@@ -901,16 +901,12 @@ components:
           type: string
       type: object
     OperationMetadata:
-      description: Represents the metadata of the long-running operation.
+      description: Represents the metadata of a long-running operation in Analytics Hub.
       properties:
         apiVersion:
           description: Output only. API version used to start the operation.
           readOnly: true
           type: string
-        cancelRequested:
-          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
-          readOnly: true
-          type: boolean
         createTime:
           description: Output only. The time the operation was created.
           format: google-datetime
@@ -921,7 +917,11 @@ components:
           format: google-datetime
           readOnly: true
           type: string
-        statusDetail:
+        requestedCancellation:
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
+          type: boolean
+        statusMessage:
           description: Output only. Human-readable status of the operation, if any.
           readOnly: true
           type: string

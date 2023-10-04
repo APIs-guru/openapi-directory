@@ -1708,6 +1708,20 @@ components:
             - AIRPLANE_MODE_USER_CHOICE
             - AIRPLANE_MODE_DISABLED
           type: string
+        cellularTwoGState:
+          description: Controls whether cellular 2G setting can be toggled by the user or not.
+          enum:
+            - CELLULAR_TWO_G_STATE_UNSPECIFIED
+            - CELLULAR_TWO_G_USER_CHOICE
+            - CELLULAR_TWO_G_DISABLED
+          type: string
+        ultraWidebandState:
+          description: Controls the state of the ultra wideband setting and whether the user can toggle it on or off.
+          enum:
+            - ULTRA_WIDEBAND_STATE_UNSPECIFIED
+            - ULTRA_WIDEBAND_USER_CHOICE
+            - ULTRA_WIDEBAND_DISABLED
+          type: string
         wifiState:
           description: Controls current state of Wi-Fi and if user can change its state.
           enum:

@@ -4300,9 +4300,6 @@ components:
     CsePrivateKeyMetadata:
       description: Metadata for a private key instance.
       properties:
-        hardwareKeyMetadata:
-          $ref: "#/components/schemas/HardwareKeyMetadata"
-          description: Metadata for hardware keys.
         kaclsKeyMetadata:
           $ref: "#/components/schemas/KaclsKeyMetadata"
           description: Metadata for a private key instance managed by an external key access control list service.
@@ -4423,13 +4420,6 @@ components:
             - verificationStatusUnspecified
             - accepted
             - pending
-          type: string
-      type: object
-    HardwareKeyMetadata:
-      description: Metadata for hardware keys.
-      properties:
-        description:
-          description: Description about the hardware key.
           type: string
       type: object
     History:

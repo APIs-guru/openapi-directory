@@ -1590,9 +1590,6 @@ components:
     LocationMetadata:
       description: Metadata about the service in a location.
       properties:
-        multiRegionMetadata:
-          $ref: "#/components/schemas/MultiRegionMetadata"
-          description: The multi-region metadata if the current region is a multi-region.
         supportedHiveMetastoreVersions:
           description: The versions of Hive Metastore that can be used when creating a new metastore service in this location. The server guarantees that exactly one HiveMetastoreVersion in the list will set is_default.
           items:
@@ -1735,15 +1732,6 @@ components:
     MoveTableToDatabaseResponse:
       description: Response message for DataprocMetastore.MoveTableToDatabase.
       properties: {}
-      type: object
-    MultiRegionMetadata:
-      description: The metadata for the multi-region that includes the constituent regions. The metadata is only populated if the region is multi-region. For single region, it will be empty.
-      properties:
-        constituentRegions:
-          description: The regions constituting the multi-region.
-          items:
-            type: string
-          type: array
       type: object
     NetworkConfig:
       description: "Network configuration for the Dataproc Metastore service.Next available ID: 4"

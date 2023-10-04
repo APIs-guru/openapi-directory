@@ -3588,7 +3588,7 @@ paths:
       description: Lists Features in a given EntityType.
       operationId: aiplatform.projects.locations.featurestores.entityTypes.features.list
       parameters:
-        - description: "Required. The resource name of the Location to list Features. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`"
+        - description: "Required. The resource name of the Location to list Features. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}` `projects/{project}/locations/{location}/featureGroups/{feature_group}`"
           in: path
           name: parent
           required: true
@@ -3654,13 +3654,12 @@ paths:
       description: Creates a new Feature in a given EntityType.
       operationId: aiplatform.projects.locations.featurestores.entityTypes.features.create
       parameters:
-        - description: "Required. The resource name of the EntityType to create a Feature. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`"
-          in: path
+        - in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Required. The ID to use for the Feature, which will become the final component of the Feature's resource name. This value may be up to 128 characters, and valid characters are `[a-z0-9_]`. The first character cannot be a number. The value must be unique within an EntityType .
+        - description: Required. The ID to use for the Feature, which will become the final component of the Feature's resource name. This value may be up to 128 characters, and valid characters are `[a-z0-9_]`. The first character cannot be a number. The value must be unique within an EntityType/FeatureGroup.
           in: query
           name: featureId
           schema:
@@ -4707,7 +4706,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Optional. An expression for filtering the results of the request. For field names both snake_case and camelCase are supported. * `notebookRuntimeTemplate` supports = and !=. `notebookRuntimeTemplate` represents the NotebookRuntimeTemplate ID, i.e. the last segment of the NotebookRuntimeTemplate's resource name. * `display_name` supports = and != * `labels` supports general map functions that is: * `labels.key=value` - key:value equality * `labels.key:* or labels:key - key existence * A key including a space must be quoted. `labels.\"a key\"`. Some examples: * `notebookRuntimeTemplate=notebookRuntimeTemplate123` * `displayName=\"myDisplayName\"` * `labels.myKey=\"myValue\"`"
+        - description: "Optional. An expression for filtering the results of the request. For field names both snake_case and camelCase are supported. * `notebookRuntimeTemplate` supports = and !=. `notebookRuntimeTemplate` represents the NotebookRuntimeTemplate ID, i.e. the last segment of the NotebookRuntimeTemplate's resource name. * `display_name` supports = and != * `labels` supports general map functions that is: * `labels.key=value` - key:value equality * `labels.key:* or labels:key - key existence * A key including a space must be quoted. `labels.\"a key\"`. * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum: [USER_DEFINED, ONE_CLICK]. Some examples: * `notebookRuntimeTemplate=notebookRuntimeTemplate123` * `displayName=\"myDisplayName\"` * `labels.myKey=\"myValue\"` * `notebookRuntimeType=USER_DEFINED`"
           in: query
           name: filter
           schema:
@@ -4803,7 +4802,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Optional. An expression for filtering the results of the request. For field names both snake_case and camelCase are supported. * `notebookRuntime` supports = and !=. `notebookRuntime` represents the NotebookRuntime ID, i.e. the last segment of the NotebookRuntime's resource name. * `displayName` supports = and != and regex. * `notebookRuntimeTemplate` supports = and !=. `notebookRuntimeTemplate` represents the NotebookRuntimeTemplate ID, i.e. the last segment of the NotebookRuntimeTemplate's resource name. * `healthState` supports = and !=. healthState enum: [HEALTHY, UNHEALTHY, HEALTH_STATE_UNSPECIFIED]. * `runtimeState` supports = and !=. runtimeState enum: [RUNTIME_STATE_UNSPECIFIED, RUNNING, BEING_STARTED, BEING_STOPPED, STOPPED, BEING_UPGRADED]. * `runtimeUser` supports = and !=. * API version is UI only: `uiState` supports = and !=. uiState enum: [UI_RESOURCE_STATE_UNSPECIFIED, UI_RESOURCE_STATE_BEING_CREATED, UI_RESOURCE_STATE_ACTIVE, UI_RESOURCE_STATE_BEING_DELETED, UI_RESOURCE_STATE_CREATION_FAILED]. Some examples: * `notebookRuntime=\"notebookRuntime123\"` * `displayName=\"myDisplayName\"` and `displayName=~\"myDisplayNameRegex\"` * `notebookRuntimeTemplate=\"notebookRuntimeTemplate321\"` * `healthState=HEALTHY` * `runtimeState=RUNNING` * `runtimeUser=\"test@google.com\"` * `uiState=UI_RESOURCE_STATE_BEING_DELETED`"
+        - description: "Optional. An expression for filtering the results of the request. For field names both snake_case and camelCase are supported. * `notebookRuntime` supports = and !=. `notebookRuntime` represents the NotebookRuntime ID, i.e. the last segment of the NotebookRuntime's resource name. * `displayName` supports = and != and regex. * `notebookRuntimeTemplate` supports = and !=. `notebookRuntimeTemplate` represents the NotebookRuntimeTemplate ID, i.e. the last segment of the NotebookRuntimeTemplate's resource name. * `healthState` supports = and !=. healthState enum: [HEALTHY, UNHEALTHY, HEALTH_STATE_UNSPECIFIED]. * `runtimeState` supports = and !=. runtimeState enum: [RUNTIME_STATE_UNSPECIFIED, RUNNING, BEING_STARTED, BEING_STOPPED, STOPPED, BEING_UPGRADED]. * `runtimeUser` supports = and !=. * API version is UI only: `uiState` supports = and !=. uiState enum: [UI_RESOURCE_STATE_UNSPECIFIED, UI_RESOURCE_STATE_BEING_CREATED, UI_RESOURCE_STATE_ACTIVE, UI_RESOURCE_STATE_BEING_DELETED, UI_RESOURCE_STATE_CREATION_FAILED]. * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum: [USER_DEFINED, ONE_CLICK]. Some examples: * `notebookRuntime=\"notebookRuntime123\"` * `displayName=\"myDisplayName\"` and `displayName=~\"myDisplayNameRegex\"` * `notebookRuntimeTemplate=\"notebookRuntimeTemplate321\"` * `healthState=HEALTHY` * `runtimeState=RUNNING` * `runtimeUser=\"test@google.com\"` * `uiState=UI_RESOURCE_STATE_BEING_DELETED` * `notebookRuntimeType=USER_DEFINED`"
           in: query
           name: filter
           schema:
@@ -7678,16 +7677,15 @@ components:
           description: Operation metadata for Feature.
       type: object
     GoogleCloudAiplatformV1CreateFeatureRequest:
-      description: Request message for FeaturestoreService.CreateFeature.
+      description: Request message for FeaturestoreService.CreateFeature. Request message for FeatureRegistryService.CreateFeature.
       properties:
         feature:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1Feature"
           description: Required. The Feature to create.
         featureId:
-          description: Required. The ID to use for the Feature, which will become the final component of the Feature's resource name. This value may be up to 128 characters, and valid characters are `[a-z0-9_]`. The first character cannot be a number. The value must be unique within an EntityType .
+          description: Required. The ID to use for the Feature, which will become the final component of the Feature's resource name. This value may be up to 128 characters, and valid characters are `[a-z0-9_]`. The first character cannot be a number. The value must be unique within an EntityType/FeatureGroup.
           type: string
         parent:
-          description: "Required. The resource name of the EntityType to create a Feature. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`"
           type: string
       type: object
     GoogleCloudAiplatformV1CreateFeaturestoreOperationMetadata:
@@ -10384,7 +10382,7 @@ components:
           type: string
       type: object
     GoogleCloudAiplatformV1ListFeaturesResponse:
-      description: Response message for FeaturestoreService.ListFeatures.
+      description: Response message for FeaturestoreService.ListFeatures. Response message for FeatureRegistryService.ListFeatures.
       properties:
         features:
           description: The Features matching the request.
@@ -14132,6 +14130,29 @@ components:
           description: The beginning, inclusive, of the video's time segment on which to perform the prediction. Expressed as a number of seconds as measured from the start of the video, with "s" appended at the end. Fractions are allowed, up to a microsecond precision.
           type: string
       type: object
+    GoogleCloudAiplatformV1SchemaPredictParamsGroundingConfig:
+      description: The configuration for grounding checking.
+      properties:
+        sources:
+          description: The sources for the grounding checking.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1SchemaPredictParamsGroundingConfigSourceEntry"
+          type: array
+      type: object
+    GoogleCloudAiplatformV1SchemaPredictParamsGroundingConfigSourceEntry:
+      description: Single source entry for the grounding checking.
+      properties:
+        enterpriseDatastore:
+          description: The uri of the Enterprise Search data source.
+          type: string
+        type:
+          description: The type of the grounding checking source.
+          enum:
+            - UNSPECIFIED
+            - WEB
+            - ENTERPRISE
+          type: string
+      type: object
     GoogleCloudAiplatformV1SchemaPredictParamsImageClassificationPredictionParams:
       description: Prediction model parameters for Image Classification.
       properties:
@@ -14623,9 +14644,16 @@ components:
     GoogleCloudAiplatformV1SchemaTextPromptDatasetMetadata:
       description: The metadata of Datasets that contain Text Prompt data.
       properties:
+        candidateCount:
+          description: Number of candidates.
+          format: int64
+          type: string
         gcsUri:
           description: The Google Cloud Storage URI that stores the prompt data.
           type: string
+        groundingConfig:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1SchemaPredictParamsGroundingConfig"
+          description: Grounding checking configuration.
         maxOutputTokens:
           description: Value of the maximum number of tokens generated set when the dataset was saved.
           format: int64
@@ -14633,6 +14661,11 @@ components:
         promptType:
           description: Type of the prompt dataset.
           type: string
+        stopSequences:
+          description: Customized stop sequences.
+          items:
+            type: string
+          type: array
         temperature:
           description: Temperature value used for sampling set when the dataset was saved. This value is used to tune the degree of randomness.
           format: float

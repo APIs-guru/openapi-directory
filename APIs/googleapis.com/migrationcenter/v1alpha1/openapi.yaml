@@ -2451,7 +2451,7 @@ components:
           readOnly: true
           type: string
         displayName:
-          description: User-friendly display name. Maximum length is 63 characters.
+          description: Optional. User-friendly display name. Maximum length is 256 characters.
           type: string
         format:
           description: Required. The payload format.
@@ -4029,7 +4029,7 @@ components:
           type: string
       type: object
     VirtualMachinePreferences:
-      description: VirtualMachinePreferences enables you to create sets of assumptions, for example, a geographical location and pricing track, for your migrated virtual machines. The set of preferences influence recommendations for migrating virtual machine assets.
+      description: VirtualMachinePreferences enables you to create sets of preferences, for example, a geographical location and pricing track, for your migrated virtual machines. The set of preferences influence recommendations for migrating virtual machine assets.
       properties:
         commitmentPlan:
           description: Commitment plan to consider when calculating costs for virtual machine insights and recommendations. If you are unsure which value to set, a 3 year commitment plan is often a good value to start with.

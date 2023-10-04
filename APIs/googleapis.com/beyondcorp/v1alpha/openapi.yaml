@@ -2811,6 +2811,9 @@ components:
           description: Output only. ProxyConfig resource name.
           readOnly: true
           type: string
+        proxyProtocolConfig:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaProxyProtocolConfig"
+          description: Optional. Protocol config data for the Proxy.
         proxyUri:
           description: Required. The URI of the proxy server.
           type: string
@@ -2825,6 +2828,15 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+      type: object
+    GoogleCloudBeyondcorpPartnerservicesV1alphaProxyProtocolConfig:
+      description: The protocol data that specifies how to communicate with Partner's Proxy.
+      properties:
+        metadata:
+          additionalProperties:
+            type: string
+          description: Optional. Untyped property bag to be sent back to the proxy using client specific mechanism.
+          type: object
       type: object
     GoogleCloudBeyondcorpPartnerservicesV1alphaRoutingInfo:
       description: Message contains the routing information to direct traffic to the proxy server.

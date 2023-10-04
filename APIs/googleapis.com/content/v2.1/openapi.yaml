@@ -3024,7 +3024,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Requests a review of free listings in a specific region.
+      description: Requests a review of free listings in a specific region. This method deprecated. Use the `MerchantSupportService` to view product and account issues and request a review.
       operationId: content.freelistingsprogram.requestreview
       parameters:
         - description: Required. The ID of the account.
@@ -7569,7 +7569,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Requests a review of Shopping ads in a specific region.
+      description: Requests a review of Shopping ads in a specific region. This method deprecated. Use the `MerchantSupportService` to view product and account issues and request a review.
       operationId: content.shoppingadsprogram.requestreview
       parameters:
         - description: Required. The ID of the account.

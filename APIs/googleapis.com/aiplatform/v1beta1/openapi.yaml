@@ -1062,6 +1062,132 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1beta1/{featureView}:fetchFeatureValues:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Fetch feature values under a FeatureView.
+      operationId: aiplatform.projects.locations.featureOnlineStores.featureViews.fetchFeatureValues
+      parameters:
+        - description: Required. FeatureView resource format `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}/featureViews/{featureView}`
+          in: path
+          name: featureView
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FetchFeatureValuesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FetchFeatureValuesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1beta1/{featureView}:searchNearestEntities:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Search the nearest entities under a FeatureView. Search only works for indexable feature view; if a feature view isn't indexable, returns Invalid argument response.
+      operationId: aiplatform.projects.locations.featureOnlineStores.featureViews.searchNearestEntities
+      parameters:
+        - description: Required. FeatureView resource format `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}/featureViews/{featureView}`
+          in: path
+          name: featureView
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1SearchNearestEntitiesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1SearchNearestEntitiesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1beta1/{featureView}:sync:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Triggers on-demand sync for the FeatureView.
+      operationId: aiplatform.projects.locations.featureOnlineStores.featureViews.sync
+      parameters:
+        - description: "Required. Format: `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}`"
+          in: path
+          name: featureView
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1SyncFeatureViewRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1SyncFeatureViewResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1beta1/{featurestore}:batchReadFeatureValues:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1937,7 +2063,7 @@ paths:
       description: "Internal only: Called from Compute Engine instance to obtain EUC for owner Anonymous access: authenticates caller using VM identity JWT. Design doc: go/colab-on-vertex-euc-dd"
       operationId: aiplatform.projects.locations.notebookRuntimes.generateAccessToken
       parameters:
-        - description: "Required. The name of the NotebookRuntime resource. Format: `projects/{project}/locations/{location}/notebookRuntimes/{notebook_runtime}`"
+        - description: "Required. The name of the resource requesting the OAuth2 token. Format: `projects/{project}/locations/{location}/notebookRuntimes/{notebook_runtime}` `projects/{project}/locations/{location}/notebookExecutionJobs/{notebook_execution_job}`"
           in: path
           name: name
           required: true
@@ -3823,12 +3949,347 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1beta1/{parent}/featureGroups:
+    get:
+      description: Lists FeatureGroups in a given project and location.
+      operationId: aiplatform.projects.locations.featureGroups.list
+      parameters:
+        - description: "Required. The resource name of the Location to list FeatureGroups. Format: `projects/{project}/locations/{location}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: 'Lists the FeatureGroups that match the filter expression. The following fields are supported: * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons. Values must be in RFC 3339 format. * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons. Values must be in RFC 3339 format. * `labels`: Supports key-value equality and key presence. Examples: * `create_time > "2020-01-01" OR update_time > "2020-01-01"` FeatureGroups created or updated after 2020-01-01. * `labels.env = "prod"` FeatureGroups with label "env" set to "prod".'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: 'A comma-separated list of fields to order by, sorted in ascending order. Use "desc" after a field name for descending. Supported Fields: * `create_time` * `update_time`'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: The maximum number of FeatureGroups to return. The service may return fewer than this value. If unspecified, at most 100 FeatureGroups will be returned. The maximum value is 100; any value greater than 100 will be coerced to 100.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous FeatureGroupAdminService.ListFeatureGroups call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to FeatureGroupAdminService.ListFeatureGroups must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1ListFeatureGroupsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new FeatureGroup in a given project and location.
+      operationId: aiplatform.projects.locations.featureGroups.create
+      parameters:
+        - description: "Required. The resource name of the Location to create FeatureGroups. Format: `projects/{project}/locations/{location}'`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for this FeatureGroup, which will become the final component of the FeatureGroup's resource name. This value may be up to 60 characters, and valid characters are `[a-z0-9_]`. The first character cannot be a number. The value must be unique within the project and location.
+          in: query
+          name: featureGroupId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureGroup"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1beta1/{parent}/featureOnlineStores:
+    get:
+      description: Lists FeatureOnlineStores in a given project and location.
+      operationId: aiplatform.projects.locations.featureOnlineStores.list
+      parameters:
+        - description: "Required. The resource name of the Location to list FeatureOnlineStores. Format: `projects/{project}/locations/{location}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: 'Lists the FeatureOnlineStores that match the filter expression. The following fields are supported: * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons. Values must be in RFC 3339 format. * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons. Values must be in RFC 3339 format. * `labels`: Supports key-value equality and key presence. Examples: * `create_time > "2020-01-01" OR update_time > "2020-01-01"` FeatureOnlineStores created or updated after 2020-01-01. * `labels.env = "prod"` FeatureOnlineStores with label "env" set to "prod".'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: 'A comma-separated list of fields to order by, sorted in ascending order. Use "desc" after a field name for descending. Supported Fields: * `create_time` * `update_time`'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: The maximum number of FeatureOnlineStores to return. The service may return fewer than this value. If unspecified, at most 100 FeatureOnlineStores will be returned. The maximum value is 100; any value greater than 100 will be coerced to 100.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous FeatureOnlineStoreAdminService.ListFeatureOnlineStores call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to FeatureOnlineStoreAdminService.ListFeatureOnlineStores must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1ListFeatureOnlineStoresResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new FeatureOnlineStore in a given project and location.
+      operationId: aiplatform.projects.locations.featureOnlineStores.create
+      parameters:
+        - description: "Required. The resource name of the Location to create FeatureOnlineStores. Format: `projects/{project}/locations/{location}'`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for this FeatureOnlineStore, which will become the final component of the FeatureOnlineStore's resource name. This value may be up to 60 characters, and valid characters are `[a-z0-9_]`. The first character cannot be a number. The value must be unique within the project and location.
+          in: query
+          name: featureOnlineStoreId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureOnlineStore"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1beta1/{parent}/featureViewSyncs:
+    get:
+      description: Lists FeatureViewSyncs in a given FeatureView.
+      operationId: aiplatform.projects.locations.featureOnlineStores.featureViews.featureViewSyncs.list
+      parameters:
+        - description: "Required. The resource name of the FeatureView to list FeatureViewSyncs. Format: `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: 'Lists the FeatureViewSyncs that match the filter expression. The following filters are supported: * `create_time`: Supports `=`, `!=`, `<`, `>`, `>=`, and `<=` comparisons. Values must be in RFC 3339 format. Examples: * `create_time > \"2020-01-31T15:30:00.000000Z\"` --> FeatureViewSyncs created after 2020-01-31T15:30:00.000000Z.'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: 'A comma-separated list of fields to order by, sorted in ascending order. Use "desc" after a field name for descending. Supported fields: * `create_time`'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: The maximum number of FeatureViewSyncs to return. The service may return fewer than this value. If unspecified, at most 1000 FeatureViewSyncs will be returned. The maximum value is 1000; any value greater than 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous FeatureOnlineStoreAdminService.ListFeatureViewSyncs call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to FeatureOnlineStoreAdminService.ListFeatureViewSyncs must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1ListFeatureViewSyncsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1beta1/{parent}/featureViews:
+    get:
+      description: Lists FeatureViews in a given FeatureOnlineStore.
+      operationId: aiplatform.projects.locations.featureOnlineStores.featureViews.list
+      parameters:
+        - description: "Required. The resource name of the FeatureOnlineStore to list FeatureViews. Format: `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Lists the FeatureViews that match the filter expression. The following filters are supported: * `create_time`: Supports `=`, `!=`, `<`, `>`, `>=`, and `<=` comparisons. Values must be in RFC 3339 format. * `update_time`: Supports `=`, `!=`, `<`, `>`, `>=`, and `<=` comparisons. Values must be in RFC 3339 format. * `labels`: Supports key-value equality as well as key presence. Examples: * `create_time > \\\"2020-01-31T15:30:00.000000Z\\\" OR update_time > \\\"2020-01-31T15:30:00.000000Z\\\"` --> FeatureViews created or updated after 2020-01-31T15:30:00.000000Z. * `labels.active = yes AND labels.env = prod` --> FeatureViews having both (active: yes) and (env: prod) labels. * `labels.env: *` --> Any FeatureView which has a label with 'env' as the key."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: 'A comma-separated list of fields to order by, sorted in ascending order. Use "desc" after a field name for descending. Supported fields: * `feature_view_id` * `create_time` * `update_time`'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: The maximum number of FeatureViews to return. The service may return fewer than this value. If unspecified, at most 1000 FeatureViews will be returned. The maximum value is 1000; any value greater than 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous FeatureOnlineStoreAdminService.ListFeatureViews call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to FeatureOnlineStoreAdminService.ListFeatureViews must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1ListFeatureViewsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new FeatureView in a given FeatureOnlineStore.
+      operationId: aiplatform.projects.locations.featureOnlineStores.featureViews.create
+      parameters:
+        - description: "Required. The resource name of the FeatureOnlineStore to create FeatureViews. Format: `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the FeatureView, which will become the final component of the FeatureView's resource name. This value may be up to 60 characters, and valid characters are `[a-z0-9_]`. The first character cannot be a number. The value must be unique within a FeatureOnlineStore.
+          in: query
+          name: featureViewId
+          schema:
+            type: string
+        - description: Immutable. If set to true, one on demand sync will be run immediately, regardless whether the FeatureView.sync_config is configured or not.
+          in: query
+          name: runSyncImmediately
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureView"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1beta1/{parent}/features:
     get:
       description: Lists Features in a given EntityType.
       operationId: aiplatform.projects.locations.featurestores.entityTypes.features.list
       parameters:
-        - description: "Required. The resource name of the Location to list Features. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`"
+        - description: "Required. The resource name of the Location to list Features. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}` `projects/{project}/locations/{location}/featureGroups/{feature_group}`"
           in: path
           name: parent
           required: true
@@ -3894,13 +4355,12 @@ paths:
       description: Creates a new Feature in a given EntityType.
       operationId: aiplatform.projects.locations.featurestores.entityTypes.features.create
       parameters:
-        - description: "Required. The resource name of the EntityType to create a Feature. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`"
-          in: path
+        - in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Required. The ID to use for the Feature, which will become the final component of the Feature's resource name. This value may be up to 128 characters, and valid characters are `[a-z0-9_]`. The first character cannot be a number. The value must be unique within an EntityType .
+        - description: Required. The ID to use for the Feature, which will become the final component of the Feature's resource name. This value may be up to 128 characters, and valid characters are `[a-z0-9_]`. The first character cannot be a number. The value must be unique within an EntityType/FeatureGroup.
           in: query
           name: featureId
           schema:
@@ -4659,41 +5119,56 @@ paths:
         - projects
   /v1beta1/{parent}/models:
     get:
-      description: Lists Models in a Location.
-      operationId: aiplatform.projects.locations.models.list
+      description: Lists publisher models in Model Garden.
+      operationId: aiplatform.publishers.models.list
       parameters:
-        - description: "Required. The resource name of the Location to list the Models from. Format: `projects/{project}/locations/{location}`"
+        - description: "Required. The name of the Publisher from which to list the PublisherModels. Format: `publishers/{publisher}`"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: "An expression for filtering the results of the request. For field names both snake_case and camelCase are supported. * `model` supports = and !=. `model` represents the Model ID, i.e. the last segment of the Model's resource name. * `display_name` supports = and != * `labels` supports general map functions that is: * `labels.key=value` - key:value equality * `labels.key:* or labels:key - key existence * A key including a space must be quoted. `labels.\"a key\"`. Some examples: * `model=1234` * `displayName=\"myDisplayName\"` * `labels.myKey=\"myValue\"`"
+        - description: Optional. The standard list filter.
           in: query
           name: filter
           schema:
             type: string
-        - description: The standard list page size.
+        - description: Optional. The IETF BCP-47 language code representing the language in which the publisher models' text information should be written in (see go/bcp47). If not set, by default English (en).
+          in: query
+          name: languageCode
+          schema:
+            type: string
+        - description: Optional. A comma-separated list of fields to order by, sorted in ascending order. Use "desc" after a field name for descending.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The standard list page size.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: The standard list page token. Typically obtained via ListModelsResponse.next_page_token of the previous ModelService.ListModels call.
+        - description: Optional. The standard list page token. Typically obtained via ListPublisherModelsResponse.next_page_token of the previous ModelGardenService.ListPublisherModels call.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: Mask specifying which fields to read.
+        - description: Optional. PublisherModel view specifying which fields to read.
           in: query
-          name: readMask
+          name: view
           schema:
+            enum:
+              - PUBLISHER_MODEL_VIEW_UNSPECIFIED
+              - PUBLISHER_MODEL_VIEW_BASIC
+              - PUBLISHER_MODEL_VIEW_FULL
+              - PUBLISHER_MODEL_VERSION_VIEW_BASIC
             type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1ListModelsResponse"
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1ListPublisherModelsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -4701,7 +5176,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - publishers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4942,7 +5417,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Optional. An expression for filtering the results of the request. For field names both snake_case and camelCase are supported. * `notebookRuntimeTemplate` supports = and !=. `notebookRuntimeTemplate` represents the NotebookRuntimeTemplate ID, i.e. the last segment of the NotebookRuntimeTemplate's resource name. * `display_name` supports = and != * `labels` supports general map functions that is: * `labels.key=value` - key:value equality * `labels.key:* or labels:key - key existence * A key including a space must be quoted. `labels.\"a key\"`. Some examples: * `notebookRuntimeTemplate=notebookRuntimeTemplate123` * `displayName=\"myDisplayName\"` * `labels.myKey=\"myValue\"`"
+        - description: "Optional. An expression for filtering the results of the request. For field names both snake_case and camelCase are supported. * `notebookRuntimeTemplate` supports = and !=. `notebookRuntimeTemplate` represents the NotebookRuntimeTemplate ID, i.e. the last segment of the NotebookRuntimeTemplate's resource name. * `display_name` supports = and != * `labels` supports general map functions that is: * `labels.key=value` - key:value equality * `labels.key:* or labels:key - key existence * A key including a space must be quoted. `labels.\"a key\"`. * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum: [USER_DEFINED, ONE_CLICK]. Some examples: * `notebookRuntimeTemplate=notebookRuntimeTemplate123` * `displayName=\"myDisplayName\"` * `labels.myKey=\"myValue\"` * `notebookRuntimeType=USER_DEFINED`"
           in: query
           name: filter
           schema:
@@ -5038,7 +5513,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Optional. An expression for filtering the results of the request. For field names both snake_case and camelCase are supported. * `notebookRuntime` supports = and !=. `notebookRuntime` represents the NotebookRuntime ID, i.e. the last segment of the NotebookRuntime's resource name. * `displayName` supports = and != and regex. * `notebookRuntimeTemplate` supports = and !=. `notebookRuntimeTemplate` represents the NotebookRuntimeTemplate ID, i.e. the last segment of the NotebookRuntimeTemplate's resource name. * `healthState` supports = and !=. healthState enum: [HEALTHY, UNHEALTHY, HEALTH_STATE_UNSPECIFIED]. * `runtimeState` supports = and !=. runtimeState enum: [RUNTIME_STATE_UNSPECIFIED, RUNNING, BEING_STARTED, BEING_STOPPED, STOPPED, BEING_UPGRADED]. * `runtimeUser` supports = and !=. * API version is UI only: `uiState` supports = and !=. uiState enum: [UI_RESOURCE_STATE_UNSPECIFIED, UI_RESOURCE_STATE_BEING_CREATED, UI_RESOURCE_STATE_ACTIVE, UI_RESOURCE_STATE_BEING_DELETED, UI_RESOURCE_STATE_CREATION_FAILED]. Some examples: * `notebookRuntime=\"notebookRuntime123\"` * `displayName=\"myDisplayName\"` and `displayName=~\"myDisplayNameRegex\"` * `notebookRuntimeTemplate=\"notebookRuntimeTemplate321\"` * `healthState=HEALTHY` * `runtimeState=RUNNING` * `runtimeUser=\"test@google.com\"` * `uiState=UI_RESOURCE_STATE_BEING_DELETED`"
+        - description: "Optional. An expression for filtering the results of the request. For field names both snake_case and camelCase are supported. * `notebookRuntime` supports = and !=. `notebookRuntime` represents the NotebookRuntime ID, i.e. the last segment of the NotebookRuntime's resource name. * `displayName` supports = and != and regex. * `notebookRuntimeTemplate` supports = and !=. `notebookRuntimeTemplate` represents the NotebookRuntimeTemplate ID, i.e. the last segment of the NotebookRuntimeTemplate's resource name. * `healthState` supports = and !=. healthState enum: [HEALTHY, UNHEALTHY, HEALTH_STATE_UNSPECIFIED]. * `runtimeState` supports = and !=. runtimeState enum: [RUNTIME_STATE_UNSPECIFIED, RUNNING, BEING_STARTED, BEING_STOPPED, STOPPED, BEING_UPGRADED]. * `runtimeUser` supports = and !=. * API version is UI only: `uiState` supports = and !=. uiState enum: [UI_RESOURCE_STATE_UNSPECIFIED, UI_RESOURCE_STATE_BEING_CREATED, UI_RESOURCE_STATE_ACTIVE, UI_RESOURCE_STATE_BEING_DELETED, UI_RESOURCE_STATE_CREATION_FAILED]. * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum: [USER_DEFINED, ONE_CLICK]. Some examples: * `notebookRuntime=\"notebookRuntime123\"` * `displayName=\"myDisplayName\"` and `displayName=~\"myDisplayNameRegex\"` * `notebookRuntimeTemplate=\"notebookRuntimeTemplate321\"` * `healthState=HEALTHY` * `runtimeState=RUNNING` * `runtimeUser=\"test@google.com\"` * `uiState=UI_RESOURCE_STATE_BEING_DELETED` * `notebookRuntimeType=USER_DEFINED`"
           in: query
           name: filter
           schema:
@@ -8039,6 +8514,20 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
           description: The common part of the operation metadata.
       type: object
+    GoogleCloudAiplatformV1beta1CreateFeatureGroupOperationMetadata:
+      description: Details of operations that perform create FeatureGroup.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
+          description: Operation metadata for FeatureGroup.
+      type: object
+    GoogleCloudAiplatformV1beta1CreateFeatureOnlineStoreOperationMetadata:
+      description: Details of operations that perform create FeatureOnlineStore.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
+          description: Operation metadata for FeatureOnlineStore.
+      type: object
     GoogleCloudAiplatformV1beta1CreateFeatureOperationMetadata:
       description: Details of operations that perform create Feature.
       properties:
@@ -8047,17 +8536,23 @@ components:
           description: Operation metadata for Feature.
       type: object
     GoogleCloudAiplatformV1beta1CreateFeatureRequest:
-      description: Request message for FeaturestoreService.CreateFeature.
+      description: Request message for FeaturestoreService.CreateFeature. Request message for FeatureRegistryService.CreateFeature.
       properties:
         feature:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Feature"
           description: Required. The Feature to create.
         featureId:
-          description: Required. The ID to use for the Feature, which will become the final component of the Feature's resource name. This value may be up to 128 characters, and valid characters are `[a-z0-9_]`. The first character cannot be a number. The value must be unique within an EntityType .
+          description: Required. The ID to use for the Feature, which will become the final component of the Feature's resource name. This value may be up to 128 characters, and valid characters are `[a-z0-9_]`. The first character cannot be a number. The value must be unique within an EntityType/FeatureGroup.
           type: string
         parent:
-          description: "Required. The resource name of the EntityType to create a Feature. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`"
           type: string
+      type: object
+    GoogleCloudAiplatformV1beta1CreateFeatureViewOperationMetadata:
+      description: Details of operations that perform create FeatureView.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
+          description: Operation metadata for FeatureView Create.
       type: object
     GoogleCloudAiplatformV1beta1CreateFeaturestoreOperationMetadata:
       description: Details of operations that perform create Featurestore.
@@ -8116,6 +8611,13 @@ components:
         pipelineJobId:
           description: The ID to use for the PipelineJob, which will become the final component of the PipelineJob name. If not provided, an ID will be automatically generated. This value should be less than 128 characters, and valid characters are `/a-z-/`.
           type: string
+      type: object
+    GoogleCloudAiplatformV1beta1CreateRegistryFeatureOperationMetadata:
+      description: Details of operations that perform create FeatureGroup.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
+          description: Operation metadata for Feature.
       type: object
     GoogleCloudAiplatformV1beta1CreateSolverOperationMetadata:
       description: Runtime operation information for SolverService.CreateSolver.
@@ -9767,6 +10269,50 @@ components:
             - BYTES
           type: string
       type: object
+    GoogleCloudAiplatformV1beta1FeatureGroup:
+      description: Vertex AI Feature Group.
+      properties:
+        bigQuery:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureGroupBigQuery"
+          description: Indicates that features for this group come from BigQuery.
+        createTime:
+          description: Output only. Timestamp when this FeatureGroup was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. Description of the FeatureGroup.
+          type: string
+        etag:
+          description: Optional. Used to perform consistent read-modify-write updates. If not set, a blind "overwrite" update happens.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. The labels with user-defined metadata to organize your FeatureGroup. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. See https://goo.gl/xmQnxf for more information on and examples of labels. No more than 64 user labels can be associated with one FeatureGroup(System labels are excluded)." System reserved label keys are prefixed with "aiplatform.googleapis.com/" and are immutable.
+          type: object
+        name:
+          description: "Output only. Name of the FeatureGroup. Format: `projects/{project}/locations/{location}/featureGroups/{featureGroup}`"
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Timestamp when this FeatureGroup was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1FeatureGroupBigQuery:
+      description: Input source type for BigQuery Tables and Views.
+      properties:
+        bigQuerySource:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1BigQuerySource"
+          description: Required. Immutable. The BigQuery source URI that points to either a BigQuery Table or View.
+        entityIdColumns:
+          description: Optional. Columns to construct entity_id / row keys. Currently only supports 1 entity_id_column. If not provided defaults to `entity_id`.
+          items:
+            type: string
+          type: array
+      type: object
     GoogleCloudAiplatformV1beta1FeatureMonitoringStatsAnomaly:
       description: A list of historical SnapshotAnalysis or ImportFeaturesAnalysis stats requested by user, sorted by FeatureStatsAnomaly.start_time descending.
       properties:
@@ -9802,6 +10348,85 @@ components:
           description: This represents the standard deviation of the Gaussian kernel that will be used to add noise to the feature prior to computing gradients. Similar to noise_sigma but represents the noise added to the current feature. Defaults to 0.1.
           format: float
           type: number
+      type: object
+    GoogleCloudAiplatformV1beta1FeatureOnlineStore:
+      description: Vertex AI Feature Online Store provides a centralized repository for serving ML features and embedding indexes at low latency. The Feature Online Store is a top-level container.
+      properties:
+        bigtable:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureOnlineStoreBigtable"
+          description: Contains settings for the Cloud Bigtable instance that will be created to serve featureValues for all FeatureViews under this FeatureOnlineStore.
+        createTime:
+          description: Output only. Timestamp when this FeatureOnlineStore was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        dedicatedServingEndpoint:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureOnlineStoreDedicatedServingEndpoint"
+          description: Optional. The dedicated serving endpoint for this FeatureOnlineStore, which is different from common Vertex service endpoint.
+        embeddingManagement:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureOnlineStoreEmbeddingManagement"
+          description: Optional. The settings for embedding management in FeatureOnlineStore.
+        etag:
+          description: Optional. Used to perform consistent read-modify-write updates. If not set, a blind "overwrite" update happens.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. The labels with user-defined metadata to organize your FeatureOnlineStore. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. See https://goo.gl/xmQnxf for more information on and examples of labels. No more than 64 user labels can be associated with one FeatureOnlineStore(System labels are excluded)." System reserved label keys are prefixed with "aiplatform.googleapis.com/" and are immutable.
+          type: object
+        name:
+          description: "Output only. Name of the FeatureOnlineStore. Format: `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}`"
+          readOnly: true
+          type: string
+        state:
+          description: Output only. State of the featureOnlineStore.
+          enum:
+            - STATE_UNSPECIFIED
+            - STABLE
+            - UPDATING
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Timestamp when this FeatureOnlineStore was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1FeatureOnlineStoreBigtable:
+      properties:
+        autoScaling:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureOnlineStoreBigtableAutoScaling"
+          description: Required. Autoscaling config applied to Bigtable Instance.
+      type: object
+    GoogleCloudAiplatformV1beta1FeatureOnlineStoreBigtableAutoScaling:
+      properties:
+        cpuUtilizationTarget:
+          description: Optional. A percentage of the cluster's CPU capacity. Can be from 10% to 80%. When a cluster's CPU utilization exceeds the target that you have set, Bigtable immediately adds nodes to the cluster. When CPU utilization is substantially lower than the target, Bigtable removes nodes. If not set will default to 50%.
+          format: int32
+          type: integer
+        maxNodeCount:
+          description: Required. The maximum number of nodes to scale up to. Must be greater than or equal to min_node_count, and less than or equal to 10 times of 'min_node_count'.
+          format: int32
+          type: integer
+        minNodeCount:
+          description: Required. The minimum number of nodes to scale down to. Must be greater than or equal to 1.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudAiplatformV1beta1FeatureOnlineStoreDedicatedServingEndpoint:
+      description: The dedicated serving endpoint for this FeatureOnlineStore.
+      properties:
+        publicEndpointDomainName:
+          description: Output only. This field will be populated with the domain name to use for this FeatureOnlineStore
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1FeatureOnlineStoreEmbeddingManagement:
+      description: Contains settings for embedding management.
+      properties:
+        enabled:
+          description: Optional. Immutable. Whether to enable embedding management in this FeatureOnlineStore. It's immutable after creation to ensure the FeatureOnlineStore availability.
+          type: boolean
       type: object
     GoogleCloudAiplatformV1beta1FeatureSelector:
       description: Selector for Features of an EntityType.
@@ -9905,6 +10530,146 @@ components:
         generateTime:
           description: Feature generation timestamp. Typically, it is provided by user at feature ingestion time. If not, feature store will use the system timestamp when the data is ingested into feature store. For streaming ingestion, the time, aligned by days, must be no older than five years (1825 days) and no later than one year (366 days) in the future.
           format: google-datetime
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1FeatureView:
+      description: FeatureView is representation of values that the FeatureOnlineStore will serve based on its syncConfig.
+      properties:
+        bigQuerySource:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureViewBigQuerySource"
+          description: Optional. Configures how data is supposed to be extracted from a BigQuery source to be loaded onto the FeatureOnlineStore.
+        createTime:
+          description: Output only. Timestamp when this FeatureView was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        etag:
+          description: Optional. Used to perform consistent read-modify-write updates. If not set, a blind "overwrite" update happens.
+          type: string
+        featureRegistrySource:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureViewFeatureRegistrySource"
+          description: Optional. Configures the features from a Feature Registry source that need to be loaded onto the FeatureOnlineStore.
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. The labels with user-defined metadata to organize your FeatureViews. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. See https://goo.gl/xmQnxf for more information on and examples of labels. No more than 64 user labels can be associated with one FeatureOnlineStore(System labels are excluded)." System reserved label keys are prefixed with "aiplatform.googleapis.com/" and are immutable.
+          type: object
+        name:
+          description: "Output only. Name of the FeatureView. Format: `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}`"
+          readOnly: true
+          type: string
+        syncConfig:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureViewSyncConfig"
+          description: Configures when data is to be synced/updated for this FeatureView. At the end of the sync the latest featureValues for each entityId of this FeatureView are made ready for online serving.
+        updateTime:
+          description: Output only. Timestamp when this FeatureView was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+        vectorSearchConfig:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureViewVectorSearchConfig"
+          description: Optional. Configuration for vector search. It contains the required configurations to create an index from source data, so that approximate nearest neighbor (a.k.a ANN) algorithms search can be performed during online serving.
+      type: object
+    GoogleCloudAiplatformV1beta1FeatureViewBigQuerySource:
+      properties:
+        entityIdColumns:
+          description: Required. Columns to construct entity_id / row keys. Start by supporting 1 only.
+          items:
+            type: string
+          type: array
+        uri:
+          description: Required. The Bigquery View URI that will be materialized on each sync trigger based on FeatureView.SyncConfig.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1FeatureViewFeatureRegistrySource:
+      description: A Feature Registry source for features that need to be synced to Online Store.
+      properties:
+        featureGroups:
+          description: Required. List of features that need to be synced to Online Store.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureViewFeatureRegistrySourceFeatureGroup"
+          type: array
+      type: object
+    GoogleCloudAiplatformV1beta1FeatureViewFeatureRegistrySourceFeatureGroup:
+      description: Features belonging to a single feature group that will be synced to Online Store.
+      properties:
+        featureGroupId:
+          description: Required. Identifier of the feature group.
+          type: string
+        featureIds:
+          description: Required. Identifiers of features under the feature group.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudAiplatformV1beta1FeatureViewSync:
+      description: FeatureViewSync is a representation of sync operation which copies data from data source to Feature View in Online Store.
+      properties:
+        createTime:
+          description: Output only. Time when this FeatureViewSync is created. Creation of a FeatureViewSync means that the job is pending / waiting for sufficient resources but may not have started the actual data transfer yet.
+          format: google-datetime
+          readOnly: true
+          type: string
+        finalStatus:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: Output only. Final status of the FeatureViewSync.
+          readOnly: true
+        name:
+          description: "Output only. Name of the FeatureViewSync. Format: `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}/featureViewSyncs/{feature_view_sync}`"
+          readOnly: true
+          type: string
+        runTime:
+          $ref: "#/components/schemas/GoogleTypeInterval"
+          description: Output only. Time when this FeatureViewSync is finished.
+          readOnly: true
+      type: object
+    GoogleCloudAiplatformV1beta1FeatureViewSyncConfig:
+      properties:
+        cron:
+          description: 'Cron schedule (https://en.wikipedia.org/wiki/Cron) to launch scheduled runs. To explicitly set a timezone to the cron tab, apply a prefix in the cron tab: "CRON_TZ=${IANA_TIME_ZONE}" or "TZ=${IANA_TIME_ZONE}". The ${IANA_TIME_ZONE} may only be a valid string from IANA time zone database. For example, "CRON_TZ=America/New_York 1 * * * *", or "TZ=America/New_York 1 * * * *".'
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1FeatureViewVectorSearchConfig:
+      description: Configuration for vector search.
+      properties:
+        bruteForceConfig:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureViewVectorSearchConfigBruteForceConfig"
+          description: Optional. Configuration options for using brute force search, which simply implements the standard linear search in the database for each query. It is primarily meant for benchmarking and to generate the ground truth for approximate search.
+        crowdingColumn:
+          description: Optional. Column of crowding. This column contains crowding attribute which is a constraint on a neighbor list produced by nearest neighbor search requiring that no more than some value k' of the k neighbors returned have the same value of crowding_attribute.
+          type: string
+        distanceMeasureType:
+          description: Optional. The distance measure used in nearest neighbor search.
+          enum:
+            - DISTANCE_MEASURE_TYPE_UNSPECIFIED
+            - SQUARED_L2_DISTANCE
+            - COSINE_DISTANCE
+            - DOT_PRODUCT_DISTANCE
+          type: string
+        embeddingColumn:
+          description: Optional. Column of embedding. This column contains the source data to create index for vector search. embedding_column must be set when using vector search.
+          type: string
+        embeddingDimension:
+          description: Optional. The number of dimensions of the input embedding.
+          format: int32
+          type: integer
+        filterColumns:
+          description: Optional. Columns of features that're used to filter vector search results.
+          items:
+            type: string
+          type: array
+        treeAhConfig:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureViewVectorSearchConfigTreeAHConfig"
+          description: "Optional. Configuration options for the tree-AH algorithm (Shallow tree + Asymmetric Hashing). Please refer to this paper for more details: https://arxiv.org/abs/1908.10396"
+      type: object
+    GoogleCloudAiplatformV1beta1FeatureViewVectorSearchConfigBruteForceConfig:
+      properties: {}
+      type: object
+    GoogleCloudAiplatformV1beta1FeatureViewVectorSearchConfigTreeAHConfig:
+      properties:
+        leafNodeEmbeddingCount:
+          description: Optional. Number of embeddings on each leaf node. The default value is 1000 if not set.
+          format: int64
           type: string
       type: object
     GoogleCloudAiplatformV1beta1Featurestore:
@@ -10041,6 +10806,51 @@ components:
           description: Required. The minimum number of nodes to scale down to. Must be greater than or equal to 1.
           format: int32
           type: integer
+      type: object
+    GoogleCloudAiplatformV1beta1FetchFeatureValuesRequest:
+      description: Request message for FeatureOnlineStoreService.FetchFeatureValues. All the features under the requested feature view will be returned.
+      properties:
+        format:
+          description: Specify response data format. If not set, KeyValue format will be used.
+          enum:
+            - FORMAT_UNSPECIFIED
+            - KEY_VALUE
+            - PROTO_STRUCT
+          type: string
+        id:
+          description: Simple ID. The whole string will be used as is to identify Entity to fetch feature values for.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1FetchFeatureValuesResponse:
+      description: Response message for FeatureOnlineStoreService.FetchFeatureValues
+      properties:
+        keyValues:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FetchFeatureValuesResponseFeatureNameValuePairList"
+          description: Feature values in KeyValue format.
+        protoStruct:
+          additionalProperties:
+            description: Properties of the object.
+          description: Feature values in proto Struct format.
+          type: object
+      type: object
+    GoogleCloudAiplatformV1beta1FetchFeatureValuesResponseFeatureNameValuePairList:
+      description: Response structure in the format of key (feature name) and (feature) value pair.
+      properties:
+        features:
+          description: List of feature names and values.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FetchFeatureValuesResponseFeatureNameValuePairListFeatureNameValuePair"
+          type: array
+      type: object
+    GoogleCloudAiplatformV1beta1FetchFeatureValuesResponseFeatureNameValuePairListFeatureNameValuePair:
+      description: Feature name & value pair.
+      properties:
+        name:
+          description: Feature short name.
+          type: string
+        value:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureValue"
+          description: Feature value.
       type: object
     GoogleCloudAiplatformV1beta1FilterSplit:
       description: "Assigns input data to training, validation, and test sets based on the given filters, data pieces not matched by any filter are ignored. Currently only supported for Datasets containing DataItems. If any of the filters in this message are to match nothing, then they can be set as '-' (the minus sign). Supported only for unstructured Datasets. "
@@ -10199,6 +11009,13 @@ components:
           description: Output only. Time when the operation was updated for the last time. If the operation has finished (successfully or not), this is the finish time.
           format: google-datetime
           readOnly: true
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1GenieSource:
+      description: Contains information about the source of the models generated from Generative AI Studio.
+      properties:
+        baseModelUri:
+          description: Required. The public base model URI.
           type: string
       type: object
     GoogleCloudAiplatformV1beta1HyperparameterTuningJob:
@@ -10879,8 +11696,56 @@ components:
           description: A token, which can be sent as ListExecutionsRequest.page_token to retrieve the next page. If this field is not populated, there are no subsequent pages.
           type: string
       type: object
+    GoogleCloudAiplatformV1beta1ListFeatureGroupsResponse:
+      description: Response message for FeatureRegistryService.ListFeatureGroups.
+      properties:
+        featureGroups:
+          description: The FeatureGroups matching the request.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureGroup"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as ListFeatureGroupsRequest.page_token to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1ListFeatureOnlineStoresResponse:
+      description: Response message for FeatureOnlineStoreAdminService.ListFeatureOnlineStores.
+      properties:
+        featureOnlineStores:
+          description: The FeatureOnlineStores matching the request.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureOnlineStore"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as ListFeatureOnlineStoresRequest.page_token to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1ListFeatureViewSyncsResponse:
+      description: Response message for FeatureOnlineStoreAdminService.ListFeatureViewSyncs.
+      properties:
+        featureViewSyncs:
+          description: The FeatureViewSyncs matching the request.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureViewSync"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as ListFeatureViewSyncsRequest.page_token to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1ListFeatureViewsResponse:
+      description: Response message for FeatureOnlineStoreAdminService.ListFeatureViews.
+      properties:
+        featureViews:
+          description: The FeatureViews matching the request.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureView"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as ListFeatureViewsRequest.page_token to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
     GoogleCloudAiplatformV1beta1ListFeaturesResponse:
-      description: Response message for FeaturestoreService.ListFeatures.
+      description: Response message for FeaturestoreService.ListFeatures. Response message for FeatureRegistryService.ListFeatures.
       properties:
         features:
           description: The Features matching the request.
@@ -11105,6 +11970,18 @@ components:
           description: List of PipelineJobs in the requested page.
           items:
             $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1PipelineJob"
+          type: array
+      type: object
+    GoogleCloudAiplatformV1beta1ListPublisherModelsResponse:
+      description: Response message for ModelGardenService.ListPublisherModels.
+      properties:
+        nextPageToken:
+          description: A token to retrieve next page of results. Pass to ListPublisherModels.page_token to obtain that page.
+          type: string
+        publisherModels:
+          description: List of PublisherModels in the requested page.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1PublisherModel"
           type: array
       type: object
     GoogleCloudAiplatformV1beta1ListSavedQueriesResponse:
@@ -11583,6 +12460,9 @@ components:
         explanationSpec:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1ExplanationSpec"
           description: The default explanation specification for this Model. The Model can be used for requesting explanation after being deployed if it is populated. The Model can be used for batch explanation if it is populated. All fields of the explanation_spec can be overridden by explanation_spec of DeployModelRequest.deployed_model, or explanation_spec of BatchPredictionJob. If the default explanation specification is not set for this Model, this Model can still be used for requesting explanation by setting explanation_spec of DeployModelRequest.deployed_model and for batch explanation by setting explanation_spec of BatchPredictionJob.
+        generatedModelSource:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1ModelGeneratedModelSource"
+          description: Optional. Used to specify the source of the Model Garden model or Genie models. Only present for models created or tuned from Model Garden and Genie.
         labels:
           additionalProperties:
             type: string
@@ -12044,6 +12924,23 @@ components:
           description: "Output only. The ID of the export format. The possible format IDs are: * `tflite` Used for Android mobile devices. * `edgetpu-tflite` Used for [Edge TPU](https://cloud.google.com/edge-tpu/) devices. * `tf-saved-model` A tensorflow model in SavedModel format. * `tf-js` A [TensorFlow.js](https://www.tensorflow.org/js) model that can be used in the browser and in Node.js using JavaScript. * `core-ml` Used for iOS mobile devices. * `custom-trained` A Model that was uploaded or trained by custom code."
           readOnly: true
           type: string
+      type: object
+    GoogleCloudAiplatformV1beta1ModelGardenSource:
+      description: Contains information about the source of the models generated from Model Garden.
+      properties:
+        publicModelName:
+          description: Required. The model garden source model resource name.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1ModelGeneratedModelSource:
+      description: Used to specify the source of the Model Garden model or Genie models. Only present for models created or tuned from Model Garden and Genie.
+      properties:
+        genieSource:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenieSource"
+          description: Information about the base model of Genie models.
+        modelGardenSource:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1ModelGardenSource"
+          description: Source information of Model Garden models.
       type: object
     GoogleCloudAiplatformV1beta1ModelMonitoringAlertConfig:
       properties:
@@ -12521,6 +13418,71 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1NasTrial"
           description: The train NasTrial corresponding to search_trial. Only populated if search_trial is used for training.
       type: object
+    GoogleCloudAiplatformV1beta1NearestNeighborQuery:
+      description: A query to find a number of similar entities.
+      properties:
+        embedding:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1NearestNeighborQueryEmbedding"
+          description: Optional. The embedding vector that be used for similar search.
+        entityId:
+          description: Optional. The entity id whose similar entities should be searched for. If embedding is set, search will use embedding instead of entity_id.
+          type: string
+        neighborCount:
+          description: Optional. The number of similar entities to be retrieved from feature view for each query.
+          format: int32
+          type: integer
+        parameters:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1NearestNeighborQueryParameters"
+          description: Optional. Parameters that can be set to tune query on the fly.
+        perCrowdingAttributeNeighborCount:
+          description: Optional. Crowding is a constraint on a neighbor list produced by nearest neighbor search requiring that no more than sper_crowding_attribute_neighbor_count of the k neighbors returned have the same value of crowding_attribute. It's used for improving result diversity.
+          format: int32
+          type: integer
+        stringFilters:
+          description: Optional. The list of string filters.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1NearestNeighborQueryStringFilter"
+          type: array
+      type: object
+    GoogleCloudAiplatformV1beta1NearestNeighborQueryEmbedding:
+      description: The embedding vector.
+      properties:
+        value:
+          description: Optional. Individual value in the embedding.
+          items:
+            format: float
+            type: number
+          type: array
+      type: object
+    GoogleCloudAiplatformV1beta1NearestNeighborQueryParameters:
+      description: Parameters that can be overrided in each query to tune query latency and recall.
+      properties:
+        approximateNeighborCandidates:
+          description: Optional. The number of neighbors to find via approximate search before exact reordering is performed; if set, this value must be > neighbor_count.
+          format: int32
+          type: integer
+        leafNodesSearchFraction:
+          description: Optional. The fraction of the number of leaves to search, set at query time allows user to tune search performance. This value increase result in both search accuracy and latency increase. The value should be between 0.0 and 1.0.
+          format: double
+          type: number
+      type: object
+    GoogleCloudAiplatformV1beta1NearestNeighborQueryStringFilter:
+      description: "String filter is used to search a subset of the entities by using boolean rules. For example: if a query specifies string filter with 'name = color, allow_tokens = {red, blue}, deny_tokens = {purple}',' then that query will match entities that are red or blue, but if those points are also purple, then they will be excluded even if they are red/blue. Only string filter is supported for now, numeric filter will be supported in the near future."
+      properties:
+        allowTokens:
+          description: Optional. The allowed tokens.
+          items:
+            type: string
+          type: array
+        denyTokens:
+          description: Optional. The denied tokens.
+          items:
+            type: string
+          type: array
+        name:
+          description: Required. Column names in BigQuery that used as filters.
+          type: string
+      type: object
     GoogleCloudAiplatformV1beta1NearestNeighborSearchOperationMetadata:
       description: Runtime operation metadata with regard to Matching Engine Index.
       properties:
@@ -12579,6 +13541,29 @@ components:
         sourceGcsUri:
           description: Cloud Storage URI pointing to the original file in user's bucket.
           type: string
+      type: object
+    GoogleCloudAiplatformV1beta1NearestNeighbors:
+      description: Nearest neighbors for one query.
+      properties:
+        neighbors:
+          description: All its neighbors.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1NearestNeighborsNeighbor"
+          type: array
+      type: object
+    GoogleCloudAiplatformV1beta1NearestNeighborsNeighbor:
+      description: A neighbor of the query vector.
+      properties:
+        distance:
+          description: The distance between the neighbor and the query vector.
+          format: double
+          type: number
+        entityId:
+          description: The id of the similar entity.
+          type: string
+        entityKeyValues:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FetchFeatureValuesResponse"
+          description: The attributes of the neighbor, e.g. filters, crowding and metadata Note that full entities are returned only when "return_full_entity" is set to true. Otherwise, only the "entity_id" and "distance" fields are populated.
       type: object
     GoogleCloudAiplatformV1beta1Neighbor:
       description: Neighbors for example-based explanations.
@@ -13808,6 +14793,25 @@ components:
       type: object
     GoogleCloudAiplatformV1beta1RemoveDatapointsResponse:
       description: Response message for IndexService.RemoveDatapoints
+      properties: {}
+      type: object
+    GoogleCloudAiplatformV1beta1ReportExecutionEventRequest:
+      description: Request message for NotebookInternalService.ReportExecutionEvent.
+      properties:
+        eventType:
+          description: Required. The type of the event.
+          enum:
+            - EVENT_TYPE_UNSPECIFIED
+            - ACTIVE
+            - DONE
+            - FAILED
+          type: string
+        vmToken:
+          description: Required. The VM identity token (a JWT) for authenticating the VM. https://cloud.google.com/compute/docs/instances/verifying-instance-identity
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1ReportExecutionEventResponse:
+      description: Response message for NotebookInternalService.ReportExecutionEvent.
       properties: {}
       type: object
     GoogleCloudAiplatformV1beta1ReportRuntimeEventRequest:
@@ -16653,6 +17657,23 @@ components:
           description: The page token that can be used by the next JobService.SearchModelDeploymentMonitoringStatsAnomalies call.
           type: string
       type: object
+    GoogleCloudAiplatformV1beta1SearchNearestEntitiesRequest:
+      description: The request message for FeatureOnlineStoreService.SearchNearestEntities.
+      properties:
+        query:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1NearestNeighborQuery"
+          description: Required. The query.
+        returnFullEntity:
+          description: Optional. If set to true, the full entities (including all vector values and metadata) of the nearest neighbors are returned; otherwise only entity id of the nearest neighbors will be returned. Note that returning full entities will significantly increase the latency and cost of the query.
+          type: boolean
+      type: object
+    GoogleCloudAiplatformV1beta1SearchNearestEntitiesResponse:
+      description: Response message for FeatureOnlineStoreService.SearchNearestEntities
+      properties:
+        nearestNeighbors:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1NearestNeighbors"
+          description: The nearest neighbors of the query entity.
+      type: object
     GoogleCloudAiplatformV1beta1ServiceAccountSpec:
       description: Configuration for the use of custom service account to run the workloads.
       properties:
@@ -17163,6 +18184,17 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Trial"
           type: array
+      type: object
+    GoogleCloudAiplatformV1beta1SyncFeatureViewRequest:
+      description: Request message for FeatureOnlineStoreAdminService.SyncFeatureView.
+      properties: {}
+      type: object
+    GoogleCloudAiplatformV1beta1SyncFeatureViewResponse:
+      description: Respose message for FeatureOnlineStoreAdminService.SyncFeatureView.
+      properties:
+        featureViewSync:
+          description: "Format: `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}/featureViewSyncs/{feature_view_sync}`"
+          type: string
       type: object
     GoogleCloudAiplatformV1beta1TFRecordDestination:
       description: The storage details for TFRecord output content.
@@ -17805,6 +18837,34 @@ components:
     GoogleCloudAiplatformV1beta1UpdateExplanationDatasetResponse:
       description: Response message of ModelService.UpdateExplanationDataset operation.
       properties: {}
+      type: object
+    GoogleCloudAiplatformV1beta1UpdateFeatureGroupOperationMetadata:
+      description: Details of operations that perform update FeatureGroup.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
+          description: Operation metadata for FeatureGroup.
+      type: object
+    GoogleCloudAiplatformV1beta1UpdateFeatureOnlineStoreOperationMetadata:
+      description: Details of operations that perform update FeatureOnlineStore.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
+          description: Operation metadata for FeatureOnlineStore.
+      type: object
+    GoogleCloudAiplatformV1beta1UpdateFeatureOperationMetadata:
+      description: Details of operations that perform update Feature.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
+          description: Operation metadata for Feature Update.
+      type: object
+    GoogleCloudAiplatformV1beta1UpdateFeatureViewOperationMetadata:
+      description: Details of operations that perform update FeatureView.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
+          description: Operation metadata for FeatureView Update.
       type: object
     GoogleCloudAiplatformV1beta1UpdateFeaturestoreOperationMetadata:
       description: Details of operations that perform update Featurestore.

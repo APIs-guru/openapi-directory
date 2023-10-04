@@ -1999,6 +1999,9 @@ components:
             - HIGH
             - CRITICAL
           type: string
+        extraDetails:
+          description: Occurrence-specific extra details about the vulnerability.
+          type: string
         fixAvailable:
           description: Output only. Whether at least one of the affected packages has a fix available.
           type: boolean
