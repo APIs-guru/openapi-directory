@@ -1174,6 +1174,9 @@ components:
         dockerSiblingContainers:
           $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature"
           description: Whether dockerSiblingContainers can be used.
+        dockerUlimits:
+          $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature"
+          description: Whether dockerUlimits are allowed to be set.
         linuxExecution:
           description: "Defines how Linux actions are allowed to execute. DO NOT USE: Experimental / unlaunched feature."
           enum:

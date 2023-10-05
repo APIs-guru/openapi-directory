@@ -985,6 +985,11 @@ components:
             - API_CURRENT
             - API_DEPRECATED
           type: string
+        scheduledToDeprecatePolicies:
+          description: Corresponding to deprecated_in_favor_of, the fully qualified namespace(s) of the old policies that will be deprecated because of introduction of this policy. This field should not be manually set but will be set and exposed through PolicyAPI automatically.
+          items:
+            type: string
+          type: array
       type: object
     GoogleChromePolicyVersionsV1PolicyModificationError:
       description: Error information for a modification request of a specific policy on a specific target.

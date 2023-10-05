@@ -3797,6 +3797,9 @@ components:
           items:
             $ref: "#/components/schemas/Detail"
           type: array
+        extraDetails:
+          description: Occurrence-specific extra details about the vulnerability.
+          type: string
         severity:
           description: The note provider assigned severity of this vulnerability.
           enum:
@@ -3846,9 +3849,6 @@ components:
             - MEDIUM
             - HIGH
             - CRITICAL
-          type: string
-        extraDetails:
-          description: Occurrence-specific extra details about the vulnerability.
           type: string
         fixAvailable:
           description: Output only. Whether at least one of the affected packages has a fix available.

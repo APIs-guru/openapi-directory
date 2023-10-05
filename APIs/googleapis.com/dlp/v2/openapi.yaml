@@ -2264,6 +2264,10 @@ components:
         jobTriggerName:
           description: If created by a job trigger, the resource name of the trigger that instantiated the job.
           type: string
+        lastModified:
+          description: Time when the job was last modified by the system.
+          format: google-datetime
+          type: string
         name:
           description: The server-assigned name.
           type: string
@@ -2705,8 +2709,8 @@ components:
             - JAPAN
             - KOREA
             - MEXICO
-            - NEW_ZEALAND
             - THE_NETHERLANDS
+            - NEW_ZEALAND
             - NORWAY
             - PARAGUAY
             - PERU
@@ -2716,6 +2720,7 @@ components:
             - SOUTH_AFRICA
             - SPAIN
             - SWEDEN
+            - SWITZERLAND
             - TAIWAN
             - THAILAND
             - TURKEY
