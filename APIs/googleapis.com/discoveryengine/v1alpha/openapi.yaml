@@ -3107,6 +3107,10 @@ components:
           description: Output only. Whether LLM is enabled in the corresponding data store.
           readOnly: true
           type: boolean
+        minimumDataTermAccepted:
+          description: Output only. Whether the customer accepted data use terms.
+          readOnly: true
+          type: boolean
         name:
           description: "Immutable. The full resource name of the widget config. Format: `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/widgetConfigs/{widget_config_id}`. This field must be a UTF-8 encoded string with a length limit of 1024 characters."
           type: string

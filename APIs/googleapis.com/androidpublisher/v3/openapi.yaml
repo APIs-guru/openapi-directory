@@ -5263,10 +5263,12 @@ components:
               - CAN_MANAGE_APP_CONTENT
               - CAN_VIEW_NON_FINANCIAL_DATA
               - CAN_VIEW_APP_QUALITY
+              - CAN_MANAGE_DEEPLINKS
             type: string
             x-enumDeprecated:
               - false
               - true
+              - false
               - false
               - false
               - false
@@ -6209,7 +6211,7 @@ components:
       description: Price change related information of a subscription item.
       properties:
         expectedNewPriceChargeTime:
-          description: The renewal time at which the price change will become effective for the user. This is subject to change(to a future time) due to cases where the renewal time shifts like pause.
+          description: The renewal time at which the price change will become effective for the user. This is subject to change(to a future time) due to cases where the renewal time shifts like pause. This field is only populated if the price change has not taken effect.
           format: google-datetime
           type: string
         newPrice:
@@ -6816,6 +6818,7 @@ components:
               - CAN_MANAGE_APP_CONTENT_GLOBAL
               - CAN_VIEW_NON_FINANCIAL_DATA_GLOBAL
               - CAN_VIEW_APP_QUALITY_GLOBAL
+              - CAN_MANAGE_DEEPLINKS_GLOBAL
             type: string
           type: array
         email:

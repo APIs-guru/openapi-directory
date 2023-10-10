@@ -13,15 +13,18 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Display & Video 360 API
   version: v3
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - format: google
       url: https://displayvideo.googleapis.com/$discovery/rest?version=v3
       version: v1
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: displayvideo
 externalDocs:
@@ -729,7 +732,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v3/advertisers/{advertiserId}/adGroups:bulkListAdGroupAssignedTargetingOptions:
     get:
-      description: Lists assigned targeting options for multiple ad groups across targeting types. Inherieted assigned targeting options are not included.
+      description: Lists assigned targeting options for multiple ad groups across targeting types. Inherited assigned targeting options are not included.
       operationId: displayvideo.advertisers.adGroups.bulkListAdGroupAssignedTargetingOptions
       parameters:
         - description: Required. The ID of the advertiser the line items belongs to.
@@ -752,7 +755,7 @@ paths:
           name: filter
           schema:
             type: string
-        - description: 'Optional. Field by which to sort the list. Acceptable values are: * `youtubeAdGroupId` (acceptable in v2) * `adGroupId` (acceptable in v3) * `assignedTargetingOption.targetingType` The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `targetingType desc`.'
+        - description: 'Optional. Field by which to sort the list. Acceptable values are: * `adGroupId` (default) * `assignedTargetingOption.targetingType` The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `targetingType desc`.'
           in: query
           name: orderBy
           schema:
@@ -3838,7 +3841,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Bulk edits multiple assignments between locations and a single location list. The operation will delete the assigned locations provided in BulkEditAssignedLocationsRequest.deleted_assigned_locations and then create the assigned locations provided in BulkEditAssignedLocationsRequest.created_assigned_locations.
+      description: Bulk edits multiple assignments between locations and a single location list. The operation will delete the assigned locations provided in deletedAssignedLocations and then create the assigned locations provided in createdAssignedLocations.
       operationId: displayvideo.advertisers.locationLists.assignedLocations.bulkEdit
       parameters:
         - description: Required. The ID of the DV360 advertiser to which the location list belongs.
@@ -5315,7 +5318,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v3/customBiddingAlgorithms/{customBiddingAlgorithmId}:uploadRules:
     get:
-      description: Creates a rules reference object. The resulting reference object provides a resource path where the rules file should be uploaded. This reference object should be included when creating a new rules resource.
+      description: Creates a rules reference object for an AlgorithmRules file. The resulting reference object provides a resource path where the AlgorithmRules file should be uploaded. This reference object should be included when creating a new CustomBiddingAlgorithmRules resource.
       operationId: displayvideo.customBiddingAlgorithms.uploadRules
       parameters:
         - description: Required. The ID of the custom bidding algorithm that owns the rules resource.
@@ -8336,7 +8339,7 @@ components:
           type: string
         bidStrategy:
           $ref: "#/components/schemas/BiddingStrategy"
-          description: The bidding strategy used by the ad group. Only BiddingStrategy.youtube_and_partners_bid can be used here.
+          description: The bidding strategy used by the ad group. Only the youtubeAndPartnersBid field can be used in the bidding strategy.
         displayName:
           description: The display name of the ad group. Must be UTF-8 encoded with a maximum size of 255 bytes.
           type: string
@@ -8362,7 +8365,7 @@ components:
           description: The settings of the product feed in this ad group.
         targetingExpansion:
           $ref: "#/components/schemas/TargetingExpansionConfig"
-          description: The [targeting expansion](https://support.google.com/displayvideo/answer/10191558) settings of the ad group. This config is only applicable when eligible audience list targeting is assigned to the ad group.
+          description: The [optimized targeting](//support.google.com/displayvideo/answer/12060859) settings of the ad group.
       type: object
     AdGroupAd:
       description: A single ad associated with an ad group.
@@ -8426,7 +8429,7 @@ components:
           description: Details of an [ad used in a video action campaign](//support.google.com/google-ads/answer/10147229) to drive actions to the business, service or product.
       type: object
     AdGroupAssignedTargetingOption:
-      description: Wrapper object associating an assigned_targeting_option resource and the ad group it is assigned to.
+      description: Wrapper object associating an AssignedTargetingOption resource and the ad group it is assigned to.
       properties:
         adGroupId:
           description: The ID of the ad group the assigned targeting option is assigned to.
@@ -8484,7 +8487,7 @@ components:
           type: string
         billingConfig:
           $ref: "#/components/schemas/AdvertiserBillingConfig"
-          description: Billing related settings of the advertiser.
+          description: Required. Billing related settings of the advertiser.
         creativeConfig:
           $ref: "#/components/schemas/AdvertiserCreativeConfig"
           description: Required. Creative related settings of the advertiser.
@@ -8544,7 +8547,7 @@ components:
       description: Billing related settings of an advertiser.
       properties:
         billingProfileId:
-          description: The ID of a billing profile assigned to the advertiser. This field will default to the default billing profile ID of the advertiser's parent partner if a value is not provided.
+          description: The ID of a billing profile assigned to the advertiser.
           format: int64
           type: string
       type: object
@@ -8607,7 +8610,7 @@ components:
       description: Represents a targetable age range. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_AGE_RANGE`.
       properties:
         ageRange:
-          description: The age range of an audience. We only support targeting a continuous age range of an audience. Thus, the age range represented in this field can be 1) targeted solely, or, 2) part of a larger continuous age range. The reach of a continuous age range targeting can be expanded by also targeting an audience of an unknown age. Output only in v1. Required in v2.
+          description: Required. The age range of an audience. We only support targeting a continuous age range of an audience. Thus, the age range represented in this field can be 1) targeted solely, or, 2) part of a larger continuous age range. The reach of a continuous age range targeting can be expanded by also targeting an audience of an unknown age.
           enum:
             - AGE_RANGE_UNSPECIFIED
             - AGE_RANGE_18_24
@@ -8993,7 +8996,7 @@ components:
           type: string
       type: object
     AssignedLocation:
-      description: An assignment between a location list and a relevant targeting option. Currently, geo region targeting options are the only supported option for assignment.
+      description: An assignment between a location list and a relevant targeting option.
       properties:
         assignedLocationId:
           description: Output only. The unique ID of the assigned location. The ID is only unique within a location list. It may be reused in other contexts.
@@ -9005,7 +9008,7 @@ components:
           readOnly: true
           type: string
         targetingOptionId:
-          description: Required. The ID of the targeting option assigned to the location list. Assigned locations can only be modified in TARGETING_LOCATION_TYPE_REGIONAL location lists. When creating or deleting assigned locations, this value must be of type TARGETING_TYPE_GEO_REGION.
+          description: Required. The ID of the targeting option assigned to the location list.
           type: string
       type: object
     AssignedTargetingOption:
@@ -9307,7 +9310,7 @@ components:
       description: Details for audio content type assigned targeting option. This will be populated in the audio_content_type_details field when targeting_type is `TARGETING_TYPE_AUDIO_CONTENT_TYPE`. Explicitly targeting all options is not supported. Remove all audio content type targeting options to achieve this effect.
       properties:
         audioContentType:
-          description: The audio content type. Output only in v1. Required in v2.
+          description: Required. The audio content type.
           enum:
             - AUDIO_CONTENT_TYPE_UNSPECIFIED
             - AUDIO_CONTENT_TYPE_UNKNOWN
@@ -9419,7 +9422,7 @@ components:
           description: A strategy that automatically adjusts the bid to meet or beat a specified performance goal. It is to be used only for a line item entity.
         youtubeAndPartnersBid:
           $ref: "#/components/schemas/YoutubeAndPartnersBiddingStrategy"
-          description: A bid strategy used by YouTube and Partners resources. It can only be used for a YouTube and Partners line item and ad group entity.
+          description: A bid strategy used by YouTube and Partners resources. It can only be used for a YouTube and Partners line item or ad group entity.
       type: object
     BrowserAssignedTargetingOptionDetails:
       description: Details for assigned browser targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_BROWSER`.
@@ -9523,19 +9526,18 @@ components:
       description: Request message for AssignedLocationService.BulkEditAssignedLocations.
       properties:
         createdAssignedLocations:
-          description: The assigned locations to create in bulk, specified as a list of AssignedLocations.
+          description: The assigned locations to create in bulk, specified as a list of AssignedLocation resources.
           items:
             $ref: "#/components/schemas/AssignedLocation"
           type: array
         deletedAssignedLocations:
-          description: The IDs of the assigned locations to delete in bulk, specified as a list of assigned_location_ids.
+          description: The IDs of the assigned locations to delete in bulk, specified as a list of assignedLocationId values.
           items:
             format: int64
             type: string
           type: array
       type: object
     BulkEditAssignedLocationsResponse:
-      description: Response message for AssignedLocationService.BulkEditAssignedLocations.
       properties:
         assignedLocations:
           description: The list of assigned locations that have been successfully created. This list will be absent if empty.
@@ -9691,7 +9693,7 @@ components:
             $ref: "#/components/schemas/AdGroupAssignedTargetingOption"
           type: array
         nextPageToken:
-          description: A token identifying the next page of results. This value should be specified as the pageToken in a subsequent call to `BulkListAdGroupAssignedTargetingOptions` to fetch the next page of results. This token will be absent if there are no more youtube_ad_group_assigned_targeting_options or ad_group_assigned_targeting_options to return.
+          description: A token identifying the next page of results. This value should be specified as the pageToken in a subsequent call to `BulkListAdGroupAssignedTargetingOptions` to fetch the next page of results. This token will be absent if there are no more AdGroupAssignedTargetingOption resources to return.
           type: string
       type: object
     BulkListAdvertiserAssignedTargetingOptionsResponse:
@@ -10293,7 +10295,7 @@ components:
           readOnly: true
           type: string
         contentInstreamPosition:
-          description: The content instream position for video or audio ads. Output only in v1. Required in v2.
+          description: Required. The content instream position for video or audio ads.
           enum:
             - CONTENT_INSTREAM_POSITION_UNSPECIFIED
             - CONTENT_INSTREAM_POSITION_PRE_ROLL
@@ -10329,7 +10331,7 @@ components:
           readOnly: true
           type: string
         contentOutstreamPosition:
-          description: The content outstream position. Output only in v1. Required in v2.
+          description: Required. The content outstream position.
           enum:
             - CONTENT_OUTSTREAM_POSITION_UNSPECIFIED
             - CONTENT_OUTSTREAM_POSITION_UNKNOWN
@@ -10908,7 +10910,7 @@ components:
           type: string
       type: object
     CustomBiddingAlgorithmRulesRef:
-      description: The reference to the uploaded AlgorithmRules file. Retrieve the location to upload new AlgorithmRules file to using customBiddingAlgoirhtms.uploadRules
+      description: The reference to the uploaded AlgorithmRules file. Retrieve the location to upload new AlgorithmRules file to using customBiddingAlgorithms.uploadRules.
       properties:
         resourceName:
           description: A resource name to be used in media.download to download the rules files. Or media.upload to upload the rules files. Resource names have the format `customBiddingAlgorithms/{custom_bidding_algorithm_id}/rulesRef/{ref_id}`.
@@ -10964,7 +10966,7 @@ components:
           readOnly: true
           type: string
         errors:
-          description: Output only. Error details of a rejected custom bidding script. This field will only be populated when Script.state is REJECTED.
+          description: Output only. Error details of a rejected custom bidding script. This field will only be populated when state is REJECTED.
           items:
             $ref: "#/components/schemas/ScriptError"
           readOnly: true
@@ -11216,7 +11218,7 @@ components:
       description: Targeting details for device type. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_DEVICE_TYPE`.
       properties:
         deviceType:
-          description: The display name of the device type. Output only in v1. Required in v2.
+          description: Required. The display name of the device type.
           enum:
             - DEVICE_TYPE_UNSPECIFIED
             - DEVICE_TYPE_COMPUTER
@@ -11591,7 +11593,7 @@ components:
       description: Assigned environment targeting option details. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_ENVIRONMENT`.
       properties:
         environment:
-          description: The serving environment. Output only in v1. Required in v2.
+          description: Required. The serving environment.
           enum:
             - ENVIRONMENT_UNSPECIFIED
             - ENVIRONMENT_WEB_OPTIMIZED
@@ -12231,7 +12233,7 @@ components:
       description: Details for assigned gender targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_GENDER`.
       properties:
         gender:
-          description: The gender of the audience. Output only in v1. Required in v2.
+          description: Required. The gender of the audience.
           enum:
             - GENDER_UNSPECIFIED
             - GENDER_MALE
@@ -12614,7 +12616,7 @@ components:
       description: Details for assigned household income targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_HOUSEHOLD_INCOME`.
       properties:
         householdIncome:
-          description: The household income of the audience. Output only in v1. Required in v2.
+          description: Required. The household income of the audience.
           enum:
             - HOUSEHOLD_INCOME_UNSPECIFIED
             - HOUSEHOLD_INCOME_UNKNOWN
@@ -12760,7 +12762,7 @@ components:
           description: Additional integration details of the insertion order.
         kpi:
           $ref: "#/components/schemas/Kpi"
-          description: Required. The key performance indicator (KPI) of the insertion order.
+          description: Required. The key performance indicator (KPI) of the insertion order. This is represented as referred to as the "Goal" in the Display & Video 360 interface.
         name:
           description: Output only. The resource name of the insertion order.
           readOnly: true
@@ -13347,7 +13349,7 @@ components:
           format: int64
           type: string
         kpiString:
-          description: A KPI string, which can be empty. Must be UTF-8 encoded with a length of no more than 100 characters. Applicable when kpi_type][Kpi.kpi_type] is `KPI_TYPE_OTHER`.
+          description: A KPI string, which can be empty. Must be UTF-8 encoded with a length of no more than 100 characters. Applicable when kpi_type is `KPI_TYPE_OTHER`.
           type: string
         kpiType:
           description: Required. The type of KPI.
@@ -13608,7 +13610,7 @@ components:
             $ref: "#/components/schemas/AssignedTargetingOption"
           type: array
         nextPageToken:
-          description: A token identifying the next page of results. This value should be specified as the pageToken in a subsequent ListAdGroupAssignedTargetingOptionsRequest to fetch the next page of results. This token will be absent if there are no more assigned_targeting_options to return.
+          description: A token identifying the next page of results. This value should be specified as the pageToken in a subsequent ListAdGroupAssignedTargetingOptionsRequest to fetch the next page of results. This token will be absent if there are no more AssignedTargetingOption resources to return.
           type: string
       type: object
     ListAdGroupsResponse:
@@ -13726,7 +13728,6 @@ components:
           type: string
       type: object
     ListCustomBiddingAlgorithmRulesResponse:
-      description: Response message for CustomBiddingAlgorithmRulesService.ListCustomBiddingAlgorithmRules.
       properties:
         customBiddingRules:
           description: The list of CustomBiddingAlgorithmRules resources. This list will be absent if empty.
@@ -14152,7 +14153,7 @@ components:
       description: Details for native content position assigned targeting option. This will be populated in the native_content_position_details field when targeting_type is `TARGETING_TYPE_NATIVE_CONTENT_POSITION`. Explicitly targeting all options is not supported. Remove all native content position targeting options to achieve this effect.
       properties:
         contentPosition:
-          description: The content position. Output only in v1. Required in v2.
+          description: Required. The content position.
           enum:
             - NATIVE_CONTENT_POSITION_UNSPECIFIED
             - NATIVE_CONTENT_POSITION_UNKNOWN
@@ -14272,7 +14273,7 @@ components:
       description: Represents a targetable Open Measurement enabled inventory type. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_OMID`.
       properties:
         omid:
-          description: The type of Open Measurement enabled inventory. Output only in v1. Required in v2.
+          description: Required. The type of Open Measurement enabled inventory.
           enum:
             - OMID_UNSPECIFIED
             - OMID_FOR_MOBILE_DISPLAY_ADS
@@ -14384,7 +14385,7 @@ components:
           format: int64
           type: string
         pacingPeriod:
-          description: Required. The time period in which the pacing budget will be spent. When automatic budget allocation is enabled at the insertion order via auto_budget_allocation, this field is output only and defaults to `PACING_PERIOD_FLIGHT`.
+          description: Required. The time period in which the pacing budget will be spent. When automatic budget allocation is enabled at the insertion order via automationType, this field is output only and defaults to `PACING_PERIOD_FLIGHT`.
           enum:
             - PACING_PERIOD_UNSPECIFIED
             - PACING_PERIOD_DAILY
@@ -14437,7 +14438,7 @@ components:
       description: Details for assigned parental status targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_PARENTAL_STATUS`.
       properties:
         parentalStatus:
-          description: The parental status of the audience. Output only in v1. Required in v2.
+          description: Required. The parental status of the audience.
           enum:
             - PARENTAL_STATUS_UNSPECIFIED
             - PARENTAL_STATUS_PARENT
@@ -14620,7 +14621,7 @@ components:
             - false
       type: object
     PerformanceGoal:
-      description: Settings that control the performance goal of a campaign or insertion order.
+      description: Settings that control the performance goal of a campaign.
       properties:
         performanceGoalAmountMicros:
           description: "The goal amount, in micros of the advertiser's currency. Applicable when performance_goal_type is one of: * `PERFORMANCE_GOAL_TYPE_CPM` * `PERFORMANCE_GOAL_TYPE_CPC` * `PERFORMANCE_GOAL_TYPE_CPA` * `PERFORMANCE_GOAL_TYPE_CPIAVC` * `PERFORMANCE_GOAL_TYPE_VCPM` For example 1500000 represents 1.5 standard units of the currency."
@@ -15235,16 +15236,18 @@ components:
       description: Settings that control the [optimized targeting](//support.google.com/displayvideo/answer/12060859) settings of the line item.
       properties:
         audienceExpansionLevel:
-          description: Magnitude of expansion for eligible 1p user list under this ad group.
+          description: Output only. Magnitude of expansion for eligible first-party user lists under this ad group. This field only applies to YouTube and Partners line item and ad group resources.
           enum:
             - UNKNOWN
             - NO_REACH
             - LEAST_REACH
             - MID_REACH
             - MOST_REACH
+          readOnly: true
           type: string
         audienceExpansionSeedListExcluded:
-          description: Whether to exclude seed list for audience expansion.
+          description: Output only. Whether to exclude seed list for audience expansion. This field only applies to YouTube and Partners line item and ad group resources.
+          readOnly: true
           type: boolean
         enableOptimizedTargeting:
           description: Required. Whether to enable Optimized Targeting for the line item.
@@ -15784,7 +15787,7 @@ components:
       description: Video player size targeting option details. This will be populated in the video_player_size_details field when targeting_type is `TARGETING_TYPE_VIDEO_PLAYER_SIZE`. Explicitly targeting all options is not supported. Remove all video player size targeting options to achieve this effect.
       properties:
         videoPlayerSize:
-          description: The video player size. Output only in v1. Required in v2.
+          description: Required. The video player size.
           enum:
             - VIDEO_PLAYER_SIZE_UNSPECIFIED
             - VIDEO_PLAYER_SIZE_SMALL
@@ -15811,7 +15814,7 @@ components:
       description: Assigned viewability targeting option details. This will be populated in the viewability_details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_VIEWABILITY`.
       properties:
         viewability:
-          description: The predicted viewability percentage. Output only in v1. Required in v2.
+          description: Required. The predicted viewability percentage.
           enum:
             - VIEWABILITY_UNSPECIFIED
             - VIEWABILITY_10_PERCENT_OR_MORE
@@ -15848,7 +15851,7 @@ components:
       description: Settings that control the bid strategy for YouTube and Partners resources.
       properties:
         adGroupEffectiveTargetCpaSource:
-          description: Output only. Source of the effective targetCpa value for AdGroup.
+          description: Output only. Source of the effective target CPA value for ad group.
           enum:
             - BIDDING_SOURCE_UNSPECIFIED
             - BIDDING_SOURCE_LINE_ITEM
@@ -15856,7 +15859,7 @@ components:
           readOnly: true
           type: string
         adGroupEffectiveTargetCpaValue:
-          description: Output only. The effective targetCpa for AdGroup, in micros of advertiser's currency.
+          description: Output only. The effective target CPA for ad group, in micros of advertiser's currency.
           format: int64
           readOnly: true
           type: string
@@ -15883,7 +15886,7 @@ components:
       description: Settings that control what YouTube related inventories the YouTube and Partners line item will target.
       properties:
         includeYoutube:
-          description: Whether to target inventory on YouTube. This is a consolidation of the search and video networks - see go/dv3-yt-oyn-dd for more details.
+          description: Whether to target inventory on YouTube. This includes both search, channels and videos.
           type: boolean
         includeYoutubeVideoPartners:
           description: Whether to target inventory on a collection of partner sites and apps that follow the same brand safety standards as YouTube.

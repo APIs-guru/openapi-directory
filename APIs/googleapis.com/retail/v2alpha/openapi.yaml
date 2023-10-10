@@ -3397,6 +3397,48 @@ components:
           $ref: "#/components/schemas/GoogleCloudRetailV2alphaPriceInfo"
           description: Product price and cost information. Google Merchant Center property [price](https://support.google.com/merchants/answer/6324371).
       type: object
+    GoogleCloudRetailV2alphaLoggingConfig:
+      description: Project level logging config to control what level of log will be generated and written to Cloud Logging.
+      properties:
+        defaultLogGenerationRule:
+          $ref: "#/components/schemas/GoogleCloudRetailV2alphaLoggingConfigLogGenerationRule"
+          description: The log generation rule that applies by default to all services supporting log generation. It can be overridden by ServiceLogGenerationRule for service level control.
+        name:
+          description: "Required. Immutable. The name of the LoggingConfig singleton resource. Format: projects/*/loggingConfig"
+          type: string
+        serviceLogGenerationRules:
+          description: Controls logging configurations more granularly for each supported service. This overrides the default_log_generation_rule for the services specified. For those not mentioned, they will fallback to the default log generation rule.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRetailV2alphaLoggingConfigServiceLogGenerationRule"
+          type: array
+      type: object
+    GoogleCloudRetailV2alphaLoggingConfigLogGenerationRule:
+      description: The logging configurations for services supporting log generation.
+      properties:
+        infoLogSampleRate:
+          description: The log sample rate for INFO level log entries. You can use this to reduce the number of entries generated for INFO level logs. DO NOT set this field if the logging_level is not LoggingLevel.LOG_ALL. Otherwise, an INVALID_ARGUMENT error is returned. Sample rate for INFO logs defaults to 1 when unset (generate and send all INFO logs to Cloud Logging). Its value must be greater than 0 and less than or equal to 1.
+          format: float
+          type: number
+        loggingLevel:
+          description: The logging level. By default it is set to `LOG_WARNINGS_AND_ABOVE`.
+          enum:
+            - LOGGING_LEVEL_UNSPECIFIED
+            - LOGGING_DISABLED
+            - LOG_ERRORS_AND_ABOVE
+            - LOG_WARNINGS_AND_ABOVE
+            - LOG_ALL
+          type: string
+      type: object
+    GoogleCloudRetailV2alphaLoggingConfigServiceLogGenerationRule:
+      description: The granular logging configurations for supported services.
+      properties:
+        logGenerationRule:
+          $ref: "#/components/schemas/GoogleCloudRetailV2alphaLoggingConfigLogGenerationRule"
+          description: The log generation rule that applies to this service.
+        serviceName:
+          description: 'Required. Supported service names: "CatalogService", "CompletionService", "ControlService", "MerchantCenterStreaming", "ModelService", "PredictionService", "ProductService", "ServingConfigService", "UserEventService",'
+          type: string
+      type: object
     GoogleCloudRetailV2alphaMerchantCenterAccountLink:
       description: Represents a link between a Merchant Center account and a branch. After a link is established, products from the linked Merchant Center account are streamed to the linked branch.
       properties:
