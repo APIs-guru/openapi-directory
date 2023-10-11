@@ -1519,7 +1519,7 @@ components:
           format: byte
           type: string
         limitedUse:
-          description: "Forces a short-lived token with a 5 minute TTL. Useful when the client wishes to impose stricter TTL requirements for this exchange. Default: false."
+          description: Specifies whether this attestation is for use in a *limited use* (`true`) or *session based* (`false`) context. To enable this attestation to be used with the *replay protection* feature, set this to `true`. The default value is `false`.
           type: boolean
       type: object
     GoogleFirebaseAppcheckV1betaExchangeAppAttestAttestationRequest:
@@ -1538,7 +1538,7 @@ components:
           format: byte
           type: string
         limitedUse:
-          description: "Forces a short-lived token with a 5 minute TTL. Useful when the client wishes to impose stricter TTL requirements for this exchange. Default: false."
+          description: Specifies whether this attestation is for use in a *limited use* (`true`) or *session based* (`false`) context. To enable this attestation to be used with the *replay protection* feature, set this to `true`. The default value is `false`.
           type: boolean
       type: object
     GoogleFirebaseAppcheckV1betaExchangeAppAttestAttestationResponse:
@@ -1563,7 +1563,7 @@ components:
           description: Required. A custom token signed using your project's Admin SDK service account credentials.
           type: string
         limitedUse:
-          description: "Forces a short-lived token with a 5 minute TTL. Useful when the client wishes to impose stricter TTL requirements for this exchange. Default: false."
+          description: Specifies whether this attestation is for use in a *limited use* (`true`) or *session based* (`false`) context. To enable this attestation to be used with the *replay protection* feature, set this to `true`. The default value is `false`.
           type: boolean
       type: object
     GoogleFirebaseAppcheckV1betaExchangeDebugTokenRequest:
@@ -1573,7 +1573,7 @@ components:
           description: Required. A debug token secret. This string must match a debug token secret previously created using CreateDebugToken.
           type: string
         limitedUse:
-          description: "Forces a short-lived token with a 5 minute TTL. Useful when the client wishes to impose stricter TTL requirements for this exchange. Default: false."
+          description: Specifies whether this attestation is for use in a *limited use* (`true`) or *session based* (`false`) context. To enable this attestation to be used with the *replay protection* feature, set this to `true`. The default value is `false`.
           type: boolean
       type: object
     GoogleFirebaseAppcheckV1betaExchangeDeviceCheckTokenRequest:
@@ -1583,14 +1583,14 @@ components:
           description: Required. The `device_token` as returned by Apple's client-side [DeviceCheck API](https://developer.apple.com/documentation/devicecheck/dcdevice). This is the base64 encoded `Data` (Swift) or `NSData` (ObjC) object.
           type: string
         limitedUse:
-          description: "Forces a short-lived token with a 5 minute TTL. Useful when the client wishes to impose stricter TTL requirements for this exchange. Default: false."
+          description: Specifies whether this attestation is for use in a *limited use* (`true`) or *session based* (`false`) context. To enable this attestation to be used with the *replay protection* feature, set this to `true`. The default value is `false`.
           type: boolean
       type: object
     GoogleFirebaseAppcheckV1betaExchangePlayIntegrityTokenRequest:
       description: Request message for the ExchangePlayIntegrityToken method.
       properties:
         limitedUse:
-          description: "Forces a short-lived token with a 5 minute TTL. Useful when the client wishes to impose stricter TTL requirements for this exchange. Default: false."
+          description: Specifies whether this attestation is for use in a *limited use* (`true`) or *session based* (`false`) context. To enable this attestation to be used with the *replay protection* feature, set this to `true`. The default value is `false`.
           type: boolean
         playIntegrityToken:
           description: Required. The [integrity verdict response token from Play Integrity](https://developer.android.com/google/play/integrity/verdict#decrypt-verify) issued to your app.
@@ -1600,7 +1600,7 @@ components:
       description: Request message for the ExchangeRecaptchaEnterpriseToken method.
       properties:
         limitedUse:
-          description: "Forces a short-lived token with a 5 minute TTL. Useful when the client wishes to impose stricter TTL requirements for this exchange. Default: false."
+          description: Specifies whether this attestation is for use in a *limited use* (`true`) or *session based* (`false`) context. To enable this attestation to be used with the *replay protection* feature, set this to `true`. The default value is `false`.
           type: boolean
         recaptchaEnterpriseToken:
           description: Required. The reCAPTCHA token as returned by the [reCAPTCHA Enterprise JavaScript API](https://cloud.google.com/recaptcha-enterprise/docs/instrument-web-pages).
@@ -1618,7 +1618,7 @@ components:
       description: Request message for the ExchangeRecaptchaV3Token method.
       properties:
         limitedUse:
-          description: "Forces a short-lived token with a 5 minute TTL. Useful when the client wishes to impose stricter TTL requirements for this exchange. Default: false."
+          description: Specifies whether this attestation is for use in a *limited use* (`true`) or *session based* (`false`) context. To enable this attestation to be used with the *replay protection* feature, set this to `true`. The default value is `false`.
           type: boolean
         recaptchaV3Token:
           description: Required. The reCAPTCHA token as returned by the [reCAPTCHA v3 JavaScript API](https://developers.google.com/recaptcha/docs/v3).

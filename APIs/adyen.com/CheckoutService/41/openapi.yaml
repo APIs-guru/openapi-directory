@@ -7027,6 +7027,42 @@ components:
         - issuer
       title: BillDesk
       type: object
+    BillingAddress:
+      properties:
+        city:
+          description: "The name of the city. Maximum length: 3000 characters."
+          maxLength: 3000
+          type: string
+        country:
+          description: |-
+            The two-character ISO-3166-1 alpha-2 country code. For example, **US**.
+            > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
+          type: string
+        houseNumberOrName:
+          description: "The number or name of the house. Maximum length: 3000 characters."
+          maxLength: 3000
+          type: string
+        postalCode:
+          description: A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries.
+          type: string
+        stateOrProvince:
+          description: |-
+            The two-character ISO 3166-2 state or province code. For example, **CA** in the US or **ON** in Canada.
+            > Required for the US and Canada.
+          type: string
+        street:
+          description: |-
+            The name of the street. Maximum length: 3000 characters.
+            > The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
+          maxLength: 3000
+          type: string
+      required:
+        - street
+        - houseNumberOrName
+        - city
+        - postalCode
+        - country
+      type: object
     BlikDetails:
       additionalProperties: false
       properties:
@@ -7466,6 +7502,46 @@ components:
         - orderData
         - resultCode
       type: object
+    DeliveryAddress:
+      properties:
+        city:
+          description: "The name of the city. Maximum length: 3000 characters."
+          maxLength: 3000
+          type: string
+        country:
+          description: |-
+            The two-character ISO-3166-1 alpha-2 country code. For example, **US**.
+            > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
+          type: string
+        firstName:
+          type: string
+        houseNumberOrName:
+          description: "The number or name of the house. Maximum length: 3000 characters."
+          maxLength: 3000
+          type: string
+        lastName:
+          type: string
+        postalCode:
+          description: A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries.
+          type: string
+        stateOrProvince:
+          description: |-
+            The two-character ISO 3166-2 state or province code. For example, **CA** in the US or **ON** in Canada.
+            > Required for the US and Canada.
+          type: string
+        street:
+          description: |-
+            The name of the street. Maximum length: 3000 characters.
+            > The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
+          maxLength: 3000
+          type: string
+      required:
+        - street
+        - houseNumberOrName
+        - city
+        - postalCode
+        - country
+      type: object
     DeviceRenderOptions:
       properties:
         sdkInterface:
@@ -7524,6 +7600,8 @@ components:
             - doku_bca_va
             - doku_alfamart
             - doku_indomaret
+            - doku_wallet
+            - doku_ovo
           type: string
       required:
         - type
@@ -7586,7 +7664,7 @@ components:
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
           x-addedInVersion: "40"
         billingAddress:
-          $ref: "#/components/schemas/Address"
+          $ref: "#/components/schemas/BillingAddress"
           description: |-
             The address where to send the invoice.
             > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
@@ -7645,7 +7723,7 @@ components:
           $ref: "#/components/schemas/ForexQuote"
           description: The forex quote as returned in the response of the forex service.
         deliveryAddress:
-          $ref: "#/components/schemas/Address"
+          $ref: "#/components/schemas/DeliveryAddress"
           description: The address where the purchased goods should be delivered.
         deliveryDate:
           description: |-
@@ -9781,7 +9859,7 @@ components:
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
           x-addedInVersion: "40"
         billingAddress:
-          $ref: "#/components/schemas/Address"
+          $ref: "#/components/schemas/BillingAddress"
           description: |-
             The address where to send the invoice.
             > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
@@ -9831,7 +9909,7 @@ components:
           $ref: "#/components/schemas/ForexQuote"
           description: The forex quote as returned in the response of the forex service.
         deliveryAddress:
-          $ref: "#/components/schemas/Address"
+          $ref: "#/components/schemas/DeliveryAddress"
           description: The address where the purchased goods should be delivered.
         deliveryDate:
           description: |-

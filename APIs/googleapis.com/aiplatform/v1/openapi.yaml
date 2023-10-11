@@ -9069,9 +9069,6 @@ components:
         annotationsFilter:
           description: An expression for filtering what part of the Dataset is to be exported. Only Annotations that match this filter will be exported. The filter syntax is the same as in ListAnnotations.
           type: string
-        filterSplit:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1ExportFilterSplit"
-          description: Split based on the provided filters for each set.
         fractionSplit:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1ExportFractionSplit"
           description: Split based on fractions defining the size of each set.
@@ -9160,19 +9157,6 @@ components:
     GoogleCloudAiplatformV1ExportFeatureValuesResponse:
       description: Response message for FeaturestoreService.ExportFeatureValues.
       properties: {}
-      type: object
-    GoogleCloudAiplatformV1ExportFilterSplit:
-      description: Assigns input data to training, validation, and test sets based on the given filters, data pieces not matched by any filter are ignored. Currently only supported for Datasets containing DataItems. If any of the filters in this message are to match nothing, then they can be set as '-' (the minus sign). Supported only for unstructured Datasets.
-      properties:
-        testFilter:
-          description: Required. A filter on DataItems of the Dataset. DataItems that match this filter are used to test the Model. A filter with same syntax as the one used in DatasetService.ListDataItems may be used. If a single DataItem is matched by more than one of the FilterSplit filters, then it is assigned to the first set that applies to it in the training, validation, test order.
-          type: string
-        trainingFilter:
-          description: Required. A filter on DataItems of the Dataset. DataItems that match this filter are used to train the Model. A filter with same syntax as the one used in DatasetService.ListDataItems may be used. If a single DataItem is matched by more than one of the FilterSplit filters, then it is assigned to the first set that applies to it in the training, validation, test order.
-          type: string
-        validationFilter:
-          description: Required. A filter on DataItems of the Dataset. DataItems that match this filter are used to validate the Model. A filter with same syntax as the one used in DatasetService.ListDataItems may be used. If a single DataItem is matched by more than one of the FilterSplit filters, then it is assigned to the first set that applies to it in the training, validation, test order.
-          type: string
       type: object
     GoogleCloudAiplatformV1ExportFractionSplit:
       description: Assigns the input data to training, validation, and test sets as per the given fractions. Any of `training_fraction`, `validation_fraction` and `test_fraction` may optionally be provided, they must sum to up to 1. If the provided ones sum to less than 1, the remainder is assigned to sets as decided by Vertex AI. If none of the fractions are set, by default roughly 80% of data is used for training, 10% for validation, and 10% for test.
@@ -10750,6 +10734,9 @@ components:
           type: string
         machineType:
           description: Immutable. The type of the machine. See the [list of machine types supported for prediction](https://cloud.google.com/vertex-ai/docs/predictions/configure-compute#machine-types) See the [list of machine types supported for custom training](https://cloud.google.com/vertex-ai/docs/training/configure-compute#machine-types). For DeployedModel this field is optional, and the default value is `n1-standard-2`. For BatchPredictionJob or as part of WorkerPoolSpec this field is required.
+          type: string
+        tpuTopology:
+          description: 'Immutable. The topology of the TPUs. Corresponds to the TPU topologies available from GKE. (Example: tpu_topology: "2x2x1").'
           type: string
       type: object
     GoogleCloudAiplatformV1ManualBatchTuningParameters:

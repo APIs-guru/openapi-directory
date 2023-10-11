@@ -531,6 +531,9 @@ components:
           contentEncoding: base64
           description: Public key. The 3D Secure 2 SDK encrypts the device information by using the DS public key.
           type: string
+        rootCertificates:
+          description: Directory Server root certificates. The 3D Secure 2 SDK verifies the ACS signed content using the rootCertificates.
+          type: string
       type: object
     MerchantDetails:
       properties:

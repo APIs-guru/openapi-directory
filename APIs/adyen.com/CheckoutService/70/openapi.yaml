@@ -7835,6 +7835,42 @@ components:
         - issuer
       title: BillDesk
       type: object
+    BillingAddress:
+      properties:
+        city:
+          description: "The name of the city. Maximum length: 3000 characters."
+          maxLength: 3000
+          type: string
+        country:
+          description: |-
+            The two-character ISO-3166-1 alpha-2 country code. For example, **US**.
+            > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
+          type: string
+        houseNumberOrName:
+          description: "The number or name of the house. Maximum length: 3000 characters."
+          maxLength: 3000
+          type: string
+        postalCode:
+          description: A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries.
+          type: string
+        stateOrProvince:
+          description: |-
+            The two-character ISO 3166-2 state or province code. For example, **CA** in the US or **ON** in Canada.
+            > Required for the US and Canada.
+          type: string
+        street:
+          description: |-
+            The name of the street. Maximum length: 3000 characters.
+            > The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
+          maxLength: 3000
+          type: string
+      required:
+        - street
+        - houseNumberOrName
+        - city
+        - postalCode
+        - country
+      type: object
     BlikDetails:
       additionalProperties: false
       properties:
@@ -8564,7 +8600,7 @@ components:
           description: Configuration data for 3DS payments.
           x-addedInVersion: "69"
         billingAddress:
-          $ref: "#/components/schemas/Address"
+          $ref: "#/components/schemas/BillingAddress"
           description: The address where to send the invoice.
         blockedPaymentMethods:
           description: |-
@@ -8612,7 +8648,7 @@ components:
           format: date-time
           type: string
         deliveryAddress:
-          $ref: "#/components/schemas/Address"
+          $ref: "#/components/schemas/DeliveryAddress"
           description: The address where the purchased goods should be delivered.
         enableOneClick:
           description: When true and `shopperReference` is provided, the shopper will be asked if the payment details should be stored for future one-click payments.
@@ -8862,7 +8898,7 @@ components:
           description: Configuration data for 3DS payments.
           x-addedInVersion: "69"
         billingAddress:
-          $ref: "#/components/schemas/Address"
+          $ref: "#/components/schemas/BillingAddress"
           description: The address where to send the invoice.
         blockedPaymentMethods:
           description: |-
@@ -8907,7 +8943,7 @@ components:
           format: date-time
           type: string
         deliveryAddress:
-          $ref: "#/components/schemas/Address"
+          $ref: "#/components/schemas/DeliveryAddress"
           description: The address where the purchased goods should be delivered.
         enableOneClick:
           description: When true and `shopperReference` is provided, the shopper will be asked if the payment details should be stored for future one-click payments.
@@ -9199,6 +9235,46 @@ components:
         - orderData
         - resultCode
       type: object
+    DeliveryAddress:
+      properties:
+        city:
+          description: "The name of the city. Maximum length: 3000 characters."
+          maxLength: 3000
+          type: string
+        country:
+          description: |-
+            The two-character ISO-3166-1 alpha-2 country code. For example, **US**.
+            > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
+          type: string
+        firstName:
+          type: string
+        houseNumberOrName:
+          description: "The number or name of the house. Maximum length: 3000 characters."
+          maxLength: 3000
+          type: string
+        lastName:
+          type: string
+        postalCode:
+          description: A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries.
+          type: string
+        stateOrProvince:
+          description: |-
+            The two-character ISO 3166-2 state or province code. For example, **CA** in the US or **ON** in Canada.
+            > Required for the US and Canada.
+          type: string
+        street:
+          description: |-
+            The name of the street. Maximum length: 3000 characters.
+            > The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
+          maxLength: 3000
+          type: string
+      required:
+        - street
+        - houseNumberOrName
+        - city
+        - postalCode
+        - country
+      type: object
     DetailsRequestAuthenticationData:
       properties:
         authenticationOnly:
@@ -9271,6 +9347,8 @@ components:
             - doku_bca_va
             - doku_alfamart
             - doku_indomaret
+            - doku_wallet
+            - doku_ovo
           type: string
       required:
         - type
@@ -9337,7 +9415,7 @@ components:
           description: Data for 3DS authentication.
           x-addedInVersion: "69"
         billingAddress:
-          $ref: "#/components/schemas/Address"
+          $ref: "#/components/schemas/BillingAddress"
           description: |-
             The address where to send the invoice.
             > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
@@ -9417,7 +9495,7 @@ components:
           type: string
           x-addedInVersion: "70"
         deliveryAddress:
-          $ref: "#/components/schemas/Address"
+          $ref: "#/components/schemas/DeliveryAddress"
           description: The address where the purchased goods should be delivered.
         deliveryDate:
           description: |-
@@ -12069,7 +12147,7 @@ components:
           description: Data for 3DS authentication.
           x-addedInVersion: "69"
         billingAddress:
-          $ref: "#/components/schemas/Address"
+          $ref: "#/components/schemas/BillingAddress"
           description: |-
             The address where to send the invoice.
             > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
@@ -12140,7 +12218,7 @@ components:
           type: string
           x-addedInVersion: "70"
         deliveryAddress:
-          $ref: "#/components/schemas/Address"
+          $ref: "#/components/schemas/DeliveryAddress"
           description: The address where the purchased goods should be delivered.
         deliveryDate:
           deprecated: true
@@ -14366,7 +14444,7 @@ components:
     SubMerchantInfo:
       properties:
         address:
-          $ref: "#/components/schemas/Address"
+          $ref: "#/components/schemas/BillingAddress"
         id:
           type: string
         mcc:

@@ -1661,6 +1661,10 @@ components:
         scaling:
           $ref: "#/components/schemas/GoogleCloudRunV2RevisionScaling"
           description: Scaling settings for this revision.
+        scalingStatus:
+          $ref: "#/components/schemas/GoogleCloudRunV2RevisionScalingStatus"
+          description: Output only. The current effective scaling settings for the revision.
+          readOnly: true
         service:
           description: Output only. The name of the parent service.
           readOnly: true
@@ -1702,6 +1706,14 @@ components:
           type: integer
         minInstanceCount:
           description: Minimum number of serving instances that this resource should have.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudRunV2RevisionScalingStatus:
+      description: Effective settings for the current revision
+      properties:
+        desiredMinInstanceCount:
+          description: The current number of min instances provisioned for this revision.
           format: int32
           type: integer
       type: object

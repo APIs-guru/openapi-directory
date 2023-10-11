@@ -805,6 +805,17 @@ components:
           description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
+    CmekConfig:
+      description: CMEK, or Customer Managed Encryption Keys, enables GCP products to put control over encryption and key management in their customer’s hands.
+      properties:
+        kmsKey:
+          description: Resource name of the Cloud KMS key, of the form `projects/PROJECT_ID/locations/LOCATION_ID/keyRings/KEY_RING_ID/cryptoKeys/KEY_ID`, that will be used to encrypt the Queues & Tasks in the region. Setting this as blank will turn off CMEK encryption.
+          type: string
+        name:
+          description: Output only. The config resource name which includes the project and location and must end in 'cmekConfig', in the format projects/PROJECT_ID/locations/LOCATION_ID/cmekConfig`
+          readOnly: true
+          type: string
+      type: object
     CreateTaskRequest:
       description: Request message for CreateTask.
       properties:
