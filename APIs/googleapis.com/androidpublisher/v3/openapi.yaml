@@ -2191,7 +2191,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Refunds a user's subscription or in-app purchase order. Orders older than 1 year cannot be refunded.
+      description: Refunds a user's subscription or in-app purchase order. Orders older than 3 years cannot be refunded.
       operationId: androidpublisher.orders.refund
       parameters:
         - description: The package name of the application for which this subscription or in-app item was purchased (for example, 'com.some.thing').
@@ -5912,7 +5912,7 @@ components:
       description: Configuration for a price migration.
       properties:
         oldestAllowedPriceVersionTime:
-          description: Required. The cutoff time for historical prices that subscribers can remain paying. Subscribers who are on a price that was created before this cutoff time will be migrated to the currently-offered price. These subscribers will receive a notification that they will be paying a different price. Subscribers who do not agree to the new price will have their subscription ended at the next renewal.
+          description: Required. The cutoff time for historical prices that subscribers can remain paying. Subscribers on prices which were available at this cutoff time or later will stay on their existing price. Subscribers on older prices will be migrated to the currently-offered price. The migrated subscribers will receive a notification that they will be paying a different price. Subscribers who do not agree to the new price will have their subscription ended at the next renewal.
           format: google-datetime
           type: string
         priceIncreaseType:

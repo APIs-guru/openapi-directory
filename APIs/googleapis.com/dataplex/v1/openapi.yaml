@@ -3732,6 +3732,47 @@ components:
           readOnly: true
           type: boolean
       type: object
+    GoogleCloudDataplexV1GovernanceEvent:
+      description: Payload associated with Governance related log events.
+      properties:
+        entity:
+          $ref: "#/components/schemas/GoogleCloudDataplexV1GovernanceEventEntity"
+          description: Entity resource information if the log event is associated with a specific entity.
+        eventType:
+          description: The type of the event.
+          enum:
+            - EVENT_TYPE_UNSPECIFIED
+            - RESOURCE_IAM_POLICY_UPDATE
+            - BIGQUERY_TABLE_CREATE
+            - BIGQUERY_TABLE_UPDATE
+            - BIGQUERY_TABLE_DELETE
+            - BIGQUERY_CONNECTION_CREATE
+            - BIGQUERY_CONNECTION_UPDATE
+            - BIGQUERY_CONNECTION_DELETE
+            - BIGQUERY_TAXONOMY_CREATE
+            - BIGQUERY_POLICY_TAG_CREATE
+            - BIGQUERY_POLICY_TAG_DELETE
+            - BIGQUERY_POLICY_TAG_SET_IAM_POLICY
+            - ACCESS_POLICY_UPDATE
+          type: string
+        message:
+          description: The log message.
+          type: string
+      type: object
+    GoogleCloudDataplexV1GovernanceEventEntity:
+      description: Information about Entity resource that the log event is associated with.
+      properties:
+        entity:
+          description: "The Entity resource the log event is associated with. Format: projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}"
+          type: string
+        entityType:
+          description: Type of entity.
+          enum:
+            - ENTITY_TYPE_UNSPECIFIED
+            - TABLE
+            - FILESET
+          type: string
+      type: object
     GoogleCloudDataplexV1Job:
       description: A job represents an instance of a task.
       properties:

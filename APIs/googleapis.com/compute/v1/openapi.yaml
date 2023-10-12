@@ -24687,6 +24687,56 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
+    patch:
+      description: Patches the specified NetworkAttachment resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
+      operationId: compute.networkAttachments.patch
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the NetworkAttachment resource to patch.
+          in: path
+          name: networkAttachment
+          required: true
+          schema:
+            type: string
+        - description: "An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder"
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NetworkAttachment"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - networkAttachments
   /projects/{project}/regions/{region}/networkAttachments/{resource}/getIamPolicy:
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
@@ -55260,6 +55310,9 @@ components:
         lastAttempt:
           $ref: "#/components/schemas/ManagedInstanceLastAttempt"
           description: "[Output Only] Information about the last attempt to create or delete the instance."
+        name:
+          description: "[Output Only] The name of the instance. The name always exists even if the instance has not yet been created."
+          type: string
         preservedStateFromConfig:
           $ref: "#/components/schemas/PreservedState"
           description: "[Output Only] Preserved state applied from per-instance config for this instance."
@@ -55676,6 +55729,9 @@ components:
         ipAddress:
           description: The IPv4 address assigned to the producer instance network interface. This value will be a range in case of Serverless.
           type: string
+        ipv6Address:
+          description: The IPv6 address assigned to the producer instance network interface. This is only assigned when the stack types of both the instance network interface and the consumer subnet are IPv4_IPv6.
+          type: string
         projectIdOrNum:
           description: The project id or number of the interface to which the IP was assigned.
           type: string
@@ -55696,6 +55752,9 @@ components:
           type: string
         subnetwork:
           description: The subnetwork used to assign the IP to the producer instance network interface.
+          type: string
+        subnetworkCidrRange:
+          description: "[Output Only] The CIDR range of the subnet from which the IPv4 internal IP was allocated from."
           type: string
       type: object
     NetworkAttachmentList:

@@ -6529,7 +6529,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: '[CLDR country code](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml) (e.g. "US"), used as a filter on repricing rules.'
+        - description: '[CLDR country code](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml) (for example, "US"), used as a filter on repricing rules.'
           in: query
           name: countryCode
           schema:
@@ -6715,7 +6715,7 @@ paths:
         - repricingrules
   /{merchantId}/repricingrules/{ruleId}/repricingreports:
     get:
-      description: Lists the metrics report for a given Repricing rule.
+      description: "*Deprecated*: New merchants can't start using this service. Lists the metrics report for a given Repricing rule."
       operationId: content.repricingrules.repricingreports.list
       parameters:
         - description: Required. Id of the merchant who owns the Repricing rule.
@@ -14851,13 +14851,13 @@ components:
           type: integer
       type: object
     RepricingRule:
-      description: Represents a repricing rule. A repricing rule is used by shopping serving to adjust transactable offer prices if conditions are met.
+      description: "*Deprecated*: New merchants can't start using this resource. Represents a repricing rule. A repricing rule is used by shopping serving to adjust transactable offer prices if conditions are met."
       properties:
         cogsBasedRule:
           $ref: "#/components/schemas/RepricingRuleCostOfGoodsSaleRule"
           description: The rule definition for TYPE_COGS_BASED. Required when the rule type is TYPE_COGS_BASED.
         countryCode:
-          description: Required. Immutable. [CLDR country code](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml) (e.g. "US").
+          description: Required. Immutable. [CLDR country code](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml) (for example, "US").
           type: string
         effectiveTimePeriod:
           $ref: "#/components/schemas/RepricingRuleEffectiveTime"
@@ -14907,7 +14907,7 @@ components:
           format: int32
           type: integer
         priceDelta:
-          description: The price delta against the COGS. E.g. 2 means $2 more of the COGS.
+          description: The price delta against the COGS. For example, 2 means $2 more of the COGS.
           type: string
       type: object
     RepricingRuleEffectiveTime:
@@ -14958,7 +14958,7 @@ components:
       description: Matcher by string attributes.
       properties:
         strAttributes:
-          description: String attributes, as long as such attribute of an offer is one of the string attribute values, the offer is considered as passing the matcher. The string matcher checks an offer for inclusivity in the string attributes, not equality. Only literal string matching is supported, no regex.
+          description: String attributes, as long as such attribute of an offer is one of the string attribute values, the offer is considered as passing the matcher. The string matcher checks an offer for inclusivity in the string attributes, not equality. Only literal string matching is supported, no regular expressions.
           items:
             type: string
           type: array
@@ -15654,7 +15654,7 @@ components:
             $ref: "#/components/schemas/RateGroup"
           type: array
         shipmentType:
-          description: 'Type of locations this service ships orders to. Acceptable values are: - "`delivery`" - "`pickup`" - "`local_delivery`" '
+          description: 'Type of locations this service ships orders to. Acceptable values are: - "`delivery`" - "`pickup`" - "`local_delivery`" - "`collection_point`" '
           type: string
         storeConfig:
           $ref: "#/components/schemas/ServiceStoreConfig"
