@@ -1349,7 +1349,8 @@ components:
           readOnly: true
           type: boolean
         satisfiesPzs:
-          description: Reserved for future use.
+          description: Output only. Reserved for future use.
+          readOnly: true
           type: boolean
         sizeBytes:
           description: Output only. The size of the backup in bytes.
@@ -1525,7 +1526,8 @@ components:
           readOnly: true
           type: boolean
         satisfiesPzs:
-          description: Reserved for future use.
+          description: Output only. Reserved for future use.
+          readOnly: true
           type: boolean
         secondaryConfig:
           $ref: "#/components/schemas/SecondaryConfig"
@@ -1865,13 +1867,14 @@ components:
           description: Configuration for query insights.
         readPoolConfig:
           $ref: "#/components/schemas/ReadPoolConfig"
-          description: Read pool specific config.
+          description: Read pool instance configuration. This is required if the value of instanceType is READ_POOL.
         reconciling:
           description: Output only. Reconciling (https://google.aip.dev/128#reconciliation). Set to true if the current state of Instance does not match the user's intended state, and the service is actively updating the resource to reconcile them. This can happen due to user-triggered updates or system actions like failover or maintenance.
           readOnly: true
           type: boolean
         satisfiesPzs:
-          description: Reserved for future use.
+          description: Output only. Reserved for future use.
+          readOnly: true
           type: boolean
         state:
           description: Output only. The current serving state of the instance.
@@ -2039,7 +2042,7 @@ components:
       description: Metadata related to network configuration.
       properties:
         allocatedIpRange:
-          description: 'Optional. Name of the allocated IP range for the private IP AlloyDB cluster, for example: "google-managed-services-default". If set, the instance IPs for this cluster will be created in the allocated range. The range name must comply with RFC 1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])?. Field name is intended to be consistent with CloudSQL.'
+          description: 'Optional. Name of the allocated IP range for the private IP AlloyDB cluster, for example: "google-managed-services-default". If set, the instance IPs for this cluster will be created in the allocated range. The range name must comply with RFC 1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?`. Field name is intended to be consistent with Cloud SQL.'
           type: string
         network:
           description: 'Required. The resource link for the VPC network in which cluster resources are created and from which they are accessible via Private IP. The network must belong to the same project as the cluster. It is specified in the form: "projects/{project_number}/global/networks/{network_id}". This is required to create a cluster.'
@@ -2375,14 +2378,14 @@ components:
           description: Description associated with signal
           type: string
         eventTime:
-          description: The last time at which the event described by this signal took place
+          description: Required. The last time at which the event described by this signal took place
           format: google-datetime
           type: string
         externalUri:
           description: The external-uri of the signal, using which more information about this signal can be obtained. In GCP, this will take user to SCC page to get more details about signals.
           type: string
         name:
-          description: "The name of the signal, ex: PUBLIC_SQL_INSTANCE, SQL_LOG_ERROR_VERBOSITY etc."
+          description: "Required. The name of the signal, ex: PUBLIC_SQL_INSTANCE, SQL_LOG_ERROR_VERBOSITY etc."
           type: string
         provider:
           description: "Cloud provider name. Ex: GCP/AWS/Azure/OnPrem/SelfManaged"
@@ -2399,10 +2402,10 @@ components:
           description: Closest parent container of this resource. In GCP, 'container' refers to a Cloud Resource Manager project. It must be resource name of a Cloud Resource Manager project with the format of "provider//", such as "gcp/projects/123".
           type: string
         resourceName:
-          description: Database resource name associated with the signal. Resource name to follow CAIS resource_name format as noted here go/condor-common-datamodel
+          description: Required. Database resource name associated with the signal. Resource name to follow CAIS resource_name format as noted here go/condor-common-datamodel
           type: string
         signalClass:
-          description: The class of the signal, such as if it's a THREAT or VULNERABILITY.
+          description: Required. The class of the signal, such as if it's a THREAT or VULNERABILITY.
           enum:
             - CLASS_UNSPECIFIED
             - THREAT
@@ -2412,7 +2415,58 @@ components:
             - ERROR
           type: string
         signalId:
-          description: Unique identifier for the signal. This is an unique id which would be mainatined by partner to identify a signal.
+          description: Required. Unique identifier for the signal. This is an unique id which would be mainatined by partner to identify a signal.
+          type: string
+        signalType:
+          description: Required. Type of signal, for example, `AVAILABLE_IN_MULTIPLE_ZONES`, `LOGGING_MOST_ERRORS`, etc.
+          enum:
+            - SIGNAL_TYPE_UNSPECIFIED
+            - SIGNAL_TYPE_NOT_AVAILABLE_IN_MULTIPLE_ZONES
+            - SIGNAL_TYPE_NOT_AVAILABLE_IN_MULTIPLE_REGIONS
+            - SIGNAL_TYPE_NO_PROMOTABLE_REPLICA
+            - SIGNAL_TYPE_NO_AUTOMATED_BACKUP_POLICY
+            - SIGNAL_TYPE_SHORT_BACKUP_RETENTION
+            - SIGNAL_TYPE_LAST_BACKUP_FAILED
+            - SIGNAL_TYPE_LAST_BACKUP_OLD
+            - SIGNAL_TYPE_VIOLATES_CIS_GCP_FOUNDATION_2_0
+            - SIGNAL_TYPE_VIOLATES_CIS_GCP_FOUNDATION_1_3
+            - SIGNAL_TYPE_VIOLATES_CIS_GCP_FOUNDATION_1_2
+            - SIGNAL_TYPE_VIOLATES_CIS_GCP_FOUNDATION_1_1
+            - SIGNAL_TYPE_VIOLATES_CIS_GCP_FOUNDATION_1_0
+            - SIGNAL_TYPE_VIOLATES_NIST_800_53
+            - SIGNAL_TYPE_VIOLATES_ISO_27001
+            - SIGNAL_TYPE_VIOLATES_PCI_DSS_V3_2_1
+            - SIGNAL_TYPE_LOGS_NOT_OPTIMIZED_FOR_TROUBLESHOOTING
+            - SIGNAL_TYPE_QUERY_DURATIONS_NOT_LOGGED
+            - SIGNAL_TYPE_VERBOSE_ERROR_LOGGING
+            - SIGNAL_TYPE_QUERY_LOCK_WAITS_NOT_LOGGED
+            - SIGNAL_TYPE_LOGGING_MOST_ERRORS
+            - SIGNAL_TYPE_LOGGING_ONLY_CRITICAL_ERRORS
+            - SIGNAL_TYPE_MINIMAL_ERROR_LOGGING
+            - SIGNAL_TYPE_QUERY_STATISTICS_LOGGED
+            - SIGNAL_TYPE_EXCESSIVE_LOGGING_OF_CLIENT_HOSTNAME
+            - SIGNAL_TYPE_EXCESSIVE_LOGGING_OF_PARSER_STATISTICS
+            - SIGNAL_TYPE_EXCESSIVE_LOGGING_OF_PLANNER_STATISTICS
+            - SIGNAL_TYPE_NOT_LOGGING_ONLY_DDL_STATEMENTS
+            - SIGNAL_TYPE_LOGGING_QUERY_STATISTICS
+            - SIGNAL_TYPE_NOT_LOGGING_TEMPORARY_FILES
+            - SIGNAL_TYPE_CONNECTION_MAX_NOT_CONFIGURED
+            - SIGNAL_TYPE_USER_OPTIONS_CONFIGURED
+            - SIGNAL_TYPE_EXPOSED_TO_PUBLIC_ACCESS
+            - SIGNAL_TYPE_UNENCRYPTED_CONNECTIONS
+            - SIGNAL_TYPE_NO_ROOT_PASSWORD
+            - SIGNAL_TYPE_WEAK_ROOT_PASSWORD
+            - SIGNAL_TYPE_ENCRYPTION_KEY_NOT_CUSTOMER_MANAGED
+            - SIGNAL_TYPE_SERVER_AUTHENTICATION_NOT_REQUIRED
+            - SIGNAL_TYPE_EXPOSED_BY_OWNERSHIP_CHAINING
+            - SIGNAL_TYPE_EXPOSED_TO_EXTERNAL_SCRIPTS
+            - SIGNAL_TYPE_EXPOSED_TO_LOCAL_DATA_LOADS
+            - SIGNAL_TYPE_CONNECTION_ATTEMPTS_NOT_LOGGED
+            - SIGNAL_TYPE_DISCONNECTIONS_NOT_LOGGED
+            - SIGNAL_TYPE_LOGGING_EXCESSIVE_STATEMENT_INFO
+            - SIGNAL_TYPE_EXPOSED_TO_REMOTE_ACCESS
+            - SIGNAL_TYPE_DATABASE_NAMES_EXPOSED
+            - SIGNAL_TYPE_SENSITIVE_TRACE_INFO_NOT_MASKED
           type: string
         state:
           enum:
@@ -2495,6 +2549,7 @@ components:
           enum:
             - INSTANCE_TYPE_UNSPECIFIED
             - PRIMARY
+            - SECONDARY
             - READ_REPLICA
             - OTHER
           type: string

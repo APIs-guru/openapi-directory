@@ -105,7 +105,7 @@ paths:
       description: Updates an existing workstation.
       operationId: workstations.projects.locations.workstationClusters.workstationConfigs.workstations.patch
       parameters:
-        - description: Full name of this workstation.
+        - description: Identifier. Full name of this workstation.
           in: path
           name: name
           required: true
@@ -1550,7 +1550,7 @@ components:
           description: Optional. [Labels](https://cloud.google.com/workstations/docs/label-resources) that are applied to the workstation and that are also propagated to the underlying Compute Engine resources.
           type: object
         name:
-          description: Full name of this workstation.
+          description: Identifier. Full name of this workstation.
           type: string
         reconciling:
           description: Output only. Indicates whether this workstation is currently being updated to match its intended state.
@@ -1625,7 +1625,7 @@ components:
           description: Optional. [Labels](https://cloud.google.com/workstations/docs/label-resources) that are applied to the workstation cluster and that are also propagated to the underlying Compute Engine resources.
           type: object
         name:
-          description: Full name of this workstation cluster.
+          description: Identifier. Full name of this workstation cluster.
           type: string
         network:
           description: Immutable. Name of the Compute Engine network in which instances associated with this workstation cluster will be created.
@@ -1703,7 +1703,7 @@ components:
           description: Optional. [Labels](https://cloud.google.com/workstations/docs/label-resources) that are applied to the workstation configuration and that are also propagated to the underlying Compute Engine resources.
           type: object
         name:
-          description: Full name of this workstation configuration.
+          description: Identifier. Full name of this workstation configuration.
           type: string
         persistentDirectories:
           description: Optional. Directories to persist across workstation sessions.
