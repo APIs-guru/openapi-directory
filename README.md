@@ -28,14 +28,18 @@ Our goal is to create the most comprehensive, standards-compliant and up-to-date
 - Anyone can add or change an API, not only API owners.
 - All data can be accessed through a [REST API][apiDoc-link].
 
-If you want to reference this project and you need an icon or even a banner, check our [branding guide](https://github.com/APIs-guru/branding). If you love our logo, we have a [RedBubble store](https://www.redbubble.com/shop/ap/79074109) where you can buy official stickers, t-shirts, mugs etc.
+If you want to reference this project and you need an icon or even a banner, check our [branding guide](https://github.com/APIs-guru/branding).
 
 The project was started by [Ivan Goncharov](https://github.com/IvanGoncharov) of APIs.guru, it is now maintained by [Mike Ralphson](https://github.com/MikeRalphson) of [Mermade Software](https://github.com/mermade). Check out our other [OpenAPI-related projects](https://github.com/search?q=org%3AMermade+openapi).
 
 APIs.guru provide services and consultancy around the GraphQL and OpenAPI specifications and APIs in general.
 You can contact us at founders@apis.guru / mike.ralphson@gmail.com
 
-[![Become a backer](https://opencollective.com/openapi-directory/tiers/backer.svg?avatarHeight=36&width=600)](https://opencollective.com/openapi-directory)
+The OpenAPI Directory is sponsored by [Speakeasy](https://www.speakeasyapi.dev/?utm_source=apigurus+repo&utm_medium=github+sponsorship) - Your API: Enterprise ready in a click.
+
+[![Speakeasy logo](https://apis.guru/assets/images/speakeasy-github-sponsor-dark.svg)](https://www.speakeasyapi.dev/?utm_source=apigurus+repo&utm_medium=github+sponsorship)
+
+[![Become a partner](https://opencollective.com/openapi-directory/tiers/partner.svg?avatarHeight=36&width=600)](https://opencollective.com/openapi-directory)
 
 What does APIs.guru do?
 --------------------------
@@ -70,7 +74,7 @@ Own-Label API Directory
 Existing integrations
 --------------------------
 
-[![Become a partner](https://opencollective.com/openapi-directory/tiers/partner.svg?avatarHeight=36&width=600)](https://opencollective.com/openapi-directory)
+[![Become a backer](https://opencollective.com/openapi-directory/tiers/backer.svg?avatarHeight=36&width=600)](https://opencollective.com/openapi-directory)
 
  - [HTTP Toolkit](https://httptoolkit.tech/) **Beautiful & open-source tools to debug, test and develop with HTTP(S)**
  - [OpenAPI-Directory-JS](https://github.com/httptoolkit/openapi-directory-js) - The OpenAPI directory precompiled & indexed for JS usage & searching
@@ -93,7 +97,7 @@ Existing integrations
  - [Mockcoon](https://mockoon.com/mock-samples/category/all/) - API mock samples for your project
 
 Also used as test suite in the following projects:
- - [Speakeasy](https://speakeasyapi.dev) - **Generate SDKs Now. Gives your users the DevEx that makes API integrations easy**
+ - [Speakeasy](https://www.speakeasyapi.dev/?utm_source=apigurus+repo&utm_medium=github+sponsorship) - **Generate SDKs Now. Gives your users the DevEx that makes API integrations easy**
  - [ReDoc](https://github.com/Redocly/redoc) - OpenAPI-generated API Reference Documentation
  - [swagger-parser](https://github.com/BigstickCarpet/swagger-parser) - OpenAPI parser and validator for Node and browsers
  - [OpenAPI-schema-validator](https://github.com/seriousme/openapi-schema-validator) - OpenApi schema validation for OpenApi versions v2, v3.0.x and v3.1.x
