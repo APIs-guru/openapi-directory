@@ -1,0 +1,460 @@
+openapi: 3.0.3
+servers:
+  - description: Production server
+    url: https://api.carbone.io
+x-hasEquivalentPaths: true
+info:
+  contact:
+    email: support@carbone.io
+    name: Carbone Support
+    url: https://help.carbone.io
+  description: |-
+    Carbone Cloud/On-premise Open API reference.
+
+    For requesting:
+    - Carbone Cloud API: find your API key on your [Carbone account](https://account.carbone.io). Home page > Copy the `production` or `testing` API key.
+    - Carbone On-premise: Update the `Server URL` on the Open API specification.
+
+    Useful links:
+    - [API Flow](https://carbone.io/api-reference.html#quickstart-api-flow)
+    - [Integration / SDKs](https://carbone.io/api-reference.html#api-integration)
+    - [Generated document storage](https://carbone.io/api-reference.html#report-storage)
+    - [Request timeout](https://carbone.io/api-reference.html#api-timeout)
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  title: Carbone API
+  version: 1.2.0
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: https://carbone-resources.s3.eu-west-3.amazonaws.com/20210630+-+logo_V2.png
+  x-origin:
+    - format: openapi
+      url: https://carbone.io/examples/carboneRenderAPI.OpenAPI.yml
+      version: "3.0"
+  x-providerName: carbone.io
+tags:
+  - description: Manage templates
+    name: template
+  - description: Manage renders
+    name: render
+  - description: API Status
+    name: status
+paths:
+  "/render/{renderId}":
+    get:
+      description: "Documentation: https://carbone.io/api-reference.html#download-rendered-reports"
+      parameters:
+        - $ref: "#/components/parameters/renderId"
+        - $ref: "#/components/parameters/carboneVersion"
+      responses:
+        "200":
+          description: Stream of the generated document
+          headers:
+            content-disposition:
+              description: "File name, for instance: 'filename=\"report.pdf\"'. The default value is 'report'. The file name can be changed dynamically thanks to the `reportName` option when generating a document with `POST /render/:templateId`."
+              schema:
+                type: string
+            content-type:
+              description: File type
+              schema:
+                type: string
+        "400":
+          $ref: "#/components/responses/RenderIdNotValidError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/FileDoesNotExistError"
+      summary: Retreive a generated document from a render ID.
+      tags:
+        - render
+  "/render/{templateId}":
+    post:
+      description: "Documentation: https://carbone.io/api-reference.html#render-reports"
+      parameters:
+        - $ref: "#/components/parameters/templateId"
+        - $ref: "#/components/parameters/carboneVersion"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                complement:
+                  description: Optional - Object|Array, extra data accessible in the template with {c.} instead of {d.}
+                  example: {}
+                  type: object
+                convertTo:
+                  description: "Optional - Convert the document into another format. Accepted values: ods xlsx xls csv pdf txt odp ppt pptx jpg png odt doc docx txt jpg png epub html xml idml. List of supported formats: https://carbone.io/documentation.html#supported-files-and-features-list"
+                  example: pdf
+                  type: string
+                currencyRates:
+                  description: "Optional - Currency exchange rates for conversions from `currencySource` to `currencyTarget`. Learn more: https://carbone.io/documentation.html#formatc-precisionorformat-"
+                  example:
+                    EUR: 1
+                    USD: 1.2
+                  type: object
+                currencySource:
+                  description: "Optional - Currency source coming from your JSON data. The option is used by `formatC` to convert the currency based on the `currencyTarget` and `currencyRates`. Learn more: https://carbone.io/documentation.html#formatc-precisionorformat-"
+                  example: EUR
+                  type: string
+                currencyTarget:
+                  description: "Optional - Target currency when the document is generated. The option is used by `formatC` to convert the currency based on the `currencySource` and `currencyRates`. Learn more: https://carbone.io/documentation.html#formatc-precisionorformat-"
+                  example: USD
+                  type: string
+                data:
+                  description: Required - ️JSON data-set merged into the template to generate a document
+                  example:
+                    id: "42"
+                    name: John
+                    type: invoice
+                  type: object
+                enum:
+                  description: "Optional - List of enumerations, use it in reports with `convEnum` formatters, documentation: https://carbone.io/documentation.html#convenum-type-"
+                  example: {}
+                  type: object
+                hardRefresh:
+                  description: Optional - If true, the report content is refreshed at the end of the rendering process. To use this option, `convertTo` has to be defined. It is mostly used to refresh a table of content.
+                  example: false
+                  type: boolean
+                lang:
+                  description: "Optional - Locale of the generated doocument, it will used for translation `{t()}`, formatting numbers with `:formatN`, and currencies `:formatC`. List of supported locales: https://github.com/carboneio/carbone/blob/master/formatters/_locale.js"
+                  example: fr-fr
+                  type: string
+                reportName:
+                  description: Optional - Static or dynamic file name returned on the `content-disposition` header when the generated report is fetched with `GET /report/:renderI`. Multiple Carbone tags are accepted, such as `{d.type}-{d.date}.pdf`
+                  example: "{d.date}.odt"
+                  type: string
+                timezone:
+                  description: "Optional - Convert document dates to a timezone. The default timezone is `Europe/Paris`. The date must be chained with the `:formatD` formatter, for instance `{d.date:formatD(YYYY-MM-DD HH:MM)}`. List of accepted timezones (Column TZ identifier): https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
+                  example: Europe/Paris
+                  type: string
+                translations:
+                  description: "Optional - When the report is generated, all text between `{t( )}` is replaced with the corresponding translation. The `lang` option is required to select the correct translation. Learn more: https://carbone.io/documentation.html#translations"
+                  example:
+                    es:
+                      one: uno
+                    fr:
+                      one: un
+                  type: object
+                variableStr:
+                  description: "Optional - Predefine alias, related documenation: https://carbone.io/documentation.html#alias"
+                  example: "{#def = d.id}"
+                  type: string
+              required:
+                - data
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    properties:
+                      renderId:
+                        type: string
+                    type: object
+                  success:
+                    default: true
+                    type: boolean
+                type: object
+          description: On success, a `render ID` is returned, a unique identifier for the generated document.
+        "400":
+          $ref: "#/components/responses/NotJsonError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/TemplateNotFoundError"
+        "422":
+          $ref: "#/components/responses/MissingDataFieldError"
+        "500":
+          $ref: "#/components/responses/GenerateReportError"
+      security:
+        - bearerAuth: []
+      summary: Generate a document from a template ID, and a JSON data-set
+      tags:
+        - render
+  /status:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                  code: 200
+                  message: OK
+                  success: true
+                  version: 4.13.0
+                properties:
+                  code:
+                    type: number
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+                  version:
+                    type: string
+                type: object
+          description: Check the API status and version
+        "500":
+          description: Something went wrong, contact support on the chat
+      summary: Fetch the API status and version
+      tags:
+        - status
+  /template:
+    post:
+      description: "Documentation: https://carbone.io/api-reference.html#add-templates"
+      parameters:
+        - $ref: "#/components/parameters/carboneVersion"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                template:
+                  example: base64-encoded file contents
+                  type: string
+              required:
+                - template
+              type: object
+          multipart/form-data:
+            schema:
+              properties:
+                template:
+                  format: binary
+                  type: string
+              required:
+                - template
+              type: object
+        description: "Template File to upload, supported formats: DOCX, XLSX, PPTX, ODT, ODS, ODP, ODG, XHTML, IDML, HTML or an XML file"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    properties:
+                      templateId:
+                        type: string
+                    type: object
+                  success:
+                    type: boolean
+                type: object
+          description: On success, the `template ID` is returned.
+        "400":
+          $ref: "#/components/responses/NotFileError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "415":
+          $ref: "#/components/responses/TemplateFormatError"
+        "422":
+          $ref: "#/components/responses/MissingTemplateFieldError"
+      security:
+        - bearerAuth: []
+      summary: Upload a template.
+      tags:
+        - template
+  "/template/{templateId}":
+    delete:
+      description: "Documentation: https://carbone.io/api-reference.html#delete-templates"
+      parameters:
+        - $ref: "#/components/parameters/templateId"
+        - $ref: "#/components/parameters/carboneVersion"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    default: true
+                    type: boolean
+                type: object
+          description: The template is deleted
+        "400":
+          $ref: "#/components/responses/templateIdNotValidError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/TemplateNotFoundError"
+      security:
+        - bearerAuth: []
+      summary: Delete a template from a template ID
+      tags:
+        - template
+    get:
+      description: "Documentation: https://carbone.io/api-reference.html#get-templates"
+      parameters:
+        - $ref: "#/components/parameters/templateId"
+        - $ref: "#/components/parameters/carboneVersion"
+      responses:
+        "200":
+          description: stream of the file content
+          headers:
+            content-disposition:
+              description: "Template name, for instance: 'filename=\"{templateid}.docx\"'."
+              schema:
+                type: string
+            content-type:
+              description: File type
+              schema:
+                type: string
+        "400":
+          $ref: "#/components/responses/templateIdNotValidError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/TemplateNotFoundError"
+      security:
+        - bearerAuth: []
+      summary: Download a template from a template ID
+      tags:
+        - template
+components:
+  parameters:
+    carboneVersion:
+      description: Carbone version
+      in: header
+      name: carbone-version
+      required: true
+      schema:
+        default: 4
+        format: int32
+        type: integer
+    renderId:
+      description: Unique identifier of the report
+      in: path
+      name: renderId
+      required: true
+      schema:
+        type: string
+    templateId:
+      description: Unique identifier of the template
+      in: path
+      name: templateId
+      required: true
+      schema:
+        type: string
+  responses:
+    CResponseError:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: object
+              success:
+                default: false
+                type: boolean
+            type: object
+      description: Error response when the request is invalid.
+    FileDoesNotExistError:
+      content:
+        application/json:
+          schema:
+            example:
+              error: File not found
+              success: false
+            type: object
+      description: The file does not exist.
+    GenerateReportError:
+      content:
+        application/json:
+          schema:
+            example:
+              error: Error while rendering template
+              success: false
+            type: object
+      description: Something went wrong when merging the JSON data-set into the template. The design of the template has an issue.
+    MissingDataFieldError:
+      content:
+        application/json:
+          schema:
+            example:
+              error: Missing 'data' property in body
+              success: false
+            type: object
+      description: The 'data' property is missing on the body request.
+    MissingTemplateFieldError:
+      content:
+        application/json:
+          schema:
+            example:
+              error: "'template' field is empty"
+              success: false
+            type: object
+      description: The `template` field is empty on the body request
+    NotFileError:
+      content:
+        application/json:
+          schema:
+            example:
+              error: Content-Type header should be multipart/form-data or application/json
+              success: false
+            type: object
+      description: The body request type is not correct, it must be a FormData or a JSON. The `Content-type` header must be either `application/json` or `multipart/form-data`
+    NotJsonError:
+      content:
+        application/json:
+          schema:
+            example:
+              error: "'Content-Type' header is not 'application/json'"
+              success: false
+            type: object
+      description: The body request type is not correct, it must be a JSON type and the `Content-type` header must be `application/json`
+    RenderIdNotValidError:
+      content:
+        application/json:
+          schema:
+            example:
+              error: Invalid render ID
+              success: false
+            type: object
+      description: The `render ID` is not valid
+    TemplateFormatError:
+      content:
+        application/json:
+          schema:
+            example:
+              error: Template format not supported
+              success: false
+            type: object
+      description: "Template format not supported, it must be an XML-based document: DOCX, XLSX, PPTX, ODT, ODS, ODP, ODG, XHTML, IDML, HTML or an XML file"
+    TemplateNotFoundError:
+      content:
+        application/json:
+          schema:
+            example:
+              error: Template not found
+              success: false
+            type: object
+      description: The template is not found
+    UnauthorizedError:
+      content:
+        application/json:
+          schema:
+            example:
+              error: Unauthorized, please provide a valid API key on the 'Authorization' header
+              success: false
+            type: object
+      description: "Unauthorized, please provide a correct API key on the `Authorization ` header. The API key is available on your Carbone account: https://account.carbone.io"
+    templateIdNotValidError:
+      content:
+        application/json:
+          schema:
+            example:
+              error: Invalid templateId
+              success: false
+            type: object
+      description: The `template ID` is not valid
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: eyJhbGci...
+      description: Get you test or production API Key on https://account.carbone.io
+      scheme: bearer
+      type: http

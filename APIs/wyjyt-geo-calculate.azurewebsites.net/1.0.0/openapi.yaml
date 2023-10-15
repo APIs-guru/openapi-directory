@@ -1,0 +1,470 @@
+openapi: 3.0.0
+servers:
+  - url: https://wyjyt-geo-calculate.azurewebsites.net/api
+info:
+  description: Widget API to calculate Geo Coordinates, Geo Fences and Sun, Moon, Sky, Eclipse information.  See https://wyjyt.com
+  title: Wyjyt - Geo Calculate
+  version: 1.0.0
+  x-apisguru-categories:
+    - location
+  x-logo:
+    url: https://wyjyt.com/wp-content/uploads/2023/05/widget-300x300.png
+  x-origin:
+    - format: swagger
+      url: https://wyjyt-geo-calculate.azurewebsites.net/api/swagger.json
+      version: "2.0"
+  x-providerName: wyjyt-geo-calculate.azurewebsites.net
+paths:
+  /Convert:
+    post:
+      description: Convert the list of geo coordinates to a standard format - (latlon | utm | mgrs | ecef | epsg3857 | georef | cartesian)
+      operationId: Convert
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/geoConvertRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/geoConvertResponse"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/wyjytErrorResponse"
+          description: Bad request
+        "500":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Error
+      summary: Convert the list of geo coordinates to a standard format - (latlon | utm | mgrs | ecef | epsg3857 | georef | cartesian)
+      tags:
+        - Geo Calculate
+  /Distance:
+    post:
+      description: Calculate the distance between two geo coordinates.
+      operationId: Distance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/geoDistanceRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/geoDistanceResponse"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/wyjytErrorResponse"
+          description: Bad request
+        "500":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Error
+      summary: Calculate the distance between two geo coordinates.
+      tags:
+        - Geo Calculate
+  /Fence:
+    post:
+      description: Check if a list of coordinates are inside of a fence of coordinates.
+      operationId: Fence
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/geoFenceRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/geoFenceResponse"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/wyjytErrorResponse"
+          description: Bad request
+        "500":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Error
+      summary: Check if a list of coordinates are inside of a fence of coordinates.
+      tags:
+        - Geo Calculate
+  /Sky:
+    post:
+      description: Calculate sun, moon, eclipse and sky information for the date and location.
+      operationId: Sky
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/geoSkyRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/geoSkyResponse"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/wyjytErrorResponse"
+          description: Bad request
+        "500":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Error
+      summary: Calculate sun, moon, eclipse and sky information for the date and location.
+      tags:
+        - Geo Calculate
+components:
+  schemas:
+    geoConvertRequest:
+      example: '{"coordinates":"39.801769 -86.157769","system":"latlon","format":"seconds"}'
+      properties:
+        coordinates:
+          description: Comma-separated list of Geo Coordinates to convert. See accepted Systems below.
+          type: string
+        format:
+          description: "Output format:\r
+
+            (decimal, degree, minutes, seconds.)\r
+
+            Default is decimal."
+          type: string
+        system:
+          description: "Output standard coordinate system:\r
+
+            (latlon | utm | mgrs | ecef | epsg3857 | georef | cartesian).  \r
+
+            Default is latlon."
+          type: string
+      type: object
+    geoConvertResponse:
+      properties:
+        coordinates:
+          description: Comma-separated list of formatted Geo Coordinates.
+          type: string
+      type: object
+    geoDistanceRequest:
+      example: '{"coordinate1":"39.801769 -86.157769","coordinate2":"38.801769 -85.157769","useEllipse":false}'
+      properties:
+        coordinate1:
+          description: "Geo Coordinate 1 to calculate from.\r
+
+            \  Standards are (latlon | utm | mgrs | ecef | epsg3857 | georef | cartesian)"
+          type: string
+        coordinate2:
+          description: "Geo Coordinate 2 to calculate to.\r
+
+            \  Standards are (latlon | utm | mgrs | ecef | epsg3857 | georef | cartesian)"
+          type: string
+        useEllipse:
+          description: "Flag to use ellipsoid calculation.\r
+
+            \  Default is false, spherical."
+          type: boolean
+      type: object
+    geoDistanceResponse:
+      properties:
+        bearing:
+          description: Bearing direction between the two coordinates in degrees.
+          format: double
+          type: number
+        meters:
+          description: Distance between the two coordinates in meters.
+          format: double
+          type: number
+      type: object
+    geoEventDto:
+      description: Celestial event information.
+      properties:
+        fall:
+          format: date-time
+          type: string
+        lastApogee:
+          format: date-time
+          type: string
+        lastPerigee:
+          format: date-time
+          type: string
+        nextApogee:
+          format: date-time
+          type: string
+        nextPerigee:
+          format: date-time
+          type: string
+        spring:
+          format: date-time
+          type: string
+        summer:
+          format: date-time
+          type: string
+        winter:
+          format: date-time
+          type: string
+        zodiacSign:
+          type: string
+      type: object
+    geoFenceRequest:
+      example: '{"fenceCoordinates":["39.801769 -86.157769","40.801769 -86.157769","40.801769 -87.157769","39.801769 -87.157769","39.801769 -86.157769"],"checkCoordinates":["40 -87"]}'
+      properties:
+        checkCoordinates:
+          description: "Array of coordinates to check if in the fence.\r
+
+            \  Accepted standards: (latlon | utm | mgrs | ecef | epsg3857 | georef | cartesian)"
+          items:
+            type: string
+          type: array
+        fenceCoordinates:
+          description: "Array of coordinates that define the fence.  First and last should be the same for polygons.\r
+
+            \  Accepted standards: (latlon | utm | mgrs | ecef | epsg3857 | georef | cartesian)"
+          items:
+            type: string
+          type: array
+      type: object
+    geoFenceResponse:
+      properties:
+        distances:
+          description: List of distances from the fence.
+          items:
+            format: double
+            type: number
+          type: array
+        insides:
+          description: List of flags indicating inside or outside of the fence.
+          items:
+            type: boolean
+          type: array
+      type: object
+    geoMoonDto:
+      description: Lunar information.
+      properties:
+        altitude:
+          format: double
+          type: number
+        azimuth:
+          format: double
+          type: number
+        bearing:
+          format: double
+          type: number
+        declination:
+          format: double
+          type: number
+        distance:
+          format: double
+          type: number
+        illumination:
+          $ref: "#/components/schemas/moonIllum"
+        isUp:
+          type: boolean
+        lastEclipse:
+          $ref: "#/components/schemas/lunarEclipseDetails"
+        name:
+          type: string
+        nextEclipse:
+          $ref: "#/components/schemas/lunarEclipseDetails"
+        rightAscension:
+          format: double
+          type: number
+        rise:
+          format: date-time
+          type: string
+        set:
+          format: date-time
+          type: string
+        sign:
+          type: string
+      type: object
+    geoSkyRequest:
+      example: '{"date":"2023-10-15T22:02:39.509098Z","coordinate":"39.801769 -86.157769"}'
+      properties:
+        coordinate:
+          description: Location coordinate of sky data.
+          type: string
+        date:
+          description: Date on which to fetch sky data.
+          format: date-time
+          type: string
+      type: object
+    geoSkyResponse:
+      properties:
+        event:
+          $ref: "#/components/schemas/geoEventDto"
+        moon:
+          $ref: "#/components/schemas/geoMoonDto"
+        sun:
+          $ref: "#/components/schemas/geoSunDto"
+      type: object
+    geoSunDto:
+      description: Solar information.
+      properties:
+        altitude:
+          format: double
+          type: number
+        azimuth:
+          format: double
+          type: number
+        dawn:
+          format: date-time
+          type: string
+        declination:
+          format: double
+          type: number
+        dusk:
+          format: date-time
+          type: string
+        isUp:
+          type: boolean
+        lastEclipse:
+          $ref: "#/components/schemas/solarEclipseDetails"
+        nextEclipse:
+          $ref: "#/components/schemas/solarEclipseDetails"
+        noon:
+          format: date-time
+          type: string
+        rightAscension:
+          format: double
+          type: number
+        rise:
+          format: date-time
+          type: string
+        set:
+          format: date-time
+          type: string
+      type: object
+    lunarEclipseDetails:
+      properties:
+        date:
+          format: date-time
+          type: string
+        hasEclipseData:
+          type: boolean
+        midEclipse:
+          format: date-time
+          type: string
+        partialEclispeBegin:
+          format: date-time
+          type: string
+        partialEclispeEnd:
+          format: date-time
+          type: string
+        penumbralEclipseBegin:
+          format: date-time
+          type: string
+        penumbralEclispeEnd:
+          format: date-time
+          type: string
+        totalEclipseBegin:
+          format: date-time
+          type: string
+        totalEclipseEnd:
+          format: date-time
+          type: string
+        type:
+          default: 0
+          enum:
+            - 0
+            - 1
+            - 2
+          format: int32
+          type: integer
+      type: object
+    moonIllum:
+      properties:
+        angle:
+          format: double
+          type: number
+        fraction:
+          format: double
+          type: number
+        phase:
+          format: double
+          type: number
+        phaseName:
+          type: string
+        phaseNameEnum:
+          default: 0
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+          format: int32
+          type: integer
+      type: object
+    solarEclipseDetails:
+      properties:
+        aorTDuration:
+          format: timespan
+          type: string
+        aorTEclipseBegin:
+          format: date-time
+          type: string
+        aorTEclipseEnd:
+          format: date-time
+          type: string
+        date:
+          format: date-time
+          type: string
+        hasEclipseData:
+          type: boolean
+        maximumEclipse:
+          format: date-time
+          type: string
+        partialEclispeBegin:
+          format: date-time
+          type: string
+        partialEclispeEnd:
+          format: date-time
+          type: string
+        type:
+          default: 0
+          enum:
+            - 0
+            - 1
+            - 2
+          format: int32
+          type: integer
+      type: object
+    wyjytErrorResponse:
+      properties:
+        reason:
+          description: Error message.
+          type: string
+        success:
+          description: Success or fail.
+          type: boolean
+      type: object

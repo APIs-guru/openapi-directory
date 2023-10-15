@@ -1,0 +1,4661 @@
+openapi: 3.0.1
+servers:
+  - url: /
+info:
+  title: Visma.net.ERP.SalesOrders.Api
+  version: 1.0.14.784
+  x-apisguru-categories:
+    - enterprise
+  x-origin:
+    - format: openapi
+      url: https://salesorder.visma.net/swagger/v3/swagger.json
+      version: "3.0"
+  x-providerName: visma.net
+security:
+  - oauth2: []
+paths:
+  /api/v3/Customers:
+    get:
+      description: "Sample request:\r
+
+        \            \r
+
+        GET /customers?filter=visma&pageSize=10"
+      operationId: Customers_GetList_
+      parameters:
+        - description: An optional text string to find customers matching (searching fields id, name, gln, tax registration id). If not specified all customers are returned.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The number of customers retrieved per page. If not specified, the default value of 100 will be used.
+          in: query
+          name: pageSize
+          schema:
+            default: 100
+            format: int32
+            type: integer
+        - description: The zero based page index to retrieve
+          in: query
+          name: pageIndex
+          schema:
+            default: 0
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomerDtoPagedResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CustomerDtoPagedResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CustomerDtoPagedResult"
+          description: Returns the list of customers found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: If pageSize or pageIndex is not within the allowed range
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+        - oauth2:
+            - read
+      summary: Gets a list of customers
+      tags:
+        - Customers
+  "/api/v3/Customers/{customerId}/locations":
+    get:
+      description: "Sample rquest:\r
+
+        \            \r
+
+        GET /customers/10000/locations"
+      operationId: Customers_GetCustomerLocationList_customerIdlocations
+      parameters:
+        - description: The customer id (CustomerCd) to retrieve locations for
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CustomerLocationItemDto"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CustomerLocationItemDto"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CustomerLocationItemDto"
+                type: array
+          description: List of locations for the specified customer
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: If customer with id customerId is not found or is not accessible
+      security:
+        - oauth2:
+            - read
+      summary: Gets a list of locations for the specified customer
+      tags:
+        - Customers
+  /api/v3/Inventory:
+    get:
+      description: "Sample request:\r
+
+        \            \r
+
+        GET /inventory?inventoryId=Item1\r
+
+        \            \r
+
+        GET /inventory?warehouseId=MAIN&modifiedSince=2021-08-01T12:00:00&pageSize=1000\r
+
+        \            \r
+
+        GET /inventory?inventoryId=Item1&InventoryId=Item2&expand=location,attribute\r
+
+        \            \r
+
+        GET /inventory?expand=location&attributeFilter=WEBSHOP:1"
+      operationId: Inventory_GetList_
+      parameters:
+        - description: A list of zero or more inventory items to get a summary for. If no inventoryId is passed, all inventory items will be included in the response.
+          in: query
+          name: inventoryId
+          schema:
+            items:
+              type: string
+            type: array
+        - description: A list of zero or more warehouses to get a summary for. If no warehouse is supplied, all warehouses will be included in the response.
+          in: query
+          name: warehouseId
+          schema:
+            items:
+              type: string
+            type: array
+        - description: A list of zero or more locations to get a summary for. If no location is supplied, all locations will be included in the response.
+          in: query
+          name: locationId
+          schema:
+            items:
+              type: string
+            type: array
+        - description: An additional option to include location detail information with the warehouse summary, or attribute details for the inventory item. If this is not supplied, location information or attributes will not be included in the response.
+          in: query
+          name: expand
+          schema:
+            items:
+              $ref: "#/components/schemas/InventoryAvailabilityExpansions"
+            type: array
+        - description: "A date/time value for filtering when an inventory item's warehouse or location availability last changed\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T12:15:14+02:00'), the date is considered to be in the UTC time zone."
+          in: query
+          name: modifiedSince
+          schema:
+            format: date-time
+            type: string
+        - description: "One or more attribute filter values specified as attribute-id:attribute-value. For example \"attributeFilter=WEBSHOP:1&attributeFilter=AnotherAttribute:someValue\"\r
+
+            If two attributeFilter values have the same attribute-Id either one need to match."
+          in: query
+          name: attributeFilter
+          schema:
+            items:
+              type: string
+            type: array
+        - description: The number of inventory items retrieved per page. If not specified the default pagesize is 10000 items per page
+          in: query
+          name: pageSize
+          schema:
+            format: int32
+            type: integer
+        - description: Gets or sets the zero based page index to get
+          in: query
+          name: pageIndex
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InventoryItemAvailabilityDtoPagedResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/InventoryItemAvailabilityDtoPagedResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/InventoryItemAvailabilityDtoPagedResult"
+          description: Returns list of inventory items found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: If modifiedSince is an invalid date, if expand contains an invalid value, or if any of the supplied attributeFilter(s) are invalid
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+        - oauth2:
+            - read
+      summary: Gets an inventory summary for inventory items.
+      tags:
+        - Inventory
+  /api/v3/SalesOrders:
+    get:
+      description: "Sample requests:\r
+
+        \            \r
+
+        `GET /salesorders`\r
+
+        \            \r
+
+        `GET /salesorders?customerId=10000&status=Open&pageSize=10`\r
+
+        \            \r
+
+        `GET /salesorders?orderBy=lastModified%20asc`"
+      operationId: SalesOrders_GetList_
+      parameters:
+        - description: The customer for which to retrieve orders. If omitted or empty, orders for all customers are included
+          in: query
+          name: customerId
+          schema:
+            type: string
+        - description: The order status to include in the result. If omitted or empty, orders with any status are included.
+          in: query
+          name: status
+          schema:
+            type: string
+        - description: "A date/time value for filtering when a sales order last changed.\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T12:15:14+02:00'), the date is considered to be in the UTC time zone."
+          in: query
+          name: modifiedSince
+          schema:
+            format: date-time
+            type: string
+        - description: The number of customers retrieved per page
+          in: query
+          name: pageSize
+          schema:
+            default: 100
+            format: int32
+            type: integer
+        - description: The zero based page index to retrieve
+          in: query
+          name: pageIndex
+          schema:
+            default: 0
+            format: int32
+            type: integer
+        - description: The field to order the list by. Can be one of `created`, `lastModified`, or `orderId` followed by an optional sort direction (`asc` or `desc`), default direction is `asc` (ascending) if not present.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: A filter for the list, applied to the orderId
+          in: query
+          name: filter
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderListDtoPagedResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderListDtoPagedResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SalesOrderListDtoPagedResult"
+          description: Returns a list of Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderListDto found.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: If `pageSize` or `pageIndex` is not within the allowed range, or if an invalid `orderBy` is specified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+        - oauth2:
+            - read
+      summary: Gets a paged list with sales orders of any type
+      tags:
+        - SalesOrders
+    post:
+      description: "Sample requests:\r
+
+        \            \r
+
+        ```\r
+
+        POST /salesorders\r
+
+        {\r
+
+        \    \"customer\": {\r
+
+        \      \"id\": \"10001\",\r
+
+        \    },\r
+
+        \    \"type\": \"SO\"\r
+
+        }\r
+
+        ```\r
+
+        ```\r
+
+        POST /salesorders\r
+
+        {\r
+
+        \    \"customer\": {\r
+
+        \      \"id\": \"10000\",\r
+
+        \      \"order\": \"some-customer-order-nbr\"\r
+
+        \    },\r
+
+        \    \"type\": \"SO\",\r
+
+        \    \"description\": \"sample request order\",\r
+
+        \    \"status\": \"Hold\",\r
+
+        \    \"orderLines\": [\r
+
+        \        {\r
+
+        \            \"inventoryId\": \"StockItem1\",\r
+
+        \            \"quantity\": 4,\r
+
+        \            \"unitPrice\": 101.25\r
+
+        \        }\r
+
+        \    ]\r
+
+        }\r
+
+        ```"
+      operationId: SalesOrders_CreateNewItem_
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NewSalesOrderCommand"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewSalesOrderCommand"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NewSalesOrderCommand"
+        description: Information about the sales order to create
+      responses:
+        "201":
+          description: The order was created successfully, and the Location request header contains the address to call to GET the new sales order
+          headers:
+            Location:
+              description: Location of the newly created resource
+              schema:
+                description: Location of the newly created resource
+                format: ""
+                type: string
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+          description: "If any of values in command is not present or active, or is outside the allowed range\r
+
+            \             See <a href=\"/swagger/v3/swagger.json#components/x-visma-erp-error-codes\">#/components/x-visma-erp-error-codes</a> for the full list of error codes."
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Conflict
+      security:
+        - oauth2:
+            - write
+      summary: Adds a new sales order to the system
+      tags:
+        - SalesOrders
+  "/api/v3/SalesOrders/{type}":
+    get:
+      description: "Sample requests:\r
+
+        \            \r
+
+        `GET /salesorders/SO`\r
+
+        \            \r
+
+        `GET /salesorders/SO?customerId=10000&status=Open&pageSize=10`\r
+
+        \            \r
+
+        `GET /salesorders/SO?orderBy=created%20desc`"
+      operationId: SalesOrders_GetList_type
+      parameters:
+        - description: The type of sales orders to get.
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: The customer for which to retrieve orders. If omitted or empty, orders for all customers are included
+          in: query
+          name: customerId
+          schema:
+            type: string
+        - description: The order status to include in the result. If omitted or empty, orders with any status are included.
+          in: query
+          name: status
+          schema:
+            type: string
+        - description: "A date/time value for filtering when a sales order last changed.\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T12:15:14+02:00'), the date is considered to be in the UTC time zone."
+          in: query
+          name: modifiedSince
+          schema:
+            format: date-time
+            type: string
+        - description: The number of customers retrieved per page
+          in: query
+          name: pageSize
+          schema:
+            default: 100
+            format: int32
+            type: integer
+        - description: The zero based page index to retrieve
+          in: query
+          name: pageIndex
+          schema:
+            default: 0
+            format: int32
+            type: integer
+        - description: The field to order the list by. Can be one of `created`, `lastModified`, or `orderId` followed by an optional sort direction (`asc` or `desc`), default direction is `asc` (ascending) if not present.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: A filter for the list, applied to the orderId
+          in: query
+          name: filter
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderListDtoPagedResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderListDtoPagedResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SalesOrderListDtoPagedResult"
+          description: Returns a list of Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderListDto found.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: If `pageSize` or `pageIndex` is not within the allowed range, or if an invalid `orderBy` is specified
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+        - oauth2:
+            - read
+      summary: Gets a paged list with sales orders of a specific type
+      tags:
+        - SalesOrders
+  "/api/v3/SalesOrders/{type}/{orderId}":
+    delete:
+      description: "If-Match header represents a version of Sales Order to be modified and must be included in request.\r
+
+        Value of current version is included in GET /salesorders/{type}/{orderId} and modification endpoints on that resource as ETag header."
+      operationId: SalesOrders_Delete_typeorderId
+      parameters:
+        - description: The type of the order to delete
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: The order number to delete
+          in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+      responses:
+        "202":
+          description: The order was deleted successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Specified order was not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Method Not Allowed
+      security:
+        - oauth2:
+            - write
+      summary: Delete an existing sales order
+      tags:
+        - SalesOrders
+    get:
+      description: "The expand query parameter corresponds to sections in the Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderDto.\r
+
+        If an expand value is not specified it will not be filled and returned in the response object.\r
+
+        \            \r
+
+        Sample request:\r
+
+        \            \r
+
+        `GET /salesorders/SO/000100?expand=customer,payment`"
+      operationId: SalesOrders_GetItemAsync_typeorderId
+      parameters:
+        - description: The type of sales order to get
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: The id of the sales order to get
+          in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+        - description: An optional specification of what details to include about the sales order. The default value if not supplied is "None"
+          in: query
+          name: expand
+          schema:
+            items:
+              $ref: "#/components/schemas/SalesOrderExpansions"
+            type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderDto"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SalesOrderDto"
+          description: A Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderDto if found and accessible
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: If an order with type type and orderId is not found, or is not accessible.
+      security:
+        - oauth2:
+            - read
+      summary: Gets information about a single sales order
+      tags:
+        - SalesOrders
+    patch:
+      description: "If-Match header represents a version of Sales Order to be modified and must be included in request.\r
+
+        Value of current version is included in GET /salesorders/{type}/{orderId} and modification endpoints on that resource as ETag header."
+      operationId: SalesOrders_Patch_typeorderId
+      parameters:
+        - description: The type of the order to make modifications to
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: The order number to make modifications to
+          in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PatchSalesOrderCommand"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchSalesOrderCommand"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PatchSalesOrderCommand"
+        description: Data to change about the sales order
+      responses:
+        "202":
+          description: The order was modified successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+          description: "If any of values in command is outside the allowed range\r
+
+            \             See <a href=\"/swagger/v3/swagger.json#components/x-visma-erp-error-codes\">#/components/x-visma-erp-error-codes</a> for the full list of error codes."
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: The order specified was not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Method Not Allowed
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Conflict
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Order version does not match with If-Match header
+        "428":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: If-Match header was not supplied
+      security:
+        - oauth2:
+            - write
+      summary: Make modifications to an existing sales order
+      tags:
+        - SalesOrders
+  "/api/v3/SalesOrders/{type}/{orderId}/commissions":
+    get:
+      description: "Sample request:\r
+
+        \            \r
+
+        `GET /salesorders/SO/000101/commissions`"
+      operationId: SalesOrders_GetItemCommissions_typeorderIdcommissions
+      parameters:
+        - description: The type of sales order to get
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: The id of the sales order to get
+          in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SalesOrderCommissionDto"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SalesOrderCommissionDto"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SalesOrderCommissionDto"
+                type: array
+          description: A Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderCommissionDto if found and accessible
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: If an order with type type and orderId is not found, or is not accessible.
+      security:
+        - oauth2:
+            - read
+      summary: Gets commission information for a single sales order
+      tags:
+        - SalesOrders
+  "/api/v3/SalesOrders/{type}/{orderId}/discounts":
+    get:
+      description: "Sample request:\r
+
+        \            \r
+
+        `GET /salesorders/SO/000101/discounts`"
+      operationId: SalesOrders_GetItemDiscounts_typeorderIddiscounts
+      parameters:
+        - description: The type of sales order to get
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: The id of the sales order to get
+          in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SalesOrderDiscountDto"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SalesOrderDiscountDto"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SalesOrderDiscountDto"
+                type: array
+          description: A list of Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderDiscountDto if found and accessible
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: If an order with type type and orderId is not found, or is not accessible.
+      security:
+        - oauth2:
+            - read
+      summary: Gets discount details information for a single sales order
+      tags:
+        - SalesOrders
+  "/api/v3/SalesOrders/{type}/{orderId}/lines":
+    delete:
+      description: "If-Match header represents a version of Sales Order to be modified and must be included in request.\r
+
+        Value of current version is included in GET /salesorders/{type}/{orderId} and modification endpoints on that resource as ETag header."
+      operationId: SalesOrders_DeleteLines_typeorderIdlines
+      parameters:
+        - description: The type of the order to make modifications to
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: The order number to make modifications to
+          in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+        - description: Lines to delete with comma seprator. Limit of line ids is 1000.
+          in: query
+          name: ids
+          schema:
+            items:
+              format: int32
+              type: integer
+            type: array
+      responses:
+        "202":
+          description: The lines were deleted successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+          description: "If any of values in ids is outside the allowed range\r
+
+            \             See <a href=\"/swagger/v3/swagger.json#components/x-visma-erp-error-codes\">#/components/x-visma-erp-error-codes</a> for the full list of error codes."
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Specified order was not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Method Not Allowed
+      security:
+        - oauth2:
+            - write
+      summary: Delete lines from an existing sales order
+      tags:
+        - SalesOrders
+    get:
+      description: "Sample request:\r
+
+        \            \r
+
+        `GET /salesorders/SO/000101/lines`"
+      operationId: SalesOrders_GetItemLines_typeorderIdlines
+      parameters:
+        - description: The type of sales order to get
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: The id of the sales order to get
+          in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+        - description: The number of lines retrieved per page, defaults to 1000 if not specified
+          in: query
+          name: pageSize
+          schema:
+            default: 1000
+            format: int32
+            type: integer
+        - description: The zero based page index to retrieve, defaults to 0 if not specified
+          in: query
+          name: pageIndex
+          schema:
+            default: 0
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderLineDtoPagedResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderLineDtoPagedResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SalesOrderLineDtoPagedResult"
+          description: A Visma.net.ERP.SalesOrders.Api.Dto.PagedResult`1 object if sales order is found and accessible
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: If an order with type type and orderId is not found, or is not accessible.
+      security:
+        - oauth2:
+            - read
+      summary: Gets sales order lines for a single sales order
+      tags:
+        - SalesOrders
+    patch:
+      description: "If-Match header represents a version of Sales Order to be modified and must be included in request.\r
+
+        Value of current version is included in GET /salesorders/{type}/{orderId} and modification endpoints on that resource as ETag header."
+      operationId: SalesOrders_PatchLines_typeorderIdlines
+      parameters:
+        - description: The type of the order to make modifications to
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: The order number to make modifications to
+          in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PatchSalesOrderLinesCommand"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchSalesOrderLinesCommand"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PatchSalesOrderLinesCommand"
+        description: Data to change about the sales order lines
+      responses:
+        "202":
+          description: The order was modified successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+          description: "If any of values in command is outside the allowed range\r
+
+            \             See <a href=\"/swagger/v3/swagger.json#components/x-visma-erp-error-codes\">#/components/x-visma-erp-error-codes</a> for the full list of error codes."
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: The order specified was not found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Method Not Allowed
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Order version does not match with If-Match header
+        "428":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: If-Match header was not supplied
+      security:
+        - oauth2:
+            - write
+      summary: Make modifications to an existing sales order lines
+      tags:
+        - SalesOrders
+    post:
+      description: "If-Match header represents a version of Sales Order to be modified and must be included in request.\r
+
+        Value of current version is included in GET /salesorders/{type}/{orderId} and modification endpoints on that resource as ETag header."
+      operationId: SalesOrders_AddLines_typeorderIdlines
+      parameters:
+        - description: ""
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: ""
+          in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/AddSalesOrderLinesCommand"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddSalesOrderLinesCommand"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/AddSalesOrderLinesCommand"
+        description: Information about the lines to create
+      responses:
+        "202":
+          description: The order lines where created successfully, and the Location request header contains the address to call to GET the new sales order
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SalesOrderValidationProblemDetails"
+          description: "If any of values in command is not present or active, or is outside the allowed range\r
+
+            \            <response code=\"404\">Specified order was not found</response>"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Method Not Allowed
+      security:
+        - oauth2:
+            - write
+      summary: Adds new lines to a existing sales order in the system
+      tags:
+        - SalesOrders
+  "/api/v3/SalesOrders/{type}/{orderId}/lines/{lineId}":
+    get:
+      description: "Sample request:\r
+
+        \            \r
+
+        `GET /salesorders/SO/000101/lines/1`"
+      operationId: SalesOrders_GetItemLine_typeorderIdlineslineId
+      parameters:
+        - description: The type of sales order to get
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: The id of the sales order to get
+          in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+        - description: The id of the line to get
+          in: path
+          name: lineId
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderLineDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderLineDto"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SalesOrderLineDto"
+          description: A Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderLineDto object if sales order line is found and accessible
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: "If an order with type type and orderId is not found, or is not accessible\r
+
+            \             or the line with the id lineId is not found"
+      security:
+        - oauth2:
+            - read
+      summary: Gets a specific sales order line for a single sales order
+      tags:
+        - SalesOrders
+  "/api/v3/SalesOrders/{type}/{orderId}/rotrut":
+    get:
+      description: "Sample request:\r
+
+        \            \r
+
+        `GET /salesorders/SO/000123/rotrut`"
+      operationId: SalesOrders_GetItemRotRut_typeorderIdrotrut
+      parameters:
+        - description: The type of sales order to get
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: The id of the sales order to get
+          in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderRotRutDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SalesOrderRotRutDto"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SalesOrderRotRutDto"
+          description: A Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderRotRutDto if found and accessible
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: If an order with type type and orderId is not found, or is not accessible.
+      security:
+        - oauth2:
+            - read
+      summary: Gets ROT/RUT information for a single sales order
+      tags:
+        - SalesOrders
+  "/api/v3/SalesOrders/{type}/{orderId}/shipment":
+    get:
+      description: "Sample request:\r
+
+        \            \r
+
+        `GET /salesorders/SO/000101/shipment`"
+      operationId: SalesOrders_GetSalesOrderShipment_typeorderIdshipment
+      parameters:
+        - description: The type of sales order to get
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: The id of the sales order to get
+          in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SalesOrderShipmentDto"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SalesOrderShipmentDto"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SalesOrderShipmentDto"
+                type: array
+          description: A list of Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderShipmentDto if found and accessible
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: If an order with type type and orderId is not found, or is not accessible.
+      security:
+        - oauth2:
+            - read
+      summary: Gets shipment information for a single sales order
+      tags:
+        - SalesOrders
+  "/api/v3/SalesOrders/{type}/{orderId}/tax":
+    get:
+      description: "Sample request:\r
+
+        \            \r
+
+        `GET /salesorders/SO/000101/tax`"
+      operationId: SalesOrders_GetItemTax_typeorderIdtax
+      parameters:
+        - description: The type of sales order to get
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: The id of the sales order to get
+          in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SalesOrderTaxDto"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SalesOrderTaxDto"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SalesOrderTaxDto"
+                type: array
+          description: A list of Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderTaxDto if found and accessible
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: If an order with type type and orderId is not found, or is not accessible.
+      security:
+        - oauth2:
+            - read
+      summary: Gets tax information for a single sales order
+      tags:
+        - SalesOrders
+components:
+  schemas:
+    AddSalesOrderLinesCommand:
+      additionalProperties: false
+      properties:
+        lines:
+          items:
+            $ref: "#/components/schemas/NewSalesOrderLineDto"
+          nullable: true
+          type: array
+      type: object
+    AddressDto:
+      additionalProperties: false
+      properties:
+        city:
+          description: The city
+          nullable: true
+          type: string
+        country:
+          $ref: "#/components/schemas/CdNamePairDto"
+        county:
+          $ref: "#/components/schemas/CdNamePairDto"
+        id:
+          description: The address id
+          format: int32
+          type: integer
+        line1:
+          description: Address line 1
+          nullable: true
+          type: string
+        line2:
+          description: Address line 2
+          nullable: true
+          type: string
+        line3:
+          description: Address line 3
+          nullable: true
+          type: string
+        overridesDefault:
+          description: Whether this address overrides the default address
+          type: boolean
+        postalCode:
+          description: The postal code
+          nullable: true
+          type: string
+      type: object
+    AttachmentDto:
+      additionalProperties: false
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          nullable: true
+          type: string
+        revision:
+          format: int32
+          type: integer
+      type: object
+    CdDescriptionPairDto:
+      additionalProperties: false
+      properties:
+        description:
+          description: The description
+          nullable: true
+          type: string
+        id:
+          description: The id
+          nullable: true
+          type: string
+      type: object
+    CdNamePairDto:
+      additionalProperties: false
+      properties:
+        id:
+          description: The id
+          nullable: true
+          type: string
+        name:
+          description: The name
+          nullable: true
+          type: string
+      type: object
+    ContactDto:
+      additionalProperties: false
+      properties:
+        attention:
+          description: Any attention for the contact
+          nullable: true
+          type: string
+        email:
+          description: The e-mail address of the contact
+          nullable: true
+          type: string
+        fax:
+          description: The fax number of the contact
+          nullable: true
+          type: string
+        id:
+          description: The id of the contact
+          format: int32
+          type: integer
+        name:
+          description: The name of the contact
+          nullable: true
+          type: string
+        overridesDefault:
+          description: Whether this overrides the default contact
+          type: boolean
+        phone1:
+          description: The phone number of the contact
+          nullable: true
+          type: string
+        phone2:
+          description: The secondary phone number of the contact
+          nullable: true
+          type: string
+      type: object
+    CustomerDto:
+      additionalProperties: false
+      description: The Visma.net.ERP.SalesOrders.Api.Dto.CustomerDto class Defines a customer
+      properties:
+        addressLine1:
+          description: The customer's first address line
+          nullable: true
+          type: string
+        addressLine2:
+          description: The customer's second address line
+          nullable: true
+          type: string
+        country:
+          description: The customer's country code
+          nullable: true
+          type: string
+        currencyId:
+          description: The currency Id used by the customer
+          nullable: true
+          type: string
+        customerClassId:
+          description: The class of the customer
+          nullable: true
+          type: string
+        defaultLocation:
+          $ref: "#/components/schemas/CustomerLocationDto"
+        id:
+          description: Unique id for the customer
+          nullable: true
+          type: string
+        internalId:
+          description: An internal unique id
+          format: int32
+          type: integer
+        name:
+          description: The name of the customer
+          nullable: true
+          type: string
+        postalCode:
+          description: The customer's postal code
+          nullable: true
+          type: string
+        salutation:
+          description: The customer's salutation
+          nullable: true
+          type: string
+        status:
+          description: The customer's status code
+          nullable: true
+          type: string
+      type: object
+    CustomerDtoPagedResult:
+      additionalProperties: false
+      properties:
+        nextPage:
+          description: Gets or sets the link to the next page with more results. If set to null then no more records are present.
+          nullable: true
+          type: string
+        totalCount:
+          description: Gets or sets the total number of items available. If set to null, then the total number of items cannot be determined
+          format: int32
+          nullable: true
+          type: integer
+        value:
+          description: Gets or sets the items that are paged
+          items:
+            $ref: "#/components/schemas/CustomerDto"
+          nullable: true
+          type: array
+      type: object
+    CustomerLocationDto:
+      additionalProperties: false
+      properties:
+        corporateId:
+          description: The corporate id of the location
+          nullable: true
+          type: string
+        countryId:
+          description: The country code of the location
+          nullable: true
+          type: string
+        gln:
+          description: The global localization number of the location
+          nullable: true
+          type: string
+        id:
+          description: Location id
+          nullable: true
+          type: string
+        internalId:
+          description: An internal id of the customer location
+          format: int32
+          type: integer
+        name:
+          description: Location description
+          nullable: true
+          type: string
+        taxRegistrationId:
+          description: The tax registration id of the location
+          nullable: true
+          type: string
+        warehouseId:
+          description: The site id of the location
+          nullable: true
+          type: string
+      type: object
+    CustomerLocationItemDto:
+      additionalProperties: false
+      properties:
+        address:
+          $ref: "#/components/schemas/AddressDto"
+        contact:
+          $ref: "#/components/schemas/ContactDto"
+        corporateId:
+          description: The corporate id of the location
+          nullable: true
+          type: string
+        countryId:
+          description: The country code of the location
+          nullable: true
+          type: string
+        fobPointId:
+          description: Default FobPointId
+          nullable: true
+          type: string
+        gln:
+          description: The global localization number of the location
+          nullable: true
+          type: string
+        id:
+          description: Location id
+          nullable: true
+          type: string
+        insurance:
+          description: Default Insurance
+          type: boolean
+        internalId:
+          description: An internal id of the customer location
+          format: int32
+          type: integer
+        leadTime:
+          description: "The number of days required for the shipped goods to reach the customer.\r
+
+            Used in the calculation of the scheduled shipment date"
+          format: int32
+          nullable: true
+          type: integer
+        name:
+          description: Location description
+          nullable: true
+          type: string
+        preferredWarehouseId:
+          description: The preferred shipping warehouse of the customer set default for the order
+          nullable: true
+          type: string
+        priceClassId:
+          description: Price class
+          nullable: true
+          type: string
+        priority:
+          description: Default Priority
+          format: int32
+          nullable: true
+          type: integer
+        resedentialDelivery:
+          deprecated: true
+          description: "Default ResidentialDelivery.<br />\r
+
+            This field will be removed with due date 1.12.2023. It is recommended to use <see cref=\"P:Visma.net.ERP.SalesOrders.Api.Dto.CustomerLocationItemDto.ResidentialDelivery\">ResidentialDelivery</see> instead."
+          type: boolean
+        residentialDelivery:
+          description: Default ResidentialDelivery
+          type: boolean
+        saturdayDelivery:
+          description: Default SaturdayDelivery
+          type: boolean
+        shipTermsId:
+          description: Default ShipTermsId
+          nullable: true
+          type: string
+        shipViaId:
+          description: The ship via id that represents the carrier and its service to be used for shipping the ordered goods
+          nullable: true
+          type: string
+        shipZoneId:
+          description: Default ShipZoneId
+          nullable: true
+          type: string
+        shippingRule:
+          description: "Shipping rule of the customer set default for the order\r
+
+            <br>Is one of the following options:<br><list type=\"bullet\"><item><term>CancelRemainder: </term><description>The ordered quantity should be delivered in one shipment</description></item><item><term>BackOrderAllowed: </term><description>The ordered quantity can be delivered in multiple shipments.</description></item><item><term>ShipComplete: </term><description>The ordered quantity should be delivered in one shipment.</description></item></list>"
+          nullable: true
+          type: string
+        taxRegistrationId:
+          description: The tax registration id of the location
+          nullable: true
+          type: string
+        taxZoneId:
+          description: The location tax/VAT zone id
+          nullable: true
+          type: string
+        warehouseId:
+          description: The site id of the location
+          nullable: true
+          type: string
+      type: object
+    DtoLink:
+      additionalProperties: false
+      properties:
+        href:
+          description: A link to the item in question
+          nullable: true
+          type: string
+      type: object
+    EmployeeDto:
+      additionalProperties: false
+      properties:
+        id:
+          description: The identifier of the employee
+          nullable: true
+          type: string
+        internalId:
+          description: The internal unique identifier of the employee
+          nullable: true
+          type: string
+      type: object
+    IdDescriptionPairDto:
+      additionalProperties: false
+      properties:
+        description:
+          description: The description
+          nullable: true
+          type: string
+        id:
+          description: The id
+          format: int32
+          type: integer
+      type: object
+    InventoryAvailabilityExpansions:
+      description: Defines expansion options for the inventory summary endpoint.
+      enum:
+        - None
+        - Location
+        - Attribute
+        - All
+      type: string
+    InventoryItemAvailabilityDto:
+      additionalProperties: false
+      description: Inventory summary for a specific inventory item
+      properties:
+        attributes:
+          additionalProperties:
+            type: string
+          description: Attributes applied to the inventory item
+          nullable: true
+          type: object
+        availability:
+          description: Warehouse information for the inventory item
+          items:
+            $ref: "#/components/schemas/WarehouseAvailabilityDto"
+          nullable: true
+          type: array
+        baseUnit:
+          description: The base unit for the inventory item
+          nullable: true
+          type: string
+        description:
+          description: The description of the inventory item
+          nullable: true
+          type: string
+        internalId:
+          description: The internal Id used by the system to identify the inventory item
+          format: int32
+          type: integer
+        inventoryId:
+          description: The inventory id (InventoryCd)
+          nullable: true
+          type: string
+      type: object
+    InventoryItemAvailabilityDtoPagedResult:
+      additionalProperties: false
+      properties:
+        nextPage:
+          description: Gets or sets the link to the next page with more results. If set to null then no more records are present.
+          nullable: true
+          type: string
+        totalCount:
+          description: Gets or sets the total number of items available. If set to null, then the total number of items cannot be determined
+          format: int32
+          nullable: true
+          type: integer
+        value:
+          description: Gets or sets the items that are paged
+          items:
+            $ref: "#/components/schemas/InventoryItemAvailabilityDto"
+          nullable: true
+          type: array
+      type: object
+    LocationAvailabilityDto:
+      additionalProperties: false
+      properties:
+        description:
+          description: The description of the location
+          nullable: true
+          type: string
+        internalLocationId:
+          description: The internal id used by the sytem for this location
+          format: int32
+          type: integer
+        lastModified:
+          description: "Date and time this entry for this location was modified\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T12:15:14+02:00'), the date is considered to be in the UTC time zone."
+          format: date-time
+          type: string
+        locationId:
+          description: The location id (LocationCd) for this location
+          nullable: true
+          type: string
+        quantityAvailable:
+          description: "You can configure the way this estimated quantity is calculated by using availability\r
+
+            calculation rules. The available quantity may include anticipated transactions and therefore\r
+
+            may be less than or greater than the QuantityOnHand. Anticipated transactions correspond\r
+
+            to the documents and transactions that have been entered in the system but not yet\r
+
+            processed to the end.\r
+
+            In the availability calculation settings of an item class, you specify which anticipated\r
+
+            transactions affect the available quantity. Thus, the available quantity may include\r
+
+            goods on purchase orders and exclude the goods allocated for sales orders. You can use\r
+
+            the available quantity as an indicator of demand.\r
+
+            Note: For quantities on warehouse location level, only quantities added specifically for the location are taken into consideration in quantityAvailable"
+          format: double
+          type: number
+        quantityAvailableForShipment:
+          description: "Estimated quantity calculated by using the following formula: the QuantityOnHand minus the quantity on unreleased inventory\r
+
+            issues, minus the quantity allocated for shipping. Thus, the QuantityAvailableForShipment can be less than the QuantityOnHand.\r
+
+            Note: For quantities on warehouse location level, only quantities added specifically for the location are taken into consideration in quantityAvailableForShipment"
+          format: double
+          type: number
+        quantityNotAvailable:
+          description: "The quantity stored at locations not included in the availability calculation.\r
+
+            For each warehouse location, the 'Include in Qty. Available' check box on the\r
+
+            Warehouses(IN204000) screen defines whether the quantity of items stored at this\r
+
+            location is included in the quantity of available items."
+          format: double
+          type: number
+        quantityOnHand:
+          description: Physical quantity on-hand of items in the specific location
+          format: double
+          type: number
+        quantityPurchaseOrders:
+          description: "The quantity of the inventory item included in open purchase orders.\r
+
+            Note: For quantities on warehouse location level, only quantities added specifically for the location are taken into consideration"
+          format: double
+          type: number
+      type: object
+    LocationDto:
+      additionalProperties: false
+      description: Defines a warehouse location
+      properties:
+        description:
+          description: The description
+          nullable: true
+          type: string
+        id:
+          description: The id
+          nullable: true
+          type: string
+      type: object
+    NewSalesOrderAddressDto:
+      additionalProperties: false
+      description: "Defines a new address when creating a sales order.\r
+
+        When the address information is provided, it is expected to provide all needed fields for the address(line1, line2, countryId etc).\r
+
+        No default values from the customer will be set for the non defined address fields."
+      properties:
+        city:
+          description: The city
+          maxLength: 50
+          nullable: true
+          type: string
+        countryId:
+          description: The country. Required when setting the address.
+          maxLength: 2
+          nullable: true
+          type: string
+        line1:
+          description: Address line 1
+          maxLength: 50
+          nullable: true
+          type: string
+        line2:
+          description: Address line 2
+          maxLength: 50
+          nullable: true
+          type: string
+        line3:
+          description: Address line 3
+          maxLength: 50
+          nullable: true
+          type: string
+        postalCode:
+          description: The postal code
+          maxLength: 20
+          nullable: true
+          type: string
+        stateId:
+          description: The state
+          maxLength: 50
+          nullable: true
+          type: string
+      type: object
+    NewSalesOrderBillingDto:
+      additionalProperties: false
+      properties:
+        address:
+          $ref: "#/components/schemas/NewSalesOrderAddressDto"
+        contact:
+          $ref: "#/components/schemas/NewSalesOrderContactDto"
+      type: object
+    NewSalesOrderCommand:
+      additionalProperties: false
+      properties:
+        billing:
+          $ref: "#/components/schemas/NewSalesOrderBillingDto"
+        branchId:
+          description: "The branch with which this order is associated. Prio for setting the Branch ID being:\r
+
+            <list type=\"number\"><item>BranchID set in body</item><item>BranchID from call header</item><item>BranchID from customer location</item><item>Company's default branch ID</item></list>"
+          maxLength: 30
+          nullable: true
+          type: string
+        cancelBy:
+          description: "Sets the cancel by date for the order to create. If not supplied, the order type's days to keep will be added to the current date to determine the value of this field\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        currencyId:
+          description: Override the CurrencyId for the order. Must be a valid currency Id. If not specified, the customer's currency is used if not null. If null, company base currency is used
+          maxLength: 5
+          nullable: true
+          type: string
+        customer:
+          $ref: "#/components/schemas/NewSalesOrderCustomerDto"
+        date:
+          description: "Sets the order date of the order to create. If not supplied, the current date will be used\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        description:
+          description: "Sets the description for the order to create\r
+
+            <br>Note that text fields should not contain any personally identifiable or otherwise sensitive data"
+          maxLength: 255
+          nullable: true
+          type: string
+        financialInformation:
+          $ref: "#/components/schemas/NewSalesOrderFinancialInfoDto"
+        freight:
+          $ref: "#/components/schemas/NewSalesOrderFreightDto"
+        note:
+          description: Any note to apply to the order header.
+          maxLength: 2048
+          nullable: true
+          type: string
+        orderId:
+          description: "Sets the new id that should be assigned to the new sales order.\r
+
+            This is required if the specified Visma.net.ERP.SalesOrders.Api.Application.Commands.NewSalesOrder.NewSalesOrderCommand.Type has manual numbering set up. If not it should be null or empty."
+          maxLength: 15
+          nullable: true
+          type: string
+        orderLines:
+          description: The lines that are added to the order upon creation
+          items:
+            $ref: "#/components/schemas/NewSalesOrderLineDto"
+          nullable: true
+          type: array
+        originalOrderId:
+          description: Sets the unique identifier of the original order
+          maxLength: 15
+          nullable: true
+          type: string
+        originalOrderType:
+          description: Sets the type code for the original sales order
+          maxLength: 2
+          nullable: true
+          type: string
+        ownerId:
+          description: Sets the owner (employee) for the order
+          nullable: true
+          type: string
+        paymentSettings:
+          $ref: "#/components/schemas/NewSalesOrderPaymentSettings"
+        print:
+          $ref: "#/components/schemas/SalesOrderPrintDto"
+        projectId:
+          description: The project with which this sales order is associated
+          maxLength: 30
+          nullable: true
+          type: string
+        requestOn:
+          description: "Sets the requested on date for the order to create. If not supplied, the current date will be used\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        salesPersonId:
+          description: Sets default sales person for the order
+          maxLength: 15
+          nullable: true
+          type: string
+        shipping:
+          $ref: "#/components/schemas/NewSalesOrderShippingDto"
+        status:
+          description: Sets the initial status code for the order. Must be null, empty or one of "Open" or "Hold". If not supplied the value will be determined by the sales order type.
+          nullable: true
+          type: string
+        taxZoneId:
+          description: Override the TaxZoneId for the order. If not specified, the customer's location's TaxZoneId will be used
+          nullable: true
+          type: string
+        type:
+          description: Sets the type id of an active sales order type to create
+          minLength: 1
+          type: string
+        useReplacementCostForMarginAndProfit:
+          description: "When this option is set to `true`, the `costTotal` of the order will be calculated based on `replacementUnitCost`.\r
+
+            If option is set to `false`, the `costTotal` will be calculated based on `unitCost`"
+          nullable: true
+          type: boolean
+      required:
+        - customer
+        - type
+      type: object
+    NewSalesOrderContactDto:
+      additionalProperties: false
+      description: "Defines a new contact when creating a new sales order.\r
+
+        When the contact information is provided, it is expected to provide all needed fields for the contact(name, attention etc).\r
+
+        No default values from the customer will be set for the non defined contact fields."
+      properties:
+        attention:
+          description: Sets any attention for the contact
+          maxLength: 255
+          nullable: true
+          type: string
+        email:
+          description: Sets the e-mail address of the contact
+          format: email
+          maxLength: 255
+          nullable: true
+          type: string
+        name:
+          description: Sets the full name of the contact
+          maxLength: 255
+          nullable: true
+          type: string
+        phone1:
+          description: Sets the primary phone number of the contact
+          maxLength: 50
+          nullable: true
+          type: string
+      type: object
+    NewSalesOrderCustomerDto:
+      additionalProperties: false
+      properties:
+        contactId:
+          description: The contact id for the customer
+          format: int32
+          nullable: true
+          type: integer
+        gln:
+          description: The unique global location number of the customer
+          nullable: true
+          type: string
+        id:
+          description: The unique id of the the customer
+          nullable: true
+          type: string
+        locationId:
+          description: "Sets the location for the customer supplied to use on the order.\r
+
+            Must be a valid active location for the customer supplied in Visma.net.ERP.SalesOrders.Api.Dto.NewSalesOrder.NewSalesOrderCustomerDto.Id"
+          nullable: true
+          type: string
+        order:
+          description: The customer order text
+          maxLength: 40
+          nullable: true
+          type: string
+        refNo:
+          description: The customer ref number text
+          maxLength: 40
+          nullable: true
+          type: string
+        termsId:
+          description: "Sets the terms to use for the sales order.\r
+
+            Must be a valid terms identifier"
+          nullable: true
+          type: string
+      type: object
+    NewSalesOrderFinancialInfoDto:
+      additionalProperties: false
+      properties:
+        cashDiscountDate:
+          description: "The date when the cash discount is available for the invoice created for the order. Default date is set based on the terms selected in the order.\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        dueDate:
+          description: "The due date for the invoice created for the order. Default due date is set according to the credit terms.\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        invoiceDate:
+          description: "Sets the invoice date of the invoice that will be generated for the order.\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        invoiceId:
+          description: "The reference number of the invoice generated for this order.\r
+
+            This can be used if the numbering sequence assigned to invoices is configured for manual numbering."
+          maxLength: 15
+          nullable: true
+          type: string
+        invoiceSeparately:
+          description: Sets if the order should be invoiced/billed separately
+          nullable: true
+          type: boolean
+        postPeriod:
+          description: The post period for the invoice. This can be used to override the financial period. Must be a valid existing financial period.
+          maxLength: 6
+          nullable: true
+          type: string
+      type: object
+    NewSalesOrderFreightDto:
+      additionalProperties: false
+      properties:
+        cost:
+          description: The freight cost calculated for the sales order, can be manually set if orders Ship via code allows it.
+          format: double
+          nullable: true
+          type: number
+        premiumAmount:
+          description: The additional freight charges for handling the order.
+          format: double
+          nullable: true
+          type: number
+        taxCategoryId:
+          description: "The tax category that applies to the freight amount.\r
+
+            By default, it is the tax category associated with the ship via code selected for the order."
+          maxLength: 10
+          nullable: true
+          type: string
+      type: object
+    NewSalesOrderLineDto:
+      additionalProperties: false
+      properties:
+        branchId:
+          description: "The branch with which this line is associated.\r
+
+            If no `BranchId` is provided, default is set from order `BranchId`"
+          maxLength: 30
+          nullable: true
+          type: string
+        commissionable:
+          description: "Indicates if line is comissionable.\r
+
+            If not set, the default value is picked from the inventory item"
+          nullable: true
+          type: boolean
+        description:
+          description: "Sets the description of the order line item. This will override the default description from the inventory item\r
+
+            <br>Note that text fields should not contain any personally identifiable or otherwise sensitive data"
+          maxLength: 256
+          nullable: true
+          type: string
+        discountAmount:
+          description: "Sets the manual currency discount amount for the line.\r
+
+            <remarks>\r
+
+            Note that the behavior of the 'discountAmount' field is affected by the 'hasManualDiscount' option.\r
+
+            If 'hasManualDiscount' is provided and set to \"false\", and 'discountAmount' is provided, the system will set the discountAmount according to the predefined rules.\r
+
+            </remarks>"
+          format: double
+          nullable: true
+          type: number
+        discountCode:
+          description: "Sets the discount for the line if applicable. This must be one of the selectable discount codes.\r
+
+            <remarks>\r
+
+            Note that the behavior of the 'discountCode' field is affected by the 'hasManualDiscount' option.\r
+
+            If 'hasManualDiscount' is provided and set to \"false\", and 'discountCode' is provided, the system will set the discountCode according to the predefined rules.\r
+
+            </remarks>"
+          maxLength: 10
+          nullable: true
+          type: string
+        discountPercent:
+          description: "Sets the manual percentage discount for the line.\r
+
+            <remarks>\r
+
+            Note that the behavior of the 'discountPercent' field is affected by the 'hasManualDiscount' option.\r
+
+            If 'hasManualDiscount' is provided and set to \"false\", and 'discountPercent' is provided, the system will set the discountPercent according to the predefined rules.\r
+
+            </remarks>"
+          format: double
+          maximum: 100
+          minimum: -100
+          nullable: true
+          type: number
+        externalLink:
+          description: Sets the external link for the line
+          maxLength: 255
+          nullable: true
+          type: string
+        hasManualDiscount:
+          description: "Indicates that line level discount is applied manually.\r
+
+            <remarks>\r
+
+            Note that the behavior of the fields 'discountCode', 'discountPercent' and 'discountAmount' is affected by this option.\r
+
+            If 'hasManualDiscount' is provided and set to \"false\", and discount field(s) is provided, the system will set the line level discounts according to the predefined rules.\r
+
+            </remarks>"
+          nullable: true
+          type: boolean
+        hasManualPrice:
+          description: "Indicates that the `unitPrice` in this line has been specified manually.\r
+
+            If set to \"false\", the system updates the unit price in the line according to predefined rules.\r
+
+            Note that the behavior of the field `unitPrice` is affected by this option.\r
+
+            If `hasManualPrice` is provided and set to \"false\", and `unitPrice` is provided, the system will set the `unitPrice` according to the predefined rules."
+          nullable: true
+          type: boolean
+        inventoryId:
+          description: The Inventory Id of the item to add
+          minLength: 1
+          type: string
+        note:
+          description: Adds a text note to the sales order line.
+          maxLength: 2048
+          nullable: true
+          type: string
+        operation:
+          description: The type of operation the line represents to the order. Acceptable values are 'Issue' or 'Receipt'. This must be a valid operation for sales order type.
+          nullable: true
+          type: string
+        overshipThreshold:
+          description: Sets the overship threshold in percent. If not set, information from the inventory item is used
+          format: double
+          maximum: 999
+          minimum: 100
+          nullable: true
+          type: number
+        projectTaskId:
+          description: The project task with which this sales order line is associated
+          maxLength: 30
+          nullable: true
+          type: string
+        purchaseOrderSource:
+          description: "Sets the purchase source of the line.\r
+
+            Accepted values are `dropShip` or `purchaseToOrder`, when no value provided, the default value is picked from the inventory item.\r
+
+            If the value was provided as '' (empty string), the value will set to null."
+          nullable: true
+          type: string
+        quantity:
+          description: Sets the quantity of items on the order line
+          format: double
+          type: number
+        reasonCode:
+          description: Sets the reason code for the line. This must be one of the selectable reason codes
+          nullable: true
+          type: string
+        requestDate:
+          description: "Sets the date the order line is requested (Requested On)\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        salesAccountId:
+          description: "Overrides the Sales Account Id of the line. The value must be one of the selectable Accounts.\r
+
+            If not set, a value based on the rules is used"
+          maxLength: 10
+          nullable: true
+          type: string
+        salesPersonId:
+          description: "Sets the sales person for the line.\r
+
+            If `SalesPersonId` is provided as (null), the value will be set from from order `SalesPersonId`"
+          maxLength: 15
+          nullable: true
+          type: string
+        shipDate:
+          description: "Sets the day the order line should be shipped, so that the customer gets it on the requested date (Ship On).\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        shippingRule:
+          description: "The way the line item should be shipped. This will override the default or the one set on the order head.\r
+
+            <br>One of the following options can be set:<br><list type=\"bullet\"><item><term>CancelRemainder: </term><description>The ordered quantity should be delivered in one shipment</description></item><item><term>BackOrderAllowed: </term><description>The ordered quantity can be delivered in multiple shipments.</description></item><item><term>ShipComplete: </term><description>The ordered quantity should be delivered in one shipment.</description></item></list>"
+          nullable: true
+          type: string
+        subaccount:
+          additionalProperties:
+            type: string
+          description: "Overrides the Subaccount setup for the line.\r
+
+            Each entry corresponds to a subaccount id/value pair"
+          nullable: true
+          type: object
+        supplierId:
+          description: "<remarks>\r
+
+            \            If the actual value was provided as (null), the value will be set from the inventory item preferred supplier,\r
+
+            \            can be set only if the Purchase Order Source is set to `dropShip` or `purchaseToOrder`\r
+
+            \            </remarks>"
+          nullable: true
+          type: string
+        supplierPrice:
+          description: Sets the supplier price for the line item.
+          format: double
+          nullable: true
+          type: number
+        taxCategoryId:
+          description: Overrides the default tax category id (from customer's class). The value must be one of the selectable Tax Categories
+          nullable: true
+          type: string
+        undershipThreshold:
+          description: Sets the undership threshold in percent. If not set, information from the inventory item is used
+          format: double
+          maximum: 100
+          minimum: 0
+          nullable: true
+          type: number
+        unitCost:
+          description: "Sets the unit cost of the product on the line. If no cost is set (null or omitted) the cost will be set\r
+
+            according to predefined rules"
+          format: double
+          nullable: true
+          type: number
+        unitOfMeasure:
+          description: Sets the Unit of measure for the line item. This will override the default UOM for the inventory item
+          maxLength: 6
+          nullable: true
+          type: string
+        unitPrice:
+          description: "Sets the unit price for the product on the line.\r
+
+            If no price is set(null or omitted) the price will be set according to predefined rules based on the inventoryId and the customer.\r
+
+            Note that the behavior of the `unitPrice` field is affected by the `hasManualPrice` option.\r
+
+            If `hasManualPrice` is provided and set to \"false\", and `unitPrice` is provided, the system will set the `unitPrice` according to the predefined rules."
+          format: double
+          nullable: true
+          type: number
+        warehouseId:
+          description: Sets the warehouse the item should be shipped from. This will override the default, or the one set on the order head.
+          nullable: true
+          type: string
+        warehouseLocationId:
+          description: Sets the warehouse location that will be used for the shipment generated for the order the warehouse location Id for this line. This must be a valid location for `warehouseId` and will override the default if set.
+          nullable: true
+          type: string
+      required:
+        - inventoryId
+      type: object
+    NewSalesOrderPaymentSettings:
+      additionalProperties: false
+      properties:
+        cashAccountId:
+          description: The cash account associated with the set payment method.
+          maxLength: 10
+          nullable: true
+          type: string
+        paymentMethodId:
+          description: Overrides the default payment method set on the customer. This must be a valid and active payment method id.
+          nullable: true
+          type: string
+        paymentReference:
+          description: Sets the external reference number for the order. This must be set if order type requires it.
+          maxLength: 40
+          nullable: true
+          type: string
+      type: object
+    NewSalesOrderShippingDto:
+      additionalProperties: false
+      properties:
+        address:
+          $ref: "#/components/schemas/NewSalesOrderAddressDto"
+        contact:
+          $ref: "#/components/schemas/NewSalesOrderContactDto"
+        fobPointId:
+          description: The identifier of the point (such as a city or town) where the title of goods passes from the company to the customer.
+          maxLength: 15
+          nullable: true
+          type: string
+        insurance:
+          description: Sets whether insurance applies to this shipping
+          nullable: true
+          type: boolean
+        intrastatTransactionTypeId:
+          description: Sets the intrastat transaction type id for the sales order, if not supplied the default value from the ordertype will be used. Must be a valid intrastat transaction type id.
+          format: int32
+          nullable: true
+          type: integer
+        preferredWarehouseId:
+          description: Sets the default site for the customer supplied to use on the order. Must be a valid site id
+          maxLength: 30
+          nullable: true
+          type: string
+        priority:
+          description: Sets priority of the order
+          format: int32
+          nullable: true
+          type: integer
+        residentialDelivery:
+          description: Sets whether this is residential delivery
+          nullable: true
+          type: boolean
+        rule:
+          description: Sets the shipping rule for the order
+          nullable: true
+          type: string
+        saturdayDelivery:
+          description: Sets whether this is a saturday delivery
+          nullable: true
+          type: boolean
+        scheduledDate:
+          description: "Sets the date the shipment is scheduled for\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        shipSeparately:
+          description: Sets whether the order should be shipped separately or included in a batch segment
+          nullable: true
+          type: boolean
+        shipViaId:
+          description: Sets the unique id that represents the carrier and its service to be used for shipping the ordered goods.
+          maxLength: 15
+          nullable: true
+          type: string
+        termsId:
+          description: The identifier of the shipping terms used for the order.
+          maxLength: 15
+          nullable: true
+          type: string
+        zoneId:
+          description: Sets the shipping zone of the order freight
+          maxLength: 15
+          nullable: true
+          type: string
+      type: object
+    PatchSalesOrderAddressDto:
+      additionalProperties: false
+      description: "Defines an address when updating a sales order.\r
+
+        Only the provided fields will be changed in address."
+      properties:
+        city:
+          description: The city
+          maxLength: 50
+          nullable: true
+          type: string
+        countryId:
+          description: The country.
+          maxLength: 2
+          nullable: true
+          type: string
+        line1:
+          description: Address line 1
+          maxLength: 50
+          nullable: true
+          type: string
+        line2:
+          description: Address line 2
+          maxLength: 50
+          nullable: true
+          type: string
+        line3:
+          description: Address line 3
+          maxLength: 50
+          nullable: true
+          type: string
+        overridesDefault:
+          description: Whether this address overrides the default address
+          nullable: true
+          type: boolean
+        postalCode:
+          description: The postal code
+          maxLength: 20
+          nullable: true
+          type: string
+        stateId:
+          description: The state
+          maxLength: 50
+          nullable: true
+          type: string
+      type: object
+    PatchSalesOrderBillingDto:
+      additionalProperties: false
+      properties:
+        address:
+          $ref: "#/components/schemas/PatchSalesOrderAddressDto"
+        contact:
+          $ref: "#/components/schemas/PatchSalesOrderContactDto"
+      type: object
+    PatchSalesOrderCommand:
+      additionalProperties: false
+      description: The Visma.net.ERP.SalesOrders.Api.Application.Commands.PatchSalesOrder.PatchSalesOrderCommand is a command for updating parts of a sales order
+      properties:
+        billing:
+          $ref: "#/components/schemas/PatchSalesOrderBillingDto"
+        branchId:
+          description: The branch with which this order is associated.
+          maxLength: 30
+          nullable: true
+          type: string
+        cancelBy:
+          description: "Cancel by date for the order.\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        currencyId:
+          description: Override the CurrencyId for the order. Must be a valid currency Id.
+          maxLength: 5
+          nullable: true
+          type: string
+        customer:
+          $ref: "#/components/schemas/PatchSalesOrderCustomerDto"
+        date:
+          description: "Sets the order date of the order.\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        description:
+          description: "Description for the order\r
+
+            <br>Note that text fields should not contain any personally identifiable or otherwise sensitive data"
+          maxLength: 255
+          nullable: true
+          type: string
+        financialInformation:
+          $ref: "#/components/schemas/PatchSalesOrderFinancialInfoDto"
+        freight:
+          $ref: "#/components/schemas/PatchSalesOrderFreightDto"
+        note:
+          description: Any note to apply to the order header.
+          maxLength: 2048
+          nullable: true
+          type: string
+        originalOrderId:
+          description: Sets the unique identifier of the original order
+          maxLength: 15
+          nullable: true
+          type: string
+        originalOrderType:
+          description: Sets the type code for the original sales order
+          maxLength: 2
+          nullable: true
+          type: string
+        ownerId:
+          description: Sets the owner (employee) for the order
+          nullable: true
+          type: string
+        paymentSettings:
+          $ref: "#/components/schemas/PatchSalesOrderPaymentSettingsDto"
+        print:
+          $ref: "#/components/schemas/SalesOrderPrintDto"
+        projectId:
+          description: The project with which this sales order is associated
+          maxLength: 30
+          nullable: true
+          type: string
+        requestOn:
+          description: "Sets the requested on date for the order.\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        salesPersonId:
+          description: Sets default sales person for the order
+          maxLength: 15
+          nullable: true
+          type: string
+        shipping:
+          $ref: "#/components/schemas/PatchSalesOrderShippingDto"
+        status:
+          description: Sets the status code for the order. Must be "Open", "Hold" or "BackOrder".
+          nullable: true
+          type: string
+        taxZoneId:
+          description: Override the TaxZoneId for the order
+          nullable: true
+          type: string
+        useReplacementCostForMarginAndProfit:
+          description: "When this option is set to `true`, the `costTotal` of the order will be calculated based on `replacementUnitCost`.\r
+
+            If option is set to `false`, the `costTotal` will be calculated based on `unitCost`"
+          nullable: true
+          type: boolean
+      type: object
+    PatchSalesOrderContactDto:
+      additionalProperties: false
+      description: "Defines an contact when updating a sales order.\r
+
+        Only the provided fields will be changed in contact."
+      properties:
+        attention:
+          description: Sets any attention for the contact
+          maxLength: 255
+          nullable: true
+          type: string
+        email:
+          description: Sets the e-mail address of the contact
+          format: email
+          maxLength: 255
+          nullable: true
+          type: string
+        name:
+          description: Sets the full name of the contact
+          maxLength: 255
+          nullable: true
+          type: string
+        overridesDefault:
+          description: Whether this contact overrides the default contact
+          nullable: true
+          type: boolean
+        phone1:
+          description: Sets the primary phone number of the contact
+          maxLength: 50
+          nullable: true
+          type: string
+      type: object
+    PatchSalesOrderCustomerDto:
+      additionalProperties: false
+      properties:
+        contactId:
+          description: The contact id for the customer
+          format: int32
+          nullable: true
+          type: integer
+        id:
+          description: The unique id of the the customer
+          nullable: true
+          type: string
+        locationId:
+          description: "Sets the location for the customer supplied to use on the order.\r
+
+            Must be a valid active location for the customer/>"
+          nullable: true
+          type: string
+        order:
+          description: The customer order text.
+          maxLength: 40
+          nullable: true
+          type: string
+        refNo:
+          description: The customer ref number text. If null or not supplied the value will not be changed
+          maxLength: 40
+          nullable: true
+          type: string
+        termsId:
+          description: "Sets the terms to use for the sales order.\r
+
+            Must be a valid terms identifier"
+          nullable: true
+          type: string
+      type: object
+    PatchSalesOrderFinancialInfoDto:
+      additionalProperties: false
+      properties:
+        cashDiscountDate:
+          description: "The date when the cash discount is available for the invoice created for the order. Default date is set based on the terms selected in the order.\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        dueDate:
+          description: "The due date for the invoice created for the order. Default due date is set according to the credit terms.\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        invoiceDate:
+          description: "Sets the invoice date of the invoice that will be generated for the order.\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        invoiceId:
+          description: "The reference number of the invoice generated for this order.\r
+
+            This can be used if the numbering sequence assigned to invoices is configured for manual numbering."
+          maxLength: 15
+          nullable: true
+          type: string
+        invoiceSeparately:
+          description: Sets if the order should be invoiced/billed separately
+          nullable: true
+          type: boolean
+        postPeriod:
+          description: The post period for the invoice. This can be used to override the financial period. Must be a valid existing financial period.
+          maxLength: 6
+          nullable: true
+          type: string
+      type: object
+    PatchSalesOrderFreightDto:
+      additionalProperties: false
+      properties:
+        cost:
+          description: The freight cost calculated for the sales order, can be manually set if orders Ship via code allows it.
+          format: double
+          nullable: true
+          type: number
+        premiumAmount:
+          description: The additional freight charges for handling the order.
+          format: double
+          nullable: true
+          type: number
+        taxCategoryId:
+          description: "The tax category that applies to the freight amount.\r
+
+            By default, it is the tax category associated with the ship via code selected for the order."
+          maxLength: 10
+          nullable: true
+          type: string
+      type: object
+    PatchSalesOrderLineDto:
+      additionalProperties: false
+      description: The sales order line which is set to patch
+      properties:
+        branchId:
+          description: "Sets the branch with which this line is associated.\r
+
+            If `BranchId` is provided as (null), the value will be set from from order `BranchId`"
+          nullable: true
+          type: string
+        commissionable:
+          description: Indicates if line is comissionable.
+          nullable: true
+          type: boolean
+        description:
+          description: "Sets the description of the order line item. This will override the default description from the inventory item\r
+
+            <br>Note that text fields should not contain any personally identifiable or otherwise sensitive data"
+          maxLength: 256
+          nullable: true
+          type: string
+        discountAmount:
+          description: "Sets the manual currency discount amount for the line.\r
+
+            <remarks>\r
+
+            Note that the behavior of the 'discountAmount' field is affected by the 'hasManualDiscount' option.\r
+
+            If 'hasManualDiscount' is provided and set to \"false\", and 'discountAmount' is provided, the system will set the discountAmount according to the predefined rules.\r
+
+            </remarks>"
+          format: double
+          nullable: true
+          type: number
+        discountCode:
+          description: "Sets the discount for the line if applicable. This must be one of the selectable discount codes.\r
+
+            <remarks>\r
+
+            Note that the behavior of the 'discountCode' field is affected by the 'hasManualDiscount' option.\r
+
+            If 'hasManualDiscount' is provided and set to \"false\", and 'discountCode' is provided, the system will set the discountCode according to the predefined rules.\r
+
+            </remarks>"
+          maxLength: 10
+          nullable: true
+          type: string
+        discountPercent:
+          description: "Sets the manual percentage discount for the line.\r
+
+            <remarks>\r
+
+            Note that the behavior of the 'discountPercent' field is affected by the 'hasManualDiscount' option.\r
+
+            If 'hasManualDiscount' is provided and set to \"false\", and 'discountPercent' is provided, the system will set the discountPercent according to the predefined rules.\r
+
+            </remarks>"
+          format: double
+          maximum: 100
+          minimum: -100
+          nullable: true
+          type: number
+        externalLink:
+          description: Sets the external link for the line
+          maxLength: 255
+          nullable: true
+          type: string
+        hasManualDiscount:
+          description: "Indicates that line level discount is applied manually.\r
+
+            <remarks>\r
+
+            Note that the behavior of the fields 'discountCode', 'discountPercent' and 'discountAmount' is affected by this option.\r
+
+            If 'hasManualDiscount' is provided and set to \"false\", and discount field(s) is provided, the system will set the line level discounts according to the predefined rules.\r
+
+            </remarks>"
+          nullable: true
+          type: boolean
+        hasManualPrice:
+          description: "Indicates that the `unitPrice` in this line has been specified manually.\r
+
+            If set to \"false\", the system updates the unit price in the line according to predefined rules.\r
+
+            Note that the behavior of the field `unitPrice` is affected by this option.\r
+
+            If `hasManualPrice` is provided and set to \"false\", and `unitPrice` is provided, the system will set the `unitPrice` according to the predefined rules."
+          nullable: true
+          type: boolean
+        lineId:
+          description: The line id of the line.
+          format: int32
+          type: integer
+        note:
+          description: Any note to apply to the order header.
+          maxLength: 2048
+          nullable: true
+          type: string
+        operation:
+          description: The type of operation the line represents to the order. Acceptable values are 'Issue' or 'Receipt'. This must be a valid operation for sales order type.
+          nullable: true
+          type: string
+        overshipThreshold:
+          description: Sets the overship threshold in percent. If not set, information from the inventory item is used
+          format: double
+          maximum: 999
+          minimum: 100
+          nullable: true
+          type: number
+        projectTaskId:
+          description: The project task with which this sales order line is associated
+          maxLength: 30
+          nullable: true
+          type: string
+        purchaseOrderSource:
+          description: "Sets the purchase source of the line.\r
+
+            Accepted values are `dropShip` or `purchaseToOrder`, when null provided, value will be set from default value from the inventory item.\r
+
+            If the value was provided as '' (empty string), the value will set to null."
+          nullable: true
+          type: string
+        quantity:
+          description: Sets the quantity of items on the order line
+          format: double
+          nullable: true
+          type: number
+        reasonCode:
+          description: Patch the reason code for the line. This must be one of the selectable reason codes
+          nullable: true
+          type: string
+        requestDate:
+          description: "Sets the date the order line is requested (Requested On)\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        salesAccountId:
+          description: "Overrides the Sales Account Id of the line. The value must be one of the selectable Accounts.\r
+
+            If not set, a value based on the rules is used"
+          maxLength: 10
+          nullable: true
+          type: string
+        salesPersonId:
+          description: "Sets the sales person for the line.\r
+
+            If `SalesPersonId` is provided as (null), the value will be set from from order `SalesPersonId`"
+          maxLength: 15
+          nullable: true
+          type: string
+        shipDate:
+          description: "Sets the day the order line should be shipped, so that the customer gets it on the requested date (Ship On).\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        shippingRule:
+          description: "The way the line item should be shipped.\r
+
+            <br>One of the following options can be set:<br><list type=\"bullet\"><item><term>CancelRemainder: </term><description>The ordered quantity should be delivered in one shipment</description></item><item><term>BackOrderAllowed: </term><description>The ordered quantity can be delivered in multiple shipments.</description></item><item><term>ShipComplete: </term><description>The ordered quantity should be delivered in one shipment.</description></item></list>"
+          nullable: true
+          type: string
+        sortOrder:
+          format: int32
+          nullable: true
+          type: integer
+        subaccount:
+          additionalProperties:
+            type: string
+          description: "Overrides the Subaccount setup for the line.\r
+
+            Each entry corresponds to a subaccount id/value pair"
+          nullable: true
+          type: object
+        supplierId:
+          description: Sets the Purchase Order Vendor for the line, can be set if the purchase order source is `purchaseToOrder` or `dropShip`.
+          nullable: true
+          type: string
+        supplierPrice:
+          description: Sets the supplier price for the line item.
+          format: double
+          nullable: true
+          type: number
+        taxCategoryId:
+          description: Overrides the default tax category id. The value must be one of the selectable Tax Categories
+          nullable: true
+          type: string
+        undershipThreshold:
+          description: Sets the undership threshold in percent. If not set, information from the inventory item is used
+          format: double
+          maximum: 100
+          minimum: 0
+          nullable: true
+          type: number
+        unitCost:
+          description: Sets the unit cost of the product on the line.
+          format: double
+          nullable: true
+          type: number
+        unitOfMeasure:
+          description: Sets the Unit of measure for the line item. This will override the default UOM for the inventory item
+          maxLength: 6
+          nullable: true
+          type: string
+        unitPrice:
+          description: "Sets the unit price for the product on the line.\r
+
+            If no price is set(null or omitted) the price will be set according to predefined rules based on the inventoryId and the customer.\r
+
+            Note that the behavior of the `unitPrice` field is affected by the `hasManualPrice` option.\r
+
+            If `hasManualPrice` is provided and set to \"false\", and `unitPrice` is provided, the system will set the `unitPrice` according to the predefined rules."
+          format: double
+          nullable: true
+          type: number
+        warehouseId:
+          description: Sets the warehouse the item should be shipped from. This will override the default, or the one set on the order head.
+          nullable: true
+          type: string
+        warehouseLocationId:
+          description: "Sets the warehouse location that will be used for the shipment generated for the order the warehouse location Id for this line.\r
+
+            This must be a valid location for `warehouseId` and will override the default if set."
+          nullable: true
+          type: string
+      required:
+        - lineId
+      type: object
+    PatchSalesOrderLinesCommand:
+      additionalProperties: false
+      description: The Visma.net.ERP.SalesOrders.Api.Application.Commands.PatchSalesOrderLines.PatchSalesOrderLinesCommand is a command for updating the lines of a sales order
+      properties:
+        lines:
+          description: The sales order lines that are set to patch
+          items:
+            $ref: "#/components/schemas/PatchSalesOrderLineDto"
+          nullable: true
+          type: array
+      type: object
+    PatchSalesOrderPaymentSettingsDto:
+      additionalProperties: false
+      properties:
+        cashAccountId:
+          description: The cash account associated with the set payment method.
+          maxLength: 10
+          nullable: true
+          type: string
+        paymentMethodId:
+          description: Overrides the default payment method set on the customer. This must be a valid and active payment method id.
+          nullable: true
+          type: string
+        paymentReference:
+          description: Sets the external reference number for the order. This must be set if order type requires it.
+          maxLength: 40
+          nullable: true
+          type: string
+      type: object
+    PatchSalesOrderShippingDto:
+      additionalProperties: false
+      properties:
+        address:
+          $ref: "#/components/schemas/PatchSalesOrderAddressDto"
+        contact:
+          $ref: "#/components/schemas/PatchSalesOrderContactDto"
+        fobPointId:
+          description: The identifier of the point (such as a city or town) where the title of goods passes from the company to the customer.
+          maxLength: 15
+          nullable: true
+          type: string
+        insurance:
+          description: Sets whether insurance applies to this shipping
+          nullable: true
+          type: boolean
+        intrastatTransactionTypeId:
+          description: Sets the intrastat transaction type id for the sales order. Must be a valid intrastat transaction type id.
+          format: int32
+          nullable: true
+          type: integer
+        preferredWarehouseId:
+          description: "Sets the default site for the customer supplied to use on the order. Must be a valid site id\r
+
+            If empty string, the default site for order will be removed"
+          maxLength: 30
+          nullable: true
+          type: string
+        priority:
+          description: Sets priority of the order
+          format: int32
+          nullable: true
+          type: integer
+        residentialDelivery:
+          description: Sets whether this is residential delivery
+          nullable: true
+          type: boolean
+        rule:
+          description: Sets the shipping rule for the order
+          nullable: true
+          type: string
+        saturdayDelivery:
+          description: Sets whether this is a saturday delivery
+          nullable: true
+          type: boolean
+        scheduledDate:
+          description: "Sets the date the shipment is scheduled for\r
+
+            Unless a specific time zone offset is specified with the date (e.g. '2012-12-24T13:30:23+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        shipSeparately:
+          description: Sets whether the order should be shipped separately or included in a batch segment
+          nullable: true
+          type: boolean
+        shipViaId:
+          description: "Sets the unique id that represents the carrier and its service to be used for shipping the ordered goods. Must be a valid carrier id.\r
+
+            If empty string then the value will be set to null"
+          maxLength: 15
+          nullable: true
+          type: string
+        termsId:
+          description: The identifier of the shipping terms used for the order.
+          maxLength: 15
+          nullable: true
+          type: string
+        zoneId:
+          description: Sets the shipping zone of the order freight
+          nullable: true
+          type: string
+      type: object
+    ProblemDetails:
+      additionalProperties: {}
+      properties:
+        detail:
+          nullable: true
+          type: string
+        instance:
+          nullable: true
+          type: string
+        status:
+          format: int32
+          nullable: true
+          type: integer
+        title:
+          nullable: true
+          type: string
+        type:
+          nullable: true
+          type: string
+      type: object
+    ProjectDto:
+      additionalProperties: false
+      description: The Visma.net.ERP.SalesOrders.Api.Dto.ProjectDto class defines a project reference for a sales order
+      properties:
+        description:
+          description: The description
+          nullable: true
+          type: string
+        id:
+          description: The id
+          nullable: true
+          type: string
+        internalId:
+          description: An internal unique identifier of the project
+          format: int32
+          type: integer
+      type: object
+    SalesOrderBillingDto:
+      additionalProperties: false
+      properties:
+        address:
+          $ref: "#/components/schemas/AddressDto"
+        contact:
+          $ref: "#/components/schemas/ContactDto"
+      type: object
+    SalesOrderCommissionDto:
+      additionalProperties: false
+      properties:
+        amount:
+          description: The commission amount
+          format: double
+          nullable: true
+          type: number
+        commissionableAmount:
+          description: The order's commissionable amount
+          format: double
+          nullable: true
+          type: number
+        percent:
+          description: The commission percent
+          format: double
+          nullable: true
+          type: number
+        salesPersonId:
+          description: The id of the sales person that gets the commision
+          nullable: true
+          type: string
+      type: object
+    SalesOrderCustomerDto:
+      additionalProperties: false
+      properties:
+        contactId:
+          description: The contact id for the customer
+          format: int32
+          nullable: true
+          type: integer
+        id:
+          description: The unique id of the the customer
+          nullable: true
+          type: string
+        internalId:
+          description: An internal unique id of the customer
+          format: int32
+          type: integer
+        location:
+          $ref: "#/components/schemas/CustomerLocationDto"
+        name:
+          description: The customer name
+          nullable: true
+          type: string
+        order:
+          description: The customer order text
+          nullable: true
+          type: string
+        refNo:
+          description: The customer ref number text
+          nullable: true
+          type: string
+        taxZone:
+          $ref: "#/components/schemas/CdDescriptionPairDto"
+      type: object
+    SalesOrderDiscountDto:
+      additionalProperties: false
+      properties:
+        discountAmount:
+          description: The amount of the discount
+          format: double
+          nullable: true
+          type: number
+        discountId:
+          description: The identifier of the discount applied to the order
+          nullable: true
+          type: string
+        discountPercent:
+          description: The discount percent, if the discount is defined to be calculated as a percentage
+          format: double
+          nullable: true
+          type: number
+        discountSequenceId:
+          description: The identifier of the discount sequence of the discount ID applied to the order
+          nullable: true
+          type: string
+        discountableAmount:
+          description: The amount used as a base for discount calculation if the discount is based on amount.
+          format: double
+          nullable: true
+          type: number
+        discountableQuantity:
+          description: The quantity used as a base for discount calculation if the discount is based on quantity.
+          format: double
+          nullable: true
+          type: number
+        freeItem:
+          $ref: "#/components/schemas/CdDescriptionPairDto"
+        freeItemQuantity:
+          description: The quantity of the free item. Used to set the quantity for the order line generate by a free item discount
+          format: double
+          nullable: true
+          type: number
+        isManual:
+          description: Indicates that the discount has been applied manually
+          type: boolean
+        manualOrderIndex:
+          description: The number of discount line set for the order
+          format: int32
+          type: integer
+        skipDiscount:
+          description: Indicates if the discount has been cancelled for the order and is not applicable
+          type: boolean
+        type:
+          description: The type of discount whose sequence was applied to the document(Group or Document)
+          nullable: true
+          type: string
+      type: object
+    SalesOrderDto:
+      additionalProperties: false
+      properties:
+        attachments:
+          description: The attachments of the order
+          items:
+            $ref: "#/components/schemas/AttachmentDto"
+          nullable: true
+          type: array
+        billing:
+          $ref: "#/components/schemas/SalesOrderBillingDto"
+        branch:
+          $ref: "#/components/schemas/CdDescriptionPairDto"
+        cancelBy:
+          description: "The cancel date for the order\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T00:00:00+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        createdBy:
+          description: The user name of the creator of the order. If the order was created by an API call this field will be null or empty.
+          nullable: true
+          type: string
+        currencyId:
+          description: CurrencyId for the order.
+          nullable: true
+          type: string
+        customer:
+          $ref: "#/components/schemas/SalesOrderCustomerDto"
+        date:
+          description: "Date the order was submitted\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T00:00:00+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          type: string
+        description:
+          description: Description of the order
+          nullable: true
+          type: string
+        financialInformation:
+          $ref: "#/components/schemas/SalesOrderFinancialInfoDto"
+        freight:
+          $ref: "#/components/schemas/SalesOrderFreightDto"
+        isRotRutDeductable:
+          description: Whether the order is ROT/RUT deductible
+          type: boolean
+        lastModified:
+          description: "Date the order was last modified\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T00:00:00+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          type: string
+        note:
+          description: Any notes on the order
+          nullable: true
+          type: string
+        orderId:
+          description: The unique identifier of the order
+          nullable: true
+          type: string
+        orderQty:
+          description: The total quantity of inventory items in the order
+          format: double
+          type: number
+        origin:
+          $ref: "#/components/schemas/SalesOrderOriginDto"
+        originalOrderId:
+          description: The unique identifier of the original order
+          nullable: true
+          type: string
+        originalOrderType:
+          description: The type code for the original sales order
+          nullable: true
+          type: string
+        owner:
+          $ref: "#/components/schemas/EmployeeDto"
+        paymentSettings:
+          $ref: "#/components/schemas/SalesOrderPaymentDto"
+        print:
+          $ref: "#/components/schemas/SalesOrderPrintDto"
+        project:
+          $ref: "#/components/schemas/ProjectDto"
+        requestOn:
+          description: "Date the order was requested\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T00:00:00+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        salesPerson:
+          $ref: "#/components/schemas/SalesPersonDto"
+        shipping:
+          $ref: "#/components/schemas/SalesOrderShippingDto"
+        status:
+          $ref: "#/components/schemas/SalesOrderStatusDto"
+        totals:
+          $ref: "#/components/schemas/SalesOrderTotalsDto"
+        type:
+          description: The type code for the sales order
+          nullable: true
+          type: string
+        useReplacementCostForMarginAndProfit:
+          description: "When this option is set to `true`, the `costTotal` of the order will be calculated based on `replacementUnitCost`.\r
+
+            If option is set to `false`, the `costTotal` will be calculated based on `unitCost`"
+          nullable: true
+          type: boolean
+        version:
+          description: An internal order version used for detecting concurrent updates to an order
+          format: byte
+          nullable: true
+          type: string
+      type: object
+    SalesOrderExpansions:
+      description: The Visma.net.ERP.SalesOrders.Api.Dto.SalesOrderExpansions enumeration defines individual parts of the Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderDto that can be filled
+      enum:
+        - None
+        - Billing
+        - Payment
+        - FinancialInformation
+        - Shipping
+        - Customer
+        - Owner
+        - Origin
+        - Note
+        - Freight
+        - Attachments
+        - All
+      type: string
+    SalesOrderFinancialInfoDto:
+      additionalProperties: false
+      properties:
+        cashDiscountDate:
+          description: "The date for the cash discount\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T00:00:00+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        dueDate:
+          description: "The due date for the invoice\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T00:00:00+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        invoiceDate:
+          description: "The invoice date\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T00:00:00+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        invoiceId:
+          description: The id of the invoice issued for the order
+          nullable: true
+          type: string
+        invoiceSeparately:
+          description: Whether the order should be invoiced separately
+          type: boolean
+        postPeriod:
+          description: The post period for the invoice
+          nullable: true
+          type: string
+        terms:
+          $ref: "#/components/schemas/CdDescriptionPairDto"
+      type: object
+    SalesOrderFreightDto:
+      additionalProperties: false
+      properties:
+        amount:
+          description: "The amounts calculated based on the ship terms.\r
+
+            ///"
+          format: double
+          type: number
+        amountInBaseCurrency:
+          description: The amounts calculated based on the ship terms in base currency of the order.
+          format: double
+          type: number
+        cost:
+          description: The freight cost calculated for the sales order,
+          format: double
+          type: number
+        costInBaseCurrency:
+          description: The freight cost calculated for the sales order in base currency.
+          format: double
+          type: number
+        premiumAmount:
+          description: The additional freight charges for handling the order.
+          format: double
+          readOnly: true
+          type: number
+        premiumAmountInBaseCurrency:
+          description: The additional freight charges in base currency for handling the order.
+          format: double
+          readOnly: true
+          type: number
+        taxCategoryId:
+          description: "The tax category that applies to the freight amount.\r
+
+            By default, it is the tax category associated with the ship via code selected for the order."
+          nullable: true
+          readOnly: true
+          type: string
+        volume:
+          format: double
+          type: number
+        weight:
+          format: double
+          type: number
+      type: object
+    SalesOrderLineDto:
+      additionalProperties: false
+      properties:
+        attachments:
+          description: The attachments associated with this sales order line
+          items:
+            $ref: "#/components/schemas/AttachmentDto"
+          nullable: true
+          type: array
+        baseOrderQuantity:
+          description: The base order quantity for this line
+          format: double
+          nullable: true
+          type: number
+        billedQuantity:
+          description: The billed quantity for this line
+          format: double
+          nullable: true
+          type: number
+        branch:
+          $ref: "#/components/schemas/CdDescriptionPairDto"
+        commissionable:
+          description: Indicates if line is comissionable
+          type: boolean
+        completed:
+          description: Whether this order line is completed or not
+          nullable: true
+          type: boolean
+        description:
+          description: Any description for this order line
+          nullable: true
+          type: string
+        discountAmount:
+          description: The discount amount for this line
+          format: double
+          nullable: true
+          type: number
+        discountCode:
+          description: Code of discount applied to this line
+          nullable: true
+          type: string
+        discountPercent:
+          description: Discount percentage applied to this line
+          format: double
+          nullable: true
+          type: number
+        discountSequenceId:
+          description: Id of discount sequence applied to this line
+          nullable: true
+          type: string
+        extendedPrice:
+          description: The extended price for this sales order line
+          format: double
+          nullable: true
+          type: number
+        externalLink:
+          description: Any external link for this sales order line
+          nullable: true
+          type: string
+        freeItem:
+          description: Whether these item(s) are free or not
+          type: boolean
+        hasManualDiscount:
+          description: Discount is applied manually
+          type: boolean
+        hasManualPrice:
+          description: Unit price is applied manually
+          type: boolean
+        inventory:
+          $ref: "#/components/schemas/SalesOrderLineInventoryDto"
+        inventoryAlternateId:
+          nullable: true
+          type: string
+        lineId:
+          description: The line number of the sales order line
+          format: int32
+          type: integer
+        lineTotalBeforeDiscount:
+          description: The line total before any discounts are applied
+          format: double
+          nullable: true
+          type: number
+        lineType:
+          description: The type of sales order line
+          nullable: true
+          type: string
+        note:
+          description: Any note that has been applied to this order line
+          nullable: true
+          type: string
+        openLine:
+          description: Indicates if line has quantity left to be shipped
+          type: boolean
+        openQuantity:
+          description: The open quantity for this line
+          format: double
+          nullable: true
+          type: number
+        operation:
+          description: The type of operation the line represents to the order
+          nullable: true
+          type: string
+        orderDate:
+          description: "The date the order line was added\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T00:00:00+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        overshipThreshold:
+          description: The overship threshold value (%)
+          format: double
+          nullable: true
+          type: number
+        projectTaskId:
+          description: The project task with which this sales order line is associated
+          nullable: true
+          type: string
+        purchaseOrderSource:
+          description: Information about line purchase order source
+          nullable: true
+          type: string
+        quantity:
+          description: The quantity of unit of measure this line represents
+          format: double
+          nullable: true
+          type: number
+        quantityOnShipments:
+          description: The quantity on shipments for this line
+          format: double
+          nullable: true
+          type: number
+        reasonCode:
+          description: The reason code
+          nullable: true
+          type: string
+        replacementUnitCost:
+          description: "The replacement unit cost of an item. This is set based on the supplier price.\r
+
+            If no supplier price found, the last price of the item's default supplier will be used.\r
+
+            If no default supplier is set, the last cost of the item will be used."
+          format: double
+          nullable: true
+          type: number
+        requestDate:
+          description: "The request date for this order line\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T00:00:00+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        salesAccountId:
+          description: The general ledger account this line applies to
+          nullable: true
+          type: string
+        salesPerson:
+          $ref: "#/components/schemas/SalesPersonDto"
+        shipDate:
+          description: "The expected shipping date for this order line\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T00:00:00+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        shippingRule:
+          description: The shipping rule code for this order line
+          nullable: true
+          type: string
+        sortOrder:
+          description: Used to apply sort order to a set of lines
+          format: int32
+          nullable: true
+          type: integer
+        subaccount:
+          additionalProperties:
+            type: string
+          description: The general ledger subaccount this line applies to
+          nullable: true
+          type: object
+        supplier:
+          $ref: "#/components/schemas/SupplierDto"
+        supplierPrice:
+          format: double
+          type: number
+        taxCategoryId:
+          description: The Tax Category Id applying to this order line
+          nullable: true
+          type: string
+        undershipThreshold:
+          description: The undership threshold value (%)
+          format: double
+          nullable: true
+          type: number
+        unitCost:
+          description: The unit cost of items on this order line
+          format: double
+          nullable: true
+          type: number
+        unitOfMeasure:
+          description: The unit of measure (UOM) for the sales order line
+          nullable: true
+          type: string
+        unitPrice:
+          description: The unit price for items on this order line
+          format: double
+          nullable: true
+          type: number
+        warehouseId:
+          description: The Site Id for items on this line
+          nullable: true
+          type: string
+        warehouseLocation:
+          $ref: "#/components/schemas/LocationDto"
+      type: object
+    SalesOrderLineDtoPagedResult:
+      additionalProperties: false
+      properties:
+        nextPage:
+          description: Gets or sets the link to the next page with more results. If set to null then no more records are present.
+          nullable: true
+          type: string
+        totalCount:
+          description: Gets or sets the total number of items available. If set to null, then the total number of items cannot be determined
+          format: int32
+          nullable: true
+          type: integer
+        value:
+          description: Gets or sets the items that are paged
+          items:
+            $ref: "#/components/schemas/SalesOrderLineDto"
+          nullable: true
+          type: array
+      type: object
+    SalesOrderLineInventoryDto:
+      additionalProperties: false
+      properties:
+        baseUnit:
+          nullable: true
+          type: string
+        description:
+          description: The description
+          nullable: true
+          type: string
+        id:
+          description: The id
+          nullable: true
+          type: string
+      type: object
+    SalesOrderListDto:
+      additionalProperties: false
+      properties:
+        _links:
+          additionalProperties:
+            $ref: "#/components/schemas/DtoLink"
+          description: Links applicable for the dto
+          nullable: true
+          type: object
+        currency:
+          description: The currency id for the order
+          nullable: true
+          type: string
+        customerId:
+          description: The customer Id for the order (a.k.a CustoemrCd)
+          nullable: true
+          type: string
+        customerName:
+          description: The name of the customer as it appears on the order
+          nullable: true
+          type: string
+        customerOrder:
+          description: The customer order link
+          nullable: true
+          type: string
+        customerRefNo:
+          description: The order reference number of the customer
+          nullable: true
+          type: string
+        date:
+          description: "The order date\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T00:00:00+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          type: string
+        description:
+          description: Any description on the order
+          nullable: true
+          type: string
+        lastModified:
+          description: The date and time the order was last modified
+          format: date-time
+          type: string
+        location:
+          description: The customer location for this order
+          nullable: true
+          type: string
+        orderId:
+          description: The order id (a.k.a OrderCd) for the order
+          nullable: true
+          type: string
+        orderQty:
+          description: The total number of items on the order
+          format: double
+          type: number
+        orderTotal:
+          description: The total amount on the order
+          format: double
+          type: number
+        requestOn:
+          description: "The date the order is requested\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T00:00:00+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          type: string
+        shippingScheduledDate:
+          description: "The date shipment is scheduled\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T00:00:00+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          type: string
+        status:
+          description: The current status of the order
+          nullable: true
+          type: string
+        type:
+          description: The type of the order
+          nullable: true
+          type: string
+      type: object
+    SalesOrderListDtoPagedResult:
+      additionalProperties: false
+      properties:
+        nextPage:
+          description: Gets or sets the link to the next page with more results. If set to null then no more records are present.
+          nullable: true
+          type: string
+        totalCount:
+          description: Gets or sets the total number of items available. If set to null, then the total number of items cannot be determined
+          format: int32
+          nullable: true
+          type: integer
+        value:
+          description: Gets or sets the items that are paged
+          items:
+            $ref: "#/components/schemas/SalesOrderListDto"
+          nullable: true
+          type: array
+      type: object
+    SalesOrderOriginDto:
+      additionalProperties: false
+      properties:
+        _links:
+          additionalProperties:
+            $ref: "#/components/schemas/DtoLink"
+          description: Links applicable for the dto
+          nullable: true
+          type: object
+        orderId:
+          description: The unique id of the origin order
+          nullable: true
+          type: string
+        orderType:
+          description: The order type code for the origin order
+          nullable: true
+          type: string
+      type: object
+    SalesOrderPaymentDto:
+      additionalProperties: false
+      properties:
+        cashAccountId:
+          description: The cash account to use
+          nullable: true
+          type: string
+        paymentMethod:
+          $ref: "#/components/schemas/CdDescriptionPairDto"
+        paymentReference:
+          description: The payment reference
+          nullable: true
+          type: string
+      type: object
+    SalesOrderPrintDto:
+      additionalProperties: false
+      properties:
+        descriptionOnInvoice:
+          description: Set to true to print description on the invoice
+          nullable: true
+          type: boolean
+        noteOnExternalDocuments:
+          description: Set to true to print note on external documents
+          nullable: true
+          type: boolean
+        noteOnInternalDocuments:
+          description: Set to true to print note on internal documents
+          nullable: true
+          type: boolean
+      type: object
+    SalesOrderRotRutDistributionDto:
+      additionalProperties: false
+      properties:
+        amount:
+          description: The amount
+          format: double
+          nullable: true
+          type: number
+        extra:
+          description: Whether this is extra or not
+          nullable: true
+          type: boolean
+        lineId:
+          description: Reference to the order line
+          format: int32
+          type: integer
+        personalId:
+          description: The personal id
+          nullable: true
+          type: string
+      type: object
+    SalesOrderRotRutDto:
+      additionalProperties: false
+      properties:
+        appartment:
+          description: The appartment reference
+          nullable: true
+          type: string
+        distributedAutomatically:
+          description: Whether the ROT/RUT is distributed automatically
+          type: boolean
+        distribution:
+          description: The distrinbution entries
+          items:
+            $ref: "#/components/schemas/SalesOrderRotRutDistributionDto"
+          nullable: true
+          type: array
+        estate:
+          description: The estate reference
+          nullable: true
+          type: string
+        organizationNumber:
+          description: The organization number
+          nullable: true
+          type: string
+        type:
+          description: The type of ROT/RUT
+          nullable: true
+          type: string
+      type: object
+    SalesOrderShipmentDto:
+      additionalProperties: false
+      description: The Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderShipmentDto specifies a shipment line detail for a sales order
+      properties:
+        date:
+          description: The date of the shipment
+          format: date-time
+          type: string
+        id:
+          description: The id of a shipments created for the order
+          nullable: true
+          type: string
+        inventoryDocumentType:
+          description: The type of inventory document created for the shipment
+          nullable: true
+          type: string
+        inventoryReferenceId:
+          description: The id of the inventory document created for the shipment
+          nullable: true
+          type: string
+        invoiceId:
+          description: The id of the invoice
+          nullable: true
+          type: string
+        invoiceType:
+          description: The type of invoice
+          nullable: true
+          type: string
+        quantity:
+          description: The quantity of goods on the shipment
+          format: double
+          type: number
+        type:
+          description: The type of the shipment
+          nullable: true
+          type: string
+        volume:
+          description: The volume of the shipped goods
+          format: double
+          type: number
+        weight:
+          description: The weight of the shipped goods
+          format: double
+          type: number
+      type: object
+    SalesOrderShippingDto:
+      additionalProperties: false
+      properties:
+        address:
+          $ref: "#/components/schemas/AddressDto"
+        contact:
+          $ref: "#/components/schemas/ContactDto"
+        fobPoint:
+          $ref: "#/components/schemas/CdDescriptionPairDto"
+        insurance:
+          description: Whether insurance applies to this shipping
+          type: boolean
+        intrastatTransactionType:
+          $ref: "#/components/schemas/IdDescriptionPairDto"
+        preferredWarehouse:
+          $ref: "#/components/schemas/CdDescriptionPairDto"
+        priority:
+          description: Priority of the order
+          format: int32
+          type: integer
+        residentialDelivery:
+          description: Whether this is residential delivery
+          type: boolean
+        rule:
+          description: The shipping rule
+          nullable: true
+          type: string
+        saturdayDelivery:
+          description: Whether this is a saturday delivery
+          type: boolean
+        scheduledDate:
+          description: "The shipping scheduled date\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T00:00:00+02:00'), the passed date is considered to be in the UTC time zone."
+          format: date-time
+          nullable: true
+          type: string
+        shipSeparately:
+          description: Whether this order can/is shipped separately
+          type: boolean
+        shipVia:
+          $ref: "#/components/schemas/CdDescriptionPairDto"
+        terms:
+          $ref: "#/components/schemas/CdDescriptionPairDto"
+        zone:
+          $ref: "#/components/schemas/CdDescriptionPairDto"
+      type: object
+    SalesOrderStatusDto:
+      additionalProperties: false
+      properties:
+        cancelled:
+          description: Whether this order is in a cancelled state
+          type: boolean
+        description:
+          description: The status code for the order
+          nullable: true
+          type: string
+        hold:
+          description: Whether this order is in a held state
+          type: boolean
+      type: object
+    SalesOrderTaxDto:
+      additionalProperties: false
+      description: The Visma.net.ERP.SalesOrders.Api.Dto.SalesOrder.SalesOrderTaxDto specifies a tax line detail for a sales order
+      properties:
+        exemptTax:
+          description: Indicates if the taxable amount will be included in taxExemptTotal
+          type: boolean
+        includeInTaxable:
+          description: Indicates if the taxable amount will be included in taxableTotal
+          type: boolean
+        isPendingTax:
+          description: Indicates if the tax calculated is treated as a pending tax
+          type: boolean
+        isReverseTax:
+          description: Indicates if the tax is treated as a reverse tax
+          type: boolean
+        isStatisticalTax:
+          description: Indicates if the tax calculated is treated as a statistical tax
+          type: boolean
+        taxAmount:
+          description: The calculated tax amount for the specific tax
+          format: double
+          nullable: true
+          type: number
+        taxId:
+          description: The unique tax identifier of the specific tax applied to the document
+          nullable: true
+          type: string
+        taxRate:
+          description: The tax rate used for the tax
+          format: double
+          nullable: true
+          type: number
+        taxType:
+          description: The type of tax, which can be Sales, Use, VAT or Withholding
+          nullable: true
+          type: string
+        taxableAmount:
+          description: The calculated taxable amount for the specific tax
+          format: double
+          nullable: true
+          type: number
+      type: object
+    SalesOrderTotalsDto:
+      additionalProperties: false
+      properties:
+        costTotal:
+          description: "The total of the costs on the lines of the sales order. How the `costTotal` is calculated is dependent on the option `useReplacementCostForMarginAndProfit`.\r
+
+            If this option is `true` the `costTotal` will be calculated based on the `replacementUnitCost`.\r
+
+            If this option is `false`, the `costTotal` will be calculate based on `unitCost`"
+          format: double
+          nullable: true
+          type: number
+        costTotalInBaseCurrency:
+          description: The total of the costs on the lines of the sales order in base currency.
+          format: double
+          nullable: true
+          type: number
+        discountTotal:
+          description: The discount total
+          format: double
+          nullable: true
+          type: number
+        discountTotalInBaseCurrency:
+          description: The discount total in base currency
+          format: double
+          nullable: true
+          type: number
+        freightCost:
+          description: The freight cost calculated for the sales order. Not applicable for transfer order types.
+          format: double
+          nullable: true
+          type: number
+        freightCostInBaseCurrency:
+          description: The freight cost calculated for the sales order in base currency. Not applicable for transfer order types.
+          format: double
+          nullable: true
+          readOnly: true
+          type: number
+        freightTotal:
+          description: The freight amount calculated in accordance with the shipping terms. Not applicable for transfer order types.
+          format: double
+          type: number
+        freightTotalInBaseCurrency:
+          description: The freight amount calculated in accordance with the shipping terms in base currency. Not applicable for transfer order types.
+          format: double
+          type: number
+        orderTotal:
+          description: The order total
+          format: double
+          type: number
+        orderTotalInBaseCurrency:
+          description: The order total in base currency
+          format: double
+          type: number
+        taxExemptTotal:
+          description: The VAT exempt total
+          format: double
+          type: number
+        taxExemptTotalInBaseCurrency:
+          description: The VAT exempt total in base currency
+          format: double
+          type: number
+        taxTotal:
+          description: The tax total
+          format: double
+          type: number
+        taxTotalInBaseCurrency:
+          description: The tax total in base currency
+          format: double
+          type: number
+        taxableTotal:
+          description: The VAT taxable total
+          format: double
+          type: number
+        taxableTotalInBaseCurrency:
+          description: The VAT taxable in base currency
+          format: double
+          type: number
+        unbilledAmount:
+          description: The sum of unbilled amounts for the lines
+          format: double
+          type: number
+        unbilledAmountInBaseCurrency:
+          description: The sum of unbilled amounts for the lines in base currency
+          format: double
+          type: number
+        unshippedAmount:
+          description: The sum of unshipped amounts for the lines
+          format: double
+          type: number
+        unshippedAmountInBaseCurrency:
+          description: The sum of unshipped amounts for the lines in base currency
+          format: double
+          type: number
+      type: object
+    SalesOrderValidationProblemDetails:
+      additionalProperties: {}
+      description: Defines an error response for validation problems
+      properties:
+        detail:
+          nullable: true
+          type: string
+        details:
+          description: List with details for all the validation problems
+          items:
+            $ref: "#/components/schemas/ValidationErrorCodeDetails"
+          nullable: true
+          readOnly: true
+          type: array
+        errors:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          nullable: true
+          readOnly: true
+          type: object
+        instance:
+          nullable: true
+          type: string
+        status:
+          format: int32
+          nullable: true
+          type: integer
+        title:
+          nullable: true
+          type: string
+        type:
+          nullable: true
+          type: string
+      type: object
+    SalesPersonDto:
+      additionalProperties: false
+      properties:
+        description:
+          description: The description
+          nullable: true
+          type: string
+        id:
+          description: The id
+          nullable: true
+          type: string
+      type: object
+    SupplierDto:
+      additionalProperties: false
+      properties:
+        id:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+      type: object
+    ValidationErrorCodeDetails:
+      additionalProperties: false
+      description: Defines details related to validation problems
+      properties:
+        code:
+          description: Error code
+          example: 0001-NullNotAllowed
+          nullable: true
+          type: string
+        message:
+          description: Detailed validation message
+          example: Null value not allowed
+          nullable: true
+          type: string
+        parameters:
+          additionalProperties: {}
+          description: "Extra parameters related to the validation problem.\r
+
+            <remarks>If the validation problem refers to a particular field the \"property\" element will contain the field name</remarks>"
+          nullable: true
+          type: object
+      type: object
+    WarehouseAvailabilityDto:
+      additionalProperties: false
+      description: Warehouse information for a specific inventory item
+      properties:
+        description:
+          description: The description of the warehouse
+          nullable: true
+          type: string
+        estimatedTotalCost:
+          description: The total cost for the QuantityOnHand
+          format: double
+          nullable: true
+          type: number
+        estimatedUnitCost:
+          description: The estimated cost per unit, calculated as EstimatedTotalCost/QuantityOnHand
+          format: double
+          nullable: true
+          type: number
+        internalWarehouseId:
+          description: The internal id used by the system for the warehouse
+          format: int32
+          type: integer
+        lastModified:
+          description: "The date and time the entry for this warehouse was modified\r
+
+            Unless a specific time zone offset is included (e.g. '2012-12-24T12:15:14+02:00'), the date is considered to be in the UTC time zone."
+          format: date-time
+          type: string
+        locations:
+          description: "List of locations in the warehouse for the specific inventory item.\r
+
+            Note that this is not returned as part of the response unless expand=Location is specified with the request."
+          items:
+            $ref: "#/components/schemas/LocationAvailabilityDto"
+          nullable: true
+          type: array
+        quantityAvailable:
+          description: "You can configure the way this estimated quantity is calculated by using availability\r
+
+            calculation rules. The available quantity may include anticipated transactions and therefore\r
+
+            may be less than or greater than the QuantityOnHand. Anticipated transactions correspond\r
+
+            to the documents and transactions that have been entered in the system but not yet\r
+
+            processed to the end.\r
+
+            In the availability calculation settings of an item class, you specify which anticipated\r
+
+            transactions affect the available quantity. Thus, the available quantity may include\r
+
+            goods on purchase orders and exclude the goods allocated for sales orders. You can use\r
+
+            the available quantity as an indicator of demand"
+          format: double
+          type: number
+        quantityAvailableForShipment:
+          description: "Estimated quantity calculated by using the following formula: the QuantityOnHand minus the quantity on unreleased inventory\r
+
+            issues, minus the quantity allocated for shipping. Thus, the QuantityAvailableForShipment can be less than the QuantityOnHand"
+          format: double
+          type: number
+        quantityNotAvailable:
+          description: "The quantity stored at locations not included in the availability calculation.\r
+
+            For each warehouse location, the 'Include in Qty. Available' check box on the\r
+
+            Warehouses(IN204000) screen defines whether the quantity of items stored at this\r
+
+            location is included in the quantity of available items."
+          format: double
+          type: number
+        quantityOnHand:
+          description: Physical quantity on-hand of items in the specific warehouse
+          format: double
+          type: number
+        quantityPurchaseOrders:
+          description: The quantity of the inventory item included in open purchase orders.
+          format: double
+          type: number
+        warehouseId:
+          description: The id (SiteCd) of the warehouse
+          nullable: true
+          type: string
+      type: object
+  securitySchemes:
+    oauth2:
+      description: ""
+      flows:
+        clientCredentials:
+          scopes:
+            read: "*Originally missing*"
+            visma.net.erp.salesorder:read: Read sales order data
+            visma.net.erp.salesorder:write: Create or update sales order data
+            write: "*Originally missing*"
+          tokenUrl: https://connect.visma.com/connect/token
+      type: oauth2
+  x-visma-erp-error-codes:
+    - code: 0001-NullNotAllowed
+      description: Null value not allowed
+    - code: 0001-EmptyNotAllowed
+      description: Empty value not allowed
+    - code: 0002-InvalidLength
+      description: Invalid length
+    - code: 0003-InvalidValue
+      description: Invalid value
+    - code: 0004-ValueNotAllowed
+      description: Value not allowed
+    - code: 0005-InvalidState
+      description: Invalid state
+    - code: 0100-OutsideValidRange
+      description: Value is outside the valid range
+    - code: 0200-LineIdDoesNotExist
+      description: " Line Id {0}. Line with provided Id does not exists in the order"
+    - code: 1100-InvalidDiscount
+      description: Document/Group discount cannot exceed the line total
+    - code: 1101-DiscountAmountMoreThanExtPrice
+      description: Discount amount can not be greater than Extended Price
+    - code: 1102-DiscountSetupInvalid
+      description: Discount setup is not valid for discounts calculations
+    - code: 1103-DiscountNotApplicable
+      description: Discount can not be applied to line
+    - code: 1104-FreeItemNotFound
+      description: Free item specified in header discount was not found.
+    - code: 1105-InvalidDiscountCode
+      description: Invalid DiscountCode. The Discount is missing or invalid
+    - code: 1200-SubaccountSegmentInactive
+      description: Subaccount segment values inactive
+    - code: 1201-SubaccountInactive
+      description: Subaccount is not Active
+    - code: 1202-SegmentValueNotFound
+      description: Segment value for Subaccount cannot be found
+    - code: 1203-SubaccountNotFound
+      description: Could not find Subaccount segment value
+    - code: 1204-SubaccountError
+      description: Validation errors for the subaccount
+    - code: 1300-InvalidShipComplete
+      description: If require location and not require shipping then ship complete cannot be set to back order allowed
+    - code: 1310-FreightCostCanNotBeSetManually
+      description: Freight cost is not allowed to be set manually according to the Ship Via Code settings
+    - code: 1400-CustomerLookupException
+      description: Exception searching customer
+    - code: 1401-MissingTermsId
+      description: TermsId cannot be empty in the order. Set a default terms on the customer or specify the terms for the order
+    - code: 1402-PaymentMethodIdNotFound
+      description: Payment method set for order can not be found
+    - code: 1403-InactivePaymentMethodId
+      description: Payment methods set for order is inactive
+    - code: 1404-InvalidPaymentMethodId
+      description: Payment method set for order can not be used in sales orders
+    - code: 1405-PaymentReferenceRequired
+      description: Payment reference not set, order type requires it
+    - code: 1406-PaymentReferenceProhibited
+      description: Order type does not allow payment reference
+    - code: 1407-InvalidCustomerStatus
+      description: Invalid Customer Status
+    - code: 1408-OverrideCurrencyIdProhibited
+      description: Currency Id can not be overridden
+    - code: 1409-PaymentMethodRequired
+      description: Payment method not set, order type requires it
+    - code: 1500-CashAccountRequired
+      description: Cash account not set, order type requires it
+    - code: 1501-CashAccountInactive
+      description: Cash account set for order is inactive
+    - code: 1502-CashAccountNotFound
+      description: Cash account set on order can not be found
+    - code: 1503-CashAccountInvalidForPaymentMethod
+      description: Cash account cannot be used with the set Payment Method
+    - code: 1504-CashAccountInvalidForBranch
+      description: Cash account not allowed to be used with the set Branch
+    - code: 1600-FinancialPeriodNotFound
+      description: No financial period that matches the selected Invoice date can be found. Please change the Invoice Date, set the Financial period for the order or create Financial periods
+    - code: 1601-FinancialPeriodClosed
+      description: Financial period '{0}' is closed and cannot be set for order
+    - code: 1602-FinancialPeriodInactive
+      description: Financial period is inactive. Activate it or set another period
+    - code: 1603-FinancialPeriodNotApplicable
+      description: Post period cannot be set for this order type
+    - code: 1700-WarehouseLocationNotFound
+      description: Warehouse location is not found
+    - code: 1701-WarehouseLocationInactive
+      description: Warehouse location is inactive
+    - code: 1703-WarehouseLocationInvalid
+      description: Sales not allowed for warehouse location set for line
+    - code: 1704-InvalidOrderType
+      description: Not possible to update warehouse for line with line number {0}. Setting warehouse location is allowed only for not shippable orders.
+    - code: 1705-DuplicatedSiteCds
+      description: Duplicated site cds
+    - code: 1800-InvalidLineOperation
+      description: Given line operation is not accepted for this order type
+    - code: 1801-MissingReasonCode
+      description: Reason code is not set and order type requires it
+    - code: 1802-InvalidWarehouseId
+      description: Invalid Warehouse Id, or Warehouse Id not found
+    - code: 1803-UniqueInventoryIdNotFound
+      description: "Cannot find unique InventoryId for inventoryId: '{0}'"
+    - code: 1804-InventoryIdNotFound
+      description: InventoryId cannot be found or is invalid
+    - code: 1805-InvalidTaxCategoryId
+      description: Invalid TaxCategoryId, or TaxCategory not found
+    - code: 1806-InvalidSalesAccountId
+      description: Invalid SalesAccountId specified
+    - code: 1807-InvalidReasonCode
+      description: Invalid ReasonCode, or ReasonCode not found
+    - code: 1808-InvalidUnitOfMeasure
+      description: Invalid Unit of Measure
+    - code: 1809-InvalidQuantityForType
+      description: Quantity must be zero or positive when inventory item is not of type MiscCharge
+    - code: 1810-LineAlreadyCompleted
+      description: Line is marked as completed. Patch operation can not be done on completed lines.
+    - code: 1811-LineAlreadyShippedExternalLink
+      description: Not possible to update External Link. Update only accepted for orders, where the updated line has not been shipped
+    - code: 1812-LineAlreadyShippedSalesAccountId
+      description: Not possible to update sales account id. Update only accepted for orders, where the updated line has not been shipped
+    - code: 1813-InputLinesExceedExistingLinesCount
+      description: The number of provided lines exceed existing sales order lines
+    - code: 1814-ReasonCodePrerequisitesNotMet
+      description: The reason code prerequisites for the line does not meet expectations
+    - code: 1815-SortOrderExceedLinesCount
+      description: Cannot set higher sort order number than the number of lines
+    - code: 1816-SortOrderNbrIsNotUnique
+      description: The SortOrder number provided is not unique in your request
+    - code: 1817-LineIdIsNotUnique
+      description: The LineId provided is not unique in your request
+    - code: 1818-LineAlreadyShippedUnitCost
+      description: Not possible to update Unit cost. Update only accepted for orders, where the updated line has not been shipped
+    - code: 1819-LineAlreadyShippedShippingRule
+      description: Not possible to update Shipping rule. Update only accepted for orders, where the updated line has not been shipped
+    - code: 1820-LineIsFreeItem
+      description: Cannot change discount fields for line that is marked as free item line
+    - code: 1821-InventoryIdFreeItemNotFound
+      description: InventoryId for a free Item cannot be found or is invalid
+    - code: 1822-CanNotUpdateLineLocation
+      description: Not possible to update warehouse for line with line number {0}. Update only accepted for orders in statuses Open, On hold, Back ordered, Credit hold and where the updated line has not been shipped and line is not completed.
+    - code: 1823-DeleteLineWhichIsAlreadyShipped
+      description: Cannot delete line that has been shipped
+    - code: 1824-DeleteLineWhichIsFreeDiscountLine
+      description: Cannot delete free item line set from a discount. Please review the discount
+    - code: 1825-DeleteSalesOrderWithShippedLines
+      description: Cannot delete order containing lines that have been shipped
+    - code: 1900-OrderNumberSequenceNotFound
+      description: Order number sequence cannot be found
+    - code: 1901-InactiveSalesPerson
+      description: Sales Person is not active
+    - code: 1902-SalesPersonNotFound
+      description: Sales Person is not found
+    - code: 1903-SupplierNotFound
+      description: Supplier not found or is not active
+    - code: 1904-ProjectNotFound
+      description: Project cannot be found
+    - code: 1905-ProjectNotVisibleInSO
+      description: Project is not accepted for use in a sales order
+    - code: 1906-ProjectCancelled
+      description: Project cannot be set because status is Cancelled
+    - code: 1907-ProjectCompleted
+      description: Project cannot be set because status is Completed
+    - code: 1908-ProjectTaskNotFound
+      description: Project task cannot be found
+    - code: 5000-InvalidAttributeFilter
+      description: Invalid attributeFilter
+    - code: 5001-InvalidAttributeName
+      description: The attribute name is invalid. Only characters, digits, or space is allowed
+    - code: 5002-BaseUnitDetailsNotSet
+      description: Base Unit details not set for unit

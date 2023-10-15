@@ -1,0 +1,463 @@
+swagger: "2.0"
+schemes:
+  - https
+host: api.ean-search.org
+basePath: /
+info:
+  description: |-
+    Documentation of the EAN-Search.org API, see [https://www.ean-search.org/ean-database-api.html](https://www.ean-search.org/ean-database-api.html).
+    Please consult the PDF manual in your account for more details.
+  title: EAN-Search.org API
+  version: 1.50.0
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    url: https://www.ean-search.org/ean-logo.svg
+  x-origin:
+    - format: swagger
+      url: https://www.ean-search.org/eansearch-swagger2.json
+      version: "2.0"
+  x-providerName: ean-search.org
+securityDefinitions:
+  ApiKeyAuth:
+    in: query
+    name: token
+    type: apiKey
+paths:
+  /barcode-image:
+    get:
+      operationId: barcode-image
+      parameters:
+        - description: API operation
+          enum:
+            - barcode-image
+          in: query
+          name: op
+          required: true
+          type: string
+        - description: EAN code to search for
+          format: unsigned64
+          in: query
+          name: ean
+          required: true
+          type: integer
+        - default: 102
+          in: query
+          name: width
+          type: integer
+        - default: 50
+          in: query
+          name: height
+          type: integer
+        - description: output format
+          enum:
+            - json
+            - xml
+          in: query
+          name: format
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/Barcode"
+            type: array
+        "400":
+          description: Invalid operation requested
+        "401":
+          description: Invalid access token
+        "402":
+          description: Request limit reached
+        "405":
+          description: Must use HTTP GET to access the API
+        "429":
+          description: Too many requests (eg. rate limit exeeded)
+      security:
+        - ApiKeyAuth: []
+      summary: Generate a PNG barcode image
+  /barcode-lookup:
+    get:
+      description: Search by EAN code
+      operationId: barcode-lookup
+      parameters:
+        - description: API operation
+          enum:
+            - barcode-lookup
+          in: query
+          name: op
+          required: true
+          type: string
+        - description: EAN code to search for
+          format: unsigned64
+          in: query
+          name: ean
+          required: true
+          type: integer
+        - default: 1
+          description: preferred language for the product name
+          in: query
+          name: language
+          type: integer
+        - description: output format
+          enum:
+            - json
+            - xml
+          in: query
+          name: format
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/Product"
+            type: array
+        "400":
+          description: Invalid operation requested
+        "401":
+          description: Invalid access token
+        "402":
+          description: Request limit reached
+        "405":
+          description: Must use HTTP GET to access the API
+        "429":
+          description: Too many requests (eg. rate limit exeeded)
+      security:
+        - ApiKeyAuth: []
+      summary: Look up an EAN
+  /barcode-prefix-search:
+    get:
+      operationId: barcode-prefix-search
+      parameters:
+        - description: API operation
+          enum:
+            - barcode-prefix-search
+          in: query
+          name: op
+          required: true
+          type: string
+        - description: barcode prefix to search for, at least 4 digits
+          in: query
+          name: prefix
+          required: true
+          type: string
+        - default: 1
+          description: preferred language for the product name
+          in: query
+          name: language
+          type: integer
+        - default: 0
+          description: result page
+          in: query
+          name: page
+          type: integer
+        - description: output format
+          enum:
+            - json
+            - xml
+          in: query
+          name: format
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/Product"
+            type: array
+        "400":
+          description: Invalid operation requested
+        "401":
+          description: Invalid access token
+        "402":
+          description: Request limit reached
+        "405":
+          description: Must use HTTP GET to access the API
+        "429":
+          description: Too many requests (eg. rate limit exeeded)
+      security:
+        - ApiKeyAuth: []
+      summary: Query the database for all barcodes with the same beginning
+  /category-search:
+    get:
+      operationId: category-search
+      parameters:
+        - description: API operation
+          enum:
+            - category-search
+          in: query
+          name: op
+          required: true
+          type: string
+        - description: category number
+          in: query
+          name: category
+          required: true
+          type: integer
+        - description: name or keyords to search for
+          in: query
+          name: name
+          type: string
+        - default: 99
+          description: preferred language for the product name (default any language)
+          in: query
+          name: language
+          type: integer
+        - default: 0
+          description: result page
+          in: query
+          name: page
+          type: integer
+        - description: output format
+          enum:
+            - json
+            - xml
+          in: query
+          name: format
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/Product"
+            type: array
+        "400":
+          description: Invalid operation requested
+        "401":
+          description: Invalid access token
+        "402":
+          description: Request limit reached
+        "405":
+          description: Must use HTTP GET to access the API
+        "429":
+          description: Too many requests (eg. rate limit exeeded)
+      security:
+        - ApiKeyAuth: []
+      summary: Search for products form a certain category
+  /issuing-country:
+    get:
+      description: Search for a issuing country of a barcode. In contrast to barcode-lookup, this will always give a result, even if we don't know the product name.
+      operationId: issuing-country
+      parameters:
+        - description: API operation
+          enum:
+            - issuing-country
+          in: query
+          name: op
+          required: true
+          type: string
+        - description: EAN code to search for
+          format: unsigned64
+          in: query
+          name: ean
+          required: true
+          type: integer
+        - description: output format
+          enum:
+            - json
+            - xml
+          in: query
+          name: format
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/IssuingCountry"
+            type: array
+        "400":
+          description: Invalid operation requested
+        "401":
+          description: Invalid access token
+        "402":
+          description: Request limit reached
+        "405":
+          description: Must use HTTP GET to access the API
+        "429":
+          description: Too many requests (eg. rate limit exeeded)
+      security:
+        - ApiKeyAuth: []
+      summary: Search for a issuing country of a barcode
+  /product-search:
+    get:
+      operationId: product-search
+      parameters:
+        - description: API operation
+          enum:
+            - product-search
+          in: query
+          name: op
+          required: true
+          type: string
+        - description: name or keyords to search for
+          in: query
+          name: name
+          required: true
+          type: string
+        - default: 99
+          description: preferred language for the product name (default any language)
+          in: query
+          name: language
+          type: integer
+        - default: 0
+          description: result page
+          in: query
+          name: page
+          type: integer
+        - description: output format
+          enum:
+            - json
+            - xml
+          in: query
+          name: format
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/Product"
+            type: array
+        "400":
+          description: Invalid operation requested
+        "401":
+          description: Invalid access token
+        "402":
+          description: Request limit reached
+        "405":
+          description: Must use HTTP GET to access the API
+        "429":
+          description: Too many requests (eg. rate limit exeeded)
+      security:
+        - ApiKeyAuth: []
+      summary: Search by product name
+  /verify-checksum:
+    get:
+      operationId: verify-checksum
+      parameters:
+        - description: API operation
+          enum:
+            - verify-checksum
+          in: query
+          name: op
+          required: true
+          type: string
+        - description: EAN code to search for
+          format: unsigned64
+          in: query
+          name: ean
+          required: true
+          type: integer
+        - description: output format
+          enum:
+            - json
+            - xml
+          in: query
+          name: format
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/VerifyChecksum"
+            type: array
+        "400":
+          description: Invalid operation requested
+        "401":
+          description: Invalid access token
+        "402":
+          description: Request limit reached
+        "405":
+          description: Must use HTTP GET to access the API
+        "429":
+          description: Too many requests (eg. rate limit exeeded)
+      security:
+        - ApiKeyAuth: []
+      summary: Verify the checksum of an EAN code
+definitions:
+  Barcode:
+    properties:
+      barcode:
+        description: base64 encoded PNG image
+        type: string
+      ean:
+        type: string
+    required:
+      - ean
+      - barcode
+    type: object
+    xml:
+      name: product
+  IssuingCountry:
+    properties:
+      ean:
+        type: string
+      issuingCountry:
+        format: ISO 3166 Alpha-2
+        type: string
+    required:
+      - ean
+      - issuingCountry
+    type: object
+    xml:
+      name: product
+  Product:
+    properties:
+      categoryId:
+        type: string
+      categoryName:
+        type: string
+      ean:
+        type: string
+      issuingCountry:
+        format: ISO 3166 Alpha-2
+        type: string
+      name:
+        type: string
+    required:
+      - ean
+      - name
+      - issuingCountry
+    type: object
+    xml:
+      name: product
+  VerifyChecksum:
+    properties:
+      ean:
+        type: string
+      valid:
+        enum:
+          - "0"
+          - "1"
+        type: string
+    required:
+      - ean
+      - valid
+    type: object
+    xml:
+      name: product

@@ -1,0 +1,609 @@
+openapi: 3.0.1
+servers:
+  - description: Breadcrumbs One - Production Server
+    url: https://api.breadcrumbs.one
+info:
+  title: Breadcrumbs One
+  version: v1
+  x-apisguru-categories:
+    - financial
+  x-logo:
+    url: https://twitter.com/AppBreadcrumbs/photo
+  x-origin:
+    - format: openapi
+      url: https://api.breadcrumbs.one/swagger/v1/swagger.json
+      version: "3.0"
+  x-providerName: breadcrumbs.one
+security:
+  - X-API-KEY: []
+paths:
+  /node:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/Breadcrumbs.API.Models.Node.NodeRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Breadcrumbs.API.Models.Node.NodeRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/Breadcrumbs.API.Models.Node.NodeRequest"
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example 1:
+                  value:
+                    entity_tags:
+                      - Exchange
+                    incoming:
+                      - address: "0x4e9ce36e442e55ecd9025b9a6e0d88485d628a67"
+                      - address: "0xbe0eb53f46cd790cd13851d5eff43d12404d33e8"
+                      - address: "0xd551234ae421e3bcba99a0da6d736074f22192ff"
+                      - address: "0xe4b5b2667e049ac8c79ae6c5a7e3300815aa32be"
+                      - address: "0xfb3236c106b2cae3a6fd851f2c121faed0a0ceae"
+                      - address: "0xfe9e8709d3215310075d67e3ed32a380ccf451c8"
+                      - address: "0xebdce3b3775c5683c96ca754e4130ea5175de85e"
+                    outgoing:
+                      - address: "0x3f5ce5fbfe3e9af3971dd833d26ba9b5c936f0be"
+                      - address: "0xf977814e90da44bfa03b6295a0616a897441acec"
+                      - address: "0xccb04768f3abcf1af1e749085ef67d8ec7c5fdd2"
+              schema:
+                $ref: "#/components/schemas/Breadcrumbs.API.Models.Node.NodeResponse"
+          description: Success
+        "401":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    error: Unauthorize access
+                    status: 401
+              schema:
+                $ref: "#/components/schemas/Breadcrumbs.Response.UnauthorizedResponse"
+          description: Unauthorized
+        "422":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    error: Invalid chain value
+                    status: 422
+              schema:
+                $ref: "#/components/schemas/Breadcrumbs.Response.UnprocessableResponse"
+          description: Client Error
+      summary: Shows the incoming and outgoing transactions from blockchain address
+      tags:
+        - Node
+  /pathfinder:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/Breadcrumbs.API.Models.Pathfinder.PathfinderRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Breadcrumbs.API.Models.Pathfinder.PathfinderRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/Breadcrumbs.API.Models.Pathfinder.PathfinderRequest"
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                2 Hops Found:
+                  value:
+                    path_found: true
+                    result_hops: 2
+                    result_paths:
+                      - - "0x030e37ddd7df1b43db172b23916d523f1599c6cb"
+                        - "0x3f5ce5fbfe3e9af3971dd833d26ba9b5c936f0be"
+                        - "0x0000f079e68bbcc79ab9600ace786b0a4db1c83c"
+                2 Paths Found:
+                  value:
+                    path_found: true
+                    result_hops: 2
+                    result_paths:
+                      - - "0x030e37ddd7df1b43db172b23916d523f1599c6cb"
+                        - "0x3f5ce5fbfe3e9af3971dd833d26ba9b5c936f0be"
+                        - "0x0000f079e68bbcc79ab9600ace786b0a4db1c83c"
+                      - - "0x030e37ddd7df1b43db172b23916d523f1599c6cb"
+                        - "0x3f5ce5fbfe3e9af3971dd833d26ba9b5c936f0be"
+                        - "0x0000f079e68bbcc79ab9600ace786b0a4db1c83c"
+                No path found:
+                  value:
+                    path_found: false
+                    result_hops: 0
+                    result_paths: []
+              schema:
+                $ref: "#/components/schemas/Breadcrumbs.API.Models.Pathfinder.PathfinderResponse"
+          description: Success
+        "401":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    error: Unauthorize access
+                    status: 401
+              schema:
+                $ref: "#/components/schemas/Breadcrumbs.Response.UnauthorizedResponse"
+          description: Unauthorized
+        "422":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    error: Invalid chain value
+                    status: 422
+              schema:
+                $ref: "#/components/schemas/Breadcrumbs.Response.UnprocessableResponse"
+          description: Client Error
+      summary: Automatically find path between crypto addresses
+      tags:
+        - Pathfinder
+  /risk/address:
+    get:
+      parameters:
+        - description: "Blockchain eg: ETH, BTC, MATIC, RON, SOL, TRX"
+          in: query
+          name: chain
+          required: true
+          schema:
+            default: ETH
+            enum:
+              - ETH
+              - BTC
+              - MATIC
+              - RON
+              - SOL
+              - TRX
+            type: string
+          style: form
+        - description: Blockchain address
+          in: query
+          name: address
+          required: true
+          schema:
+            type: string
+          style: form
+        - description: If set to `true`, will search the one nearest illicit address (incoming and outgoing) from the specified address
+          in: query
+          name: include_exposure
+          schema:
+            default: false
+            type: boolean
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example 1:
+                  value:
+                    closest_incoming_exposure:
+                      entity_attributes:
+                        - Hack
+                      hop: 7
+                    closest_outgoing_exposure:
+                      entity_attributes:
+                        - Hack
+                      hop: 3
+                    entity_tags:
+                      - Hack
+                    risk_score: High
+                Example 2:
+                  value:
+                    entity_tags:
+                      - Centralized Exchange
+                    risk_score: Low
+              schema:
+                $ref: "#/components/schemas/Breadcrumbs.API.Models.Address.RiskExposureResponse"
+          description: Success
+        "401":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    error: Unauthorize access
+                    status: 401
+              schema:
+                $ref: "#/components/schemas/Breadcrumbs.Response.UnauthorizedResponse"
+          description: Unauthorized
+        "422":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    error: Invalid chain value
+                    status: 422
+              schema:
+                $ref: "#/components/schemas/Breadcrumbs.Response.UnprocessableResponse"
+          description: Client Error
+      summary: Will check the risk score for single address
+      tags:
+        - Risk
+  /risk/transaction:
+    get:
+      parameters:
+        - description: "Blockchain eg: ETH, BTC, MATIC, RON, SOL, TRX"
+          in: query
+          name: chain
+          required: true
+          schema:
+            default: ETH
+            enum:
+              - ETH
+              - BTC
+              - MATIC
+              - RON
+              - SOL
+              - TRX
+            type: string
+          style: form
+        - description: Blockchain hash
+          in: query
+          name: hash
+          required: true
+          schema:
+            type: string
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example 1:
+                  value:
+                    addresses:
+                      - address: "0x030e37ddd7df1b43db172b23916d523f1599c6cb"
+                        entity_tags:
+                          - Exchange
+                        risk_score: Low
+                      - address: "0xccb04768f3abcf1af1e749085ef67d8ec7c5fdd2"
+                        entity_tags: []
+                        risk_score: Low
+              schema:
+                $ref: "#/components/schemas/Breadcrumbs.API.Models.Transaction.RiskResponse"
+          description: Success
+        "401":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    error: Unauthorize access
+                    status: 401
+              schema:
+                $ref: "#/components/schemas/Breadcrumbs.Response.UnauthorizedResponse"
+          description: Unauthorized
+        "422":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    error: Invalid chain value
+                    status: 422
+              schema:
+                $ref: "#/components/schemas/Breadcrumbs.Response.UnprocessableResponse"
+          description: Client Error
+      summary: Will check the risk score for every addresses in a transaction
+      tags:
+        - Risk
+  /sanctioned_address:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              items:
+                $ref: "#/components/schemas/Breadcrumbs.API.Models.Sanction.SanctionedRequest"
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: "#/components/schemas/Breadcrumbs.API.Models.Sanction.SanctionedRequest"
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: "#/components/schemas/Breadcrumbs.API.Models.Sanction.SanctionedRequest"
+              type: array
+        description: ""
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Breadcrumbs.API.Models.Sanction.SanctionedResponse"
+          description: Success
+        "401":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    error: Unauthorize access
+                    status: 401
+              schema:
+                $ref: "#/components/schemas/Breadcrumbs.Response.UnauthorizedResponse"
+          description: Unauthorized
+        "422":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    error: Invalid chain value
+                    status: 422
+              schema:
+                $ref: "#/components/schemas/Breadcrumbs.Response.UnprocessableResponse"
+          description: Client Error
+      summary: Verify if the addresses provided are in our sanctioned lists
+      tags:
+        - Sanction
+components:
+  schemas:
+    Breadcrumbs.API.Models.Address.AddressResponse:
+      additionalProperties: false
+      properties:
+        address:
+          nullable: true
+          type: string
+      type: object
+    Breadcrumbs.API.Models.Address.AddressRiskResponse:
+      additionalProperties: false
+      properties:
+        address:
+          nullable: true
+          type: string
+        entity_tags:
+          items:
+            type: string
+          nullable: true
+          type: array
+        risk_score:
+          nullable: true
+          type: string
+      type: object
+    Breadcrumbs.API.Models.Address.ExposureResponse:
+      additionalProperties: false
+      properties:
+        entity_attributes:
+          items:
+            type: string
+          nullable: true
+          type: array
+        hop:
+          format: int32
+          type: integer
+      type: object
+    Breadcrumbs.API.Models.Address.RiskExposureResponse:
+      additionalProperties: false
+      properties:
+        closest_incoming_exposure:
+          $ref: "#/components/schemas/Breadcrumbs.API.Models.Address.ExposureResponse"
+        closest_outgoing_exposure:
+          $ref: "#/components/schemas/Breadcrumbs.API.Models.Address.ExposureResponse"
+        entity_tags:
+          items:
+            type: string
+          nullable: true
+          type: array
+        risk_score:
+          nullable: true
+          type: string
+      type: object
+    Breadcrumbs.API.Models.Node.NodeRequest:
+      additionalProperties: false
+      properties:
+        address:
+          description: Blockchain address
+          minLength: 1
+          type: string
+        chain:
+          default: ETH
+          description: "Blockchain eg: ETH, BTC, MATIC, RON, SOL, TRX"
+          enum:
+            - ETH
+            - BTC
+            - MATIC
+            - RON
+            - SOL
+            - TRX
+          minLength: 1
+          type: string
+        token_address:
+          description: If set, will only show transactions from this token
+          nullable: true
+          type: string
+      required:
+        - address
+        - chain
+      type: object
+    Breadcrumbs.API.Models.Node.NodeResponse:
+      additionalProperties: false
+      properties:
+        entity_tags:
+          items:
+            type: string
+          nullable: true
+          type: array
+        incoming:
+          items:
+            $ref: "#/components/schemas/Breadcrumbs.API.Models.Address.AddressResponse"
+          nullable: true
+          type: array
+        outgoing:
+          items:
+            $ref: "#/components/schemas/Breadcrumbs.API.Models.Address.AddressResponse"
+          nullable: true
+          type: array
+      type: object
+    Breadcrumbs.API.Models.Pathfinder.PathfinderRequest:
+      additionalProperties: false
+      properties:
+        chain:
+          default: ETH
+          description: "Blockchain eg: ETH, BTC, SOL"
+          enum:
+            - ETH
+            - BTC
+            - SOL
+          minLength: 1
+          type: string
+        destination_addresses:
+          description: "Required if search_type is either Shortest/Multiple Path.\r
+
+            If you know where did the money went or come from."
+          items:
+            type: string
+          nullable: true
+          type: array
+        direction_type:
+          default: Incoming
+          description: "Direction type is what direction it should go. Accepts: 0 = Incoming and 1 = Outgoing only"
+          enum:
+            - Incoming
+            - Outgoing
+          type: string
+        entity_tags:
+          default:
+            - Exchange
+          description: "Required if search_type is Closest Entity.\r
+
+            Available values are: Exchange, DEX, Mining, ICO, Mixer"
+          items:
+            enum:
+              - Exchange
+              - DEX
+              - Mining
+              - ICO
+              - Mixer
+            type: string
+          nullable: true
+          type: array
+        search_type:
+          default: ShortestPath
+          description: "Search type values: 1 = Shortest Path, 2 = Multiple Path, 3 = Closest Entity and 4 = Closest Illicit"
+          enum:
+            - ShortestPath
+            - MultiplePath
+            - ClosestEntity
+            - ClosestIllicit
+          type: string
+        source_address:
+          description: Source address is where you want to start your search
+          minLength: 1
+          type: string
+      required:
+        - chain
+        - direction_type
+        - search_type
+        - source_address
+      type: object
+    Breadcrumbs.API.Models.Pathfinder.PathfinderResponse:
+      additionalProperties: false
+      properties:
+        path_found:
+          type: boolean
+        result_hops:
+          format: int32
+          type: integer
+        result_paths:
+          items:
+            items:
+              type: string
+            type: array
+          nullable: true
+          type: array
+      type: object
+    Breadcrumbs.API.Models.Sanction.SanctionedRequest:
+      additionalProperties: false
+      properties:
+        address:
+          description: Blockchain address
+          minLength: 1
+          type: string
+        chain:
+          default: ETH
+          description: "Blockchain eg: ETH, BTC, MATIC, RON, SOL, TRX"
+          enum:
+            - ETH
+            - BTC
+            - MATIC
+            - RON
+            - SOL
+            - TRX
+          minLength: 1
+          type: string
+      required:
+        - address
+        - chain
+      type: object
+    Breadcrumbs.API.Models.Sanction.SanctionedResponse:
+      additionalProperties: false
+      properties:
+        address:
+          nullable: true
+          type: string
+        chain:
+          enum:
+            - ETH
+            - BTC
+            - MATIC
+            - RON
+            - SOL
+            - TRX
+          nullable: true
+          type: string
+        isSanctioned:
+          type: boolean
+      type: object
+    Breadcrumbs.API.Models.Transaction.RiskResponse:
+      additionalProperties: false
+      properties:
+        addresses:
+          items:
+            $ref: "#/components/schemas/Breadcrumbs.API.Models.Address.AddressRiskResponse"
+          nullable: true
+          type: array
+      type: object
+    Breadcrumbs.Response.UnauthorizedResponse:
+      additionalProperties: false
+      properties:
+        error:
+          nullable: true
+          type: string
+        status:
+          format: int32
+          type: integer
+      type: object
+    Breadcrumbs.Response.UnprocessableResponse:
+      additionalProperties: false
+      properties:
+        error:
+          nullable: true
+          type: string
+        status:
+          format: int32
+          type: integer
+      type: object
+  securitySchemes:
+    X-API-KEY:
+      description: Authorization method required to allow user to access the api endpoints.
+      in: header
+      name: X-API-KEY
+      type: apiKey

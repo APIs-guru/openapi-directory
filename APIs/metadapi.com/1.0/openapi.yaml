@@ -1,0 +1,1511 @@
+openapi: 3.0.0
+servers:
+  - url: https://global.metadapi.com
+info:
+  contact:
+    email: support@metadapi.com
+    name: Support
+    url: https://metadapi.com/support
+  description: The Zip Code API provides United States zip code data with a comprehensive data model in JSON format. Using REST design, this API can help you build zip validations, city searches, distance calculations, radius searches and many other key functions for your applications.
+  termsOfService: https://www.metadapi.com/API-Terms
+  title: Zip Code Data API
+  version: "1.0"
+  x-apisguru-categories:
+    - location
+  x-logo:
+    url: https://www.metadapi.com/Portals/0/metadapi_dnn_logo.png
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/Metadapi/zip-code-api/main/api-specification/Zipcode.json
+      version: "3.0"
+  x-providerName: metadapi.com
+paths:
+  /zipc/v1:
+    get:
+      description: Endpoint used to validate license key only. Returns 204 on Success
+      operationId: get-zipc-v1
+      responses:
+        "204":
+          description: No Content
+        "401":
+          content:
+            application/json:
+              examples:
+                Invalid API Key:
+                  value:
+                    message: Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.
+                    statusCode: 401
+                Missing API Key:
+                  value:
+                    message: Access denied due to missing subscription key. Make sure to include subscription key when making requests to an API.
+                    statusCode: 401
+              schema:
+                properties:
+                  message:
+                    type: string
+                  statusCode:
+                    type: integer
+                type: object
+                x-examples:
+                  Example 1:
+                    message: Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.
+                    statusCode: 401
+          description: Unauthorized
+      security:
+        - subscription-key: []
+      summary: Validate License Key
+      tags: []
+  /zipc/v1/distance:
+    get:
+      description: "Gets the distance (in miles and kilometers) between 2 zip codes passed as parameters. There are 2 mandatory query parameters (zipCode1 and zipCode2). "
+      operationId: get-distance
+      parameters:
+        - description: Zip Code 1
+          in: query
+          name: zipCode1
+          required: true
+          schema:
+            example: "90210"
+            type: string
+        - description: Zip Code 2
+          in: query
+          name: zipCode2
+          required: true
+          schema:
+            example: "33162"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example-1:
+                  value:
+                    data:
+                      distanceKm: 174.65
+                      distanceMi: 108.52
+                      zipCode1: "33009"
+                      zipCode2: "33967"
+                    links:
+                      self: https://global.metadapi.com/zipc/v1/distance?zipcode1=33009&zipcode2=33967
+              schema:
+                description: ""
+                properties:
+                  data:
+                    properties:
+                      distanceKm:
+                        type: number
+                      distanceMi:
+                        type: number
+                      zipCode1:
+                        minLength: 1
+                        type: string
+                      zipCode2:
+                        minLength: 1
+                        type: string
+                    required:
+                      - zipCode1
+                      - zipCode2
+                      - distanceKm
+                      - distanceMi
+                    type: object
+                  links:
+                    properties:
+                      self:
+                        minLength: 1
+                        type: string
+                    required:
+                      - self
+                    type: object
+                required:
+                  - links
+                  - data
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      distanceKm: 174.65
+                      distanceMi: 108.52
+                      zipCode1: "33009"
+                      zipCode2: "33967"
+                    links:
+                      self: https://global.metadapi.com/zipc/v1/distance?zipcode1=33009&zipcode2=33967
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Errors"
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+        - subscription-key: []
+      summary: Distance Between 2 Zip Codes
+      tags: []
+    parameters: []
+  /zipc/v1/msagroups:
+    get:
+      description: "This end point lists all the Metropolitan and Micropolitan Statistical Areas in the United States with the corresponding states and counties that make up the group. "
+      operationId: get-msagroups
+      parameters:
+        - description: "Number of records to return in each page. Max value: 50."
+          in: query
+          name: limit
+          required: true
+          schema:
+            maximum: 50
+            minimum: 1
+            type: integer
+        - description: Offset is the position in the dataset to start retrieval of records.
+          in: query
+          name: offset
+          required: true
+          schema:
+            minimum: 0
+            type: integer
+        - description: Parameter for state code.
+          in: query
+          name: stateCode
+          schema:
+            example: CA
+            maxLength: 2
+            minLength: 2
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: Response
+                properties:
+                  data:
+                    items:
+                      description: MSA Groups Data Object
+                      properties:
+                        msaCode:
+                          description: 5 digit MSA (Metropolitan Statistical Area) code.
+                          minLength: 1
+                          type: string
+                        msaName:
+                          description: Name of the defined MSA code.
+                          minLength: 1
+                          type: string
+                        states:
+                          description: Array with states and counties that make up MSA Group
+                          items:
+                            description: State Information
+                            properties:
+                              counties:
+                                description: Array with counties related to MSA group in the state.
+                                items:
+                                  description: County Information
+                                  properties:
+                                    countyFipsCode:
+                                      description: FIPS code assigned to the county of the main city of the zip code.
+                                      minLength: 1
+                                      type: string
+                                    titleCaseCountyName:
+                                      description: County Name in Title Case
+                                      minLength: 1
+                                      type: string
+                                    uspsCountyName:
+                                      description: Name of the county of the main city for the zip code. USPS Standard.
+                                      minLength: 1
+                                      type: string
+                                  required:
+                                    - countyFipsCode
+                                    - uspsCountyName
+                                    - titleCaseCountyName
+                                  type: object
+                                minItems: 1
+                                type: array
+                                uniqueItems: true
+                              stateCode:
+                                description: Standard 2 character state code.
+                                example: CA
+                                maxLength: 2
+                                minLength: 2
+                                type: string
+                              stateFipsCode:
+                                description: Federal Information Processing Standards 2 digit assigned code.
+                                minLength: 1
+                                type: string
+                              stateName:
+                                description: State Name
+                                minLength: 1
+                                type: string
+                            required:
+                              - stateCode
+                              - stateFipsCode
+                              - stateName
+                              - counties
+                            type: object
+                          minItems: 1
+                          type: array
+                          uniqueItems: true
+                      required:
+                        - msaCode
+                        - msaName
+                        - states
+                      type: object
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                  links:
+                    description: Response Link Navigation object
+                    properties:
+                      first:
+                        description: Link to the first group of records from API call.
+                        minLength: 1
+                        type: string
+                      next:
+                        description: Link to next set of results from API call.
+                        minLength: 1
+                        type: string
+                      prev:
+                        description: Link to the previous set of records from API call.
+                        minLength: 1
+                        type: string
+                      self:
+                        description: Link to this response.
+                        minLength: 1
+                        type: string
+                    required:
+                      - self
+                    type: object
+                  meta:
+                    description: Response Metadata Information
+                    properties:
+                      count:
+                        description: "Total number of records of the response. Note: the data object always has a limit number of records retrieved."
+                        type: number
+                      limit:
+                        description: Total number of records returned in the data array. Specified by limit query parameter.
+                        type: number
+                      offset:
+                        description: Offset position of where the first record returned.
+                        type: number
+                    required:
+                      - count
+                      - offset
+                      - limit
+                    type: object
+                required:
+                  - links
+                  - meta
+                  - data
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      - msaCode: "12180"
+                        msaName: Auburn, NY Micro Area
+                        states:
+                          - counties:
+                              - countyFipsCode: "011"
+                                titleCaseCountyName: Cayuga
+                                uspsCountyName: CAYUGA
+                            stateCode: NY
+                            stateFipsCode: "36"
+                            stateName: New York
+                      - msaCode: "12220"
+                        msaName: Auburn-Opelika, AL Metro Area
+                        states:
+                          - counties:
+                              - countyFipsCode: "081"
+                                titleCaseCountyName: Lee
+                                uspsCountyName: LEE
+                            stateCode: AL
+                            stateFipsCode: "01"
+                            stateName: Alabama
+                      - msaCode: "12260"
+                        msaName: Augusta-Richmond County, GA-SC Metro Area
+                        states:
+                          - counties:
+                              - countyFipsCode: "033"
+                                titleCaseCountyName: Burke
+                                uspsCountyName: BURKE
+                              - countyFipsCode: "073"
+                                titleCaseCountyName: Columbia
+                                uspsCountyName: COLUMBIA
+                              - countyFipsCode: "181"
+                                titleCaseCountyName: Lincoln
+                                uspsCountyName: LINCOLN
+                              - countyFipsCode: "189"
+                                titleCaseCountyName: Mcduffie
+                                uspsCountyName: MCDUFFIE
+                              - countyFipsCode: "245"
+                                titleCaseCountyName: Richmond
+                                uspsCountyName: RICHMOND
+                            stateCode: GA
+                            stateFipsCode: "13"
+                            stateName: Georgia
+                          - counties:
+                              - countyFipsCode: "003"
+                                titleCaseCountyName: Aiken
+                                uspsCountyName: AIKEN
+                              - countyFipsCode: "037"
+                                titleCaseCountyName: Edgefield
+                                uspsCountyName: EDGEFIELD
+                            stateCode: SC
+                            stateFipsCode: "45"
+                            stateName: South Carolina
+                      - msaCode: "12300"
+                        msaName: Augusta-Waterville, ME Micro Area
+                        states:
+                          - counties:
+                              - countyFipsCode: "011"
+                                titleCaseCountyName: Kennebec
+                                uspsCountyName: KENNEBEC
+                            stateCode: ME
+                            stateFipsCode: "23"
+                            stateName: Maine
+                      - msaCode: "12380"
+                        msaName: Austin, MN Micro Area
+                        states:
+                          - counties:
+                              - countyFipsCode: "099"
+                                titleCaseCountyName: Mower
+                                uspsCountyName: MOWER
+                            stateCode: MN
+                            stateFipsCode: "27"
+                            stateName: Minnesota
+                    links:
+                      first: http://localhost:7071/zipc/v1/msagroups?Offset=0&Limit=5
+                      next: http://localhost:7071/zipc/v1/msagroups?Offset=55&Limit=5
+                      prev: http://localhost:7071/zipc/v1/msagroups?Offset=45&Limit=5
+                      self: http://localhost:7071/zipc/v1/msagroups?Offset=50&Limit=5
+                    meta:
+                      count: 611
+                      limit: 5
+                      offset: 50
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Errors"
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+        - subscription-key: []
+      summary: List All MSA Groups
+      tags: []
+    parameters: []
+  "/zipc/v1/msagroups/{msaCode}":
+    get:
+      description: Gets the details of a single Metropolitan Statistical Area code passed as a path parameter.
+      operationId: get-msagroups-msacode
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: ""
+                properties:
+                  data:
+                    description: Response Data array.
+                    properties:
+                      msaCode:
+                        description: 5 digit MSA (Metropolitan Statistical Area) code.
+                        minLength: 1
+                        type: string
+                      msaName:
+                        description: Name of the defined MSA code.
+                        minLength: 1
+                        type: string
+                      states:
+                        description: Array with states and counties that make up MSA Group
+                        items:
+                          properties:
+                            counties:
+                              description: Array with counties related to MSA group in the state.
+                              items:
+                                properties:
+                                  countyFipsCode:
+                                    description: FIPS code assigned to the county of the main city of the zip code.
+                                    minLength: 1
+                                    type: string
+                                  titleCaseCountyName:
+                                    description: County Name in Title Case
+                                    minLength: 1
+                                    type: string
+                                  uspsCountyName:
+                                    description: Name of the county of the main city for the zip code USPS Standard.
+                                    minLength: 1
+                                    type: string
+                                required:
+                                  - countyFipsCode
+                                  - uspsCountyName
+                                  - titleCaseCountyName
+                                type: object
+                              minItems: 1
+                              type: array
+                              uniqueItems: true
+                            stateCode:
+                              description: Standard 2 character state code.
+                              minLength: 1
+                              type: string
+                            stateFipsCode:
+                              description: Federal Information Processing Standards 2 digit assigned code.
+                              minLength: 1
+                              type: string
+                            stateName:
+                              description: State Name
+                              minLength: 1
+                              type: string
+                          required:
+                            - stateCode
+                            - stateFipsCode
+                            - stateName
+                          type: object
+                        minItems: 1
+                        type: array
+                        uniqueItems: true
+                    required:
+                      - msaCode
+                      - msaName
+                      - states
+                    type: object
+                  links:
+                    description: Response Link Navigation object
+                    properties:
+                      self:
+                        description: Link to this response.
+                        minLength: 1
+                        type: string
+                    required:
+                      - self
+                    type: object
+                  meta:
+                    description: Response Metadata Information
+                    properties:
+                      count:
+                        description: "Total number of records of the response. Note: the data object always has a limit number of records retrieved."
+                        type: number
+                    required:
+                      - count
+                    type: object
+                required:
+                  - links
+                  - meta
+                  - data
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      msaCode: "11580"
+                      msaName: Arcadia, FL Micro Area
+                      states:
+                        - counties:
+                            - countyFipsCode: "027"
+                              titleCaseCountyName: Desoto
+                              uspsCountyName: DESOTO
+                          stateCode: FL
+                          stateFipsCode: "12"
+                          stateName: Florida
+                    links:
+                      self: http://localhost:7071/zipc/v1/msagroups/11580
+                    meta:
+                      count: 1
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Errors"
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+        - subscription-key: []
+      summary: Metro/Micro Statistical Area Details
+      tags: []
+    parameters:
+      - description: 5 digit MSA (Metropolitan Statistical Area) code.
+        in: path
+        name: msaCode
+        required: true
+        schema:
+          example: "11580"
+          maxLength: 5
+          minLength: 5
+          type: string
+  /zipc/v1/radius:
+    get:
+      description: Endpoint that returns the zip codes that fall within the specified radius of another zip code. The returned zip codes are sorted by distance.
+      operationId: get-radius
+      parameters:
+        - description: 5 Digit US Zip Code
+          in: query
+          name: zipCode
+          required: true
+          schema:
+            maxLength: 5
+            minLength: 5
+            type: string
+        - description: Radius distance.  Max 322 km or 200 mi
+          in: query
+          name: radius
+          required: true
+          schema:
+            type: integer
+        - description: Unit of Measure
+          in: query
+          name: uom
+          required: true
+          schema:
+            enum:
+              - mi
+              - km
+            example: mi
+            maxLength: 2
+            minLength: 2
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: ""
+                properties:
+                  data:
+                    items:
+                      properties:
+                        distanceKm:
+                          description: Distance to query parameter zip code in kilometers
+                          type: number
+                        distanceMi:
+                          description: Distance to query parameter zip code in miles
+                          type: number
+                        latitude:
+                          description: Zip Code Latitude
+                          type: number
+                        longitude:
+                          description: Zip Code Longitude
+                          type: number
+                        zipCode:
+                          description: 5 Digit Zip Code. Zone Improvement Plan.
+                          example: "90210"
+                          maxLength: 5
+                          minLength: 5
+                          type: string
+                        zipCodeUrl:
+                          description: URL to Zip Code
+                          minLength: 1
+                          type: string
+                      required:
+                        - zipCode
+                        - latitude
+                        - longitude
+                        - zipCodeUrl
+                        - distanceKm
+                        - distanceMi
+                      type: object
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                  links:
+                    properties:
+                      self:
+                        description: Link to this response.
+                        minLength: 1
+                        type: string
+                    required:
+                      - self
+                    type: object
+                  meta:
+                    properties:
+                      count:
+                        description: Number of zip codes found in the radius
+                        type: number
+                    required:
+                      - count
+                    type: object
+                required:
+                  - links
+                  - meta
+                  - data
+                type: object
+                x-examples:
+                  example-1:
+                    data:
+                      - distanceKm: 0
+                        distanceMi: 0
+                        latitude: 34.100517
+                        longitude: -118.41463
+                        zipCode: "90210"
+                        zipCodeUrl: https://global.metadapi.com/zipc/v1/zipcodes/90210
+                      - distanceKm: 3.1281612
+                        distanceMi: 1.9437492
+                        latitude: 34.09383
+                        longitude: -118.3817
+                        zipCode: "90069"
+                        zipCodeUrl: https://global.metadapi.com/zipc/v1/zipcodes/90069
+                    links:
+                      self: https://global.metadapi.com/zipc/v1/radius?zipcode=90210&radius=2&uom=mi
+                    meta:
+                      count: 2
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                description: ""
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        detail:
+                          minLength: 1
+                          type: string
+                        status:
+                          minLength: 1
+                          type: string
+                        title:
+                          minLength: 1
+                          type: string
+                      required:
+                        - status
+                        - title
+                        - detail
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                required:
+                  - errors
+                type: object
+                x-examples:
+                  example-1:
+                    errors:
+                      - detail: Valid uom values must be mi or km
+                        status: "400"
+                        title: Uom
+                      - detail: Radius Distance must be less than 322 kilometers or 200 miles
+                        status: "400"
+                        title: radius
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              examples:
+                example-1:
+                  value:
+                    message: string
+                    statusCode: 0
+              schema:
+                description: ""
+                properties:
+                  message:
+                    minLength: 1
+                    type: string
+                  statusCode:
+                    type: number
+                required:
+                  - statusCode
+                  - message
+                type: object
+                x-examples:
+                  example-1:
+                    message: Access denied due to missing subscription key. Make sure to include subscription key when making requests to an API.
+                    statusCode: 401
+          description: Unauthorized
+        "403":
+          description: Quota Exceeded. The error message will display how long in dd:hh:mi:ss for the quota to be reset.
+      security:
+        - subscription-key: []
+      summary: Zip Code Radius
+      tags: []
+    parameters: []
+  /zipc/v1/zipcodes:
+    get:
+      description: Returns a list of zip codes. Results are always paginated. Visit the [Zip Code Data API](https://www.metadapi.com/API-Products/API-Product-Details/zip-code-api) product page for information on how to get an API key.
+      operationId: get-zipcodes
+      parameters:
+        - description: Offset is the position in the dataset to start retrieval of records.
+          in: query
+          name: offset
+          schema:
+            example: 10
+            minimum: 0
+            type: number
+        - description: Number of records to return in each page.
+          in: query
+          name: limit
+          schema:
+            example: 10
+            maximum: 50
+            minimum: 1
+            type: number
+        - description: 5 Digit Zip Code query parameter. Can have multiple values (separated by comma).
+          in: query
+          name: zipcode
+          schema:
+            example: 90210,33162
+            type: string
+        - description: Parameter for USPS City / Town key identifier for the main city of the zip code.
+          in: query
+          name: uspsMainCityKey
+          schema:
+            example: Z20259
+            type: string
+        - description: Parameter for zipClassificationCode
+          in: query
+          name: zipClassificationCode
+          schema:
+            example: P
+            maxLength: 1
+            minLength: 1
+            type: string
+        - description: Parameter for facility code.
+          in: query
+          name: uspsFacilityCode
+          schema:
+            example: B
+            type: string
+        - description: Parameter for delivery code.
+          in: query
+          name: uspsDeliveryCode
+          schema:
+            type: string
+        - description: Parameter for carrier route sort code.
+          in: query
+          name: uspsCarrierRouteSortCode
+          schema:
+            type: string
+        - description: Parameter for unique zip name indicator.
+          in: query
+          name: uniqueZipNameInd
+          schema:
+            type: boolean
+        - description: Parameter for finance number.
+          in: query
+          name: uspsFinanceNumber
+          schema:
+            type: string
+        - description: Parameter for state code.
+          in: query
+          name: stateCode
+          schema:
+            example: CA
+            maxLength: 2
+            minLength: 2
+            type: string
+        - description: Parameter for State FIPS code.
+          in: query
+          name: stateFipsCode
+          schema:
+            example: "06"
+            type: string
+        - description: Parameter for county FIPS code.
+          in: query
+          name: countyFipsCode
+          schema:
+            example: "037"
+            type: string
+        - description: "Parameter for division code. "
+          in: query
+          name: divisionCode
+          schema:
+            example: "9"
+            type: string
+        - description: "Parameter for region code. "
+          in: query
+          name: regionCode
+          schema:
+            example: "4"
+            type: string
+        - description: Parameter for msaCode.
+          in: query
+          name: msaCode
+          schema:
+            example: "31080"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Sample Response:
+                  value:
+                    data:
+                      - cityAliases:
+                          - titleCaseCityName: Ponte Vedra
+                            uspsCityAbbr: null
+                            uspsCityKey: Y22733
+                            uspsCityMailingInd: true
+                            uspsCityName: PONTE VEDRA
+                            uspsMainCityInd: false
+                          - titleCaseCityName: Ponte Vedra Beach
+                            uspsCityAbbr: PONTE VEDRA
+                            uspsCityKey: Y22734
+                            uspsCityMailingInd: true
+                            uspsCityName: PONTE VEDRA BEACH
+                            uspsMainCityInd: true
+                        countyFipsCode: "109"
+                        divisionCode: "5"
+                        divisionName: South Atlantic Division
+                        landAreaKm2: 13.192342
+                        landAreaMi2: 5.094
+                        latitude: 25.985128
+                        longitude: -80.14726
+                        msaCode: "27260"
+                        msaName: Jacksonville, FL Metro Area
+                        regionCode: "3"
+                        regionName: South Region
+                        stateAbbr: Fla.
+                        stateCode: FL
+                        stateFipsCode: "12"
+                        stateName: Florida
+                        titleCaseCityName: Ponte Vedra Beach
+                        titleCaseCountyName: Saint Johns
+                        uniqueZipNameInd: false
+                        uspsCarrierRouteRateSortDesc: Carrier Route. Sortation/Rates. Do Not Apply-Merging Not Permitted
+                        uspsCarrierRouteSortCode: D
+                        uspsCityMailingInd: true
+                        uspsCountyName: SAINT JOHNS
+                        uspsDeliveryCode: N
+                        uspsDeliveryDesc: Office Does Not Have City-Delivery Carrier Routes
+                        uspsFacilityCode: P
+                        uspsFacilityName: Post Office
+                        uspsFinanceNumber: "117665"
+                        uspsMainCityKey: Y22734
+                        uspsMainCityName: PONTE VEDRA BEACH
+                        waterAreaKm2: 1.512196
+                        waterAreaMi2: 0.584
+                        zipClassificationCode: P
+                        zipClassificationDesc: PO Box Zip
+                        zipCode: "32004"
+                        zipCodeStatistics: null
+                      - cityAliases:
+                          - titleCaseCityName: Hallandale
+                            uspsCityAbbr: null
+                            uspsCityKey: Y22003
+                            uspsCityMailingInd: true
+                            uspsCityName: HALLANDALE
+                            uspsMainCityInd: true
+                          - titleCaseCityName: Hallandale Beach
+                            uspsCityAbbr: HALLANDLE BCH
+                            uspsCityKey: Y22005
+                            uspsCityMailingInd: true
+                            uspsCityName: HALLANDALE BEACH
+                            uspsMainCityInd: false
+                          - titleCaseCityName: Pembroke Park
+                            uspsCityAbbr: null
+                            uspsCityKey: Y22676
+                            uspsCityMailingInd: false
+                            uspsCityName: PEMBROKE PARK
+                            uspsMainCityInd: false
+                          - titleCaseCityName: Halndle Bch
+                            uspsCityAbbr: null
+                            uspsCityKey: "004979"
+                            uspsCityMailingInd: true
+                            uspsCityName: HALNDLE BCH
+                            uspsMainCityInd: false
+                          - titleCaseCityName: Hallandle Bch
+                            uspsCityAbbr: null
+                            uspsCityKey: "014736"
+                            uspsCityMailingInd: true
+                            uspsCityName: HALLANDLE BCH
+                            uspsMainCityInd: false
+                        countyFipsCode: "011"
+                        divisionCode: "5"
+                        divisionName: South Atlantic Division
+                        landAreaKm2: 13.192342
+                        landAreaMi2: 5.094
+                        latitude: 25.985128
+                        longitude: -80.14726
+                        msaCode: "33100"
+                        msaName: Miami-Fort Lauderdale-West Palm Beach, FL Metro Area
+                        regionCode: "3"
+                        regionName: South Region
+                        stateAbbr: Fla.
+                        stateCode: FL
+                        stateFipsCode: "12"
+                        stateName: Florida
+                        titleCaseCityName: Hallandale
+                        titleCaseCountyName: Broward
+                        uniqueZipNameInd: false
+                        uspsCarrierRouteRateSortDesc: Carrier Route. Sortation/Rates. Do Not Apply-Merging Not Permitted
+                        uspsCarrierRouteSortCode: D
+                        uspsCityMailingInd: true
+                        uspsCountyName: BROWARD
+                        uspsDeliveryCode: Y
+                        uspsDeliveryDesc: Office Has City-Delivery Carrier Routes
+                        uspsFacilityCode: P
+                        uspsFacilityName: Post Office
+                        uspsFinanceNumber: "113720"
+                        uspsMainCityKey: Y22003
+                        uspsMainCityName: HALLANDALE
+                        waterAreaKm2: 1.512196
+                        waterAreaMi2: 0.584
+                        zipClassificationCode: null
+                        zipClassificationDesc: Non-Unique Zip
+                        zipCode: "33009"
+                        zipCodeStatistics:
+                          - femalePopulation: 18404
+                            malePopulation: 16100
+                            totalPopulation: 34504
+                            year: 2000
+                          - femalePopulation: 20579
+                            malePopulation: 18762
+                            totalPopulation: 39341
+                            year: 2010
+                    links:
+                      first: http://global.metadapi.com/zipc/v1/zipcodes?Offset=0&Limit=2
+                      next: http://global.metadapi.com/zipc/v1/zipcodes?Offset=2&Limit=2
+                      self: http://global.metadapi.com/zipc/v1/zipcodes?Offset=0&Limit=2
+                    meta:
+                      count: 24
+                      limit: 2
+                      offset: 0
+              schema:
+                $ref: "#/components/schemas/ZipCodeResponse"
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      security:
+        - subscription-key: []
+      summary: List all Zip Codes
+      tags: []
+    parameters: []
+  "/zipc/v1/zipcodes/{zipcode}":
+    get:
+      description: "Gets the details of a single Zip code. "
+      operationId: get-zipcode
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                "90210":
+                  value:
+                    data:
+                      cityAliases:
+                        - titleCaseCityName: Beverly Hills
+                          uspsCityAbbr: "null"
+                          uspsCityKey: Z20259
+                          uspsCityMailingInd: true
+                          uspsCityName: BEVERLY HILLS
+                          uspsMainCityInd: true
+                      countyFipsCode: "037"
+                      divisionCode: "9"
+                      divisionName: Pacific Division
+                      landAreaKm2: 26.22277
+                      landAreaMi2: 10.125
+                      latitude: 34.100517
+                      longitude: -118.41463
+                      msaCode: "31080"
+                      msaName: Los Angeles-Long Beach-Anaheim, CA Metro Area
+                      regionCode: "4"
+                      regionName: West Region
+                      stateAbbr: Calif.
+                      stateCode: CA
+                      stateFipsCode: "06"
+                      stateName: California
+                      titleCaseCityName: Beverly Hills
+                      titleCaseCountyName: Los Angeles
+                      uniqueZipNameInd: false
+                      uspsCarrierRouteRateSortDesc: Carrier Route. Sortation/Rates. Apply-Merging Not Permitted
+                      uspsCarrierRouteSortCode: B
+                      uspsCityMailingInd: true
+                      uspsCountyName: LOS ANGELES
+                      uspsDeliveryCode: Y
+                      uspsDeliveryDesc: Office Has City-Delivery Carrier Routes
+                      uspsFacilityCode: P
+                      uspsFacilityName: Post Office
+                      uspsFinanceNumber: "050666"
+                      uspsMainCityKey: Z20259
+                      uspsMainCityName: BEVERLY HILLS
+                      waterAreaKm2: 0.153478
+                      waterAreaMi2: 0.059
+                      zipClassificationCode: "null"
+                      zipClassificationDesc: Non-Unique Zip
+                      zipCode: "90210"
+                      zipCodeStatistics:
+                        - femalePopulation: 11335
+                          malePopulation: 10061
+                          totalPopulation: 21396
+                          year: 2000
+                        - femalePopulation: 11449
+                          malePopulation: 10292
+                          totalPopulation: 21741
+                          year: 2010
+                    links:
+                      self: https://global.metadapi.com/zipc/v1/zipcodes/90210
+              schema:
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Zipcode"
+                  links:
+                    $ref: "#/components/schemas/Links"
+                type: object
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Errors"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                description: ""
+                properties:
+                  message:
+                    minLength: 1
+                    type: string
+                  statusCode:
+                    type: number
+                required:
+                  - statusCode
+                  - message
+                type: object
+                x-examples:
+                  example-1:
+                    message: Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.
+                    statusCode: 401
+          description: Access Denied
+        "403":
+          content:
+            application/json:
+              examples: {}
+              schema:
+                description: ""
+                properties:
+                  message:
+                    minLength: 1
+                    type: string
+                  statusCode:
+                    type: number
+                required:
+                  - statusCode
+                  - message
+                type: object
+                x-examples:
+                  example-1:
+                    message: Out of call volume quota. Quota will be replenished in 28.08:33:23.
+                    statusCode: 403
+          description: Quota Exceeded. The error message will display how long in dd:hh:mi:ss for the quota to be reset.
+      security:
+        - subscription-key: []
+      summary: Zip Code Details
+      tags: []
+    parameters:
+      - description: 5 Digit US Zip Code
+        in: path
+        name: zipcode
+        required: true
+        schema:
+          type: string
+components:
+  parameters: {}
+  schemas:
+    Errors:
+      description: List of Errors generated by the request.
+      properties:
+        errors:
+          description: Errors Array
+          items:
+            properties:
+              detail:
+                description: Detail information about the error.
+                minLength: 1
+                type: string
+              status:
+                description: Status Code of Error
+                minLength: 1
+                type: string
+              title:
+                description: Error Title
+                minLength: 1
+                type: string
+            required:
+              - status
+              - title
+              - detail
+            type: object
+          minItems: 1
+          type: array
+          uniqueItems: true
+      required:
+        - errors
+      type: object
+      x-examples:
+        example-1:
+          errors:
+            - detail: "Path Parameter: 33x09 Error Message: Invalid Zip Code Format. 5 character long, numbers only"
+              status: "400"
+              title: Invalid Path Parameter
+    Links:
+      description: API Response Links
+      properties:
+        first:
+          description: Link to the first group of records from API call.
+          example: https://global.metadapi.com/zipc/v1/zipcodes?Offset=0&Limit=10
+          type: string
+        last:
+          description: "Link to last set of records from API call. "
+          example: https://global.metadapi.com/zipc/v1/zipcodes?Offset=60&Limit=10
+          type: string
+        next:
+          description: Link to next set of results from API call.
+          example: https://global.metadapi.com/zipc/v1/zipcodes?Offset=30&Limit=10
+          type: string
+        prev:
+          description: Link to the previous set of records from API call.
+          example: https://global.metadapi.com/zipc/v1/zipcodes?Offset=10&Limit=10
+          type: string
+        self:
+          description: Link to this response.
+          example: https://global.metadapi.com/zipc/v1/zipcodes?Offset=20&Limit=10
+          type: string
+      title: links
+      type: object
+    ZipCodeResponse:
+      description: "Succesful response of the "
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Zipcode"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/meta"
+      title: ZipCodeResponse
+      type: object
+    Zipcode:
+      description: Zip Code Data Model
+      properties:
+        cityAliases:
+          description: Array that contains all the city aliases for the given zip code.
+          items:
+            properties:
+              titleCaseCityName:
+                description: USPS City / Town Name for the zip code.
+                minLength: 1
+                type: string
+              uspsCityAbbr:
+                description: Main city abbreviation provided by USPS. Null if not provided. Uppercase.
+                minLength: 1
+                nullable: true
+                type: string
+              uspsCityKey:
+                description: USPS City / Town key identifier city of the zip code.
+                minLength: 1
+                type: string
+              uspsCityMailingInd:
+                description: City names with the City State Mailing Name indicator flag set to True are considered part of a complete and standardized address; city names with the flag set to false  file should not be used in a complete and standardized address.
+                type: boolean
+              uspsCityName:
+                description: USPS City / Town Name for the zip code. All uppercase.
+                minLength: 1
+                type: string
+              uspsMainCityInd:
+                description: If true, the city name and code is the main zip code city name.  (Preferred USPS city).
+                type: boolean
+            required:
+              - uspsCityKey
+              - uspsCityName
+              - titleCaseCityName
+              - uspsCityAbbr
+              - uspsCityMailingInd
+              - uspsMainCityInd
+            type: object
+          minItems: 1
+          type: array
+          uniqueItems: true
+        countyFipsCode:
+          description: FIPS code assigned to the county of the main city of the zip code.
+          minLength: 1
+          type: string
+        divisionCode:
+          description: Division Code. Part of the geographical hierarchy of the US provided by the united states census.
+          minLength: 1
+          type: string
+        divisionName:
+          description: Division Name. Part of the geographical hierarchy of the US provided by the united states census.
+          minLength: 1
+          type: string
+        landAreaKm2:
+          description: Zip Code Land Area in square kilometers.
+          nullable: true
+          type: number
+        landAreaMi2:
+          description: Zip Code Land area in Square Miles
+          nullable: true
+          type: number
+        latitude:
+          description: Zip Code Latitude
+          nullable: true
+          type: number
+        longitude:
+          description: Zip Code Longitude
+          nullable: true
+          type: number
+        msaCode:
+          description: 5 digit MSA (Metropolitan Statistical Area) code.
+          minLength: 1
+          type: string
+        msaName:
+          description: Name of the defined MSA code.
+          minLength: 1
+          type: string
+        regionCode:
+          description: Region Code. Part of the geographical hierarchy of the US provided by the united states census.
+          minLength: 1
+          type: string
+        regionName:
+          description: Region Name. Part of the geographical hierarchy of the US provided by the united states census.
+          minLength: 1
+          type: string
+        stateAbbr:
+          description: Abbreviation for state name.
+          minLength: 1
+          type: string
+        stateCode:
+          description: Standard 2 character state code.
+          minLength: 1
+          type: string
+        stateFipsCode:
+          description: Federal Information Processing Standards 2 digit assigned code.
+          minLength: 1
+          type: string
+        stateName:
+          description: State Name
+          minLength: 1
+          type: string
+        titleCaseCityName:
+          description: USPS City / Town Name for the main city of the zip code. Title Case Format.
+          minLength: 1
+          type: string
+        titleCaseCountyName:
+          description: Main County Name in Title Case
+          minLength: 1
+          type: string
+        uniqueZipNameInd:
+          description: True = Unique Zip Code Name. False the zip code name is not unique.
+          type: boolean
+        uspsCarrierRouteRateSortDesc:
+          description: Description for the carrier route code.
+          minLength: 1
+          type: string
+        uspsCarrierRouteSortCode:
+          description: Code for the available carrier route.
+          minLength: 1
+          type: string
+        uspsCityMailingInd:
+          description: City names with the City State Mailing Name indicator flag set to True are considered part of a complete and standardized address; city names with the flag set to false  file should not be used in a complete and standardized address.
+          type: boolean
+        uspsCountyName:
+          description: Name of the county of the main city for the zip code.
+          minLength: 1
+          type: string
+        uspsDeliveryCode:
+          description: Determines if the zip code city has Carrier Routes.
+          minLength: 1
+          type: string
+        uspsDeliveryDesc:
+          description: Determines if the zip code city has Carrier Routes.
+          minLength: 1
+          type: string
+        uspsFacilityCode:
+          description: Facility code provided by the USPS. B=Branch, C=Community Post Office, N = Non-Postal Community Name, former postal facility or place name, P= Post Office, S=Station, U = Urbanization
+          minLength: 1
+          type: string
+        uspsFacilityName:
+          description: USPS Facility Name  B=Branch, C=Community Post Office, N = Non-Postal Community Name, former postal facility or place name, P= Post Office, S=Station, U = Urbanization
+          minLength: 1
+          type: string
+        uspsFinanceNumber:
+          description: USPS Provided Finance Number. This code is assigned to postal service facilities.
+          minLength: 1
+          type: string
+        uspsMainCityKey:
+          description: USPS City / Town key identifier for the main city of the zip code.
+          minLength: 1
+          type: string
+        uspsMainCityName:
+          description: USPS City / Town Name for the main city of the zip code. USPS Upper Case Format.
+          minLength: 1
+          type: string
+        waterAreaKm2:
+          description: Zip Code water area in Square kilometers.
+          nullable: true
+          type: number
+        waterAreaMi2:
+          description: Zip Code Water Area in Square Miles
+          nullable: true
+          type: number
+        zipClassificationCode:
+          description: Code provided by USPS for the type of Zip Code it represents.  P = PO Box Zip, U = Unique Zip, M = APO/FPO Military Zip , null (not provided by USPS),N = Non-Unique Zip.
+          minLength: 1
+          nullable: true
+          type: string
+        zipClassificationDesc:
+          description: Description of the zip classification code.   P = PO Box Zip, U = Unique Zip, M = APO/FPO Military Zip , null (not provided by USPS), = Non-Unique Zip.
+          minLength: 1
+          type: string
+        zipCode:
+          description: 5 Digit Zip Code. Zone Improvement Plan.
+          example: "90210"
+          maxLength: 5
+          minLength: 5
+          type: string
+        zipCodeStatistics:
+          description: Available statistics by year of the Zip Code.
+          items:
+            properties:
+              femalePopulation:
+                description: Total female population of the zip code.
+                type: number
+              malePopulation:
+                description: Total Male population of the zip code.
+                type: number
+              totalPopulation:
+                description: Total population of the zip code
+                type: number
+              year:
+                description: Year for the captured statistic
+                type: number
+            required:
+              - year
+              - totalPopulation
+              - malePopulation
+              - femalePopulation
+            type: object
+          minItems: 1
+          nullable: true
+          type: array
+          uniqueItems: true
+      required:
+        - zipCode
+        - uspsMainCityKey
+        - uspsMainCityName
+        - titleCaseCityName
+        - zipClassificationCode
+        - zipClassificationDesc
+        - uspsFacilityCode
+        - uspsFacilityName
+        - uspsCityMailingInd
+        - uspsDeliveryCode
+        - uspsDeliveryDesc
+        - uspsCarrierRouteSortCode
+        - uspsCarrierRouteRateSortDesc
+        - uniqueZipNameInd
+        - uspsFinanceNumber
+        - stateCode
+        - stateName
+        - stateFipsCode
+        - stateAbbr
+        - countyFipsCode
+        - uspsCountyName
+        - titleCaseCountyName
+        - landAreaMi2
+        - waterAreaMi2
+        - landAreaKm2
+        - waterAreaKm2
+        - divisionCode
+        - divisionName
+        - regionCode
+        - regionName
+        - msaCode
+        - msaName
+        - cityAliases
+        - zipCodeStatistics
+      title: Zip Code
+      type: object
+      x-examples:
+        Sample Zip Code Response:
+          cityAliases:
+            - titleCaseCityName: Beverly Hills
+              uspsCityAbbr: null
+              uspsCityKey: Z20259
+              uspsCityMailingInd: true
+              uspsCityName: BEVERLY HILLS
+              uspsMainCityInd: true
+          countyFipsCode: "037"
+          divisionCode: "9"
+          divisionName: Pacific Division
+          landAreaKm2: 26.22277
+          landAreaMi2: 10.125
+          latitude: 34.100517
+          longitude: -118.41463
+          msaCode: "31080"
+          msaName: Los Angeles-Long Beach-Anaheim, CA Metro Area
+          regionCode: "4"
+          regionName: West Region
+          stateAbbr: Calif.
+          stateCode: CA
+          stateFipsCode: "06"
+          stateName: California
+          titleCaseCityName: Beverly Hills
+          titleCaseCountyName: Los Angeles
+          uniqueZipNameInd: false
+          uspsCarrierRouteRateSortDesc: Carrier Route. Sortation/Rates. Apply-Merging Not Permitted
+          uspsCarrierRouteSortCode: B
+          uspsCityMailingInd: true
+          uspsCountyName: LOS ANGELES
+          uspsDeliveryCode: Y
+          uspsDeliveryDesc: Office Has City-Delivery Carrier Routes
+          uspsFacilityCode: P
+          uspsFacilityName: Post Office
+          uspsFinanceNumber: "050666"
+          uspsMainCityKey: Z20259
+          uspsMainCityName: BEVERLY HILLS
+          waterAreaKm2: 0.153478
+          waterAreaMi2: 0.059
+          zipClassificationCode: "null"
+          zipClassificationDesc: Non-Unique Zip
+          zipCode: "90210"
+          zipCodeStatistics:
+            - femalePopulation: 11335
+              malePopulation: 10061
+              totalPopulation: 21396
+              year: 2000
+            - femalePopulation: 11449
+              malePopulation: 10292
+              totalPopulation: 21741
+              year: 2010
+    meta:
+      description: Response Metadata. Provides additional context about the data response.
+      properties:
+        count:
+          description: "Total number of records of the response. Note: the data object always has a limit number of records retrieved."
+          example: 24
+          type: number
+        limit:
+          description: "Total number of records returned in the data array. "
+          example: 2
+          type: number
+        offset:
+          description: Offset position of where the first record returned.
+          example: 0
+          type: number
+      required:
+        - count
+        - offset
+        - limit
+      title: meta
+      type: object
+  securitySchemes:
+    subscription-key:
+      description: API Key provided by the metadapi subscription.
+      in: header
+      name: Ocp-Apim-Subscription-Key
+      type: apiKey

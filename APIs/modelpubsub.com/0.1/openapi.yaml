@@ -1,0 +1,113 @@
+openapi: 3.0.1
+servers:
+  - url: https://modelpubsub.com
+info:
+  description: defaultDescription
+  title: defaultTitle
+  version: "0.1"
+  x-apisguru-categories:
+    - machine_learning
+  x-logo:
+    url: https://skymel.com/images/skymel.png
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/privacy-ai/unsafe-or-fake-image-classifier/main/privacy-ai-SkymelNSFWImageClassifier-0.1-resolved.json
+      version: "3.0"
+  x-providerName: modelpubsub.com
+paths:
+  /api-v1.0/SafeUnsafeImageWithTags:
+    post:
+      description: Auto generated using Swagger Inspector
+      requestBody:
+        content:
+          application/json:
+            examples: {}
+            schema:
+              $ref: "#/components/schemas/apiv1_0_SafeUnsafeImageWithTags_body"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                "0":
+                  value: '{"error_code":0,"predictions":{"1girl":0.92,"abs":0.83,"artificial-images":0.99,"bikini":0.79,"black bikini":0.63,"black hair":0.83,"breasts":0.83,"choker":0.63,"composition_one_female":0.59,"dark skin":0.64,"dark-skinned female":0.68,"english commentary":0.63,"forehead":0.77,"jewelry":0.69,"large breasts":0.74,"lips":0.66,"long hair":0.78,"looking at viewer":0.72,"muscular":0.72,"muscular female":0.74,"navel":0.69,"original":0.67,"patreon username":0.67,"solo":0.86,"swimsuit":0.82,"thighs":0.65,"toned":0.61,"unsafe":1.0}}'
+              schema:
+                $ref: "#/components/schemas/inline_response_200"
+          description: Auto generated using Swagger Inspector
+      servers:
+        - url: https://modelpubsub.com
+    servers:
+      - url: https://modelpubsub.com
+components:
+  schemas:
+    apiv1_0_SafeUnsafeImageWithTags_body:
+      properties:
+        api_key:
+          type: string
+        base64_image:
+          type: string
+      type: object
+    inline_response_200:
+      properties:
+        error_code:
+          type: integer
+        predictions:
+          properties:
+            1girl:
+              type: number
+            abs:
+              type: number
+            artificial-images:
+              type: number
+            bikini:
+              type: number
+            black bikini:
+              type: number
+            black hair:
+              type: number
+            breasts:
+              type: number
+            choker:
+              type: number
+            composition_one_female:
+              type: number
+            dark skin:
+              type: number
+            dark-skinned female:
+              type: number
+            english commentary:
+              type: number
+            forehead:
+              type: number
+            jewelry:
+              type: number
+            large breasts:
+              type: number
+            lips:
+              type: number
+            long hair:
+              type: number
+            looking at viewer:
+              type: number
+            muscular:
+              type: number
+            muscular female:
+              type: number
+            navel:
+              type: number
+            original:
+              type: number
+            patreon username:
+              type: number
+            solo:
+              type: number
+            swimsuit:
+              type: number
+            thighs:
+              type: number
+            toned:
+              type: number
+            unsafe:
+              type: number
+          type: object
+      type: object

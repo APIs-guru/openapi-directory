@@ -1,0 +1,750 @@
+openapi: 3.0.3
+servers:
+  - url: https://moon-phase.p.rapidapi.com
+info:
+  contact:
+    x-twitter: Rapid_API
+  description: |-
+    # Moon-API.com Postman Collection
+
+    Welcome to the Moon Phase API Postman Collection! This collection contains a set of pre-configured API requests to interact with the Moon Phase API endpoints provided by [moon-api.com](https://moon-api.com). Explore the enchanting world of the moon and its ever-changing phases with ease using this collection.
+
+    ## Getting Started
+
+    To start using this Postman collection, follow these steps:
+
+    1. [Download and install Postman](https://www.postman.com/downloads/) if you haven't already.
+    2. Import the Moon API Postman Collection into your Postman app.
+    3. Set your RapidAPI key in the collection's environment variables.
+    4. Begin making requests to explore the moon phase data and retrieve lunar information.
+        
+
+    ## Collection Structure
+
+    The Moon-API.com Postman Collection consists of the following requests:
+
+    - **Basic Moon Phase**: Retrieve the main moon phase data.
+    - **Advanced Moon Phase**: Get detailed moon phase data based on a specific timezone and coordinates.
+    - **Plain Text Moon Phase**: Get a plain text description of the current moon phase.
+    - **Emoji Moon Phase**: Get the relevant emoji of the current moon phase.
+    - **Lunar Calender**: Get the current year's moon phases in a markdown calender.
+        
+
+    ## Environment Variables
+
+    The collection uses environment variables to store your RapidAPI key. To use this collection effectively, ensure you set the `X-Rapidapi-Key` variable in the collection's environment with your actual RapidAPI key.
+
+    ## How to Use
+
+    1. Select the desired request from the Moon API collection.
+    2. Click on the request to open it.
+    3. Send the request and view the response to retrieve the moon phase data.
+        
+
+    ## Documentation
+
+    For more information on the Moon Phase API endpoints and their response formats, refer to the [official Moon API documentation](https://rapidapi.com/MoonAPIcom/api/moon-phase/details). Visit [moon-api.com](https://moon-api.com) to learn more about the Moon Phase API and the services provided.
+
+    Happy moon exploration with the Moon Phase API Postman Collection provided by [moon-api.com](https://moon-api.com)!
+  title: Moon API
+  version: 1.0.0
+  x-apisguru-categories:
+    - education
+    - text
+  x-logo:
+    url: https://twitter.com/Rapid_API/profile_image?size=original
+  x-origin:
+    - format: postman
+      url: https://moon-api.com/postman.json
+      version: 2.x
+  x-providerName: rapidapi.com
+tags: []
+paths:
+  /advanced:
+    get:
+      description: Get Advanced Moon Phase Data
+      operationId: getAdvancedMoonPhaseData
+      parameters:
+        - description: Filter data in the Advanced Moon API by specifying the desired fields using the `filters` parameter in the request. Include a comma-separated list of keys to retrieve customized data, allowing you to fetch specific moon phase information and related details.
+          in: query
+          name: filters
+          schema:
+            example: moon.phase_name,moon.stage,moon_phases.full_moon.next
+            type: string
+        - in: header
+          name: X-Rapidapi-Key
+          schema:
+            example: "{{Rapidapi-Key}}"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Get Advanced Moon Phase Data:
+                  value:
+                    datestamp: Thu, 01 Jun 2023 11:45:25 +0200
+                    moon:
+                      age_days: 12
+                      emoji: 🌔
+                      illumination: 88%
+                      lunar_cycle: 38.97%
+                      moon_altitude: -50.256859109962605
+                      moon_azimuth: 339.31434124218265
+                      moon_distance: 382878.864197106
+                      moon_parallactic_angle: -2.0214503141006763
+                      moonrise: 18:08
+                      moonrise_timestamp: 1685635680
+                      moonset: 03:18
+                      moonset_timestamp: 1685582280
+                      phase: "0.38966480971092"
+                      phase_name: Waxing Gibbous
+                      stage: waxing
+                      zodiac_sign: Gemini
+                    moon_phases:
+                      first_quarter:
+                        current:
+                          datestamp: Fri, 28 Apr 2023 18:34:00 +0200
+                          days_ago: 33
+                          timestamp: 1682699640
+                        next:
+                          datestamp: Sun, 18 Jun 2023 04:41:00 +0200
+                          days_ahead: 16
+                          timestamp: 1687056060
+                      full_moon:
+                        current:
+                          datestamp: Fri, 05 May 2023 18:34:00 +0200
+                          days_ago: 26
+                          timestamp: 1683304440
+                        next:
+                          datestamp: Sun, 04 Jun 2023 04:41:00 +0200
+                          days_ahead: 2
+                          timestamp: 1685846460
+                      last_quarter:
+                        current:
+                          datestamp: Fri, 12 May 2023 16:53:00 +0200
+                          days_ago: 19
+                          timestamp: 1683903180
+                        next:
+                          datestamp: Sun, 11 Jun 2023 04:41:00 +0200
+                          days_ahead: 9
+                          timestamp: 1686451260
+                      new_moon:
+                        current:
+                          datestamp: Fri, 19 May 2023 16:53:00 +0200
+                          days_ago: 12
+                          timestamp: 1684507980
+                        next:
+                          datestamp: Sun, 18 Jun 2023 05:37:00 +0200
+                          days_ahead: 16
+                          timestamp: 1687059420
+                    sun:
+                      day_length: 16:18
+                      solar_noon: 12:57
+                      sun_altitude: 41.698139184701695
+                      sun_azimuth: 108.19562393041076
+                      sun_distance: 151643787.44305298
+                      sunrise: 1685584270
+                      sunrise_timestamp: 01:51
+                      sunset: 1685648688
+                      sunset_timestamp: 19:44
+                    timestamp: 1685612725
+              schema:
+                properties:
+                  datestamp:
+                    example: Thu, 01 Jun 2023 11:45:25 +0200
+                    type: string
+                  moon:
+                    properties:
+                      age_days:
+                        example: 12
+                        type: number
+                      emoji:
+                        example: 🌔
+                        type: string
+                      illumination:
+                        example: 88%
+                        type: string
+                      lunar_cycle:
+                        example: 38.97%
+                        type: string
+                      moon_altitude:
+                        example: -50.256859109962605
+                        type: number
+                      moon_azimuth:
+                        example: 339.31434124218265
+                        type: number
+                      moon_distance:
+                        example: 382878.864197106
+                        type: number
+                      moon_parallactic_angle:
+                        example: -2.0214503141006763
+                        type: number
+                      moonrise:
+                        example: 18:08
+                        type: string
+                      moonrise_timestamp:
+                        example: 1685635680
+                        type: number
+                      moonset:
+                        example: 03:18
+                        type: string
+                      moonset_timestamp:
+                        example: 1685582280
+                        type: number
+                      phase:
+                        example: "0.38966480971092"
+                        type: string
+                      phase_name:
+                        example: Waxing Gibbous
+                        type: string
+                      stage:
+                        example: waxing
+                        type: string
+                      zodiac_sign:
+                        example: Gemini
+                        type: string
+                    type: object
+                  moon_phases:
+                    properties:
+                      first_quarter:
+                        properties:
+                          current:
+                            properties:
+                              datestamp:
+                                example: Fri, 28 Apr 2023 18:34:00 +0200
+                                type: string
+                              days_ago:
+                                example: 33
+                                type: number
+                              timestamp:
+                                example: 1682699640
+                                type: number
+                            type: object
+                          next:
+                            properties:
+                              datestamp:
+                                example: Sun, 18 Jun 2023 04:41:00 +0200
+                                type: string
+                              days_ahead:
+                                example: 16
+                                type: number
+                              timestamp:
+                                example: 1687056060
+                                type: number
+                            type: object
+                        type: object
+                      full_moon:
+                        properties:
+                          current:
+                            properties:
+                              datestamp:
+                                example: Fri, 05 May 2023 18:34:00 +0200
+                                type: string
+                              days_ago:
+                                example: 26
+                                type: number
+                              timestamp:
+                                example: 1683304440
+                                type: number
+                            type: object
+                          next:
+                            properties:
+                              datestamp:
+                                example: Sun, 04 Jun 2023 04:41:00 +0200
+                                type: string
+                              days_ahead:
+                                example: 2
+                                type: number
+                              timestamp:
+                                example: 1685846460
+                                type: number
+                            type: object
+                        type: object
+                      last_quarter:
+                        properties:
+                          current:
+                            properties:
+                              datestamp:
+                                example: Fri, 12 May 2023 16:53:00 +0200
+                                type: string
+                              days_ago:
+                                example: 19
+                                type: number
+                              timestamp:
+                                example: 1683903180
+                                type: number
+                            type: object
+                          next:
+                            properties:
+                              datestamp:
+                                example: Sun, 11 Jun 2023 04:41:00 +0200
+                                type: string
+                              days_ahead:
+                                example: 9
+                                type: number
+                              timestamp:
+                                example: 1686451260
+                                type: number
+                            type: object
+                        type: object
+                      new_moon:
+                        properties:
+                          current:
+                            properties:
+                              datestamp:
+                                example: Fri, 19 May 2023 16:53:00 +0200
+                                type: string
+                              days_ago:
+                                example: 12
+                                type: number
+                              timestamp:
+                                example: 1684507980
+                                type: number
+                            type: object
+                          next:
+                            properties:
+                              datestamp:
+                                example: Sun, 18 Jun 2023 05:37:00 +0200
+                                type: string
+                              days_ahead:
+                                example: 16
+                                type: number
+                              timestamp:
+                                example: 1687059420
+                                type: number
+                            type: object
+                        type: object
+                    type: object
+                  sun:
+                    properties:
+                      day_length:
+                        example: 16:18
+                        type: string
+                      solar_noon:
+                        example: 12:57
+                        type: string
+                      sun_altitude:
+                        example: 41.698139184701695
+                        type: number
+                      sun_azimuth:
+                        example: 108.19562393041076
+                        type: number
+                      sun_distance:
+                        example: 151643787.44305298
+                        type: number
+                      sunrise:
+                        example: 1685584270
+                        type: number
+                      sunrise_timestamp:
+                        example: 01:51
+                        type: string
+                      sunset:
+                        example: 1685648688
+                        type: number
+                      sunset_timestamp:
+                        example: 19:44
+                        type: string
+                    type: object
+                  timestamp:
+                    example: 1685612725
+                    type: number
+                type: object
+          description: Get Advanced Moon Phase Data
+          headers:
+            CF-Cache-Status:
+              schema:
+                example: DYNAMIC
+                type: string
+            CF-RAY:
+              schema:
+                example: 7d06860f4ae09bc4-FRA
+                type: string
+            Cache-Control:
+              schema:
+                example: no-cache, private
+                type: string
+            Connection:
+              schema:
+                example: keep-alive
+                type: string
+            Content-Encoding:
+              schema:
+                example: br
+                type: string
+            Date:
+              schema:
+                example: Thu, 01 Jun 2023 09:45:25 GMT
+                type: string
+            NEL:
+              schema:
+                example: '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+                type: string
+            Report-To:
+              schema:
+                example: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=2tz5nmLaobOLnUf4o1opTCtzJDGuslGzP3hoACleEWP0TEyqfFv42v831U62bri7PEBIDsywDEmOoe7ooHM2Xr%2BVFcP%2BlUAJJ2qPMIdmvxoaeQycKtIUUzQ8J7%2FucnTJmqeu9S7g"}],"group":"cf-nel","max_age":604800}'
+                type: string
+            Server:
+              schema:
+                example: RapidAPI-1.2.8
+                type: string
+            Transfer-Encoding:
+              schema:
+                example: chunked
+                type: string
+            X-RapidAPI-Region:
+              schema:
+                example: AWS - eu-central-1
+                type: string
+            X-RapidAPI-Version:
+              schema:
+                example: 1.2.8
+                type: string
+            alt-svc:
+              schema:
+                example: h3=":443"; ma=86400
+                type: string
+      summary: Get Advanced Moon Phase Data
+  /basic:
+    get:
+      description: Get Basic Moon Phase Data
+      operationId: getBasicMoonPhaseData
+      parameters:
+        - in: header
+          name: X-Rapidapi-Key
+          schema:
+            example: "{{Rapidapi-Key}}"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Get Basic Moon Phase Data:
+                  value:
+                    days_until_next_full_moon: 4
+                    days_until_next_new_moon: 18
+                    phase_name: Waxing gibbous
+                    stage: waxing
+              schema:
+                properties:
+                  days_until_next_full_moon:
+                    example: 4
+                    type: number
+                  days_until_next_new_moon:
+                    example: 18
+                    type: number
+                  phase_name:
+                    example: Waxing gibbous
+                    type: string
+                  stage:
+                    example: waxing
+                    type: string
+                type: object
+          description: Get Basic Moon Phase Data
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                example: "*"
+                type: string
+            CF-Cache-Status:
+              schema:
+                example: DYNAMIC
+                type: string
+            CF-RAY:
+              schema:
+                example: 7cc6a9b2a8787780-LHR
+                type: string
+            Connection:
+              schema:
+                example: keep-alive
+                type: string
+            Content-Encoding:
+              schema:
+                example: gzip
+                type: string
+            Date:
+              schema:
+                example: Wed, 24 May 2023 15:44:56 GMT
+                type: string
+            NEL:
+              schema:
+                example: '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+                type: string
+            Report-To:
+              schema:
+                example: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=l56LN6rvJsNCUVRMf7bAEG0NjEr1Z5OvkbosIKMBePUwT28unnJaooS%2BVzZZwJMVGNd6wLCiNUeHfJlObSuJNb6Dut%2BTPzHnQtVnbdQkc8Wg6J9y3Q1kZHQMekGSabPhxKJqI5p9"}],"group":"cf-nel","max_age":604800}'
+                type: string
+            Server:
+              schema:
+                example: cloudflare
+                type: string
+            Tk:
+              schema:
+                example: N
+                type: string
+            Transfer-Encoding:
+              schema:
+                example: chunked
+                type: string
+            Vary:
+              schema:
+                example: Accept-Encoding
+                type: string
+            X-Cache:
+              schema:
+                example: HIT
+                type: string
+            alt-svc:
+              schema:
+                example: h3=":443"; ma=86400, h3-29=":443"; ma=86400
+                type: string
+      summary: Get Basic Moon Phase Data
+  /calendar:
+    get:
+      description: Get Lunar Calendar
+      operationId: getLunarCalendar
+      parameters:
+        - description: Filter data in the Advanced Moon API by specifying the desired fields using the `filters` parameter in the request. Include a comma-separated list of keys to retrieve customized data, allowing you to fetch specific moon phase information and related details.
+          in: query
+          name: filters
+          schema:
+            example: moon.phase_name,moon.stage,moon_phases.full_moon.next
+            type: string
+        - in: header
+          name: X-Rapidapi-Key
+          schema:
+            example: "{{Rapidapi-Key}}"
+            type: string
+      responses:
+        "200":
+          content:
+            text/plain:
+              examples:
+                Get Lunar Calendar:
+                  value: |
+                    | Month | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 
+                    | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+                    | January | 🌔 | 🌔 | 🌕 | 🌕 | 🌕 | 🌖 | 🌖 | 🌖 | 🌖 | 🌗 | 🌗 | 🌗 | 🌗 | 🌘 | 🌘 | 🌘 | 🌘 | 🌑 | 🌑 | 🌑 | 🌒 | 🌒 | 🌒 | 🌒 | 🌓 | 🌓 | 🌓 | 🌓 | 🌔 | 🌔 | 🌔 |
+                    | February | 🌔 | 🌕 | 🌕 | 🌕 | 🌖 | 🌖 | 🌖 | 🌖 | 🌗 | 🌗 | 🌗 | 🌗 | 🌘 | 🌘 | 🌘 | 🌘 | 🌑 | 🌑 | 🌑 | 🌒 | 🌒 | 🌒 | 🌒 | 🌓 | 🌓 | 🌓 | 🌓 | 🌔 | 🌔 | 🌔 | 🌔 |
+                    | March | 🌔 | 🌔 | 🌔 | 🌕 | 🌕 | 🌕 | 🌖 | 🌖 | 🌖 | 🌖 | 🌗 | 🌗 | 🌗 | 🌗 | 🌘 | 🌘 | 🌘 | 🌘 | 🌑 | 🌑 | 🌑 | 🌒 | 🌒 | 🌒 | 🌒 | 🌓 | 🌓 | 🌓 | 🌓 | 🌔 | 🌔 |
+                    | April | 🌔 | 🌔 | 🌕 | 🌕 | 🌕 | 🌖 | 🌖 | 🌖 | 🌖 | 🌗 | 🌗 | 🌗 | 🌗 | 🌘 | 🌘 | 🌘 | 🌘 | 🌑 | 🌑 | 🌑 | 🌒 | 🌒 | 🌒 | 🌒 | 🌓 | 🌓 | 🌓 | 🌓 | 🌔 | 🌔 | 🌔 |
+                    | May | 🌔 | 🌔 | 🌕 | 🌕 | 🌕 | 🌖 | 🌖 | 🌖 | 🌖 | 🌗 | 🌗 | 🌗 | 🌗 | 🌘 | 🌘 | 🌘 | 🌘 | 🌑 | 🌑 | 🌑 | 🌒 | 🌒 | 🌒 | 🌒 | 🌓 | 🌓 | 🌓 | 🌓 | 🌔 | 🌔 | 🌔 |
+                    | June | 🌔 | 🌕 | 🌕 | 🌕 | 🌖 | 🌖 | 🌖 | 🌖 | 🌗 | 🌗 | 🌗 | 🌗 | 🌘 | 🌘 | 🌘 | 🌘 | 🌑 | 🌑 | 🌑 | 🌒 | 🌒 | 🌒 | 🌒 | 🌓 | 🌓 | 🌓 | 🌓 | 🌔 | 🌔 | 🌔 | 🌔 |
+                    | July | 🌔 | 🌕 | 🌕 | 🌕 | 🌖 | 🌖 | 🌖 | 🌖 | 🌗 | 🌗 | 🌗 | 🌗 | 🌘 | 🌘 | 🌘 | 🌘 | 🌑 | 🌑 | 🌑 | 🌒 | 🌒 | 🌒 | 🌒 | 🌓 | 🌓 | 🌓 | 🌓 | 🌔 | 🌔 | 🌔 | 🌔 |
+                    | August | 🌕 | 🌕 | 🌕 | 🌖 | 🌖 | 🌖 | 🌖 | 🌗 | 🌗 | 🌗 | 🌗 | 🌘 | 🌘 | 🌘 | 🌘 | 🌑 | 🌑 | 🌑 | 🌒 | 🌒 | 🌒 | 🌒 | 🌓 | 🌓 | 🌓 | 🌓 | 🌔 | 🌔 | 🌔 | 🌔 | 🌕 |
+                    | September | 🌕 | 🌕 | 🌖 | 🌖 | 🌖 | 🌖 | 🌗 | 🌗 | 🌗 | 🌗 | 🌘 | 🌘 | 🌘 | 🌘 | 🌑 | 🌑 | 🌑 | 🌒 | 🌒 | 🌒 | 🌒 | 🌓 | 🌓 | 🌓 | 🌓 | 🌔 | 🌔 | 🌔 | 🌔 | 🌕 | 🌕 |
+                    | October | 🌕 | 🌕 | 🌖 | 🌖 | 🌖 | 🌖 | 🌗 | 🌗 | 🌗 | 🌗 | 🌘 | 🌘 | 🌘 | 🌘 | 🌑 | 🌑 | 🌑 | 🌒 | 🌒 | 🌒 | 🌒 | 🌓 | 🌓 | 🌓 | 🌓 | 🌔 | 🌔 | 🌔 | 🌔 | 🌕 | 🌕 |
+                    | November | 🌕 | 🌖 | 🌖 | 🌖 | 🌖 | 🌗 | 🌗 | 🌗 | 🌗 | 🌘 | 🌘 | 🌘 | 🌘 | 🌑 | 🌑 | 🌑 | 🌒 | 🌒 | 🌒 | 🌒 | 🌓 | 🌓 | 🌓 | 🌓 | 🌔 | 🌔 | 🌔 | 🌔 | 🌕 | 🌕 | 🌕 |
+                    | December | 🌕 | 🌖 | 🌖 | 🌖 | 🌖 | 🌗 | 🌗 | 🌗 | 🌗 | 🌘 | 🌘 | 🌘 | 🌘 | 🌑 | 🌑 | 🌑 | 🌒 | 🌒 | 🌒 | 🌒 | 🌓 | 🌓 | 🌓 | 🌓 | 🌔 | 🌔 | 🌔 | 🌔 | 🌕 | 🌕 | - |
+          description: Get Lunar Calendar
+          headers:
+            CF-Cache-Status:
+              schema:
+                example: DYNAMIC
+                type: string
+            CF-RAY:
+              schema:
+                example: 7d69e9abae3e34e4-DUB
+                type: string
+            Cache-Control:
+              schema:
+                example: no-cache, private
+                type: string
+            Connection:
+              schema:
+                example: keep-alive
+                type: string
+            Content-Encoding:
+              schema:
+                example: br
+                type: string
+            Date:
+              schema:
+                example: Tue, 13 Jun 2023 11:14:56 GMT
+                type: string
+            NEL:
+              schema:
+                example: '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+                type: string
+            Report-To:
+              schema:
+                example: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=xQdeDxQcXLLvVeRdVJriJ7k92VBD7jPKs0qUYuJVPsK0tnj0mt4bahj%2ByQrmqq5IYPBEJBE0W9kGobbUKSuUhGAf5P6JuZJzSklfGKSpZE5yH%2FWtf8nALnzC719TMRMd7ZmcFDZ5"}],"group":"cf-nel","max_age":604800}'
+                type: string
+            Server:
+              schema:
+                example: RapidAPI-1.2.8
+                type: string
+            Transfer-Encoding:
+              schema:
+                example: chunked
+                type: string
+            X-RapidAPI-Region:
+              schema:
+                example: AWS - eu-west-1
+                type: string
+            X-RapidAPI-Version:
+              schema:
+                example: 1.2.8
+                type: string
+            alt-svc:
+              schema:
+                example: h3=":443"; ma=86400
+                type: string
+      summary: Get Lunar Calendar
+  /emoji:
+    get:
+      description: Get Emoji of Moon Phase
+      operationId: getEmojiOfMoonPhase
+      parameters:
+        - in: header
+          name: X-Rapidapi-Key
+          schema:
+            example: "{{Rapidapi-Key}}"
+            type: string
+      responses:
+        "200":
+          content:
+            text/plain:
+              examples:
+                Get Emoji of Moon Phase:
+                  value: 🌔
+          description: Get Emoji of Moon Phase
+          headers:
+            CF-Cache-Status:
+              schema:
+                example: DYNAMIC
+                type: string
+            CF-RAY:
+              schema:
+                example: 7d068265ece791ea-FRA
+                type: string
+            Cache-Control:
+              schema:
+                example: no-cache, private
+                type: string
+            Connection:
+              schema:
+                example: keep-alive
+                type: string
+            Content-Encoding:
+              schema:
+                example: br
+                type: string
+            Date:
+              schema:
+                example: Thu, 01 Jun 2023 09:42:55 GMT
+                type: string
+            NEL:
+              schema:
+                example: '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+                type: string
+            Report-To:
+              schema:
+                example: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=UVWE04aPRN6PWn2SQ8cZv8eW1wbIf19dIBCVl%2FNEUjNhD1ukoT3h6vHEEA9mMtpukUmmDs9ZuErEXeEJ1m2lJGA7x3POMIBK8UufmQRtW%2BD97KU%2BtwbdEUBWG8Wj%2FtJiTqLQCdER"}],"group":"cf-nel","max_age":604800}'
+                type: string
+            Server:
+              schema:
+                example: RapidAPI-1.2.8
+                type: string
+            Transfer-Encoding:
+              schema:
+                example: chunked
+                type: string
+            X-RapidAPI-Region:
+              schema:
+                example: AWS - eu-central-1
+                type: string
+            X-RapidAPI-Version:
+              schema:
+                example: 1.2.8
+                type: string
+            alt-svc:
+              schema:
+                example: h3=":443"; ma=86400
+                type: string
+      summary: Get Emoji of Moon Phase
+  /plain-text:
+    get:
+      description: Get Plain Text Moon Phase Data
+      operationId: getPlainTextMoonPhaseData
+      parameters:
+        - in: header
+          name: X-Rapidapi-Key
+          schema:
+            example: "{{Rapidapi-Key}}"
+            type: string
+      responses:
+        "200":
+          content:
+            text/plain:
+              examples:
+                Get Plain Text Moon Phase Data:
+                  value: Waxing Crescent
+          description: Get Plain Text Moon Phase Data
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                example: "*"
+                type: string
+            CF-Cache-Status:
+              schema:
+                example: DYNAMIC
+                type: string
+            CF-RAY:
+              schema:
+                example: 7cc6a9dd4e13954f-DUB
+                type: string
+            Connection:
+              schema:
+                example: keep-alive
+                type: string
+            Content-Encoding:
+              schema:
+                example: br
+                type: string
+            Date:
+              schema:
+                example: Wed, 24 May 2023 15:45:03 GMT
+                type: string
+            NEL:
+              schema:
+                example: '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+                type: string
+            Report-To:
+              schema:
+                example: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=FAIBAVp7EafLttCv4uYTD9wJLY7qqnJP04KGjvZ18GexcHoBz28Iwv59%2BAWIeTOGoxvsaUc2olx0lVv3m4G84%2F5tw%2BSwI%2FtI6eSEjjje3uKWqF2VxcvJw0on50uUfVHJXzR6jtf0"}],"group":"cf-nel","max_age":604800}'
+                type: string
+            Server:
+              schema:
+                example: RapidAPI-1.2.8
+                type: string
+            Tk:
+              schema:
+                example: N
+                type: string
+            Transfer-Encoding:
+              schema:
+                example: chunked
+                type: string
+            Vary:
+              schema:
+                example: Accept-Encoding
+                type: string
+            X-Cache:
+              schema:
+                example: HIT
+                type: string
+            X-RapidAPI-Region:
+              schema:
+                example: AWS - eu-west-1
+                type: string
+            X-RapidAPI-Version:
+              schema:
+                example: 1.2.8
+                type: string
+            alt-svc:
+              schema:
+                example: h3=":443"; ma=86400, h3-29=":443"; ma=86400
+                type: string
+      summary: Get Plain Text Moon Phase Data

@@ -1,0 +1,1045 @@
+openapi: 3.0.2
+servers:
+  - url: https://api.useapi.net/v1
+info:
+  description: Simple, reliable and affordable way to use Midjourney via standard REST API
+  title: Midjourney REST API by useapi.net
+  version: "1.0"
+  x-apisguru-categories:
+    - media
+  x-logo:
+    url: https://useapi.net/assets/images/logo.png
+  x-origin:
+    - format: openapi
+      url: https://useapi.net/docs/api-v1/openapi.yml
+      version: "3.0"
+  x-providerName: useapi.net
+  x-unofficialSpec: true
+security:
+  - apiToken: []
+paths:
+  /account:
+    get:
+      description: Retrieve account information
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/accountResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: Unauthorized
+  /jobs:
+    get:
+      description: Get list of currently executing jobs
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/jobsResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: Unauthorized
+  /jobs/:
+    get:
+      description: Retrieve status and results of jobs/imagine, jobs/button, jobs/blend or jobs/describe
+      parameters:
+        - description: jobid value returned by jobs/imagine, jobs/button, jobs/blend or jobs/describe
+          in: query
+          name: jobid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/jobResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: Query param jobid not provided
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: Unable to locate jobid
+  /jobs/blend:
+    post:
+      description: Submit the Midjourney /blend command
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                blendDimensions:
+                  enum:
+                    - Portrait
+                    - Square
+                    - Landscape
+                  type: string
+                blendUrls:
+                  description: Must contain at least 2 valid URL image links, up to 5 URL image links supported
+                  items:
+                    type: string
+                  maxItems: 5
+                  minItems: 2
+                  type: array
+                channel:
+                  description: Discord channel id
+                  type: string
+                discord:
+                  description: Discord token
+                  type: string
+                maxJobs:
+                  description: Optional Maximum Concurrent Jobs for current Midjourney subscription
+                  maximum: 15
+                  minimum: 1
+                  type: integer
+                replyRef:
+                  description: Optional reference id which will be stored and returned along with this job response / result
+                  type: string
+                replyUrl:
+                  description: Optional callback URL, API will call the provided replyUrl once generation completed
+                  type: string
+                server:
+                  description: Discord server id
+                  type: string
+              required:
+                - blendUrls
+                - discord
+                - server
+                - channel
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/blendResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: Unauthorized
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: blendUrls, discord, server or channel value is missing, one of blendUrls values not a valid URL or URL which can not be retrieved
+        "413":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: replyRef or replyUrl is too long
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/imagineResponseModerated"
+          description: Unable to find posted message, likely moderated or invalid url
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseMaxJobs"
+          description: API query is full and can not accept new jobs/blend requests
+  /jobs/button:
+    post:
+      description: Submit the Midjourney /imagine command
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                button:
+                  description: button from buttons array of job referenced via jobid
+                  enum:
+                    - U1
+                    - U2
+                    - U3
+                    - U4
+                    - V1
+                    - V2
+                    - V3
+                    - V4
+                    - ⬅️
+                    - ➡️
+                    - ⬆️
+                    - ⬇️
+                    - 🔄
+                    - Vary (Strong)
+                    - Vary (Subtle)
+                    - Zoom Out 1.5x
+                    - Zoom Out 2x
+                    - Make Square
+                    - Make Variations
+                    - Remaster
+                  type: string
+                discord:
+                  description: Optional Discord token, if provided will override discord value of referenced jobid
+                  type: string
+                jobid:
+                  description: jobid of successfully completed (status set to completed) jobs/imagine or jobs/button job
+                  type: string
+                maxJobs:
+                  description: Optional Maximum Concurrent Jobs for current Midjourney subscription
+                  maximum: 15
+                  minimum: 1
+                  type: integer
+                replyRef:
+                  description: Optional reference id which will be stored and returned along with this job response / result
+                  type: string
+                replyUrl:
+                  description: Optional callback URL, API will call the provided replyUrl once generation completed
+                  type: string
+              required:
+                - jobid
+                - button
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/buttonResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: Button not supported or not found in jobid buttons array
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: Unable to locate jobid
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/buttonResponseErrorUpscaled"
+          description: Upscale button already executed by jobid
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: jobid or button value is missing
+        "413":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: replyRef or replyUrl is too long
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseMaxJobs"
+          description: API query is full and can not accept new jobs/button requests
+  /jobs/cancel/:
+    get:
+      description: Cancel execution of job created by jobs/imagine, jobs/button, jobs/blend or jobs/describe
+      parameters:
+        - description: jobid value returned by jobs/imagine, jobs/button, jobs/blend or jobs/describe
+          in: query
+          name: jobid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/jobCancelResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: Query param jobid not provided
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: Unable to locate jobid
+  /jobs/describe:
+    post:
+      description: Submit the Midjourney /describe command
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                channel:
+                  description: Discord channel id
+                  type: string
+                describeUrl:
+                  description: Must contain valid URL image link
+                  type: string
+                discord:
+                  description: Discord token
+                  type: string
+                maxJobs:
+                  description: Optional Maximum Concurrent Jobs for current Midjourney subscription
+                  maximum: 15
+                  minimum: 1
+                  type: integer
+                replyRef:
+                  description: Optional reference id which will be stored and returned along with this job response / result
+                  type: string
+                replyUrl:
+                  description: Optional callback URL, API will call the provided replyUrl once generation completed
+                  type: string
+                server:
+                  description: Discord server id
+                  type: string
+              required:
+                - describeUrl
+                - discord
+                - server
+                - channel
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/describeResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: Unauthorized
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: describeUrl, discord, server or channel value is missing, describeUrl value not a valid URL or URL which can not be retrieved
+        "413":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: replyRef or replyUrl is too long
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/imagineResponseModerated"
+          description: Unable to find posted message, likely moderated or invalid url
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseMaxJobs"
+          description: API query is full and can not accept new jobs/blend requests
+  /jobs/imagine:
+    post:
+      description: Submit the Midjourney /imagine command
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                channel:
+                  description: Discord channel id
+                  type: string
+                discord:
+                  description: Discord token
+                  type: string
+                maxJobs:
+                  description: Optional Maximum Concurrent Jobs for current Midjourney subscription
+                  maximum: 15
+                  minimum: 1
+                  type: integer
+                prompt:
+                  description: Midjourney prompt
+                  maxLength: 1024
+                  type: string
+                replyRef:
+                  description: Optional reference id which will be stored and returned along with this job response / result
+                  type: string
+                replyUrl:
+                  description: Optional callback URL, API will call the provided replyUrl once generation completed
+                  type: string
+                server:
+                  description: Discord server id
+                  type: string
+              required:
+                - prompt
+                - discord
+                - server
+                - channel
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/imagineResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: Unauthorized
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: prompt, discord, server or channel value is missing
+        "413":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseError"
+          description: prompt, replyRef or replyUrl is too long
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/imagineResponseModerated"
+          description: Unable to find posted message, likely moderated or invalid prompt
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/responseMaxJobs"
+          description: API query is full and can not accept new jobs/imagine requests
+components:
+  schemas:
+    accountResponse:
+      additionalProperties: false
+      properties:
+        created:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        sub:
+          type: string
+        verified:
+          type: string
+      required:
+        - email
+        - created
+        - name
+        - verified
+        - sub
+      type: object
+    blendResponse:
+      additionalProperties: false
+      properties:
+        blendDimensions:
+          enum:
+            - Portrait
+            - Square
+            - Landscape
+          type: string
+        blendUrls:
+          items:
+            type: string
+          type: array
+        channel:
+          type: string
+        code:
+          enum:
+            - 200
+          type: integer
+        content:
+          description: Contains message generated by Midjourney reflecting current generation parameters and progress
+          type: string
+        created:
+          type: string
+        jobid:
+          description: Use returned jobid value to retrieve job status and results
+          type: string
+        maxJobs:
+          type: integer
+        messageId:
+          type: string
+        server:
+          type: string
+        status:
+          enum:
+            - started
+          type: string
+        timestamp:
+          type: string
+        updated:
+          type: string
+        verb:
+          enum:
+            - blend
+          type: string
+      required:
+        - jobid
+        - verb
+        - status
+        - created
+        - updated
+        - blendUrls
+        - channel
+        - server
+        - maxJobs
+        - messageId
+        - content
+        - timestamp
+        - code
+      type: object
+    buttonResponse:
+      additionalProperties: false
+      properties:
+        button:
+          enum:
+            - U1
+            - U2
+            - U3
+            - U4
+            - V1
+            - V2
+            - V3
+            - V4
+            - ⬅️
+            - ➡️
+            - ⬆️
+            - ⬇️
+            - 🔄
+            - Vary (Strong)
+            - Vary (Subtle)
+            - Zoom Out 1.5x
+            - Zoom Out 2x
+            - Make Square
+            - Make Variations
+            - Remaster
+          type: string
+        channel:
+          type: string
+        code:
+          enum:
+            - 200
+          type: integer
+        created:
+          type: string
+        jobid:
+          description: Use returned jobid value to retrieve job status and results
+          type: string
+        maxJobs:
+          type: integer
+        parentJobId:
+          type: string
+        server:
+          type: string
+        status:
+          enum:
+            - started
+            - completed
+          type: string
+        updated:
+          type: string
+        verb:
+          enum:
+            - button
+          type: string
+      required:
+        - jobid
+        - verb
+        - status
+        - created
+        - updated
+        - button
+        - parentJobId
+        - channel
+        - server
+        - maxJobs
+        - code
+      type: object
+    buttonResponseErrorUpscaled:
+      additionalProperties: false
+      properties:
+        button:
+          enum:
+            - U1
+            - U2
+            - U3
+            - U4
+          type: string
+        code:
+          enum:
+            - 409
+          type: integer
+        error:
+          type: string
+        jobid:
+          type: string
+      required:
+        - error
+        - button
+        - jobid
+        - code
+      type: object
+    describeResponse:
+      additionalProperties: false
+      properties:
+        channel:
+          type: string
+        code:
+          enum:
+            - 200
+          type: integer
+        content:
+          description: Contains message generated by Midjourney reflecting current generation parameters and progress
+          type: string
+        created:
+          type: string
+        describeUrl:
+          type: string
+        embeds:
+          description: Contains additional information
+          items:
+            properties:
+              description:
+                type: string
+              image:
+                properties:
+                  height:
+                    type: number
+                  proxy_url:
+                    type: string
+                  url:
+                    type: string
+                  width:
+                    type: number
+                type: object
+              type:
+                type: string
+            type: object
+          type: array
+        jobid:
+          description: Use returned jobid value to retrieve job status and results
+          type: string
+        maxJobs:
+          type: integer
+        messageId:
+          type: string
+        server:
+          type: string
+        status:
+          enum:
+            - started
+            - completed
+          type: string
+        timestamp:
+          type: string
+        updated:
+          type: string
+        verb:
+          enum:
+            - describe
+          type: string
+      required:
+        - jobid
+        - verb
+        - status
+        - created
+        - updated
+        - describeUrl
+        - channel
+        - server
+        - maxJobs
+        - messageId
+        - content
+        - timestamp
+        - code
+      type: object
+    imagineResponse:
+      additionalProperties: false
+      properties:
+        channel:
+          type: string
+        code:
+          enum:
+            - 200
+          type: integer
+        content:
+          description: Contains message generated by Midjourney reflecting current generation parameters and progress
+          type: string
+        created:
+          type: string
+        jobid:
+          description: Use returned jobid value to retrieve job status and results
+          type: string
+        maxJobs:
+          type: integer
+        messageId:
+          type: string
+        prompt:
+          type: string
+        server:
+          type: string
+        status:
+          enum:
+            - started
+          type: string
+        timestamp:
+          type: string
+        updated:
+          type: string
+        verb:
+          enum:
+            - imagine
+          type: string
+      required:
+        - jobid
+        - verb
+        - status
+        - created
+        - updated
+        - prompt
+        - channel
+        - server
+        - maxJobs
+        - messageId
+        - content
+        - timestamp
+        - code
+      type: object
+    imagineResponseModerated:
+      additionalProperties: false
+      properties:
+        code:
+          enum:
+            - 422
+          type: integer
+        error:
+          type: string
+        jobid:
+          type: string
+        status:
+          enum:
+            - moderated
+          type: string
+      required:
+        - error
+        - jobid
+        - status
+        - code
+      type: object
+    jobCancelResponse:
+      additionalProperties: false
+      properties:
+        code:
+          enum:
+            - 200
+          type: integer
+        jobid:
+          type: string
+        status:
+          enum:
+            - created
+            - started
+            - moderated
+            - progress
+            - completed
+            - failed
+            - cancelled
+          type: string
+      required:
+        - jobid
+        - status
+        - code
+      type: object
+    jobResponse:
+      additionalProperties: false
+      properties:
+        attachments:
+          items:
+            properties:
+              content_type:
+                type: string
+              filename:
+                type: string
+              height:
+                type: integer
+              id:
+                type: string
+              proxy_url:
+                type: string
+              size:
+                type: integer
+              url:
+                type: string
+              width:
+                type: integer
+            type: object
+          type: array
+        blendDimensions:
+          enum:
+            - Portrait
+            - Square
+            - Landscape
+          type: string
+        blendUrls:
+          items:
+            type: string
+          type: array
+        button:
+          enum:
+            - U1
+            - U2
+            - U3
+            - U4
+            - V1
+            - V2
+            - V3
+            - V4
+            - ⬅️
+            - ➡️
+            - ⬆️
+            - ⬇️
+            - 🔄
+            - Vary (Strong)
+            - Vary (Subtle)
+            - Zoom Out 1.5x
+            - Zoom Out 2x
+            - Make Square
+            - Make Variations
+            - Remaster
+          type: string
+        buttons:
+          items:
+            enum:
+              - U1
+              - U2
+              - U3
+              - U4
+              - V1
+              - V2
+              - V3
+              - V4
+              - ⬅️
+              - ➡️
+              - ⬆️
+              - ⬇️
+              - 🔄
+              - Vary (Strong)
+              - Vary (Subtle)
+              - Zoom Out 1.5x
+              - Zoom Out 2x
+              - Make Square
+              - Make Variations
+              - Remaster
+            type: string
+          type: array
+        channel:
+          type: string
+        children:
+          items:
+            properties:
+              button:
+                enum:
+                  - U1
+                  - U2
+                  - U3
+                  - U4
+                  - V1
+                  - V2
+                  - V3
+                  - V4
+                  - ⬅️
+                  - ➡️
+                  - ⬆️
+                  - ⬇️
+                  - 🔄
+                  - Vary (Strong)
+                  - Vary (Subtle)
+                  - Zoom Out 1.5x
+                  - Zoom Out 2x
+                  - Make Square
+                  - Make Variations
+                  - Remaster
+                type: string
+              jobid:
+                type: string
+              messageId:
+                type: string
+            required:
+              - messageId
+              - button
+              - jobid
+            type: object
+          type: array
+        code:
+          enum:
+            - 200
+          type: integer
+        content:
+          description: Message generated by Midjourney reflecting current generation parameters and progress
+          type: string
+        created:
+          type: string
+        describeUrl:
+          type: string
+        embeds:
+          description: Contains additional information
+          items:
+            properties:
+              description:
+                type: string
+              image:
+                properties:
+                  height:
+                    type: number
+                  proxy_url:
+                    type: string
+                  url:
+                    type: string
+                  width:
+                    type: number
+                type: object
+              type:
+                type: string
+            type: object
+          type: array
+        jobid:
+          type: string
+        maxJobs:
+          type: integer
+        messageId:
+          type: string
+        parentJobId:
+          type: string
+        prompt:
+          type: string
+        server:
+          type: string
+        status:
+          description: If value is created, started or progress wait in a loop for at least 10..30 seconds and retry again
+          enum:
+            - created
+            - started
+            - moderated
+            - progress
+            - completed
+            - failed
+            - cancelled
+          type: string
+        timestamp:
+          type: string
+        updated:
+          type: string
+        verb:
+          enum:
+            - imagine
+            - button
+            - blend
+            - describe
+          type: string
+      required:
+        - jobid
+        - verb
+        - status
+        - created
+        - channel
+        - server
+        - maxJobs
+        - code
+      type: object
+    jobsResponse:
+      items:
+        type: string
+      type: array
+    responseError:
+      additionalProperties: false
+      properties:
+        code:
+          enum:
+            - 400
+            - 401
+            - 404
+            - 412
+            - 413
+          type: integer
+        error:
+          type: string
+      required:
+        - error
+        - code
+      type: object
+    responseMaxJobs:
+      additionalProperties: false
+      properties:
+        code:
+          enum:
+            - 429
+          type: integer
+        error:
+          type: string
+        executingJobs:
+          items:
+            type: string
+          type: array
+      required:
+        - error
+        - executingJobs
+        - code
+      type: object
+  securitySchemes:
+    apiToken:
+      description: API Token
+      scheme: bearer
+      type: http

@@ -1,0 +1,239 @@
+openapi: 3.0.3
+servers:
+  - url: https://api.currencytick.com
+info:
+  description: ""
+  title: Currencytick API Documentation
+  version: 1.0.0
+  x-apisguru-categories:
+    - financial
+  x-logo:
+    url: https://dashboard.currencytick.com/svg/logo.svg
+  x-origin:
+    - format: openapi
+      url: https://dashboard.currencytick.com/docs/openapi.yaml
+      version: "3.0"
+  x-providerName: currencytick.com
+security:
+  - default: []
+tags:
+  - description: ""
+    name: Endpoints
+paths:
+  /healthcheck:
+    get:
+      description: |-
+        Check that the service is up. If everything is okay, you'll get a 200 OK response.
+
+        Otherwise, the request will fail with a 400 error, and a response listing the failed services.
+      operationId: healthcheck
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                  status: up
+                properties:
+                  status:
+                    description: The status of this API (`up` or `down`).
+                    example: up
+                    type: string
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json:
+              schema:
+                example:
+                  status: down
+                properties:
+                  status:
+                    description: The status of this API (`up` or `down`).
+                    example: down
+                    type: string
+                type: object
+          description: Service is unhealthy
+      security: []
+      summary: Healthcheck
+      tags:
+        - Endpoints
+  /historical:
+    get:
+      description: Get the exchange rate on a specific date
+      operationId: historicalExchangeRate
+      parameters:
+        - description: Authentication key.
+          example: YOUR_API_KEY
+          in: query
+          name: apikey
+          required: true
+          schema:
+            description: Authentication key.
+            example: YOUR_API_KEY
+            type: string
+        - description: The source currency.
+          example: USD
+          in: query
+          name: base
+          required: true
+          schema:
+            description: The source currency.
+            example: USD
+            type: string
+        - description: The target currency.
+          example: EUR
+          in: query
+          name: target
+          required: true
+          schema:
+            description: The target currency.
+            example: EUR
+            type: string
+        - description: The date to get the exchange rate.
+          example: 2023-04-18
+          in: query
+          name: date
+          required: true
+          schema:
+            description: The date to get the exchange rate.
+            example: 2023-04-18
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                  amount: "1"
+                  date: 2023-04-18
+                  from: USD
+                  rate: 0.911463076
+                  to: EUR
+                properties:
+                  amount:
+                    example: "1"
+                    type: string
+                  date:
+                    example: 2023-04-18
+                    type: string
+                  from:
+                    example: USD
+                    type: string
+                  rate:
+                    example: 0.911463076
+                    type: number
+                  to:
+                    example: EUR
+                    type: string
+                type: object
+          description: Success
+      summary: Historical Exchange Rate
+      tags:
+        - Endpoints
+  /live:
+    get:
+      description: Get the exchange rate between two currencies.
+      operationId: liveCurrencyExchangeRate
+      parameters:
+        - description: Authentication key.
+          example: YOUR_API_KEY
+          in: query
+          name: apikey
+          required: true
+          schema:
+            description: Authentication key.
+            example: YOUR_API_KEY
+            type: string
+        - description: The source currency.
+          example: USD
+          in: query
+          name: base
+          required: true
+          schema:
+            description: The source currency.
+            example: USD
+            type: string
+        - description: The target currency.
+          example: EUR
+          in: query
+          name: target
+          required: true
+          schema:
+            description: The target currency.
+            example: EUR
+            type: string
+        - description: optional The amount to convert.
+          example: 1
+          in: query
+          name: amount
+          required: false
+          schema:
+            description: optional The amount to convert.
+            example: 1
+            type: number
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                example:
+                  amount: "1"
+                  date: 2023-04-18
+                  from: USD
+                  rate: 0.911463076
+                  to: EUR
+                properties:
+                  amount:
+                    example: "1"
+                    type: string
+                  date:
+                    example: 2023-04-18
+                    type: string
+                  from:
+                    example: USD
+                    type: string
+                  rate:
+                    example: 0.911463076
+                    type: number
+                  to:
+                    example: EUR
+                    type: string
+                type: object
+          description: Success
+      summary: Live currency exchange rate
+      tags:
+        - Endpoints
+  /supported_currencies:
+    get:
+      description: Get the list of supported currencies, currently 220 currencies are supported.
+      operationId: listOfSupportedCurrencies
+      parameters:
+        - description: Authentication key.
+          example: YOUR_API_KEY
+          in: query
+          name: apikey
+          required: true
+          schema:
+            description: Authentication key.
+            example: YOUR_API_KEY
+            type: string
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                example: '{ "list" : ["USD", "EUR", ..]}'
+                type: string
+          description: Success
+      summary: List of supported currencies
+      tags:
+        - Endpoints
+components:
+  securitySchemes:
+    default:
+      description: ""
+      in: query
+      name: apikey
+      type: apiKey

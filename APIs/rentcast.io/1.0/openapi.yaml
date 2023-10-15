@@ -1,0 +1,2131 @@
+openapi: 3.1.0
+servers:
+  - url: https://api.rentcast.io/v1
+info:
+  title: RentCast API
+  version: "1.0"
+  x-apisguru-categories:
+    - financial
+  x-logo:
+    url: https://uploads-ssl.webflow.com/5fcfc6872ea226dee1432ecd/617c460a237cd21ffdb2b9f8_logo-icon.svg
+  x-origin:
+    - format: openapi
+      url: https://developers.rentcast.io/openapi/62980a560589b4001356b8a1
+      version: "3.1"
+  x-providerName: rentcast.io
+security:
+  - sec0: []
+paths:
+  /avm/rent/long-term:
+    get:
+      deprecated: false
+      description: Returns a property rent estimate and comparable properties.
+      operationId: rent-estimate-long-term
+      parameters:
+        - description: The full property address, in the format of `Street, City, State, Zip`. You need to provide either the `address` or the `latitude`/`longitude` parameters
+          in: query
+          name: address
+          schema:
+            default: 5500 Grand Lake Drive, San Antonio, TX, 78244
+            type: string
+        - description: The latitude of the property. The `latitude`/`longitude` can be provided instead of the `address` parameter
+          in: query
+          name: latitude
+          schema:
+            format: float
+            type: number
+        - description: The longitude of the property. The `latitude`/`longitude` can be provided instead of the `address` parameter
+          in: query
+          name: longitude
+          schema:
+            format: float
+            type: number
+        - description: The type of the property. See [explanation of property types](https://developers.rentcast.io/reference/property-types)
+          in: query
+          name: propertyType
+          schema:
+            default: Single Family
+            enum:
+              - Single Family
+              - Condo
+              - Townhouse
+              - Manufactured
+              - Multi-Family
+              - Apartment
+            type: string
+        - description: The number of bedrooms in the property. Use `0` to indicate a studio layout
+          in: query
+          name: bedrooms
+          schema:
+            default: 4
+            format: float
+            type: number
+        - description: The number of bathrooms in the property. Supports fractions to indicate partial bathrooms
+          in: query
+          name: bathrooms
+          schema:
+            default: 2
+            format: float
+            type: number
+        - description: The total living area size of the property, in square feet
+          in: query
+          name: squareFootage
+          schema:
+            default: 1600
+            format: float
+            type: number
+        - description: The maximum distance between comparable listings and the subject property, in miles
+          in: query
+          name: maxRadius
+          schema:
+            format: float
+            type: number
+        - description: The maximum number of days since comparable listings were last seen on the market, with a minimum of 1
+          in: query
+          name: daysOld
+          schema:
+            format: float
+            type: number
+        - description: The number of comparable listings to use when calculating the rent estimate, between 5 and 25. Defaults to 10 if not provided
+          in: query
+          name: compCount
+          schema:
+            default: 5
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Response:
+                  value: '{"rent":1800,"rentRangeLow":1740,"rentRangeHigh":1860,"longitude":-98.351442,"latitude":29.475962,"comparables":[{"id":"7410-Adaja-Riv,-San-Antonio,-TX-78244","formattedAddress":"7410 Adaja Riv, San Antonio, TX 78244","addressLine1":"7410 Adaja Riv","city":"San Antonio","state":"TX","zipCode":"78244","county":"Bexar","longitude":-98.344856,"latitude":29.481005,"propertyType":"Single Family","bedrooms":4,"bathrooms":2,"squareFootage":1627,"price":1850,"listedDate":"2023-01-22T00:00:00.000Z","lastSeenDate":"2023-02-17T00:00:00.000Z","daysOld":11,"distance":0.5282,"correlation":0.988},{"id":"7303-Avila-Vis,-San-Antonio,-TX-78244","formattedAddress":"7303 Avila Vis, San Antonio, TX 78244","addressLine1":"7303 Avila Vis","city":"San Antonio","state":"TX","zipCode":"78244","county":"Bexar","longitude":-98.34565,"latitude":29.483196,"propertyType":"Single Family","bedrooms":4,"bathrooms":2,"squareFootage":1627,"price":1850,"listedDate":"2023-02-03T00:00:00.000Z","lastSeenDate":"2023-02-17T00:00:00.000Z","daysOld":11,"distance":0.6099,"correlation":0.9867},{"id":"7331-Avila-Vis,-San-Antonio,-TX-78244","formattedAddress":"7331 Avila Vis, San Antonio, TX 78244","addressLine1":"7331 Avila Vis","city":"San Antonio","state":"TX","zipCode":"78244","county":"Bexar","longitude":-98.34481,"latitude":29.482922,"propertyType":"Single Family","bedrooms":4,"bathrooms":2,"squareFootage":1627,"price":1810,"listedDate":"2023-02-21T00:00:00.000Z","lastSeenDate":"2023-02-27T00:00:00.000Z","daysOld":1,"distance":0.6255,"correlation":0.9865},{"id":"7411-Avila-Vis,-San-Antonio,-TX-78244","formattedAddress":"7411 Avila Vis, San Antonio, TX 78244","addressLine1":"7411 Avila Vis","city":"San Antonio","state":"TX","zipCode":"78244","county":"Bexar","longitude":-98.344398,"latitude":29.482676,"propertyType":"Single Family","bedrooms":4,"bathrooms":2,"squareFootage":1627,"price":1815,"listedDate":"2023-01-16T00:00:00.000Z","lastSeenDate":"2023-02-10T00:00:00.000Z","daysOld":18,"distance":0.629,"correlation":0.9864},{"id":"7327-Plata-Cir,-San-Antonio,-TX-78244","formattedAddress":"7327 Plata Cir, San Antonio, TX 78244","addressLine1":"7327 Plata Cir","city":"San Antonio","state":"TX","zipCode":"78244","county":"Bexar","longitude":-98.344406,"latitude":29.480621,"propertyType":"Single Family","bedrooms":4,"bathrooms":2,"squareFootage":1492,"price":1680,"listedDate":"2023-01-12T00:00:00.000Z","lastSeenDate":"2023-02-08T00:00:00.000Z","daysOld":20,"distance":0.5323,"correlation":0.9758}]}'
+              schema:
+                properties:
+                  comparables:
+                    items:
+                      properties:
+                        addressLine1:
+                          example: 7410 Adaja Riv
+                          type: string
+                        bathrooms:
+                          default: 0
+                          example: 2
+                          type: integer
+                        bedrooms:
+                          default: 0
+                          example: 4
+                          type: integer
+                        city:
+                          example: San Antonio
+                          type: string
+                        correlation:
+                          default: 0
+                          example: 0.988
+                          type: number
+                        county:
+                          example: Bexar
+                          type: string
+                        daysOld:
+                          default: 0
+                          example: 11
+                          type: integer
+                        distance:
+                          default: 0
+                          example: 0.5282
+                          type: number
+                        formattedAddress:
+                          example: 7410 Adaja Riv, San Antonio, TX 78244
+                          type: string
+                        id:
+                          example: 7410-Adaja-Riv,-San-Antonio,-TX-78244
+                          type: string
+                        lastSeenDate:
+                          example: 2023-02-17T00:00:00.000Z
+                          type: string
+                        latitude:
+                          default: 0
+                          example: 29.481005
+                          type: number
+                        listedDate:
+                          example: 2023-01-22T00:00:00.000Z
+                          type: string
+                        longitude:
+                          default: 0
+                          example: -98.344856
+                          type: number
+                        price:
+                          default: 0
+                          example: 1850
+                          type: integer
+                        propertyType:
+                          example: Single Family
+                          type: string
+                        squareFootage:
+                          default: 0
+                          example: 1627
+                          type: integer
+                        state:
+                          example: TX
+                          type: string
+                        zipCode:
+                          example: "78244"
+                          type: string
+                      type: object
+                    type: array
+                  latitude:
+                    default: 0
+                    example: 29.475962
+                    type: number
+                  longitude:
+                    default: 0
+                    example: -98.351442
+                    type: number
+                  rent:
+                    default: 0
+                    example: 1800
+                    type: integer
+                  rentRangeHigh:
+                    default: 0
+                    example: 1860
+                    type: integer
+                  rentRangeLow:
+                    default: 0
+                    example: 1740
+                    type: integer
+                type: object
+          description: "200"
+      summary: Rent Estimate
+  /avm/value:
+    get:
+      deprecated: false
+      description: Returns a property value estimate and comparable properties.
+      operationId: value-estimate
+      parameters:
+        - description: The full property address, in the format of `Street, City, State, Zip`. You need to provide either the `address` or the `latitude`/`longitude` parameters
+          in: query
+          name: address
+          schema:
+            default: 5500 Grand Lake Drive, San Antonio, TX, 78244
+            type: string
+        - description: The latitude of the property. The `latitude`/`longitude` can be provided instead of the `address` parameter
+          in: query
+          name: latitude
+          schema:
+            format: float
+            type: number
+        - description: The longitude of the property. The `latitude`/`longitude` can be provided instead of the `address` parameter
+          in: query
+          name: longitude
+          schema:
+            format: float
+            type: number
+        - description: The type of the property. See [explanation of property types](https://developers.rentcast.io/reference/property-types)
+          in: query
+          name: propertyType
+          schema:
+            default: Single Family
+            enum:
+              - Single Family
+              - Condo
+              - Townhouse
+              - Manufactured
+              - Multi-Family
+              - Apartment
+              - Land
+            type: string
+        - description: The number of bedrooms in the property. Use `0` to indicate a studio layout
+          in: query
+          name: bedrooms
+          schema:
+            default: 4
+            format: float
+            type: number
+        - description: The number of bathrooms in the property. Supports fractions to indicate partial bathrooms
+          in: query
+          name: bathrooms
+          schema:
+            default: 2
+            format: float
+            type: number
+        - description: The total living area size of the property, in square feet
+          in: query
+          name: squareFootage
+          schema:
+            default: 1600
+            format: float
+            type: number
+        - description: The maximum distance between comparable listings and the subject property, in miles
+          in: query
+          name: maxRadius
+          schema:
+            format: float
+            type: number
+        - description: The maximum number of days since comparable listings were last seen on the market, with a minimum of 1
+          in: query
+          name: daysOld
+          schema:
+            format: float
+            type: number
+        - description: The number of comparable listings to use when calculating the value estimate, between 5 and 25. Defaults to 10 if not provided
+          in: query
+          name: compCount
+          schema:
+            default: 5
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Response:
+                  value: '{"price":232000,"priceRangeLow":213000,"priceRangeHigh":251000,"longitude":-98.351442,"latitude":29.475962,"comparables":[{"id":"6807-Blue-Lake-Dr,-San-Antonio,-TX-78244","formattedAddress":"6807 Blue Lake Dr, San Antonio, TX 78244","addressLine1":"6807 Blue Lake Dr","city":"San Antonio","state":"TX","zipCode":"78244","county":"Bexar","longitude":-98.354769,"latitude":29.476178,"propertyType":"Single Family","bedrooms":4,"bathrooms":2,"squareFootage":1518,"lotSize":6534,"yearBuilt":1972,"price":198000,"listedDate":"2023-02-18T00:00:00.000Z","lastSeenDate":"2023-02-23T00:00:00.000Z","daysOld":5,"distance":0.2009,"correlation":0.9891},{"id":"6823-Quail-Lk,-San-Antonio,-TX-78244","formattedAddress":"6823 Quail Lk, San Antonio, TX 78244","addressLine1":"6823 Quail Lk","city":"San Antonio","state":"TX","zipCode":"78244","county":"Bexar","longitude":-98.351689,"latitude":29.473522,"propertyType":"Single Family","bedrooms":4,"bathrooms":2,"squareFootage":1732,"lotSize":6621,"yearBuilt":1987,"price":243900,"listedDate":"2023-02-08T00:00:00.000Z","lastSeenDate":"2023-02-27T00:00:00.000Z","daysOld":1,"distance":0.1694,"correlation":0.9862},{"id":"5119-Pine-Lake-Dr,-San-Antonio,-TX-78244","formattedAddress":"5119 Pine Lake Dr, San Antonio, TX 78244","addressLine1":"5119 Pine Lake Dr","city":"San Antonio","state":"TX","zipCode":"78244","county":"Bexar","longitude":-98.35069,"latitude":29.470208,"propertyType":"Single Family","bedrooms":4,"bathrooms":2,"squareFootage":1734,"lotSize":6665,"yearBuilt":1989,"price":260000,"listedDate":"2023-01-30T00:00:00.000Z","lastSeenDate":"2023-02-27T00:00:00.000Z","daysOld":1,"distance":0.4006,"correlation":0.9818},{"id":"4710-Crystal-Farm,-San-Antonio,-TX-78244","formattedAddress":"4710 Crystal Farm, San Antonio, TX 78244","addressLine1":"4710 Crystal Farm","city":"San Antonio","state":"TX","zipCode":"78244","county":"Bexar","longitude":-98.361364,"latitude":29.470534,"propertyType":"Single Family","bedrooms":4,"bathrooms":2,"squareFootage":1514,"lotSize":5489,"yearBuilt":1999,"price":225000,"listedDate":"2023-01-13T00:00:00.000Z","lastSeenDate":"2023-02-09T00:00:00.000Z","daysOld":19,"distance":0.7057,"correlation":0.9793},{"id":"6162-Brandys-Farm,-San-Antonio,-TX-78244","formattedAddress":"6162 Brandys Farm, San Antonio, TX 78244","addressLine1":"6162 Brandys Farm","city":"San Antonio","state":"TX","zipCode":"78244","county":"Bexar","longitude":-98.366161,"latitude":29.469905,"propertyType":"Single Family","bedrooms":4,"bathrooms":2,"squareFootage":1646,"lotSize":5489,"yearBuilt":2003,"price":235000,"listedDate":"2023-02-25T00:00:00.000Z","lastSeenDate":"2023-02-27T00:00:00.000Z","daysOld":1,"distance":0.9804,"correlation":0.9779}]}'
+              schema:
+                properties:
+                  comparables:
+                    items:
+                      properties:
+                        addressLine1:
+                          example: 6807 Blue Lake Dr
+                          type: string
+                        bathrooms:
+                          default: 0
+                          example: 2
+                          type: integer
+                        bedrooms:
+                          default: 0
+                          example: 4
+                          type: integer
+                        city:
+                          example: San Antonio
+                          type: string
+                        correlation:
+                          default: 0
+                          example: 0.9891
+                          type: number
+                        county:
+                          example: Bexar
+                          type: string
+                        daysOld:
+                          default: 0
+                          example: 5
+                          type: integer
+                        distance:
+                          default: 0
+                          example: 0.2009
+                          type: number
+                        formattedAddress:
+                          example: 6807 Blue Lake Dr, San Antonio, TX 78244
+                          type: string
+                        id:
+                          example: 6807-Blue-Lake-Dr,-San-Antonio,-TX-78244
+                          type: string
+                        lastSeenDate:
+                          example: 2023-02-23T00:00:00.000Z
+                          type: string
+                        latitude:
+                          default: 0
+                          example: 29.476178
+                          type: number
+                        listedDate:
+                          example: 2023-02-18T00:00:00.000Z
+                          type: string
+                        longitude:
+                          default: 0
+                          example: -98.354769
+                          type: number
+                        lotSize:
+                          default: 0
+                          example: 6534
+                          type: integer
+                        price:
+                          default: 0
+                          example: 198000
+                          type: integer
+                        propertyType:
+                          example: Single Family
+                          type: string
+                        squareFootage:
+                          default: 0
+                          example: 1518
+                          type: integer
+                        state:
+                          example: TX
+                          type: string
+                        yearBuilt:
+                          default: 0
+                          example: 1972
+                          type: integer
+                        zipCode:
+                          example: "78244"
+                          type: string
+                      type: object
+                    type: array
+                  latitude:
+                    default: 0
+                    example: 29.475962
+                    type: number
+                  longitude:
+                    default: 0
+                    example: -98.351442
+                    type: number
+                  price:
+                    default: 0
+                    example: 232000
+                    type: integer
+                  priceRangeHigh:
+                    default: 0
+                    example: 251000
+                    type: integer
+                  priceRangeLow:
+                    default: 0
+                    example: 213000
+                    type: integer
+                type: object
+          description: "200"
+      summary: Value Estimate
+  /listings/rental/long-term:
+    get:
+      deprecated: false
+      description: Search for rental listings in a geographical area, or by a specific address.
+      operationId: rental-listings-long-term
+      parameters:
+        - description: The full address of the property, in the format of `Street, City, State, Zip`. Used to retrieve data for a specific property, or together with the `radius` parameter to search for listings in a specific area
+          in: query
+          name: address
+          schema:
+            type: string
+        - description: The name of the city, used to search for listings in a specific city. This parameter is case-sensitive
+          in: query
+          name: city
+          schema:
+            default: Austin
+            type: string
+        - description: The 2-character state abbreviation, used to search for listings in a specific state. This parameter is case-sensitive
+          in: query
+          name: state
+          schema:
+            default: TX
+            type: string
+        - description: The 5-digit zip code, used to search for listings in a specific zip code
+          in: query
+          name: zipCode
+          schema:
+            type: string
+        - description: The latitude of the search area. Use the `latitude`/`longitude` and `radius` parameters to search for listings in a specific area
+          in: query
+          name: latitude
+          schema:
+            format: float
+            type: number
+        - description: The longitude of the search area. Use the `latitude`/`longitude` and `radius` parameters to search for listings in a specific area
+          in: query
+          name: longitude
+          schema:
+            format: float
+            type: number
+        - description: The radius of the search area in miles, with a maximum of 100. Use in combination with the `latitude`/`longitude` or `address` parameters to search for listings in a specific area
+          in: query
+          name: radius
+          schema:
+            format: float
+            type: number
+        - description: The type of the property, used to search for listings matching this criteria. See [explanation of property types](https://developers.rentcast.io/reference/property-types)
+          in: query
+          name: propertyType
+          schema:
+            enum:
+              - Single Family
+              - Condo
+              - Townhouse
+              - Manufactured
+              - Multi-Family
+              - Apartment
+            type: string
+        - description: The number of bedrooms, used to search for listings matching this criteria. Use `0` to indicate a studio layout
+          in: query
+          name: bedrooms
+          schema:
+            format: float
+            type: number
+        - description: The number of bathrooms, used to search for listings matching this criteria. Supports fractions to indicate partial bathrooms
+          in: query
+          name: bathrooms
+          schema:
+            format: float
+            type: number
+        - description: The current listing status, used to search for listings matching this criteria
+          in: query
+          name: status
+          schema:
+            default: Active
+            enum:
+              - Active
+              - Inactive
+            type: string
+        - description: The maximum number of days since a property was listed on the market, with a minimum of 1
+          in: query
+          name: daysOld
+          schema:
+            format: float
+            type: number
+        - description: The maximum number of listings to return, between 1 and 500. Defaults to 50 if not provided. [Learn more](https://developers.rentcast.io/reference/pagination) about pagination
+          in: query
+          name: limit
+          schema:
+            default: 5
+            format: int32
+            type: integer
+        - description: The index of the first listing to return, used to paginate through large lists of results. Defaults to 0 if not provided. [Learn more](https://developers.rentcast.io/reference/pagination) about pagination
+          in: query
+          name: offset
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Response:
+                  value: '[{"id":"10015-Lake-Creek-Pkwy,-Austin,-TX-78729","formattedAddress":"10015 Lake Creek Pkwy, Austin, TX 78729","addressLine1":"10015 Lake Creek Pkwy","city":"Austin","state":"TX","zipCode":"78729","county":"Williamson","longitude":-97.786581,"latitude":30.466927,"propertyType":"Apartment","bedrooms":1,"bathrooms":1,"squareFootage":901,"yearBuilt":2001,"status":"Active","price":1885,"listedDate":"2023-01-13T00:00:00.000Z","removedDate":null,"createdDate":"2019-11-07T15:23:43.984Z","lastSeenDate":"2023-02-25T00:00:00.000Z","daysOnMarket":43},{"id":"1000-W-26th-St,-Apt-216,-Austin,-TX-78705","formattedAddress":"1000 W 26th St, Apt 216, Austin, TX 78705","addressLine1":"1000 W 26th St","addressLine2":"Apt 216","city":"Austin","state":"TX","zipCode":"78705","county":"Travis","longitude":-97.747833,"latitude":30.291138,"propertyType":"Condo","bedrooms":1,"bathrooms":1,"squareFootage":445,"lotSize":653,"yearBuilt":1973,"status":"Active","price":1275,"listedDate":"2022-11-21T00:00:00.000Z","removedDate":null,"createdDate":"2019-11-07T15:13:54.790Z","lastSeenDate":"2023-02-25T00:00:00.000Z","daysOnMarket":96},{"id":"10000-N-Lamar-Blvd,-Austin,-TX-78753","formattedAddress":"10000 N Lamar Blvd, Austin, TX 78753","addressLine1":"10000 N Lamar Blvd","city":"Austin","state":"TX","zipCode":"78753","county":"Travis","longitude":-97.695373,"latitude":30.369334,"propertyType":"Apartment","bedrooms":2,"bathrooms":1,"status":"Active","price":1294,"listedDate":"2022-12-22T00:00:00.000Z","removedDate":null,"createdDate":"2019-11-05T20:07:02.749Z","lastSeenDate":"2023-02-25T00:00:00.000Z","daysOnMarket":65},{"id":"1001-Collinwood-West-Dr,-Austin,-TX-78753","formattedAddress":"1001 Collinwood West Dr, Austin, TX 78753","addressLine1":"1001 Collinwood West Dr","city":"Austin","state":"TX","zipCode":"78753","county":"Travis","longitude":-97.67469,"latitude":30.37071,"propertyType":"Apartment","bedrooms":2,"bathrooms":1,"yearBuilt":2001,"status":"Active","price":925,"listedDate":"2022-12-22T00:00:00.000Z","removedDate":null,"createdDate":"2019-11-05T20:06:58.888Z","lastSeenDate":"2023-02-25T00:00:00.000Z","daysOnMarket":65},{"id":"10011-Stonelake-Blvd,-Austin,-TX-78759","formattedAddress":"10011 Stonelake Blvd, Austin, TX 78759","addressLine1":"10011 Stonelake Blvd","city":"Austin","state":"TX","zipCode":"78759","county":"Travis","longitude":-97.738149,"latitude":30.392466,"propertyType":"Apartment","bedrooms":1,"bathrooms":1,"squareFootage":924,"yearBuilt":2014,"status":"Active","price":1581,"listedDate":"2022-12-22T00:00:00.000Z","removedDate":null,"createdDate":"2019-11-07T14:53:38.218Z","lastSeenDate":"2023-02-25T00:00:00.000Z","daysOnMarket":65}]'
+              schema:
+                items:
+                  properties:
+                    addressLine1:
+                      example: 10015 Lake Creek Pkwy
+                      type: string
+                    bathrooms:
+                      default: 0
+                      example: 1
+                      type: integer
+                    bedrooms:
+                      default: 0
+                      example: 1
+                      type: integer
+                    city:
+                      example: Austin
+                      type: string
+                    county:
+                      example: Williamson
+                      type: string
+                    createdDate:
+                      example: 2019-11-07T15:23:43.984Z
+                      type: string
+                    daysOnMarket:
+                      default: 0
+                      example: 43
+                      type: integer
+                    formattedAddress:
+                      example: 10015 Lake Creek Pkwy, Austin, TX 78729
+                      type: string
+                    id:
+                      example: 10015-Lake-Creek-Pkwy,-Austin,-TX-78729
+                      type: string
+                    lastSeenDate:
+                      example: 2023-02-25T00:00:00.000Z
+                      type: string
+                    latitude:
+                      default: 0
+                      example: 30.466927
+                      type: number
+                    listedDate:
+                      example: 2023-01-13T00:00:00.000Z
+                      type: string
+                    longitude:
+                      default: 0
+                      example: -97.786581
+                      type: number
+                    price:
+                      default: 0
+                      example: 1885
+                      type: integer
+                    propertyType:
+                      example: Apartment
+                      type: string
+                    removedDate: {}
+                    squareFootage:
+                      default: 0
+                      example: 901
+                      type: integer
+                    state:
+                      example: TX
+                      type: string
+                    status:
+                      example: Active
+                      type: string
+                    yearBuilt:
+                      default: 0
+                      example: 2001
+                      type: integer
+                    zipCode:
+                      example: "78729"
+                      type: string
+                  type: object
+                type: array
+          description: "200"
+      summary: Rental Listings
+  "/listings/rental/long-term/{id}":
+    get:
+      deprecated: false
+      description: Returns a single rental listing matching the specified id.
+      operationId: rental-listing-long-term-by-id
+      parameters:
+        - description: The id of the property listing to return
+          in: path
+          name: id
+          required: true
+          schema:
+            default: 1702-Cherry-Orchard-Dr,-Austin,-TX-78745
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Response:
+                  value: '{"id":"1702-Cherry-Orchard-Dr,-Austin,-TX-78745","formattedAddress":"1702 Cherry Orchard Dr, Austin, TX 78745","addressLine1":"1702 Cherry Orchard Dr","city":"Austin","state":"TX","zipCode":"78745","county":"Travis","longitude":-97.802849,"latitude":30.201436,"propertyType":"Single Family","bedrooms":3,"bathrooms":1,"squareFootage":910,"lotSize":8233,"yearBuilt":1972,"status":"Active","price":2025,"listedDate":"2022-10-18T00:00:00.000Z","removedDate":null,"createdDate":"2022-10-18T00:00:00.000Z","lastSeenDate":"2022-12-02T00:00:00.000Z","daysOnMarket":45}	'
+              schema:
+                properties:
+                  addressLine1:
+                    example: 1702 Cherry Orchard Dr
+                    type: string
+                  bathrooms:
+                    default: 0
+                    example: 1
+                    type: integer
+                  bedrooms:
+                    default: 0
+                    example: 3
+                    type: integer
+                  city:
+                    example: Austin
+                    type: string
+                  county:
+                    example: Travis
+                    type: string
+                  createdDate:
+                    example: 2022-10-18T00:00:00.000Z
+                    type: string
+                  daysOnMarket:
+                    default: 0
+                    example: 45
+                    type: integer
+                  formattedAddress:
+                    example: 1702 Cherry Orchard Dr, Austin, TX 78745
+                    type: string
+                  id:
+                    example: 1702-Cherry-Orchard-Dr,-Austin,-TX-78745
+                    type: string
+                  lastSeenDate:
+                    example: 2022-12-02T00:00:00.000Z
+                    type: string
+                  latitude:
+                    default: 0
+                    example: 30.201436
+                    type: number
+                  listedDate:
+                    example: 2022-10-18T00:00:00.000Z
+                    type: string
+                  longitude:
+                    default: 0
+                    example: -97.802849
+                    type: number
+                  lotSize:
+                    default: 0
+                    example: 8233
+                    type: integer
+                  price:
+                    default: 0
+                    example: 2025
+                    type: integer
+                  propertyType:
+                    example: Single Family
+                    type: string
+                  removedDate: {}
+                  squareFootage:
+                    default: 0
+                    example: 910
+                    type: integer
+                  state:
+                    example: TX
+                    type: string
+                  status:
+                    example: Active
+                    type: string
+                  yearBuilt:
+                    default: 0
+                    example: 1972
+                    type: integer
+                  zipCode:
+                    example: "78745"
+                    type: string
+                type: object
+          description: "200"
+      summary: Rental Listing by Id
+  /listings/sale:
+    get:
+      deprecated: false
+      description: Search for sale listings in a geographical area, or by a specific address.
+      operationId: sale-listings
+      parameters:
+        - description: The full address of the property, in the format of `Street, City, State, Zip`. Used to retrieve data for a specific property, or together with the `radius` parameter to search for listings in a specific area
+          in: query
+          name: address
+          schema:
+            type: string
+        - description: The name of the city, used to search for listings in a specific city. This parameter is case-sensitive
+          in: query
+          name: city
+          schema:
+            default: Austin
+            type: string
+        - description: The 2-character state abbreviation, used to search for listings in a specific state. This parameter is case-sensitive
+          in: query
+          name: state
+          schema:
+            default: TX
+            type: string
+        - description: The 5-digit zip code, used to search for listings in a specific zip code
+          in: query
+          name: zipCode
+          schema:
+            type: string
+        - description: The latitude of the search area. Use the `latitude`/`longitude` and `radius` parameters to search for listings in a specific area
+          in: query
+          name: latitude
+          schema:
+            format: float
+            type: number
+        - description: The longitude of the search area. Use the `latitude`/`longitude` and `radius` parameters to search for listings in a specific area
+          in: query
+          name: longitude
+          schema:
+            format: float
+            type: number
+        - description: The radius of the search area in miles, with a maximum of 100. Use in combination with the `latitude`/`longitude` or `address` parameters to search for listings in a specific area
+          in: query
+          name: radius
+          schema:
+            format: float
+            type: number
+        - description: The type of the property, used to search for listings matching this criteria. See [explanation of property types](https://developers.rentcast.io/reference/property-types)
+          in: query
+          name: propertyType
+          schema:
+            enum:
+              - Single Family
+              - Condo
+              - Townhouse
+              - Manufactured
+              - Multi-Family
+              - Apartment
+              - Land
+            type: string
+        - description: The number of bedrooms, used to search for listings matching this criteria. Use `0` to indicate a studio layout
+          in: query
+          name: bedrooms
+          schema:
+            format: float
+            type: number
+        - description: The number of bathrooms, used to search for listings matching this criteria. Supports fractions to indicate partial bathrooms
+          in: query
+          name: bathrooms
+          schema:
+            format: float
+            type: number
+        - description: The current listing status, used to search for listings matching this criteria
+          in: query
+          name: status
+          schema:
+            default: Active
+            enum:
+              - Active
+              - Inactive
+            type: string
+        - description: The maximum number of days since a property was listed on the market, with a minimum of 1
+          in: query
+          name: daysOld
+          schema:
+            format: float
+            type: number
+        - description: The maximum number of listings to return, between 1 and 500. Defaults to 50 if not provided. [Learn more](https://developers.rentcast.io/reference/pagination) about pagination
+          in: query
+          name: limit
+          schema:
+            default: 5
+            format: int32
+            type: integer
+        - description: The index of the first listing to return, used to paginate through large lists of results. Defaults to 0 if not provided. [Learn more](https://developers.rentcast.io/reference/pagination) about pagination
+          in: query
+          name: offset
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Response:
+                  value: '[{"id":"12166-Metric-Blvd,-Apt-212,-Austin,-TX-78758","formattedAddress":"12166 Metric Blvd, Apt 212, Austin, TX 78758","addressLine1":"12166 Metric Blvd","addressLine2":"Apt 212","city":"Austin","state":"TX","zipCode":"78758","county":"Travis","longitude":-97.697869,"latitude":30.406796,"propertyType":"Condo","bedrooms":1,"bathrooms":1,"squareFootage":516,"lotSize":1568,"yearBuilt":1986,"status":"Active","price":205000,"listedDate":"2023-01-13T00:00:00.000Z","removedDate":null,"createdDate":"2020-09-15T05:26:05.426Z","lastSeenDate":"2023-02-25T00:00:00.000Z","daysOnMarket":43},{"id":"2212-Big-Horn-Dr,-Austin,-TX-78734","formattedAddress":"2212 Big Horn Dr, Austin, TX 78734","addressLine1":"2212 Big Horn Dr","city":"Austin","state":"TX","zipCode":"78734","county":"Travis","longitude":-97.916294,"latitude":30.372577,"propertyType":"Land","lotSize":10498,"status":"Active","price":265000,"listedDate":"2022-05-19T00:00:00.000Z","removedDate":null,"createdDate":"2020-09-15T04:00:54.343Z","lastSeenDate":"2023-02-25T00:00:00.000Z","daysOnMarket":282},{"id":"364-Seneca-Dr,-Austin,-TX-78737","formattedAddress":"364 Seneca Dr, Austin, TX 78737","addressLine1":"364 Seneca Dr","city":"Austin","state":"TX","zipCode":"78737","county":"Hays","longitude":-97.990657,"latitude":30.190639,"propertyType":"Land","lotSize":14680,"status":"Active","price":330000,"listedDate":"2022-12-30T00:00:00.000Z","removedDate":null,"createdDate":"2020-09-15T04:10:54.051Z","lastSeenDate":"2023-02-25T00:00:00.000Z","daysOnMarket":57},{"id":"1410-E-Applegate-Dr,-Austin,-TX-78753","formattedAddress":"1410 E Applegate Dr, Austin, TX 78753","addressLine1":"1410 E Applegate Dr","city":"Austin","state":"TX","zipCode":"78753","county":"Travis","longitude":-97.668667,"latitude":30.363393,"propertyType":"Land","lotSize":141526,"status":"Active","price":1100000,"listedDate":"2023-01-31T00:00:00.000Z","removedDate":null,"createdDate":"2020-09-15T05:26:05.430Z","lastSeenDate":"2023-02-25T00:00:00.000Z","daysOnMarket":25},{"id":"8417-Lakewood-Ridge-Cv,-Austin,-TX-78738","formattedAddress":"8417 Lakewood Ridge Cv, Austin, TX 78738","addressLine1":"8417 Lakewood Ridge Cv","city":"Austin","state":"TX","zipCode":"78738","county":"Travis","longitude":-98.03995,"latitude":30.295995,"propertyType":"Land","lotSize":45128,"status":"Active","price":799000,"listedDate":"2022-06-16T00:00:00.000Z","removedDate":null,"createdDate":"2020-09-15T18:20:57.279Z","lastSeenDate":"2023-02-25T00:00:00.000Z","daysOnMarket":254}]'
+              schema:
+                items:
+                  properties:
+                    addressLine1:
+                      example: 12166 Metric Blvd
+                      type: string
+                    addressLine2:
+                      example: Apt 212
+                      type: string
+                    bathrooms:
+                      default: 0
+                      example: 1
+                      type: integer
+                    bedrooms:
+                      default: 0
+                      example: 1
+                      type: integer
+                    city:
+                      example: Austin
+                      type: string
+                    county:
+                      example: Travis
+                      type: string
+                    createdDate:
+                      example: 2020-09-15T05:26:05.426Z
+                      type: string
+                    daysOnMarket:
+                      default: 0
+                      example: 43
+                      type: integer
+                    formattedAddress:
+                      example: 12166 Metric Blvd, Apt 212, Austin, TX 78758
+                      type: string
+                    id:
+                      example: 12166-Metric-Blvd,-Apt-212,-Austin,-TX-78758
+                      type: string
+                    lastSeenDate:
+                      example: 2023-02-25T00:00:00.000Z
+                      type: string
+                    latitude:
+                      default: 0
+                      example: 30.406796
+                      type: number
+                    listedDate:
+                      example: 2023-01-13T00:00:00.000Z
+                      type: string
+                    longitude:
+                      default: 0
+                      example: -97.697869
+                      type: number
+                    lotSize:
+                      default: 0
+                      example: 1568
+                      type: integer
+                    price:
+                      default: 0
+                      example: 205000
+                      type: integer
+                    propertyType:
+                      example: Condo
+                      type: string
+                    removedDate: {}
+                    squareFootage:
+                      default: 0
+                      example: 516
+                      type: integer
+                    state:
+                      example: TX
+                      type: string
+                    status:
+                      example: Active
+                      type: string
+                    yearBuilt:
+                      default: 0
+                      example: 1986
+                      type: integer
+                    zipCode:
+                      example: "78758"
+                      type: string
+                  type: object
+                type: array
+          description: "200"
+      summary: Sale Listings
+  "/listings/sale/{id}":
+    get:
+      deprecated: false
+      description: Returns a single sale listing matching the specified id.
+      operationId: sale-listing-by-id
+      parameters:
+        - description: The id of the property listing to return
+          in: path
+          name: id
+          required: true
+          schema:
+            default: 1702-Cherry-Orchard-Dr,-Austin,-TX-78745
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Response:
+                  value: '{"id":"1702-Cherry-Orchard-Dr,-Austin,-TX-78745","formattedAddress":"1702 Cherry Orchard Dr, Austin, TX 78745","addressLine1":"1702 Cherry Orchard Dr","city":"Austin","state":"TX","zipCode":"78745","county":"Travis","longitude":-97.802849,"latitude":30.201436,"propertyType":"Single Family","bedrooms":3,"bathrooms":1,"squareFootage":910,"lotSize":8233,"yearBuilt":1972,"status":"Active","price":385000,"listedDate":"2023-02-02T00:00:00.000Z","removedDate":null,"createdDate":"2020-09-20T00:00:00.000Z","lastSeenDate":"2023-02-25T00:00:00.000Z","daysOnMarket":23}	'
+              schema:
+                properties:
+                  addressLine1:
+                    example: 1702 Cherry Orchard Dr
+                    type: string
+                  bathrooms:
+                    default: 0
+                    example: 1
+                    type: integer
+                  bedrooms:
+                    default: 0
+                    example: 3
+                    type: integer
+                  city:
+                    example: Austin
+                    type: string
+                  county:
+                    example: Travis
+                    type: string
+                  createdDate:
+                    example: 2020-09-20T00:00:00.000Z
+                    type: string
+                  daysOnMarket:
+                    default: 0
+                    example: 23
+                    type: integer
+                  formattedAddress:
+                    example: 1702 Cherry Orchard Dr, Austin, TX 78745
+                    type: string
+                  id:
+                    example: 1702-Cherry-Orchard-Dr,-Austin,-TX-78745
+                    type: string
+                  lastSeenDate:
+                    example: 2023-02-25T00:00:00.000Z
+                    type: string
+                  latitude:
+                    default: 0
+                    example: 30.201436
+                    type: number
+                  listedDate:
+                    example: 2023-02-02T00:00:00.000Z
+                    type: string
+                  longitude:
+                    default: 0
+                    example: -97.802849
+                    type: number
+                  lotSize:
+                    default: 0
+                    example: 8233
+                    type: integer
+                  price:
+                    default: 0
+                    example: 385000
+                    type: integer
+                  propertyType:
+                    example: Single Family
+                    type: string
+                  removedDate: {}
+                  squareFootage:
+                    default: 0
+                    example: 910
+                    type: integer
+                  state:
+                    example: TX
+                    type: string
+                  status:
+                    example: Active
+                    type: string
+                  yearBuilt:
+                    default: 0
+                    example: 1972
+                    type: integer
+                  zipCode:
+                    example: "78745"
+                    type: string
+                type: object
+          description: "200"
+      summary: Sale Listing by Id
+  /markets:
+    get:
+      deprecated: false
+      description: Returns aggregate rental statistics and listing trends for a single US zip code.
+      operationId: market-statistics
+      parameters:
+        - description: A valid 5-digit US zip code
+          in: query
+          name: zipCode
+          required: true
+          schema:
+            default: "29611"
+            type: string
+        - description: The time range for historical record entries, in months. Defaults to 12 if not provided
+          in: query
+          name: historyRange
+          schema:
+            default: 6
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Response:
+                  value: '{"id":"29611","zipCode":"29611","rentalData":{"averageRent":1389,"minRent":750,"maxRent":2750,"totalListings":87,"dataByBedrooms":[{"bedrooms":1,"averageRent":1130,"minRent":875,"maxRent":1610,"totalListings":6},{"bedrooms":2,"averageRent":1286,"minRent":875,"maxRent":2750,"totalListings":34},{"bedrooms":3,"averageRent":1470,"minRent":750,"maxRent":2550,"totalListings":42},{"bedrooms":4,"averageRent":1719,"minRent":1150,"maxRent":1995,"totalListings":5}],"history":{"2023-05":{"averageRent":1392,"minRent":575,"maxRent":2900,"totalListings":106,"dataByBedrooms":[{"bedrooms":1,"averageRent":942,"minRent":575,"maxRent":1610,"totalListings":12},{"bedrooms":2,"averageRent":1325,"minRent":795,"maxRent":2700,"totalListings":52},{"bedrooms":3,"averageRent":1568,"minRent":871,"maxRent":2900,"totalListings":36},{"bedrooms":4,"averageRent":1814,"minRent":1595,"maxRent":1995,"totalListings":6}]},"2023-06":{"averageRent":1394,"minRent":575,"maxRent":2700,"totalListings":108,"dataByBedrooms":[{"bedrooms":1,"averageRent":938,"minRent":575,"maxRent":1610,"totalListings":10},{"bedrooms":2,"averageRent":1316,"minRent":795,"maxRent":2700,"totalListings":52},{"bedrooms":3,"averageRent":1552,"minRent":950,"maxRent":2400,"totalListings":40},{"bedrooms":4,"averageRent":1781,"minRent":1595,"maxRent":1995,"totalListings":6}]},"2023-07":{"averageRent":1392,"minRent":650,"maxRent":2700,"totalListings":102,"dataByBedrooms":[{"bedrooms":1,"averageRent":987,"minRent":650,"maxRent":1610,"totalListings":8},{"bedrooms":2,"averageRent":1300,"minRent":795,"maxRent":2700,"totalListings":45},{"bedrooms":3,"averageRent":1514,"minRent":950,"maxRent":2400,"totalListings":44},{"bedrooms":4,"averageRent":1797,"minRent":1595,"maxRent":1995,"totalListings":5}]},"2023-08":{"averageRent":1389,"minRent":750,"maxRent":2950,"totalListings":93,"dataByBedrooms":[{"bedrooms":1,"averageRent":1122,"minRent":875,"maxRent":1610,"totalListings":7},{"bedrooms":2,"averageRent":1274,"minRent":795,"maxRent":2700,"totalListings":42},{"bedrooms":3,"averageRent":1526,"minRent":750,"maxRent":2950,"totalListings":39},{"bedrooms":4,"averageRent":1657,"minRent":1095,"maxRent":1995,"totalListings":5}]},"2023-09":{"averageRent":1385,"minRent":750,"maxRent":2750,"totalListings":88,"dataByBedrooms":[{"bedrooms":1,"averageRent":1130,"minRent":875,"maxRent":1610,"totalListings":6},{"bedrooms":2,"averageRent":1282,"minRent":795,"maxRent":2750,"totalListings":35},{"bedrooms":3,"averageRent":1476,"minRent":750,"maxRent":2550,"totalListings":43},{"bedrooms":4,"averageRent":1686,"minRent":1150,"maxRent":1995,"totalListings":4}]},"2023-10":{"averageRent":1389,"minRent":750,"maxRent":2750,"totalListings":87,"dataByBedrooms":[{"bedrooms":1,"averageRent":1130,"minRent":875,"maxRent":1610,"totalListings":6},{"bedrooms":2,"averageRent":1286,"minRent":875,"maxRent":2750,"totalListings":34},{"bedrooms":3,"averageRent":1470,"minRent":750,"maxRent":2550,"totalListings":42},{"bedrooms":4,"averageRent":1719,"minRent":1150,"maxRent":1995,"totalListings":5}]}}}}'
+              schema:
+                properties:
+                  id:
+                    example: "29611"
+                    type: string
+                  rentalData:
+                    properties:
+                      averageRent:
+                        default: 0
+                        example: 1389
+                        type: integer
+                      dataByBedrooms:
+                        items:
+                          properties:
+                            averageRent:
+                              default: 0
+                              example: 1130
+                              type: integer
+                            bedrooms:
+                              default: 0
+                              example: 1
+                              type: integer
+                            maxRent:
+                              default: 0
+                              example: 1610
+                              type: integer
+                            minRent:
+                              default: 0
+                              example: 875
+                              type: integer
+                            totalListings:
+                              default: 0
+                              example: 6
+                              type: integer
+                          type: object
+                        type: array
+                      history:
+                        properties:
+                          2023-05:
+                            properties:
+                              averageRent:
+                                default: 0
+                                example: 1392
+                                type: integer
+                              dataByBedrooms:
+                                items:
+                                  properties:
+                                    averageRent:
+                                      default: 0
+                                      example: 942
+                                      type: integer
+                                    bedrooms:
+                                      default: 0
+                                      example: 1
+                                      type: integer
+                                    maxRent:
+                                      default: 0
+                                      example: 1610
+                                      type: integer
+                                    minRent:
+                                      default: 0
+                                      example: 575
+                                      type: integer
+                                    totalListings:
+                                      default: 0
+                                      example: 12
+                                      type: integer
+                                  type: object
+                                type: array
+                              maxRent:
+                                default: 0
+                                example: 2900
+                                type: integer
+                              minRent:
+                                default: 0
+                                example: 575
+                                type: integer
+                              totalListings:
+                                default: 0
+                                example: 106
+                                type: integer
+                            type: object
+                          2023-06:
+                            properties:
+                              averageRent:
+                                default: 0
+                                example: 1394
+                                type: integer
+                              dataByBedrooms:
+                                items:
+                                  properties:
+                                    averageRent:
+                                      default: 0
+                                      example: 938
+                                      type: integer
+                                    bedrooms:
+                                      default: 0
+                                      example: 1
+                                      type: integer
+                                    maxRent:
+                                      default: 0
+                                      example: 1610
+                                      type: integer
+                                    minRent:
+                                      default: 0
+                                      example: 575
+                                      type: integer
+                                    totalListings:
+                                      default: 0
+                                      example: 10
+                                      type: integer
+                                  type: object
+                                type: array
+                              maxRent:
+                                default: 0
+                                example: 2700
+                                type: integer
+                              minRent:
+                                default: 0
+                                example: 575
+                                type: integer
+                              totalListings:
+                                default: 0
+                                example: 108
+                                type: integer
+                            type: object
+                          2023-07:
+                            properties:
+                              averageRent:
+                                default: 0
+                                example: 1392
+                                type: integer
+                              dataByBedrooms:
+                                items:
+                                  properties:
+                                    averageRent:
+                                      default: 0
+                                      example: 987
+                                      type: integer
+                                    bedrooms:
+                                      default: 0
+                                      example: 1
+                                      type: integer
+                                    maxRent:
+                                      default: 0
+                                      example: 1610
+                                      type: integer
+                                    minRent:
+                                      default: 0
+                                      example: 650
+                                      type: integer
+                                    totalListings:
+                                      default: 0
+                                      example: 8
+                                      type: integer
+                                  type: object
+                                type: array
+                              maxRent:
+                                default: 0
+                                example: 2700
+                                type: integer
+                              minRent:
+                                default: 0
+                                example: 650
+                                type: integer
+                              totalListings:
+                                default: 0
+                                example: 102
+                                type: integer
+                            type: object
+                          2023-08:
+                            properties:
+                              averageRent:
+                                default: 0
+                                example: 1389
+                                type: integer
+                              dataByBedrooms:
+                                items:
+                                  properties:
+                                    averageRent:
+                                      default: 0
+                                      example: 1122
+                                      type: integer
+                                    bedrooms:
+                                      default: 0
+                                      example: 1
+                                      type: integer
+                                    maxRent:
+                                      default: 0
+                                      example: 1610
+                                      type: integer
+                                    minRent:
+                                      default: 0
+                                      example: 875
+                                      type: integer
+                                    totalListings:
+                                      default: 0
+                                      example: 7
+                                      type: integer
+                                  type: object
+                                type: array
+                              maxRent:
+                                default: 0
+                                example: 2950
+                                type: integer
+                              minRent:
+                                default: 0
+                                example: 750
+                                type: integer
+                              totalListings:
+                                default: 0
+                                example: 93
+                                type: integer
+                            type: object
+                          2023-09:
+                            properties:
+                              averageRent:
+                                default: 0
+                                example: 1385
+                                type: integer
+                              dataByBedrooms:
+                                items:
+                                  properties:
+                                    averageRent:
+                                      default: 0
+                                      example: 1130
+                                      type: integer
+                                    bedrooms:
+                                      default: 0
+                                      example: 1
+                                      type: integer
+                                    maxRent:
+                                      default: 0
+                                      example: 1610
+                                      type: integer
+                                    minRent:
+                                      default: 0
+                                      example: 875
+                                      type: integer
+                                    totalListings:
+                                      default: 0
+                                      example: 6
+                                      type: integer
+                                  type: object
+                                type: array
+                              maxRent:
+                                default: 0
+                                example: 2750
+                                type: integer
+                              minRent:
+                                default: 0
+                                example: 750
+                                type: integer
+                              totalListings:
+                                default: 0
+                                example: 88
+                                type: integer
+                            type: object
+                          2023-10:
+                            properties:
+                              averageRent:
+                                default: 0
+                                example: 1389
+                                type: integer
+                              dataByBedrooms:
+                                items:
+                                  properties:
+                                    averageRent:
+                                      default: 0
+                                      example: 1130
+                                      type: integer
+                                    bedrooms:
+                                      default: 0
+                                      example: 1
+                                      type: integer
+                                    maxRent:
+                                      default: 0
+                                      example: 1610
+                                      type: integer
+                                    minRent:
+                                      default: 0
+                                      example: 875
+                                      type: integer
+                                    totalListings:
+                                      default: 0
+                                      example: 6
+                                      type: integer
+                                  type: object
+                                type: array
+                              maxRent:
+                                default: 0
+                                example: 2750
+                                type: integer
+                              minRent:
+                                default: 0
+                                example: 750
+                                type: integer
+                              totalListings:
+                                default: 0
+                                example: 87
+                                type: integer
+                            type: object
+                        type: object
+                      maxRent:
+                        default: 0
+                        example: 2750
+                        type: integer
+                      minRent:
+                        default: 0
+                        example: 750
+                        type: integer
+                      totalListings:
+                        default: 0
+                        example: 87
+                        type: integer
+                    type: object
+                  zipCode:
+                    example: "29611"
+                    type: string
+                type: object
+          description: "200"
+      summary: Market Statistics
+  /properties:
+    get:
+      deprecated: false
+      description: Search for property records in a geographical area, or by a specific address.
+      operationId: property-records
+      parameters:
+        - description: The full address of the property, in the format of `Street, City, State, Zip`. Used to retrieve data for a specific property, or together with the `radius` parameter to search for properties in a specific area
+          in: query
+          name: address
+          schema:
+            default: 5500 Grand Lake Dr, San Antonio, TX, 78244
+            type: string
+        - description: The name of the city, used to search for properties in a specific city. This parameter is case-sensitive
+          in: query
+          name: city
+          schema:
+            type: string
+        - description: The 2-character state abbreviation, used to search for properties in a specific state. This parameter is case-sensitive
+          in: query
+          name: state
+          schema:
+            type: string
+        - description: The 5-digit zip code, used to search for properties in a specific zip code
+          in: query
+          name: zipCode
+          schema:
+            type: string
+        - description: The latitude of the search area. Use the `latitude`/`longitude` and `radius` parameters to search for properties in a specific area
+          in: query
+          name: latitude
+          schema:
+            format: float
+            type: number
+        - description: The longitude of the search area. Use the `latitude`/`longitude` and `radius` parameters to search for properties in a specific area
+          in: query
+          name: longitude
+          schema:
+            format: float
+            type: number
+        - description: The radius of the search area in miles, with a maximum of 100. Use in combination with the `latitude`/`longitude` or `address` parameters to search for properties in a specific area
+          in: query
+          name: radius
+          schema:
+            format: float
+            type: number
+        - description: The type of the property, used to search for properties matching this criteria. See [explanation of property types](https://developers.rentcast.io/reference/property-types)
+          in: query
+          name: propertyType
+          schema:
+            enum:
+              - Single Family
+              - Condo
+              - Townhouse
+              - Manufactured
+              - Multi-Family
+              - Apartment
+              - Land
+            type: string
+        - description: The number of bedrooms, used to search for properties matching this criteria. Use `0` to indicate a studio layout
+          in: query
+          name: bedrooms
+          schema:
+            format: float
+            type: number
+        - description: The number of bathrooms, used to search for properties matching this criteria. Supports fractions to indicate partial bathrooms
+          in: query
+          name: bathrooms
+          schema:
+            format: float
+            type: number
+        - description: The maximum number of property records to return, between 1 and 500. Defaults to 50 if not provided. [Learn more](https://developers.rentcast.io/reference/pagination) about pagination
+          in: query
+          name: limit
+          schema:
+            format: int32
+            type: integer
+        - description: The index of the first property record to return, used to paginate through large lists of results. Defaults to 0 if not provided. [Learn more](https://developers.rentcast.io/reference/pagination) about pagination
+          in: query
+          name: offset
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Response:
+                  value: '[{"id":"5500-Grand-Lake-Dr,-San-Antonio,-TX-78244","formattedAddress":"5500 Grand Lake Dr, San Antonio, TX 78244","addressLine1":"5500 Grand Lake Dr","city":"San Antonio","state":"TX","zipCode":"78244","county":"Bexar","longitude":-98.351451,"latitude":29.475953,"propertyType":"Single Family","bedrooms":3,"bathrooms":2,"squareFootage":1878,"lotSize":8843,"yearBuilt":1973,"assessorID":"05076-103-0500","legalDescription":"CB 5076A BLK 3 LOT 50","subdivision":"CONV A/S CODE","zoning":"RH","lastSaleDate":"2017-10-19T00:00:00.000Z","lastSalePrice":185000,"features":{"architectureType":"Contemporary","cooling":true,"coolingType":"Central","exteriorType":"Wood","floorCount":1,"foundationType":"Slab / Mat / Raft","garage":true,"garageType":"Garage","heating":true,"heatingType":"Forced Air","pool":true,"roofType":"Asphalt","roomCount":5,"unitCount":1},"taxAssessments":{"2019":{"value":135430,"land":23450,"improvements":111980},"2020":{"value":142610,"land":23450,"improvements":119160},"2021":{"value":163440,"land":45050,"improvements":118390},"2022":{"value":197600,"land":49560,"improvements":148040}},"propertyTaxes":{"2019":{"total":2984},"2020":{"total":3023},"2021":{"total":3455},"2022":{"total":4091}},"owner":{"names":["MICHAEL SMITH"],"mailingAddress":{"addressLine1":"149 Weaver Blvd","addressLine2":"# 264","city":"Weaverville","id":"149-Weaver-Blvd,---264,-Weaverville,-NC-28787","state":"NC","zipCode":"28787"}},"ownerOccupied":false}]'
+              schema:
+                items:
+                  properties:
+                    addressLine1:
+                      example: 5500 Grand Lake Dr
+                      type: string
+                    assessorID:
+                      example: 05076-103-0500
+                      type: string
+                    bathrooms:
+                      default: 0
+                      example: 2
+                      type: integer
+                    bedrooms:
+                      default: 0
+                      example: 3
+                      type: integer
+                    city:
+                      example: San Antonio
+                      type: string
+                    county:
+                      example: Bexar
+                      type: string
+                    features:
+                      properties:
+                        architectureType:
+                          example: Contemporary
+                          type: string
+                        cooling:
+                          default: true
+                          example: true
+                          type: boolean
+                        coolingType:
+                          example: Central
+                          type: string
+                        exteriorType:
+                          example: Wood
+                          type: string
+                        floorCount:
+                          default: 0
+                          example: 1
+                          type: integer
+                        foundationType:
+                          example: Slab / Mat / Raft
+                          type: string
+                        garage:
+                          default: true
+                          example: true
+                          type: boolean
+                        garageType:
+                          example: Garage
+                          type: string
+                        heating:
+                          default: true
+                          example: true
+                          type: boolean
+                        heatingType:
+                          example: Forced Air
+                          type: string
+                        pool:
+                          default: true
+                          example: true
+                          type: boolean
+                        roofType:
+                          example: Asphalt
+                          type: string
+                        roomCount:
+                          default: 0
+                          example: 5
+                          type: integer
+                        unitCount:
+                          default: 0
+                          example: 1
+                          type: integer
+                      type: object
+                    formattedAddress:
+                      example: 5500 Grand Lake Dr, San Antonio, TX 78244
+                      type: string
+                    id:
+                      example: 5500-Grand-Lake-Dr,-San-Antonio,-TX-78244
+                      type: string
+                    lastSaleDate:
+                      example: 2017-10-19T00:00:00.000Z
+                      type: string
+                    lastSalePrice:
+                      default: 0
+                      example: 185000
+                      type: integer
+                    latitude:
+                      default: 0
+                      example: 29.475953
+                      type: number
+                    legalDescription:
+                      example: CB 5076A BLK 3 LOT 50
+                      type: string
+                    longitude:
+                      default: 0
+                      example: -98.351451
+                      type: number
+                    lotSize:
+                      default: 0
+                      example: 8843
+                      type: integer
+                    owner:
+                      properties:
+                        mailingAddress:
+                          properties:
+                            addressLine1:
+                              example: 149 Weaver Blvd
+                              type: string
+                            addressLine2:
+                              example: "# 264"
+                              type: string
+                            city:
+                              example: Weaverville
+                              type: string
+                            id:
+                              example: 149-Weaver-Blvd,---264,-Weaverville,-NC-28787
+                              type: string
+                            state:
+                              example: NC
+                              type: string
+                            zipCode:
+                              example: "28787"
+                              type: string
+                          type: object
+                        names:
+                          items:
+                            example: MICHAEL SMITH
+                            type: string
+                          type: array
+                      type: object
+                    ownerOccupied:
+                      default: true
+                      example: false
+                      type: boolean
+                    propertyTaxes:
+                      properties:
+                        "2019":
+                          properties:
+                            total:
+                              default: 0
+                              example: 2984
+                              type: integer
+                          type: object
+                        "2020":
+                          properties:
+                            total:
+                              default: 0
+                              example: 3023
+                              type: integer
+                          type: object
+                        "2021":
+                          properties:
+                            total:
+                              default: 0
+                              example: 3455
+                              type: integer
+                          type: object
+                        "2022":
+                          properties:
+                            total:
+                              default: 0
+                              example: 4091
+                              type: integer
+                          type: object
+                      type: object
+                    propertyType:
+                      example: Single Family
+                      type: string
+                    squareFootage:
+                      default: 0
+                      example: 1878
+                      type: integer
+                    state:
+                      example: TX
+                      type: string
+                    subdivision:
+                      example: CONV A/S CODE
+                      type: string
+                    taxAssessments:
+                      properties:
+                        "2019":
+                          properties:
+                            improvements:
+                              default: 0
+                              example: 111980
+                              type: integer
+                            land:
+                              default: 0
+                              example: 23450
+                              type: integer
+                            value:
+                              default: 0
+                              example: 135430
+                              type: integer
+                          type: object
+                        "2020":
+                          properties:
+                            improvements:
+                              default: 0
+                              example: 119160
+                              type: integer
+                            land:
+                              default: 0
+                              example: 23450
+                              type: integer
+                            value:
+                              default: 0
+                              example: 142610
+                              type: integer
+                          type: object
+                        "2021":
+                          properties:
+                            improvements:
+                              default: 0
+                              example: 118390
+                              type: integer
+                            land:
+                              default: 0
+                              example: 45050
+                              type: integer
+                            value:
+                              default: 0
+                              example: 163440
+                              type: integer
+                          type: object
+                        "2022":
+                          properties:
+                            improvements:
+                              default: 0
+                              example: 148040
+                              type: integer
+                            land:
+                              default: 0
+                              example: 49560
+                              type: integer
+                            value:
+                              default: 0
+                              example: 197600
+                              type: integer
+                          type: object
+                      type: object
+                    yearBuilt:
+                      default: 0
+                      example: 1973
+                      type: integer
+                    zipCode:
+                      example: "78244"
+                      type: string
+                    zoning:
+                      example: RH
+                      type: string
+                  type: object
+                type: array
+          description: "200"
+      summary: Property Records
+  /properties/random:
+    get:
+      deprecated: false
+      description: Returns a list of property records selected at random.
+      operationId: property-records-random
+      parameters:
+        - description: The number of records to return, between 1 and 500. Defaults to 50 if not provided
+          in: query
+          name: limit
+          schema:
+            default: 5
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Response:
+                  value: '[{"id":"602-University-Dr,-Waldorf,-MD-20602","formattedAddress":"602 University Dr, Waldorf, MD 20602","addressLine1":"602 University Dr","city":"Waldorf","state":"MD","zipCode":"20602","county":"Charles","longitude":-76.916982,"latitude":38.589637,"propertyType":"Single Family","bedrooms":3,"bathrooms":1.5,"squareFootage":1500,"lotSize":11221,"yearBuilt":1977,"assessorID":"06-078761","legalDescription":"L-36 B-66 S-IV-B CARRINGTON NEIGHBORHOOD ST CHARLES SUB","subdivision":"CHARLES SUB","zoning":"RH","lastSaleDate":"2006-12-11T00:00:00.000Z","lastSalePrice":298000,"features":{"architectureType":"Split Level","cooling":true,"coolingType":"Commercial","exteriorType":"Aluminum / Vinyl Siding","fireplace":true,"fireplaceType":"2 Story Brick Chimney","floorCount":2,"garage":true,"garageType":"Garage","heating":true,"heatingType":"Forced Air","roofType":"Composition Shingle","unitCount":1},"taxAssessments":{"2022":{"value":224100}},"propertyTaxes":{"2022":{"total":2808}},"owner":{"names":["PRISCILLA D HARLEY"],"mailingAddress":{"id":"602-University-Dr,-Waldorf,-MD-20602","addressLine1":"602 University Dr","city":"Waldorf","state":"MD","zipCode":"20602"}},"ownerOccupied":true},{"id":"10228-Enniscrone-Rd,-Pineville,-NC-28134","formattedAddress":"10228 Enniscrone Rd, Pineville, NC 28134","addressLine1":"10228 Enniscrone Rd","city":"Pineville","state":"NC","zipCode":"28134","county":"Mecklenburg","longitude":-80.884813,"latitude":35.072198,"propertyType":"Single Family","bedrooms":3,"bathrooms":3,"squareFootage":2422,"lotSize":4356,"yearBuilt":2011,"assessorID":"221-112-10","legalDescription":"L71 M52-366","subdivision":"PARKWAY XING MAP 03","zoning":"BPCD","lastSaleDate":"2014-11-03T00:00:00.000Z","lastSalePrice":194000,"features":{"cooling":true,"coolingType":"Central","exteriorType":"Aluminum / Vinyl Siding","fireplace":true,"fireplaceType":"Prefab","floorCount":2,"foundationType":"Slab","garage":true,"garageType":"Garage","heating":true,"heatingType":"Steam"},"taxAssessments":{"2020":{"value":274700,"land":65000,"improvements":209700}},"propertyTaxes":{"2020":{"total":2601}},"owner":{"names":["ROBERT BROTHERTON"],"mailingAddress":{"id":"10228-Enniscrone-Rd,-Pineville,-NC-28134","addressLine1":"10228 Enniscrone Rd","city":"Pineville","state":"NC","zipCode":"28134"}},"ownerOccupied":true},{"id":"13-Stacy-Ln,-Gerrardstown,-WV-25420","formattedAddress":"13 Stacy Ln, Gerrardstown, WV 25420","addressLine1":"13 Stacy Ln","city":"Gerrardstown","state":"WV","zipCode":"25420","county":"Berkeley","longitude":-78.112123,"latitude":39.361939,"propertyType":"Land","lotSize":25265,"assessorID":"02-03- 35J-0001.0005","legalDescription":".5838 AC LOT E S/OF GERRARDSTOWN","features":{},"taxAssessments":{"2022":{"value":21900,"land":21900}},"propertyTaxes":{"2022":{"total":510}},"owner":{"names":["STACEY SILVER MILLER"],"mailingAddress":{"id":"412-Ronald-Ln,-Gerrardstown,-WV-25420","addressLine1":"412 Ronald Ln","city":"Gerrardstown","state":"WV","zipCode":"25420"}}},{"id":"3618-Warrensburg-Rd,-Delaware,-OH-43015","formattedAddress":"3618 Warrensburg Rd, Delaware, OH 43015","addressLine1":"3618 Warrensburg Rd","city":"Delaware","state":"OH","zipCode":"43015","county":"Delaware","longitude":-83.136307,"latitude":40.312936,"propertyType":"Single Family","bedrooms":4,"bathrooms":3,"squareFootage":2464,"lotSize":217844,"yearBuilt":1991,"assessorID":"520-410-01-079-000","legalDescription":"LANDS 20 5 4 15","subdivision":"RADNOR","lastSaleDate":"1996-12-09T00:00:00.000Z","lastSalePrice":220750,"features":{"architectureType":"Conventional","cooling":true,"coolingType":"Central","exteriorType":"Combination","fireplace":true,"floorCount":2,"garage":true,"garageSpaces":3,"garageType":"Garage","heating":true,"heatingType":"Baseboard","roomCount":7,"unitCount":1},"taxAssessments":{"2019":{"value":105560,"land":22610,"improvements":82950}},"propertyTaxes":{"2019":{"total":4465}},"owner":{"names":["D MATTHEW & NATALIE A KOEHLER"],"mailingAddress":{"id":"3618-Warrensburg-Rd,-Delaware,-OH-43015","addressLine1":"3618 Warrensburg Rd","city":"Delaware","state":"OH","zipCode":"43015"}},"ownerOccupied":true},{"id":"1314-S-Jackson-St,-Jacksonville,-TX-75766","formattedAddress":"1314 S Jackson St, Jacksonville, TX 75766","addressLine1":"1314 S Jackson St","city":"Jacksonville","state":"TX","zipCode":"75766","county":"Cherokee","longitude":-95.263369,"latitude":31.952003,"features":{}}]'
+              schema:
+                items:
+                  properties:
+                    addressLine1:
+                      example: 602 University Dr
+                      type: string
+                    assessorID:
+                      example: 06-078761
+                      type: string
+                    bathrooms:
+                      default: 0
+                      example: 1.5
+                      type: number
+                    bedrooms:
+                      default: 0
+                      example: 3
+                      type: integer
+                    city:
+                      example: Waldorf
+                      type: string
+                    county:
+                      example: Charles
+                      type: string
+                    features:
+                      properties:
+                        architectureType:
+                          example: Split Level
+                          type: string
+                        cooling:
+                          default: true
+                          example: true
+                          type: boolean
+                        coolingType:
+                          example: Commercial
+                          type: string
+                        exteriorType:
+                          example: Aluminum / Vinyl Siding
+                          type: string
+                        fireplace:
+                          default: true
+                          example: true
+                          type: boolean
+                        fireplaceType:
+                          example: 2 Story Brick Chimney
+                          type: string
+                        floorCount:
+                          default: 0
+                          example: 2
+                          type: integer
+                        garage:
+                          default: true
+                          example: true
+                          type: boolean
+                        garageType:
+                          example: Garage
+                          type: string
+                        heating:
+                          default: true
+                          example: true
+                          type: boolean
+                        heatingType:
+                          example: Forced Air
+                          type: string
+                        roofType:
+                          example: Composition Shingle
+                          type: string
+                        unitCount:
+                          default: 0
+                          example: 1
+                          type: integer
+                      type: object
+                    formattedAddress:
+                      example: 602 University Dr, Waldorf, MD 20602
+                      type: string
+                    id:
+                      example: 602-University-Dr,-Waldorf,-MD-20602
+                      type: string
+                    lastSaleDate:
+                      example: 2006-12-11T00:00:00.000Z
+                      type: string
+                    lastSalePrice:
+                      default: 0
+                      example: 298000
+                      type: integer
+                    latitude:
+                      default: 0
+                      example: 38.589637
+                      type: number
+                    legalDescription:
+                      example: L-36 B-66 S-IV-B CARRINGTON NEIGHBORHOOD ST CHARLES SUB
+                      type: string
+                    longitude:
+                      default: 0
+                      example: -76.916982
+                      type: number
+                    lotSize:
+                      default: 0
+                      example: 11221
+                      type: integer
+                    owner:
+                      properties:
+                        mailingAddress:
+                          properties:
+                            addressLine1:
+                              example: 602 University Dr
+                              type: string
+                            city:
+                              example: Waldorf
+                              type: string
+                            id:
+                              example: 602-University-Dr,-Waldorf,-MD-20602
+                              type: string
+                            state:
+                              example: MD
+                              type: string
+                            zipCode:
+                              example: "20602"
+                              type: string
+                          type: object
+                        names:
+                          items:
+                            example: PRISCILLA D HARLEY
+                            type: string
+                          type: array
+                      type: object
+                    ownerOccupied:
+                      default: true
+                      example: true
+                      type: boolean
+                    propertyTaxes:
+                      properties:
+                        "2022":
+                          properties:
+                            total:
+                              default: 0
+                              example: 2808
+                              type: integer
+                          type: object
+                      type: object
+                    propertyType:
+                      example: Single Family
+                      type: string
+                    squareFootage:
+                      default: 0
+                      example: 1500
+                      type: integer
+                    state:
+                      example: MD
+                      type: string
+                    subdivision:
+                      example: CHARLES SUB
+                      type: string
+                    taxAssessments:
+                      properties:
+                        "2022":
+                          properties:
+                            value:
+                              default: 0
+                              example: 224100
+                              type: integer
+                          type: object
+                      type: object
+                    yearBuilt:
+                      default: 0
+                      example: 1977
+                      type: integer
+                    zipCode:
+                      example: "20602"
+                      type: string
+                    zoning:
+                      example: RH
+                      type: string
+                  type: object
+                type: array
+          description: "200"
+      summary: Random Property Records
+  "/properties/{id}":
+    get:
+      deprecated: false
+      description: Returns a single property record matching the specified id.
+      operationId: property-record-by-id
+      parameters:
+        - description: The id of the property record to return
+          in: path
+          name: id
+          required: true
+          schema:
+            default: 5500-Grand-Lake-Dr,-San-Antonio,-TX-78244
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Response:
+                  value: '{"id":"5500-Grand-Lake-Dr,-San-Antonio,-TX-78244","formattedAddress":"5500 Grand Lake Dr, San Antonio, TX 78244","addressLine1":"5500 Grand Lake Dr","city":"San Antonio","state":"TX","zipCode":"78244","county":"Bexar","longitude":-98.351451,"latitude":29.475953,"propertyType":"Single Family","bedrooms":3,"bathrooms":2,"squareFootage":1878,"lotSize":8843,"yearBuilt":1973,"assessorID":"05076-103-0500","legalDescription":"CB 5076A BLK 3 LOT 50","subdivision":"CONV A/S CODE","zoning":"RH","lastSaleDate":"2017-10-19T00:00:00.000Z","lastSalePrice":185000,"features":{"architectureType":"Contemporary","cooling":true,"coolingType":"Central","exteriorType":"Wood","floorCount":1,"foundationType":"Slab / Mat / Raft","garage":true,"garageType":"Garage","heating":true,"heatingType":"Forced Air","pool":true,"roofType":"Asphalt","roomCount":5,"unitCount":1},"taxAssessments":{"2019":{"value":135430,"land":23450,"improvements":111980},"2020":{"value":142610,"land":23450,"improvements":119160},"2021":{"value":163440,"land":45050,"improvements":118390},"2022":{"value":197600,"land":49560,"improvements":148040}},"propertyTaxes":{"2019":{"total":2984},"2020":{"total":3023},"2021":{"total":3455},"2022":{"total":4091}},"owner":{"names":["MICHAEL SMITH"],"mailingAddress":{"addressLine1":"149 Weaver Blvd","addressLine2":"# 264","city":"Weaverville","id":"149-Weaver-Blvd,---264,-Weaverville,-NC-28787","state":"NC","zipCode":"28787"}},"ownerOccupied":false}'
+              schema:
+                properties:
+                  addressLine1:
+                    example: 5500 Grand Lake Dr
+                    type: string
+                  assessorID:
+                    example: 05076-103-0500
+                    type: string
+                  bathrooms:
+                    default: 0
+                    example: 2
+                    type: integer
+                  bedrooms:
+                    default: 0
+                    example: 3
+                    type: integer
+                  city:
+                    example: San Antonio
+                    type: string
+                  county:
+                    example: Bexar
+                    type: string
+                  features:
+                    properties:
+                      architectureType:
+                        example: Contemporary
+                        type: string
+                      cooling:
+                        default: true
+                        example: true
+                        type: boolean
+                      coolingType:
+                        example: Central
+                        type: string
+                      exteriorType:
+                        example: Wood
+                        type: string
+                      floorCount:
+                        default: 0
+                        example: 1
+                        type: integer
+                      foundationType:
+                        example: Slab / Mat / Raft
+                        type: string
+                      garage:
+                        default: true
+                        example: true
+                        type: boolean
+                      garageType:
+                        example: Garage
+                        type: string
+                      heating:
+                        default: true
+                        example: true
+                        type: boolean
+                      heatingType:
+                        example: Forced Air
+                        type: string
+                      pool:
+                        default: true
+                        example: true
+                        type: boolean
+                      roofType:
+                        example: Asphalt
+                        type: string
+                      roomCount:
+                        default: 0
+                        example: 5
+                        type: integer
+                      unitCount:
+                        default: 0
+                        example: 1
+                        type: integer
+                    type: object
+                  formattedAddress:
+                    example: 5500 Grand Lake Dr, San Antonio, TX 78244
+                    type: string
+                  id:
+                    example: 5500-Grand-Lake-Dr,-San-Antonio,-TX-78244
+                    type: string
+                  lastSaleDate:
+                    example: 2017-10-19T00:00:00.000Z
+                    type: string
+                  lastSalePrice:
+                    default: 0
+                    example: 185000
+                    type: integer
+                  latitude:
+                    default: 0
+                    example: 29.475953
+                    type: number
+                  legalDescription:
+                    example: CB 5076A BLK 3 LOT 50
+                    type: string
+                  longitude:
+                    default: 0
+                    example: -98.351451
+                    type: number
+                  lotSize:
+                    default: 0
+                    example: 8843
+                    type: integer
+                  owner:
+                    properties:
+                      mailingAddress:
+                        properties:
+                          addressLine1:
+                            example: 149 Weaver Blvd
+                            type: string
+                          addressLine2:
+                            example: "# 264"
+                            type: string
+                          city:
+                            example: Weaverville
+                            type: string
+                          id:
+                            example: 149-Weaver-Blvd,---264,-Weaverville,-NC-28787
+                            type: string
+                          state:
+                            example: NC
+                            type: string
+                          zipCode:
+                            example: "28787"
+                            type: string
+                        type: object
+                      names:
+                        items:
+                          example: MICHAEL SMITH
+                          type: string
+                        type: array
+                    type: object
+                  ownerOccupied:
+                    default: true
+                    example: false
+                    type: boolean
+                  propertyTaxes:
+                    properties:
+                      "2019":
+                        properties:
+                          total:
+                            default: 0
+                            example: 2984
+                            type: integer
+                        type: object
+                      "2020":
+                        properties:
+                          total:
+                            default: 0
+                            example: 3023
+                            type: integer
+                        type: object
+                      "2021":
+                        properties:
+                          total:
+                            default: 0
+                            example: 3455
+                            type: integer
+                        type: object
+                      "2022":
+                        properties:
+                          total:
+                            default: 0
+                            example: 4091
+                            type: integer
+                        type: object
+                    type: object
+                  propertyType:
+                    example: Single Family
+                    type: string
+                  squareFootage:
+                    default: 0
+                    example: 1878
+                    type: integer
+                  state:
+                    example: TX
+                    type: string
+                  subdivision:
+                    example: CONV A/S CODE
+                    type: string
+                  taxAssessments:
+                    properties:
+                      "2019":
+                        properties:
+                          improvements:
+                            default: 0
+                            example: 111980
+                            type: integer
+                          land:
+                            default: 0
+                            example: 23450
+                            type: integer
+                          value:
+                            default: 0
+                            example: 135430
+                            type: integer
+                        type: object
+                      "2020":
+                        properties:
+                          improvements:
+                            default: 0
+                            example: 119160
+                            type: integer
+                          land:
+                            default: 0
+                            example: 23450
+                            type: integer
+                          value:
+                            default: 0
+                            example: 142610
+                            type: integer
+                        type: object
+                      "2021":
+                        properties:
+                          improvements:
+                            default: 0
+                            example: 118390
+                            type: integer
+                          land:
+                            default: 0
+                            example: 45050
+                            type: integer
+                          value:
+                            default: 0
+                            example: 163440
+                            type: integer
+                        type: object
+                      "2022":
+                        properties:
+                          improvements:
+                            default: 0
+                            example: 148040
+                            type: integer
+                          land:
+                            default: 0
+                            example: 49560
+                            type: integer
+                          value:
+                            default: 0
+                            example: 197600
+                            type: integer
+                        type: object
+                    type: object
+                  yearBuilt:
+                    default: 0
+                    example: 1973
+                    type: integer
+                  zipCode:
+                    example: "78244"
+                    type: string
+                  zoning:
+                    example: RH
+                    type: string
+                type: object
+          description: "200"
+      summary: Property Record by Id
+components:
+  securitySchemes:
+    sec0:
+      in: header
+      name: X-Api-Key
+      type: apiKey
+x-readme:
+  explorer-enabled: true
+  headers: []
+  proxy-enabled: true
+  samples-enabled: true
+x-readme-fauxas: true
