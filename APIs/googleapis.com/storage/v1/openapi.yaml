@@ -34,6 +34,7 @@ tags:
   - name: buckets
   - name: channels
   - name: defaultObjectAccessControls
+  - name: managedFolders
   - name: notifications
   - name: objectAccessControls
   - name: objects
@@ -1192,6 +1193,401 @@ paths:
             - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - buckets
+  /b/{bucket}/managedFolders:
+    get:
+      description: Lists managed folders in the given bucket.
+      operationId: storage.managedFolders.list
+      parameters:
+        - description: Name of the bucket containing the managed folder.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of items return in a single page of responses.
+          in: query
+          name: pageSize
+          schema:
+            minimum: 0
+            type: integer
+        - description: A previously-returned page token representing part of the larger set of results to view.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: The managed folder name/path prefix to filter the output list of results.
+          in: query
+          name: prefix
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ManagedFolders"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_only
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - managedFolders
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Creates a new managed folder.
+      operationId: storage.managedFolders.insert
+      parameters:
+        - description: Name of the bucket containing the managed folder.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ManagedFolder"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ManagedFolder"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - managedFolders
+  /b/{bucket}/managedFolders/{managedFolder}:
+    delete:
+      description: Permanently deletes a managed folder.
+      operationId: storage.managedFolders.delete
+      parameters:
+        - description: Name of the bucket containing the managed folder.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: The managed folder name/path.
+          in: path
+          name: managedFolder
+          required: true
+          schema:
+            type: string
+        - description: If set, only deletes the managed folder if its metageneration matches this value.
+          in: query
+          name: ifMetagenerationMatch
+          schema:
+            type: string
+        - description: If set, only deletes the managed folder if its metageneration does not match this value.
+          in: query
+          name: ifMetagenerationNotMatch
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - managedFolders
+    get:
+      description: Returns metadata of the specified managed folder.
+      operationId: storage.managedFolders.get
+      parameters:
+        - description: Name of the bucket containing the managed folder.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: The managed folder name/path.
+          in: path
+          name: managedFolder
+          required: true
+          schema:
+            type: string
+        - description: Makes the return of the managed folder metadata conditional on whether the managed folder's current metageneration matches the given value.
+          in: query
+          name: ifMetagenerationMatch
+          schema:
+            type: string
+        - description: Makes the return of the managed folder metadata conditional on whether the managed folder's current metageneration does not match the given value.
+          in: query
+          name: ifMetagenerationNotMatch
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ManagedFolder"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_only
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - managedFolders
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+  /b/{bucket}/managedFolders/{managedFolder}/iam:
+    get:
+      description: Returns an IAM policy for the specified managed folder.
+      operationId: storage.managedFolders.getIamPolicy
+      parameters:
+        - description: Name of the bucket containing the managed folder.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: The managed folder name/path.
+          in: path
+          name: managedFolder
+          required: true
+          schema:
+            type: string
+        - description: The IAM policy format version to be returned. If the optionsRequestedPolicyVersion is for an older version that doesn't support part of the requested IAM policy, the request fails.
+          in: query
+          name: optionsRequestedPolicyVersion
+          schema:
+            minimum: 1
+            type: integer
+        - description: The project to be billed for this request. Required for Requester Pays buckets.
+          in: query
+          name: userProject
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_only
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - managedFolders
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    put:
+      description: Updates an IAM policy for the specified managed folder.
+      operationId: storage.managedFolders.setIamPolicy
+      parameters:
+        - description: Name of the bucket containing the managed folder.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: The managed folder name/path.
+          in: path
+          name: managedFolder
+          required: true
+          schema:
+            type: string
+        - description: The project to be billed for this request. Required for Requester Pays buckets.
+          in: query
+          name: userProject
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Policy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+      tags:
+        - managedFolders
+  /b/{bucket}/managedFolders/{managedFolder}/iam/testPermissions:
+    get:
+      description: Tests a set of permissions on the given managed folder to see which, if any, are held by the caller.
+      operationId: storage.managedFolders.testIamPermissions
+      parameters:
+        - description: Name of the bucket containing the managed folder.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: The managed folder name/path.
+          in: path
+          name: managedFolder
+          required: true
+          schema:
+            type: string
+        - description: Permissions to test.
+          explode: true
+          in: query
+          name: permissions
+          required: true
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - description: The project to be billed for this request. Required for Requester Pays buckets.
+          in: query
+          name: userProject
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestIamPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_only
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - managedFolders
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
   /b/{bucket}/notificationConfigs:
     get:
       description: Retrieves a list of notification subscriptions for a given bucket.
@@ -1410,6 +1806,11 @@ paths:
           name: endOffset
           schema:
             type: string
+        - description: Only applicable if delimiter is set to '/'. If true, will also include folders and managed folders (besides objects) in the returned prefixes.
+          in: query
+          name: includeFoldersAsPrefixes
+          schema:
+            type: boolean
         - description: If true, objects that end in exactly one instance of delimiter will have their metadata included in items in addition to prefixes.
           in: query
           name: includeTrailingDelimiter
@@ -4283,6 +4684,54 @@ components:
           description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
           type: string
       type: object
+    ManagedFolder:
+      description: A managed folder.
+      properties:
+        bucket:
+          description: The name of the bucket containing this managed folder.
+          type: string
+        createTime:
+          description: The creation time of the managed folder in RFC 3339 format.
+          format: date-time
+          type: string
+        id:
+          description: The ID of the managed folder, including the bucket name and managed folder name.
+          type: string
+        kind:
+          default: storage#managedFolder
+          description: The kind of item this is. For managed folders, this is always storage#managedFolder.
+          type: string
+        metageneration:
+          description: The version of the metadata for this managed folder. Used for preconditions and for detecting changes in metadata.
+          format: int64
+          type: string
+        name:
+          description: The name of the managed folder. Required if not specified by URL parameter.
+          type: string
+        selfLink:
+          description: The link to this managed folder.
+          type: string
+        updateTime:
+          description: The last update time of the managed folder metadata in RFC 3339 format.
+          format: date-time
+          type: string
+      type: object
+    ManagedFolders:
+      description: A list of managed folders.
+      properties:
+        items:
+          description: The list of items.
+          items:
+            $ref: "#/components/schemas/ManagedFolder"
+          type: array
+        kind:
+          default: storage#managedFolders
+          description: The kind of item this is. For lists of managed folders, this is always storage#managedFolders.
+          type: string
+        nextPageToken:
+          description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+          type: string
+      type: object
     Notification:
       description: A subscription to receive Google PubSub notifications.
       properties:
@@ -4581,7 +5030,7 @@ components:
           type: array
       type: object
     Policy:
-      description: A bucket/object IAM policy.
+      description: A bucket/object/managedFolder IAM policy.
       properties:
         bindings:
           description: An association between a role, which comes with a set of permissions, and members who may assume that role.
@@ -4630,7 +5079,7 @@ components:
           description: The kind of item this is. For policies, this is always storage#policy. This field is ignored on input.
           type: string
         resourceId:
-          description: "The ID of the resource to which this policy belongs. Will be of the form projects/_/buckets/bucket for buckets, and projects/_/buckets/bucket/objects/object for objects. A specific generation may be specified by appending #generationNumber to the end of the object name, e.g. projects/_/buckets/my-bucket/objects/data.txt#17. The current generation can be denoted with #0. This field is ignored on input."
+          description: "The ID of the resource to which this policy belongs. Will be of the form projects/_/buckets/bucket for buckets, projects/_/buckets/bucket/objects/object for objects, and projects/_/buckets/bucket/managedFolders/managedFolder. A specific generation may be specified by appending #generationNumber to the end of the object name, e.g. projects/_/buckets/my-bucket/objects/data.txt#17. The current generation can be denoted with #0. This field is ignored on input."
           type: string
         version:
           description: The IAM policy format version.
@@ -4674,7 +5123,7 @@ components:
           type: string
       type: object
     TestIamPermissionsResponse:
-      description: A storage.(buckets|objects).testIamPermissions response.
+      description: A storage.(buckets|objects|managedFolders).testIamPermissions response.
       properties:
         kind:
           default: storage#testIamPermissionsResponse
@@ -4682,7 +5131,7 @@ components:
           type: string
         permissions:
           description: |-
-            The permissions held by the caller. Permissions are always of the format storage.resource.capability, where resource is one of buckets or objects. The supported permissions are as follows:  
+            The permissions held by the caller. Permissions are always of the format storage.resource.capability, where resource is one of buckets, objects, or managedFolders. The supported permissions are as follows:  
             - storage.buckets.delete — Delete bucket.  
             - storage.buckets.get — Read bucket metadata.  
             - storage.buckets.getIamPolicy — Read bucket IAM policy.  
@@ -4696,7 +5145,13 @@ components:
             - storage.objects.create — Create object.  
             - storage.objects.list — List objects.  
             - storage.objects.setIamPolicy — Update object IAM policy.  
-            - storage.objects.update — Update object metadata.
+            - storage.objects.update — Update object metadata. 
+            - storage.managedFolders.delete — Delete managed folder.  
+            - storage.managedFolders.get — Read managed folder metadata.  
+            - storage.managedFolders.getIamPolicy — Read managed folder IAM policy.  
+            - storage.managedFolders.create — Create managed folder.  
+            - storage.managedFolders.list — List managed folders.  
+            - storage.managedFolders.setIamPolicy — Update managed folder IAM policy.
           items:
             type: string
           type: array

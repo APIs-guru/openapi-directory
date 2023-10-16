@@ -1370,9 +1370,11 @@ components:
             - TYPE_PROCESS_ABORTED
             - TYPE_RESTRICTION_VIOLATED
             - TYPE_RESOURCE_DELETED
+            - TYPE_ROLLOUT_UPDATE
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
             - false
             - false
             - false
@@ -1411,9 +1413,11 @@ components:
             - TYPE_PROCESS_ABORTED
             - TYPE_RESTRICTION_VIOLATED
             - TYPE_RESOURCE_DELETED
+            - TYPE_ROLLOUT_UPDATE
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
             - false
             - false
             - false
@@ -1678,9 +1682,11 @@ components:
             - TYPE_PROCESS_ABORTED
             - TYPE_RESTRICTION_VIOLATED
             - TYPE_RESOURCE_DELETED
+            - TYPE_ROLLOUT_UPDATE
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
             - false
             - false
             - false
@@ -2033,9 +2039,11 @@ components:
             - TYPE_PROCESS_ABORTED
             - TYPE_RESTRICTION_VIOLATED
             - TYPE_RESOURCE_DELETED
+            - TYPE_ROLLOUT_UPDATE
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
             - false
             - false
             - false
@@ -2602,9 +2610,11 @@ components:
             - TYPE_PROCESS_ABORTED
             - TYPE_RESTRICTION_VIOLATED
             - TYPE_RESOURCE_DELETED
+            - TYPE_ROLLOUT_UPDATE
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
             - false
             - false
             - false
@@ -2844,9 +2854,11 @@ components:
             - TYPE_PROCESS_ABORTED
             - TYPE_RESTRICTION_VIOLATED
             - TYPE_RESOURCE_DELETED
+            - TYPE_ROLLOUT_UPDATE
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
             - false
             - false
             - false
@@ -3106,9 +3118,11 @@ components:
             - TYPE_PROCESS_ABORTED
             - TYPE_RESTRICTION_VIOLATED
             - TYPE_RESOURCE_DELETED
+            - TYPE_ROLLOUT_UPDATE
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
             - false
             - false
             - false
@@ -3127,6 +3141,7 @@ components:
             - CLOUD_BUILD_UNAVAILABLE
             - EXECUTION_FAILED
             - CLOUD_BUILD_REQUEST_FAILED
+            - VERIFICATION_CONFIG_NOT_FOUND
             - CUSTOM_ACTION_NOT_FOUND
           readOnly: true
           type: string

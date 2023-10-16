@@ -1742,6 +1742,13 @@ components:
           description: The window used for ratelimiting runtime requests to connections.
           format: int64
           type: string
+        deploymentModel:
+          description: Indicate whether connector is deployed on GKE/CloudRun
+          enum:
+            - DEPLOYMENT_MODEL_UNSPECIFIED
+            - GKE_MST
+            - CLOUD_RUN_MST
+          type: string
         hpaConfig:
           $ref: "#/components/schemas/HPAConfig"
           description: HPA autoscaling config.
@@ -1905,6 +1912,7 @@ components:
           format: int32
           type: integer
         serviceAttachment:
+          deprecated: true
           description: "PSC service attachments. Format: projects/*/regions/*/serviceAttachments/*"
           type: string
       type: object
@@ -3002,6 +3010,23 @@ components:
           readOnly: true
           type: string
       type: object
+    NetworkConfig:
+      description: Regional Network Config.
+      properties:
+        egressIps:
+          description: Output only. Egress IPs
+          items:
+            type: string
+          readOnly: true
+          type: array
+        egressMode:
+          description: Optional. Egress mode for the network.
+          enum:
+            - NETWORK_EGRESS_MODE_UNSPECIFIED
+            - AUTO_IP
+            - STATIC_IP
+          type: string
+      type: object
     NodeConfig:
       description: Node configuration for the connection.
       properties:
@@ -3200,6 +3225,17 @@ components:
     RefreshConnectionSchemaMetadataRequest:
       description: Request message for ConnectorsService.RefreshConnectionSchemaMetadata.
       properties: {}
+      type: object
+    RegionalSettings:
+      description: Regional Settings details.
+      properties:
+        name:
+          description: "Output only. Resource name of the Connection. Format: projects/{project}/locations/{location}/regionalSettings"
+          readOnly: true
+          type: string
+        networkConfig:
+          $ref: "#/components/schemas/NetworkConfig"
+          description: Optional. Regional network config.
       type: object
     RepairEventingRequest:
       description: Request message for ConnectorsService.RepairEventing
