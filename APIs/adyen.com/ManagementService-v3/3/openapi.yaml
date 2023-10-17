@@ -1,6 +1,6 @@
 openapi: 3.1.0
 servers:
-  - url: https://management-test.adyen.com/v1
+  - url: https://management-test.adyen.com/v3
 info:
   contact:
     name: Adyen Developer Experience team
@@ -17,7 +17,7 @@ info:
     Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:
 
     ```text
-    https://management-test.adyen.com/v1/companies/{companyId}/webhooks
+    https://management-test.adyen.com/v3/companies/{companyId}/webhooks
     ```
 
     ## Going live
@@ -25,22 +25,22 @@ info:
     To access the live endpoints, you need an API key from your live Customer Area. Use this API key to make requests to:
 
     ```text
-    https://management-live.adyen.com/v1
+    https://management-live.adyen.com/v3
     ```
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: Management API
-  version: "1"
+  version: "3"
   x-apisguru-categories:
     - payment
   x-logo:
     url: https://twitter.com/Adyen/profile_image?size=original
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/ManagementService-v1.json
+      url: https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/ManagementService-v3.json
       version: "3.1"
   x-providerName: adyen.com
   x-publicVersion: true
-  x-serviceName: ManagementService
+  x-serviceName: ManagementService-v3
 tags:
   - name: Account - company level
   - name: Account - merchant level
@@ -304,6 +304,63 @@ paths:
       x-groupName: Android files - company level
       x-methodName: listAndroidApps
       x-sortIndex: 1
+    post:
+      description: |-
+        Uploads an Android APK file to Adyen.
+        The maximum APK file size is 200 MB.
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Android files read and write
+
+        >By choosing to upload, install, or run any third-party applications on an Adyen payment terminal, you accept full responsibility and liability for any consequences of uploading, installing, or running any such applications.
+      operationId: post-companies-companyId-androidApps
+      parameters:
+        - description: The unique identifier of the company account.
+          in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+      responses:
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Upload Android App
+      tags:
+        - Android files - company level
+      x-addedInVersion: "3"
+      x-groupName: Android files - company level
+      x-methodName: uploadAndroidApp
+      x-sortIndex: 4
   /companies/{companyId}/androidApps/{id}:
     get:
       description: |-
@@ -4804,8 +4861,6 @@ paths:
         content:
           application/json:
             examples:
-              add-payment-method:
-                $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-add-payment-method"
               add-payment-method-partner-model:
                 $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-add-payment-method-partner-model"
             schema:
@@ -4815,8 +4870,6 @@ paths:
           content:
             application/json:
               examples:
-                add-payment-method:
-                  $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-add-payment-method-200"
                 add-payment-method-partner-model:
                   $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-add-payment-method-partner-model-200"
               schema:
@@ -9469,6 +9522,69 @@ paths:
       x-groupName: Terminal actions - terminal level
       x-methodName: createTerminalAction
       x-sortIndex: 1
+  /terminals/{terminalId}/reassign:
+    post:
+      description: |-
+        Reassigns a payment terminal to a company account, merchant account, merchant account inventory, or a store.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Assign Terminal
+      operationId: post-terminals-terminalId-reassign
+      parameters:
+        - description: The unique identifier of the payment terminal.
+          in: path
+          name: terminalId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TerminalReassignmentRequest"
+      responses:
+        "200":
+          description: "No Content - look at the actual response code for the status of the request. "
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Reassign a terminal
+      tags:
+        - Terminals - terminal level
+      x-addedInVersion: "3"
+      x-groupName: Terminals - terminal level
+      x-methodName: reassignTerminal
+      x-sortIndex: 2
   /terminals/{terminalId}/terminalLogos:
     get:
       description: |-
@@ -12315,39 +12431,34 @@ components:
       description: Example response when getting terminals that your API credential has access to.
       summary: List of terminals
       value:
+        _links:
+          first:
+            href: https://management-test.adyen.com/v3/terminals?pageNumber=1&pageSize=20
+          last:
+            href: https://management-test.adyen.com/v3/terminals?pageNumber=1&pageSize=20
+          next:
+            href: https://management-test.adyen.com/v3/terminals?pageNumber=1&pageSize=20
+          self:
+            href: https://management-test.adyen.com/v3/terminals?pageNumber=0&pageSize=20
         data:
-          - assigned: true
-            city: Amsterdam
-            companyAccount: YOUR_COMPANY_ACCOUNT
-            countryCode: NL
-            deviceModel: S1F2
-            firmwareVersion: Castles_Android 1.79.4
-            iccid: "6006491286999921374"
-            id: S1F2-000150183300032
-            lastActivityDateTime: 2022-08-09T12:44:11+02:00
+          - assignment:
+              companyId: YOUR_COMPANY_ACCOUNT
+              merchantId: YOUR_MERCHANT_ACCOUNT
+              reassignmentTarget:
+                inventory: true
+              status: reassignmentInProgress
+              storeId: YOUR_STORE_ID
+            connectivity:
+              cellular:
+                iccid: "6006491286999921374"
+              wifi:
+                ipAddress: 198.51.100.1
+                macAddress: C4:6E:33:26:36:E4
+            firmwareVersion: Castles_Android 1.89.4
+            id: AMS1-000150183300032
+            model: AMS1
             serialNumber: "000150183300032"
-            status: OnlineToday
-            storeStatus: Active
-            wifiIp: 198.51.100.1
-            wifiMac: C4:6E:00:16:A1:01
-          - assigned: true
-            bluetoothMac: a4:60:11:83:0e:00
-            city: Amsterdam
-            companyAccount: YOUR_COMPANY_ACCOUNT
-            countryCode: NL
-            deviceModel: V400m
-            ethernetMac: 64:5a:ed:f5:68:55
-            firmwareVersion: Verifone_VOS 1.79.4
-            iccid: "6064364710330000000"
-            id: V400m-080020970
-            lastActivityDateTime: 2022-08-10T14:09:14+02:00
-            serialNumber: 080-020-970
-            status: onlineLast1Day
-            storeStatus: Active
-            wifiIp: 198.51.100.1
-            wifiMac: d0:17:69:7c:02:4d
-            wifiSsid: GUEST
-        itemsTotal: 2
+        itemsTotal: 1
         pagesTotal: 1
     get-terminals-terminalId-terminalLogos-success-200:
       description: Example response when getting the logo of a payment terminal
@@ -14756,25 +14867,6 @@ components:
         roles:
           - Checkout webservice role
         username: YOUR_USERNAME
-    post-merchants-merchantId-paymentMethodSettings-add-payment-method:
-      description: Example request to add a payment method
-      summary: Request a payment method
-      value:
-        countries:
-          - US
-        currencies:
-          - USD
-        type: visa
-    post-merchants-merchantId-paymentMethodSettings-add-payment-method-200:
-      description: Example response after sending a request to add a payment method
-      summary: Response code - 200 OK
-      value:
-        countries:
-          - US
-        currencies:
-          - USD
-        id: PM3227C223224K5FH84M8CBNH
-        type: visa
     post-merchants-merchantId-paymentMethodSettings-add-payment-method-partner-model:
       description: Example request to add Swish with a partner model setup
       summary: Request to add Swish
@@ -14784,7 +14876,8 @@ components:
           - SE
         currencies:
           - SEK
-        storeId: ST322LJ223223K5F4SQNR9XL5
+        storeIds:
+          - ST322LJ223223K5F4SQNR9XL5
         swish:
           swishNumber: "1231111111"
         type: swish
@@ -14798,7 +14891,8 @@ components:
         currencies:
           - SEK
         id: PM3227C223224K5FH84M8CBNH
-        storeId: ST322LJ223223K5F4SQNR9XL5
+        storeIds:
+          - ST322LJ223223K5F4SQNR9XL5
         swish:
           swishNumber: "1231111111"
         type: swish
@@ -16269,6 +16363,22 @@ components:
         description:
           description: Your description for this webhook configuration.
           type: string
+        encryptionProtocol:
+          description: |-
+            SSL version to access the public webhook URL specified in the `url` field. Possible values:
+            * **TLSv1.3**
+            * **TLSv1.2**
+            * **HTTP** - Only allowed on Test environment.
+
+            If not specified, the webhook will use `sslVersion`: **TLSv1.2**.
+          enum:
+            - HTTP
+            - TLSv1.2
+            - TLSv1.3
+          examples:
+            - TLSv1.2
+          type: string
+          x-addedInVersion: "2"
         filterMerchantAccountType:
           description: |+
             Shows how merchant accounts are filtered when configuring the webhook. 
@@ -16315,21 +16425,6 @@ components:
 
             Only applies if `communicationFormat`: **soap**.
           type: boolean
-        sslVersion:
-          description: |-
-            SSL version to access the public webhook URL specified in the `url` field. Possible values:
-            * **TLSv1.3**
-            * **TLSv1.2**
-            * **HTTP** - Only allowed on Test environment.
-
-            If not specified, the webhook will use `sslVersion`: **TLSv1.2**.
-          enum:
-            - HTTP
-            - TLSv1.2
-            - TLSv1.3
-          examples:
-            - TLSv1.2
-          type: string
         type:
           description: |-
             The type of webhook that is being created. Possible values are:
@@ -16504,6 +16599,22 @@ components:
         description:
           description: Your description for this webhook configuration.
           type: string
+        encryptionProtocol:
+          description: |-
+            SSL version to access the public webhook URL specified in the `url` field. Possible values:
+            * **TLSv1.3**
+            * **TLSv1.2**
+            * **HTTP** - Only allowed on Test environment.
+
+            If not specified, the webhook will use `sslVersion`: **TLSv1.2**.
+          enum:
+            - HTTP
+            - TLSv1.2
+            - TLSv1.3
+          examples:
+            - TLSv1.2
+          type: string
+          x-addedInVersion: "2"
         networkType:
           description: |-
             Network type for Terminal API notification webhooks. Possible values:
@@ -16524,21 +16635,6 @@ components:
 
             Only applies if `communicationFormat`: **soap**.
           type: boolean
-        sslVersion:
-          description: |-
-            SSL version to access the public webhook URL specified in the `url` field. Possible values:
-            * **TLSv1.3**
-            * **TLSv1.2**
-            * **HTTP** - Only allowed on Test environment.
-
-            If not specified, the webhook will use `sslVersion`: **TLSv1.2**.
-          enum:
-            - HTTP
-            - TLSv1.2
-            - TLSv1.3
-          examples:
-            - TLSv1.2
-          type: string
         type:
           description: |-
             The type of webhook that is being created. Possible values are:
@@ -16896,15 +16992,11 @@ components:
         - value
         - message
       type: object
-    InvalidFieldWrapper:
-      properties:
-        InvalidField:
-          $ref: "#/components/schemas/InvalidField"
     JSONObject:
       properties:
         paths:
           items:
-            $ref: "#/components/schemas/JSONPathWrapper"
+            $ref: "#/components/schemas/JSONPath"
           type: array
         rootPath:
           $ref: "#/components/schemas/JSONPath"
@@ -16916,10 +17008,6 @@ components:
             type: string
           type: array
       type: object
-    JSONPathWrapper:
-      properties:
-        JSONPath:
-          $ref: "#/components/schemas/JSONPath"
     Key:
       properties:
         identifier:
@@ -17642,9 +17730,12 @@ components:
         sofort:
           $ref: "#/components/schemas/SofortInfo"
           description: Sofort details.
-        storeId:
-          description: The ID of the [store](https://docs.adyen.com/api-explorer/#/ManagementService/latest/post/stores__resParam_id), if any.
-          type: string
+        storeIds:
+          description: The unique identifier of the store for which to configure the payment method, if any.
+          items:
+            type: string
+          type: array
+          x-addedInVersion: "3"
         swish:
           $ref: "#/components/schemas/SwishInfo"
           description: Swish details.
@@ -17684,7 +17775,7 @@ components:
         data:
           description: The list of supported payment methods and their details.
           items:
-            $ref: "#/components/schemas/PaymentMethodWrapper"
+            $ref: "#/components/schemas/PaymentMethod"
           type: array
         itemsTotal:
           description: Total number of items.
@@ -17851,9 +17942,12 @@ components:
         sofort:
           $ref: "#/components/schemas/SofortInfo"
           description: Sofort details.
-        storeId:
-          description: The ID of the [store](https://docs.adyen.com/api-explorer/#/ManagementService/latest/post/stores__resParam_id), if any.
-          type: string
+        storeIds:
+          description: The unique identifier of the store for which to configure the payment method, if any.
+          items:
+            type: string
+          type: array
+          x-addedInVersion: "3"
         swish:
           $ref: "#/components/schemas/SwishInfo"
           description: Swish details.
@@ -17922,10 +18016,6 @@ components:
       required:
         - type
       type: object
-    PaymentMethodWrapper:
-      properties:
-        PaymentMethod:
-          $ref: "#/components/schemas/PaymentMethod"
     PayoutSettings:
       properties:
         allowed:
@@ -18193,7 +18283,7 @@ components:
         invalidFields:
           description: Detailed explanation of each validation error, when applicable.
           items:
-            $ref: "#/components/schemas/InvalidFieldWrapper"
+            $ref: "#/components/schemas/InvalidField"
           type: array
         requestId:
           description: A unique reference for the request, essentially the same as `pspReference`.
@@ -18270,14 +18360,6 @@ components:
         storeId:
           description: The unique ID of the [store](https://docs.adyen.com/api-explorer/#/ManagementService/latest/get/stores). If present, all terminals in the `terminalIds` list must be assigned to this store.
           type: string
-        terminalIds:
-          deprecated: true
-          description: A list of unique IDs of the terminals that the action applies to.
-          items:
-            type: string
-          type: array
-          x-deprecatedInVersion: "1"
-          x-deprecatedMessage: Use `items.terminalId` instead
         terminalsWithErrors:
           additionalProperties:
             items:
@@ -18609,7 +18691,7 @@ components:
           description: The unique identifier of the merchant account that the store belongs to.
           type: string
         phoneNumber:
-          description: The phone number of the store, including '+' and country code.
+          description: "The phone number of the store, including '+' and country code in the [E.164](https://en.wikipedia.org/wiki/E.164) format. If passed in a different format, we convert and validate the phone number against E.164. "
           type: string
         reference:
           description: |-
@@ -18660,7 +18742,7 @@ components:
 
           type: string
         phoneNumber:
-          description: The phone number of the store, including '+' and country code.
+          description: "The phone number of the store, including '+' and country code in the [E.164](https://en.wikipedia.org/wiki/E.164) format. If passed in a different format, we convert and validate the phone number against E.164. "
           type: string
         reference:
           description: |-
@@ -18711,7 +18793,7 @@ components:
           description: The unique identifier of the merchant account that the store belongs to.
           type: string
         phoneNumber:
-          description: The phone number of the store, including '+' and country code.
+          description: "The phone number of the store, including '+' and country code in the [E.164](https://en.wikipedia.org/wiki/E.164) format. If passed in a different format, we convert and validate the phone number against E.164. "
           type: string
         reference:
           description: |-
@@ -18803,97 +18885,36 @@ components:
       type: object
     Terminal:
       properties:
-        assigned:
-          deprecated: true
-          description: The [assignment status](https://docs.adyen.com/point-of-sale/automating-terminal-management/assign-terminals-api) of the terminal. If true, the terminal is assigned. If false, the terminal is in inventory and can't be boarded.
-          type: boolean
-        bluetoothIp:
-          deprecated: true
-          description: The Bluetooth IP address of the terminal.
-          type: string
-        bluetoothMac:
-          deprecated: true
-          description: The Bluetooth MAC address of the terminal.
-          type: string
-        city:
-          deprecated: true
-          description: The city where the terminal is located.
-          type: string
-        companyAccount:
-          deprecated: true
-          description: The company account that the terminal is associated with. If this is the only account level shown in the response, the terminal is assigned to the inventory of the company account.
-          type: string
-        countryCode:
-          deprecated: true
-          description: The country code of the country where the terminal is located.
-          type: string
-        deviceModel:
-          deprecated: true
-          description: The model name of the terminal.
-          type: string
-        ethernetIp:
-          deprecated: true
-          description: The ethernet IP address of the terminal.
-          type: string
-        ethernetMac:
-          deprecated: true
-          description: The ethernet MAC address of the terminal.
-          type: string
+        assignment:
+          $ref: "#/components/schemas/TerminalAssignment"
+          description: Indicates the account level to which the terminal is assigned, the [assignment status](https://docs.adyen.com/point-of-sale/automating-terminal-management/assign-terminals-api), and where the terminals is in the process of being reassigned to.
+          x-addedInVersion: "2"
+        connectivity:
+          $ref: "#/components/schemas/TerminalConnectivity"
+          description: Information about bluetooth, cellular, ethernet and wifi connectivity for the terminal.
+          x-addedInVersion: "2"
         firmwareVersion:
           description: The software release currently in use on the terminal.
-          type: string
-        iccid:
-          deprecated: true
-          description: The integrated circuit card identifier (ICCID) of the SIM card in the terminal.
           type: string
         id:
           description: The unique identifier of the terminal.
           type: string
-        lastActivityDateTime:
-          deprecated: true
+        lastActivityAt:
           description: Date and time of the last activity on the terminal. Not included when the last activity was more than 14 days ago.
           format: date-time
           type: string
-        lastTransactionDateTime:
-          deprecated: true
-          description: Date and time of the last transaction on the terminal.
+          x-addedInVersion: "2"
+        lastTransactionAt:
+          description: Date and time of the last transaction on the terminal. Not included when the last transaction was more than 14 days ago.
           format: date-time
           type: string
-        linkNegotiation:
-          deprecated: true
-          description: |-
-            The Ethernet link negotiation that the terminal uses:
-
-            - `auto`: Auto-negotiation
-
-            - `100full`: 100 Mbps full duplex
+          x-addedInVersion: "2"
+        model:
+          description: The model name of the terminal.
           type: string
+          x-addedInVersion: "2"
         serialNumber:
           description: The serial number of the terminal.
-          type: string
-        simStatus:
-          deprecated: true
-          description: "On a terminal that supports 3G or 4G connectivity, indicates the status of the SIM card in the terminal: ACTIVE or INVENTORY."
-          type: string
-        status:
-          deprecated: true
-          description: Indicates when the terminal was last online, whether the terminal is being reassigned, or whether the terminal is turned off. If the terminal was last online more that a week ago, it is also shown as turned off.
-          type: string
-        storeStatus:
-          deprecated: true
-          description: The status of the store that the terminal is assigned to.
-          type: string
-        wifiIp:
-          deprecated: true
-          description: The terminal's IP address in your Wi-Fi network.
-          type: string
-        wifiMac:
-          deprecated: true
-          description: The terminal's MAC address in your Wi-Fi network.
-          type: string
-        wifiSsid:
-          deprecated: true
-          description: The SSID of the Wi-Fi network that your terminal is connected to.
           type: string
       type: object
     TerminalActionScheduleDetail:
@@ -18903,6 +18924,94 @@ components:
           type: string
         terminalId:
           description: The unique ID of the terminal that the action applies to.
+          type: string
+      type: object
+    TerminalAssignment:
+      properties:
+        companyId:
+          description: The unique identifier of the company account to which terminal is assigned.
+          type: string
+        merchantId:
+          description: The unique identifier of the merchant account to which terminal is assigned.
+          type: string
+        reassignmentTarget:
+          $ref: "#/components/schemas/TerminalReassignmentTarget"
+          description: Indicates where the terminal is in the process of being reassigned to.
+        status:
+          description: |
+            The status of the reassignment. Possible values: 
+             * `reassignmentInProgress`: the terminal was boarded and is now scheduled to remove the configuration. Wait for the terminal to synchronize with the Adyen platform.
+             * `deployed`: the terminal is deployed and reassigned. 
+             * `inventory`: the terminal is in inventory and cannot process transactions. 
+          enum:
+            - reassignmentInProgress
+            - deployed
+            - inventory
+          type: string
+        storeId:
+          description: The unique identifier of the store to which terminal is assigned.
+          type: string
+      required:
+        - companyId
+        - status
+      type: object
+    TerminalConnectivity:
+      properties:
+        bluetooth:
+          $ref: "#/components/schemas/TerminalConnectivityBluetooth"
+        cellular:
+          $ref: "#/components/schemas/TerminalConnectivityCellular"
+        ethernet:
+          $ref: "#/components/schemas/TerminalConnectivityEthernet"
+        wifi:
+          $ref: "#/components/schemas/TerminalConnectivityWifi"
+      type: object
+    TerminalConnectivityBluetooth:
+      properties:
+        ipAddress:
+          description: The terminal's Bluetooth IP address.
+          type: string
+        macAddress:
+          description: The terminal's Bluetooth MAC address.
+          type: string
+      type: object
+    TerminalConnectivityCellular:
+      properties:
+        iccid:
+          description: The integrated circuit card identifier (ICCID) of the SIM card in the terminal.
+          type: string
+        status:
+          description: On a terminal that supports 3G or 4G connectivity, indicates the status of the SIM card in the terminal.
+          enum:
+            - activated
+            - deactivated
+            - deprecated
+            - inventory
+            - readyForActivation
+          type: string
+      type: object
+    TerminalConnectivityEthernet:
+      properties:
+        ipAddress:
+          description: The terminal's ethernet IP address.
+          type: string
+        linkNegotiation:
+          description: The ethernet link negotiation that the terminal uses.
+          type: string
+        macAddress:
+          description: The terminal's ethernet MAC address.
+          type: string
+      type: object
+    TerminalConnectivityWifi:
+      properties:
+        ipAddress:
+          description: The terminal's IP address in the Wi-Fi network.
+          type: string
+        macAddress:
+          description: The terminal's MAC address in the Wi-Fi network.
+          type: string
+        ssid:
+          description: The SSID of the Wi-Fi network that the terminal is connected to.
           type: string
       type: object
     TerminalModelsResponse:
@@ -19010,6 +19119,46 @@ components:
           items:
             $ref: "#/components/schemas/TerminalProduct"
           type: array
+      type: object
+    TerminalReassignmentRequest:
+      properties:
+        companyId:
+          description: The unique identifier of the company account to which the terminal is reassigned.
+          type: string
+        inventory:
+          description: |-
+            Must be specified when reassigning terminals to a merchant account:
+
+            - If set to **true**, reassigns terminals to the inventory of the merchant account and the terminals cannot process transactions.
+
+            - If set to **false**, reassigns terminals directly to the merchant account and the terminals can process transactions.
+          type: boolean
+        merchantId:
+          description: The unique identifier of the merchant account to which the terminal is reassigned. When reassigning terminals to a merchant account, you must specify the `inventory` field.
+          type: string
+        storeId:
+          description: The unique identifier of the store to which the terminal is reassigned.
+          type: string
+      type: object
+    TerminalReassignmentTarget:
+      properties:
+        companyId:
+          description: The unique identifier of the company account to which the terminal is reassigned.
+          type: string
+        inventory:
+          description: |-
+            Indicates if the terminal is reassigned to the inventory of the merchant account.
+            - If **true**, the terminal is in the inventory of the merchant account and cannot process transactions.
+            - If **false**, the terminal is reassigned directly to the merchant account and can process transactions.
+          type: boolean
+        merchantId:
+          description: The unique identifier of the merchant account to which the terminal is reassigned.
+          type: string
+        storeId:
+          description: The unique identifier of the store to which the terminal is reassigned.
+          type: string
+      required:
+        - inventory
       type: object
     TerminalSettings:
       properties:
@@ -19386,6 +19535,22 @@ components:
         description:
           description: Your description for this webhook configuration.
           type: string
+        encryptionProtocol:
+          description: |-
+            SSL version to access the public webhook URL specified in the `url` field. Possible values:
+            * **TLSv1.3**
+            * **TLSv1.2**
+            * **HTTP** - Only allowed on Test environment.
+
+            If not specified, the webhook will use `sslVersion`: **TLSv1.2**.
+          enum:
+            - HTTP
+            - TLSv1.2
+            - TLSv1.3
+          examples:
+            - TLSv1.2
+          type: string
+          x-addedInVersion: "2"
         filterMerchantAccountType:
           description: |-
             Shows how merchant accounts are filtered when configuring the webhook. Possible values:
@@ -19429,21 +19594,6 @@ components:
 
             Only applies if `communicationFormat`: **soap**.
           type: boolean
-        sslVersion:
-          description: |-
-            SSL version to access the public webhook URL specified in the `url` field. Possible values:
-            * **TLSv1.3**
-            * **TLSv1.2**
-            * **HTTP** - Only allowed on Test environment.
-
-            If not specified, the webhook will use `sslVersion`: **TLSv1.2**.
-          enum:
-            - HTTP
-            - TLSv1.2
-            - TLSv1.3
-          examples:
-            - TLSv1.2
-          type: string
         url:
           description: Public URL where webhooks will be sent, for example **https://www.domain.com/webhook-endpoint**.
           examples:
@@ -19533,6 +19683,22 @@ components:
         description:
           description: Your description for this webhook configuration.
           type: string
+        encryptionProtocol:
+          description: |-
+            SSL version to access the public webhook URL specified in the `url` field. Possible values:
+            * **TLSv1.3**
+            * **TLSv1.2**
+            * **HTTP** - Only allowed on Test environment.
+
+            If not specified, the webhook will use `sslVersion`: **TLSv1.2**.
+          enum:
+            - HTTP
+            - TLSv1.2
+            - TLSv1.3
+          examples:
+            - TLSv1.2
+          type: string
+          x-addedInVersion: "2"
         networkType:
           description: |-
             Network type for Terminal API notification webhooks. Possible values:
@@ -19553,21 +19719,6 @@ components:
 
             Only applies if `communicationFormat`: **soap**.
           type: boolean
-        sslVersion:
-          description: |-
-            SSL version to access the public webhook URL specified in the `url` field. Possible values:
-            * **TLSv1.3**
-            * **TLSv1.2**
-            * **HTTP** - Only allowed on Test environment.
-
-            If not specified, the webhook will use `sslVersion`: **TLSv1.2**.
-          enum:
-            - HTTP
-            - TLSv1.2
-            - TLSv1.3
-          examples:
-            - TLSv1.2
-          type: string
         url:
           description: Public URL where webhooks will be sent, for example **https://www.domain.com/webhook-endpoint**.
           examples:
@@ -19852,6 +20003,12 @@ components:
             - inactive
           type: string
       type: object
+    UploadAndroidAppResponse:
+      properties:
+        id:
+          description: The unique identifier of the uploaded Android app.
+          type: string
+      type: object
     Url:
       properties:
         encrypted:
@@ -19969,6 +20126,22 @@ components:
         description:
           description: Your description for this webhook configuration.
           type: string
+        encryptionProtocol:
+          description: |-
+            SSL version to access the public webhook URL specified in the `url` field. Possible values:
+            * **TLSv1.3**
+            * **TLSv1.2**
+            * **HTTP** - Only allowed on Test environment.
+
+            If not specified, the webhook will use `sslVersion`: **TLSv1.2**.
+          enum:
+            - HTTP
+            - TLSv1.2
+            - TLSv1.3
+          examples:
+            - TLSv1.2
+          type: string
+          x-addedInVersion: "2"
         filterMerchantAccountType:
           description: |-
             Shows how merchant accounts are included in company-level webhooks. Possible values:
@@ -20016,21 +20189,6 @@ components:
 
             Only applies if `communicationFormat`: **soap**.
           type: boolean
-        sslVersion:
-          description: |-
-            SSL version to access the public webhook URL specified in the `url` field. Possible values:
-            * **TLSv1.3**
-            * **TLSv1.2**
-            * **HTTP** - Only allowed on Test environment.
-
-            If not specified, the webhook will use `sslVersion`: **TLSv1.2**.
-          enum:
-            - HTTP
-            - TLSv1.2
-            - TLSv1.3
-          examples:
-            - TLSv1.2
-          type: string
         type:
           description: |-
             The type of webhook. Possible values are:

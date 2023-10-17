@@ -54,11 +54,11 @@ info:
   x-serviceName: LegalEntityService
 tags:
   - name: Legal entities
-  - name: Hosted Onboarding
+  - name: Transfer instruments
   - name: Business lines
   - name: Documents
   - name: Terms of Service
-  - name: Transfer instruments
+  - name: Hosted Onboarding
   - name: PCI questionnaires
 paths:
   /businessLines:
@@ -1974,8 +1974,13 @@ components:
           sendToTransferInstrument:
             allowed: false
             requested: true
+            transferInstruments:
+              - allowed: false
+                id: SE322KH223222F5GXZFNM3BGP
+                requested: true
+                verificationStatus: pending
             verificationStatus: pending
-        id: LE00000000000000000000001
+        id: YOUR_LEGAL_ENTITY
         individual:
           birthData:
             dateOfBirth: 1990-06-21
@@ -1989,6 +1994,10 @@ components:
             postalCode: 1011DJ
             street: Simon Carmiggeltstraat 6 - 50
             street2: "274"
+        transferInstruments:
+          - accountIdentifier: NL************0123
+            id: SE322KH223222F5GXZFNM3BGP
+            trustedSource: false
         type: individual
     get-legalEntities-id-termsOfServiceAcceptanceInfos-success-200:
       description: Example response when getting Terms of Service information for a legal entity
@@ -2054,14 +2063,21 @@ components:
               supportPage: https://www.adyen.com/contact
             updatedAt: 2022-08-25T00:00:00+02:00
     get-transferInstruments-id-success-200:
-      description: Example response when getting the details of a transfer instrument
+      description: Example response when getting the details of a new transfer instrument
       summary: Details of a transfer instrument
       value:
         bankAccount:
+          accountIdentification:
+            iban: NL62ABNA0000000123
+            type: iban
           countryCode: NL
           currencyCode: EUR
-          iban: NL62ABNA0000000123
-        id: SE322JV223222F5GNXSR89TMW
+        capabilities:
+          sendToTransferInstrument:
+            allowed: false
+            requested: true
+            verificationStatus: pending
+        id: SE322KH223222F5GXZFNM3BGP
         legalEntityId: LE00000000000000000000001
         type: bankAccount
     patch-businessLines-id-updateBusinessLine:
@@ -2559,6 +2575,7 @@ components:
           countryCode: NL
           currencyCode: EUR
           iban: NL62ABNA0000000123
+          trustedSource: false
         legalEntityId: LE00000000000000000000001
         type: bankAccount
     post-transferInstruments-createTransferInstrumentEUR-200:
@@ -2570,7 +2587,12 @@ components:
           currencyCode: EUR
           iban: NL62ABNA0000000123
           trustedSource: false
-        id: SE576BH223222F5GJVKHH6BDT
+        capabilities:
+          sendToTransferInstrument:
+            allowed: false
+            requested: true
+            verificationStatus: pending
+        id: SE322KH223222F5GXZFNM3BGP
         legalEntityId: LE00000000000000000000001
         type: bankAccount
     post-transferInstruments-createTransferInstrumentUSD:
@@ -2596,6 +2618,11 @@ components:
           countryCode: US
           currencyCode: USD
           trustedSource: false
+        capabilities:
+          sendToTransferInstrument:
+            allowed: false
+            requested: true
+            verificationStatus: pending
         id: SE322JV223222F5GJVKHH8DTC
         legalEntityId: LE00000000000000000000001
         type: bankAccount
@@ -3273,7 +3300,7 @@ components:
         type:
           description: Type of identity data. For **individual**, the `type` value is **nationalIdNumber**.
           enum:
-            - proofOfNationalIdNumber
+            - nationalIdNumber
           type: string
       required:
         - type
@@ -3434,7 +3461,7 @@ components:
     LegalEntityCapability:
       properties:
         allowed:
-          description: "Indicates whether the capability is allowed. Adyen sets this to **true** if the verification is successful "
+          description: Indicates whether the capability is allowed. Adyen sets this to **true** if the verification is successful.
           readOnly: true
           type: boolean
         allowedLevel:
@@ -3451,7 +3478,7 @@ components:
           type: string
         allowedSettings:
           $ref: "#/components/schemas/CapabilitySettings"
-          description: The settings that were allowed for the Legal Entity.
+          description: The settings that are allowed for the legal entity.
           readOnly: true
         problems:
           description: Contains verification errors and the actions that you can take to resolve them.
@@ -3460,7 +3487,7 @@ components:
           readOnly: true
           type: array
         requested:
-          description: "Indicates whether the capability is requested. To check whether the Legal Entity is permitted to use the capability, "
+          description: Indicates whether the capability is requested. To check whether the legal entity is permitted to use the capability, refer to the `allowed` field.
           readOnly: true
           type: boolean
         requestedLevel:
@@ -3477,14 +3504,15 @@ components:
           type: string
         requestedSettings:
           $ref: "#/components/schemas/CapabilitySettings"
-          description: The settings that are requested for the Legal Entity.
+          description: The settings that are requested for the legal entity.
           readOnly: true
         transferInstruments:
-          description: Capability status for transfer instruments associated with legal entity
+          description: The capability status of transfer instruments associated with the legal entity.
           items:
             $ref: "#/components/schemas/SupportingEntityCapability"
           readOnly: true
           type: array
+          x-addedInVersion: "2"
         verificationStatus:
           description: |
             The status of the verification checks for the capability.
@@ -3636,11 +3664,21 @@ components:
 
             - **editPrefilledCountry**: The user can change the country of their legal entity's address, for example the registered address of an organization.
 
-            By default, this value is set to **false**. Set to **true** to allow the action.
+            By default, these values are set to **false**. Set to **true** to allow the action.
 
             - **allowBankAccountFormatSelection**: The user can select the format for their payout account if applicable.
 
             - **allowIntraRegionCrossBorderPayout**: The user can select a payout account in a different EU/EEA country than the country of their legal entity.
+
+            By default, these value are set to **false**. Set the following values to **true** to require the user to sign PCI questionnaires based on their sales channels. The user must sign PCI questionnaires for all relevant sales channels.
+
+            - **requirePciSignEcommerce**
+
+            - **requirePciSignPos**
+
+            - **requirePciSignEcomMoto**
+
+            - **requirePciSignPosMoto**
 
           type: object
         themeId:
@@ -3935,11 +3973,11 @@ components:
       properties:
         allowed:
           description: |-
-            Indicates whether the supporting entity capability is allowed.
+            Indicates whether the capability is allowed for the supporting entity.
 
-            If a supporting entity is allowed but its parent legal entity is not, it means there are other supporting entities that failed validation.
+            If a capability is allowed for a supporting entity but not for the parent legal entity, this means the legal entity has other supporting entities that failed verification.
 
-            **The allowed supporting entity can still be used**
+            **You can use the allowed supporting entity** regardless of the verification status of other supporting entities.
           readOnly: true
           type: boolean
         id:
@@ -3952,7 +3990,7 @@ components:
           type: boolean
         verificationStatus:
           description: |
-            The status of the verification checks for the supporting entity capability.
+            The status of the verification checks for the capability of the supporting entity.
 
             Possible values:
 

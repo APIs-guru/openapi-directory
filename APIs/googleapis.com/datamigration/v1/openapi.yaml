@@ -2029,10 +2029,10 @@ components:
             - SQL_DATABASE_VERSION_UNSPECIFIED
             - MYSQL_5_6
             - MYSQL_5_7
+            - MYSQL_8_0
             - POSTGRES_9_6
             - POSTGRES_11
             - POSTGRES_10
-            - MYSQL_8_0
             - POSTGRES_12
             - POSTGRES_13
             - POSTGRES_14
@@ -2367,7 +2367,7 @@ components:
             - ORACLE
           type: string
         version:
-          description: Required. Engine named version, for example 12.c.1.
+          description: Required. Engine version, for example "12.c.1".
           type: string
       type: object
     DatabaseEntity:
@@ -3345,6 +3345,7 @@ components:
             - SOURCE_SIZE_EXCEEDS_THRESHOLD
             - EXISTING_CONFLICTING_DATABASES
             - PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE
+            - EXISTING_DATA
           readOnly: true
           type: string
         errorDetailMessage:

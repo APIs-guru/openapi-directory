@@ -3313,7 +3313,6 @@ components:
       properties:
         apiConfig:
           $ref: "#/components/schemas/ApiConfigHandler"
-          deprecated: true
           description: Serving configuration for Google Cloud Endpoints (https://cloud.google.com/endpoints).Only returned in GET requests if view=FULL is set.
         appEngineApis:
           description: Allows App Engine second generation runtimes to access the legacy bundled services.

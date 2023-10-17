@@ -24,7 +24,9 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: ManagementNotificationService-v1
-tags: []
+tags:
+  - name: Merchant account
+  - name: Payment method
 components:
   examples:
     WebhookAck:
@@ -346,10 +348,10 @@ components:
           description: Indicates whether the payment method is enabled (**true**) or disabled (**false**).
           type: boolean
         id:
-          description: The identifier of the resource.
+          description: The unique identifier of the resource.
           type: string
         merchantId:
-          description: The identifier of the merchant account.
+          description: The unique identifier of the merchant account.
           type: string
         reference:
           description: Your reference for the payment method.
@@ -361,7 +363,7 @@ components:
             - FAILURE
           type: string
         storeId:
-          description: The identifier of the [store](https://docs.adyen.com/api-explorer/#/ManagementService/latest/post/merchants/{id}/paymentMethodSettings__reqParam_storeId), if any.
+          description: The unique identifier of the [store](https://docs.adyen.com/api-explorer/#/ManagementService/latest/post/merchants/{id}/paymentMethodSettings__reqParam_storeId), if any.
           type: string
         type:
           description: Payment method [variant](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api).
@@ -517,7 +519,7 @@ webhooks:
       x-sortIndex: 1
   merchant.updated:
     post:
-      description: There were changes to verification status and capabilities of a [merchant account](https://docs.adyen.com/api-explorer/#/ManagementService/latest/post/merchants). If the verification fails, this webhook includes the errors and the actions that you can take to resolve them.
+      description: There were changes to the verification status and capabilities of a [merchant account](https://docs.adyen.com/api-explorer/#/ManagementService/latest/post/merchants). If the verification fails, this webhook includes the errors and the actions that you can take to resolve them.
       operationId: post-merchant.updated
       requestBody:
         content:

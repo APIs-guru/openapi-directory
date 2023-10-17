@@ -3026,6 +3026,7 @@ components:
             - CUTOVER_ERROR
             - UTILIZATION_REPORT_ERROR
             - APPLIANCE_UPGRADE_ERROR
+            - IMAGE_IMPORT_ERROR
           readOnly: true
           type: string
         errorMessage:
@@ -3429,7 +3430,7 @@ components:
           readOnly: true
           type: string
         project:
-          description: The target project ID (number) or project name.
+          description: Required. The target project ID (number) or project name.
           type: string
         updateTime:
           description: Output only. The last time the target project resource was updated.

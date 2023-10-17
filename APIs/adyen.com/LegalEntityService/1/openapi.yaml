@@ -54,11 +54,11 @@ info:
   x-serviceName: LegalEntityService
 tags:
   - name: Legal entities
-  - name: Hosted Onboarding
+  - name: Transfer instruments
   - name: Business lines
   - name: Documents
   - name: Terms of Service
-  - name: Transfer instruments
+  - name: Hosted Onboarding
   - name: PCI questionnaires
 paths:
   /businessLines:
@@ -3019,7 +3019,7 @@ components:
         type:
           description: Type of identity data. For **individual**, the `type` value is **nationalIdNumber**.
           enum:
-            - proofOfNationalIdNumber
+            - nationalIdNumber
           type: string
       required:
         - type
@@ -3158,7 +3158,7 @@ components:
     LegalEntityCapability:
       properties:
         allowed:
-          description: "Indicates whether the capability is allowed. Adyen sets this to **true** if the verification is successful "
+          description: Indicates whether the capability is allowed. Adyen sets this to **true** if the verification is successful.
           readOnly: true
           type: boolean
         allowedLevel:
@@ -3175,7 +3175,7 @@ components:
           type: string
         allowedSettings:
           $ref: "#/components/schemas/CapabilitySettings"
-          description: The settings that were allowed for the Legal Entity.
+          description: The settings that are allowed for the legal entity.
           readOnly: true
         problems:
           description: Contains verification errors and the actions that you can take to resolve them.
@@ -3184,7 +3184,7 @@ components:
           readOnly: true
           type: array
         requested:
-          description: "Indicates whether the capability is requested. To check whether the Legal Entity is permitted to use the capability, "
+          description: Indicates whether the capability is requested. To check whether the legal entity is permitted to use the capability, refer to the `allowed` field.
           readOnly: true
           type: boolean
         requestedLevel:
@@ -3201,14 +3201,8 @@ components:
           type: string
         requestedSettings:
           $ref: "#/components/schemas/CapabilitySettings"
-          description: The settings that are requested for the Legal Entity.
+          description: The settings that are requested for the legal entity.
           readOnly: true
-        transferInstruments:
-          description: Capability status for transfer instruments associated with legal entity
-          items:
-            $ref: "#/components/schemas/SupportingEntityCapability"
-          readOnly: true
-          type: array
         verificationStatus:
           description: |
             The status of the verification checks for the capability.
@@ -3346,11 +3340,21 @@ components:
 
             - **editPrefilledCountry**: The user can change the country of their legal entity's address, for example the registered address of an organization.
 
-            By default, this value is set to **false**. Set to **true** to allow the action.
+            By default, these values are set to **false**. Set to **true** to allow the action.
 
             - **allowBankAccountFormatSelection**: The user can select the format for their payout account if applicable.
 
             - **allowIntraRegionCrossBorderPayout**: The user can select a payout account in a different EU/EEA country than the country of their legal entity.
+
+            By default, these value are set to **false**. Set the following values to **true** to require the user to sign PCI questionnaires based on their sales channels. The user must sign PCI questionnaires for all relevant sales channels.
+
+            - **requirePciSignEcommerce**
+
+            - **requirePciSignPos**
+
+            - **requirePciSignEcomMoto**
+
+            - **requirePciSignPosMoto**
 
           type: object
         themeId:
@@ -3591,41 +3595,6 @@ components:
           type: string
         tickerSymbol:
           description: The stock ticker symbol.
-          type: string
-      type: object
-    SupportingEntityCapability:
-      properties:
-        allowed:
-          description: |-
-            Indicates whether the supporting entity capability is allowed.
-
-            If a supporting entity is allowed but its parent legal entity is not, it means there are other supporting entities that failed validation.
-
-            **The allowed supporting entity can still be used**
-          readOnly: true
-          type: boolean
-        id:
-          description: "Supporting entity reference "
-          readOnly: true
-          type: string
-        requested:
-          description: "Indicates whether the supporting entity capability is requested. "
-          readOnly: true
-          type: boolean
-        verificationStatus:
-          description: |
-            The status of the verification checks for the supporting entity capability.
-
-            Possible values:
-
-            * **pending**: Adyen is running the verification.
-
-            * **invalid**: The verification failed. Check if the `errors` array contains more information.
-
-            * **valid**: The verification has been successfully completed.
-
-            * **rejected**: Adyen has verified the information, but found reasons to not allow the capability.
-          readOnly: true
           type: string
       type: object
     TermsOfServiceAcceptanceInfo:
