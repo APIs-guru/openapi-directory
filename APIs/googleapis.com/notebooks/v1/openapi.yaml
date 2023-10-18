@@ -360,48 +360,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  /v1/{name}:migrate:
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Migrate an existing Runtime to a new Workbench Instance.
-      operationId: notebooks.projects.locations.runtimes.migrate
-      parameters:
-        - description: "Required. Format: `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/MigrateRuntimeRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   /v1/{name}:refreshRuntimeTokenInternal:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2669,40 +2627,6 @@ components:
           type: object
         name:
           description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
-          type: string
-      type: object
-    MigrateInstanceRequest:
-      description: Request for migrating a User-Managed Notebook to Workbench Instances.
-      properties:
-        postStartupScriptOption:
-          description: Optional. Specifies the behavior of post startup script during migration.
-          enum:
-            - POST_STARTUP_SCRIPT_OPTION_UNSPECIFIED
-            - POST_STARTUP_SCRIPT_OPTION_SKIP
-            - POST_STARTUP_SCRIPT_OPTION_RERUN
-          type: string
-      type: object
-    MigrateRuntimeRequest:
-      description: Request for migrating a Runtime to a Workbench Instance.
-      properties:
-        network:
-          description: "Optional. Name of the VPC that the new Instance is in. This is required if the Runtime uses google-managed network. If the Runtime uses customer-owned network, it will reuse the same VPC, and this field must be empty. Format: `projects/{project_id}/global/networks/{network_id}`"
-          type: string
-        postStartupScriptOption:
-          description: Optional. Specifies the behavior of post startup script during migration.
-          enum:
-            - POST_STARTUP_SCRIPT_OPTION_UNSPECIFIED
-            - POST_STARTUP_SCRIPT_OPTION_SKIP
-            - POST_STARTUP_SCRIPT_OPTION_RERUN
-          type: string
-        requestId:
-          description: Optional. Idempotent request UUID.
-          type: string
-        serviceAccount:
-          description: Optional. The service account to be included in the Compute Engine instance of the new Workbench Instance when the Runtime uses "single user only" mode for permission. If not specified, the [Compute Engine default service account](https://cloud.google.com/compute/docs/access/service-accounts#default_service_account) is used. When the Runtime uses service account mode for permission, it will reuse the same service account, and this field must be empty.
-          type: string
-        subnet:
-          description: "Optional. Name of the subnet that the new Instance is in. This is required if the Runtime uses google-managed network. If the Runtime uses customer-owned network, it will reuse the same subnet, and this field must be empty. Format: `projects/{project_id}/regions/{region}/subnetworks/{subnetwork_id}`"
           type: string
       type: object
     Operation:

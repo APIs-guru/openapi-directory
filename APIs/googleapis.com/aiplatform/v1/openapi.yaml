@@ -3588,7 +3588,7 @@ paths:
       description: Lists Features in a given EntityType.
       operationId: aiplatform.projects.locations.featurestores.entityTypes.features.list
       parameters:
-        - description: "Required. The resource name of the Location to list Features. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}` `projects/{project}/locations/{location}/featureGroups/{feature_group}`"
+        - description: "Required. The resource name of the Location to list Features. Format for entity_type as parent: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}` Format for feature_group as parent: `projects/{project}/locations/{location}/featureGroups/{feature_group}`"
           in: path
           name: parent
           required: true
@@ -3599,7 +3599,7 @@ paths:
           name: filter
           schema:
             type: string
-        - description: If set, return the most recent ListFeaturesRequest.latest_stats_count of stats for each Feature in response. Valid value is [0, 10]. If number of stats exists < ListFeaturesRequest.latest_stats_count, return all existing stats.
+        - description: Only applicable for Vertex AI Feature Store (Legacy). If set, return the most recent ListFeaturesRequest.latest_stats_count of stats for each Feature in response. Valid value is [0, 10]. If number of stats exists < ListFeaturesRequest.latest_stats_count, return all existing stats.
           in: query
           name: latestStatsCount
           schema:
@@ -3614,7 +3614,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous FeaturestoreService.ListFeatures call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to FeaturestoreService.ListFeatures must match the call that provided the page token.
+        - description: A page token, received from a previous FeaturestoreService.ListFeatures call or FeatureRegistryService.ListFeatures call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to FeaturestoreService.ListFeatures or or FeatureRegistryService.ListFeatures must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -3654,7 +3654,8 @@ paths:
       description: Creates a new Feature in a given EntityType.
       operationId: aiplatform.projects.locations.featurestores.entityTypes.features.create
       parameters:
-        - in: path
+        - description: "Required. The resource name of the EntityType or FeatureGroup to create a Feature. Format for entity_type as parent: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}` Format for feature_group as parent: `projects/{project}/locations/{location}/featureGroups/{feature_group}`"
+          in: path
           name: parent
           required: true
           schema:
@@ -7686,6 +7687,7 @@ components:
           description: Required. The ID to use for the Feature, which will become the final component of the Feature's resource name. This value may be up to 128 characters, and valid characters are `[a-z0-9_]`. The first character cannot be a number. The value must be unique within an EntityType/FeatureGroup.
           type: string
         parent:
+          description: "Required. The resource name of the EntityType or FeatureGroup to create a Feature. Format for entity_type as parent: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}` Format for feature_group as parent: `projects/{project}/locations/{location}/featureGroups/{feature_group}`"
           type: string
       type: object
     GoogleCloudAiplatformV1CreateFeaturestoreOperationMetadata:
@@ -7882,6 +7884,9 @@ components:
           type: string
         network:
           description: Optional. The full name of the Compute Engine [network](/compute/docs/networks-and-firewalls#networks) to which the Job should be peered. For example, `projects/12345/global/networks/myVPC`. [Format](/compute/docs/reference/rest/v1/networks/insert) is of the form `projects/{project}/global/networks/{network}`. Where {project} is a project number, as in `12345`, and {network} is a network name. To specify this field, you must have already [configured VPC Network Peering for Vertex AI](https://cloud.google.com/vertex-ai/docs/general/vpc-peering). If this field is left unspecified, the job is not peered with any network.
+          type: string
+        protectedArtifactLocationId:
+          description: "The ID of the location to store protected artifacts. e.g. us-central1. Populate only when the location is different than CustomJob location. For unprotected artifacts, the value of this field is ignored. List of supported locations: https://cloud.google.com/vertex-ai/docs/general/locations"
           type: string
         reservedIpRanges:
           description: "Optional. A list of names for the reserved ip ranges under the VPC network that can be used for this job. If set, we will deploy the job within the provided ip ranges. Otherwise, the job will be deployed to any ip ranges under the provided VPC network. Example: ['vertex-ai-ip-range']."
@@ -9251,10 +9256,10 @@ components:
           type: array
       type: object
     GoogleCloudAiplatformV1Feature:
-      description: Feature Metadata information that describes an attribute of an entity type. For example, apple is an entity type, and color is a feature that describes apple.
+      description: Feature Metadata information. For example, color is a feature that describes an apple.
       properties:
         createTime:
-          description: Output only. Timestamp when this EntityType was created.
+          description: Output only. Only applicable for Vertex AI Feature Store (Legacy). Timestamp when this EntityType was created.
           format: google-datetime
           readOnly: true
           type: string
@@ -9262,7 +9267,7 @@ components:
           description: Description of the Feature.
           type: string
         disableMonitoring:
-          description: Optional. If not set, use the monitoring_config defined for the EntityType this Feature belongs to. Only Features with type (Feature.ValueType) BOOL, STRING, DOUBLE or INT64 can enable monitoring. If set to true, all types of data monitoring are disabled despite the config on EntityType.
+          description: Optional. Only applicable for Vertex AI Feature Store (Legacy). If not set, use the monitoring_config defined for the EntityType this Feature belongs to. Only Features with type (Feature.ValueType) BOOL, STRING, DOUBLE or INT64 can enable monitoring. If set to true, all types of data monitoring are disabled despite the config on EntityType.
           type: boolean
         etag:
           description: Used to perform a consistent read-modify-write updates. If not set, a blind "overwrite" update happens.
@@ -9273,21 +9278,21 @@ components:
           description: Optional. The labels with user-defined metadata to organize your Features. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. See https://goo.gl/xmQnxf for more information on and examples of labels. No more than 64 user labels can be associated with one Feature (System labels are excluded)." System reserved label keys are prefixed with "aiplatform.googleapis.com/" and are immutable.
           type: object
         monitoringStatsAnomalies:
-          description: Output only. The list of historical stats and anomalies with specified objectives.
+          description: Output only. Only applicable for Vertex AI Feature Store (Legacy). The list of historical stats and anomalies with specified objectives.
           items:
             $ref: "#/components/schemas/GoogleCloudAiplatformV1FeatureMonitoringStatsAnomaly"
           readOnly: true
           type: array
         name:
-          description: "Immutable. Name of the Feature. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}` The last part feature is assigned by the client. The feature can be up to 64 characters long and can consist only of ASCII Latin letters A-Z and a-z, underscore(_), and ASCII digits 0-9 starting with a letter. The value will be unique given an entity type."
+          description: "Immutable. Name of the Feature. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}` `projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}` The last part feature is assigned by the client. The feature can be up to 64 characters long and can consist only of ASCII Latin letters A-Z and a-z, underscore(_), and ASCII digits 0-9 starting with a letter. The value will be unique given an entity type."
           type: string
         updateTime:
-          description: Output only. Timestamp when this EntityType was most recently updated.
+          description: Output only. Only applicable for Vertex AI Feature Store (Legacy). Timestamp when this EntityType was most recently updated.
           format: google-datetime
           readOnly: true
           type: string
         valueType:
-          description: Immutable. Type of Feature value.
+          description: Immutable. Only applicable for Vertex AI Feature Store (Legacy). Type of Feature value.
           enum:
             - VALUE_TYPE_UNSPECIFIED
             - BOOL

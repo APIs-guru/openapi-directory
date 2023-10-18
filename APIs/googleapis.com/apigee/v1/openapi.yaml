@@ -117,7 +117,7 @@ paths:
         - organizations
   /v1/{name}:
     delete:
-      description: Deletes a category from the portal.
+      description: Deletes an API category.
       operationId: apigee.organizations.sites.apicategories.delete
       parameters:
         - description: "Required. Name of the category. Use the following structure in your request: `organizations/{org}/sites/{site}/apicategories/{apicategory}`"
@@ -149,7 +149,7 @@ paths:
       tags:
         - organizations
     get:
-      description: Gets a category on the portal.
+      description: Gets an API category.
       operationId: apigee.organizations.sites.apicategories.get
       parameters:
         - description: "Required. Name of the category. Use the following structure in your request: `organizations/{org}/sites/{site}/apicategories/{apicategory}`"
@@ -259,7 +259,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates a category on the portal.
+      description: Updates an API category.
       operationId: apigee.organizations.sites.apicategories.patch
       parameters:
         - description: "Required. Name of the category. Use the following structure in your request: `organizations/{org}/sites/{site}/apicategories/{apicategory}`"
@@ -1664,7 +1664,7 @@ paths:
         - organizations
   /v1/{parent}/apicategories:
     get:
-      description: Lists the categories on the portal.
+      description: Returns the API categories associated with a portal.
       operationId: apigee.organizations.sites.apicategories.list
       parameters:
         - description: "Required. Name of the portal. Use the following structure in your request: `organizations/{org}/sites/{site}`"
@@ -1700,7 +1700,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new category on the portal.
+      description: Creates a new API category.
       operationId: apigee.organizations.sites.apicategories.create
       parameters:
         - description: "Required. Name of the portal. Use the following structure in your request: `organizations/{org}/sites/{site}`"
@@ -5242,30 +5242,27 @@ components:
           type: string
       type: object
     GoogleCloudApigeeV1ApiCategory:
-      description: the Api category resource wrapped with response status, error_code etc.
+      description: The API category resource wrapped with response status, error_code, etc.
       properties:
         data:
           $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategoryData"
-          description: Details of category.
+          description: Details of the category.
         errorCode:
-          description: ID that can be used to find errors in the log files.
+          description: Unique error code for the request, if any.
           type: string
         message:
           description: Description of the operation.
           type: string
         requestId:
-          description: ID that can be used to find request details in the log files.
+          description: Unique ID of the request.
           type: string
         status:
           description: Status of the operation.
           type: string
       type: object
     GoogleCloudApigeeV1ApiCategoryData:
-      description: the Api category resource.
+      description: "`ApiCategoryData` represents an API category. Catalog items can be tagged with API categories; users viewing the API catalog in the portal will have the option to browse the catalog by category."
       properties:
-        gcpResource:
-          description: GCP name of api category resource.
-          type: string
         id:
           description: ID of the category (a UUID).
           type: string
@@ -6390,16 +6387,16 @@ components:
       description: Response for certain delete operations.
       properties:
         errorCode:
-          description: ID that can be used to find errors in the log files.
+          description: Unique error code for the request, if any.
           type: string
         gcpResource:
-          description: GCP name of deleted resource.
+          description: Google Cloud name of deleted resource.
           type: string
         message:
           description: Description of the operation.
           type: string
         requestId:
-          description: ID that can be used to find request details in the log files.
+          description: Unique ID of the request.
           type: string
         status:
           description: Status of the operation.
@@ -7567,21 +7564,21 @@ components:
           type: string
       type: object
     GoogleCloudApigeeV1ListApiCategoriesResponse:
-      description: the response for ListApiCategoriesRequest.
+      description: The response for `ListApiCategoriesRequest`.
       properties:
         data:
-          description: Details of categories.
+          description: Details of the categories.
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategoryData"
           type: array
         errorCode:
-          description: ID that can be used to find errors in the log files.
+          description: Unique error code for the request, if any.
           type: string
         message:
           description: Description of the operation.
           type: string
         requestId:
-          description: ID that can be used to find request details in the log files.
+          description: Unique ID of the request.
           type: string
         status:
           description: Status of the operation.
