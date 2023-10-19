@@ -53,15 +53,15 @@ info:
   x-serviceName: BalancePlatformService
 tags:
   - name: Platform
-  - name: Grant offers
-  - name: Payment instrument groups
-  - name: Network tokens
   - name: Account holders
-  - name: Payment instruments
-  - name: Grant accounts
-  - name: Bank account validation
   - name: Balance accounts
+  - name: Payment instruments
+  - name: Payment instrument groups
   - name: Transaction rules
+  - name: Bank account validation
+  - name: Network tokens
+  - name: Grant accounts
+  - name: Grant offers
   - name: Transfer routes
 paths:
   /accountHolders:
@@ -399,6 +399,101 @@ paths:
       x-groupName: Account holders
       x-methodName: getAllBalanceAccountsOfAccountHolder
       x-sortIndex: 4
+  /accountHolders/{id}/taxForms:
+    get:
+      description: Generates a tax form for account holders operating in the US. For more information, refer to [Providing tax forms](https://docs.adyen.com/marketplaces-and-platforms/us-tax-forms/).
+      operationId: get-accountHolders-id-taxForms
+      parameters:
+        - description: The unique identifier of the account holder.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: The type of tax form you want to retrieve. Accepted values are **us1099k** and **us1099nec**
+          in: query
+          name: formType
+          required: true
+          schema:
+            enum:
+              - US1099k
+              - US1099nec
+            type: string
+            x-enum:
+              - value: US1099k
+              - value: US1099nec
+        - description: The tax year in YYYY format for the tax form you want to retrieve
+          in: query
+          name: year
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                success:
+                  $ref: "#/components/examples/get-accountHolders-id-taxForms-success-200"
+              schema:
+                $ref: "#/components/schemas/GetTaxFormResponse"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-400"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Get a tax form
+      tags:
+        - Account holders
+      x-addedInVersion: "2"
+      x-groupName: Account holders
+      x-methodName: getTaxForm
+      x-sortIndex: 5
   /balanceAccounts:
     post:
       description: Creates a balance account that holds the funds of the associated account holder.
@@ -682,7 +777,7 @@ paths:
             type: string
       responses:
         "204":
-          description: "No Content - look at the actual response code for the status of the request "
+          description: "No Content - look at the actual response code for the status of the request. "
         "400":
           content:
             application/json:
@@ -1629,7 +1724,7 @@ paths:
               $ref: "#/components/schemas/UpdateNetworkTokenRequest"
       responses:
         "202":
-          description: "No Content - look at the actual response code for the status of the request "
+          description: "No Content - look at the actual response code for the status of the request. "
         "401":
           content:
             application/json:
@@ -2802,7 +2897,7 @@ paths:
               $ref: "#/components/schemas/BankAccountIdentificationValidationRequest"
       responses:
         "200":
-          description: "No Content - look at the actual response code for the status of the request "
+          description: "No Content - look at the actual response code for the status of the request. "
         "401":
           content:
             application/json:
@@ -2993,12 +3088,24 @@ components:
             allowed: false
             enabled: true
             requested: true
+            transferInstruments:
+              - allowed: false
+                enabled: true
+                id: SE322KH223222F5GXZFNM3BGP
+                requested: true
+                verificationStatus: pending
             verificationStatus: pending
         description: Liable account holder used for international payments and payouts
         id: AH3227C223222C5GXQXF658WB
         legalEntityId: LE322JV223222D5GG42KN6869
         reference: S.Eller-001
         status: active
+    get-accountHolders-id-taxForms-success-200:
+      description: Example response when retrieving a tax form for an account holder
+      summary: Tax form retrieved for an account holder
+      value:
+        content: JVBERi0xLjcKJcfsj6IKJSVJbnZvY2F0aW9uOiBwYXRoL2dzd2luNjQuZXhlIC1kRGlzcGxh
+        contentType: application/pdf
     get-balanceAccounts-balanceAccountId-sweeps-success-200:
       description: Example response when retrieving sweeps under a balance account
       summary: Sweeps under a balance account retrieved
@@ -4220,6 +4327,7 @@ components:
           items:
             $ref: "#/components/schemas/AccountSupportingEntityCapability"
           type: array
+          x-addedInVersion: "2"
         verificationStatus:
           description: |
             The status of the verification checks for the capability.
@@ -4640,6 +4748,7 @@ components:
           description: |-
             The default three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) of the balance account.
             The default value is **EUR**.
+            > After a balance account is created, you cannot change its default currency.
           type: string
         description:
           description: A human-readable description of the balance account, maximum 300 characters. You can use this parameter to distinguish between multiple balance accounts under an account holder.
@@ -4694,6 +4803,7 @@ components:
           description: |-
             The default three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) of the balance account.
             The default value is **EUR**.
+            > After a balance account is created, you cannot change its default currency.
           type: string
         description:
           description: A human-readable description of the balance account, maximum 300 characters. You can use this parameter to distinguish between multiple balance accounts under an account holder.
@@ -4748,6 +4858,7 @@ components:
           description: |-
             The default three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) of the balance account.
             The default value is **EUR**.
+            > After a balance account is created, you cannot change its default currency.
           type: string
         description:
           description: A human-readable description of the balance account, maximum 300 characters. You can use this parameter to distinguish between multiple balance accounts under an account holder.
@@ -4784,11 +4895,6 @@ components:
       properties:
         accountHolderId:
           description: The unique identifier of the [account holder](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/accountHolders__resParam_id) associated with the balance account.
-          type: string
-        defaultCurrencyCode:
-          description: |-
-            The default currency code of this balance account, in three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) format. 
-            The default value is **EUR**.
           type: string
         description:
           description: A human-readable description of the balance account, maximum 300 characters. You can use this parameter to distinguish between multiple balance accounts under an account holder.
@@ -4947,6 +5053,18 @@ components:
             - $ref: "#/components/schemas/USLocalAccountIdentification"
       required:
         - accountIdentification
+      type: object
+    BankIdentification:
+      properties:
+        country:
+          type: string
+        identification:
+          type: string
+        identificationType:
+          enum:
+            - iban
+            - routingNumber
+          type: string
       type: object
     BrandVariantsRestriction:
       properties:
@@ -5425,6 +5543,19 @@ components:
           description: Unique identifier of the [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
           type: string
       type: object
+    CounterpartyBankRestriction:
+      properties:
+        operation:
+          description: Defines how the condition must be evaluated.
+          type: string
+        value:
+          description: List of counterparty Bank Institutions and the operation.
+          items:
+            $ref: "#/components/schemas/BankIdentification"
+          type: array
+      required:
+        - operation
+      type: object
     CountriesRestriction:
       properties:
         operation:
@@ -5497,7 +5628,6 @@ components:
           items:
             enum:
               - crossBorder
-              - directDebit
               - fast
               - instant
               - internal
@@ -5511,16 +5641,19 @@ components:
           enum:
             - amountLimitExceeded
             - approved
+            - balanceAccountTemporarilyBlockedByTransactionRule
             - counterpartyAccountBlocked
             - counterpartyAccountClosed
             - counterpartyAccountNotFound
             - counterpartyAddressRequired
             - counterpartyBankTimedOut
             - counterpartyBankUnavailable
+            - declinedByTransactionRule
             - error
             - notEnoughBalance
             - refusedByCounterpartyBank
             - routeNotFound
+            - scaFailed
             - unknown
           readOnly: true
           type: string
@@ -5814,6 +5947,25 @@ components:
       required:
         - token
       type: object
+    GetTaxFormResponse:
+      properties:
+        content:
+          contentEncoding: base64
+          description: The content of the tax form in Base64 format.
+          type: string
+        contentType:
+          description: |+
+            The content type of the tax form.
+
+            Possible values:
+            *  **application/pdf**
+
+          enum:
+            - application/pdf
+          type: string
+      required:
+        - content
+      type: object
     GrantLimit:
       properties:
         amount:
@@ -5866,8 +6018,8 @@ components:
       additionalProperties: false
       properties:
         accountNumber:
-          description: The 9- to 12-character bank account number (alphanumeric), without separators or whitespace. Starts with the 3-digit branch code.
-          maxLength: 12
+          description: The 9- to 15-character bank account number (alphanumeric), without separators or whitespace. Starts with the 3-digit branch code.
+          maxLength: 15
           minLength: 9
           type: string
         clearingCode:
@@ -6062,19 +6214,9 @@ components:
       additionalProperties: false
       properties:
         accountNumber:
-          description: The 7-digit bank account number, without separators or whitespace.
-          maxLength: 7
-          minLength: 7
-          type: string
-        accountSuffix:
-          description: The 2- to 3-digit account suffix, without separators or whitespace.
-          maxLength: 3
-          minLength: 2
-          type: string
-        bankCode:
-          description: The 6-digit bank code including the 2-digit bank code and 4-digit branch code, without separators or whitespace.
-          maxLength: 6
-          minLength: 6
+          description: The 15-16 digit bank account number. The first 2 digits are the bank number, the next 4 digits are the branch number, the next 7 digits are the account number, and the final 2-3 digits are the suffix.
+          maxLength: 16
+          minLength: 15
           type: string
         type:
           default: nzLocal
@@ -6085,8 +6227,6 @@ components:
       required:
         - type
         - accountNumber
-        - accountSuffix
-        - bankCode
       type: object
     Name:
       properties:
@@ -6450,6 +6590,9 @@ components:
         issuingCountryCode:
           description: The two-character ISO-3166-1 alpha-2 country code of the counterparty. For example, **US** or **NL**.
           type: string
+        onlyForCrossBalancePlatform:
+          description: Specifies if the requirement only applies to transfers to another balance platform.
+          type: boolean
         paymentInstrumentType:
           description: The type of the payment instrument. For example, "BankAccount" or "Card".
           enum:
@@ -6585,7 +6728,7 @@ components:
       properties:
         salesDayClosingTime:
           description: |-
-            Specifies at what time a [sales day](https://docs.adyen.com/marketplaces-and-platforms/receive-funds/sales-day-settlement#sales-day) ends.
+            Specifies at what time a [sales day](https://docs.adyen.com/marketplaces-and-platforms/settle-funds/sales-day-settlement#sales-day) ends.
 
             Possible values: Time in **"HH:MM"** format. **HH** ranges from **00** to **07**. **MM** must be **00**.
 
@@ -6594,11 +6737,11 @@ components:
           type: string
         settlementDelayDays:
           description: |-
-            Specifies after how many business days the funds in a [settlement batch](https://docs.adyen.com/marketplaces-and-platforms/receive-funds/sales-day-settlement#settlement-batch) are made available.
+            Specifies after how many business days the funds in a [settlement batch](https://docs.adyen.com/marketplaces-and-platforms/settle-funds/sales-day-settlement#settlement-batch) are made available.
 
             Possible values: **0** to **10**, or **null**.
-            * Setting this value to an integer enables [Sales day settlement](https://docs.adyen.com/marketplaces-and-platforms/receive-funds/sales-day-settlement).
-            * Setting this value to **null** enables [Pass-through settlement](https://docs.adyen.com/marketplaces-and-platforms/receive-funds/pass-through-settlement).
+            * Setting this value to an integer enables [Sales day settlement](https://docs.adyen.com/marketplaces-and-platforms/settle-funds/sales-day-settlement).
+            * Setting this value to **null** enables [Pass-through settlement](https://docs.adyen.com/marketplaces-and-platforms/settle-funds/pass-through-settlement).
 
             Default value: **null**.
           format: int32
@@ -6830,7 +6973,6 @@ components:
           items:
             enum:
               - crossBorder
-              - directDebit
               - fast
               - instant
               - internal
@@ -6844,16 +6986,19 @@ components:
           enum:
             - amountLimitExceeded
             - approved
+            - balanceAccountTemporarilyBlockedByTransactionRule
             - counterpartyAccountBlocked
             - counterpartyAccountClosed
             - counterpartyAccountNotFound
             - counterpartyAddressRequired
             - counterpartyBankTimedOut
             - counterpartyBankUnavailable
+            - declinedByTransactionRule
             - error
             - notEnoughBalance
             - refusedByCounterpartyBank
             - routeNotFound
+            - scaFailed
             - unknown
           readOnly: true
           type: string
@@ -7334,6 +7479,9 @@ components:
             List of card brand variants and the operation.
 
             Supported operations: **anyMatch**, **noneMatch**.
+        counterpartyBank:
+          $ref: "#/components/schemas/CounterpartyBankRestriction"
+          description: "List of counterparty Institutions and the operation. Supported operations: **anyMatch**, **noneMatch**."
         countries:
           $ref: "#/components/schemas/CountriesRestriction"
           description: |-
@@ -7411,9 +7559,6 @@ components:
       type: object
     TransferRoute:
       properties:
-        balancePlatform:
-          description: The unique identifier assigned to the balance platform associated with the account holder.
-          type: string
         category:
           description: |2
              The type of transfer.
@@ -7429,6 +7574,7 @@ components:
             - issuedCard
             - migration
             - platformPayment
+            - upgrade
           type: string
         country:
           description: The two-character ISO-3166-1 alpha-2 country code of the counterparty. For example, **US** or **NL**.
@@ -7755,7 +7901,6 @@ components:
           items:
             enum:
               - crossBorder
-              - directDebit
               - fast
               - instant
               - internal
@@ -7769,16 +7914,19 @@ components:
           enum:
             - amountLimitExceeded
             - approved
+            - balanceAccountTemporarilyBlockedByTransactionRule
             - counterpartyAccountBlocked
             - counterpartyAccountClosed
             - counterpartyAccountNotFound
             - counterpartyAddressRequired
             - counterpartyBankTimedOut
             - counterpartyBankUnavailable
+            - declinedByTransactionRule
             - error
             - notEnoughBalance
             - refusedByCounterpartyBank
             - routeNotFound
+            - scaFailed
             - unknown
           readOnly: true
           type: string

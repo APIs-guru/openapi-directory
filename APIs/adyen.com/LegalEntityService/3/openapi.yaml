@@ -1084,7 +1084,7 @@ paths:
       x-sortIndex: 3
   /legalEntities/{id}/pciQuestionnaires/generatePciTemplates:
     post:
-      description: Generates the required PCI questionnaire based on the user's [salesChannel](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businessLines__reqParam_salesChannels). If multiple questionnaires are required, this request creates a single consodilated document to be signed.
+      description: Generates the required PCI questionnaires based on the user's [salesChannel](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businessLines__reqParam_salesChannels).
       operationId: post-legalEntities-id-pciQuestionnaires-generatePciTemplates
       parameters:
         - description: The unique identifier of the legal entity to get PCI questionnaire information.
@@ -2724,13 +2724,13 @@ components:
       value:
         url: https://balanceplatform-test.adyen.com/balanceplatform/uo/form/xtl-...?signature=..&cd=..&redirectUrl=https%3A%2F%2Fyour.redirect-url.com%2F&expiry=1667226404807&locale=nl-NL
     post-legalEntities-id-pciQuestionnaires-generatePciTemplates-createPciQuestionnaire:
-      description: Example request for generating the PCI questionnaire in French
-      summary: Generate the PCI questionnaire
+      description: Example request for generating PCI questionnaires in French
+      summary: Generate PCI questionnaires
       value:
         language: fr
     post-legalEntities-id-pciQuestionnaires-generatePciTemplates-createPciQuestionnaire-200:
-      description: Example response for getting a PCI questionnaire
-      summary: PCI questionnaire returned
+      description: Example response for getting PCI questionnaires
+      summary: PCI questionnaires returned
       value:
         content: JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBv+f/ub0j6JPRX+E3EmC==
         language: fr
@@ -2738,8 +2738,8 @@ components:
           - PCIT-T7KC6VGL
           - PCIT-PKB6DKS4
     post-legalEntities-id-pciQuestionnaires-signPciTemplates-signPciQuestionnaire:
-      description: Example request for signing the PCI questionnaires
-      summary: Sign the PCI questionnaires
+      description: Example request for signing PCI questionnaires
+      summary: Sign PCI questionnaires
       value:
         pciTemplateReferences:
           - PCIT-T7KC6VGL
@@ -3546,6 +3546,24 @@ components:
       type: object
     GeneratePciDescriptionRequest:
       properties:
+        additionalSalesChannels:
+          description: |+
+            An array of additional sales channels to generate PCI questionnaires. Include the relevant sales channels if you need your user to sign PCI questionnaires. Not required if you [create stores](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/create-stores/) and [add payment methods](https://docs.adyen.com/marketplaces-and-platforms/payment-methods/) for your user.
+
+            Possible values:
+            *  **eCommerce**
+            *  **pos**
+            *  **ecomMoto**
+            *  **posMoto**
+
+          items:
+            enum:
+              - eCommerce
+              - ecomMoto
+              - pos
+              - posMoto
+            type: string
+          type: array
         language:
           description: Sets the language of the PCI questionnaire. Its value is a two-character [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) language code, for example, **en**.
           type: string

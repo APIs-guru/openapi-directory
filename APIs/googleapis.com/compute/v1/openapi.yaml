@@ -5695,6 +5695,173 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - backendBuckets
+  /projects/{project}/global/backendBuckets/{resource}/getIamPolicy:
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.backendBuckets.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - backendBuckets
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+  /projects/{project}/global/backendBuckets/{resource}/setIamPolicy:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.backendBuckets.setIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlobalSetPolicyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - backendBuckets
+  /projects/{project}/global/backendBuckets/{resource}/testIamPermissions:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.backendBuckets.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - backendBuckets
   /projects/{project}/global/backendServices:
     get:
       description: Retrieves the list of BackendService resources available to the specified project.
@@ -6453,6 +6620,63 @@ paths:
             - https://www.googleapis.com/auth/compute
           Oauth2c:
             - https://www.googleapis.com/auth/compute
+      tags:
+        - backendServices
+  /projects/{project}/global/backendServices/{resource}/testIamPermissions:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.backendServices.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
       tags:
         - backendServices
   /projects/{project}/global/externalVpnGateways:
@@ -10627,7 +10851,7 @@ paths:
         - interconnects
   /projects/{project}/global/interconnects/{interconnect}/getDiagnostics:
     get:
-      description: Returns the interconnectDiagnostics for the specified Interconnect.
+      description: Returns the interconnectDiagnostics for the specified Interconnect. In the event of a global outage, do not use this API to make decisions about where to redirect your network traffic. Unlike a VLAN attachment, which is regional, a Cloud Interconnect connection is a global resource. A global outage can prevent this API from functioning properly.
       operationId: compute.interconnects.getDiagnostics
       parameters:
         - description: Project ID for this request.
@@ -18854,6 +19078,69 @@ paths:
             - https://www.googleapis.com/auth/compute
           Oauth2c:
             - https://www.googleapis.com/auth/compute
+      tags:
+        - regionBackendServices
+  /projects/{project}/regions/{region}/backendServices/{resource}/testIamPermissions:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.regionBackendServices.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
       tags:
         - regionBackendServices
   /projects/{project}/regions/{region}/commitments:

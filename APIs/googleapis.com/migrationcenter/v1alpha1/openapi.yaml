@@ -2033,6 +2033,18 @@ components:
           format: int32
           type: integer
       type: object
+    DetectedSoftware:
+      description: Information about software detected on an asset.
+      properties:
+        softwareFamily:
+          description: Output only. Software family of the detected software, e.g. Database, SAP family.
+          readOnly: true
+          type: string
+        softwareName:
+          description: Output only. Software's name.
+          readOnly: true
+          type: string
+      type: object
     DiskEntry:
       description: Single disk entry.
       properties:
@@ -2316,10 +2328,10 @@ components:
           readOnly: true
           type: string
         description:
-          description: The description of the resource.
+          description: Optional. The description of the group.
           type: string
         displayName:
-          description: User-friendly display name.
+          description: Optional. User-friendly display name.
           type: string
         labels:
           additionalProperties:
@@ -2623,6 +2635,10 @@ components:
         migrationInsight:
           $ref: "#/components/schemas/MigrationInsight"
           description: Output only. An insight about potential migrations for an asset.
+          readOnly: true
+        softwareInsight:
+          $ref: "#/components/schemas/SoftwareInsight"
+          description: Output only. An insight regarding software detected on an asset.
           readOnly: true
       type: object
     InsightList:
@@ -3713,6 +3729,14 @@ components:
         preferenceSet:
           description: The preference set used by default for a project.
           type: string
+      type: object
+    SoftwareInsight:
+      description: An insight regarding software detected on an asset.
+      properties:
+        detectedSoftware:
+          $ref: "#/components/schemas/DetectedSoftware"
+          description: Output only. Information about the detected software.
+          readOnly: true
       type: object
     SoleTenancyPreferences:
       description: Preferences concerning Sole Tenancy nodes and VMs.

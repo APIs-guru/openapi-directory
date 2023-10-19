@@ -2244,10 +2244,10 @@ components:
           readOnly: true
           type: string
         description:
-          description: Optional. The description of the group.
+          description: The description of the resource.
           type: string
         displayName:
-          description: Optional. User-friendly display name.
+          description: User-friendly display name.
           type: string
         labels:
           additionalProperties:
@@ -3686,9 +3686,6 @@ components:
     Settings:
       description: Describes the Migration Center settings related to the project.
       properties:
-        disableCloudLogging:
-          description: Disable Cloud Logging for the Migration Center API. Users are billed for the logs.
-          type: boolean
         name:
           description: Output only. The name of the resource.
           readOnly: true
