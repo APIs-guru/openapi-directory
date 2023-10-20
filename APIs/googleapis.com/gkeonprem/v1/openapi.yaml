@@ -3175,7 +3175,8 @@ components:
           description: The VMware platform configuration.
         preparedSecrets:
           $ref: "#/components/schemas/VmwareAdminPreparedSecretsConfig"
-          description: The VMware admin cluster prepared secrets configuration.
+          description: Output only. The VMware admin cluster prepared secrets configuration. It should always be enabled by the Central API, instead of letting users set it.
+          readOnly: true
         reconciling:
           description: Output only. If set, there are currently changes in flight to the VMware admin cluster.
           readOnly: true

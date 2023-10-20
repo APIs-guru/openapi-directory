@@ -1017,6 +1017,13 @@ components:
           description: Immutable. The service account to use with the specified KMS key. We recommend that you use a separate service account and follow KMS best practices. For more information, see [Separation of duties](https://cloud.google.com/kms/docs/separation-of-duties) and `gcloud kms keys add-iam-policy-binding` [`--member`](https://cloud.google.com/sdk/gcloud/reference/kms/keys/add-iam-policy-binding#--member).
           type: string
       type: object
+    DomainConfig:
+      description: Configuration options for a custom domain.
+      properties:
+        domain:
+          description: Immutable. Domain used by Workstations for HTTP ingress.
+          type: string
+      type: object
     EphemeralDirectory:
       description: An ephemeral directory which won't persist across workstation sessions. It is freshly created on every workstation start operation.
       properties:
@@ -1576,6 +1583,9 @@ components:
         displayName:
           description: Optional. Human-readable name for this workstation cluster.
           type: string
+        domainConfig:
+          $ref: "#/components/schemas/DomainConfig"
+          description: Optional. Configuration options for a custom domain.
         etag:
           description: Optional. Checksum computed by the server. May be sent on update and delete requests to make sure that the client has an up-to-date value before proceeding.
           type: string

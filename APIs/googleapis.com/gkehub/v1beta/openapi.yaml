@@ -1339,6 +1339,9 @@ components:
         identityservice:
           $ref: "#/components/schemas/IdentityServiceMembershipSpec"
           description: Identity Service-specific spec.
+        policycontroller:
+          $ref: "#/components/schemas/PolicyControllerMembershipSpec"
+          description: Policy Controller spec.
       type: object
     ConfigManagementBinauthzConfig:
       description: Configuration for Binauthz

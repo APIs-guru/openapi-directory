@@ -1528,6 +1528,10 @@ components:
     CloudRunMetadata:
       description: CloudRunMetadata contains information from a Cloud Run deployment.
       properties:
+        job:
+          description: Output only. The name of the Cloud Run job that is associated with a `Rollout`. Format is projects/{project}/locations/{location}/jobs/{job_name}.
+          readOnly: true
+          type: string
         revision:
           description: Output only. The Cloud Run Revision id associated with a `Rollout`.
           readOnly: true

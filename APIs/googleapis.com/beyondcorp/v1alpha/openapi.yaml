@@ -1411,7 +1411,7 @@ paths:
       description: Creates a new BeyondCorp Enterprise ProxyConfig in a given organization and PartnerTenant. Can only be called by on onboarded Beyondcorp Enterprise partner.
       operationId: beyondcorp.organizations.locations.global.partnerTenants.proxyConfigs.create
       parameters:
-        - description: "Required. The resource name of the Tenant using the form: `organizations/{organization_id}/locations/global/tenants/{tenant_id}`"
+        - description: "Required. The resource name of the parent PartnerTenant using the form: `organizations/{organization_id}/locations/global/partnerTenants/{partner_tenant_id}`"
           in: path
           name: parent
           required: true
@@ -2794,7 +2794,7 @@ components:
           type: string
       type: object
     GoogleCloudBeyondcorpPartnerservicesV1alphaProxyConfig:
-      description: Proxy Configuration of a Tenant.
+      description: Proxy Configuration of a PartnerTenant.
       properties:
         createTime:
           description: Output only. Timestamp when the resource was created.
@@ -2811,9 +2811,6 @@ components:
           description: Output only. ProxyConfig resource name.
           readOnly: true
           type: string
-        proxyProtocolConfig:
-          $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaProxyProtocolConfig"
-          description: Optional. Protocol config data for the Proxy.
         proxyUri:
           description: Required. The URI of the proxy server.
           type: string
@@ -2828,15 +2825,6 @@ components:
           format: google-datetime
           readOnly: true
           type: string
-      type: object
-    GoogleCloudBeyondcorpPartnerservicesV1alphaProxyProtocolConfig:
-      description: The protocol data that specifies how to communicate with Partner's Proxy.
-      properties:
-        metadata:
-          additionalProperties:
-            type: string
-          description: Optional. Untyped property bag to be sent back to the proxy using client specific mechanism.
-          type: object
       type: object
     GoogleCloudBeyondcorpPartnerservicesV1alphaRoutingInfo:
       description: Message contains the routing information to direct traffic to the proxy server.

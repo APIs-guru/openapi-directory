@@ -558,6 +558,87 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v2/{parent}/discoveryConfigs:
+    get:
+      description: Lists Discovery configurations.
+      operationId: dlp.projects.locations.discoveryConfigs.list
+      parameters:
+        - description: "Required. Parent resource name. The format of this value is as follows: `projects/`PROJECT_ID`/locations/`LOCATION_ID The following example `parent` string specifies a parent project with the identifier `example-project`, and specifies the `europe-west3` location for processing data: parent=projects/example-project/locations/europe-west3"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Comma separated list of config fields to order by, followed by `asc` or `desc` postfix. This list is case-insensitive, default sorting order is ascending, redundant space characters are insignificant. Example: `name asc,update_time, create_time desc` Supported fields are: - `last_run_time`: corresponds to the last time the DiscoveryConfig ran. - `name`: corresponds to the DiscoveryConfig's name. - `status`: corresponds to DiscoveryConfig's status."
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Size of the page, can be limited by a server.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token to continue retrieval. Comes from previous call to ListDiscoveryConfigs. `order_by` field must not change for subsequent calls.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GooglePrivacyDlpV2ListDiscoveryConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a config for Discovery to scan and profile storage.
+      operationId: dlp.projects.locations.discoveryConfigs.create
+      parameters:
+        - description: "Required. Parent resource name. The format of this value is as follows: `projects/`PROJECT_ID`/locations/`LOCATION_ID The following example `parent` string specifies a parent project with the identifier `example-project`, and specifies the `europe-west3` location for processing data: parent=projects/example-project/locations/europe-west3"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GooglePrivacyDlpV2CreateDiscoveryConfigRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoveryConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v2/{parent}/dlpJobs:
     get:
       description: Lists DlpJobs that match the specified filter in the request. See https://cloud.google.com/dlp/docs/inspecting-storage and https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
@@ -1140,6 +1221,10 @@ components:
       description: Apply transformation to all findings.
       properties: {}
       type: object
+    GooglePrivacyDlpV2AllOtherBigQueryTables:
+      description: Catch-all for all other tables not specified by other filters. Should always be last, except for single-table configurations, which will only have a TableReference target.
+      properties: {}
+      type: object
     GooglePrivacyDlpV2AllText:
       description: Apply to all text.
       properties: {}
@@ -1189,6 +1274,22 @@ components:
         table:
           $ref: "#/components/schemas/GooglePrivacyDlpV2BigQueryTable"
           description: Required. Auxiliary table location.
+      type: object
+    GooglePrivacyDlpV2BigQueryDiscoveryTarget:
+      description: Target used to match against for Discovery with BigQuery tables
+      properties:
+        cadence:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoveryGenerationCadence"
+          description: How often and when to update profiles. New tables that match both the filter and conditions are scanned as quickly as possible depending on system capacity.
+        conditions:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoveryBigQueryConditions"
+          description: In addition to matching the filter, these conditions must be true before a profile is generated.
+        disabled:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2Disabled"
+          description: Tables that match this filter will not have profiles created.
+        filter:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoveryBigQueryFilter"
+          description: Required. The tables the Discovery cadence applies to. The first target with a matching filter will be the one to apply to a table.
       type: object
     GooglePrivacyDlpV2BigQueryField:
       description: Message defining a field of a BigQuery table.
@@ -1247,6 +1348,28 @@ components:
           $ref: "#/components/schemas/GooglePrivacyDlpV2BigQueryTable"
           description: Complete BigQuery table reference.
       type: object
+    GooglePrivacyDlpV2BigQueryRegex:
+      description: A pattern to match against one or more tables, datasets, or projects that contain BigQuery tables. At least one pattern must be specified. Regular expressions use RE2 [syntax](https://github.com/google/re2/wiki/Syntax); a guide can be found under the google/re2 repository on GitHub.
+      properties:
+        datasetIdRegex:
+          description: If unset, this property matches all datasets.
+          type: string
+        projectIdRegex:
+          description: For organizations, if unset, will match all projects. Has no effect for data profile configurations created within a project.
+          type: string
+        tableIdRegex:
+          description: If unset, this property matches all tables.
+          type: string
+      type: object
+    GooglePrivacyDlpV2BigQueryRegexes:
+      description: A collection of regular expressions to determine what tables to match against.
+      properties:
+        patterns:
+          description: A single BigQuery regular expression pattern to match against one or more tables, datasets, or projects that contain BigQuery tables.
+          items:
+            $ref: "#/components/schemas/GooglePrivacyDlpV2BigQueryRegex"
+          type: array
+      type: object
     GooglePrivacyDlpV2BigQueryTable:
       description: "Message defining the location of a BigQuery table. A table is uniquely identified by its project_id, dataset_id, and table_name. Within a query a table is often referenced with a string in the format of: `:.` or `..`."
       properties:
@@ -1259,6 +1382,26 @@ components:
         tableId:
           description: Name of the table.
           type: string
+      type: object
+    GooglePrivacyDlpV2BigQueryTableCollection:
+      description: Specifies a collection of BigQuery tables. Used for Discovery.
+      properties:
+        includeRegexes:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2BigQueryRegexes"
+          description: A collection of regular expressions to match a BigQuery table against.
+      type: object
+    GooglePrivacyDlpV2BigQueryTableTypes:
+      description: The types of bigquery tables supported by Cloud DLP.
+      properties:
+        types:
+          description: A set of bigquery table types.
+          items:
+            enum:
+              - BIG_QUERY_TABLE_TYPE_UNSPECIFIED
+              - BIG_QUERY_TABLE_TYPE_TABLE
+              - BIG_QUERY_TABLE_TYPE_EXTERNAL_BIG_LAKE
+            type: string
+          type: array
       type: object
     GooglePrivacyDlpV2BoundingBox:
       description: Bounding box encompassing detected text within an image.
@@ -1707,6 +1850,16 @@ components:
         templateId:
           description: "The template id can contain uppercase and lowercase letters, numbers, and hyphens; that is, it must match the regular expression: `[a-zA-Z\\d-_]+`. The maximum length is 100 characters. Can be empty to allow the system to generate one."
           type: string
+      type: object
+    GooglePrivacyDlpV2CreateDiscoveryConfigRequest:
+      description: Request message for CreateDiscoveryConfig.
+      properties:
+        configId:
+          description: "The config id can contain uppercase and lowercase letters, numbers, and hyphens; that is, it must match the regular expression: `[a-zA-Z\\d-_]+`. The maximum length is 100 characters. Can be empty to allow the system to generate one."
+          type: string
+        discoveryConfig:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoveryConfig"
+          description: Required. The DiscoveryConfig to create.
       type: object
     GooglePrivacyDlpV2CreateDlpJobRequest:
       description: Request message for CreateDlpJobRequest. Used to initiate long running jobs such as calculating risk metrics or inspecting Google Cloud Storage.
@@ -2236,6 +2389,167 @@ components:
         wordList:
           $ref: "#/components/schemas/GooglePrivacyDlpV2WordList"
           description: List of words or phrases to search for.
+      type: object
+    GooglePrivacyDlpV2Disabled:
+      description: Do nothing.
+      properties: {}
+      type: object
+    GooglePrivacyDlpV2DiscoveryBigQueryConditions:
+      description: Requirements that must be true before a table is scanned in Discovery for the first time. There is an AND relationship between the top-level attributes.
+      properties:
+        createdAfter:
+          description: BigQuery table must have been created after this date. Used to avoid backfilling.
+          format: google-datetime
+          type: string
+        orConditions:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2OrConditions"
+          description: At least one of the conditions must be true for a table to be scanned.
+        typeCollection:
+          description: Restrict Discovery to categories of table types.
+          enum:
+            - BIG_QUERY_COLLECTION_UNSPECIFIED
+            - BIG_QUERY_COLLECTION_ALL_TYPES
+            - BIG_QUERY_COLLECTION_ONLY_SUPPORTED_TYPES
+          type: string
+        types:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2BigQueryTableTypes"
+          description: Restrict Discovery to specific table types.
+      type: object
+    GooglePrivacyDlpV2DiscoveryBigQueryFilter:
+      description: Determines what tables will have profiles generated within an organization or project. Includes the ability to filter by regular expression patterns on project ID, dataset ID, and table ID. Also lets you set minimum conditions that must be met before Cloud DLP scans a table (like a minimum row count or a minimum table age).
+      properties:
+        otherTables:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2AllOtherBigQueryTables"
+          description: Catch-all. This should always be the last filter in the list because anything above it will apply first. Should only appear once in a configuration. If none is specified, a default one will be added automatically.
+        tables:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2BigQueryTableCollection"
+          description: A specific set of tables for this filter to apply to. A table collection must be specified in only one filter per config. If a table id or dataset is empty, Cloud DLP assumes all tables in that collection must be profiled. Must specify a project ID.
+      type: object
+    GooglePrivacyDlpV2DiscoveryConfig:
+      description: Configuration for Discovery to scan resources for profile generation. Only one Discovery configuration may exist per organization, folder, or project. The generated data profiles are retained according to the [data retention policy] (https://cloud.google.com/dlp/docs/data-profiles#retention).
+      properties:
+        actions:
+          description: Actions to execute at the completion of scanning.
+          items:
+            $ref: "#/components/schemas/GooglePrivacyDlpV2DataProfileAction"
+          type: array
+        createTime:
+          description: Output only. The creation timestamp of a DiscoveryConfig.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Display name (max 100 chars)
+          type: string
+        errors:
+          description: Output only. A stream of errors encountered when the config was activated. Repeated errors may result in the config automatically being paused. Output only field. Will return the last 100 errors. Whenever the config is modified this list will be cleared.
+          items:
+            $ref: "#/components/schemas/GooglePrivacyDlpV2Error"
+          readOnly: true
+          type: array
+        inspectTemplates:
+          description: Detection logic for profile generation. Not all template features are used by Discovery. FindingLimits, include_quote and exclude_info_types have no impact on Discovery. Multiple templates may be provided if there is data in multiple regions. At most one template must be specified per-region (including "global"). Each region is scanned using the applicable template. If no region-specific template is specified, but a "global" template is specified, it will be copied to that region and used instead. If no global or region-specific template is provided for a region with data, that region's data will not be scanned. For more information, see https://cloud.google.com/dlp/docs/data-profiles#data_residency.
+          items:
+            type: string
+          type: array
+        lastRunTime:
+          description: Output only. The timestamp of the last time this config was executed.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: Unique resource name for the DiscoveryConfig, assigned by the service when the DiscoveryConfig is created, for example `projects/dlp-test-project/locations/global/discoveryConfigs/53234423`.
+          type: string
+        orgConfig:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2OrgConfig"
+          description: Only set when the parent is an org.
+        status:
+          description: Required. A status for this configuration.
+          enum:
+            - STATUS_UNSPECIFIED
+            - RUNNING
+            - PAUSED
+          type: string
+        targets:
+          description: Target to match against for determining what to scan and how frequently.
+          items:
+            $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoveryTarget"
+          type: array
+        updateTime:
+          description: Output only. The last update timestamp of a DiscoveryConfig.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GooglePrivacyDlpV2DiscoveryGenerationCadence:
+      description: What must take place for a profile to be updated and how frequently it should occur. New tables are scanned as quickly as possible depending on system capacity.
+      properties:
+        schemaModifiedCadence:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoverySchemaModifiedCadence"
+          description: Governs when to update data profiles when a schema is modified.
+        tableModifiedCadence:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoveryTableModifiedCadence"
+          description: Governs when to update data profiles when a table is modified.
+      type: object
+    GooglePrivacyDlpV2DiscoverySchemaModifiedCadence:
+      description: The cadence at which to update data profiles when a schema is modified.
+      properties:
+        frequency:
+          description: How frequently profiles may be updated when schemas are modified. Defaults to monthly.
+          enum:
+            - UPDATE_FREQUENCY_UNSPECIFIED
+            - UPDATE_FREQUENCY_NEVER
+            - UPDATE_FREQUENCY_DAILY
+            - UPDATE_FREQUENCY_MONTHLY
+          type: string
+        types:
+          description: The type of events to consider when deciding if the table's schema has been modified and should have the profile updated. Defaults to NEW_COLUMNS.
+          items:
+            enum:
+              - SCHEMA_MODIFICATION_UNSPECIFIED
+              - SCHEMA_NEW_COLUMNS
+              - SCHEMA_REMOVED_COLUMNS
+            type: string
+          type: array
+      type: object
+    GooglePrivacyDlpV2DiscoveryStartingLocation:
+      description: The location to begin a Discovery scan. Denotes an organization ID or folder ID within an organization.
+      properties:
+        folderId:
+          description: The ID of the Folder within an organization to scan.
+          format: int64
+          type: string
+        organizationId:
+          description: The ID of an organization to scan.
+          format: int64
+          type: string
+      type: object
+    GooglePrivacyDlpV2DiscoveryTableModifiedCadence:
+      description: The cadence at which to update data profiles when a table is modified.
+      properties:
+        frequency:
+          description: How frequently data profiles can be updated when tables are modified. Defaults to never.
+          enum:
+            - UPDATE_FREQUENCY_UNSPECIFIED
+            - UPDATE_FREQUENCY_NEVER
+            - UPDATE_FREQUENCY_DAILY
+            - UPDATE_FREQUENCY_MONTHLY
+          type: string
+        types:
+          description: The type of events to consider when deciding if the table has been modified and should have the profile updated. Defaults to MODIFIED_TIMESTAMP.
+          items:
+            enum:
+              - TABLE_MODIFICATION_UNSPECIFIED
+              - TABLE_MODIFIED_TIMESTAMP
+            type: string
+          type: array
+      type: object
+    GooglePrivacyDlpV2DiscoveryTarget:
+      description: Target used to match against for Discovery.
+      properties:
+        bigQueryTarget:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2BigQueryDiscoveryTarget"
+          description: BigQuery target for Discovery. The first target to match a table will be the one applied.
       type: object
     GooglePrivacyDlpV2DlpJob:
       description: Combines all of the information about a DLP job.
@@ -3346,6 +3660,18 @@ components:
           description: If the next page is available then the next page token to be used in following ListDeidentifyTemplates request.
           type: string
       type: object
+    GooglePrivacyDlpV2ListDiscoveryConfigsResponse:
+      description: Response message for ListDiscoveryConfigs.
+      properties:
+        discoveryConfigs:
+          description: List of configs, up to page_size in ListDiscoveryConfigsRequest.
+          items:
+            $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoveryConfig"
+          type: array
+        nextPageToken:
+          description: If the next page is available then the next page token to be used in following ListDiscoveryConfigs request.
+          type: string
+      type: object
     GooglePrivacyDlpV2ListDlpJobsResponse:
       description: The response message for listing DLP jobs.
       properties:
@@ -3459,6 +3785,28 @@ components:
           items:
             $ref: "#/components/schemas/GooglePrivacyDlpV2Value"
           type: array
+      type: object
+    GooglePrivacyDlpV2OrConditions:
+      description: There is an OR relationship between these attributes. They are used to determine if a table should be scanned or not in Discovery.
+      properties:
+        minAge:
+          description: Minimum age a table must have before Cloud DLP can profile it. Value must be 1 hour or greater.
+          format: google-duration
+          type: string
+        minRowCount:
+          description: Minimum number of rows that should be present before Cloud DLP profiles a table
+          format: int32
+          type: integer
+      type: object
+    GooglePrivacyDlpV2OrgConfig:
+      description: Project and scan location information. Only set when the parent is an org.
+      properties:
+        location:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoveryStartingLocation"
+          description: "The data to scan: folder, org, or project"
+        projectId:
+          description: The project that will run the scan. The DLP service account that exists within this project must have access to all resources that are profiled, and the Cloud DLP API must be enabled.
+          type: string
       type: object
     GooglePrivacyDlpV2OtherInfoTypeSummary:
       description: Infotype details for other infoTypes found within a column.
@@ -4544,6 +4892,17 @@ components:
         deidentifyTemplate:
           $ref: "#/components/schemas/GooglePrivacyDlpV2DeidentifyTemplate"
           description: New DeidentifyTemplate value.
+        updateMask:
+          description: Mask to control which fields get updated.
+          format: google-fieldmask
+          type: string
+      type: object
+    GooglePrivacyDlpV2UpdateDiscoveryConfigRequest:
+      description: Request message for UpdateDiscoveryConfig.
+      properties:
+        discoveryConfig:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoveryConfig"
+          description: New DiscoveryConfig value.
         updateMask:
           description: Mask to control which fields get updated.
           format: google-fieldmask
