@@ -3657,6 +3657,58 @@ paths:
       x-groupName: My API credential
       x-methodName: getAllowedOriginDetails
       x-sortIndex: 0
+  /me/generateClientKey:
+    post:
+      description: |-
+        Returns a new [client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works) for the caller - API Credential or OAuth Access Token. You can use the new client key a few minutes after generating it. The old client key stops working 24 hours after generating a new one.To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
+      operationId: post-me-generateClientKey
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenerateClientKeyResponse"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Generate new client key for self
+      tags:
+        - My API credential
+      x-groupName: My API credential
+      x-methodName: generateNewClientKeyForSelf
+      x-sortIndex: 0
   /merchants:
     get:
       description: |-
@@ -17269,6 +17321,12 @@ components:
         - itemsTotal
         - pagesTotal
       type: object
+    Localization:
+      properties:
+        language:
+          description: Language of the terminal.
+          type: string
+      type: object
     Logo:
       properties:
         data:
@@ -19176,6 +19234,9 @@ components:
         hardware:
           $ref: "#/components/schemas/Hardware"
           description: Settings for terminal hardware features.
+        localization:
+          $ref: "#/components/schemas/Localization"
+          description: Settings for localization.
         nexo:
           $ref: "#/components/schemas/Nexo"
           description: Settings for a Terminal API integration.

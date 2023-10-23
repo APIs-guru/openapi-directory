@@ -2213,6 +2213,9 @@ components:
         pythonRepository:
           $ref: "#/components/schemas/PythonRepository"
           description: Specific settings for a Python remote repository.
+        upstreamCredentials:
+          $ref: "#/components/schemas/UpstreamCredentials"
+          description: Optional. The credentials used to access the remote repository.
         yumRepository:
           $ref: "#/components/schemas/YumRepository"
           description: Specific settings for a Yum remote repository.
@@ -2459,6 +2462,13 @@ components:
             $ref: "#/components/schemas/YumArtifact"
           type: array
       type: object
+    UpstreamCredentials:
+      description: The credentials to access the remote repository.
+      properties:
+        usernamePasswordCredentials:
+          $ref: "#/components/schemas/UsernamePasswordCredentials"
+          description: Use username and password to access the remote repository.
+      type: object
     UpstreamPolicy:
       description: Artifact policy configuration for the repository contents.
       properties:
@@ -2471,6 +2481,16 @@ components:
           type: integer
         repository:
           description: 'A reference to the repository resource, for example: "projects/p1/locations/us-central1/repositories/repo1".'
+          type: string
+      type: object
+    UsernamePasswordCredentials:
+      description: Username and password credentials.
+      properties:
+        passwordSecretVersion:
+          description: The Secret Manager key version that holds the password to access the remote repository. Must be in the format of `projects/{project}/secrets/{secret}/versions/{version}`.
+          type: string
+        username:
+          description: The username to access the remote repository.
           type: string
       type: object
     VPCSCConfig:

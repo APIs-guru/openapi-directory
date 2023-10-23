@@ -680,6 +680,13 @@ components:
           description: DS ad ID.
           format: int64
           type: string
+        adUserDataConsent:
+          description: Ad user data consent for this conversion.
+          enum:
+            - UNKNOWN
+            - GRANTED
+            - DENIED
+          type: string
         advertiserId:
           description: DS advertiser ID.
           format: int64

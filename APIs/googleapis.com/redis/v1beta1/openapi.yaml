@@ -816,6 +816,9 @@ components:
       properties:
         managedServerCa:
           $ref: "#/components/schemas/ManagedCertificateAuthority"
+        name:
+          description: "Identifier. Unique name of the resource in this scope including project, location and cluster using the form: `projects/{project}/locations/{location}/clusters/{cluster}/certificateAuthority`"
+          type: string
       type: object
     Cluster:
       description: A cluster instance.

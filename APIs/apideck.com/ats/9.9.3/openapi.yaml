@@ -269,7 +269,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: ATS API
-  version: 9.9.2
+  version: 9.9.3
   x-apideck-api: ats
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -2788,6 +2788,9 @@ components:
               type: object
             - items:
                 type: string
+              type: array
+            - items:
+                type: object
               type: array
       required:
         - id

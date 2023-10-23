@@ -1968,7 +1968,10 @@ components:
           type: string
         vrf:
           $ref: "#/components/schemas/VRF"
-          description: The vrf for the Network.
+          description: The Vrf for the Network. Use this only if a new Vrf needs to be created.
+        vrfAttachment:
+          description: Optional. The name of a pre-existing Vrf that the network should be attached to. Format is `vrfs/{vrf}`.
+          type: string
       type: object
     NetworkAddress:
       description: A network.

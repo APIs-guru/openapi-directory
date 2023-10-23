@@ -539,7 +539,7 @@ components:
             - RELEVANCE
           type: string
         regionCode:
-          description: The Unicode country/region code (CLDR) of the location where the request is coming from. This parameter is used to display the place details, like region-specific place name, if available. The parameter can affect results based on applicable law. For more information, see http://www.unicode.org/reports/tr35/#unicode_region_subtag. Note that 3-digit region codes are not currently supported.
+          description: The Unicode country/region code (CLDR) of the location where the request is coming from. This parameter is used to display the place details, like region-specific place name, if available. The parameter can affect results based on applicable law. For more information, see https://www.unicode.org/cldr/charts/latest/supplemental/territory_language_information.html. Note that 3-digit region codes are not currently supported.
           type: string
         strictTypeFiltering:
           description: Used to set strict type filtering for included_type. If set to true, only results of the same type will be returned. Default to false.
