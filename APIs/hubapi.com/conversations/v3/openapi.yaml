@@ -3,8 +3,16 @@ servers:
   - url: https://api.hubapi.com
 info:
   description: The Visitor Identification API allows you to pass identification information to the HubSpot chat widget for otherwise unknown visitors that were verified by your own authentication system.
-  title: Visitor Identification
+  title: Conversations Visitor Identification
   version: v3
+  x-hubspot-api-use-case: You're building an integration to pass along website visitors to a chatflow you've configured in HubSpot, and ensure that visitors are associated with a known contact so support agents in your account know who they're helping.
+  x-hubspot-documentation-banner: NONE
+  x-hubspot-introduction: The visitor identification API allows you to identify users who navigate to your website that you've authenticated using your own authentication system.
+  x-hubspot-product-tier-requirements:
+    cms: FREE
+    marketing: FREE
+    sales: FREE
+    service: FREE
   x-logo:
     url: https://developers.hubspot.com/hubfs/assets/hubspot.com/buzz/HubSpotOpenGraph.png
   x-origin:
@@ -19,7 +27,7 @@ paths:
   /conversations/v3/visitor-identification/tokens/create:
     post:
       description: Generates a new visitor identification token. This token will be unique every time this endpoint is called, even if called with the same email address. This token is temporary and will expire after 12 hours
-      operationId: post-/visitor-identification/v3/tokens/create_generateToken
+      operationId: post-/visitor-identification/v3/tokens/create
       requestBody:
         content:
           application/json:

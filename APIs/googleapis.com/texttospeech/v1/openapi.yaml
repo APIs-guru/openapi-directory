@@ -425,7 +425,8 @@ components:
           description: Required. The name of the AutoML model that synthesizes the custom voice.
           type: string
         reportedUsage:
-          description: Optional. The usage of the synthesized audio to be reported.
+          deprecated: true
+          description: Optional. Deprecated. The usage of the synthesized audio to be reported.
           enum:
             - REPORTED_USAGE_UNSPECIFIED
             - REALTIME

@@ -3,10 +3,18 @@ servers:
   - url: https://api.hubapi.com
 info:
   description: Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
-  title: Webhooks API
+  title: Webhooks Webhooks
   version: v3
   x-apisguru-categories:
     - customer_relation
+  x-hubspot-api-use-case: You're building a custom integration that syncs contact data with HubSpot and you need to programmatically determine when certain fields are updated in your HubSpot account.
+  x-hubspot-documentation-banner: NONE
+  x-hubspot-introduction: The Webhooks API allows you to subscribe to events happening in a HubSpot account with your integration installed. Rather than making an API call when an event happens in a connected account, HubSpot can send an HTTP request to an endpoint you configure.
+  x-hubspot-product-tier-requirements:
+    cms: FREE
+    marketing: FREE
+    sales: FREE
+    service: FREE
   x-logo:
     url: https://developers.hubspot.com/hubfs/assets/hubspot.com/buzz/HubSpotOpenGraph.png
   x-origin:
@@ -21,7 +29,7 @@ tags:
 paths:
   /webhooks/v3/{appId}/settings:
     delete:
-      operationId: delete-/webhooks/v3/{appId}/settings_clear
+      operationId: delete-/webhooks/v3/{appId}/settings
       parameters:
         - explode: false
           in: path
@@ -42,7 +50,7 @@ paths:
       tags:
         - Settings
     get:
-      operationId: get-/webhooks/v3/{appId}/settings_getAll
+      operationId: get-/webhooks/v3/{appId}/settings
       parameters:
         - explode: false
           in: path
@@ -66,7 +74,7 @@ paths:
       tags:
         - Settings
     put:
-      operationId: put-/webhooks/v3/{appId}/settings_configure
+      operationId: put-/webhooks/v3/{appId}/settings
       parameters:
         - explode: false
           in: path
@@ -97,7 +105,7 @@ paths:
         - Settings
   /webhooks/v3/{appId}/subscriptions:
     get:
-      operationId: get-/webhooks/v3/{appId}/subscriptions_getAll
+      operationId: get-/webhooks/v3/{appId}/subscriptions
       parameters:
         - explode: false
           in: path
@@ -121,7 +129,7 @@ paths:
       tags:
         - Subscriptions
     post:
-      operationId: post-/webhooks/v3/{appId}/subscriptions_create
+      operationId: post-/webhooks/v3/{appId}/subscriptions
       parameters:
         - explode: false
           in: path
@@ -152,7 +160,7 @@ paths:
         - Subscriptions
   /webhooks/v3/{appId}/subscriptions/batch/update:
     post:
-      operationId: post-/webhooks/v3/{appId}/subscriptions/batch/update_updateBatch
+      operationId: post-/webhooks/v3/{appId}/subscriptions/batch/update
       parameters:
         - explode: false
           in: path
@@ -189,7 +197,7 @@ paths:
         - Subscriptions
   /webhooks/v3/{appId}/subscriptions/{subscriptionId}:
     delete:
-      operationId: delete-/webhooks/v3/{appId}/subscriptions/{subscriptionId}_archive
+      operationId: delete-/webhooks/v3/{appId}/subscriptions/{subscriptionId}
       parameters:
         - explode: false
           in: path
@@ -218,7 +226,7 @@ paths:
       tags:
         - Subscriptions
     get:
-      operationId: get-/webhooks/v3/{appId}/subscriptions/{subscriptionId}_getById
+      operationId: get-/webhooks/v3/{appId}/subscriptions/{subscriptionId}
       parameters:
         - explode: false
           in: path
@@ -250,7 +258,7 @@ paths:
       tags:
         - Subscriptions
     patch:
-      operationId: patch-/webhooks/v3/{appId}/subscriptions/{subscriptionId}_update
+      operationId: patch-/webhooks/v3/{appId}/subscriptions/{subscriptionId}
       parameters:
         - explode: false
           in: path

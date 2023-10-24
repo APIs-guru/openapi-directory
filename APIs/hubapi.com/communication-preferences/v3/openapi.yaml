@@ -3,8 +3,16 @@ servers:
   - url: https://api.hubapi.com
 info:
   description: Subscriptions allow contacts to control what forms of communications they receive. Contacts can decide whether they want to receive communication pertaining to a specific topic, brand, or an entire HubSpot account.
-  title: Subscriptions
+  title: Communication Preferences Subscriptions
   version: v3
+  x-hubspot-api-use-case: You want to ensure a contact's opt-in status is updated if they opted out of communications from your business via a service external to HubSpot.
+  x-hubspot-documentation-banner: NONE
+  x-hubspot-introduction: Use the subscription preferences API to retrieve subscription data for a contact or opt a contact in or out of a specific subscription type.
+  x-hubspot-product-tier-requirements:
+    cms: FREE
+    marketing: FREE
+    sales: FREE
+    service: FREE
   x-logo:
     url: https://developers.hubspot.com/hubfs/assets/hubspot.com/buzz/HubSpotOpenGraph.png
   x-origin:
@@ -21,7 +29,8 @@ paths:
   /communication-preferences/v3/definitions:
     get:
       description: Get a list of all subscription definitions for the portal
-      operationId: get-/communication-preferences/v3/definitions_getPage
+      operationId: get-/communication-preferences/v3/definitions
+      parameters: []
       responses:
         "200":
           content:
@@ -74,6 +83,7 @@ paths:
   /communication-preferences/v3/status/email/bulk:
     post:
       operationId: post-/communication-preferences/v3/status/email/bulk
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -103,7 +113,7 @@ paths:
   /communication-preferences/v3/status/email/{emailAddress}:
     get:
       description: Returns a list of subscriptions and their status for a given contact.
-      operationId: get-/communication-preferences/v3/status/email/{emailAddress}_getEmailStatus
+      operationId: get-/communication-preferences/v3/status/email/{emailAddress}
       parameters:
         - explode: false
           in: path
@@ -152,7 +162,8 @@ paths:
   /communication-preferences/v3/subscribe:
     post:
       description: Subscribes a contact to the given subscription type. This API is not valid to use for subscribing a contact at a brand or portal level and will return an error.
-      operationId: post-/communication-preferences/v3/subscribe_subscribe
+      operationId: post-/communication-preferences/v3/subscribe
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -210,7 +221,8 @@ paths:
   /communication-preferences/v3/unsubscribe:
     post:
       description: Unsubscribes a contact from the given subscription type. This API is not valid to use for unsubscribing a contact at a brand or portal level and will return an error.
-      operationId: post-/communication-preferences/v3/unsubscribe_unsubscribe
+      operationId: post-/communication-preferences/v3/unsubscribe
+      parameters: []
       requestBody:
         content:
           application/json:

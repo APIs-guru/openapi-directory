@@ -677,6 +677,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1/{parent}/customModules:simulate:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Simulates a given SecurityHealthAnalyticsCustomModule and Resource.
+      operationId: securitycenter.projects.securityHealthAnalyticsSettings.customModules.simulate
+      parameters:
+        - description: 'Required. The relative resource name of the organization, project, or folder. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name An example is: "organizations/{organization_id}".'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SimulateSecurityHealthAnalyticsCustomModuleRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimulateSecurityHealthAnalyticsCustomModuleResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{parent}/effectiveCustomModules:
     get:
       description: Returns a list of all EffectiveSecurityHealthAnalyticsCustomModules for the given parent. This includes resident modules defined at the scope of the parent, and inherited modules, inherited from CRM ancestors.
@@ -2361,6 +2403,11 @@ components:
         nextSteps:
           description: Steps to address the finding.
           type: string
+        orgPolicies:
+          description: Contains information about the org policies associated with the finding.
+          items:
+            $ref: "#/components/schemas/OrgPolicy"
+          type: array
         parent:
           description: 'The relative resource name of the source the finding belongs to. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name This field is immutable after creation time. For example: "organizations/{organization_id}/sources/{source_id}"'
           type: string
@@ -2601,7 +2648,7 @@ components:
           readOnly: true
           type: string
         name:
-          description: This field will be ignored if provided on config creation. Format "organizations/{organization}/muteConfigs/{mute_config}" "folders/{folder}/muteConfigs/{mute_config}" "projects/{project}/muteConfigs/{mute_config}"
+          description: This field will be ignored if provided on config creation. Format "organizations/{organization}/muteConfigs/{mute_config}" "folders/{folder}/muteConfigs/{mute_config}" "projects/{project}/muteConfigs/{mute_config}" "organizations/{organization}/locations/global/muteConfigs/{mute_config}" "folders/{folder}/locations/global/muteConfigs/{mute_config}" "projects/{project}/locations/global/muteConfigs/{mute_config}"
           type: string
         updateTime:
           description: Output only. The most recent time at which the mute config was updated. This field is set by the server and will be ignored if provided on config creation or update.
@@ -3599,6 +3646,13 @@ components:
           description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
+    OrgPolicy:
+      description: Contains information about the org policies associated with the finding.
+      properties:
+        name:
+          description: 'The resource name of the org policy. Example: "organizations/{organization_id}/policies/{constraint_name}"'
+          type: string
+      type: object
     OrganizationSettings:
       description: User specified settings that are attached to the Security Command Center organization.
       properties:
@@ -3913,6 +3967,51 @@ components:
             - UNMUTED
             - UNDEFINED
           type: string
+      type: object
+    SimulateSecurityHealthAnalyticsCustomModuleRequest:
+      description: Request message to simulate a CustomConfig against a given test resource. Maximum size of the request is 4 MB by default.
+      properties:
+        customConfig:
+          $ref: "#/components/schemas/GoogleCloudSecuritycenterV1CustomConfig"
+          description: Required. The user specified custom configuration to test.
+        resource:
+          $ref: "#/components/schemas/SimulatedResource"
+          description: Required. Resource data to simulate custom module against.
+      type: object
+    SimulateSecurityHealthAnalyticsCustomModuleResponse:
+      description: Response message for simulating a SecurityHealthAnalyticsCustomModule against a given resource.
+      properties:
+        result:
+          $ref: "#/components/schemas/SimulatedResult"
+          description: Result for test case in the corresponding request.
+      type: object
+    SimulatedResource:
+      description: Manually constructed resource. If the custom module only evaluates against the resource data, the iam_policy_data field can be omitted, and vice versa.
+      properties:
+        iamPolicyData:
+          $ref: "#/components/schemas/Policy"
+          description: Optional. A representation of the IAM policy.
+        resourceData:
+          additionalProperties:
+            description: Properties of the object.
+          description: Optional. A representation of the GCP resource. Should match the GCP resource JSON format.
+          type: object
+        resourceType:
+          description: Required. The type of the resource, e.g. `compute.googleapis.com/Disk`.
+          type: string
+      type: object
+    SimulatedResult:
+      description: Possible test result.
+      properties:
+        error:
+          $ref: "#/components/schemas/Status"
+          description: Error encountered during the test.
+        finding:
+          $ref: "#/components/schemas/Finding"
+          description: Finding that would be published for the test case, if a violation is detected.
+        noViolation:
+          $ref: "#/components/schemas/Empty"
+          description: Indicates that the test case does not trigger any violation.
       type: object
     Simulation:
       description: Attack path simulation

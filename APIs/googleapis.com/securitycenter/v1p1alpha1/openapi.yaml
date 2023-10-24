@@ -772,6 +772,11 @@ components:
         nextSteps:
           description: Steps to address the finding.
           type: string
+        orgPolicies:
+          description: Contains information about the org policies associated with the finding.
+          items:
+            $ref: "#/components/schemas/OrgPolicy"
+          type: array
         parent:
           description: 'The relative resource name of the source the finding belongs to. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name This field is immutable after creation time. For example: "organizations/{organization_id}/sources/{source_id}"'
           type: string
@@ -997,7 +1002,7 @@ components:
           readOnly: true
           type: string
         name:
-          description: This field will be ignored if provided on config creation. Format "organizations/{organization}/muteConfigs/{mute_config}" "folders/{folder}/muteConfigs/{mute_config}" "projects/{project}/muteConfigs/{mute_config}"
+          description: This field will be ignored if provided on config creation. Format "organizations/{organization}/muteConfigs/{mute_config}" "folders/{folder}/muteConfigs/{mute_config}" "projects/{project}/muteConfigs/{mute_config}" "organizations/{organization}/locations/global/muteConfigs/{mute_config}" "folders/{folder}/locations/global/muteConfigs/{mute_config}" "projects/{project}/locations/global/muteConfigs/{mute_config}"
           type: string
         updateTime:
           description: Output only. The most recent time at which the mute config was updated. This field is set by the server and will be ignored if provided on config creation or update.
@@ -1654,6 +1659,13 @@ components:
             description: Properties of the object. Contains field @type with type URL.
           description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
+      type: object
+    OrgPolicy:
+      description: Contains information about the org policies associated with the finding.
+      properties:
+        name:
+          description: 'The resource name of the org policy. Example: "organizations/{organization_id}/policies/{constraint_name}"'
+          type: string
       type: object
     Pod:
       description: A Kubernetes Pod.

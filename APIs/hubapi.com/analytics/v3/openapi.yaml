@@ -3,8 +3,16 @@ servers:
   - url: https://api.hubapi.com
 info:
   description: HTTP API for triggering instances of custom behavioral events
-  title: Custom Behavioral Events API
+  title: Events Send Event Completions
   version: v3
+  x-hubspot-api-use-case: You want to track more complex interactions that visitors perform when they navigate to your website and engage with your content.
+  x-hubspot-documentation-banner: NONE
+  x-hubspot-introduction: Use the custom behavioral events API to define events that you can later create and associate with records in your HubSpot CRM.
+  x-hubspot-product-tier-requirements:
+    cms: FREE
+    marketing: FREE
+    sales: FREE
+    service: FREE
   x-logo:
     url: https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/HubSpotOpenGraph.png
   x-origin:
@@ -20,6 +28,7 @@ paths:
     post:
       description: Endpoint to send an instance of a behavioral event
       operationId: post-/events/v3/send
+      parameters: []
       requestBody:
         content:
           application/json:

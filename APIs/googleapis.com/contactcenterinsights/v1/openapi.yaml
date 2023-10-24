@@ -1265,6 +1265,12 @@ components:
           description: The number of requested analyses that have failed so far.
           format: int32
           type: integer
+        partialErrors:
+          description: Output only. Partial errors during ingest operation that might cause the operation output to be incomplete.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          readOnly: true
+          type: array
         request:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1BulkAnalyzeConversationsRequest"
           description: The original request for bulk analyze.
@@ -1518,7 +1524,7 @@ components:
           type: integer
       type: object
     GoogleCloudContactcenterinsightsV1ConversationDataSource:
-      description: The conversation source, which is a combination of transcript and audio.
+      description: The conversation source, which is a combination of transcript, audio, and metadata.
       properties:
         dialogflowSource:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1DialogflowSource"
@@ -2855,6 +2861,12 @@ components:
           description: The number of requested analyses that have failed so far.
           format: int32
           type: integer
+        partialErrors:
+          description: Output only. Partial errors during ingest operation that might cause the operation output to be incomplete.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          readOnly: true
+          type: array
         request:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1BulkAnalyzeConversationsRequest"
           description: The original request for bulk analyze.
@@ -3033,7 +3045,7 @@ components:
           type: integer
       type: object
     GoogleCloudContactcenterinsightsV1alpha1ConversationDataSource:
-      description: The conversation source, which is a combination of transcript and audio.
+      description: The conversation source, which is a combination of transcript, audio, and metadata.
       properties:
         dialogflowSource:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1DialogflowSource"
