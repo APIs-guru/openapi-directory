@@ -59,12 +59,13 @@ info:
   x-publicVersion: true
   x-serviceName: CheckoutService
 tags:
-  - name: Modifications
-  - name: Orders
-  - name: Classic Checkout SDK
-  - name: Utility
   - name: Payments
   - name: Payment links
+  - name: Modifications
+  - name: Recurring
+  - name: Orders
+  - name: Utility
+  - name: Classic Checkout SDK
 paths:
   /applePay/sessions:
     post:
@@ -1164,8 +1165,10 @@ paths:
                 $ref: "#/components/examples/post-payments-recurring"
               sofort:
                 $ref: "#/components/examples/post-payments-sofort"
-              split:
-                $ref: "#/components/examples/post-payments-split"
+              split-balanceplatform:
+                $ref: "#/components/examples/post-payments-split-balanceplatform"
+              split-classic:
+                $ref: "#/components/examples/post-payments-split-classic"
               subscription-first-transaction:
                 $ref: "#/components/examples/post-payments-subscription-first-transaction"
             schema:
@@ -1193,6 +1196,8 @@ paths:
                   $ref: "#/components/examples/post-payments-ideal-200"
                 sofort:
                   $ref: "#/components/examples/post-payments-sofort-200"
+                split-balanceplatform:
+                  $ref: "#/components/examples/post-payments-split-balanceplatform-200"
                 subscription-first-transaction:
                   $ref: "#/components/examples/post-payments-subscription-first-transaction-200"
               schema:
@@ -2104,7 +2109,7 @@ components:
         reference: YOUR_DONATION_REFERENCE
         returnUrl: https://your-company.com/...
         shopperInteraction: ContAuth
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
     post-orders-basic:
       summary: Create an order
       value:
@@ -2175,7 +2180,7 @@ components:
         reference: YOUR_ORDER_NUMBER
         shopperEmail: test@email.com
         shopperLocale: pt-BR
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
     post-paymentLinks-basic-200:
       summary: Payment link created
       value:
@@ -2204,7 +2209,7 @@ components:
         reusable: false
         shopperEmail: test@email.com
         shopperLocale: pt-BR
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
         status: active
         url: https://test.adyen.link/PLE83C39B0A0DE0C1E
     post-paymentMethods-balance-basic:
@@ -4364,7 +4369,7 @@ components:
         returnUrl: app://
         sessionValidity: 2017-04-06T13:09:13Z
         shopperLocale: nl_NL
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
         token: TOKEN_YOU_GET_FROM_CHECKOUT_SDK
     post-paymentSession-enableOneClick:
       summary: Set up a payment session with the option to store card details
@@ -4383,7 +4388,7 @@ components:
         returnUrl: https://www.yourshop.com/checkout/result
         sdkVersion: 1.7.0
         shopperLocale: nl_NL
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
     post-paymentSession-enableOneClick-200:
       summary: Example response for request 'enableOneClick'
       value:
@@ -4401,7 +4406,7 @@ components:
         returnUrl: app://
         sessionValidity: 2017-04-06T13:09:13Z
         shopperLocale: nl_NL
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
         token: TOKEN_YOU_GET_FROM_CHECKOUT_SDK
     post-paymentSession-split:
       summary: Split a payment between a sub-merchant and a platform account
@@ -4429,7 +4434,7 @@ components:
         returnUrl: app://
         sessionValidity: 2017-04-06T13:09:13Z
         shopperLocale: nl_NL
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
         token: TOKEN_YOU_GET_FROM_CHECKOUT_SDK
     post-paymentSession-web:
       summary: Set up a payment session (Web)
@@ -4446,7 +4451,7 @@ components:
         returnUrl: https://www.yourshop.com/checkout/result
         sdkVersion: 1.9.5
         shopperLocale: nl_NL
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
     post-paymentSession-web-200:
       summary: Example response for request 'web'
       value:
@@ -4685,7 +4690,7 @@ components:
           type: scheme
         reference: Your order number
         returnUrl: https://your-company.com/...
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
     post-payments-enableOneClick-raw:
       summary: Tokenize card details for one-off payments
       value:
@@ -4704,7 +4709,7 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
         shopperInteraction: Ecommerce
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
         storePaymentMethod: true
     post-payments-enableOneClick-raw-200:
       summary: Card details tokenized for one-off payments
@@ -5003,8 +5008,98 @@ components:
           method: GET
           url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1vozAQ-DXwFmS*4YGHXEpbemmvR6CK8lIZs8UoiU1sg0J*-RmaS6vTSchGM6vdmVlXArN6xWtI6lYAUWmF2b5ljUl6IYCRcebSMjePIAjFTC0J4T1TSQFSPV*xG5kxBY3AquXMUmMHyeoxXf38VRbvD*lLmmer-1YOIKS*Ew-d6Bw*YJoPiVRi0vNFqF6wO6xwEsd2YIdR7MV*HLjx061m0zZJ1W2bTf7juHfbZVFc3i77cdfsthuPxg8HStH51XupTvn5d1ca7p3Z4fEI2txx9mYjhEwBsszXCVWqM9yl4dzr78AJPlAulUYiFCENEQpkz3slKe86EBqRIIaWgNS-r59tM0b4UbvI4TNlzQz233bXmmdQlNeGe-9P0Frd96gNJxBzBFqbpiZ1epA-CfQnifoYeS8WemCH2WjpewYtyzIlyCnnN3xo61aNiYMce4G8BYoKO9CObF8ffrwzr16mHQlMph0lqW40KQNT6vcxv4qur6zBsa5rCIMwDO3I9axLNmzd4imoo2FMHbo8v5Oa0nOJsvLy4Z3Wp-RxnTYw1jX-A42b3RY
         resultCode: RedirectShopper
-    post-payments-split:
-      summary: Split a payment between a sub-merchant and a platform account
+    post-payments-split-balanceplatform:
+      summary: Split a payment between balance accounts
+      value:
+        amount:
+          currency: USD
+          value: 40000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          cvc: "737"
+          expiryMonth: "03"
+          expiryYear: "2030"
+          holderName: John Smith
+          number: "4111111111111111"
+          type: scheme
+        reference: YOUR_ORDER_NUMBER
+        returnUrl: https://your-company.com/...
+        splits:
+          - account: BA00000000000000000000001
+            amount:
+              value: 39600
+            description: Your description for the sale amount
+            reference: Your reference for the sale amount
+            type: BalanceAccount
+          - amount:
+              value: 400
+            description: Your description for the commission
+            reference: Your reference for the commission
+            type: Commission
+          - account: BA00000000000000000000001
+            description: Your description for the fees
+            reference: Your reference for the fees
+            type: PaymentFee
+    post-payments-split-balanceplatform-200:
+      summary: Payment split between balance accounts
+      value:
+        additionalData:
+          PaymentAccountReference: 6006491286999921374...
+          acquirerAccountCode: YOUR_ACQUIRER_ACCOUNT
+          acquirerCode: YOUR_ACQUIRER_CODE
+          acquirerReference: YOUR_ACQUIRER_REFERENCE
+          alias: "8915844059375211"
+          aliasType: Default
+          authCode: "035450"
+          authorisationMid: "50"
+          authorisedAmountCurrency: USD
+          authorisedAmountValue: "40000"
+          avsResult: 5 No AVS data provided
+          avsResultRaw: "5"
+          cardBin: "411111"
+          cardHolderName: John Smith
+          cardIssuingBank: ISSUING_BANK_CUSTOMER
+          cardIssuingCountry: NL
+          cardPaymentMethod: visa
+          cardSummary: "1111"
+          cavvAlgorithm: N/A
+          cvcResult: 1 Matches
+          cvcResultRaw: M
+          eci: N/A
+          expiryDate: 3/2030
+          fraudManualReview: "false"
+          fraudResultType: GREEN
+          fundsAvailability: I
+          isCardCommercial: unknown
+          issuerBin: "41111111"
+          issuerCountry: NL
+          liabilityShift: "false"
+          merchantReference: YOUR_ORDER_NUMBER
+          networkTxReference: "777718270854480"
+          paymentMethod: visa
+          paymentMethodVariant: visa
+          payoutEligible: Y
+          refusalReasonRaw: AUTHORISED
+          retry.attempt1.acquirer: YOUR_ACQUIRER_CODE
+          retry.attempt1.acquirerAccount: YOUR_ACQUIRER_ACCOUNT
+          retry.attempt1.avsResultRaw: "5"
+          retry.attempt1.rawResponse: AUTHORISED
+          retry.attempt1.responseCode: Approved
+          retry.attempt1.shopperInteraction: Ecommerce
+          threeDAuthenticated: "false"
+          threeDAuthenticatedResponse: N/A
+          threeDOffered: "false"
+          threeDOfferedResponse: N/A
+          xid: N/A
+        amount:
+          currency: USD
+          value: 40000
+        donationToken: 81234567890123456...
+        merchantReference: YOUR_ORDER_NUMBER
+        pspReference: PPKFQ89R6QRXGN82
+        resultCode: Authorised
+    post-payments-split-classic:
+      summary: Split a payment in a Classic Platforms integration
       value:
         amount:
           currency: EUR
@@ -5048,7 +5143,7 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
         shopperInteraction: Ecommerce
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
         storePaymentMethod: true
     post-payments-subscription-first-transaction-200:
       summary: Card details tokenized for a subscription
@@ -9594,6 +9689,7 @@ components:
             - walley
             - walley_b2b
             - alma
+            - paypo
             - molpay_fpx
             - konbini
             - directEbanking
@@ -10658,14 +10754,13 @@ components:
         returnUrl:
           description: |-
             The URL to return to in case of a redirection.
-            The format depends on the channel. This URL can have a maximum of 1024 characters.
+            The format depends on the channel. 
             * For web, include the protocol `http://` or `https://`. You can also include your own additional query parameters, for example, shopper ID or order reference number.
             Example: `https://your-company.com/checkout?shopperOrder=12xy`
             * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app).
             Example: `my-app://`
             * For Android, use a custom URL handled by an Activity on your app. You can configure it with an [intent filter](https://developer.android.com/guide/components/intents-filters).
             Example: `my-app://your.package.name`
-          maxLength: 8000
           type: string
         riskData:
           $ref: "#/components/schemas/RiskData"
@@ -12262,26 +12357,36 @@ components:
     Split:
       properties:
         account:
-          description: |+
-            Unique identifier of the account where the split amount should be sent. This is required if `type` is **MarketPlace** or **BalanceAccount**.
+          description: |-
+            The unique identifier of the account to which the split amount is booked. Required if `type` is **MarketPlace** or **BalanceAccount**.
 
+            * [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic): The [`accountCode`](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccount#request-accountCode) of the account to which the split amount is booked.
+            * [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms): The [`balanceAccountId`](https://docs.adyen.com/api-explorer/balanceplatform/latest/get/balanceAccounts/_id_#path-id) of the account to which the split amount is booked.
           type: string
         amount:
           $ref: "#/components/schemas/SplitAmount"
-          description: The amount of this split.
+          description: |-
+            The amount of the split item.
+
+            * Required for all split types in the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
+            * Required if `type` is **BalanceAccount**, **Commission**, **Default**, or **VAT** in your [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms) integration.
         description:
-          description: A description of this split.
+          description: Your description for the split item.
           type: string
         reference:
           description: |-
-            Your reference for the split, which you can use to link the split to other operations such as captures and refunds.
+            Your reference for the split item.
 
-            This is required if `type` is **MarketPlace** or **BalanceAccount**. For the other types, we also recommend sending a reference so you can reconcile the split and the associated payment in the transaction overview and in the reports. If the reference is not provided, the split is reported as part of the aggregated [TransferBalance record type](https://docs.adyen.com/reporting/marketpay-payments-accounting-report) in Adyen for Platforms.
+            This is required if `type` is **MarketPlace** ([Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic)) or **BalanceAccount** ([Balance Platform](https://docs.adyen.com/marketplaces-and-platforms)). For the other types, we also recommend sending a reference so you can reconcile the split and the associated payment in the transaction overview and in the reports.
           type: string
         type:
           description: |-
-            The type of split.
-            Possible values: **Default**, **PaymentFee**, **VAT**, **Commission**, **MarketPlace**, **BalanceAccount**, **Remainder**, **Surcharge**, **Tip**.
+            The type of the split item.
+
+            Possible values:
+
+            * [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic): **Commission**, **Default**, **Marketplace**, **PaymentFee**, **VAT**.
+            * [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms): **BalanceAccount**, **Commission**, **Default**, **PaymentFee**, **Remainder**, **Surcharge**, **Tip**, **VAT**.
           enum:
             - BalanceAccount
             - Commission
@@ -12294,21 +12399,17 @@ components:
             - VAT
           type: string
       required:
-        - amount
         - type
       type: object
     SplitAmount:
       properties:
         currency:
-          description: |-
-            The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
-
-            If this value is not provided, the currency in which the payment is made will be used.
+          description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes). By default, this is the original payment currency.
           maxLength: 3
           minLength: 3
           type: string
         value:
-          description: The amount in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+          description: The value of the split amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
           format: int64
           type: integer
       required:

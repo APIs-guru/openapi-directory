@@ -165,6 +165,7 @@ components:
         paging:
           $ref: "#/components/schemas/Paging"
         results:
+          description: ""
           items:
             $ref: "#/components/schemas/ExternalUnifiedEvent"
           type: array
@@ -305,8 +306,10 @@ components:
     NextPage:
       properties:
         after:
+          description: ""
           type: string
         link:
+          description: ""
           type: string
       required:
         - after

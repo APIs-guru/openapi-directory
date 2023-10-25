@@ -635,6 +635,7 @@ components:
     BatchInputMarketingEventCreateRequestParams:
       properties:
         inputs:
+          description: ""
           items:
             $ref: "#/components/schemas/MarketingEventCreateRequestParams"
           type: array
@@ -675,30 +676,38 @@ components:
     BatchResponseMarketingEventPublicDefaultResponse:
       properties:
         completedAt:
+          description: ""
           format: date-time
           type: string
         errors:
+          description: ""
           items:
             $ref: "#/components/schemas/StandardError"
           type: array
         links:
           additionalProperties:
             type: string
+          description: ""
           type: object
         numErrors:
+          description: ""
           format: int32
           type: integer
         requestedAt:
+          description: ""
           format: date-time
           type: string
         results:
+          description: ""
           items:
             $ref: "#/components/schemas/MarketingEventPublicDefaultResponse"
           type: array
         startedAt:
+          description: ""
           format: date-time
           type: string
         status:
+          description: ""
           enum:
             - PENDING
             - PROCESSING
@@ -1037,6 +1046,7 @@ components:
     MarketingEventPublicDefaultResponse:
       properties:
         createdAt:
+          description: ""
           format: date-time
           type: string
         customProperties:
@@ -1069,12 +1079,14 @@ components:
           description: A URL in the external event application where the marketing event can be managed.
           type: string
         id:
+          description: ""
           type: string
         startDateTime:
           description: The start date and time of the marketing event.
           format: date-time
           type: string
         updatedAt:
+          description: ""
           format: date-time
           type: string
       required:
@@ -1095,6 +1107,7 @@ components:
           format: int32
           type: integer
         createdAt:
+          description: ""
           format: date-time
           type: string
         customProperties:
@@ -1130,6 +1143,7 @@ components:
           description: The id of the marketing event in the external event application.
           type: string
         id:
+          description: ""
           type: string
         noShows:
           description: The number of HubSpot contacts that registered for this marketing event, but did not attend. This field only had a value when the event is over.
@@ -1144,6 +1158,7 @@ components:
           format: date-time
           type: string
         updatedAt:
+          description: ""
           format: date-time
           type: string
       required:
@@ -1215,18 +1230,23 @@ components:
         isLargeValue:
           type: boolean
         name:
+          description: ""
           type: string
         persistenceTimestamp:
           format: int64
           type: integer
         requestId:
+          description: ""
           type: string
         selectedByUser:
+          description: ""
           type: boolean
         selectedByUserTimestamp:
+          description: ""
           format: int64
           type: integer
         source:
+          description: ""
           enum:
             - IMPORT
             - API
@@ -1309,18 +1329,22 @@ components:
             - WORKFLOW_CONTACT_DELETE_ACTION
           type: string
         sourceId:
+          description: ""
           type: string
         sourceLabel:
+          description: ""
           type: string
         sourceMetadata:
           description: "Source metadata encoded as a base64 string. For example: `ZXhhbXBsZSBzdHJpbmc=`"
           type: string
         sourceVid:
+          description: ""
           items:
             format: int64
             type: integer
           type: array
         timestamp:
+          description: ""
           format: int64
           type: integer
         updatedByUserId:
@@ -1329,6 +1353,7 @@ components:
         useTimestampAsPersistenceTimestamp:
           type: boolean
         value:
+          description: ""
           type: string
       required:
         - name
@@ -1346,28 +1371,36 @@ components:
     StandardError:
       properties:
         category:
+          description: ""
           type: string
         context:
           additionalProperties:
             items:
               type: string
             type: array
+          description: ""
           type: object
         errors:
+          description: ""
           items:
             $ref: "#/components/schemas/ErrorDetail"
           type: array
         id:
+          description: ""
           type: string
         links:
           additionalProperties:
             type: string
+          description: ""
           type: object
         message:
+          description: ""
           type: string
         status:
+          description: ""
           type: string
         subCategory:
+          description: ""
           properties: {}
           type: object
       required:

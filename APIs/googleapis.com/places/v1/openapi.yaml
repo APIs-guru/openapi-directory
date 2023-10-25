@@ -265,16 +265,13 @@ components:
       description: Information about the author of the UGC data. Used in Photo, and Review.
       properties:
         displayName:
-          description: Output only. Name of the author of the Photo or Review.
-          readOnly: true
+          description: Name of the author of the Photo or Review.
           type: string
         photoUri:
-          description: Output only. Profile photo URI of the author of the Photo or Review.
-          readOnly: true
+          description: Profile photo URI of the author of the Photo or Review.
           type: string
         uri:
-          description: Output only. URI of the author of the Photo or Review.
-          readOnly: true
+          description: URI of the author of the Photo or Review.
           type: string
       type: object
     GoogleMapsPlacesV1Circle:
@@ -386,24 +383,20 @@ components:
       description: Information about a photo of a place.
       properties:
         authorAttributions:
-          description: Output only. This photo's authors.
+          description: This photo's authors.
           items:
             $ref: "#/components/schemas/GoogleMapsPlacesV1AuthorAttribution"
-          readOnly: true
           type: array
         heightPx:
-          description: Output only. The maximum available height, in pixels.
+          description: The maximum available height, in pixels.
           format: int32
-          readOnly: true
           type: integer
         name:
-          description: 'Output only. A reference representing this place photo which may be used to look up this place photo again (a.k.a. the API "resource" name: places/{place_id}/photos/{photo}).'
-          readOnly: true
+          description: 'Identifier. A reference representing this place photo which may be used to look up this place photo again (a.k.a. the API "resource" name: places/{place_id}/photos/{photo}).'
           type: string
         widthPx:
-          description: Output only. The maximum available width, in pixels.
+          description: The maximum available width, in pixels.
           format: int32
-          readOnly: true
           type: integer
       type: object
     GoogleMapsPlacesV1PhotoMedia:
@@ -545,11 +538,11 @@ components:
             - PRICE_LEVEL_VERY_EXPENSIVE
           type: string
         primaryType:
-          description: The primary type of the given result. This type must one of the Places API supported types. For example, "restaurant", "cafe", "airport", etc. A place can only have a single primary type.
+          description: The primary type of the given result. This type must one of the Places API supported types. For example, "restaurant", "cafe", "airport", etc. A place can only have a single primary type. For the complete list of possible values, see Table A and Table B at https://developers.google.com/maps/documentation/places/web-service/place-types
           type: string
         primaryTypeDisplayName:
           $ref: "#/components/schemas/GoogleTypeLocalizedText"
-          description: The display name of the primary type, localized to the request language if applicable.
+          description: The display name of the primary type, localized to the request language if applicable. For the complete list of possible values, see Table A and Table B at https://developers.google.com/maps/documentation/places/web-service/place-types
         rating:
           description: A rating between 1.0 and 5.0, based on user reviews of this place.
           format: double
@@ -569,7 +562,7 @@ components:
           description: Place has restroom.
           type: boolean
         reviews:
-          description: List of reviews about this place.
+          description: List of reviews about this place, sorted by relevance.
           items:
             $ref: "#/components/schemas/GoogleMapsPlacesV1Review"
           type: array
@@ -615,7 +608,7 @@ components:
           description: Specifies if the business supports takeout.
           type: boolean
         types:
-          description: 'A set of type tags for this result. For example, "political" and "locality". See: https://developers.google.com/maps/documentation/places/web-service/place-types'
+          description: A set of type tags for this result. For example, "political" and "locality". For the complete list of possible values, see Table A and Table B at https://developers.google.com/maps/documentation/places/web-service/place-types
           items:
             type: string
           type: array
@@ -823,34 +816,27 @@ components:
       properties:
         authorAttribution:
           $ref: "#/components/schemas/GoogleMapsPlacesV1AuthorAttribution"
-          description: Output only. This review's author.
-          readOnly: true
+          description: This review's author.
         name:
-          description: 'Output only. A reference representing this place review which may be used to look up this place review again (a.k.a. the API "resource" name: places/{place_id}/reviews/{review}).'
-          readOnly: true
+          description: 'A reference representing this place review which may be used to look up this place review again (also called the API "resource" name: places/place_id/reviews/review).'
           type: string
         originalText:
           $ref: "#/components/schemas/GoogleTypeLocalizedText"
-          description: Output only. The review text in its original language.
-          readOnly: true
+          description: The review text in its original language.
         publishTime:
-          description: Output only. Timestamp for the review.
+          description: Timestamp for the review.
           format: google-datetime
-          readOnly: true
           type: string
         rating:
-          description: Output only. A number between 1.0 and 5.0, a.k.a. the number of stars.
+          description: A number between 1.0 and 5.0, also called the number of stars.
           format: double
-          readOnly: true
           type: number
         relativePublishTimeDescription:
-          description: Output only. A string of formatted recent time, expressing the review time relative to the current time in a form appropriate for the language and country.
-          readOnly: true
+          description: A string of formatted recent time, expressing the review time relative to the current time in a form appropriate for the language and country.
           type: string
         text:
           $ref: "#/components/schemas/GoogleTypeLocalizedText"
-          description: Output only. The localized text of the review.
-          readOnly: true
+          description: The localized text of the review.
       type: object
     GoogleMapsPlacesV1SearchNearbyRequest:
       description: "Request proto for Search Nearby. "

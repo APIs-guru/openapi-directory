@@ -378,14 +378,14 @@ components:
       value:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         recurringDetailReference: "8314442372419167"
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
     post-listRecurringDetails-listAllRecurringDetails:
       summary: List recurring details of the specified contract value
       value:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         recurring:
           contract: RECURRING
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
     post-notifyShopper-notifyShopperOfUpcomingRecurringPayment:
       summary: Request issuer to notify shopper of upcoming recurring payment
       value:
@@ -424,7 +424,7 @@ components:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         reference: YOUR_REFERENCE
         selectedRecurringDetailReference: "8814232895168272"
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
   schemas:
     Address:
       properties:

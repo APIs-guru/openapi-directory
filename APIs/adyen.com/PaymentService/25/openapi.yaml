@@ -67,8 +67,8 @@ info:
   x-publicVersion: true
   x-serviceName: PaymentService
 tags:
-  - name: Modifications
   - name: Payments
+  - name: Modifications
 paths:
   /authorise:
     post:
@@ -678,7 +678,7 @@ components:
         shopperEmail: s.hopper@test.com
         shopperIP: 61.294.12.12
         shopperInteraction: ContAuth
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
     post-authorise-authorise-recurringcontauth-200:
       summary: Example response for request 'authorise-recurringcontauth'
       value:
@@ -705,7 +705,7 @@ components:
         shopperEmail: s.hopper@test.com
         shopperIP: 61.294.12.12
         shopperInteraction: Ecommerce
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
     post-authorise-authorise-recurringstore:
       summary: Store card details for recurring payments
       value:
@@ -724,7 +724,7 @@ components:
         reference: YOUR_REFERENCE
         shopperEmail: s.hopper@test.com
         shopperIP: 61.294.12.12
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
     post-authorise3d-authorise3d:
       summary: Complete a 3D Secure payment
       value:

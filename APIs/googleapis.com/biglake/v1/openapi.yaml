@@ -1,0 +1,754 @@
+openapi: 3.0.0
+servers:
+  - url: https://biglake.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: The BigLake API provides access to BigLake Metastore, a serverless, fully managed, and highly available metastore for open-source data that can be used for querying Apache Iceberg tables in BigQuery.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: BigLake API
+  version: v1
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+  x-origin:
+    - format: google
+      url: https://biglake.googleapis.com/$discovery/rest?version=v1
+      version: v1
+  x-providerName: googleapis.com
+  x-serviceName: biglake
+externalDocs:
+  url: https://cloud.google.com/bigquery/
+tags:
+  - name: projects
+paths:
+  /v1/{name}:
+    delete:
+      description: Deletes an existing table specified by the table ID.
+      operationId: biglake.projects.locations.catalogs.databases.tables.delete
+      parameters:
+        - description: "Required. The name of the table to delete. Format: projects/{project_id_or_number}/locations/{location_id}/catalogs/{catalog_id}/databases/{database_id}/tables/{table_id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Table"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/bigquery
+          Oauth2c:
+            - https://www.googleapis.com/auth/bigquery
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    get:
+      description: Gets the table specified by the resource name.
+      operationId: biglake.projects.locations.catalogs.databases.tables.get
+      parameters:
+        - description: "Required. The name of the table to retrieve. Format: projects/{project_id_or_number}/locations/{location_id}/catalogs/{catalog_id}/databases/{database_id}/tables/{table_id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Table"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/bigquery
+          Oauth2c:
+            - https://www.googleapis.com/auth/bigquery
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates an existing table specified by the table ID.
+      operationId: biglake.projects.locations.catalogs.databases.tables.patch
+      parameters:
+        - description: "Output only. The resource name. Format: projects/{project_id_or_number}/locations/{location_id}/catalogs/{catalog_id}/databases/{database_id}/tables/{table_id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The list of fields to update. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask If not set, defaults to all of the fields that are allowed to update.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Table"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Table"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/bigquery
+          Oauth2c:
+            - https://www.googleapis.com/auth/bigquery
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{name}:rename:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Renames an existing table specified by the table ID.
+      operationId: biglake.projects.locations.catalogs.databases.tables.rename
+      parameters:
+        - description: "Required. The table's `name` field is used to identify the table to rename. Format: projects/{project_id_or_number}/locations/{location_id}/catalogs/{catalog_id}/databases/{database_id}/tables/{table_id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RenameTableRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Table"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/bigquery
+          Oauth2c:
+            - https://www.googleapis.com/auth/bigquery
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{parent}/catalogs:
+    get:
+      description: List all catalogs in a specified project.
+      operationId: biglake.projects.locations.catalogs.list
+      parameters:
+        - description: "Required. The parent, which owns this collection of catalogs. Format: projects/{project_id_or_number}/locations/{location_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of catalogs to return. The service may return fewer than this value. If unspecified, at most 50 catalogs will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListCatalogs` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListCatalogs` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCatalogsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/bigquery
+          Oauth2c:
+            - https://www.googleapis.com/auth/bigquery
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new catalog.
+      operationId: biglake.projects.locations.catalogs.create
+      parameters:
+        - description: "Required. The parent resource where this catalog will be created. Format: projects/{project_id_or_number}/locations/{location_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the catalog, which will become the final component of the catalog's resource name.
+          in: query
+          name: catalogId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Catalog"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Catalog"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/bigquery
+          Oauth2c:
+            - https://www.googleapis.com/auth/bigquery
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{parent}/databases:
+    get:
+      description: List all databases in a specified catalog.
+      operationId: biglake.projects.locations.catalogs.databases.list
+      parameters:
+        - description: "Required. The parent, which owns this collection of databases. Format: projects/{project_id_or_number}/locations/{location_id}/catalogs/{catalog_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of databases to return. The service may return fewer than this value. If unspecified, at most 50 databases will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListDatabases` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListDatabases` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListDatabasesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/bigquery
+          Oauth2c:
+            - https://www.googleapis.com/auth/bigquery
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new database.
+      operationId: biglake.projects.locations.catalogs.databases.create
+      parameters:
+        - description: "Required. The parent resource where this database will be created. Format: projects/{project_id_or_number}/locations/{location_id}/catalogs/{catalog_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the database, which will become the final component of the database's resource name.
+          in: query
+          name: databaseId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Database"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Database"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/bigquery
+          Oauth2c:
+            - https://www.googleapis.com/auth/bigquery
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{parent}/tables:
+    get:
+      description: List all tables in a specified database.
+      operationId: biglake.projects.locations.catalogs.databases.tables.list
+      parameters:
+        - description: "Required. The parent, which owns this collection of tables. Format: projects/{project_id_or_number}/locations/{location_id}/catalogs/{catalog_id}/databases/{database_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of tables to return. The service may return fewer than this value. If unspecified, at most 50 tables will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListTables` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListTables` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: The view for the returned tables.
+          in: query
+          name: view
+          schema:
+            enum:
+              - TABLE_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListTablesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/bigquery
+          Oauth2c:
+            - https://www.googleapis.com/auth/bigquery
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new table.
+      operationId: biglake.projects.locations.catalogs.databases.tables.create
+      parameters:
+        - description: "Required. The parent resource where this table will be created. Format: projects/{project_id_or_number}/locations/{location_id}/catalogs/{catalog_id}/databases/{database_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the table, which will become the final component of the table's resource name.
+          in: query
+          name: tableId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Table"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Table"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/bigquery
+          Oauth2c:
+            - https://www.googleapis.com/auth/bigquery
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    Catalog:
+      description: Catalog is the container of databases.
+      properties:
+        createTime:
+          description: Output only. The creation time of the catalog.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. The deletion time of the catalog. Only set after the catalog is deleted.
+          format: google-datetime
+          readOnly: true
+          type: string
+        expireTime:
+          description: Output only. The time when this catalog is considered expired. Only set after the catalog is deleted.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: "Output only. The resource name. Format: projects/{project_id_or_number}/locations/{location_id}/catalogs/{catalog_id}"
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The last modification time of the catalog.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    Database:
+      description: Database is the container of tables.
+      properties:
+        createTime:
+          description: Output only. The creation time of the database.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. The deletion time of the database. Only set after the database is deleted.
+          format: google-datetime
+          readOnly: true
+          type: string
+        expireTime:
+          description: Output only. The time when this database is considered expired. Only set after the database is deleted.
+          format: google-datetime
+          readOnly: true
+          type: string
+        hiveOptions:
+          $ref: "#/components/schemas/HiveDatabaseOptions"
+          description: Options of a Hive database.
+        name:
+          description: "Output only. The resource name. Format: projects/{project_id_or_number}/locations/{location_id}/catalogs/{catalog_id}/databases/{database_id}"
+          readOnly: true
+          type: string
+        type:
+          description: The database type.
+          enum:
+            - TYPE_UNSPECIFIED
+            - HIVE
+          type: string
+        updateTime:
+          description: Output only. The last modification time of the database.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    HiveDatabaseOptions:
+      description: Options of a Hive database.
+      properties:
+        locationUri:
+          description: Cloud Storage folder URI where the database data is stored, starting with "gs://".
+          type: string
+        parameters:
+          additionalProperties:
+            type: string
+          description: Stores user supplied Hive database parameters.
+          type: object
+      type: object
+    HiveTableOptions:
+      description: Options of a Hive table.
+      properties:
+        parameters:
+          additionalProperties:
+            type: string
+          description: Stores user supplied Hive table parameters.
+          type: object
+        storageDescriptor:
+          $ref: "#/components/schemas/StorageDescriptor"
+          description: Stores physical storage information of the data.
+        tableType:
+          description: Hive table type. For example, MANAGED_TABLE, EXTERNAL_TABLE.
+          type: string
+      type: object
+    ListCatalogsResponse:
+      description: Response message for the ListCatalogs method.
+      properties:
+        catalogs:
+          description: The catalogs from the specified project.
+          items:
+            $ref: "#/components/schemas/Catalog"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    ListDatabasesResponse:
+      description: Response message for the ListDatabases method.
+      properties:
+        databases:
+          description: The databases from the specified catalog.
+          items:
+            $ref: "#/components/schemas/Database"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    ListTablesResponse:
+      description: Response message for the ListTables method.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        tables:
+          description: The tables from the specified database.
+          items:
+            $ref: "#/components/schemas/Table"
+          type: array
+      type: object
+    RenameTableRequest:
+      description: Request message for the RenameTable method in MetastoreService
+      properties:
+        newName:
+          description: "Required. The new `name` for the specified table, must be in the same database. Format: projects/{project_id_or_number}/locations/{location_id}/catalogs/{catalog_id}/databases/{database_id}/tables/{table_id}"
+          type: string
+      type: object
+    SerDeInfo:
+      description: Serializer and deserializer information.
+      properties:
+        serializationLib:
+          description: The fully qualified Java class name of the serialization library.
+          type: string
+      type: object
+    StorageDescriptor:
+      description: Stores physical storage information of the data.
+      properties:
+        inputFormat:
+          description: The fully qualified Java class name of the input format.
+          type: string
+        locationUri:
+          description: Cloud Storage folder URI where the table data is stored, starting with "gs://".
+          type: string
+        outputFormat:
+          description: The fully qualified Java class name of the output format.
+          type: string
+        serdeInfo:
+          $ref: "#/components/schemas/SerDeInfo"
+          description: Serializer and deserializer information.
+      type: object
+    Table:
+      description: Represents a table.
+      properties:
+        createTime:
+          description: Output only. The creation time of the table.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. The deletion time of the table. Only set after the table is deleted.
+          format: google-datetime
+          readOnly: true
+          type: string
+        etag:
+          description: The checksum of a table object computed by the server based on the value of other fields. It may be sent on update requests to ensure the client has an up-to-date value before proceeding. It is only checked for update table operations.
+          type: string
+        expireTime:
+          description: Output only. The time when this table is considered expired. Only set after the table is deleted.
+          format: google-datetime
+          readOnly: true
+          type: string
+        hiveOptions:
+          $ref: "#/components/schemas/HiveTableOptions"
+          description: Options of a Hive table.
+        name:
+          description: "Output only. The resource name. Format: projects/{project_id_or_number}/locations/{location_id}/catalogs/{catalog_id}/databases/{database_id}/tables/{table_id}"
+          readOnly: true
+          type: string
+        type:
+          description: The table type.
+          enum:
+            - TYPE_UNSPECIFIED
+            - HIVE
+          type: string
+        updateTime:
+          description: Output only. The last modification time of the table.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/bigquery: View and manage your data in Google BigQuery and see the email address for your Google Account
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/bigquery: View and manage your data in Google BigQuery and see the email address for your Google Account
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

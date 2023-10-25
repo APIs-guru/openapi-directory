@@ -109,6 +109,7 @@ tags:
   - name: securityPolicies
   - name: serviceAttachments
   - name: snapshots
+  - name: snapshotSettings
   - name: sslCertificates
   - name: sslPolicies
   - name: subnetworks
@@ -13334,6 +13335,112 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - publicAdvertisedPrefixes
+  /projects/{project}/global/publicAdvertisedPrefixes/{publicAdvertisedPrefix}/announce:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Announces the specified PublicAdvertisedPrefix
+      operationId: compute.publicAdvertisedPrefixes.announce
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the public advertised prefix. It should comply with RFC1035.
+          in: path
+          name: publicAdvertisedPrefix
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - publicAdvertisedPrefixes
+  /projects/{project}/global/publicAdvertisedPrefixes/{publicAdvertisedPrefix}/withdraw:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Withdraws the specified PublicAdvertisedPrefix
+      operationId: compute.publicAdvertisedPrefixes.withdraw
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the public advertised prefix. It should comply with RFC1035.
+          in: path
+          name: publicAdvertisedPrefix
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - publicAdvertisedPrefixes
   /projects/{project}/global/publicDelegatedPrefixes:
     get:
       description: Lists the global PublicDelegatedPrefixes for a project.
@@ -14396,6 +14503,95 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - securityPolicies
+  /projects/{project}/global/snapshotSettings:
+    get:
+      description: Get snapshot settings.
+      operationId: compute.snapshotSettings.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SnapshotSettings"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - snapshotSettings
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    patch:
+      description: Patch snapshot settings.
+      operationId: compute.snapshotSettings.patch
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+        - description: update_mask indicates fields to be updated as part of this request.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SnapshotSettings"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - snapshotSettings
   /projects/{project}/global/snapshots:
     get:
       description: Retrieves the list of Snapshot resources contained within the specified project.
@@ -27335,6 +27531,124 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/PublicDelegatedPrefix"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - publicDelegatedPrefixes
+  /projects/{project}/regions/{region}/publicDelegatedPrefixes/{publicDelegatedPrefix}/announce:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Announces the specified PublicDelegatedPrefix in the given region.
+      operationId: compute.publicDelegatedPrefixes.announce
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region where the public delegated prefix is located. It should comply with RFC1035.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: The name of the public delegated prefix. It should comply with RFC1035.
+          in: path
+          name: publicDelegatedPrefix
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - publicDelegatedPrefixes
+  /projects/{project}/regions/{region}/publicDelegatedPrefixes/{publicDelegatedPrefix}/withdraw:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Withdraws the specified PublicDelegatedPrefix in the given region.
+      operationId: compute.publicDelegatedPrefixes.withdraw
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region where the public delegated prefix is located. It should comply with RFC1035.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: The name of the public delegated prefix. It should comply with RFC1035.
+          in: path
+          name: publicDelegatedPrefix
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -60082,6 +60396,12 @@ components:
     PublicAdvertisedPrefix:
       description: A public advertised prefix represents an aggregated IP prefix or netblock which customers bring to cloud. The IP prefix is a single unit of route advertisement and is announced globally to the internet.
       properties:
+        byoipApiVersion:
+          description: "[Output Only] The version of BYOIP API."
+          enum:
+            - V1
+            - V2
+          type: string
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
           type: string
@@ -60110,6 +60430,13 @@ components:
           description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
           type: string
+        pdpScope:
+          description: "Specifies how child public delegated prefix will be scoped. It could be one of following values: - `REGIONAL`: The public delegated prefix is regional only. The provisioning will take a few minutes. - `GLOBAL`: The public delegated prefix is global only. The provisioning will take ~4 weeks. - `GLOBAL_AND_REGIONAL` [output only]: The public delegated prefixes is BYOIP V1 legacy prefix. This is output only value and no longer supported in BYOIP V2. "
+          enum:
+            - GLOBAL
+            - GLOBAL_AND_REGIONAL
+            - REGIONAL
+          type: string
         publicDelegatedPrefixs:
           description: "[Output Only] The list of public delegated prefixes that exist for this public advertised prefix."
           items:
@@ -60124,11 +60451,13 @@ components:
         status:
           description: "The status of the public advertised prefix. Possible values include: - `INITIAL`: RPKI validation is complete. - `PTR_CONFIGURED`: User has configured the PTR. - `VALIDATED`: Reverse DNS lookup is successful. - `REVERSE_DNS_LOOKUP_FAILED`: Reverse DNS lookup failed. - `PREFIX_CONFIGURATION_IN_PROGRESS`: The prefix is being configured. - `PREFIX_CONFIGURATION_COMPLETE`: The prefix is fully configured. - `PREFIX_REMOVAL_IN_PROGRESS`: The prefix is being removed. "
           enum:
+            - ANNOUNCED_TO_INTERNET
             - INITIAL
             - PREFIX_CONFIGURATION_COMPLETE
             - PREFIX_CONFIGURATION_IN_PROGRESS
             - PREFIX_REMOVAL_IN_PROGRESS
             - PTR_CONFIGURED
+            - READY_TO_ANNOUNCE
             - REVERSE_DNS_LOOKUP_FAILED
             - VALIDATED
           type: string
@@ -60256,6 +60585,12 @@ components:
     PublicDelegatedPrefix:
       description: A PublicDelegatedPrefix resource represents an IP block within a PublicAdvertisedPrefix that is configured within a single cloud scope (global or region). IPs in the block can be allocated to resources within that scope. Public delegated prefixes may be further broken up into smaller IP blocks in the same scope as the parent block.
       properties:
+        byoipApiVersion:
+          description: "[Output Only] The version of BYOIP API."
+          enum:
+            - V1
+            - V2
+          type: string
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
           type: string
@@ -60302,6 +60637,8 @@ components:
           description: "[Output Only] The status of the public delegated prefix, which can be one of following values: - `INITIALIZING` The public delegated prefix is being initialized and addresses cannot be created yet. - `READY_TO_ANNOUNCE` The public delegated prefix is a live migration prefix and is active. - `ANNOUNCED` The public delegated prefix is active. - `DELETING` The public delegated prefix is being deprovsioned. "
           enum:
             - ANNOUNCED
+            - ANNOUNCED_TO_GOOGLE
+            - ANNOUNCED_TO_INTERNET
             - DELETING
             - INITIALIZING
             - READY_TO_ANNOUNCE
@@ -65679,6 +66016,9 @@ components:
         sourceDiskEncryptionKey:
           $ref: "#/components/schemas/CustomerEncryptionKey"
           description: The customer-supplied encryption key of the source disk. Required if the source disk is protected by a customer-supplied encryption key.
+        sourceDiskForRecoveryCheckpoint:
+          description: The source disk whose recovery checkpoint will be used to create this snapshot.
+          type: string
         sourceDiskId:
           description: "[Output Only] The ID value of the disk used to create this snapshot. This value may be used to determine whether the snapshot was taken from the current or a previous instance of a given disk name."
           type: string
@@ -65814,6 +66154,35 @@ components:
               description: "[Output Only] A human-readable description of the warning code."
               type: string
           type: object
+      type: object
+    SnapshotSettings:
+      properties:
+        storageLocation:
+          $ref: "#/components/schemas/SnapshotSettingsStorageLocationSettings"
+          description: Policy of which storage location is going to be resolved, and additional data that particularizes how the policy is going to be carried out.
+      type: object
+    SnapshotSettingsStorageLocationSettings:
+      properties:
+        locations:
+          additionalProperties:
+            $ref: "#/components/schemas/SnapshotSettingsStorageLocationSettingsStorageLocationPreference"
+          description: When the policy is SPECIFIC_LOCATIONS, snapshots will be stored in the locations listed in this field. Keys are GCS bucket locations.
+          type: object
+        policy:
+          description: The chosen location policy.
+          enum:
+            - LOCAL_REGION
+            - NEAREST_MULTI_REGION
+            - SPECIFIC_LOCATIONS
+            - STORAGE_LOCATION_POLICY_UNSPECIFIED
+          type: string
+      type: object
+    SnapshotSettingsStorageLocationSettingsStorageLocationPreference:
+      description: A structure for specifying storage locations.
+      properties:
+        name:
+          description: Name of the location. It should be one of the GCS buckets.
+          type: string
       type: object
     SourceDiskEncryptionKey:
       properties:

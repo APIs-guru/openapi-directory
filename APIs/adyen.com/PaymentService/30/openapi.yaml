@@ -67,8 +67,8 @@ info:
   x-publicVersion: true
   x-serviceName: PaymentService
 tags:
-  - name: Modifications
   - name: Payments
+  - name: Modifications
 paths:
   /adjustAuthorisation:
     post:
@@ -846,7 +846,7 @@ components:
         shopperEmail: s.hopper@test.com
         shopperIP: 61.294.12.12
         shopperInteraction: ContAuth
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
     post-authorise-authorise-recurringoneclick:
       summary: Authorise a one-click payment
       value:
@@ -863,7 +863,7 @@ components:
         shopperEmail: s.hopper@test.com
         shopperIP: 61.294.12.12
         shopperInteraction: Ecommerce
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
     post-authorise-authorise-recurringstore:
       summary: Store card details for recurring payments
       value:
@@ -882,7 +882,7 @@ components:
         reference: YOUR_REFERENCE
         shopperEmail: s.hopper@test.com
         shopperIP: 61.294.12.12
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        shopperReference: YOUR_SHOPPER_REFERENCE
     post-authorise-authorise-split:
       summary: Split a payment between a sub-merchant and a platform account
       value:
