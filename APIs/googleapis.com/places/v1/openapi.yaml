@@ -281,7 +281,7 @@ components:
           $ref: "#/components/schemas/GoogleTypeLatLng"
           description: Required. Center latitude and longitude. The range of latitude must be within [-90.0, 90.0]. The range of the longitude must be within [-180.0, 180.0].
         radius:
-          description: Required. Radius measured in meters. The radius must be within [0.0, 50000.0].
+          description: Required. Radius measured in meters. The radius must be within [0.0, 50000.0]. The default radius is 0.0.
           format: double
           type: number
       type: object
@@ -487,7 +487,7 @@ components:
           description: "Background color for icon_mask in hex format, e.g. #909CE1."
           type: string
         iconMaskBaseUri:
-          description: A truncated URL to an v2 icon mask. User can access different icon type by appending type suffix to the end (eg, ".svg" or ".png").
+          description: A truncated URL to an icon mask. User can access different icon type by appending type suffix to the end (eg, ".svg" or ".png").
           type: string
         id:
           description: The unique identifier of a place.
@@ -914,7 +914,7 @@ components:
           $ref: "#/components/schemas/GoogleMapsPlacesV1SearchTextRequestLocationRestriction"
           description: The region to search. This location serves as a restriction which means results outside given location will not be returned. Cannot be set along with location_bias.
         maxResultCount:
-          description: Maximum number of results to return. It must be between 1 and 20, inclusively. If the number is unset, it falls back to the upper limit. If the number is set to negative or exceeds the upper limit, an INVALID_ARGUMENT error is returned.
+          description: Maximum number of results to return. It must be between 1 and 20, inclusively. The default is 20. If the number is unset, it falls back to the upper limit. If the number is set to negative or exceeds the upper limit, an INVALID_ARGUMENT error is returned.
           format: int32
           type: integer
         minRating:
@@ -922,7 +922,7 @@ components:
           format: double
           type: number
         openNow:
-          description: Used to restrict the search to places that are currently open.
+          description: Used to restrict the search to places that are currently open. The default is false.
           type: boolean
         priceLevels:
           description: Used to restrict the search to places that are marked as certain price levels. Users can choose any combinations of price levels. Default to select all price levels.

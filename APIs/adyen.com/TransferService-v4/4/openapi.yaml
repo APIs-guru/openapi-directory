@@ -616,7 +616,6 @@ components:
         balancePlatform: YOUR_BALANCE_PLATFORM
         bookingDate: 2023-08-11T16:19:39+02:00
         creationDate: 2023-08-11T16:19:35+02:00
-        eventId: EVJN4227C224222B5JBDHPTD672M52
         id: EVJN4227C224222B5JBDHPTD672M52EUR
         status: booked
         transfer:
@@ -643,7 +642,6 @@ components:
             balancePlatform: YOUR_BALANCE_PLATFORM
             bookingDate: 2023-08-10T14:51:33+02:00
             creationDate: 2023-08-10T14:51:20+02:00
-            eventId: EVJN42272224222B5JB8BRC84N686Z
             id: EVJN42272224222B5JB8BRC84N686ZEUR
             status: booked
             transfer:
@@ -662,7 +660,6 @@ components:
             balancePlatform: YOUR_BALANCE_PLATFORM
             bookingDate: 2023-08-10T15:34:40+02:00
             creationDate: 2023-08-10T15:34:31+02:00
-            eventId: EVJN4227C224222B5JB8G3Q89N2NB6
             id: EVJN4227C224222B5JB8G3Q89N2NB6EUR
             status: booked
             transfer:
@@ -681,7 +678,6 @@ components:
             balancePlatform: YOUR_BALANCE_PLATFORM
             bookingDate: 2023-08-11T13:45:57+02:00
             creationDate: 2023-08-11T13:45:46+02:00
-            eventId: EVJN4227C224222B5JBD3XHF8P3L8G
             id: EVJN4227C224222B5JBD3XHF8P3L8GUSD
             status: booked
             transfer:
@@ -700,7 +696,6 @@ components:
             balancePlatform: YOUR_BALANCE_PLATFORM
             bookingDate: 2023-08-11T13:45:58+02:00
             creationDate: 2023-08-11T13:45:51+02:00
-            eventId: EVJN42272224222B5JBD3XJGHF4J26
             id: EVJN42272224222B5JBD3XJGHF4J26USD
             status: booked
             transfer:
@@ -1580,22 +1575,6 @@ components:
           type: array
           x-addedInVersion: "4"
       type: object
-    JSONObject:
-      properties:
-        paths:
-          items:
-            $ref: "#/components/schemas/JSONPath"
-          type: array
-        rootPath:
-          $ref: "#/components/schemas/JSONPath"
-      type: object
-    JSONPath:
-      properties:
-        content:
-          items:
-            type: string
-          type: array
-      type: object
     Link:
       properties:
         href:
@@ -1906,8 +1885,8 @@ components:
           description: A unique reference for the request, essentially the same as `pspReference`.
           type: string
         response:
-          $ref: "#/components/schemas/JSONObject"
           description: JSON response payload.
+          type: object
         status:
           description: The HTTP status code.
           format: int32
@@ -2063,10 +2042,6 @@ components:
           description: The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
           format: date-time
           type: string
-        eventId:
-          description: The PSP reference of the transaction in the journal.
-          type: string
-          x-addedInVersion: "3"
         id:
           description: The unique identifier of the transaction.
           type: string

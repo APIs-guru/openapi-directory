@@ -488,17 +488,17 @@ paths:
           name: locationId
           schema:
             type: string
-        - description: "Comma separated list of fields to order by, followed by `asc` or `desc` postfix. This list is case-insensitive, default sorting order is ascending, redundant space characters are insignificant. Example: `name asc,update_time, create_time desc` Supported fields are: - `create_time`: corresponds to the time the template was created. - `update_time`: corresponds to the time the template was last updated. - `name`: corresponds to the template's name. - `display_name`: corresponds to the template's display name."
+        - description: "Comma separated list of fields to order by, followed by `asc` or `desc` postfix. This list is case insensitive. The default sorting order is ascending. Redundant space characters are insignificant. Example: `name asc,update_time, create_time desc` Supported fields are: - `create_time`: corresponds to the time the template was created. - `update_time`: corresponds to the time the template was last updated. - `name`: corresponds to the template's name. - `display_name`: corresponds to the template's display name."
           in: query
           name: orderBy
           schema:
             type: string
-        - description: Size of the page, can be limited by the server. If zero server returns a page of max size 100.
+        - description: Size of the page. This value can be limited by the server. If zero server returns a page of max size 100.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Page token to continue retrieval. Comes from previous call to `ListDeidentifyTemplates`.
+        - description: Page token to continue retrieval. Comes from the previous call to `ListDeidentifyTemplates`.
           in: query
           name: pageToken
           schema:
@@ -560,7 +560,7 @@ paths:
         - projects
   /v2/{parent}/discoveryConfigs:
     get:
-      description: Lists Discovery configurations.
+      description: Lists discovery configurations.
       operationId: dlp.projects.locations.discoveryConfigs.list
       parameters:
         - description: "Required. Parent resource name. The format of this value is as follows: `projects/`PROJECT_ID`/locations/`LOCATION_ID The following example `parent` string specifies a parent project with the identifier `example-project`, and specifies the `europe-west3` location for processing data: parent=projects/example-project/locations/europe-west3"
@@ -569,17 +569,17 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Comma separated list of config fields to order by, followed by `asc` or `desc` postfix. This list is case-insensitive, default sorting order is ascending, redundant space characters are insignificant. Example: `name asc,update_time, create_time desc` Supported fields are: - `last_run_time`: corresponds to the last time the DiscoveryConfig ran. - `name`: corresponds to the DiscoveryConfig's name. - `status`: corresponds to DiscoveryConfig's status."
+        - description: "Comma separated list of config fields to order by, followed by `asc` or `desc` postfix. This list is case insensitive. The default sorting order is ascending. Redundant space characters are insignificant. Example: `name asc,update_time, create_time desc` Supported fields are: - `last_run_time`: corresponds to the last time the DiscoveryConfig ran. - `name`: corresponds to the DiscoveryConfig's name. - `status`: corresponds to DiscoveryConfig's status."
           in: query
           name: orderBy
           schema:
             type: string
-        - description: Size of the page, can be limited by a server.
+        - description: Size of the page. This value can be limited by a server.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Page token to continue retrieval. Comes from previous call to ListDiscoveryConfigs. `order_by` field must not change for subsequent calls.
+        - description: Page token to continue retrieval. Comes from the previous call to ListDiscoveryConfigs. `order_by` field must not change for subsequent calls.
           in: query
           name: pageToken
           schema:
@@ -611,7 +611,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a config for Discovery to scan and profile storage.
+      description: Creates a config for discovery to scan and profile storage.
       operationId: dlp.projects.locations.discoveryConfigs.create
       parameters:
         - description: "Required. Parent resource name. The format of this value is as follows: `projects/`PROJECT_ID`/locations/`LOCATION_ID The following example `parent` string specifies a parent project with the identifier `example-project`, and specifies the `europe-west3` location for processing data: parent=projects/example-project/locations/europe-west3"
@@ -660,7 +660,7 @@ paths:
           name: locationId
           schema:
             type: string
-        - description: "Comma separated list of fields to order by, followed by `asc` or `desc` postfix. This list is case-insensitive, default sorting order is ascending, redundant space characters are insignificant. Example: `name asc, end_time asc, create_time desc` Supported fields are: - `create_time`: corresponds to the time the job was created. - `end_time`: corresponds to the time the job ended. - `name`: corresponds to the job's name. - `state`: corresponds to `state`"
+        - description: "Comma separated list of fields to order by, followed by `asc` or `desc` postfix. This list is case insensitive. The default sorting order is ascending. Redundant space characters are insignificant. Example: `name asc, end_time asc, create_time desc` Supported fields are: - `create_time`: corresponds to the time the job was created. - `end_time`: corresponds to the time the job ended. - `name`: corresponds to the job's name. - `state`: corresponds to `state`"
           in: query
           name: orderBy
           schema:
@@ -849,17 +849,17 @@ paths:
           name: locationId
           schema:
             type: string
-        - description: "Comma separated list of fields to order by, followed by `asc` or `desc` postfix. This list is case-insensitive, default sorting order is ascending, redundant space characters are insignificant. Example: `name asc,update_time, create_time desc` Supported fields are: - `create_time`: corresponds to the time the template was created. - `update_time`: corresponds to the time the template was last updated. - `name`: corresponds to the template's name. - `display_name`: corresponds to the template's display name."
+        - description: "Comma separated list of fields to order by, followed by `asc` or `desc` postfix. This list is case insensitive. The default sorting order is ascending. Redundant space characters are insignificant. Example: `name asc,update_time, create_time desc` Supported fields are: - `create_time`: corresponds to the time the template was created. - `update_time`: corresponds to the time the template was last updated. - `name`: corresponds to the template's name. - `display_name`: corresponds to the template's display name."
           in: query
           name: orderBy
           schema:
             type: string
-        - description: Size of the page, can be limited by the server. If zero server returns a page of max size 100.
+        - description: Size of the page. This value can be limited by the server. If zero server returns a page of max size 100.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Page token to continue retrieval. Comes from previous call to `ListInspectTemplates`.
+        - description: Page token to continue retrieval. Comes from the previous call to `ListInspectTemplates`.
           in: query
           name: pageToken
           schema:
@@ -940,17 +940,17 @@ paths:
           name: locationId
           schema:
             type: string
-        - description: "Comma separated list of triggeredJob fields to order by, followed by `asc` or `desc` postfix. This list is case-insensitive, default sorting order is ascending, redundant space characters are insignificant. Example: `name asc,update_time, create_time desc` Supported fields are: - `create_time`: corresponds to the time the JobTrigger was created. - `update_time`: corresponds to the time the JobTrigger was last updated. - `last_run_time`: corresponds to the last time the JobTrigger ran. - `name`: corresponds to the JobTrigger's name. - `display_name`: corresponds to the JobTrigger's display name. - `status`: corresponds to JobTrigger's status."
+        - description: "Comma separated list of triggeredJob fields to order by, followed by `asc` or `desc` postfix. This list is case insensitive. The default sorting order is ascending. Redundant space characters are insignificant. Example: `name asc,update_time, create_time desc` Supported fields are: - `create_time`: corresponds to the time the JobTrigger was created. - `update_time`: corresponds to the time the JobTrigger was last updated. - `last_run_time`: corresponds to the last time the JobTrigger ran. - `name`: corresponds to the JobTrigger's name. - `display_name`: corresponds to the JobTrigger's display name. - `status`: corresponds to JobTrigger's status."
           in: query
           name: orderBy
           schema:
             type: string
-        - description: Size of the page, can be limited by a server.
+        - description: Size of the page. This value can be limited by a server.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Page token to continue retrieval. Comes from previous call to ListJobTriggers. `order_by` field must not change for subsequent calls.
+        - description: Page token to continue retrieval. Comes from the previous call to ListJobTriggers. `order_by` field must not change for subsequent calls.
           in: query
           name: pageToken
           schema:
@@ -1035,17 +1035,17 @@ paths:
           name: locationId
           schema:
             type: string
-        - description: "Comma separated list of fields to order by, followed by `asc` or `desc` postfix. This list is case-insensitive, default sorting order is ascending, redundant space characters are insignificant. Example: `name asc, display_name, create_time desc` Supported fields are: - `create_time`: corresponds to the time the most recent version of the resource was created. - `state`: corresponds to the state of the resource. - `name`: corresponds to resource name. - `display_name`: corresponds to info type's display name."
+        - description: "Comma separated list of fields to order by, followed by `asc` or `desc` postfix. This list is case insensitive. The default sorting order is ascending. Redundant space characters are insignificant. Example: `name asc, display_name, create_time desc` Supported fields are: - `create_time`: corresponds to the time the most recent version of the resource was created. - `state`: corresponds to the state of the resource. - `name`: corresponds to resource name. - `display_name`: corresponds to info type's display name."
           in: query
           name: orderBy
           schema:
             type: string
-        - description: Size of the page, can be limited by the server. If zero server returns a page of max size 100.
+        - description: Size of the page. This value can be limited by the server. If zero server returns a page of max size 100.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Page token to continue retrieval. Comes from previous call to `ListStoredInfoTypes`.
+        - description: Page token to continue retrieval. Comes from the previous call to `ListStoredInfoTypes`.
           in: query
           name: pageToken
           schema:
@@ -1276,7 +1276,7 @@ components:
           description: Required. Auxiliary table location.
       type: object
     GooglePrivacyDlpV2BigQueryDiscoveryTarget:
-      description: Target used to match against for Discovery with BigQuery tables
+      description: Target used to match against for discovery with BigQuery tables
       properties:
         cadence:
           $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoveryGenerationCadence"
@@ -1289,7 +1289,7 @@ components:
           description: Tables that match this filter will not have profiles created.
         filter:
           $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoveryBigQueryFilter"
-          description: Required. The tables the Discovery cadence applies to. The first target with a matching filter will be the one to apply to a table.
+          description: Required. The tables the discovery cadence applies to. The first target with a matching filter will be the one to apply to a table.
       type: object
     GooglePrivacyDlpV2BigQueryField:
       description: Message defining a field of a BigQuery table.
@@ -1391,10 +1391,10 @@ components:
           description: A collection of regular expressions to match a BigQuery table against.
       type: object
     GooglePrivacyDlpV2BigQueryTableTypes:
-      description: The types of bigquery tables supported by Cloud DLP.
+      description: The types of BigQuery tables supported by Cloud DLP.
       properties:
         types:
-          description: A set of bigquery table types.
+          description: A set of BigQuery table types.
           items:
             enum:
               - BIG_QUERY_TABLE_TYPE_UNSPECIFIED
@@ -1855,7 +1855,7 @@ components:
       description: Request message for CreateDiscoveryConfig.
       properties:
         configId:
-          description: "The config id can contain uppercase and lowercase letters, numbers, and hyphens; that is, it must match the regular expression: `[a-zA-Z\\d-_]+`. The maximum length is 100 characters. Can be empty to allow the system to generate one."
+          description: "The config ID can contain uppercase and lowercase letters, numbers, and hyphens; that is, it must match the regular expression: `[a-zA-Z\\d-_]+`. The maximum length is 100 characters. Can be empty to allow the system to generate one."
           type: string
         discoveryConfig:
           $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoveryConfig"
@@ -2060,7 +2060,7 @@ components:
             $ref: "#/components/schemas/GooglePrivacyDlpV2DataProfileAction"
           type: array
         inspectTemplates:
-          description: Detection logic for profile generation. Not all template features are used by profiles. FindingLimits, include_quote and exclude_info_types have no impact on data profiling. Multiple templates may be provided if there is data in multiple regions. At most one template must be specified per-region (including "global"). Each region is scanned using the applicable template. If no region-specific template is specified, but a "global" template is specified, it will be copied to that region and used instead. If no global or region-specific template is provided for a region with data, that region's data will not be scanned. For more information, see https://cloud.google.com/dlp/docs/data-profiles#data_residency.
+          description: Detection logic for profile generation. Not all template features are used by profiles. FindingLimits, include_quote and exclude_info_types have no impact on data profiling. Multiple templates may be provided if there is data in multiple regions. At most one template must be specified per-region (including "global"). Each region is scanned using the applicable template. If no region-specific template is specified, but a "global" template is specified, it will be copied to that region and used instead. If no global or region-specific template is provided for a region with data, that region's data will not be scanned. For more information, see https://cloud.google.com/dlp/docs/data-profiles#data-residency.
           items:
             type: string
           type: array
@@ -2391,11 +2391,11 @@ components:
           description: List of words or phrases to search for.
       type: object
     GooglePrivacyDlpV2Disabled:
-      description: Do nothing.
+      description: Do not profile the tables.
       properties: {}
       type: object
     GooglePrivacyDlpV2DiscoveryBigQueryConditions:
-      description: Requirements that must be true before a table is scanned in Discovery for the first time. There is an AND relationship between the top-level attributes.
+      description: Requirements that must be true before a table is scanned in discovery for the first time. There is an AND relationship between the top-level attributes. Additionally, minimum conditions with an OR relationship that must be met before Cloud DLP scans a table can be set (like a minimum row count or a minimum table age).
       properties:
         createdAfter:
           description: BigQuery table must have been created after this date. Used to avoid backfilling.
@@ -2405,7 +2405,7 @@ components:
           $ref: "#/components/schemas/GooglePrivacyDlpV2OrConditions"
           description: At least one of the conditions must be true for a table to be scanned.
         typeCollection:
-          description: Restrict Discovery to categories of table types.
+          description: Restrict discovery to categories of table types.
           enum:
             - BIG_QUERY_COLLECTION_UNSPECIFIED
             - BIG_QUERY_COLLECTION_ALL_TYPES
@@ -2413,10 +2413,10 @@ components:
           type: string
         types:
           $ref: "#/components/schemas/GooglePrivacyDlpV2BigQueryTableTypes"
-          description: Restrict Discovery to specific table types.
+          description: Restrict discovery to specific table types.
       type: object
     GooglePrivacyDlpV2DiscoveryBigQueryFilter:
-      description: Determines what tables will have profiles generated within an organization or project. Includes the ability to filter by regular expression patterns on project ID, dataset ID, and table ID. Also lets you set minimum conditions that must be met before Cloud DLP scans a table (like a minimum row count or a minimum table age).
+      description: Determines what tables will have profiles generated within an organization or project. Includes the ability to filter by regular expression patterns on project ID, dataset ID, and table ID.
       properties:
         otherTables:
           $ref: "#/components/schemas/GooglePrivacyDlpV2AllOtherBigQueryTables"
@@ -2426,7 +2426,7 @@ components:
           description: A specific set of tables for this filter to apply to. A table collection must be specified in only one filter per config. If a table id or dataset is empty, Cloud DLP assumes all tables in that collection must be profiled. Must specify a project ID.
       type: object
     GooglePrivacyDlpV2DiscoveryConfig:
-      description: Configuration for Discovery to scan resources for profile generation. Only one Discovery configuration may exist per organization, folder, or project. The generated data profiles are retained according to the [data retention policy] (https://cloud.google.com/dlp/docs/data-profiles#retention).
+      description: Configuration for discovery to scan resources for profile generation. Only one discovery configuration may exist per organization, folder, or project. The generated data profiles are retained according to the [data retention policy] (https://cloud.google.com/dlp/docs/data-profiles#retention).
       properties:
         actions:
           description: Actions to execute at the completion of scanning.
@@ -2448,7 +2448,7 @@ components:
           readOnly: true
           type: array
         inspectTemplates:
-          description: Detection logic for profile generation. Not all template features are used by Discovery. FindingLimits, include_quote and exclude_info_types have no impact on Discovery. Multiple templates may be provided if there is data in multiple regions. At most one template must be specified per-region (including "global"). Each region is scanned using the applicable template. If no region-specific template is specified, but a "global" template is specified, it will be copied to that region and used instead. If no global or region-specific template is provided for a region with data, that region's data will not be scanned. For more information, see https://cloud.google.com/dlp/docs/data-profiles#data_residency.
+          description: Detection logic for profile generation. Not all template features are used by Discovery. FindingLimits, include_quote and exclude_info_types have no impact on Discovery. Multiple templates may be provided if there is data in multiple regions. At most one template must be specified per-region (including "global"). Each region is scanned using the applicable template. If no region-specific template is specified, but a "global" template is specified, it will be copied to that region and used instead. If no global or region-specific template is provided for a region with data, that region's data will not be scanned. For more information, see https://cloud.google.com/dlp/docs/data-profiles#data-residency.
           items:
             type: string
           type: array
@@ -2513,7 +2513,7 @@ components:
           type: array
       type: object
     GooglePrivacyDlpV2DiscoveryStartingLocation:
-      description: The location to begin a Discovery scan. Denotes an organization ID or folder ID within an organization.
+      description: The location to begin a discovery scan. Denotes an organization ID or folder ID within an organization.
       properties:
         folderId:
           description: The ID of the Folder within an organization to scan.
@@ -3657,7 +3657,7 @@ components:
             $ref: "#/components/schemas/GooglePrivacyDlpV2DeidentifyTemplate"
           type: array
         nextPageToken:
-          description: If the next page is available then the next page token to be used in following ListDeidentifyTemplates request.
+          description: If the next page is available then the next page token to be used in the following ListDeidentifyTemplates request.
           type: string
       type: object
     GooglePrivacyDlpV2ListDiscoveryConfigsResponse:
@@ -3669,7 +3669,7 @@ components:
             $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoveryConfig"
           type: array
         nextPageToken:
-          description: If the next page is available then the next page token to be used in following ListDiscoveryConfigs request.
+          description: If the next page is available then the next page token to be used in the following ListDiscoveryConfigs request.
           type: string
       type: object
     GooglePrivacyDlpV2ListDlpJobsResponse:
@@ -3702,7 +3702,7 @@ components:
             $ref: "#/components/schemas/GooglePrivacyDlpV2InspectTemplate"
           type: array
         nextPageToken:
-          description: If the next page is available then the next page token to be used in following ListInspectTemplates request.
+          description: If the next page is available then the next page token to be used in the following ListInspectTemplates request.
           type: string
       type: object
     GooglePrivacyDlpV2ListJobTriggersResponse:
@@ -3714,14 +3714,14 @@ components:
             $ref: "#/components/schemas/GooglePrivacyDlpV2JobTrigger"
           type: array
         nextPageToken:
-          description: If the next page is available then the next page token to be used in following ListJobTriggers request.
+          description: If the next page is available then the next page token to be used in the following ListJobTriggers request.
           type: string
       type: object
     GooglePrivacyDlpV2ListStoredInfoTypesResponse:
       description: Response message for ListStoredInfoTypes.
       properties:
         nextPageToken:
-          description: If the next page is available then the next page token to be used in following ListStoredInfoTypes request.
+          description: If the next page is available then the next page token to be used in the following ListStoredInfoTypes request.
           type: string
         storedInfoTypes:
           description: List of storedInfoTypes, up to page_size in ListStoredInfoTypesRequest.
@@ -4902,7 +4902,7 @@ components:
       properties:
         discoveryConfig:
           $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoveryConfig"
-          description: New DiscoveryConfig value.
+          description: Required. New DiscoveryConfig value.
         updateMask:
           description: Mask to control which fields get updated.
           format: google-fieldmask

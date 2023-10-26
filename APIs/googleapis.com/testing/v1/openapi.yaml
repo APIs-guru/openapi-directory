@@ -1011,10 +1011,6 @@ components:
         androidDevice:
           $ref: "#/components/schemas/AndroidDevice"
           description: Required. The requested device
-        androidDeviceList:
-          $ref: "#/components/schemas/AndroidDeviceList"
-          deprecated: true
-          description: Optional. The list of requested devices. At most two devices may be simultaneously requested.
         createTime:
           description: Output only. The time that the Session was created.
           format: google-datetime
@@ -1056,7 +1052,7 @@ components:
           readOnly: true
           type: array
         ttl:
-          description: "Optional. The amount of time that a device will be initially allocated for. This can eventually be extended with the ExtendDeviceSession RPC. Default: 30 minutes."
+          description: "Optional. The amount of time that a device will be initially allocated for. This can eventually be extended with the UpdateDeviceSession RPC. Default: 30 minutes."
           format: google-duration
           type: string
       type: object

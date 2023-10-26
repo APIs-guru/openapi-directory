@@ -677,7 +677,7 @@ components:
       content:
         "*/*":
           schema:
-            $ref: "#/components/schemas/Error_1"
+            $ref: "#/components/schemas/Error"
       description: An error occurred.
   schemas:
     BatchInputCallbackCompletionBatchRequest:
@@ -818,85 +818,6 @@ components:
           description: A specific category that contains more specific detail about the error
           type: string
       required:
-        - message
-      type: object
-    ErrorDetail_1:
-      properties:
-        code:
-          description: The status code associated with the error detail
-          type: string
-        context:
-          additionalProperties:
-            items:
-              type: string
-            type: array
-          description: Context about the error condition
-          example:
-            missingScopes:
-              - scope1
-              - scope2
-          type: object
-        in:
-          description: The name of the field or parameter in which the error was found.
-          type: string
-        message:
-          description: A human readable message describing the error along with remediation steps where appropriate
-          type: string
-        subCategory:
-          description: A specific category that contains more specific detail about the error
-          type: string
-      required:
-        - message
-      type: object
-    Error_1:
-      example:
-        category: VALIDATION_ERROR
-        correlationId: aeb5f871-7f07-4993-9211-075dc63e7cbf
-        links:
-          knowledge-base: https://www.hubspot.com/products/service/knowledge-base
-        message: Invalid input (details will vary based on the error)
-      properties:
-        category:
-          description: The error category
-          type: string
-        context:
-          additionalProperties:
-            items:
-              type: string
-            type: array
-          description: Context about the error condition
-          example:
-            invalidPropertyName:
-              - propertyValue
-            missingScopes:
-              - scope1
-              - scope2
-          type: object
-        correlationId:
-          description: A unique identifier for the request. Include this value with any error reports or support tickets
-          example: aeb5f871-7f07-4993-9211-075dc63e7cbf
-          format: uuid
-          type: string
-        errors:
-          description: further information about the error
-          items:
-            $ref: "#/components/schemas/ErrorDetail_1"
-          type: array
-        links:
-          additionalProperties:
-            type: string
-          description: A map of link names to associated URIs containing documentation about the error or recommended remediation steps
-          type: object
-        message:
-          description: A human readable message describing the error along with remediation steps where appropriate
-          example: An error occurred
-          type: string
-        subCategory:
-          description: A specific category that contains more specific detail about the error
-          type: string
-      required:
-        - category
-        - correlationId
         - message
       type: object
     FieldTypeDefinition:

@@ -1971,6 +1971,9 @@ components:
             - COMPUTE_ENGINE_DISK_TYPE_SSD
             - COMPUTE_ENGINE_DISK_TYPE_BALANCED
           type: string
+        encryption:
+          $ref: "#/components/schemas/Encryption"
+          description: Optional. The encryption to apply to the boot disk.
         image:
           $ref: "#/components/schemas/DiskImageDefaults"
           description: The image to use when creating the disk.
@@ -2142,6 +2145,9 @@ components:
             - COMPUTE_ENGINE_DISK_TYPE_SSD
             - COMPUTE_ENGINE_DISK_TYPE_BALANCED
           type: string
+        encryption:
+          $ref: "#/components/schemas/Encryption"
+          description: Optional. Immutable. The encryption to apply to the VM disks.
         hostname:
           description: The hostname to assign to the VM.
           type: string
@@ -2223,6 +2229,9 @@ components:
             - COMPUTE_ENGINE_DISK_TYPE_SSD
             - COMPUTE_ENGINE_DISK_TYPE_BALANCED
           type: string
+        encryption:
+          $ref: "#/components/schemas/Encryption"
+          description: Optional. The encryption to apply to the VM disks.
         hostname:
           description: The hostname to assign to the VM.
           type: string
@@ -2532,6 +2541,9 @@ components:
         computeScheduling:
           $ref: "#/components/schemas/ComputeScheduling"
           description: Optional. Compute instance scheduling information (if empty default is used).
+        encryption:
+          $ref: "#/components/schemas/Encryption"
+          description: Optional. The encryption to apply to the VM.
         hostname:
           description: Optional. The hostname to assign to the VM.
           type: string
@@ -2582,6 +2594,13 @@ components:
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
+      type: object
+    Encryption:
+      description: Encryption message describes the details of the applied encryption.
+      properties:
+        kmsKey:
+          description: Required. The name of the encryption key that is stored in Google Cloud KMS.
+          type: string
       type: object
     FetchInventoryResponse:
       description: Response message for fetchInventory.
@@ -3026,7 +3045,6 @@ components:
             - CUTOVER_ERROR
             - UTILIZATION_REPORT_ERROR
             - APPLIANCE_UPGRADE_ERROR
-            - IMAGE_IMPORT_ERROR
           readOnly: true
           type: string
         errorMessage:
@@ -3207,6 +3225,9 @@ components:
             - COMPUTE_ENGINE_DISK_TYPE_SSD
             - COMPUTE_ENGINE_DISK_TYPE_BALANCED
           type: string
+        encryption:
+          $ref: "#/components/schemas/Encryption"
+          description: Optional. The encryption to apply to the disk.
         sourceDiskNumber:
           description: Required. The ordinal number of the source VM disk.
           format: int32
@@ -3364,6 +3385,9 @@ components:
         description:
           description: User-provided description of the source.
           type: string
+        encryption:
+          $ref: "#/components/schemas/Encryption"
+          description: Optional. Immutable. The encryption details of the source data stored by the service.
         labels:
           additionalProperties:
             type: string

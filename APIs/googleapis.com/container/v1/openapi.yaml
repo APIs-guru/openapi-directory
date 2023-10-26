@@ -3697,9 +3697,6 @@ components:
         desiredNodePoolAutoConfigNetworkTags:
           $ref: "#/components/schemas/NetworkTags"
           description: The desired network tags that apply to all auto-provisioned node pools in autopilot clusters and node auto-provisioning enabled clusters.
-        desiredNodePoolAutoConfigResourceManagerTags:
-          $ref: "#/components/schemas/ResourceManagerTags"
-          description: The desired resource manager tags that apply to all auto-provisioned node pools in autopilot clusters and node auto-provisioning enabled clusters.
         desiredNodePoolAutoscaling:
           $ref: "#/components/schemas/NodePoolAutoscaling"
           description: Autoscaler configuration for the node pool specified in desired_node_pool_id. If there is only one pool in the cluster and desired_node_pool_id is not provided then the change applies to that single node pool.
@@ -3998,7 +3995,6 @@ components:
           enum:
             - CHANNEL_UNSPECIFIED
             - CHANNEL_DISABLED
-            - CHANNEL_EXPERIMENTAL
             - CHANNEL_STANDARD
           type: string
       type: object
@@ -4726,9 +4722,6 @@ components:
             type: string
           description: The resource labels for the node pool to use to annotate any related Google Compute Engine resources.
           type: object
-        resourceManagerTags:
-          $ref: "#/components/schemas/ResourceManagerTags"
-          description: A map of resource manager tag keys and values to be attached to the nodes.
         sandboxConfig:
           $ref: "#/components/schemas/SandboxConfig"
           description: Sandbox configuration for this node.
@@ -4938,9 +4931,6 @@ components:
         networkTags:
           $ref: "#/components/schemas/NetworkTags"
           description: The list of instance tags applied to all nodes. Tags are used to identify valid sources or targets for network firewalls and are specified by the client during cluster creation. Each tag within the list must comply with RFC1035.
-        resourceManagerTags:
-          $ref: "#/components/schemas/ResourceManagerTags"
-          description: Resource manager tag keys and values to be attached to the nodes for managing Compute Engine firewalls using Network Firewall Policies.
       type: object
     NodePoolAutoscaling:
       description: NodePoolAutoscaling contains information required by cluster autoscaler to adjust the size of the node pool to the current cluster usage.
@@ -5074,7 +5064,6 @@ components:
             - SET_NETWORK_POLICY
             - SET_MAINTENANCE_POLICY
             - RESIZE_CLUSTER
-            - FLEET_FEATURE_UPGRADE
           type: string
           x-enumDeprecated:
             - false
@@ -5094,7 +5083,6 @@ components:
             - false
             - true
             - true
-            - false
             - false
         progress:
           $ref: "#/components/schemas/OperationProgress"
@@ -5335,15 +5323,6 @@ components:
         resourceType:
           description: Resource name "cpu", "memory" or gpu-specific string.
           type: string
-      type: object
-    ResourceManagerTags:
-      description: A map of resource manager tag keys and values to be attached to the nodes for managing Compute Engine firewalls using Network Firewall Policies. Tags must be according to specifications in https://cloud.google.com/vpc/docs/tags-firewalls-overview#specifications. A maximum of 5 tag key-value pairs can be specified. Existing tags will be replaced with new values.
-      properties:
-        tags:
-          additionalProperties:
-            type: string
-          description: TagKeyValue must be in one of the following formats ([KEY]=[VALUE]) 1. `tagKeys/{tag_key_id}=tagValues/{tag_value_id}` 2. `{org_id}/{tag_key_name}={tag_value_name}` 3. `{project_id}/{tag_key_name}={tag_value_name}`
-          type: object
       type: object
     ResourceUsageExportConfig:
       description: Configuration for exporting cluster resource usages.
@@ -6038,9 +6017,6 @@ components:
         resourceLabels:
           $ref: "#/components/schemas/ResourceLabels"
           description: The resource labels for the node pool to use to annotate any related Google Compute Engine resources.
-        resourceManagerTags:
-          $ref: "#/components/schemas/ResourceManagerTags"
-          description: Desired resource manager tag keys and values to be attached to the nodes for managing Compute Engine firewalls using Network Firewall Policies. Existing tags will be replaced with new values.
         tags:
           $ref: "#/components/schemas/NetworkTags"
           description: The desired network tags to be applied to all nodes in the node pool. If this field is not present, the tags will not be changed. Otherwise, the existing network tags will be *replaced* with the provided tags.

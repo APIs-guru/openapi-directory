@@ -1925,6 +1925,9 @@ components:
           description: Output only. Reserved for future use.
           readOnly: true
           type: boolean
+        scaling:
+          $ref: "#/components/schemas/GoogleCloudRunV2ServiceScaling"
+          description: Optional. Specifies service-level scaling settings
         template:
           $ref: "#/components/schemas/GoogleCloudRunV2RevisionTemplate"
           description: Required. The template used to create revisions for this Service.
@@ -1956,6 +1959,14 @@ components:
           description: Output only. The main URI in which this Service is serving traffic.
           readOnly: true
           type: string
+      type: object
+    GoogleCloudRunV2ServiceScaling:
+      description: Scaling settings that apply to the service as a whole rather than the individual revision.
+      properties:
+        minInstanceCount:
+          description: total min instances for the service. This number of instances will be divide among all revisions with specified traffic based on the percent of traffic they are receiving. (ALPHA)
+          format: int32
+          type: integer
       type: object
     GoogleCloudRunV2TCPSocketAction:
       description: TCPSocketAction describes an action based on opening a socket

@@ -1362,6 +1362,9 @@ components:
           items:
             $ref: "#/components/schemas/AgentTask"
           type: array
+        useBatchMonitoredResource:
+          description: If true, the cloud logging for batch agent will use batch.googleapis.com/Job as monitored resource for Batch job related logging.
+          type: boolean
       type: object
     Runnable:
       description: Runnable describes instructions for executing a specific script or container as part of a Task.

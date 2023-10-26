@@ -2807,13 +2807,6 @@ components:
             type: string
           type: array
       type: object
-    GoogleCloudDataprocV1WorkflowTemplateEncryptionConfig:
-      description: "Encryption settings for the encrypting customer core content. NEXT ID: 2"
-      properties:
-        kmsKey:
-          description: Optional. The Cloud KMS key name to use for encrypting customer core content.
-          type: string
-      type: object
     HadoopJob:
       description: A Dataproc job for running Apache Hadoop MapReduce (https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html) jobs on Apache Hadoop YARN (https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/YARN.html).
       properties:
@@ -3459,12 +3452,6 @@ components:
             $ref: "#/components/schemas/WorkflowTemplate"
           readOnly: true
           type: array
-        unreachable:
-          description: Output only. List of workflow templates that could not be included in the response. Attempting to get one of these resources may indicate why it was not included in the list response.
-          items:
-            type: string
-          readOnly: true
-          type: array
       type: object
     LoggingConfig:
       description: The runtime logging config of the job.
@@ -3615,7 +3602,6 @@ components:
             - UPDATE
             - DELETE
             - RESIZE
-            - REPAIR
           type: string
         status:
           $ref: "#/components/schemas/ClusterOperationStatus"
@@ -4634,13 +4620,6 @@ components:
     UsageMetrics:
       description: Usage metrics represent approximate total resources consumed by a workload.
       properties:
-        acceleratorType:
-          description: Optional. Accelerator type being used, if any
-          type: string
-        milliAcceleratorSeconds:
-          description: Optional. Accelerator usage in (milliAccelerator x seconds) (see Dataproc Serverless pricing (https://cloud.google.com/dataproc-serverless/pricing)).
-          format: int64
-          type: string
         milliDcuSeconds:
           description: Optional. DCU (Dataproc Compute Units) usage in (milliDCU x seconds) (see Dataproc Serverless pricing (https://cloud.google.com/dataproc-serverless/pricing)).
           format: int64
@@ -4653,13 +4632,6 @@ components:
     UsageSnapshot:
       description: The usage snapshot represents the resources consumed by a workload at a specified time.
       properties:
-        acceleratorType:
-          description: Optional. Accelerator type being used, if any
-          type: string
-        milliAccelerator:
-          description: Optional. Milli (one-thousandth) accelerator. (see Dataproc Serverless pricing (https://cloud.google.com/dataproc-serverless/pricing))
-          format: int64
-          type: string
         milliDcu:
           description: Optional. Milli (one-thousandth) Dataproc Compute Units (DCUs) (see Dataproc Serverless pricing (https://cloud.google.com/dataproc-serverless/pricing)).
           format: int64
@@ -4830,9 +4802,6 @@ components:
           description: Optional. Timeout duration for the DAG of jobs, expressed in seconds (see JSON representation of duration (https://developers.google.com/protocol-buffers/docs/proto3#json)). The timeout duration must be from 10 minutes ("600s") to 24 hours ("86400s"). The timer begins when the first job is submitted. If the workflow is running at the end of the timeout period, any remaining jobs are cancelled, the workflow is ended, and if the workflow was running on a managed cluster, the cluster is deleted.
           format: google-duration
           type: string
-        encryptionConfig:
-          $ref: "#/components/schemas/GoogleCloudDataprocV1WorkflowTemplateEncryptionConfig"
-          description: Optional. Encryption settings for the encrypting customer core content.
         id:
           type: string
         jobs:

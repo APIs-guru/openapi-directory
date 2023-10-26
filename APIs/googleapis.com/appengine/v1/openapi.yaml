@@ -3374,6 +3374,11 @@ components:
         flexibleRuntimeSettings:
           $ref: "#/components/schemas/FlexibleRuntimeSettings"
           description: Settings for App Engine flexible runtimes.
+        generatedCustomerMetadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Additional Google Generated Customer Metadata, this field won't be provided by default and can be requested by setting the IncludeExtraData field in GetVersionRequest
+          type: object
         handlers:
           description: An ordered list of URL-matching patterns that should be applied to incoming requests. The first matching URL handles the request and other request handlers are not attempted.Only returned in GET requests if view=FULL is set.
           items:

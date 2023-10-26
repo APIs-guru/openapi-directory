@@ -2744,7 +2744,7 @@ components:
       description: The output of a DataQualityScan.
       properties:
         dimensions:
-          description: A list of results at the dimension level.
+          description: A list of results at the dimension level.A dimension will have a corresponding DataQualityDimensionResult if and only if there is at least one rule with the 'dimension' field set to it.
           items:
             $ref: "#/components/schemas/GoogleCloudDataplexV1DataQualityDimensionResult"
           type: array

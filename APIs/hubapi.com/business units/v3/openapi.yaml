@@ -3,7 +3,7 @@ servers:
   - url: https://api.hubapi.com
 info:
   description: Retrieve Business Unit information.
-  title: Business Units Business Units
+  title: Business Units
   version: v3
   x-hubspot-api-use-case: You have a third-party service to manage organizational data for your business, and you need to confirm the business unit that a specific HubSpot user is in.
   x-hubspot-documentation-banner: NONE
@@ -13,6 +13,9 @@ info:
     marketing: FREE
     sales: FREE
     service: FREE
+  x-hubspot-related-documentation:
+    - name: Business Units Overview
+      url: https://developers.hubspot.com/docs/api/settings/business-units-api
   x-logo:
     url: https://wtcfns.hubspot.com/wt-api/social-sharing
   x-origin:
