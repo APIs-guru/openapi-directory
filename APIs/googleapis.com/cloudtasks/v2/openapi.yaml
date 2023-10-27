@@ -806,7 +806,7 @@ components:
           type: string
       type: object
     CmekConfig:
-      description: CMEK, or Customer Managed Encryption Keys, enables GCP products to put control over encryption and key management in their customer’s hands.
+      description: Describes the customer-managed encryption key (CMEK) configuration associated with a project and location.
       properties:
         kmsKey:
           description: Resource name of the Cloud KMS key, of the form `projects/PROJECT_ID/locations/LOCATION_ID/keyRings/KEY_RING_ID/cryptoKeys/KEY_ID`, that will be used to encrypt the Queues & Tasks in the region. Setting this as blank will turn off CMEK encryption.

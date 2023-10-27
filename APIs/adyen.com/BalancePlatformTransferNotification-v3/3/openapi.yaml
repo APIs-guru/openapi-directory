@@ -22,7 +22,8 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformTransferNotification-v3
-tags: []
+tags:
+  - name: General
 components:
   examples: {}
   schemas:
@@ -344,8 +345,8 @@ components:
       additionalProperties: false
       properties:
         accountNumber:
-          description: The 9- to 12-character bank account number (alphanumeric), without separators or whitespace. Starts with the 3-digit branch code.
-          maxLength: 12
+          description: The 9- to 15-character bank account number (alphanumeric), without separators or whitespace. Starts with the 3-digit branch code.
+          maxLength: 15
           minLength: 9
           type: string
         clearingCode:
@@ -1000,7 +1001,6 @@ components:
             * **internal**: Transfer to an Adyen-issued business bank account (by bank account number/IBAN). This will be removed in v4 and replaced with a new field.
           enum:
             - crossBorder
-            - directDebit
             - fast
             - instant
             - internal

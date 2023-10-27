@@ -1225,6 +1225,13 @@ components:
           description: Immutable. The subnetwork of the customer project from which an IP address is reserved and used as the Dataproc Metastore service's endpoint. It is accessible to hosts in the subnet and to all hosts in a subnet in the same region and same network. There must be at least one IP address available in the subnet's primary range. The subnet is specified in the following form:projects/{project_number}/regions/{region_id}/subnetworks/{subnetwork_id}
           type: string
       type: object
+    DataCatalogConfig:
+      description: Specifies how metastore metadata should be integrated with the Data Catalog service.
+      properties:
+        enabled:
+          description: Optional. Defines whether the metastore metadata should be synced to Data Catalog. The default value is to disable syncing metastore metadata to Data Catalog.
+          type: boolean
+      type: object
     DatabaseDump:
       description: A specification of the location of and metadata about a database dump from a relational database management system.
       properties:
@@ -1627,6 +1634,13 @@ components:
           readOnly: true
           type: string
       type: object
+    MetadataIntegration:
+      description: Specifies how metastore metadata should be integrated with external services.
+      properties:
+        dataCatalogConfig:
+          $ref: "#/components/schemas/DataCatalogConfig"
+          description: Optional. The integration config for the Data Catalog service.
+      type: object
     MetadataManagementActivity:
       description: The metadata management activities of the metastore service.
       properties:
@@ -1890,6 +1904,9 @@ components:
         maintenanceWindow:
           $ref: "#/components/schemas/MaintenanceWindow"
           description: The one hour maintenance window of the metastore service. This specifies when the service can be restarted for maintenance purposes in UTC time. Maintenance window is not needed for services with the SPANNER database type.
+        metadataIntegration:
+          $ref: "#/components/schemas/MetadataIntegration"
+          description: Optional. The setting that defines how metastore metadata should be integrated with external services and systems.
         metadataManagementActivity:
           $ref: "#/components/schemas/MetadataManagementActivity"
           description: Output only. The metadata management activities of the metastore service.

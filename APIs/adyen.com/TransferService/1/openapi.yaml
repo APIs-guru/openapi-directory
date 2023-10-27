@@ -57,8 +57,9 @@ info:
   x-publicVersion: true
   x-serviceName: TransferService
 tags:
-  - name: Transactions
   - name: Transfers
+  - name: Transactions
+  - name: Capital
 paths:
   /transactions:
     get:
@@ -194,7 +195,7 @@ paths:
         Returns a transaction.
       operationId: get-transactions-id
       parameters:
-        - description: Unique identifier of the transaction.
+        - description: The unique identifier of the transaction.
           in: path
           name: id
           required: true
@@ -205,7 +206,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TransactionData"
+                $ref: "#/components/schemas/Transaction"
           description: OK - the request has succeeded.
         "401":
           content:
@@ -480,20 +481,6 @@ components:
         - message
       type: object
     JSONObject:
-      properties:
-        paths:
-          items:
-            $ref: "#/components/schemas/JSONPath"
-          type: array
-        rootPath:
-          $ref: "#/components/schemas/JSONPath"
-      type: object
-    JSONPath:
-      properties:
-        content:
-          items:
-            type: string
-          type: array
       type: object
     Link:
       properties:
@@ -630,7 +617,7 @@ components:
           format: int32
           type: integer
       type: object
-    TransactionData:
+    Transaction:
       properties:
         accountHolderId:
           description: Unique identifier of the account holder.
@@ -807,7 +794,7 @@ components:
         data:
           description: Contains the transactions that match the query parameters.
           items:
-            $ref: "#/components/schemas/TransactionData"
+            $ref: "#/components/schemas/Transaction"
           type: array
       type: object
     TransferInfoOld:

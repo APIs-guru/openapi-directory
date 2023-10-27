@@ -1272,7 +1272,7 @@ components:
       description: Specifies how metastore metadata should be integrated with the Data Catalog service.
       properties:
         enabled:
-          description: Optional. Defines whether the metastore metadata should be synced to Data Catalog. The default value is to disable syncing metastore metadata to Data Catalog.
+          description: Defines whether the metastore metadata should be synced to Data Catalog. The default value is to disable syncing metastore metadata to Data Catalog.
           type: boolean
       type: object
     DatabaseDump:
@@ -1698,7 +1698,7 @@ components:
       properties:
         dataCatalogConfig:
           $ref: "#/components/schemas/DataCatalogConfig"
-          description: Optional. The integration config for the Data Catalog service.
+          description: The integration config for the Data Catalog service.
         dataplexConfig:
           $ref: "#/components/schemas/DataplexConfig"
           description: The integration config for the Dataplex service.
@@ -1985,7 +1985,7 @@ components:
           description: The one hour maintenance window of the metastore service. This specifies when the service can be restarted for maintenance purposes in UTC time. Maintenance window is not needed for services with the SPANNER database type.
         metadataIntegration:
           $ref: "#/components/schemas/MetadataIntegration"
-          description: Optional. The setting that defines how metastore metadata should be integrated with external services and systems.
+          description: The setting that defines how metastore metadata should be integrated with external services and systems.
         metadataManagementActivity:
           $ref: "#/components/schemas/MetadataManagementActivity"
           description: Output only. The metadata management activities of the metastore service.
