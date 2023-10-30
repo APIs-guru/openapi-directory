@@ -326,6 +326,12 @@ components:
         notificationsRule:
           $ref: "#/components/schemas/GoogleCloudBillingBudgetsV1NotificationsRule"
           description: Optional. Rules to apply to notifications sent based on budget spend and thresholds.
+        ownershipScope:
+          enum:
+            - OWNERSHIP_SCOPE_UNSPECIFIED
+            - ALL_USERS
+            - BILLING_ACCOUNT
+          type: string
         thresholdRules:
           description: Optional. Rules that trigger alerts (notifications of thresholds being crossed) when spend exceeds the specified percentages of the budget. Optional for `pubsubTopic` notifications. Required if using email notifications.
           items:

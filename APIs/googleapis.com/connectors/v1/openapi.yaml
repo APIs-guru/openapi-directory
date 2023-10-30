@@ -1647,6 +1647,11 @@ components:
             - STATE_UNSPECIFIED
             - REFRESHING
             - UPDATED
+            - REFRESHING_SCHEMA_METADATA
+            - UPDATED_SCHEMA_METADATA
+            - REFRESH_SCHEMA_METADATA_FAILED
+            - REFRESHING_FULL_SCHEMA
+            - UPDATED_FULL_SCHEMA
           readOnly: true
           type: string
         updateTime:
@@ -2064,6 +2069,9 @@ components:
         eventTypeId:
           description: Optional. Event type id of the event of current EventSubscription.
           type: string
+        jms:
+          $ref: "#/components/schemas/JMS"
+          description: Optional. JMS is the source for the event listener.
         name:
           description: "Required. Resource name of the EventSubscription. Format: projects/{project}/locations/{location}/connections/{connection}/eventSubscriptions/{event_subscription}"
           type: string
@@ -2207,6 +2215,13 @@ components:
         enrichmentSupported:
           description: Enrichment Supported.
           type: boolean
+        eventListenerType:
+          description: The type of the event listener for a specific connector.
+          enum:
+            - EVENT_LISTENER_TYPE_UNSPECIFIED
+            - WEBHOOK_LISTENER
+            - JMS_LISTENER
+          type: string
         isEventingSupported:
           description: Is Eventing Supported.
           type: boolean
@@ -2605,6 +2620,20 @@ components:
           type: boolean
         parameter:
           description: Name of the Parameter.
+          type: string
+      type: object
+    JMS:
+      description: JMS message denotes the source of the event
+      properties:
+        name:
+          description: Optional. Name of the JMS source. i.e. queueName or topicName
+          type: string
+        type:
+          description: Optional. Type of the JMS Source. i.e. Queue or Topic
+          enum:
+            - TYPE_UNSPECIFIED
+            - QUEUE
+            - TOPIC
           type: string
       type: object
     JsonSchema:

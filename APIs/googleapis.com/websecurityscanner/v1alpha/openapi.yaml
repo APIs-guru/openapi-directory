@@ -613,6 +613,9 @@ components:
             - INVALID_HEADER
             - MISSPELLED_SECURITY_HEADER_NAME
             - MISMATCHING_SECURITY_HEADER_VALUES
+            - ACCESSIBLE_GIT_REPOSITORY
+            - ACCESSIBLE_SVN_REPOSITORY
+            - ACCESSIBLE_ENV_FILE
           type: string
         frameUrl:
           description: If the vulnerability was originated from nested IFrame, the immediate parent IFrame is reported.
@@ -670,6 +673,9 @@ components:
             - INVALID_HEADER
             - MISSPELLED_SECURITY_HEADER_NAME
             - MISMATCHING_SECURITY_HEADER_VALUES
+            - ACCESSIBLE_GIT_REPOSITORY
+            - ACCESSIBLE_SVN_REPOSITORY
+            - ACCESSIBLE_ENV_FILE
           type: string
       type: object
     GoogleAccount:

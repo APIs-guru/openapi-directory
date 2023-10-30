@@ -1321,7 +1321,7 @@ components:
             - UNSUPPORTED
           type: string
         newPassword:
-          description: For commands of type RESET_PASSWORD, optionally specifies the new password.
+          description: "For commands of type RESET_PASSWORD, optionally specifies the new password. Note: The new password must be at least 6 characters long if it is numeric in case of Android 14 devices. Else the command will fail with INVALID_VALUE."
           type: string
         resetPasswordFlags:
           description: For commands of type RESET_PASSWORD, optionally specifies flags.
@@ -2507,6 +2507,8 @@ components:
             - NO_LICENSES_REMAINING
             - NOT_ENROLLED
             - USER_INVALID
+            - NETWORK_ERROR_UNRELIABLE_CONNECTION
+            - INSUFFICIENT_STORAGE
           type: string
         nonComplianceReason:
           description: The reason the device is not in compliance with the setting.

@@ -30,6 +30,7 @@ info:
 externalDocs:
   url: https://developers.google.com/storage/docs/json_api/
 tags:
+  - name: anywhereCache
   - name: bucketAccessControls
   - name: buckets
   - name: channels
@@ -725,6 +726,357 @@ paths:
             - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - bucketAccessControls
+  /b/{bucket}/anywhereCache:
+    get:
+      description: Returns a list of Anywhere Cache instances of the bucket matching the criteria.
+      operationId: storage.anywhereCaches.list
+      parameters:
+        - description: Name of the partent bucket
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of items return in a single page of responses. Maximum 1000.
+          in: query
+          name: pageSize
+          schema:
+            minimum: 0
+            type: integer
+        - description: A previously-returned page token representing part of the larger set of results to view.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnywhereCaches"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_only
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - anywhereCache
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+  /b/{bucket}/anywhereCaches:
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Creates an Anywhere Cache instance.
+      operationId: storage.anywhereCaches.insert
+      parameters:
+        - description: Name of the partent bucket
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnywhereCache"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - anywhereCache
+  /b/{bucket}/anywhereCaches/{anywhereCacheId}:
+    get:
+      description: Returns the metadata of an Anywhere Cache instance.
+      operationId: storage.anywhereCaches.get
+      parameters:
+        - description: Name of the partent bucket
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: The ID of requested Anywhere Cache instance.
+          in: path
+          name: anywhereCacheId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnywhereCache"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_only
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - anywhereCache
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    patch:
+      description: Updates the config(ttl and admissionPolicy) of an Anywhere Cache instance.
+      operationId: storage.anywhereCaches.update
+      parameters:
+        - description: Name of the partent bucket
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: The ID of requested Anywhere Cache instance.
+          in: path
+          name: anywhereCacheId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnywhereCache"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - anywhereCache
+  /b/{bucket}/anywhereCaches/{anywhereCacheId}/disable:
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Disables an Anywhere Cache instance.
+      operationId: storage.anywhereCaches.disable
+      parameters:
+        - description: Name of the partent bucket
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: The ID of requested Anywhere Cache instance.
+          in: path
+          name: anywhereCacheId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnywhereCache"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - anywhereCache
+  /b/{bucket}/anywhereCaches/{anywhereCacheId}/pause:
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Pauses an Anywhere Cache instance.
+      operationId: storage.anywhereCaches.pause
+      parameters:
+        - description: Name of the partent bucket
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: The ID of requested Anywhere Cache instance.
+          in: path
+          name: anywhereCacheId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnywhereCache"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - anywhereCache
+  /b/{bucket}/anywhereCaches/{anywhereCacheId}/resume:
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Resumes a paused or disabled Anywhere Cache instance.
+      operationId: storage.anywhereCaches.resume
+      parameters:
+        - description: Name of the partent bucket
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: The ID of requested Anywhere Cache instance.
+          in: path
+          name: anywhereCacheId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnywhereCache"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - anywhereCache
   /b/{bucket}/defaultObjectAcl:
     get:
       description: Retrieves default object ACL entries on the specified bucket.
@@ -4059,6 +4411,63 @@ components:
       schema:
         type: string
   schemas:
+    AnywhereCache:
+      description: An Anywhere Cache instance.
+      properties:
+        admissionPolicy:
+          description: The cache-level entry admission policy.
+          type: string
+        anywhereCacheId:
+          description: The ID of the Anywhere cache instance.
+          type: string
+        bucket:
+          description: The name of the bucket containing this cache instance.
+          type: string
+        createTime:
+          description: The creation time of the cache instance in RFC 3339 format.
+          format: date-time
+          type: string
+        id:
+          description: The ID of the resource, including the project number, bucket name and anywhere cache ID.
+          type: string
+        kind:
+          default: storage#anywhereCache
+          description: The kind of item this is. For Anywhere Cache, this is always storage#anywhereCache.
+          type: string
+        pendingUpdate:
+          description: True if the cache instance has an active Update long-running operation.
+          type: boolean
+        selfLink:
+          description: The link to this cache instance.
+          type: string
+        state:
+          description: The current state of the cache instance.
+          type: string
+        ttl:
+          description: 'The TTL of all cache entries in whole seconds. e.g., "7200s". '
+          format: google-duration
+          type: string
+        updateTime:
+          description: The modification time of the cache instance metadata in RFC 3339 format.
+          format: date-time
+          type: string
+      type: object
+    AnywhereCaches:
+      description: A list of Anywhere Caches.
+      properties:
+        items:
+          description: The list of items.
+          items:
+            $ref: "#/components/schemas/AnywhereCache"
+          type: array
+        kind:
+          default: storage#anywhereCaches
+          description: The kind of item this is. For lists of Anywhere Caches, this is always storage#anywhereCaches.
+          type: string
+        nextPageToken:
+          description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+          type: string
+      type: object
     Bucket:
       description: A bucket.
       properties:
@@ -4335,7 +4744,7 @@ components:
               format: date-time
               type: string
             retentionDurationSeconds:
-              description: The period of time in seconds, that soft-deleted objects in the bucket will be retained and cannot be permanently deleted.
+              description: The duration in seconds that soft-deleted objects in the bucket will be retained and cannot be permanently deleted.
               format: int64
               type: string
           type: object

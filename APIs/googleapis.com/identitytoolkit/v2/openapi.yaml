@@ -1644,21 +1644,6 @@ components:
           description: Do not use. The `token` response type is not supported at the moment.
           type: boolean
       type: object
-    GoogleCloudIdentitytoolkitAdminV2PasskeyConfig:
-      description: Configuration for signing in users using passkeys.
-      properties:
-        expectedOrigins:
-          description: Required. The website or app origins associated with the customer's sites or apps. Only challenges signed from these origins will be allowed to sign in with passkeys.
-          items:
-            type: string
-          type: array
-        name:
-          description: Required. The name of the PasskeyConfig resource.
-          type: string
-        rpId:
-          description: Required. The relying party ID for the purpose of passkeys verifications. This cannot be changed once created.
-          type: string
-      type: object
     GoogleCloudIdentitytoolkitAdminV2PasswordPolicyConfig:
       description: The configuration for the password policy on the project.
       properties:
