@@ -342,12 +342,6 @@ components:
           description: Output only. Resource name of the budget. The resource name implies the scope of a budget. Values are of the form `billingAccounts/{billingAccountId}/budgets/{budgetId}`.
           readOnly: true
           type: string
-        ownershipScope:
-          enum:
-            - OWNERSHIP_SCOPE_UNSPECIFIED
-            - ALL_USERS
-            - BILLING_ACCOUNT
-          type: string
         thresholdRules:
           description: Optional. Rules that trigger alerts (notifications of thresholds being crossed) when spend exceeds the specified percentages of the budget. Optional for `pubsubTopic` notifications. Required if using email notifications.
           items:

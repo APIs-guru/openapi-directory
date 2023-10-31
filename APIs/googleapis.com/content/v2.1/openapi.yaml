@@ -8188,7 +8188,10 @@ components:
       type: object
     AccountIdentityType:
       description: The account identity type used to specify attributes.
-      properties: {}
+      properties:
+        selfIdentified:
+          description: Optional. Indicates that the business identifies itself with a given identity type. Setting this field does not automatically mean eligibility for promotions.
+          type: boolean
       type: object
     AccountImageImprovements:
       description: "This improvement will attempt to automatically correct submitted images if they don't meet the [image requirements](https://support.google.com/merchants/answer/6324350), for example, removing overlays. If successful, the image will be replaced and approved. This improvement is only applied to images of disapproved offers. For more information see: [Automatic image improvements](https://support.google.com/merchants/answer/9242973)"

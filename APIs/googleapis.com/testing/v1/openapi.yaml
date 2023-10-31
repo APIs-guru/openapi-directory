@@ -1942,6 +1942,11 @@ components:
           items:
             $ref: "#/components/schemas/DeviceFile"
           type: array
+        initialSetupApks:
+          description: Optional. Initial setup APKs to install before the app under test is installed. Currently capped at 100.
+          items:
+            $ref: "#/components/schemas/Apk"
+          type: array
         networkProfile:
           description: The network traffic profile used for running the test. Available network profiles can be queried by using the NETWORK_CONFIGURATION environment type when calling TestEnvironmentDiscoveryService.GetTestEnvironmentCatalog.
           type: string

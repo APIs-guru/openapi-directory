@@ -2885,7 +2885,18 @@ components:
           description: The unique identifier of the Terms of Service document.
           type: string
         type:
-          description: The type of Terms of Service.
+          description: |+
+            The type of Terms of Service.
+
+            Possible values:
+            *  **adyenForPlatformsManage**
+            *  **adyenIssuing**
+            *  **adyenForPlatformsAdvanced**
+            *  **adyenCapital**
+            *  **adyenAccount**
+            *  **adyenCard**
+            *  **adyenFranchisee**
+
           enum:
             - adyenAccount
             - adyenCapital
