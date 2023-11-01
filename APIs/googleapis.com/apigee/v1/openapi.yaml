@@ -237,7 +237,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategory"
+                $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategoryResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -277,13 +277,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategoryData"
+              $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategory"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategory"
+                $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategoryResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1713,13 +1713,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategoryData"
+              $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategory"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategory"
+                $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategoryResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -5242,26 +5242,7 @@ components:
           type: string
       type: object
     GoogleCloudApigeeV1ApiCategory:
-      description: The API category resource wrapped with response status, error_code, etc.
-      properties:
-        data:
-          $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategoryData"
-          description: Details of the category.
-        errorCode:
-          description: Unique error code for the request, if any.
-          type: string
-        message:
-          description: Description of the operation.
-          type: string
-        requestId:
-          description: Unique ID of the request.
-          type: string
-        status:
-          description: Status of the operation.
-          type: string
-      type: object
-    GoogleCloudApigeeV1ApiCategoryData:
-      description: "`ApiCategoryData` represents an API category. Catalog items can be tagged with API categories; users viewing the API catalog in the portal will have the option to browse the catalog by category."
+      description: "`ApiCategory` represents an API category. [Catalog items](/apigee/docs/reference/apis/apigee/rest/v1/organizations.sites.apidocs) can be tagged with API categories; users viewing the API catalog in the portal will have the option to browse the catalog by category."
       properties:
         id:
           description: ID of the category (a UUID).
@@ -5275,6 +5256,25 @@ components:
         updateTime:
           description: Time the category was last modified in milliseconds since epoch.
           format: int64
+          type: string
+      type: object
+    GoogleCloudApigeeV1ApiCategoryResponse:
+      description: The API category resource wrapped with response status, error_code, etc.
+      properties:
+        data:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategory"
+          description: The API category resource.
+        errorCode:
+          description: Unique error code for the request, if any.
+          type: string
+        message:
+          description: Description of the operation.
+          type: string
+        requestId:
+          description: Unique ID of the request.
+          type: string
+        status:
+          description: Status of the operation.
           type: string
       type: object
     GoogleCloudApigeeV1ApiProduct:
@@ -7567,9 +7567,9 @@ components:
       description: The response for `ListApiCategoriesRequest`.
       properties:
         data:
-          description: Details of the categories.
+          description: The API category resources.
           items:
-            $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategoryData"
+            $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategory"
           type: array
         errorCode:
           description: Unique error code for the request, if any.

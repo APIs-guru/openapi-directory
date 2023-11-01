@@ -26,7 +26,6 @@ info:
   x-serviceName: communication-preferences
 tags:
   - name: Status
-  - name: Subscription_Status
   - name: Definition
 paths:
   /communication-preferences/v3/definitions:
@@ -83,36 +82,6 @@ paths:
       summary: Get subscription definitions
       tags:
         - Definition
-  /communication-preferences/v3/status/email/bulk:
-    post:
-      operationId: post-/communication-preferences/v3/status/email/bulk
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              items:
-                type: string
-              type: array
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PublicBulkSubscriptionStatusesResponse"
-          description: successful operation
-        default:
-          $ref: "#/components/responses/Error"
-      security:
-        - private_apps_legacy: []
-        - oauth2_legacy:
-            - communication_preferences.read_write
-        - private_apps_legacy: []
-        - oauth2_legacy:
-            - communication_preferences.read
-      tags:
-        - Subscription_Status
   /communication-preferences/v3/status/email/{emailAddress}:
     get:
       description: Returns a list of subscriptions and their status for a given contact.
@@ -367,17 +336,6 @@ components:
           type: string
       required:
         - message
-      type: object
-    PublicBulkSubscriptionStatusesResponse:
-      properties:
-        recipientToSubscriptionStatuses:
-          additionalProperties:
-            items:
-              $ref: "#/components/schemas/PublicSubscriptionStatus"
-            type: array
-          type: object
-      required:
-        - recipientToSubscriptionStatuses
       type: object
     PublicSubscriptionStatus:
       description: The status of a subscription for a contact.

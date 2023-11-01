@@ -1344,13 +1344,13 @@ components:
           type: string
       type: object
     GoogleCloudDocumentaiUiv1beta3ResyncDatasetMetadata:
-      description: The metadata proto of ResyncDataset method.
+      description: The metadata proto of `ResyncDataset` method.
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
           description: The basic metadata of the long-running operation.
         datasetResyncStatuses:
-          description: The list of dataset resync statuses. Not checked when `dataset_documents` is specified in ResyncRequest.
+          description: The list of dataset resync statuses. Not checked when ResyncDatasetRequest.dataset_documents is specified.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3ResyncDatasetMetadataDatasetResyncStatus"
           type: array
@@ -1371,7 +1371,7 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/GoogleRpcStatus"
-          description: The status of resyncing the dataset with regards to the detected inconsistency. Empty if `validate_only` is true in the request.
+          description: The status of resyncing the dataset with regards to the detected inconsistency. Empty if ResyncDatasetRequest.validate_only is `true`.
       type: object
     GoogleCloudDocumentaiUiv1beta3ResyncDatasetMetadataIndividualDocumentResyncStatus:
       description: Resync status for each document per inconsistency type.
@@ -1389,7 +1389,7 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/GoogleRpcStatus"
-          description: The status of resyncing the document with regards to the detected inconsistency. Empty if `validate_only` is true in the request.
+          description: The status of resyncing the document with regards to the detected inconsistency. Empty if ResyncDatasetRequest.validate_only is `true`.
       type: object
     GoogleCloudDocumentaiUiv1beta3ResyncDatasetResponse:
       description: The response proto of ResyncDataset method.
@@ -5453,7 +5453,8 @@ components:
       properties:
         documentWarehouseConfig:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DatasetDocumentWarehouseConfig"
-          description: Optional. Document AI Warehouse-based dataset configuration.
+          deprecated: true
+          description: Optional. Derepcated. Warehouse-based dataset configuration is not supported today.
         gcsManagedConfig:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DatasetGCSManagedConfig"
           description: Optional. User-managed Cloud Storage dataset configuration. Use this configuration if the dataset documents are stored under a user-managed Cloud Storage location.

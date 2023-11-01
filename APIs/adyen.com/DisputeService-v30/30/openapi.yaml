@@ -230,68 +230,6 @@ paths:
       x-groupName: General
       x-methodName: deleteDisputeDefenseDocument
       x-sortIndex: 1
-  /downloadDisputeDefenseDocument:
-    post:
-      description: Downloads a specific dispute defense document that was supplied earlier.
-      operationId: post-downloadDisputeDefenseDocument
-      requestBody:
-        content:
-          application/json:
-            examples:
-              download-dispute-defense-document:
-                $ref: "#/components/examples/post-downloadDisputeDefenseDocument-download-dispute-defense-document"
-            schema:
-              $ref: "#/components/schemas/DownloadDefenseDocumentRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                download-dispute-defense-document:
-                  $ref: "#/components/examples/post-downloadDisputeDefenseDocument-download-dispute-defense-document-200"
-              schema:
-                $ref: "#/components/schemas/DownloadDefenseDocumentResponse"
-          description: OK - the request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceError"
-          description: Bad Request - a problem reading or understanding the request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceError"
-          description: Unauthorized - authentication required.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceError"
-          description: Forbidden - insufficient permissions to process the request.
-        "422":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceError"
-          description: Unprocessable Entity - a request validation error.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceError"
-          description: Internal Server Error - the server could not process the request.
-      security:
-        - BasicAuth: []
-        - ApiKeyAuth: []
-      summary: Download a defense document
-      tags:
-        - General
-      x-addedInVersion: "1"
-      x-groupName: General
-      x-methodName: downloadDisputeDefenseDocument
-      x-sortIndex: 1
   /retrieveApplicableDefenseReasons:
     post:
       description: Returns a list of all applicable defense reasons to defend a specific dispute.
@@ -447,17 +385,6 @@ components:
         merchantAccountCode: YOUR_MERCHANT_ACCOUNT
     post-deleteDisputeDefenseDocument-delete-dispute-defense-document-200:
       summary: Dispute defense document deleted
-      value:
-        disputeServiceResult:
-          success: true
-    post-downloadDisputeDefenseDocument-download-dispute-defense-document:
-      summary: Download a dispute defense document that was supplied earlier
-      value:
-        defenseDocumentType: DefenseMaterial
-        disputePspReference: DZ4DPSHB4WD2WN82
-        merchantAccountCode: YOUR_MERCHANT_ACCOUNT
-    post-downloadDisputeDefenseDocument-download-dispute-defense-document-200:
-      summary: Dispute defense document downloaded
       value:
         disputeServiceResult:
           success: true
@@ -687,48 +614,6 @@ components:
           type: boolean
       required:
         - success
-      type: object
-    DownloadDefenseDocumentRequest:
-      properties:
-        defenseDocumentType:
-          description: The document type code of the defense document.
-          type: string
-        disputePspReference:
-          description: The PSP reference assigned to the dispute.
-          type: string
-        merchantAccountCode:
-          description: The merchant account identifier, for which you want to process the dispute transaction.
-          type: string
-      required:
-        - merchantAccountCode
-        - disputePspReference
-        - defenseDocumentType
-      type: object
-    DownloadDefenseDocumentResponse:
-      properties:
-        content:
-          contentEncoding: base64
-          description: The content of the defense document in Base64 binary format. Must be encoded in the format that is specified in the `contentType` field.
-          type: string
-        contentType:
-          description: |-
-            The content type of the dispute defense document.
-
-            Possible values: 
-
-            * **image/jpg**
-
-            * **image/jpeg**
-
-            * **image/tiff**
-
-            * **application/pdf**
-          type: string
-        disputeServiceResult:
-          $ref: "#/components/schemas/DisputeServiceResult"
-          description: The result of the dispute service.
-      required:
-        - disputeServiceResult
       type: object
     ServiceError:
       properties:

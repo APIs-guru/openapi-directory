@@ -1632,13 +1632,13 @@ components:
           type: string
       type: object
     GoogleCloudDocumentaiUiv1beta3ResyncDatasetMetadata:
-      description: The metadata proto of ResyncDataset method.
+      description: The metadata proto of `ResyncDataset` method.
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
           description: The basic metadata of the long-running operation.
         datasetResyncStatuses:
-          description: The list of dataset resync statuses. Not checked when `dataset_documents` is specified in ResyncRequest.
+          description: The list of dataset resync statuses. Not checked when ResyncDatasetRequest.dataset_documents is specified.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3ResyncDatasetMetadataDatasetResyncStatus"
           type: array
@@ -1659,7 +1659,7 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/GoogleRpcStatus"
-          description: The status of resyncing the dataset with regards to the detected inconsistency. Empty if `validate_only` is true in the request.
+          description: The status of resyncing the dataset with regards to the detected inconsistency. Empty if ResyncDatasetRequest.validate_only is `true`.
       type: object
     GoogleCloudDocumentaiUiv1beta3ResyncDatasetMetadataIndividualDocumentResyncStatus:
       description: Resync status for each document per inconsistency type.
@@ -1677,7 +1677,7 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/GoogleRpcStatus"
-          description: The status of resyncing the document with regards to the detected inconsistency. Empty if `validate_only` is true in the request.
+          description: The status of resyncing the document with regards to the detected inconsistency. Empty if ResyncDatasetRequest.validate_only is `true`.
       type: object
     GoogleCloudDocumentaiUiv1beta3ResyncDatasetResponse:
       description: The response proto of ResyncDataset method.
@@ -4214,7 +4214,8 @@ components:
       properties:
         documentWarehouseConfig:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DatasetDocumentWarehouseConfig"
-          description: Optional. Document AI Warehouse-based dataset configuration.
+          deprecated: true
+          description: Optional. Derepcated. Warehouse-based dataset configuration is not supported today.
         gcsManagedConfig:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DatasetGCSManagedConfig"
           description: Optional. User-managed Cloud Storage dataset configuration. Use this configuration if the dataset documents are stored under a user-managed Cloud Storage location.
@@ -4503,7 +4504,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentId"
           description: Document identifier.
         labelingState:
-          description: Labelling state of the document.
+          description: Labeling state of the document.
           enum:
             - DOCUMENT_LABELING_STATE_UNSPECIFIED
             - DOCUMENT_LABELED
@@ -5720,10 +5721,10 @@ components:
           description: A page token, received from a previous `ListDocuments` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListDocuments` must match the call that provided the page token.
           type: string
         returnTotalSize:
-          description: Optional. Controls if the ListDocuments request requires a total size of matched documents. See ListDocumentsResponse.total_size. Enabling this flag may adversely impact performance. Defaults to false.
+          description: Optional. Controls if the request requires a total size of matched documents. See ListDocumentsResponse.total_size. Enabling this flag may adversely impact performance. Defaults to false.
           type: boolean
         skip:
-          description: Optional. Number of results to skip beginning from the `page_token` if provided. https://google.aip.dev/158#skipping-results. It must be a non-negative integer. Negative values wil be rejected. Note that this is not the number of pages to skip. If this value causes the cursor to move past the end of results, `ListDocumentsResponse.document_metadata` and `ListDocumentsResponse.next_page_token` will be empty.
+          description: Optional. Number of results to skip beginning from the `page_token` if provided. https://google.aip.dev/158#skipping-results. It must be a non-negative integer. Negative values will be rejected. Note that this is not the number of pages to skip. If this value causes the cursor to move past the end of results, ListDocumentsResponse.document_metadata and ListDocumentsResponse.next_page_token will be empty.
           format: int32
           type: integer
       type: object
@@ -5735,7 +5736,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentMetadata"
           type: array
         nextPageToken:
-          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          description: A token, which can be sent as ListDocumentsRequest.page_token to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
         totalSize:
           description: Total count of documents queried.

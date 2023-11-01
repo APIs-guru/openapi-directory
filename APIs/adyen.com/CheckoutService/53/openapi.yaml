@@ -11404,7 +11404,7 @@ components:
             - Success
           type: string
         serviceError:
-          $ref: "#/components/schemas/ServiceError-2"
+          $ref: "#/components/schemas/ServiceErrorDetails"
           description: The type of the error.
         shopperLocale:
           description: The shopperLocale value provided in the payment request.
@@ -12219,7 +12219,7 @@ components:
           format: int32
           type: integer
       type: object
-    ServiceError-2:
+    ServiceErrorDetails:
       properties:
         errorCode:
           type: string
