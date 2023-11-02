@@ -1310,6 +1310,26 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. A filter specifying constraints of a list operation. All fields in the PartnerTenant message are supported. For example, the following query will return the PartnerTenants with displayName "test-tenant" organizations/${ORG_ID}/locations/${LOCATION}/partnerTenants?filter=displayName="test-tenant" Nested fields are also supported. The follow query will return PartnerTenants with internal_tenant_id "1234" organizations/${ORG_ID}/locations/${LOCATION}/partnerTenants?filter=partnerMetadata.internalTenantId="1234" For more information, please refer to https://google.aip.dev/160.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Specifies the ordering of results. See [Sorting order](https://cloud.google.com/apis/design/design_patterns#sorting_order) for more information.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return. If not specified, a default value of 50 will be used by the service. Regardless of the page_size value, the response may include a partial list and a caller should only rely on response's next_page_token to determine if there are more instances left to be queried.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous ListPartnerTenantsResponse, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -1379,6 +1399,26 @@ paths:
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: Optional. A filter specifying constraints of a list operation. All fields in the ProxyConfig message are supported. For example, the following query will return the ProxyConfigs with displayName "test-config" organizations/${ORG_ID}/locations/global/partnerTenants/${PARTNER_TENANT_ID}/proxyConfigs?filter=displayName="test-config" Nested fields are also supported. The follow query will return ProxyConfigs with pacUri "example.com/pac.pac" organizations/${ORG_ID}/locations/global/partnerTenants/${PARTNER_TENANT_ID}/proxyConfigs?filter=routingInfo.pacUri="example.com/pac.pac" For more information, please refer to https://google.aip.dev/160.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Specifies the ordering of results. See [Sorting order](https://cloud.google.com/apis/design/design_patterns#sorting_order) for more information.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return. If not specified, a default value of 50 will be used by the service. Regardless of the page_size value, the response may include a partial list and a caller should only rely on response's next_page_token to determine if there are more instances left to be queried.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous ListProxyConfigsRequest, if any.
+          in: query
+          name: pageToken
           schema:
             type: string
       responses:
@@ -2707,6 +2747,9 @@ components:
     GoogleCloudBeyondcorpPartnerservicesV1alphaListPartnerTenantsResponse:
       description: Message for response to listing PartnerTenants.
       properties:
+        nextPageToken:
+          description: A token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
         partnerTenants:
           description: The list of PartnerTenant objects.
           items:
@@ -2716,6 +2759,9 @@ components:
     GoogleCloudBeyondcorpPartnerservicesV1alphaListProxyConfigsResponse:
       description: Message for response to listing ProxyConfigs.
       properties:
+        nextPageToken:
+          description: A token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
         proxyConfigs:
           description: The list of ProxyConfig objects.
           items:
@@ -3128,9 +3174,8 @@ components:
           description: Required. Unique resource name of the Subscription. The name is ignored when creating a subscription.
           type: string
         seatCount:
-          description: Output only. Number of seats in the subscription.
+          description: Optional. Number of seats in the subscription.
           format: int64
-          readOnly: true
           type: string
         sku:
           description: Required. SKU of subscription.

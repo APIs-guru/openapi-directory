@@ -515,6 +515,164 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1/{parent}/automationRuns:
+    get:
+      description: Lists AutomationRuns in a given project and location.
+      operationId: clouddeploy.projects.locations.deliveryPipelines.automationRuns.list
+      parameters:
+        - description: Required. The parent, which owns this collection of automationRuns. Format must be projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filter automationRuns to be returned. All fields can be used in the filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Field to sort by.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: The maximum number of automationRuns to return. The service may return fewer than this value. If unspecified, at most 50 automationRuns will be returned. The maximum value is 1000; values above 1000 will be set to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListAutomationRuns` call. Provide this to retrieve the subsequent page. When paginating, all other provided parameters match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAutomationRunsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1/{parent}/automations:
+    get:
+      description: Lists Automations in a given project and location.
+      operationId: clouddeploy.projects.locations.deliveryPipelines.automations.list
+      parameters:
+        - description: Required. The parent, which owns this collection of automations. Format must be projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filter automations to be returned. All fields can be used in the filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Field to sort by.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: The maximum number of automations to return. The service may return fewer than this value. If unspecified, at most 50 automations will be returned. The maximum value is 1000; values above 1000 will be set to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListAutomations` call. Provide this to retrieve the subsequent page. When paginating, all other provided parameters match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAutomationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new Automation in a given project and location.
+      operationId: clouddeploy.projects.locations.deliveryPipelines.automations.create
+      parameters:
+        - description: Required. The parent collection in which the `Automation` should be created. Format should be projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. ID of the `Automation`.
+          in: query
+          name: automationId
+          schema:
+            type: string
+        - description: Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+        - description: Optional. If set to true, the request is validated and the user is provided with an expected result, but no actual change is made.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Automation"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{parent}/deliveryPipelines:
     get:
       description: Lists DeliveryPipelines in a given project and location.
@@ -1291,6 +1449,27 @@ components:
           readOnly: true
           type: string
       type: object
+    AdvanceRolloutOperation:
+      description: Contains the information of an automated advance-rollout operation.
+      properties:
+        destinationPhase:
+          description: Output only. The phase to which the rollout will be advanced to.
+          readOnly: true
+          type: string
+        rollout:
+          description: Output only. The name of the rollout that initiates the `AutomationRun`.
+          readOnly: true
+          type: string
+        sourcePhase:
+          description: Output only. The phase of a deployment that initiated the operation.
+          readOnly: true
+          type: string
+        wait:
+          description: Output only. How long the operation will be paused.
+          format: google-duration
+          readOnly: true
+          type: string
+      type: object
     AdvanceRolloutRequest:
       description: The request object used by `AdvanceRollout`.
       properties:
@@ -1301,6 +1480,26 @@ components:
     AdvanceRolloutResponse:
       description: The response object from `AdvanceRollout`.
       properties: {}
+      type: object
+    AdvanceRolloutRule:
+      description: The `AdvanceRollout` automation rule will automatically advance a successful Rollout to the next phase.
+      properties:
+        condition:
+          $ref: "#/components/schemas/AutomationRuleCondition"
+          description: Output only. Information around the state of the Automation rule.
+          readOnly: true
+        id:
+          description: Required. ID of the rule. This id must be unique in the `Automation` resource to which this rule belongs. The format is a-z{0,62}.
+          type: string
+        sourcePhases:
+          description: "Optional. Proceeds only after phase name matched any one in the list. This value must consist of lower-case letters, numbers, and hyphens, start with a letter and end with a letter or a number, and have a max length of 63 characters. In other words, it must match the following regex: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`."
+          items:
+            type: string
+          type: array
+        wait:
+          description: Optional. How long to wait after a rollout is finished.
+          format: google-duration
+          type: string
       type: object
     AnthosCluster:
       description: Information specifying an Anthos Cluster.
@@ -1349,6 +1548,58 @@ components:
             - DATA_READ
           type: string
       type: object
+    Automation:
+      description: An `Automation` resource in the Cloud Deploy API. An `Automation` enables the automation of manually driven actions for a Delivery Pipeline, which includes Release promotion amongst Targets, Rollout repair and Rollout deployment strategy advancement. The intention of Automation is to reduce manual intervention in the continuous delivery process.
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: "Optional. User annotations. These attributes can only be set and used by the user, and not by Cloud Deploy. Annotations must meet the following constraints: * Annotations are key/value pairs. * Valid annotation keys have two segments: an optional prefix and name, separated by a slash (/). * The name segment is required and must be 63 characters or less, beginning and ending with an alphanumeric character ([a-z0-9A-Z]) with dashes (-), underscores (_), dots (.), and alphanumerics between. * The prefix is optional. If specified, the prefix must be a DNS subdomain: a series of DNS labels separated by dots(.), not longer than 253 characters in total, followed by a slash (/). See https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/#syntax-and-character-set for more details."
+          type: object
+        createTime:
+          description: Output only. Time at which the automation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. Description of the `Automation`. Max length is 255 characters.
+          type: string
+        etag:
+          description: Optional. The weak etag of the `Automation` resource. This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: "Optional. Labels are attributes that can be set and used by both the user and by Cloud Deploy. Labels must meet the following constraints: * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. * All characters must use UTF-8 encoding, and international characters are allowed. * Keys must start with a lowercase letter or international character. * Each resource is limited to a maximum of 64 labels. Both keys and values are additionally constrained to be <= 63 characters."
+          type: object
+        name:
+          description: Output only. Name of the `Automation`. Format is projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}/automations/{automation}.
+          readOnly: true
+          type: string
+        rules:
+          description: "Required. List of Automation rules associated with the Automation resource. Must have at least one rule and limited to 250 rules per Delivery Pipeline. Note: the order of the rules here is not the same as the order of execution."
+          items:
+            $ref: "#/components/schemas/AutomationRule"
+          type: array
+        selector:
+          $ref: "#/components/schemas/AutomationResourceSelector"
+          description: Required. Selected resources to which the automation will be applied.
+        serviceAccount:
+          description: Required. Email address of the user-managed IAM service account that creates Cloud Deploy release and rollout resources.
+          type: string
+        suspended:
+          description: Optional. When Suspended, automation is deactivated from execution.
+          type: boolean
+        uid:
+          description: Output only. Unique identifier of the `Automation`.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Time at which the automation was updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     AutomationEvent:
       description: Payload proto for "clouddeploy.googleapis.com/automation" Platform Log event that describes the Automation related events.
       properties:
@@ -1382,6 +1633,134 @@ components:
             - false
             - false
             - true
+      type: object
+    AutomationResourceSelector:
+      description: AutomationResourceSelector contains the information to select the resources to which an Automation is going to be applied.
+      properties:
+        targets:
+          description: Contains attributes about a target.
+          items:
+            $ref: "#/components/schemas/TargetAttribute"
+          type: array
+      type: object
+    AutomationRolloutMetadata:
+      description: AutomationRolloutMetadata contains Automation-related actions that were performed on a rollout.
+      properties:
+        advanceAutomationRuns:
+          description: Output only. The IDs of the AutomationRuns initiated by an advance rollout rule.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        promoteAutomationRun:
+          description: Output only. The ID of the AutomationRun initiated by a promote release rule.
+          readOnly: true
+          type: string
+        repairAutomationRuns:
+          description: Output only. The IDs of the AutomationRuns initiated by a repair rollout rule.
+          items:
+            type: string
+          readOnly: true
+          type: array
+      type: object
+    AutomationRule:
+      description: "`AutomationRule` defines the automation activities."
+      properties:
+        advanceRolloutRule:
+          $ref: "#/components/schemas/AdvanceRolloutRule"
+          description: Optional. The `AdvanceRolloutRule` will automatically advance a successful Rollout.
+        promoteReleaseRule:
+          $ref: "#/components/schemas/PromoteReleaseRule"
+          description: Optional. `PromoteReleaseRule` will automatically promote a release from the current target to a specified target.
+        repairRolloutRule:
+          $ref: "#/components/schemas/RepairRolloutRule"
+          description: Optional. The `RepairRolloutRule` will automatically repair a failed rollout.
+      type: object
+    AutomationRuleCondition:
+      description: "`AutomationRuleCondition` contains conditions relevant to an `Automation` rule."
+      properties:
+        targetsPresentCondition:
+          $ref: "#/components/schemas/TargetsPresentCondition"
+          description: Optional. Details around targets enumerated in the rule.
+      type: object
+    AutomationRun:
+      description: An `AutomationRun` resource in the Cloud Deploy API. An `AutomationResource` represents an automation execution instance of an automation rule.
+      properties:
+        advanceRolloutOperation:
+          $ref: "#/components/schemas/AdvanceRolloutOperation"
+          description: Output only. Advances a rollout to the next phase.
+          readOnly: true
+        automationId:
+          description: Output only. The ID of the automation that initiated the operation.
+          readOnly: true
+          type: string
+        automationSnapshot:
+          $ref: "#/components/schemas/Automation"
+          description: Output only. Snapshot of the Automation taken at AutomationRun creation time.
+          readOnly: true
+        createTime:
+          description: Output only. Time at which the `AutomationRun` was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        etag:
+          description: Output only. The weak etag of the `AutomationRun` resource. This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
+          readOnly: true
+          type: string
+        expireTime:
+          description: Output only. Time the `AutomationRun` will expire. An `AutomationRun` will expire after 14 days from its creation date.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: Output only. Name of the `AutomationRun`. Format is projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}/automationRuns/{automation_run}.
+          readOnly: true
+          type: string
+        promoteReleaseOperation:
+          $ref: "#/components/schemas/PromoteReleaseOperation"
+          description: Output only. Promotes a release to a specified 'Target'.
+          readOnly: true
+        repairRolloutOperation:
+          $ref: "#/components/schemas/RepairRolloutOperation"
+          description: Output only. Repairs a failed 'Rollout'.
+          readOnly: true
+        ruleId:
+          description: Output only. The ID of the automation rule that initiated the operation.
+          readOnly: true
+          type: string
+        serviceAccount:
+          description: Output only. Email address of the user-managed IAM service account that performs the operations against Cloud Deploy resources.
+          readOnly: true
+          type: string
+        state:
+          description: Output only. Current state of the `AutomationRun`.
+          enum:
+            - STATE_UNSPECIFIED
+            - SUCCEEDED
+            - CANCELLED
+            - FAILED
+            - IN_PROGRESS
+            - PENDING
+          readOnly: true
+          type: string
+        stateDescription:
+          description: Output only. Explains the current state of the `AutomationRun`. Present only an explanation is needed.
+          readOnly: true
+          type: string
+        targetId:
+          description: Output only. The ID of the target that represents the promotion stage that initiates the `AutomationRun`. The value of this field is the last segment of a target name.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Time at which the automationRun was updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+        waitUntilTime:
+          description: Output only. Earliest time the `AutomationRun` will attempt to resume. Wait-time is configured by `wait` in automation rule.
+          format: google-datetime
+          readOnly: true
+          type: string
       type: object
     AutomationRunEvent:
       description: Payload proto for "clouddeploy.googleapis.com/automation_run" Platform Log event that describes the AutomationRun related events.
@@ -1482,6 +1861,14 @@ components:
         verify:
           description: Whether to run verify tests after each percentage deployment.
           type: boolean
+      type: object
+    CancelAutomationRunRequest:
+      description: The request object used by `CancelAutomationRun`.
+      properties: {}
+      type: object
+    CancelAutomationRunResponse:
+      description: The response object from `CancelAutomationRun`.
+      properties: {}
       type: object
     CancelOperationRequest:
       description: The request message for Operations.CancelOperation.
@@ -2066,6 +2453,40 @@ components:
           $ref: "#/components/schemas/ServiceNetworking"
           description: Kubernetes Service networking configuration.
       type: object
+    ListAutomationRunsResponse:
+      description: The response object from `ListAutomationRuns`.
+      properties:
+        automationRuns:
+          description: The `AutomationRuns` objects.
+          items:
+            $ref: "#/components/schemas/AutomationRun"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListAutomationsResponse:
+      description: The response object from `ListAutomations`.
+      properties:
+        automations:
+          description: The `Automations` objects.
+          items:
+            $ref: "#/components/schemas/Automation"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
     ListDeliveryPipelinesResponse:
       description: The response object from `ListDeliveryPipelines`.
       properties:
@@ -2201,6 +2622,10 @@ components:
     Metadata:
       description: Metadata includes information associated with a `Rollout`.
       properties:
+        automation:
+          $ref: "#/components/schemas/AutomationRolloutMetadata"
+          description: Output only. AutomationRolloutMetadata contains the information about the interactions between Automation service and this rollout.
+          readOnly: true
         cloudRun:
           $ref: "#/components/schemas/CloudRunMetadata"
           description: Output only. The name of the Cloud Run Service that is associated with a `Rollout`.
@@ -2486,6 +2911,48 @@ components:
           description: Required. Resource name of the Cloud Build worker pool to use. The format is `projects/{project}/locations/{location}/workerPools/{pool}`.
           type: string
       type: object
+    PromoteReleaseOperation:
+      description: Contains the information of an automated promote-release operation.
+      properties:
+        phase:
+          description: Output only. The starting phase of the rollout created by this operation.
+          readOnly: true
+          type: string
+        rollout:
+          description: Output only. The name of the rollout that initiates the `AutomationRun`.
+          readOnly: true
+          type: string
+        targetId:
+          description: Output only. The ID of the target that represents the promotion stage to which the release will be promoted. The value of this field is the last segment of a target name.
+          readOnly: true
+          type: string
+        wait:
+          description: Output only. How long the operation will be paused.
+          format: google-duration
+          readOnly: true
+          type: string
+      type: object
+    PromoteReleaseRule:
+      description: "`PromoteRelease` rule will automatically promote a release from the current target to a specified target."
+      properties:
+        condition:
+          $ref: "#/components/schemas/AutomationRuleCondition"
+          description: Output only. Information around the state of the Automation rule.
+          readOnly: true
+        destinationPhase:
+          description: Optional. The starting phase of the rollout created by this operation. Default to the first phase.
+          type: string
+        destinationTargetId:
+          description: 'Optional. The ID of the stage in the pipeline to which this `Release` is deploying. If unspecified, default it to the next stage in the promotion flow. The value of this field could be one of the following: * The last segment of a target name. It only needs the ID to determine if the target is one of the stages in the promotion sequence defined in the pipeline. * "@next", the next target in the promotion sequence.'
+          type: string
+        id:
+          description: Required. ID of the rule. This id must be unique in the `Automation` resource to which this rule belongs. The format is a-z{0,62}.
+          type: string
+        wait:
+          description: Optional. How long the release need to be paused until being promoted to the next target.
+          format: google-duration
+          type: string
+      type: object
     Release:
       description: A `Release` resource in the Cloud Deploy API. A `Release` defines a specific Skaffold configuration instance that can be deployed.
       properties:
@@ -2652,6 +3119,122 @@ components:
           description: Output only. Metadata associated with rendering for Cloud Run.
           readOnly: true
       type: object
+    RepairMode:
+      description: Configuration of the repair action.
+      properties:
+        retry:
+          $ref: "#/components/schemas/Retry"
+          description: Optional. Retries a failed job.
+        rollback:
+          $ref: "#/components/schemas/Rollback"
+          description: Optional. Rolls back a `Rollout`.
+      type: object
+    RepairPhase:
+      description: RepairPhase tracks the repair attempts that have been made for each `RepairMode` specified in the `Automation` resource.
+      properties:
+        retry:
+          $ref: "#/components/schemas/RetryPhase"
+          description: Output only. Records of the retry attempts for retry repair mode.
+          readOnly: true
+        rollback:
+          $ref: "#/components/schemas/RollbackAttempt"
+          description: Output only. Rollback attempt for rollback repair mode .
+          readOnly: true
+      type: object
+    RepairRolloutOperation:
+      description: Contains the information for an automated `repair rollout` operation.
+      properties:
+        currentRepairModeIndex:
+          description: Output only. The index of the current repair action in the repair sequence.
+          format: int64
+          readOnly: true
+          type: string
+        repairPhases:
+          description: Output only. Records of the repair attempts. Each repair phase may have multiple retry attempts or single rollback attempt.
+          items:
+            $ref: "#/components/schemas/RepairPhase"
+          readOnly: true
+          type: array
+        rollout:
+          description: Output only. The name of the rollout that initiates the `AutomationRun`.
+          readOnly: true
+          type: string
+      type: object
+    RepairRolloutRule:
+      description: The `RepairRolloutRule` automation rule will automatically repair a failed `Rollout`.
+      properties:
+        condition:
+          $ref: "#/components/schemas/AutomationRuleCondition"
+          description: Output only. Information around the state of the 'Automation' rule.
+          readOnly: true
+        id:
+          description: Required. ID of the rule. This id must be unique in the `Automation` resource to which this rule belongs. The format is a-z{0,62}.
+          type: string
+        jobs:
+          description: "Optional. Jobs to repair. Proceeds only after job name matched any one in the list, or for all jobs if unspecified or empty. The phase that includes the job must match the phase ID specified in `source_phase`. This value must consist of lower-case letters, numbers, and hyphens, start with a letter and end with a letter or a number, and have a max length of 63 characters. In other words, it must match the following regex: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`."
+          items:
+            type: string
+          type: array
+        repairModes:
+          description: Required. Defines the types of automatic repair actions for failed jobs.
+          items:
+            $ref: "#/components/schemas/RepairMode"
+          type: array
+        sourcePhases:
+          description: "Optional. Phases within which jobs are subject to automatic repair actions on failure. Proceeds only after phase name matched any one in the list, or for all phases if unspecified. This value must consist of lower-case letters, numbers, and hyphens, start with a letter and end with a letter or a number, and have a max length of 63 characters. In other words, it must match the following regex: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`."
+          items:
+            type: string
+          type: array
+      type: object
+    Retry:
+      description: Retries the failed job.
+      properties:
+        attempts:
+          description: Required. Total number of retries. Retry will skipped if set to 0; The minimum value is 1, and the maximum value is 10.
+          format: int64
+          type: string
+        backoffMode:
+          description: Optional. The pattern of how wait time will be increased. Default is linear. Backoff mode will be ignored if `wait` is 0.
+          enum:
+            - BACKOFF_MODE_UNSPECIFIED
+            - BACKOFF_MODE_LINEAR
+            - BACKOFF_MODE_EXPONENTIAL
+          type: string
+        wait:
+          description: Optional. How long to wait for the first retry. Default is 0, and the maximum value is 14d.
+          format: google-duration
+          type: string
+      type: object
+    RetryAttempt:
+      description: RetryAttempt represents an action of retrying the failed Cloud Deploy job.
+      properties:
+        attempt:
+          description: Output only. The index of this retry attempt.
+          format: int64
+          readOnly: true
+          type: string
+        state:
+          description: Output only. Valid state of this retry action.
+          enum:
+            - REPAIR_STATE_UNSPECIFIED
+            - REPAIR_STATE_SUCCEEDED
+            - REPAIR_STATE_CANCELLED
+            - REPAIR_STATE_FAILED
+            - REPAIR_STATE_IN_PROGRESS
+            - REPAIR_STATE_PENDING
+            - REPAIR_STATE_SKIPPED
+          readOnly: true
+          type: string
+        stateDesc:
+          description: Output only. Description of the state of the Retry.
+          readOnly: true
+          type: string
+        wait:
+          description: Output only. How long the operation will be paused.
+          format: google-duration
+          readOnly: true
+          type: string
+      type: object
     RetryJobRequest:
       description: RetryJobRequest is the request object used by `RetryJob`.
       properties:
@@ -2665,6 +3248,72 @@ components:
     RetryJobResponse:
       description: The response object from 'RetryJob'.
       properties: {}
+      type: object
+    RetryPhase:
+      description: RetryPhase contains the retry attempts and the metadata for initiating a new attempt.
+      properties:
+        attempts:
+          description: Output only. Detail of a retry action.
+          items:
+            $ref: "#/components/schemas/RetryAttempt"
+          readOnly: true
+          type: array
+        backoffMode:
+          description: Output only. The pattern of how the wait time of the retry attempt is calculated.
+          enum:
+            - BACKOFF_MODE_UNSPECIFIED
+            - BACKOFF_MODE_LINEAR
+            - BACKOFF_MODE_EXPONENTIAL
+          readOnly: true
+          type: string
+        jobId:
+          description: Output only. The job ID for the Job to retry.
+          readOnly: true
+          type: string
+        phaseId:
+          description: Output only. The phase ID of the phase that includes the job being retried.
+          readOnly: true
+          type: string
+        totalAttempts:
+          description: Output only. The number of attempts that have been made.
+          format: int64
+          readOnly: true
+          type: string
+      type: object
+    Rollback:
+      description: Rolls back a `Rollout`.
+      properties:
+        destinationPhase:
+          description: Optional. The starting phase ID for the `Rollout`. If unspecified, the `Rollout` will start in the stable phase.
+          type: string
+      type: object
+    RollbackAttempt:
+      description: RollbackAttempt represents an action of rolling back a Cloud Deploy 'Target'.
+      properties:
+        destinationPhase:
+          description: Output only. The phase to which the rollout will be rolled back to.
+          readOnly: true
+          type: string
+        rolloutId:
+          description: Output only. ID of the rollback `Rollout` to create.
+          readOnly: true
+          type: string
+        state:
+          description: Output only. Valid state of this rollback action.
+          enum:
+            - REPAIR_STATE_UNSPECIFIED
+            - REPAIR_STATE_SUCCEEDED
+            - REPAIR_STATE_CANCELLED
+            - REPAIR_STATE_FAILED
+            - REPAIR_STATE_IN_PROGRESS
+            - REPAIR_STATE_PENDING
+            - REPAIR_STATE_SKIPPED
+          readOnly: true
+          type: string
+        stateDesc:
+          description: Output only. Description of the state of the Rollback.
+          readOnly: true
+          type: string
       type: object
     RollbackTargetConfig:
       description: Configs for the Rollback rollout.
@@ -2851,6 +3500,65 @@ components:
           type: string
         type:
           description: Type of this notification, e.g. for a Pub/Sub failure.
+          enum:
+            - TYPE_UNSPECIFIED
+            - TYPE_PUBSUB_NOTIFICATION_FAILURE
+            - TYPE_RESOURCE_STATE_CHANGE
+            - TYPE_PROCESS_ABORTED
+            - TYPE_RESTRICTION_VIOLATED
+            - TYPE_RESOURCE_DELETED
+            - TYPE_ROLLOUT_UPDATE
+            - TYPE_RENDER_STATUES_CHANGE
+          type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - true
+      type: object
+    RolloutUpdateEvent:
+      description: Payload proto for "clouddeploy.googleapis.com/rollout_update" Platform Log event that describes the rollout update event.
+      properties:
+        message:
+          description: Debug message for when a rollout update event occurs.
+          type: string
+        pipelineUid:
+          description: Unique identifier of the pipeline.
+          type: string
+        releaseUid:
+          description: Unique identifier of the release.
+          type: string
+        rollout:
+          description: The name of the rollout.
+          type: string
+        rolloutUpdateType:
+          description: Output only. The type of the rollout update.
+          enum:
+            - ROLLOUT_UPDATE_TYPE_UNSPECIFIED
+            - PENDING
+            - PENDING_RELEASE
+            - IN_PROGRESS
+            - CANCELLING
+            - CANCELLED
+            - HALTED
+            - SUCCEEDED
+            - FAILED
+            - APPROVAL_REQUIRED
+            - APPROVED
+            - REJECTED
+            - ADVANCE_REQUIRED
+            - ADVANCED
+          readOnly: true
+          type: string
+        targetId:
+          description: ID of the target.
+          type: string
+        type:
+          description: Type of this notification, e.g. for a rollout update event.
           enum:
             - TYPE_UNSPECIFIED
             - TYPE_PUBSUB_NOTIFICATION_FAILURE
@@ -3103,6 +3811,18 @@ components:
           description: Output only. File path of the resolved Skaffold configuration relative to the URI.
           readOnly: true
           type: string
+      type: object
+    TargetAttribute:
+      description: 'Contains criteria for selecting Targets. Attributes provided must match the target resource in order for policy restrictions to apply. E.g. if id "prod" and labels "foo: bar" are given the target resource must match both that id and have that label in order to be selected.'
+      properties:
+        id:
+          description: 'ID of the `Target`. The value of this field could be one of the following: * The last segment of a target name. It only needs the ID to determine which target is being referred to * "*", all targets in a location.'
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Target labels.
+          type: object
       type: object
     TargetNotificationEvent:
       description: Payload proto for "clouddeploy.googleapis.com/target_notification" Platform Log event that describes the failure to send target status change Pub/Sub notification.

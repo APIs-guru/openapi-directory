@@ -1266,6 +1266,12 @@ components:
         configmanagement:
           $ref: "#/components/schemas/ConfigManagementMembershipSpec"
           description: Config Management-specific spec.
+        identityservice:
+          $ref: "#/components/schemas/IdentityServiceMembershipSpec"
+          description: Identity Service-specific spec.
+        mesh:
+          $ref: "#/components/schemas/ServiceMeshMembershipSpec"
+          description: Anthos Service Mesh-specific spec
         policycontroller:
           $ref: "#/components/schemas/PolicyControllerMembershipSpec"
           description: Policy Controller spec.

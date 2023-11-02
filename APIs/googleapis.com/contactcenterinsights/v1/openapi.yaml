@@ -608,6 +608,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1/{parent}/conversations:bulkDelete:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Deletes multiple conversations in a single request.
+      operationId: contactcenterinsights.projects.locations.conversations.bulkDelete
+      parameters:
+        - description: "Required. The parent resource to create analyses in. Format: projects/{project}/locations/{location}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1BulkDeleteConversationsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{parent}/conversations:ingest:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1266,7 +1308,7 @@ components:
           format: int32
           type: integer
         partialErrors:
-          description: Output only. Partial errors during ingest operation that might cause the operation output to be incomplete.
+          description: Output only. Partial errors during bulk analyze operation that might cause the operation output to be incomplete.
           items:
             $ref: "#/components/schemas/GoogleRpcStatus"
           readOnly: true
@@ -1307,6 +1349,47 @@ components:
           description: Count of successful analyses.
           format: int32
           type: integer
+      type: object
+    GoogleCloudContactcenterinsightsV1BulkDeleteConversationsMetadata:
+      description: The metadata for a bulk delete conversations operation.
+      properties:
+        createTime:
+          description: The time the operation was created.
+          format: google-datetime
+          type: string
+        endTime:
+          description: The time the operation finished running.
+          format: google-datetime
+          type: string
+        partialErrors:
+          description: Partial errors during bulk delete conversations operation that might cause the operation output to be incomplete.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+        request:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1BulkDeleteConversationsRequest"
+          description: The original request for bulk delete.
+      type: object
+    GoogleCloudContactcenterinsightsV1BulkDeleteConversationsRequest:
+      description: The request to delete conversations in bulk.
+      properties:
+        filter:
+          description: Filter used to select the subset of conversations to analyze.
+          type: string
+        force:
+          description: If set to true, all of this conversation's analyses will also be deleted. Otherwise, the request will only succeed if the conversation has no analyses.
+          type: boolean
+        maxDeleteCount:
+          description: Maximum number of conversations to delete. The default is 1000. It can be changed by setting the `max_delete_count` field.
+          format: int32
+          type: integer
+        parent:
+          description: "Required. The parent resource to create analyses in. Format: projects/{project}/locations/{location}"
+          type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1BulkDeleteConversationsResponse:
+      description: The response for a bulk analyze conversations operation.
+      properties: {}
       type: object
     GoogleCloudContactcenterinsightsV1CalculateIssueModelStatsResponse:
       description: Response of querying an issue model's statistics.
@@ -2023,6 +2106,12 @@ components:
         parent:
           description: Required. The parent resource for new conversations.
           type: string
+        redactionConfig:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1RedactionConfig"
+          description: Optional. DLP settings for transcript redaction. Optional, will default to the config specified in Settings.
+        speechConfig:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1SpeechConfig"
+          description: Optional. Default Speech-to-Text configuration. Optional, will default to the config specified in Settings.
         transcriptObjectConfig:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1IngestConversationsRequestTranscriptObjectConfig"
           description: Configuration for when `source` contains conversation transcripts.
@@ -2030,13 +2119,28 @@ components:
     GoogleCloudContactcenterinsightsV1IngestConversationsRequestConversationConfig:
       description: Configuration that applies to all conversations.
       properties:
+        agentChannel:
+          description: Optional. For audio conversations, this field indicates which of the channels, 1 or 2, contains the agent. Note that this must be set for audio conversations to be properly displayed and analyzed.
+          format: int32
+          type: integer
         agentId:
           description: An opaque, user-specified string representing the human agent who handled the conversations.
           type: string
+        customerChannel:
+          description: Optional. For audio conversations, this field indicates which of the channels, 1 or 2, contains the customer. Note that this must be set for audio conversations to be properly displayed and analyzed.
+          format: int32
+          type: integer
       type: object
     GoogleCloudContactcenterinsightsV1IngestConversationsRequestGcsSource:
       description: Configuration for Cloud Storage bucket sources.
       properties:
+        bucketObjectType:
+          description: Optional. Specifies the type of the objects in `bucket_uri`.
+          enum:
+            - BUCKET_OBJECT_TYPE_UNSPECIFIED
+            - TRANSCRIPT
+            - AUDIO
+          type: string
         bucketUri:
           description: Required. The Cloud Storage bucket containing source objects.
           type: string
@@ -2862,7 +2966,7 @@ components:
           format: int32
           type: integer
         partialErrors:
-          description: Output only. Partial errors during ingest operation that might cause the operation output to be incomplete.
+          description: Output only. Partial errors during bulk analyze operation that might cause the operation output to be incomplete.
           items:
             $ref: "#/components/schemas/GoogleRpcStatus"
           readOnly: true
@@ -2903,6 +3007,47 @@ components:
           description: Count of successful analyses.
           format: int32
           type: integer
+      type: object
+    GoogleCloudContactcenterinsightsV1alpha1BulkDeleteConversationsMetadata:
+      description: The metadata for a bulk delete conversations operation.
+      properties:
+        createTime:
+          description: The time the operation was created.
+          format: google-datetime
+          type: string
+        endTime:
+          description: The time the operation finished running.
+          format: google-datetime
+          type: string
+        partialErrors:
+          description: Partial errors during bulk delete conversations operation that might cause the operation output to be incomplete.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+        request:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1BulkDeleteConversationsRequest"
+          description: The original request for bulk delete.
+      type: object
+    GoogleCloudContactcenterinsightsV1alpha1BulkDeleteConversationsRequest:
+      description: The request to delete conversations in bulk.
+      properties:
+        filter:
+          description: Filter used to select the subset of conversations to analyze.
+          type: string
+        force:
+          description: If set to true, all of this conversation's analyses will also be deleted. Otherwise, the request will only succeed if the conversation has no analyses.
+          type: boolean
+        maxDeleteCount:
+          description: Maximum number of conversations to delete. The default is 1000. It can be changed by setting the `max_delete_count` field.
+          format: int32
+          type: integer
+        parent:
+          description: "Required. The parent resource to create analyses in. Format: projects/{project}/locations/{location}"
+          type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1alpha1BulkDeleteConversationsResponse:
+      description: The response for a bulk analyze conversations operation.
+      properties: {}
       type: object
     GoogleCloudContactcenterinsightsV1alpha1CallAnnotation:
       description: A piece of metadata that applies to a window of a call.
@@ -3537,6 +3682,12 @@ components:
         parent:
           description: Required. The parent resource for new conversations.
           type: string
+        redactionConfig:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1RedactionConfig"
+          description: Optional. DLP settings for transcript redaction. Optional, will default to the config specified in Settings.
+        speechConfig:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1SpeechConfig"
+          description: Optional. Default Speech-to-Text configuration. Optional, will default to the config specified in Settings.
         transcriptObjectConfig:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1IngestConversationsRequestTranscriptObjectConfig"
           description: Configuration for when `source` contains conversation transcripts.
@@ -3544,13 +3695,28 @@ components:
     GoogleCloudContactcenterinsightsV1alpha1IngestConversationsRequestConversationConfig:
       description: Configuration that applies to all conversations.
       properties:
+        agentChannel:
+          description: Optional. For audio conversations, this field indicates which of the channels, 1 or 2, contains the agent. Note that this must be set for audio conversations to be properly displayed and analyzed.
+          format: int32
+          type: integer
         agentId:
           description: An opaque, user-specified string representing the human agent who handled the conversations.
           type: string
+        customerChannel:
+          description: Optional. For audio conversations, this field indicates which of the channels, 1 or 2, contains the customer. Note that this must be set for audio conversations to be properly displayed and analyzed.
+          format: int32
+          type: integer
       type: object
     GoogleCloudContactcenterinsightsV1alpha1IngestConversationsRequestGcsSource:
       description: Configuration for Cloud Storage bucket sources.
       properties:
+        bucketObjectType:
+          description: Optional. Specifies the type of the objects in `bucket_uri`.
+          enum:
+            - BUCKET_OBJECT_TYPE_UNSPECIFIED
+            - TRANSCRIPT
+            - AUDIO
+          type: string
         bucketUri:
           description: Required. The Cloud Storage bucket containing source objects.
           type: string

@@ -1783,6 +1783,60 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
+  /v1/apps/{appsId}:listRuntimes:
+    get:
+      description: Lists all the available runtimes for the application.
+      operationId: appengine.apps.listRuntimes
+      parameters:
+        - description: "Part of `parent`. Required. Name of the parent Application resource. Example: apps/myapp."
+          in: path
+          name: appsId
+          required: true
+          schema:
+            type: string
+        - description: Optional. The environment of the Application.
+          in: query
+          name: environment
+          schema:
+            enum:
+              - ENVIRONMENT_UNSPECIFIED
+              - STANDARD
+              - FLEXIBLE
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListRuntimesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/appengine.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/appengine.admin
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+      tags:
+        - apps
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1/apps/{appsId}:repair:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2221,6 +2275,22 @@ components:
           description: The Cloud Build ID if one was created as part of the version create. @OutputOnly
           type: string
       type: object
+    Date:
+      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: A full date, with non-zero year, month, and day values. A month and day, with a zero year (for example, an anniversary). A year on its own, with a zero month and a zero day. A year and month, with a zero day (for example, a credit card expiration date).Related types: google.type.TimeOfDay google.type.DateTime google.protobuf.Timestamp"
+      properties:
+        day:
+          description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+          format: int32
+          type: integer
+        month:
+          description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+          format: int32
+          type: integer
+        year:
+          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+          format: int32
+          type: integer
+      type: object
     DebugInstanceRequest:
       description: Request message for Instances.DebugInstance.
       properties:
@@ -2630,6 +2700,18 @@ components:
           description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListRuntimesResponse:
+      description: Response message for Applications.ListRuntimes.
+      properties:
+        nextPageToken:
+          description: Continuation token for fetching the next page of results.
+          type: string
+        runtimes:
+          description: The runtimes available to the requested application.
+          items:
+            $ref: "#/components/schemas/Runtime"
           type: array
       type: object
     ListServicesResponse:
@@ -3110,6 +3192,46 @@ components:
           description: User specified volumes.
           items:
             $ref: "#/components/schemas/Volume"
+          type: array
+      type: object
+    Runtime:
+      description: Runtime versions for App Engine.
+      properties:
+        decommissionedDate:
+          $ref: "#/components/schemas/Date"
+          description: Date when Runtime is decommissioned.
+        deprecationDate:
+          $ref: "#/components/schemas/Date"
+          description: Date when Runtime is deprecated.
+        endOfSupportDate:
+          $ref: "#/components/schemas/Date"
+          description: Date when Runtime is end of support.
+        environment:
+          description: The environment of the runtime.
+          enum:
+            - ENVIRONMENT_UNSPECIFIED
+            - STANDARD
+            - FLEXIBLE
+          type: string
+        name:
+          description: The name of the runtime, e.g., 'go113', 'nodejs12', etc.
+          type: string
+        stage:
+          description: The stage of life this runtime is in, e.g., BETA, GA, etc.
+          enum:
+            - RUNTIME_STAGE_UNSPECIFIED
+            - DEVELOPMENT
+            - ALPHA
+            - BETA
+            - GA
+            - DEPRECATED
+            - DECOMMISSIONED
+            - END_OF_SUPPORT
+          type: string
+        warnings:
+          description: Warning messages, e.g., a deprecation warning.
+          items:
+            type: string
           type: array
       type: object
     ScriptHandler:

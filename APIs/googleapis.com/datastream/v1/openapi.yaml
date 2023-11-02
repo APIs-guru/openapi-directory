@@ -106,16 +106,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. The binary log file name.
-          in: query
-          name: cdcStrategy.specificStartPosition.mysqlLogPosition.logFile
-          schema:
-            type: string
-        - description: Optional. The position within the binary log file. Default is head of file.
-          in: query
-          name: cdcStrategy.specificStartPosition.mysqlLogPosition.logPosition
-          schema:
-            type: integer
         - description: Optional. Update the stream without validating it.
           in: query
           name: force

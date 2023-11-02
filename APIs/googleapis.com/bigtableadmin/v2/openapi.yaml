@@ -2005,6 +2005,9 @@ components:
         consistencyToken:
           description: Required. The token created using GenerateConsistencyToken for the Table.
           type: string
+        standardReadRemoteWrites:
+          $ref: "#/components/schemas/StandardReadRemoteWrites"
+          description: Checks that reads using an app profile with `StandardIsolation` can see all writes committed before the token was created, even if the read and write target different clusters.
       type: object
     CheckConsistencyResponse:
       description: Response message for google.bigtable.admin.v2.BigtableTableAdmin.CheckConsistency
@@ -2096,7 +2099,8 @@ components:
           description: "Garbage collection rule specified as a protobuf. Must serialize to at most 500 bytes. NOTE: Garbage collection executes opportunistically in the background, and so it's possible for reads to return a cell even if it matches the active GC expression for its family."
         stats:
           $ref: "#/components/schemas/ColumnFamilyStats"
-          description: Only available with STATS_VIEW, this includes summary statistics about column family contents. For statistics over an entire table, see TableStats above.
+          description: Output only. Only available with STATS_VIEW, this includes summary statistics about column family contents. For statistics over an entire table, see TableStats above.
+          readOnly: true
       type: object
     ColumnFamilyStats:
       description: Approximate statistics related to a single column family within a table. This information may change rapidly, interpreting these values at a point in time may already preset out-of-date information. Everything below is approximate, unless otherwise specified.
@@ -2782,6 +2786,10 @@ components:
             - PRIORITY_HIGH
           type: string
       type: object
+    StandardReadRemoteWrites:
+      description: Checks that all writes before the consistency token was generated is replicated in every cluster and readable.
+      properties: {}
+      type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
@@ -2835,7 +2843,8 @@ components:
           readOnly: true
         stats:
           $ref: "#/components/schemas/TableStats"
-          description: Only available with STATS_VIEW, this includes summary statistics about the entire table contents. For statistics about a specific column family, see ColumnFamilyStats in the mapped ColumnFamily collection above.
+          description: Output only. Only available with STATS_VIEW, this includes summary statistics about the entire table contents. For statistics about a specific column family, see ColumnFamilyStats in the mapped ColumnFamily collection above.
+          readOnly: true
       type: object
     TableProgress:
       description: Progress info for copying a table's data to the new cluster.

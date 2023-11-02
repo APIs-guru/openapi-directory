@@ -2422,6 +2422,8 @@ components:
           description: Required. Type of signal, for example, `AVAILABLE_IN_MULTIPLE_ZONES`, `LOGGING_MOST_ERRORS`, etc.
           enum:
             - SIGNAL_TYPE_UNSPECIFIED
+            - SIGNAL_TYPE_NOT_PROTECTED_BY_AUTOMATIC_FAILOVER
+            - SIGNAL_TYPE_GROUP_NOT_REPLICATING_ACROSS_REGIONS
             - SIGNAL_TYPE_NOT_AVAILABLE_IN_MULTIPLE_ZONES
             - SIGNAL_TYPE_NOT_AVAILABLE_IN_MULTIPLE_REGIONS
             - SIGNAL_TYPE_NO_PROMOTABLE_REPLICA
@@ -2468,7 +2470,59 @@ components:
             - SIGNAL_TYPE_EXPOSED_TO_REMOTE_ACCESS
             - SIGNAL_TYPE_DATABASE_NAMES_EXPOSED
             - SIGNAL_TYPE_SENSITIVE_TRACE_INFO_NOT_MASKED
+            - SIGNAL_TYPE_PUBLIC_IP_ENABLED
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - true
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
         state:
           enum:
             - STATE_UNSPECIFIED
