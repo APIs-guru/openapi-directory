@@ -9974,6 +9974,7 @@ components:
             * Maximum 20 key-value pairs per request. Otherwise, error "177" occurs: "Metadata size exceeds limit"
             * Maximum 20 characters per key. Otherwise, error "178" occurs: "Metadata key size exceeds limit"
             * A key cannot have the name `checkout.linkId`. Any value that you provide with this key is going to be replaced by the real payment link ID.
+          maxLength: 80
           type: object
         recurringProcessingModel:
           description: |
@@ -10132,6 +10133,7 @@ components:
             * Maximum 20 key-value pairs per request. Otherwise, error "177" occurs: "Metadata size exceeds limit"
             * Maximum 20 characters per key. Otherwise, error "178" occurs: "Metadata key size exceeds limit"
             * A key cannot have the name `checkout.linkId`. Any value that you provide with this key is going to be replaced by the real payment link ID.
+          maxLength: 80
           type: object
         recurringProcessingModel:
           description: |

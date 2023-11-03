@@ -3568,6 +3568,9 @@ components:
     PostgreSqlConnectionProfile:
       description: Specifies connection parameters required specifically for PostgreSQL databases.
       properties:
+        alloydbClusterId:
+          description: Optional. If the destination is an AlloyDB database, use this field to provide the AlloyDB cluster ID.
+          type: string
         cloudSqlId:
           description: If the source is a Cloud SQL database, use this field to provide the Cloud SQL instance ID of the source.
           type: string

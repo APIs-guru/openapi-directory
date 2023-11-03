@@ -8770,6 +8770,17 @@ components:
             * Maximum 20 characters per key.
             * Maximum 80 characters per value. 
           type: object
+        mode:
+          default: embedded
+          description: |-
+            Indicates the type of front end integration. Possible values:
+            * **embedded** (default): Drop-in or Components integration
+            * **hosted**: Hosted Checkout integration
+          enum:
+            - embedded
+            - hosted
+          type: string
+          x-addedInVersion: "69"
         mpiData:
           $ref: "#/components/schemas/ThreeDSecureData"
           description: Authentication data produced by an MPI (Mastercard SecureCode, Visa Secure, or Cartes Bancaires).
@@ -11535,6 +11546,7 @@ components:
             * Maximum 20 key-value pairs per request. Otherwise, error "177" occurs: "Metadata size exceeds limit"
             * Maximum 20 characters per key. Otherwise, error "178" occurs: "Metadata key size exceeds limit"
             * A key cannot have the name `checkout.linkId`. Any value that you provide with this key is going to be replaced by the real payment link ID.
+          maxLength: 80
           type: object
         recurringProcessingModel:
           description: |
@@ -11763,6 +11775,7 @@ components:
             * Maximum 20 key-value pairs per request. Otherwise, error "177" occurs: "Metadata size exceeds limit"
             * Maximum 20 characters per key. Otherwise, error "178" occurs: "Metadata key size exceeds limit"
             * A key cannot have the name `checkout.linkId`. Any value that you provide with this key is going to be replaced by the real payment link ID.
+          maxLength: 80
           type: object
         recurringProcessingModel:
           description: |

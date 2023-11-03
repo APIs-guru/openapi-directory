@@ -717,6 +717,53 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v2alpha1/{parent}/reservations:
+    get:
+      description: Retrieves the reservations for the given project in the given location.
+      operationId: tpu.projects.locations.reservations.list
+      parameters:
+        - description: Required. The parent for reservations.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListReservationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v2alpha1/{parent}/runtimeVersions:
     get:
       description: Lists runtime versions supported by this API.
@@ -1154,6 +1201,18 @@ components:
             type: string
           type: array
       type: object
+    ListReservationsResponse:
+      description: Response for ListReservations.
+      properties:
+        nextPageToken:
+          description: The next page token or empty if none.
+          type: string
+        reservations:
+          description: The listed reservations.
+          items:
+            $ref: "#/components/schemas/Reservation"
+          type: array
+      type: object
     ListRuntimeVersionsResponse:
       description: Response for ListRuntimeVersions.
       properties:
@@ -1441,6 +1500,11 @@ components:
         bestEffort:
           $ref: "#/components/schemas/BestEffort"
           description: The BestEffort tier.
+        createTime:
+          description: Output only. The time when the QueuedResource was created.
+          format: google-datetime
+          readOnly: true
+          type: string
         guaranteed:
           $ref: "#/components/schemas/Guaranteed"
           description: The Guaranteed tier.
@@ -1538,6 +1602,15 @@ components:
           format: google-datetime
           type: string
       type: object
+    Reservation:
+      description: A reservation describes the amount of a resource 'allotted' for a defined period of time.
+      properties:
+        name:
+          description: "The reservation name with the format: projects/{projectID}/locations/{location}/reservations/{reservationID}"
+          type: string
+        standard:
+          $ref: "#/components/schemas/Standard"
+      type: object
     ResetQueuedResourceRequest:
       description: Request for ResetQueuedResource.
       properties: {}
@@ -1600,6 +1673,27 @@ components:
     Spot:
       description: Spot tier definition.
       properties: {}
+      type: object
+    Standard:
+      properties:
+        capacityUnits:
+          enum:
+            - CAPACITY_UNITS_UNSPECIFIED
+            - CORES
+            - CHIPS
+          type: string
+        interval:
+          $ref: "#/components/schemas/Interval"
+          description: The start and end time of the reservation.
+        resourceType:
+          description: The resource type of the reservation.
+          type: string
+        size:
+          description: The size of the reservation, in the units specified in the 'capacity_units' field.
+          format: int32
+          type: integer
+        usage:
+          $ref: "#/components/schemas/Usage"
       type: object
     StartNodeRequest:
       description: Request for StartNode.
@@ -1668,6 +1762,13 @@ components:
           items:
             $ref: "#/components/schemas/NodeSpec"
           type: array
+      type: object
+    Usage:
+      properties:
+        total:
+          description: The real-time value of usage within the reservation, with the unit specified in field capacity_units.
+          format: int64
+          type: string
       type: object
   securitySchemes:
     Oauth2:
