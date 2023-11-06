@@ -1986,6 +1986,20 @@ components:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
+    EncryptionConfig:
+      description: Regional encryption config for CMEK details.
+      properties:
+        encryptionType:
+          description: Optional. Encryption type for the region.
+          enum:
+            - ENCRYPTION_TYPE_UNSPECIFIED
+            - GMEK
+            - CMEK
+          type: string
+        kmsKeyName:
+          description: Optional. KMS crypto key. This field accepts identifiers of the form `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/ {crypto_key}`
+          type: string
+      type: object
     EncryptionKey:
       description: Encryption Key value.
       properties:
@@ -2268,6 +2282,14 @@ components:
             type: string
           readOnly: true
           type: array
+        type:
+          description: Output only. The type of the event listener for a specific connector.
+          enum:
+            - TYPE_UNSPECIFIED
+            - WEBHOOK
+            - JMS
+          readOnly: true
+          type: string
       type: object
     EventingRuntimeData:
       description: Eventing runtime data has the details related to eventing managed by the system.
@@ -3258,6 +3280,9 @@ components:
     RegionalSettings:
       description: Regional Settings details.
       properties:
+        encryptionConfig:
+          $ref: "#/components/schemas/EncryptionConfig"
+          description: Optional. Regional encryption config to hold CMEK details.
         name:
           description: "Output only. Resource name of the Connection. Format: projects/{project}/locations/{location}/regionalSettings"
           readOnly: true

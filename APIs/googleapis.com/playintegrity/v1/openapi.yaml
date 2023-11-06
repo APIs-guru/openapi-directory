@@ -230,8 +230,24 @@ components:
             type: string
           type: array
       type: object
+    EnvironmentDetails:
+      description: Contains information about the environment Play Integrity API runs in, e.g. Play Protect verdict.
+      properties:
+        playProtectVerdict:
+          description: The evaluation of Play Protect verdict.
+          enum:
+            - PLAY_PROTECT_VERDICT_UNSPECIFIED
+            - UNEVALUATED
+            - NO_ISSUES
+            - NO_DATA
+            - MEDIUM_RISK
+            - HIGH_RISK
+            - POSSIBLE_RISK
+          type: string
+      type: object
     GuidanceDetails:
-      description: Contains guidance details about the Integrity API response, providing additional context to the integrity verdicts.
+      deprecated: true
+      description: "Deprecated: this field is not used. Contains guidance details about the Integrity API response, providing additional context to the integrity verdicts."
       properties:
         userRemediationDetails:
           description: This shows when there is an issue with at least one of the integrity verdicts, which can be remedied by the user and provides additional details.
@@ -275,9 +291,13 @@ components:
         deviceIntegrity:
           $ref: "#/components/schemas/DeviceIntegrity"
           description: Required. Details about the device integrity.
+        environmentDetails:
+          $ref: "#/components/schemas/EnvironmentDetails"
+          description: Details of the environment Play Integrity API runs in.
         guidanceDetails:
           $ref: "#/components/schemas/GuidanceDetails"
-          description: Additional guidance related to the integrity API response.
+          deprecated: true
+          description: "Deprecated: this field is not used. Additional guidance related to the integrity API response."
         requestDetails:
           $ref: "#/components/schemas/RequestDetails"
           description: Required. Details about the integrity request.
@@ -286,7 +306,8 @@ components:
           description: Indicates that this payload is generated for testing purposes and contains any additional data that is linked with testing status.
       type: object
     UserRemediationDetails:
-      description: Contains details of remediation guidance that the user can perform.
+      deprecated: true
+      description: "Deprecated: this field is not used. Contains details of remediation guidance that the user can perform."
       properties:
         remediation:
           description: Description of the user remediation action.

@@ -97,6 +97,7 @@ paths:
                 - TIMED_OUT
                 - UNKNOWN
                 - DELAYED
+                - EXECUTION_DISABLED
               type: string
             type: array
           style: form
@@ -217,6 +218,7 @@ paths:
                 - TIMED_OUT
                 - UNKNOWN
                 - DELAYED
+                - EXECUTION_DISABLED
               type: string
             type: array
           style: form
@@ -1213,6 +1215,7 @@ components:
             - TIMED_OUT
             - UNKNOWN
             - DELAYED
+            - EXECUTION_DISABLED
           type: string
         processType:
           description: The executions type.

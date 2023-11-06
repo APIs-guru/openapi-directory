@@ -2044,6 +2044,7 @@ paths:
 
         To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
         * Management API—Terminal ordering read and write
+        >Requests to the Management API test endpoint do not create actual orders for test terminals. To order test terminals, you need to [submit a sales order](https://docs.adyen.com/point-of-sale/managing-terminals/order-terminals/#sales-order-steps) in your Customer Area.
       operationId: post-companies-companyId-terminalOrders
       parameters:
         - description: The unique identifier of the company account.
@@ -3663,7 +3664,11 @@ paths:
   /me/generateClientKey:
     post:
       description: |-
-        Returns a new [client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works) for the caller - API Credential or OAuth Access Token. You can use the new client key a few minutes after generating it. The old client key stops working 24 hours after generating a new one.To make this request, your API credential must have the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        Generates a new [client key](https://docs.adyen.com/development-resources/client-side-authentication/) used to authenticate requests from your payment environment.
+        You can use the new client key a few minutes after generating it.
+        The old client key stops working 24 hours after generating a new one.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
         * Management API—API credentials read and write
       operationId: post-me-generateClientKey
       responses:
@@ -3706,11 +3711,11 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Generate new client key for self
+      summary: Generate a client key
       tags:
         - My API credential
       x-groupName: My API credential
-      x-methodName: generateNewClientKeyForSelf
+      x-methodName: generateClientKey
       x-sortIndex: 0
   /merchants:
     get:
@@ -7434,6 +7439,7 @@ paths:
 
         To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
         * Management API—Terminal ordering read and write
+        >Requests to the Management API test endpoint do not create actual orders for test terminals. To order test terminals, you need to [submit a sales order](https://docs.adyen.com/point-of-sale/managing-terminals/order-terminals/#sales-order-steps) in your Customer Area.
       operationId: post-merchants-merchantId-terminalOrders
       parameters:
         - description: The unique identifier of the merchant account.
@@ -7580,7 +7586,7 @@ paths:
         Updating is only possible while the order has the status **Placed**.
 
         The request body only needs to contain what you want to change. 
-        However, to update the products in the `items` array, you must provice the entire array. For example, if the array has three items:
+        However, to update the products in the `items` array, you must provide the entire array. For example, if the array has three items:
          To remove one item, the array must include the remaining two items. Or to add one item, the array must include all four items.
 
         To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
@@ -17048,20 +17054,6 @@ components:
         - message
       type: object
     JSONObject:
-      properties:
-        paths:
-          items:
-            $ref: "#/components/schemas/JSONPath"
-          type: array
-        rootPath:
-          $ref: "#/components/schemas/JSONPath"
-      type: object
-    JSONPath:
-      properties:
-        content:
-          items:
-            type: string
-          type: array
       type: object
     Key:
       properties:
@@ -19004,10 +18996,12 @@ components:
              * `reassignmentInProgress`: the terminal was boarded and is now scheduled to remove the configuration. Wait for the terminal to synchronize with the Adyen platform.
              * `deployed`: the terminal is deployed and reassigned. 
              * `inventory`: the terminal is in inventory and cannot process transactions. 
+             * `boarded`: the terminal is boarded to a store, or a merchant account representing a store, and can process transactions. 
           enum:
-            - reassignmentInProgress
+            - boarded
             - deployed
             - inventory
+            - reassignmentInProgress
           type: string
         storeId:
           description: The unique identifier of the store to which terminal is assigned.

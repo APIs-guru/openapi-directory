@@ -989,6 +989,58 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - databases
+  /v1/projects/{project}/instances/{instance}/demote:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Demotes an existing standalone instance to be a Cloud SQL read replica for an external database server.
+      operationId: sql.instances.demote
+      parameters:
+        - description: Required. ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Required. Cloud SQL instance name.
+          in: path
+          name: instance
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InstancesDemoteRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/sqlservice.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/sqlservice.admin
+      tags:
+        - instances
   /v1/projects/{project}/instances/{instance}/demoteMaster:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -3522,6 +3574,16 @@ components:
           description: This is always `sql#databasesList`.
           type: string
       type: object
+    DemoteContext:
+      description: This context is used to demote an existing standalone instance to be a Cloud SQL read replica for an external database server.
+      properties:
+        kind:
+          description: This is always `sql#demoteContext`.
+          type: string
+        sourceRepresentativeInstanceName:
+          description: Required. The name of the instance which acts as the on-premises primary instance in the replication setup.
+          type: string
+      type: object
     DemoteMasterConfiguration:
       description: Read-replica configuration for connecting to the on-premises primary instance.
       properties:
@@ -4012,6 +4074,13 @@ components:
         demoteMasterContext:
           $ref: "#/components/schemas/DemoteMasterContext"
           description: Contains details about the demoteMaster operation.
+      type: object
+    InstancesDemoteRequest:
+      description: This request is used to demote an existing standalone instance to be a Cloud SQL read replica for an external database server.
+      properties:
+        demoteContext:
+          $ref: "#/components/schemas/DemoteContext"
+          description: Required. Contains details about the demote operation.
       type: object
     InstancesExportRequest:
       description: Database instance export request.
@@ -4810,6 +4879,8 @@ components:
             - INVALID_FILE_INFO
             - UNSUPPORTED_DATABASE_SETTINGS
             - MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE
+            - LOCAL_INFILE_OFF
+            - TURN_ON_PITR_AFTER_PROMOTE
           type: string
       type: object
     SqlInstancesGetDiskShrinkConfigResponse:

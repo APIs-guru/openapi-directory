@@ -3443,10 +3443,8 @@ components:
           description: The card number of the document that was issued (AU only).
           type: string
         expiryDate:
-          deprecated: true
           description: The expiry date of the document, in YYYY-MM-DD format.
           type: string
-          x-deprecatedInVersion: "1"
         issuerCountry:
           deprecated: true
           description: The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the document was issued. For example, **US**.

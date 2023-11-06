@@ -14,7 +14,7 @@ info:
     To access the live endpoints, you need to generate a new API key in your live Customer Area.
     ## Versioning
 
-    Management API handles versioning as part of the endpoint URL. For example, to send a request to version 1 of the `/companies/{companyId}/webhooks` endpoint, use:
+    Management API handles versioning as part of the endpoint URL. For example, to send a request to this version of the `/companies/{companyId}/webhooks` endpoint, use:
 
     ```text
     https://management-test.adyen.com/v1/companies/{companyId}/webhooks
@@ -27,6 +27,9 @@ info:
     ```text
     https://management-live.adyen.com/v1
     ```
+
+    ## Release notes
+    Have a look at the [release notes](https://docs.adyen.com/release-notes/management-api) to find out what changed in this version!
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: Management API
   version: "1"
@@ -1984,6 +1987,7 @@ paths:
 
         To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
         * Management API—Terminal ordering read and write
+        >Requests to the Management API test endpoint do not create actual orders for test terminals. To order test terminals, you need to [submit a sales order](https://docs.adyen.com/point-of-sale/managing-terminals/order-terminals/#sales-order-steps) in your Customer Area.
       operationId: post-companies-companyId-terminalOrders
       parameters:
         - description: The unique identifier of the company account.
@@ -3599,6 +3603,62 @@ paths:
         - My API credential
       x-groupName: My API credential
       x-methodName: getAllowedOriginDetails
+      x-sortIndex: 0
+  /me/generateClientKey:
+    post:
+      description: |-
+        Generates a new [client key](https://docs.adyen.com/development-resources/client-side-authentication/) used to authenticate requests from your payment environment.
+        You can use the new client key a few minutes after generating it.
+        The old client key stops working 24 hours after generating a new one.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—API credentials read and write
+      operationId: post-me-generateClientKey
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenerateClientKeyResponse"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Generate a client key
+      tags:
+        - My API credential
+      x-groupName: My API credential
+      x-methodName: generateClientKey
       x-sortIndex: 0
   /merchants:
     get:
@@ -7326,6 +7386,7 @@ paths:
 
         To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
         * Management API—Terminal ordering read and write
+        >Requests to the Management API test endpoint do not create actual orders for test terminals. To order test terminals, you need to [submit a sales order](https://docs.adyen.com/point-of-sale/managing-terminals/order-terminals/#sales-order-steps) in your Customer Area.
       operationId: post-merchants-merchantId-terminalOrders
       parameters:
         - description: The unique identifier of the merchant account.
@@ -7472,7 +7533,7 @@ paths:
         Updating is only possible while the order has the status **Placed**.
 
         The request body only needs to contain what you want to change. 
-        However, to update the products in the `items` array, you must provice the entire array. For example, if the array has three items:
+        However, to update the products in the `items` array, you must provide the entire array. For example, if the array has three items:
          To remove one item, the array must include the remaining two items. Or to add one item, the array must include all four items.
 
         To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
@@ -16901,25 +16962,7 @@ components:
         InvalidField:
           $ref: "#/components/schemas/InvalidField"
     JSONObject:
-      properties:
-        paths:
-          items:
-            $ref: "#/components/schemas/JSONPathWrapper"
-          type: array
-        rootPath:
-          $ref: "#/components/schemas/JSONPath"
       type: object
-    JSONPath:
-      properties:
-        content:
-          items:
-            type: string
-          type: array
-      type: object
-    JSONPathWrapper:
-      properties:
-        JSONPath:
-          $ref: "#/components/schemas/JSONPath"
     Key:
       properties:
         identifier:
@@ -17180,6 +17223,12 @@ components:
       required:
         - itemsTotal
         - pagesTotal
+      type: object
+    Localization:
+      properties:
+        language:
+          description: Language of the terminal.
+          type: string
       type: object
     Logo:
       properties:
@@ -19027,6 +19076,9 @@ components:
         hardware:
           $ref: "#/components/schemas/Hardware"
           description: Settings for terminal hardware features.
+        localization:
+          $ref: "#/components/schemas/Localization"
+          description: Settings for localization.
         nexo:
           $ref: "#/components/schemas/Nexo"
           description: Settings for a Terminal API integration.
