@@ -2905,7 +2905,7 @@ components:
       properties:
         additionalSalesChannels:
           description: |+
-            An array of additional sales channels to generate PCI questionnaires. Include the relevant sales channels if you need your user to sign PCI questionnaires. Not required if you [create stores](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/create-stores/) and [add payment methods](https://docs.adyen.com/marketplaces-and-platforms/payment-methods/) for your user.
+            An array of additional sales channels to generate PCI questionnaires. Include the relevant sales channels if you need your user to sign PCI questionnaires. Not required if you [create stores](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/create-stores/) and [add payment methods](https://docs.adyen.com/marketplaces-and-platforms/payment-methods/) before you generate the questionnaires.
 
             Possible values:
             *  **eCommerce**
@@ -2980,7 +2980,18 @@ components:
           description: "The language to be used for the Terms of Service document, specified by the two-letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code. Possible value: **en** for English."
           type: string
         type:
-          description: The type of Terms of Service.
+          description: |+
+            The type of Terms of Service.
+
+            Possible values:
+            *  **adyenForPlatformsManage**
+            *  **adyenIssuing**
+            *  **adyenForPlatformsAdvanced**
+            *  **adyenCapital**
+            *  **adyenAccount**
+            *  **adyenCard**
+            *  **adyenFranchisee**
+
           enum:
             - adyenAccount
             - adyenCapital
@@ -3010,7 +3021,18 @@ components:
           description: The unique identifier of the Terms of Service document.
           type: string
         type:
-          description: The type of Terms of Service.
+          description: |+
+            The type of Terms of Service.
+
+            Possible values:
+            *  **adyenForPlatformsManage**
+            *  **adyenIssuing**
+            *  **adyenForPlatformsAdvanced**
+            *  **adyenCapital**
+            *  **adyenAccount**
+            *  **adyenCard**
+            *  **adyenFranchisee**
+
           enum:
             - adyenAccount
             - adyenCapital
@@ -3669,7 +3691,18 @@ components:
           description: An Adyen-generated reference for the accepted Terms of Service.
           type: string
         type:
-          description: The type of Terms of Service.
+          description: |+
+            The type of Terms of Service.
+
+            Possible values:
+            *  **adyenForPlatformsManage**
+            *  **adyenIssuing**
+            *  **adyenForPlatformsAdvanced**
+            *  **adyenCapital**
+            *  **adyenAccount**
+            *  **adyenCard**
+            *  **adyenFranchisee**
+
           enum:
             - adyenAccount
             - adyenCapital

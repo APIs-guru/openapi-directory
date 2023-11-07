@@ -3227,10 +3227,22 @@ components:
     GoogleCloudDataplexV1DataScanEventDataQualityResult:
       description: Data quality result for data scan job.
       properties:
+        columnScore:
+          additionalProperties:
+            format: float
+            type: number
+          description: The score of each column scanned in the data scan job. The key of the map is the name of the column. The value is the data quality score for the column.The score ranges between 0, 100 (up to two decimal points).
+          type: object
         dimensionPassed:
           additionalProperties:
             type: boolean
           description: The result of each dimension for data quality result. The key of the map is the name of the dimension. The value is the bool value depicting whether the dimension result was pass or not.
+          type: object
+        dimensionScore:
+          additionalProperties:
+            format: float
+            type: number
+          description: The score of each dimension for data quality result. The key of the map is the name of the dimension. The value is the data quality score for the dimension.The score ranges between 0, 100 (up to two decimal points).
           type: object
         passed:
           description: Whether the data quality result was pass or not.
@@ -3239,6 +3251,10 @@ components:
           description: The count of rows processed in the data scan job.
           format: int64
           type: string
+        score:
+          description: The table-level data quality score for the data scan job.The data quality score ranges between 0, 100 (up to two decimal points).
+          format: float
+          type: number
       type: object
     GoogleCloudDataplexV1DataScanEventPostScanActionsResult:
       description: Post scan actions result for data scan job.
@@ -3754,6 +3770,9 @@ components:
             - BIGQUERY_POLICY_TAG_DELETE
             - BIGQUERY_POLICY_TAG_SET_IAM_POLICY
             - ACCESS_POLICY_UPDATE
+            - GOVERNANCE_RULE_MATCHED_RESOURCES
+            - GOVERNANCE_RULE_SEARCH_LIMIT_EXCEEDS
+            - GOVERNANCE_RULE_ERRORS
           type: string
         message:
           description: The log message.

@@ -2555,6 +2555,16 @@ components:
           $ref: "#/components/schemas/LocalizedString"
           description: The short message.
       type: object
+    DirectedReadOptions:
+      description: The DirectedReadOptions can be used to indicate which replicas or regions should be used for non-transactional reads or queries. DirectedReadOptions may only be specified for a read-only transaction, otherwise the API will return an `INVALID_ARGUMENT` error.
+      properties:
+        excludeReplicas:
+          $ref: "#/components/schemas/ExcludeReplicas"
+          description: Exclude_replicas indicates that should be excluded from serving requests. Spanner will not route requests to the replicas in this list.
+        includeReplicas:
+          $ref: "#/components/schemas/IncludeReplicas"
+          description: Include_replicas indicates the order of replicas (as they appear in this list) to process the request. If auto_failover_disabled is set to true and all replicas are exhausted without finding a healthy replica, Spanner will wait for a replica in the list to become available, requests may fail due to `DEADLINE_EXCEEDED` errors.
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
@@ -2585,6 +2595,15 @@ components:
           description: Output only. A Cloud KMS key version that is being used to protect the database or backup.
           readOnly: true
           type: string
+      type: object
+    ExcludeReplicas:
+      description: An ExcludeReplicas contains a repeated set of ReplicaSelection that should be excluded from serving requests.
+      properties:
+        replicaSelections:
+          description: The directed read replica selector.
+          items:
+            $ref: "#/components/schemas/ReplicaSelection"
+          type: array
       type: object
     ExecuteBatchDmlRequest:
       description: The request for ExecuteBatchDml.
@@ -2623,6 +2642,9 @@ components:
         dataBoostEnabled:
           description: If this is for a partitioned query and this field is set to `true`, the request is executed with Spanner Data Boost independent compute resources. If the field is set to `true` but the request does not set `partition_token`, the API returns an `INVALID_ARGUMENT` error.
           type: boolean
+        directedReadOptions:
+          $ref: "#/components/schemas/DirectedReadOptions"
+          description: Directed read options for this request.
         paramTypes:
           additionalProperties:
             $ref: "#/components/schemas/Type"
@@ -2739,6 +2761,18 @@ components:
           description: Optional. The maximum policy version that will be used to format the policy. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional role bindings must specify version 3. Policies with no conditional role bindings may specify any valid value or leave the field unset. The policy in the response might use the policy version that you specified, or it might use a lower policy version. For example, if you specify version 3, but the policy has no conditional role bindings, the response uses version 1. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
           format: int32
           type: integer
+      type: object
+    IncludeReplicas:
+      description: An IncludeReplicas contains a repeated set of ReplicaSelection which indicates the order in which replicas should be considered.
+      properties:
+        autoFailoverDisabled:
+          description: If true, Spanner will not route requests to a replica outside the include_replicas list when all of the specified replicas are unavailable or unhealthy. Default value is `false`.
+          type: boolean
+        replicaSelections:
+          description: The directed read replica selector.
+          items:
+            $ref: "#/components/schemas/ReplicaSelection"
+          type: array
       type: object
     IndexAdvice:
       description: Recommendation to add new indexes to run queries more efficiently.
@@ -3550,6 +3584,9 @@ components:
         dataBoostEnabled:
           description: If this is for a partitioned read and this field is set to `true`, the request is executed with Spanner Data Boost independent compute resources. If the field is set to `true` but the request does not set `partition_token`, the API returns an `INVALID_ARGUMENT` error.
           type: boolean
+        directedReadOptions:
+          $ref: "#/components/schemas/DirectedReadOptions"
+          description: Directed read options for this request.
         index:
           description: If non-empty, the name of an index on table. This index is used instead of the table primary key when interpreting key_set and sorting result rows. See key_set for further information.
           type: string
@@ -3604,6 +3641,20 @@ components:
             - READ_WRITE
             - READ_ONLY
             - WITNESS
+          type: string
+      type: object
+    ReplicaSelection:
+      description: 'The directed read replica selector. Callers must provide one or more of the following fields for replica selection: * `location` - The location must be one of the regions within the multi-region configuration of your database. * `type` - The type of the replica. Some examples of using replica_selectors are: * `location:us-east1` --> The "us-east1" replica(s) of any available type will be used to process the request. * `type:READ_ONLY` --> The "READ_ONLY" type replica(s) in nearest . available location will be used to process the request. * `location:us-east1 type:READ_ONLY` --> The "READ_ONLY" type replica(s) in location "us-east1" will be used to process the request.'
+      properties:
+        location:
+          description: The location or region of the serving requests, e.g. "us-east1".
+          type: string
+        type:
+          description: The type of replica.
+          enum:
+            - TYPE_UNSPECIFIED
+            - READ_WRITE
+            - READ_ONLY
           type: string
       type: object
     RequestOptions:
