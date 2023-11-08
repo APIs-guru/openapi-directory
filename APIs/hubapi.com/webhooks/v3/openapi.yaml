@@ -32,7 +32,7 @@ tags:
 paths:
   /webhooks/v3/{appId}/settings:
     delete:
-      operationId: delete-/webhooks/v3/{appId}/settings
+      operationId: delete-/webhooks/v3/{appId}/settings_clear
       parameters:
         - explode: false
           in: path
@@ -53,7 +53,7 @@ paths:
       tags:
         - Settings
     get:
-      operationId: get-/webhooks/v3/{appId}/settings
+      operationId: get-/webhooks/v3/{appId}/settings_getAll
       parameters:
         - explode: false
           in: path
@@ -77,7 +77,7 @@ paths:
       tags:
         - Settings
     put:
-      operationId: put-/webhooks/v3/{appId}/settings
+      operationId: put-/webhooks/v3/{appId}/settings_configure
       parameters:
         - explode: false
           in: path
@@ -108,7 +108,7 @@ paths:
         - Settings
   /webhooks/v3/{appId}/subscriptions:
     get:
-      operationId: get-/webhooks/v3/{appId}/subscriptions
+      operationId: get-/webhooks/v3/{appId}/subscriptions_getAll
       parameters:
         - explode: false
           in: path
@@ -132,7 +132,7 @@ paths:
       tags:
         - Subscriptions
     post:
-      operationId: post-/webhooks/v3/{appId}/subscriptions
+      operationId: post-/webhooks/v3/{appId}/subscriptions_create
       parameters:
         - explode: false
           in: path
@@ -163,7 +163,7 @@ paths:
         - Subscriptions
   /webhooks/v3/{appId}/subscriptions/batch/update:
     post:
-      operationId: post-/webhooks/v3/{appId}/subscriptions/batch/update
+      operationId: post-/webhooks/v3/{appId}/subscriptions/batch/update_updateBatch
       parameters:
         - explode: false
           in: path
@@ -200,7 +200,7 @@ paths:
         - Subscriptions
   /webhooks/v3/{appId}/subscriptions/{subscriptionId}:
     delete:
-      operationId: delete-/webhooks/v3/{appId}/subscriptions/{subscriptionId}
+      operationId: delete-/webhooks/v3/{appId}/subscriptions/{subscriptionId}_archive
       parameters:
         - explode: false
           in: path
@@ -229,7 +229,7 @@ paths:
       tags:
         - Subscriptions
     get:
-      operationId: get-/webhooks/v3/{appId}/subscriptions/{subscriptionId}
+      operationId: get-/webhooks/v3/{appId}/subscriptions/{subscriptionId}_getById
       parameters:
         - explode: false
           in: path
@@ -261,7 +261,7 @@ paths:
       tags:
         - Subscriptions
     patch:
-      operationId: patch-/webhooks/v3/{appId}/subscriptions/{subscriptionId}
+      operationId: patch-/webhooks/v3/{appId}/subscriptions/{subscriptionId}_update
       parameters:
         - explode: false
           in: path
@@ -397,6 +397,7 @@ components:
       properties:
         category:
           description: The error category
+          example: VALIDATION_ERROR
           type: string
         context:
           additionalProperties:
@@ -425,10 +426,12 @@ components:
           additionalProperties:
             type: string
           description: A map of link names to associated URIs containing documentation about the error or recommended remediation steps
+          example:
+            knowledge-base: https://www.hubspot.com/products/service/knowledge-base
           type: object
         message:
           description: A human readable message describing the error along with remediation steps where appropriate
-          example: An error occurred
+          example: Invalid input (details will vary based on the error)
           type: string
         subCategory:
           description: A specific category that contains more specific detail about the error
@@ -476,6 +479,7 @@ components:
       properties:
         targetUrl:
           description: A publicly available URL for Hubspot to call where event payloads will be delivered. See [link-so-some-doc](#) for details about the format of these event payloads.
+          example: https://www.example.com/hubspot/target
           type: string
         throttling:
           $ref: "#/components/schemas/ThrottlingSettings"
@@ -499,6 +503,7 @@ components:
           type: string
         targetUrl:
           description: A publicly available URL for Hubspot to call where event payloads will be delivered. See [link-so-some-doc](#) for details about the format of these event payloads.
+          example: https://www.example.com/hubspot/target
           type: string
         throttling:
           $ref: "#/components/schemas/ThrottlingSettings"
@@ -566,6 +571,7 @@ components:
       properties:
         active:
           description: Determines if the subscription is active or paused. Defaults to false.
+          example: true
           type: boolean
         eventType:
           description: Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
@@ -611,9 +617,11 @@ components:
             - deal.associationChange
             - ticket.associationChange
             - line_item.associationChange
+          example: contact.propertyChange
           type: string
         propertyName:
           description: The internal name of the property to monitor for changes. Only applies when `eventType` is `propertyChange`.
+          example: email
           type: string
       required:
         - eventType
@@ -636,6 +644,7 @@ components:
       properties:
         active:
           description: Determines if the subscription is active or paused.
+          example: true
           type: boolean
       type: object
     SubscriptionResponse:

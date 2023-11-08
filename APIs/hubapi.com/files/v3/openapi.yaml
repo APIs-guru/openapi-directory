@@ -1056,6 +1056,7 @@ components:
       properties:
         category:
           description: The error category
+          example: VALIDATION_ERROR
           type: string
         context:
           additionalProperties:
@@ -1084,10 +1085,12 @@ components:
           additionalProperties:
             type: string
           description: A map of link names to associated URIs containing documentation about the error or recommended remediation steps
+          example:
+            knowledge-base: https://www.hubspot.com/products/service/knowledge-base
           type: object
         message:
           description: A human readable message describing the error along with remediation steps where appropriate
-          example: An error occurred
+          example: Invalid input (details will vary based on the error)
           type: string
         subCategory:
           description: A specific category that contains more specific detail about the error
@@ -1411,11 +1414,14 @@ components:
       properties:
         id:
           description: ID of the task
+          example: 57122e26-59f8-4cfc-ba53-96e30c816762
           type: string
         links:
           additionalProperties:
             type: string
           description: Links for where to check information related to the task. The `status` link gives the URL for where to check the status of the task.
+          example:
+            - status: https://api.hubspot.com/files/v3/folders/update/async/tasks/57122e26-59f8-4cfc-ba53-96e30c816762/status
           type: object
       required:
         - id
@@ -1480,11 +1486,14 @@ components:
       properties:
         id:
           description: ID of the task
+          example: 57122e26-59f8-4cfc-ba53-96e30c816762
           type: string
         links:
           additionalProperties:
             type: string
           description: Links for where to check information related to the task. The `status` link gives the URL for where to check the status of the task.
+          example:
+            - status: https://api.hubspot.com/files/v3/files/import-from-url/async/tasks/57122e26-59f8-4cfc-ba53-96e30c816762/status
           type: object
       required:
         - id

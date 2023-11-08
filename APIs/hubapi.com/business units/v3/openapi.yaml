@@ -106,6 +106,7 @@ components:
       properties:
         category:
           description: The error category
+          example: VALIDATION_ERROR
           type: string
         context:
           additionalProperties:
@@ -134,10 +135,12 @@ components:
           additionalProperties:
             type: string
           description: A map of link names to associated URIs containing documentation about the error or recommended remediation steps
+          example:
+            knowledge-base: https://www.hubspot.com/products/service/knowledge-base
           type: object
         message:
           description: A human readable message describing the error along with remediation steps where appropriate
-          example: An error occurred
+          example: Invalid input (details will vary based on the error)
           type: string
         subCategory:
           description: A specific category that contains more specific detail about the error
@@ -187,11 +190,13 @@ components:
       properties:
         id:
           description: The Business Unit's unique ID
+          example: "101"
           type: string
         logoMetadata:
           $ref: "#/components/schemas/PublicBusinessUnitLogoMetadata"
         name:
           description: The Business Unit's name
+          example: sample business unit name
           type: string
       required:
         - id
@@ -206,12 +211,15 @@ components:
       properties:
         logoAltText:
           description: The logo's alt text
+          example: logo sample text
           type: string
         logoUrl:
           description: The logo's url
+          example: examplelogourl.com
           type: string
         resizedUrl:
           description: The logo's resized url
+          example: sillystring
           type: string
       type: object
   securitySchemes:

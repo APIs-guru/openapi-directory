@@ -98,6 +98,7 @@ components:
       properties:
         category:
           description: The error category
+          example: VALIDATION_ERROR
           type: string
         context:
           additionalProperties:
@@ -126,10 +127,12 @@ components:
           additionalProperties:
             type: string
           description: A map of link names to associated URIs containing documentation about the error or recommended remediation steps
+          example:
+            knowledge-base: https://www.hubspot.com/products/service/knowledge-base
           type: object
         message:
           description: A human readable message describing the error along with remediation steps where appropriate
-          example: An error occurred
+          example: Invalid input (details will vary based on the error)
           type: string
         subCategory:
           description: A specific category that contains more specific detail about the error

@@ -640,6 +640,14 @@ components:
       description: NullMatch is an empty message to specify a null value.
       properties: {}
       type: object
+    OrMatcher:
+      description: Specifies a list of alternatives for the match.
+      properties:
+        valueMatchers:
+          items:
+            $ref: "#/components/schemas/ValueMatcher"
+          type: array
+      type: object
     PathSegment:
       description: Specifies the segment in a path to retrieve value from Struct.
       properties:
@@ -868,7 +876,7 @@ components:
           type: string
       type: object
     ValueMatcher:
-      description: "Specifies the way to match a ProtobufWkt::Value. Primitive values and ListValue are supported. StructValue is not supported and is always not matched. [#next-free-field: 7]"
+      description: "Specifies the way to match a ProtobufWkt::Value. Primitive values and ListValue are supported. StructValue is not supported and is always not matched. [#next-free-field: 8]"
       properties:
         boolMatch:
           description: If specified, a match occurs if and only if the target value is a bool value and is equal to this field.
@@ -882,6 +890,9 @@ components:
         nullMatch:
           $ref: "#/components/schemas/NullMatch"
           description: If specified, a match occurs if and only if the target value is a NullValue.
+        orMatch:
+          $ref: "#/components/schemas/OrMatcher"
+          description: If specified, a match occurs if and only if any of the alternatives in the match accept the value.
         presentMatch:
           description: If specified, value match will be performed based on whether the path is referring to a valid primitive value in the metadata. If the path is referring to a non-primitive value, the result is always not matched.
           type: boolean

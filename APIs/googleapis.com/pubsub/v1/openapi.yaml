@@ -1807,6 +1807,9 @@ components:
           items:
             type: string
           type: array
+        enforceInTransit:
+          description: Optional. If true, `allowed_persistence_regions` is also used to enforce in-transit guarantees for messages. That is, Pub/Sub will fail Publish operations on this topic and subscribe operations on any subscription attached to this topic in any region that is not in `allowed_persistence_regions`.
+          type: boolean
       type: object
     ModifyAckDeadlineRequest:
       description: Request for the ModifyAckDeadline method.

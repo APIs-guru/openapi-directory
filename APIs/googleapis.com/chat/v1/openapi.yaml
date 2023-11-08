@@ -2160,7 +2160,7 @@ components:
     ListMembershipsResponse:
       properties:
         memberships:
-          description: List of memberships in the requested (or first) page.
+          description: Unordered list. List of memberships in the requested (or first) page.
           items:
             $ref: "#/components/schemas/Membership"
           type: array

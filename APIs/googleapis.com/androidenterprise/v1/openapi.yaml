@@ -3481,7 +3481,7 @@ components:
             $ref: "#/components/schemas/AutoInstallConstraint"
           type: array
         autoInstallMode:
-          description: The auto-install mode. If unset defaults to "doNotAutoInstall".
+          description: The auto-install mode. If unset, defaults to "doNotAutoInstall". An app is automatically installed regardless of a set maintenance window.
           enum:
             - autoInstallModeUnspecified
             - doNotAutoInstall

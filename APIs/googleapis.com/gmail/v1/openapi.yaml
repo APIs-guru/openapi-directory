@@ -4677,6 +4677,9 @@ components:
           items:
             $ref: "#/components/schemas/Label"
           type: array
+        productId:
+          format: int32
+          type: integer
       type: object
     ListMessagesResponse:
       properties:

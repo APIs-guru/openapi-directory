@@ -582,7 +582,7 @@ components:
           type: string
       type: object
     GetIosPostInstallAttributionResponse:
-      description: Response for iSDK to execute strong match flow for post-install attribution.
+      description: Response for iSDK to execute strong match flow for post-install attribution. Information of the resolved FDL link.
       properties:
         appMinimumVersion:
           description: The minimum version for app, specified by dev through ?imv= parameter. Return to iSDK to allow app to evaluate if current version meets this.

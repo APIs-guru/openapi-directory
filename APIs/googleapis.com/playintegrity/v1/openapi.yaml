@@ -176,6 +176,30 @@ components:
             - UNEVALUATED
           type: string
       type: object
+    AppAccessRiskVerdict:
+      description: Contains signals about others apps on the device which could be used to access or control the requesting app.
+      properties:
+        otherApps:
+          description: Required. App access risk verdict related to apps that are not installed by Google Play, and are not preloaded on the system image by the device manufacturer.
+          enum:
+            - UNKNOWN
+            - UNEVALUATED
+            - NOT_INSTALLED
+            - INSTALLED
+            - CAPTURING
+            - CONTROLLING
+          type: string
+        playOrSystemApps:
+          description: Required. App access risk verdict related to apps that are not installed by the Google Play Store, and are not preloaded on the system image by the device manufacturer.
+          enum:
+            - UNKNOWN
+            - UNEVALUATED
+            - NOT_INSTALLED
+            - INSTALLED
+            - CAPTURING
+            - CONTROLLING
+          type: string
+      type: object
     AppIntegrity:
       description: Contains the application integrity information.
       properties:
@@ -233,6 +257,9 @@ components:
     EnvironmentDetails:
       description: Contains information about the environment Play Integrity API runs in, e.g. Play Protect verdict.
       properties:
+        appAccessRiskVerdict:
+          $ref: "#/components/schemas/AppAccessRiskVerdict"
+          description: The evaluation of the App Access Risk verdicts.
         playProtectVerdict:
           description: The evaluation of Play Protect verdict.
           enum:
