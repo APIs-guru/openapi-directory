@@ -27,8 +27,12 @@ info:
   x-providerName: hubapi.com
   x-serviceName: webhooks
 tags:
-  - name: Settings
-  - name: Subscriptions
+  - description: ""
+    name: Settings
+    x-hubspot-tag-name-english-source: Settings
+  - description: ""
+    name: Subscriptions
+    x-hubspot-tag-name-english-source: Subscriptions
 paths:
   /webhooks/v3/{appId}/settings:
     delete:

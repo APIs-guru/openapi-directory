@@ -3508,7 +3508,7 @@ components:
           type: array
         healthCheck:
           $ref: "#/components/schemas/HealthCheck"
-          description: Configures health checking for instances. Unhealthy instances are stopped and replaced with new instances. Only applicable in the App Engine flexible environment.Only returned in GET requests if view=FULL is set.
+          description: Configures health checking for instances. Unhealthy instances are stopped and replaced with new instances. Only applicable in the App Engine flexible environment.
         id:
           description: 'Relative name of the version within the service. Example: v1. Version names can contain only lowercase letters, numbers, or hyphens. Reserved names: "default", "latest", and any name with the prefix "ah-".'
           type: string
@@ -3537,7 +3537,7 @@ components:
           type: array
         livenessCheck:
           $ref: "#/components/schemas/LivenessCheck"
-          description: Configures liveness health checking for instances. Unhealthy instances are stopped and replaced with new instancesOnly returned in GET requests if view=FULL is set.
+          description: Configures liveness health checking for instances. Unhealthy instances are stopped and replaced with new instances
         manualScaling:
           $ref: "#/components/schemas/ManualScaling"
           description: A service with manual scaling runs continuously, allowing you to perform complex initialization and rely on the state of its memory over time. Manually scaled versions are sometimes referred to as "backends".
@@ -3552,7 +3552,7 @@ components:
           type: string
         readinessCheck:
           $ref: "#/components/schemas/ReadinessCheck"
-          description: Configures readiness health checking for instances. Unhealthy instances are not put into the backend traffic rotation.Only returned in GET requests if view=FULL is set.
+          description: Configures readiness health checking for instances. Unhealthy instances are not put into the backend traffic rotation.
         resources:
           $ref: "#/components/schemas/Resources"
           description: Machine resources for this version. Only applicable in the App Engine flexible environment.

@@ -24,8 +24,35 @@ info:
       version: "3.0"
   x-providerName: hubapi.com
   x-serviceName: conversations
-tags: []
-paths: {}
+tags:
+  - name: Generate
+paths:
+  /conversations/v3/visitor-identification/tokens/create:
+    post:
+      description: Generates a new visitor identification token. This token will be unique every time this endpoint is called, even if called with the same email address. This token is temporary and will expire after 12 hours
+      operationId: post-/conversations/v3/visitor-identification/tokens/create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IdentificationTokenGenerationRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IdentificationTokenResponse"
+          description: successful operation
+        default:
+          $ref: "#/components/responses/Error"
+      security:
+        - oauth2_legacy:
+            - conversations.visitor_identification.tokens.create
+        - private_apps_legacy: []
+      summary: Generate a token
+      tags:
+        - Generate
 components:
   responses:
     Error:
@@ -116,6 +143,40 @@ components:
           type: string
       required:
         - message
+      type: object
+    IdentificationTokenGenerationRequest:
+      description: Information used to generate a token
+      example:
+        email: visitor-email@example.com
+        firstName: Gob
+        lastName: Bluth
+      properties:
+        email:
+          description: The email of the visitor that you wish to identify
+          example: visitor-email@example.com
+          type: string
+        firstName:
+          description: The first name of the visitor that you wish to identify. This value will only be set in HubSpot for new contacts and existing contacts where first name is unknown. Optional.
+          example: Gob
+          type: string
+        lastName:
+          description: The last name of the visitor that you wish to identify. This value will only be set in HubSpot for new contacts and existing contacts where last name is unknown. Optional.
+          example: Bluth
+          type: string
+      required:
+        - email
+      type: object
+    IdentificationTokenResponse:
+      description: The identification token to be passed to the Conversations JS API to identify the visitor
+      example:
+        token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+      properties:
+        token:
+          description: ""
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+          type: string
+      required:
+        - token
       type: object
   securitySchemes:
     oauth2_legacy:

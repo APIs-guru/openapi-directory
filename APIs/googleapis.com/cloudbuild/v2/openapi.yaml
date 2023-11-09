@@ -947,6 +947,20 @@ components:
       description: The request message for Operations.CancelOperation.
       properties: {}
       type: object
+    Capabilities:
+      description: Capabilities adds and removes POSIX capabilities from running containers.
+      properties:
+        add:
+          description: Optional. Added capabilities +optional
+          items:
+            type: string
+          type: array
+        drop:
+          description: Optional. Removed capabilities +optional
+          items:
+            type: string
+          type: array
+      type: object
     ChildStatusReference:
       description: ChildStatusReference is used to point to the statuses of individual TaskRuns and Runs within this PipelineRun.
       properties:
@@ -1056,6 +1070,15 @@ components:
         value:
           description: Value of the environment variable.
           type: string
+      type: object
+    ExecAction:
+      description: ExecAction describes a "run in container" action.
+      properties:
+        command:
+          description: Optional. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. +optional
+          items:
+            type: string
+          type: array
       type: object
     Expr:
       description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."
@@ -1709,6 +1732,17 @@ components:
           format: int32
           type: integer
       type: object
+    Probe:
+      description: Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.
+      properties:
+        exec:
+          $ref: "#/components/schemas/ExecAction"
+          description: Optional. Exec specifies the action to take. +optional
+        periodSeconds:
+          description: Optional. How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1. +optional
+          format: int32
+          type: integer
+      type: object
     PropertySpec:
       description: PropertySpec holds information about a property in an object.
       properties:
@@ -1799,9 +1833,26 @@ components:
     SecurityContext:
       description: Security options the container should be run with.
       properties:
+        allowPrivilegeEscalation:
+          description: "Optional. AllowPrivilegeEscalation controls whether a process can gain more privileges than its parent process. This bool directly controls if the no_new_privs flag will be set on the container process. AllowPrivilegeEscalation is true always when the container is: 1) run as Privileged 2) has CAP_SYS_ADMIN Note that this field cannot be set when spec.os.name is windows. +optional"
+          type: boolean
+        capabilities:
+          $ref: "#/components/schemas/Capabilities"
+          description: Optional. Adds and removes POSIX capabilities from running containers.
         privileged:
           description: Run container in privileged mode.
           type: boolean
+        runAsGroup:
+          description: Optional. The GID to run the entrypoint of the container process. Uses runtime default if unset. May also be set in PodSecurityContext. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. Note that this field cannot be set when spec.os.name is windows. +optional
+          format: int64
+          type: string
+        runAsNonRoot:
+          description: Optional. Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed. May also be set in PodSecurityContext. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. +optional
+          type: boolean
+        runAsUser:
+          description: Optional. The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified. May also be set in PodSecurityContext. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence. Note that this field cannot be set when spec.os.name is windows. +optional
+          format: int64
+          type: string
       type: object
     SetIamPolicyRequest:
       description: Request message for `SetIamPolicy` method.
@@ -1838,12 +1889,15 @@ components:
         name:
           description: Name of the Sidecar.
           type: string
+        readinessProbe:
+          $ref: "#/components/schemas/Probe"
+          description: "Optional. Periodic probe of Sidecar service readiness. Container will be removed from service endpoints if the probe fails. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes +optional"
         script:
           description: The contents of an executable file to execute.
           type: string
         securityContext:
           $ref: "#/components/schemas/SecurityContext"
-          description: Security options the container should be run with.
+          description: Optional. Security options the container should be run with.
         volumeMounts:
           description: Pod volumes to mount into the container's filesystem.
           items:
@@ -1914,6 +1968,9 @@ components:
         script:
           description: The contents of an executable file to execute.
           type: string
+        securityContext:
+          $ref: "#/components/schemas/SecurityContext"
+          description: "Optional. SecurityContext defines the security options the Step should be run with. If set, the fields of SecurityContext override the equivalent fields of PodSecurityContext. More info: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/ +optional"
         timeout:
           description: Time after which the Step times out. Defaults to never.
           format: google-duration
@@ -1926,6 +1983,15 @@ components:
         workingDir:
           description: Container's working directory.
           type: string
+      type: object
+    StepTemplate:
+      description: StepTemplate can be used as the basis for all step containers within the Task, so that the steps inherit settings on the base container.
+      properties:
+        env:
+          description: Optional. List of environment variables to set in the Step. Cannot be updated.
+          items:
+            $ref: "#/components/schemas/EnvVar"
+          type: array
       type: object
     TaskRef:
       description: TaskRef can be used to refer to a specific instance of a task. PipelineRef can be used to refer to a specific instance of a Pipeline.
@@ -1999,6 +2065,11 @@ components:
           description: Sidecars that run alongside the Task's step containers.
           items:
             $ref: "#/components/schemas/Sidecar"
+          type: array
+        stepTemplate:
+          description: Optional. StepTemplate can be used as the basis for all step containers within the Task, so that the steps inherit settings on the base container.
+          items:
+            $ref: "#/components/schemas/StepTemplate"
           type: array
         steps:
           description: Steps of the task.
@@ -2141,6 +2212,9 @@ components:
         name:
           description: Name is the name by which you can bind the volume at runtime.
           type: string
+        optional:
+          description: Optional. Optional marks a Workspace as not being required in TaskRuns. By default this field is false and so declared workspaces are required.
+          type: boolean
         readOnly:
           description: ReadOnly dictates whether a mounted volume is writable.
           type: boolean

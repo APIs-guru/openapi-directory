@@ -3160,6 +3160,9 @@ components:
             - individual
             - organization
           type: string
+        unincorporatedPartnership:
+          $ref: "#/components/schemas/UnincorporatedPartnership"
+          description: Information about the unincorporated partnership. Required if `type` is **unincorporatedPartnership**.
       required:
         - id
       type: object
@@ -3328,6 +3331,9 @@ components:
             - individual
             - organization
           type: string
+        unincorporatedPartnership:
+          $ref: "#/components/schemas/UnincorporatedPartnership"
+          description: Information about the unincorporated partnership. Required if `type` is **unincorporatedPartnership**.
       type: object
     LegalEntityInfoRequiredType:
       properties:
@@ -3366,6 +3372,9 @@ components:
             - individual
             - organization
           type: string
+        unincorporatedPartnership:
+          $ref: "#/components/schemas/UnincorporatedPartnership"
+          description: Information about the unincorporated partnership. Required if `type` is **unincorporatedPartnership**.
       required:
         - type
       type: object
@@ -3829,6 +3838,63 @@ components:
             - pooledSuperannuationTrust
             - publicTradingTrust
             - unlistedPublicUnitTrust
+          type: string
+        vatAbsenceReason:
+          description: |-
+            The reason for not providing a VAT number.
+
+            Possible values: **industryExemption**, **belowTaxThreshold**.
+          enum:
+            - industryExemption
+            - belowTaxThreshold
+          type: string
+        vatNumber:
+          description: The VAT number.
+          type: string
+      required:
+        - name
+        - countryOfGoverningLaw
+        - registeredAddress
+        - type
+      type: object
+    UnincorporatedPartnership:
+      properties:
+        countryOfGoverningLaw:
+          description: The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code of the governing country.
+          type: string
+        doingBusinessAs:
+          description: The registered name, if different from the `name`.
+          type: string
+        name:
+          description: The legal name.
+          type: string
+        principalPlaceOfBusiness:
+          $ref: "#/components/schemas/Address"
+          description: The business address. Required if the principal place of business is different from the `registeredAddress`.
+        registeredAddress:
+          $ref: "#/components/schemas/Address"
+          description: The address registered at the registrar, such as the Chamber of Commerce.
+        registrationNumber:
+          description: The registration number.
+          type: string
+        type:
+          description: Type of Partnership.{POSSIBLE_VALUES}
+          enum:
+            - limitedPartnership
+            - generalPartnership
+            - familyPartnership
+            - commercialPartnership
+            - publicPartnership
+            - otherPartnership
+            - gbr
+            - gmbh
+            - kgaa
+            - cv
+            - vof
+            - maatschap
+            - privateFundLimitedPartnership
+            - businessTrustEntity
+            - businessPartnership
           type: string
         vatAbsenceReason:
           description: |-

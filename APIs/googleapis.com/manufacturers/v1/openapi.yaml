@@ -452,6 +452,11 @@ components:
         capacity:
           $ref: "#/components/schemas/Capacity"
           description: The capacity of the product. For more information, see https://support.google.com/manufacturers/answer/6124116#capacity.
+        certification:
+          description: Optional. List of certifications claimed by this product.
+          items:
+            $ref: "#/components/schemas/GoogleShoppingManufacturersV1ProductCertification"
+          type: array
         color:
           description: The color of the product. For more information, see https://support.google.com/manufacturers/answer/6124116#color.
           type: string
@@ -669,6 +674,19 @@ components:
           type: number
         unit:
           description: unit.
+          type: string
+      type: object
+    GoogleShoppingManufacturersV1ProductCertification:
+      description: Description of a certification.
+      properties:
+        authority:
+          description: Required. Name of the certification body.
+          type: string
+        code:
+          description: Required. A unique code to identify the certification.
+          type: string
+        name:
+          description: Required. Name of the certification.
           type: string
       type: object
     Grocery:

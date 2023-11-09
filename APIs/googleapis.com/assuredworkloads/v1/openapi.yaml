@@ -596,6 +596,13 @@ components:
     GoogleCloudAssuredworkloadsV1AcknowledgeViolationRequest:
       description: "Request for acknowledging the violation Next Id: 5"
       properties:
+        acknowledgeType:
+          description: Optional. Acknowledge type of specified violation.
+          enum:
+            - ACKNOWLEDGE_TYPE_UNSPECIFIED
+            - SINGLE_VIOLATION
+            - EXISTING_CHILD_RESOURCE_VIOLATIONS
+          type: string
         comment:
           description: Required. Business justification explaining the need for violation acknowledgement
           type: string
@@ -770,6 +777,10 @@ components:
           description: Optional. Timestamp when this violation was acknowledged first. Check exception_contexts to find the last time the violation was acknowledged when there are more than one violations. This field will be absent when acknowledged field is marked as false.
           format: google-datetime
           type: string
+        associatedOrgPolicyViolationId:
+          description: Optional. Output only. Violation Id of the org-policy violation due to which the resource violation is caused. Empty for org-policy violations.
+          readOnly: true
+          type: string
         auditLogLink:
           description: "Output only. Immutable. Audit Log Link for violated resource Format: https://console.cloud.google.com/logs/query;query={logName}{protoPayload.resourceName}{timeRange}{folder}"
           readOnly: true
@@ -810,6 +821,10 @@ components:
           description: Output only. Immutable. The org-policy-constraint that was incorrectly changed, which resulted in this violation.
           readOnly: true
           type: string
+        parentProjectNumber:
+          description: Optional. Output only. Parent project number where resource is present. Empty for org-policy violations.
+          readOnly: true
+          type: string
         remediation:
           $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1ViolationRemediation"
           description: Output only. Compliance violation remediation
@@ -817,6 +832,14 @@ components:
         resolveTime:
           description: Output only. Time of the event which fixed the Violation. If the violation is ACTIVE this will be empty.
           format: google-datetime
+          readOnly: true
+          type: string
+        resourceName:
+          description: Optional. Output only. Name of the resource like //storage.googleapis.com/myprojectxyz-testbucket. Empty for org-policy violations.
+          readOnly: true
+          type: string
+        resourceType:
+          description: Optional. Output only. Type of the resource like compute.googleapis.com/Disk, etc. Empty for org-policy violations.
           readOnly: true
           type: string
         state:
@@ -831,6 +854,14 @@ components:
         updateTime:
           description: Output only. The last time when the Violation record was updated.
           format: google-datetime
+          readOnly: true
+          type: string
+        violationType:
+          description: Output only. Type of the violation
+          enum:
+            - VIOLATION_TYPE_UNSPECIFIED
+            - ORG_POLICY
+            - RESOURCE
           readOnly: true
           type: string
       type: object
@@ -867,6 +898,7 @@ components:
             - REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION
             - REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION
             - REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION
+            - REMEDIATION_RESOURCE_VIOLATION
           readOnly: true
           type: string
       type: object
@@ -1036,8 +1068,16 @@ components:
     GoogleCloudAssuredworkloadsV1WorkloadComplianceStatus:
       description: Represents the Compliance Status of this workload
       properties:
+        acknowledgedResourceViolationCount:
+          description: Number of current resource violations which are not acknowledged.
+          format: int32
+          type: integer
         acknowledgedViolationCount:
           description: Number of current orgPolicy violations which are acknowledged.
+          format: int32
+          type: integer
+        activeResourceViolationCount:
+          description: Number of current resource violations which are acknowledged.
           format: int32
           type: integer
         activeViolationCount:
