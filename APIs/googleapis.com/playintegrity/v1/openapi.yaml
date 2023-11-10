@@ -272,16 +272,6 @@ components:
             - POSSIBLE_RISK
           type: string
       type: object
-    GuidanceDetails:
-      deprecated: true
-      description: "Deprecated: this field is not used. Contains guidance details about the Integrity API response, providing additional context to the integrity verdicts."
-      properties:
-        userRemediationDetails:
-          description: This shows when there is an issue with at least one of the integrity verdicts, which can be remedied by the user and provides additional details.
-          items:
-            $ref: "#/components/schemas/UserRemediationDetails"
-          type: array
-      type: object
     RequestDetails:
       description: Contains the integrity request information.
       properties:
@@ -321,31 +311,12 @@ components:
         environmentDetails:
           $ref: "#/components/schemas/EnvironmentDetails"
           description: Details of the environment Play Integrity API runs in.
-        guidanceDetails:
-          $ref: "#/components/schemas/GuidanceDetails"
-          deprecated: true
-          description: "Deprecated: this field is not used. Additional guidance related to the integrity API response."
         requestDetails:
           $ref: "#/components/schemas/RequestDetails"
           description: Required. Details about the integrity request.
         testingDetails:
           $ref: "#/components/schemas/TestingDetails"
           description: Indicates that this payload is generated for testing purposes and contains any additional data that is linked with testing status.
-      type: object
-    UserRemediationDetails:
-      deprecated: true
-      description: "Deprecated: this field is not used. Contains details of remediation guidance that the user can perform."
-      properties:
-        remediation:
-          description: Description of the user remediation action.
-          enum:
-            - UNKNOWN_USER_REMEDIATION
-            - RESTORE_FACTORY_ROM
-            - LOCK_BOOTLOADER
-            - GET_UNMODIFIED_APP
-            - SIGN_INTO_GOOGLE_ACCOUNT
-            - INSTALL_APP_FROM_PLAY
-          type: string
       type: object
   securitySchemes:
     Oauth2:

@@ -2632,6 +2632,12 @@ components:
           description: Output only. Resource name of the device.
           readOnly: true
           type: string
+        networkBandwidthReport:
+          description: Output only. Network bandwidth reports collected periodically sorted in a decreasing order of report_time.
+          items:
+            $ref: "#/components/schemas/GoogleChromeManagementV1NetworkBandwidthReport"
+          readOnly: true
+          type: array
         networkDiagnosticsReport:
           description: Output only. Network diagnostics collected periodically.
           items:
