@@ -803,7 +803,7 @@ components:
           description: Location where compute resources should be allocated for the Job.
         network:
           $ref: "#/components/schemas/NetworkPolicy"
-          description: The network policy.
+          description: The network policy. If you define an instance template in the InstancePolicyOrTemplate field, Batch will use the network settings in the instance template instead of this field.
         placement:
           $ref: "#/components/schemas/PlacementPolicy"
           description: The placement policy.

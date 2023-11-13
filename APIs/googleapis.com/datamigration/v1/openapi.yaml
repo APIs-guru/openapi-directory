@@ -672,6 +672,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1/{name}:demoteDestination:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Demotes the destination database to become a read replica of the source. This is applicable for the following migrations: 1. MySQL to Cloud SQL (for MySQL) 2. PostgreSQL to Cloud SQL (for PostgreSQL) 3. PostgreSQL to AlloyDB."
+      operationId: datamigration.projects.locations.migrationJobs.demoteDestination
+      parameters:
+        - description: Name of the migration job resource to demote its destination.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DemoteDestinationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{name}:fetchStaticIps:
     get:
       description: Fetches a set of static IP addresses that need to be allowlisted by the customer when using the static-IP connectivity method.
@@ -2030,6 +2072,15 @@ components:
             - MYSQL_5_6
             - MYSQL_5_7
             - MYSQL_8_0
+            - MYSQL_8_0_18
+            - MYSQL_8_0_26
+            - MYSQL_8_0_27
+            - MYSQL_8_0_28
+            - MYSQL_8_0_30
+            - MYSQL_8_0_31
+            - MYSQL_8_0_32
+            - MYSQL_8_0_33
+            - MYSQL_8_0_34
             - POSTGRES_9_6
             - POSTGRES_11
             - POSTGRES_10
@@ -2485,6 +2536,10 @@ components:
             - AURORA
             - ALLOYDB
           type: string
+      type: object
+    DemoteDestinationRequest:
+      description: Request message for 'DemoteDestination' request.
+      properties: {}
       type: object
     DescribeConversionWorkspaceRevisionsResponse:
       description: Response message for 'DescribeConversionWorkspaceRevisions' request.

@@ -1501,7 +1501,7 @@ components:
       description: Authorization defines the On-Prem cluster authorization configuration to bootstrap onto the admin cluster.
       properties:
         adminUsers:
-          description: Required. For VMware and bare metal user clusters, users will be granted the cluster-admin role on the cluster, which provides full administrative access to the cluster. For bare metal admin clusters, users will be granted the cluster-view role, which limits users to read-only access.
+          description: For VMware and bare metal user clusters, users will be granted the cluster-admin role on the cluster, which provides full administrative access to the cluster. For bare metal admin clusters, users will be granted the cluster-view role, which limits users to read-only access.
           items:
             $ref: "#/components/schemas/ClusterUser"
           type: array
@@ -3109,6 +3109,15 @@ components:
           $ref: "#/components/schemas/VmwareAutoResizeConfig"
           description: VmwareAutoResizeConfig config specifies auto resize config.
       type: object
+    VmwareAdminAuthorizationConfig:
+      description: VmwareAdminAuthorizationConfig represents configuration for admin cluster authorization.
+      properties:
+        viewerUsers:
+          description: For VMware admin clusters, users will be granted the cluster-viewer role on the cluster.
+          items:
+            $ref: "#/components/schemas/ClusterUser"
+          type: array
+      type: object
     VmwareAdminCluster:
       description: Resource that represents a VMware admin cluster.
       properties:
@@ -3123,6 +3132,9 @@ components:
         antiAffinityGroups:
           $ref: "#/components/schemas/VmwareAAGConfig"
           description: The VMware admin cluster anti affinity group configuration.
+        authorization:
+          $ref: "#/components/schemas/VmwareAdminAuthorizationConfig"
+          description: The VMware admin cluster authorization configuration.
         autoRepairConfig:
           $ref: "#/components/schemas/VmwareAutoRepairConfig"
           description: The VMware admin cluster auto repair configuration.

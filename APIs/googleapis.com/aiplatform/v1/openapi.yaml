@@ -348,6 +348,90 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1/{endpoint}:computeTokens:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Return a list of tokens based on the input text.
+      operationId: aiplatform.projects.locations.publishers.models.computeTokens
+      parameters:
+        - description: Required. The name of the Endpoint requested to get lists of tokens and token ids.
+          in: path
+          name: endpoint
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1ComputeTokensRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1ComputeTokensResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{endpoint}:countTokens:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Perform a token counting.
+      operationId: aiplatform.projects.locations.publishers.models.countTokens
+      parameters:
+        - description: "Required. The name of the Endpoint requested to perform token counting. Format: `projects/{project}/locations/{location}/endpoints/{endpoint}`"
+          in: path
+          name: endpoint
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1CountTokensRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1CountTokensResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{endpoint}:deployModel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -7989,6 +8073,23 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleCloudAiplatformV1ComputeTokensRequest:
+      description: Request message for ComputeTokens RPC call.
+      properties:
+        instances:
+          description: Required. The instances that are the input to token computing API call. Schema is identical to the prediction schema of the text model, even for the non-text models, like chat models, or Codey models.
+          items: {}
+          type: array
+      type: object
+    GoogleCloudAiplatformV1ComputeTokensResponse:
+      description: Response message for ComputeTokens RPC call.
+      properties:
+        tokensInfo:
+          description: Lists of tokens info from the input. A ComputeTokensRequest could have multiple instances with a prompt in each instance. We also need to return lists of tokens info for the request with multiple instances.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1TokensInfo"
+          type: array
+      type: object
     GoogleCloudAiplatformV1ContainerRegistryDestination:
       description: The Container Registry location for the container image.
       properties:
@@ -8099,6 +8200,26 @@ components:
           description: Output only. The version ID of the model that is copied.
           readOnly: true
           type: string
+      type: object
+    GoogleCloudAiplatformV1CountTokensRequest:
+      description: Request message for PredictionService.CountTokens.
+      properties:
+        instances:
+          description: Required. The instances that are the input to token counting call. Schema is identical to the prediction schema of the underlying model.
+          items: {}
+          type: array
+      type: object
+    GoogleCloudAiplatformV1CountTokensResponse:
+      description: Response message for PredictionService.CountTokens.
+      properties:
+        totalBillableCharacters:
+          description: The total number of billable characters counted across all instances from the request.
+          format: int32
+          type: integer
+        totalTokens:
+          description: The total number of tokens counted across all instances from the request.
+          format: int32
+          type: integer
       type: object
     GoogleCloudAiplatformV1CreateDatasetOperationMetadata:
       description: Runtime operation information for DatasetService.CreateDataset.
@@ -8778,7 +8899,7 @@ components:
           type: string
         dedicatedResources:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1DedicatedResources"
-          description: "Optional. A description of resources that are dedicated to the DeployedIndex, and that need a higher degree of manual configuration. If min_replica_count is not set, the default value is 2 (we don't provide SLA when min_replica_count=1). If max_replica_count is not set, the default value is min_replica_count. The max allowed replica count is 1000. Available machine types for SMALL shard: e2-standard-2 and all machine types available for MEDIUM and LARGE shard. Available machine types for MEDIUM shard: e2-standard-16 and all machine types available for LARGE shard. Available machine types for LARGE shard: e2-highmem-16, n2d-standard-32. n1-standard-16 and n1-standard-32 are still available, but we recommend e2-standard-16 and e2-highmem-16 for cost efficiency."
+          description: "Optional. A description of resources that are dedicated to the DeployedIndex, and that need a higher degree of manual configuration. The field min_replica_count must be set to a value strictly greater than 0, or else validation will fail. We don't provide SLA when min_replica_count=1. If max_replica_count is not set, the default value is min_replica_count. The max allowed replica count is 1000. Available machine types for SMALL shard: e2-standard-2 and all machine types available for MEDIUM and LARGE shard. Available machine types for MEDIUM shard: e2-standard-16 and all machine types available for LARGE shard. Available machine types for LARGE shard: e2-highmem-16, n2d-standard-32. n1-standard-16 and n1-standard-32 are still available, but we recommend e2-standard-16 and e2-highmem-16 for cost efficiency."
         deployedIndexAuthConfig:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1DeployedIndexAuthConfig"
           description: Optional. If set, the authentication is enabled for the private endpoint.
@@ -9886,12 +10007,6 @@ components:
           format: google-datetime
           readOnly: true
           type: string
-        dedicatedServingEndpoint:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1FeatureOnlineStoreDedicatedServingEndpoint"
-          description: Optional. The dedicated serving endpoint for this FeatureOnlineStore, which is different from common Vertex service endpoint.
-        embeddingManagement:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1FeatureOnlineStoreEmbeddingManagement"
-          description: Optional. The settings for embedding management in FeatureOnlineStore.
         etag:
           description: Optional. Used to perform consistent read-modify-write updates. If not set, a blind "overwrite" update happens.
           type: string
@@ -9938,28 +10053,6 @@ components:
           description: Required. The minimum number of nodes to scale down to. Must be greater than or equal to 1.
           format: int32
           type: integer
-      type: object
-    GoogleCloudAiplatformV1FeatureOnlineStoreDedicatedServingEndpoint:
-      description: The dedicated serving endpoint for this FeatureOnlineStore. Only need to set when you choose Optimized storage type or enable EmbeddingManagement. Will use public endpoint by default.
-      properties:
-        privateServiceConnectConfig:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1PrivateServiceConnectConfig"
-          description: Optional. Private service connect config. If PrivateServiceConnectConfig.enable_private_service_connect set to true, customers will use private service connection to send request. Otherwise, the connection will set to public endpoint.
-        publicEndpointDomainName:
-          description: Output only. This field will be populated with the domain name to use for this FeatureOnlineStore
-          readOnly: true
-          type: string
-        serviceAttachment:
-          description: Output only. The name of the service attachment resource. Populated if private service connect is enabled and after FeatureViewSync is created.
-          readOnly: true
-          type: string
-      type: object
-    GoogleCloudAiplatformV1FeatureOnlineStoreEmbeddingManagement:
-      description: Contains settings for embedding management.
-      properties:
-        enabled:
-          description: Optional. Immutable. Whether to enable embedding management in this FeatureOnlineStore. It's immutable after creation to ensure the FeatureOnlineStore availability.
-          type: boolean
       type: object
     GoogleCloudAiplatformV1FeatureSelector:
       description: Selector for Features of an EntityType.
@@ -10099,9 +10192,6 @@ components:
           format: google-datetime
           readOnly: true
           type: string
-        vectorSearchConfig:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1FeatureViewVectorSearchConfig"
-          description: Optional. Configuration for vector search. It contains the required configurations to create an index from source data, so that approximate nearest neighbor (a.k.a ANN) algorithms search can be performed during online serving.
       type: object
     GoogleCloudAiplatformV1FeatureViewBigQuerySource:
       properties:
@@ -10160,49 +10250,6 @@ components:
       properties:
         cron:
           description: 'Cron schedule (https://en.wikipedia.org/wiki/Cron) to launch scheduled runs. To explicitly set a timezone to the cron tab, apply a prefix in the cron tab: "CRON_TZ=${IANA_TIME_ZONE}" or "TZ=${IANA_TIME_ZONE}". The ${IANA_TIME_ZONE} may only be a valid string from IANA time zone database. For example, "CRON_TZ=America/New_York 1 * * * *", or "TZ=America/New_York 1 * * * *".'
-          type: string
-      type: object
-    GoogleCloudAiplatformV1FeatureViewVectorSearchConfig:
-      description: Configuration for vector search.
-      properties:
-        bruteForceConfig:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1FeatureViewVectorSearchConfigBruteForceConfig"
-          description: Optional. Configuration options for using brute force search, which simply implements the standard linear search in the database for each query. It is primarily meant for benchmarking and to generate the ground truth for approximate search.
-        crowdingColumn:
-          description: Optional. Column of crowding. This column contains crowding attribute which is a constraint on a neighbor list produced by nearest neighbor search requiring that no more than some value k' of the k neighbors returned have the same value of crowding_attribute.
-          type: string
-        distanceMeasureType:
-          description: Optional. The distance measure used in nearest neighbor search.
-          enum:
-            - DISTANCE_MEASURE_TYPE_UNSPECIFIED
-            - SQUARED_L2_DISTANCE
-            - COSINE_DISTANCE
-            - DOT_PRODUCT_DISTANCE
-          type: string
-        embeddingColumn:
-          description: Optional. Column of embedding. This column contains the source data to create index for vector search. embedding_column must be set when using vector search.
-          type: string
-        embeddingDimension:
-          description: Optional. The number of dimensions of the input embedding.
-          format: int32
-          type: integer
-        filterColumns:
-          description: Optional. Columns of features that're used to filter vector search results.
-          items:
-            type: string
-          type: array
-        treeAhConfig:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1FeatureViewVectorSearchConfigTreeAHConfig"
-          description: "Optional. Configuration options for the tree-AH algorithm (Shallow tree + Asymmetric Hashing). Please refer to this paper for more details: https://arxiv.org/abs/1908.10396"
-      type: object
-    GoogleCloudAiplatformV1FeatureViewVectorSearchConfigBruteForceConfig:
-      properties: {}
-      type: object
-    GoogleCloudAiplatformV1FeatureViewVectorSearchConfigTreeAHConfig:
-      properties:
-        leafNodeEmbeddingCount:
-          description: Optional. Number of embeddings on each leaf node. The default value is 1000 if not set.
-          format: int64
           type: string
       type: object
     GoogleCloudAiplatformV1Featurestore:
@@ -16981,7 +17028,7 @@ components:
           type: array
       type: object
     GoogleCloudAiplatformV1Study:
-      description: "A message representing a Study. Next id: 12"
+      description: A message representing a Study.
       properties:
         createTime:
           description: Output only. Time at which the study was created.
@@ -17744,6 +17791,22 @@ components:
           description: The fraction of the input data that is to be used to validate the Model.
           format: double
           type: number
+      type: object
+    GoogleCloudAiplatformV1TokensInfo:
+      description: Tokens info with a list of tokens and the corresponding list of token ids.
+      properties:
+        tokenIds:
+          description: A list of token ids from the input.
+          items:
+            format: int64
+            type: string
+          type: array
+        tokens:
+          description: A list of tokens from the input.
+          items:
+            format: byte
+            type: string
+          type: array
       type: object
     GoogleCloudAiplatformV1TrainingConfig:
       description: CMLE training config. For every active learning labeling iteration, system will train a machine learning model on CMLE. The trained model will be used by data sampling algorithm to select DataItems.

@@ -1315,6 +1315,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         gitSync:
           description: Deployment state of the git-sync pod
@@ -1323,6 +1324,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         importer:
           description: Deployment state of the importer pod
@@ -1331,6 +1333,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         monitor:
           description: Deployment state of the monitor pod
@@ -1339,6 +1342,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         reconcilerManager:
           description: Deployment state of reconciler-manager pod
@@ -1347,6 +1351,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         rootReconciler:
           description: Deployment state of root-reconciler
@@ -1355,6 +1360,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         syncer:
           description: Deployment state of the syncer pod
@@ -1363,6 +1369,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
       type: object
     ConfigManagementConfigSyncError:
@@ -1441,6 +1448,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         gatekeeperControllerManagerState:
           description: Status of gatekeeper-controller-manager pod.
@@ -1449,6 +1457,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         gatekeeperMutation:
           description: Status of the pod serving the mutation webhook.
@@ -1457,6 +1466,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
       type: object
     ConfigManagementGitConfig:
@@ -1524,6 +1534,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         hnc:
           description: The deployment state for open source HNC (e.g. v0.7.0-hc.0)
@@ -1532,6 +1543,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
       type: object
     ConfigManagementHierarchyControllerState:
@@ -1639,6 +1651,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         errors:
           description: Install errors.
@@ -1796,6 +1809,13 @@ components:
           $ref: "#/components/schemas/TypeMeta"
           description: Kubernetes type of the resource.
       type: object
+    DefaultClusterConfig:
+      description: DefaultClusterConfig describes the default cluster configurations to be applied to all clusters born-in-fleet.
+      properties:
+        securityPostureConfig:
+          $ref: "#/components/schemas/SecurityPostureConfig"
+          description: Enable/Disable Security Posture features for the cluster.
+      type: object
     EdgeCluster:
       description: EdgeCluster contains information specific to Google Edge Clusters.
       properties:
@@ -1928,6 +1948,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        defaultClusterConfig:
+          $ref: "#/components/schemas/DefaultClusterConfig"
+          description: Optional. The default cluster configurations to apply across the fleet.
         deleteTime:
           description: Output only. When the Fleet was deleted.
           format: google-datetime
@@ -3206,6 +3229,25 @@ components:
             - DELETING
             - UPDATING
           readOnly: true
+          type: string
+      type: object
+    SecurityPostureConfig:
+      description: SecurityPostureConfig defines the flags needed to enable/disable features for the Security Posture API.
+      properties:
+        mode:
+          description: Sets which mode to use for Security Posture features.
+          enum:
+            - MODE_UNSPECIFIED
+            - DISABLED
+            - BASIC
+          type: string
+        vulnerabilityMode:
+          description: Sets which mode to use for vulnerability scanning.
+          enum:
+            - VULNERABILITY_MODE_UNSPECIFIED
+            - VULNERABILITY_DISABLED
+            - VULNERABILITY_BASIC
+            - VULNERABILITY_ENTERPRISE
           type: string
       type: object
     ServiceMeshControlPlaneManagement:

@@ -1312,6 +1312,9 @@ components:
             - V2_ALPHA1
           readOnly: true
           type: string
+        autocheckpointEnabled:
+          description: Optional. Whether Autocheckpoint is enabled.
+          type: boolean
         bootDiskConfig:
           $ref: "#/components/schemas/BootDiskConfig"
           description: Optional. Boot disk configuration.

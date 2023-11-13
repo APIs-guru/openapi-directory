@@ -2911,6 +2911,8 @@ components:
             - SQL_API_WARNING_CODE_UNSPECIFIED
             - REGION_UNREACHABLE
             - MAX_RESULTS_EXCEEDS_LIMIT
+            - COMPROMISED_CREDENTIALS
+            - INTERNAL_STATE_FAILURE
           type: string
         message:
           description: The warning message.
@@ -3525,6 +3527,12 @@ components:
         settings:
           $ref: "#/components/schemas/Settings"
           description: The user settings.
+        sqlNetworkArchitecture:
+          enum:
+            - SQL_NETWORK_ARCHITECTURE_UNSPECIFIED
+            - NEW_NETWORK_ARCHITECTURE
+            - OLD_NETWORK_ARCHITECTURE
+          type: string
         state:
           description: The current serving state of the Cloud SQL instance.
           enum:
@@ -4257,6 +4265,7 @@ components:
             - SQL_UPDATE_TRACK_UNSPECIFIED
             - canary
             - stable
+            - week5
           type: string
       type: object
     MySqlReplicaConfiguration:
@@ -4341,6 +4350,9 @@ components:
     Operation:
       description: An Operation resource. For successful operations that return an Operation resource, only the fields relevant to the operation are populated in the resource.
       properties:
+        apiWarning:
+          $ref: "#/components/schemas/ApiWarning"
+          description: An Admin API warning message.
         backupContext:
           $ref: "#/components/schemas/BackupContext"
           description: The context for backup operation, if applicable.
@@ -4571,6 +4583,9 @@ components:
             - COMPLEXITY_UNSPECIFIED
             - COMPLEXITY_DEFAULT
           type: string
+        disallowCompromisedCredentials:
+          description: Disallow credentials that have been previously compromised by a public data breach.
+          type: boolean
         disallowUsernameSubstring:
           description: Disallow username as a part of the password.
           type: boolean

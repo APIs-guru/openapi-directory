@@ -395,6 +395,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1beta1/{endpoint}:computeTokens:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Return a list of tokens based on the input text.
+      operationId: aiplatform.projects.locations.publishers.models.computeTokens
+      parameters:
+        - description: Required. The name of the Endpoint requested to get lists of tokens and token ids.
+          in: path
+          name: endpoint
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1ComputeTokensRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1ComputeTokensResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1beta1/{endpoint}:countTokens:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -8376,6 +8418,23 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleCloudAiplatformV1beta1ComputeTokensRequest:
+      description: Request message for ComputeTokens RPC call.
+      properties:
+        instances:
+          description: Required. The instances that are the input to token computing API call. Schema is identical to the prediction schema of the text model, even for the non-text models, like chat models, or Codey models.
+          items: {}
+          type: array
+      type: object
+    GoogleCloudAiplatformV1beta1ComputeTokensResponse:
+      description: Response message for ComputeTokens RPC call.
+      properties:
+        tokensInfo:
+          description: Lists of tokens info from the input. A ComputeTokensRequest could have multiple instances with a prompt in each instance. We also need to return lists of tokens info for the request with multiple instances.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1TokensInfo"
+          type: array
+      type: object
     GoogleCloudAiplatformV1beta1ContainerRegistryDestination:
       description: The Container Registry location for the container image.
       properties:
@@ -9250,7 +9309,7 @@ components:
           type: string
         dedicatedResources:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1DedicatedResources"
-          description: "Optional. A description of resources that are dedicated to the DeployedIndex, and that need a higher degree of manual configuration. If min_replica_count is not set, the default value is 2 (we don't provide SLA when min_replica_count=1). If max_replica_count is not set, the default value is min_replica_count. The max allowed replica count is 1000. Available machine types for SMALL shard: e2-standard-2 and all machine types available for MEDIUM and LARGE shard. Available machine types for MEDIUM shard: e2-standard-16 and all machine types available for LARGE shard. Available machine types for LARGE shard: e2-highmem-16, n2d-standard-32. n1-standard-16 and n1-standard-32 are still available, but we recommend e2-standard-16 and e2-highmem-16 for cost efficiency."
+          description: "Optional. A description of resources that are dedicated to the DeployedIndex, and that need a higher degree of manual configuration. The field min_replica_count must be set to a value strictly greater than 0, or else validation will fail. We don't provide SLA when min_replica_count=1. If max_replica_count is not set, the default value is min_replica_count. The max allowed replica count is 1000. Available machine types for SMALL shard: e2-standard-2 and all machine types available for MEDIUM and LARGE shard. Available machine types for MEDIUM shard: e2-standard-16 and all machine types available for LARGE shard. Available machine types for LARGE shard: e2-highmem-16, n2d-standard-32. n1-standard-16 and n1-standard-32 are still available, but we recommend e2-standard-16 and e2-highmem-16 for cost efficiency."
         deployedIndexAuthConfig:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1DeployedIndexAuthConfig"
           description: Optional. If set, the authentication is enabled for the private endpoint.
@@ -14902,6 +14961,9 @@ components:
             - DONE
             - FAILED
           type: string
+        status:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: Optional. The error details of the event.
         vmToken:
           description: Required. The VM identity token (a JWT) for authenticating the VM. https://cloud.google.com/compute/docs/instances/verifying-instance-identity
           type: string
@@ -17909,7 +17971,7 @@ components:
           type: array
       type: object
     GoogleCloudAiplatformV1beta1Study:
-      description: "A message representing a Study. Next id: 12"
+      description: A message representing a Study.
       properties:
         createTime:
           description: Output only. Time at which the study was created.
@@ -18715,6 +18777,22 @@ components:
           description: The fraction of the input data that is to be used to validate the Model.
           format: double
           type: number
+      type: object
+    GoogleCloudAiplatformV1beta1TokensInfo:
+      description: Tokens info with a list of tokens and the corresponding list of token ids.
+      properties:
+        tokenIds:
+          description: A list of token ids from the input.
+          items:
+            format: int64
+            type: string
+          type: array
+        tokens:
+          description: A list of tokens from the input.
+          items:
+            format: byte
+            type: string
+          type: array
       type: object
     GoogleCloudAiplatformV1beta1TrainingConfig:
       description: CMLE training config. For every active learning labeling iteration, system will train a machine learning model on CMLE. The trained model will be used by data sampling algorithm to select DataItems.

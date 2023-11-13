@@ -482,6 +482,9 @@ components:
           description: Output only. The fully qualified name of the blockchain node. e.g. `projects/my-project/locations/us-central1/blockchainNodes/my-node`.
           readOnly: true
           type: string
+        privateServiceConnectEnabled:
+          description: Optional. When true, the node is only accessible via Private Service Connect; no public endpoints are exposed. Otherwise, the node is only accessible via public endpoints. See https://cloud.google.com/vpc/docs/private-service-connect.
+          type: boolean
         state:
           description: Output only. A status representing the state of the node.
           enum:
@@ -573,6 +576,7 @@ components:
             - MAINNET
             - TESTNET_GOERLI_PRATER
             - TESTNET_SEPOLIA
+            - TESTNET_HOLESKY
           type: string
         nodeType:
           description: Immutable. The type of Ethereum node.

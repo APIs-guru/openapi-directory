@@ -962,7 +962,7 @@ components:
       description: Request message to claim a device on behalf of a customer.
       properties:
         configurationId:
-          description: Optional. The unique identifier of the configuration (internally known as profile) to set for the section.
+          description: Optional. The ID of the configuration applied to the device section.
           format: int64
           type: string
         customerId:
@@ -989,7 +989,7 @@ components:
             - SECTION_TYPE_ZERO_TOUCH
           type: string
         simlockProfileId:
-          description: "Optional. "
+          description: Optional. Must and can only be set when DeviceProvisioningSectionType is SECTION_TYPE_SIM_LOCK. The unique identifier of the SimLock profile.
           format: int64
           type: string
       type: object
@@ -1536,7 +1536,7 @@ components:
       description: Identifies one claim request.
       properties:
         configurationId:
-          description: Optional. The unique identifier of the configuration (internally known as profile) to set for the section.
+          description: Optional. The ID of the configuration applied to the device section.
           format: int64
           type: string
         customerId:
@@ -1563,7 +1563,7 @@ components:
             - SECTION_TYPE_ZERO_TOUCH
           type: string
         simlockProfileId:
-          description: "Optional. "
+          description: Optional. Must and can only be set when DeviceProvisioningSectionType is SECTION_TYPE_SIM_LOCK. The unique identifier of the SimLock profile.
           format: int64
           type: string
       type: object

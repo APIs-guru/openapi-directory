@@ -1627,6 +1627,41 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new track.
+      operationId: androidpublisher.edits.tracks.create
+      parameters:
+        - description: Required. Package name of the app.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: Required. Identifier of the edit.
+          in: path
+          name: editId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TrackConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Track"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - edits
   /androidpublisher/v3/applications/{packageName}/edits/{editId}/tracks/{track}:
     get:
       description: Gets a track.
@@ -6694,6 +6729,27 @@ components:
           type: array
         track:
           description: Identifier of the track. Form factor tracks have a special prefix as an identifier, for example `wear:production`, `automotive:production`. [More on track name](https://developers.google.com/android-publisher/tracks#ff-track-name)
+          type: string
+      type: object
+    TrackConfig:
+      description: Configurations of the new track.
+      properties:
+        formFactor:
+          description: Required. Form factor of the new track. Defaults to the default track.
+          enum:
+            - FORM_FACTOR_UNSPECIFIED
+            - DEFAULT
+            - WEAR
+            - AUTOMOTIVE
+          type: string
+        track:
+          description: Required. Identifier of the new track. For default tracks, this field consists of the track alias only. Form factor tracks have a special prefix as an identifier, for example `wear:production`, `automotive:production`. This prefix must match the value of the `form_factor` field, if it is not a default track. [More on track name](https://developers.google.com/android-publisher/tracks#ff-track-name)
+          type: string
+        type:
+          description: Required. Type of the new track. Currently, the only supported value is closedTesting.
+          enum:
+            - TRACK_TYPE_UNSPECIFIED
+            - CLOSED_TESTING
           type: string
       type: object
     TrackCountryAvailability:

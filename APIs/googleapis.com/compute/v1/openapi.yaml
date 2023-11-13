@@ -48895,7 +48895,7 @@ components:
             - UDP
           type: string
         allPorts:
-          description: "This field can only be used: - If IPProtocol is one of TCP, UDP, or SCTP. - By internal TCP/UDP load balancers, backend service-based network load balancers, and internal and external protocol forwarding. Set this field to true to allow packets addressed to any port or packets lacking destination port information (for example, UDP fragments after the first fragment) to be forwarded to the backends configured with this forwarding rule. The ports, port_range, and allPorts fields are mutually exclusive."
+          description: "The ports, portRange, and allPorts fields are mutually exclusive. Only packets addressed to ports in the specified range will be forwarded to the backends configured with this forwarding rule. The allPorts field has the following limitations: - It requires that the forwarding rule IPProtocol be TCP, UDP, SCTP, or L3_DEFAULT. - It's applicable only to the following products: internal passthrough Network Load Balancers, backend service-based external passthrough Network Load Balancers, and internal and external protocol forwarding. - Set this field to true to allow packets addressed to any port or packets lacking destination port information (for example, UDP fragments after the first fragment) to be forwarded to the backends configured with this forwarding rule. The L3_DEFAULT protocol requires allPorts be set to true. "
           type: boolean
         allowGlobalAccess:
           description: This field is used along with the backend_service field for internal load balancing or with the target field for internal TargetInstance. If set to true, clients can access the Internal TCP/UDP Load Balancer, Internal HTTP(S) and TCP Proxy Load Balancer from all regions. If false, only allows access from the local region the load balancer is located at. Note that for INTERNAL_MANAGED forwarding rules, this field cannot be changed after the forwarding rule is created.
@@ -48980,10 +48980,10 @@ components:
           description: This is used in PSC consumer ForwardingRule to control whether it should try to auto-generate a DNS zone or not. Non-PSC forwarding rules do not use this field. Once set, this field is not mutable.
           type: boolean
         portRange:
-          description: "This field can only be used: - If IPProtocol is one of TCP, UDP, or SCTP. - By backend service-based network load balancers, target pool-based network load balancers, internal proxy load balancers, external proxy load balancers, Traffic Director, external protocol forwarding, and Classic VPN. Some products have restrictions on what ports can be used. See port specifications for details. Only packets addressed to ports in the specified range will be forwarded to the backends configured with this forwarding rule. The ports, port_range, and allPorts fields are mutually exclusive. For external forwarding rules, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot have overlapping portRanges. For internal forwarding rules within the same VPC network, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot have overlapping portRanges. @pattern: \\\\d+(?:-\\\\d+)?"
+          description: "The ports, portRange, and allPorts fields are mutually exclusive. Only packets addressed to ports in the specified range will be forwarded to the backends configured with this forwarding rule. The portRange field has the following limitations: - It requires that the forwarding rule IPProtocol be TCP, UDP, or SCTP, and - It's applicable only to the following products: external passthrough Network Load Balancers, internal and external proxy Network Load Balancers, internal and external Application Load Balancers, external protocol forwarding, and Classic VPN. - Some products have restrictions on what ports can be used. See port specifications for details. For external forwarding rules, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot have overlapping portRanges. For internal forwarding rules within the same VPC network, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot have overlapping portRanges. @pattern: \\\\d+(?:-\\\\d+)?"
           type: string
         ports:
-          description: "This field can only be used: - If IPProtocol is one of TCP, UDP, or SCTP. - By internal TCP/UDP load balancers, backend service-based network load balancers, and internal protocol forwarding. You can specify a list of up to five ports by number, separated by commas. The ports can be contiguous or discontiguous. Only packets addressed to these ports will be forwarded to the backends configured with this forwarding rule. For external forwarding rules, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot share any values defined in ports. For internal forwarding rules within the same VPC network, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair, and cannot share any values defined in ports. The ports, port_range, and allPorts fields are mutually exclusive. @pattern: \\\\d+(?:-\\\\d+)?"
+          description: "The ports, portRange, and allPorts fields are mutually exclusive. Only packets addressed to ports in the specified range will be forwarded to the backends configured with this forwarding rule. The ports field has the following limitations: - It requires that the forwarding rule IPProtocol be TCP, UDP, or SCTP, and - It's applicable only to the following products: internal passthrough Network Load Balancers, backend service-based external passthrough Network Load Balancers, and internal protocol forwarding. - You can specify a list of up to five ports by number, separated by commas. The ports can be contiguous or discontiguous. For external forwarding rules, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair if they share at least one port number. For internal forwarding rules within the same VPC network, two or more forwarding rules cannot use the same [IPAddress, IPProtocol] pair if they share at least one port number. @pattern: \\\\d+(?:-\\\\d+)?"
           items:
             type: string
           type: array
@@ -63169,6 +63169,8 @@ components:
         physicalHost:
           description: "[Output Only] An opaque ID of the host on which the VM is running."
           type: string
+        upcomingMaintenance:
+          $ref: "#/components/schemas/UpcomingMaintenance"
       type: object
     Route:
       description: Represents a Route resource. A route defines a path from VM instances in the VPC network to a specific destination. This destination can be inside or outside the VPC network. For more information, read the Routes overview.
@@ -64001,6 +64003,12 @@ components:
           description: Timeout (in seconds) for TCP transitory connections. Defaults to 30s if not set.
           format: int32
           type: integer
+        type:
+          description: Indicates whether this NAT is used for public or private IP translation. If unspecified, it defaults to PUBLIC.
+          enum:
+            - PRIVATE
+            - PUBLIC
+          type: string
         udpIdleTimeoutSec:
           description: Timeout (in seconds) for UDP connections. Defaults to 30s if not set.
           format: int32
@@ -64043,8 +64051,18 @@ components:
           items:
             type: string
           type: array
+        sourceNatActiveRanges:
+          description: A list of URLs of the subnetworks used as source ranges for this NAT Rule. These subnetworks must have purpose set to PRIVATE_NAT. This field is used for private NAT.
+          items:
+            type: string
+          type: array
         sourceNatDrainIps:
           description: A list of URLs of the IP resources to be drained. These IPs must be valid static external IPs that have been assigned to the NAT. These IPs should be used for updating/patching a NAT rule only. This field is used for public NAT.
+          items:
+            type: string
+          type: array
+        sourceNatDrainRanges:
+          description: A list of URLs of subnetworks representing source ranges to be drained. This is only supported on patch/update, and these subnetworks must have previously been used as active ranges in this NAT Rule. This field is used for private NAT.
           items:
             type: string
           type: array
@@ -64919,12 +64937,18 @@ components:
           enum:
             - DISABLED
             - STANDARD
+            - STANDARD_WITH_GRAPHQL
           type: string
         logLevel:
           enum:
             - NORMAL
             - VERBOSE
           type: string
+        userIpRequestHeaders:
+          description: An optional list of case-insensitive request header names to use for resolving the callers client IP address.
+          items:
+            type: string
+          type: array
       type: object
     SecurityPolicyAdvancedOptionsConfigJsonCustomConfig:
       properties:
@@ -65960,6 +65984,11 @@ components:
           description: "[Output Only] Number of bytes downloaded to restore a snapshot to a disk."
           format: int64
           type: string
+        guestOsFeatures:
+          description: "[Output Only] A list of features to enable on the guest operating system. Applicable only for bootable images. Read Enabling guest operating system features to see a list of available options."
+          items:
+            $ref: "#/components/schemas/GuestOsFeature"
+          type: array
         id:
           description: "[Output Only] The unique identifier for the resource. This identifier is defined by the server."
           format: uint64
@@ -67237,6 +67266,7 @@ components:
             - GLOBAL_MANAGED_PROXY
             - INTERNAL_HTTPS_LOAD_BALANCER
             - PRIVATE
+            - PRIVATE_NAT
             - PRIVATE_RFC_1918
             - PRIVATE_SERVICE_CONNECT
             - REGIONAL_MANAGED_PROXY
@@ -70148,6 +70178,35 @@ components:
           format: uint64
           type: string
       type: object
+    UpcomingMaintenance:
+      description: Upcoming Maintenance notification information.
+      properties:
+        canReschedule:
+          description: Indicates if the maintenance can be customer triggered.
+          type: boolean
+        latestWindowStartTime:
+          description: The latest time for the planned maintenance window to start. This timestamp value is in RFC3339 text format.
+          type: string
+        maintenanceStatus:
+          enum:
+            - ONGOING
+            - PENDING
+            - UNKNOWN
+          type: string
+        type:
+          description: Defines the type of maintenance.
+          enum:
+            - SCHEDULED
+            - UNKNOWN_TYPE
+            - UNSCHEDULED
+          type: string
+        windowEndTime:
+          description: The time by which the maintenance disruption will be completed. This timestamp value is in RFC3339 text format.
+          type: string
+        windowStartTime:
+          description: The current start time of the maintenance window. This timestamp value is in RFC3339 text format.
+          type: string
+      type: object
     UrlMap:
       description: "Represents a URL Map resource. Compute Engine has two URL Map resources: * [Global](/compute/docs/reference/rest/v1/urlMaps) * [Regional](/compute/docs/reference/rest/v1/regionUrlMaps) A URL map resource is a component of certain types of cloud load balancers and Traffic Director: * urlMaps are used by global external Application Load Balancers, classic Application Load Balancers, and cross-region internal Application Load Balancers. * regionUrlMaps are used by internal Application Load Balancers, regional external Application Load Balancers and regional internal Application Load Balancers. For a list of supported URL map features by the load balancer type, see the Load balancing features: Routing and traffic management table. For a list of supported URL map features for Traffic Director, see the Traffic Director features: Routing and traffic management table. This resource defines mappings from hostnames and URL paths to either a backend service or a backend bucket. To use the global urlMaps resource, the backend service must have a loadBalancingScheme of either EXTERNAL or INTERNAL_SELF_MANAGED. To use the regionUrlMaps resource, the backend service must have a loadBalancingScheme of INTERNAL_MANAGED. For more information, read URL Map Concepts."
       properties:
@@ -70625,6 +70684,7 @@ components:
             - GLOBAL_MANAGED_PROXY
             - INTERNAL_HTTPS_LOAD_BALANCER
             - PRIVATE
+            - PRIVATE_NAT
             - PRIVATE_RFC_1918
             - PRIVATE_SERVICE_CONNECT
             - REGIONAL_MANAGED_PROXY

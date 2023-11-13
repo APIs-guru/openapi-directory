@@ -3108,7 +3108,15 @@ components:
           description: Debug message for when a render transition occurs. Provides further details as rendering progresses through render states.
           type: string
         release:
-          description: The name of the `Release`.
+          description: The name of the release.
+          type: string
+        releaseRenderState:
+          description: The state of the release render.
+          enum:
+            - RENDER_STATE_UNSPECIFIED
+            - SUCCEEDED
+            - FAILED
+            - IN_PROGRESS
           type: string
       type: object
     RenderMetadata:
@@ -3536,7 +3544,7 @@ components:
           description: The name of the rollout.
           type: string
         rolloutUpdateType:
-          description: Output only. The type of the rollout update.
+          description: The type of the rollout update.
           enum:
             - ROLLOUT_UPDATE_TYPE_UNSPECIFIED
             - PENDING
@@ -3552,7 +3560,6 @@ components:
             - REJECTED
             - ADVANCE_REQUIRED
             - ADVANCED
-          readOnly: true
           type: string
         targetId:
           description: ID of the target.

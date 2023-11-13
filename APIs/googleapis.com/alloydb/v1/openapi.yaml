@@ -1297,11 +1297,13 @@ components:
             - DATABASE_VERSION_UNSPECIFIED
             - POSTGRES_13
             - POSTGRES_14
+            - POSTGRES_15
           readOnly: true
           type: string
           x-enumDeprecated:
             - false
             - true
+            - false
             - false
         deleteTime:
           description: Output only. Delete time stamp
@@ -1464,10 +1466,12 @@ components:
             - DATABASE_VERSION_UNSPECIFIED
             - POSTGRES_13
             - POSTGRES_14
+            - POSTGRES_15
           type: string
           x-enumDeprecated:
             - false
             - true
+            - false
             - false
         deleteTime:
           description: Output only. Delete time stamp
@@ -2690,10 +2694,12 @@ components:
               - DATABASE_VERSION_UNSPECIFIED
               - POSTGRES_13
               - POSTGRES_14
+              - POSTGRES_15
             type: string
             x-enumDeprecated:
               - false
               - true
+              - false
               - false
           type: array
         valueType:

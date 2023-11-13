@@ -1649,6 +1649,9 @@ components:
         multiclusteringress:
           $ref: "#/components/schemas/MultiClusterIngressFeatureSpec"
           description: Multicluster Ingress-specific spec.
+        namespaceactuation:
+          $ref: "#/components/schemas/NamespaceActuationFeatureSpec"
+          description: Namespace Actuation feature spec
         workloadcertificate:
           $ref: "#/components/schemas/FeatureSpec"
           description: Workload Certificate spec.
@@ -1665,6 +1668,9 @@ components:
         fleetobservability:
           $ref: "#/components/schemas/FleetObservabilityFeatureState"
           description: FleetObservability feature state.
+        namespaceactuation:
+          $ref: "#/components/schemas/NamespaceActuationFeatureState"
+          description: Namespace Actuation feature state.
         servicemesh:
           $ref: "#/components/schemas/ServiceMeshFeatureState"
           description: Service Mesh-specific state.
@@ -1709,6 +1715,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
       type: object
     ConfigManagementBinauthzVersion:
@@ -1757,6 +1764,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         gitSync:
           description: Deployment state of the git-sync pod
@@ -1765,6 +1773,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         importer:
           description: Deployment state of the importer pod
@@ -1773,6 +1782,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         monitor:
           description: Deployment state of the monitor pod
@@ -1781,6 +1791,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         reconcilerManager:
           description: Deployment state of reconciler-manager pod
@@ -1789,6 +1800,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         rootReconciler:
           description: Deployment state of root-reconciler
@@ -1797,6 +1809,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         syncer:
           description: Deployment state of the syncer pod
@@ -1805,6 +1818,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
       type: object
     ConfigManagementConfigSyncError:
@@ -1883,6 +1897,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         gatekeeperControllerManagerState:
           description: Status of gatekeeper-controller-manager pod.
@@ -1891,6 +1906,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         gatekeeperMutation:
           description: Status of the pod serving the mutation webhook.
@@ -1899,6 +1915,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
       type: object
     ConfigManagementGitConfig:
@@ -1966,6 +1983,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         hnc:
           description: The deployment state for open source HNC (e.g. v0.7.0-hc.0)
@@ -1974,6 +1992,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
       type: object
     ConfigManagementHierarchyControllerState:
@@ -2088,6 +2107,7 @@ components:
             - NOT_INSTALLED
             - INSTALLED
             - ERROR
+            - PENDING
           type: string
         errors:
           description: Install errors.
@@ -2245,6 +2265,13 @@ components:
           $ref: "#/components/schemas/TypeMeta"
           description: Kubernetes type of the resource.
       type: object
+    DefaultClusterConfig:
+      description: DefaultClusterConfig describes the default cluster configurations to be applied to all clusters born-in-fleet.
+      properties:
+        securityPostureConfig:
+          $ref: "#/components/schemas/SecurityPostureConfig"
+          description: Enable/Disable Security Posture features for the cluster.
+      type: object
     EdgeCluster:
       description: EdgeCluster contains information specific to Google Edge Clusters.
       properties:
@@ -2393,6 +2420,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        defaultClusterConfig:
+          $ref: "#/components/schemas/DefaultClusterConfig"
+          description: Optional. The default cluster configurations to apply across the fleet.
         deleteTime:
           description: Output only. When the Fleet was deleted.
           format: google-datetime
@@ -3099,6 +3129,9 @@ components:
         mesh:
           $ref: "#/components/schemas/ServiceMeshMembershipSpec"
           description: Anthos Service Mesh-specific spec
+        namespaceactuation:
+          $ref: "#/components/schemas/NamespaceActuationMembershipSpec"
+          description: FNS Actuation membership spec
         origin:
           $ref: "#/components/schemas/Origin"
           description: Whether this per-Membership spec was inherited from a fleet-level default. This field can be updated by users by either overriding a Membership config (updated to USER implicitly) or setting to FLEET explicitly.
@@ -3130,6 +3163,9 @@ components:
         metering:
           $ref: "#/components/schemas/MeteringMembershipState"
           description: Metering-specific state.
+        namespaceactuation:
+          $ref: "#/components/schemas/NamespaceActuationMembershipState"
+          description: FNS Actuation membership state
         policycontroller:
           $ref: "#/components/schemas/PolicyControllerMembershipState"
           description: Policycontroller-specific state.
@@ -3265,6 +3301,29 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+      type: object
+    NamespaceActuationFeatureSpec:
+      description: An empty spec for actuation feature. This is required since Feature proto requires a spec.
+      properties:
+        actuationMode:
+          description: actuation_mode controls the behavior of the controller
+          enum:
+            - ACTUATION_MODE_UNSPECIFIED
+            - ACTUATION_MODE_CREATE_AND_DELETE_IF_CREATED
+            - ACTUATION_MODE_ADD_AND_REMOVE_FLEET_LABELS
+          type: string
+      type: object
+    NamespaceActuationFeatureState:
+      description: NamespaceActuation Feature State.
+      properties: {}
+      type: object
+    NamespaceActuationMembershipSpec:
+      description: "**Namespace Actuation**: The membership-specific input for NamespaceActuation feature."
+      properties: {}
+      type: object
+    NamespaceActuationMembershipState:
+      description: "**Namespace Actuation**: An empty state left as an example membership-specific Feature state."
+      properties: {}
       type: object
     NamespaceLifecycleState:
       description: NamespaceLifecycleState describes the state of a Namespace resource.
@@ -3783,6 +3842,25 @@ components:
             - DELETING
             - UPDATING
           readOnly: true
+          type: string
+      type: object
+    SecurityPostureConfig:
+      description: SecurityPostureConfig defines the flags needed to enable/disable features for the Security Posture API.
+      properties:
+        mode:
+          description: Sets which mode to use for Security Posture features.
+          enum:
+            - MODE_UNSPECIFIED
+            - DISABLED
+            - BASIC
+          type: string
+        vulnerabilityMode:
+          description: Sets which mode to use for vulnerability scanning.
+          enum:
+            - VULNERABILITY_MODE_UNSPECIFIED
+            - VULNERABILITY_DISABLED
+            - VULNERABILITY_BASIC
+            - VULNERABILITY_ENTERPRISE
           type: string
       type: object
     ServiceMeshAnalysisMessage:
