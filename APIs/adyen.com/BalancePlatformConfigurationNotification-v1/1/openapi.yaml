@@ -351,6 +351,11 @@ components:
             The time zone of the account holder. For example, **Europe/Amsterdam**.
             Defaults to the time zone of the balance platform if no time zone is set. For possible values, see the [list of time zone codes](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
           type: string
+        verificationDeadlines:
+          description: List of verification deadlines and the capabilities that will be disallowed if verification errors are not resolved.
+          items:
+            $ref: "#/components/schemas/VerificationDeadline"
+          type: array
       required:
         - legalEntityId
         - id
@@ -399,6 +404,11 @@ components:
         requestedSettings:
           $ref: "#/components/schemas/CapabilitySettings"
           description: A JSON object containing the settings that were requested for the account holder.
+        transferInstruments:
+          description: "Contains the status of the transfer instruments associated with this capability. "
+          items:
+            $ref: "#/components/schemas/AccountSupportingEntityCapability"
+          type: array
         verificationStatus:
           description: |
             The status of the verification checks for the capability.
@@ -449,6 +459,62 @@ components:
         - environment
         - type
         - data
+      type: object
+    AccountSupportingEntityCapability:
+      properties:
+        allowed:
+          description: Indicates whether the supporting entity capability is allowed. Adyen sets this to **true** if the verification is successful and the account holder is permitted to use the capability.
+          type: boolean
+        allowedLevel:
+          description: |-
+            The capability level that is allowed for the account holder.
+
+            Possible values: **notApplicable**, **low**, **medium**, **high**.
+          enum:
+            - high
+            - low
+            - medium
+            - notApplicable
+          type: string
+        enabled:
+          description: Indicates whether the capability is enabled. If **false**, the capability is temporarily disabled for the account holder.
+          type: boolean
+        id:
+          description: The ID of the supporting entity.
+          type: string
+        requested:
+          description: Indicates whether the capability is requested. To check whether the account holder is permitted to use the capability, refer to the `allowed` field.
+          type: boolean
+        requestedLevel:
+          description: |-
+            The requested level of the capability. Some capabilities, such as those used in [card issuing](https://docs.adyen.com/issuing/add-capabilities#capability-levels), have different levels. Levels increase the capability, but also require additional checks and increased monitoring.
+
+            Possible values: **notApplicable**, **low**, **medium**, **high**.
+          enum:
+            - high
+            - low
+            - medium
+            - notApplicable
+          type: string
+        verificationStatus:
+          description: |
+            The status of the verification checks for the supporting entity capability.
+
+            Possible values:
+
+            * **pending**: Adyen is running the verification.
+
+            * **invalid**: The verification failed. Check if the `errors` array contains more information.
+
+            * **valid**: The verification has been successfully completed.
+
+            * **rejected**: Adyen has verified the information, but found reasons to not allow the capability.
+          enum:
+            - invalid
+            - pending
+            - rejected
+            - valid
+          type: string
       type: object
     Address:
       properties:
@@ -1528,6 +1594,77 @@ components:
         - type
         - accountNumber
         - routingNumber
+      type: object
+    VerificationDeadline:
+      properties:
+        capabilities:
+          description: The names of the capabilities to be disallowed.
+          items:
+            enum:
+              - acceptExternalFunding
+              - acceptPspFunding
+              - acceptTransactionInRestrictedCountries
+              - acceptTransactionInRestrictedCountriesCommercial
+              - acceptTransactionInRestrictedCountriesConsumer
+              - acceptTransactionInRestrictedIndustries
+              - acceptTransactionInRestrictedIndustriesCommercial
+              - acceptTransactionInRestrictedIndustriesConsumer
+              - acquiring
+              - atmWithdrawal
+              - atmWithdrawalCommercial
+              - atmWithdrawalConsumer
+              - atmWithdrawalInRestrictedCountries
+              - atmWithdrawalInRestrictedCountriesCommercial
+              - atmWithdrawalInRestrictedCountriesConsumer
+              - authorisedPaymentInstrumentUser
+              - getGrantOffers
+              - issueBankAccount
+              - issueCard
+              - issueCardCommercial
+              - issueCardConsumer
+              - localAcceptance
+              - payout
+              - payoutToTransferInstrument
+              - processing
+              - receiveFromBalanceAccount
+              - receiveFromPlatformPayments
+              - receiveFromThirdParty
+              - receiveFromTransferInstrument
+              - receiveGrants
+              - receivePayments
+              - sendToBalanceAccount
+              - sendToThirdParty
+              - sendToTransferInstrument
+              - thirdPartyFunding
+              - useCard
+              - useCardCommercial
+              - useCardConsumer
+              - useCardInRestrictedCountries
+              - useCardInRestrictedCountriesCommercial
+              - useCardInRestrictedCountriesConsumer
+              - useCardInRestrictedIndustries
+              - useCardInRestrictedIndustriesCommercial
+              - useCardInRestrictedIndustriesConsumer
+              - withdrawFromAtm
+              - withdrawFromAtmCommercial
+              - withdrawFromAtmConsumer
+              - withdrawFromAtmInRestrictedCountries
+              - withdrawFromAtmInRestrictedCountriesCommercial
+              - withdrawFromAtmInRestrictedCountriesConsumer
+            type: string
+          type: array
+        entityIds:
+          description: The unique identifiers of the bank account(s) that the deadline applies to
+          items:
+            type: string
+          type: array
+        expiresAt:
+          description: The date that verification is due by before capabilities are disallowed.
+          format: date-time
+          type: string
+      required:
+        - expiresAt
+        - capabilities
       type: object
     VerificationError:
       properties:

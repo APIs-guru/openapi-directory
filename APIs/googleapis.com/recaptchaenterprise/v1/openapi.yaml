@@ -131,7 +131,7 @@ paths:
       description: Updates the specified key.
       operationId: recaptchaenterprise.projects.keys.patch
       parameters:
-        - description: The resource name for the Key in the format `projects/{project}/keys/{key}`.
+        - description: Identifier. The resource name for the Key in the format `projects/{project}/keys/{key}`.
           in: path
           name: name
           required: true
@@ -806,7 +806,7 @@ components:
           description: Output only. Fraud Signals specific to the users involved in a payment transaction.
           readOnly: true
         name:
-          description: Output only. The resource name for the Assessment in the format `projects/{project}/assessments/{assessment}`.
+          description: Output only. Identifier. The resource name for the Assessment in the format `projects/{project}/assessments/{assessment}`.
           readOnly: true
           type: string
         privatePasswordLeakVerification:
@@ -973,7 +973,7 @@ components:
           description: Optional. A description of what this policy aims to achieve, for convenience purposes. The description can at most include 256 UTF-8 characters.
           type: string
         name:
-          description: The resource name for the FirewallPolicy in the format `projects/{project}/firewallpolicies/{firewallpolicy}`.
+          description: Identifier. The resource name for the FirewallPolicy in the format `projects/{project}/firewallpolicies/{firewallpolicy}`.
           type: string
         path:
           description: Optional. The path for which this policy applies, specified as a glob pattern. For more information on glob, see the [manual page](https://man7.org/linux/man-pages/man7/glob.7.html). A path has a max length of 200 characters.
@@ -1118,7 +1118,7 @@ components:
           description: Optional. See [Creating and managing labels] (https://cloud.google.com/recaptcha-enterprise/docs/labels).
           type: object
         name:
-          description: The resource name for the Key in the format `projects/{project}/keys/{key}`.
+          description: Identifier. The resource name for the Key in the format `projects/{project}/keys/{key}`.
           type: string
         testingOptions:
           $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1TestingOptions"
@@ -1187,7 +1187,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1ChallengeMetrics"
           type: array
         name:
-          description: Output only. The name of the metrics, in the format `projects/{project}/keys/{key}/metrics`.
+          description: Output only. Identifier. The name of the metrics, in the format `projects/{project}/keys/{key}/metrics`.
           readOnly: true
           type: string
         scoreMetrics:
@@ -1235,7 +1235,7 @@ components:
       description: A group of related accounts.
       properties:
         name:
-          description: Required. The resource name for the related account group in the format `projects/{project}/relatedaccountgroups/{related_account_group}`.
+          description: Required. Identifier. The resource name for the related account group in the format `projects/{project}/relatedaccountgroups/{related_account_group}`.
           type: string
       type: object
     GoogleCloudRecaptchaenterpriseV1RelatedAccountGroupMembership:
@@ -1246,7 +1246,7 @@ components:
           format: byte
           type: string
         name:
-          description: Required. The resource name for this membership in the format `projects/{project}/relatedaccountgroups/{relatedaccountgroup}/memberships/{membership}`.
+          description: Required. Identifier. The resource name for this membership in the format `projects/{project}/relatedaccountgroups/{relatedaccountgroup}/memberships/{membership}`.
           type: string
       type: object
     GoogleCloudRecaptchaenterpriseV1RetrieveLegacySecretKeyResponse:

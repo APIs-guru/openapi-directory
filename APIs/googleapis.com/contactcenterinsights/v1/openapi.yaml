@@ -625,7 +625,7 @@ paths:
       description: Deletes multiple conversations in a single request.
       operationId: contactcenterinsights.projects.locations.conversations.bulkDelete
       parameters:
-        - description: "Required. The parent resource to create analyses in. Format: projects/{project}/locations/{location}"
+        - description: "Required. The parent resource to delete conversations from. Format: projects/{project}/locations/{location}"
           in: path
           name: parent
           required: true
@@ -1374,21 +1374,21 @@ components:
       description: The request to delete conversations in bulk.
       properties:
         filter:
-          description: Filter used to select the subset of conversations to analyze.
+          description: Filter used to select the subset of conversations to delete.
           type: string
         force:
           description: If set to true, all of this conversation's analyses will also be deleted. Otherwise, the request will only succeed if the conversation has no analyses.
           type: boolean
         maxDeleteCount:
-          description: Maximum number of conversations to delete. The default is 1000. It can be changed by setting the `max_delete_count` field.
+          description: Maximum number of conversations to delete.
           format: int32
           type: integer
         parent:
-          description: "Required. The parent resource to create analyses in. Format: projects/{project}/locations/{location}"
+          description: "Required. The parent resource to delete conversations from. Format: projects/{project}/locations/{location}"
           type: string
       type: object
     GoogleCloudContactcenterinsightsV1BulkDeleteConversationsResponse:
-      description: The response for a bulk analyze conversations operation.
+      description: The response for a bulk delete conversations operation.
       properties: {}
       type: object
     GoogleCloudContactcenterinsightsV1CalculateIssueModelStatsResponse:
@@ -3032,21 +3032,21 @@ components:
       description: The request to delete conversations in bulk.
       properties:
         filter:
-          description: Filter used to select the subset of conversations to analyze.
+          description: Filter used to select the subset of conversations to delete.
           type: string
         force:
           description: If set to true, all of this conversation's analyses will also be deleted. Otherwise, the request will only succeed if the conversation has no analyses.
           type: boolean
         maxDeleteCount:
-          description: Maximum number of conversations to delete. The default is 1000. It can be changed by setting the `max_delete_count` field.
+          description: Maximum number of conversations to delete.
           format: int32
           type: integer
         parent:
-          description: "Required. The parent resource to create analyses in. Format: projects/{project}/locations/{location}"
+          description: "Required. The parent resource to delete conversations from. Format: projects/{project}/locations/{location}"
           type: string
       type: object
     GoogleCloudContactcenterinsightsV1alpha1BulkDeleteConversationsResponse:
-      description: The response for a bulk analyze conversations operation.
+      description: The response for a bulk delete conversations operation.
       properties: {}
       type: object
     GoogleCloudContactcenterinsightsV1alpha1CallAnnotation:

@@ -410,7 +410,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The type of tax form you want to retrieve. Accepted values are **us1099k** and **us1099nec**
+        - description: The type of tax form you want to retrieve. Accepted values are **US1099k** and **US1099nec**
           in: query
           name: formType
           required: true
@@ -4268,7 +4268,6 @@ components:
             $ref: "#/components/schemas/VerificationDeadline"
           readOnly: true
           type: array
-          x-addedInVersion: "2"
       required:
         - legalEntityId
         - id
@@ -4327,7 +4326,6 @@ components:
           items:
             $ref: "#/components/schemas/AccountSupportingEntityCapability"
           type: array
-          x-addedInVersion: "2"
         verificationStatus:
           description: |
             The status of the verification checks for the capability.
@@ -4461,7 +4459,6 @@ components:
             $ref: "#/components/schemas/VerificationDeadline"
           readOnly: true
           type: array
-          x-addedInVersion: "2"
       type: object
     AccountSupportingEntityCapability:
       properties:
@@ -4598,6 +4595,12 @@ components:
         requiredAddressFields:
           description: List of address fields.
           items:
+            enum:
+              - city
+              - country
+              - line1
+              - postalCode
+              - stateOrProvince
             type: string
           type: array
         type:
@@ -6108,20 +6111,6 @@ components:
         - message
       type: object
     JSONObject:
-      properties:
-        paths:
-          items:
-            $ref: "#/components/schemas/JSONPath"
-          type: array
-        rootPath:
-          $ref: "#/components/schemas/JSONPath"
-      type: object
-    JSONPath:
-      properties:
-        content:
-          items:
-            type: string
-          type: array
       type: object
     ListNetworkTokensResponse:
       properties:
@@ -6896,6 +6885,26 @@ components:
         - accountNumber
         - bic
       type: object
+    SameAmountRestriction:
+      properties:
+        operation:
+          description: Defines how the condition must be evaluated.
+          type: string
+        value:
+          type: boolean
+      required:
+        - operation
+      type: object
+    SameCounterpartyRestriction:
+      properties:
+        operation:
+          description: Defines how the condition must be evaluated.
+          type: string
+        value:
+          type: boolean
+      required:
+        - operation
+      type: object
     StringMatch:
       properties:
         operation:
@@ -7539,6 +7548,34 @@ components:
             List of processing types and the operation.
 
             Supported operations: **anyMatch**, **noneMatch**.
+        sameAmountRestriction:
+          $ref: "#/components/schemas/SameAmountRestriction"
+          description: |-
+            Checks if a user has recently sent the same amount of funds in multiple transfers.
+
+            To use this restriction, you must:
+
+            - Set the rule `type` to **velocity**.
+
+            - Specify a time `interval`.
+
+            - Specify a number of `matchingTransactions`.
+
+            Supported operation: **equals**.
+        sameCounterpartyRestriction:
+          $ref: "#/components/schemas/SameCounterpartyRestriction"
+          description: |-
+            Checks if a user has recently made multiple transfers to the same counterparty.
+
+            To use this restriction, you must:
+
+            - Set the rule `type` to **velocity**.
+
+            - Specify a time `interval`.
+
+            - Specify a number of `matchingTransactions`.
+
+            Supported operations: **equals**.
         timeOfDay:
           $ref: "#/components/schemas/TimeOfDayRestriction"
           description: "A start and end time in a time-only ISO-8601 extended offset format. Supported operations: **equals**, **notEquals**."
@@ -7574,6 +7611,7 @@ components:
             - issuedCard
             - migration
             - platformPayment
+            - topUp
             - upgrade
           type: string
         country:
@@ -8214,8 +8252,6 @@ components:
             - invalidInput
             - pendingStatus
           type: string
-      type: object
-    void:
       type: object
   securitySchemes:
     ApiKeyAuth:

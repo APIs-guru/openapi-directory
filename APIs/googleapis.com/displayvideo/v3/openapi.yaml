@@ -10186,6 +10186,24 @@ components:
           $ref: "#/components/schemas/YoutubeVideoDetails"
           description: The YouTube video of the ad.
       type: object
+    Consent:
+      description: User consent status.
+      properties:
+        adPersonalization:
+          description: Represents consent for ad personalization.
+          enum:
+            - CONSENT_STATUS_UNSPECIFIED
+            - CONSENT_STATUS_GRANTED
+            - CONSENT_STATUS_DENIED
+          type: string
+        adUserData:
+          description: Represents consent for ad user data.
+          enum:
+            - CONSENT_STATUS_UNSPECIFIED
+            - CONSENT_STATUS_GRANTED
+            - CONSENT_STATUS_DENIED
+          type: string
+      type: object
     ContactInfo:
       description: Contact information defining a Customer Match audience member.
       properties:
@@ -10217,6 +10235,9 @@ components:
     ContactInfoList:
       description: Wrapper message for a list of contact information defining Customer Match audience members.
       properties:
+        consent:
+          $ref: "#/components/schemas/Consent"
+          description: Input only. User consent status.
         contactInfos:
           description: A list of ContactInfo objects defining Customer Match audience members. The size of members after splitting the contact_infos mustn't be greater than 500,000.
           items:
@@ -14130,6 +14151,9 @@ components:
     MobileDeviceIdList:
       description: Wrapper message for a list of mobile device IDs defining Customer Match audience members.
       properties:
+        consent:
+          $ref: "#/components/schemas/Consent"
+          description: Input only. User consent status.
         mobileDeviceIds:
           description: A list of mobile device IDs defining Customer Match audience members. The size of mobile_device_ids mustn't be greater than 500,000.
           items:
