@@ -1763,6 +1763,58 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1beta1/{workspace}:searchFiles:
+    get:
+      description: Finds the contents of a given Workspace directory by filter.
+      operationId: dataform.projects.locations.repositories.workspaces.searchFiles
+      parameters:
+        - description: Required. The workspace's name.
+          in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+        - description: Optional. Optional filter for the returned list in go/filtering format. Filtering is only currently supported on the `path` field.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Maximum number of search results to return. The server may return fewer items than requested. If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token received from a previous `SearchFilesRequest` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `SearchFilesRequest` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchFilesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1beta1/{workspace}:writeFile:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2160,6 +2212,13 @@ components:
           description: A file in the directory.
           type: string
       type: object
+    DirectorySearchResult:
+      description: Client-facing representation of a directory entry in search results.
+      properties:
+        path:
+          description: File system path relative to the workspace root.
+          type: string
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
@@ -2238,6 +2297,13 @@ components:
         writeFile:
           $ref: "#/components/schemas/WriteFile"
           description: Represents the write operation.
+      type: object
+    FileSearchResult:
+      description: Client-facing representation of a file entry in search results.
+      properties:
+        path:
+          description: File system path relative to the workspace root.
+          type: string
       type: object
     GitRemoteSettings:
       description: Controls Git remote configuration for a repository.
@@ -2871,6 +2937,28 @@ components:
           format: google-datetime
           type: string
       type: object
+    SearchFilesResponse:
+      description: Client-facing representation of a file search response.
+      properties:
+        nextPageToken:
+          description: Optional. A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        searchResults:
+          description: List of matched results.
+          items:
+            $ref: "#/components/schemas/SearchResult"
+          type: array
+      type: object
+    SearchResult:
+      description: Client-facing representation of a search result entry.
+      properties:
+        directory:
+          $ref: "#/components/schemas/DirectorySearchResult"
+          description: Details when search result is a directory.
+        file:
+          $ref: "#/components/schemas/FileSearchResult"
+          description: Details when search result is a file.
+      type: object
     SetIamPolicyRequest:
       description: Request message for `SetIamPolicy` method.
       properties:
@@ -2994,6 +3082,10 @@ components:
           readOnly: true
         name:
           description: Output only. The workflow invocation's name.
+          readOnly: true
+          type: string
+        resolvedCompilationResult:
+          description: Output only. The resolved compilation result that was used to create this invocation. Will be in the format `projects/*/locations/*/repositories/*/compilationResults/*`.
           readOnly: true
           type: string
         state:

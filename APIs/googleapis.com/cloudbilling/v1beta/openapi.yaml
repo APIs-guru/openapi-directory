@@ -834,7 +834,7 @@ components:
           type: string
       type: object
     GoogleCloudBillingBillingaccountpricesV1betaBillingAccountPrice:
-      description: Encapsulates the latest price for the given billing account SKU.
+      description: Encapsulates the latest price for a billing account SKU.
       properties:
         currencyCode:
           description: ISO-4217 currency code for the price.
@@ -849,7 +849,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudBillingBillingaccountpricesV1betaRate"
           description: Rate price metadata. Billing account SKUs with `Rate` price are offered by pricing tiers. The price can have 1 or more rate pricing tiers.
         valueType:
-          description: 'Type of the price. It can have values: ["unspecified", "rate"].'
+          description: 'Type of the price. The possible values are: ["unspecified", "rate"].'
           type: string
       type: object
     GoogleCloudBillingBillingaccountpricesV1betaDefaultPrice:
@@ -1239,7 +1239,7 @@ components:
           type: string
       type: object
     GoogleCloudBillingPricesV1betaPrice:
-      description: Encapsulates the latest price for the given SKU.
+      description: Encapsulates the latest price for a SKU.
       properties:
         currencyCode:
           description: ISO-4217 currency code for the price.

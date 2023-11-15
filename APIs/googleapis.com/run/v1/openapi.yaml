@@ -3124,7 +3124,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudRunV1Condition"
           type: array
         desiredReplicas:
-          description: Output only. The desired number of instances running this revision. For Cloud Run, this only includes instances provisioned using the minScale annotation. It does not include instances created by autoscaling.
+          description: Output only. The configured number of instances running this revision. For Cloud Run, this only includes instances provisioned using the minScale annotation. It does not include instances created by autoscaling.
           format: int32
           readOnly: true
           type: integer
@@ -3580,7 +3580,7 @@ components:
           description: Required. The name of the volume. There must be a corresponding Volume with the same name.
           type: string
         readOnly:
-          description: Only true is accepted for Secret Volumes. Defaults to true for Secrets Volumes.
+          description: Sets the mount to be read-only or read-write. Not used by Cloud Run.
           type: boolean
         subPath:
           description: Path within the volume from which the container's volume should be mounted. Defaults to "" (volume's root).

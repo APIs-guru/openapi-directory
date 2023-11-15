@@ -280,6 +280,210 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1/{name}:getAction:
+    get:
+      description: Get action.
+      operationId: connectors.projects.locations.connections.connectionSchemaMetadata.getAction
+      parameters:
+        - description: "Required. Resource name format: projects/{project}/locations/{location}/connections/{connection}/connectionSchemaMetadata"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Required. Id of the action.
+          in: query
+          name: actionId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1/{name}:getEntityType:
+    get:
+      description: Get entity type.
+      operationId: connectors.projects.locations.connections.connectionSchemaMetadata.getEntityType
+      parameters:
+        - description: "Required. Resource name format: projects/{project}/locations/{location}/connections/{connection}/connectionSchemaMetadata"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Required. Id of the entity type.
+          in: query
+          name: entityId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1/{name}:listActions:
+    get:
+      description: List actions.
+      operationId: connectors.projects.locations.connections.connectionSchemaMetadata.listActions
+      parameters:
+        - description: Required. Resource name format. projects/{project}/locations/{location}/connections/{connection}/connectionSchemaMetadata
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Required. Filter Wildcards are not supported in the filter currently.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Page size. If unspecified, at most 50 actions will be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Specifies which fields are returned in response. Defaults to BASIC view.
+          in: query
+          name: view
+          schema:
+            enum:
+              - VIEW_UNSPECIFIED
+              - BASIC
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListActionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1/{name}:listEntityTypes:
+    get:
+      description: List entity types.
+      operationId: connectors.projects.locations.connections.connectionSchemaMetadata.listEntityTypes
+      parameters:
+        - description: "Required. Resource name format: projects/{project}/locations/{location}/connections/{connection}/connectionSchemaMetadata"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Required. Filter Wildcards are not supported in the filter currently.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Page size. If unspecified, at most 50 entity types will be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Specifies which fields are returned in response. Defaults to BASIC view.
+          in: query
+          name: view
+          schema:
+            enum:
+              - VIEW_UNSPECIFIED
+              - BASIC
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListEntityTypesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1/{name}:refresh:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -558,6 +762,173 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1/{parent}/customConnectorVersions:
+    get:
+      description: List CustomConnectorVersions in a given project
+      operationId: connectors.projects.locations.global.customConnectors.customConnectorVersions.list
+      parameters:
+        - description: "Required. Parent resource of the connectors, of the form: `projects/*/locations/{location}/customConnectors/*/customConnectorVersions/*`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCustomConnectorVersionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new CustomConnectorVersion in a given project and location.
+      operationId: connectors.projects.locations.global.customConnectors.customConnectorVersions.create
+      parameters:
+        - description: "Required. Parent resource of the CreateCustomConnector, of the form: `projects/{project}/locations/{location}/customConnectors/{custom_connector}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Identifier to assign to the CreateCustomConnectorVersion. Must be unique within scope of the parent resource.
+          in: query
+          name: customConnectorVersionId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomConnectorVersion"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{parent}/customConnectors:
+    get:
+      description: List CustomConnectorVersions in a given project
+      operationId: connectors.projects.locations.global.customConnectors.list
+      parameters:
+        - description: "Required. Parent resource of the custom connectors, of the form: `projects/*/locations/*` Only global location is supported for CustomConnector resource."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filter string.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCustomConnectorsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new CustomConnector in a given project and location.
+      operationId: connectors.projects.locations.global.customConnectors.create
+      parameters:
+        - description: "Required. Parent resource of the CreateCustomConnector, of the form: `projects/{project}/locations/*`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Identifier to assign to the CreateCustomConnector. Must be unique within scope of the parent resource.
+          in: query
+          name: customConnectorId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomConnector"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{parent}/endpointAttachments:
     get:
       description: List EndpointAttachments in a given project
@@ -1907,6 +2278,96 @@ components:
           description: Enabled represents whether logging is enabled or not for a connection.
           type: boolean
       type: object
+    CustomConnector:
+      description: CustomConnector represents the custom connector defined by the customer as part of byoc.
+      properties:
+        createTime:
+          description: Output only. Created time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        customConnectorType:
+          description: Required. Type of the custom connector.
+          enum:
+            - CUSTOM_CONNECTOR_TYPE_UNSPECIFIED
+            - OPEN_API
+            - PROTO
+          type: string
+        description:
+          description: Optional. Description of the resource.
+          type: string
+        displayName:
+          description: Optional. Display name.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Resource labels to represent user-provided metadata. Refer to cloud documentation on labels for more details. https://cloud.google.com/compute/docs/labeling-resources
+          type: object
+        launchStage:
+          description: Output only. Launch stage.
+          enum:
+            - LAUNCH_STAGE_UNSPECIFIED
+            - PREVIEW
+            - GA
+            - DEPRECATED
+            - PRIVATE_PREVIEW
+          readOnly: true
+          type: string
+        logo:
+          description: Optional. Logo of the resource.
+          type: string
+        name:
+          description: "Identifier. Resource name of the CustomConnector. Format: projects/{project}/locations/{location}/customConnectors/{connector}"
+          type: string
+        updateTime:
+          description: Output only. Updated time.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    CustomConnectorVersion:
+      description: CustomConnectorVersion indicates a specific version of a connector.
+      properties:
+        authConfig:
+          $ref: "#/components/schemas/AuthConfig"
+          description: Required. Configuration for establishing the authentication to the connector destination.
+        createTime:
+          description: Output only. Created time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        destinationConfig:
+          $ref: "#/components/schemas/DestinationConfig"
+          description: Required. Configuration of the customConnector's destination.
+        enableBackendDestinationConfig:
+          description: Optional. Whether to enable backend destination config. This is the backend server that the connector connects to.
+          type: boolean
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Resource labels to represent user-provided metadata. Refer to cloud documentation on labels for more details. https://cloud.google.com/compute/docs/labeling-resources
+          type: object
+        name:
+          description: "Output only. Identifier. Resource name of the Version. Format: projects/{project}/locations/{location}/customConnectors/{custom_connector}/customConnectorVersions/{custom_connector_version}"
+          readOnly: true
+          type: string
+        specLocation:
+          description: Optional. Location of the custom connector spec.
+          type: string
+        type:
+          description: Required. Type of the customConnector.
+          enum:
+            - CUSTOM_CONNECTOR_TYPE_UNSPECIFIED
+            - OPEN_API
+            - PROTO
+          type: string
+        updateTime:
+          description: Output only. Updated time.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     Destination:
       properties:
         host:
@@ -2798,6 +3259,18 @@ components:
           description: Value for the "sub" claim.
           type: string
       type: object
+    ListActionsResponse:
+      description: Response message for ListActions API
+      properties:
+        actions:
+          description: list of actions
+          items:
+            $ref: "#/components/schemas/RuntimeActionSchema"
+          type: array
+        nextPageToken:
+          description: token for next page
+          type: string
+      type: object
     ListConnectionsResponse:
       description: Response message for ConnectorsService.ListConnections
       properties:
@@ -2849,6 +3322,40 @@ components:
             type: string
           type: array
       type: object
+    ListCustomConnectorVersionsResponse:
+      description: Response message for Connectors.ListCustomConnectorVersions.
+      properties:
+        customConnectorVersions:
+          description: A list of connector versions.
+          items:
+            $ref: "#/components/schemas/CustomConnectorVersion"
+          type: array
+        nextPageToken:
+          description: Next page token.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListCustomConnectorsResponse:
+      description: Response message for Connectors.ListCustomConnectors.
+      properties:
+        customConnectors:
+          description: A list of customConnectors.
+          items:
+            $ref: "#/components/schemas/CustomConnector"
+          type: array
+        nextPageToken:
+          description: Next page token.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
     ListEndpointAttachmentsResponse:
       description: Response message for ConnectorsService.ListEndpointAttachments
       properties:
@@ -2865,6 +3372,18 @@ components:
           items:
             type: string
           type: array
+      type: object
+    ListEntityTypesResponse:
+      description: Response message for ListEntityTypes API
+      properties:
+        entityTypes:
+          description: list of entity types
+          items:
+            $ref: "#/components/schemas/RuntimeEntitySchema"
+          type: array
+        nextPageToken:
+          description: token for next page
+          type: string
       type: object
     ListEventSubscriptionsResponse:
       description: Response message for ConnectorsService.ListEventSubscriptions

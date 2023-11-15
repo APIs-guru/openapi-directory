@@ -1834,6 +1834,13 @@ components:
     AlloyDbSettings:
       description: Settings for creating an AlloyDB cluster.
       properties:
+        databaseVersion:
+          description: Optional. The database engine major version. This is an optional field. If a database version is not supplied at cluster creation time, then a default database version will be used.
+          enum:
+            - DATABASE_VERSION_UNSPECIFIED
+            - POSTGRES_14
+            - POSTGRES_15
+          type: string
         encryptionConfig:
           $ref: "#/components/schemas/EncryptionConfig"
           description: Optional. The encryption config can be specified to encrypt the data disks and other persistent data resources of a cluster with a customer-managed encryption key (CMEK). When this field is not specified, the cluster will then use default encryption scheme to protect the user data.

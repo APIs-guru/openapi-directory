@@ -1563,6 +1563,11 @@ components:
         etag:
           description: Needed for declarative-friendly resources.
           type: string
+        finallyStartTime:
+          description: Output only. FinallyStartTime is when all non-finally tasks have been completed and only finally tasks are being executed. +optional
+          format: google-datetime
+          readOnly: true
+          type: string
         name:
           description: Output only. The `PipelineRun` name with format `projects/{project}/locations/{location}/pipelineRuns/{pipeline_run}`
           readOnly: true
@@ -2196,6 +2201,9 @@ components:
         secret:
           $ref: "#/components/schemas/SecretVolumeSource"
           description: Secret Volume Source.
+        subPath:
+          description: Optional. SubPath is optionally a directory on the volume which should be used for this binding (i.e. the volume will be mounted at this sub directory). +optional
+          type: string
         volumeClaim:
           $ref: "#/components/schemas/VolumeClaim"
           description: Volume claim that will be created in the same namespace.
@@ -2224,6 +2232,9 @@ components:
       properties:
         name:
           description: Name of the workspace as declared by the task.
+          type: string
+        subPath:
+          description: Optional. SubPath is optionally a directory on the volume which should be used for this binding (i.e. the volume will be mounted at this sub directory). +optional
           type: string
         workspace:
           description: Name of the workspace declared by the pipeline.
