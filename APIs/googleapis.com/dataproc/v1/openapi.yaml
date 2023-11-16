@@ -2468,6 +2468,13 @@ components:
           items:
             type: string
           type: array
+        tarballAccess:
+          description: Optional. (Optional) The access type to the diagnostic tarball. If not specified, falls back to default access of the bucket
+          enum:
+            - TARBALL_ACCESS_UNSPECIFIED
+            - GOOGLE_CLOUD_SUPPORT
+            - GOOGLE_DATAPROC_DIAGNOSE
+          type: string
         tarballGcsDir:
           description: Optional. (Optional) The output Cloud Storage directory for the diagnostic tarball. If not specified, a task-specific directory in the cluster's staging bucket will be used.
           type: string

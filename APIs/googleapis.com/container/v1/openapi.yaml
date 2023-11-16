@@ -4918,6 +4918,9 @@ components:
           description: "[Output only] The pod CIDR block size per node in this node pool."
           format: int32
           type: integer
+        queuedProvisioning:
+          $ref: "#/components/schemas/QueuedProvisioning"
+          description: Specifies the configuration of queued provisioning.
         selfLink:
           description: "[Output only] Server-defined URL for the resource."
           type: string
@@ -5251,6 +5254,13 @@ components:
         topic:
           description: The desired Pub/Sub topic to which notifications will be sent by GKE. Format is `projects/{project}/topics/{topic}`.
           type: string
+      type: object
+    QueuedProvisioning:
+      description: QueuedProvisioning defines the queued provisioning used by the node pool.
+      properties:
+        enabled:
+          description: Denotes that this nodepool is QRM specific, meaning nodes can be only obtained through queuing via the Cluster Autoscaler ProvisioningRequest API.
+          type: boolean
       type: object
     RangeInfo:
       description: RangeInfo contains the range name and the range utilization by this cluster.

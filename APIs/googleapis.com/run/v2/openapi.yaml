@@ -1961,10 +1961,10 @@ components:
           type: string
       type: object
     GoogleCloudRunV2ServiceScaling:
-      description: Scaling settings that apply to the service as a whole rather than the individual revision.
+      description: Scaling settings applied at the service level rather than at the revision level.
       properties:
         minInstanceCount:
-          description: total min instances for the service. This number of instances will be divide among all revisions with specified traffic based on the percent of traffic they are receiving. (ALPHA)
+          description: total min instances for the service. This number of instances is divided among all revisions with specified traffic based on the percent of traffic they are receiving. (ALPHA)
           format: int32
           type: integer
       type: object

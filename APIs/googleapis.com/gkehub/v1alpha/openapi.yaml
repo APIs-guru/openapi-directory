@@ -106,7 +106,7 @@ paths:
       description: Updates a Scope RBACRoleBinding.
       operationId: gkehub.projects.locations.scopes.rbacrolebindings.patch
       parameters:
-        - description: The resource name for the rbacrolebinding `projects/{project}/locations/{location}/namespaces/{namespace}/rbacrolebindings/{rbacrolebinding}` or `projects/{project}/locations/{location}/memberships/{membership}/rbacrolebindings/{rbacrolebinding}`
+        - description: The resource name for the rbacrolebinding `projects/{project}/locations/{location}/scopes/{scope}/rbacrolebindings/{rbacrolebinding}` or `projects/{project}/locations/{location}/memberships/{membership}/rbacrolebindings/{rbacrolebinding}`
           in: path
           name: name
           required: true
@@ -1380,6 +1380,22 @@ components:
           readOnly: true
           type: string
       type: object
+    BinaryAuthorizationConfig:
+      description: BinaryAuthorizationConfig defines the fleet level configuration of binary authorization feature.
+      properties:
+        evaluationMode:
+          description: Optional. Mode of operation for binauthz policy evaluation.
+          enum:
+            - EVALUATION_MODE_UNSPECIFIED
+            - DISABLED
+            - POLICY_BINDINGS
+          type: string
+        policyBindings:
+          description: Optional. Binauthz policies that apply to this cluster.
+          items:
+            $ref: "#/components/schemas/PolicyBinding"
+          type: array
+      type: object
     Binding:
       description: Associates `members`, or principals, with a `role`.
       properties:
@@ -1750,9 +1766,6 @@ components:
         sourceFormat:
           description: Specifies whether the Config Sync Repo is in "hierarchical" or "unstructured" mode.
           type: string
-        stopSyncing:
-          description: Set to true to stop syncing configs for a single cluster when automatic Feature management is enabled. Default to false. The field will be ignored when automatic Feature management is disabled.
-          type: boolean
       type: object
     ConfigManagementConfigSyncDeploymentState:
       description: The state of ConfigSync's deployment on a cluster
@@ -2038,13 +2051,6 @@ components:
         hierarchyController:
           $ref: "#/components/schemas/ConfigManagementHierarchyControllerConfig"
           description: Hierarchy Controller configuration for the cluster.
-        management:
-          description: Enables automatic Feature management.
-          enum:
-            - MANAGEMENT_UNSPECIFIED
-            - MANAGEMENT_AUTOMATIC
-            - MANAGEMENT_MANUAL
-          type: string
         policyController:
           $ref: "#/components/schemas/ConfigManagementPolicyController"
           description: Policy Controller configuration for the cluster.
@@ -2268,6 +2274,9 @@ components:
     DefaultClusterConfig:
       description: DefaultClusterConfig describes the default cluster configurations to be applied to all clusters born-in-fleet.
       properties:
+        binaryAuthorizationConfig:
+          $ref: "#/components/schemas/BinaryAuthorizationConfig"
+          description: Optional. Enable/Disable binary authorization features for the cluster.
         securityPostureConfig:
           $ref: "#/components/schemas/SecurityPostureConfig"
           description: Enable/Disable Security Posture features for the cluster.
@@ -2874,18 +2883,6 @@ components:
             type: string
           type: array
       type: object
-    ListNamespacesResponse:
-      description: List of fleet namespaces.
-      properties:
-        namespaces:
-          description: The list of fleet namespaces
-          items:
-            $ref: "#/components/schemas/Namespace"
-          type: array
-        nextPageToken:
-          description: A token to request the next page of resources from the `ListNamespaces` method. The value of an empty string means that there are no more resources to return.
-          type: string
-      type: object
     ListOperationsResponse:
       description: The response message for Operations.ListOperations.
       properties:
@@ -2896,18 +2893,6 @@ components:
           description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/Operation"
-          type: array
-      type: object
-    ListRBACRoleBindingsResponse:
-      description: List of RBACRoleBindings.
-      properties:
-        nextPageToken:
-          description: A token to request the next page of resources from the `ListRBACRoleBindings` method. The value of an empty string means that there are no more resources to return.
-          type: string
-        rbacrolebindings:
-          description: The list of RBACRoleBindings
-          items:
-            $ref: "#/components/schemas/RBACRoleBinding"
           type: array
       type: object
     ListScopeNamespacesResponse:
@@ -3453,6 +3438,13 @@ components:
           format: int32
           type: integer
       type: object
+    PolicyBinding:
+      description: Binauthz policy that applies to this cluster.
+      properties:
+        name:
+          description: "The relative resource name of the binauthz platform policy to audit. GKE platform policies have the following format: `projects/{project_number}/platforms/gke/policies/{policy_id}`."
+          type: string
+      type: object
     PolicyControllerBundleInstallSpec:
       description: BundleInstallSpec is the specification configuration for a single managed bundle.
       properties:
@@ -3700,7 +3692,7 @@ components:
           description: Optional. Labels for this RBACRolebinding.
           type: object
         name:
-          description: The resource name for the rbacrolebinding `projects/{project}/locations/{location}/namespaces/{namespace}/rbacrolebindings/{rbacrolebinding}` or `projects/{project}/locations/{location}/memberships/{membership}/rbacrolebindings/{rbacrolebinding}`
+          description: The resource name for the rbacrolebinding `projects/{project}/locations/{location}/scopes/{scope}/rbacrolebindings/{rbacrolebinding}` or `projects/{project}/locations/{location}/memberships/{membership}/rbacrolebindings/{rbacrolebinding}`
           type: string
         role:
           $ref: "#/components/schemas/Role"
