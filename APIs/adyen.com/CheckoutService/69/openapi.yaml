@@ -7679,6 +7679,7 @@ components:
             - $ref: "#/components/schemas/ResponseAdditionalDataBillingAddress"
             - $ref: "#/components/schemas/ResponseAdditionalDataCard"
             - $ref: "#/components/schemas/ResponseAdditionalDataCommon"
+            - $ref: "#/components/schemas/ResponseAdditionalDataDomesticError"
             - $ref: "#/components/schemas/ResponseAdditionalDataInstallments"
             - $ref: "#/components/schemas/ResponseAdditionalDataNetworkTokens"
             - $ref: "#/components/schemas/ResponseAdditionalDataOpi"
@@ -8146,7 +8147,7 @@ components:
       additionalProperties: false
       properties:
         paymentData:
-          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+          description: Encoded payment data.
           type: string
         paymentMethodType:
           description: Specifies the payment method.
@@ -8169,7 +8170,7 @@ components:
           description: A token needed to authorise a payment.
           type: string
         paymentData:
-          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+          description: Encoded payment data.
           type: string
         paymentMethodType:
           description: Specifies the payment method.
@@ -8247,7 +8248,7 @@ components:
           type: string
           x-addedInVersion: "68"
         paymentData:
-          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+          description: Encoded payment data.
           type: string
         paymentMethodType:
           description: Specifies the payment method.
@@ -8295,7 +8296,7 @@ components:
       additionalProperties: false
       properties:
         paymentData:
-          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+          description: Encoded payment data.
           type: string
         paymentMethodType:
           description: Specifies the payment method.
@@ -8350,7 +8351,7 @@ components:
           description: A token needed to authorise a payment.
           type: string
         paymentData:
-          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+          description: Encoded payment data.
           type: string
         paymentMethodType:
           description: Specifies the payment method.
@@ -8413,7 +8414,7 @@ components:
           type: string
           x-addedInVersion: "68"
         paymentData:
-          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+          description: Encoded payment data.
           type: string
         paymentMethodType:
           description: Specifies the payment method.
@@ -9117,6 +9118,7 @@ components:
             - $ref: "#/components/schemas/ResponseAdditionalDataBillingAddress"
             - $ref: "#/components/schemas/ResponseAdditionalDataCard"
             - $ref: "#/components/schemas/ResponseAdditionalDataCommon"
+            - $ref: "#/components/schemas/ResponseAdditionalDataDomesticError"
             - $ref: "#/components/schemas/ResponseAdditionalDataInstallments"
             - $ref: "#/components/schemas/ResponseAdditionalDataNetworkTokens"
             - $ref: "#/components/schemas/ResponseAdditionalDataOpi"
@@ -11063,7 +11065,12 @@ components:
           $ref: "#/components/schemas/PaymentCompletionDetails"
           description: Use this collection to submit the details that were returned as a result of the `/payments` call.
         paymentData:
-          description: "The `paymentData` value from the `/payments` response. Required if the `/payments` response returns this value. "
+          description: |-
+            Encoded payment data. For [authorizing a payment after using 3D Secure 2 Authentication-only](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only/#authorise-the-payment-with-adyen):
+
+            If you received `resultCode`: **AuthenticationNotRequired** in the `/payments` response, use the `threeDSPaymentData` from the same response.
+
+            If you received `resultCode`: **AuthenticationFinished** in the `/payments` response, use the `action.paymentData` from the same response.
           maxLength: 100000
           type: string
         threeDSAuthenticationOnly:
@@ -11086,6 +11093,7 @@ components:
             - $ref: "#/components/schemas/ResponseAdditionalDataBillingAddress"
             - $ref: "#/components/schemas/ResponseAdditionalDataCard"
             - $ref: "#/components/schemas/ResponseAdditionalDataCommon"
+            - $ref: "#/components/schemas/ResponseAdditionalDataDomesticError"
             - $ref: "#/components/schemas/ResponseAdditionalDataInstallments"
             - $ref: "#/components/schemas/ResponseAdditionalDataNetworkTokens"
             - $ref: "#/components/schemas/ResponseAdditionalDataOpi"
@@ -12372,6 +12380,7 @@ components:
             - $ref: "#/components/schemas/ResponseAdditionalDataBillingAddress"
             - $ref: "#/components/schemas/ResponseAdditionalDataCard"
             - $ref: "#/components/schemas/ResponseAdditionalDataCommon"
+            - $ref: "#/components/schemas/ResponseAdditionalDataDomesticError"
             - $ref: "#/components/schemas/ResponseAdditionalDataInstallments"
             - $ref: "#/components/schemas/ResponseAdditionalDataNetworkTokens"
             - $ref: "#/components/schemas/ResponseAdditionalDataOpi"
@@ -12894,6 +12903,7 @@ components:
             - $ref: "#/components/schemas/ResponseAdditionalDataBillingAddress"
             - $ref: "#/components/schemas/ResponseAdditionalDataCard"
             - $ref: "#/components/schemas/ResponseAdditionalDataCommon"
+            - $ref: "#/components/schemas/ResponseAdditionalDataDomesticError"
             - $ref: "#/components/schemas/ResponseAdditionalDataInstallments"
             - $ref: "#/components/schemas/ResponseAdditionalDataNetworkTokens"
             - $ref: "#/components/schemas/ResponseAdditionalDataOpi"
@@ -13592,6 +13602,19 @@ components:
             Example: ODgxNDc2MDg2MDExODk5MAAAAAA=
           type: string
       type: object
+    ResponseAdditionalDataDomesticError:
+      properties:
+        domesticRefusalReasonRaw:
+          description: |-
+            The reason the transaction was declined, given by the local issuer. 
+            Currently available for merchants in Japan.
+          type: string
+        domesticShopperAdvice:
+          description: |-
+            The action the shopper should take, in a local language. 
+            Currently available in Japanese, for merchants in Japan.
+          type: string
+      type: object
     ResponseAdditionalDataInstallments:
       properties:
         installmentPaymentData.installmentType:
@@ -13935,9 +13958,11 @@ components:
           type: string
         reference:
           description: |-
-            Your reference for the split item.
+            Your unique reference for the split item.
 
-            This is required if `type` is **MarketPlace** ([Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic)) or **BalanceAccount** ([Balance Platform](https://docs.adyen.com/marketplaces-and-platforms)). For the other types, we also recommend sending a reference so you can reconcile the split and the associated payment in the transaction overview and in the reports.
+            This is required if `type` is **MarketPlace** ([Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic)) or **BalanceAccount** ([Balance Platform](https://docs.adyen.com/marketplaces-and-platforms)).
+
+            For the other types, we also recommend providing a **unique** reference so you can reconcile the split and the associated payment in the transaction overview and in the reports.
           type: string
         type:
           description: |-
