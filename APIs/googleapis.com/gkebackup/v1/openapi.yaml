@@ -1589,7 +1589,7 @@ components:
           type: array
       type: object
     Restore:
-      description: "Represents both a request to Restore some portion of a Backup into a target GKE cluster and a record of the restore operation itself. Next id: 19"
+      description: "Represents both a request to Restore some portion of a Backup into a target GKE cluster and a record of the restore operation itself. Next id: 20"
       properties:
         backup:
           description: "Required. Immutable. A reference to the Backup used as the source from which this Restore will restore. Note that this Backup must be a sub-resource of the RestorePlan's backup_plan. Format: `projects/*/locations/*/backupPlans/*/backups/*`."
@@ -1674,7 +1674,7 @@ components:
           type: integer
       type: object
     RestoreConfig:
-      description: "Configuration of a restore. Next id: 12"
+      description: "Configuration of a restore. Next id: 13"
       properties:
         allNamespaces:
           description: Restore all namespaced resources in the Backup if set to "True". Specifying this field to "False" is an error.

@@ -860,6 +860,7 @@ components:
             - PSC_GOOGLE_API
             - PSC_VPC_SC
             - SERVERLESS_NEG
+            - STORAGE_BUCKET
           type: string
       type: object
     DropInfo:
@@ -1067,6 +1068,7 @@ components:
             - SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE
             - NETWORK_FIREWALL_POLICY_RULE
             - NETWORK_REGIONAL_FIREWALL_POLICY_RULE
+            - UNSUPPORTED_FIREWALL_POLICY_RULE
           type: string
         networkUri:
           description: The URI of the VPC network that the firewall rule is associated with. This field is not applicable to hierarchical firewall policy rules.
@@ -1308,7 +1310,8 @@ components:
             $ref: "#/components/schemas/LoadBalancerBackend"
           type: array
         healthCheckUri:
-          description: URI of the health check for the load balancer.
+          deprecated: true
+          description: URI of the health check for the load balancer. Deprecated and no longer populated as different load balancer backends might have different health checks.
           type: string
         loadBalancerType:
           description: Type of the load balancer.
