@@ -577,7 +577,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Gets the IAM policy.
-      operationId: analyticshub.projects.locations.dataExchanges.listings.getIamPolicy
+      operationId: analyticshub.projects.locations.subscriptions.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -679,7 +679,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the IAM policy.
-      operationId: analyticshub.projects.locations.dataExchanges.listings.setIamPolicy
+      operationId: analyticshub.projects.locations.subscriptions.setIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
