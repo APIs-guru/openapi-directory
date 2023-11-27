@@ -34,7 +34,7 @@ paths:
       description: Deletes a single Target.
       operationId: clouddeploy.projects.locations.targets.delete
       parameters:
-        - description: Required. The name of the `Target` to delete. Format should be projects/{project_id}/locations/{location_name}/targets/{target_name}.
+        - description: Required. The name of the `Target` to delete. Format should be `projects/{project_id}/locations/{location_name}/targets/{target_name}`.
           in: path
           name: name
           required: true
@@ -78,7 +78,7 @@ paths:
       description: Gets details of a single Target.
       operationId: clouddeploy.projects.locations.targets.get
       parameters:
-        - description: Required. Name of the `Target`. Format must be projects/{project_id}/locations/{location_name}/targets/{target_name}.
+        - description: Required. Name of the `Target`. Format must be `projects/{project_id}/locations/{location_name}/targets/{target_name}`.
           in: path
           name: name
           required: true
@@ -114,7 +114,7 @@ paths:
       description: Updates the parameters of a single Target.
       operationId: clouddeploy.projects.locations.targets.patch
       parameters:
-        - description: Optional. Name of the `Target`. Format is projects/{project}/locations/{location}/targets/a-z{0,62}.
+        - description: Optional. Name of the `Target`. Format is `projects/{project}/locations/{location}/targets/a-z{0,62}`.
           in: path
           name: name
           required: true
@@ -280,7 +280,7 @@ paths:
       description: Abandons a Release in the Delivery Pipeline.
       operationId: clouddeploy.projects.locations.deliveryPipelines.releases.abandon
       parameters:
-        - description: Required. Name of the Release. Format is projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/ releases/{release}.
+        - description: Required. Name of the Release. Format is `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}`.
           in: path
           name: name
           required: true
@@ -322,7 +322,7 @@ paths:
       description: Advances a Rollout in a given project and location.
       operationId: clouddeploy.projects.locations.deliveryPipelines.releases.rollouts.advance
       parameters:
-        - description: Required. Name of the Rollout. Format is projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/ releases/{release}/rollouts/{rollout}.
+        - description: Required. Name of the Rollout. Format is `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
           in: path
           name: name
           required: true
@@ -364,7 +364,7 @@ paths:
       description: Approves a Rollout.
       operationId: clouddeploy.projects.locations.deliveryPipelines.releases.rollouts.approve
       parameters:
-        - description: Required. Name of the Rollout. Format is projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/ releases/{release}/rollouts/{rollout}.
+        - description: Required. Name of the Rollout. Format is `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
           in: path
           name: name
           required: true
@@ -448,7 +448,7 @@ paths:
       description: Creates a `Rollout` to roll back the specified target.
       operationId: clouddeploy.projects.locations.deliveryPipelines.rollbackTarget
       parameters:
-        - description: Required. The `DeliveryPipeline` for which the rollback `Rollout` should be created. Format should be projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}.
+        - description: Required. The `DeliveryPipeline` for which the rollback `Rollout` should be created. Format should be `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
           in: path
           name: name
           required: true
@@ -490,7 +490,7 @@ paths:
       description: Terminates a Job Run in a given project and location.
       operationId: clouddeploy.projects.locations.deliveryPipelines.releases.rollouts.jobRuns.terminate
       parameters:
-        - description: Required. Name of the `JobRun`. Format must be projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/ releases/{release}/rollouts/{rollout}/jobRuns/{jobRun}.
+        - description: Required. Name of the `JobRun`. Format must be `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}/jobRuns/{jobRun}`.
           in: path
           name: name
           required: true
@@ -520,7 +520,7 @@ paths:
       description: Lists AutomationRuns in a given project and location.
       operationId: clouddeploy.projects.locations.deliveryPipelines.automationRuns.list
       parameters:
-        - description: Required. The parent, which owns this collection of automationRuns. Format must be projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}.
+        - description: Required. The parent, which owns this collection of automationRuns. Format must be `projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}`.
           in: path
           name: parent
           required: true
@@ -577,7 +577,7 @@ paths:
       description: Lists Automations in a given project and location.
       operationId: clouddeploy.projects.locations.deliveryPipelines.automations.list
       parameters:
-        - description: Required. The parent, which owns this collection of automations. Format must be projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}.
+        - description: Required. The parent, which owns this collection of automations. Format must be `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
           in: path
           name: parent
           required: true
@@ -633,7 +633,7 @@ paths:
       description: Creates a new Automation in a given project and location.
       operationId: clouddeploy.projects.locations.deliveryPipelines.automations.create
       parameters:
-        - description: Required. The parent collection in which the `Automation` should be created. Format should be projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}.
+        - description: Required. The parent collection in which the `Automation` should be created. Format should be `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
           in: path
           name: parent
           required: true
@@ -678,7 +678,7 @@ paths:
       description: Lists DeliveryPipelines in a given project and location.
       operationId: clouddeploy.projects.locations.deliveryPipelines.list
       parameters:
-        - description: Required. The parent, which owns this collection of pipelines. Format must be projects/{project_id}/locations/{location_name}.
+        - description: Required. The parent, which owns this collection of pipelines. Format must be `projects/{project_id}/locations/{location_name}`.
           in: path
           name: parent
           required: true
@@ -734,7 +734,7 @@ paths:
       description: Creates a new DeliveryPipeline in a given project and location.
       operationId: clouddeploy.projects.locations.deliveryPipelines.create
       parameters:
-        - description: Required. The parent collection in which the `DeliveryPipeline` should be created. Format should be projects/{project_id}/locations/{location_name}.
+        - description: Required. The parent collection in which the `DeliveryPipeline` should be created. Format should be `projects/{project_id}/locations/{location_name}`.
           in: path
           name: parent
           required: true
@@ -892,7 +892,7 @@ paths:
       description: Creates a new Release in a given project and location.
       operationId: clouddeploy.projects.locations.deliveryPipelines.releases.create
       parameters:
-        - description: Required. The parent collection in which the `Release` should be created. Format should be projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}.
+        - description: Required. The parent collection in which the `Release` should be created. Format should be `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
           in: path
           name: parent
           required: true
@@ -993,7 +993,7 @@ paths:
       description: Creates a new Rollout in a given project and location.
       operationId: clouddeploy.projects.locations.deliveryPipelines.releases.rollouts.create
       parameters:
-        - description: Required. The parent collection in which the `Rollout` should be created. Format should be projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/releases/{release_name}.
+        - description: Required. The parent collection in which the `Rollout` should be created. Format should be `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/releases/{release_name}`.
           in: path
           name: parent
           required: true
@@ -1043,7 +1043,7 @@ paths:
       description: Lists Targets in a given project and location.
       operationId: clouddeploy.projects.locations.targets.list
       parameters:
-        - description: Required. The parent, which owns this collection of targets. Format must be projects/{project_id}/locations/{location_name}.
+        - description: Required. The parent, which owns this collection of targets. Format must be `projects/{project_id}/locations/{location_name}`.
           in: path
           name: parent
           required: true
@@ -1099,7 +1099,7 @@ paths:
       description: Creates a new Target in a given project and location.
       operationId: clouddeploy.projects.locations.targets.create
       parameters:
-        - description: Required. The parent collection in which the `Target` should be created. Format should be projects/{project_id}/locations/{location_name}.
+        - description: Required. The parent collection in which the `Target` should be created. Format should be `projects/{project_id}/locations/{location_name}`.
           in: path
           name: parent
           required: true
@@ -1282,7 +1282,7 @@ paths:
       description: Ignores the specified Job in a Rollout.
       operationId: clouddeploy.projects.locations.deliveryPipelines.releases.rollouts.ignoreJob
       parameters:
-        - description: Required. Name of the Rollout. Format is projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/ releases/{release}/rollouts/{rollout}.
+        - description: Required. Name of the Rollout. Format is `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
           in: path
           name: rollout
           required: true
@@ -1324,7 +1324,7 @@ paths:
       description: Retries the specified Job in a Rollout.
       operationId: clouddeploy.projects.locations.deliveryPipelines.releases.rollouts.retryJob
       parameters:
-        - description: Required. Name of the Rollout. Format is projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/ releases/{release}/rollouts/{rollout}.
+        - description: Required. Name of the Rollout. Format is `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
           in: path
           name: rollout
           required: true
@@ -1441,7 +1441,7 @@ components:
       description: AdvanceChildRolloutJobRun contains information specific to a advanceChildRollout `JobRun`.
       properties:
         rollout:
-          description: Output only. Name of the `ChildRollout`. Format is projects/{project}/ locations/{location}/deliveryPipelines/{deliveryPipeline}/ releases/{release}/rollouts/a-z{0,62}.
+          description: Output only. Name of the `ChildRollout`. Format is `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/a-z{0,62}`.
           readOnly: true
           type: string
         rolloutPhaseId:
@@ -1489,7 +1489,7 @@ components:
           description: Output only. Information around the state of the Automation rule.
           readOnly: true
         id:
-          description: Required. ID of the rule. This id must be unique in the `Automation` resource to which this rule belongs. The format is a-z{0,62}.
+          description: Required. ID of the rule. This id must be unique in the `Automation` resource to which this rule belongs. The format is `a-z{0,62}`.
           type: string
         sourcePhases:
           description: "Optional. Proceeds only after phase name matched any one in the list. This value must consist of lower-case letters, numbers, and hyphens, start with a letter and end with a letter or a number, and have a max length of 63 characters. In other words, it must match the following regex: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`."
@@ -1554,7 +1554,7 @@ components:
         annotations:
           additionalProperties:
             type: string
-          description: "Optional. User annotations. These attributes can only be set and used by the user, and not by Cloud Deploy. Annotations must meet the following constraints: * Annotations are key/value pairs. * Valid annotation keys have two segments: an optional prefix and name, separated by a slash (/). * The name segment is required and must be 63 characters or less, beginning and ending with an alphanumeric character ([a-z0-9A-Z]) with dashes (-), underscores (_), dots (.), and alphanumerics between. * The prefix is optional. If specified, the prefix must be a DNS subdomain: a series of DNS labels separated by dots(.), not longer than 253 characters in total, followed by a slash (/). See https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/#syntax-and-character-set for more details."
+          description: "Optional. User annotations. These attributes can only be set and used by the user, and not by Cloud Deploy. Annotations must meet the following constraints: * Annotations are key/value pairs. * Valid annotation keys have two segments: an optional prefix and name, separated by a slash (`/`). * The name segment is required and must be 63 characters or less, beginning and ending with an alphanumeric character (`[a-z0-9A-Z]`) with dashes (`-`), underscores (`_`), dots (`.`), and alphanumerics between. * The prefix is optional. If specified, the prefix must be a DNS subdomain: a series of DNS labels separated by dots(`.`), not longer than 253 characters in total, followed by a slash (`/`). See https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/#syntax-and-character-set for more details."
           type: object
         createTime:
           description: Output only. Time at which the automation was created.
@@ -1573,7 +1573,7 @@ components:
           description: "Optional. Labels are attributes that can be set and used by both the user and by Cloud Deploy. Labels must meet the following constraints: * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. * All characters must use UTF-8 encoding, and international characters are allowed. * Keys must start with a lowercase letter or international character. * Each resource is limited to a maximum of 64 labels. Both keys and values are additionally constrained to be <= 63 characters."
           type: object
         name:
-          description: Output only. Name of the `Automation`. Format is projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}/automations/{automation}.
+          description: Output only. Name of the `Automation`. Format is `projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}/automations/{automation}`.
           readOnly: true
           type: string
         rules:
@@ -1684,7 +1684,7 @@ components:
           description: Optional. Details around targets enumerated in the rule.
       type: object
     AutomationRun:
-      description: An `AutomationRun` resource in the Cloud Deploy API. An `AutomationResource` represents an automation execution instance of an automation rule.
+      description: An `AutomationRun` resource in the Cloud Deploy API. An `AutomationRun` represents an automation execution instance of an automation rule.
       properties:
         advanceRolloutOperation:
           $ref: "#/components/schemas/AdvanceRolloutOperation"
@@ -1713,7 +1713,7 @@ components:
           readOnly: true
           type: string
         name:
-          description: Output only. Name of the `AutomationRun`. Format is projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}/automationRuns/{automation_run}.
+          description: Output only. Name of the `AutomationRun`. Format is `projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}/automationRuns/{automation_run}`.
           readOnly: true
           type: string
         promoteReleaseOperation:
@@ -1916,7 +1916,7 @@ components:
       description: CloudRunMetadata contains information from a Cloud Run deployment.
       properties:
         job:
-          description: Output only. The name of the Cloud Run job that is associated with a `Rollout`. Format is projects/{project}/locations/{location}/jobs/{job_name}.
+          description: Output only. The name of the Cloud Run job that is associated with a `Rollout`. Format is `projects/{project}/locations/{location}/jobs/{job_name}`.
           readOnly: true
           type: string
         revision:
@@ -1924,7 +1924,7 @@ components:
           readOnly: true
           type: string
         service:
-          description: Output only. The name of the Cloud Run Service that is associated with a `Rollout`. Format is projects/{project}/locations/{location}/services/{service}.
+          description: Output only. The name of the Cloud Run Service that is associated with a `Rollout`. Format is `projects/{project}/locations/{location}/services/{service}`.
           readOnly: true
           type: string
         serviceUrls:
@@ -1938,7 +1938,7 @@ components:
       description: CloudRunRenderMetadata contains Cloud Run information associated with a `Release` render.
       properties:
         service:
-          description: Output only. The name of the Cloud Run Service in the rendered manifest. Format is projects/{project}/locations/{location}/services/{service}.
+          description: Output only. The name of the Cloud Run Service in the rendered manifest. Format is `projects/{project}/locations/{location}/services/{service}`.
           readOnly: true
           type: string
       type: object
@@ -1965,7 +1965,7 @@ components:
       description: CreateChildRolloutJobRun contains information specific to a createChildRollout `JobRun`.
       properties:
         rollout:
-          description: Output only. Name of the `ChildRollout`. Format is projects/{project}/ locations/{location}/deliveryPipelines/{deliveryPipeline}/ releases/{release}/rollouts/a-z{0,62}.
+          description: Output only. Name of the `ChildRollout`. Format is `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/a-z{0,62}`.
           readOnly: true
           type: string
         rolloutPhaseId:
@@ -2037,7 +2037,7 @@ components:
           description: "Labels are attributes that can be set and used by both the user and by Cloud Deploy. Labels must meet the following constraints: * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. * All characters must use UTF-8 encoding, and international characters are allowed. * Keys must start with a lowercase letter or international character. * Each resource is limited to a maximum of 64 labels. Both keys and values are additionally constrained to be <= 128 bytes."
           type: object
         name:
-          description: Optional. Name of the `DeliveryPipeline`. Format is projects/{project}/ locations/{location}/deliveryPipelines/a-z{0,62}.
+          description: Optional. Name of the `DeliveryPipeline`. Format is `projects/{project}/locations/{location}/deliveryPipelines/a-z{0,62}`.
           type: string
         serialPipeline:
           $ref: "#/components/schemas/SerialPipeline"
@@ -2112,7 +2112,7 @@ components:
           description: Output only. The artifact of a deploy job run, if available.
           readOnly: true
         build:
-          description: Output only. The resource name of the Cloud Build `Build` object that is used to deploy. Format is projects/{project}/locations/{location}/builds/{build}.
+          description: Output only. The resource name of the Cloud Build `Build` object that is used to deploy. Format is `projects/{project}/locations/{location}/builds/{build}`.
           readOnly: true
           type: string
         failureCause:
@@ -2253,7 +2253,7 @@ components:
       description: Information specifying a GKE Cluster.
       properties:
         cluster:
-          description: Information specifying a GKE Cluster. Format is `projects/{project_id}/locations/{location_id}/clusters/{cluster_id}.
+          description: Information specifying a GKE Cluster. Format is `projects/{project_id}/locations/{location_id}/clusters/{cluster_id}`.
           type: string
         internalIp:
           description: Optional. If true, `cluster` is accessed using the private IP address of the control plane endpoint. Otherwise, the default IP address of the control plane endpoint is used. The default IP address is the private IP address for clusters with private control-plane endpoints and the public IP address otherwise. Only specify this option when `cluster` is a [private GKE cluster](https://cloud.google.com/kubernetes-engine/docs/concepts/private-cluster-concept).
@@ -2361,7 +2361,7 @@ components:
           readOnly: true
           type: string
         name:
-          description: Optional. Name of the `JobRun`. Format is projects/{project}/locations/{location}/ deliveryPipelines/{deliveryPipeline}/releases/{releases}/rollouts/ {rollouts}/jobRuns/{uuid}.
+          description: Optional. Name of the `JobRun`. Format is `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{releases}/rollouts/{rollouts}/jobRuns/{uuid}`.
           type: string
         phaseId:
           description: Output only. ID of the `Rollout` phase this `JobRun` belongs in.
@@ -2839,7 +2839,7 @@ components:
       description: PostdeployJobRun contains information specific to a postdeploy `JobRun`.
       properties:
         build:
-          description: Output only. The resource name of the Cloud Build `Build` object that is used to execute the custom actions associated with the postdeploy Job. Format is projects/{project}/locations/{location}/builds/{build}.
+          description: Output only. The resource name of the Cloud Build `Build` object that is used to execute the custom actions associated with the postdeploy Job. Format is `projects/{project}/locations/{location}/builds/{build}`.
           readOnly: true
           type: string
         failureCause:
@@ -2880,7 +2880,7 @@ components:
       description: PredeployJobRun contains information specific to a predeploy `JobRun`.
       properties:
         build:
-          description: Output only. The resource name of the Cloud Build `Build` object that is used to execute the custom actions associated with the predeploy Job. Format is projects/{project}/locations/{location}/builds/{build}.
+          description: Output only. The resource name of the Cloud Build `Build` object that is used to execute the custom actions associated with the predeploy Job. Format is `projects/{project}/locations/{location}/builds/{build}`.
           readOnly: true
           type: string
         failureCause:
@@ -2946,7 +2946,7 @@ components:
           description: 'Optional. The ID of the stage in the pipeline to which this `Release` is deploying. If unspecified, default it to the next stage in the promotion flow. The value of this field could be one of the following: * The last segment of a target name. It only needs the ID to determine if the target is one of the stages in the promotion sequence defined in the pipeline. * "@next", the next target in the promotion sequence.'
           type: string
         id:
-          description: Required. ID of the rule. This id must be unique in the `Automation` resource to which this rule belongs. The format is a-z{0,62}.
+          description: Required. ID of the rule. This id must be unique in the `Automation` resource to which this rule belongs. The format is `a-z{0,62}`.
           type: string
         wait:
           description: Optional. How long the release need to be paused until being promoted to the next target.
@@ -3000,7 +3000,7 @@ components:
           description: "Labels are attributes that can be set and used by both the user and by Cloud Deploy. Labels must meet the following constraints: * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. * All characters must use UTF-8 encoding, and international characters are allowed. * Keys must start with a lowercase letter or international character. * Each resource is limited to a maximum of 64 labels. Both keys and values are additionally constrained to be <= 128 bytes."
           type: object
         name:
-          description: Optional. Name of the `Release`. Format is projects/{project}/ locations/{location}/deliveryPipelines/{deliveryPipeline}/ releases/a-z{0,62}.
+          description: Optional. Name of the `Release`. Format is `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/a-z{0,62}`.
           type: string
         renderEndTime:
           description: Output only. Time at which the render completed.
@@ -3176,7 +3176,7 @@ components:
           description: Output only. Information around the state of the 'Automation' rule.
           readOnly: true
         id:
-          description: Required. ID of the rule. This id must be unique in the `Automation` resource to which this rule belongs. The format is a-z{0,62}.
+          description: Required. ID of the rule. This id must be unique in the `Automation` resource to which this rule belongs. The format is `a-z{0,62}`.
           type: string
         jobs:
           description: "Optional. Jobs to repair. Proceeds only after job name matched any one in the list, or for all jobs if unspecified or empty. The phase that includes the job must match the phase ID specified in `source_phase`. This value must consist of lower-case letters, numbers, and hyphens, start with a letter and end with a letter or a number, and have a max length of 63 characters. In other words, it must match the following regex: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`."
@@ -3386,7 +3386,7 @@ components:
           readOnly: true
           type: string
         controllerRollout:
-          description: Output only. Name of the `ControllerRollout`. Format is projects/{project}/ locations/{location}/deliveryPipelines/{deliveryPipeline}/ releases/{release}/rollouts/a-z{0,62}.
+          description: Output only. Name of the `ControllerRollout`. Format is `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/a-z{0,62}`.
           readOnly: true
           type: string
         createTime:
@@ -3446,7 +3446,7 @@ components:
           description: Output only. Metadata contains information about the rollout.
           readOnly: true
         name:
-          description: Optional. Name of the `Rollout`. Format is projects/{project}/ locations/{location}/deliveryPipelines/{deliveryPipeline}/ releases/{release}/rollouts/a-z{0,62}.
+          description: Optional. Name of the `Rollout`. Format is `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/a-z{0,62}`.
           type: string
         phases:
           description: Output only. The phases that represent the workflows of this `Rollout`.
@@ -3775,7 +3775,7 @@ components:
           $ref: "#/components/schemas/MultiTarget"
           description: Optional. Information specifying a multiTarget.
         name:
-          description: Optional. Name of the `Target`. Format is projects/{project}/locations/{location}/targets/a-z{0,62}.
+          description: Optional. Name of the `Target`. Format is `projects/{project}/locations/{location}/targets/a-z{0,62}`.
           type: string
         requireApproval:
           description: Optional. Whether or not the `Target` requires approval.
@@ -3874,6 +3874,7 @@ components:
             - CLOUD_BUILD_REQUEST_FAILED
             - VERIFICATION_CONFIG_NOT_FOUND
             - CUSTOM_ACTION_NOT_FOUND
+            - DEPLOYMENT_STRATEGY_NOT_SUPPORTED
           readOnly: true
           type: string
         failureMessage:
@@ -3902,7 +3903,7 @@ components:
       description: TargetsPresentCondition contains information on any Targets defined in the Delivery Pipeline that do not actually exist.
       properties:
         missingTargets:
-          description: The list of Target names that do not exist. For example, projects/{project_id}/locations/{location_name}/targets/{target_name}.
+          description: The list of Target names that do not exist. For example, `projects/{project_id}/locations/{location_name}/targets/{target_name}`.
           items:
             type: string
           type: array
@@ -3962,7 +3963,7 @@ components:
           readOnly: true
           type: string
         build:
-          description: Output only. The resource name of the Cloud Build `Build` object that is used to verify. Format is projects/{project}/locations/{location}/builds/{build}.
+          description: Output only. The resource name of the Cloud Build `Build` object that is used to verify. Format is `projects/{project}/locations/{location}/builds/{build}`.
           readOnly: true
           type: string
         eventLogPath:

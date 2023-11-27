@@ -2722,6 +2722,19 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudDataplexV1DataQualityColumnResult:
+      description: DataQualityColumnResult provides a more detailed, per-column view of the results.
+      properties:
+        column:
+          description: Output only. The column specified in the DataQualityRule.
+          readOnly: true
+          type: string
+        score:
+          description: Output only. The column-level data quality score for this data scan job if and only if the 'column' field is set.The score ranges between between 0, 100 (up to two decimal points).
+          format: float
+          readOnly: true
+          type: number
+      type: object
     GoogleCloudDataplexV1DataQualityDimension:
       description: A dimension captures data quality intent about a defined subset of the rules specified.
       properties:
@@ -2739,10 +2752,21 @@ components:
         passed:
           description: Whether the dimension passed or failed.
           type: boolean
+        score:
+          description: Output only. The dimension-level data quality score for this data scan job if and only if the 'dimension' field is set.The score ranges between 0, 100 (up to two decimal points).
+          format: float
+          readOnly: true
+          type: number
       type: object
     GoogleCloudDataplexV1DataQualityResult:
       description: The output of a DataQualityScan.
       properties:
+        columns:
+          description: Output only. A list of results at the column level.A column will have a corresponding DataQualityColumnResult if and only if there is at least one rule with the 'column' field set to it.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDataplexV1DataQualityColumnResult"
+          readOnly: true
+          type: array
         dimensions:
           description: A list of results at the dimension level.A dimension will have a corresponding DataQualityDimensionResult if and only if there is at least one rule with the 'dimension' field set to it.
           items:
@@ -2767,6 +2791,11 @@ components:
         scannedData:
           $ref: "#/components/schemas/GoogleCloudDataplexV1ScannedData"
           description: The data scanned for this result.
+        score:
+          description: Output only. The overall data quality score.The score ranges between 0, 100 (up to two decimal points).
+          format: float
+          readOnly: true
+          type: number
       type: object
     GoogleCloudDataplexV1DataQualityResultPostScanActionsResult:
       description: The result of post scan actions of DataQualityScan job.

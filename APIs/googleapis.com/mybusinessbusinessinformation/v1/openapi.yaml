@@ -859,7 +859,7 @@ components:
           description: If the number of locations exceeded the requested page size, this field is populated with a token to fetch the next page of locations on a subsequent call to `ListLocations`. If there are no more locations, this field is not present in the response.
           type: string
         totalSize:
-          description: The approximate number of Locations in the list irrespective of pagination.
+          description: The approximate number of Locations in the list irrespective of pagination. This field will only be returned if `filter` is used as a query parameter.
           format: int32
           type: integer
       type: object

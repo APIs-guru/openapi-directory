@@ -7223,6 +7223,7 @@ components:
         fundingSource:
           description: The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
           enum:
+            - credit
             - debit
           type: string
         recurringDetailReference:
@@ -8045,6 +8046,7 @@ components:
         fundingSource:
           description: The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
           enum:
+            - credit
             - debit
           type: string
         holderName:
@@ -8782,6 +8784,10 @@ components:
         telephoneNumber:
           description: The shopper's telephone number.
           type: string
+        themeId:
+          description: Sets a custom theme for the Adyen-hosted payment page. The value can be any of the **Theme ID** values from your Customer Area.
+          type: string
+          x-addedInVersion: "69"
         threeDSAuthenticationOnly:
           default: false
           deprecated: true
@@ -9071,6 +9077,10 @@ components:
         telephoneNumber:
           description: The shopper's telephone number.
           type: string
+        themeId:
+          description: Sets a custom theme for the Adyen-hosted payment page. The value can be any of the **Theme ID** values from your Customer Area.
+          type: string
+          x-addedInVersion: "69"
         threeDSAuthenticationOnly:
           default: false
           deprecated: true
@@ -9081,6 +9091,10 @@ components:
         trustedShopper:
           description: Set to true if the payment should be routed to a trusted MID.
           type: boolean
+        url:
+          description: The URL for the Hosted Checkout page. Redirect the shopper to this URL so they can make the payment.
+          type: string
+          x-addedInVersion: "69"
       required:
         - id
         - amount
@@ -10045,6 +10059,7 @@ components:
         fundingSource:
           description: The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
           enum:
+            - credit
             - debit
           type: string
         googlePayToken:
@@ -10378,6 +10393,7 @@ components:
         fundingSource:
           description: The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
           enum:
+            - credit
             - debit
           type: string
         masterpassTransactionId:
@@ -10688,6 +10704,7 @@ components:
         fundingSource:
           description: The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
           enum:
+            - credit
             - debit
           type: string
         googlePayToken:
@@ -11690,6 +11707,7 @@ components:
         fundingSource:
           description: The funding source of the payment method.
           enum:
+            - credit
             - debit
           type: string
           x-addedInVersion: "53"
@@ -13110,6 +13128,7 @@ components:
         fundingSource:
           description: The funding source of the payment method.
           enum:
+            - credit
             - debit
           type: string
           x-addedInVersion: "53"
@@ -13759,6 +13778,7 @@ components:
         fundingSource:
           description: The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
           enum:
+            - credit
             - debit
           type: string
         recurringDetailReference:
@@ -15114,6 +15134,7 @@ components:
         fundingSource:
           description: The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
           enum:
+            - credit
             - debit
           type: string
         type:
