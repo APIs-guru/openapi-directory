@@ -3811,6 +3811,7 @@ components:
         fundingSource:
           description: The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
           enum:
+            - credit
             - debit
           type: string
           x-addedInVersion: "52"
@@ -4554,6 +4555,7 @@ components:
             - $ref: "#/components/schemas/ResponseAdditionalDataBillingAddress"
             - $ref: "#/components/schemas/ResponseAdditionalDataCard"
             - $ref: "#/components/schemas/ResponseAdditionalDataCommon"
+            - $ref: "#/components/schemas/ResponseAdditionalDataDomesticError"
             - $ref: "#/components/schemas/ResponseAdditionalDataInstallments"
             - $ref: "#/components/schemas/ResponseAdditionalDataNetworkTokens"
             - $ref: "#/components/schemas/ResponseAdditionalDataOpi"
@@ -5217,6 +5219,19 @@ components:
             Example: ODgxNDc2MDg2MDExODk5MAAAAAA=
           type: string
       type: object
+    ResponseAdditionalDataDomesticError:
+      properties:
+        domesticRefusalReasonRaw:
+          description: |-
+            The reason the transaction was declined, given by the local issuer. 
+            Currently available for merchants in Japan.
+          type: string
+        domesticShopperAdvice:
+          description: |-
+            The action the shopper should take, in a local language. 
+            Currently available in Japanese, for merchants in Japan.
+          type: string
+      type: object
     ResponseAdditionalDataInstallments:
       properties:
         installmentPaymentData.installmentType:
@@ -5378,9 +5393,11 @@ components:
           type: string
         reference:
           description: |-
-            Your reference for the split item.
+            Your unique reference for the split item.
 
-            This is required if `type` is **MarketPlace** ([Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic)) or **BalanceAccount** ([Balance Platform](https://docs.adyen.com/marketplaces-and-platforms)). For the other types, we also recommend sending a reference so you can reconcile the split and the associated payment in the transaction overview and in the reports.
+            This is required if `type` is **MarketPlace** ([Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic)) or **BalanceAccount** ([Balance Platform](https://docs.adyen.com/marketplaces-and-platforms)).
+
+            For the other types, we also recommend providing a **unique** reference so you can reconcile the split and the associated payment in the transaction overview and in the reports.
           type: string
         type:
           description: |-

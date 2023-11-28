@@ -9,10 +9,10 @@ info:
   x-hubspot-documentation-banner: NONE
   x-hubspot-introduction: Use the web analytics API to fetch events associated with CRM records of any type. This includes standard events, such as website page views and email opens, as well as custom behavioral events.
   x-hubspot-product-tier-requirements:
-    cms: STARTER
-    marketing: FREE
-    sales: FREE
-    service: FREE
+    cms: ENTERPRISE
+    marketing: ENTERPRISE
+    sales: ENTERPRISE
+    service: ENTERPRISE
   x-hubspot-related-documentation:
     - name: Web Analytics Overview
       url: https://developers.hubspot.com/docs/api/events/web-analytics
@@ -31,7 +31,7 @@ tags:
 paths:
   /events/v3/events/:
     get:
-      operationId: get-/events/v3/events/_getPage
+      operationId: get-/events/v3/events/
       parameters:
         - explode: true
           in: query
@@ -358,7 +358,7 @@ x-hubspot-available-client-libraries:
   - Python
 x-hubspot-documentation-banner: NONE
 x-hubspot-product-tier-requirements:
-  cms: STARTER
-  marketing: FREE
-  sales: FREE
-  service: FREE
+  cms: ENTERPRISE
+  marketing: ENTERPRISE
+  sales: ENTERPRISE
+  service: ENTERPRISE

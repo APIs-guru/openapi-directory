@@ -3750,8 +3750,7 @@ components:
           $ref: "#/components/schemas/VmwareStaticIpConfig"
           description: Configuration settings for a static IP configuration.
         vcenterNetwork:
-          description: Output only. vcenter_network specifies vCenter network name. Inherited from the admin cluster.
-          readOnly: true
+          description: vcenter_network specifies vCenter network name. Inherited from the admin cluster.
           type: string
       type: object
     VmwareNodeConfig:

@@ -49,10 +49,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
             - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
             - https://www.googleapis.com/auth/sdm.service
@@ -107,10 +103,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
             - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
             - https://www.googleapis.com/auth/sdm.service
@@ -140,10 +132,6 @@ paths:
                 $ref: "#/components/schemas/GoogleHomeEnterpriseSdmV1ListDevicesResponse"
           description: Successful response
       security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
             - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
@@ -181,10 +169,6 @@ paths:
                 $ref: "#/components/schemas/GoogleHomeEnterpriseSdmV1ListRoomsResponse"
           description: Successful response
       security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
             - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
@@ -227,10 +211,6 @@ paths:
                 $ref: "#/components/schemas/GoogleHomeEnterpriseSdmV1ListStructuresResponse"
           description: Successful response
       security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
             - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
@@ -440,7 +420,6 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
             https://www.googleapis.com/auth/sdm.service: See and/or control the devices that you selected
       type: oauth2
     Oauth2c:
@@ -449,7 +428,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
             https://www.googleapis.com/auth/sdm.service: See and/or control the devices that you selected
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

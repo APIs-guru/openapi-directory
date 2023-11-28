@@ -916,7 +916,7 @@ components:
       properties:
         dialogAction:
           $ref: "#/components/schemas/DialogAction"
-          description: Input only. A response to an event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
+          description: Input only. A response to an interaction event related to a [dialog](https://developers.google.com/chat/how-tos/dialogs). Must be accompanied by `ResponseType.Dialog`.
         type:
           description: Input only. The type of Chat app response.
           enum:
@@ -926,7 +926,11 @@ components:
             - UPDATE_USER_MESSAGE_CARDS
             - REQUEST_CONFIG
             - DIALOG
+            - UPDATE_WIDGET
           type: string
+        updatedWidget:
+          $ref: "#/components/schemas/UpdatedWidget"
+          description: Input only. The response of the updated widget.
         url:
           description: Input only. URL for users to authenticate or configure. (Only for `REQUEST_CONFIG` response types.)
           type: string
@@ -1285,6 +1289,7 @@ components:
             - ADDED_TO_SPACE
             - REMOVED_FROM_SPACE
             - CARD_CLICKED
+            - WIDGET_UPDATED
           type: string
         user:
           $ref: "#/components/schemas/User"
@@ -2408,6 +2413,15 @@ components:
             $ref: "#/components/schemas/WidgetMarkup"
           type: array
       type: object
+    SelectionItems:
+      description: List of widget autocomplete results.
+      properties:
+        items:
+          description: An array of the SelectionItem objects.
+          items:
+            $ref: "#/components/schemas/GoogleAppsCardV1SelectionItem"
+          type: array
+      type: object
     SetUpSpaceRequest:
       properties:
         memberships:
@@ -2607,6 +2621,16 @@ components:
           description: The user timezone offset, in milliseconds, from Coordinated Universal Time (UTC).
           format: int32
           type: integer
+      type: object
+    UpdatedWidget:
+      description: The response of the updated widget. Used to provide autocomplete options for a widget.
+      properties:
+        suggestions:
+          $ref: "#/components/schemas/SelectionItems"
+          description: List of widget autocomplete results
+        widget:
+          description: The ID of the updated widget. The ID must match the one for the widget that triggered the update request.
+          type: string
       type: object
     UploadAttachmentRequest:
       properties:

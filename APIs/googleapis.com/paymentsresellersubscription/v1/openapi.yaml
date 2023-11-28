@@ -47,6 +47,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1Subscription"
           description: Successful response
+      security:
+        - Oauth2:
+            - openid
+          Oauth2c:
+            - openid
       tags:
         - partners
     parameters:
@@ -96,6 +101,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - openid
+          Oauth2c:
+            - openid
       tags:
         - partners
   /v1/{name}:entitle:
@@ -133,6 +143,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1EntitleSubscriptionResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - openid
+          Oauth2c:
+            - openid
       tags:
         - partners
   /v1/{name}:extend:
@@ -170,6 +185,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1ExtendSubscriptionResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - openid
+          Oauth2c:
+            - openid
       tags:
         - partners
   /v1/{name}:undoCancel:
@@ -207,6 +227,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1UndoCancelSubscriptionResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - openid
+          Oauth2c:
+            - openid
       tags:
         - partners
   /v1/{parent}/products:
@@ -242,6 +267,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1ListProductsResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - openid
+          Oauth2c:
+            - openid
       tags:
         - partners
     parameters:
@@ -289,6 +319,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1ListPromotionsResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - openid
+          Oauth2c:
+            - openid
       tags:
         - partners
     parameters:
@@ -317,7 +352,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: To find eligible promotions for the current user. The API requires user authorization via OAuth. The user is inferred from the authenticated OAuth credential.
+      description: To find eligible promotions for the current user. The API requires user authorization via OAuth. The bare minimum oauth scope `openid` is sufficient, which will skip the consent screen.
       operationId: paymentsresellersubscription.partners.promotions.findEligible
       parameters:
         - description: "Required. The parent, the partner that can resell. Format: partners/{partner}"
@@ -338,6 +373,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - openid
+          Oauth2c:
+            - openid
       tags:
         - partners
   /v1/{parent}/subscriptions:
@@ -380,6 +420,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1Subscription"
           description: Successful response
+      security:
+        - Oauth2:
+            - openid
+          Oauth2c:
+            - openid
       tags:
         - partners
   /v1/{parent}/subscriptions:provision:
@@ -422,6 +467,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1Subscription"
           description: Successful response
+      security:
+        - Oauth2:
+            - openid
+          Oauth2c:
+            - openid
       tags:
         - partners
 components:
@@ -589,7 +639,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1Extension"
           description: Required. Specifies details of the extension. Currently, the duration of the extension must be exactly one billing cycle of the original subscription.
         requestId:
-          description: Required. Restricted to 36 ASCII characters. A random UUID is recommended. The idempotency key for the request. The ID generation logic is controlled by the partner. request_id should be the same as on retries of the same request. A different request_id must be used for a extension of a different cycle. A random UUID is recommended.
+          description: Required. Restricted to 36 ASCII characters. A random UUID is recommended. The idempotency key for the request. The ID generation logic is controlled by the partner. request_id should be the same as on retries of the same request. A different request_id must be used for a extension of a different cycle.
           type: string
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1ExtendSubscriptionResponse:
@@ -1173,3 +1223,21 @@ components:
             $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemBundleDetailsBundleElementDetails"
           type: array
       type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            openid: Associate you with your personal info on Google
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            openid: Associate you with your personal info on Google
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2
