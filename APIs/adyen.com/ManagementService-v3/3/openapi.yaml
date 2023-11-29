@@ -4921,8 +4921,10 @@ paths:
         content:
           application/json:
             examples:
-              add-payment-method-partner-model:
-                $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-add-payment-method-partner-model"
+              01.add-payment-method-visa:
+                $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-01.add-payment-method-visa"
+              02.add-payment-method-partner-model:
+                $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-02.add-payment-method-partner-model"
             schema:
               $ref: "#/components/schemas/PaymentMethodSetupInfo"
       responses:
@@ -4930,8 +4932,10 @@ paths:
           content:
             application/json:
               examples:
-                add-payment-method-partner-model:
-                  $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-add-payment-method-partner-model-200"
+                01.add-payment-method-visa:
+                  $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-01.add-payment-method-visa-200"
+                02.add-payment-method-partner-model:
+                  $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-02.add-payment-method-partner-model-200"
               schema:
                 $ref: "#/components/schemas/PaymentMethod"
           description: OK - the request has succeeded.
@@ -14928,7 +14932,34 @@ components:
         roles:
           - Checkout webservice role
         username: YOUR_USERNAME
-    post-merchants-merchantId-paymentMethodSettings-add-payment-method-partner-model:
+    post-merchants-merchantId-paymentMethodSettings-01.add-payment-method-visa:
+      description: Example request to add Visa as the payment method
+      summary: Request to add Visa
+      value:
+        businessLineId: BL322KV223222D5F8H2J4BQ6C
+        countries:
+          - NL
+        currencies:
+          - EUR
+        storeIds:
+          - ST322LJ223223K5F4SQNR9XL5
+        type: visa
+    post-merchants-merchantId-paymentMethodSettings-01.add-payment-method-visa-200:
+      description: Example response after sending a request to add Visa as a payment method
+      summary: Response code - 200 OK
+      value:
+        allowed: false
+        businessLineId: BL322KV223222D5F8H2J4BQ6C
+        countries:
+          - NL
+        currencies:
+          - EUR
+        enabled: true
+        id: PM3227C223224K5FH84M8CBNH
+        storeId: ST322LJ223223K5F4SQNR9XL5
+        type: visa
+        verificationStatus: pending
+    post-merchants-merchantId-paymentMethodSettings-02.add-payment-method-partner-model:
       description: Example request to add Swish with a partner model setup
       summary: Request to add Swish
       value:
@@ -14942,7 +14973,7 @@ components:
         swish:
           swishNumber: "1231111111"
         type: swish
-    post-merchants-merchantId-paymentMethodSettings-add-payment-method-partner-model-200:
+    post-merchants-merchantId-paymentMethodSettings-02.add-payment-method-partner-model-200:
       description: Example response after sending a request to add Swish in a partner model setup
       summary: Response code - 200 OK
       value:
@@ -15680,6 +15711,21 @@ components:
           items:
             $ref: "#/components/schemas/AllowedOrigin"
           type: array
+      type: object
+    AmexInfo:
+      properties:
+        midNumber:
+          description: "MID number. Format: 10 numeric characters"
+          type: string
+        serviceLevel:
+          description: Service level
+          enum:
+            - noContract
+            - gatewayContract
+            - paymentDesignatorContract
+          type: string
+      required:
+        - serviceLevel
       type: object
     Amount:
       properties:
@@ -17692,6 +17738,9 @@ components:
         allowed:
           description: Indicates whether receiving payments is allowed. This value is set to **true** by Adyen after screening your merchant account.
           type: boolean
+        amex:
+          $ref: "#/components/schemas/AmexInfo"
+          description: Amex details.
         applePay:
           $ref: "#/components/schemas/ApplePayInfo"
           description: Apple Pay details.
@@ -17902,6 +17951,9 @@ components:
         afterpayTouch:
           $ref: "#/components/schemas/AfterpayTouchInfo"
           description: Afterpay Touch details.
+        amex:
+          $ref: "#/components/schemas/AmexInfo"
+          description: Amex details.
         applePay:
           $ref: "#/components/schemas/ApplePayInfo"
           description: Apple Pay details.
@@ -18756,7 +18808,7 @@ components:
           type: string
         splitConfiguration:
           $ref: "#/components/schemas/StoreSplitConfiguration"
-          description: Rules for Adyen for Platform merchants to [split commission fees](https://docs.adyen.com/marketplaces-and-platforms/classic/split-configuration-for-stores).
+          description: Rules for Adyen for Platforms merchants to split the transaction amount and fees.
         status:
           description: |-
             The status of the store. Possible values are:
@@ -18811,7 +18863,7 @@ components:
           type: string
         splitConfiguration:
           $ref: "#/components/schemas/StoreSplitConfiguration"
-          description: The configuration of the split.
+          description: Rules for Adyen for Platforms merchants to split the transaction amount and fees.
       required:
         - description
         - shopperStatement
@@ -18862,7 +18914,7 @@ components:
           type: string
         splitConfiguration:
           $ref: "#/components/schemas/StoreSplitConfiguration"
-          description: The configuration of the split.
+          description: Rules for Adyen for Platforms merchants to split the transaction amount and fees.
       required:
         - description
         - shopperStatement
@@ -18909,10 +18961,10 @@ components:
     StoreSplitConfiguration:
       properties:
         balanceAccountId:
-          description: The [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__queryParam_id) linked to the account holder.
+          description: The [unique identifier of the balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__queryParam_id) to which the split amount must be booked, depending on the defined [split logic](https://docs.adyen.com/api-explorer/Management/latest/post/merchants/_merchantId_/splitConfigurations#request-rules-splitLogic).
           type: string
         splitConfigurationId:
-          description: The UUID of the [split configuration](https://docs.adyen.com/marketplaces-and-platforms/classic/split-configuration-for-stores) from the Customer Area.
+          description: The unique identifier of the [split configuration profile](https://docs.adyen.com/marketplaces-and-platforms/automatic-split-configuration/create-split-configuration/).
           type: string
       type: object
     Surcharge:
@@ -20042,9 +20094,12 @@ components:
         externalReferenceId:
           description: "When using the Zip payment method: The location ID that Zip has assigned to your store."
           type: string
+        phoneNumber:
+          description: "The phone number of the store, including '+' and country code in the [E.164](https://en.wikipedia.org/wiki/E.164) format. If passed in a different format, we convert and validate the phone number against E.164. "
+          type: string
         splitConfiguration:
           $ref: "#/components/schemas/StoreSplitConfiguration"
-          description: Rules for Adyen for Platform merchants to split commission fees.
+          description: Rules for Adyen for Platforms merchants to split the transaction amount and fees.
         status:
           description: |-
             The status of the store. Possible values are:
@@ -20139,8 +20194,6 @@ components:
           type: string
       required:
         - logo
-      type: object
-    Void:
       type: object
     Webhook:
       properties:

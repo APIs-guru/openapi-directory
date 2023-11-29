@@ -1021,7 +1021,7 @@ components:
           type: string
       type: object
     ApplicationPolicy:
-      description: "Policy for an individual app. Note: Application availability on a given device cannot be changed using this policy if installAppsDisabled is enabled. The maximum number of applications that you can specify per enterprise policy is 3,000."
+      description: "Policy for an individual app. Note: Application availability on a given device cannot be changed using this policy if installAppsDisabled is enabled. The maximum number of applications that you can specify per policy is 3,000."
       properties:
         accessibleTrackIds:
           description: List of the app’s track IDs that a device belonging to the enterprise can access. If the list contains multiple track IDs, devices receive the latest version among all accessible tracks. If the list contains no track IDs, devices only have access to the app’s production track. More details about each track are available in AppTrackInfo.
@@ -2875,7 +2875,7 @@ components:
             - ALWAYS
           type: string
         applications:
-          description: Policy applied to apps.
+          description: Policy applied to apps. This can have at most 3,000 elements.
           items:
             $ref: "#/components/schemas/ApplicationPolicy"
           type: array

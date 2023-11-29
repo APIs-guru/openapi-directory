@@ -765,7 +765,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. Id of the requesting object. If auto-generating Id server-side, remove this field and firewall_endpoint_association_id from the method_signature of Create RPC.
+        - description: Required. Id of the requesting object. If auto-generating Id server-side, remove this field and firewall_endpoint_association_id from the method_signature of Create RPC.
           in: query
           name: firewallEndpointAssociationId
           schema:
