@@ -2072,10 +2072,8 @@ components:
             $ref: "#/components/schemas/Sidecar"
           type: array
         stepTemplate:
+          $ref: "#/components/schemas/StepTemplate"
           description: Optional. StepTemplate can be used as the basis for all step containers within the Task, so that the steps inherit settings on the base container.
-          items:
-            $ref: "#/components/schemas/StepTemplate"
-          type: array
         steps:
           description: Steps of the task.
           items:

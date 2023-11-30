@@ -1129,6 +1129,26 @@ components:
           description: "Name of the worker pool to delete. Format: `projects/[PROJECT_ID]/instances/[INSTANCE_ID]/workerpools/[POOL_ID]`."
           type: string
       type: object
+    GoogleDevtoolsRemotebuildexecutionAdminV1alphaDisks:
+      description: Disks defines the disks that would be attached to the workers.
+      properties:
+        localSsd:
+          $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaDisksLocalSSD"
+          description: Optional. Specifies the number of local SSDs to be attached. If specified, local SSDs will be used as the working directory.
+      type: object
+    GoogleDevtoolsRemotebuildexecutionAdminV1alphaDisksLocalSSD:
+      description: LocalSSD specifies how to attach local SSD to the workers.
+      properties:
+        count:
+          description: Optional. The number of Local SSDs to be attached.
+          format: int64
+          type: string
+        sizeGb:
+          description: Output only. The size of the local SSD in gb. Intended for informational purposes only.
+          format: int64
+          readOnly: true
+          type: string
+      type: object
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy:
       description: FeaturePolicy defines features allowed to be used on RBE instances, as well as instance-wide behavior changes that take effect without opt-in or opt-out at usage time.
       properties:
@@ -1361,6 +1381,9 @@ components:
         accelerator:
           $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig"
           description: The accelerator card attached to each VM.
+        attachedDisks:
+          $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaDisks"
+          description: Optional. Specifies the disks that will be attached.
         diskSizeGb:
           description: Required. Size of the disk attached to the worker, in GB. See https://cloud.google.com/compute/docs/disks/
           format: int64

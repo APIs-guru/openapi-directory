@@ -2837,6 +2837,7 @@ components:
             - GITHUB
             - BITBUCKET_SERVER
             - GITLAB
+            - BITBUCKET_CLOUD
           type: string
         repository:
           description: The fully qualified resource name of the Repos API repository. Either URI or repository can be specified. If unspecified, the repo from which the trigger invocation originated is assumed to be the repo from which to read the specified path.
@@ -3082,6 +3083,7 @@ components:
             - GITHUB
             - BITBUCKET_SERVER
             - GITLAB
+            - BITBUCKET_CLOUD
           type: string
         repository:
           description: The connected repository resource name, in the format `projects/*/locations/*/connections/*/repositories/*`. Either `uri` or `repository` can be specified and is required.
@@ -3511,6 +3513,7 @@ components:
             - GITHUB_ENTERPRISE
             - GITLAB_ENTERPRISE
             - BITBUCKET_DATA_CENTER
+            - BITBUCKET_CLOUD
           readOnly: true
           type: string
       type: object

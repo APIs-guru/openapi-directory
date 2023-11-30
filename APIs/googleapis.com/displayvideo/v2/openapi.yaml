@@ -9941,7 +9941,7 @@ components:
       properties:
         consent:
           $ref: "#/components/schemas/Consent"
-          description: Input only. User consent status.
+          description: Input only. The consent setting for the users in contact_infos.
         contactInfos:
           description: A list of ContactInfo objects defining Customer Match audience members. The size of members after splitting the contact_infos mustn't be greater than 500,000.
           items:
@@ -13788,7 +13788,7 @@ components:
       properties:
         consent:
           $ref: "#/components/schemas/Consent"
-          description: Input only. User consent status.
+          description: Input only. The consent setting for the users in mobile_device_ids.
         mobileDeviceIds:
           description: A list of mobile device IDs defining Customer Match audience members. The size of mobile_device_ids mustn't be greater than 500,000.
           items:
