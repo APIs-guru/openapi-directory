@@ -3,7 +3,7 @@ servers:
   - url: https://api.hubapi.com
 info:
   description: Subscriptions allow contacts to control what forms of communications they receive. Contacts can decide whether they want to receive communication pertaining to a specific topic, brand, or an entire HubSpot account.
-  title: Subscriptions
+  title: Communication Preferences Subscriptions
   version: v3
   x-hubspot-api-use-case: You want to ensure a contact's opt-in status is updated if they opted out of communications from your business via a service external to HubSpot.
   x-hubspot-documentation-banner: NONE
@@ -22,12 +22,8 @@ info:
   x-providerName: hubapi.com
   x-serviceName: communication-preferences
 tags:
-  - description: ""
-    name: Status
-    x-hubspot-tag-name-english-source: Status
-  - description: ""
-    name: Definition
-    x-hubspot-tag-name-english-source: Definition
+  - name: Status
+  - name: Definition
 paths:
   /communication-preferences/v3/definitions:
     get:

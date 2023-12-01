@@ -4304,6 +4304,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1/{parent}/securityIncidents:batchUpdate:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: BatchUpdateSecurityIncident updates multiple existing security incidents.
+      operationId: apigee.organizations.environments.securityIncidents.batchUpdate
+      parameters:
+        - description: Optional. The parent resource shared by all security incidents being updated. If this is set, the parent field in the UpdateSecurityIncidentRequest messages must either be empty or match this field.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1BatchUpdateSecurityIncidentsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1BatchUpdateSecurityIncidentsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   /v1/{parent}/securityProfiles:
     get:
       description: ListSecurityProfiles lists all the security profiles associated with the org including attached and unattached profiles.
@@ -5857,6 +5899,25 @@ components:
           description: List of attributes.
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1Attribute"
+          type: array
+      type: object
+    GoogleCloudApigeeV1BatchUpdateSecurityIncidentsRequest:
+      description: Request for BatchUpdateSecurityIncident.
+      properties:
+        requests:
+          description: Optional. Required. The request message specifying the resources to update. A maximum of 1000 can be modified in a batch.
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1UpdateSecurityIncidentRequest"
+          type: array
+      type: object
+    GoogleCloudApigeeV1BatchUpdateSecurityIncidentsResponse:
+      description: Response for BatchUpdateSecurityIncident.
+      properties:
+        securityIncidents:
+          description: Output only. Updated security incidents
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1SecurityIncident"
+          readOnly: true
           type: array
       type: object
     GoogleCloudApigeeV1CanaryEvaluation:
@@ -9368,8 +9429,20 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        lastObservabilityChangeTime:
+          description: Output only. The time when the incident observability was last changed.
+          format: google-datetime
+          readOnly: true
+          type: string
         name:
           description: "Immutable. Name of the security incident resource. Format: organizations/{org}/environments/{environment}/securityIncidents/{incident} Example: organizations/apigee-org/environments/dev/securityIncidents/1234-5678-9101-1111"
+          type: string
+        observability:
+          description: Optional. Indicates if the user archived this incident.
+          enum:
+            - OBSERVABILITY_UNSPECIFIED
+            - ACTIVE
+            - ARCHIVED
           type: string
         riskLevel:
           description: Output only. Risk level of the incident.
@@ -9392,7 +9465,8 @@ components:
           description: Description of the security profile.
           type: string
         displayName:
-          description: Display name of the security profile.
+          deprecated: true
+          description: "DEPRECATED: DO NOT USE Display name of the security profile."
           type: string
         environments:
           description: List of environments attached to security profile.
@@ -9426,7 +9500,8 @@ components:
           readOnly: true
           type: string
         revisionPublishTime:
-          description: Output only. The time when revision was published. Once published, the security profile revision cannot be updated further and can be attached to environments.
+          deprecated: true
+          description: "Output only. DEPRECATED: DO NOT USE The time when revision was published. Once published, the security profile revision cannot be updated further and can be attached to environments."
           format: google-datetime
           readOnly: true
           type: string
@@ -9466,7 +9541,8 @@ components:
           description: Immutable. Name of the environment that the profile is attached to.
           type: string
         securityProfileRevisionId:
-          description: Revision ID of the security profile.
+          deprecated: true
+          description: "DEPRECATED: DO NOT USE Revision ID of the security profile."
           format: int64
           type: string
       type: object
@@ -10075,6 +10151,17 @@ components:
           type: string
         type:
           description: A string that uniquely identifies the type of error. This provides a more reliable means to deduplicate errors across revisions and instances.
+          type: string
+      type: object
+    GoogleCloudApigeeV1UpdateSecurityIncidentRequest:
+      description: Request for UpdateSecurityIncident.
+      properties:
+        securityIncident:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1SecurityIncident"
+          description: Required. The security incident to update. Must contain all existing populated fields of the current incident.
+        updateMask:
+          description: "Required. The list of fields to update. Allowed fields are: LINT.IfChange(allowed_update_fields_comment) - observability LINT.ThenChange()"
+          format: google-fieldmask
           type: string
       type: object
     GoogleIamV1AuditConfig:

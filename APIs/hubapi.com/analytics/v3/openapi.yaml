@@ -3,7 +3,7 @@ servers:
   - url: https://api.hubapi.com
 info:
   description: HTTP API for triggering instances of custom behavioral events
-  title: Send Event Completions
+  title: Events Send Event Completions
   version: v3
   x-hubspot-api-use-case: You want to track more complex interactions that visitors perform when they navigate to your website and engage with your content.
   x-hubspot-documentation-banner: NONE
@@ -22,9 +22,7 @@ info:
   x-providerName: hubapi.com
   x-serviceName: analytics
 tags:
-  - description: ""
-    name: Behavioral_Events_Tracking
-    x-hubspot-tag-name-english-source: Behavioral_Events_Tracking
+  - name: Behavioral_Events_Tracking
 paths:
   /events/v3/send:
     post:

@@ -726,7 +726,7 @@ paths:
             - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - bucketAccessControls
-  /b/{bucket}/anywhereCache:
+  /b/{bucket}/anywhereCaches:
     get:
       description: Returns a list of Anywhere Cache instances of the bucket matching the criteria.
       operationId: storage.anywhereCaches.list
@@ -778,16 +778,6 @@ paths:
             - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - anywhereCache
-    parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-  /b/{bucket}/anywhereCaches:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
