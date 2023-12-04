@@ -1456,6 +1456,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1/{resourcePath}:listenEvent:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: ListenEvent listens to the event.
+      operationId: connectors.projects.locations.connections.listenEvent
+      parameters:
+        - description: Required. Resource path for request.
+          in: path
+          name: resourcePath
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ListenEventRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListenEventResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
@@ -1707,6 +1749,7 @@ components:
             - OAUTH2_CLIENT_CREDENTIALS
             - SSH_PUBLIC_KEY
             - OAUTH2_AUTH_CODE_FLOW
+            - GOOGLE_AUTHENTICATION
           type: string
         oauth2AuthCodeFlow:
           $ref: "#/components/schemas/Oauth2AuthCodeFlow"
@@ -1739,6 +1782,7 @@ components:
             - OAUTH2_CLIENT_CREDENTIALS
             - SSH_PUBLIC_KEY
             - OAUTH2_AUTH_CODE_FLOW
+            - GOOGLE_AUTHENTICATION
           type: string
         configVariableTemplates:
           description: Config variables to describe an `AuthConfig` for a `Connection`.
@@ -2003,6 +2047,9 @@ components:
             type: string
           readOnly: true
           type: array
+        errorMessage:
+          description: Error message for users.
+          type: string
         name:
           description: "Output only. Resource name. Format: projects/{project}/locations/{location}/connections/{connection}/connectionSchemaMetadata"
           readOnly: true
@@ -2304,16 +2351,6 @@ components:
             type: string
           description: Optional. Resource labels to represent user-provided metadata. Refer to cloud documentation on labels for more details. https://cloud.google.com/compute/docs/labeling-resources
           type: object
-        launchStage:
-          description: Output only. Launch stage.
-          enum:
-            - LAUNCH_STAGE_UNSPECIFIED
-            - PREVIEW
-            - GA
-            - DEPRECATED
-            - PRIVATE_PREVIEW
-          readOnly: true
-          type: string
         logo:
           description: Optional. Logo of the resource.
           type: string
@@ -2352,15 +2389,11 @@ components:
           description: "Output only. Identifier. Resource name of the Version. Format: projects/{project}/locations/{location}/customConnectors/{custom_connector}/customConnectorVersions/{custom_connector_version}"
           readOnly: true
           type: string
+        serviceAccount:
+          description: Required. Service account needed for runtime plane to access Custom Connector secrets.
+          type: string
         specLocation:
           description: Optional. Location of the custom connector spec.
-          type: string
-        type:
-          description: Required. Type of the customConnector.
-          enum:
-            - CUSTOM_CONNECTOR_TYPE_UNSPECIFIED
-            - OPEN_API
-            - PROTO
           type: string
         updateTime:
           description: Output only. Updated time.
@@ -2649,15 +2682,15 @@ components:
         authConfig:
           $ref: "#/components/schemas/AuthConfig"
           description: Auth details for the webhook adapter.
-        encryptionKey:
-          $ref: "#/components/schemas/ConfigVariable"
-          description: Encryption key (can be either Google managed or CMEK).
         enrichmentEnabled:
           description: Enrichment Enabled.
           type: boolean
         eventsListenerIngressEndpoint:
           description: Optional. Ingress endpoint of the event listener. This is used only when private connectivity is enabled.
           type: string
+        listenerAuthConfig:
+          $ref: "#/components/schemas/AuthConfig"
+          description: Optional. Auth details for the event listener.
         privateConnectivityEnabled:
           description: Optional. Private Connectivity Enabled.
           type: boolean
@@ -2700,6 +2733,11 @@ components:
         isEventingSupported:
           description: Is Eventing Supported.
           type: boolean
+        listenerAuthConfigTemplates:
+          description: ListenerAuthConfigTemplates represents the auth values for the event listener.
+          items:
+            $ref: "#/components/schemas/AuthConfigTemplate"
+          type: array
         registrationDestinationConfig:
           $ref: "#/components/schemas/DestinationConfigTemplate"
           description: Registration host destination config template.
@@ -3490,6 +3528,19 @@ components:
           items:
             $ref: "#/components/schemas/RuntimeEntitySchema"
           type: array
+      type: object
+    ListenEventRequest:
+      description: Expected request for ListenEvent API.
+      properties:
+        payload:
+          additionalProperties:
+            description: Properties of the object.
+          description: Optional. Request payload.
+          type: object
+      type: object
+    ListenEventResponse:
+      description: Expected response for ListenEvent API.
+      properties: {}
       type: object
     Location:
       description: A resource that represents a Google Cloud location.

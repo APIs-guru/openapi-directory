@@ -31,10 +31,10 @@ tags:
 paths:
   /v1beta/{name}:
     get:
-      description: Returns metadata for dimensions and metrics available in reporting methods. Used to explore the dimensions and metrics. In this method, a Google Analytics GA4 Property Identifier is specified in the request, and the metadata response includes Custom dimensions and metrics as well as Universal metadata. For example if a custom metric with parameter name `levels_unlocked` is registered to a property, the Metadata response will contain `customEvent:levels_unlocked`. Universal metadata are dimensions and metrics applicable to any property such as `country` and `totalUsers`.
-      operationId: analyticsdata.properties.getMetadata
+      description: Gets configuration metadata about a specific audience export. This method can be used to understand an audience export after it has been created. See [Creating an Audience Export](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Exports with examples. Audience Export APIs have some methods at alpha and other methods at beta stability. The intention is to advance methods to beta stability after some feedback and adoption. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+      operationId: analyticsdata.properties.audienceExports.get
       parameters:
-        - description: "Required. The resource name of the metadata to retrieve. This name field is specified in the URL path and not URL parameters. Property is a numeric Google Analytics GA4 Property identifier. To learn more, see [where to find your Property ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id). Example: properties/1234/metadata Set the Property ID to 0 for dimensions and metrics common to all properties. In this special mode, this method will not return custom dimensions and metrics."
+        - description: "Required. The audience export resource name. Format: `properties/{property}/audienceExports/{audience_export}`"
           in: path
           name: name
           required: true
@@ -45,7 +45,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Metadata"
+                $ref: "#/components/schemas/AudienceExport"
           description: Successful response
       security:
         - Oauth2:
@@ -70,6 +70,136 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1beta/{name}:query:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Retrieves an audience export of users. After creating an audience, the users are not immediately available for exporting. First, a request to `CreateAudienceExport` is necessary to create an audience export of users, and then second, this method is used to retrieve the users in the audience export. See [Creating an Audience Export](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Exports with examples. Audiences in Google Analytics 4 allow you to segment your users in the ways that are important to your business. To learn more, see https://support.google.com/analytics/answer/9267572. Audience Export APIs have some methods at alpha and other methods at beta stability. The intention is to advance methods to beta stability after some feedback and adoption. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+      operationId: analyticsdata.properties.audienceExports.query
+      parameters:
+        - description: "Required. The name of the audience export to retrieve users from. Format: `properties/{property}/audienceExports/{audience_export}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryAudienceExportRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryAudienceExportResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.readonly
+      tags:
+        - properties
+  /v1beta/{parent}/audienceExports:
+    get:
+      description: Lists all audience exports for a property. This method can be used for you to find and reuse existing audience exports rather than creating unnecessary new audience exports. The same audience can have multiple audience exports that represent the export of users that were in an audience on different days. See [Creating an Audience Export](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Exports with examples. Audience Export APIs have some methods at alpha and other methods at beta stability. The intention is to advance methods to beta stability after some feedback and adoption. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+      operationId: analyticsdata.properties.audienceExports.list
+      parameters:
+        - description: "Required. All audience exports for this property will be listed in the response. Format: `properties/{property}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The maximum number of audience exports to return. The service may return fewer than this value. If unspecified, at most 200 audience exports will be returned. The maximum value is 1000 (higher values will be coerced to the maximum).
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A page token, received from a previous `ListAudienceExports` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListAudienceExports` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAudienceExportsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.readonly
+      tags:
+        - properties
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates an audience export for later retrieval. This method quickly returns the audience export's resource name and initiates a long running asynchronous request to form an audience export. To export the users in an audience export, first create the audience export through this method and then send the audience resource name to the `QueryAudienceExport` method. See [Creating an Audience Export](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Exports with examples. An audience export is a snapshot of the users currently in the audience at the time of audience export creation. Creating audience exports for one audience on different days will return different results as users enter and exit the audience. Audiences in Google Analytics 4 allow you to segment your users in the ways that are important to your business. To learn more, see https://support.google.com/analytics/answer/9267572. Audience exports contain the users in each audience. Audience Export APIs have some methods at alpha and other methods at beta stability. The intention is to advance methods to beta stability after some feedback and adoption. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.
+      operationId: analyticsdata.properties.audienceExports.create
+      parameters:
+        - description: "Required. The parent resource where this audience export will be created. Format: `properties/{property}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AudienceExport"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.readonly
+      tags:
+        - properties
   /v1beta/{property}:batchRunPivotReports:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -438,6 +568,59 @@ components:
             type: string
           type: array
       type: object
+    AudienceExport:
+      description: An audience export is a list of users in an audience at the time of the list's creation. One audience may have multiple audience exports created for different days.
+      properties:
+        audience:
+          description: "Required. The audience resource name. This resource name identifies the audience being listed and is shared between the Analytics Data & Admin APIs. Format: `properties/{property}/audiences/{audience}`"
+          type: string
+        audienceDisplayName:
+          description: Output only. The descriptive display name for this audience. For example, "Purchasers".
+          readOnly: true
+          type: string
+        beginCreatingTime:
+          description: Output only. The time when CreateAudienceExport was called and the AudienceExport began the `CREATING` state.
+          format: google-datetime
+          readOnly: true
+          type: string
+        creationQuotaTokensCharged:
+          description: Output only. The total quota tokens charged during creation of the AudienceExport. Because this token count is based on activity from the `CREATING` state, this tokens charged will be fixed once an AudienceExport enters the `ACTIVE` or `FAILED` states.
+          format: int32
+          readOnly: true
+          type: integer
+        dimensions:
+          description: Required. The dimensions requested and displayed in the query response.
+          items:
+            $ref: "#/components/schemas/V1betaAudienceDimension"
+          type: array
+        errorMessage:
+          description: Output only. Error message is populated when an audience export fails during creation. A common reason for such a failure is quota exhaustion.
+          readOnly: true
+          type: string
+        name:
+          description: "Output only. Identifier. The audience export resource name assigned during creation. This resource name identifies this `AudienceExport`. Format: `properties/{property}/audienceExports/{audience_export}`"
+          readOnly: true
+          type: string
+        percentageCompleted:
+          description: Output only. The percentage completed for this audience export ranging between 0 to 100.
+          format: double
+          readOnly: true
+          type: number
+        rowCount:
+          description: Output only. The total number of rows in the AudienceExport result.
+          format: int32
+          readOnly: true
+          type: integer
+        state:
+          description: Output only. The current state for this AudienceExport.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
+            - FAILED
+          readOnly: true
+          type: string
+      type: object
     AudienceListMetadata:
       description: This metadata is currently blank.
       properties: {}
@@ -768,6 +951,18 @@ components:
             type: string
           type: array
       type: object
+    ListAudienceExportsResponse:
+      description: A list of all audience exports for a property.
+      properties:
+        audienceExports:
+          description: Each audience export for a property.
+          items:
+            $ref: "#/components/schemas/AudienceExport"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
     Metadata:
       description: The dimensions, metrics and comparisons currently accepted in reporting methods.
       properties:
@@ -947,6 +1142,29 @@ components:
           format: int64
           type: string
       type: object
+    Operation:
+      description: This resource represents a long-running operation that is the result of a network API call.
+      properties:
+        done:
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
+          type: boolean
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The error result of the operation in case of failure or cancellation.
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          type: object
+        name:
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          type: object
+      type: object
     OrderBy:
       description: Order bys define how rows will be sorted in the response. For example, ordering rows by descending event count is one ordering, and ordering rows by the event name string is a different ordering.
       properties:
@@ -1061,6 +1279,34 @@ components:
         tokensPerProjectPerHour:
           $ref: "#/components/schemas/QuotaStatus"
           description: Analytics Properties can use up to 35% of their tokens per project per hour. This amounts to standard Analytics Properties can use up to 14,000 tokens per project per hour, and Analytics 360 Properties can use 140,000 tokens per project per hour. An API request consumes a single number of tokens, and that number is deducted from all of the hourly, daily, and per project hourly quotas.
+      type: object
+    QueryAudienceExportRequest:
+      description: A request to list users in an audience export.
+      properties:
+        limit:
+          description: Optional. The number of rows to return. If unspecified, 10,000 rows are returned. The API returns a maximum of 250,000 rows per request, no matter how many you ask for. `limit` must be positive. The API can also return fewer rows than the requested `limit`, if there aren't as many dimension values as the `limit`. To learn more about this pagination parameter, see [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+          format: int64
+          type: string
+        offset:
+          description: Optional. The row count of the start row. The first row is counted as row 0. When paging, the first request does not specify offset; or equivalently, sets offset to 0; the first request returns the first `limit` of rows. The second request sets offset to the `limit` of the first request; the second request returns the second `limit` of rows. To learn more about this pagination parameter, see [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+          format: int64
+          type: string
+      type: object
+    QueryAudienceExportResponse:
+      description: A list of users in an audience export.
+      properties:
+        audienceExport:
+          $ref: "#/components/schemas/AudienceExport"
+          description: Configuration data about AudienceExport being queried. Returned to help interpret the audience rows in this response. For example, the dimensions in this AudienceExport correspond to the columns in the AudienceRows.
+        audienceRows:
+          description: Rows for each user in an audience export. The number of rows in this response will be less than or equal to request's page size.
+          items:
+            $ref: "#/components/schemas/V1betaAudienceRow"
+          type: array
+        rowCount:
+          description: The total number of rows in the AudienceExport result. `rowCount` is independent of the number of rows returned in the response, the `limit` request parameter, and the `offset` request parameter. For example if a query returns 175 rows and includes `limit` of 50 in the API request, the response will contain `rowCount` of 175 but only 50 rows. To learn more about this pagination parameter, see [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+          format: int32
+          type: integer
       type: object
     QuotaStatus:
       description: Current state for a particular quota group.
@@ -1422,6 +1668,24 @@ components:
             $ref: "#/components/schemas/ActiveMetricRestriction"
           type: array
       type: object
+    Status:
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      properties:
+        code:
+          description: The status code, which should be an enum value of google.rpc.Code.
+          format: int32
+          type: integer
+        details:
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
     StringFilter:
       description: The filter for string
       properties:
@@ -1442,6 +1706,29 @@ components:
         value:
           description: The string value used for the matching.
           type: string
+      type: object
+    V1betaAudienceDimension:
+      description: An audience dimension is a user attribute. Specific user attributed are requested and then later returned in the `QueryAudienceExportResponse`.
+      properties:
+        dimensionName:
+          description: Optional. The API name of the dimension. See the [API Dimensions](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-api-schema#dimensions) for the list of dimension names.
+          type: string
+      type: object
+    V1betaAudienceDimensionValue:
+      description: The value of a dimension.
+      properties:
+        value:
+          description: Value as a string if the dimension type is a string.
+          type: string
+      type: object
+    V1betaAudienceRow:
+      description: Dimension value attributes for the audience user row.
+      properties:
+        dimensionValues:
+          description: Each dimension value attribute for an audience user. One dimension value will be added for each dimension column requested.
+          items:
+            $ref: "#/components/schemas/V1betaAudienceDimensionValue"
+          type: array
       type: object
   securitySchemes:
     Oauth2:

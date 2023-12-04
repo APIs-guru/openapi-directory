@@ -895,6 +895,67 @@ paths:
       x-groupName: Legal entities
       x-methodName: getAllBusinessLinesUnderLegalEntity
       x-sortIndex: 4
+  /legalEntities/{id}/confirmDataReview:
+    post:
+      description: Confirms that your user has reviewed the data for the legal entity specified in the path. Call this endpoint to inform Adyen that your user reviewed and verified that the data is up-to-date. The endpoint returns the timestamp of when Adyen received the request.
+      operationId: post-legalEntities-id-confirmDataReview
+      parameters:
+        - description: The unique identifier of the legal entity.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                confirmDataReview:
+                  $ref: "#/components/examples/post-legalEntities-id-confirmDataReview-confirmDataReview-200"
+              schema:
+                $ref: "#/components/schemas/DataReviewConfirmationResponse"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Confirm data review
+      tags:
+        - Legal entities
+      x-addedInVersion: "2"
+      x-groupName: Legal entities
+      x-methodName: confirmDataReview
+      x-sortIndex: 22
   /legalEntities/{id}/onboardingLinks:
     post:
       description: |+
@@ -2007,7 +2068,7 @@ components:
             street: Simon Carmiggeltstraat 6 - 50
             street2: "274"
         transferInstruments:
-          - accountIdentifier: NL************0123
+          - accountIdentifier: NL**ABNA******0123
             id: SE322KH223222F5GXZFNM3BGP
             trustedSource: false
         type: individual
@@ -2646,6 +2707,11 @@ components:
             - description: My future children
               reference: SE322KH223222J5HJ6JRB75HQ
         type: trust
+    post-legalEntities-id-confirmDataReview-confirmDataReview-200:
+      description: Example response when reviewing the data for a legal entity
+      summary: Data review for a legal entity
+      value:
+        dataReviewedAt: 2023-11-13T15:19:02Z
     post-legalEntities-id-onboardingLinks-createOnboardingLink:
       description: Example request for creating a hosted onboarding link
       summary: Create a hosted onboarding link
@@ -3184,6 +3250,12 @@ components:
         maxAmount:
           $ref: "#/components/schemas/Amount"
           description: The maximum amount a card holder can withdraw per day.
+      type: object
+    DataReviewConfirmationResponse:
+      properties:
+        dataReviewedAt:
+          description: Date when data review was confirmed.
+          type: string
       type: object
     Document:
       properties:
@@ -4390,7 +4462,7 @@ components:
           description: The unique identifier of the resource.
           type: string
         realLastFour:
-          description: Four last digits of the bank account number.
+          description: Four last digits of the bank account number. If the transfer instrument is created using [instant bank account verification](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-08-hosted-onboarding), and it is a virtual bank account, these digits may be different from the last four digits of the masked account number.
           type: string
         trustedSource:
           description: Identifies if the bank account was created through [instant bank verification](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-08-hosted-onboarding).
