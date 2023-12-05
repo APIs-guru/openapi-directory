@@ -258,10 +258,10 @@ paths:
         - locations
   /v1alpha/{name}:
     delete:
-      description: Deletes a Schema.
-      operationId: discoveryengine.projects.locations.dataStores.schemas.delete
+      description: Deletes a TargetSite.
+      operationId: discoveryengine.projects.locations.dataStores.siteSearchEngine.targetSites.delete
       parameters:
-        - description: Required. The full resource name of the schema, in the format of `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}`.
+        - description: Required. Full resource name of TargetSite, such as `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}`. If the caller does not have permission to access the TargetSite, regardless of whether or not it exists, a PERMISSION_DENIED error is returned. If the requested TargetSite does not exist, a NOT_FOUND error is returned.
           in: path
           name: name
           required: true
@@ -318,10 +318,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates a Schema.
-      operationId: discoveryengine.projects.locations.dataStores.schemas.patch
+      description: Updates a TargetSite.
+      operationId: discoveryengine.projects.locations.dataStores.siteSearchEngine.targetSites.patch
       parameters:
-        - description: Immutable. The full resource name of the schema, in the format of `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}`. This field must be a UTF-8 encoded string with a length limit of 1024 characters.
+        - description: Output only. The fully qualified resource name of the target site. `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}` The `target_site_id` is system-generated.
           in: path
           name: name
           required: true
@@ -336,7 +336,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSchema"
+              $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaTargetSite"
       responses:
         "200":
           content:
@@ -1080,6 +1080,124 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1alpha/{parent}/targetSites:
+    get:
+      description: Gets a list of TargetSites.
+      operationId: discoveryengine.projects.locations.dataStores.siteSearchEngine.targetSites.list
+      parameters:
+        - description: Required. The parent site search engine resource name, such as `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine`. If the caller does not have permission to list TargetSites under this site search engine, regardless of whether or not this branch exists, a PERMISSION_DENIED error is returned.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default. The maximum value is 1000; values above 1000 will be coerced to 1000. If this field is negative, an INVALID_ARGUMENT error is returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListTargetSites` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListTargetSites` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaListTargetSitesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a TargetSite.
+      operationId: discoveryengine.projects.locations.dataStores.siteSearchEngine.targetSites.create
+      parameters:
+        - description: Required. Parent resource name of TargetSite, such as `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaTargetSite"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1alpha/{parent}/targetSites:batchCreate:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates TargetSite in a batch.
+      operationId: discoveryengine.projects.locations.dataStores.siteSearchEngine.targetSites.batchCreate
+      parameters:
+        - description: Required. The parent resource shared by all TargetSites being created. `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine`. The parent field in the CreateBookRequest messages must either be empty or match this field.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSitesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1alpha/{parent}/userEvents:collect:
     get:
       description: Writes a single user event from the browser. This uses a GET request to due to browser restriction of POST-ing to a third-party domain. This method is used only by the Discovery Engine API JavaScript pixel and Google Tag Manager. Users should not call this method directly.
@@ -1258,6 +1376,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1alpha/{parent}:batchVerifyTargetSites:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Verify target sites' ownership and validity. This API sends all the target sites under site search engine for verification.
+      operationId: discoveryengine.projects.locations.collections.dataStores.siteSearchEngine.batchVerifyTargetSites
+      parameters:
+        - description: Required. The parent resource shared by all TargetSites being verified. `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaBatchVerifyTargetSitesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1alpha/{servingConfig}:recommend:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1342,6 +1502,137 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1alpha/{siteSearchEngine}:disableAdvancedSiteSearch:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Downgrade from advanced site search to basic site search.
+      operationId: discoveryengine.projects.locations.dataStores.siteSearchEngine.disableAdvancedSiteSearch
+      parameters:
+        - description: Required. Full resource name of the SiteSearchEngine, such as `projects/{project}/locations/{location}/dataStores/{data_store_id}/siteSearchEngine`.
+          in: path
+          name: siteSearchEngine
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaDisableAdvancedSiteSearchRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1alpha/{siteSearchEngine}:enableAdvancedSiteSearch:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Upgrade from basic site search to advanced site search.
+      operationId: discoveryengine.projects.locations.dataStores.siteSearchEngine.enableAdvancedSiteSearch
+      parameters:
+        - description: Required. Full resource name of the SiteSearchEngine, such as `projects/{project}/locations/{location}/dataStores/{data_store_id}/siteSearchEngine`.
+          in: path
+          name: siteSearchEngine
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaEnableAdvancedSiteSearchRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1alpha/{siteSearchEngine}:fetchDomainVerificationStatus:
+    get:
+      description: Returns list of target sites with its domain verification status. This method can only be called under data store with BASIC_SITE_SEARCH state at the moment.
+      operationId: discoveryengine.projects.locations.collections.dataStores.siteSearchEngine.fetchDomainVerificationStatus
+      parameters:
+        - description: Required. The site search engine resource under which we fetch all the domain verification status. `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine`.
+          in: path
+          name: siteSearchEngine
+          required: true
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default. The maximum value is 1000; values above 1000 will be coerced to 1000. If this field is negative, an INVALID_ARGUMENT error is returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `FetchDomainVerificationStatus` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `FetchDomainVerificationStatus` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaFetchDomainVerificationStatusResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1alpha/{siteSearchEngine}:recrawlUris:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1728,6 +2019,40 @@ components:
           description: Token that used for non-human user check.
           type: string
       type: object
+    GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSiteMetadata:
+      description: Metadata related to the progress of the SiteSearchEngineService.BatchCreateTargetSite operation. This will be returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSitesRequest:
+      description: Request message for SiteSearchEngineService.s method.
+      properties:
+        requests:
+          description: Required. The request message specifying the resources to create. A maximum of 20 TargetSites can be created in a batch.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaCreateTargetSiteRequest"
+          type: array
+      type: object
+    GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSitesResponse:
+      description: Response message for SiteSearchEngineService.BatchCreateTargetSites method.
+      properties:
+        targetSites:
+          description: TargetSites created.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaTargetSite"
+          type: array
+      type: object
+    GoogleCloudDiscoveryengineV1alphaBatchVerifyTargetSitesRequest:
+      description: Request message for SiteSearchEngineService.BatchVerifyTargetSites method.
+      properties: {}
+      type: object
     GoogleCloudDiscoveryengineV1alphaBigQuerySource:
       description: BigQuery source import data from.
       properties:
@@ -1818,7 +2143,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaConversationMessage"
           type: array
         name:
-          description: Immutable. Fully qualified name `project/*/locations/global/collections/{collection}/dataStore/*/conversations/*`
+          description: Immutable. Fully qualified name `project/*/locations/global/collections/{collection}/dataStore/*/conversations/*` or `project/*/locations/global/collections/{collection}/engines/*/conversations/*`.
           type: string
         startTime:
           description: Output only. The time the conversation started.
@@ -1946,6 +2271,28 @@ components:
           format: google-datetime
           type: string
       type: object
+    GoogleCloudDiscoveryengineV1alphaCreateTargetSiteMetadata:
+      description: Metadata related to the progress of the SiteSearchEngineService.CreateTargetSite operation. This will be returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaCreateTargetSiteRequest:
+      description: Request message for SiteSearchEngineService.CreateTargetSite method.
+      properties:
+        parent:
+          description: Required. Parent resource name of TargetSite, such as `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine`.
+          type: string
+        targetSite:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaTargetSite"
+          description: Required. The TargetSite to create.
+      type: object
     GoogleCloudDiscoveryengineV1alphaCustomAttribute:
       description: A custom attribute that is not explicitly modeled in a resource, e.g. UserEvent.
       properties:
@@ -2041,6 +2388,38 @@ components:
           format: google-datetime
           type: string
       type: object
+    GoogleCloudDiscoveryengineV1alphaDeleteTargetSiteMetadata:
+      description: Metadata related to the progress of the SiteSearchEngineService.DeleteTargetSite operation. This will be returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaDisableAdvancedSiteSearchMetadata:
+      description: Metadata related to the progress of the SiteSearchEngineService.DisableAdvancedSiteSearch operation. This will be returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaDisableAdvancedSiteSearchRequest:
+      description: Request message for SiteSearchEngineService.DisableAdvancedSiteSearch method.
+      properties: {}
+      type: object
+    GoogleCloudDiscoveryengineV1alphaDisableAdvancedSiteSearchResponse:
+      description: Response message for SiteSearchEngineService.DisableAdvancedSiteSearch method.
+      properties: {}
+      type: object
     GoogleCloudDiscoveryengineV1alphaDocument:
       description: Document captures all raw metadata information of items to be recommended or searched.
       properties:
@@ -2119,6 +2498,26 @@ components:
             format: double
             type: number
           type: array
+      type: object
+    GoogleCloudDiscoveryengineV1alphaEnableAdvancedSiteSearchMetadata:
+      description: Metadata related to the progress of the SiteSearchEngineService.EnableAdvancedSiteSearch operation. This will be returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaEnableAdvancedSiteSearchRequest:
+      description: Request message for SiteSearchEngineService.EnableAdvancedSiteSearch method.
+      properties: {}
+      type: object
+    GoogleCloudDiscoveryengineV1alphaEnableAdvancedSiteSearchResponse:
+      description: Response message for SiteSearchEngineService.EnableAdvancedSiteSearch method.
+      properties: {}
       type: object
     GoogleCloudDiscoveryengineV1alphaEngine:
       description: Metadata that describes the training and serving parameters of an Engine.
@@ -2303,6 +2702,22 @@ components:
     GoogleCloudDiscoveryengineV1alphaEngineSimilarDocumentsEngineConfig:
       description: Additional config specs for a `similar-items` engine.
       properties: {}
+      type: object
+    GoogleCloudDiscoveryengineV1alphaFetchDomainVerificationStatusResponse:
+      description: Response message for SiteSearchEngineService.FetchDomainVerificationStatus method.
+      properties:
+        nextPageToken:
+          description: A token that can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        targetSites:
+          description: List of TargetSites containing the site verification status.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaTargetSite"
+          type: array
+        totalSize:
+          description: The total number of items matching the request. This will always be populated in the response.
+          format: int32
+          type: integer
       type: object
     GoogleCloudDiscoveryengineV1alphaFieldConfig:
       description: Configurations for fields of a schema. For example, configuring a field is indexable, or searchable.
@@ -2602,6 +3017,22 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSchema"
           type: array
+      type: object
+    GoogleCloudDiscoveryengineV1alphaListTargetSitesResponse:
+      description: Response message for SiteSearchEngineService.ListTargetSites method.
+      properties:
+        nextPageToken:
+          description: A token that can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        targetSites:
+          description: List of TargetSites.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaTargetSite"
+          type: array
+        totalSize:
+          description: The total number of items matching the request. This will always be populated in the response.
+          format: int32
+          type: integer
       type: object
     GoogleCloudDiscoveryengineV1alphaLookupWidgetConfigRequest:
       description: Request message for WidgetService.LookupWidgetConfig method.
@@ -3126,10 +3557,20 @@ components:
         languageCode:
           description: "Language code for Summary. Use language tags defined by [BCP47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt). Note: This is an experimental feature."
           type: string
+        modelSpec:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSearchRequestContentSearchSpecSummarySpecModelSpec"
+          description: If specified, the spec will be used to modify the model specification provided to the LLM.
         summaryResultCount:
           description: The number of top results to generate the summary from. If the number of results returned is less than `summaryResultCount`, the summary is generated from all of the results. At most five results can be used to generate a summary.
           format: int32
           type: integer
+      type: object
+    GoogleCloudDiscoveryengineV1alphaSearchRequestContentSearchSpecSummarySpecModelSpec:
+      description: Specification of the model.
+      properties:
+        version:
+          description: The string format of the model version. e.g. stable, latest, etc.
+          type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaSearchRequestEmbeddingSpec:
       description: The specification that uses customized query embedding vector to do semantic document retrieval.
@@ -3411,6 +3852,13 @@ components:
             type: number
           type: array
       type: object
+    GoogleCloudDiscoveryengineV1alphaSiteSearchEngine:
+      description: SiteSearchEngine captures DataStore level site search persisting configurations. It is a singleton value per data store.
+      properties:
+        name:
+          description: "The fully qualified resource name of the site search engine. Format: `projects/*/locations/*/dataStores/*/siteSearchEngine`"
+          type: string
+      type: object
     GoogleCloudDiscoveryengineV1alphaSiteVerificationInfo:
       description: Verification information for target sites in advanced site search.
       properties:
@@ -3538,6 +3986,18 @@ components:
       type: object
     GoogleCloudDiscoveryengineV1alphaUpdateSchemaMetadata:
       description: Metadata for UpdateSchema LRO.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaUpdateTargetSiteMetadata:
+      description: Metadata related to the progress of the SiteSearchEngineService.UpdateTargetSite operation. This will be returned by the google.longrunning.Operation.metadata field.
       properties:
         createTime:
           description: Operation create time.

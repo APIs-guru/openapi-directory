@@ -521,6 +521,90 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1/{endpoint}:directPredict:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Perform an unary online prediction request for Vertex first-party products and frameworks.
+      operationId: aiplatform.projects.locations.endpoints.directPredict
+      parameters:
+        - description: "Required. The name of the Endpoint requested to serve the prediction. Format: `projects/{project}/locations/{location}/endpoints/{endpoint}`"
+          in: path
+          name: endpoint
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1DirectPredictRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1DirectPredictResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{endpoint}:directRawPredict:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Perform an online prediction request through gRPC.
+      operationId: aiplatform.projects.locations.endpoints.directRawPredict
+      parameters:
+        - description: "Required. The name of the Endpoint requested to serve the prediction. Format: `projects/{project}/locations/{location}/endpoints/{endpoint}`"
+          in: path
+          name: endpoint
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1DirectRawPredictRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1DirectRawPredictResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{endpoint}:explain:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2389,6 +2473,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleCloudAiplatformV1Trial"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{name}:upgrade:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Upgrades a NotebookRuntime.
+      operationId: aiplatform.projects.locations.notebookRuntimes.upgrade
+      parameters:
+        - description: Required. The name of the NotebookRuntime resource to be upgrade. Instead of checking whether the name is in valid NotebookRuntime resource name format, directly throw NotFound exception if there is no such NotebookRuntime in spanner.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1UpgradeNotebookRuntimeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -4279,7 +4405,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous FeaturestoreService.ListFeatures call or FeatureRegistryService.ListFeatures call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to FeaturestoreService.ListFeatures or or FeatureRegistryService.ListFeatures must match the call that provided the page token.
+        - description: A page token, received from a previous FeaturestoreService.ListFeatures call or FeatureRegistryService.ListFeatures call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to FeaturestoreService.ListFeatures or FeatureRegistryService.ListFeatures must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -8090,6 +8216,17 @@ components:
           description: "Required. BigQuery URI to a table, up to 2000 characters long. Accepted forms: * BigQuery path. For example: `bq://projectId.bqDatasetId.bqTableId`."
           type: string
       type: object
+    GoogleCloudAiplatformV1Blob:
+      description: Content blob.
+      properties:
+        data:
+          description: Required. Data.
+          format: byte
+          type: string
+        mimeType:
+          description: Required. Mime type of the data.
+          type: string
+      type: object
     GoogleCloudAiplatformV1BlurBaselineConfig:
       description: "Config for blur baseline. When enabled, a linear path from the maximally blurred image to the input image is created. Using a blurred baseline instead of zero (black image) is motivated by the BlurIG approach explained here: https://arxiv.org/abs/2004.03383"
       properties:
@@ -8242,6 +8379,18 @@ components:
           description: Required. The URI of a container image in the Container Registry that is to be run on each worker replica.
           type: string
       type: object
+    GoogleCloudAiplatformV1Content:
+      description: A single turn in a conversation with the model.
+      properties:
+        parts:
+          description: Required. Ordered parts that make up a message. Parts may have different MIME types.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1Part"
+          type: array
+        role:
+          description: "Optional. The role in a conversation associated with this content. Set it only if a content represents a turn in a conversations, otherwise no need to set role. Possible values: user, model."
+          type: string
+      type: object
     GoogleCloudAiplatformV1Context:
       description: Instance of a general context.
       properties:
@@ -8327,10 +8476,18 @@ components:
     GoogleCloudAiplatformV1CountTokensRequest:
       description: Request message for PredictionService.CountTokens.
       properties:
+        contents:
+          description: Required. Input content.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1Content"
+          type: array
         instances:
           description: Required. The instances that are the input to token counting call. Schema is identical to the prediction schema of the underlying model.
           items: {}
           type: array
+        model:
+          description: "Required. The name of the publisher model requested to serve the prediction. Format: `projects/{project}/locations/{location}/publishers/*/models/*`"
+          type: string
       type: object
     GoogleCloudAiplatformV1CountTokensResponse:
       description: Response message for PredictionService.CountTokens.
@@ -9100,6 +9257,10 @@ components:
         deployedIndexId:
           description: Immutable. The ID of the DeployedIndex in the above IndexEndpoint.
           type: string
+        displayName:
+          description: Output only. The display name of the DeployedIndex.
+          readOnly: true
+          type: string
         indexEndpoint:
           description: Immutable. A resource name of the IndexEndpoint.
           type: string
@@ -9147,6 +9308,9 @@ components:
         serviceAccount:
           description: The service account that the DeployedModel's container runs as. Specify the email address of the service account. If this service account is not specified, the container runs as a service account that doesn't have access to the resource project. Users deploying the Model must have the `iam.serviceAccounts.actAs` permission on this service account.
           type: string
+        sharedResources:
+          description: "The resource name of the shared DeploymentResourcePool to deploy on. Format: `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`"
+          type: string
       type: object
     GoogleCloudAiplatformV1DeployedModelRef:
       description: Points to a DeployedModel.
@@ -9180,6 +9344,49 @@ components:
           type: string
         featureId:
           description: Required. The ID of the Feature to apply the setting to.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1DirectPredictRequest:
+      description: Request message for PredictionService.DirectPredict.
+      properties:
+        inputs:
+          description: The prediction input.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1Tensor"
+          type: array
+        parameters:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1Tensor"
+          description: The parameters that govern the prediction.
+      type: object
+    GoogleCloudAiplatformV1DirectPredictResponse:
+      description: Response message for PredictionService.DirectPredict.
+      properties:
+        outputs:
+          description: The prediction output.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1Tensor"
+          type: array
+        parameters:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1Tensor"
+          description: The parameters that govern the prediction.
+      type: object
+    GoogleCloudAiplatformV1DirectRawPredictRequest:
+      description: Request message for PredictionService.DirectRawPredict.
+      properties:
+        input:
+          description: The prediction input.
+          format: byte
+          type: string
+        methodName:
+          description: "Fully qualified name of the API method being invoked to perform predictions. Format: `/namespace.Service/Method/` Example: `/tensorflow.serving.PredictionService/Predict`"
+          type: string
+      type: object
+    GoogleCloudAiplatformV1DirectRawPredictResponse:
+      description: Response message for PredictionService.DirectRawPredict.
+      properties:
+        output:
+          description: The prediction output.
+          format: byte
           type: string
       type: object
     GoogleCloudAiplatformV1DiskSpec:
@@ -9833,15 +10040,30 @@ components:
     GoogleCloudAiplatformV1ExportDataConfig:
       description: Describes what part of the Dataset is to be exported, the destination of the export and how to export.
       properties:
+        annotationSchemaUri:
+          description: Only used for custom training data export use cases. Only applicable to Datasets that have DataItems and Annotations. Cloud Storage URI that points to a YAML file describing the annotation schema. The schema is defined as an OpenAPI 3.0.2 [Schema Object](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md#schemaObject). The schema files that can be used here are found in gs://google-cloud-aiplatform/schema/dataset/annotation/, note that the chosen schema must be consistent with metadata of the Dataset specified by dataset_id. Only Annotations that both match this schema and belong to DataItems not ignored by the split method are used in respectively training, validation or test role, depending on the role of the DataItem they are on. When used in conjunction with annotations_filter, the Annotations used for training are filtered by both annotations_filter and annotation_schema_uri.
+          type: string
         annotationsFilter:
           description: An expression for filtering what part of the Dataset is to be exported. Only Annotations that match this filter will be exported. The filter syntax is the same as in ListAnnotations.
           type: string
+        exportUse:
+          description: Indicates the usage of the exported files.
+          enum:
+            - EXPORT_USE_UNSPECIFIED
+            - CUSTOM_CODE_TRAINING
+          type: string
+        filterSplit:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1ExportFilterSplit"
+          description: Split based on the provided filters for each set.
         fractionSplit:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1ExportFractionSplit"
           description: Split based on fractions defining the size of each set.
         gcsDestination:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1GcsDestination"
           description: "The Google Cloud Storage location where the output is to be written to. In the given directory a new directory will be created with name: `export-data--` where timestamp is in YYYY-MM-DDThh:mm:ss.sssZ ISO-8601 format. All export output will be written into that directory. Inside that directory, annotations with the same schema will be grouped into sub directories which are named with the corresponding annotations' schema title. Inside these sub directories, a schema.yaml will be created to describe the output format."
+        savedQueryId:
+          description: "Only used for custom training data export use cases. Only applicable to Datasets that have SavedQueries. The ID of a SavedQuery (annotation set) under the Dataset specified by dataset_id used for filtering Annotations for training. Only Annotations that are associated with this SavedQuery are used in respectively training. When used in conjunction with annotations_filter, the Annotations used for training are filtered by both saved_query_id and annotations_filter. Only one of saved_query_id and annotation_schema_uri should be specified as both of them represent the same thing: problem type."
+          type: string
       type: object
     GoogleCloudAiplatformV1ExportDataOperationMetadata:
       description: Runtime operation information for DatasetService.ExportData.
@@ -9863,8 +10085,11 @@ components:
     GoogleCloudAiplatformV1ExportDataResponse:
       description: Response message for DatasetService.ExportData.
       properties:
+        dataStats:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1ModelDataStats"
+          description: Only present for custom code training export use case. Records data stats, i.e., train/validation/test item/annotation counts calculated during the export operation.
         exportedFiles:
-          description: All of the files that are exported in this export operation.
+          description: All of the files that are exported in this export operation. For custom code training export, only three (training, validation and test) GCS paths in wildcard format are populated (e.g., gs://.../training-*).
           items:
             type: string
           type: array
@@ -9924,6 +10149,19 @@ components:
     GoogleCloudAiplatformV1ExportFeatureValuesResponse:
       description: Response message for FeaturestoreService.ExportFeatureValues.
       properties: {}
+      type: object
+    GoogleCloudAiplatformV1ExportFilterSplit:
+      description: Assigns input data to training, validation, and test sets based on the given filters, data pieces not matched by any filter are ignored. Currently only supported for Datasets containing DataItems. If any of the filters in this message are to match nothing, then they can be set as '-' (the minus sign). Supported only for unstructured Datasets.
+      properties:
+        testFilter:
+          description: Required. A filter on DataItems of the Dataset. DataItems that match this filter are used to test the Model. A filter with same syntax as the one used in DatasetService.ListDataItems may be used. If a single DataItem is matched by more than one of the FilterSplit filters, then it is assigned to the first set that applies to it in the training, validation, test order.
+          type: string
+        trainingFilter:
+          description: Required. A filter on DataItems of the Dataset. DataItems that match this filter are used to train the Model. A filter with same syntax as the one used in DatasetService.ListDataItems may be used. If a single DataItem is matched by more than one of the FilterSplit filters, then it is assigned to the first set that applies to it in the training, validation, test order.
+          type: string
+        validationFilter:
+          description: Required. A filter on DataItems of the Dataset. DataItems that match this filter are used to validate the Model. A filter with same syntax as the one used in DatasetService.ListDataItems may be used. If a single DataItem is matched by more than one of the FilterSplit filters, then it is assigned to the first set that applies to it in the training, validation, test order.
+          type: string
       type: object
     GoogleCloudAiplatformV1ExportFractionSplit:
       description: Assigns the input data to training, validation, and test sets as per the given fractions. Any of `training_fraction`, `validation_fraction` and `test_fraction` may optionally be provided, they must sum to up to 1. If the provided ones sum to less than 1, the remainder is assigned to sets as decided by Vertex AI. If none of the fractions are set, by default roughly 80% of data is used for training, 10% for validation, and 10% for test.
@@ -10094,8 +10332,7 @@ components:
           description: Optional. The labels with user-defined metadata to organize your FeatureGroup. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. See https://goo.gl/xmQnxf for more information on and examples of labels. No more than 64 user labels can be associated with one FeatureGroup(System labels are excluded)." System reserved label keys are prefixed with "aiplatform.googleapis.com/" and are immutable.
           type: object
         name:
-          description: "Output only. Name of the FeatureGroup. Format: `projects/{project}/locations/{location}/featureGroups/{featureGroup}`"
-          readOnly: true
+          description: "Identifier. Name of the FeatureGroup. Format: `projects/{project}/locations/{location}/featureGroups/{featureGroup}`"
           type: string
         updateTime:
           description: Output only. Timestamp when this FeatureGroup was last updated.
@@ -10171,8 +10408,7 @@ components:
           description: Optional. The labels with user-defined metadata to organize your FeatureOnlineStore. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. See https://goo.gl/xmQnxf for more information on and examples of labels. No more than 64 user labels can be associated with one FeatureOnlineStore(System labels are excluded)." System reserved label keys are prefixed with "aiplatform.googleapis.com/" and are immutable.
           type: object
         name:
-          description: "Output only. Name of the FeatureOnlineStore. Format: `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}`"
-          readOnly: true
+          description: "Identifier. Name of the FeatureOnlineStore. Format: `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}`"
           type: string
         state:
           description: Output only. State of the featureOnlineStore.
@@ -10336,8 +10572,7 @@ components:
           description: Optional. The labels with user-defined metadata to organize your FeatureViews. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. See https://goo.gl/xmQnxf for more information on and examples of labels. No more than 64 user labels can be associated with one FeatureOnlineStore(System labels are excluded)." System reserved label keys are prefixed with "aiplatform.googleapis.com/" and are immutable.
           type: object
         name:
-          description: "Output only. Name of the FeatureView. Format: `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}`"
-          readOnly: true
+          description: "Identifier. Name of the FeatureView. Format: `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}`"
           type: string
         syncConfig:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1FeatureViewSyncConfig"
@@ -10400,8 +10635,7 @@ components:
           description: Output only. Final status of the FeatureViewSync.
           readOnly: true
         name:
-          description: "Output only. Name of the FeatureViewSync. Format: `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}/featureViewSyncs/{feature_view_sync}`"
-          readOnly: true
+          description: "Identifier. Name of the FeatureViewSync. Format: `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}/featureViewSyncs/{feature_view_sync}`"
           type: string
         runTime:
           $ref: "#/components/schemas/GoogleTypeInterval"
@@ -10409,6 +10643,7 @@ components:
           readOnly: true
       type: object
     GoogleCloudAiplatformV1FeatureViewSyncConfig:
+      description: Configuration for Sync. Only one option is set.
       properties:
         cron:
           description: 'Cron schedule (https://en.wikipedia.org/wiki/Cron) to launch scheduled runs. To explicitly set a timezone to the cron tab, apply a prefix in the cron tab: "CRON_TZ=${IANA_TIME_ZONE}" or "TZ=${IANA_TIME_ZONE}". The ${IANA_TIME_ZONE} may only be a valid string from IANA time zone database. For example, "CRON_TZ=America/New_York 1 * * * *", or "TZ=America/New_York 1 * * * *".'
@@ -10589,6 +10824,16 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1FeatureValue"
           description: Feature value.
       type: object
+    GoogleCloudAiplatformV1FileData:
+      description: URI based data.
+      properties:
+        fileUri:
+          description: Required. URI.
+          type: string
+        mimeType:
+          description: Required. Mime type of the data.
+          type: string
+      type: object
     GoogleCloudAiplatformV1FilterSplit:
       description: "Assigns input data to training, validation, and test sets based on the given filters, data pieces not matched by any filter are ignored. Currently only supported for Datasets containing DataItems. If any of the filters in this message are to match nothing, then they can be set as '-' (the minus sign). Supported only for unstructured Datasets. "
       properties:
@@ -10687,6 +10932,30 @@ components:
           description: The fraction of the input data that is to be used to validate the Model.
           format: double
           type: number
+      type: object
+    GoogleCloudAiplatformV1FunctionCall:
+      description: A predicted [FunctionCall] returned from the model that contains a string representing the [FunctionDeclaration.name] and a structured JSON object containing the parameters and their values.
+      properties:
+        args:
+          additionalProperties:
+            description: Properties of the object.
+          description: Optional. Required. The function parameters and values in JSON object format. See [FunctionDeclaration.parameters] for parameter details.
+          type: object
+        name:
+          description: Required. The name of the function to call. Matches [FunctionDeclaration.name].
+          type: string
+      type: object
+    GoogleCloudAiplatformV1FunctionResponse:
+      description: The result output from a [FunctionCall] that contains a string representing the [FunctionDeclaration.name] and a structured JSON object containing any output from the function is used as context to the model. This should contain the result of a [FunctionCall] made based on model prediction.
+      properties:
+        name:
+          description: Required. The name of the function to call. Matches [FunctionDeclaration.name] and [FunctionCall.name].
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object.
+          description: Required. The function response in JSON object format.
+          type: object
       type: object
     GoogleCloudAiplatformV1GcsDestination:
       description: The Google Cloud Storage location where the output is to be written to.
@@ -12150,6 +12419,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        dataStats:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1ModelDataStats"
+          description: Stats of data used for training or evaluating the Model. Only populated when the Model is trained by a TrainingPipeline with data_input_config.
         deployedModels:
           description: Output only. The pointers to DeployedModels created from this Model. Note that Model could have been deployed to Endpoints in different Locations.
           items:
@@ -12277,7 +12549,7 @@ components:
             type: string
           type: array
         deploymentTimeout:
-          description: "Immutable. Deployment timeout. TODO (b/306244185): Revise documentation before exposing."
+          description: Immutable. Deployment timeout. Limit for deployment timeout is 2 hours.
           format: google-duration
           type: string
         env:
@@ -12285,9 +12557,14 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudAiplatformV1EnvVar"
           type: array
+        grpcPorts:
+          description: Immutable. List of ports to expose from the container. Vertex AI sends gRPC prediction requests that it receives to the first port on this list. Vertex AI also sends liveness and health checks to this port. If you do not specify this field, gRPC requests to the container will be disabled. Vertex AI does not use ports other than the first one listed. This field corresponds to the `ports` field of the Kubernetes Containers v1 core API.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1Port"
+          type: array
         healthProbe:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1Probe"
-          description: "Immutable. Specification for Kubernetes readiness probe. TODO (b/306244185): Revise documentation before exposing."
+          description: Immutable. Specification for Kubernetes readiness probe.
         healthRoute:
           description: "Immutable. HTTP path on the container to send health checks to. Vertex AI intermittently sends GET requests to this path on the container's IP address and port to check that the container is healthy. Read more about [health checks](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#health). For example, if you set this field to `/bar`, then Vertex AI intermittently sends a GET request to the `/bar` path on the port of your container specified by the first value of this `ModelContainerSpec`'s ports field. If you don't specify this field, it defaults to the following value when you deploy this Model to an Endpoint: /v1/endpoints/ENDPOINT/deployedModels/ DEPLOYED_MODEL:predict The placeholders in this value are replaced as follows: * ENDPOINT: The last segment (following `endpoints/`)of the Endpoint.name][] field of the Endpoint where this Model has been deployed. (Vertex AI makes this value available to your container code as the [`AIP_ENDPOINT_ID` environment variable](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables).) * DEPLOYED_MODEL: DeployedModel.id of the `DeployedModel`. (Vertex AI makes this value available to your container code as the [`AIP_DEPLOYED_MODEL_ID` environment variable](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables).)"
           type: string
@@ -12303,12 +12580,40 @@ components:
           description: "Immutable. HTTP path on the container to send prediction requests to. Vertex AI forwards requests sent using projects.locations.endpoints.predict to this path on the container's IP address and port. Vertex AI then returns the container's response in the API response. For example, if you set this field to `/foo`, then when Vertex AI receives a prediction request, it forwards the request body in a POST request to the `/foo` path on the port of your container specified by the first value of this `ModelContainerSpec`'s ports field. If you don't specify this field, it defaults to the following value when you deploy this Model to an Endpoint: /v1/endpoints/ENDPOINT/deployedModels/DEPLOYED_MODEL:predict The placeholders in this value are replaced as follows: * ENDPOINT: The last segment (following `endpoints/`)of the Endpoint.name][] field of the Endpoint where this Model has been deployed. (Vertex AI makes this value available to your container code as the [`AIP_ENDPOINT_ID` environment variable](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables).) * DEPLOYED_MODEL: DeployedModel.id of the `DeployedModel`. (Vertex AI makes this value available to your container code as the [`AIP_DEPLOYED_MODEL_ID` environment variable](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables).)"
           type: string
         sharedMemorySizeMb:
-          description: "Immutable. The amount of the VM memory to reserve as the shared memory for the model in megabytes. TODO (b/306244185): Revise documentation before exposing."
+          description: Immutable. The amount of the VM memory to reserve as the shared memory for the model in megabytes.
           format: int64
           type: string
         startupProbe:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1Probe"
-          description: "Immutable. Specification for Kubernetes startup probe. TODO (b/306244185): Revise documentation before exposing."
+          description: Immutable. Specification for Kubernetes startup probe.
+      type: object
+    GoogleCloudAiplatformV1ModelDataStats:
+      description: Stats of data used for train or evaluate the Model.
+      properties:
+        testAnnotationsCount:
+          description: Number of Annotations that are used for evaluating this Model. If the Model is evaluated multiple times, this will be the number of test Annotations used by the first evaluation. If the Model is not evaluated, the number is 0.
+          format: int64
+          type: string
+        testDataItemsCount:
+          description: Number of DataItems that were used for evaluating this Model. If the Model is evaluated multiple times, this will be the number of test DataItems used by the first evaluation. If the Model is not evaluated, the number is 0.
+          format: int64
+          type: string
+        trainingAnnotationsCount:
+          description: Number of Annotations that are used for training this Model.
+          format: int64
+          type: string
+        trainingDataItemsCount:
+          description: Number of DataItems that were used for training this Model.
+          format: int64
+          type: string
+        validationAnnotationsCount:
+          description: Number of Annotations that are used for validating this Model during training.
+          format: int64
+          type: string
+        validationDataItemsCount:
+          description: Number of DataItems that were used for validating this Model during training.
+          format: int64
+          type: string
       type: object
     GoogleCloudAiplatformV1ModelDeploymentMonitoringBigQueryTable:
       description: ModelDeploymentMonitoringBigQueryTable specifies the BigQuery table name as well as some information of the logs stored in this table.
@@ -13366,6 +13671,28 @@ components:
         notebookRuntimeTemplate:
           description: Immutable. A resource name of the NotebookRuntimeTemplate.
           type: string
+      type: object
+    GoogleCloudAiplatformV1Part:
+      description: Content part.
+      properties:
+        fileData:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1FileData"
+          description: Optional. URI based data.
+        functionCall:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1FunctionCall"
+          description: Optional. A predicted [FunctionCall] returned from the model that contains a string representing the [FunctionDeclaration.name] with the parameters and their values.
+        functionResponse:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1FunctionResponse"
+          description: Optional. The result output of a [FunctionCall] that contains a string representing the [FunctionDeclaration.name] and a structured JSON object containing any output from the function call. It is used as context to the model.
+        inlineData:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1Blob"
+          description: Optional. Inlined bytes data.
+        text:
+          description: Optional. Text part (can be code).
+          type: string
+        videoMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1VideoMetadata"
+          description: Optional. Video metadata. The metadata should only be specified while the video data is presented in inline_data or file_data.
       type: object
     GoogleCloudAiplatformV1PauseModelDeploymentMonitoringJobRequest:
       description: Request message for JobService.PauseModelDeploymentMonitoringJob.
@@ -15312,6 +15639,9 @@ components:
           deprecated: true
           description: The uri of the Vertex AI Search data source. Deprecated. Use vertex_ai_search_datastore instead.
           type: string
+        inlineContext:
+          description: The grounding text passed inline with the Predict API. It can support up to 1 million token context.
+          type: string
         type:
           description: The type of the grounding checking source.
           enum:
@@ -15319,11 +15649,13 @@ components:
             - WEB
             - ENTERPRISE
             - VERTEX_AI_SEARCH
+            - INLINE
           type: string
           x-enumDeprecated:
             - false
             - false
             - true
+            - false
             - false
         vertexAiSearchDatastore:
           description: The uri of the Vertex AI Search data source.
@@ -15833,6 +16165,9 @@ components:
         maxOutputTokens:
           description: Value of the maximum number of tokens generated set when the dataset was saved.
           format: int64
+          type: string
+        note:
+          description: User-created prompt note. Note size limit is 2KB.
           type: string
         promptType:
           description: Type of the prompt dataset.
@@ -18384,6 +18719,20 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1GenericOperationMetadata"
           description: Operation metadata for Tensorboard.
       type: object
+    GoogleCloudAiplatformV1UpgradeNotebookRuntimeOperationMetadata:
+      description: Metadata information for NotebookService.UpgradeNotebookRuntime.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1GenericOperationMetadata"
+          description: The operation generic information.
+        progressMessage:
+          description: A human-readable message that shows the intermediate progress details of NotebookRuntime.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1UpgradeNotebookRuntimeRequest:
+      description: Request message for NotebookService.UpgradeNotebookRuntime.
+      properties: {}
+      type: object
     GoogleCloudAiplatformV1UploadModelOperationMetadata:
       description: Details of ModelService.UploadModel operation.
       properties:
@@ -18457,6 +18806,18 @@ components:
           type: string
         stringValue:
           description: A string value.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1VideoMetadata:
+      description: Metadata describes the input video content.
+      properties:
+        endOffset:
+          description: Optional. The end offset of the video.
+          format: google-duration
+          type: string
+        startOffset:
+          description: Optional. The start offset of the video.
+          format: google-duration
           type: string
       type: object
     GoogleCloudAiplatformV1WorkerPoolSpec:

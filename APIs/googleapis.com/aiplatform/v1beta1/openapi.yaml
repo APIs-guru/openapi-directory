@@ -521,6 +521,90 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1beta1/{endpoint}:directPredict:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Perform an unary online prediction request for Vertex first-party products and frameworks.
+      operationId: aiplatform.projects.locations.endpoints.directPredict
+      parameters:
+        - description: "Required. The name of the Endpoint requested to serve the prediction. Format: `projects/{project}/locations/{location}/endpoints/{endpoint}`"
+          in: path
+          name: endpoint
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1DirectPredictRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1DirectPredictResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1beta1/{endpoint}:directRawPredict:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Perform an online prediction request through gRPC.
+      operationId: aiplatform.projects.locations.endpoints.directRawPredict
+      parameters:
+        - description: "Required. The name of the Endpoint requested to serve the prediction. Format: `projects/{project}/locations/{location}/endpoints/{endpoint}`"
+          in: path
+          name: endpoint
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1DirectRawPredictRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1DirectRawPredictResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1beta1/{endpoint}:explain:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1660,6 +1744,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1beta1/{model}:streamGenerateContent:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Generate content with multimodal inputs with streaming support.
+      operationId: aiplatform.projects.locations.publishers.models.streamGenerateContent
+      parameters:
+        - description: "Required. The name of the publisher model requested to serve the prediction. Format: `projects/{project}/locations/{location}/publishers/*/models/*`"
+          in: path
+          name: model
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenerateContentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenerateContentResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1beta1/{model}:updateExplanationDataset:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2515,6 +2641,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Trial"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1beta1/{name}:upgrade:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Upgrades a NotebookRuntime.
+      operationId: aiplatform.projects.locations.notebookRuntimes.upgrade
+      parameters:
+        - description: Required. The name of the NotebookRuntime resource to be upgrade. Instead of checking whether the name is in valid NotebookRuntime resource name format, directly throw NotFound exception if there is no such NotebookRuntime in spanner.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1UpgradeNotebookRuntimeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -4357,7 +4525,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous FeaturestoreService.ListFeatures call or FeatureRegistryService.ListFeatures call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to FeaturestoreService.ListFeatures or or FeatureRegistryService.ListFeatures must match the call that provided the page token.
+        - description: A page token, received from a previous FeaturestoreService.ListFeatures call or FeatureRegistryService.ListFeatures call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to FeaturestoreService.ListFeatures or FeatureRegistryService.ListFeatures must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -5818,6 +5986,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1PipelineJob"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1beta1/{parent}/pipelineJobs:batchCancel:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Batch cancel PipelineJobs. Firstly the server will check if all the jobs are in non-terminal states, and skip the jobs that are already terminated. If the operation failed, none of the pipeline jobs are cancelled. The server will poll the states of all the pipeline jobs periodically to check the cancellation status. This operation will return an LRO.
+      operationId: aiplatform.projects.locations.pipelineJobs.batchCancel
+      parameters:
+        - description: "Required. The name of the PipelineJobs' parent resource. Format: `projects/{project}/locations/{location}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1BatchCancelPipelineJobsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -7870,6 +8080,15 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GcsSource"
           description: Required. Google Cloud Storage location.
       type: object
+    GoogleCloudAiplatformV1beta1BatchCancelPipelineJobsRequest:
+      description: Request message for PipelineService.BatchCancelPipelineJobs.
+      properties:
+        names:
+          description: "Required. The names of the PipelineJobs to cancel. A maximum of 32 PipelineJobs can be cancelled in a batch. Format: `projects/{project}/locations/{location}/pipelineJobs/{pipelineJob}`"
+          items:
+            type: string
+          type: array
+      type: object
     GoogleCloudAiplatformV1beta1BatchCreateFeaturesOperationMetadata:
       description: Details of operations that perform batch create Features.
       properties:
@@ -8312,6 +8531,17 @@ components:
           description: "Required. BigQuery URI to a table, up to 2000 characters long. Accepted forms: * BigQuery path. For example: `bq://projectId.bqDatasetId.bqTableId`."
           type: string
       type: object
+    GoogleCloudAiplatformV1beta1Blob:
+      description: Content blob.
+      properties:
+        data:
+          description: Required. Data.
+          format: byte
+          type: string
+        mimeType:
+          description: Required. Mime type of the data.
+          type: string
+      type: object
     GoogleCloudAiplatformV1beta1BlurBaselineConfig:
       description: "Config for blur baseline. When enabled, a linear path from the maximally blurred image to the input image is created. Using a blurred baseline instead of zero (black image) is motivated by the BlurIG approach explained here: https://arxiv.org/abs/2004.03383"
       properties:
@@ -8357,6 +8587,44 @@ components:
       description: Request message for PipelineService.CancelTrainingPipeline.
       properties: {}
       type: object
+    GoogleCloudAiplatformV1beta1Candidate:
+      description: Generated candidate.
+      properties:
+        citationMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1CitationMetadata"
+          description: Output only. Source attribution of the generated content.
+          readOnly: true
+        content:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Content"
+          description: Output only. Content parts of the candidate.
+          readOnly: true
+        finishMessage:
+          description: Output only. A string that describes the filtering behavior in more detail. Only filled when reason is set.
+          readOnly: true
+          type: string
+        finishReason:
+          description: Output only. The reason why the model stopped generating tokens.
+          enum:
+            - FINISH_REASON_UNSPECIFIED
+            - STOP
+            - MAX_TOKENS
+            - SAFETY
+            - RECITATION
+            - OTHER
+          readOnly: true
+          type: string
+        index:
+          description: Output only. Index of the candidate.
+          format: int32
+          readOnly: true
+          type: integer
+        safetyRatings:
+          description: Output only. Safety ratings of the generated content.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1SafetyRating"
+          readOnly: true
+          type: array
+      type: object
     GoogleCloudAiplatformV1beta1CheckTrialEarlyStoppingStateMetatdata:
       description: This message will be placed in the metadata field of a google.longrunning.Operation associated with a CheckTrialEarlyStoppingState request.
       properties:
@@ -8380,6 +8648,46 @@ components:
         shouldStop:
           description: True if the Trial should stop.
           type: boolean
+      type: object
+    GoogleCloudAiplatformV1beta1Citation:
+      description: Source attributions for content.
+      properties:
+        endIndex:
+          description: Output only. End index into the content.
+          format: int32
+          readOnly: true
+          type: integer
+        license:
+          description: Output only. License of the attribution.
+          readOnly: true
+          type: string
+        publicationDate:
+          $ref: "#/components/schemas/GoogleTypeDate"
+          description: Output only. Publication date of the attribution.
+          readOnly: true
+        startIndex:
+          description: Output only. Start index into the content.
+          format: int32
+          readOnly: true
+          type: integer
+        title:
+          description: Output only. Title of the attribution.
+          readOnly: true
+          type: string
+        uri:
+          description: Output only. Url reference of the attribution.
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1CitationMetadata:
+      description: A collection of source attributions for a piece of content.
+      properties:
+        citations:
+          description: Output only. List of citations.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Citation"
+          readOnly: true
+          type: array
       type: object
     GoogleCloudAiplatformV1beta1CompleteTrialRequest:
       description: Request message for VizierService.CompleteTrial.
@@ -8462,6 +8770,18 @@ components:
           type: array
         imageUri:
           description: Required. The URI of a container image in the Container Registry that is to be run on each worker replica.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1Content:
+      description: A single turn in a conversation with the model.
+      properties:
+        parts:
+          description: Required. Ordered parts that make up a message. Parts may have different MIME types.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Part"
+          type: array
+        role:
+          description: "Optional. The role in a conversation associated with this content. Set it only if a content represents a turn in a conversations, otherwise no need to set role. Possible values: user, model."
           type: string
       type: object
     GoogleCloudAiplatformV1beta1Context:
@@ -8549,10 +8869,18 @@ components:
     GoogleCloudAiplatformV1beta1CountTokensRequest:
       description: Request message for PredictionService.CountTokens.
       properties:
+        contents:
+          description: Required. Input content.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Content"
+          type: array
         instances:
           description: Required. The instances that are the input to token counting call. Schema is identical to the prediction schema of the underlying model.
           items: {}
           type: array
+        model:
+          description: "Required. The name of the publisher model requested to serve the prediction. Format: `projects/{project}/locations/{location}/publishers/*/models/*`"
+          type: string
       type: object
     GoogleCloudAiplatformV1beta1CountTokensResponse:
       description: Response message for PredictionService.CountTokens.
@@ -9370,6 +9698,10 @@ components:
         deployedIndexId:
           description: Immutable. The ID of the DeployedIndex in the above IndexEndpoint.
           type: string
+        displayName:
+          description: Output only. The display name of the DeployedIndex.
+          readOnly: true
+          type: string
         indexEndpoint:
           description: Immutable. A resource name of the IndexEndpoint.
           type: string
@@ -9456,6 +9788,49 @@ components:
           type: string
         featureId:
           description: Required. The ID of the Feature to apply the setting to.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1DirectPredictRequest:
+      description: Request message for PredictionService.DirectPredict.
+      properties:
+        inputs:
+          description: The prediction input.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Tensor"
+          type: array
+        parameters:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Tensor"
+          description: The parameters that govern the prediction.
+      type: object
+    GoogleCloudAiplatformV1beta1DirectPredictResponse:
+      description: Response message for PredictionService.DirectPredict.
+      properties:
+        outputs:
+          description: The prediction output.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Tensor"
+          type: array
+        parameters:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Tensor"
+          description: The parameters that govern the prediction.
+      type: object
+    GoogleCloudAiplatformV1beta1DirectRawPredictRequest:
+      description: Request message for PredictionService.DirectRawPredict.
+      properties:
+        input:
+          description: The prediction input.
+          format: byte
+          type: string
+        methodName:
+          description: "Fully qualified name of the API method being invoked to perform predictions. Format: `/namespace.Service/Method/` Example: `/tensorflow.serving.PredictionService/Predict`"
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1DirectRawPredictResponse:
+      description: Response message for PredictionService.DirectRawPredict.
+      properties:
+        output:
+          description: The prediction output.
+          format: byte
           type: string
       type: object
     GoogleCloudAiplatformV1beta1DiskSpec:
@@ -10162,7 +10537,7 @@ components:
       description: Response message for DatasetService.ExportData.
       properties:
         exportedFiles:
-          description: All of the files that are exported in this export operation.
+          description: All of the files that are exported in this export operation. For custom code training export, only three (training, validation and test) GCS paths in wildcard format are populated (e.g., gs://.../training-*).
           items:
             type: string
           type: array
@@ -10423,8 +10798,7 @@ components:
           description: Optional. The labels with user-defined metadata to organize your FeatureGroup. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. See https://goo.gl/xmQnxf for more information on and examples of labels. No more than 64 user labels can be associated with one FeatureGroup(System labels are excluded)." System reserved label keys are prefixed with "aiplatform.googleapis.com/" and are immutable.
           type: object
         name:
-          description: "Output only. Name of the FeatureGroup. Format: `projects/{project}/locations/{location}/featureGroups/{featureGroup}`"
-          readOnly: true
+          description: "Identifier. Name of the FeatureGroup. Format: `projects/{project}/locations/{location}/featureGroups/{featureGroup}`"
           type: string
         updateTime:
           description: Output only. Timestamp when this FeatureGroup was last updated.
@@ -10506,8 +10880,7 @@ components:
           description: Optional. The labels with user-defined metadata to organize your FeatureOnlineStore. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. See https://goo.gl/xmQnxf for more information on and examples of labels. No more than 64 user labels can be associated with one FeatureOnlineStore(System labels are excluded)." System reserved label keys are prefixed with "aiplatform.googleapis.com/" and are immutable.
           type: object
         name:
-          description: "Output only. Name of the FeatureOnlineStore. Format: `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}`"
-          readOnly: true
+          description: "Identifier. Name of the FeatureOnlineStore. Format: `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}`"
           type: string
         optimized:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureOnlineStoreOptimized"
@@ -10700,8 +11073,7 @@ components:
           description: Optional. The labels with user-defined metadata to organize your FeatureViews. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. See https://goo.gl/xmQnxf for more information on and examples of labels. No more than 64 user labels can be associated with one FeatureOnlineStore(System labels are excluded)." System reserved label keys are prefixed with "aiplatform.googleapis.com/" and are immutable.
           type: object
         name:
-          description: "Output only. Name of the FeatureView. Format: `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}`"
-          readOnly: true
+          description: "Identifier. Name of the FeatureView. Format: `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}`"
           type: string
         syncConfig:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureViewSyncConfig"
@@ -10767,8 +11139,7 @@ components:
           description: Output only. Final status of the FeatureViewSync.
           readOnly: true
         name:
-          description: "Output only. Name of the FeatureViewSync. Format: `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}/featureViewSyncs/{feature_view_sync}`"
-          readOnly: true
+          description: "Identifier. Name of the FeatureViewSync. Format: `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}/featureViewSyncs/{feature_view_sync}`"
           type: string
         runTime:
           $ref: "#/components/schemas/GoogleTypeInterval"
@@ -10776,6 +11147,7 @@ components:
           readOnly: true
       type: object
     GoogleCloudAiplatformV1beta1FeatureViewSyncConfig:
+      description: Configuration for Sync. Only one option is set.
       properties:
         cron:
           description: 'Cron schedule (https://en.wikipedia.org/wiki/Cron) to launch scheduled runs. To explicitly set a timezone to the cron tab, apply a prefix in the cron tab: "CRON_TZ=${IANA_TIME_ZONE}" or "TZ=${IANA_TIME_ZONE}". The ${IANA_TIME_ZONE} may only be a valid string from IANA time zone database. For example, "CRON_TZ=America/New_York 1 * * * *", or "TZ=America/New_York 1 * * * *".'
@@ -11016,6 +11388,16 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureValue"
           description: Feature value.
       type: object
+    GoogleCloudAiplatformV1beta1FileData:
+      description: URI based data.
+      properties:
+        fileUri:
+          description: Required. URI.
+          type: string
+        mimeType:
+          description: Required. Mime type of the data.
+          type: string
+      type: object
     GoogleCloudAiplatformV1beta1FilterSplit:
       description: "Assigns input data to training, validation, and test sets based on the given filters, data pieces not matched by any filter are ignored. Currently only supported for Datasets containing DataItems. If any of the filters in this message are to match nothing, then they can be set as '-' (the minus sign). Supported only for unstructured Datasets. "
       properties:
@@ -11115,6 +11497,43 @@ components:
           format: double
           type: number
       type: object
+    GoogleCloudAiplatformV1beta1FunctionCall:
+      description: A predicted [FunctionCall] returned from the model that contains a string representing the [FunctionDeclaration.name] and a structured JSON object containing the parameters and their values.
+      properties:
+        args:
+          additionalProperties:
+            description: Properties of the object.
+          description: Optional. Required. The function parameters and values in JSON object format. See [FunctionDeclaration.parameters] for parameter details.
+          type: object
+        name:
+          description: Required. The name of the function to call. Matches [FunctionDeclaration.name].
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1FunctionDeclaration:
+      description: Function declaration details.
+      properties:
+        description:
+          description: Optional. Description and purpose of the function. Model uses it to decide how and whether to call the function.
+          type: string
+        name:
+          description: Required. The name of the function to call. Must start with a letter or an underscore. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+          type: string
+        parameters:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Schema"
+          description: "Optional. Describes the parameters to this function. Reflects the Open API 3.03 Parameter Object string Key: the name of the parameter. Parameter names are case sensitive. For function with no parameters, this can be left unset."
+      type: object
+    GoogleCloudAiplatformV1beta1FunctionResponse:
+      description: The result output from a [FunctionCall] that contains a string representing the [FunctionDeclaration.name] and a structured JSON object containing any output from the function is used as context to the model. This should contain the result of a [FunctionCall] made based on model prediction.
+      properties:
+        name:
+          description: Required. The name of the function to call. Matches [FunctionDeclaration.name] and [FunctionCall.name].
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object.
+          description: Required. The function response in JSON object format.
+          type: object
+      type: object
     GoogleCloudAiplatformV1beta1GcsDestination:
       description: The Google Cloud Storage location where the output is to be written to.
       properties:
@@ -11154,6 +11573,135 @@ components:
         tokenType:
           description: Type of the returned access token (e.g. "Bearer"). It specifies how the token must be used. Bearer tokens may be used by any entity without proof of identity.
           type: string
+      type: object
+    GoogleCloudAiplatformV1beta1GenerateContentRequest:
+      description: Request message for [PredictionService.GenerateContent].
+      properties:
+        contents:
+          description: Required. Input content.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Content"
+          type: array
+        endpoint:
+          description: "Required. The name of the Endpoint requested to serve the prediction. Format: `projects/{project}/locations/{location}/endpoints/{endpoint}`"
+          type: string
+        generationConfig:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenerationConfig"
+          description: Optional. Generation config.
+        safetySettings:
+          description: Optional. Per request settings for blocking unsafe content. Enforced on GenerateContentResponse.candidates.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1SafetySetting"
+          type: array
+        tools:
+          description: Optional. Tools that the model may use to generate response.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Tool"
+          type: array
+      type: object
+    GoogleCloudAiplatformV1beta1GenerateContentResponse:
+      description: Response message for [PredictionService.GenerateContent].
+      properties:
+        candidates:
+          description: Output only. Generated candidates.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Candidate"
+          readOnly: true
+          type: array
+        promptFeedback:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenerateContentResponsePromptFeedback"
+          description: "Output only. Content filter results for a prompt sent in the request. Note: Sent only in the first stream chunk. Only happens when no candidates were generated due to content violations."
+          readOnly: true
+        usageMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenerateContentResponseUsageMetadata"
+          description: Usage metadata about the response(s).
+      type: object
+    GoogleCloudAiplatformV1beta1GenerateContentResponsePromptFeedback:
+      description: Content filter results for a prompt sent in the request.
+      properties:
+        blockReason:
+          description: Output only. Blocked reason.
+          enum:
+            - BLOCKED_REASON_UNSPECIFIED
+            - SAFETY
+            - OTHER
+          readOnly: true
+          type: string
+        blockReasonMessage:
+          description: Output only. A readable block reason message.
+          readOnly: true
+          type: string
+        safetyRatings:
+          description: Output only. Safety ratings.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1SafetyRating"
+          readOnly: true
+          type: array
+      type: object
+    GoogleCloudAiplatformV1beta1GenerateContentResponseUsageMetadata:
+      description: Usage metadata about response(s).
+      properties:
+        candidatesTokenCount:
+          description: Number of tokens in the response(s).
+          format: int32
+          type: integer
+        promptTokenCount:
+          description: Number of tokens in the request.
+          format: int32
+          type: integer
+        totalTokenCount:
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudAiplatformV1beta1GenerationConfig:
+      description: Generation config.
+      properties:
+        candidateCount:
+          description: Optional. Number of candidates to generate.
+          format: int32
+          type: integer
+        echo:
+          description: Optional. Echo.
+          type: boolean
+        frequencyPenalty:
+          description: Optional. Frequency penalties.
+          format: float
+          type: number
+        logitBias:
+          additionalProperties:
+            format: float
+            type: number
+          description: Optional. Logit bias.
+          type: object
+        logprobs:
+          description: Optional. Logit probabilities.
+          format: int32
+          type: integer
+        maxOutputTokens:
+          description: Optional. The maximum number of output tokens to generate per message.
+          format: int32
+          type: integer
+        presencePenalty:
+          description: Optional. Positive penalties.
+          format: float
+          type: number
+        stopSequences:
+          description: Optional. Stop sequences.
+          items:
+            type: string
+          type: array
+        temperature:
+          description: Optional. Controls the randomness of predictions.
+          format: float
+          type: number
+        topK:
+          description: Optional. If specified, top-k sampling will be used.
+          format: float
+          type: number
+        topP:
+          description: Optional. If specified, nucleus sampling will be used.
+          format: float
+          type: number
       type: object
     GoogleCloudAiplatformV1beta1GenericOperationMetadata:
       description: Generic Metadata shared by all operations.
@@ -12757,7 +13305,7 @@ components:
             type: string
           type: array
         deploymentTimeout:
-          description: "Immutable. Deployment timeout. TODO (b/306244185): Revise documentation before exposing."
+          description: Immutable. Deployment timeout. Limit for deployment timeout is 2 hours.
           format: google-duration
           type: string
         env:
@@ -12765,9 +13313,14 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1EnvVar"
           type: array
+        grpcPorts:
+          description: Immutable. List of ports to expose from the container. Vertex AI sends gRPC prediction requests that it receives to the first port on this list. Vertex AI also sends liveness and health checks to this port. If you do not specify this field, gRPC requests to the container will be disabled. Vertex AI does not use ports other than the first one listed. This field corresponds to the `ports` field of the Kubernetes Containers v1 core API.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Port"
+          type: array
         healthProbe:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Probe"
-          description: "Immutable. Specification for Kubernetes readiness probe. TODO (b/306244185): Revise documentation before exposing."
+          description: Immutable. Specification for Kubernetes readiness probe.
         healthRoute:
           description: "Immutable. HTTP path on the container to send health checks to. Vertex AI intermittently sends GET requests to this path on the container's IP address and port to check that the container is healthy. Read more about [health checks](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#health). For example, if you set this field to `/bar`, then Vertex AI intermittently sends a GET request to the `/bar` path on the port of your container specified by the first value of this `ModelContainerSpec`'s ports field. If you don't specify this field, it defaults to the following value when you deploy this Model to an Endpoint: /v1/endpoints/ENDPOINT/deployedModels/ DEPLOYED_MODEL:predict The placeholders in this value are replaced as follows: * ENDPOINT: The last segment (following `endpoints/`)of the Endpoint.name][] field of the Endpoint where this Model has been deployed. (Vertex AI makes this value available to your container code as the [`AIP_ENDPOINT_ID` environment variable](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables).) * DEPLOYED_MODEL: DeployedModel.id of the `DeployedModel`. (Vertex AI makes this value available to your container code as the [`AIP_DEPLOYED_MODEL_ID` environment variable](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables).)"
           type: string
@@ -12783,12 +13336,12 @@ components:
           description: "Immutable. HTTP path on the container to send prediction requests to. Vertex AI forwards requests sent using projects.locations.endpoints.predict to this path on the container's IP address and port. Vertex AI then returns the container's response in the API response. For example, if you set this field to `/foo`, then when Vertex AI receives a prediction request, it forwards the request body in a POST request to the `/foo` path on the port of your container specified by the first value of this `ModelContainerSpec`'s ports field. If you don't specify this field, it defaults to the following value when you deploy this Model to an Endpoint: /v1/endpoints/ENDPOINT/deployedModels/DEPLOYED_MODEL:predict The placeholders in this value are replaced as follows: * ENDPOINT: The last segment (following `endpoints/`)of the Endpoint.name][] field of the Endpoint where this Model has been deployed. (Vertex AI makes this value available to your container code as the [`AIP_ENDPOINT_ID` environment variable](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables).) * DEPLOYED_MODEL: DeployedModel.id of the `DeployedModel`. (Vertex AI makes this value available to your container code as the [`AIP_DEPLOYED_MODEL_ID` environment variable](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables).)"
           type: string
         sharedMemorySizeMb:
-          description: "Immutable. The amount of the VM memory to reserve as the shared memory for the model in megabytes. TODO (b/306244185): Revise documentation before exposing."
+          description: Immutable. The amount of the VM memory to reserve as the shared memory for the model in megabytes.
           format: int64
           type: string
         startupProbe:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Probe"
-          description: "Immutable. Specification for Kubernetes startup probe. TODO (b/306244185): Revise documentation before exposing."
+          description: Immutable. Specification for Kubernetes startup probe.
       type: object
     GoogleCloudAiplatformV1beta1ModelDeploymentMonitoringBigQueryTable:
       description: ModelDeploymentMonitoringBigQueryTable specifies the BigQuery table name as well as some information of the logs stored in this table.
@@ -13962,6 +14515,28 @@ components:
           description: Immutable. A resource name of the NotebookRuntimeTemplate.
           type: string
       type: object
+    GoogleCloudAiplatformV1beta1Part:
+      description: Content part.
+      properties:
+        fileData:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FileData"
+          description: Optional. URI based data.
+        functionCall:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FunctionCall"
+          description: Optional. A predicted [FunctionCall] returned from the model that contains a string representing the [FunctionDeclaration.name] with the parameters and their values.
+        functionResponse:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FunctionResponse"
+          description: Optional. The result output of a [FunctionCall] that contains a string representing the [FunctionDeclaration.name] and a structured JSON object containing any output from the function call. It is used as context to the model.
+        inlineData:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Blob"
+          description: Optional. Inlined bytes data.
+        text:
+          description: Optional. Text part (can be code).
+          type: string
+        videoMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1VideoMetadata"
+          description: Optional. Video metadata. The metadata should only be specified while the video data is presented in inline_data or file_data.
+      type: object
     GoogleCloudAiplatformV1beta1PauseModelDeploymentMonitoringJobRequest:
       description: Request message for JobService.PauseModelDeploymentMonitoringJob.
       properties: {}
@@ -14040,6 +14615,7 @@ components:
             - RUNNING
             - STOPPING
             - ERROR
+            - REBOOTING
           readOnly: true
           type: string
         updateTime:
@@ -15150,6 +15726,56 @@ components:
           description: Optional. Whether to backfill missed runs when the schedule is resumed from PAUSED state. If set to true, all missed runs will be scheduled. New runs will be scheduled after the backfill is complete. This will also update Schedule.catch_up field. Default to false.
           type: boolean
       type: object
+    GoogleCloudAiplatformV1beta1SafetyRating:
+      description: Safety rating corresponding to the generated content.
+      properties:
+        blocked:
+          description: Output only. Indicates whether the content was filtered out because of this rating.
+          readOnly: true
+          type: boolean
+        category:
+          description: Output only. Harm category.
+          enum:
+            - HARM_CATEGORY_UNSPECIFIED
+            - HARM_CATEGORY_HATE_SPEECH
+            - HARM_CATEGORY_DANGEROUS_CONTENT
+            - HARM_CATEGORY_HARASSMENT
+            - HARM_CATEGORY_SEXUALLY_EXPLICIT
+          readOnly: true
+          type: string
+        probability:
+          description: Output only. Harm probability levels in the content.
+          enum:
+            - HARM_PROBABILITY_UNSPECIFIED
+            - NEGLIGIBLE
+            - LOW
+            - MEDIUM
+            - HIGH
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1SafetySetting:
+      description: Safety settings.
+      properties:
+        category:
+          description: Required. Harm category.
+          enum:
+            - HARM_CATEGORY_UNSPECIFIED
+            - HARM_CATEGORY_HATE_SPEECH
+            - HARM_CATEGORY_DANGEROUS_CONTENT
+            - HARM_CATEGORY_HARASSMENT
+            - HARM_CATEGORY_SEXUALLY_EXPLICIT
+          type: string
+        threshold:
+          description: Required. The harm block threshold.
+          enum:
+            - HARM_BLOCK_THRESHOLD_UNSPECIFIED
+            - BLOCK_LOW_AND_ABOVE
+            - BLOCK_MEDIUM_AND_ABOVE
+            - BLOCK_ONLY_HIGH
+            - BLOCK_NONE
+          type: string
+      type: object
     GoogleCloudAiplatformV1beta1SampleConfig:
       description: Active learning data sampling config. For every active learning labeling iteration, it will select a batch of data based on the sampling strategy.
       properties:
@@ -15346,6 +15972,50 @@ components:
         timeout:
           description: The maximum job running time. The default is 7 days.
           format: google-duration
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1Schema:
+      description: Represents a select subset of an OpenAPI 3.0 Schema object. Schema is used to define the format of input/output data. More fields may be added in the future as needed. https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#schemaObject
+      properties:
+        description:
+          description: Optional. The description of the data.
+          type: string
+        enum:
+          description: 'Optional. Possible values of the element of Type.STRING with enum format. For example we can define an Enum Direction as : {type:STRING, format:enum, enum:["EAST", NORTH", "SOUTH", "WEST"]}'
+          items:
+            type: string
+          type: array
+        example:
+          description: Optional. Example of the object. Will only populated when the object is the root.
+        format:
+          description: "Optional. The format of the data. Supported formats: for NUMBER type: float, double for INTEGER type: int32, int64"
+          type: string
+        items:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Schema"
+          description: Optional. Schema of the elements of Type.ARRAY.
+        nullable:
+          description: Optional. Indicates if the value may be null.
+          type: boolean
+        properties:
+          additionalProperties:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Schema"
+          description: Optional. Properties of Type.OBJECT.
+          type: object
+        required:
+          description: Optional. Required properties of Type.OBJECT.
+          items:
+            type: string
+          type: array
+        type:
+          description: Optional. The type of the data.
+          enum:
+            - TYPE_UNSPECIFIED
+            - STRING
+            - NUMBER
+            - INTEGER
+            - BOOLEAN
+            - ARRAY
+            - OBJECT
           type: string
       type: object
     GoogleCloudAiplatformV1beta1SchemaAnnotationSpecColor:
@@ -18858,6 +19528,15 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudAiplatformV1beta1Tool:
+      description: Tool details that the model may use to generate response.
+      properties:
+        functionDeclarations:
+          description: Optional. One or more function declarations to be passed to the model along with the current user query. Model may decide to call a subset of these functions by populating FunctionCall in the response. User should provide a FunctionResponse for each function call in the next turn. Based on the function responses, Model will generate the final response back to the user. Maximum 64 function declarations can be provided.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FunctionDeclaration"
+          type: array
+      type: object
     GoogleCloudAiplatformV1beta1TrainingConfig:
       description: CMLE training config. For every active learning labeling iteration, system will train a machine learning model on CMLE. The trained model will be used by data sampling algorithm to select DataItems.
       properties:
@@ -19197,6 +19876,20 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
           description: Operation metadata for Tensorboard.
       type: object
+    GoogleCloudAiplatformV1beta1UpgradeNotebookRuntimeOperationMetadata:
+      description: Metadata information for NotebookService.UpgradeNotebookRuntime.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
+          description: The operation generic information.
+        progressMessage:
+          description: A human-readable message that shows the intermediate progress details of NotebookRuntime.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1UpgradeNotebookRuntimeRequest:
+      description: Request message for NotebookService.UpgradeNotebookRuntime.
+      properties: {}
+      type: object
     GoogleCloudAiplatformV1beta1UploadModelOperationMetadata:
       description: Details of ModelService.UploadModel operation.
       properties:
@@ -19270,6 +19963,18 @@ components:
           type: string
         stringValue:
           description: A string value.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1VideoMetadata:
+      description: Metadata describes the input video content.
+      properties:
+        endOffset:
+          description: Optional. The end offset of the video.
+          format: google-duration
+          type: string
+        startOffset:
+          description: Optional. The start offset of the video.
+          format: google-duration
           type: string
       type: object
     GoogleCloudAiplatformV1beta1WorkerPoolSpec:
@@ -19548,6 +20253,22 @@ components:
           description: The amount of red in the color as a value in the interval [0, 1].
           format: float
           type: number
+      type: object
+    GoogleTypeDate:
+      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp"
+      properties:
+        day:
+          description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+          format: int32
+          type: integer
+        month:
+          description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+          format: int32
+          type: integer
+        year:
+          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+          format: int32
+          type: integer
       type: object
     GoogleTypeExpr:
       description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."

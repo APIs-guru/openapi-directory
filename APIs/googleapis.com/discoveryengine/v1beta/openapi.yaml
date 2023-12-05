@@ -1165,6 +1165,27 @@ components:
           format: google-datetime
           type: string
       type: object
+    GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSiteMetadata:
+      description: Metadata related to the progress of the SiteSearchEngineService.BatchCreateTargetSite operation. This will be returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSitesResponse:
+      description: Response message for SiteSearchEngineService.BatchCreateTargetSites method.
+      properties:
+        targetSites:
+          description: TargetSites created.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaTargetSite"
+          type: array
+      type: object
     GoogleCloudDiscoveryengineV1alphaCreateDataStoreMetadata:
       description: Metadata related to the progress of the DataStoreService.CreateDataStore operation. This will be returned by the google.longrunning.Operation.metadata field.
       properties:
@@ -1191,6 +1212,18 @@ components:
       type: object
     GoogleCloudDiscoveryengineV1alphaCreateSchemaMetadata:
       description: Metadata for Create Schema LRO.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaCreateTargetSiteMetadata:
+      description: Metadata related to the progress of the SiteSearchEngineService.CreateTargetSite operation. This will be returned by the google.longrunning.Operation.metadata field.
       properties:
         createTime:
           description: Operation create time.
@@ -1280,6 +1313,50 @@ components:
           description: Operation last update time. If the operation is done, this is also the finish time.
           format: google-datetime
           type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaDeleteTargetSiteMetadata:
+      description: Metadata related to the progress of the SiteSearchEngineService.DeleteTargetSite operation. This will be returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaDisableAdvancedSiteSearchMetadata:
+      description: Metadata related to the progress of the SiteSearchEngineService.DisableAdvancedSiteSearch operation. This will be returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaDisableAdvancedSiteSearchResponse:
+      description: Response message for SiteSearchEngineService.DisableAdvancedSiteSearch method.
+      properties: {}
+      type: object
+    GoogleCloudDiscoveryengineV1alphaEnableAdvancedSiteSearchMetadata:
+      description: Metadata related to the progress of the SiteSearchEngineService.EnableAdvancedSiteSearch operation. This will be returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaEnableAdvancedSiteSearchResponse:
+      description: Response message for SiteSearchEngineService.EnableAdvancedSiteSearch method.
+      properties: {}
       type: object
     GoogleCloudDiscoveryengineV1alphaEngine:
       description: Metadata that describes the training and serving parameters of an Engine.
@@ -1861,6 +1938,18 @@ components:
           format: google-datetime
           type: string
       type: object
+    GoogleCloudDiscoveryengineV1alphaUpdateTargetSiteMetadata:
+      description: Metadata related to the progress of the SiteSearchEngineService.UpdateTargetSite operation. This will be returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
     GoogleCloudDiscoveryengineV1betaBigQuerySource:
       description: BigQuery source import data from.
       properties:
@@ -1932,7 +2021,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaConversationMessage"
           type: array
         name:
-          description: Immutable. Fully qualified name `project/*/locations/global/collections/{collection}/dataStore/*/conversations/*`
+          description: Immutable. Fully qualified name `project/*/locations/global/collections/{collection}/dataStore/*/conversations/*` or `project/*/locations/global/collections/{collection}/engines/*/conversations/*`.
           type: string
         startTime:
           description: Output only. The time the conversation started.
@@ -2721,10 +2810,20 @@ components:
         languageCode:
           description: "Language code for Summary. Use language tags defined by [BCP47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt). Note: This is an experimental feature."
           type: string
+        modelSpec:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpecModelSpec"
+          description: If specified, the spec will be used to modify the model specification provided to the LLM.
         summaryResultCount:
           description: The number of top results to generate the summary from. If the number of results returned is less than `summaryResultCount`, the summary is generated from all of the results. At most five results can be used to generate a summary.
           format: int32
           type: integer
+      type: object
+    GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpecModelSpec:
+      description: Specification of the model.
+      properties:
+        version:
+          description: The string format of the model version. e.g. stable, latest, etc.
+          type: string
       type: object
     GoogleCloudDiscoveryengineV1betaSearchRequestEmbeddingSpec:
       description: The specification that uses customized query embedding vector to do semantic document retrieval.

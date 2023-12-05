@@ -28,13 +28,14 @@ externalDocs:
   url: https://cloud.google.com/advisory-notifications
 tags:
   - name: organizations
+  - name: projects
 paths:
   /v1/{name}:
     get:
       description: Gets a notification.
-      operationId: advisorynotifications.organizations.locations.notifications.get
+      operationId: advisorynotifications.projects.locations.notifications.get
       parameters:
-        - description: "Required. A name of the notification to retrieve. Format: organizations/{organization}/locations/{location}/notifications/{notification}."
+        - description: "Required. A name of the notification to retrieve. Format: organizations/{organization}/locations/{location}/notifications/{notification} or projects/{projects}/locations/{location}/notifications/{notification}."
           in: path
           name: name
           required: true
@@ -58,7 +59,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -75,7 +76,7 @@ paths:
       description: Update notification settings.
       operationId: advisorynotifications.organizations.locations.updateSettings
       parameters:
-        - description: "Output only. The resource name of the settings to retrieve. Format: organizations/{organization}/locations/{location}/settings."
+        - description: "Identifier. The resource name of the settings to retrieve. Format: organizations/{organization}/locations/{location}/settings."
           in: path
           name: name
           required: true
@@ -103,9 +104,9 @@ paths:
   /v1/{parent}/notifications:
     get:
       description: Lists notifications under a given parent.
-      operationId: advisorynotifications.organizations.locations.notifications.list
+      operationId: advisorynotifications.projects.locations.notifications.list
       parameters:
-        - description: Required. The parent, which owns this collection of notifications. Must be of the form "organizations/{organization}/locations/{location}"
+        - description: Required. The parent, which owns this collection of notifications. Must be of the form "organizations/{organization}/locations/{location}" or "projects/{project}/locations/{location}"
           in: path
           name: parent
           required: true
@@ -148,7 +149,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -327,7 +328,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudAdvisorynotificationsV1Message"
           type: array
         name:
-          description: "The resource name of the notification. Format: organizations/{organization}/locations/{location}/notifications/{notification}."
+          description: "The resource name of the notification. Format: organizations/{organization}/locations/{location}/notifications/{notification} or projects/{project}/locations/{location}/notifications/{notification}."
           type: string
         notificationType:
           description: Type of notification
@@ -356,8 +357,7 @@ components:
           description: Required. Fingerprint for optimistic concurrency returned in Get requests. Must be provided for Update requests. If the value provided does not match the value known to the server, ABORTED will be thrown, and the client should retry the read-modify-write cycle.
           type: string
         name:
-          description: "Output only. The resource name of the settings to retrieve. Format: organizations/{organization}/locations/{location}/settings."
-          readOnly: true
+          description: "Identifier. The resource name of the settings to retrieve. Format: organizations/{organization}/locations/{location}/settings."
           type: string
         notificationSettings:
           additionalProperties:
