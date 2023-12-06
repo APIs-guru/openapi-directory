@@ -29,6 +29,7 @@ externalDocs:
 tags:
   - name: accounts
   - name: bidders
+  - name: buyers
 paths:
   /v2beta1/accounts/{accountId}/clients:
     get:
@@ -1687,7 +1688,7 @@ paths:
   /v2beta1/{filterSetName}/bidMetrics:
     get:
       description: Lists all metrics that are measured in terms of number of bids.
-      operationId: adexchangebuyer2.bidders.filterSets.bidMetrics.list
+      operationId: adexchangebuyer2.buyers.filterSets.bidMetrics.list
       parameters:
         - description: "Name of the filter set that should be applied to the requested metrics. For example: - For a bidder-level filter set for bidder 123: `bidders/123/filterSets/abc` - For an account-level filter set for the buyer account representing bidder 123: `bidders/123/accounts/123/filterSets/abc` - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: `bidders/123/accounts/456/filterSets/abc`"
           in: path
@@ -1718,7 +1719,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
-        - bidders
+        - buyers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1734,7 +1735,7 @@ paths:
   /v2beta1/{filterSetName}/bidResponseErrors:
     get:
       description: List all errors that occurred in bid responses, with the number of bid responses affected for each reason.
-      operationId: adexchangebuyer2.bidders.filterSets.bidResponseErrors.list
+      operationId: adexchangebuyer2.buyers.filterSets.bidResponseErrors.list
       parameters:
         - description: "Name of the filter set that should be applied to the requested metrics. For example: - For a bidder-level filter set for bidder 123: `bidders/123/filterSets/abc` - For an account-level filter set for the buyer account representing bidder 123: `bidders/123/accounts/123/filterSets/abc` - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: `bidders/123/accounts/456/filterSets/abc`"
           in: path
@@ -1765,7 +1766,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
-        - bidders
+        - buyers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1781,7 +1782,7 @@ paths:
   /v2beta1/{filterSetName}/bidResponsesWithoutBids:
     get:
       description: List all reasons for which bid responses were considered to have no applicable bids, with the number of bid responses affected for each reason.
-      operationId: adexchangebuyer2.bidders.filterSets.bidResponsesWithoutBids.list
+      operationId: adexchangebuyer2.buyers.filterSets.bidResponsesWithoutBids.list
       parameters:
         - description: "Name of the filter set that should be applied to the requested metrics. For example: - For a bidder-level filter set for bidder 123: `bidders/123/filterSets/abc` - For an account-level filter set for the buyer account representing bidder 123: `bidders/123/accounts/123/filterSets/abc` - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: `bidders/123/accounts/456/filterSets/abc`"
           in: path
@@ -1812,7 +1813,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
-        - bidders
+        - buyers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1828,7 +1829,7 @@ paths:
   /v2beta1/{filterSetName}/filteredBidRequests:
     get:
       description: List all reasons that caused a bid request not to be sent for an impression, with the number of bid requests not sent for each reason.
-      operationId: adexchangebuyer2.bidders.filterSets.filteredBidRequests.list
+      operationId: adexchangebuyer2.buyers.filterSets.filteredBidRequests.list
       parameters:
         - description: "Name of the filter set that should be applied to the requested metrics. For example: - For a bidder-level filter set for bidder 123: `bidders/123/filterSets/abc` - For an account-level filter set for the buyer account representing bidder 123: `bidders/123/accounts/123/filterSets/abc` - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: `bidders/123/accounts/456/filterSets/abc`"
           in: path
@@ -1859,7 +1860,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
-        - bidders
+        - buyers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1875,7 +1876,7 @@ paths:
   /v2beta1/{filterSetName}/filteredBids:
     get:
       description: List all reasons for which bids were filtered, with the number of bids filtered for each reason.
-      operationId: adexchangebuyer2.bidders.filterSets.filteredBids.list
+      operationId: adexchangebuyer2.buyers.filterSets.filteredBids.list
       parameters:
         - description: "Name of the filter set that should be applied to the requested metrics. For example: - For a bidder-level filter set for bidder 123: `bidders/123/filterSets/abc` - For an account-level filter set for the buyer account representing bidder 123: `bidders/123/accounts/123/filterSets/abc` - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: `bidders/123/accounts/456/filterSets/abc`"
           in: path
@@ -1906,7 +1907,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
-        - bidders
+        - buyers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1922,7 +1923,7 @@ paths:
   /v2beta1/{filterSetName}/filteredBids/{creativeStatusId}/creatives:
     get:
       description: List all creatives associated with a specific reason for which bids were filtered, with the number of bids filtered for each creative.
-      operationId: adexchangebuyer2.bidders.filterSets.filteredBids.creatives.list
+      operationId: adexchangebuyer2.buyers.filterSets.filteredBids.creatives.list
       parameters:
         - description: "Name of the filter set that should be applied to the requested metrics. For example: - For a bidder-level filter set for bidder 123: `bidders/123/filterSets/abc` - For an account-level filter set for the buyer account representing bidder 123: `bidders/123/accounts/123/filterSets/abc` - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: `bidders/123/accounts/456/filterSets/abc`"
           in: path
@@ -1959,7 +1960,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
-        - bidders
+        - buyers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1975,7 +1976,7 @@ paths:
   /v2beta1/{filterSetName}/filteredBids/{creativeStatusId}/details:
     get:
       description: List all details associated with a specific reason for which bids were filtered, with the number of bids filtered for each detail.
-      operationId: adexchangebuyer2.bidders.filterSets.filteredBids.details.list
+      operationId: adexchangebuyer2.buyers.filterSets.filteredBids.details.list
       parameters:
         - description: "Name of the filter set that should be applied to the requested metrics. For example: - For a bidder-level filter set for bidder 123: `bidders/123/filterSets/abc` - For an account-level filter set for the buyer account representing bidder 123: `bidders/123/accounts/123/filterSets/abc` - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: `bidders/123/accounts/456/filterSets/abc`"
           in: path
@@ -2012,7 +2013,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
-        - bidders
+        - buyers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2028,7 +2029,7 @@ paths:
   /v2beta1/{filterSetName}/impressionMetrics:
     get:
       description: Lists all metrics that are measured in terms of number of impressions.
-      operationId: adexchangebuyer2.bidders.filterSets.impressionMetrics.list
+      operationId: adexchangebuyer2.buyers.filterSets.impressionMetrics.list
       parameters:
         - description: "Name of the filter set that should be applied to the requested metrics. For example: - For a bidder-level filter set for bidder 123: `bidders/123/filterSets/abc` - For an account-level filter set for the buyer account representing bidder 123: `bidders/123/accounts/123/filterSets/abc` - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: `bidders/123/accounts/456/filterSets/abc`"
           in: path
@@ -2059,7 +2060,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
-        - bidders
+        - buyers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2075,7 +2076,7 @@ paths:
   /v2beta1/{filterSetName}/losingBids:
     get:
       description: List all reasons for which bids lost in the auction, with the number of bids that lost for each reason.
-      operationId: adexchangebuyer2.bidders.filterSets.losingBids.list
+      operationId: adexchangebuyer2.buyers.filterSets.losingBids.list
       parameters:
         - description: "Name of the filter set that should be applied to the requested metrics. For example: - For a bidder-level filter set for bidder 123: `bidders/123/filterSets/abc` - For an account-level filter set for the buyer account representing bidder 123: `bidders/123/accounts/123/filterSets/abc` - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: `bidders/123/accounts/456/filterSets/abc`"
           in: path
@@ -2106,7 +2107,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
-        - bidders
+        - buyers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2122,7 +2123,7 @@ paths:
   /v2beta1/{filterSetName}/nonBillableWinningBids:
     get:
       description: List all reasons for which winning bids were not billable, with the number of bids not billed for each reason.
-      operationId: adexchangebuyer2.bidders.filterSets.nonBillableWinningBids.list
+      operationId: adexchangebuyer2.buyers.filterSets.nonBillableWinningBids.list
       parameters:
         - description: "Name of the filter set that should be applied to the requested metrics. For example: - For a bidder-level filter set for bidder 123: `bidders/123/filterSets/abc` - For an account-level filter set for the buyer account representing bidder 123: `bidders/123/accounts/123/filterSets/abc` - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: `bidders/123/accounts/456/filterSets/abc`"
           in: path
@@ -2153,7 +2154,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
-        - bidders
+        - buyers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2169,7 +2170,7 @@ paths:
   /v2beta1/{name}:
     delete:
       description: Deletes the requested filter set from the account with the given account ID.
-      operationId: adexchangebuyer2.bidders.filterSets.delete
+      operationId: adexchangebuyer2.buyers.filterSets.delete
       parameters:
         - description: "Full name of the resource to delete. For example: - For a bidder-level filter set for bidder 123: `bidders/123/filterSets/abc` - For an account-level filter set for the buyer account representing bidder 123: `bidders/123/accounts/123/filterSets/abc` - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: `bidders/123/accounts/456/filterSets/abc`"
           in: path
@@ -2190,10 +2191,10 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
-        - bidders
+        - buyers
     get:
       description: Retrieves the requested filter set for the account with the given account ID.
-      operationId: adexchangebuyer2.bidders.filterSets.get
+      operationId: adexchangebuyer2.buyers.filterSets.get
       parameters:
         - description: "Full name of the resource being requested. For example: - For a bidder-level filter set for bidder 123: `bidders/123/filterSets/abc` - For an account-level filter set for the buyer account representing bidder 123: `bidders/123/accounts/123/filterSets/abc` - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: `bidders/123/accounts/456/filterSets/abc`"
           in: path
@@ -2214,7 +2215,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
-        - bidders
+        - buyers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2230,7 +2231,7 @@ paths:
   /v2beta1/{ownerName}/filterSets:
     get:
       description: Lists all filter sets for the account with the given account ID.
-      operationId: adexchangebuyer2.bidders.filterSets.list
+      operationId: adexchangebuyer2.buyers.filterSets.list
       parameters:
         - description: "Name of the owner (bidder or account) of the filter sets to be listed. For example: - For a bidder-level filter set for bidder 123: `bidders/123` - For an account-level filter set for the buyer account representing bidder 123: `bidders/123/accounts/123` - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: `bidders/123/accounts/456`"
           in: path
@@ -2261,7 +2262,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
-        - bidders
+        - buyers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2276,7 +2277,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates the specified filter set for the account with the given account ID.
-      operationId: adexchangebuyer2.bidders.filterSets.create
+      operationId: adexchangebuyer2.buyers.filterSets.create
       parameters:
         - description: "Name of the owner (bidder or account) of the filter set to be created. For example: - For a bidder-level filter set for bidder 123: `bidders/123` - For an account-level filter set for the buyer account representing bidder 123: `bidders/123/accounts/123` - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: `bidders/123/accounts/456`"
           in: path
@@ -2307,7 +2308,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
-        - bidders
+        - buyers
 components:
   parameters:
     _.xgafv:

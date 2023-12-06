@@ -224,6 +224,43 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
+  /v1/{name}:enableResourceMonitoring:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Enable resource violation monitoring for a workload.
+      operationId: assuredworkloads.organizations.locations.workloads.enableResourceMonitoring
+      parameters:
+        - description: "Required. The `name` field is used to identify the workload. Format: organizations/{org_id}/locations/{location_id}/workloads/{workload_id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1EnableResourceMonitoringResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   /v1/{name}:mutatePartnerPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -594,7 +631,7 @@ components:
         type: string
   schemas:
     GoogleCloudAssuredworkloadsV1AcknowledgeViolationRequest:
-      description: "Request for acknowledging the violation Next Id: 5"
+      description: Request for acknowledging the violation
       properties:
         acknowledgeType:
           description: Optional. Acknowledge type of specified violation.
@@ -678,6 +715,10 @@ components:
         parent:
           description: Optional. The parent of the workload.
           type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1EnableResourceMonitoringResponse:
+      description: Response for EnableResourceMonitoring endpoint.
+      properties: {}
       type: object
     GoogleCloudAssuredworkloadsV1ListViolationsResponse:
       description: Response of ListViolations endpoint.

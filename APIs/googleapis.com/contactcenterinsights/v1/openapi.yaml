@@ -1607,7 +1607,7 @@ components:
           type: integer
       type: object
     GoogleCloudContactcenterinsightsV1ConversationDataSource:
-      description: The conversation source, which is a combination of transcript, audio, and metadata.
+      description: The conversation source, which is a combination of transcript and audio.
       properties:
         dialogflowSource:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1DialogflowSource"
@@ -2742,10 +2742,10 @@ components:
           type: string
         redactionConfig:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1RedactionConfig"
-          description: Optional. DLP settings for transcript redaction. Optional, will default to the config specified in Settings.
+          description: Optional. DLP settings for transcript redaction. Will default to the config specified in Settings.
         speechConfig:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1SpeechConfig"
-          description: Optional. Default Speech-to-Text configuration. Optional, will default to the config specified in Settings.
+          description: Optional. Speech-to-Text configuration. Will default to the config specified in Settings.
       type: object
     GoogleCloudContactcenterinsightsV1View:
       description: The View resource.
@@ -3190,7 +3190,7 @@ components:
           type: integer
       type: object
     GoogleCloudContactcenterinsightsV1alpha1ConversationDataSource:
-      description: The conversation source, which is a combination of transcript, audio, and metadata.
+      description: The conversation source, which is a combination of transcript and audio.
       properties:
         dialogflowSource:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1DialogflowSource"
@@ -4081,10 +4081,10 @@ components:
           type: string
         redactionConfig:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1RedactionConfig"
-          description: Optional. DLP settings for transcript redaction. Optional, will default to the config specified in Settings.
+          description: Optional. DLP settings for transcript redaction. Will default to the config specified in Settings.
         speechConfig:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1SpeechConfig"
-          description: Optional. Default Speech-to-Text configuration. Optional, will default to the config specified in Settings.
+          description: Optional. Speech-to-Text configuration. Will default to the config specified in Settings.
       type: object
     GoogleLongrunningListOperationsResponse:
       description: The response message for Operations.ListOperations.

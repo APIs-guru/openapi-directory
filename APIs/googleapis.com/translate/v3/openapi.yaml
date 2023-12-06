@@ -435,6 +435,196 @@ paths:
             - https://www.googleapis.com/auth/cloud-translation
       tags:
         - projects
+  /v3/{parent}/adaptiveMtDatasets:
+    get:
+      description: Lists all Adaptive MT datasets for which the caller has read permission.
+      operationId: translate.projects.locations.adaptiveMtDatasets.list
+      parameters:
+        - description: Required. The resource name of the project from which to list the Adaptive MT datasets. `projects/{project-number-or-id}/locations/{location-id}`
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. An expression for filtering the results of the request. Filter is not supported yet.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Requested page size. The server may return fewer results than requested. If unspecified, the server picks an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A token identifying a page of results the server should return. Typically, this is the value of ListAdaptiveMtDatasetsResponse.next_page_token returned from the previous call to `ListAdaptiveMtDatasets` method. The first page is returned if `page_token`is empty or missing.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAdaptiveMtDatasetsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-translation
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-translation
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates an Adaptive MT dataset.
+      operationId: translate.projects.locations.adaptiveMtDatasets.create
+      parameters:
+        - description: Required. Name of the parent project. In form of `projects/{project-number-or-id}/locations/{location-id}`
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdaptiveMtDataset"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdaptiveMtDataset"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-translation
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-translation
+      tags:
+        - projects
+  /v3/{parent}/adaptiveMtFiles:
+    get:
+      description: Lists all AdaptiveMtFiles associated to an AdaptiveMtDataset.
+      operationId: translate.projects.locations.adaptiveMtDatasets.adaptiveMtFiles.list
+      parameters:
+        - description: Required. The resource name of the project from which to list the Adaptive MT files. `projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}`
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Optional. "
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A token identifying a page of results the server should return. Typically, this is the value of ListAdaptiveMtFilesResponse.next_page_token returned from the previous call to `ListAdaptiveMtFiles` method. The first page is returned if `page_token`is empty or missing.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAdaptiveMtFilesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-translation
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-translation
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v3/{parent}/adaptiveMtSentences:
+    get:
+      description: Lists all AdaptiveMtSentences under a given file/dataset.
+      operationId: translate.projects.locations.adaptiveMtDatasets.adaptiveMtSentences.list
+      parameters:
+        - description: Required. The resource name of the project from which to list the Adaptive MT files. The following format lists all sentences under a file. `projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}/adaptiveMtFiles/{file}` The following format lists all sentences within a dataset. `projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}`
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return. Typically, this is the value of ListAdaptiveMtSentencesRequest.next_page_token returned from the previous call to `ListTranslationMemories` method. The first page is returned if `page_token` is empty or missing.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAdaptiveMtSentencesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-translation
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-translation
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v3/{parent}/datasets:
     get:
       description: Lists datasets.
@@ -468,6 +658,10 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-translation
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-translation
       tags:
         - projects
     parameters:
@@ -509,6 +703,10 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-translation
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-translation
       tags:
         - projects
   /v3/{parent}/examples:
@@ -605,6 +803,10 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-translation
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-translation
       tags:
         - projects
     parameters:
@@ -681,6 +883,10 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-translation
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-translation
       tags:
         - projects
     parameters:
@@ -766,6 +972,10 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-translation
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-translation
       tags:
         - projects
     parameters:
@@ -846,6 +1056,10 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-translation
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-translation
       tags:
         - projects
     parameters:
@@ -860,6 +1074,52 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v3/{parent}:adaptiveMtTranslate:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Translate text using Adaptive MT.
+      operationId: translate.projects.locations.adaptiveMtTranslate
+      parameters:
+        - description: "Required. Location to make a regional call. Format: `projects/{project-number-or-id}/locations/{location-id}`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdaptiveMtTranslateRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdaptiveMtTranslateResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-translation
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-translation
+      tags:
+        - projects
   /v3/{parent}:batchTranslateDocument:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -984,6 +1244,56 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-translation
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-translation
+      tags:
+        - projects
+  /v3/{parent}:importAdaptiveMtFile:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Imports an AdaptiveMtFile and adds all of its sentences into the AdaptiveMtDataset.
+      operationId: translate.projects.locations.adaptiveMtDatasets.importAdaptiveMtFile
+      parameters:
+        - description: Required. The resource name of the file, in form of `projects/{project-number-or-id}/locations/{location_id}/adaptiveMtDatasets/{dataset}`
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportAdaptiveMtFileRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportAdaptiveMtFileResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-translation
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-translation
       tags:
         - projects
   /v3/{parent}:romanizeText:
@@ -1026,6 +1336,10 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-translation
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-translation
       tags:
         - projects
   /v3/{parent}:translateDocument:
@@ -1114,6 +1428,10 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-translation
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-translation
       tags:
         - projects
 components:
@@ -1192,6 +1510,117 @@ components:
       schema:
         type: string
   schemas:
+    AdaptiveMtDataset:
+      description: An Adaptive MT Dataset.
+      properties:
+        createTime:
+          description: Output only. Timestamp when this dataset was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: The name of the dataset to show in the interface. The name can be up to 32 characters long and can consist only of ASCII Latin letters A-Z and a-z, underscores (_), and ASCII digits 0-9.
+          type: string
+        exampleCount:
+          description: The number of examples in the dataset.
+          format: int32
+          type: integer
+        name:
+          description: Required. The resource name of the dataset, in form of `projects/{project-number-or-id}/locations/{location_id}/adaptiveMtDatasets/{dataset_id}`
+          type: string
+        sourceLanguageCode:
+          description: The BCP-47 language code of the source language.
+          type: string
+        targetLanguageCode:
+          description: The BCP-47 language code of the target language.
+          type: string
+        updateTime:
+          description: Output only. Timestamp when this dataset was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    AdaptiveMtFile:
+      description: An AdaptiveMtFile.
+      properties:
+        createTime:
+          description: Output only. Timestamp when this file was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: The file's display name.
+          type: string
+        entryCount:
+          description: The number of entries that the file contains.
+          format: int32
+          type: integer
+        name:
+          description: Required. The resource name of the file, in form of `projects/{project-number-or-id}/locations/{location_id}/adaptiveMtDatasets/{dataset}/files/{file}`
+          type: string
+        updateTime:
+          description: Output only. Timestamp when this file was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    AdaptiveMtSentence:
+      description: An AdaptiveMt sentence entry.
+      properties:
+        createTime:
+          description: Output only. Timestamp when this sentence was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: Required. The resource name of the file, in form of `projects/{project-number-or-id}/locations/{location_id}/adaptiveMtDatasets/{dataset}/files/{file}/sentences/{sentence}`
+          type: string
+        sourceSentence:
+          description: Required. The source sentence.
+          type: string
+        targetSentence:
+          description: Required. The target sentence.
+          type: string
+        updateTime:
+          description: Output only. Timestamp when this sentence was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    AdaptiveMtTranslateRequest:
+      description: The request for sending an AdaptiveMt translation query.
+      properties:
+        content:
+          description: Required. The content of the input in string format. For now only one sentence per request is supported.
+          items:
+            type: string
+          type: array
+        dataset:
+          description: Required. The resource name for the dataset to use for adaptive MT. `projects/{project}/locations/{location-id}/adaptiveMtDatasets/{dataset}`
+          type: string
+      type: object
+    AdaptiveMtTranslateResponse:
+      description: An AdaptiveMtTranslate response.
+      properties:
+        languageCode:
+          description: Output only. The translation's language code.
+          readOnly: true
+          type: string
+        translations:
+          description: Output only. The translation.
+          items:
+            $ref: "#/components/schemas/AdaptiveMtTranslation"
+          readOnly: true
+          type: array
+      type: object
+    AdaptiveMtTranslation:
+      description: An AdaptiveMt translation.
+      properties:
+        translatedText:
+          description: Output only. The translated text.
+          readOnly: true
+          type: string
+      type: object
     BatchDocumentInputConfig:
       description: Input configuration for BatchTranslateDocument request.
       properties:
@@ -1458,6 +1887,20 @@ components:
           $ref: "#/components/schemas/DatasetOutputConfig"
           description: Required. The config for the output content.
       type: object
+    FileInputSource:
+      description: An inlined file.
+      properties:
+        content:
+          description: Required. The file's byte contents.
+          format: byte
+          type: string
+        displayName:
+          description: Required. The file's display name.
+          type: string
+        mimeType:
+          description: Required. The file's mime type.
+          type: string
+      type: object
     GcsDestination:
       description: The Google Cloud Storage location for the output content.
       properties:
@@ -1572,6 +2015,24 @@ components:
             $ref: "#/components/schemas/GlossaryTerm"
           type: array
       type: object
+    ImportAdaptiveMtFileRequest:
+      description: The request for importing an AdaptiveMt file along with its sentences.
+      properties:
+        fileInputSource:
+          $ref: "#/components/schemas/FileInputSource"
+          description: Inline file source.
+        gcsInputSource:
+          $ref: "#/components/schemas/GcsInputSource"
+          description: Google Cloud Storage file source.
+      type: object
+    ImportAdaptiveMtFileResponse:
+      description: The response for importing an AdaptiveMtFile
+      properties:
+        adaptiveMtFile:
+          $ref: "#/components/schemas/AdaptiveMtFile"
+          description: Output only. The Adaptive MT file that was imported.
+          readOnly: true
+      type: object
     ImportDataRequest:
       description: Request message for ImportData.
       properties:
@@ -1617,6 +2078,45 @@ components:
           items:
             type: string
           type: array
+      type: object
+    ListAdaptiveMtDatasetsResponse:
+      description: A list of AdaptiveMtDatasets.
+      properties:
+        adaptiveMtDatasets:
+          description: Output only. A list of Adaptive MT datasets.
+          items:
+            $ref: "#/components/schemas/AdaptiveMtDataset"
+          readOnly: true
+          type: array
+        nextPageToken:
+          description: Optional. A token to retrieve a page of results. Pass this value in the [ListAdaptiveMtDatasetsRequest.page_token] field in the subsequent call to `ListAdaptiveMtDatasets` method to retrieve the next page of results.
+          type: string
+      type: object
+    ListAdaptiveMtFilesResponse:
+      description: The response for listing all AdaptiveMt files under a given dataset.
+      properties:
+        adaptiveMtFiles:
+          description: Output only. The Adaptive MT files.
+          items:
+            $ref: "#/components/schemas/AdaptiveMtFile"
+          readOnly: true
+          type: array
+        nextPageToken:
+          description: Optional. A token to retrieve a page of results. Pass this value in the ListAdaptiveMtFilesRequest.page_token field in the subsequent call to `ListAdaptiveMtFiles` method to retrieve the next page of results.
+          type: string
+      type: object
+    ListAdaptiveMtSentencesResponse:
+      description: List AdaptiveMt sentences response.
+      properties:
+        adaptiveMtSentences:
+          description: Output only. The list of AdaptiveMtSentences.
+          items:
+            $ref: "#/components/schemas/AdaptiveMtSentence"
+          readOnly: true
+          type: array
+        nextPageToken:
+          description: "Optional. "
+          type: string
       type: object
     ListDatasetsResponse:
       description: Response message for ListDatasets.

@@ -507,6 +507,9 @@ components:
         cost:
           $ref: "#/components/schemas/GoogleTypeMoney"
           description: An approximate projection on amount saved or amount incurred. Negative cost units indicate cost savings and positive cost units indicate increase. See google.type.Money documentation for positive/negative units. A user's permissions may affect whether the cost is computed using list prices or custom contract prices.
+        costInLocalCurrency:
+          $ref: "#/components/schemas/GoogleTypeMoney"
+          description: The approximate cost savings in the billing account's local currency.
         duration:
           description: Duration for which this cost applies.
           format: google-duration
@@ -531,7 +534,7 @@ components:
           description: Use with CategoryType.COST
         reliabilityProjection:
           $ref: "#/components/schemas/GoogleCloudRecommenderV1ReliabilityProjection"
-          description: Use with CategoryType.RELAIBILITY
+          description: Use with CategoryType.RELIABILITY
         securityProjection:
           $ref: "#/components/schemas/GoogleCloudRecommenderV1SecurityProjection"
           description: Use with CategoryType.SECURITY

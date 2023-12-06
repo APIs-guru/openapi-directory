@@ -598,6 +598,13 @@ components:
           description: Duration for which this cost applies.
           format: google-duration
           type: string
+        pricingType:
+          description: How the cost is calculated.
+          enum:
+            - PRICING_TYPE_UNSPECIFIED
+            - LIST_PRICE
+            - CUSTOM_PRICE
+          type: string
       type: object
     GoogleCloudRecommenderV1beta1Impact:
       description: Contains the impact a recommendation can have for a given category.
@@ -716,7 +723,7 @@ components:
       description: The type of insight.
       properties:
         name:
-          description: "The insight_type’s name in format insightTypes/{insight_type} eg: insightTypes/google.iam.policy.Insight"
+          description: "The insight_type's name in format insightTypes/{insight_type} eg: insightTypes/google.iam.policy.Insight"
           type: string
       type: object
     GoogleCloudRecommenderV1beta1InsightTypeConfig:

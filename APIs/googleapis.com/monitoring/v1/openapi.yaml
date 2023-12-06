@@ -159,7 +159,7 @@ paths:
       description: Replaces an existing custom dashboard with a new definition.This method requires the monitoring.dashboards.update permission on the specified dashboard. For more information, see Cloud Identity and Access Management (https://cloud.google.com/iam).
       operationId: monitoring.projects.dashboards.patch
       parameters:
-        - description: Immutable. The resource name of the dashboard.
+        - description: Identifier. The resource name of the dashboard.
           in: path
           name: name
           required: true
@@ -626,7 +626,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
+        - description: Optional. If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
           in: query
           name: pageToken
           schema:
@@ -1025,7 +1025,7 @@ components:
           $ref: "#/components/schemas/MosaicLayout"
           description: The content is arranged as a grid of tiles, with each content widget occupying one or more grid blocks.
         name:
-          description: Immutable. The resource name of the dashboard.
+          description: Identifier. The resource name of the dashboard.
           type: string
         rowLayout:
           $ref: "#/components/schemas/RowLayout"

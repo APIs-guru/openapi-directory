@@ -586,18 +586,13 @@ paths:
         - projects
   /v1beta/{name}:
     delete:
-      description: Deletes the specified ResourcePolicy configuration.
-      operationId: firebaseappcheck.projects.services.resourcePolicies.delete
+      description: Deletes the specified DebugToken. A deleted debug token cannot be used to exchange for an App Check token. Use this method when you suspect the secret `token` has been compromised or when you no longer need the debug token.
+      operationId: firebaseappcheck.projects.apps.debugTokens.delete
       parameters:
-        - description: "Required. The relative resource name of the ResourcePolicy to delete, in the format: ``` projects/{project_number}/services/{service_id}/resourcePolicies/{resource_name} ```"
+        - description: "Required. The relative resource name of the DebugToken to delete, in the format: ``` projects/{project_number}/apps/{app_id}/debugTokens/{debug_token_id} ```"
           in: path
           name: name
           required: true
-          schema:
-            type: string
-        - description: The checksum to be validated against the current ResourcePolicy, to ensure the client has an up-to-date value before proceeding. The user can obtain this from the ResourcePolicy object that they last received. This etag is strongly validated.
-          in: query
-          name: etag
           schema:
             type: string
       responses:
@@ -619,10 +614,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the requested ResourcePolicy configuration.
-      operationId: firebaseappcheck.projects.services.resourcePolicies.get
+      description: Gets the Service configuration for the specified service name.
+      operationId: firebaseappcheck.projects.services.get
       parameters:
-        - description: "Required. The relative resource name of the ResourcePolicy to retrieve, in the format: ``` projects/{project_number}/services/{service_id}/resourcePolicies/{resource_policy_id} ``` Note that the `service_id` element must be a supported service ID. Currently, the following service IDs are supported: * `oauth2.googleapis.com` (Google Identity for iOS) `resource_policy_id` is a system-generated UID used as the resource ID for the policy."
+        - description: "Required. The relative resource name of the Service to retrieve, in the format: ``` projects/{project_number}/services/{service_id} ``` Note that the `service_id` element must be a supported service ID. Currently, the following service IDs are supported: * `firebasestorage.googleapis.com` (Cloud Storage for Firebase) * `firebasedatabase.googleapis.com` (Firebase Realtime Database) * `firestore.googleapis.com` (Cloud Firestore) * `identitytoolkit.googleapis.com` (Firebase Authentication with Identity Platform)"
           in: path
           name: name
           required: true
@@ -633,7 +628,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaResourcePolicy"
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaService"
           description: Successful response
       security:
         - Oauth2:
@@ -659,16 +654,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the specified ResourcePolicy configuration.
-      operationId: firebaseappcheck.projects.services.resourcePolicies.patch
+      description: Updates the specified Service configuration.
+      operationId: firebaseappcheck.projects.services.patch
       parameters:
-        - description: "Required. The relative name of the resource configuration object, in the format: ``` projects/{project_number}/services/{service_id}/resourcePolicies/{resource_policy_id} ``` Note that the `service_id` element must be a supported service ID. Currently, the following service IDs are supported: * `oauth2.googleapis.com` (Google Identity for iOS) `resource_policy_id` is a system-generated UID used as the resource ID for the policy."
+        - description: "Required. The relative resource name of the service configuration object, in the format: ``` projects/{project_number}/services/{service_id} ``` Note that the `service_id` element must be a supported service ID. Currently, the following service IDs are supported: * `firebasestorage.googleapis.com` (Cloud Storage for Firebase) * `firebasedatabase.googleapis.com` (Firebase Realtime Database) * `firestore.googleapis.com` (Cloud Firestore) * `identitytoolkit.googleapis.com` (Firebase Authentication with Identity Platform)"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: "Required. A comma-separated list of names of fields in the ResourcePolicy to update. Example: `enforcement_mode`."
+        - description: "Required. A comma-separated list of names of fields in the Service to update. Example: `enforcement_mode`."
           in: query
           name: updateMask
           schema:
@@ -677,13 +672,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaResourcePolicy"
+              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaService"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaResourcePolicy"
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaService"
           description: Successful response
       security:
         - Oauth2:
@@ -1130,136 +1125,6 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  /v1beta/{parent}/resourcePolicies:
-    get:
-      description: Lists all ResourcePolicy configurations for the specified project and service.
-      operationId: firebaseappcheck.projects.services.resourcePolicies.list
-      parameters:
-        - description: "Required. The relative resource name of the parent project and service for which to list each associated ResourcePolicy, in the format: ``` projects/{project_number}/services/{service_name} ```"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: The maximum number of ResourcePolicys to return in the response. Only explicitly configured policies are returned. The server may return fewer than this at its own discretion. If no value is specified (or too large a value is specified), the server will impose its own limit.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Token returned from a previous call to ListResourcePolicies indicating where in the set of ResourcePolicys to resume listing. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to ListResourcePolicies must match the call that provided the page token; if they do not match, the result is undefined.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaListResourcePoliciesResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/firebase
-          Oauth2c:
-            - https://www.googleapis.com/auth/firebase
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates the specified ResourcePolicy configuration.
-      operationId: firebaseappcheck.projects.services.resourcePolicies.create
-      parameters:
-        - description: "Required. The relative resource name of the parent service in which the specified ResourcePolicy will be created, in the format: ``` projects/{project_number}/services/{service_id} ``` Note that the `service_id` element must be a supported service ID. Currently, the following service IDs are supported: * `oauth2.googleapis.com` (Google Identity for iOS)"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaResourcePolicy"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaResourcePolicy"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/firebase
-          Oauth2c:
-            - https://www.googleapis.com/auth/firebase
-      tags:
-        - projects
-  /v1beta/{parent}/resourcePolicies:batchUpdate:
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Atomically updates the specified ResourcePolicy configurations.
-      operationId: firebaseappcheck.projects.services.resourcePolicies.batchUpdate
-      parameters:
-        - description: Required. The parent project name and the service, in the format ``` projects/{project_number}/services/{service_id} ``` The parent collection in the `name` field of any resource being updated must match this field, or the entire batch fails.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaBatchUpdateResourcePoliciesRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaBatchUpdateResourcePoliciesResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/firebase
-          Oauth2c:
-            - https://www.googleapis.com/auth/firebase
-      tags:
-        - projects
   /v1beta/{parent}/services:
     get:
       description: Lists all Service configurations for the specified project. Only Services which were explicitly configured using UpdateService or BatchUpdateServices will be returned.
@@ -1582,28 +1447,6 @@ components:
             $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaSafetyNetConfig"
           type: array
       type: object
-    GoogleFirebaseAppcheckV1betaBatchUpdateResourcePoliciesRequest:
-      description: Request message for the BatchUpdateResourcePolicies method.
-      properties:
-        requests:
-          description: Required. The request messages specifying the ResourcePolicys to update. A maximum of 100 objects can be updated in a batch.
-          items:
-            $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaUpdateResourcePolicyRequest"
-          type: array
-        updateMask:
-          description: "Optional. A comma-separated list of names of fields in the ResourceConfigurations to update. Example: `enforcement_mode`. If this field is present, the `update_mask` field in the UpdateResourcePolicyRequest messages must all match this field, or the entire batch fails and no updates will be committed."
-          format: google-fieldmask
-          type: string
-      type: object
-    GoogleFirebaseAppcheckV1betaBatchUpdateResourcePoliciesResponse:
-      description: Response message for the BatchUpdateResourcePolicies method.
-      properties:
-        resourcePolicies:
-          description: ResourcePolicy objects after the updates have been applied.
-          items:
-            $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaResourcePolicy"
-          type: array
-      type: object
     GoogleFirebaseAppcheckV1betaBatchUpdateServicesRequest:
       description: Request message for the BatchUpdateServices method.
       properties:
@@ -1832,18 +1675,6 @@ components:
           description: If the result list is too large to fit in a single response, then a token is returned. If the string is empty or omitted, then this response is the last page of results. This token can be used in a subsequent call to ListDebugTokens to find the next group of DebugTokens. Page tokens are short-lived and should not be persisted.
           type: string
       type: object
-    GoogleFirebaseAppcheckV1betaListResourcePoliciesResponse:
-      description: Response message for the ListResourcePolicies method.
-      properties:
-        nextPageToken:
-          description: If the result list is too large to fit in a single response, then a token is returned. If the string is empty or omitted, then this response is the last page of results. This token can be used in a subsequent call to ListResourcePolicies to find the next group of ResourcePolicys. Page tokens are short-lived and should not be persisted.
-          type: string
-        resourcePolicies:
-          description: The ResourcePolicys retrieved.
-          items:
-            $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaResourcePolicy"
-          type: array
-      type: object
     GoogleFirebaseAppcheckV1betaListServicesResponse:
       description: Response message for the ListServices method.
       properties:
@@ -1949,31 +1780,6 @@ components:
           format: google-duration
           type: string
       type: object
-    GoogleFirebaseAppcheckV1betaResourcePolicy:
-      description: App Check enforcement policy for a specific resource of a Firebase service supported by App Check. Note that this policy will override the Service level enforcement mode configuration.
-      properties:
-        enforcementMode:
-          description: Required. The App Check enforcement mode for this resource. This will override the EnforcementMode setting on the service. For new resources that you are creating, you should consider setting an override and enable enforcement on the resource immediately, if there are no outdated clients that can use it.
-          enum:
-            - OFF
-            - UNENFORCED
-            - ENFORCED
-          type: string
-        etag:
-          description: This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding. This etag is strongly validated.
-          type: string
-        name:
-          description: "Required. The relative name of the resource configuration object, in the format: ``` projects/{project_number}/services/{service_id}/resourcePolicies/{resource_policy_id} ``` Note that the `service_id` element must be a supported service ID. Currently, the following service IDs are supported: * `oauth2.googleapis.com` (Google Identity for iOS) `resource_policy_id` is a system-generated UID used as the resource ID for the policy."
-          type: string
-        targetResource:
-          description: "Required. Service specific name of the resource object to which this policy applies, in the format: * `//oauth2.googleapis.com/projects/{project}/oauthClients/{oauth_client_id}` (Google Identity for iOS) NOTE that the resource must belong to the service specified in the `name` and be from the same project as this policy, but it may or may not exist at the time of creation of the policy."
-          type: string
-        updateTime:
-          description: Output only. Timestamp when this service configuration object was most recently updated.
-          format: google-datetime
-          readOnly: true
-          type: string
-      type: object
     GoogleFirebaseAppcheckV1betaSafetyNetConfig:
       deprecated: true
       description: An app's SafetyNet configuration object. This configuration controls certain properties of the `AppCheckToken` returned by ExchangeSafetyNetToken, such as its ttl. Note that your registered SHA-256 certificate fingerprints are used to validate tokens issued by SafetyNet; please register them via the Firebase Console or programmatically via the [Firebase Management Service](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.androidApps.sha/create).
@@ -2006,17 +1812,6 @@ components:
           description: Output only. Timestamp when this service configuration object was most recently updated.
           format: google-datetime
           readOnly: true
-          type: string
-      type: object
-    GoogleFirebaseAppcheckV1betaUpdateResourcePolicyRequest:
-      description: Request message for the UpdateResourcePolicy method as well as an individual update message for the BatchUpdateResourcePolicies method.
-      properties:
-        resourcePolicy:
-          $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaResourcePolicy"
-          description: "Required. The ResourcePolicy to update. The ResourcePolicy's `name` field is used to identify the ResourcePolicy to be updated, in the format: ``` projects/{project_number}/services/{service_id}/resourcePolicies/{resource_name} ``` Note that the `service_id` element must be a supported service ID. Currently, the following service IDs are supported: * `oauth2.googleapis.com` (Google Identity for iOS) Only the top-level resources are supported for each of the services. The resources must belong to the service specified and `resource_name` should be formatted as: * `oauthClients/{oauth_client_id}` (Google Identity for iOS)"
-        updateMask:
-          description: "Required. A comma-separated list of names of fields in the ResourcePolicy to update. Example: `enforcement_mode`."
-          format: google-fieldmask
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaUpdateServiceRequest:
