@@ -1270,7 +1270,7 @@ components:
           type: string
       type: object
     Gateway:
-      description: Gateway represents the configuration for a proxy, typically a load balancer. It captures the ip:port over which the services are exposed by the proxy, along with any policy configurations. Routes have reference to to Gateways to dictate how requests should be routed by this Gateway.
+      description: "Gateway represents the configuration for a proxy, typically a load balancer. It captures the ip:port over which the services are exposed by the proxy, along with any policy configurations. Routes have reference to to Gateways to dictate how requests should be routed by this Gateway. Next id: 29"
       properties:
         addresses:
           description: "Optional. Zero or one IPv4 or IPv6 address on which the Gateway will receive the traffic. When no address is provided, an IP from the subnetwork is allocated This field only applies to gateways of type 'SECURE_WEB_GATEWAY'. Gateways of type 'OPEN_MESH' listen on 0.0.0.0 for IPv4 and :: for IPv6."
@@ -1292,6 +1292,13 @@ components:
           type: string
         gatewaySecurityPolicy:
           description: "Optional. A fully-qualified GatewaySecurityPolicy URL reference. Defines how a server should apply security policy to inbound (VM to Proxy) initiated connections. For example: `projects/*/locations/*/gatewaySecurityPolicies/swg-policy`. This policy is specific to gateways of type 'SECURE_WEB_GATEWAY'."
+          type: string
+        ipVersion:
+          description: Optional. The IP Version that will be used by this gateway. Valid options are IPV4 or IPV6. Default is IPV4.
+          enum:
+            - IP_VERSION_UNSPECIFIED
+            - IPV4
+            - IPV6
           type: string
         labels:
           additionalProperties:

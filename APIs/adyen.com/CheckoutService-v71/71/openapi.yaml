@@ -2148,7 +2148,7 @@ components:
         url: https://test.adyen.link/PL61C53A8B97E6915A
     get-sessions-sessionId-success-200:
       description: The status of the session with the specified ID.
-      summary: "Response code: 201. Success."
+      summary: "Response code: 200 - Success"
       value:
         id: CS12345678
         status: completed
@@ -8355,7 +8355,6 @@ components:
         expiresAt:
           description: Expiry time of the QR code.
           type: string
-          x-addedInVersion: "68"
         paymentData:
           description: Encoded payment data.
           type: string
@@ -8908,7 +8907,7 @@ components:
           description: The shopper's telephone number.
           type: string
         themeId:
-          description: Sets a custom theme for the Adyen-hosted payment page. The value can be any of the **Theme ID** values from your Customer Area.
+          description: Sets a custom theme for [Hosted Checkout](https://docs.adyen.com/online-payments/build-your-integration/?platform=Web&integration=Hosted+Checkout). The value can be any of the **Theme ID** values from your Customer Area.
           type: string
           x-addedInVersion: "69"
         threeDSAuthenticationOnly:
@@ -9228,7 +9227,7 @@ components:
           description: The shopper's telephone number.
           type: string
         themeId:
-          description: Sets a custom theme for the Adyen-hosted payment page. The value can be any of the **Theme ID** values from your Customer Area.
+          description: Sets a custom theme for [Hosted Checkout](https://docs.adyen.com/online-payments/build-your-integration/?platform=Web&integration=Hosted+Checkout). The value can be any of the **Theme ID** values from your Customer Area.
           type: string
           x-addedInVersion: "69"
         threeDSAuthenticationOnly:
@@ -10787,7 +10786,6 @@ components:
         applicationInfo:
           $ref: "#/components/schemas/ApplicationInfo"
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
-          x-addedInVersion: "70"
         industryUsage:
           description: |-
             The reason for the amount update. Possible values: 
@@ -10883,7 +10881,6 @@ components:
         applicationInfo:
           $ref: "#/components/schemas/ApplicationInfo"
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
-          x-addedInVersion: "70"
         merchantAccount:
           description: The merchant account that is used to process the payment.
           type: string
@@ -10926,7 +10923,6 @@ components:
         applicationInfo:
           $ref: "#/components/schemas/ApplicationInfo"
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
-          x-addedInVersion: "70"
         lineItems:
           description: |-
             Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
@@ -11190,7 +11186,7 @@ components:
             If you received `resultCode`: **AuthenticationNotRequired** in the `/payments` response, use the `threeDSPaymentData` from the same response.
 
             If you received `resultCode`: **AuthenticationFinished** in the `/payments` response, use the `action.paymentData` from the same response.
-          maxLength: 100000
+          maxLength: 200000
           type: string
         threeDSAuthenticationOnly:
           deprecated: true
@@ -11985,7 +11981,6 @@ components:
         applicationInfo:
           $ref: "#/components/schemas/ApplicationInfo"
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
-          x-addedInVersion: "70"
         lineItems:
           description: |-
             Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
@@ -12637,7 +12632,6 @@ components:
         applicationInfo:
           $ref: "#/components/schemas/ApplicationInfo"
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
-          x-addedInVersion: "70"
         merchantAccount:
           description: The merchant account that is used to process the payment.
           type: string
@@ -14164,7 +14158,6 @@ components:
         applicationInfo:
           $ref: "#/components/schemas/ApplicationInfo"
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
-          x-addedInVersion: "70"
         merchantAccount:
           description: The merchant account that is used to process the payment.
           type: string
@@ -14217,6 +14210,12 @@ components:
       type: object
     StoredPaymentMethod:
       properties:
+        bankAccountNumber:
+          description: The bank account number (without separators).
+          type: string
+        bankLocationId:
+          description: The location id of the bank. The field value is `nil` in most cases.
+          type: string
         brand:
           description: The brand of the card.
           type: string
@@ -14236,6 +14235,10 @@ components:
         id:
           description: A unique identifier of this stored payment method.
           type: string
+        label:
+          description: The shopper’s issuer account label
+          type: string
+          x-addedInVersion: "70"
         lastFour:
           description: The last four digits of the PAN.
           type: string

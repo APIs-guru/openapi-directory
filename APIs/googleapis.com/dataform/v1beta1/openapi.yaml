@@ -1774,7 +1774,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. Optional filter for the returned list in go/filtering format. Filtering is only currently supported on the `path` field.
+        - description: Optional. Optional filter for the returned list in filtering format. Filtering is only currently supported on the `path` field. See https://google.aip.dev/160 for details.
           in: query
           name: filter
           schema:

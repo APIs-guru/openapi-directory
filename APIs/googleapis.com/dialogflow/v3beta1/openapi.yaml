@@ -1547,6 +1547,100 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
+  /v3beta1/{parent}/generators:
+    get:
+      description: Returns the list of all generators in the specified agent.
+      operationId: dialogflow.projects.locations.agents.generators.list
+      parameters:
+        - description: "Required. The agent to list all generators for. Format: `projects//locations//agents/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The language to list generators for.
+          in: query
+          name: languageCode
+          schema:
+            type: string
+        - description: The maximum number of items to return in a single page. By default 100 and at most 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ListGeneratorsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a generator in the specified agent.
+      operationId: dialogflow.projects.locations.agents.generators.create
+      parameters:
+        - description: "Required. The agent to create a generator for. Format: `projects//locations//agents/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "The language to create generators for the following fields: * `Generator.prompt_text.text` If not specified, the agent's default language is used."
+          in: query
+          name: languageCode
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Generator"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Generator"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
   /v3beta1/{parent}/intents:
     get:
       description: Returns the list of all intents in the specified agent.
@@ -2824,7 +2918,7 @@ components:
           description: Required. Instructs the speech recognizer how to process the speech audio.
       type: object
     GoogleCloudDialogflowCxV3BargeInConfig:
-      description: "Configuration of the barge-in behavior. Barge-in instructs the API to return a detected utterance at a proper time while the client is playing back the response audio from a previous request. When the client sees the utterance, it should stop the playback and immediately get ready for receiving the responses for the current request. The barge-in handling requires the client to start streaming audio input as soon as it starts playing back the audio from the previous response. The playback is modeled into two phases: * No barge-in phase: which goes first and during which speech detection should not be carried out. * Barge-in phase: which follows the no barge-in phase and during which the API starts speech detection and may inform the client that an utterance has been detected. Note that no-speech event is not expected in this phase. The client provides this configuration in terms of the durations of those two phases. The durations are measured in terms of the audio length fromt the the start of the input audio. The flow goes like below: --> Time without speech detection | utterance only | utterance or no-speech event | | +-------------+ | +------------+ | +---------------+ ----------+ no barge-in +-|-+ barge-in +-|-+ normal period +----------- +-------------+ | +------------+ | +---------------+ No-speech event is a response with END_OF_UTTERANCE without any transcript following up."
+      description: "Configuration of the barge-in behavior. Barge-in instructs the API to return a detected utterance at a proper time while the client is playing back the response audio from a previous request. When the client sees the utterance, it should stop the playback and immediately get ready for receiving the responses for the current request. The barge-in handling requires the client to start streaming audio input as soon as it starts playing back the audio from the previous response. The playback is modeled into two phases: * No barge-in phase: which goes first and during which speech detection should not be carried out. * Barge-in phase: which follows the no barge-in phase and during which the API starts speech detection and may inform the client that an utterance has been detected. Note that no-speech event is not expected in this phase. The client provides this configuration in terms of the durations of those two phases. The durations are measured in terms of the audio length from the the start of the input audio. No-speech event is a response with END_OF_UTTERANCE without any transcript following up."
       properties:
         noBargeInDuration:
           description: Duration that is not eligible for barge-in at the beginning of the input audio.
@@ -3395,7 +3489,7 @@ components:
           description: Optional. If `true`, Dialogflow returns SpeechWordInfo in StreamingRecognitionResult with information about the recognized speech words, e.g. start and end time offsets. If false or unspecified, Speech doesn't return any word-level information.
           type: boolean
         model:
-          description: "Optional. Which Speech model to select for the given request. Select the model best suited to your domain to get best results. If a model is not explicitly specified, then we auto-select a model based on the parameters in the InputAudioConfig. If enhanced speech model is enabled for the agent and an enhanced version of the specified model for the language does not exist, then the speech is recognized using the standard version of the specified model. Refer to [Cloud Speech API documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model) for more details. If you specify a model, the following models typically have the best performance: - phone_call (best for Agent Assist and telephony) - latest_short (best for Dialogflow non-telephony) - command_and_search (best for very short utterances and commands)"
+          description: Optional. Which Speech model to select for the given request. For more information, see [Speech models](https://cloud.google.com/dialogflow/cx/docs/concept/speech-models).
           type: string
         modelVariant:
           description: Optional. Which variant of the Speech model to use.
@@ -4432,7 +4526,7 @@ components:
           description: Required. Instructs the speech recognizer how to process the speech audio.
       type: object
     GoogleCloudDialogflowCxV3beta1BargeInConfig:
-      description: "Configuration of the barge-in behavior. Barge-in instructs the API to return a detected utterance at a proper time while the client is playing back the response audio from a previous request. When the client sees the utterance, it should stop the playback and immediately get ready for receiving the responses for the current request. The barge-in handling requires the client to start streaming audio input as soon as it starts playing back the audio from the previous response. The playback is modeled into two phases: * No barge-in phase: which goes first and during which speech detection should not be carried out. * Barge-in phase: which follows the no barge-in phase and during which the API starts speech detection and may inform the client that an utterance has been detected. Note that no-speech event is not expected in this phase. The client provides this configuration in terms of the durations of those two phases. The durations are measured in terms of the audio length fromt the the start of the input audio. The flow goes like below: --> Time without speech detection | utterance only | utterance or no-speech event | | +-------------+ | +------------+ | +---------------+ ----------+ no barge-in +-|-+ barge-in +-|-+ normal period +----------- +-------------+ | +------------+ | +---------------+ No-speech event is a response with END_OF_UTTERANCE without any transcript following up."
+      description: "Configuration of the barge-in behavior. Barge-in instructs the API to return a detected utterance at a proper time while the client is playing back the response audio from a previous request. When the client sees the utterance, it should stop the playback and immediately get ready for receiving the responses for the current request. The barge-in handling requires the client to start streaming audio input as soon as it starts playing back the audio from the previous response. The playback is modeled into two phases: * No barge-in phase: which goes first and during which speech detection should not be carried out. * Barge-in phase: which follows the no barge-in phase and during which the API starts speech detection and may inform the client that an utterance has been detected. Note that no-speech event is not expected in this phase. The client provides this configuration in terms of the durations of those two phases. The durations are measured in terms of the audio length from the the start of the input audio. No-speech event is a response with END_OF_UTTERANCE without any transcript following up."
       properties:
         noBargeInDuration:
           description: Duration that is not eligible for barge-in at the beginning of the input audio.
@@ -5565,6 +5659,34 @@ components:
           description: Company description, used for LLM prompt, e.g. "a family company selling freshly roasted coffee beans".
           type: string
       type: object
+    GoogleCloudDialogflowCxV3beta1Generator:
+      description: Generators contain prompt to be sent to the LLM model to generate text. The prompt can contain parameters which will be resolved before calling the model. It can optionally contain banned phrases to ensure the model responses are safe.
+      properties:
+        displayName:
+          description: Required. The human-readable name of the generator, unique within the agent. The prompt contains pre-defined parameters such as $conversation, $last-user-utterance, etc. populated by Dialogflow. It can also contain custom placeholders which will be resolved during fulfillment.
+          type: string
+        name:
+          description: "The unique identifier of the generator. Must be set for the Generators.UpdateGenerator method. Generators.CreateGenerate populates the name automatically. Format: `projects//locations//agents//generators/`."
+          type: string
+        placeholders:
+          description: Optional. List of custom placeholders in the prompt text.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1GeneratorPlaceholder"
+          type: array
+        promptText:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Phrase"
+          description: Required. Prompt for the LLM model.
+      type: object
+    GoogleCloudDialogflowCxV3beta1GeneratorPlaceholder:
+      description: Represents a custom placeholder in the prompt text.
+      properties:
+        id:
+          description: Unique ID used to map custom placeholder to parameters in fulfillment.
+          type: string
+        name:
+          description: Custom placeholder value in the prompt text.
+          type: string
+      type: object
     GoogleCloudDialogflowCxV3beta1GenericKnowledgeOperationMetadata:
       description: Metadata in google::longrunning::Operation for Knowledge operations.
       properties:
@@ -5749,7 +5871,7 @@ components:
           description: Optional. If `true`, Dialogflow returns SpeechWordInfo in StreamingRecognitionResult with information about the recognized speech words, e.g. start and end time offsets. If false or unspecified, Speech doesn't return any word-level information.
           type: boolean
         model:
-          description: "Optional. Which Speech model to select for the given request. Select the model best suited to your domain to get best results. If a model is not explicitly specified, then we auto-select a model based on the parameters in the InputAudioConfig. If enhanced speech model is enabled for the agent and an enhanced version of the specified model for the language does not exist, then the speech is recognized using the standard version of the specified model. Refer to [Cloud Speech API documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model) for more details. If you specify a model, the following models typically have the best performance: - phone_call (best for Agent Assist and telephony) - latest_short (best for Dialogflow non-telephony) - command_and_search (best for very short utterances and commands)"
+          description: Optional. Which Speech model to select for the given request. For more information, see [Speech models](https://cloud.google.com/dialogflow/cx/docs/concept/speech-models).
           type: string
         modelVariant:
           description: Optional. Which variant of the Speech model to use.
@@ -5991,6 +6113,18 @@ components:
           description: The list of flows. There will be a maximum number of items returned based on the page_size field in the request.
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Flow"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1ListGeneratorsResponse:
+      description: The response message for Generators.ListGenerators.
+      properties:
+        generators:
+          description: The list of generators. There will be a maximum number of items returned based on the page_size field in the request.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Generator"
           type: array
         nextPageToken:
           description: Token to retrieve the next page of results, or empty if there are no more results in the list.
@@ -6317,6 +6451,13 @@ components:
           type: string
         value:
           description: Optional for both WebhookRequest and WebhookResponse. The value of the parameter. This field can be set by the webhook to change the parameter value.
+      type: object
+    GoogleCloudDialogflowCxV3beta1Phrase:
+      description: Text input which can be used for prompt or banned phrases.
+      properties:
+        text:
+          description: Required. Text input which can be used for prompt or banned phrases.
+          type: string
       type: object
     GoogleCloudDialogflowCxV3beta1QueryInput:
       description: "Represents the query input. It can contain one of: 1. A conversational query in the form of text. 2. An intent query that specifies which intent to trigger. 3. Natural language speech audio to be processed. 4. An event to be triggered. 5. DTMF digits to invoke an intent and fill in parameter value."

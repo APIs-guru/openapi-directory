@@ -4487,7 +4487,7 @@ components:
           $ref: "#/components/schemas/AccessDeterminationLogConfig"
           description: Optional. Specifies how the server logs the consent-aware requests. If not specified, the `AccessDeterminationLogConfig.LogLevel.MINIMUM` option is used.
         accessEnforced:
-          description: Optional. If set to true, when accessing FHIR resources, the consent headers provided using [SMART-on-FHIR](https://cloud.google.com/healthcare/private/docs/how-tos/smart-on-fhir) will be verified against consents given by patients. See the ConsentEnforcementVersion for the supported consent headers.
+          description: Optional. If set to true, when accessing FHIR resources, the consent headers will be verified against consents given by patients. See the ConsentEnforcementVersion for the supported consent headers.
           type: boolean
         consentHeaderHandling:
           $ref: "#/components/schemas/ConsentHeaderHandling"

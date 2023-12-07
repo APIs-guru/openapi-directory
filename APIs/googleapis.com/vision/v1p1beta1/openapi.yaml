@@ -1979,7 +1979,8 @@ components:
       description: Parameters for web detection request.
       properties:
         includeGeoResults:
-          description: Whether to include results derived from the geo information in the image.
+          deprecated: true
+          description: This field has no effect on results.
           type: boolean
       type: object
     GoogleCloudVisionV1p1beta1WebDetectionWebEntity:

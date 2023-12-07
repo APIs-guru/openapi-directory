@@ -1554,7 +1554,7 @@ components:
           description: Required. The name for this extension. The name is logged as part of the HTTP request logs. The name must conform with RFC-1034, is restricted to lower-cased letters, numbers and hyphens, and can have a maximum length of 63 characters. Additionally, the first character must be a letter and the last a letter or a number.
           type: string
         service:
-          description: Required. The reference to the service that runs the extension. Must be a reference to a [backend service](https://cloud.google.com/compute/docs/reference/rest/v1/backendServices).
+          description: "Required. The reference to the service that runs the extension. Currently only Callout extensions are supported here. To configure a Callout extension, `service` must be a fully-qualified reference to a [backend service](https://cloud.google.com/compute/docs/reference/rest/v1/backendServices) in the format: `https://www.googleapis.com/compute/v1/projects/{project}/regions/{region}/backendServices/{backendService}` or `https://www.googleapis.com/compute/v1/projects/{project}/global/backendServices/{backendService}`."
           type: string
         supportedEvents:
           description: Optional. A set of events during request or response processing for which this extension is called. This field is required for the `LbTrafficExtension` resource. It's not relevant for the `LbRouteExtension` resource.
@@ -1576,11 +1576,11 @@ components:
       description: Conditions under which this chain is invoked for a request.
       properties:
         celExpression:
-          description: Required. A Common Expression Language (CEL) expression that is used to match requests for which the extension chain is executed.
+          description: Required. A Common Expression Language (CEL) expression that is used to match requests for which the extension chain is executed. For more information, see [CEL matcher language reference](https://cloud.google.com/service-extensions/docs/cel-matcher-language-reference).
           type: string
       type: object
     Gateway:
-      description: Gateway represents the configuration for a proxy, typically a load balancer. It captures the ip:port over which the services are exposed by the proxy, along with any policy configurations. Routes have reference to to Gateways to dictate how requests should be routed by this Gateway.
+      description: "Gateway represents the configuration for a proxy, typically a load balancer. It captures the ip:port over which the services are exposed by the proxy, along with any policy configurations. Routes have reference to to Gateways to dictate how requests should be routed by this Gateway. Next id: 29"
       properties:
         addresses:
           description: "Optional. Zero or one IPv4 or IPv6 address on which the Gateway will receive the traffic. When no address is provided, an IP from the subnetwork is allocated This field only applies to gateways of type 'SECURE_WEB_GATEWAY'. Gateways of type 'OPEN_MESH' listen on 0.0.0.0 for IPv4 and :: for IPv6."
@@ -1602,6 +1602,13 @@ components:
           type: string
         gatewaySecurityPolicy:
           description: "Optional. A fully-qualified GatewaySecurityPolicy URL reference. Defines how a server should apply security policy to inbound (VM to Proxy) initiated connections. For example: `projects/*/locations/*/gatewaySecurityPolicies/swg-policy`. This policy is specific to gateways of type 'SECURE_WEB_GATEWAY'."
+          type: string
+        ipVersion:
+          description: Optional. The IP Version that will be used by this gateway. Valid options are IPV4 or IPV6. Default is IPV4.
+          enum:
+            - IP_VERSION_UNSPECIFIED
+            - IPV4
+            - IPV6
           type: string
         labels:
           additionalProperties:

@@ -2070,7 +2070,7 @@ components:
         url: https://test.adyen.link/PL61C53A8B97E6915A
     get-sessions-sessionId-success-200:
       description: The status of the session with the specified ID.
-      summary: "Response code: 201. Success."
+      summary: "Response code: 200 - Success"
       value:
         id: CS12345678
         status: completed
@@ -8148,7 +8148,6 @@ components:
         expiresAt:
           description: Expiry time of the QR code.
           type: string
-          x-addedInVersion: "68"
         paymentData:
           description: Encoded payment data.
           type: string
@@ -10586,6 +10585,9 @@ components:
         amount:
           $ref: "#/components/schemas/Amount"
           description: The updated amount. The `currency` must match the currency used in authorisation.
+        applicationInfo:
+          $ref: "#/components/schemas/ApplicationInfo"
+          description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
         merchantAccount:
           description: The merchant account that is used to process the payment.
           type: string
@@ -10656,6 +10658,9 @@ components:
       type: object
     PaymentCancelRequest:
       properties:
+        applicationInfo:
+          $ref: "#/components/schemas/ApplicationInfo"
+          description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
         merchantAccount:
           description: The merchant account that is used to process the payment.
           type: string
@@ -10695,6 +10700,9 @@ components:
         amount:
           $ref: "#/components/schemas/Amount"
           description: The amount that you want to capture. The `currency` must match the currency used in authorisation, the `value` must be smaller than or equal to the authorised amount.
+        applicationInfo:
+          $ref: "#/components/schemas/ApplicationInfo"
+          description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
         lineItems:
           description: |-
             Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
@@ -10934,7 +10942,7 @@ components:
             If you received `resultCode`: **AuthenticationNotRequired** in the `/payments` response, use the `threeDSPaymentData` from the same response.
 
             If you received `resultCode`: **AuthenticationFinished** in the `/payments` response, use the `action.paymentData` from the same response.
-          maxLength: 100000
+          maxLength: 200000
           type: string
         threeDSAuthenticationOnly:
           description: Change the `authenticationOnly` indicator originally set in the `/payments` request. Only needs to be set if you want to modify the value set previously.
@@ -11647,6 +11655,9 @@ components:
         amount:
           $ref: "#/components/schemas/Amount"
           description: The amount that you want to refund. The `currency` must match the currency used in authorisation, the `value` must be smaller than or equal to the authorised amount.
+        applicationInfo:
+          $ref: "#/components/schemas/ApplicationInfo"
+          description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
         lineItems:
           description: |-
             Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
@@ -12256,6 +12267,9 @@ components:
       type: object
     PaymentReversalRequest:
       properties:
+        applicationInfo:
+          $ref: "#/components/schemas/ApplicationInfo"
+          description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
         merchantAccount:
           description: The merchant account that is used to process the payment.
           type: string
@@ -13770,6 +13784,9 @@ components:
       type: object
     StandalonePaymentCancelRequest:
       properties:
+        applicationInfo:
+          $ref: "#/components/schemas/ApplicationInfo"
+          description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
         merchantAccount:
           description: The merchant account that is used to process the payment.
           type: string
@@ -13822,6 +13839,12 @@ components:
       type: object
     StoredPaymentMethod:
       properties:
+        bankAccountNumber:
+          description: The bank account number (without separators).
+          type: string
+        bankLocationId:
+          description: The location id of the bank. The field value is `nil` in most cases.
+          type: string
         brand:
           description: The brand of the card.
           type: string

@@ -586,7 +586,7 @@ paths:
         - projects
   /v1alpha1/{parent}/cloneJobs:
     get:
-      description: Lists CloneJobs of a given migrating VM.
+      description: Lists the CloneJobs of a migrating VM. Only the 25 most recent CloneJobs are returned.
       operationId: vmmigration.projects.locations.sources.migratingVms.cloneJobs.list
       parameters:
         - description: Required. The parent, which owns this collection of source VMs.
@@ -682,7 +682,7 @@ paths:
         - projects
   /v1alpha1/{parent}/cutoverJobs:
     get:
-      description: Lists CutoverJobs of a given migrating VM.
+      description: Lists the CutoverJobs of a migrating VM. Only the 25 most recent CutoverJobs are returned.
       operationId: vmmigration.projects.locations.sources.migratingVms.cutoverJobs.list
       parameters:
         - description: Required. The parent, which owns this collection of migrating VMs.

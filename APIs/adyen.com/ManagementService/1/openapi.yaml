@@ -15587,21 +15587,6 @@ components:
             $ref: "#/components/schemas/AllowedOrigin"
           type: array
       type: object
-    AmexInfo:
-      properties:
-        midNumber:
-          description: "MID number. Format: 10 numeric characters"
-          type: string
-        serviceLevel:
-          description: Service level
-          enum:
-            - noContract
-            - gatewayContract
-            - paymentDesignatorContract
-          type: string
-      required:
-        - serviceLevel
-      type: object
     Amount:
       properties:
         currency:
@@ -16015,6 +16000,11 @@ components:
         brand:
           description: "Payment method, like **eftpos_australia** or **mc**. See the [possible values](https://docs.adyen.com/development-resources/paymentmethodvariant#management-api). "
           type: string
+        country:
+          description: Countries, to filter different surcharge amounts for domestic or international cards.
+          items:
+            type: string
+          type: array
         currencies:
           description: Currency, and surcharge percentage or amount.
           items:
@@ -17615,9 +17605,6 @@ components:
         allowed:
           description: Indicates whether receiving payments is allowed. This value is set to **true** by Adyen after screening your merchant account.
           type: boolean
-        amex:
-          $ref: "#/components/schemas/AmexInfo"
-          description: Amex details.
         applePay:
           $ref: "#/components/schemas/ApplePayInfo"
           description: Apple Pay details.
@@ -17825,9 +17812,6 @@ components:
         afterpayTouch:
           $ref: "#/components/schemas/AfterpayTouchInfo"
           description: Afterpay Touch details.
-        amex:
-          $ref: "#/components/schemas/AmexInfo"
-          description: Amex details.
         applePay:
           $ref: "#/components/schemas/ApplePayInfo"
           description: Apple Pay details.
