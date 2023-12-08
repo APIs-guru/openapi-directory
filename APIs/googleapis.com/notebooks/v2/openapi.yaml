@@ -1362,6 +1362,10 @@ components:
             - SUSPENDED
           readOnly: true
           type: string
+        thirdPartyProxyUrl:
+          description: Output only. The workforce pools proxy endpoint that is used to access the Jupyter notebook.
+          readOnly: true
+          type: string
         updateTime:
           description: Output only. Instance update time.
           format: google-datetime

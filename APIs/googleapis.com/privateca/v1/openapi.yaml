@@ -1779,7 +1779,7 @@ components:
       description: Response message for CertificateAuthorityService.FetchCaCerts.
       properties:
         caCerts:
-          description: The PEM encoded CA certificate chains of all ACTIVE CertificateAuthority resources in this CaPool.
+          description: The PEM encoded CA certificate chains of all Certificate Authorities in this CaPool in the ENABLED, DISABLED, or STAGED states.
           items:
             $ref: "#/components/schemas/CertChain"
           type: array

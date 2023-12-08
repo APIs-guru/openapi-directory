@@ -872,12 +872,17 @@ components:
             - NO_ROUTE
             - ROUTE_BLACKHOLE
             - ROUTE_WRONG_NETWORK
+            - ROUTE_NEXT_HOP_IP_ADDRESS_NOT_RESOLVED
+            - ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND
+            - NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS
+            - VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH
+            - VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH
             - PRIVATE_TRAFFIC_TO_INTERNET
             - PRIVATE_GOOGLE_ACCESS_DISALLOWED
+            - PRIVATE_GOOGLE_ACCESS_VIA_VPN_TUNNEL_UNSUPPORTED
             - NO_EXTERNAL_ADDRESS
             - UNKNOWN_INTERNAL_ADDRESS
             - FORWARDING_RULE_MISMATCH
-            - FORWARDING_RULE_REGION_MISMATCH
             - FORWARDING_RULE_NO_INSTANCES
             - FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK
             - INSTANCE_NOT_RUNNING
@@ -901,13 +906,25 @@ components:
             - CLOUD_FUNCTION_NOT_ACTIVE
             - VPC_CONNECTOR_NOT_SET
             - VPC_CONNECTOR_NOT_RUNNING
+            - FORWARDING_RULE_REGION_MISMATCH
             - PSC_CONNECTION_NOT_ACCEPTED
+            - PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK
             - CLOUD_RUN_REVISION_NOT_READY
             - DROPPED_INSIDE_PSC_SERVICE_PRODUCER
             - LOAD_BALANCER_HAS_NO_PROXY_SUBNET
+            - CLOUD_NAT_NO_ADDRESSES
+          type: string
+        destinationIp:
+          description: Destination IP address of the dropped packet (if relevant).
+          type: string
+        region:
+          description: Region of the dropped packet (if relevant).
           type: string
         resourceUri:
           description: URI of the resource that caused the drop.
+          type: string
+        sourceIp:
+          description: Source IP address of the dropped packet (if relevant).
           type: string
       type: object
     EdgeLocation:
@@ -956,7 +973,7 @@ components:
           description: A Compute Engine instance URI.
           type: string
         ipAddress:
-          description: The IP address of the endpoint, which can be an external or internal IP. An IPv6 address is only allowed when the test's destination is a [global load balancer VIP](https://cloud.google.com/load-balancing/docs/load-balancing-overview).
+          description: The IP address of the endpoint, which can be an external or internal IP.
           type: string
         loadBalancerId:
           description: Output only. ID of the load balancer the forwarding rule points to. Empty for forwarding rules not related to load balancers.
@@ -1161,6 +1178,9 @@ components:
             - IAP
             - GFE_PROXY_OR_HEALTH_CHECK_PROBER
             - CLOUD_DNS
+            - GOOGLE_API
+            - GOOGLE_API_PSC
+            - GOOGLE_API_VPC_SC
           type: string
         sourceIp:
           description: Source IP address.
@@ -1286,6 +1306,38 @@ components:
           description: URI of a Compute Engine instance or network endpoint.
           type: string
       type: object
+    LoadBalancerBackendInfo:
+      description: For display only. Metadata associated with the load balancer backend.
+      properties:
+        backendDisplayName:
+          description: Display name of the backend. For example, it might be an instance name for the instance group backends, or an IP address and port for zonal network endpoint group backends.
+          type: string
+        backendServiceUri:
+          description: URI of the backend service this backend belongs to (if applicable).
+          type: string
+        healthCheckConfigState:
+          description: "Output only. Health check configuration state for the backend. This is a result of the static firewall analysis (verifying that health check traffic from required IP ranges to the backend is allowed or not). The backend might still be unhealthy even if these firewalls are configured. Please refer to the documentation for more information: https://cloud.google.com/load-balancing/docs/firewall-rules"
+          enum:
+            - HEALTH_CHECK_CONFIG_STATE_UNSPECIFIED
+            - FIREWALLS_CONFIGURED
+            - FIREWALLS_PARTIALLY_CONFIGURED
+            - FIREWALLS_NOT_CONFIGURED
+            - FIREWALLS_UNSUPPORTED
+          readOnly: true
+          type: string
+        healthCheckUri:
+          description: URI of the health check attached to this backend (if applicable).
+          type: string
+        instanceGroupUri:
+          description: URI of the instance group this backend belongs to (if applicable).
+          type: string
+        instanceUri:
+          description: URI of the backend instance (if applicable). Populated for instance group backends, and zonal NEG backends.
+          type: string
+        networkEndpointGroupUri:
+          description: URI of the network endpoint group this backend belongs to (if applicable).
+          type: string
+      type: object
     LoadBalancerInfo:
       description: For display only. Metadata associated with a load balancer.
       properties:
@@ -1341,6 +1393,59 @@ components:
           type: object
         name:
           description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
+          type: string
+      type: object
+    NatInfo:
+      description: For display only. Metadata associated with NAT.
+      properties:
+        natGatewayName:
+          description: The name of Cloud NAT Gateway. Only valid when type is CLOUD_NAT.
+          type: string
+        networkUri:
+          description: URI of the network where NAT translation takes place.
+          type: string
+        newDestinationIp:
+          description: Destination IP address after NAT translation.
+          type: string
+        newDestinationPort:
+          description: Destination port after NAT translation. Only valid when protocol is TCP or UDP.
+          format: int32
+          type: integer
+        newSourceIp:
+          description: Source IP address after NAT translation.
+          type: string
+        newSourcePort:
+          description: Source port after NAT translation. Only valid when protocol is TCP or UDP.
+          format: int32
+          type: integer
+        oldDestinationIp:
+          description: Destination IP address before NAT translation.
+          type: string
+        oldDestinationPort:
+          description: Destination port before NAT translation. Only valid when protocol is TCP or UDP.
+          format: int32
+          type: integer
+        oldSourceIp:
+          description: Source IP address before NAT translation.
+          type: string
+        oldSourcePort:
+          description: Source port before NAT translation. Only valid when protocol is TCP or UDP.
+          format: int32
+          type: integer
+        protocol:
+          description: 'IP protocol in string format, for example: "TCP", "UDP", "ICMP".'
+          type: string
+        routerUri:
+          description: Uri of the Cloud Router. Only valid when type is CLOUD_NAT.
+          type: string
+        type:
+          description: Type of NAT.
+          enum:
+            - TYPE_UNSPECIFIED
+            - INTERNAL_TO_EXTERNAL
+            - EXTERNAL_TO_INTERNAL
+            - CLOUD_NAT
+            - PRIVATE_SERVICE_CONNECT
           type: string
       type: object
     NetworkInfo:
@@ -1470,6 +1575,47 @@ components:
         verifyTime:
           description: The time that reachability was assessed through active probing.
           format: google-datetime
+          type: string
+      type: object
+    ProxyConnectionInfo:
+      description: For display only. Metadata associated with ProxyConnection.
+      properties:
+        networkUri:
+          description: URI of the network where connection is proxied.
+          type: string
+        newDestinationIp:
+          description: Destination IP address of a new connection.
+          type: string
+        newDestinationPort:
+          description: Destination port of a new connection. Only valid when protocol is TCP or UDP.
+          format: int32
+          type: integer
+        newSourceIp:
+          description: Source IP address of a new connection.
+          type: string
+        newSourcePort:
+          description: Source port of a new connection. Only valid when protocol is TCP or UDP.
+          format: int32
+          type: integer
+        oldDestinationIp:
+          description: Destination IP address of an original connection
+          type: string
+        oldDestinationPort:
+          description: Destination port of an original connection. Only valid when protocol is TCP or UDP.
+          format: int32
+          type: integer
+        oldSourceIp:
+          description: Source IP address of an original connection.
+          type: string
+        oldSourcePort:
+          description: Source port of an original connection. Only valid when protocol is TCP or UDP.
+          format: int32
+          type: integer
+        protocol:
+          description: 'IP protocol in string format, for example: "TCP", "UDP", "ICMP".'
+          type: string
+        subnetUri:
+          description: Uri of proxy subnet.
           type: string
       type: object
     ReachabilityDetails:
@@ -1672,12 +1818,21 @@ components:
         loadBalancer:
           $ref: "#/components/schemas/LoadBalancerInfo"
           description: Display information of the load balancers.
+        loadBalancerBackendInfo:
+          $ref: "#/components/schemas/LoadBalancerBackendInfo"
+          description: Display information of a specific load balancer backend.
+        nat:
+          $ref: "#/components/schemas/NatInfo"
+          description: Display information of a NAT.
         network:
           $ref: "#/components/schemas/NetworkInfo"
           description: Display information of a Google Cloud network.
         projectId:
           description: Project ID that contains the configuration this step is validating.
           type: string
+        proxyConnection:
+          $ref: "#/components/schemas/ProxyConnectionInfo"
+          description: Display information of a ProxyConnection.
         route:
           $ref: "#/components/schemas/RouteInfo"
           description: Display information of a Compute Engine route.
@@ -1698,6 +1853,7 @@ components:
             - APPLY_EGRESS_FIREWALL_RULE
             - APPLY_ROUTE
             - APPLY_FORWARDING_RULE
+            - ANALYZE_LOAD_BALANCER_BACKEND
             - SPOOFING_APPROVED
             - ARRIVE_AT_INSTANCE
             - ARRIVE_AT_INTERNAL_LOAD_BALANCER

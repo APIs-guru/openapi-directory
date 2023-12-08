@@ -1,0 +1,1072 @@
+openapi: 3.0.0
+servers:
+  - url: https://firebaseappdistribution.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: ""
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Firebase App Distribution API
+  version: v1alpha
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+  x-origin:
+    - format: google
+      url: https://firebaseappdistribution.googleapis.com/$discovery/rest?version=v1alpha
+      version: v1
+  x-providerName: googleapis.com
+  x-serviceName: firebaseappdistribution
+externalDocs:
+  url: https://firebase.google.com/products/app-distribution
+tags:
+  - name: apps
+  - name: projects
+paths:
+  /v1alpha/apps/{mobilesdkAppId}:
+    get:
+      description: Get the app, if it exists
+      operationId: firebaseappdistribution.apps.get
+      parameters:
+        - description: "Unique id for a Firebase app of the format: {version}:{project_number}:{platform}:{hash(bundle_id)} Example: 1:581234567376:android:aa0a3c7b135e90289"
+          in: path
+          name: mobilesdkAppId
+          required: true
+          schema:
+            type: string
+        - description: App view. When unset or set to BASIC, returns an App with everything set except for aab_state. When set to FULL, returns an App with aab_state set.
+          in: query
+          name: appView
+          schema:
+            enum:
+              - APP_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaApp"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - apps
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Provision app distribution for an existing Firebase app, enabling it to subsequently be used by appdistro.
+      operationId: firebaseappdistribution.apps.provisionApp
+      parameters:
+        - description: "Unique id for a Firebase app of the format: {version}:{project_number}:{platform}:{hash(bundle_id)} Example: 1:581234567376:android:aa0a3c7b135e90289"
+          in: path
+          name: mobilesdkAppId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaProvisionAppResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - apps
+  /v1alpha/apps/{mobilesdkAppId}/jwt:
+    get:
+      description: Get a JWT token
+      operationId: firebaseappdistribution.apps.getJwt
+      parameters:
+        - description: "Unique id for a Firebase app of the format: {version}:{project_number}:{platform}:{hash(bundle_id)} Example: 1:581234567376:android:aa0a3c7b135e90289"
+          in: path
+          name: mobilesdkAppId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaJwt"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - apps
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1alpha/apps/{mobilesdkAppId}/release_by_hash/{uploadHash}:
+    get:
+      description: GET Release by binary upload hash
+      operationId: firebaseappdistribution.apps.release_by_hash.get
+      parameters:
+        - description: "Unique id for a Firebase app of the format: {version}:{project_number}:{platform}:{hash(bundle_id)} Example: 1:581234567376:android:aa0a3c7b135e90289"
+          in: path
+          name: mobilesdkAppId
+          required: true
+          schema:
+            type: string
+        - description: The hash for the upload
+          in: path
+          name: uploadHash
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaGetReleaseByUploadHashResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - apps
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1alpha/apps/{mobilesdkAppId}/releases/{releaseId}/enable_access:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Enable access on a release for testers.
+      operationId: firebaseappdistribution.apps.releases.enable_access
+      parameters:
+        - description: "Unique id for a Firebase app of the format: {version}:{project_number}:{platform}:{hash(bundle_id)} Example: 1:581234567376:android:aa0a3c7b135e90289"
+          in: path
+          name: mobilesdkAppId
+          required: true
+          schema:
+            type: string
+        - description: Release identifier
+          in: path
+          name: releaseId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaEnableAccessOnReleaseRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaEnableAccessOnReleaseResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - apps
+  /v1alpha/apps/{mobilesdkAppId}/releases/{releaseId}/notes:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create release notes on a release.
+      operationId: firebaseappdistribution.apps.releases.notes.create
+      parameters:
+        - description: "Unique id for a Firebase app of the format: {version}:{project_number}:{platform}:{hash(bundle_id)} Example: 1:581234567376:android:aa0a3c7b135e90289"
+          in: path
+          name: mobilesdkAppId
+          required: true
+          schema:
+            type: string
+        - description: Release identifier
+          in: path
+          name: releaseId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaCreateReleaseNotesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaCreateReleaseNotesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - apps
+  /v1alpha/apps/{mobilesdkAppId}/testers:getTesterUdids:
+    get:
+      description: Get UDIDs of tester iOS devices in a project
+      operationId: firebaseappdistribution.apps.testers.getTesterUdids
+      parameters:
+        - description: "Unique id for a Firebase app of the format: {version}:{project_number}:{platform}:{hash(bundle_id)} Example: 1:581234567376:android:aa0a3c7b135e90289"
+          in: path
+          name: mobilesdkAppId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaGetTesterUdidsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - apps
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1alpha/apps/{mobilesdkAppId}/upload_status/{uploadToken}:
+    get:
+      description: GET Binary upload status by token
+      operationId: firebaseappdistribution.apps.upload_status.get
+      parameters:
+        - description: "Unique id for a Firebase app of the format: {version}:{project_number}:{platform}:{hash(bundle_id)} Example: 1:581234567376:android:aa0a3c7b135e90289"
+          in: path
+          name: mobilesdkAppId
+          required: true
+          schema:
+            type: string
+        - description: The token for the upload
+          in: path
+          name: uploadToken
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaGetUploadStatusResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - apps
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1alpha/{name}:
+    get:
+      description: Get results for automated test run on release.
+      operationId: firebaseappdistribution.projects.apps.releases.tests.get
+      parameters:
+        - description: "Required. The name of the release test resource. Format: `projects/{project_number}/apps/{app_id}/releases/{release_id}/tests/{test_id}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaReleaseTest"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates a release.
+      operationId: firebaseappdistribution.projects.apps.updateTestConfig
+      parameters:
+        - description: "Identifier. The name of the test configuration resource. Format: `projects/{project_number}/apps/{app_id}/testConfig`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Optional. The list of fields to update.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaTestConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaTestConfig"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1alpha/{parent}/tests:
+    get:
+      description: List results for automated tests run on release.
+      operationId: firebaseappdistribution.projects.apps.releases.tests.list
+      parameters:
+        - description: "Required. The name of the release resource, which is the parent of the tests Format: `projects/{project_number}/apps/{app_id}/releases/{release_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The maximum number of tests to return. The service may return fewer than this value.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A page token, received from a previous `ListReleaseTests` call. Provide this to retrieve the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaListReleaseTestsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Run automated test(s) on release.
+      operationId: firebaseappdistribution.projects.apps.releases.tests.create
+      parameters:
+        - description: "Required. The name of the release resource, which is the parent of the test Format: `projects/{project_number}/apps/{app_id}/releases/{release_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The ID to use for the test, which will become the final component of the tests's resource name. This value should be 4-63 characters, and valid characters are /a-z-/. If it is not provided one will be automatically generated.
+          in: query
+          name: releaseTestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaReleaseTest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaReleaseTest"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    GoogleFirebaseAppdistroV1Release:
+      description: A release of a Firebase app.
+      properties:
+        binaryDownloadUri:
+          description: Output only. A signed link (which expires in one hour) to directly download the app binary (IPA/APK/AAB) file.
+          readOnly: true
+          type: string
+        buildVersion:
+          description: Output only. Build version of the release. For an Android release, the build version is the `versionCode`. For an iOS release, the build version is the `CFBundleVersion`.
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. The time the release was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayVersion:
+          description: Output only. Display version of the release. For an Android release, the display version is the `versionName`. For an iOS release, the display version is the `CFBundleShortVersionString`.
+          readOnly: true
+          type: string
+        firebaseConsoleUri:
+          description: Output only. A link to the Firebase console displaying a single release.
+          readOnly: true
+          type: string
+        name:
+          description: "The name of the release resource. Format: `projects/{project_number}/apps/{app_id}/releases/{release_id}`"
+          type: string
+        releaseNotes:
+          $ref: "#/components/schemas/GoogleFirebaseAppdistroV1ReleaseNotes"
+          description: Notes of the release.
+        testingUri:
+          description: Output only. A link to the release in the tester web clip or Android app that lets testers (which were granted access to the app) view release notes and install the app onto their devices.
+          readOnly: true
+          type: string
+      type: object
+    GoogleFirebaseAppdistroV1ReleaseNotes:
+      description: Notes that belong to a release.
+      properties:
+        text:
+          description: The text of the release notes.
+          type: string
+      type: object
+    GoogleFirebaseAppdistroV1UploadReleaseMetadata:
+      description: Operation metadata for `UploadRelease`.
+      properties: {}
+      type: object
+    GoogleFirebaseAppdistroV1UploadReleaseResponse:
+      description: Response message for `UploadRelease`.
+      properties:
+        release:
+          $ref: "#/components/schemas/GoogleFirebaseAppdistroV1Release"
+          description: Release associated with the uploaded binary.
+        result:
+          description: Result of upload release.
+          enum:
+            - UPLOAD_RELEASE_RESULT_UNSPECIFIED
+            - RELEASE_CREATED
+            - RELEASE_UPDATED
+            - RELEASE_UNMODIFIED
+          type: string
+      type: object
+    GoogleFirebaseAppdistroV1alphaAabCertificate:
+      description: App bundle test certificate
+      properties:
+        certificateHashMd5:
+          description: MD5 hash of the certificate used to resign the AAB
+          type: string
+        certificateHashSha1:
+          description: SHA1 hash of the certificate used to resign the AAB
+          type: string
+        certificateHashSha256:
+          description: SHA256 hash of the certificate used to resign the AAB
+          type: string
+      type: object
+    GoogleFirebaseAppdistroV1alphaApp:
+      properties:
+        aabCertificate:
+          $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaAabCertificate"
+          description: App bundle test certificate generated for the app.
+        aabState:
+          description: App bundle state. Only valid for android apps. The app_view field in the request must be set to FULL in order for this to be populated.
+          enum:
+            - AAB_STATE_UNSPECIFIED
+            - ACTIVE
+            - PLAY_ACCOUNT_NOT_LINKED
+            - NO_APP_WITH_GIVEN_BUNDLE_ID_IN_PLAY_ACCOUNT
+            - APP_NOT_PUBLISHED
+            - AAB_STATE_UNAVAILABLE
+            - PLAY_IAS_TERMS_NOT_ACCEPTED
+          type: string
+        appId:
+          description: Firebase gmp app id
+          type: string
+        bundleId:
+          description: Bundle identifier
+          type: string
+        contactEmail:
+          description: Developer contact email for testers to reach out to about privacy or support issues.
+          type: string
+        platform:
+          description: iOS or Android
+          type: string
+        projectNumber:
+          description: Project number of the Firebase project, for example 300830567303.
+          type: string
+      type: object
+    GoogleFirebaseAppdistroV1alphaAppCrash:
+      description: An app crash that occurred during an automated test.
+      properties:
+        message:
+          description: Output only. The message associated with the crash.
+          readOnly: true
+          type: string
+        stackTrace:
+          description: Output only. The raw stack trace.
+          readOnly: true
+          type: string
+      type: object
+    GoogleFirebaseAppdistroV1alphaCreateReleaseNotesRequest:
+      properties:
+        releaseNotes:
+          $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaReleaseNotes"
+          description: The actual release notes body from the user
+      type: object
+    GoogleFirebaseAppdistroV1alphaCreateReleaseNotesResponse:
+      properties: {}
+      type: object
+    GoogleFirebaseAppdistroV1alphaDeviceExecution:
+      description: The results of running an automated test on a particular device.
+      properties:
+        appCrash:
+          $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaAppCrash"
+          description: Output only. An app crash, if any occurred during the test.
+          readOnly: true
+        crawlGraphUri:
+          description: Output only. A URI to an image of the Robo crawl graph.
+          readOnly: true
+          type: string
+        device:
+          $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaTestDevice"
+          description: Required. The device that the test was run on.
+        failedReason:
+          description: Output only. The reason why the test failed.
+          enum:
+            - FAILED_REASON_UNSPECIFIED
+            - CRASHED
+            - NOT_INSTALLED
+            - UNABLE_TO_CRAWL
+            - DEVICE_OUT_OF_MEMORY
+          readOnly: true
+          type: string
+        inconclusiveReason:
+          description: Output only. The reason why the test was inconclusive.
+          enum:
+            - INCONCLUSIVE_REASON_UNSPECIFIED
+            - QUOTA_EXCEEDED
+            - INFRASTRUCTURE_FAILURE
+            - SERVICE_NOT_ACTIVATED
+            - NO_SIGNATURE
+            - NO_LAUNCHER_ACTIVITY
+            - FORBIDDEN_PERMISSIONS
+            - DEVICE_ADMIN_RECEIVER
+            - NO_CODE_APK
+            - INVALID_APK_PREVIEW_SDK
+          readOnly: true
+          type: string
+        resultsStoragePath:
+          description: Output only. The path to a directory in Cloud Storage that will eventually contain the results for this execution. For example, gs://bucket/Nexus5-18-en-portrait.
+          readOnly: true
+          type: string
+        roboStats:
+          $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaRoboStats"
+          description: Output only. The statistics collected during the Robo test.
+          readOnly: true
+        screenshotUris:
+          description: Output only. A list of screenshot image URIs taken from the Robo crawl. The file names are numbered by the order in which they were taken.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        state:
+          description: Output only. The state of the test.
+          enum:
+            - TEST_STATE_UNSPECIFIED
+            - IN_PROGRESS
+            - PASSED
+            - FAILED
+            - INCONCLUSIVE
+          readOnly: true
+          type: string
+        videoUri:
+          description: Output only. A URI to a video of the test run.
+          readOnly: true
+          type: string
+      type: object
+    GoogleFirebaseAppdistroV1alphaEnableAccessOnReleaseRequest:
+      properties:
+        buildVersion:
+          deprecated: true
+          description: Optional. Ignored. Used to be build version of the app release if an instance identifier was provided for the release_id.
+          type: string
+        displayVersion:
+          deprecated: true
+          description: Optional. Ignored. Used to be display version of the app release if an instance identifier was provided for the release_id.
+          type: string
+        emails:
+          description: Optional. An email address which should get access to this release, for example rebeccahe@google.com
+          items:
+            type: string
+          type: array
+        groupIds:
+          description: "Optional. A repeated list of group aliases to enable access to a release for Note: This field is misnamed, but can't be changed because we need to maintain compatibility with old build tools"
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleFirebaseAppdistroV1alphaEnableAccessOnReleaseResponse:
+      properties: {}
+      type: object
+    GoogleFirebaseAppdistroV1alphaGetReleaseByUploadHashResponse:
+      description: Response object to get the release given a upload hash
+      properties:
+        release:
+          $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaRelease"
+          description: Release object
+      type: object
+    GoogleFirebaseAppdistroV1alphaGetTesterUdidsResponse:
+      description: Response containing the UDIDs of tester iOS devices in a project
+      properties:
+        testerUdids:
+          description: The UDIDs of tester iOS devices in a project
+          items:
+            $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaTesterUdid"
+          type: array
+      type: object
+    GoogleFirebaseAppdistroV1alphaGetUploadStatusResponse:
+      properties:
+        errorCode:
+          description: The error code associated with (only set on "FAILURE")
+          enum:
+            - ERROR_UNSPECIFIED
+            - INVALID_ZIP
+            - MISSING_PLIST
+            - MISSING_PROFILE
+            - VERSION_TOO_LONG
+            - MISSING_UUIDS
+            - MISSING_RESOURCES
+            - MISSING_MANIFEST
+            - IOS_METADATA_ERROR
+            - ANDROID_METADATA_ERROR
+            - UNSUPPORTED_PLATFORM_TYPE
+            - BUNDLE_ID_MISMATCH
+            - APK_NOT_ZIP_ALIGNED
+            - INVALID_CERTIFICATE
+            - APK_TOO_LARGE
+            - AAB_NOT_PUBLISHED
+            - INVALID_PLIST_DEVICE_FAMILIES
+            - AAB_TOS_NOT_ACCEPTED
+            - APP_NAME_TOO_LONG
+            - AAB_DEVELOPER_ACCOUNT_NOT_LINKED
+            - AAB_NO_APP_WITH_GIVEN_PACKAGE_NAME_IN_ACCOUNT
+            - AAB_UPLOAD_ERROR
+          type: string
+        message:
+          description: Any additional context for the given upload status (e.g. error message) Meant to be displayed to the client
+          type: string
+        release:
+          $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaRelease"
+          description: The release that was created from the upload (only set on "SUCCESS")
+        status:
+          description: The status of the upload
+          enum:
+            - STATUS_UNSPECIFIED
+            - IN_PROGRESS
+            - ALREADY_UPLOADED
+            - SUCCESS
+            - ERROR
+          type: string
+      type: object
+    GoogleFirebaseAppdistroV1alphaJwt:
+      properties:
+        token:
+          type: string
+      type: object
+    GoogleFirebaseAppdistroV1alphaListReleaseTestsResponse:
+      description: The response message for `ListReleaseTests`.
+      properties:
+        nextPageToken:
+          description: A short-lived token, which can be sent as `pageToken` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        releaseTests:
+          description: The tests listed.
+          items:
+            $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaReleaseTest"
+          type: array
+      type: object
+    GoogleFirebaseAppdistroV1alphaLoginCredential:
+      description: Login credential for automated tests
+      properties:
+        fieldHints:
+          $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaLoginCredentialFieldHints"
+          description: Optional. Hints to the crawler for identifying input fields
+        google:
+          description: Optional. Are these credentials for Google?
+          type: boolean
+        password:
+          description: Optional. Password for automated tests
+          type: string
+        username:
+          description: Optional. Username for automated tests
+          type: string
+      type: object
+    GoogleFirebaseAppdistroV1alphaLoginCredentialFieldHints:
+      description: Hints to the crawler for identifying input fields
+      properties:
+        passwordResourceName:
+          description: 'Required. The Android resource name of the password UI element. For example, in Java: R.string.foo in xml: @string/foo Only the "foo" part is needed. Reference doc: https://developer.android.com/guide/topics/resources/accessing-resources.html'
+          type: string
+        usernameResourceName:
+          description: 'Required. The Android resource name of the username UI element. For example, in Java: R.string.foo in xml: @string/foo Only the "foo" part is needed. Reference doc: https://developer.android.com/guide/topics/resources/accessing-resources.html'
+          type: string
+      type: object
+    GoogleFirebaseAppdistroV1alphaProvisionAppResponse:
+      properties: {}
+      type: object
+    GoogleFirebaseAppdistroV1alphaRelease:
+      description: Proto defining a release object
+      properties:
+        buildVersion:
+          description: Release build version
+          type: string
+        displayVersion:
+          description: Release version
+          type: string
+        distributedAt:
+          description: Timestamp when the release was created
+          format: google-datetime
+          type: string
+        id:
+          description: Release Id
+          type: string
+        instanceId:
+          description: Instance id of the release
+          type: string
+        lastActivityAt:
+          description: Last activity timestamp
+          format: google-datetime
+          type: string
+        openInvitationCount:
+          description: Number of testers who have open invitations for the release
+          format: int32
+          type: integer
+        receivedAt:
+          deprecated: true
+          description: "unused. "
+          format: google-datetime
+          type: string
+        releaseNotesSummary:
+          description: Release notes summary
+          type: string
+        testerCount:
+          description: Count of testers added to the release
+          format: int32
+          type: integer
+        testerWithInstallCount:
+          description: Number of testers who have installed the release
+          format: int32
+          type: integer
+      type: object
+    GoogleFirebaseAppdistroV1alphaReleaseNotes:
+      properties:
+        releaseNotes:
+          type: string
+      type: object
+    GoogleFirebaseAppdistroV1alphaReleaseTest:
+      description: The results of running an automated test on a release.
+      properties:
+        createTime:
+          description: Output only. Timestamp when the test was run.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deviceExecutions:
+          description: Required. The results of the test on each device.
+          items:
+            $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaDeviceExecution"
+          type: array
+        loginCredential:
+          $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaLoginCredential"
+          description: Optional. Input only. Login credentials for the test. Input only.
+        name:
+          description: "The name of the release test resource. Format: `projects/{project_number}/apps/{app_id}/releases/{release_id}/tests/{test_id}`"
+          type: string
+      type: object
+    GoogleFirebaseAppdistroV1alphaRoboCrawler:
+      description: Configuration for Robo crawler
+      properties:
+        loginCredential:
+          $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaLoginCredential"
+          description: Optional. Login credential for automated tests
+      type: object
+    GoogleFirebaseAppdistroV1alphaRoboStats:
+      description: Statistics collected during a Robo test.
+      properties:
+        actionsPerformed:
+          description: Output only. Number of actions that crawler performed.
+          format: int32
+          readOnly: true
+          type: integer
+        crawlDuration:
+          description: Output only. Duration of crawl.
+          format: google-duration
+          readOnly: true
+          type: string
+        distinctVisitedScreens:
+          description: Output only. Number of distinct screens visited.
+          format: int32
+          readOnly: true
+          type: integer
+        mainActivityCrawlTimedOut:
+          description: Output only. Whether the main activity crawl timed out.
+          readOnly: true
+          type: boolean
+      type: object
+    GoogleFirebaseAppdistroV1alphaTestConfig:
+      description: Configuration for automated tests
+      properties:
+        name:
+          description: "Identifier. The name of the test configuration resource. Format: `projects/{project_number}/apps/{app_id}/testConfig`"
+          type: string
+        roboCrawler:
+          $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaRoboCrawler"
+          description: Optional. Configuration for Robo crawler
+        testDevices:
+          description: Optional. Tests will be run on this list of devices
+          items:
+            $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaTestDevice"
+          type: array
+      type: object
+    GoogleFirebaseAppdistroV1alphaTestDevice:
+      description: A device on which automated tests can be run.
+      properties:
+        locale:
+          description: Optional. The locale of the device (e.g. "en_US" for US English) during the test.
+          type: string
+        model:
+          description: Required. The device model.
+          type: string
+        orientation:
+          description: Optional. The orientation of the device during the test.
+          type: string
+        version:
+          description: Required. The version of the device (API level on Android).
+          type: string
+      type: object
+    GoogleFirebaseAppdistroV1alphaTesterUdid:
+      description: The UDIDs of a tester's iOS device
+      properties:
+        name:
+          description: The name of the tester's device
+          type: string
+        platform:
+          description: The platform of the tester's device
+          type: string
+        udid:
+          description: The UDID of the tester's device
+          type: string
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

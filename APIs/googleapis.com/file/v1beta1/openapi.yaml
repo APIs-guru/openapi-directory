@@ -345,7 +345,7 @@ paths:
       description: Revert an existing instance's file system to a specified snapshot.
       operationId: file.projects.locations.instances.revert
       parameters:
-        - description: Required. projects/{project_id}/locations/{location_id}/instances/{instance_id}. The resource name of the instance, in the format
+        - description: Required. `projects/{project_id}/locations/{location_id}/instances/{instance_id}`. The resource name of the instance, in the format
           in: path
           name: name
           required: true
@@ -951,7 +951,7 @@ components:
           format: int64
           type: string
         name:
-          description: Required. The name of the file share. Must use 1-16 characters for the basic service tier and 1-63 characters for all other service tiers. Must use lowercase letters, numbers, or underscores [a-z0-9_]. Must start with a letter. Immutable.
+          description: Required. The name of the file share. Must use 1-16 characters for the basic service tier and 1-63 characters for all other service tiers. Must use lowercase letters, numbers, or underscores `[a-z0-9_]`. Must start with a letter. Immutable.
           type: string
         nfsExportOptions:
           description: Nfs Export Options. There is a limit of 10 export options per file share.
@@ -1581,7 +1581,7 @@ components:
       description: RevertInstanceRequest reverts the given instance's file share to the specified snapshot.
       properties:
         targetSnapshotId:
-          description: Required. The snapshot resource ID, in the format 'my-snapshot', where the specified ID is the {snapshot_id} of the fully qualified name like projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}
+          description: Required. The snapshot resource ID, in the format 'my-snapshot', where the specified ID is the {snapshot_id} of the fully qualified name like `projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}`
           type: string
       type: object
     Schedule:
