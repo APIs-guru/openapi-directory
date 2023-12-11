@@ -801,6 +801,9 @@ components:
     GooglePlayDeveloperReportingV1alpha1ErrorReport:
       description: "An error report received for an app. There reports are produced by the Android platform code when a (potentially fatal) error condition is detected. Identical reports from many users will be deduplicated and coalesced into a single ErrorReport. **Required permissions**: to access this resource, the calling user needs the _View app information (read-only)_ permission for the app."
       properties:
+        appVersion:
+          $ref: "#/components/schemas/GooglePlayDeveloperReportingV1alpha1AppVersion"
+          description: The app version on which an event in this error report occurred on.
         deviceModel:
           $ref: "#/components/schemas/GooglePlayDeveloperReportingV1alpha1DeviceModelSummary"
           description: A device model on which an event in this error report occurred on.

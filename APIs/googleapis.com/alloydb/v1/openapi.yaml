@@ -1348,6 +1348,10 @@ components:
           description: Output only. Reconciling (https://google.aip.dev/128#reconciliation), if true, indicates that the service is actively updating the resource. This can happen due to user-triggered updates or system actions like failover or maintenance.
           readOnly: true
           type: boolean
+        satisfiesPzs:
+          description: Output only. Reserved for future use.
+          readOnly: true
+          type: boolean
         sizeBytes:
           description: Output only. The size of the backup in bytes.
           format: int64
@@ -1519,6 +1523,10 @@ components:
           readOnly: true
         reconciling:
           description: Output only. Reconciling (https://google.aip.dev/128#reconciliation). Set to true if the current state of Cluster does not match the user's intended state, and the service is actively updating the resource to reconcile them. This can happen due to user-triggered updates or system actions like failover or maintenance.
+          readOnly: true
+          type: boolean
+        satisfiesPzs:
+          description: Output only. Reserved for future use.
           readOnly: true
           type: boolean
         secondaryConfig:
@@ -1846,6 +1854,10 @@ components:
           description: Read pool instance configuration. This is required if the value of instanceType is READ_POOL.
         reconciling:
           description: Output only. Reconciling (https://google.aip.dev/128#reconciliation). Set to true if the current state of Instance does not match the user's intended state, and the service is actively updating the resource to reconcile them. This can happen due to user-triggered updates or system actions like failover or maintenance.
+          readOnly: true
+          type: boolean
+        satisfiesPzs:
+          description: Output only. Reserved for future use.
           readOnly: true
           type: boolean
         state:
@@ -2369,7 +2381,7 @@ components:
             - PROVIDER_OTHER
           type: string
         resourceContainer:
-          description: Closest parent container of this resource. In GCP, 'container' refers to a Cloud Resource Manager project. It must be resource name of a Cloud Resource Manager project with the format of "provider//", such as "gcp/projects/123". For GCP provided resources, number should be project number.
+          description: Closest parent container of this resource. In GCP, 'container' refers to a Cloud Resource Manager project. It must be resource name of a Cloud Resource Manager project with the format of "provider//", such as "projects/123". For GCP provided resources, number should be project number.
           type: string
         resourceName:
           description: Required. Database resource name associated with the signal. Resource name to follow CAIS resource_name format as noted here go/condor-common-datamodel
@@ -2572,11 +2584,27 @@ components:
           description: The type of the instance. Specified at creation time.
           enum:
             - INSTANCE_TYPE_UNSPECIFIED
+            - SUB_RESOURCE_TYPE_UNSPECIFIED
             - PRIMARY
             - SECONDARY
             - READ_REPLICA
             - OTHER
+            - SUB_RESOURCE_TYPE_PRIMARY
+            - SUB_RESOURCE_TYPE_SECONDARY
+            - SUB_RESOURCE_TYPE_READ_REPLICA
+            - SUB_RESOURCE_TYPE_OTHER
           type: string
+          x-enumDeprecated:
+            - true
+            - false
+            - true
+            - true
+            - true
+            - true
+            - false
+            - false
+            - false
+            - false
         location:
           description: The resource location. REQUIRED
           type: string
@@ -2587,7 +2615,7 @@ components:
           $ref: "#/components/schemas/StorageDatabasecenterProtoCommonProduct"
           description: The product this resource represents.
         resourceContainer:
-          description: Closest parent Cloud Resource Manager container of this resource. It must be resource name of a Cloud Resource Manager project with the format of "provider//", such as "gcp/projects/123". For GCP provided resources, number should be project number.
+          description: Closest parent Cloud Resource Manager container of this resource. It must be resource name of a Cloud Resource Manager project with the format of "/", such as "projects/123". For GCP provided resources, number should be project number.
           type: string
         resourceName:
           description: Required. Different from DatabaseResourceId.unique_id, a resource name can be reused over time. That is, after a resource named "ABC" is deleted, the name "ABC" can be used to to create a new resource within the same source. Resource name to follow CAIS resource_name format as noted here go/condor-common-datamodel
@@ -2636,23 +2664,56 @@ components:
           description: The specific engine that the underlying database is running.
           enum:
             - ENGINE_UNSPECIFIED
+            - ENGINE_MYSQL
             - MYSQL
+            - ENGINE_POSTGRES
             - POSTGRES
+            - ENGINE_SQL_SERVER
             - SQL_SERVER
+            - ENGINE_NATIVE
             - NATIVE
+            - ENGINE_CLOUD_SPANNER_WITH_POSTGRES_DIALECT
             - SPANGRES
             - ENGINE_OTHER
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - true
+            - false
+            - true
+            - false
+            - true
+            - false
+            - true
+            - false
+            - true
+            - false
         type:
           description: Type of specific database product. It could be CloudSQL, AlloyDB etc..
           enum:
             - PRODUCT_TYPE_UNSPECIFIED
+            - PRODUCT_TYPE_CLOUD_SQL
             - CLOUD_SQL
+            - PRODUCT_TYPE_ALLOYDB
             - ALLOYDB
+            - PRODUCT_TYPE_SPANNER
             - SPANNER
+            - PRODUCT_TYPE_ON_PREM
             - ON_PREM
             - PRODUCT_TYPE_OTHER
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - true
+            - false
+            - true
+            - false
+            - true
+            - false
+            - true
+            - false
         version:
           description: 'Version of the underlying database engine. Example values: For MySQL, it could be "8.0", "5.7" etc.. For Postgres, it could be "14", "15" etc..'
           type: string

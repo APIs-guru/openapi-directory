@@ -765,7 +765,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. Id of the requesting object. If auto-generating Id server-side, remove this field and firewall_endpoint_association_id from the method_signature of Create RPC.
+        - description: Optional. Id of the requesting object. If auto-generating Id server-side, remove this field and firewall_endpoint_association_id from the method_signature of Create RPC.
           in: query
           name: firewallEndpointAssociationId
           schema:
@@ -1857,9 +1857,16 @@ components:
       description: Message describing Endpoint object
       properties:
         associatedNetworks:
+          deprecated: true
           description: "Output only. List of networks that are associated with this endpoint in the local zone. This is a projection of the FirewallEndpointAssociations pointing at this endpoint. A network will only appear in this list after traffic routing is fully configured. Format: projects/{project}/global/networks/{name}."
           items:
             type: string
+          readOnly: true
+          type: array
+        associations:
+          description: Output only. List of FirewallEndpointAssociations that are associated to this endpoint. An association will only appear in this list after traffic routing is fully configured.
+          items:
+            $ref: "#/components/schemas/FirewallEndpointAssociationReference"
           readOnly: true
           type: array
         billingProjectId:
@@ -1879,8 +1886,7 @@ components:
           description: Optional. Labels as key value pairs
           type: object
         name:
-          description: Output only. name of resource
-          readOnly: true
+          description: Immutable. Identifier. name of resource
           type: string
         reconciling:
           description: Output only. Whether reconciling is in progress, recommended per https://google.aip.dev/128.
@@ -1919,8 +1925,7 @@ components:
           description: Optional. Labels as key value pairs
           type: object
         name:
-          description: Output only. name of resource
-          readOnly: true
+          description: Immutable. Identifier. name of resource
           type: string
         network:
           description: Required. The URL of the network that is being associated.
@@ -1945,6 +1950,18 @@ components:
         updateTime:
           description: Output only. Update time stamp
           format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    FirewallEndpointAssociationReference:
+      description: This is a subset of the FirewallEndpointAssociation message, containing fields to be used by the consumer.
+      properties:
+        name:
+          description: "Output only. The resource name of the FirewallEndpointAssociation. Format: projects/{project}/locations/{location}/firewallEndpointAssociations/{id}"
+          readOnly: true
+          type: string
+        network:
+          description: "Output only. The VPC network associated. Format: projects/{project}/global/networks/{name}."
           readOnly: true
           type: string
       type: object

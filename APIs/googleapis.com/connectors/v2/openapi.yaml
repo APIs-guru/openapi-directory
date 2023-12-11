@@ -251,6 +251,119 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v2/{name}:checkReadiness:
+    get:
+      description: Reports readiness status of the connector. Similar logic to GetStatus but modified for kubernetes health check to understand.
+      operationId: connectors.projects.locations.connections.checkReadiness
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckReadinessResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v2/{name}:checkStatus:
+    get:
+      description: Reports the status of the connection. Note that when the connection is in a state that is not ACTIVE, the implementation of this RPC method must return a Status with the corresponding State instead of returning a gRPC status code that is not "OK", which indicates that ConnectionStatus itself, not the connection, failed.
+      operationId: connectors.projects.locations.connections.checkStatus
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckStatusResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v2/{name}:exchangeAuthCode:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: ExchangeAuthCode exchanges the OAuth authorization code (and other necessary data) for an access token (and associated credentials).
+      operationId: connectors.projects.locations.connections.exchangeAuthCode
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExchangeAuthCodeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExchangeAuthCodeResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v2/{name}:execute:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -285,6 +398,47 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ExecuteActionResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v2/{name}:refreshAccessToken:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: RefreshAccessToken exchanges the OAuth refresh token (and other necessary data) for a new access token (and new associated credentials).
+      operationId: connectors.projects.locations.connections.refreshAccessToken
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RefreshAccessTokenRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RefreshAccessTokenResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -571,6 +725,20 @@ components:
       schema:
         type: string
   schemas:
+    AccessCredentials:
+      description: AccessCredentials includes the OAuth access token, and the other fields returned along with it.
+      properties:
+        accessToken:
+          description: OAuth access token.
+          type: string
+        expiresIn:
+          description: Duration till the access token expires.
+          format: google-duration
+          type: string
+        refreshToken:
+          description: OAuth refresh token.
+          type: string
+      type: object
     Action:
       description: Action message contains metadata information about a single action present in the external system.
       properties:
@@ -599,6 +767,27 @@ components:
           items:
             $ref: "#/components/schemas/ResultMetadata"
           type: array
+      type: object
+    CheckReadinessResponse:
+      description: Response containing status of the connector for readiness prober.
+      properties:
+        status:
+          type: string
+      type: object
+    CheckStatusResponse:
+      description: The status of the connector.
+      properties:
+        description:
+          description: When the connector is not in ACTIVE state, the description must be populated to specify the reason why it's not in ACTIVE state.
+          type: string
+        state:
+          description: State of the connector.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - ERROR
+            - AUTH_ERROR
+          type: string
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
@@ -630,6 +819,16 @@ components:
         name:
           description: The name of the entity type.
           type: string
+      type: object
+    ExchangeAuthCodeRequest:
+      description: ExchangeAuthCodeRequest currently includes no fields.
+      properties: {}
+      type: object
+    ExchangeAuthCodeResponse:
+      description: ExchangeAuthCodeResponse includes the returned access token and its associated credentials.
+      properties:
+        accessCredentials:
+          $ref: "#/components/schemas/AccessCredentials"
       type: object
     ExecuteActionRequest:
       description: Request message for ActionService.ExecuteAction
@@ -1216,6 +1415,16 @@ components:
         type:
           description: Name of reference entity type.
           type: string
+      type: object
+    RefreshAccessTokenRequest:
+      description: RefreshAccessTokenRequest currently includes no fields.
+      properties: {}
+      type: object
+    RefreshAccessTokenResponse:
+      description: RefreshAccessTokenResponse includes the returned access token and its associated credentials.
+      properties:
+        accessCredentials:
+          $ref: "#/components/schemas/AccessCredentials"
       type: object
     ResultMetadata:
       description: Result Metadata message contains metadata about the result returned after executing an Action.

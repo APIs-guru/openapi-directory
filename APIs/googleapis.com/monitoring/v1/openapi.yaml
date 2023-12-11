@@ -1645,6 +1645,16 @@ components:
           $ref: "#/components/schemas/TimeSeriesQuery"
           description: Required. Fields for querying time series data from the Stackdriver metrics API.
       type: object
+    SectionHeader:
+      description: A widget that defines a new section header. Sections populate a table of contents and allow easier navigation of long-form content.
+      properties:
+        dividerBelow:
+          description: Whether to insert a divider below the section in the table of contents
+          type: boolean
+        subtitle:
+          description: The subtitle of the section
+          type: string
+      type: object
     SourceContext:
       description: SourceContext represents information about the source of a protobuf element, like the file in which it is defined.
       properties:
@@ -2019,6 +2029,9 @@ components:
         scorecard:
           $ref: "#/components/schemas/Scorecard"
           description: A scorecard summarizing time series data.
+        sectionHeader:
+          $ref: "#/components/schemas/SectionHeader"
+          description: A widget that defines a section header for easier navigation of the dashboard.
         text:
           $ref: "#/components/schemas/Text"
           description: A raw string or markdown displaying textual content.

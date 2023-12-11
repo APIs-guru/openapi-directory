@@ -144,7 +144,6 @@ paths:
       tags:
         - Modifications
       x-addedInVersion: "30"
-      x-groupName: Modifications
       x-methodName: adjustAuthorisation
       x-sortIndex: 6
   /authorise:
@@ -225,7 +224,6 @@ paths:
       summary: Create an authorisation
       tags:
         - Payments
-      x-groupName: Payments
       x-methodName: authorise
       x-sortIndex: 1
   /authorise3d:
@@ -295,7 +293,6 @@ paths:
       summary: Complete a 3DS authorisation
       tags:
         - Payments
-      x-groupName: Payments
       x-methodName: authorise3d
       x-sortIndex: 2
   /authorise3ds2:
@@ -366,7 +363,6 @@ paths:
       tags:
         - Payments
       x-addedInVersion: "37"
-      x-groupName: Payments
       x-methodName: authorise3ds2
       x-sortIndex: 3
   /cancel:
@@ -438,7 +434,6 @@ paths:
       summary: Cancel an authorisation
       tags:
         - Modifications
-      x-groupName: Modifications
       x-methodName: cancel
       x-sortIndex: 2
   /cancelOrRefund:
@@ -519,7 +514,6 @@ paths:
       summary: Cancel or refund a payment
       tags:
         - Modifications
-      x-groupName: Modifications
       x-methodName: cancelOrRefund
       x-sortIndex: 4
   /capture:
@@ -597,7 +591,6 @@ paths:
       summary: Capture an authorisation
       tags:
         - Modifications
-      x-groupName: Modifications
       x-methodName: capture
       x-sortIndex: 1
   /donate:
@@ -668,7 +661,6 @@ paths:
       tags:
         - Modifications
       x-addedInVersion: "40"
-      x-groupName: Modifications
       x-methodName: donate
       x-sortIndex: 6
   /refund:
@@ -746,7 +738,6 @@ paths:
       summary: Refund a captured payment
       tags:
         - Modifications
-      x-groupName: Modifications
       x-methodName: refund
       x-sortIndex: 3
   /retrieve3ds2Result:
@@ -814,7 +805,6 @@ paths:
       tags:
         - Payments
       x-addedInVersion: "40"
-      x-groupName: Payments
       x-methodName: retrieve3ds2Result
       x-sortIndex: 4
   /technicalCancel:
@@ -892,7 +882,6 @@ paths:
       tags:
         - Modifications
       x-addedInVersion: "30"
-      x-groupName: Modifications
       x-methodName: technicalCancel
       x-sortIndex: 5
   /voidPendingRefund:
@@ -972,7 +961,6 @@ paths:
       tags:
         - Modifications
       x-addedInVersion: "25"
-      x-groupName: Modifications
       x-methodName: voidPendingRefund
       x-sortIndex: 7
 components:
@@ -5534,6 +5522,3 @@ components:
     BasicAuth:
       scheme: basic
       type: http
-x-groups:
-  - Payments
-  - Modifications

@@ -514,7 +514,6 @@ webhooks:
       tags:
         - Merchant account
       x-addedInVersion: "1"
-      x-groupName: Merchant account
       x-methodName: merchantAccountCreated
       x-sortIndex: 1
   merchant.updated:
@@ -549,7 +548,6 @@ webhooks:
       tags:
         - Merchant account
       x-addedInVersion: "1"
-      x-groupName: Merchant account
       x-methodName: merchantAccountCapabilityUpdated
       x-sortIndex: 2
   paymentMethod.created:
@@ -580,10 +578,6 @@ webhooks:
       tags:
         - Payment method
       x-addedInVersion: "1"
-      x-groupName: Payment method
       x-methodName: paymentMethodCreated
       x-sortIndex: 1
-x-groups:
-  - Merchant account
-  - Payment method
 x-staticResponse: response.json

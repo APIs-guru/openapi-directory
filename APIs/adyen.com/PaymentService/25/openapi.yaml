@@ -147,7 +147,6 @@ paths:
       summary: Create an authorisation
       tags:
         - Payments
-      x-groupName: Payments
       x-methodName: authorise
       x-sortIndex: 1
   /authorise3d:
@@ -217,7 +216,6 @@ paths:
       summary: Complete a 3DS authorisation
       tags:
         - Payments
-      x-groupName: Payments
       x-methodName: authorise3d
       x-sortIndex: 2
   /cancel:
@@ -289,7 +287,6 @@ paths:
       summary: Cancel an authorisation
       tags:
         - Modifications
-      x-groupName: Modifications
       x-methodName: cancel
       x-sortIndex: 2
   /cancelOrRefund:
@@ -370,7 +367,6 @@ paths:
       summary: Cancel or refund a payment
       tags:
         - Modifications
-      x-groupName: Modifications
       x-methodName: cancelOrRefund
       x-sortIndex: 4
   /capture:
@@ -448,7 +444,6 @@ paths:
       summary: Capture an authorisation
       tags:
         - Modifications
-      x-groupName: Modifications
       x-methodName: capture
       x-sortIndex: 1
   /refund:
@@ -526,7 +521,6 @@ paths:
       summary: Refund a captured payment
       tags:
         - Modifications
-      x-groupName: Modifications
       x-methodName: refund
       x-sortIndex: 3
   /voidPendingRefund:
@@ -606,7 +600,6 @@ paths:
       tags:
         - Modifications
       x-addedInVersion: "25"
-      x-groupName: Modifications
       x-methodName: voidPendingRefund
       x-sortIndex: 7
 components:
@@ -3901,6 +3894,3 @@ components:
     BasicAuth:
       scheme: basic
       type: http
-x-groups:
-  - Payments
-  - Modifications

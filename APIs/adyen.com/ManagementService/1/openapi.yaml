@@ -145,7 +145,6 @@ paths:
       summary: Get a list of company accounts
       tags:
         - Account - company level
-      x-groupName: Account - company level
       x-methodName: listCompanyAccounts
       x-sortIndex: 0
   /companies/{companyId}:
@@ -209,7 +208,6 @@ paths:
       summary: Get a company account
       tags:
         - Account - company level
-      x-groupName: Account - company level
       x-methodName: getCompanyAccount
       x-sortIndex: 0
   /companies/{companyId}/androidApps:
@@ -304,7 +302,6 @@ paths:
       summary: Get a list of Android apps
       tags:
         - Android files - company level
-      x-groupName: Android files - company level
       x-methodName: listAndroidApps
       x-sortIndex: 1
   /companies/{companyId}/androidApps/{id}:
@@ -373,7 +370,6 @@ paths:
       summary: Get Android app
       tags:
         - Android files - company level
-      x-groupName: Android files - company level
       x-methodName: getAndroidApp
       x-sortIndex: 3
   /companies/{companyId}/androidCertificates:
@@ -461,7 +457,6 @@ paths:
       summary: Get a list of Android certificates
       tags:
         - Android files - company level
-      x-groupName: Android files - company level
       x-methodName: listAndroidCertificates
       x-sortIndex: 2
   /companies/{companyId}/apiCredentials:
@@ -539,7 +534,6 @@ paths:
       summary: Get a list of API credentials
       tags:
         - API credentials - company level
-      x-groupName: API credentials - company level
       x-methodName: listApiCredentials
       x-sortIndex: 0
     post:
@@ -619,7 +613,6 @@ paths:
       summary: Create an API credential.
       tags:
         - API credentials - company level
-      x-groupName: API credentials - company level
       x-methodName: createApiCredential
       x-sortIndex: 0
   /companies/{companyId}/apiCredentials/{apiCredentialId}:
@@ -689,7 +682,6 @@ paths:
       summary: Get an API credential
       tags:
         - API credentials - company level
-      x-groupName: API credentials - company level
       x-methodName: getApiCredential
       x-sortIndex: 0
     patch:
@@ -766,7 +758,6 @@ paths:
       summary: Update an API credential.
       tags:
         - API credentials - company level
-      x-groupName: API credentials - company level
       x-methodName: updateApiCredential
       x-sortIndex: 0
   /companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins:
@@ -836,7 +827,6 @@ paths:
       summary: Get a list of allowed origins
       tags:
         - Allowed origins - company level
-      x-groupName: Allowed origins - company level
       x-methodName: listAllowedOrigins
       x-sortIndex: 0
     post:
@@ -913,7 +903,6 @@ paths:
       summary: Create an allowed origin
       tags:
         - Allowed origins - company level
-      x-groupName: Allowed origins - company level
       x-methodName: createAllowedOrigin
       x-sortIndex: 0
   /companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins/{originId}:
@@ -982,7 +971,6 @@ paths:
       summary: Delete an allowed origin
       tags:
         - Allowed origins - company level
-      x-groupName: Allowed origins - company level
       x-methodName: deleteAllowedOrigin
       x-sortIndex: 0
     get:
@@ -1057,7 +1045,6 @@ paths:
       summary: Get an allowed origin
       tags:
         - Allowed origins - company level
-      x-groupName: Allowed origins - company level
       x-methodName: getAllowedOrigin
       x-sortIndex: 0
   /companies/{companyId}/apiCredentials/{apiCredentialId}/generateApiKey:
@@ -1124,7 +1111,6 @@ paths:
       summary: Generate new API key
       tags:
         - API key - company level
-      x-groupName: API key - company level
       x-methodName: generateNewApiKey
       x-sortIndex: 0
   /companies/{companyId}/apiCredentials/{apiCredentialId}/generateClientKey:
@@ -1191,7 +1177,6 @@ paths:
       summary: Generate new client key
       tags:
         - Client key - company level
-      x-groupName: Client key - company level
       x-methodName: generateNewClientKey
       x-sortIndex: 0
   /companies/{companyId}/billingEntities:
@@ -1263,7 +1248,6 @@ paths:
       summary: Get a list of billing entities
       tags:
         - Terminal orders - company level
-      x-groupName: Terminal orders - company level
       x-methodName: listBillingEntities
       x-sortIndex: 3
   /companies/{companyId}/merchants:
@@ -1341,7 +1325,6 @@ paths:
       summary: Get a list of merchant accounts
       tags:
         - Account - company level
-      x-groupName: Account - company level
       x-methodName: listMerchantAccounts
       x-sortIndex: 0
   /companies/{companyId}/shippingLocations:
@@ -1427,7 +1410,6 @@ paths:
       summary: Get a list of shipping locations
       tags:
         - Terminal orders - company level
-      x-groupName: Terminal orders - company level
       x-methodName: listShippingLocations
       x-sortIndex: 4
     post:
@@ -1498,7 +1480,6 @@ paths:
       summary: Create a shipping location
       tags:
         - Terminal orders - company level
-      x-groupName: Terminal orders - company level
       x-methodName: createShippingLocation
       x-sortIndex: 5
   /companies/{companyId}/terminalActions:
@@ -1592,7 +1573,6 @@ paths:
       summary: Get a list of terminal actions
       tags:
         - Terminal actions - company level
-      x-groupName: Terminal actions - company level
       x-methodName: listTerminalActions
       x-sortIndex: 1
   /companies/{companyId}/terminalActions/{actionId}:
@@ -1662,7 +1642,6 @@ paths:
       summary: Get terminal action
       tags:
         - Terminal actions - company level
-      x-groupName: Terminal actions - company level
       x-methodName: getTerminalAction
       x-sortIndex: 2
   /companies/{companyId}/terminalLogos:
@@ -1736,7 +1715,6 @@ paths:
       summary: Get the terminal logo
       tags:
         - Terminal settings - company level
-      x-groupName: Terminal settings - company level
       x-methodName: getTerminalLogo
       x-sortIndex: 2
     patch:
@@ -1820,7 +1798,6 @@ paths:
       summary: Update the terminal logo
       tags:
         - Terminal settings - company level
-      x-groupName: Terminal settings - company level
       x-methodName: updateTerminalLogo
       x-sortIndex: 4
   /companies/{companyId}/terminalModels:
@@ -1886,7 +1863,6 @@ paths:
       summary: Get a list of terminal models
       tags:
         - Terminal orders - company level
-      x-groupName: Terminal orders - company level
       x-methodName: listTerminalModels
       x-sortIndex: 1
   /companies/{companyId}/terminalOrders:
@@ -1978,7 +1954,6 @@ paths:
       summary: Get a list of orders
       tags:
         - Terminal orders - company level
-      x-groupName: Terminal orders - company level
       x-methodName: listOrders
       x-sortIndex: 7
     post:
@@ -2050,7 +2025,6 @@ paths:
       summary: Create an order
       tags:
         - Terminal orders - company level
-      x-groupName: Terminal orders - company level
       x-methodName: createOrder
       x-sortIndex: 6
   /companies/{companyId}/terminalOrders/{orderId}:
@@ -2121,7 +2095,6 @@ paths:
       summary: Get an order
       tags:
         - Terminal orders - company level
-      x-groupName: Terminal orders - company level
       x-methodName: getOrder
       x-sortIndex: 8
     patch:
@@ -2203,7 +2176,6 @@ paths:
       summary: Update an order
       tags:
         - Terminal orders - company level
-      x-groupName: Terminal orders - company level
       x-methodName: updateOrder
       x-sortIndex: 9
   /companies/{companyId}/terminalOrders/{orderId}/cancel:
@@ -2275,7 +2247,6 @@ paths:
       summary: Cancel an order
       tags:
         - Terminal orders - company level
-      x-groupName: Terminal orders - company level
       x-methodName: cancelOrder
       x-sortIndex: 10
   /companies/{companyId}/terminalProducts:
@@ -2366,7 +2337,6 @@ paths:
       summary: Get a list of terminal products
       tags:
         - Terminal orders - company level
-      x-groupName: Terminal orders - company level
       x-methodName: listTerminalProducts
       x-sortIndex: 2
   /companies/{companyId}/terminalSettings:
@@ -2434,7 +2404,6 @@ paths:
       summary: Get terminal settings
       tags:
         - Terminal settings - company level
-      x-groupName: Terminal settings - company level
       x-methodName: getTerminalSettings
       x-sortIndex: 1
     patch:
@@ -2516,7 +2485,6 @@ paths:
       summary: Update terminal settings
       tags:
         - Terminal settings - company level
-      x-groupName: Terminal settings - company level
       x-methodName: updateTerminalSettings
       x-sortIndex: 3
   /companies/{companyId}/users:
@@ -2597,7 +2565,6 @@ paths:
       summary: Get a list of users
       tags:
         - Users - company level
-      x-groupName: Users - company level
       x-methodName: listUsers
       x-sortIndex: 0
     post:
@@ -2668,7 +2635,6 @@ paths:
       summary: Create a new user
       tags:
         - Users - company level
-      x-groupName: Users - company level
       x-methodName: createNewUser
       x-sortIndex: 0
   /companies/{companyId}/users/{userId}:
@@ -2735,7 +2701,6 @@ paths:
       summary: Get user details
       tags:
         - Users - company level
-      x-groupName: Users - company level
       x-methodName: getUserDetails
       x-sortIndex: 0
     patch:
@@ -2806,7 +2771,6 @@ paths:
       summary: Update user details
       tags:
         - Users - company level
-      x-groupName: Users - company level
       x-methodName: updateUserDetails
       x-sortIndex: 0
   /companies/{companyId}/webhooks:
@@ -2885,7 +2849,6 @@ paths:
       summary: List all webhooks
       tags:
         - Webhooks - company level
-      x-groupName: Webhooks - company level
       x-methodName: listAllWebhooks
       x-sortIndex: 2
     post:
@@ -2956,7 +2919,6 @@ paths:
       summary: Set up a webhook
       tags:
         - Webhooks - company level
-      x-groupName: Webhooks - company level
       x-methodName: setUpWebhook
       x-sortIndex: 1
   /companies/{companyId}/webhooks/{webhookId}:
@@ -3019,7 +2981,6 @@ paths:
       summary: Remove a webhook
       tags:
         - Webhooks - company level
-      x-groupName: Webhooks - company level
       x-methodName: removeWebhook
       x-sortIndex: 5
     get:
@@ -3089,7 +3050,6 @@ paths:
       summary: Get a webhook
       tags:
         - Webhooks - company level
-      x-groupName: Webhooks - company level
       x-methodName: getWebhook
       x-sortIndex: 3
     patch:
@@ -3166,7 +3126,6 @@ paths:
       summary: Update a webhook
       tags:
         - Webhooks - company level
-      x-groupName: Webhooks - company level
       x-methodName: updateWebhook
       x-sortIndex: 4
   /companies/{companyId}/webhooks/{webhookId}/generateHmac:
@@ -3236,7 +3195,6 @@ paths:
       summary: Generate an HMAC key
       tags:
         - Webhooks - company level
-      x-groupName: Webhooks - company level
       x-methodName: generateHmacKey
       x-sortIndex: 6
   /companies/{companyId}/webhooks/{webhookId}/test:
@@ -3320,7 +3278,6 @@ paths:
       summary: Test a webhook
       tags:
         - Webhooks - company level
-      x-groupName: Webhooks - company level
       x-methodName: testWebhook
       x-sortIndex: 7
   /me:
@@ -3373,7 +3330,6 @@ paths:
       summary: Get API credential details
       tags:
         - My API credential
-      x-groupName: My API credential
       x-methodName: getApiCredentialDetails
       x-sortIndex: 0
   /me/allowedOrigins:
@@ -3426,7 +3382,6 @@ paths:
       summary: Get allowed origins
       tags:
         - My API credential
-      x-groupName: My API credential
       x-methodName: getAllowedOrigins
       x-sortIndex: 0
     post:
@@ -3484,7 +3439,6 @@ paths:
       summary: Add allowed origin
       tags:
         - My API credential
-      x-groupName: My API credential
       x-methodName: addAllowedOrigin
       x-sortIndex: 0
   /me/allowedOrigins/{originId}:
@@ -3541,7 +3495,6 @@ paths:
       summary: Remove allowed origin
       tags:
         - My API credential
-      x-groupName: My API credential
       x-methodName: removeAllowedOrigin
       x-sortIndex: 0
     get:
@@ -3601,7 +3554,6 @@ paths:
       summary: Get allowed origin details
       tags:
         - My API credential
-      x-groupName: My API credential
       x-methodName: getAllowedOriginDetails
       x-sortIndex: 0
   /me/generateClientKey:
@@ -3657,7 +3609,6 @@ paths:
       summary: Generate a client key
       tags:
         - My API credential
-      x-groupName: My API credential
       x-methodName: generateClientKey
       x-sortIndex: 0
   /merchants:
@@ -3731,7 +3682,6 @@ paths:
       summary: Get a list of merchant accounts
       tags:
         - Account - merchant level
-      x-groupName: Account - merchant level
       x-methodName: listMerchantAccounts
       x-sortIndex: 4
     post:
@@ -3799,7 +3749,6 @@ paths:
       summary: Create a merchant account
       tags:
         - Account - merchant level
-      x-groupName: Account - merchant level
       x-methodName: createMerchantAccount
       x-sortIndex: 1
   /merchants/{merchantId}:
@@ -3865,7 +3814,6 @@ paths:
       summary: Get a merchant account
       tags:
         - Account - merchant level
-      x-groupName: Account - merchant level
       x-methodName: getMerchantAccount
       x-sortIndex: 3
   /merchants/{merchantId}/activate:
@@ -3932,7 +3880,6 @@ paths:
       summary: Request to activate a merchant account
       tags:
         - Account - merchant level
-      x-groupName: Account - merchant level
       x-methodName: requestToActivateMerchantAccount
       x-sortIndex: 2
   /merchants/{merchantId}/apiCredentials:
@@ -4012,7 +3959,6 @@ paths:
       summary: Get a list of API credentials
       tags:
         - API credentials - merchant level
-      x-groupName: API credentials - merchant level
       x-methodName: listApiCredentials
       x-sortIndex: 0
     post:
@@ -4094,7 +4040,6 @@ paths:
       summary: Create an API credential
       tags:
         - API credentials - merchant level
-      x-groupName: API credentials - merchant level
       x-methodName: createApiCredential
       x-sortIndex: 0
   /merchants/{merchantId}/apiCredentials/{apiCredentialId}:
@@ -4166,7 +4111,6 @@ paths:
       summary: Get an API credential
       tags:
         - API credentials - merchant level
-      x-groupName: API credentials - merchant level
       x-methodName: getApiCredential
       x-sortIndex: 0
     patch:
@@ -4245,7 +4189,6 @@ paths:
       summary: Update an API credential
       tags:
         - API credentials - merchant level
-      x-groupName: API credentials - merchant level
       x-methodName: updateApiCredential
       x-sortIndex: 0
   /merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins:
@@ -4317,7 +4260,6 @@ paths:
       summary: Get a list of allowed origins
       tags:
         - Allowed origins - merchant level
-      x-groupName: Allowed origins - merchant level
       x-methodName: listAllowedOrigins
       x-sortIndex: 0
     post:
@@ -4396,7 +4338,6 @@ paths:
       summary: Create an allowed origin
       tags:
         - Allowed origins - merchant level
-      x-groupName: Allowed origins - merchant level
       x-methodName: createAllowedOrigin
       x-sortIndex: 0
   /merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins/{originId}:
@@ -4465,7 +4406,6 @@ paths:
       summary: Delete an allowed origin
       tags:
         - Allowed origins - merchant level
-      x-groupName: Allowed origins - merchant level
       x-methodName: deleteAllowedOrigin
       x-sortIndex: 0
     get:
@@ -4542,7 +4482,6 @@ paths:
       summary: Get an allowed origin
       tags:
         - Allowed origins - merchant level
-      x-groupName: Allowed origins - merchant level
       x-methodName: getAllowedOrigin
       x-sortIndex: 0
   /merchants/{merchantId}/apiCredentials/{apiCredentialId}/generateApiKey:
@@ -4611,7 +4550,6 @@ paths:
       summary: Generate new API key
       tags:
         - API key - merchant level
-      x-groupName: API key - merchant level
       x-methodName: generateNewApiKey
       x-sortIndex: 0
   /merchants/{merchantId}/apiCredentials/{apiCredentialId}/generateClientKey:
@@ -4680,7 +4618,6 @@ paths:
       summary: Generate new client key
       tags:
         - Client key - merchant level
-      x-groupName: Client key - merchant level
       x-methodName: generateNewClientKey
       x-sortIndex: 0
   /merchants/{merchantId}/billingEntities:
@@ -4754,7 +4691,6 @@ paths:
       summary: Get a list of billing entities
       tags:
         - Terminal orders - merchant level
-      x-groupName: Terminal orders - merchant level
       x-methodName: listBillingEntities
       x-sortIndex: 3
   /merchants/{merchantId}/paymentMethodSettings:
@@ -4843,7 +4779,6 @@ paths:
       summary: Get all payment methods
       tags:
         - Payment methods - merchant level
-      x-groupName: Payment methods - merchant level
       x-methodName: getAllPaymentMethods
       x-sortIndex: 2
     post:
@@ -4920,7 +4855,6 @@ paths:
       summary: Request a payment method
       tags:
         - Payment methods - merchant level
-      x-groupName: Payment methods - merchant level
       x-methodName: requestPaymentMethod
       x-sortIndex: 1
   /merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}:
@@ -4989,7 +4923,6 @@ paths:
       summary: Get payment method details
       tags:
         - Payment methods - merchant level
-      x-groupName: Payment methods - merchant level
       x-methodName: getPaymentMethodDetails
       x-sortIndex: 3
     patch:
@@ -5062,7 +4995,6 @@ paths:
       summary: Update a payment method
       tags:
         - Payment methods - merchant level
-      x-groupName: Payment methods - merchant level
       x-methodName: updatePaymentMethod
       x-sortIndex: 4
   /merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}/addApplePayDomains:
@@ -5133,7 +5065,6 @@ paths:
       summary: Add an Apple Pay domain
       tags:
         - Payment methods - merchant level
-      x-groupName: Payment methods - merchant level
       x-methodName: addApplePayDomain
       x-sortIndex: 5
   /merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}/getApplePayDomains:
@@ -5202,7 +5133,6 @@ paths:
       summary: Get Apple Pay domains
       tags:
         - Payment methods - merchant level
-      x-groupName: Payment methods - merchant level
       x-methodName: getApplePayDomains
       x-sortIndex: 6
   /merchants/{merchantId}/payoutSettings:
@@ -5267,7 +5197,6 @@ paths:
       summary: Get a list of payout settings
       tags:
         - Payout settings - merchant level
-      x-groupName: Payout settings - merchant level
       x-methodName: listPayoutSettings
       x-sortIndex: 3
     post:
@@ -5339,7 +5268,6 @@ paths:
       summary: Add a payout setting
       tags:
         - Payout settings - merchant level
-      x-groupName: Payout settings - merchant level
       x-methodName: addPayoutSetting
       x-sortIndex: 1
   /merchants/{merchantId}/payoutSettings/{payoutSettingsId}:
@@ -5405,7 +5333,6 @@ paths:
       summary: Delete a payout setting
       tags:
         - Payout settings - merchant level
-      x-groupName: Payout settings - merchant level
       x-methodName: deletePayoutSetting
       x-sortIndex: 5
     get:
@@ -5475,7 +5402,6 @@ paths:
       summary: Get a payout setting
       tags:
         - Payout settings - merchant level
-      x-groupName: Payout settings - merchant level
       x-methodName: getPayoutSetting
       x-sortIndex: 4
     patch:
@@ -5551,7 +5477,6 @@ paths:
       summary: Update a payout setting
       tags:
         - Payout settings - merchant level
-      x-groupName: Payout settings - merchant level
       x-methodName: updatePayoutSetting
       x-sortIndex: 2
   /merchants/{merchantId}/shippingLocations:
@@ -5639,7 +5564,6 @@ paths:
       summary: Get a list of shipping locations
       tags:
         - Terminal orders - merchant level
-      x-groupName: Terminal orders - merchant level
       x-methodName: listShippingLocations
       x-sortIndex: 4
     post:
@@ -5712,7 +5636,6 @@ paths:
       summary: Create a shipping location
       tags:
         - Terminal orders - merchant level
-      x-groupName: Terminal orders - merchant level
       x-methodName: createShippingLocation
       x-sortIndex: 5
   /merchants/{merchantId}/splitConfigurations:
@@ -5778,7 +5701,6 @@ paths:
       summary: Get a list of split configurations
       tags:
         - Split configuration - merchant level
-      x-groupName: Split configuration - merchant level
       x-methodName: listSplitConfigurations
       x-sortIndex: 3
     post:
@@ -5851,7 +5773,6 @@ paths:
       summary: Create a split configuration
       tags:
         - Split configuration - merchant level
-      x-groupName: Split configuration - merchant level
       x-methodName: createSplitConfiguration
       x-sortIndex: 1
   /merchants/{merchantId}/splitConfigurations/{splitConfigurationId}:
@@ -5920,7 +5841,6 @@ paths:
       summary: Delete a split configuration
       tags:
         - Split configuration - merchant level
-      x-groupName: Split configuration - merchant level
       x-methodName: deleteSplitConfiguration
       x-sortIndex: 8
     get:
@@ -5991,7 +5911,6 @@ paths:
       summary: Get a split configuration
       tags:
         - Split configuration - merchant level
-      x-groupName: Split configuration - merchant level
       x-methodName: getSplitConfiguration
       x-sortIndex: 4
     patch:
@@ -6070,7 +5989,6 @@ paths:
       summary: Update split configuration description
       tags:
         - Split configuration - merchant level
-      x-groupName: Split configuration - merchant level
       x-methodName: updateSplitConfigurationDescription
       x-sortIndex: 5
     post:
@@ -6149,7 +6067,6 @@ paths:
       summary: Create a rule
       tags:
         - Split configuration - merchant level
-      x-groupName: Split configuration - merchant level
       x-methodName: createRule
       x-sortIndex: 2
   /merchants/{merchantId}/splitConfigurations/{splitConfigurationId}/rules/{ruleId}:
@@ -6223,7 +6140,6 @@ paths:
       summary: Delete a split configuration rule
       tags:
         - Split configuration - merchant level
-      x-groupName: Split configuration - merchant level
       x-methodName: deleteSplitConfigurationRule
       x-sortIndex: 9
     patch:
@@ -6308,7 +6224,6 @@ paths:
       summary: Update split conditions
       tags:
         - Split configuration - merchant level
-      x-groupName: Split configuration - merchant level
       x-methodName: updateSplitConditions
       x-sortIndex: 6
   /merchants/{merchantId}/splitConfigurations/{splitConfigurationId}/rules/{ruleId}/splitLogic/{splitLogicId}:
@@ -6400,7 +6315,6 @@ paths:
       summary: Update the split logic
       tags:
         - Split configuration - merchant level
-      x-groupName: Split configuration - merchant level
       x-methodName: updateSplitLogic
       x-sortIndex: 7
   /merchants/{merchantId}/stores:
@@ -6487,7 +6401,6 @@ paths:
       summary: Get a list of stores
       tags:
         - Account - store level
-      x-groupName: Account - store level
       x-methodName: listStoresByMerchantId
       x-sortIndex: 1
     post:
@@ -6560,7 +6473,6 @@ paths:
       summary: Create a store
       tags:
         - Account - store level
-      x-groupName: Account - store level
       x-methodName: createStoreByMerchantId
       x-sortIndex: 0
   /merchants/{merchantId}/stores/{reference}/terminalLogos:
@@ -6641,7 +6553,6 @@ paths:
       summary: Get the terminal logo
       tags:
         - Terminal settings - store level
-      x-groupName: Terminal settings - store level
       x-methodName: getTerminalLogo
       x-sortIndex: 2
     patch:
@@ -6734,7 +6645,6 @@ paths:
       summary: Update the terminal logo
       tags:
         - Terminal settings - store level
-      x-groupName: Terminal settings - store level
       x-methodName: updateTerminalLogo
       x-sortIndex: 4
   /merchants/{merchantId}/stores/{reference}/terminalSettings:
@@ -6810,7 +6720,6 @@ paths:
       summary: Get terminal settings
       tags:
         - Terminal settings - store level
-      x-groupName: Terminal settings - store level
       x-methodName: getTerminalSettings
       x-sortIndex: 1
     patch:
@@ -6900,7 +6809,6 @@ paths:
       summary: Update terminal settings
       tags:
         - Terminal settings - store level
-      x-groupName: Terminal settings - store level
       x-methodName: updateTerminalSettings
       x-sortIndex: 3
   /merchants/{merchantId}/stores/{storeId}:
@@ -6973,7 +6881,6 @@ paths:
       summary: Get a store
       tags:
         - Account - store level
-      x-groupName: Account - store level
       x-methodName: getStore
       x-sortIndex: 2
     patch:
@@ -7056,7 +6963,6 @@ paths:
       summary: Update a store
       tags:
         - Account - store level
-      x-groupName: Account - store level
       x-methodName: updateStore
       x-sortIndex: 3
   /merchants/{merchantId}/terminalLogos:
@@ -7131,7 +7037,6 @@ paths:
       summary: Get the terminal logo
       tags:
         - Terminal settings - merchant level
-      x-groupName: Terminal settings - merchant level
       x-methodName: getTerminalLogo
       x-sortIndex: 2
     patch:
@@ -7218,7 +7123,6 @@ paths:
       summary: Update the terminal logo
       tags:
         - Terminal settings - merchant level
-      x-groupName: Terminal settings - merchant level
       x-methodName: updateTerminalLogo
       x-sortIndex: 4
   /merchants/{merchantId}/terminalModels:
@@ -7285,7 +7189,6 @@ paths:
       summary: Get a list of terminal models
       tags:
         - Terminal orders - merchant level
-      x-groupName: Terminal orders - merchant level
       x-methodName: listTerminalModels
       x-sortIndex: 1
   /merchants/{merchantId}/terminalOrders:
@@ -7377,7 +7280,6 @@ paths:
       summary: Get a list of orders
       tags:
         - Terminal orders - merchant level
-      x-groupName: Terminal orders - merchant level
       x-methodName: listOrders
       x-sortIndex: 7
     post:
@@ -7451,7 +7353,6 @@ paths:
       summary: Create an order
       tags:
         - Terminal orders - merchant level
-      x-groupName: Terminal orders - merchant level
       x-methodName: createOrder
       x-sortIndex: 6
   /merchants/{merchantId}/terminalOrders/{orderId}:
@@ -7524,7 +7425,6 @@ paths:
       summary: Get an order
       tags:
         - Terminal orders - merchant level
-      x-groupName: Terminal orders - merchant level
       x-methodName: getOrder
       x-sortIndex: 8
     patch:
@@ -7608,7 +7508,6 @@ paths:
       summary: Update an order
       tags:
         - Terminal orders - merchant level
-      x-groupName: Terminal orders - merchant level
       x-methodName: updateOrder
       x-sortIndex: 9
   /merchants/{merchantId}/terminalOrders/{orderId}/cancel:
@@ -7682,7 +7581,6 @@ paths:
       summary: Cancel an order
       tags:
         - Terminal orders - merchant level
-      x-groupName: Terminal orders - merchant level
       x-methodName: cancelOrder
       x-sortIndex: 10
   /merchants/{merchantId}/terminalProducts:
@@ -7775,7 +7673,6 @@ paths:
       summary: Get a list of terminal products
       tags:
         - Terminal orders - merchant level
-      x-groupName: Terminal orders - merchant level
       x-methodName: listTerminalProducts
       x-sortIndex: 2
   /merchants/{merchantId}/terminalSettings:
@@ -7842,7 +7739,6 @@ paths:
       summary: Get terminal settings
       tags:
         - Terminal settings - merchant level
-      x-groupName: Terminal settings - merchant level
       x-methodName: getTerminalSettings
       x-sortIndex: 1
     patch:
@@ -7924,7 +7820,6 @@ paths:
       summary: Update terminal settings
       tags:
         - Terminal settings - merchant level
-      x-groupName: Terminal settings - merchant level
       x-methodName: updateTerminalSettings
       x-sortIndex: 3
   /merchants/{merchantId}/users:
@@ -8007,7 +7902,6 @@ paths:
       summary: Get a list of users
       tags:
         - Users - merchant level
-      x-groupName: Users - merchant level
       x-methodName: listUsers
       x-sortIndex: 0
     post:
@@ -8080,7 +7974,6 @@ paths:
       summary: Create a new user
       tags:
         - Users - merchant level
-      x-groupName: Users - merchant level
       x-methodName: createNewUser
       x-sortIndex: 0
   /merchants/{merchantId}/users/{userId}:
@@ -8149,7 +8042,6 @@ paths:
       summary: Get user details
       tags:
         - Users - merchant level
-      x-groupName: Users - merchant level
       x-methodName: getUserDetails
       x-sortIndex: 0
     patch:
@@ -8222,7 +8114,6 @@ paths:
       summary: Update a user
       tags:
         - Users - merchant level
-      x-groupName: Users - merchant level
       x-methodName: updateUser
       x-sortIndex: 0
   /merchants/{merchantId}/webhooks:
@@ -8303,7 +8194,6 @@ paths:
       summary: List all webhooks
       tags:
         - Webhooks - merchant level
-      x-groupName: Webhooks - merchant level
       x-methodName: listAllWebhooks
       x-sortIndex: 2
     post:
@@ -8376,7 +8266,6 @@ paths:
       summary: Set up a webhook
       tags:
         - Webhooks - merchant level
-      x-groupName: Webhooks - merchant level
       x-methodName: setUpWebhook
       x-sortIndex: 1
   /merchants/{merchantId}/webhooks/{webhookId}:
@@ -8439,7 +8328,6 @@ paths:
       summary: Remove a webhook
       tags:
         - Webhooks - merchant level
-      x-groupName: Webhooks - merchant level
       x-methodName: removeWebhook
       x-sortIndex: 5
     get:
@@ -8511,7 +8399,6 @@ paths:
       summary: Get a webhook
       tags:
         - Webhooks - merchant level
-      x-groupName: Webhooks - merchant level
       x-methodName: getWebhook
       x-sortIndex: 3
     patch:
@@ -8590,7 +8477,6 @@ paths:
       summary: Update a webhook
       tags:
         - Webhooks - merchant level
-      x-groupName: Webhooks - merchant level
       x-methodName: updateWebhook
       x-sortIndex: 4
   /merchants/{merchantId}/webhooks/{webhookId}/generateHmac:
@@ -8661,7 +8547,6 @@ paths:
       summary: Generate an HMAC key
       tags:
         - Webhooks - merchant level
-      x-groupName: Webhooks - merchant level
       x-methodName: generateHmacKey
       x-sortIndex: 6
   /merchants/{merchantId}/webhooks/{webhookId}/test:
@@ -8745,7 +8630,6 @@ paths:
       summary: Test a webhook
       tags:
         - Webhooks - merchant level
-      x-groupName: Webhooks - merchant level
       x-methodName: testWebhook
       x-sortIndex: 7
   /stores:
@@ -8830,7 +8714,6 @@ paths:
       summary: Get a list of stores
       tags:
         - Account - store level
-      x-groupName: Account - store level
       x-methodName: listStores
       x-sortIndex: 4
     post:
@@ -8894,7 +8777,6 @@ paths:
       summary: Create a store
       tags:
         - Account - store level
-      x-groupName: Account - store level
       x-methodName: createStore
       x-sortIndex: 5
   /stores/{storeId}:
@@ -8959,7 +8841,6 @@ paths:
       summary: Get a store
       tags:
         - Account - store level
-      x-groupName: Account - store level
       x-methodName: getStoreById
       x-sortIndex: 6
     patch:
@@ -9033,7 +8914,6 @@ paths:
       summary: Update a store
       tags:
         - Account - store level
-      x-groupName: Account - store level
       x-methodName: updateStoreById
       x-sortIndex: 7
   /stores/{storeId}/terminalLogos:
@@ -9106,7 +8986,6 @@ paths:
       summary: Get the terminal logo
       tags:
         - Terminal settings - store level
-      x-groupName: Terminal settings - store level
       x-methodName: getTerminalLogoByStoreId
       x-sortIndex: 2
     patch:
@@ -9191,7 +9070,6 @@ paths:
       summary: Update the terminal logo
       tags:
         - Terminal settings - store level
-      x-groupName: Terminal settings - store level
       x-methodName: updateTerminalLogoByStoreId
       x-sortIndex: 4
   /stores/{storeId}/terminalSettings:
@@ -9259,7 +9137,6 @@ paths:
       summary: Get terminal settings
       tags:
         - Terminal settings - store level
-      x-groupName: Terminal settings - store level
       x-methodName: getTerminalSettingsByStoreId
       x-sortIndex: 1
     patch:
@@ -9341,7 +9218,6 @@ paths:
       summary: Update terminal settings
       tags:
         - Terminal settings - store level
-      x-groupName: Terminal settings - store level
       x-methodName: updateTerminalSettingsByStoreId
       x-sortIndex: 3
   /terminals:
@@ -9448,7 +9324,6 @@ paths:
       summary: Get a list of terminals
       tags:
         - Terminals - terminal level
-      x-groupName: Terminals - terminal level
       x-methodName: listTerminals
       x-sortIndex: 1
   /terminals/scheduleActions:
@@ -9527,7 +9402,6 @@ paths:
       summary: Create a terminal action
       tags:
         - Terminal actions - terminal level
-      x-groupName: Terminal actions - terminal level
       x-methodName: createTerminalAction
       x-sortIndex: 1
   /terminals/{terminalId}/terminalLogos:
@@ -9593,7 +9467,6 @@ paths:
       summary: Get the terminal logo
       tags:
         - Terminal settings - terminal level
-      x-groupName: Terminal settings - terminal level
       x-methodName: getTerminalLogo
       x-sortIndex: 4
     patch:
@@ -9671,7 +9544,6 @@ paths:
       summary: Update the logo
       tags:
         - Terminal settings - terminal level
-      x-groupName: Terminal settings - terminal level
       x-methodName: updateLogo
       x-sortIndex: 6
   /terminals/{terminalId}/terminalSettings:
@@ -9739,7 +9611,6 @@ paths:
       summary: Get terminal settings
       tags:
         - Terminal settings - terminal level
-      x-groupName: Terminal settings - terminal level
       x-methodName: getTerminalSettings
       x-sortIndex: 3
     patch:
@@ -9821,7 +9692,6 @@ paths:
       summary: Update terminal settings
       tags:
         - Terminal settings - terminal level
-      x-groupName: Terminal settings - terminal level
       x-methodName: updateTerminalSettings
       x-sortIndex: 5
 components:
@@ -18855,6 +18725,12 @@ components:
       required:
         - swishNumber
       type: object
+    TapToPay:
+      properties:
+        merchantDisplayName:
+          description: Platform merchants can customize the text that appears on the TapToPay screen during a transaction
+          type: string
+      type: object
     Terminal:
       properties:
         assigned:
@@ -19117,6 +18993,9 @@ components:
         surcharge:
           $ref: "#/components/schemas/Surcharge"
           description: Settings for payment [surcharge](https://docs.adyen.com/point-of-sale/surcharge) features.
+        tapToPay:
+          $ref: "#/components/schemas/TapToPay"
+          description: Settings for apple tap to pay.
         timeouts:
           $ref: "#/components/schemas/Timeouts"
           description: Settings for device [time-outs](https://docs.adyen.com/point-of-sale/pos-timeouts#device-time-out).
@@ -20162,33 +20041,3 @@ components:
     BasicAuth:
       scheme: basic
       type: http
-x-groups:
-  - Account - company level
-  - Account - merchant level
-  - Account - store level
-  - Payout settings - merchant level
-  - Users - company level
-  - Users - merchant level
-  - My API credential
-  - API credentials - company level
-  - API credentials - merchant level
-  - API key - company level
-  - API key - merchant level
-  - Client key - company level
-  - Client key - merchant level
-  - Allowed origins - company level
-  - Allowed origins - merchant level
-  - Webhooks - company level
-  - Webhooks - merchant level
-  - Payment methods - merchant level
-  - Terminals - terminal level
-  - Terminal actions - company level
-  - Terminal actions - terminal level
-  - Terminal orders - company level
-  - Terminal orders - merchant level
-  - Terminal settings - company level
-  - Terminal settings - merchant level
-  - Terminal settings - store level
-  - Terminal settings - terminal level
-  - Android files - company level
-  - Split configuration - merchant level

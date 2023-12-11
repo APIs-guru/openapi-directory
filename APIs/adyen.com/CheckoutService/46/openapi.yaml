@@ -103,7 +103,6 @@ paths:
       summary: Get an Apple Pay session
       tags:
         - Utility
-      x-groupName: Utility
       x-methodName: getApplePaySession
       x-sortIndex: 2
   /cancels:
@@ -194,7 +193,6 @@ paths:
       summary: Cancel an authorised payment
       tags:
         - Modifications
-      x-groupName: Modifications
       x-methodName: cancelAuthorisedPayment
       x-sortIndex: 3
   /cardDetails:
@@ -238,7 +236,6 @@ paths:
       summary: Get the list of brands on the card
       tags:
         - Payments
-      x-groupName: Payments
       x-methodName: cardDetails
       x-sortIndex: 6
   /donations:
@@ -327,7 +324,6 @@ paths:
       summary: Start a transaction for donations
       tags:
         - Payments
-      x-groupName: Payments
       x-methodName: donations
       x-sortIndex: 5
   /orders:
@@ -411,7 +407,6 @@ paths:
       summary: Create an order
       tags:
         - Orders
-      x-groupName: Orders
       x-methodName: orders
       x-sortIndex: 2
   /orders/cancel:
@@ -495,7 +490,6 @@ paths:
       summary: Cancel an order
       tags:
         - Orders
-      x-groupName: Orders
       x-methodName: cancelOrder
       x-sortIndex: 3
   /originKeys:
@@ -581,7 +575,6 @@ paths:
       summary: Create originKey values for domains
       tags:
         - Utility
-      x-groupName: Utility
       x-methodName: originKeys
       x-sortIndex: 1
   /paymentLinks:
@@ -677,7 +670,6 @@ paths:
       summary: Create a payment link
       tags:
         - Payment links
-      x-groupName: Payment links
       x-methodName: paymentLinks
       x-sortIndex: 1
   /paymentLinks/{linkId}:
@@ -752,7 +744,6 @@ paths:
       summary: Get a payment link
       tags:
         - Payment links
-      x-groupName: Payment links
       x-methodName: getPaymentLink
       x-sortIndex: 2
     patch:
@@ -834,7 +825,6 @@ paths:
       summary: Update the status of a payment link
       tags:
         - Payment links
-      x-groupName: Payment links
       x-methodName: updatePaymentLink
       x-sortIndex: 3
   /paymentMethods:
@@ -929,7 +919,6 @@ paths:
       summary: Get a list of available payment methods
       tags:
         - Payments
-      x-groupName: Payments
       x-methodName: paymentMethods
       x-sortIndex: 2
   /paymentMethods/balance:
@@ -1017,7 +1006,6 @@ paths:
       summary: Get the balance of a gift card
       tags:
         - Orders
-      x-groupName: Orders
       x-methodName: getBalanceOfGiftCard
       x-sortIndex: 1
   /paymentSession:
@@ -1116,7 +1104,6 @@ paths:
       tags:
         - Classic Checkout SDK
       x-deprecatedInVersion: "37"
-      x-groupName: Classic Checkout SDK
       x-methodName: paymentSession
       x-sortIndex: 1
   /payments:
@@ -1256,7 +1243,6 @@ paths:
       summary: Start a transaction
       tags:
         - Payments
-      x-groupName: Payments
       x-methodName: payments
       x-sortIndex: 3
   /payments/details:
@@ -1345,7 +1331,6 @@ paths:
       summary: Submit details for a payment
       tags:
         - Payments
-      x-groupName: Payments
       x-methodName: paymentsDetails
       x-sortIndex: 4
   /payments/result:
@@ -1434,7 +1419,6 @@ paths:
       tags:
         - Classic Checkout SDK
       x-deprecatedInVersion: "37"
-      x-groupName: Classic Checkout SDK
       x-methodName: verifyPaymentResult
       x-sortIndex: 2
   /payments/{paymentPspReference}/amountUpdates:
@@ -1531,7 +1515,6 @@ paths:
       summary: Update an authorised amount
       tags:
         - Modifications
-      x-groupName: Modifications
       x-methodName: updateAuthorisedAmount
       x-sortIndex: 6
   /payments/{paymentPspReference}/cancels:
@@ -1628,7 +1611,6 @@ paths:
       summary: Cancel an authorised payment
       tags:
         - Modifications
-      x-groupName: Modifications
       x-methodName: cancelAuthorisedPaymentByPspReference
       x-sortIndex: 2
   /payments/{paymentPspReference}/captures:
@@ -1725,7 +1707,6 @@ paths:
       summary: Capture an authorised payment
       tags:
         - Modifications
-      x-groupName: Modifications
       x-methodName: captureAuthorisedPayment
       x-sortIndex: 1
   /payments/{paymentPspReference}/refunds:
@@ -1824,7 +1805,6 @@ paths:
       summary: Refund a captured payment
       tags:
         - Modifications
-      x-groupName: Modifications
       x-methodName: refundCapturedPayment
       x-sortIndex: 4
   /payments/{paymentPspReference}/reversals:
@@ -1920,7 +1900,6 @@ paths:
       summary: Refund or cancel a payment
       tags:
         - Modifications
-      x-groupName: Modifications
       x-methodName: refundOrCancelPayment
       x-sortIndex: 5
 components:
@@ -8072,7 +8051,6 @@ components:
           type: boolean
           x-addedInVersion: "37"
       required:
-        - donationAccount
         - paymentMethod
         - returnUrl
         - merchantAccount
@@ -12331,11 +12309,3 @@ components:
     BasicAuth:
       scheme: basic
       type: http
-x-groups:
-  - Payments
-  - Payment links
-  - Modifications
-  - Recurring
-  - Orders
-  - Utility
-  - Classic Checkout SDK

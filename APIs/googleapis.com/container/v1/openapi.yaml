@@ -3068,6 +3068,9 @@ components:
         enableMetrics:
           description: Expose flow metrics on nodes
           type: boolean
+        enableRelay:
+          description: Enable Relay component
+          type: boolean
         relayMode:
           description: Method used to make Relay available
           enum:
@@ -5475,6 +5478,7 @@ components:
             - VULNERABILITY_MODE_UNSPECIFIED
             - VULNERABILITY_DISABLED
             - VULNERABILITY_BASIC
+            - VULNERABILITY_ENTERPRISE
           type: string
       type: object
     ServerConfig:

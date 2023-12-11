@@ -137,7 +137,6 @@ paths:
       tags:
         - Reviewing
       x-addedInVersion: "10"
-      x-groupName: Reviewing
       x-methodName: confirmThirdParty
       x-sortIndex: 1
   /declineThirdParty:
@@ -205,7 +204,6 @@ paths:
       tags:
         - Reviewing
       x-addedInVersion: "10"
-      x-groupName: Reviewing
       x-methodName: declineThirdParty
       x-sortIndex: 2
   /payout:
@@ -269,7 +267,6 @@ paths:
       tags:
         - Instant payouts
       x-addedInVersion: "11"
-      x-groupName: Instant payouts
       x-methodName: payout
       x-sortIndex: 1
   /storeDetail:
@@ -333,7 +330,6 @@ paths:
       summary: Store payout details
       tags:
         - Initialization
-      x-groupName: Initialization
       x-methodName: storeDetail
       x-sortIndex: 2
   /storeDetailAndSubmitThirdParty:
@@ -406,7 +402,6 @@ paths:
       tags:
         - Initialization
       x-addedInVersion: "10"
-      x-groupName: Initialization
       x-methodName: storeDetailAndSubmitThirdParty
       x-sortIndex: 1
   /submitThirdParty:
@@ -471,7 +466,6 @@ paths:
       tags:
         - Initialization
       x-addedInVersion: "10"
-      x-groupName: Initialization
       x-methodName: submitThirdParty
       x-sortIndex: 3
 components:
@@ -2174,7 +2168,3 @@ components:
     BasicAuth:
       scheme: basic
       type: http
-x-groups:
-  - Initialization
-  - Reviewing
-  - Instant payouts

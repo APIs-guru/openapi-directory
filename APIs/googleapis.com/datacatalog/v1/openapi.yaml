@@ -200,7 +200,7 @@ paths:
       description: Updates a policy tag, including its display name, description, and parent policy tag.
       operationId: datacatalog.projects.locations.taxonomies.policyTags.patch
       parameters:
-        - description: Output only. Resource name of this policy tag in the URL format. The policy tag manager generates unique taxonomy IDs and policy tag IDs.
+        - description: Identifier. Resource name of this policy tag in the URL format. The policy tag manager generates unique taxonomy IDs and policy tag IDs.
           in: path
           name: name
           required: true
@@ -2332,8 +2332,7 @@ components:
           description: Required. User-defined name of this policy tag. The name can't start or end with spaces and must be unique within the parent taxonomy, contain only Unicode letters, numbers, underscores, dashes and spaces, and be at most 200 bytes long when encoded in UTF-8.
           type: string
         name:
-          description: Output only. Resource name of this policy tag in the URL format. The policy tag manager generates unique taxonomy IDs and policy tag IDs.
-          readOnly: true
+          description: Identifier. Resource name of this policy tag in the URL format. The policy tag manager generates unique taxonomy IDs and policy tag IDs.
           type: string
         parentPolicyTag:
           description: Resource name of this policy tag's parent policy tag. If empty, this is a top level tag. If not set, defaults to an empty string. For example, for the "LatLong" policy tag in the example above, this field contains the resource name of the "Geolocation" policy tag, and, for "Geolocation", this field is empty.
@@ -2833,8 +2832,7 @@ components:
           description: Required. User-defined name of this taxonomy. The name can't start or end with spaces, must contain only Unicode letters, numbers, underscores, dashes, and spaces, and be at most 200 bytes long when encoded in UTF-8. The taxonomy display name must be unique within an organization.
           type: string
         name:
-          description: "Output only. Resource name of this taxonomy in URL format. Note: Policy tag manager generates unique taxonomy IDs."
-          readOnly: true
+          description: "Identifier. Resource name of this taxonomy in URL format. Note: Policy tag manager generates unique taxonomy IDs."
           type: string
         policyTagCount:
           description: Output only. Number of policy tags in this taxonomy.

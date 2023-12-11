@@ -184,6 +184,66 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1beta/{parent}/prices:
+    get:
+      description: Lists the latest prices for all SKUs.
+      operationId: cloudbilling.skus.prices.list
+      parameters:
+        - description: "Required. To list the prices for all SKUs, use `-` as the SKU ID. Format: `skus/-` Specifying a specific SKU ID returns a collection with one Price object for the SKU."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. ISO-4217 currency code for the price. If not specified, USD will be used.
+          in: query
+          name: currencyCode
+          schema:
+            type: string
+        - description: Optional. Maximum number of prices to return. Results may return fewer than this value. Default value is 50 and maximum value is 5000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token received from a previous ListPrices call to retrieve the next page of results. If this field is empty, the first page is returned.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudBillingPricesV1betaListPricesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-billing
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-billing
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-billing.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-billing.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - skus
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1beta/{parent}/services:
     get:
       description: Lists services visible to a billing account.
@@ -495,10 +555,10 @@ components:
           type: string
       type: object
     CloudCdnEgressWorkload:
-      description: Specifies usage for Cloud CDN egress.
+      description: Specifies usage for Cloud CDN Data Transfer.
       properties:
         cacheEgressDestination:
-          description: The destination for the cache egress charges.
+          description: The destination for the cache data transfer.
           enum:
             - CACHE_EGRESS_DESTINATION_UNSPECIFIED
             - CACHE_EGRESS_DESTINATION_ASIA_PACIFIC
@@ -511,7 +571,7 @@ components:
           type: string
         cacheEgressRate:
           $ref: "#/components/schemas/Usage"
-          description: 'Cache egress usage. The rate of data cache egressed in the destination. For example : units such as "GiBy/s" or "TBy/mo".'
+          description: Cache data transfer usage. The rate of data cache transferred to the destination. Use units such as GiB/s or TiB/mo.
       type: object
     CloudCdnWorkload:
       description: Specifies usage for Cloud CDN resources.
@@ -534,13 +594,13 @@ components:
           description: 'Cache look up requests. This is specified to indicate the number of requests. For example: units such as "1/s".'
       type: object
     CloudInterconnectEgressWorkload:
-      description: The interconnect egress only includes the Interconnect Egress. Please use the standard egress traffic interface to specify your standard egress usage.
+      description: Includes the estimate for Interconnect Data Transfer only. To specify usage for data transfer between VMs and internet end-points, use the Standard Tier Internet Data Transfer interface.
       properties:
         egressRate:
           $ref: "#/components/schemas/Usage"
-          description: Data egress usage. This usage applies when you move or copy data from one Google Cloud service to another service. Expected units such as "GiBy/s, By/s, etc."
+          description: Outbound data transfer usage. This usage applies when you move or copy data from one Google Cloud service to another service. The units are "GiB/s, B/s, and so on."
         interconnectConnectionLocation:
-          description: Locations in the [Interconnect connection location table](https://cloud.google.com/vpc/network-pricing#interconnect-pricing). This is the interconnect egress charges.
+          description: Locations in the [Interconnect connection location table](https://cloud.google.com/vpc/network-pricing#interconnect-pricing). These are the Interconnect Data Transfer charges.
           enum:
             - INTERCONNECT_CONNECTION_LOCATION_UNSPECIFIED
             - INTERCONNECT_CONNECTION_LOCATION_ASIA
@@ -577,7 +637,7 @@ components:
           description: Interconnect usage. This is specified as a unitless quantity which indicates the number of circuit provisioned in interconnect.
       type: object
     CloudStorageEgressWorkload:
-      description: Specification of a network type. Network egress within Google Cloud applies when you move or copy data from one Cloud Storage bucket to another or when another Google Cloud service accesses data in your Cloud Storage bucket.This includes the network egress within Google Cloud and the general network usage.
+      description: Specification of a network type. Network data transfer within Google Cloud applies when you move or copy data from one Cloud Storage bucket to another or when another Google Cloud service accesses data in your Cloud Storage bucket.This includes the network data transfer within Google Cloud and the general network usage.
       properties:
         destinationContinent:
           description: Where the data is sent to.
@@ -591,7 +651,7 @@ components:
           type: string
         egressRate:
           $ref: "#/components/schemas/Usage"
-          description: Egress usage rate. This usage applies when you move or copy data from one Cloud Storage bucket to another or when another Google Cloud service accesses data in your Cloud Storage bucket. Expected units such as "GiBy/s, By/s, ..."
+          description: Data transfer usage rate. This usage applies when you move or copy data from one Cloud Storage bucket to another or when another Google Cloud service accesses data in your Cloud Storage bucket. Expected units such as "GiB/s, B/s, ..."
         sourceContinent:
           description: Where the data comes from.
           enum:
@@ -888,6 +948,18 @@ components:
           type: string
         skuGroup:
           description: SKU group where the floating discount comes from.
+          type: string
+      type: object
+    GoogleCloudBillingBillingaccountpricesV1betaListBillingAccountPricesResponse:
+      description: Response message for ListBillingAccountPrices.
+      properties:
+        billingAccountPrices:
+          description: The returned billing account prices.
+          items:
+            $ref: "#/components/schemas/GoogleCloudBillingBillingaccountpricesV1betaBillingAccountPrice"
+          type: array
+        nextPageToken:
+          description: Token that can be sent as `page_token` in the subsequent request to retrieve the next page. If this field is empty, there are no subsequent pages.
           type: string
       type: object
     GoogleCloudBillingBillingaccountpricesV1betaListPriceAsCeiling:
@@ -1238,6 +1310,18 @@ components:
             - LEVEL_PROJECT
           type: string
       type: object
+    GoogleCloudBillingPricesV1betaListPricesResponse:
+      description: Response message for ListPrices.
+      properties:
+        nextPageToken:
+          description: Token that can be sent as `page_token` in the subsequent request to retrieve the next page. If this field is empty, there are no subsequent pages.
+          type: string
+        prices:
+          description: The returned publicly listed prices.
+          items:
+            $ref: "#/components/schemas/GoogleCloudBillingPricesV1betaPrice"
+          type: array
+      type: object
     GoogleCloudBillingPricesV1betaPrice:
       description: Encapsulates the latest price for a SKU.
       properties:
@@ -1424,24 +1508,24 @@ components:
           type: string
       type: object
     InterRegionEgress:
-      description: Egress traffic between two regions.
+      description: Data transfer between two regions.
       properties:
         destinationRegion:
-          description: Which [region](https://cloud.google.com/compute/docs/regions-zones) the egress data goes to.
+          description: Which [region](https://cloud.google.com/compute/docs/regions-zones) the data is transferred to.
           type: string
         egressRate:
           $ref: "#/components/schemas/Usage"
-          description: VM to VM egress usage. Expected units such as "GiBy/s, By/s, etc."
+          description: VM to VM data transfer usage. The expected units such are GiB/s, B/s, and so on.
         sourceRegion:
-          description: Which [region](https://cloud.google.com/compute/docs/regions-zones) the egress data comes from.
+          description: Which [region](https://cloud.google.com/compute/docs/regions-zones) the data is transferred from.
           type: string
       type: object
     IntraRegionEgress:
-      description: Egress traffic within the same region. When source region and destination region are in the same zone, using the internal IP addresses, there isn't any egress charge.
+      description: Data transfer within the same region. When the source region and destination region are in the same zone, using internal IP addresses, there isn't any charge for data transfer.
       properties:
         egressRate:
           $ref: "#/components/schemas/Usage"
-          description: VM to VM egress usage. Expected units such as "GiBy/s, By/s, etc."
+          description: VM to VM data transfer usage. The expected are GiB/s, B/s, and so on.
       type: object
     MachineType:
       description: Specification of machine series, memory, and number of vCPUs.
@@ -1501,7 +1585,7 @@ components:
           type: string
       type: object
     PremiumTierEgressWorkload:
-      description: Specify Premium Tier Internet egress networking.
+      description: Specify a Premium Tier Internet Data Transfer networking workload.
       properties:
         destinationContinent:
           description: Where the data is sent to.
@@ -1522,9 +1606,9 @@ components:
           type: string
         egressRate:
           $ref: "#/components/schemas/Usage"
-          description: Premium Tier egress usage. Expected units such as "GiBy/s, By/s, etc."
+          description: Premium Tier Data Transfer usage. The expected units are GiB/s, B/s, and so on.
         sourceRegion:
-          description: Which [region](https://cloud.google.com/compute/docs/regions-zones) the egress data comes from.
+          description: Which [region](https://cloud.google.com/compute/docs/regions-zones) the data comes from.
           type: string
       type: object
     Price:
@@ -1635,13 +1719,13 @@ components:
           type: string
       type: object
     StandardTierEgressWorkload:
-      description: Specify Standard Tier Internet egress networking.
+      description: Specify Standard Tier Internet Data Transfer.
       properties:
         egressRate:
           $ref: "#/components/schemas/Usage"
-          description: Standard tier egress usage. Expected units such as "GiBy/s, By/s, etc."
+          description: Standard Tier Data Transfer usage. The expected units are GiB/s, B/s, and so on.
         sourceRegion:
-          description: Which [region](https://cloud.google.com/compute/docs/regions-zones) the egress data comes from.
+          description: Which [region](https://cloud.google.com/compute/docs/regions-zones) the data is transferred from.
           type: string
       type: object
     Usage:
@@ -1727,7 +1811,7 @@ components:
           type: string
       type: object
     VmToVmEgressWorkload:
-      description: Specify VM to VM egress.
+      description: Specify VM to VM data transfer.
       properties:
         interRegionEgress:
           $ref: "#/components/schemas/InterRegionEgress"
@@ -1739,19 +1823,19 @@ components:
       properties:
         cloudCdnEgressWorkload:
           $ref: "#/components/schemas/CloudCdnEgressWorkload"
-          description: Usage on Google Cloud CDN Egress.
+          description: Usage on Google Cloud CDN Data Transfer.
         cloudCdnWorkload:
           $ref: "#/components/schemas/CloudCdnWorkload"
           description: Usage on Google Cloud CDN.
         cloudInterconnectEgressWorkload:
           $ref: "#/components/schemas/CloudInterconnectEgressWorkload"
-          description: Usage on Google Cloud Interconnect Egress.
+          description: Usage on Google Cloud Interconnect Data Transfer.
         cloudInterconnectWorkload:
           $ref: "#/components/schemas/CloudInterconnectWorkload"
           description: Usage on Google Cloud Interconnect.
         cloudStorageEgressWorkload:
           $ref: "#/components/schemas/CloudStorageEgressWorkload"
-          description: Usage on a cloud storage egress.
+          description: Usage on Cloud Storage Data Transfer.
         cloudStorageWorkload:
           $ref: "#/components/schemas/CloudStorageWorkload"
           description: Usage on Google Cloud Storage.
@@ -1763,13 +1847,13 @@ components:
           type: string
         premiumTierEgressWorkload:
           $ref: "#/components/schemas/PremiumTierEgressWorkload"
-          description: Usage on Premium Tier Internet Egress.
+          description: Usage on Premium Tier Internet Data Transfer.
         standardTierEgressWorkload:
           $ref: "#/components/schemas/StandardTierEgressWorkload"
-          description: Usage on Standard Tier Internet Egress.
+          description: Usage on Standard Tier Internet Data Transfer.
         vmToVmEgressWorkload:
           $ref: "#/components/schemas/VmToVmEgressWorkload"
-          description: Usage on Vm to Vm Egress.
+          description: Usage on VM to VM Data Transfer.
       type: object
     WorkloadCostEstimate:
       description: Estimated cost for a workload.

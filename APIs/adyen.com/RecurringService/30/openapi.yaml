@@ -126,7 +126,6 @@ paths:
       summary: Disable stored payment details
       tags:
         - General
-      x-groupName: General
       x-methodName: disable
       x-sortIndex: 2
   /listRecurringDetails:
@@ -187,7 +186,6 @@ paths:
       summary: Get stored payment details
       tags:
         - General
-      x-groupName: General
       x-methodName: listRecurringDetails
       x-sortIndex: 1
   /notifyShopper:
@@ -248,7 +246,6 @@ paths:
       summary: Ask issuer to notify the shopper
       tags:
         - General
-      x-groupName: General
       x-methodName: notifyShopper
       x-sortIndex: 4
   /scheduleAccountUpdater:
@@ -312,7 +309,6 @@ paths:
       tags:
         - General
       x-addedInVersion: "4"
-      x-groupName: General
       x-methodName: scheduleAccountUpdater
       x-sortIndex: 3
 components:
@@ -864,5 +860,3 @@ components:
     BasicAuth:
       scheme: basic
       type: http
-x-groups:
-  - General

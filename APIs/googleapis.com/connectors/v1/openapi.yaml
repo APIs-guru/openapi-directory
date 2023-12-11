@@ -1879,6 +1879,14 @@ components:
         key:
           description: Key of the config variable.
           type: string
+        locationType:
+          description: Optional. Location Tyep denotes where this value should be sent in BYOC connections.
+          enum:
+            - LOCATION_TYPE_UNSPECIFIED
+            - HEADER
+            - PAYLOAD
+            - QUERY_PARAM
+          type: string
         required:
           description: Flag represents that this `ConfigVariable` must be provided for a connection.
           type: boolean
@@ -2277,6 +2285,17 @@ components:
           $ref: "#/components/schemas/SupportedRuntimeFeatures"
           description: Output only. Information about the runtime features supported by the Connector.
           readOnly: true
+        unsupportedConnectionTypes:
+          description: Output only. Unsupported connection types.
+          items:
+            enum:
+              - CONNECTION_TYPE_UNSPECIFIED
+              - CONNECTION_WITH_EVENTING
+              - ONLY_CONNECTION
+              - ONLY_EVENTING
+            type: string
+          readOnly: true
+          type: array
         updateTime:
           description: Output only. Updated time.
           format: google-datetime
@@ -2368,17 +2387,24 @@ components:
       properties:
         authConfig:
           $ref: "#/components/schemas/AuthConfig"
-          description: Required. Configuration for establishing the authentication to the connector destination.
+          description: Optional. Authentication config for accessing connector facade/ proxy. This is used only when enable_backend_destination_config is true.
+        backendVariableTemplates:
+          description: Optional. Backend variables config templates. This translates to additional variable templates in connection.
+          items:
+            $ref: "#/components/schemas/ConfigVariableTemplate"
+          type: array
         createTime:
           description: Output only. Created time.
           format: google-datetime
           readOnly: true
           type: string
-        destinationConfig:
-          $ref: "#/components/schemas/DestinationConfig"
-          description: Required. Configuration of the customConnector's destination.
+        destinationConfigs:
+          description: Optional. Destination config(s) for accessing connector facade/ proxy. This is used only when enable_backend_destination_config is true.
+          items:
+            $ref: "#/components/schemas/DestinationConfig"
+          type: array
         enableBackendDestinationConfig:
-          description: Optional. Whether to enable backend destination config. This is the backend server that the connector connects to.
+          description: Optional. When enabled, the connector will be a facade/ proxy, and connects to the destination provided during connection creation.
           type: boolean
         labels:
           additionalProperties:
@@ -2390,7 +2416,7 @@ components:
           readOnly: true
           type: string
         serviceAccount:
-          description: Required. Service account needed for runtime plane to access Custom Connector secrets.
+          description: Required. Service account used by runtime plane to access auth config secrets.
           type: string
         specLocation:
           description: Optional. Location of the custom connector spec.

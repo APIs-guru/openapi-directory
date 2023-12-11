@@ -2075,6 +2075,15 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. The latency tolerance for the propagation of this product update. Defaults to latency-sensitive.
+          in: query
+          name: latencyTolerance
+          schema:
+            enum:
+              - PRODUCT_UPDATE_LATENCY_TOLERANCE_UNSPECIFIED
+              - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_SENSITIVE
+              - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT
+            type: string
       responses:
         "200":
           description: Successful response
@@ -2148,6 +2157,15 @@ paths:
           name: autoConvertMissingPrices
           schema:
             type: boolean
+        - description: Optional. The latency tolerance for the propagation of this product update. Defaults to latency-sensitive.
+          in: query
+          name: latencyTolerance
+          schema:
+            enum:
+              - PRODUCT_UPDATE_LATENCY_TOLERANCE_UNSPECIFIED
+              - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_SENSITIVE
+              - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT
+            type: string
       requestBody:
         content:
           application/json:
@@ -2193,6 +2211,15 @@ paths:
           name: autoConvertMissingPrices
           schema:
             type: boolean
+        - description: Optional. The latency tolerance for the propagation of this product update. Defaults to latency-sensitive.
+          in: query
+          name: latencyTolerance
+          schema:
+            enum:
+              - PRODUCT_UPDATE_LATENCY_TOLERANCE_UNSPECIFIED
+              - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_SENSITIVE
+              - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT
+            type: string
       requestBody:
         content:
           application/json:
@@ -2204,6 +2231,132 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/InAppProduct"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - inappproducts
+  /androidpublisher/v3/applications/{packageName}/inappproducts:batchDelete:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Deletes in-app products (managed products or subscriptions). Set the latencyTolerance field on nested requests to PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT to achieve maximum update throughput. This method should not be used to delete subscriptions. See [this article](https://android-developers.googleblog.com/2023/06/changes-to-google-play-developer-api-june-2023.html) for more information.
+      operationId: androidpublisher.inappproducts.batchDelete
+      parameters:
+        - description: Package name of the app.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InappproductsBatchDeleteRequest"
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - inappproducts
+  /androidpublisher/v3/applications/{packageName}/inappproducts:batchGet:
+    get:
+      description: Reads multiple in-app products, which can be managed products or subscriptions. This method should not be used to retrieve subscriptions. See [this article](https://android-developers.googleblog.com/2023/06/changes-to-google-play-developer-api-june-2023.html) for more information.
+      operationId: androidpublisher.inappproducts.batchGet
+      parameters:
+        - description: Package name of the app.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: Unique identifier for the in-app products.
+          explode: true
+          in: query
+          name: sku
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InappproductsBatchGetResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - inappproducts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /androidpublisher/v3/applications/{packageName}/inappproducts:batchUpdate:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Updates or inserts one or more in-app products (managed products or subscriptions). Set the latencyTolerance field on nested requests to PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT to achieve maximum update throughput. This method should no longer be used to update subscriptions. See [this article](https://android-developers.googleblog.com/2023/06/changes-to-google-play-developer-api-june-2023.html) for more information.
+      operationId: androidpublisher.inappproducts.batchUpdate
+      parameters:
+        - description: Package name of the app.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InappproductsBatchUpdateRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InappproductsBatchUpdateResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -3169,6 +3322,20 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. If set to true, and the subscription with the given package_name and product_id doesn't exist, the subscription will be created. If a new subscription is created, update_mask is ignored.
+          in: query
+          name: allowMissing
+          schema:
+            type: boolean
+        - description: Optional. The latency tolerance for the propagation of this product update. Defaults to latency-sensitive.
+          in: query
+          name: latencyTolerance
+          schema:
+            enum:
+              - PRODUCT_UPDATE_LATENCY_TOLERANCE_UNSPECIFIED
+              - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_SENSITIVE
+              - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT
+            type: string
         - description: Required. A string representing the version of available regions being used for the specified resource. Regional prices for the resource have to be specified according to the information published in [this article](https://support.google.com/googleplay/android-developer/answer/10532353). Each time the supported locations substantially change, the version will be incremented. Using this field will ensure that creating and updating the resource with an older region's version and set of regional prices and currencies will succeed even though a new version is available. The latest version is 2022/02.
           in: query
           name: regionsVersion.version
@@ -3474,6 +3641,20 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. If set to true, and the subscription offer with the given package_name, product_id, base_plan_id and offer_id doesn't exist, an offer will be created. If a new offer is created, update_mask is ignored.
+          in: query
+          name: allowMissing
+          schema:
+            type: boolean
+        - description: Optional. The latency tolerance for the propagation of this product update. Defaults to latency-sensitive.
+          in: query
+          name: latencyTolerance
+          schema:
+            enum:
+              - PRODUCT_UPDATE_LATENCY_TOLERANCE_UNSPECIFIED
+              - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_SENSITIVE
+              - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT
+            type: string
         - description: Required. A string representing the version of available regions being used for the specified resource. Regional prices for the resource have to be specified according to the information published in [this article](https://support.google.com/googleplay/android-developer/answer/10532353). Each time the supported locations substantially change, the version will be incremented. Using this field will ensure that creating and updating the resource with an older region's version and set of regional prices and currencies will succeed even though a new version is available. The latest version is 2022/02.
           in: query
           name: regionsVersion.version
@@ -3615,6 +3796,168 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SubscriptionOffer"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - monetization
+  /androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}/offers:batchGet:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Reads one or more subscription offers.
+      operationId: androidpublisher.monetization.subscriptions.basePlans.offers.batchGet
+      parameters:
+        - description: Required. The parent app (package name) for which the subscriptions should be created or updated. Must be equal to the package_name field on all the requests.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: Required. The product ID of the parent subscription, if all updated offers belong to the same subscription. If this request spans multiple subscriptions, set this field to "-". Must be set.
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+        - description: Required. The parent base plan (ID) for which the offers should be read. May be specified as '-' to read offers from multiple base plans.
+          in: path
+          name: basePlanId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchGetSubscriptionOffersRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchGetSubscriptionOffersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - monetization
+  /androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}/offers:batchUpdate:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Updates a batch of subscription offers. Set the latencyTolerance field on nested requests to PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT to achieve maximum update throughput.
+      operationId: androidpublisher.monetization.subscriptions.basePlans.offers.batchUpdate
+      parameters:
+        - description: Required. The parent app (package name) of the updated subscription offers. Must be equal to the package_name field on all the updated SubscriptionOffer resources.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: Required. The product ID of the parent subscription, if all updated offers belong to the same subscription. If this request spans multiple subscriptions, set this field to "-". Must be set.
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+        - description: Required. The parent base plan (ID) for which the offers should be updated. May be specified as '-' to update offers from multiple base plans.
+          in: path
+          name: basePlanId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchUpdateSubscriptionOffersRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchUpdateSubscriptionOffersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - monetization
+  /androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}/offers:batchUpdateStates:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Updates a batch of subscription offer states. Set the latencyTolerance field on nested requests to PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT to achieve maximum update throughput.
+      operationId: androidpublisher.monetization.subscriptions.basePlans.offers.batchUpdateStates
+      parameters:
+        - description: Required. The parent app (package name) of the updated subscription offers. Must be equal to the package_name field on all the updated SubscriptionOffer resources.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: Required. The product ID of the parent subscription, if all updated offers belong to the same subscription. If this request spans multiple subscriptions, set this field to "-". Must be set.
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+        - description: Required. The parent base plan (ID) for which the offers should be updated. May be specified as '-' to update offers from multiple base plans.
+          in: path
+          name: basePlanId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchUpdateSubscriptionOfferStatesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchUpdateSubscriptionOfferStatesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -3785,6 +4128,102 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - monetization
+  /androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans:batchMigratePrices:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Batch variant of the MigrateBasePlanPrices endpoint. Set the latencyTolerance field on nested requests to PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT to achieve maximum update throughput.
+      operationId: androidpublisher.monetization.subscriptions.basePlans.batchMigratePrices
+      parameters:
+        - description: Required. The parent app (package name) for which the subscriptions should be created or updated. Must be equal to the package_name field on all the Subscription resources.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: Required. The product ID of the parent subscription, if all updated offers belong to the same subscription. If this batch update spans multiple subscriptions, set this field to "-". Must be set.
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchMigrateBasePlanPricesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchMigrateBasePlanPricesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - monetization
+  /androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans:batchUpdateStates:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Activates or deactivates base plans across one or multiple subscriptions. Set the latencyTolerance field on nested requests to PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT to achieve maximum update throughput.
+      operationId: androidpublisher.monetization.subscriptions.basePlans.batchUpdateStates
+      parameters:
+        - description: Required. The parent app (package name) of the updated base plans.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: Required. The product ID of the parent subscription, if all updated base plans belong to the same subscription. If this batch update spans multiple subscriptions, set this field to "-". Must be set.
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchUpdateBasePlanStatesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchUpdateBasePlanStatesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - monetization
   /androidpublisher/v3/applications/{packageName}/subscriptions/{productId}:archive:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -3825,6 +4264,94 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Subscription"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - monetization
+  /androidpublisher/v3/applications/{packageName}/subscriptions:batchGet:
+    get:
+      description: Reads one or more subscriptions.
+      operationId: androidpublisher.monetization.subscriptions.batchGet
+      parameters:
+        - description: Required. The parent app (package name) for which the subscriptions should be retrieved. Must be equal to the package_name field on all the requests.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: Required. A list of up to 100 subscription product IDs to retrieve. All the IDs must be different.
+          explode: true
+          in: query
+          name: productIds
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchGetSubscriptionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - monetization
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /androidpublisher/v3/applications/{packageName}/subscriptions:batchUpdate:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Updates a batch of subscriptions. Set the latencyTolerance field on nested requests to PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT to achieve maximum update throughput.
+      operationId: androidpublisher.monetization.subscriptions.batchUpdate
+      parameters:
+        - description: Required. The parent app (package name) for which the subscriptions should be updated. Must be equal to the package_name field on all the Subscription resources.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchUpdateSubscriptionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchUpdateSubscriptionsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -4417,11 +4944,46 @@ components:
       type: object
     ActivateBasePlanRequest:
       description: Request message for ActivateBasePlan.
-      properties: {}
+      properties:
+        basePlanId:
+          description: Required. The unique base plan ID of the base plan to activate.
+          type: string
+        latencyTolerance:
+          description: Optional. The latency tolerance for the propagation of this product update. Defaults to latency-sensitive.
+          enum:
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_UNSPECIFIED
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_SENSITIVE
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT
+          type: string
+        packageName:
+          description: Required. The parent app (package name) of the base plan to activate.
+          type: string
+        productId:
+          description: Required. The parent subscription (ID) of the base plan to activate.
+          type: string
       type: object
     ActivateSubscriptionOfferRequest:
       description: Request message for ActivateSubscriptionOffer.
-      properties: {}
+      properties:
+        basePlanId:
+          description: Required. The parent base plan (ID) of the offer to activate.
+          type: string
+        latencyTolerance:
+          description: Optional. The latency tolerance for the propagation of this product update. Defaults to latency-sensitive.
+          enum:
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_UNSPECIFIED
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_SENSITIVE
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT
+          type: string
+        offerId:
+          description: Required. The unique offer ID of the offer to activate.
+          type: string
+        packageName:
+          description: Required. The parent app (package name) of the offer to activate.
+          type: string
+        productId:
+          description: Required. The parent subscription (ID) of the offer to activate.
+          type: string
       type: object
     Apk:
       description: Information about an APK. The resource for ApksService.
@@ -4660,6 +5222,122 @@ components:
           readOnly: true
           type: string
       type: object
+    BatchGetSubscriptionOffersRequest:
+      description: Request message for BatchGetSubscriptionOffers endpoint.
+      properties:
+        requests:
+          description: Required. A list of update requests of up to 100 elements. All requests must update different subscriptions.
+          items:
+            $ref: "#/components/schemas/GetSubscriptionOfferRequest"
+          type: array
+      type: object
+    BatchGetSubscriptionOffersResponse:
+      description: Response message for BatchGetSubscriptionOffers endpoint.
+      properties:
+        subscriptionOffers:
+          items:
+            $ref: "#/components/schemas/SubscriptionOffer"
+          type: array
+      type: object
+    BatchGetSubscriptionsResponse:
+      description: Response message for BatchGetSubscriptions endpoint.
+      properties:
+        subscriptions:
+          description: The list of requested subscriptions, in the same order as the request.
+          items:
+            $ref: "#/components/schemas/Subscription"
+          type: array
+      type: object
+    BatchMigrateBasePlanPricesRequest:
+      description: Request message for BatchMigrateBasePlanPrices.
+      properties:
+        requests:
+          description: Required. Up to 100 price migration requests. All requests must update different base plans.
+          items:
+            $ref: "#/components/schemas/MigrateBasePlanPricesRequest"
+          type: array
+      type: object
+    BatchMigrateBasePlanPricesResponse:
+      description: Response message for BatchMigrateBasePlanPrices.
+      properties:
+        responses:
+          description: Contains one response per requested price migration, in the same order as the request.
+          items:
+            $ref: "#/components/schemas/MigrateBasePlanPricesResponse"
+          type: array
+      type: object
+    BatchUpdateBasePlanStatesRequest:
+      description: Request message for BatchUpdateBasePlanStates.
+      properties:
+        requests:
+          description: Required. The update request list of up to 100 elements. All requests must update different base plans.
+          items:
+            $ref: "#/components/schemas/UpdateBasePlanStateRequest"
+          type: array
+      type: object
+    BatchUpdateBasePlanStatesResponse:
+      description: Response message for BatchUpdateBasePlanStates.
+      properties:
+        subscriptions:
+          description: The list of updated subscriptions. This list will match the requests one to one, in the same order.
+          items:
+            $ref: "#/components/schemas/Subscription"
+          type: array
+      type: object
+    BatchUpdateSubscriptionOfferStatesRequest:
+      description: Request message for BatchUpdateSubscriptionOfferStates.
+      properties:
+        requests:
+          description: Required. The update request list of up to 100 elements. All requests must update different offers.
+          items:
+            $ref: "#/components/schemas/UpdateSubscriptionOfferStateRequest"
+          type: array
+      type: object
+    BatchUpdateSubscriptionOfferStatesResponse:
+      description: Response message for BatchUpdateSubscriptionOfferStates.
+      properties:
+        subscriptionOffers:
+          description: The updated subscription offers list.
+          items:
+            $ref: "#/components/schemas/SubscriptionOffer"
+          type: array
+      type: object
+    BatchUpdateSubscriptionOffersRequest:
+      description: Request message for BatchUpdateSubscriptionOffers.
+      properties:
+        requests:
+          description: Required. A list of update requests of up to 100 elements. All requests must update different subscription offers.
+          items:
+            $ref: "#/components/schemas/UpdateSubscriptionOfferRequest"
+          type: array
+      type: object
+    BatchUpdateSubscriptionOffersResponse:
+      description: Response message for BatchUpdateSubscriptionOffers.
+      properties:
+        subscriptionOffers:
+          description: The updated subscription offers list.
+          items:
+            $ref: "#/components/schemas/SubscriptionOffer"
+          type: array
+      type: object
+    BatchUpdateSubscriptionsRequest:
+      description: Request message for BatchUpdateSubscription.
+      properties:
+        requests:
+          description: Required. A list of update requests of up to 100 elements. All requests must update different subscriptions.
+          items:
+            $ref: "#/components/schemas/UpdateSubscriptionRequest"
+          type: array
+      type: object
+    BatchUpdateSubscriptionsResponse:
+      description: Response message for BatchUpdateSubscription.
+      properties:
+        subscriptions:
+          description: The updated subscriptions list.
+          items:
+            $ref: "#/components/schemas/Subscription"
+          type: array
+      type: object
     Bundle:
       description: Information about an app bundle. The resource for BundlesService.
       properties:
@@ -4785,11 +5463,46 @@ components:
       type: object
     DeactivateBasePlanRequest:
       description: Request message for DeactivateBasePlan.
-      properties: {}
+      properties:
+        basePlanId:
+          description: Required. The unique base plan ID of the base plan to deactivate.
+          type: string
+        latencyTolerance:
+          description: Optional. The latency tolerance for the propagation of this product update. Defaults to latency-sensitive.
+          enum:
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_UNSPECIFIED
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_SENSITIVE
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT
+          type: string
+        packageName:
+          description: Required. The parent app (package name) of the base plan to deactivate.
+          type: string
+        productId:
+          description: Required. The parent subscription (ID) of the base plan to deactivate.
+          type: string
       type: object
     DeactivateSubscriptionOfferRequest:
       description: Request message for DeactivateSubscriptionOffer.
-      properties: {}
+      properties:
+        basePlanId:
+          description: Required. The parent base plan (ID) of the offer to deactivate.
+          type: string
+        latencyTolerance:
+          description: Optional. The latency tolerance for the propagation of this product update. Defaults to latency-sensitive.
+          enum:
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_UNSPECIFIED
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_SENSITIVE
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT
+          type: string
+        offerId:
+          description: Required. The unique offer ID of the offer to deactivate.
+          type: string
+        packageName:
+          description: Required. The parent app (package name) of the offer to deactivate.
+          type: string
+        productId:
+          description: Required. The parent subscription (ID) of the offer to deactivate.
+          type: string
       type: object
     DeferredItemReplacement:
       description: Information related to deferred item replacement.
@@ -5280,6 +5993,22 @@ components:
           description: Download ID, which uniquely identifies the APK to download. Should be supplied to `generatedapks.download` method.
           type: string
       type: object
+    GetSubscriptionOfferRequest:
+      description: Request message for GetSubscriptionOffer.
+      properties:
+        basePlanId:
+          description: Required. The parent base plan (ID) of the offer to get.
+          type: string
+        offerId:
+          description: Required. The unique offer ID of the offer to get.
+          type: string
+        packageName:
+          description: Required. The parent app (package name) of the offer to get.
+          type: string
+        productId:
+          description: Required. The parent subscription (ID) of the offer to get.
+          type: string
+      type: object
     Grant:
       description: An access grant resource.
       properties:
@@ -5436,6 +6165,59 @@ components:
           description: Title for the store listing.
           type: string
       type: object
+    InappproductsBatchDeleteRequest:
+      description: Request to delete multiple in-app products.
+      properties:
+        requests:
+          description: Individual delete requests. At least one request is required. Can contain up to 100 requests. All requests must correspond to different in-app products.
+          items:
+            $ref: "#/components/schemas/InappproductsDeleteRequest"
+          type: array
+      type: object
+    InappproductsBatchGetResponse:
+      description: Response message for BatchGetSubscriptions endpoint.
+      properties:
+        inappproduct:
+          description: The list of requested in-app products, in the same order as the request.
+          items:
+            $ref: "#/components/schemas/InAppProduct"
+          type: array
+      type: object
+    InappproductsBatchUpdateRequest:
+      description: Request to update or insert one or more in-app products.
+      properties:
+        requests:
+          description: Required. Individual update requests. At least one request is required. Can contain up to 100 requests. All requests must correspond to different in-app products.
+          items:
+            $ref: "#/components/schemas/InappproductsUpdateRequest"
+          type: array
+      type: object
+    InappproductsBatchUpdateResponse:
+      description: Response for a batch in-app product update.
+      properties:
+        inappproducts:
+          description: The updated or inserted in-app products.
+          items:
+            $ref: "#/components/schemas/InAppProduct"
+          type: array
+      type: object
+    InappproductsDeleteRequest:
+      description: Request to delete an in-app product.
+      properties:
+        latencyTolerance:
+          description: Optional. The latency tolerance for the propagation of this product update. Defaults to latency-sensitive.
+          enum:
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_UNSPECIFIED
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_SENSITIVE
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT
+          type: string
+        packageName:
+          description: Package name of the app.
+          type: string
+        sku:
+          description: Unique identifier for the in-app product.
+          type: string
+      type: object
     InappproductsListResponse:
       description: Response listing all in-app products.
       properties:
@@ -5454,6 +6236,32 @@ components:
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"
           description: Pagination token, to handle a number of products that is over one page.
+      type: object
+    InappproductsUpdateRequest:
+      description: Request to update an in-app product.
+      properties:
+        allowMissing:
+          description: If set to true, and the in-app product with the given package_name and sku doesn't exist, the in-app product will be created.
+          type: boolean
+        autoConvertMissingPrices:
+          description: If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
+          type: boolean
+        inappproduct:
+          $ref: "#/components/schemas/InAppProduct"
+          description: The new in-app product.
+        latencyTolerance:
+          description: Optional. The latency tolerance for the propagation of this product update. Defaults to latency-sensitive.
+          enum:
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_UNSPECIFIED
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_SENSITIVE
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT
+          type: string
+        packageName:
+          description: Package name of the app.
+          type: string
+        sku:
+          description: Unique identifier for the in-app product.
+          type: string
       type: object
     InternalAppSharingArtifact:
       description: An artifact resource which gets created when uploading an APK or Android App Bundle through internal app sharing.
@@ -5611,6 +6419,22 @@ components:
     MigrateBasePlanPricesRequest:
       description: Request message for MigrateBasePlanPrices.
       properties:
+        basePlanId:
+          description: Required. The unique base plan ID of the base plan to update prices on.
+          type: string
+        latencyTolerance:
+          description: Optional. The latency tolerance for the propagation of this product update. Defaults to latency-sensitive.
+          enum:
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_UNSPECIFIED
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_SENSITIVE
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT
+          type: string
+        packageName:
+          description: Required. Package name of the parent app. Must be equal to the package_name field on the Subscription resource.
+          type: string
+        productId:
+          description: Required. The ID of the subscription to update. Must be equal to the product_id field on the Subscription resource.
+          type: string
         regionalPriceMigrations:
           description: Required. The regional prices to update.
           items:
@@ -6833,6 +7657,74 @@ components:
           items:
             $ref: "#/components/schemas/Track"
           type: array
+      type: object
+    UpdateBasePlanStateRequest:
+      description: Request message to update the state of a subscription base plan.
+      properties:
+        activateBasePlanRequest:
+          $ref: "#/components/schemas/ActivateBasePlanRequest"
+          description: Activates a base plan. Once activated, base plans will be available to new subscribers.
+        deactivateBasePlanRequest:
+          $ref: "#/components/schemas/DeactivateBasePlanRequest"
+          description: Deactivates a base plan. Once deactivated, the base plan will become unavailable to new subscribers, but existing subscribers will maintain their subscription
+      type: object
+    UpdateSubscriptionOfferRequest:
+      description: Request message for UpdateSubscriptionOffer.
+      properties:
+        allowMissing:
+          description: Optional. If set to true, and the subscription offer with the given package_name, product_id, base_plan_id and offer_id doesn't exist, an offer will be created. If a new offer is created, update_mask is ignored.
+          type: boolean
+        latencyTolerance:
+          description: Optional. The latency tolerance for the propagation of this product update. Defaults to latency-sensitive.
+          enum:
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_UNSPECIFIED
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_SENSITIVE
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT
+          type: string
+        regionsVersion:
+          $ref: "#/components/schemas/RegionsVersion"
+          description: Required. The version of the available regions being used for the subscription_offer.
+        subscriptionOffer:
+          $ref: "#/components/schemas/SubscriptionOffer"
+          description: Required. The subscription offer to update.
+        updateMask:
+          description: Required. The list of fields to be updated.
+          format: google-fieldmask
+          type: string
+      type: object
+    UpdateSubscriptionOfferStateRequest:
+      description: Request message to update the state of a subscription offer.
+      properties:
+        activateSubscriptionOfferRequest:
+          $ref: "#/components/schemas/ActivateSubscriptionOfferRequest"
+          description: Activates an offer. Once activated, the offer will be available to new subscribers.
+        deactivateSubscriptionOfferRequest:
+          $ref: "#/components/schemas/DeactivateSubscriptionOfferRequest"
+          description: Deactivates an offer. Once deactivated, the offer will become unavailable to new subscribers, but existing subscribers will maintain their subscription
+      type: object
+    UpdateSubscriptionRequest:
+      description: Request message for UpdateSubscription.
+      properties:
+        allowMissing:
+          description: Optional. If set to true, and the subscription with the given package_name and product_id doesn't exist, the subscription will be created. If a new subscription is created, update_mask is ignored.
+          type: boolean
+        latencyTolerance:
+          description: Optional. The latency tolerance for the propagation of this product update. Defaults to latency-sensitive.
+          enum:
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_UNSPECIFIED
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_SENSITIVE
+            - PRODUCT_UPDATE_LATENCY_TOLERANCE_LATENCY_TOLERANT
+          type: string
+        regionsVersion:
+          $ref: "#/components/schemas/RegionsVersion"
+          description: Required. The version of the available regions being used for the subscription.
+        subscription:
+          $ref: "#/components/schemas/Subscription"
+          description: Required. The subscription to update.
+        updateMask:
+          description: Required. The list of fields to be updated.
+          format: google-fieldmask
+          type: string
       type: object
     UpgradeTargetingRule:
       description: "Represents a targeting rule of the form: User currently has {scope} [with billing period {billing_period}]."

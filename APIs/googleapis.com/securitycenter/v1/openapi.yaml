@@ -1350,9 +1350,9 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Validates the given Event Threat Detection custom module.
-      operationId: securitycenter.organizations.eventThreatDetectionSettings.validateCustomModule
+      operationId: securitycenter.projects.eventThreatDetectionSettings.validateCustomModule
       parameters:
-        - description: 'Required. Resource name of the parent to validate the Custom Module under. Its format is: * "organizations/{organization}/eventThreatDetectionSettings".'
+        - description: 'Required. Resource name of the parent to validate the Custom Module under. Its format is: * "organizations/{organization}/eventThreatDetectionSettings". * "folders/{folder}/eventThreatDetectionSettings". * "projects/{project}/eventThreatDetectionSettings".'
           in: path
           name: parent
           required: true
@@ -1376,7 +1376,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
   /v1/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2249,6 +2249,40 @@ components:
           format: double
           type: number
       type: object
+    EffectiveEventThreatDetectionCustomModule:
+      description: "An EffectiveEventThreatDetectionCustomModule is the representation of an Event Threat Detection custom module at a specified level of the resource hierarchy: organization, folder, or project. If a custom module is inherited from a parent organization or folder, the value of the `enablement_state` property in EffectiveEventThreatDetectionCustomModule is set to the value that is effective in the parent, instead of `INHERITED`. For example, if the module is enabled in a parent organization or folder, the effective `enablement_state` for the module in all child folders or projects is also `enabled`. EffectiveEventThreatDetectionCustomModule is read-only."
+      properties:
+        config:
+          additionalProperties:
+            description: Properties of the object.
+          description: Output only. Config for the effective module.
+          readOnly: true
+          type: object
+        description:
+          description: Output only. The description for the module.
+          readOnly: true
+          type: string
+        displayName:
+          description: Output only. The human readable name to be displayed for the module.
+          readOnly: true
+          type: string
+        enablementState:
+          description: Output only. The effective state of enablement for the module at the given level of the hierarchy.
+          enum:
+            - ENABLEMENT_STATE_UNSPECIFIED
+            - ENABLED
+            - DISABLED
+          readOnly: true
+          type: string
+        name:
+          description: 'Output only. The resource name of the effective ETD custom module. Its format is: * "organizations/{organization}/eventThreatDetectionSettings/effectiveCustomModules/{module}". * "folders/{folder}/eventThreatDetectionSettings/effectiveCustomModules/{module}". * "projects/{project}/eventThreatDetectionSettings/effectiveCustomModules/{module}".'
+          readOnly: true
+          type: string
+        type:
+          description: Output only. Type for the module. e.g. CONFIGURABLE_BAD_IP.
+          readOnly: true
+          type: string
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
@@ -2264,8 +2298,12 @@ components:
           type: string
       type: object
     EventThreatDetectionCustomModule:
-      description: Represents an instance of an Event Threat Detection custom module, including its full module name, display name, enablement state, and last updated time. You can create a custom module at the organization level only.
+      description: Represents an instance of an Event Threat Detection custom module, including its full module name, display name, enablement state, and last updated time. You can create a custom module at the organization, folder, or project level. Custom modules that you create at the organization or folder level are inherited by child folders and projects.
       properties:
+        ancestorModule:
+          description: Output only. The closest ancestor module that this module inherits the enablement state from. The format is the same as the EventThreatDetectionCustomModule resource name.
+          readOnly: true
+          type: string
         config:
           additionalProperties:
             description: Properties of the object.
@@ -2283,6 +2321,7 @@ components:
             - ENABLEMENT_STATE_UNSPECIFIED
             - ENABLED
             - DISABLED
+            - INHERITED
           type: string
         lastEditor:
           description: Output only. The editor the module was last updated by.
@@ -4708,6 +4747,18 @@ components:
           description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
+    ListDescendantEventThreatDetectionCustomModulesResponse:
+      description: Response for listing current and descendant resident Event Threat Detection custom modules.
+      properties:
+        eventThreatDetectionCustomModules:
+          description: Custom modules belonging to the requested parent.
+          items:
+            $ref: "#/components/schemas/EventThreatDetectionCustomModule"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
     ListDescendantSecurityHealthAnalyticsCustomModulesResponse:
       description: Response message for listing descendant Security Health Analytics custom modules.
       properties:
@@ -4719,6 +4770,18 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudSecuritycenterV1SecurityHealthAnalyticsCustomModule"
           type: array
+      type: object
+    ListEffectiveEventThreatDetectionCustomModulesResponse:
+      description: Response for listing EffectiveEventThreatDetectionCustomModules.
+      properties:
+        effectiveEventThreatDetectionCustomModules:
+          description: Effective custom modules belonging to the requested parent.
+          items:
+            $ref: "#/components/schemas/EffectiveEventThreatDetectionCustomModule"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
       type: object
     ListEffectiveSecurityHealthAnalyticsCustomModulesResponse:
       description: Response message for listing effective Security Health Analytics custom modules.
