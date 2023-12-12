@@ -3253,6 +3253,10 @@ components:
           $ref: "#/components/schemas/UpgradeSettings"
           description: Upgrade settings control disruption and speed of the upgrade.
       type: object
+    AutoscaledRolloutPolicy:
+      description: Autoscaled rollout policy uses cluster autoscaler during blue-green upgrades to scale both the green and blue pools.
+      properties: {}
+      type: object
     AvailableVersion:
       deprecated: true
       description: Deprecated.
@@ -3340,6 +3344,9 @@ components:
     BlueGreenSettings:
       description: Settings for blue-green upgrade.
       properties:
+        autoscaledRolloutPolicy:
+          $ref: "#/components/schemas/AutoscaledRolloutPolicy"
+          description: Autoscaled policy for cluster autoscaler enabled blue-green upgrade.
         nodePoolSoakDuration:
           description: Time needed after draining entire blue pool. After this period, blue pool will be cleaned up.
           format: google-duration

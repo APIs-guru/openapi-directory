@@ -1263,6 +1263,16 @@ components:
           $ref: "#/components/schemas/GoogleCloudRunV2TaskTemplate"
           description: Required. Describes the task(s) that will be created when executing an execution.
       type: object
+    GoogleCloudRunV2GCSVolumeSource:
+      description: Represents a GCS Bucket mounted as a volume.
+      properties:
+        bucket:
+          description: GCS Bucket name
+          type: string
+        readOnly:
+          description: If true, mount the GCS bucket as read-only
+          type: boolean
+      type: object
     GoogleCloudRunV2GRPCAction:
       description: GRPCAction describes an action involving a GRPC port.
       properties:
@@ -1473,6 +1483,19 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudRunV2Task"
           type: array
+      type: object
+    GoogleCloudRunV2NFSVolumeSource:
+      description: Represents an NFS mount.
+      properties:
+        path:
+          description: Path that is exported by the NFS server.
+          type: string
+        readOnly:
+          description: If true, mount the NFS volume as read only
+          type: boolean
+        server:
+          description: Hostname or IP address of the NFS server
+          type: string
       type: object
     GoogleCloudRunV2NetworkInterface:
       description: Direct VPC egress settings.
@@ -2244,9 +2267,15 @@ components:
         emptyDir:
           $ref: "#/components/schemas/GoogleCloudRunV2EmptyDirVolumeSource"
           description: Ephemeral storage used as a shared volume.
+        gcs:
+          $ref: "#/components/schemas/GoogleCloudRunV2GCSVolumeSource"
+          description: Persistent storage backed by a Google Cloud Storage bucket.
         name:
           description: Required. Volume's name.
           type: string
+        nfs:
+          $ref: "#/components/schemas/GoogleCloudRunV2NFSVolumeSource"
+          description: For NFS Voumes, contains the path to the nfs Volume
         secret:
           $ref: "#/components/schemas/GoogleCloudRunV2SecretVolumeSource"
           description: Secret represents a secret that should populate this volume.

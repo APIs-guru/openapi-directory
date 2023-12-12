@@ -88,6 +88,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1alpha/{dataStore}:trainCustomModel:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Trains a custom model.
+      operationId: discoveryengine.projects.locations.collections.dataStores.trainCustomModel
+      parameters:
+        - description: Required. The resource name of the Data Store, such as `projects/*/locations/global/collections/default_collection/dataStores/default_data_store`. This field is used to identify the data store where to train the models.
+          in: path
+          name: dataStore
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaTrainCustomModelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1alpha/{location}/lookupWidgetConfig:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -256,6 +298,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - locations
+  /v1alpha/{location}:estimateDataSize:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Estimates the data size to be used by a customer.
+      operationId: discoveryengine.projects.locations.estimateDataSize
+      parameters:
+        - description: Required. Full resource name of the Location, such as `projects/{project}/locations/{location}`.
+          in: path
+          name: location
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaEstimateDataSizeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1alpha/{name}:
     delete:
       description: Deletes a TargetSite.
@@ -2194,6 +2278,9 @@ components:
         conversation:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaConversation"
           description: The conversation to be used by auto session only. The name field will be ignored as we automatically assign new name for the conversation in auto session.
+        filter:
+          description: "The filter syntax consists of an expression language for constructing a predicate from one or more fields of the documents being filtered. Filter expression is case-sensitive. This will be used to filter search results which may affect the summary response. If this field is unrecognizable, an `INVALID_ARGUMENT` is returned. Filtering in Vertex AI Search is done by mapping the LHS filter key to a key property defined in the Vertex AI Search backend -- this mapping is defined by the customer in their schema. For example a media customer might have a field 'name' in their schema. In this case the filter would look like this: filter --> name:'ANY(\"king kong\")' For more information about filtering including syntax and filter operators, see [Filter](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)"
+          type: string
         name:
           description: "Required. The resource name of the Conversation to get. Format: `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`. Use `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/-` to activate auto session mode, which automatically creates a new conversation inside a ConverseConversation session."
           type: string
@@ -2702,6 +2789,68 @@ components:
     GoogleCloudDiscoveryengineV1alphaEngineSimilarDocumentsEngineConfig:
       description: Additional config specs for a `similar-items` engine.
       properties: {}
+      type: object
+    GoogleCloudDiscoveryengineV1alphaEstimateDataSizeMetadata:
+      description: Metadata related to the progress of the EstimateDataSize operation. This is returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaEstimateDataSizeRequest:
+      description: Request message for EstimateBillingService.EstimateDataSize method
+      properties:
+        fileDataSource:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaEstimateDataSizeRequestFileDataSource"
+          description: Structured or unstructured data.
+        websiteDataSource:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaEstimateDataSizeRequestWebsiteDataSource"
+          description: Website data.
+      type: object
+    GoogleCloudDiscoveryengineV1alphaEstimateDataSizeRequestFileDataSource:
+      description: Data source contains files either in GCS or BigQuery.
+      properties:
+        bigquerySource:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaBigQuerySource"
+          description: BigQuery input source.
+        gcsSource:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaGcsSource"
+          description: Cloud Storage location for the input content.
+      type: object
+    GoogleCloudDiscoveryengineV1alphaEstimateDataSizeRequestWebsiteDataSource:
+      description: Data source is a set of website patterns that we crawl to get the total number of websites.
+      properties:
+        estimatorUriPatterns:
+          description: Required. The URI patterns to estimate the data sizes. At most 10 patterns are allowed, otherwise an INVALID_ARGUMENT error is thrown.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaEstimateDataSizeRequestWebsiteDataSourceEstimatorUriPattern"
+          type: array
+      type: object
+    GoogleCloudDiscoveryengineV1alphaEstimateDataSizeRequestWebsiteDataSourceEstimatorUriPattern:
+      description: URI patterns that we use to crawl.
+      properties:
+        exactMatch:
+          description: Whether we infer the generated URI or use the exact provided one.
+          type: boolean
+        exclusive:
+          description: Whether the pattern is exclusive or not. If set to true, the pattern is considered exclusive. If unset or set to false, the pattern is considered inclusive by default.
+          type: boolean
+        providedUriPattern:
+          description: User provided URI pattern. For example, `foo.com/bar/*`.
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaEstimateDataSizeResponse:
+      description: Response of the EstimateDataSize request. If the long running operation was successful, then this message is returned by the google.longrunning.Operations.response field if the operation was successful.
+      properties:
+        dataSizeBytes:
+          description: Data size in terms of bytes.
+          format: int64
+          type: string
+        documentCount:
+          description: Total number of documents.
+          format: int64
+          type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaFetchDomainVerificationStatusResponse:
       description: Response message for SiteSearchEngineService.FetchDomainVerificationStatus method.
@@ -3557,6 +3706,9 @@ components:
         languageCode:
           description: "Language code for Summary. Use language tags defined by [BCP47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt). Note: This is an experimental feature."
           type: string
+        modelPromptSpec:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSearchRequestContentSearchSpecSummarySpecModelPromptSpec"
+          description: If specified, the spec will be used to modify the prompt provided to the LLM.
         modelSpec:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSearchRequestContentSearchSpecSummarySpecModelSpec"
           description: If specified, the spec will be used to modify the model specification provided to the LLM.
@@ -3565,11 +3717,18 @@ components:
           format: int32
           type: integer
       type: object
+    GoogleCloudDiscoveryengineV1alphaSearchRequestContentSearchSpecSummarySpecModelPromptSpec:
+      description: Specification of the prompt to use with the model.
+      properties:
+        preamble:
+          description: Text at the beginning of the prompt that instructs the assistant. Examples are available in the user guide.
+          type: string
+      type: object
     GoogleCloudDiscoveryengineV1alphaSearchRequestContentSearchSpecSummarySpecModelSpec:
       description: Specification of the model.
       properties:
         version:
-          description: The string format of the model version. e.g. stable, latest, etc.
+          description: The string format of the model version. e.g. stable, preview, etc.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaSearchRequestEmbeddingSpec:
@@ -3836,6 +3995,55 @@ components:
         summaryText:
           description: The summary content.
           type: string
+        summaryWithMetadata:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSearchResponseSummarySummaryWithMetadata"
+      type: object
+    GoogleCloudDiscoveryengineV1alphaSearchResponseSummaryCitation:
+      description: Citation info for a segment.
+      properties:
+        endIndex:
+          description: End of the attributed segment, exclusive.
+          format: int64
+          type: string
+        sources:
+          description: Citation sources for the attributed segment.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSearchResponseSummaryCitationSource"
+          type: array
+        startIndex:
+          description: Index indicates the start of the segment, measured in bytes/unicode.
+          format: int64
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaSearchResponseSummaryCitationMetadata:
+      description: Citation metadata.
+      properties:
+        citations:
+          description: Citations for segments.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSearchResponseSummaryCitation"
+          type: array
+      type: object
+    GoogleCloudDiscoveryengineV1alphaSearchResponseSummaryCitationSource:
+      description: Citation source.
+      properties:
+        referenceIndex:
+          description: Document reference index from SummaryWithMetadata.references. It is 0-indexed and the value will be zero if the reference_index is not set explicitly.
+          format: int64
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaSearchResponseSummaryReference:
+      description: Document reference.
+      properties:
+        document:
+          description: Required. Document.name of the document. Full resource name of the referenced document, in the format `projects/*/locations/*/collections/*/dataStores/*/branches/*/documents/*`.
+          type: string
+        title:
+          description: Title of the document.
+          type: string
+        uri:
+          description: GCS or HTTP uri for the document.
+          type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaSearchResponseSummarySafetyAttributes:
       description: Safety Attribute categories and their associated confidence scores.
@@ -3851,6 +4059,21 @@ components:
             format: float
             type: number
           type: array
+      type: object
+    GoogleCloudDiscoveryengineV1alphaSearchResponseSummarySummaryWithMetadata:
+      description: Summary with metadata information.
+      properties:
+        citationMetadata:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSearchResponseSummaryCitationMetadata"
+          description: Citation metadata for given summary.
+        references:
+          description: Document References.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSearchResponseSummaryReference"
+          type: array
+        summary:
+          description: Summary text with no citation information.
+          type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaSiteSearchEngine:
       description: SiteSearchEngine captures DataStore level site search persisting configurations. It is a singleton value per data store.
@@ -3941,6 +4164,62 @@ components:
           description: Conversation context of the input.
         input:
           description: Text input.
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaTrainCustomModelMetadata:
+      description: Metadata related to the progress of the TrainCustomModel operation. This is returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaTrainCustomModelRequest:
+      description: Request message for SearchTuningService.TrainCustomModel method.
+      properties:
+        errorConfig:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaImportErrorConfig"
+          description: The desired location of errors incurred during the data ingestion and training.
+        gcsTrainingInput:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaTrainCustomModelRequestGcsTrainingInput"
+          description: Gcs training input.
+        modelType:
+          description: "Model to be trained. Supported values are: * **search-tuning**: Fine tuning the search system based on data provided."
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaTrainCustomModelRequestGcsTrainingInput:
+      description: Gcs training data input.
+      properties:
+        corpusDataPath:
+          description: 'The gcs corpus data which could be associated in train data. The data path format is gs:///. A newline delimited jsonl/ndjson file. * For search-tuning model, each line should have the _id, title and text. Example: {"_id": "doc1", title: "relevant doc", "text": "relevant text"}'
+          type: string
+        queryDataPath:
+          description: 'The gcs query data which could be associated in train data. The data path format is gs:///. A newline delimited jsonl/ndjson file. * For search-tuning model, each line should have the _id and text. Example: {"_id": "query1", "text": "example query"}'
+          type: string
+        testDataPath:
+          description: Gcs test data. Same format as train_data_path. If not provided, a random 80/20 train/test split will be performed on train_data_path.
+          type: string
+        trainDataPath:
+          description: "Gcs training data path whose format should be gs:///. The file should be in tsv format. Each line should have the doc_id and query_id and score (number). * For search-tuning model, it should have the query-id corpus-id score as tsv file header. The score should be a number in [0, inf+). The larger the number is, the more relevant the pair is. Example: query-id\\tcorpus-id\\tscore query1\\tdoc1\\t1"
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaTrainCustomModelResponse:
+      description: Response of the TrainCustomModelRequest. This message is returned by the google.longrunning.Operations.response field.
+      properties:
+        errorConfig:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaImportErrorConfig"
+          description: Echoes the destination for the complete errors in the request if set.
+        errorSamples:
+          description: A sample of errors encountered while processing the data.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+        modelStatus:
+          description: "The trained model status. Possible values are: * **bad-data**: The training data quality is bad. * **no-improvement**: Tuning didn't improve performance. Won't deploy. * **in-progress**: Model training is in progress. * **ready**: The model is ready for serving."
           type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaTransactionInfo:
@@ -4147,6 +4426,7 @@ components:
             - SITE_SEARCH
             - STRUCTURED
             - UNSTRUCTURED
+            - BLENDED
           readOnly: true
           type: string
         displayName:

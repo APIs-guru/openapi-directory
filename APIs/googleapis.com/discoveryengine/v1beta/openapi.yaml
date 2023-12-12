@@ -1542,6 +1542,26 @@ components:
       description: Additional config specs for a `similar-items` engine.
       properties: {}
       type: object
+    GoogleCloudDiscoveryengineV1alphaEstimateDataSizeMetadata:
+      description: Metadata related to the progress of the EstimateDataSize operation. This is returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaEstimateDataSizeResponse:
+      description: Response of the EstimateDataSize request. If the long running operation was successful, then this message is returned by the google.longrunning.Operations.response field if the operation was successful.
+      properties:
+        dataSizeBytes:
+          description: Data size in terms of bytes.
+          format: int64
+          type: string
+        documentCount:
+          description: Total number of documents.
+          format: int64
+          type: string
+      type: object
     GoogleCloudDiscoveryengineV1alphaFieldConfig:
       description: Configurations for fields of a schema. For example, configuring a field is indexable, or searchable.
       properties:
@@ -1915,6 +1935,33 @@ components:
     GoogleCloudDiscoveryengineV1alphaTargetSiteFailureReasonQuotaFailure:
       properties: {}
       type: object
+    GoogleCloudDiscoveryengineV1alphaTrainCustomModelMetadata:
+      description: Metadata related to the progress of the TrainCustomModel operation. This is returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaTrainCustomModelResponse:
+      description: Response of the TrainCustomModelRequest. This message is returned by the google.longrunning.Operations.response field.
+      properties:
+        errorConfig:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaImportErrorConfig"
+          description: Echoes the destination for the complete errors in the request if set.
+        errorSamples:
+          description: A sample of errors encountered while processing the data.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+        modelStatus:
+          description: "The trained model status. Possible values are: * **bad-data**: The training data quality is bad. * **no-improvement**: Tuning didn't improve performance. Won't deploy. * **in-progress**: Model training is in progress. * **ready**: The model is ready for serving."
+          type: string
+      type: object
     GoogleCloudDiscoveryengineV1alphaTuneEngineMetadata:
       description: Metadata associated with a tune operation.
       properties:
@@ -2072,6 +2119,9 @@ components:
         conversation:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaConversation"
           description: The conversation to be used by auto session only. The name field will be ignored as we automatically assign new name for the conversation in auto session.
+        filter:
+          description: "The filter syntax consists of an expression language for constructing a predicate from one or more fields of the documents being filtered. Filter expression is case-sensitive. This will be used to filter search results which may affect the summary response. If this field is unrecognizable, an `INVALID_ARGUMENT` is returned. Filtering in Vertex AI Search is done by mapping the LHS filter key to a key property defined in the Vertex AI Search backend -- this mapping is defined by the customer in their schema. For example a media customer might have a field 'name' in their schema. In this case the filter would look like this: filter --> name:'ANY(\"king kong\")' For more information about filtering including syntax and filter operators, see [Filter](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)"
+          type: string
         query:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaTextInput"
           description: Required. Current user input.
@@ -2810,6 +2860,9 @@ components:
         languageCode:
           description: "Language code for Summary. Use language tags defined by [BCP47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt). Note: This is an experimental feature."
           type: string
+        modelPromptSpec:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpecModelPromptSpec"
+          description: If specified, the spec will be used to modify the prompt provided to the LLM.
         modelSpec:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpecModelSpec"
           description: If specified, the spec will be used to modify the model specification provided to the LLM.
@@ -2818,11 +2871,18 @@ components:
           format: int32
           type: integer
       type: object
+    GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpecModelPromptSpec:
+      description: Specification of the prompt to use with the model.
+      properties:
+        preamble:
+          description: Text at the beginning of the prompt that instructs the assistant. Examples are available in the user guide.
+          type: string
+      type: object
     GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpecModelSpec:
       description: Specification of the model.
       properties:
         version:
-          description: The string format of the model version. e.g. stable, latest, etc.
+          description: The string format of the model version. e.g. stable, preview, etc.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1betaSearchRequestEmbeddingSpec:
@@ -3089,6 +3149,55 @@ components:
         summaryText:
           description: The summary content.
           type: string
+        summaryWithMetadata:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaSearchResponseSummarySummaryWithMetadata"
+      type: object
+    GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitation:
+      description: Citation info for a segment.
+      properties:
+        endIndex:
+          description: End of the attributed segment, exclusive.
+          format: int64
+          type: string
+        sources:
+          description: Citation sources for the attributed segment.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitationSource"
+          type: array
+        startIndex:
+          description: Index indicates the start of the segment, measured in bytes/unicode.
+          format: int64
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitationMetadata:
+      description: Citation metadata.
+      properties:
+        citations:
+          description: Citations for segments.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitation"
+          type: array
+      type: object
+    GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitationSource:
+      description: Citation source.
+      properties:
+        referenceIndex:
+          description: Document reference index from SummaryWithMetadata.references. It is 0-indexed and the value will be zero if the reference_index is not set explicitly.
+          format: int64
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1betaSearchResponseSummaryReference:
+      description: Document reference.
+      properties:
+        document:
+          description: Required. Document.name of the document. Full resource name of the referenced document, in the format `projects/*/locations/*/collections/*/dataStores/*/branches/*/documents/*`.
+          type: string
+        title:
+          description: Title of the document.
+          type: string
+        uri:
+          description: GCS or HTTP uri for the document.
+          type: string
       type: object
     GoogleCloudDiscoveryengineV1betaSearchResponseSummarySafetyAttributes:
       description: Safety Attribute categories and their associated confidence scores.
@@ -3104,6 +3213,21 @@ components:
             format: float
             type: number
           type: array
+      type: object
+    GoogleCloudDiscoveryengineV1betaSearchResponseSummarySummaryWithMetadata:
+      description: Summary with metadata information.
+      properties:
+        citationMetadata:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitationMetadata"
+          description: Citation metadata for given summary.
+        references:
+          description: Document References.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaSearchResponseSummaryReference"
+          type: array
+        summary:
+          description: Summary text with no citation information.
+          type: string
       type: object
     GoogleCloudDiscoveryengineV1betaTextInput:
       description: Defines text input.
