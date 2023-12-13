@@ -576,7 +576,7 @@ components:
       properties:
         classificationModelOptions:
           $ref: "#/components/schemas/ClassificationModelOptions"
-          description: Model options to use for classification. Defaults to v1 options if not specified.
+          description: Optional. Model options to use for classification. Defaults to v1 options if not specified.
         document:
           $ref: "#/components/schemas/Document"
           description: Required. Input document.
@@ -768,7 +768,7 @@ components:
       properties:
         classificationModelOptions:
           $ref: "#/components/schemas/ClassificationModelOptions"
-          description: The model options to use for classification. Defaults to v1 options if not specified. Only used if `classify_text` is set to true.
+          description: Optional. The model options to use for classification. Defaults to v1 options if not specified. Only used if `classify_text` is set to true.
         classifyText:
           description: Classify the full document into categories.
           type: boolean
