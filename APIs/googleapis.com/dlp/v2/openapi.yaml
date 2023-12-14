@@ -2047,7 +2047,10 @@ components:
         dataProfileJob:
           $ref: "#/components/schemas/GooglePrivacyDlpV2DataProfileJobConfig"
           deprecated: true
-          description: A copy of the configuration used to generate this profile. This is deprecated and will be replaced by DiscoveryConfig. DataProfileJobConfig will still be written here for Discovery in BigQuery for backwards compatibility, but will not be updated with new fields, while DiscoveryConfig will.
+          description: A copy of the configuration used to generate this profile. This is deprecated, and the DiscoveryConfig field is preferred moving forward. DataProfileJobConfig will still be written here for Discovery in BigQuery for backwards compatibility, but will not be updated with new fields, while DiscoveryConfig will.
+        discoveryConfig:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2DiscoveryConfig"
+          description: A copy of the configuration used to generate this profile.
         inspectConfig:
           $ref: "#/components/schemas/GooglePrivacyDlpV2InspectConfig"
           description: A copy of the inspection config used to generate this profile. This is a copy of the inspect_template specified in `DataProfileJobConfig`.

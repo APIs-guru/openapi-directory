@@ -395,8 +395,18 @@ components:
             type: string
           readOnly: true
           type: array
+        createTime:
+          description: Output only. The creation time of the connector.
+          format: google-datetime
+          readOnly: true
+          type: string
         ipCidrRange:
           description: "The range of internal addresses that follows RFC 4632 notation. Example: `10.132.0.0/28`."
+          type: string
+        lastRestartTime:
+          description: Output only. The last restart time of the connector.
+          format: google-datetime
+          readOnly: true
           type: string
         machineType:
           description: Machine type of VM Instance underlying connector. Default is e2-micro

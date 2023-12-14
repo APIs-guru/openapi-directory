@@ -971,6 +971,19 @@ components:
           description: The time the operation finished running.
           format: google-datetime
           type: string
+        operationType:
+          description: The operation type.
+          enum:
+            - OPERATIONTYPE_UNSPECIFIED
+            - CREATE_FUNCTION
+            - UPDATE_FUNCTION
+            - DELETE_FUNCTION
+            - REDIRECT_FUNCTION_UPGRADE_TRAFFIC
+            - ROLLBACK_FUNCTION_UPGRADE_TRAFFIC
+            - SETUP_FUNCTION_UPGRADE_CONFIG
+            - ABORT_FUNCTION_UPGRADE
+            - COMMIT_FUNCTION_UPGRADE
+          type: string
         requestResource:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
@@ -1079,6 +1092,19 @@ components:
           description: The time the operation finished running.
           format: google-datetime
           type: string
+        operationType:
+          description: The operation type.
+          enum:
+            - OPERATIONTYPE_UNSPECIFIED
+            - CREATE_FUNCTION
+            - UPDATE_FUNCTION
+            - DELETE_FUNCTION
+            - REDIRECT_FUNCTION_UPGRADE_TRAFFIC
+            - ROLLBACK_FUNCTION_UPGRADE_TRAFFIC
+            - SETUP_FUNCTION_UPGRADE_CONFIG
+            - ABORT_FUNCTION_UPGRADE
+            - COMMIT_FUNCTION_UPGRADE
+          type: string
         requestResource:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
@@ -1186,6 +1212,19 @@ components:
         endTime:
           description: The time the operation finished running.
           format: google-datetime
+          type: string
+        operationType:
+          description: The operation type.
+          enum:
+            - OPERATIONTYPE_UNSPECIFIED
+            - CREATE_FUNCTION
+            - UPDATE_FUNCTION
+            - DELETE_FUNCTION
+            - REDIRECT_FUNCTION_UPGRADE_TRAFFIC
+            - ROLLBACK_FUNCTION_UPGRADE_TRAFFIC
+            - SETUP_FUNCTION_UPGRADE_CONFIG
+            - ABORT_FUNCTION_UPGRADE
+            - COMMIT_FUNCTION_UPGRADE
           type: string
         requestResource:
           additionalProperties:

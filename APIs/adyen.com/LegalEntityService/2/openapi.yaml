@@ -126,7 +126,6 @@ paths:
       tags:
         - Business lines
       x-addedInVersion: "1"
-      x-groupName: Business lines
       x-methodName: createBusinessLine
       x-sortIndex: 12
   /businessLines/{id}:
@@ -183,7 +182,6 @@ paths:
       tags:
         - Business lines
       x-addedInVersion: "1"
-      x-groupName: Business lines
       x-methodName: deleteBusinessLine
       x-sortIndex: 14
     get:
@@ -243,7 +241,6 @@ paths:
       tags:
         - Business lines
       x-addedInVersion: "1"
-      x-groupName: Business lines
       x-methodName: getBusinessLine
       x-sortIndex: 13
     patch:
@@ -311,7 +308,6 @@ paths:
       tags:
         - Business lines
       x-addedInVersion: "2"
-      x-groupName: Business lines
       x-methodName: updateBusinessLine
       x-sortIndex: 15
   /documents:
@@ -387,7 +383,6 @@ paths:
       tags:
         - Documents
       x-addedInVersion: "1"
-      x-groupName: Documents
       x-methodName: uploadDocumentForVerificationChecks
       x-sortIndex: 4
   /documents/{id}:
@@ -441,7 +436,6 @@ paths:
       tags:
         - Documents
       x-addedInVersion: "1"
-      x-groupName: Documents
       x-methodName: deleteDocument
       x-sortIndex: 7
     get:
@@ -501,7 +495,6 @@ paths:
       tags:
         - Documents
       x-addedInVersion: "1"
-      x-groupName: Documents
       x-methodName: getDocument
       x-sortIndex: 5
     patch:
@@ -578,7 +571,6 @@ paths:
       tags:
         - Documents
       x-addedInVersion: "1"
-      x-groupName: Documents
       x-methodName: updateDocument
       x-sortIndex: 6
   /legalEntities:
@@ -677,7 +669,6 @@ paths:
       tags:
         - Legal entities
       x-addedInVersion: "1"
-      x-groupName: Legal entities
       x-methodName: createLegalEntity
       x-sortIndex: 1
   /legalEntities/{id}:
@@ -738,7 +729,6 @@ paths:
       tags:
         - Legal entities
       x-addedInVersion: "1"
-      x-groupName: Legal entities
       x-methodName: getLegalEntity
       x-sortIndex: 2
     patch:
@@ -831,7 +821,6 @@ paths:
       tags:
         - Legal entities
       x-addedInVersion: "1"
-      x-groupName: Legal entities
       x-methodName: updateLegalEntity
       x-sortIndex: 3
   /legalEntities/{id}/businessLines:
@@ -892,7 +881,6 @@ paths:
       tags:
         - Legal entities
       x-addedInVersion: "1"
-      x-groupName: Legal entities
       x-methodName: getAllBusinessLinesUnderLegalEntity
       x-sortIndex: 4
   /legalEntities/{id}/onboardingLinks:
@@ -965,7 +953,6 @@ paths:
       tags:
         - Hosted Onboarding
       x-addedInVersion: "1"
-      x-groupName: Hosted Onboarding
       x-methodName: getLinkToAdyenhostedOnboardingPage
       x-sortIndex: 1
   /legalEntities/{id}/pciQuestionnaires:
@@ -1026,7 +1013,6 @@ paths:
       tags:
         - PCI questionnaires
       x-addedInVersion: "1"
-      x-groupName: PCI questionnaires
       x-methodName: getPciQuestionnaireDetails
       x-sortIndex: 3
   /legalEntities/{id}/pciQuestionnaires/generatePciTemplates:
@@ -1095,7 +1081,6 @@ paths:
       tags:
         - PCI questionnaires
       x-addedInVersion: "1"
-      x-groupName: PCI questionnaires
       x-methodName: generatePciQuestionnaire
       x-sortIndex: 1
   /legalEntities/{id}/pciQuestionnaires/signPciTemplates:
@@ -1164,7 +1149,6 @@ paths:
       tags:
         - PCI questionnaires
       x-addedInVersion: "1"
-      x-groupName: PCI questionnaires
       x-methodName: signPciQuestionnaire
       x-sortIndex: 2
   /legalEntities/{id}/pciQuestionnaires/{pciid}:
@@ -1231,7 +1215,6 @@ paths:
       tags:
         - PCI questionnaires
       x-addedInVersion: "1"
-      x-groupName: PCI questionnaires
       x-methodName: getPciQuestionnaire
       x-sortIndex: 4
   /legalEntities/{id}/termsOfService:
@@ -1300,7 +1283,6 @@ paths:
       tags:
         - Terms of Service
       x-addedInVersion: "1"
-      x-groupName: Terms of Service
       x-methodName: getTermsOfServiceDocument
       x-sortIndex: 1
   /legalEntities/{id}/termsOfService/{termsofservicedocumentid}:
@@ -1375,7 +1357,6 @@ paths:
       tags:
         - Terms of Service
       x-addedInVersion: "1"
-      x-groupName: Terms of Service
       x-methodName: acceptTermsOfService
       x-sortIndex: 2
   /legalEntities/{id}/termsOfServiceAcceptanceInfos:
@@ -1436,7 +1417,6 @@ paths:
       tags:
         - Terms of Service
       x-addedInVersion: "1"
-      x-groupName: Terms of Service
       x-methodName: getTermsOfServiceInformationForLegalEntity
       x-sortIndex: 3
   /legalEntities/{id}/termsOfServiceStatus:
@@ -1497,7 +1477,6 @@ paths:
       tags:
         - Terms of Service
       x-addedInVersion: "1"
-      x-groupName: Terms of Service
       x-methodName: getTermsOfServiceStatus
       x-sortIndex: 4
   /themes:
@@ -1555,7 +1534,6 @@ paths:
       tags:
         - Hosted Onboarding
       x-addedInVersion: "1"
-      x-groupName: Hosted Onboarding
       x-methodName: listHostedOnboardingPageThemes
       x-sortIndex: 2
   /themes/{id}:
@@ -1618,7 +1596,6 @@ paths:
       tags:
         - Hosted Onboarding
       x-addedInVersion: "1"
-      x-groupName: Hosted Onboarding
       x-methodName: getOnboardingLinkTheme
       x-sortIndex: 4
   /transferInstruments:
@@ -1696,7 +1673,6 @@ paths:
       tags:
         - Transfer instruments
       x-addedInVersion: "1"
-      x-groupName: Transfer instruments
       x-methodName: createTransferInstrument
       x-sortIndex: 8
   /transferInstruments/{id}:
@@ -1750,7 +1726,6 @@ paths:
       tags:
         - Transfer instruments
       x-addedInVersion: "1"
-      x-groupName: Transfer instruments
       x-methodName: deleteTransferInstrument
       x-sortIndex: 11
     get:
@@ -1810,7 +1785,6 @@ paths:
       tags:
         - Transfer instruments
       x-addedInVersion: "1"
-      x-groupName: Transfer instruments
       x-methodName: getTransferInstrument
       x-sortIndex: 9
     patch:
@@ -1884,7 +1858,6 @@ paths:
       tags:
         - Transfer instruments
       x-addedInVersion: "1"
-      x-groupName: Transfer instruments
       x-methodName: updateTransferInstrument
       x-sortIndex: 10
 components:
@@ -4745,11 +4718,3 @@ components:
     BasicAuth:
       scheme: basic
       type: http
-x-groups:
-  - Legal entities
-  - Transfer instruments
-  - Business lines
-  - Documents
-  - Terms of Service
-  - Hosted Onboarding
-  - PCI questionnaires

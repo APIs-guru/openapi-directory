@@ -44,7 +44,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: FetchCaCerts returns the current trust anchor for the CaPool. This will include CA certificate chains for all ACTIVE CertificateAuthority resources in the CaPool.
+      description: FetchCaCerts returns the current trust anchor for the CaPool. This will include CA certificate chains for all Certificate Authorities in the ENABLED, DISABLED, or STAGED states.
       operationId: privateca.projects.locations.caPools.fetchCaCerts
       parameters:
         - description: Required. The resource name for the CaPool in the format `projects/*/locations/*/caPools/*`.

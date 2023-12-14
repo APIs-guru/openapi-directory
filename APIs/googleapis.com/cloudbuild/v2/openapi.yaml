@@ -1997,6 +1997,11 @@ components:
           items:
             $ref: "#/components/schemas/EnvVar"
           type: array
+        volumeMounts:
+          description: Optional. Pod volumes to mount into the container's filesystem.
+          items:
+            $ref: "#/components/schemas/VolumeMount"
+          type: array
       type: object
     TaskRef:
       description: TaskRef can be used to refer to a specific instance of a task. PipelineRef can be used to refer to a specific instance of a Pipeline.

@@ -1240,6 +1240,13 @@ components:
       schema:
         type: string
   schemas:
+    AuthorizedNetwork:
+      description: AuthorizedNetwork contains metadata for an authorized network.
+      properties:
+        cidrRange:
+          description: CIDR range for one authorzied network of the instance.
+          type: string
+      type: object
     AutomatedBackupPolicy:
       description: Message describing the user-specified automated backup policy. All fields in the automated backup policy are optional. Defaults for each field are provided if they are not set.
       properties:
@@ -1593,6 +1600,10 @@ components:
             type: string
           readOnly: true
           type: array
+        publicIpAddress:
+          description: Output only. The public IP addresses for the Instance. This is available ONLY when enable_public_ip is set. This is the connection endpoint for an end-user application.
+          readOnly: true
+          type: string
       type: object
     ContinuousBackupConfig:
       description: ContinuousBackupConfig describes the continuous backups recovery configurations of a cluster.
@@ -1867,12 +1878,18 @@ components:
           description: "Output only. The name of the instance resource with the format: * projects/{project}/locations/{region}/clusters/{cluster_id}/instances/{instance_id} where the cluster and instance ID segments should satisfy the regex expression `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`, e.g. 1-63 characters of lowercase letters, numbers, and dashes, starting with a letter, and ending with a letter or number. For more details see https://google.aip.dev/122. The prefix of the instance resource name is the name of the parent resource: * projects/{project}/locations/{region}/clusters/{cluster_id}"
           readOnly: true
           type: string
+        networkConfig:
+          $ref: "#/components/schemas/InstanceNetworkConfig"
+          description: Optional. Instance level network configuration.
         nodes:
           description: Output only. List of available read-only VMs in this instance, including the standby for a PRIMARY instance.
           items:
             $ref: "#/components/schemas/Node"
           readOnly: true
           type: array
+        pscInstanceConfig:
+          $ref: "#/components/schemas/PscInstanceConfig"
+          description: Optional. The configuration for Private Service Connect (PSC) for the instance.
         queryInsightsConfig:
           $ref: "#/components/schemas/QueryInsightsInstanceConfig"
           description: Configuration for query insights.
@@ -1921,6 +1938,18 @@ components:
           $ref: "#/components/schemas/Node"
           description: Output only. This is set for the read-write VM of the PRIMARY instance only.
           readOnly: true
+      type: object
+    InstanceNetworkConfig:
+      description: Metadata related to instance level network configuration.
+      properties:
+        authorizedExternalNetworks:
+          description: Optional. A list of external network authorized to access this instance.
+          items:
+            $ref: "#/components/schemas/AuthorizedNetwork"
+          type: array
+        enablePublicIp:
+          description: Optional. Enabling public ip for the instance.
+          type: boolean
       type: object
     IntegerRestrictions:
       description: Restrictions on INTEGER type values.
@@ -2165,6 +2194,49 @@ components:
         pscEnabled:
           description: Optional. Create an instance that allows connections from Private Service Connect endpoints to the instance.
           type: boolean
+      type: object
+    PscInstanceConfig:
+      description: "PscInstanceConfig contains PSC related configuration at an instance level. NEXT ID: 7"
+      properties:
+        allowedConsumerNetworks:
+          description: Optional. List of consumer networks that are allowed to create PSC endpoints to service-attachments to this instance.
+          items:
+            type: string
+          type: array
+        allowedConsumerProjects:
+          description: Optional. List of consumer projects that are allowed to create PSC endpoints to service-attachments to this instance.
+          items:
+            type: string
+          type: array
+        outgoingServiceAttachmentLinks:
+          description: Optional. List of service attachments that this instance has created endpoints to connect with. Currently, only a single outgoing service attachment is supported per instance.
+          items:
+            type: string
+          type: array
+        pscEnabled:
+          description: Optional. Whether PSC connectivity is enabled for this instance. This is populated by referencing the value from the parent cluster.
+          type: boolean
+        pscInterfaceConfigs:
+          description: Optional. Configurations for setting up PSC interfaces attached to the instance which are used for outbound connectivity. Only primary instances can have PSC interface attached. All the VMs created for the primary instance will share the same configurations. Currently we only support 0 or 1 PSC interface.
+          items:
+            $ref: "#/components/schemas/PscInterfaceConfig"
+          type: array
+        serviceAttachmentLink:
+          description: Output only. The service attachment created when Private Service Connect (PSC) is enabled for the instance. The name of the resource will be in the format of projects//regions//serviceAttachments/
+          readOnly: true
+          type: string
+      type: object
+    PscInterfaceConfig:
+      description: Configuration for setting up a PSC interface. This information needs to be provided by the customer. PSC interfaces will be created and added to VMs via SLM (adding a network interface will require recreating the VM). For HA instances this will be done via LDTM.
+      properties:
+        consumerEndpointIps:
+          description: A list of endpoints in the consumer VPC the interface might initiate outbound connections to. This list has to be provided when the PSC interface is created.
+          items:
+            type: string
+          type: array
+        networkAttachment:
+          description: 'The NetworkAttachment resource created in the consumer VPC to which the PSC interface will be linked, in the form of: "projects/${CONSUMER_PROJECT}/regions/${REGION}/networkAttachments/${NETWORK_ATTACHMENT_NAME}". NetworkAttachment has to be provided when the PSC interface is created.'
+          type: string
       type: object
     QuantityBasedExpiry:
       description: "A backup's position in a quantity-based retention queue, of backups with the same source cluster and type, with length, retention, specified by the backup's retention policy. Once the position is greater than the retention, the backup is eligible to be garbage collected. Example: 5 backups from the same source cluster and type with a quantity-based retention of 3 and denoted by backup_id (position, retention). Safe: backup_5 (1, 3), backup_4, (2, 3), backup_3 (3, 3). Awaiting garbage collection: backup_2 (4, 3), backup_1 (5, 3)"

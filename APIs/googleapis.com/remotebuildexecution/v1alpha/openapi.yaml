@@ -1132,6 +1132,9 @@ components:
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaDisks:
       description: Disks defines the disks that would be attached to the workers.
       properties:
+        dockerRootDisk:
+          $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaDisksPersistentDisk"
+          description: Optional. Specifies the configuration for the docker root disk to be attached. If not specified, RBE will default to the RBE managed docker root disk.
         localSsd:
           $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaDisksLocalSSD"
           description: Optional. Specifies the number of local SSDs to be attached. If specified, local SSDs will be used as the working directory.
@@ -1147,6 +1150,20 @@ components:
           description: Output only. The size of the local SSD in gb. Intended for informational purposes only.
           format: int64
           readOnly: true
+          type: string
+      type: object
+    GoogleDevtoolsRemotebuildexecutionAdminV1alphaDisksPersistentDisk:
+      description: PersistentDisk specifies how to attach a persistent disk to the workers.
+      properties:
+        diskSizeGb:
+          description: Required. Size of the disk in GB.
+          format: int64
+          type: string
+        diskType:
+          description: Required. Type of disk attached (supported types are pd-standard and pd-ssd).
+          type: string
+        sourceImage:
+          description: Required. VM image to use for the disk.
           type: string
       type: object
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy:
