@@ -641,7 +641,7 @@ components:
           description: Metric set resource where the anomaly was detected.
           type: string
         name:
-          description: "Name of the anomaly. Format: apps/{app}/anomalies/{anomaly}"
+          description: "Identifier. Name of the anomaly. Format: apps/{app}/anomalies/{anomaly}"
           type: string
         timelineSpec:
           $ref: "#/components/schemas/GooglePlayDeveloperReportingV1alpha1TimelineSpec"
@@ -654,7 +654,7 @@ components:
           $ref: "#/components/schemas/GooglePlayDeveloperReportingV1alpha1FreshnessInfo"
           description: Summary about data freshness in this resource.
         name:
-          description: "The resource name. Format: apps/{app}/anrRateMetricSet"
+          description: "Identifier. The resource name. Format: apps/{app}/anrRateMetricSet"
           type: string
       type: object
     GooglePlayDeveloperReportingV1alpha1App:
@@ -664,7 +664,7 @@ components:
           description: "Title of the app. This is the latest title as set in the Play Console and may not yet have been reviewed, so might not match the Play Store. Example: `Google Maps`."
           type: string
         name:
-          description: "The resource name. Format: apps/{app}"
+          description: "Identifier. The resource name. Format: apps/{app}"
           type: string
         packageName:
           description: "Package name of the app. Example: `com.example.app123`."
@@ -685,7 +685,7 @@ components:
           $ref: "#/components/schemas/GooglePlayDeveloperReportingV1alpha1FreshnessInfo"
           description: Summary about data freshness in this resource.
         name:
-          description: "The resource name. Format: apps/{app}/crashRateMetricSet"
+          description: "Identifier. The resource name. Format: apps/{app}/crashRateMetricSet"
           type: string
       type: object
     GooglePlayDeveloperReportingV1alpha1DecimalConfidenceInterval:
@@ -841,7 +841,7 @@ components:
           $ref: "#/components/schemas/GooglePlayDeveloperReportingV1alpha1FreshnessInfo"
           description: Summary about data freshness in this resource.
         name:
-          description: "The resource name. Format: apps/{app}/excessiveWakeupRateMetricSet"
+          description: "Identifier. The resource name. Format: apps/{app}/excessiveWakeupRateMetricSet"
           type: string
       type: object
     GooglePlayDeveloperReportingV1alpha1FreshnessInfo:
@@ -1312,7 +1312,7 @@ components:
           $ref: "#/components/schemas/GooglePlayDeveloperReportingV1alpha1FreshnessInfo"
           description: Summary about data freshness in this resource.
         name:
-          description: "The resource name. Format: apps/{app}/slowRenderingRateMetricSet"
+          description: "Identifier. The resource name. Format: apps/{app}/slowRenderingRateMetricSet"
           type: string
       type: object
     GooglePlayDeveloperReportingV1alpha1SlowStartRateMetricSet:
@@ -1322,7 +1322,7 @@ components:
           $ref: "#/components/schemas/GooglePlayDeveloperReportingV1alpha1FreshnessInfo"
           description: Summary about data freshness in this resource.
         name:
-          description: "The resource name. Format: apps/{app}/slowStartRateMetricSet"
+          description: "Identifier. The resource name. Format: apps/{app}/slowStartRateMetricSet"
           type: string
       type: object
     GooglePlayDeveloperReportingV1alpha1StuckBackgroundWakelockRateMetricSet:
@@ -1332,7 +1332,7 @@ components:
           $ref: "#/components/schemas/GooglePlayDeveloperReportingV1alpha1FreshnessInfo"
           description: Summary about data freshness in this resource.
         name:
-          description: "The resource name. Format: apps/{app}/stuckBackgroundWakelockRateMetricSet"
+          description: "Identifier. The resource name. Format: apps/{app}/stuckBackgroundWakelockRateMetricSet"
           type: string
       type: object
     GooglePlayDeveloperReportingV1alpha1TimelineSpec:

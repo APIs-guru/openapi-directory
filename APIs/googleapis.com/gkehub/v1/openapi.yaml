@@ -3201,7 +3201,8 @@ components:
             - ANTI_AFFINITY
           type: string
         podAntiAffinity:
-          description: Pod anti-affinity enablement.
+          deprecated: true
+          description: "Pod anti-affinity enablement. Deprecated: use `pod_affinity` instead."
           type: boolean
         podTolerations:
           description: Pod tolerations of node taints.

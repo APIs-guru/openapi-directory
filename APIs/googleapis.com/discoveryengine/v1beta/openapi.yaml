@@ -1342,6 +1342,17 @@ components:
       description: Response message for SiteSearchEngineService.DisableAdvancedSiteSearch method.
       properties: {}
       type: object
+    GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfig:
+      description: A singleton resource of DataStore. It's empty when DataStore is created, which defaults to digital parser. The first call to DataStoreService.UpdateDocumentProcessingConfig method will initialize the config.
+      properties:
+        name:
+          description: "Output only. The full resource name of the Document Processing Config. Format: `projects/*/locations/*/collections/*/dataStores/*/documentProcessingConfig`."
+          readOnly: true
+          type: string
+        ocrConfig:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaOcrConfig"
+          description: The OCR config. Currently it only applies to PDFs.
+      type: object
     GoogleCloudDiscoveryengineV1alphaEnableAdvancedSiteSearchMetadata:
       description: Metadata related to the progress of the SiteSearchEngineService.EnableAdvancedSiteSearch operation. This will be returned by the google.longrunning.Operation.metadata field.
       properties:
@@ -1705,6 +1716,21 @@ components:
           description: Count of user events imported, but with Document information not found in the existing Branch.
           format: int64
           type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaOcrConfig:
+      description: The OCR options for parsing documents.
+      properties:
+        enabled:
+          description: Required. If OCR is enabled or not. OCR must be enabled for other OcrConfig options to apply.
+          type: boolean
+        enhancedDocumentElements:
+          description: "Apply additional enhanced OCR processing to a list of document elements. Supported values: * `table`: advanced table parsing model."
+          items:
+            type: string
+          type: array
+        useNativeText:
+          description: If true, will use native text instead of OCR text on pages containing native text.
+          type: boolean
       type: object
     GoogleCloudDiscoveryengineV1alphaPurgeDocumentsMetadata:
       description: Metadata related to the progress of the PurgeDocuments operation. This will be returned by the google.longrunning.Operation.metadata field.

@@ -1235,6 +1235,13 @@ components:
       schema:
         type: string
   schemas:
+    AuthorizedNetwork:
+      description: AuthorizedNetwork contains metadata for an authorized network.
+      properties:
+        cidrRange:
+          description: CIDR range for one authorzied network of the instance.
+          type: string
+      type: object
     AutomatedBackupPolicy:
       description: Message describing the user-specified automated backup policy. All fields in the automated backup policy are optional. Defaults for each field are provided if they are not set.
       properties:
@@ -1573,6 +1580,10 @@ components:
             type: string
           readOnly: true
           type: array
+        publicIpAddress:
+          description: Output only. The public IP addresses for the Instance. This is available ONLY when enable_public_ip is set. This is the connection endpoint for an end-user application.
+          readOnly: true
+          type: string
       type: object
     ContinuousBackupConfig:
       description: ContinuousBackupConfig describes the continuous backups recovery configurations of a cluster.
@@ -1847,6 +1858,9 @@ components:
           description: "Output only. The name of the instance resource with the format: * projects/{project}/locations/{region}/clusters/{cluster_id}/instances/{instance_id} where the cluster and instance ID segments should satisfy the regex expression `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`, e.g. 1-63 characters of lowercase letters, numbers, and dashes, starting with a letter, and ending with a letter or number. For more details see https://google.aip.dev/122. The prefix of the instance resource name is the name of the parent resource: * projects/{project}/locations/{region}/clusters/{cluster_id}"
           readOnly: true
           type: string
+        networkConfig:
+          $ref: "#/components/schemas/InstanceNetworkConfig"
+          description: Optional. Instance level network configuration.
         nodes:
           description: Output only. List of available read-only VMs in this instance, including the standby for a PRIMARY instance.
           items:
@@ -1897,6 +1911,18 @@ components:
           $ref: "#/components/schemas/Node"
           description: Output only. This is set for the read-write VM of the PRIMARY instance only.
           readOnly: true
+      type: object
+    InstanceNetworkConfig:
+      description: Metadata related to instance level network configuration.
+      properties:
+        authorizedExternalNetworks:
+          description: Optional. A list of external network authorized to access this instance.
+          items:
+            $ref: "#/components/schemas/AuthorizedNetwork"
+          type: array
+        enablePublicIp:
+          description: Optional. Enabling public ip for the instance.
+          type: boolean
       type: object
     IntegerRestrictions:
       description: Restrictions on INTEGER type values.
