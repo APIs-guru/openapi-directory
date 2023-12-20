@@ -571,7 +571,7 @@ components:
           type: string
         cacheEgressRate:
           $ref: "#/components/schemas/Usage"
-          description: Cache data transfer usage. The rate of data cache transferred to the destination. Use units such as GiB/s or TiB/mo.
+          description: Cache data transfer usage. The rate of data cache transferred to the destination. Use units such as GiBy/s or TiBy/mo, based on [The Unified Code for Units of Measure](https://ucum.org/ucum.html) standard.
       type: object
     CloudCdnWorkload:
       description: Specifies usage for Cloud CDN resources.
@@ -598,7 +598,7 @@ components:
       properties:
         egressRate:
           $ref: "#/components/schemas/Usage"
-          description: Outbound data transfer usage. This usage applies when you move or copy data from one Google Cloud service to another service. The units are "GiB/s, B/s, and so on."
+          description: Outbound data transfer usage. This usage applies when you move or copy data from one Google Cloud service to another service. The units are GiBy/s, By/s, and so on, based on [The Unified Code for Units of Measure](https://ucum.org/ucum.html) standard.
         interconnectConnectionLocation:
           description: Locations in the [Interconnect connection location table](https://cloud.google.com/vpc/network-pricing#interconnect-pricing). These are the Interconnect Data Transfer charges.
           enum:
@@ -651,7 +651,7 @@ components:
           type: string
         egressRate:
           $ref: "#/components/schemas/Usage"
-          description: Data transfer usage rate. This usage applies when you move or copy data from one Cloud Storage bucket to another or when another Google Cloud service accesses data in your Cloud Storage bucket. Expected units such as "GiB/s, B/s, ..."
+          description: Data transfer usage rate. This usage applies when you move or copy data from one Cloud Storage bucket to another or when another Google Cloud service accesses data in your Cloud Storage bucket. The expected units are GiBy/s, By/s, and so on, based on [The Unified Code for Units of Measure](https://ucum.org/ucum.html) standard.
         sourceContinent:
           description: Where the data comes from.
           enum:
@@ -668,10 +668,10 @@ components:
       properties:
         dataRetrieval:
           $ref: "#/components/schemas/Usage"
-          description: 'Data retrieval usage. A retrieval cost applies when data or metadata is read, copied, or rewritten . For example: units such as "GiBy/s" or "By/s".'
+          description: 'Data retrieval usage. A retrieval cost applies when data or metadata is read, copied, or rewritten . For example: units such as "GiB/s" or "B/s".'
         dataStored:
           $ref: "#/components/schemas/Usage"
-          description: 'Data storage usage. The amount of data stored in buckets. For example: units such as "GiBy/s" or "TBy/mo".'
+          description: "Data storage usage. The amount of data stored in buckets. For example: units such as GiBy/s or TiBy/mo, based on [The Unified Code for Units of Measure](https://ucum.org/ucum.html) standard."
         dualRegion:
           $ref: "#/components/schemas/DualRegional"
           description: Specify dual regions.
@@ -1515,7 +1515,7 @@ components:
           type: string
         egressRate:
           $ref: "#/components/schemas/Usage"
-          description: VM to VM data transfer usage. The expected units such are GiB/s, B/s, and so on.
+          description: VM to VM data transfer usage. The expected units such are GiBy/s, By/s, and so on.
         sourceRegion:
           description: Which [region](https://cloud.google.com/compute/docs/regions-zones) the data is transferred from.
           type: string
@@ -1525,7 +1525,7 @@ components:
       properties:
         egressRate:
           $ref: "#/components/schemas/Usage"
-          description: VM to VM data transfer usage. The expected are GiB/s, B/s, and so on.
+          description: VM to VM data transfer usage. The expected are GiBy/s, By/s, and so on.
       type: object
     MachineType:
       description: Specification of machine series, memory, and number of vCPUs.
@@ -1606,7 +1606,7 @@ components:
           type: string
         egressRate:
           $ref: "#/components/schemas/Usage"
-          description: Premium Tier Data Transfer usage. The expected units are GiB/s, B/s, and so on.
+          description: Premium Tier Data Transfer usage. The expected units are GiBy/s, By/s, and so on, based on [The Unified Code for Units of Measure](https://ucum.org/ucum.html) standard.
         sourceRegion:
           description: Which [region](https://cloud.google.com/compute/docs/regions-zones) the data comes from.
           type: string
@@ -1723,7 +1723,7 @@ components:
       properties:
         egressRate:
           $ref: "#/components/schemas/Usage"
-          description: Standard Tier Data Transfer usage. The expected units are GiB/s, B/s, and so on.
+          description: Standard Tier Data Transfer usage. The expected units are GiBy/s, By/s, and so on, based on the [The Unified Code for Units of Measure](https://ucum.org/ucum.html) standard.
         sourceRegion:
           description: Which [region](https://cloud.google.com/compute/docs/regions-zones) the data is transferred from.
           type: string

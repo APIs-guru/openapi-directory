@@ -1163,9 +1163,6 @@ components:
         integerOptions:
           $ref: "#/components/schemas/GoogleAppsDriveLabelsV2FieldIntegerOptions"
           description: Update field to Integer.
-        longTextOptions:
-          $ref: "#/components/schemas/GoogleAppsDriveLabelsV2FieldLongTextOptions"
-          description: Update field to Long Text.
         selectionOptions:
           $ref: "#/components/schemas/GoogleAppsDriveLabelsV2FieldSelectionOptions"
           description: Update field to Selection.
@@ -1549,20 +1546,6 @@ components:
         maxEntries:
           description: Maximum number of entries permitted.
           format: int32
-          type: integer
-      type: object
-    GoogleAppsDriveLabelsV2FieldLongTextOptions:
-      description: Options the Long Text field type.
-      properties:
-        maxLength:
-          description: Output only. The maximum valid length of values for the text field.
-          format: int32
-          readOnly: true
-          type: integer
-        minLength:
-          description: Output only. The minimum valid length of values for the text field.
-          format: int32
-          readOnly: true
           type: integer
       type: object
     GoogleAppsDriveLabelsV2FieldProperties:

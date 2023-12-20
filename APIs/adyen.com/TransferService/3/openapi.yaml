@@ -116,13 +116,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a capital account
       tags:
         - Capital
       x-addedInVersion: "3"
-      x-groupName: Capital
       x-methodName: getCapitalAccount
       x-sortIndex: 2
     post:
@@ -183,13 +183,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Request a grant payout
       tags:
         - Capital
       x-addedInVersion: "3"
-      x-groupName: Capital
       x-methodName: requestGrantPayout
       x-sortIndex: 1
   /grants/{id}:
@@ -247,13 +247,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get grant reference details
       tags:
         - Capital
       x-addedInVersion: "3"
-      x-groupName: Capital
       x-methodName: getGrantReferenceDetails
       x-sortIndex: 3
   /transactions:
@@ -376,13 +376,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get all transactions
       tags:
         - Transactions
       x-addedInVersion: "1"
-      x-groupName: Transactions
       x-methodName: getAllTransactions
       x-sortIndex: 1
   /transactions/{id}:
@@ -434,13 +434,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a transaction
       tags:
         - Transactions
       x-addedInVersion: "1"
-      x-groupName: Transactions
       x-methodName: getTransaction
       x-sortIndex: 2
   /transfers:
@@ -527,13 +527,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Transfer funds
       tags:
         - Transfers
       x-addedInVersion: "2"
-      x-groupName: Transfers
       x-methodName: transferFunds
       x-sortIndex: 1
   /transfers/{transferId}/returns:
@@ -584,13 +584,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Return a transfer
       tags:
         - Transfers
       x-addedInVersion: "3"
-      x-groupName: Transfers
       x-methodName: returnTransfer
       x-sortIndex: 2
 components:
@@ -1623,6 +1623,7 @@ components:
           type: string
         reference:
           description: A unique reference to identify the party or counterparty involved in transfers. This identifier ensures consistency and uniqueness throughout all transactions initiated to and from the same party. For example, your client's unique wallet or payee ID.
+          maxLength: 150
           type: string
         type:
           default: unknown
@@ -1889,6 +1890,7 @@ components:
             - issuedCard
             - migration
             - platformPayment
+            - topUp
             - upgrade
           type: string
           x-addedInVersion: "1"
@@ -2297,6 +2299,7 @@ components:
             Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**
 
             Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' " ! ?**
+          maxLength: 140
           type: string
           x-addedInVersion: "1"
         paymentInstrumentId:
@@ -2441,6 +2444,7 @@ components:
           type: string
         reference:
           description: A unique reference to identify the party or counterparty involved in transfers. This identifier ensures consistency and uniqueness throughout all transactions initiated to and from the same party. For example, your client's unique wallet or payee ID.
+          maxLength: 150
           type: string
         type:
           default: unknown
@@ -2464,7 +2468,7 @@ components:
     BasicAuth:
       scheme: basic
       type: http
-x-groups:
-  - Transfers
-  - Transactions
-  - Capital
+    clientKey:
+      in: query
+      name: clientKey
+      type: apiKey

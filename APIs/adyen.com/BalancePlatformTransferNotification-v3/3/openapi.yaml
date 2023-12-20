@@ -635,6 +635,7 @@ components:
           type: string
         reference:
           description: A unique reference to identify the party or counterparty involved in transfers. This identifier ensures consistency and uniqueness throughout all transactions initiated to and from the same party. For example, your client's unique wallet or payee ID.
+          maxLength: 150
           type: string
         type:
           default: unknown
@@ -866,7 +867,7 @@ components:
           type: string
           x-addedInVersion: "3"
         counterparty:
-          $ref: "#/components/schemas/CounterpartyV3"
+          $ref: "#/components/schemas/TransferNotificationCounterParty"
           description: The other party in the transfer.
           x-addedInVersion: "3"
         creationDate:
@@ -1384,6 +1385,45 @@ components:
           type: string
           x-addedInVersion: "3"
       type: object
+    TransferNotificationCounterParty:
+      properties:
+        balanceAccountId:
+          description: Unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id).
+          type: string
+        bankAccount:
+          $ref: "#/components/schemas/BankAccountV3"
+          description: Contains information about the bank account.
+        merchant:
+          $ref: "#/components/schemas/TransferNotificationMerchantData"
+          description: Contains information about the merchant.
+        transferInstrumentId:
+          description: Unique identifier of the [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
+          type: string
+      type: object
+    TransferNotificationMerchantData:
+      properties:
+        acquirerId:
+          description: The unique identifier of the merchant's acquirer.
+          type: string
+        city:
+          description: The city where the merchant is located.
+          type: string
+        country:
+          description: The country where the merchant is located.
+          type: string
+        mcc:
+          description: The merchant category code.
+          type: string
+        merchantId:
+          description: The merchant identifier.
+          type: string
+        name:
+          description: The name of the merchant's shop or service.
+          type: string
+        postalCode:
+          description: The merchant postal code.
+          type: string
+      type: object
     TransferNotificationRequest:
       properties:
         data:
@@ -1513,7 +1553,6 @@ webhooks:
       tags:
         - General
       x-addedInVersion: "1"
-      x-groupName: General
       x-methodName: transferCreated
       x-sortIndex: 0
   balancePlatform.transfer.updated:
@@ -1542,9 +1581,6 @@ webhooks:
       tags:
         - General
       x-addedInVersion: "1"
-      x-groupName: General
       x-methodName: transferUpdated
       x-sortIndex: 0
-x-groups:
-  - General
 x-staticResponse: response.json

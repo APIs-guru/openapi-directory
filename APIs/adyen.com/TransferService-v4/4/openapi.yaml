@@ -115,13 +115,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a capital account
       tags:
         - Capital
       x-addedInVersion: "3"
-      x-groupName: Capital
       x-methodName: getCapitalAccount
       x-sortIndex: 2
     post:
@@ -182,13 +182,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Request a grant payout
       tags:
         - Capital
       x-addedInVersion: "3"
-      x-groupName: Capital
       x-methodName: requestGrantPayout
       x-sortIndex: 1
   /grants/{id}:
@@ -246,13 +246,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get grant reference details
       tags:
         - Capital
       x-addedInVersion: "3"
-      x-groupName: Capital
       x-methodName: getGrantReferenceDetails
       x-sortIndex: 3
   /transactions:
@@ -375,13 +375,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get all transactions
       tags:
         - Transactions
       x-addedInVersion: "1"
-      x-groupName: Transactions
       x-methodName: getAllTransactions
       x-sortIndex: 1
   /transactions/{id}:
@@ -392,7 +392,7 @@ paths:
         Returns a transaction.
       operationId: get-transactions-id
       parameters:
-        - description: Unique identifier of the transaction.
+        - description: The unique identifier of the transaction.
           in: path
           name: id
           required: true
@@ -433,13 +433,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a transaction
       tags:
         - Transactions
       x-addedInVersion: "1"
-      x-groupName: Transactions
       x-methodName: getTransaction
       x-sortIndex: 2
   /transfers:
@@ -526,23 +526,23 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Transfer funds
       tags:
         - Transfers
       x-addedInVersion: "2"
-      x-groupName: Transfers
       x-methodName: transferFunds
       x-sortIndex: 1
-  /transfers/{id}/returns:
+  /transfers/{transferId}/returns:
     post:
       description: Returns previously transferred funds without creating a new `transferId`.
-      operationId: post-transfers-id-returns
+      operationId: post-transfers-transferId-returns
       parameters:
         - description: The unique identifier of the transfer to be returned.
           in: path
-          name: id
+          name: transferId
           required: true
           schema:
             type: string
@@ -558,12 +558,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/ReturnTransferResponse"
           description: OK - the request has succeeded.
-        "202":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ReturnTransferResponse"
-          description: Accepted - the request has been accepted for processing, but the processing has not been completed.
         "401":
           content:
             application/json:
@@ -589,13 +583,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Return a transfer
       tags:
         - Transfers
       x-addedInVersion: "3"
-      x-groupName: Transfers
       x-methodName: returnTransfer
       x-sortIndex: 2
 components:
@@ -1530,6 +1524,10 @@ components:
     IssuedCard:
       additionalProperties: false
       properties:
+        authorisationType:
+          description: The authorisation type. For example, **defaultAuthorisation**, **preAuthorisation**, **finalAuthorisation**
+          type: string
+          x-addedInVersion: "4"
         panEntryMode:
           description: |-
             Indicates the method used for entering the PAN to initiate a transaction.
@@ -1562,6 +1560,14 @@ components:
           $ref: "#/components/schemas/RelayedAuthorisationData"
           description: If you are using relayed authorisation, this object contains information from the relayed authorisation response from your server.
           x-addedInVersion: "4"
+        schemeTraceId:
+          description: The identifier of the original payment provided by the scheme. The Id could be alphanumeric or numeric depending on the scheme. The schemeTraceID should be referring to an original schemeUniqueTransactionID provided in an earlier payment (not necessarily processed by Adyen). Instances of available schemeTraceId is authAdjustment or recurring payments.
+          type: string
+          x-addedInVersion: "4"
+        schemeUniqueTransactionId:
+          description: The unique identifier created by the scheme. The ID could be alphanumeric or numeric depending on the scheme.
+          type: string
+          x-addedInVersion: "4"
         type:
           default: issuedCard
           description: "**issuedCard**"
@@ -1574,6 +1580,8 @@ components:
             $ref: "#/components/schemas/TransferNotificationValidationFact"
           type: array
           x-addedInVersion: "4"
+      type: object
+    JSONObject:
       type: object
     Link:
       properties:
@@ -1737,6 +1745,7 @@ components:
           type: string
         reference:
           description: A unique reference to identify the party or counterparty involved in transfers. This identifier ensures consistency and uniqueness throughout all transactions initiated to and from the same party. For example, your client's unique wallet or payee ID.
+          maxLength: 150
           type: string
         type:
           default: unknown
@@ -1885,8 +1894,8 @@ components:
           description: A unique reference for the request, essentially the same as `pspReference`.
           type: string
         response:
+          $ref: "#/components/schemas/JSONObject"
           description: JSON response payload.
-          type: object
         status:
           description: The HTTP status code.
           format: int32
@@ -1932,7 +1941,7 @@ components:
           description: |-
             The resulting status of the return.
 
-            For example: **authorised**, **booked**, **error**.
+            Possible values: **Authorised**, **Declined**.
           enum:
             - Authorised
             - Declined
@@ -2337,6 +2346,7 @@ components:
             Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**
 
             Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' " ! ?**
+          maxLength: 140
           type: string
           x-addedInVersion: "1"
         paymentInstrumentId:
@@ -2490,6 +2500,7 @@ components:
           type: string
         reference:
           description: A unique reference to identify the party or counterparty involved in transfers. This identifier ensures consistency and uniqueness throughout all transactions initiated to and from the same party. For example, your client's unique wallet or payee ID.
+          maxLength: 150
           type: string
         type:
           default: unknown
@@ -2513,7 +2524,7 @@ components:
     BasicAuth:
       scheme: basic
       type: http
-x-groups:
-  - Transfers
-  - Transactions
-  - Capital
+    clientKey:
+      in: query
+      name: clientKey
+      type: apiKey

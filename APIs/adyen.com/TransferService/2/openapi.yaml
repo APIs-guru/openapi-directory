@@ -181,13 +181,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get all transactions
       tags:
         - Transactions
       x-addedInVersion: "1"
-      x-groupName: Transactions
       x-methodName: getAllTransactions
       x-sortIndex: 1
   /transactions/{id}:
@@ -239,13 +239,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a transaction
       tags:
         - Transactions
       x-addedInVersion: "1"
-      x-groupName: Transactions
       x-methodName: getTransaction
       x-sortIndex: 2
   /transfers:
@@ -324,13 +324,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Transfer funds
       tags:
         - Transfers
       x-addedInVersion: "2"
-      x-groupName: Transfers
       x-methodName: transferFunds
       x-sortIndex: 1
 components:
@@ -844,6 +844,7 @@ components:
             - issuedCard
             - migration
             - platformPayment
+            - topUp
             - upgrade
           type: string
           x-addedInVersion: "1"
@@ -1156,6 +1157,7 @@ components:
             Supported characters: **[a-z] [A-Z] [0-9] / - ?** **: ( ) . , ' + Space**
 
             Supported characters for **regular** and **fast** transfers to a US counterparty: **[a-z] [A-Z] [0-9] & $ % # @** **~ = + - _ ' " ! ?**
+          maxLength: 140
           type: string
           x-addedInVersion: "1"
         paymentInstrumentId:
@@ -1186,7 +1188,7 @@ components:
     BasicAuth:
       scheme: basic
       type: http
-x-groups:
-  - Transfers
-  - Transactions
-  - Capital
+    clientKey:
+      in: query
+      name: clientKey
+      type: apiKey

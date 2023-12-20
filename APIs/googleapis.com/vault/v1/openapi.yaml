@@ -1489,6 +1489,52 @@ components:
           description: To send a notification email to the added account, set to **true**. To not send a notification email, set to **false**.
           type: boolean
       type: object
+    CalendarExportOptions:
+      description: The options for Calendar exports.
+      properties:
+        exportFormat:
+          description: The file format for exported text messages.
+          enum:
+            - EXPORT_FORMAT_UNSPECIFIED
+            - MBOX
+            - PST
+            - ICS
+          type: string
+      type: object
+    CalendarOptions:
+      description: Additional options for Calendar search
+      properties:
+        locationQuery:
+          description: 'Matches only those events whose location contains all of the words in the given set. If the string contains quoted phrases, this method only matches those events whose location contain the exact phrase. Entries in the set are considered in "and". Word splitting example: ["New Zealand"] vs ["New","Zealand"] "New Zealand": matched by both "New and better Zealand": only matched by the later'
+          items:
+            type: string
+          type: array
+        minusWords:
+          description: Matches only those events that do not contain any of the words in the given set in title, description, location, or attendees. Entries in the set are considered in "or".
+          items:
+            type: string
+          type: array
+        peopleQuery:
+          description: Matches only those events whose attendees contain all of the words in the given set. Entries in the set are considered in "and".
+          items:
+            type: string
+          type: array
+        responseStatuses:
+          description: Matches only events for which the custodian gave one of these responses. If the set is empty or contains ATTENDEE_RESPONSE_UNSPECIFIED there will be no filtering on responses.
+          items:
+            enum:
+              - ATTENDEE_RESPONSE_UNSPECIFIED
+              - ATTENDEE_RESPONSE_NEEDS_ACTION
+              - ATTENDEE_RESPONSE_ACCEPTED
+              - ATTENDEE_RESPONSE_DECLINED
+              - ATTENDEE_RESPONSE_TENTATIVE
+            type: string
+          type: array
+        versionDate:
+          description: Search the current version of the Calendar event, but export the contents of the last version saved before 12:00 AM UTC on the specified date. Enter the date in UTC.
+          format: google-datetime
+          type: string
+      type: object
     CancelOperationRequest:
       description: The request message for Operations.CancelOperation.
       properties: {}
@@ -1651,6 +1697,10 @@ components:
         name:
           description: The export name. Don't use special characters (~!$'(),;@:/?) in the name, they can prevent you from downloading exports.
           type: string
+        parentExportId:
+          description: Output only. Identifies the parent export that spawned this child export. This is only set on child exports.
+          readOnly: true
+          type: string
         query:
           $ref: "#/components/schemas/Query"
           description: The query parameters used to create the export.
@@ -1672,6 +1722,9 @@ components:
     ExportOptions:
       description: Additional options for exports
       properties:
+        calendarOptions:
+          $ref: "#/components/schemas/CalendarExportOptions"
+          description: Option available for Calendar export.
         driveOptions:
           $ref: "#/components/schemas/DriveExportOptions"
           description: Options for Drive exports.
@@ -1748,6 +1801,7 @@ components:
             - EXPORT_FORMAT_UNSPECIFIED
             - MBOX
             - PST
+            - ICS
           type: string
       type: object
     HangoutsChatExportOptions:
@@ -1759,6 +1813,7 @@ components:
             - EXPORT_FORMAT_UNSPECIFIED
             - MBOX
             - PST
+            - ICS
           type: string
       type: object
     HangoutsChatInfo:
@@ -1887,6 +1942,7 @@ components:
             - GROUPS
             - HANGOUTS_CHAT
             - VOICE
+            - CALENDAR
           type: string
         holdId:
           description: The unique immutable ID of the hold. Assigned during creation.
@@ -2010,7 +2066,11 @@ components:
             - EXPORT_FORMAT_UNSPECIFIED
             - MBOX
             - PST
+            - ICS
           type: string
+        exportLinkedDriveFiles:
+          description: Optional. To enable exporting linked Drive files, set to **true**.
+          type: boolean
         showConfidentialModeContent:
           description: To export confidential mode content, set to **true**.
           type: boolean
@@ -2109,6 +2169,9 @@ components:
         accountInfo:
           $ref: "#/components/schemas/AccountInfo"
           description: Required when **SearchMethod** is **ACCOUNT**.
+        calendarOptions:
+          $ref: "#/components/schemas/CalendarOptions"
+          description: Set Calendar search-specific options.
         corpus:
           description: The Google Workspace service to search.
           enum:
@@ -2118,6 +2181,7 @@ components:
             - GROUPS
             - HANGOUTS_CHAT
             - VOICE
+            - CALENDAR
           type: string
         dataScope:
           description: The data source to search.
@@ -2339,6 +2403,7 @@ components:
             - EXPORT_FORMAT_UNSPECIFIED
             - MBOX
             - PST
+            - ICS
           type: string
       type: object
     VoiceOptions:

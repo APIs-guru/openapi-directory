@@ -1452,7 +1452,6 @@ webhooks:
       x-addedInVersion: "1"
       x-deprecatedInVersion: "1"
       x-deprecatedMessage: Use [balancePlatform.transfer.created](https://docs.adyen.com/api-explorer/transfer-webhooks/latest/post/balancePlatform.transfer.created) instead.
-      x-groupName: Fund movements
       x-methodName: incomingTransferCreated
       x-sortIndex: 3
   balancePlatform.incomingTransfer.updated:
@@ -1493,7 +1492,6 @@ webhooks:
       x-addedInVersion: "1"
       x-deprecatedInVersion: "1"
       x-deprecatedMessage: Use [balancePlatform.transfer.updated](https://docs.adyen.com/api-explorer/transfer-webhooks/latest/post/balancePlatform.transfer.updated) instead.
-      x-groupName: Fund movements
       x-methodName: incomingTransferUpdated
       x-sortIndex: 4
   balancePlatform.outgoingTransfer.created:
@@ -1534,7 +1532,6 @@ webhooks:
       x-addedInVersion: "1"
       x-deprecatedInVersion: "1"
       x-deprecatedMessage: Use [balancePlatform.transfer.created](https://docs.adyen.com/api-explorer/transfer-webhooks/latest/post/balancePlatform.transfer.created) instead.
-      x-groupName: Fund movements
       x-methodName: outgoingTransferCreated
       x-sortIndex: 1
   balancePlatform.outgoingTransfer.updated:
@@ -1571,7 +1568,6 @@ webhooks:
       x-addedInVersion: "1"
       x-deprecatedInVersion: "1"
       x-deprecatedMessage: Use [balancePlatform.transfer.updated](https://docs.adyen.com/api-explorer/transfer-webhooks/latest/post/balancePlatform.transfer.updated) instead.
-      x-groupName: Fund movements
       x-methodName: outgoingTransferUpdated
       x-sortIndex: 2
   balancePlatform.payment.created:
@@ -1626,7 +1622,6 @@ webhooks:
       x-addedInVersion: "1"
       x-deprecatedInVersion: "1"
       x-deprecatedMessage: Use [balancePlatform.transfer.created](https://docs.adyen.com/api-explorer/transfer-webhooks/latest/post/balancePlatform.transfer.created) instead.
-      x-groupName: Payment authorisation, refund, or funds transfer initiated
       x-methodName: paymentAuthorisationRefundOrFundsTransferInitiated
       x-sortIndex: 1
   balancePlatform.payment.updated:
@@ -1668,10 +1663,6 @@ webhooks:
       x-addedInVersion: "1"
       x-deprecatedInVersion: "1"
       x-deprecatedMessage: Use [balancePlatform.transfer.updated](https://docs.adyen.com/api-explorer/transfer-webhooks/latest/post/balancePlatform.transfer.updated) instead.
-      x-groupName: Payment authorisation, refund, or funds transfer initiated
       x-methodName: paymentAuthorisationExpiredOrCancelled
       x-sortIndex: 2
-x-groups:
-  - Payment authorisation, refund, or funds transfer initiated
-  - Fund movements
 x-staticResponse: response.json
