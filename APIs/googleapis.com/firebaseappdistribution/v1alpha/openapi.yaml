@@ -288,6 +288,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: "The name of the project, which is the parent of testers Format: `projects/{project_number}`"
+          in: query
+          name: project
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -509,6 +514,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1alpha/{project}/testers:udids:
+    get:
+      description: Get UDIDs of tester iOS devices in a project
+      operationId: firebaseappdistribution.projects.testers.getUdids
+      parameters:
+        - description: "The name of the project, which is the parent of testers Format: `projects/{project_number}`"
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: "Unique id for a Firebase app of the format: {version}:{project_number}:{platform}:{hash(bundle_id)} Example: 1:581234567376:android:aa0a3c7b135e90289"
+          in: query
+          name: mobilesdkAppId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppdistroV1alphaGetTesterUdidsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:

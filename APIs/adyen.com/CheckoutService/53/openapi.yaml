@@ -60,6 +60,7 @@ info:
   x-serviceName: CheckoutService
 tags:
   - name: Payments
+  - name: Donations
   - name: Payment links
   - name: Modifications
   - name: Recurring
@@ -323,9 +324,9 @@ paths:
         - ApiKeyAuth: []
       summary: Start a transaction for donations
       tags:
-        - Payments
+        - Donations
       x-methodName: donations
-      x-sortIndex: 5
+      x-sortIndex: 2
   /orders:
     post:
       description: Creates an order to be used for partial payments. Make a POST `/orders` call before making a `/payments` call when processing payments with different payment methods.

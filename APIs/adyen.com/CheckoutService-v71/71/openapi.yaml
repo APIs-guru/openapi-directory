@@ -59,6 +59,7 @@ info:
   x-serviceName: CheckoutService-v71
 tags:
   - name: Payments
+  - name: Donations
   - name: Payment links
   - name: Modifications
   - name: Recurring
@@ -322,9 +323,9 @@ paths:
         - ApiKeyAuth: []
       summary: Start a transaction for donations
       tags:
-        - Payments
+        - Donations
       x-methodName: donations
-      x-sortIndex: 5
+      x-sortIndex: 2
   /orders:
     post:
       description: Creates an order to be used for partial payments. Make a POST `/orders` call before making a `/payments` call when processing payments with different payment methods.
@@ -1133,8 +1134,6 @@ paths:
                 $ref: "#/components/examples/post-payments-card-securedfields"
               enableOneClick-SF:
                 $ref: "#/components/examples/post-payments-enableOneClick-SF"
-              enableOneClick-raw:
-                $ref: "#/components/examples/post-payments-enableOneClick-raw"
               giropay:
                 $ref: "#/components/examples/post-payments-giropay"
               googlepay:
@@ -1143,8 +1142,6 @@ paths:
                 $ref: "#/components/examples/post-payments-ideal"
               klarna:
                 $ref: "#/components/examples/post-payments-klarna"
-              oneclick-direct:
-                $ref: "#/components/examples/post-payments-oneclick-direct"
               oneclick-securedfields:
                 $ref: "#/components/examples/post-payments-oneclick-securedfields"
               recurring:
@@ -1170,8 +1167,6 @@ paths:
                   $ref: "#/components/examples/post-payments-card-securedfields-200"
                 enableOneClick-SF:
                   $ref: "#/components/examples/post-payments-enableOneClick-SF-200"
-                enableOneClick-raw:
-                  $ref: "#/components/examples/post-payments-enableOneClick-raw-200"
                 giropay:
                   $ref: "#/components/examples/post-payments-giropay-200"
                 ideal:
@@ -4638,7 +4633,7 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-card-3d-secure-2-web:
-      summary: Make a card payment with 3D Secure 2 native authentication, using encrypted card details
+      summary: Make a card payment with 3D Secure 2 native authentication
       value:
         amount:
           currency: EUR
@@ -4677,7 +4672,7 @@ components:
         shopperEmail: s.hopper@test.com
         shopperIP: 192.0.2.1
     post-payments-card-3d-secure-direct:
-      summary: Make card payment with 3D Secure redirect authentication
+      summary: Make a card payment with 3D Secure redirect authentication
       value:
         amount:
           currency: USD
@@ -4702,7 +4697,7 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-card-direct:
-      summary: Make a card payment
+      summary: Make a card payment with unencrypted card details
       value:
         amount:
           currency: USD
@@ -4718,7 +4713,7 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-card-direct-200:
-      summary: Successful card payment
+      summary: Successful card payment with unencrypted card details
       value:
         additionalData:
           acquirerCode: TestPmmAcquirer
@@ -4733,7 +4728,7 @@ components:
         pspReference: 993617895204576J
         resultCode: Authorised
     post-payments-card-securedfields:
-      summary: Make a card payment using encrypted card details
+      summary: Make a card payment
       value:
         amount:
           currency: USD
@@ -4748,7 +4743,7 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-card-securedfields-200:
-      summary: Successful card payment using encrypted card details
+      summary: Successful card payment
       value:
         additionalData:
           acquirerCode: TestPmmAcquirer
@@ -4780,7 +4775,7 @@ components:
         details:
           threeDSResult: eyJ0cmFuc1N0YXR1cyI6IlkifQ==
     post-payments-enableOneClick-SF:
-      summary: Tokenize card details for one-off payments, using encrypted card details
+      summary: Tokenize card details for one-off payments
       value:
         amount:
           currency: USD
@@ -4799,7 +4794,7 @@ components:
         shopperReference: YOUR_SHOPPER_REFERENCE
         storePaymentMethod: true
     post-payments-enableOneClick-SF-200:
-      summary: Card details tokenized for one-off payments, using encrypted card details
+      summary: Card details tokenized for one-off payments
       value:
         additionalData:
           acquirerCode: TestPmmAcquirer
@@ -4815,44 +4810,6 @@ components:
           refusalReasonRaw: AUTHORISED
         merchantReference: string
         pspReference: 993617895195570C
-        resultCode: Authorised
-    post-payments-enableOneClick-raw:
-      summary: Tokenize card details for one-off payments
-      value:
-        amount:
-          currency: USD
-          value: 1000
-        merchantAccount: YOUR_MERCHANT_ACCOUNT
-        paymentMethod:
-          cvc: "737"
-          expiryMonth: "03"
-          expiryYear: "2030"
-          holderName: John Smith
-          number: "4111111111111111"
-          type: scheme
-        recurringProcessingModel: CardOnFile
-        reference: Your order number
-        returnUrl: https://your-company.com/...
-        shopperInteraction: Ecommerce
-        shopperReference: YOUR_SHOPPER_REFERENCE
-        storePaymentMethod: true
-    post-payments-enableOneClick-raw-200:
-      summary: Card details tokenized for one-off payments
-      value:
-        additionalData:
-          acquirerCode: TestPmmAcquirer
-          acquirerReference: 8PQMP9VCKO0
-          authCode: "003704"
-          avsResult: 4 AVS not supported for this card type
-          avsResultRaw: "4"
-          cvcResult: 1 Matches
-          cvcResultRaw: M
-          recurring.recurringDetailReference: "9916178934434753"
-          recurring.shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
-          recurringProcessingModel: CardOnFile
-          refusalReasonRaw: AUTHORISED
-        merchantReference: string
-        pspReference: 993617895197573E
         resultCode: Authorised
     post-payments-giropay:
       summary: Make a giropay payment
@@ -4972,22 +4929,8 @@ components:
           lastName: Approved
         shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
         telephoneNumber: +46 840 839 298
-    post-payments-oneclick-direct:
-      summary: Make a one-off payment with a token and CVV
-      value:
-        amount:
-          currency: USD
-          value: 1000
-        merchantAccount: YOUR_MERCHANT_ACCOUNT
-        paymentMethod:
-          cvc: "737"
-          storedPaymentMethodId: "8416038790273850"
-          type: scheme
-        reference: Your order number
-        returnUrl: https://your-company.com/...
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID_6738oneoff
     post-payments-oneclick-securedfields:
-      summary: Make a one-off payment with a token and CVV, using encrypted card details
+      summary: Make a one-off payment with a token and CVV
       value:
         amount:
           currency: USD
@@ -5106,7 +5049,7 @@ components:
         reference: YOUR_UNIQUE_REFERENCE
         status: received
     post-payments-recurring:
-      summary: Make a card payment with a token
+      summary: Make a subscription card payment with a token
       value:
         amount:
           currency: USD
@@ -5167,11 +5110,10 @@ components:
           value: 40000
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentMethod:
-          cvc: "737"
-          expiryMonth: "03"
-          expiryYear: "2030"
-          holderName: John Smith
-          number: "4111111111111111"
+          encryptedCardNumber: test_4111111111111111
+          encryptedExpiryMonth: test_03
+          encryptedExpiryYear: test_2030
+          encryptedSecurityCode: test_737
           type: scheme
         platformChargebackLogic:
           behavior: deductFromOneBalanceAccount
@@ -5264,11 +5206,10 @@ components:
           value: 6200
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentMethod:
-          cvc: "737"
-          expiryMonth: "03"
-          expiryYear: "2030"
-          holderName: John Smith
-          number: "4111111111111111"
+          encryptedCardNumber: test_4111111111111111
+          encryptedExpiryMonth: test_03
+          encryptedExpiryYear: test_2030
+          encryptedSecurityCode: test_737
           type: scheme
         reference: YOUR_ORDER_NUMBER
         returnUrl: https://your-company.com/...
@@ -5291,11 +5232,10 @@ components:
           value: 1000
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentMethod:
-          cvc: "737"
-          expiryMonth: "03"
-          expiryYear: "2030"
-          holderName: John Smith
-          number: "4111111111111111"
+          encryptedCardNumber: test_4111111111111111
+          encryptedExpiryMonth: test_03
+          encryptedExpiryYear: test_2030
+          encryptedSecurityCode: test_737
           type: scheme
         recurringProcessingModel: Subscription
         reference: Your order number
@@ -8844,6 +8784,9 @@ components:
         showInstallmentAmount:
           description: Set to true to show the payment amount per installment.
           type: boolean
+        showRemovePaymentMethodButton:
+          description: Set to **true** to show a button that lets the shopper remove a stored payment method.
+          type: boolean
         socialSecurityNumber:
           description: The shopper's social security number.
           type: string
@@ -9163,6 +9106,9 @@ components:
           type: string
         showInstallmentAmount:
           description: Set to true to show the payment amount per installment.
+          type: boolean
+        showRemovePaymentMethodButton:
+          description: Set to **true** to show a button that lets the shopper remove a stored payment method.
           type: boolean
         socialSecurityNumber:
           description: The shopper's social security number.

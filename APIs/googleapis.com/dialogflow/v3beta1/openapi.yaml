@@ -6531,7 +6531,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1SessionEntityType"
           type: array
         sessionTtl:
-          description: Optional. Sets Dialogflow session life time. By default, a Dialogflow session remains active and its data is stored for 30 minutes after the last request is sent for the session. This value should be no longer than 1 day.
+          description: Optional. Configure lifetime of the Dialogflow session. By default, a Dialogflow session remains active and its data is stored for 30 minutes after the last request is sent for the session. This value should be no longer than 1 day.
           format: google-duration
           type: string
         timeZone:

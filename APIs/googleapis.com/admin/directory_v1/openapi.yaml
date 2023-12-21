@@ -446,7 +446,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Takes an action that affects a Chrome OS Device. This includes deprovisioning, disabling, and re-enabling devices. *Warning:* * Deprovisioning a device will stop device policy syncing and remove device-level printers. After a device is deprovisioned, it must be wiped before it can be re-enrolled. * Lost or stolen devices should use the disable action. * Re-enabling a disabled device will consume a device license. If you do not have sufficient licenses available when completing the re-enable action, you will receive an error. For more information about deprovisioning and disabling devices, visit the [help center](https://support.google.com/chrome/a/answer/3523633).
+      description: "DEPRECATED: Use BatchChangeChromeOsDeviceStatus instead. Takes an action that affects a Chrome OS Device. This includes deprovisioning, disabling, and re-enabling devices. *Warning:* * Deprovisioning a device will stop device policy syncing and remove device-level printers. After a device is deprovisioned, it must be wiped before it can be re-enrolled. * Lost or stolen devices should use the disable action. * Re-enabling a disabled device will consume a device license. If you do not have sufficient licenses available when completing the re-enable action, you will receive an error. For more information about deprovisioning and disabling devices, visit the [help center](https://support.google.com/chrome/a/answer/3523633)."
       operationId: directory.chromeosdevices.action
       parameters:
         - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
@@ -476,6 +476,48 @@ paths:
             - https://www.googleapis.com/auth/admin.directory.device.chromeos
       tags:
         - chromeosdevices
+  /admin/directory/v1/customer/{customerId}/devices/chromeos:batchChangeStatus:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Changes the status of a batch of ChromeOS devices.
+      operationId: admin.customer.devices.chromeos.batchChangeStatus
+      parameters:
+        - description: Required. Immutable ID of the G Suite account.
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchChangeChromeOsDeviceStatusRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchChangeChromeOsDeviceStatusResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.directory.device.chromeos
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.directory.device.chromeos
+      tags:
+        - customer
   /admin/directory/v1/customer/{customerId}/devices/mobile:
     get:
       description: Retrieves a paginated list of all user-owned mobile devices for an account. To retrieve a list that includes company-owned devices, use the Cloud Identity [Devices API](https://cloud.google.com/identity/docs/concepts/overview-devices) instead. This method times out after 60 minutes. For more information, see [Troubleshoot error codes](https://developers.google.com/admin-sdk/directory/v1/guides/troubleshoot-error-codes).
@@ -5288,6 +5330,59 @@ components:
             - SEVERITY_ERROR
           type: string
       type: object
+    BatchChangeChromeOsDeviceStatusRequest:
+      description: A request for changing the status of a batch of ChromeOS devices.
+      properties:
+        changeChromeOsDeviceStatusAction:
+          description: Required. The Action to take on the ChromeOS device in order to change its status.
+          enum:
+            - CHANGE_CHROME_OS_DEVICE_STATUS_ACTION_UNSPECIFIED
+            - CHANGE_CHROME_OS_DEVICE_STATUS_ACTION_DEPROVISION
+            - CHANGE_CHROME_OS_DEVICE_STATUS_ACTION_DISABLE
+            - CHANGE_CHROME_OS_DEVICE_STATUS_ACTION_REENABLE
+          type: string
+        deprovisionReason:
+          description: Optional. The reason behind a device deprovision, must be provided for all deprovisions, otherwise it must not be provided. It must be one of the non-deprecated deprovision reasons.
+          enum:
+            - DEPROVISION_REASON_UNSPECIFIED
+            - DEPROVISION_REASON_SAME_MODEL_REPLACEMENT
+            - DEPROVISION_REASON_UPGRADE
+            - DEPROVISION_REASON_DOMAIN_MOVE
+            - DEPROVISION_REASON_SERVICE_EXPIRATION
+            - DEPROVISION_REASON_OTHER
+            - DEPROVISION_REASON_DIFFERENT_MODEL_REPLACEMENT
+            - DEPROVISION_REASON_RETIRING_DEVICE
+            - DEPROVISION_REASON_UPGRADE_TRANSFER
+            - DEPROVISION_REASON_NOT_REQUIRED
+            - DEPROVISION_REASON_REPAIR_CENTER
+          type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - true
+            - true
+            - true
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+        deviceIds:
+          description: Required. List of the IDs of the ChromeOS devices to change.
+          items:
+            type: string
+          type: array
+      type: object
+    BatchChangeChromeOsDeviceStatusResponse:
+      description: The response of changing the status of a batch of ChromeOS devices.
+      properties:
+        changeChromeOsDeviceStatusResults:
+          description: The results for each of the ChromeOS devices provided in the request.
+          items:
+            $ref: "#/components/schemas/ChangeChromeOsDeviceStatusResult"
+          type: array
+      type: object
     BatchCreatePrintServersRequest:
       description: Request to add multiple new print servers in a batch.
       properties:
@@ -5535,6 +5630,23 @@ components:
         nextPageToken:
           description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
           type: string
+      type: object
+    ChangeChromeOsDeviceStatusResult:
+      description: The result of a single ChromeOS device for a Change state operation.
+      properties:
+        deviceId:
+          description: The unique ID of the ChromeOS device.
+          type: string
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The error result of the operation in case of failure.
+        response:
+          $ref: "#/components/schemas/ChangeChromeOsDeviceStatusSucceeded"
+          description: The device could change its status successfully.
+      type: object
+    ChangeChromeOsDeviceStatusSucceeded:
+      description: Response for a successful ChromeOS device status change.
+      properties: {}
       type: object
     Channel:
       description: An notification channel used to watch for resource changes.
@@ -7080,6 +7192,24 @@ components:
           items:
             $ref: "#/components/schemas/Schema"
           type: array
+      type: object
+    Status:
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      properties:
+        code:
+          description: The status code, which should be an enum value of google.rpc.Code.
+          format: int32
+          type: integer
+        details:
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
       type: object
     Token:
       description: JSON template for token resource in Directory API.
