@@ -117,6 +117,40 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1alpha1/customers:listLegacyOrganizations:
+    get:
+      description: Checks whether account is legacy.
+      operationId: prod_tt_sasportal.customers.listLegacyOrganizations
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SasPortalListLegacyOrganizationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/sasportal
+          Oauth2c:
+            - https://www.googleapis.com/auth/sasportal
+      tags:
+        - customers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1alpha1/customers:migrateOrganization:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1498,6 +1532,16 @@ components:
         nextPageToken:
           description: A pagination token returned from a previous call to ListDevices that indicates from where listing should continue. If the field is missing or empty, it means there is no more devices.
           type: string
+      type: object
+    SasPortalListLegacyOrganizationsResponse:
+      description: Response for [ListLegacyOrganizations]. [spectrum.sas.portal.v1alpha1.Provisioning.ListLegacyOrganizations].
+      properties:
+        organizationIds:
+          description: Optional. IDs of legacy SAS organizations.
+          items:
+            format: int64
+            type: string
+          type: array
       type: object
     SasPortalListNodesResponse:
       description: Response for ListNodes.
