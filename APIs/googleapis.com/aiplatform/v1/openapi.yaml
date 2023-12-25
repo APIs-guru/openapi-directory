@@ -1702,6 +1702,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1/{model}:streamGenerateContent:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Generate content with multimodal inputs with streaming support.
+      operationId: aiplatform.projects.locations.publishers.models.streamGenerateContent
+      parameters:
+        - description: "Required. The name of the publisher model requested to serve the prediction. Format: `projects/{project}/locations/{location}/publishers/*/models/*`"
+          in: path
+          name: model
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1GenerateContentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1GenerateContentResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{model}:updateExplanationDataset:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -5883,53 +5925,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  /v1/{parent}/runs/{runsId}/timeSeries:batchCreate:
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Batch create TensorboardTimeSeries that belong to a TensorboardExperiment.
-      operationId: aiplatform.projects.locations.tensorboards.experiments.runs.timeSeries.batchCreate
-      parameters:
-        - description: "Required. The resource name of the TensorboardExperiment to create the TensorboardTimeSeries in. Format: `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}` The TensorboardRuns referenced by the parent fields in the CreateTensorboardTimeSeriesRequest messages must be sub resources of this TensorboardExperiment."
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: runsId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudAiplatformV1BatchCreateTensorboardTimeSeriesRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudAiplatformV1BatchCreateTensorboardTimeSeriesResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   /v1/{parent}/runs:batchCreate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -6817,6 +6812,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1/{parent}:batchCreate:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Batch create TensorboardTimeSeries that belong to a TensorboardExperiment.
+      operationId: aiplatform.projects.locations.tensorboards.experiments.batchCreate
+      parameters:
+        - description: "Required. The resource name of the TensorboardExperiment to create the TensorboardTimeSeries in. Format: `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}` The TensorboardRuns referenced by the parent fields in the CreateTensorboardTimeSeriesRequest messages must be sub resources of this TensorboardExperiment."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1BatchCreateTensorboardTimeSeriesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1BatchCreateTensorboardTimeSeriesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{parent}:batchImport:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -7166,24 +7203,14 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  /v1/{tensorboard}/experiments/{experimentsId}/runs/{runsId}/timeSeries:batchRead:
+  /v1/{tensorboard}:batchRead:
     get:
       description: Reads multiple TensorboardTimeSeries' data. The data point number limit is 1000 for scalars, 100 for tensors and blob references. If the number of data points stored is less than the limit, all data is returned. Otherwise, the number limit of data points is randomly selected from this time series and returned.
-      operationId: aiplatform.projects.locations.tensorboards.experiments.runs.timeSeries.batchRead
+      operationId: aiplatform.projects.locations.tensorboards.batchRead
       parameters:
         - description: "Required. The resource name of the Tensorboard containing TensorboardTimeSeries to read data from. Format: `projects/{project}/locations/{location}/tensorboards/{tensorboard}`. The TensorboardTimeSeries referenced by time_series must be sub resources of this Tensorboard."
           in: path
           name: tensorboard
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: experimentsId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: runsId
           required: true
           schema:
             type: string
@@ -8735,6 +8762,44 @@ components:
       description: Request message for PipelineService.CancelTrainingPipeline.
       properties: {}
       type: object
+    GoogleCloudAiplatformV1Candidate:
+      description: A response candidate generated from the model.
+      properties:
+        citationMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1CitationMetadata"
+          description: Output only. Source attribution of the generated content.
+          readOnly: true
+        content:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1Content"
+          description: Output only. Content parts of the candidate.
+          readOnly: true
+        finishMessage:
+          description: Output only. Describes the reason the mode stopped generating tokens in more detail. This is only filled when `finish_reason` is set.
+          readOnly: true
+          type: string
+        finishReason:
+          description: Output only. The reason why the model stopped generating tokens. If empty, the model has not stopped generating the tokens.
+          enum:
+            - FINISH_REASON_UNSPECIFIED
+            - STOP
+            - MAX_TOKENS
+            - SAFETY
+            - RECITATION
+            - OTHER
+          readOnly: true
+          type: string
+        index:
+          description: Output only. Index of the candidate.
+          format: int32
+          readOnly: true
+          type: integer
+        safetyRatings:
+          description: Output only. List of ratings for the safety of a response candidate. There is at most one rating per category.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1SafetyRating"
+          readOnly: true
+          type: array
+      type: object
     GoogleCloudAiplatformV1CheckTrialEarlyStoppingStateMetatdata:
       description: This message will be placed in the metadata field of a google.longrunning.Operation associated with a CheckTrialEarlyStoppingState request.
       properties:
@@ -8758,6 +8823,46 @@ components:
         shouldStop:
           description: True if the Trial should stop.
           type: boolean
+      type: object
+    GoogleCloudAiplatformV1Citation:
+      description: Source attributions for content.
+      properties:
+        endIndex:
+          description: Output only. End index into the content.
+          format: int32
+          readOnly: true
+          type: integer
+        license:
+          description: Output only. License of the attribution.
+          readOnly: true
+          type: string
+        publicationDate:
+          $ref: "#/components/schemas/GoogleTypeDate"
+          description: Output only. Publication date of the attribution.
+          readOnly: true
+        startIndex:
+          description: Output only. Start index into the content.
+          format: int32
+          readOnly: true
+          type: integer
+        title:
+          description: Output only. Title of the attribution.
+          readOnly: true
+          type: string
+        uri:
+          description: Output only. Url reference of the attribution.
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudAiplatformV1CitationMetadata:
+      description: A collection of source attributions for a piece of content.
+      properties:
+        citations:
+          description: Output only. List of citations.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1Citation"
+          readOnly: true
+          type: array
       type: object
     GoogleCloudAiplatformV1CompleteTrialRequest:
       description: Request message for VizierService.CompleteTrial.
@@ -10557,7 +10662,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1ModelDataStats"
           description: Only present for custom code training export use case. Records data stats, i.e., train/validation/test item/annotation counts calculated during the export operation.
         exportedFiles:
-          description: All of the files that are exported in this export operation. For custom code training export, only three (training, validation and test) GCS paths in wildcard format are populated (e.g., gs://.../training-*).
+          description: All of the files that are exported in this export operation. For custom code training export, only three (training, validation and test) Cloud Storage paths in wildcard format are populated (for example, gs://.../training-*).
           items:
             type: string
           type: array
@@ -10774,7 +10879,7 @@ components:
             - BYTES
           type: string
         versionColumnName:
-          description: Only applicable for Vertex AI Feature Store. The name of the BigQuery Table/View columnn hosting data for this version. If no value is provided, will use feature_id.
+          description: Only applicable for Vertex AI Feature Store. The name of the BigQuery Table/View column hosting data for this version. If no value is provided, will use feature_id.
           type: string
       type: object
     GoogleCloudAiplatformV1FeatureGroup:
@@ -11401,6 +11506,43 @@ components:
           format: double
           type: number
       type: object
+    GoogleCloudAiplatformV1FunctionCall:
+      description: A predicted [FunctionCall] returned from the model that contains a string representing the [FunctionDeclaration.name] and a structured JSON object containing the parameters and their values.
+      properties:
+        args:
+          additionalProperties:
+            description: Properties of the object.
+          description: Optional. Required. The function parameters and values in JSON object format. See [FunctionDeclaration.parameters] for parameter details.
+          type: object
+        name:
+          description: Required. The name of the function to call. Matches [FunctionDeclaration.name].
+          type: string
+      type: object
+    GoogleCloudAiplatformV1FunctionDeclaration:
+      description: Structured representation of a function declaration as defined by the [OpenAPI 3.0 specification](https://spec.openapis.org/oas/v3.0.3). Included in this declaration are the function name and parameters. This FunctionDeclaration is a representation of a block of code that can be used as a `Tool` by the model and executed by the client.
+      properties:
+        description:
+          description: Optional. Description and purpose of the function. Model uses it to decide how and whether to call the function.
+          type: string
+        name:
+          description: Required. The name of the function to call. Must start with a letter or an underscore. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+          type: string
+        parameters:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1Schema"
+          description: "Optional. Describes the parameters to this function in JSON Schema Object format. Reflects the Open API 3.03 Parameter Object. string Key: the name of the parameter. Parameter names are case sensitive. Schema Value: the Schema defining the type used for the parameter. For function with no parameters, this can be left unset. Example with 1 required and 1 optional parameter: type: OBJECT properties: param1: type: STRING param2: type: INTEGER required: - param1"
+      type: object
+    GoogleCloudAiplatformV1FunctionResponse:
+      description: The result output from a [FunctionCall] that contains a string representing the [FunctionDeclaration.name] and a structured JSON object containing any output from the function is used as context to the model. This should contain the result of a [FunctionCall] made based on model prediction.
+      properties:
+        name:
+          description: Required. The name of the function to call. Matches [FunctionDeclaration.name] and [FunctionCall.name].
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object.
+          description: Required. The function response in JSON object format.
+          type: object
+      type: object
     GoogleCloudAiplatformV1GcsDestination:
       description: The Google Cloud Storage location where the output is to be written to.
       properties:
@@ -11416,6 +11558,115 @@ components:
           items:
             type: string
           type: array
+      type: object
+    GoogleCloudAiplatformV1GenerateContentRequest:
+      description: Request message for [PredictionService.GenerateContent].
+      properties:
+        contents:
+          description: Required. The content of the current conversation with the model. For single-turn queries, this is a single instance. For multi-turn queries, this is a repeated field that contains conversation history + latest request.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1Content"
+          type: array
+        endpoint:
+          deprecated: true
+          description: "Required. The name of the Endpoint requested to serve the prediction. Format: `projects/{project}/locations/{location}/endpoints/{endpoint}`"
+          type: string
+        generationConfig:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1GenerationConfig"
+          description: Optional. Generation config.
+        safetySettings:
+          description: Optional. Per request settings for blocking unsafe content. Enforced on GenerateContentResponse.candidates.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1SafetySetting"
+          type: array
+        tools:
+          description: Optional. A list of `Tools` the model may use to generate the next response. A `Tool` is a piece of code that enables the system to interact with external systems to perform an action, or set of actions, outside of knowledge and scope of the model. The only supported tool is currently `Function`
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1Tool"
+          type: array
+      type: object
+    GoogleCloudAiplatformV1GenerateContentResponse:
+      description: Response message for [PredictionService.GenerateContent].
+      properties:
+        candidates:
+          description: Output only. Generated candidates.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1Candidate"
+          readOnly: true
+          type: array
+        promptFeedback:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1GenerateContentResponsePromptFeedback"
+          description: "Output only. Content filter results for a prompt sent in the request. Note: Sent only in the first stream chunk. Only happens when no candidates were generated due to content violations."
+          readOnly: true
+        usageMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1GenerateContentResponseUsageMetadata"
+          description: Usage metadata about the response(s).
+      type: object
+    GoogleCloudAiplatformV1GenerateContentResponsePromptFeedback:
+      description: Content filter results for a prompt sent in the request.
+      properties:
+        blockReason:
+          description: Output only. Blocked reason.
+          enum:
+            - BLOCKED_REASON_UNSPECIFIED
+            - SAFETY
+            - OTHER
+          readOnly: true
+          type: string
+        blockReasonMessage:
+          description: Output only. A readable block reason message.
+          readOnly: true
+          type: string
+        safetyRatings:
+          description: Output only. Safety ratings.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1SafetyRating"
+          readOnly: true
+          type: array
+      type: object
+    GoogleCloudAiplatformV1GenerateContentResponseUsageMetadata:
+      description: Usage metadata about response(s).
+      properties:
+        candidatesTokenCount:
+          description: Number of tokens in the response(s).
+          format: int32
+          type: integer
+        promptTokenCount:
+          description: Number of tokens in the request.
+          format: int32
+          type: integer
+        totalTokenCount:
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudAiplatformV1GenerationConfig:
+      description: Generation config.
+      properties:
+        candidateCount:
+          description: Optional. Number of candidates to generate.
+          format: int32
+          type: integer
+        maxOutputTokens:
+          description: Optional. The maximum number of output tokens to generate per message.
+          format: int32
+          type: integer
+        stopSequences:
+          description: Optional. Stop sequences.
+          items:
+            type: string
+          type: array
+        temperature:
+          description: Optional. Controls the randomness of predictions.
+          format: float
+          type: number
+        topK:
+          description: Optional. If specified, top-k sampling will be used.
+          format: float
+          type: number
+        topP:
+          description: Optional. If specified, nucleus sampling will be used.
+          format: float
+          type: number
       type: object
     GoogleCloudAiplatformV1GenericOperationMetadata:
       description: Generic Metadata shared by all operations.
@@ -13245,7 +13496,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudAiplatformV1ModelEvaluationModelEvaluationExplanationSpec"
           type: array
         metadata:
-          description: The metadata of the ModelEvaluation. For the ModelEvaluation uploaded from Managed Pipeline, metadata contains a structured value with keys of "pipeline_job_id", "evaluation_dataset_type", "evaluation_dataset_path".
+          description: The metadata of the ModelEvaluation. For the ModelEvaluation uploaded from Managed Pipeline, metadata contains a structured value with keys of "pipeline_job_id", "evaluation_dataset_type", "evaluation_dataset_path", "row_based_metrics_path".
         metrics:
           description: Evaluation metrics of the Model. The schema of the metrics is stored in metrics_schema_uri
         metricsSchemaUri:
@@ -13969,6 +14220,26 @@ components:
           format: google-duration
           type: string
       type: object
+    GoogleCloudAiplatformV1NotebookReservationAffinity:
+      description: Notebook Reservation Affinity for consuming Zonal reservation.
+      properties:
+        consumeReservationType:
+          description: "Required. Specifies the type of reservation from which this instance can consume resources: RESERVATION_ANY (default), RESERVATION_SPECIFIC, or RESERVATION_NONE. See Consuming reserved instances for examples."
+          enum:
+            - RESERVATION_AFFINITY_TYPE_UNSPECIFIED
+            - RESERVATION_NONE
+            - RESERVATION_ANY
+            - RESERVATION_SPECIFIC
+          type: string
+        key:
+          description: Optional. Corresponds to the label key of a reservation resource. To target a RESERVATION_SPECIFIC by name, use compute.googleapis.com/reservation-name as the key and specify the name of your reservation as its value.
+          type: string
+        values:
+          description: Optional. Corresponds to the label values of a reservation resource. This must be the full path name of Reservation.
+          items:
+            type: string
+          type: array
+      type: object
     GoogleCloudAiplatformV1NotebookRuntime:
       description: A runtime is a virtual machine allocated to a particular user for a particular Notebook file on temporary basis with lifetime limited to 24 hours.
       properties:
@@ -13996,6 +14267,10 @@ components:
             - UNHEALTHY
           readOnly: true
           type: string
+        isUpgradable:
+          description: Output only. Whether NotebookRuntime is upgradable.
+          readOnly: true
+          type: boolean
         labels:
           additionalProperties:
             type: string
@@ -14005,6 +14280,11 @@ components:
           description: Output only. The resource name of the NotebookRuntime.
           readOnly: true
           type: string
+        networkTags:
+          description: Optional. The Compute Engine tags to add to runtime (see [Tagging instances](https://cloud.google.com/vpc/docs/add-remove-network-tags)).
+          items:
+            type: string
+          type: array
         notebookRuntimeTemplateRef:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1NotebookRuntimeTemplateRef"
           description: Output only. The pointer to NotebookRuntimeTemplate this NotebookRuntime is created from.
@@ -14021,6 +14301,10 @@ components:
           description: Output only. The proxy endpoint used to access the NotebookRuntime.
           readOnly: true
           type: string
+        reservationAffinity:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1NotebookReservationAffinity"
+          description: Output only. Reservation Affinity of the notebook runtime.
+          readOnly: true
         runtimeState:
           description: Output only. The runtime (instance) state of the NotebookRuntime.
           enum:
@@ -14094,6 +14378,11 @@ components:
         networkSpec:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1NetworkSpec"
           description: Optional. Network spec.
+        networkTags:
+          description: Optional. The Compute Engine tags to add to runtime (see [Tagging instances](https://cloud.google.com/vpc/docs/add-remove-network-tags)).
+          items:
+            type: string
+          type: array
         notebookRuntimeType:
           description: Optional. Immutable. The type of the notebook runtime template.
           enum:
@@ -14101,9 +14390,15 @@ components:
             - USER_DEFINED
             - ONE_CLICK
           type: string
+        reservationAffinity:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1NotebookReservationAffinity"
+          description: Optional. Reservation Affinity of the notebook runtime template.
         serviceAccount:
           description: The service account that the runtime workload runs as. You can use any service account within the same project, but you must have the service account user permission to use the instance. If not specified, the [Compute Engine default service account](https://cloud.google.com/compute/docs/access/service-accounts#default_service_account) is used.
           type: string
+        shieldedVmConfig:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1ShieldedVmConfig"
+          description: Optional. Immutable. Runtime Shielded VM spec.
         updateTime:
           description: Output only. Timestamp when this NotebookRuntimeTemplate was most recently updated.
           format: google-datetime
@@ -14123,6 +14418,12 @@ components:
         fileData:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1FileData"
           description: Optional. URI based data.
+        functionCall:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1FunctionCall"
+          description: Optional. A predicted [FunctionCall] returned from the model that contains a string representing the [FunctionDeclaration.name] with the parameters and their values.
+        functionResponse:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1FunctionResponse"
+          description: Optional. The result output of a [FunctionCall] that contains a string representing the [FunctionDeclaration.name] and a structured JSON object containing any output from the function call. It is used as context to the model.
         inlineData:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1Blob"
           description: Optional. Inlined bytes data.
@@ -15126,6 +15427,56 @@ components:
           description: Optional. Whether to backfill missed runs when the schedule is resumed from PAUSED state. If set to true, all missed runs will be scheduled. New runs will be scheduled after the backfill is complete. This will also update Schedule.catch_up field. Default to false.
           type: boolean
       type: object
+    GoogleCloudAiplatformV1SafetyRating:
+      description: Safety rating corresponding to the generated content.
+      properties:
+        blocked:
+          description: Output only. Indicates whether the content was filtered out because of this rating.
+          readOnly: true
+          type: boolean
+        category:
+          description: Output only. Harm category.
+          enum:
+            - HARM_CATEGORY_UNSPECIFIED
+            - HARM_CATEGORY_HATE_SPEECH
+            - HARM_CATEGORY_DANGEROUS_CONTENT
+            - HARM_CATEGORY_HARASSMENT
+            - HARM_CATEGORY_SEXUALLY_EXPLICIT
+          readOnly: true
+          type: string
+        probability:
+          description: Output only. Harm probability levels in the content.
+          enum:
+            - HARM_PROBABILITY_UNSPECIFIED
+            - NEGLIGIBLE
+            - LOW
+            - MEDIUM
+            - HIGH
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudAiplatformV1SafetySetting:
+      description: Safety settings.
+      properties:
+        category:
+          description: Required. Harm category.
+          enum:
+            - HARM_CATEGORY_UNSPECIFIED
+            - HARM_CATEGORY_HATE_SPEECH
+            - HARM_CATEGORY_DANGEROUS_CONTENT
+            - HARM_CATEGORY_HARASSMENT
+            - HARM_CATEGORY_SEXUALLY_EXPLICIT
+          type: string
+        threshold:
+          description: Required. The harm block threshold.
+          enum:
+            - HARM_BLOCK_THRESHOLD_UNSPECIFIED
+            - BLOCK_LOW_AND_ABOVE
+            - BLOCK_MEDIUM_AND_ABOVE
+            - BLOCK_ONLY_HIGH
+            - BLOCK_NONE
+          type: string
+      type: object
     GoogleCloudAiplatformV1SampleConfig:
       description: Active learning data sampling config. For every active learning labeling iteration, it will select a batch of data based on the sampling strategy.
       properties:
@@ -15316,12 +15667,60 @@ components:
         disableRetries:
           description: Optional. Indicates if the job should retry for internal errors after the job starts running. If true, overrides `Scheduling.restart_job_on_worker_restart` to false.
           type: boolean
+        maxWaitDuration:
+          description: Optional. This is the maximum time a user will wait in the QRM queue for resources. Default is 1 day
+          format: google-duration
+          type: string
         restartJobOnWorkerRestart:
           description: Restarts the entire CustomJob if a worker gets restarted. This feature can be used by distributed training jobs that are not resilient to workers leaving and joining a job.
           type: boolean
         timeout:
           description: The maximum job running time. The default is 7 days.
           format: google-duration
+          type: string
+      type: object
+    GoogleCloudAiplatformV1Schema:
+      description: Schema is used to define the format of input/output data. Represents a select subset of an [OpenAPI 3.0 schema object](https://spec.openapis.org/oas/v3.0.3#schema). More fields may be added in the future as needed.
+      properties:
+        description:
+          description: Optional. The description of the data.
+          type: string
+        enum:
+          description: 'Optional. Possible values of the element of Type.STRING with enum format. For example we can define an Enum Direction as : {type:STRING, format:enum, enum:["EAST", NORTH", "SOUTH", "WEST"]}'
+          items:
+            type: string
+          type: array
+        example:
+          description: Optional. Example of the object. Will only populated when the object is the root.
+        format:
+          description: "Optional. The format of the data. Supported formats: for NUMBER type: float, double for INTEGER type: int32, int64"
+          type: string
+        items:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1Schema"
+          description: Optional. Schema of the elements of Type.ARRAY.
+        nullable:
+          description: Optional. Indicates if the value may be null.
+          type: boolean
+        properties:
+          additionalProperties:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1Schema"
+          description: Optional. Properties of Type.OBJECT.
+          type: object
+        required:
+          description: Optional. Required properties of Type.OBJECT.
+          items:
+            type: string
+          type: array
+        type:
+          description: Optional. The type of the data.
+          enum:
+            - TYPE_UNSPECIFIED
+            - STRING
+            - NUMBER
+            - INTEGER
+            - BOOLEAN
+            - ARRAY
+            - OBJECT
           type: string
       type: object
     GoogleCloudAiplatformV1SchemaAnnotationSpecColor:
@@ -17940,6 +18339,13 @@ components:
           description: The page token that can be used by the next JobService.SearchModelDeploymentMonitoringStatsAnomalies call.
           type: string
       type: object
+    GoogleCloudAiplatformV1ShieldedVmConfig:
+      description: A set of Shielded Instance options. See [Images using supported Shielded VM features](https://cloud.google.com/compute/docs/instances/modifying-shielded-vm).
+      properties:
+        enableSecureBoot:
+          description: Defines whether the instance has [Secure Boot](https://cloud.google.com/compute/shielded-vm/docs/shielded-vm#secure-boot) enabled. Secure Boot helps ensure that the system only runs authentic software by verifying the digital signature of all boot components, and halting the boot process if signature verification fails.
+          type: boolean
+      type: object
     GoogleCloudAiplatformV1SmoothGradConfig:
       description: "Config for SmoothGrad approximation of gradients. When enabled, the gradients are approximated by averaging the gradients from noisy samples in the vicinity of the inputs. Adding noise can help improve the computed gradients. Refer to this paper for more details: https://arxiv.org/pdf/1706.03825.pdf"
       properties:
@@ -18849,6 +19255,15 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudAiplatformV1Tool:
+      description: Tool details that the model may use to generate response. A `Tool` is a piece of code that enables the system to interact with external systems to perform an action, or set of actions, outside of knowledge and scope of the model.
+      properties:
+        functionDeclarations:
+          description: Optional. One or more function declarations to be passed to the model along with the current user query. Model may decide to call a subset of these functions by populating FunctionCall in the response. User should provide a FunctionResponse for each function call in the next turn. Based on the function responses, Model will generate the final response back to the user. Maximum 64 function declarations can be provided.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1FunctionDeclaration"
+          type: array
+      type: object
     GoogleCloudAiplatformV1TrainingConfig:
       description: CMLE training config. For every active learning labeling iteration, system will train a machine learning model on CMLE. The trained model will be used by data sampling algorithm to select DataItems.
       properties:
@@ -19410,7 +19825,7 @@ components:
           $ref: "#/components/schemas/GoogleTypeExpr"
           description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
-          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding."
+          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. * `principal://iam.googleapis.com/locations/global/workforcePools/{pool_id}/subject/{subject_attribute_value}`: A single identity in a workforce identity pool. * `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/group/{group_id}`: All workforce identities in a group. * `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/attribute.{attribute_name}/{attribute_value}`: All workforce identities with a specific attribute value. * `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool_id}/*`: All identities in a workforce identity pool. * `principal://iam.googleapis.com/projects/{project_number}/locations/global/workloadIdentityPools/{pool_id}/subject/{subject_attribute_value}`: A single identity in a workload identity pool. * `principalSet://iam.googleapis.com/projects/{project_number}/locations/global/workloadIdentityPools/{pool_id}/group/{group_id}`: A workload identity pool group. * `principalSet://iam.googleapis.com/projects/{project_number}/locations/global/workloadIdentityPools/{pool_id}/attribute.{attribute_name}/{attribute_value}`: All identities in a workload identity pool with a certain attribute. * `principalSet://iam.googleapis.com/projects/{project_number}/locations/global/workloadIdentityPools/{pool_id}/*`: All identities in a workload identity pool. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `deleted:principal://iam.googleapis.com/locations/global/workforcePools/{pool_id}/subject/{subject_attribute_value}`: Deleted single identity in a workforce identity pool. For example, `deleted:principal://iam.googleapis.com/locations/global/workforcePools/my-pool-id/subject/my-subject-attribute-value`."
           items:
             type: string
           type: array
