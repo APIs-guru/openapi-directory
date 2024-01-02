@@ -250,16 +250,11 @@ components:
               - MEETS_DEVICE_INTEGRITY
               - MEETS_STRONG_INTEGRITY
               - MEETS_VIRTUAL_INTEGRITY
-              - MEETS_WEAK_INTEGRITY
             type: string
-            x-enumDeprecated:
-              - false
-              - false
-              - false
-              - false
-              - false
-              - true
           type: array
+        recentDeviceActivity:
+          $ref: "#/components/schemas/RecentDeviceActivity"
+          description: Details about the device activity of the device the app is running on.
       type: object
     EnvironmentDetails:
       description: Contains information about the environment Play Integrity API runs in, e.g. Play Protect verdict.
@@ -277,6 +272,20 @@ components:
             - MEDIUM_RISK
             - HIGH_RISK
             - POSSIBLE_RISK
+          type: string
+      type: object
+    RecentDeviceActivity:
+      description: Recent device activity can help developers identify devices that have exhibited hyperactive attestation activity, which could be a sign of an attack or token farming.
+      properties:
+        deviceActivityLevel:
+          description: Required. Indicates the activity level of the device.
+          enum:
+            - DEVICE_ACTIVITY_LEVEL_UNSPECIFIED
+            - UNEVALUATED
+            - LEVEL_1
+            - LEVEL_2
+            - LEVEL_3
+            - LEVEL_4
           type: string
       type: object
     RequestDetails:

@@ -2666,8 +2666,8 @@ components:
           description: |-
             Specific type of the event. This cannot be modified after the event is created. Possible values are:  
             - "default" - A regular event or not further specified. 
-            - "outOfOffice" - An out-of-office event. 
-            - "focusTime" - A focus-time event. 
+            - "outOfOffice" - An out-of-office event. An outOfOfficeProperties parameter must be supplied to make a valid event (even if empty). 
+            - "focusTime" - A focus-time event. A focusTimeProperties parameter must be supplied to make a valid event (even if empty). 
             - "workingLocation" - A working location event.  Currently, only "default " and "workingLocation" events can be created using the API. Extended support for other event types will be made available in later releases.
           type: string
         extendedProperties:
@@ -2688,7 +2688,7 @@ components:
           type: object
         focusTimeProperties:
           $ref: "#/components/schemas/EventFocusTimeProperties"
-          description: Focus Time event data. Used if eventType is focusTime.
+          description: Focus Time event data. Required if eventType is focusTime.
         gadget:
           description: A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
           properties:
@@ -2790,7 +2790,7 @@ components:
           description: For an instance of a recurring event, this is the time at which this event would start according to the recurrence data in the recurring event identified by recurringEventId. It uniquely identifies the instance within the recurring event series even if the instance was moved to a different time. Immutable.
         outOfOfficeProperties:
           $ref: "#/components/schemas/EventOutOfOfficeProperties"
-          description: Out of office event data. Used if eventType is outOfOffice.
+          description: Out of office event data. Required if eventType is outOfOffice.
         privateCopy:
           default: false
           description: If set to True, Event propagation is disabled. Note that it is not the same thing as Private event properties. Optional. Immutable. The default is False.
