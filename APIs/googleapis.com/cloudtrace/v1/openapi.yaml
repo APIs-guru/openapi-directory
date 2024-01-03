@@ -304,7 +304,7 @@ components:
       description: A span represents a single timed event within a trace. Spans can be nested and form a trace tree. Often, a trace contains a root span that describes the end-to-end latency of an operation and, optionally, one or more subspans for its suboperations. Spans do not need to be contiguous. There may be gaps between spans in a trace.
       properties:
         endTime:
-          description: End time of the span in nanoseconds from the UNIX epoch.
+          description: End time of the span in seconds and nanoseconds from the UNIX epoch.
           format: google-datetime
           type: string
         kind:
@@ -331,7 +331,7 @@ components:
           format: uint64
           type: string
         startTime:
-          description: Start time of the span in nanoseconds from the UNIX epoch.
+          description: Start time of the span in seconds and nanoseconds from the UNIX epoch.
           format: google-datetime
           type: string
       type: object

@@ -446,7 +446,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "DEPRECATED: Use BatchChangeChromeOsDeviceStatus instead. Takes an action that affects a Chrome OS Device. This includes deprovisioning, disabling, and re-enabling devices. *Warning:* * Deprovisioning a device will stop device policy syncing and remove device-level printers. After a device is deprovisioned, it must be wiped before it can be re-enrolled. * Lost or stolen devices should use the disable action. * Re-enabling a disabled device will consume a device license. If you do not have sufficient licenses available when completing the re-enable action, you will receive an error. For more information about deprovisioning and disabling devices, visit the [help center](https://support.google.com/chrome/a/answer/3523633)."
+      description: Use [BatchChangeChromeOsDeviceStatus](/admin-sdk/directory/reference/rest/v1/customer.devices.chromeos/batchChangeStatus) instead. Takes an action that affects a Chrome OS Device. This includes deprovisioning, disabling, and re-enabling devices. *Warning:* * Deprovisioning a device will stop device policy syncing and remove device-level printers. After a device is deprovisioned, it must be wiped before it can be re-enrolled. * Lost or stolen devices should use the disable action. * Re-enabling a disabled device will consume a device license. If you do not have sufficient licenses available when completing the re-enable action, you will receive an error. For more information about deprovisioning and disabling devices, visit the [help center](https://support.google.com/chrome/a/answer/3523633).
       operationId: directory.chromeosdevices.action
       parameters:
         - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
@@ -490,10 +490,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Changes the status of a batch of ChromeOS devices.
+      description: Changes the status of a batch of ChromeOS devices. For more information about changing a ChromeOS device state [Repair, repurpose, or retire ChromeOS devices](https://support.google.com/chrome/a/answer/3523633).
       operationId: admin.customer.devices.chromeos.batchChangeStatus
       parameters:
-        - description: Required. Immutable ID of the G Suite account.
+        - description: Required. Immutable ID of the Google Workspace account.
           in: path
           name: customerId
           required: true
@@ -5334,7 +5334,7 @@ components:
       description: A request for changing the status of a batch of ChromeOS devices.
       properties:
         changeChromeOsDeviceStatusAction:
-          description: Required. The Action to take on the ChromeOS device in order to change its status.
+          description: Required. The action to take on the ChromeOS device in order to change its status.
           enum:
             - CHANGE_CHROME_OS_DEVICE_STATUS_ACTION_UNSPECIFIED
             - CHANGE_CHROME_OS_DEVICE_STATUS_ACTION_DEPROVISION
@@ -5342,7 +5342,7 @@ components:
             - CHANGE_CHROME_OS_DEVICE_STATUS_ACTION_REENABLE
           type: string
         deprovisionReason:
-          description: Optional. The reason behind a device deprovision, must be provided for all deprovisions, otherwise it must not be provided. It must be one of the non-deprecated deprovision reasons.
+          description: Optional. The reason behind a device deprovision. Must be provided if 'changeChromeOsDeviceStatusAction' is set to 'CHANGE_CHROME_OS_DEVICE_STATUS_ACTION_DEPROVISION'. Otherwise, omit this field.
           enum:
             - DEPROVISION_REASON_UNSPECIFIED
             - DEPROVISION_REASON_SAME_MODEL_REPLACEMENT
@@ -5369,7 +5369,7 @@ components:
             - false
             - false
         deviceIds:
-          description: Required. List of the IDs of the ChromeOS devices to change.
+          description: Required. List of the IDs of the ChromeOS devices to change. Maximum 50.
           items:
             type: string
           type: array
