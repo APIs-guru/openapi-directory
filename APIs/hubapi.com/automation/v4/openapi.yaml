@@ -34,7 +34,7 @@ tags:
 paths:
   /automation/v4/actions/callbacks/complete:
     post:
-      operationId: post-/automation/v4/actions/callbacks/complete
+      operationId: post-/automation/v4/actions/callbacks/complete_completeBatch
       parameters: []
       requestBody:
         content:
@@ -56,7 +56,7 @@ paths:
         - Public_Callbacks
   /automation/v4/actions/callbacks/{callbackId}/complete:
     post:
-      operationId: post-/automation/v4/actions/callbacks/{callbackId}/complete
+      operationId: post-/automation/v4/actions/callbacks/{callbackId}/complete_complete
       parameters:
         - explode: false
           in: path
@@ -85,7 +85,7 @@ paths:
         - Public_Callbacks
   /automation/v4/actions/{appId}:
     get:
-      operationId: get-/automation/v4/actions/{appId}
+      operationId: get-/automation/v4/actions/{appId}_getPage
       parameters:
         - description: The maximum number of results to display per page.
           explode: true
@@ -135,7 +135,7 @@ paths:
       tags:
         - Public_Action_Definitions
     post:
-      operationId: post-/automation/v4/actions/{appId}
+      operationId: post-/automation/v4/actions/{appId}_create
       parameters:
         - explode: false
           in: path
@@ -166,7 +166,7 @@ paths:
         - Public_Action_Definitions
   /automation/v4/actions/{appId}/{definitionId}:
     delete:
-      operationId: delete-/automation/v4/actions/{appId}/{definitionId}
+      operationId: delete-/automation/v4/actions/{appId}/{definitionId}_archive
       parameters:
         - explode: false
           in: path
@@ -194,7 +194,7 @@ paths:
       tags:
         - Public_Action_Definitions
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}_getById
       parameters:
         - explode: false
           in: path
@@ -234,7 +234,7 @@ paths:
       tags:
         - Public_Action_Definitions
     patch:
-      operationId: patch-/automation/v4/actions/{appId}/{definitionId}
+      operationId: patch-/automation/v4/actions/{appId}/{definitionId}_update
       parameters:
         - explode: false
           in: path
@@ -272,7 +272,7 @@ paths:
         - Public_Action_Definitions
   /automation/v4/actions/{appId}/{definitionId}/functions:
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions_getPage
       parameters:
         - explode: false
           in: path
@@ -304,7 +304,7 @@ paths:
         - Public_Action_Functions
   /automation/v4/actions/{appId}/{definitionId}/functions/{functionType}:
     delete:
-      operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}
+      operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}_archiveByFunctionType
       parameters:
         - explode: false
           in: path
@@ -344,7 +344,7 @@ paths:
       tags:
         - Public_Action_Functions
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}_getByFunctionType
       parameters:
         - explode: false
           in: path
@@ -387,7 +387,7 @@ paths:
       tags:
         - Public_Action_Functions
     put:
-      operationId: put-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}
+      operationId: put-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}_createOrReplaceByFunctionType
       parameters:
         - explode: false
           in: path
@@ -437,7 +437,7 @@ paths:
         - Public_Action_Functions
   /automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}:
     delete:
-      operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}
+      operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}_archive
       parameters:
         - explode: false
           in: path
@@ -484,7 +484,7 @@ paths:
       tags:
         - Public_Action_Functions
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}_getById
       parameters:
         - explode: false
           in: path
@@ -534,7 +534,7 @@ paths:
       tags:
         - Public_Action_Functions
     put:
-      operationId: put-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}
+      operationId: put-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}_createOrReplace
       parameters:
         - explode: false
           in: path
@@ -591,7 +591,7 @@ paths:
         - Public_Action_Functions
   /automation/v4/actions/{appId}/{definitionId}/revisions:
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions_getPage
       parameters:
         - explode: false
           in: path
@@ -640,7 +640,7 @@ paths:
         - Public_Action_Revisions
   /automation/v4/actions/{appId}/{definitionId}/revisions/{revisionId}:
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions/{revisionId}
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions/{revisionId}_getById
       parameters:
         - explode: false
           in: path

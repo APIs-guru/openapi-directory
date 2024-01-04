@@ -30,7 +30,7 @@ info:
 externalDocs:
   url: https://developers.google.com/storage/docs/json_api/
 tags:
-  - name: anywhereCache
+  - name: anywhereCaches
   - name: bucketAccessControls
   - name: buckets
   - name: channels
@@ -731,7 +731,7 @@ paths:
       description: Returns a list of Anywhere Cache instances of the bucket matching the criteria.
       operationId: storage.anywhereCaches.list
       parameters:
-        - description: Name of the partent bucket
+        - description: Name of the parent bucket.
           in: path
           name: bucket
           required: true
@@ -777,7 +777,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/devstorage.read_write
       tags:
-        - anywhereCache
+        - anywhereCaches
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -791,7 +791,7 @@ paths:
       description: Creates an Anywhere Cache instance.
       operationId: storage.anywhereCaches.insert
       parameters:
-        - description: Name of the partent bucket
+        - description: Name of the parent bucket.
           in: path
           name: bucket
           required: true
@@ -823,13 +823,13 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/devstorage.read_write
       tags:
-        - anywhereCache
+        - anywhereCaches
   /b/{bucket}/anywhereCaches/{anywhereCacheId}:
     get:
       description: Returns the metadata of an Anywhere Cache instance.
       operationId: storage.anywhereCaches.get
       parameters:
-        - description: Name of the partent bucket
+        - description: Name of the parent bucket.
           in: path
           name: bucket
           required: true
@@ -870,7 +870,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/devstorage.read_write
       tags:
-        - anywhereCache
+        - anywhereCaches
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -884,7 +884,7 @@ paths:
       description: Updates the config(ttl and admissionPolicy) of an Anywhere Cache instance.
       operationId: storage.anywhereCaches.update
       parameters:
-        - description: Name of the partent bucket
+        - description: Name of the parent bucket.
           in: path
           name: bucket
           required: true
@@ -922,7 +922,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/devstorage.read_write
       tags:
-        - anywhereCache
+        - anywhereCaches
   /b/{bucket}/anywhereCaches/{anywhereCacheId}/disable:
     parameters:
       - $ref: "#/components/parameters/alt"
@@ -937,7 +937,7 @@ paths:
       description: Disables an Anywhere Cache instance.
       operationId: storage.anywhereCaches.disable
       parameters:
-        - description: Name of the partent bucket
+        - description: Name of the parent bucket.
           in: path
           name: bucket
           required: true
@@ -970,7 +970,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/devstorage.read_write
       tags:
-        - anywhereCache
+        - anywhereCaches
   /b/{bucket}/anywhereCaches/{anywhereCacheId}/pause:
     parameters:
       - $ref: "#/components/parameters/alt"
@@ -985,7 +985,7 @@ paths:
       description: Pauses an Anywhere Cache instance.
       operationId: storage.anywhereCaches.pause
       parameters:
-        - description: Name of the partent bucket
+        - description: Name of the parent bucket.
           in: path
           name: bucket
           required: true
@@ -1018,7 +1018,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/devstorage.read_write
       tags:
-        - anywhereCache
+        - anywhereCaches
   /b/{bucket}/anywhereCaches/{anywhereCacheId}/resume:
     parameters:
       - $ref: "#/components/parameters/alt"
@@ -1033,7 +1033,7 @@ paths:
       description: Resumes a paused or disabled Anywhere Cache instance.
       operationId: storage.anywhereCaches.resume
       parameters:
-        - description: Name of the partent bucket
+        - description: Name of the parent bucket.
           in: path
           name: bucket
           required: true
@@ -1066,7 +1066,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/devstorage.read_write
       tags:
-        - anywhereCache
+        - anywhereCaches
   /b/{bucket}/defaultObjectAcl:
     get:
       description: Retrieves default object ACL entries on the specified bucket.
@@ -4440,6 +4440,9 @@ components:
         updateTime:
           description: The modification time of the cache instance metadata in RFC 3339 format.
           format: date-time
+          type: string
+        zone:
+          description: The zone in which the cache instance is running. For example, us-central1-a.
           type: string
       type: object
     AnywhereCaches:

@@ -28,7 +28,7 @@ paths:
   /communication-preferences/v3/definitions:
     get:
       description: Get a list of all subscription definitions for the portal
-      operationId: get-/communication-preferences/v3/definitions
+      operationId: get-/communication-preferences/v3/definitions_getPage
       parameters: []
       responses:
         "200":
@@ -82,7 +82,7 @@ paths:
   /communication-preferences/v3/status/email/{emailAddress}:
     get:
       description: Returns a list of subscriptions and their status for a given contact.
-      operationId: get-/communication-preferences/v3/status/email/{emailAddress}
+      operationId: get-/communication-preferences/v3/status/email/{emailAddress}_getEmailStatus
       parameters:
         - explode: false
           in: path
@@ -131,7 +131,7 @@ paths:
   /communication-preferences/v3/subscribe:
     post:
       description: Subscribes a contact to the given subscription type. This API is not valid to use for subscribing a contact at a brand or portal level and will return an error.
-      operationId: post-/communication-preferences/v3/subscribe
+      operationId: post-/communication-preferences/v3/subscribe_subscribe
       parameters: []
       requestBody:
         content:
@@ -190,7 +190,7 @@ paths:
   /communication-preferences/v3/unsubscribe:
     post:
       description: Unsubscribes a contact from the given subscription type. This API is not valid to use for unsubscribing a contact at a brand or portal level and will return an error.
-      operationId: post-/communication-preferences/v3/unsubscribe
+      operationId: post-/communication-preferences/v3/unsubscribe_unsubscribe
       parameters: []
       requestBody:
         content:
