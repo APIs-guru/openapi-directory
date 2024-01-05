@@ -11,8 +11,8 @@ info:
   x-hubspot-product-tier-requirements:
     marketing: ENTERPRISE
   x-hubspot-related-documentation:
-    - name: Business Units Overview
-      url: https://developers.hubspot.com/docs/api/settings/business-units-api
+    - name: Business Units Guide
+      url: https://hubspot.dev/guides/api/settings/business-units-api
   x-logo:
     url: https://wtcfns.hubspot.com/wt-api/social-sharing
   x-origin:
@@ -27,7 +27,7 @@ paths:
   /business-units/v3/business-units/user/{userId}:
     get:
       description: Get Business Units identified by `userId`. The `userId` refers to the user’s ID.
-      operationId: get-/business-units/v3/business-units/user/{userId}_getByUserID
+      operationId: get-/business-units/v3/business-units/user/{userId}
       parameters:
         - description: Identifier of user to retrieve.
           explode: false

@@ -695,7 +695,7 @@ components:
           type: string
         username:
           deprecated: true
-          description: Username of the account that is being verified. Deprecated. Customers should now provide the hashed account ID field in Event.
+          description: Username of the account that is being verified. Deprecated. Customers should now provide the `account_id` field in `event.user_info`.
           type: string
       type: object
     GoogleCloudRecaptchaenterpriseV1AndroidKeySettings:

@@ -16,8 +16,8 @@ info:
     sales: PROFESSIONAL
     service: PROFESSIONAL
   x-hubspot-related-documentation:
-    - name: Webhooks Overview
-      url: https://developers.hubspot.com/docs/api/webhooks
+    - name: Webhooks Guide
+      url: https://hubspot.dev/guides/api/webhooks
   x-logo:
     url: https://developers.hubspot.com/hubfs/assets/hubspot.com/buzz/HubSpotOpenGraph.png
   x-origin:
@@ -36,7 +36,7 @@ tags:
 paths:
   /webhooks/v3/{appId}/settings:
     delete:
-      operationId: delete-/webhooks/v3/{appId}/settings_clear
+      operationId: delete-/webhooks/v3/{appId}/settings
       parameters:
         - explode: false
           in: path
@@ -57,7 +57,7 @@ paths:
       tags:
         - Settings
     get:
-      operationId: get-/webhooks/v3/{appId}/settings_getAll
+      operationId: get-/webhooks/v3/{appId}/settings
       parameters:
         - explode: false
           in: path
@@ -81,7 +81,7 @@ paths:
       tags:
         - Settings
     put:
-      operationId: put-/webhooks/v3/{appId}/settings_configure
+      operationId: put-/webhooks/v3/{appId}/settings
       parameters:
         - explode: false
           in: path
@@ -112,7 +112,7 @@ paths:
         - Settings
   /webhooks/v3/{appId}/subscriptions:
     get:
-      operationId: get-/webhooks/v3/{appId}/subscriptions_getAll
+      operationId: get-/webhooks/v3/{appId}/subscriptions
       parameters:
         - explode: false
           in: path
@@ -136,7 +136,7 @@ paths:
       tags:
         - Subscriptions
     post:
-      operationId: post-/webhooks/v3/{appId}/subscriptions_create
+      operationId: post-/webhooks/v3/{appId}/subscriptions
       parameters:
         - explode: false
           in: path
@@ -167,7 +167,7 @@ paths:
         - Subscriptions
   /webhooks/v3/{appId}/subscriptions/batch/update:
     post:
-      operationId: post-/webhooks/v3/{appId}/subscriptions/batch/update_updateBatch
+      operationId: post-/webhooks/v3/{appId}/subscriptions/batch/update
       parameters:
         - explode: false
           in: path
@@ -204,7 +204,7 @@ paths:
         - Subscriptions
   /webhooks/v3/{appId}/subscriptions/{subscriptionId}:
     delete:
-      operationId: delete-/webhooks/v3/{appId}/subscriptions/{subscriptionId}_archive
+      operationId: delete-/webhooks/v3/{appId}/subscriptions/{subscriptionId}
       parameters:
         - explode: false
           in: path
@@ -233,7 +233,7 @@ paths:
       tags:
         - Subscriptions
     get:
-      operationId: get-/webhooks/v3/{appId}/subscriptions/{subscriptionId}_getById
+      operationId: get-/webhooks/v3/{appId}/subscriptions/{subscriptionId}
       parameters:
         - explode: false
           in: path
@@ -265,7 +265,7 @@ paths:
       tags:
         - Subscriptions
     patch:
-      operationId: patch-/webhooks/v3/{appId}/subscriptions/{subscriptionId}_update
+      operationId: patch-/webhooks/v3/{appId}/subscriptions/{subscriptionId}
       parameters:
         - explode: false
           in: path

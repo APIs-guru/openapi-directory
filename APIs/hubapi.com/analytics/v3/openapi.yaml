@@ -11,7 +11,7 @@ info:
   x-hubspot-product-tier-requirements:
     marketing: ENTERPRISE
   x-hubspot-related-documentation:
-    - name: Custom Behavioral Events Overview
+    - name: Custom Behavioral Events Guide
       url: https://developers.hubspot.com/docs/api/analytics/events
   x-logo:
     url: https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/HubSpotOpenGraph.png
@@ -27,7 +27,7 @@ paths:
   /events/v3/send:
     post:
       description: Endpoint to send an instance of a behavioral event
-      operationId: post-/events/v3/send_send
+      operationId: post-/events/v3/send
       parameters: []
       requestBody:
         content:

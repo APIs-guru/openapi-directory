@@ -12,8 +12,8 @@ info:
     sales: PROFESSIONAL
     service: PROFESSIONAL
   x-hubspot-related-documentation:
-    - name: Custom Workflow Actions Overview
-      url: https://developers.hubspot.com/docs/api/automation/custom-workflow-actions
+    - name: Custom Workflow Actions Guide
+      url: https://hubspot.dev/guides/api/automation/custom-workflow-actions
   x-logo:
     url: https://developers.hubspot.com/hubfs/assets/hubspot.com/buzz/HubSpotOpenGraph.png
   x-origin:
@@ -34,7 +34,7 @@ tags:
 paths:
   /automation/v4/actions/callbacks/complete:
     post:
-      operationId: post-/automation/v4/actions/callbacks/complete_completeBatch
+      operationId: post-/automation/v4/actions/callbacks/complete
       parameters: []
       requestBody:
         content:
@@ -56,7 +56,7 @@ paths:
         - Public_Callbacks
   /automation/v4/actions/callbacks/{callbackId}/complete:
     post:
-      operationId: post-/automation/v4/actions/callbacks/{callbackId}/complete_complete
+      operationId: post-/automation/v4/actions/callbacks/{callbackId}/complete
       parameters:
         - explode: false
           in: path
@@ -85,7 +85,7 @@ paths:
         - Public_Callbacks
   /automation/v4/actions/{appId}:
     get:
-      operationId: get-/automation/v4/actions/{appId}_getPage
+      operationId: get-/automation/v4/actions/{appId}
       parameters:
         - description: The maximum number of results to display per page.
           explode: true
@@ -135,7 +135,7 @@ paths:
       tags:
         - Public_Action_Definitions
     post:
-      operationId: post-/automation/v4/actions/{appId}_create
+      operationId: post-/automation/v4/actions/{appId}
       parameters:
         - explode: false
           in: path
@@ -166,7 +166,7 @@ paths:
         - Public_Action_Definitions
   /automation/v4/actions/{appId}/{definitionId}:
     delete:
-      operationId: delete-/automation/v4/actions/{appId}/{definitionId}_archive
+      operationId: delete-/automation/v4/actions/{appId}/{definitionId}
       parameters:
         - explode: false
           in: path
@@ -194,7 +194,7 @@ paths:
       tags:
         - Public_Action_Definitions
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}_getById
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}
       parameters:
         - explode: false
           in: path
@@ -234,7 +234,7 @@ paths:
       tags:
         - Public_Action_Definitions
     patch:
-      operationId: patch-/automation/v4/actions/{appId}/{definitionId}_update
+      operationId: patch-/automation/v4/actions/{appId}/{definitionId}
       parameters:
         - explode: false
           in: path
@@ -272,7 +272,7 @@ paths:
         - Public_Action_Definitions
   /automation/v4/actions/{appId}/{definitionId}/functions:
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions_getPage
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions
       parameters:
         - explode: false
           in: path
@@ -304,7 +304,7 @@ paths:
         - Public_Action_Functions
   /automation/v4/actions/{appId}/{definitionId}/functions/{functionType}:
     delete:
-      operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}_archiveByFunctionType
+      operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}
       parameters:
         - explode: false
           in: path
@@ -344,7 +344,7 @@ paths:
       tags:
         - Public_Action_Functions
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}_getByFunctionType
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}
       parameters:
         - explode: false
           in: path
@@ -387,7 +387,7 @@ paths:
       tags:
         - Public_Action_Functions
     put:
-      operationId: put-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}_createOrReplaceByFunctionType
+      operationId: put-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}
       parameters:
         - explode: false
           in: path
@@ -437,7 +437,7 @@ paths:
         - Public_Action_Functions
   /automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}:
     delete:
-      operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}_archive
+      operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}
       parameters:
         - explode: false
           in: path
@@ -484,7 +484,7 @@ paths:
       tags:
         - Public_Action_Functions
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}_getById
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}
       parameters:
         - explode: false
           in: path
@@ -534,7 +534,7 @@ paths:
       tags:
         - Public_Action_Functions
     put:
-      operationId: put-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}_createOrReplace
+      operationId: put-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}
       parameters:
         - explode: false
           in: path
@@ -591,7 +591,7 @@ paths:
         - Public_Action_Functions
   /automation/v4/actions/{appId}/{definitionId}/revisions:
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions_getPage
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions
       parameters:
         - explode: false
           in: path
@@ -640,7 +640,7 @@ paths:
         - Public_Action_Revisions
   /automation/v4/actions/{appId}/{definitionId}/revisions/{revisionId}:
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions/{revisionId}_getById
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions/{revisionId}
       parameters:
         - explode: false
           in: path

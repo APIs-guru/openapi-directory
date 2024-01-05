@@ -14,7 +14,7 @@ info:
     sales: ENTERPRISE
     service: ENTERPRISE
   x-hubspot-related-documentation:
-    - name: Web Analytics Overview
+    - name: Web Analytics Guide
       url: https://hubspot.dev/guides/api/events/web-analytics
   x-logo:
     url: https://developers.hubspot.com/hubfs/assets/hubspot.com/buzz/HubSpotOpenGraph.png
@@ -31,7 +31,7 @@ tags:
 paths:
   /events/v3/events/:
     get:
-      operationId: get-/events/v3/events/_getPage
+      operationId: get-/events/v3/events/
       parameters:
         - explode: true
           in: query

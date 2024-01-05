@@ -41,6 +41,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. If set to true, any customConnectorVersion which is a child resource will also be deleted. https://aip.dev/135#cascading-delete
+          in: query
+          name: force
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -2311,6 +2316,13 @@ components:
           format: int64
           readOnly: true
           type: string
+        deploymentModel:
+          description: Optional. Indicates whether connector is deployed on GKE/CloudRun
+          enum:
+            - DEPLOYMENT_MODEL_UNSPECIFIED
+            - GKE_MST
+            - CLOUD_RUN_MST
+          type: string
         hpaConfig:
           $ref: "#/components/schemas/HPAConfig"
           description: Output only. HPA autoscaling config.
@@ -2454,6 +2466,16 @@ components:
           description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
           format: int32
           type: integer
+      type: object
+    DeadLetterConfig:
+      description: Dead Letter configuration details provided by the user.
+      properties:
+        projectId:
+          description: Optional. Project which has the topic given.
+          type: string
+        topic:
+          description: Optional. Topic to push events which couldn't be processed.
+          type: string
       type: object
     DenyMaintenancePeriod:
       description: DenyMaintenancePeriod definition. Maintenance is forbidden within the deny period. The start_date must be less than the end_date.
@@ -2749,6 +2771,9 @@ components:
         authConfig:
           $ref: "#/components/schemas/AuthConfig"
           description: Auth details for the webhook adapter.
+        deadLetterConfig:
+          $ref: "#/components/schemas/DeadLetterConfig"
+          description: Optional. Dead letter configuration for eventing of a connection.
         enrichmentEnabled:
           description: Enrichment Enabled.
           type: boolean

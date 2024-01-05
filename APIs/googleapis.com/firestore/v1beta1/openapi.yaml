@@ -1893,7 +1893,7 @@ components:
           type: string
         field:
           $ref: "#/components/schemas/FieldReference"
-          description: The field to order by.
+          description: Order based on the value referenced by this field.
       type: object
     PartitionQueryRequest:
       description: The request for Firestore.PartitionQuery.

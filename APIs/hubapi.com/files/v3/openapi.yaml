@@ -15,8 +15,8 @@ info:
     sales: FREE
     service: FREE
   x-hubspot-related-documentation:
-    - name: Files Overview
-      url: https://developers.hubspot.com/docs/api/files/files
+    - name: Files Guide
+      url: https://hubspot.dev/guides/api/files/files
   x-logo:
     url: https://developers.hubspot.com/hubfs/assets/hubspot.com/buzz/HubSpotOpenGraph.png
   x-origin:
@@ -36,7 +36,7 @@ paths:
   /files/v3/files:
     post:
       description: Upload a single file with content specified in request body.
-      operationId: post-/files/v3/files_upload
+      operationId: post-/files/v3/files
       parameters: []
       requestBody:
         content:
@@ -82,7 +82,7 @@ paths:
   /files/v3/files/import-from-url/async:
     post:
       description: Asynchronously imports the file at the given URL into the file manager.
-      operationId: post-/files/v3/files/import-from-url/async_importFromUrl
+      operationId: post-/files/v3/files/import-from-url/async
       parameters: []
       requestBody:
         content:
@@ -109,7 +109,7 @@ paths:
   /files/v3/files/import-from-url/async/tasks/{taskId}/status:
     get:
       description: Check the status of requested import.
-      operationId: get-/files/v3/files/import-from-url/async/tasks/{taskId}/status_checkImport
+      operationId: get-/files/v3/files/import-from-url/async/tasks/{taskId}/status
       parameters:
         - description: Import by URL task ID
           explode: false
@@ -141,7 +141,7 @@ paths:
   /files/v3/files/search:
     get:
       description: Search through files in the file manager. Does not display hidden or archived files.
-      operationId: get-/files/v3/files/search_doSearch
+      operationId: get-/files/v3/files/search
       parameters:
         - description: Desired file properties in the return object.
           explode: true
@@ -366,7 +366,7 @@ paths:
         - Files
   /files/v3/files/stat/{path}:
     get:
-      operationId: get-/files/v3/files/stat/{path}_getMetadata
+      operationId: get-/files/v3/files/stat/{path}
       parameters:
         - explode: false
           in: path
@@ -406,7 +406,7 @@ paths:
   /files/v3/files/{fileId}:
     delete:
       description: Delete file by ID
-      operationId: delete-/files/v3/files/{fileId}_archive
+      operationId: delete-/files/v3/files/{fileId}
       parameters:
         - description: FileId to delete
           explode: false
@@ -432,7 +432,7 @@ paths:
         - Files
     get:
       description: Get file by ID.
-      operationId: get-/files/v3/files/{fileId}_getById
+      operationId: get-/files/v3/files/{fileId}
       parameters:
         - description: ID of the desired file.
           explode: false
@@ -473,7 +473,7 @@ paths:
         - Files
     patch:
       description: Update properties of file by ID.
-      operationId: patch-/files/v3/files/{fileId}_updateProperties
+      operationId: patch-/files/v3/files/{fileId}
       parameters:
         - description: ID of file to update
           explode: false
@@ -509,7 +509,7 @@ paths:
         - Files
     put:
       description: Replace existing file data with new file data. Can be used to change image content without having to upload a new file and update all references.
-      operationId: put-/files/v3/files/{fileId}_replace
+      operationId: put-/files/v3/files/{fileId}
       parameters:
         - description: ID of the desired file.
           explode: false
@@ -555,7 +555,7 @@ paths:
   /files/v3/files/{fileId}/gdpr-delete:
     delete:
       description: GDRP delete file
-      operationId: delete-/files/v3/files/{fileId}/gdpr-delete_archiveGDPR
+      operationId: delete-/files/v3/files/{fileId}/gdpr-delete
       parameters:
         - description: ID of file to GDPR delete
           explode: false
@@ -582,7 +582,7 @@ paths:
   /files/v3/files/{fileId}/signed-url:
     get:
       description: Generates signed URL that allows temporary access to a private file.
-      operationId: get-/files/v3/files/{fileId}/signed-url_getSignedUrl
+      operationId: get-/files/v3/files/{fileId}/signed-url
       parameters:
         - description: ID of file.
           explode: false
@@ -645,7 +645,7 @@ paths:
   /files/v3/folders:
     post:
       description: Creates a folder.
-      operationId: post-/files/v3/folders_create
+      operationId: post-/files/v3/folders
       parameters: []
       requestBody:
         content:
@@ -673,7 +673,7 @@ paths:
   /files/v3/folders/search:
     get:
       description: Search for folders. Does not contain hidden or archived folders.
-      operationId: get-/files/v3/folders/search_doSearch
+      operationId: get-/files/v3/folders/search
       parameters:
         - description: Properties that should be included in the returned folders.
           explode: true
@@ -824,7 +824,7 @@ paths:
   /files/v3/folders/update/async:
     post:
       description: Update properties of folder by given ID. This action happens asynchronously and will update all of the folder's children as well.
-      operationId: post-/files/v3/folders/update/async_updateProperties
+      operationId: post-/files/v3/folders/update/async
       parameters: []
       requestBody:
         content:
@@ -852,7 +852,7 @@ paths:
   /files/v3/folders/update/async/tasks/{taskId}/status:
     get:
       description: Check status of folder update. Folder updates happen asynchronously.
-      operationId: get-/files/v3/folders/update/async/tasks/{taskId}/status_checkUpdateStatus
+      operationId: get-/files/v3/folders/update/async/tasks/{taskId}/status
       parameters:
         - description: TaskId of folder update
           explode: false
@@ -881,7 +881,7 @@ paths:
   /files/v3/folders/{folderId}:
     delete:
       description: Delete folder by ID.
-      operationId: delete-/files/v3/folders/{folderId}_archive
+      operationId: delete-/files/v3/folders/{folderId}
       parameters:
         - description: ID of folder to delete.
           explode: false
@@ -907,7 +907,7 @@ paths:
         - Folders
     get:
       description: Get folder by ID
-      operationId: get-/files/v3/folders/{folderId}_getById
+      operationId: get-/files/v3/folders/{folderId}
       parameters:
         - description: ID of desired folder
           explode: false
@@ -950,7 +950,7 @@ paths:
   /files/v3/folders/{folderPath}:
     delete:
       description: Delete folder by path.
-      operationId: delete-/files/v3/folders/{folderPath}_archiveByPath
+      operationId: delete-/files/v3/folders/{folderPath}
       parameters:
         - description: Path of folder to delete
           explode: false
@@ -976,7 +976,7 @@ paths:
         - Folders
     get:
       description: Get folder by path.
-      operationId: get-/files/v3/folders/{folderPath}_getByPath
+      operationId: get-/files/v3/folders/{folderPath}
       parameters:
         - description: Path of desired folder.
           explode: false
