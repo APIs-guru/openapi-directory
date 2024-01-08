@@ -35,6 +35,7 @@ tags:
   - name: buckets
   - name: channels
   - name: defaultObjectAccessControls
+  - name: folders
   - name: managedFolders
   - name: notifications
   - name: objectAccessControls
@@ -737,7 +738,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Maximum number of items return in a single page of responses. Maximum 1000.
+        - description: Maximum number of items to return in a single page of responses. Maximum 1000.
           in: query
           name: pageSize
           schema:
@@ -1330,6 +1331,303 @@ paths:
             - https://www.googleapis.com/auth/devstorage.full_control
       tags:
         - defaultObjectAccessControls
+  /b/{bucket}/folders:
+    get:
+      description: Retrieves a list of folders matching the criteria. Only applicable to buckets with hierarchical namespace enabled.
+      operationId: storage.folders.list
+      parameters:
+        - description: Name of the bucket in which to look for folders.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: Returns results in a directory-like mode. The only supported value is '/'. If set, items will only contain folders that either exactly match the prefix, or are one level below the prefix.
+          in: query
+          name: delimiter
+          schema:
+            type: string
+        - description: Filter results to folders whose names are lexicographically before endOffset. If startOffset is also set, the folders listed will have names between startOffset (inclusive) and endOffset (exclusive).
+          in: query
+          name: endOffset
+          schema:
+            type: string
+        - description: Maximum number of items to return in a single page of responses.
+          in: query
+          name: pageSize
+          schema:
+            minimum: 0
+            type: integer
+        - description: A previously-returned page token representing part of the larger set of results to view.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Filter results to folders whose paths begin with this prefix. If set, the value must either be an empty string or end with a '/'.
+          in: query
+          name: prefix
+          schema:
+            type: string
+        - description: Filter results to folders whose names are lexicographically equal to or after startOffset. If endOffset is also set, the folders listed will have names between startOffset (inclusive) and endOffset (exclusive).
+          in: query
+          name: startOffset
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Folders"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_only
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - folders
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Creates a new folder. Only applicable to buckets with hierarchical namespace enabled.
+      operationId: storage.folders.insert
+      parameters:
+        - description: Name of the bucket in which the folder resides.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: If true, any parent folder which doesn’t exist will be created automatically.
+          in: query
+          name: recursive
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Folder"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Folder"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - folders
+  /b/{bucket}/folders/{folder}:
+    delete:
+      description: Permanently deletes a folder. Only applicable to buckets with hierarchical namespace enabled.
+      operationId: storage.folders.delete
+      parameters:
+        - description: Name of the bucket in which the folder resides.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: Name of a folder.
+          in: path
+          name: folder
+          required: true
+          schema:
+            type: string
+        - description: If set, only deletes the folder if its metageneration matches this value.
+          in: query
+          name: ifMetagenerationMatch
+          schema:
+            type: string
+        - description: If set, only deletes the folder if its metageneration does not match this value.
+          in: query
+          name: ifMetagenerationNotMatch
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - folders
+    get:
+      description: Returns metadata for the specified folder. Only applicable to buckets with hierarchical namespace enabled.
+      operationId: storage.folders.get
+      parameters:
+        - description: Name of the bucket in which the folder resides.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: Name of a folder.
+          in: path
+          name: folder
+          required: true
+          schema:
+            type: string
+        - description: Makes the return of the folder metadata conditional on whether the folder's current metageneration matches the given value.
+          in: query
+          name: ifMetagenerationMatch
+          schema:
+            type: string
+        - description: Makes the return of the folder metadata conditional on whether the folder's current metageneration does not match the given value.
+          in: query
+          name: ifMetagenerationNotMatch
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Folder"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_only
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - folders
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+  /b/{bucket}/folders/{sourceFolder}/renameTo/folders/{destinationFolder}:
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Renames a source folder to a destination folder. Only applicable to buckets with hierarchical namespace enabled.
+      operationId: storage.folders.rename
+      parameters:
+        - description: Name of the bucket in which the folders are in.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: Name of the source folder.
+          in: path
+          name: sourceFolder
+          required: true
+          schema:
+            type: string
+        - description: Name of the destination folder.
+          in: path
+          name: destinationFolder
+          required: true
+          schema:
+            type: string
+        - description: Makes the operation conditional on whether the source object's current metageneration matches the given value.
+          in: query
+          name: ifSourceMetagenerationMatch
+          schema:
+            type: string
+        - description: Makes the operation conditional on whether the source object's current metageneration does not match the given value.
+          in: query
+          name: ifSourceMetagenerationNotMatch
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - folders
   /b/{bucket}/iam:
     get:
       description: Returns an IAM policy for the specified bucket.
@@ -1546,7 +1844,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Maximum number of items return in a single page of responses.
+        - description: Maximum number of items to return in a single page of responses.
           in: query
           name: pageSize
           schema:
@@ -4546,6 +4844,13 @@ components:
         etag:
           description: HTTP 1.1 Entity tag for the bucket.
           type: string
+        hierarchicalNamespace:
+          description: The bucket's hierarchical namespace configuration.
+          properties:
+            enabled:
+              description: When set to true, hierarchical namespace is enabled for this bucket.
+              type: boolean
+          type: object
         iamConfiguration:
           description: The bucket's IAM configuration.
           properties:
@@ -4964,6 +5269,67 @@ components:
           type: string
         title:
           description: An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
+          type: string
+      type: object
+    Folder:
+      description: A folder. Only available in buckets with hierarchical namespace enabled.
+      properties:
+        bucket:
+          description: The name of the bucket containing this folder.
+          type: string
+        id:
+          description: The ID of the folder, including the bucket name, folder name.
+          type: string
+        kind:
+          default: storage#folder
+          description: The kind of item this is. For folders, this is always storage#folder.
+          type: string
+        metadata:
+          additionalProperties:
+            description: An individual metadata entry.
+            type: string
+          description: User-provided metadata, in key/value pairs.
+          type: object
+        metageneration:
+          description: The version of the metadata for this folder. Used for preconditions and for detecting changes in metadata.
+          format: int64
+          type: string
+        name:
+          description: The name of the folder. Required if not specified by URL parameter.
+          type: string
+        pendingRenameInfo:
+          description: Only present if the folder is part of an ongoing rename folder operation. Contains information which can be used to query the operation status.
+          properties:
+            operationId:
+              description: The ID of the rename folder operation.
+              type: string
+          type: object
+        selfLink:
+          description: The link to this folder.
+          type: string
+        timeCreated:
+          description: The creation time of the folder in RFC 3339 format.
+          format: date-time
+          type: string
+        updated:
+          description: The modification time of the folder metadata in RFC 3339 format.
+          format: date-time
+          type: string
+      type: object
+    Folders:
+      description: A list of folders.
+      properties:
+        items:
+          description: The list of items.
+          items:
+            $ref: "#/components/schemas/Folder"
+          type: array
+        kind:
+          default: storage#folders
+          description: The kind of item this is. For lists of folders, this is always storage#folders.
+          type: string
+        nextPageToken:
+          description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
           type: string
       type: object
     GoogleLongrunningListOperationsResponse:

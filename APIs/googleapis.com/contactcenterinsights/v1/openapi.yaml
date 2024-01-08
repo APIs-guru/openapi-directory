@@ -1565,6 +1565,9 @@ components:
         obfuscatedUserId:
           description: Obfuscated user ID which the customer sent to us.
           type: string
+        qualityMetadata:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1ConversationQualityMetadata"
+          description: Conversation metadata related to quality management.
         runtimeAnnotations:
           description: Output only. The annotations that were generated during the customer and agent interaction.
           items:
@@ -1651,6 +1654,42 @@ components:
           type: string
         userId:
           description: A user-specified ID representing the participant.
+          type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1ConversationQualityMetadata:
+      description: Conversation metadata related to quality management.
+      properties:
+        agentInfo:
+          description: Information about agents involved in the call.
+          items:
+            $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1ConversationQualityMetadataAgentInfo"
+          type: array
+        customerSatisfactionRating:
+          description: An arbitrary integer value indicating the customer's satisfaction rating.
+          format: int32
+          type: integer
+        menuPath:
+          description: An arbitrary string value specifying the menu path the customer took.
+          type: string
+        waitDuration:
+          description: The amount of time the customer waited to connect with an agent.
+          format: google-duration
+          type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1ConversationQualityMetadataAgentInfo:
+      description: Information about an agent involved in the conversation.
+      properties:
+        agentId:
+          description: A user-specified string representing the agent.
+          type: string
+        displayName:
+          description: The agent's name.
+          type: string
+        dispositionCode:
+          description: A user-provided string indicating the outcome of the agent's segment of the call.
+          type: string
+        team:
+          description: A user-specified string representing the agent's team.
           type: string
       type: object
     GoogleCloudContactcenterinsightsV1ConversationSummarizationSuggestionData:
@@ -3148,6 +3187,9 @@ components:
         obfuscatedUserId:
           description: Obfuscated user ID which the customer sent to us.
           type: string
+        qualityMetadata:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1ConversationQualityMetadata"
+          description: Conversation metadata related to quality management.
         runtimeAnnotations:
           description: Output only. The annotations that were generated during the customer and agent interaction.
           items:
@@ -3234,6 +3276,42 @@ components:
           type: string
         userId:
           description: A user-specified ID representing the participant.
+          type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1alpha1ConversationQualityMetadata:
+      description: Conversation metadata related to quality management.
+      properties:
+        agentInfo:
+          description: Information about agents involved in the call.
+          items:
+            $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1ConversationQualityMetadataAgentInfo"
+          type: array
+        customerSatisfactionRating:
+          description: An arbitrary integer value indicating the customer's satisfaction rating.
+          format: int32
+          type: integer
+        menuPath:
+          description: An arbitrary string value specifying the menu path the customer took.
+          type: string
+        waitDuration:
+          description: The amount of time the customer waited to connect with an agent.
+          format: google-duration
+          type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1alpha1ConversationQualityMetadataAgentInfo:
+      description: Information about an agent involved in the conversation.
+      properties:
+        agentId:
+          description: A user-specified string representing the agent.
+          type: string
+        displayName:
+          description: The agent's name.
+          type: string
+        dispositionCode:
+          description: A user-provided string indicating the outcome of the agent's segment of the call.
+          type: string
+        team:
+          description: A user-specified string representing the agent's team.
           type: string
       type: object
     GoogleCloudContactcenterinsightsV1alpha1ConversationSummarizationSuggestionData:

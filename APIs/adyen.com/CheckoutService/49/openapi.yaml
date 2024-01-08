@@ -596,21 +596,12 @@ paths:
             schema:
               $ref: "#/components/schemas/PaymentLinkRequest"
       responses:
-        "200":
+        "201":
           content:
             application/json:
               examples:
                 basic:
-                  $ref: "#/components/examples/post-paymentLinks-basic-200"
-              schema:
-                $ref: "#/components/schemas/PaymentLinkResponse"
-          description: OK - the request has succeeded.
-          headers:
-            Idempotency-Key:
-              $ref: "#/components/headers/Idempotency-Key"
-        "201":
-          content:
-            application/json:
+                  $ref: "#/components/examples/post-paymentLinks-basic-201"
               schema:
                 $ref: "#/components/schemas/PaymentLinkResponse"
           description: Created - the request has succeeded.
@@ -2155,7 +2146,7 @@ components:
         shopperEmail: test@email.com
         shopperLocale: pt-BR
         shopperReference: YOUR_SHOPPER_REFERENCE
-    post-paymentLinks-basic-200:
+    post-paymentLinks-basic-201:
       summary: Payment link created
       value:
         amount:
@@ -6661,6 +6652,40 @@ components:
         - applePayToken
       title: Apple Pay
       type: object
+    ApplePayDonations:
+      additionalProperties: false
+      properties:
+        applePayToken:
+          description: The stringified and base64 encoded `paymentData` you retrieved from the Apple framework.
+          maxLength: 10000
+          type: string
+        fundingSource:
+          description: The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
+          enum:
+            - credit
+            - debit
+          type: string
+        recurringDetailReference:
+          deprecated: true
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          type: string
+          x-deprecatedInVersion: "49"
+          x-deprecatedMessage: Use `storedPaymentMethodId` instead.
+        storedPaymentMethodId:
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          maxLength: 64
+          type: string
+          x-addedInVersion: "49"
+        type:
+          default: applepay
+          description: "**applepay**"
+          enum:
+            - applepay
+          type: string
+      required:
+        - applePayToken
+      title: Apple Pay
+      type: object
     ApplePaySessionRequest:
       properties:
         displayName:
@@ -7127,8 +7152,6 @@ components:
           enum:
             - billdesk_online
             - billdesk_wallet
-            - onlinebanking_IN
-            - wallet_IN
           type: string
       required:
         - type
@@ -7414,8 +7437,10 @@ components:
           default: scheme
           description: Default payment method details. Common for scheme payment methods, and for simple payment method details.
           enum:
+            - bcmc
             - scheme
             - networkToken
+            - giftcard
             - card
           type: string
       title: Card
@@ -7460,6 +7485,85 @@ components:
           items:
             $ref: "#/components/schemas/CardBrandDetails"
           type: array
+      type: object
+    CardDonations:
+      additionalProperties: false
+      properties:
+        brand:
+          description: "Secondary brand of the card. For example: **plastix**, **hmclub**."
+          type: string
+        cupsecureplus.smscode:
+          deprecated: true
+          type: string
+        cvc:
+          description: The card verification code. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
+          type: string
+        encryptedCardNumber:
+          description: The encrypted card number.
+          maxLength: 15000
+          type: string
+        encryptedExpiryMonth:
+          description: The encrypted card expiry month.
+          maxLength: 15000
+          type: string
+        encryptedExpiryYear:
+          description: The encrypted card expiry year.
+          maxLength: 15000
+          type: string
+        encryptedSecurityCode:
+          description: The encrypted card verification code.
+          maxLength: 15000
+          type: string
+        expiryMonth:
+          description: The card expiry month. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
+          type: string
+        expiryYear:
+          description: The card expiry year. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
+          type: string
+        fundingSource:
+          description: The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
+          enum:
+            - credit
+            - debit
+          type: string
+        holderName:
+          description: The name of the card holder.
+          type: string
+        networkPaymentReference:
+          description: The network token reference. This is the [`networkTxReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_additionalData-ResponseAdditionalDataCommon-networkTxReference) from the response to the first payment.
+          type: string
+        number:
+          description: The card number. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
+          type: string
+        recurringDetailReference:
+          deprecated: true
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          type: string
+          x-deprecatedInVersion: "49"
+          x-deprecatedMessage: Use `storedPaymentMethodId` instead.
+        shopperNotificationReference:
+          description: The `shopperNotificationReference` returned in the response when you requested to notify the shopper. Used only for recurring payments in India.
+          type: string
+        storedPaymentMethodId:
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          maxLength: 64
+          type: string
+          x-addedInVersion: "49"
+        threeDS2SdkVersion:
+          description: Required for mobile integrations. Version of the 3D Secure 2 mobile SDK.
+          maxLength: 12
+          type: string
+        type:
+          default: scheme
+          description: Default payment method details. Common for scheme payment methods, and for simple payment method details.
+          enum:
+            - bcmc
+            - scheme
+            - networkToken
+            - giftcard
+            - card
+          type: string
+      title: Card
       type: object
     CellulantDetails:
       additionalProperties: false
@@ -8212,11 +8316,11 @@ components:
         paymentMethod:
           description: The type and required details of a payment method to use.
           oneOf:
-            - $ref: "#/components/schemas/ApplePayDetails"
-            - $ref: "#/components/schemas/CardDetails"
-            - $ref: "#/components/schemas/GooglePayDetails"
-            - $ref: "#/components/schemas/IdealDetails"
-            - $ref: "#/components/schemas/PayWithGoogleDetails"
+            - $ref: "#/components/schemas/ApplePayDonations"
+            - $ref: "#/components/schemas/CardDonations"
+            - $ref: "#/components/schemas/GooglePayDonations"
+            - $ref: "#/components/schemas/IdealDonations"
+            - $ref: "#/components/schemas/PayWithGoogleDonations"
         recurringExpiry:
           description: Date after which no further authorisations shall be performed. Only for 3D Secure 2.
           type: string
@@ -8571,9 +8675,17 @@ components:
         billingAddress:
           $ref: "#/components/schemas/Address"
           description: The address where to send the invoice.
+        shopperEmail:
+          description: Email address of the person.
+          type: string
         shopperName:
           $ref: "#/components/schemas/Name"
           description: The name of the person
+        telephoneNumber:
+          description: Phone number of the person
+          type: string
+        walletIdentifier:
+          type: string
       type: object
     FundRecipient:
       properties:
@@ -8701,7 +8813,67 @@ components:
         - googlePayToken
       title: Google Pay
       type: object
+    GooglePayDonations:
+      additionalProperties: false
+      properties:
+        fundingSource:
+          description: The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
+          enum:
+            - credit
+            - debit
+          type: string
+        googlePayToken:
+          description: The `token` that you obtained from the [Google Pay API](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData) `PaymentData` response.
+          type: string
+        recurringDetailReference:
+          deprecated: true
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          type: string
+          x-deprecatedInVersion: "49"
+          x-deprecatedMessage: Use `storedPaymentMethodId` instead.
+        storedPaymentMethodId:
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          maxLength: 64
+          type: string
+          x-addedInVersion: "49"
+        type:
+          default: googlepay
+          description: "**googlepay**, **paywithgoogle**"
+          enum:
+            - googlepay
+          type: string
+      required:
+        - googlePayToken
+      title: Google Pay
+      type: object
     IdealDetails:
+      additionalProperties: false
+      properties:
+        issuer:
+          description: The iDEAL issuer value of the shopper's selected bank. Set this to an **id** of an iDEAL issuer to preselect it.
+          type: string
+        recurringDetailReference:
+          deprecated: true
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          type: string
+          x-deprecatedInVersion: "49"
+          x-deprecatedMessage: Use `storedPaymentMethodId` instead.
+        storedPaymentMethodId:
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          maxLength: 64
+          type: string
+          x-addedInVersion: "49"
+        type:
+          default: ideal
+          description: "**ideal**"
+          enum:
+            - ideal
+          type: string
+      required:
+        - issuer
+      title: iDEAL
+      type: object
+    IdealDonations:
       additionalProperties: false
       properties:
         issuer:
@@ -9214,6 +9386,39 @@ components:
       title: PayU
       type: object
     PayWithGoogleDetails:
+      additionalProperties: false
+      properties:
+        fundingSource:
+          description: The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
+          enum:
+            - credit
+            - debit
+          type: string
+        googlePayToken:
+          description: The `token` that you obtained from the [Google Pay API](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData) `PaymentData` response.
+          type: string
+        recurringDetailReference:
+          deprecated: true
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          type: string
+          x-deprecatedInVersion: "49"
+          x-deprecatedMessage: Use `storedPaymentMethodId` instead.
+        storedPaymentMethodId:
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          maxLength: 64
+          type: string
+          x-addedInVersion: "49"
+        type:
+          default: paywithgoogle
+          description: "**paywithgoogle**"
+          enum:
+            - paywithgoogle
+          type: string
+      required:
+        - googlePayToken
+      title: Google Pay
+      type: object
+    PayWithGoogleDonations:
       additionalProperties: false
       properties:
         fundingSource:

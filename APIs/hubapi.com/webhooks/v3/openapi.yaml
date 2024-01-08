@@ -36,7 +36,7 @@ tags:
 paths:
   /webhooks/v3/{appId}/settings:
     delete:
-      operationId: delete-/webhooks/v3/{appId}/settings
+      operationId: delete-/webhooks/v3/{appId}/settings_clear
       parameters:
         - explode: false
           in: path
@@ -57,7 +57,7 @@ paths:
       tags:
         - Settings
     get:
-      operationId: get-/webhooks/v3/{appId}/settings
+      operationId: get-/webhooks/v3/{appId}/settings_getAll
       parameters:
         - explode: false
           in: path
@@ -81,7 +81,7 @@ paths:
       tags:
         - Settings
     put:
-      operationId: put-/webhooks/v3/{appId}/settings
+      operationId: put-/webhooks/v3/{appId}/settings_configure
       parameters:
         - explode: false
           in: path
@@ -112,7 +112,7 @@ paths:
         - Settings
   /webhooks/v3/{appId}/subscriptions:
     get:
-      operationId: get-/webhooks/v3/{appId}/subscriptions
+      operationId: get-/webhooks/v3/{appId}/subscriptions_getAll
       parameters:
         - explode: false
           in: path
@@ -136,7 +136,7 @@ paths:
       tags:
         - Subscriptions
     post:
-      operationId: post-/webhooks/v3/{appId}/subscriptions
+      operationId: post-/webhooks/v3/{appId}/subscriptions_create
       parameters:
         - explode: false
           in: path
@@ -167,7 +167,7 @@ paths:
         - Subscriptions
   /webhooks/v3/{appId}/subscriptions/batch/update:
     post:
-      operationId: post-/webhooks/v3/{appId}/subscriptions/batch/update
+      operationId: post-/webhooks/v3/{appId}/subscriptions/batch/update_updateBatch
       parameters:
         - explode: false
           in: path
@@ -204,7 +204,7 @@ paths:
         - Subscriptions
   /webhooks/v3/{appId}/subscriptions/{subscriptionId}:
     delete:
-      operationId: delete-/webhooks/v3/{appId}/subscriptions/{subscriptionId}
+      operationId: delete-/webhooks/v3/{appId}/subscriptions/{subscriptionId}_archive
       parameters:
         - explode: false
           in: path
@@ -233,7 +233,7 @@ paths:
       tags:
         - Subscriptions
     get:
-      operationId: get-/webhooks/v3/{appId}/subscriptions/{subscriptionId}
+      operationId: get-/webhooks/v3/{appId}/subscriptions/{subscriptionId}_getById
       parameters:
         - explode: false
           in: path
@@ -265,7 +265,7 @@ paths:
       tags:
         - Subscriptions
     patch:
-      operationId: patch-/webhooks/v3/{appId}/subscriptions/{subscriptionId}
+      operationId: patch-/webhooks/v3/{appId}/subscriptions/{subscriptionId}_update
       parameters:
         - explode: false
           in: path

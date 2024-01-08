@@ -810,6 +810,11 @@ components:
         serviceAccount:
           $ref: "#/components/schemas/ServiceAccount"
           description: Service account that VMs will run as.
+        tags:
+          description: Optional. Tags applied to the VM instances. The tags identify valid sources or targets for network firewalls. Each tag must be 1-63 characters long, and comply with [RFC1035](https://www.ietf.org/rfc/rfc1035.txt).
+          items:
+            type: string
+          type: array
       type: object
     AttachedDisk:
       description: A new or an existing persistent disk (PD) or a local ssd attached to a VM instance.
