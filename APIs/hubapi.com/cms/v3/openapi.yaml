@@ -1,9 +1,18 @@
 openapi: 3.0.1
 servers:
-  - url: https://api.hubapi.com/
+  - url: https://api.hubapi.com
 info:
-  title: Domains
+  title: CMS Domains
   version: v3
+  x-hubspot-api-use-case: Retrieve all currently connected domains to see which sites are live in a given account.
+  x-hubspot-documentation-banner: NONE
+  x-hubspot-introduction: Use the domain management API to return information about the domains connected to a HubSpot account. You can return data for all currently connected domains, or for a single domain by ID.
+  x-hubspot-product-tier-requirements:
+    cms: STARTER
+    marketing: PROFESSIONAL
+  x-hubspot-related-documentation:
+    - name: Domains Guide
+      url: https://hubspot.dev/guides/api/cms/domains
   x-logo:
     url: https://developers.hubspot.com/hubfs/assets/hubspot.com/buzz/HubSpotOpenGraph.png
   x-origin:
@@ -13,8 +22,7 @@ info:
   x-providerName: hubapi.com
   x-serviceName: cms
 tags:
-  - description: Operations for fetching domains
-    name: Domains
+  - name: Domains
 paths:
   /cms/v3/domains/:
     get:
@@ -338,6 +346,7 @@ components:
       properties:
         category:
           description: The error category
+          example: VALIDATION_ERROR
           type: string
         context:
           additionalProperties:
@@ -366,10 +375,12 @@ components:
           additionalProperties:
             type: string
           description: A map of link names to associated URIs containing documentation about the error or recommended remediation steps
+          example:
+            knowledge-base: https://www.hubspot.com/products/service/knowledge-base
           type: object
         message:
           description: A human readable message describing the error along with remediation steps where appropriate
-          example: An error occurred
+          example: Invalid input (details will vary based on the error)
           type: string
         subCategory:
           description: A specific category that contains more specific detail about the error
@@ -452,5 +463,9 @@ components:
 x-hubspot-available-client-libraries:
   - PHP
   - Node
-  - Python
   - Ruby
+  - Python
+x-hubspot-documentation-banner: NONE
+x-hubspot-product-tier-requirements:
+  cms: STARTER
+  marketing: PROFESSIONAL

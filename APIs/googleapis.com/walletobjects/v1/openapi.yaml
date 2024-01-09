@@ -5605,6 +5605,9 @@ components:
       type: object
     Issuer:
       properties:
+        callbackOptions:
+          $ref: "#/components/schemas/CallbackOptions"
+          description: Allows the issuer to provide their callback settings.
         contactInfo:
           $ref: "#/components/schemas/IssuerContactInfo"
           description: Issuer contact information.

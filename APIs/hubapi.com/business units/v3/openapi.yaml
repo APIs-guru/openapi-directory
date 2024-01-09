@@ -27,7 +27,7 @@ paths:
   /business-units/v3/business-units/user/{userId}:
     get:
       description: Get Business Units identified by `userId`. The `userId` refers to the user’s ID.
-      operationId: get-/business-units/v3/business-units/user/{userId}
+      operationId: get-/business-units/v3/business-units/user/{userId}_getByUserID
       parameters:
         - description: Identifier of user to retrieve.
           explode: false

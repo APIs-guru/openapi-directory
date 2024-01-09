@@ -31,6 +31,7 @@ externalDocs:
   url: https://developers.google.com/android-publisher
 tags:
   - name: applications
+  - name: apprecovery
   - name: edits
   - name: externaltransactions
   - name: generatedapks
@@ -118,6 +119,192 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - internalappsharingartifacts
+  /androidpublisher/v3/applications/{packageName}/appRecoveries:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create an app recovery action with recovery status as DRAFT. Note that this action does not execute the recovery action.
+      operationId: androidpublisher.apprecovery.create
+      parameters:
+        - description: Required. Package name of the app on which recovery action is performed.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateDraftAppRecoveryRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppRecoveryAction"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - apprecovery
+  /androidpublisher/v3/applications/{packageName}/appRecoveries/{appRecoveryId}:addTargeting:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Incrementally update targeting for a recovery action. Note that only the criteria selected during the creation of recovery action can be expanded.
+      operationId: androidpublisher.apprecovery.addTargeting
+      parameters:
+        - description: Required. Package name of the app for which recovery action is to be updated.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: Required. ID corresponding to the app recovery action.
+          in: path
+          name: appRecoveryId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddTargetingRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AddTargetingResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - apprecovery
+  /androidpublisher/v3/applications/{packageName}/appRecoveries/{appRecoveryId}:cancel:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Cancel an already executing app recovery action. Note that this action changes status of the recovery action to CANCELED.
+      operationId: androidpublisher.apprecovery.cancel
+      parameters:
+        - description: Required. Package name of the app for which recovery action cancellation is requested.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: Required. ID corresponding to the app recovery action.
+          in: path
+          name: appRecoveryId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelAppRecoveryRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CancelAppRecoveryResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - apprecovery
+  /androidpublisher/v3/applications/{packageName}/appRecoveries/{appRecoveryId}:deploy:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Deploy an already created app recovery action with recovery status DRAFT. Note that this action activates the recovery action for all targeted users and changes its status to ACTIVE.
+      operationId: androidpublisher.apprecovery.deploy
+      parameters:
+        - description: Required. Package name of the app for which recovery action is deployed.
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: Required. ID corresponding to the app recovery action to deploy.
+          in: path
+          name: appRecoveryId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeployAppRecoveryRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeployAppRecoveryResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - apprecovery
   /androidpublisher/v3/applications/{packageName}/deviceTierConfigs:
     get:
       description: Returns created device tier configs, ordered by descending creation time.
@@ -4985,6 +5172,34 @@ components:
           description: Required. The parent subscription (ID) of the offer to activate.
           type: string
       type: object
+    AddTargetingRequest:
+      description: Request message for AddTargeting.
+      properties:
+        targetingUpdate:
+          $ref: "#/components/schemas/TargetingUpdate"
+          description: Specifies targeting updates such as regions, android sdk versions etc.
+      type: object
+    AddTargetingResponse:
+      description: Response message for AddTargeting.
+      properties: {}
+      type: object
+    AllUsers:
+      description: Object representation to describe all set of users.
+      properties:
+        isAllUsersRequested:
+          description: Required. Set to true if all set of users are needed.
+          type: boolean
+      type: object
+    AndroidSdks:
+      description: Android api level targeting data for app recovery action targeting.
+      properties:
+        sdkLevels:
+          description: Android api levels of devices targeted by recovery action. See https://developer.android.com/guide/topics/manifest/uses-sdk-element#ApiLevels for different api levels in android.
+          items:
+            format: int64
+            type: string
+          type: array
+      type: object
     Apk:
       description: Information about an APK. The resource for ApksService.
       properties:
@@ -5114,6 +5329,66 @@ components:
         id:
           description: Output only. Identifier of the edit. Can be used in subsequent API calls.
           readOnly: true
+          type: string
+      type: object
+    AppRecoveryAction:
+      description: Information about an app recovery action.
+      properties:
+        appRecoveryId:
+          description: ID corresponding to the app recovery action.
+          format: int64
+          type: string
+        cancelTime:
+          description: Timestamp of when the app recovery action is canceled by the developer. Only set if the recovery action has been canceled.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Timestamp of when the app recovery action is created by the developer. It is always set after creation of the recovery action.
+          format: google-datetime
+          type: string
+        deployTime:
+          description: Timestamp of when the app recovery action is deployed to the users. Only set if the recovery action has been deployed.
+          format: google-datetime
+          type: string
+        lastUpdateTime:
+          description: Timestamp of when the developer last updated recovery action. In case the action is cancelled, it corresponds to cancellation time. It is always set after creation of the recovery action.
+          format: google-datetime
+          type: string
+        remoteInAppUpdateData:
+          $ref: "#/components/schemas/RemoteInAppUpdateData"
+          description: Data about the remote in-app update action such as such as recovered user base, recoverable user base etc. Set only if the recovery action type is Remote In-App Update.
+        status:
+          description: The status of the recovery action.
+          enum:
+            - RECOVERY_STATUS_UNSPECIFIED
+            - RECOVERY_STATUS_ACTIVE
+            - RECOVERY_STATUS_CANCELED
+            - RECOVERY_STATUS_DRAFT
+          type: string
+        targeting:
+          $ref: "#/components/schemas/Targeting"
+          description: Specifies targeting criteria for the recovery action such as regions, android sdk versions, app versions etc.
+      type: object
+    AppVersionList:
+      description: Data format for a list of app versions. Only one app version is supported for now.
+      properties:
+        versionCodes:
+          description: List of app version codes.
+          items:
+            format: int64
+            type: string
+          type: array
+      type: object
+    AppVersionRange:
+      description: Data format for a continuous range of app versions.
+      properties:
+        versionCodeEnd:
+          description: Highest app version in the range, inclusive.
+          format: int64
+          type: string
+        versionCodeStart:
+          description: Lowest app version in the range, inclusive.
+          format: int64
           type: string
       type: object
     ArchiveSubscriptionRequest:
@@ -5364,6 +5639,14 @@ components:
           description: The kind of this response ("androidpublisher#bundlesListResponse").
           type: string
       type: object
+    CancelAppRecoveryRequest:
+      description: Request message for CancelAppRecovery.
+      properties: {}
+      type: object
+    CancelAppRecoveryResponse:
+      description: Response message for CancelAppRecovery.
+      properties: {}
+      type: object
     CancelSurveyResult:
       description: Result of the cancel survey when the subscription was canceled by the user.
       properties:
@@ -5461,6 +5744,16 @@ components:
           description: Include "rest of world" as well as explicitly targeted countries.
           type: boolean
       type: object
+    CreateDraftAppRecoveryRequest:
+      description: Request message for CreateDraftAppRecovery.
+      properties:
+        remoteInAppUpdate:
+          $ref: "#/components/schemas/RemoteInAppUpdate"
+          description: Action type is remote in-app update. As a consequence of this action, a downloadable recovery module is also created for testing purposes.
+        targeting:
+          $ref: "#/components/schemas/Targeting"
+          description: Specifies targeting criteria for the recovery action such as regions, android sdk versions, app versions etc.
+      type: object
     DeactivateBasePlanRequest:
       description: Request message for DeactivateBasePlan.
       properties:
@@ -5528,6 +5821,14 @@ components:
         deobfuscationFile:
           $ref: "#/components/schemas/DeobfuscationFile"
           description: The uploaded Deobfuscation File configuration.
+      type: object
+    DeployAppRecoveryRequest:
+      description: Request message for DeployAppRecovery.
+      properties: {}
+      type: object
+    DeployAppRecoveryResponse:
+      description: Response message for DeployAppRecovery.
+      properties: {}
       type: object
     DeveloperComment:
       description: Developer entry from conversation between user and developer.
@@ -5924,6 +6225,11 @@ components:
           items:
             $ref: "#/components/schemas/GeneratedAssetPackSlice"
           type: array
+        generatedRecoveryModules:
+          description: Generated recovery apks for recovery actions signed with a key corresponding to certificate_sha256_hash. This includes all generated recovery APKs, also those in draft or cancelled state. This field is not set if no recovery actions were created for this signing key.
+          items:
+            $ref: "#/components/schemas/GeneratedRecoveryApk"
+          type: array
         generatedSplitApks:
           description: List of generated split APKs, signed with a key corresponding to certificate_sha256_hash.
           items:
@@ -5956,6 +6262,28 @@ components:
         version:
           description: Asset module version.
           format: int64
+          type: string
+      type: object
+    GeneratedRecoveryApk:
+      description: Download metadata for an app recovery module.
+      properties:
+        downloadId:
+          description: Download ID, which uniquely identifies the APK to download. Should be supplied to `generatedapks.download` method.
+          type: string
+        moduleName:
+          description: Name of the module which recovery apk belongs to.
+          type: string
+        recoveryId:
+          description: ID of the recovery action.
+          format: int64
+          type: string
+        recoveryStatus:
+          description: The status of the recovery action corresponding to the recovery apk.
+          enum:
+            - RECOVERY_STATUS_UNSPECIFIED
+            - RECOVERY_STATUS_ACTIVE
+            - RECOVERY_STATUS_CANCELED
+            - RECOVERY_STATUS_DRAFT
           type: string
       type: object
     GeneratedSplitApk:
@@ -6306,6 +6634,15 @@ components:
           description: "ISO-639: 2 or 3 letter language code."
           items:
             type: string
+          type: array
+      type: object
+    ListAppRecoveriesResponse:
+      description: "Response message for ListAppRecoveries. -- api-linter: core::0158::response-next-page-token-field=disabled"
+      properties:
+        recoveryActions:
+          description: List of recovery actions associated with the requested package name.
+          items:
+            $ref: "#/components/schemas/AppRecoveryAction"
           type: array
       type: object
     ListDeviceTierConfigsResponse:
@@ -6848,11 +7185,52 @@ components:
             - TAX_TIER_LIVE_OR_BROADCAST_1
           type: string
       type: object
+    Regions:
+      description: Region targeting data for app recovery action targeting.
+      properties:
+        regionCode:
+          description: Regions targeted by the recovery action. Region codes are ISO 3166 Alpha-2 country codes. For example, US stands for United States of America. See https://www.iso.org/iso-3166-country-codes.html for the complete list of country codes.
+          items:
+            type: string
+          type: array
+      type: object
     RegionsVersion:
       description: The version of the available regions being used for the specified resource.
       properties:
         version:
           description: Required. A string representing the version of available regions being used for the specified resource. Regional prices for the resource have to be specified according to the information published in [this article](https://support.google.com/googleplay/android-developer/answer/10532353). Each time the supported locations substantially change, the version will be incremented. Using this field will ensure that creating and updating the resource with an older region's version and set of regional prices and currencies will succeed even though a new version is available. The latest version is 2022/02.
+          type: string
+      type: object
+    RemoteInAppUpdate:
+      description: Object representation for Remote in-app update action type.
+      properties:
+        isRemoteInAppUpdateRequested:
+          description: Required. Set to true if Remote In-App Update action type is needed.
+          type: boolean
+      type: object
+    RemoteInAppUpdateData:
+      description: Data related to Remote In-App Update action such as recovered user count, affected user count etc.
+      properties:
+        remoteAppUpdateDataPerBundle:
+          description: Data related to the recovery action at bundle level.
+          items:
+            $ref: "#/components/schemas/RemoteInAppUpdateDataPerBundle"
+          type: array
+      type: object
+    RemoteInAppUpdateDataPerBundle:
+      description: Data related to the recovery action at bundle level.
+      properties:
+        recoveredDeviceCount:
+          description: Total number of devices which have been rescued.
+          format: int64
+          type: string
+        totalDeviceCount:
+          description: Total number of devices affected by this recovery action associated with bundle of the app.
+          format: int64
+          type: string
+        versionCode:
+          description: Version Code corresponding to the target bundle.
+          format: int64
           type: string
       type: object
     ReplacementCancellation:
@@ -7462,6 +7840,25 @@ components:
       description: Information specific to cancellations initiated by Google system.
       properties: {}
       type: object
+    Targeting:
+      description: Targeting details for a recovery action such as regions, android sdk levels, app versions etc.
+      properties:
+        allUsers:
+          $ref: "#/components/schemas/AllUsers"
+          description: All users are targeted.
+        androidSdks:
+          $ref: "#/components/schemas/AndroidSdks"
+          description: Targeting is based on android api levels of devices.
+        regions:
+          $ref: "#/components/schemas/Regions"
+          description: Targeting is based on the user account region.
+        versionList:
+          $ref: "#/components/schemas/AppVersionList"
+          description: Target version codes as a list.
+        versionRange:
+          $ref: "#/components/schemas/AppVersionRange"
+          description: Target version codes as a range.
+      type: object
     TargetingInfo:
       description: Targeting information about the generated apks.
       properties:
@@ -7485,6 +7882,19 @@ components:
         specificSubscriptionInApp:
           description: The scope of the current targeting rule is the subscription with the specified subscription ID. Must be a subscription within the same parent app.
           type: string
+      type: object
+    TargetingUpdate:
+      description: Update type for targeting. Note it is always a subset Targeting.
+      properties:
+        allUsers:
+          $ref: "#/components/schemas/AllUsers"
+          description: All users are targeted.
+        androidSdks:
+          $ref: "#/components/schemas/AndroidSdks"
+          description: Additional android sdk levels are targeted by the recovery action.
+        regions:
+          $ref: "#/components/schemas/Regions"
+          description: Additional regions are targeted by the recovery action.
       type: object
     TestPurchase:
       description: Whether this subscription purchase is a test purchase.
