@@ -321,6 +321,12 @@ paths:
           schema:
             type: string
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadAndroidAppResponse"
+          description: OK - the request has succeeded.
         "400":
           content:
             application/json:
@@ -16901,8 +16907,12 @@ components:
           description: The brightness of the display when the terminal is being used, expressed as a percentage.
           format: int32
           type: integer
+        resetTotalsHour:
+          description: "The hour of the day when the terminal is set to reset the Totals report. By default, the reset hour is at 6:00 AM in the timezone of the terminal. Minimum value: 0, maximum value: 23."
+          format: int32
+          type: integer
         restartHour:
-          description: "The hour of the day when the terminal is set to reboot to apply the configuration and software updates. By default, the restart hour is at 6:00 AM in the timezone of the terminal Minimum vaoue: 0, maximum value: 23."
+          description: "The hour of the day when the terminal is set to reboot to apply the configuration and software updates. By default, the restart hour is at 6:00 AM in the timezone of the terminal. Minimum value: 0, maximum value: 23."
           format: int32
           type: integer
       type: object
@@ -17224,6 +17234,9 @@ components:
       properties:
         language:
           description: Language of the terminal.
+          type: string
+        secondaryLanguage:
+          description: Secondary language of the terminal.
           type: string
       type: object
     Logo:
@@ -18143,6 +18156,9 @@ components:
           description: The receipt logo converted to a Base64-encoded string. The image must be a .bmp file of < 256 KB, dimensions 240 (H) x 384 (W) px.
           maxLength: 350000
           type: string
+        promptBeforePrinting:
+          description: Indicates whether a screen appears asking if you want to print the shopper receipt.
+          type: boolean
         qrCodeData:
           description: |-
             Data to print on the receipt as a QR code. This can include static text and the following variables:
@@ -18843,7 +18859,7 @@ components:
     TapToPay:
       properties:
         merchantDisplayName:
-          description: Platform merchants can customize the text that appears on the TapToPay screen during a transaction
+          description: The text shown on the screen during the Tap to Pay transaction.
           type: string
       type: object
     Terminal:
@@ -19179,7 +19195,7 @@ components:
           description: Settings for payment [surcharge](https://docs.adyen.com/point-of-sale/surcharge) features.
         tapToPay:
           $ref: "#/components/schemas/TapToPay"
-          description: Settings for apple tap to pay.
+          description: Settings for Tap to Pay.
         timeouts:
           $ref: "#/components/schemas/Timeouts"
           description: Settings for device [time-outs](https://docs.adyen.com/point-of-sale/pos-timeouts#device-time-out).

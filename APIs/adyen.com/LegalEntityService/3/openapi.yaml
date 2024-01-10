@@ -1212,7 +1212,7 @@ paths:
       description: Signs the required PCI questionnaire.
       operationId: post-legalEntities-id-pciQuestionnaires-signPciTemplates
       parameters:
-        - description: The legal entity ID of the individual who signed the PCI questionnaire.
+        - description: The legal entity ID of the user that has a contractual relationship with your platform.
           in: path
           name: id
           required: true
@@ -3233,7 +3233,7 @@ components:
           readOnly: true
           type: string
         industryCode:
-          description: A code that represents the industry of the legal entity. For example, **4431A** for computer software stores.
+          description: A code that represents the [industry of the legal entity](https://docs.adyen.com/marketplaces-and-platforms/verification-requirements/reference-additional-products/#list-industry-codes). For example, **4431A** for computer software stores.
           type: string
         legalEntityId:
           description: Unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id) that owns the business line.
@@ -3302,7 +3302,7 @@ components:
           x-deprecatedInVersion: "3"
           x-deprecatedMessage: Use `service` instead.
         industryCode:
-          description: A code that represents the industry of the legal entity. For example, **4431A** for computer software stores.
+          description: A code that represents the [industry of the legal entity](https://docs.adyen.com/marketplaces-and-platforms/verification-requirements/reference-additional-products/#list-industry-codes). For example, **4431A** for computer software stores.
           type: string
         legalEntityId:
           description: Unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities__resParam_id) that owns the business line.
@@ -4100,7 +4100,6 @@ components:
         verificationPlan:
           description: A key-value pair that specifies the [verification process](https://docs.adyen.com/marketplaces-and-platforms/collect-verification-details/) for a legal entity. Set to **upfront** for [upfront verification](https://docs.adyen.com/marketplaces-and-platforms/collect-verification-details#upfront).
           type: string
-          x-addedInVersion: "3"
       required:
         - id
       type: object
@@ -4287,7 +4286,6 @@ components:
         verificationPlan:
           description: A key-value pair that specifies the [verification process](https://docs.adyen.com/marketplaces-and-platforms/collect-verification-details/) for a legal entity. Set to **upfront** for [upfront verification](https://docs.adyen.com/marketplaces-and-platforms/collect-verification-details#upfront).
           type: string
-          x-addedInVersion: "3"
       type: object
     LegalEntityInfoRequiredType:
       properties:
@@ -4339,7 +4337,6 @@ components:
         verificationPlan:
           description: A key-value pair that specifies the [verification process](https://docs.adyen.com/marketplaces-and-platforms/collect-verification-details/) for a legal entity. Set to **upfront** for [upfront verification](https://docs.adyen.com/marketplaces-and-platforms/collect-verification-details#upfront).
           type: string
-          x-addedInVersion: "3"
       required:
         - type
       type: object
@@ -5234,10 +5231,26 @@ components:
           type: array
           x-addedInVersion: "2"
         type:
-          description: |-
-            Type of Partnership. Possible values:
+          description: |+
+            Type of Partnership.
 
-            **limitedPartnership**, **generalPartnership**, **familyPartnership**, **commercialPartnership**, **publicPartnership**, **otherPartnership**, **gbr**, **kgaa**, **cv**, **vof**, **maatschap**, **privateFundLimitedPartnership**, **businessTrustEntity**, or **businessPartnership**.
+            Possible values:
+            *  **limitedPartnership**
+            *  **generalPartnership**
+            *  **familyPartnership**
+            *  **commercialPartnership**
+            *  **publicPartnership**
+            *  **otherPartnership**
+            *  **gbr**
+            *  **gmbh**
+            *  **kgaa**
+            *  **cv**
+            *  **vof**
+            *  **maatschap**
+            *  **privateFundLimitedPartnership**
+            *  **businessTrustEntity**
+            *  **businessPartnership**
+
           enum:
             - limitedPartnership
             - generalPartnership

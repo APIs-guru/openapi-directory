@@ -608,6 +608,90 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1beta/{parent}/suggestionDenyListEntries:import:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Imports all SuggestionDenyListEntry for a DataStore.
+      operationId: discoveryengine.projects.locations.dataStores.suggestionDenyListEntries.import
+      parameters:
+        - description: Required. The parent data store resource name for which to import denylist entries. Follows pattern projects/*/locations/*/collections/*/dataStores/*.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1beta/{parent}/suggestionDenyListEntries:purge:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Permanently deletes all SuggestionDenyListEntry for a DataStore.
+      operationId: discoveryengine.projects.locations.dataStores.suggestionDenyListEntries.purge
+      parameters:
+        - description: Required. The parent data store resource name for which to import denylist entries. Follows pattern projects/*/locations/*/collections/*/dataStores/*.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaPurgeSuggestionDenyListEntriesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1beta/{parent}/userEvents:collect:
     get:
       description: Writes a single user event from the browser. This uses a GET request to due to browser restriction of POST-ing to a third-party domain. This method is used only by the Discovery Engine API JavaScript pixel and Google Tag Manager. Users should not call this method directly.
@@ -761,7 +845,7 @@ paths:
       description: Makes a recommendation, which requires a contextual user event.
       operationId: discoveryengine.projects.locations.dataStores.servingConfigs.recommend
       parameters:
-        - description: "Required. Full resource name of a ServingConfig: `projects/*/locations/global/collections/*/engines/*/servingConfigs/*`, or `projects/*/locations/global/collections/*/dataStores/*/servingConfigs/*` One default serving config is created along with your recommendation engine creation. The engine ID will be used as the ID of the default serving config. For example, for Engine `projects/*/locations/global/collections/*/engines/my-engine`, you can use `projects/*/locations/global/collections/*/engines/my-engine/servingConfigs/my-engine` for your Recommend requests."
+        - description: "Required. Full resource name of a ServingConfig: `projects/*/locations/global/collections/*/engines/*/servingConfigs/*`, or `projects/*/locations/global/collections/*/dataStores/*/servingConfigs/*` One default serving config is created along with your recommendation engine creation. The engine ID will be used as the ID of the default serving config. For example, for Engine `projects/*/locations/global/collections/*/engines/my-engine`, you can use `projects/*/locations/global/collections/*/engines/my-engine/servingConfigs/my-engine` for your RecommendationService.Recommend requests."
           in: path
           name: servingConfig
           required: true
@@ -1065,6 +1149,35 @@ components:
           description: Cloud Storage prefix for import errors. This must be an empty, existing Cloud Storage directory. Import errors are written to sharded files in this directory, one per line, as a JSON-encoded `google.rpc.Status` message.
           type: string
       type: object
+    GoogleCloudDiscoveryengineV1ImportSuggestionDenyListEntriesMetadata:
+      description: Metadata related to the progress of the ImportSuggestionDenyListEntries operation. This is returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1ImportSuggestionDenyListEntriesResponse:
+      description: Response message for CompletionService.ImportSuggestionDenyListEntries method.
+      properties:
+        errorSamples:
+          description: A sample of errors encountered while processing the request.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+        failedEntriesCount:
+          description: Count of deny list entries that failed to be imported.
+          format: int64
+          type: string
+        importedEntriesCount:
+          description: Count of deny list entries successfully imported.
+          format: int64
+          type: string
+      type: object
     GoogleCloudDiscoveryengineV1ImportUserEventsMetadata:
       description: Metadata related to the progress of the Import operation. This is returned by the google.longrunning.Operation.metadata field.
       properties:
@@ -1138,6 +1251,31 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudDiscoveryengineV1PurgeSuggestionDenyListEntriesMetadata:
+      description: Metadata related to the progress of the PurgeSuggestionDenyListEntries operation. This is returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1PurgeSuggestionDenyListEntriesResponse:
+      description: Response message for CompletionService.PurgeSuggestionDenyListEntries method.
+      properties:
+        errorSamples:
+          description: A sample of errors encountered while processing the request.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+        purgeCount:
+          description: Number of suggestion deny list entries purged.
+          format: int64
+          type: string
+      type: object
     GoogleCloudDiscoveryengineV1Schema:
       description: Defines the structure and layout of a type of document data.
       properties:
@@ -1166,7 +1304,7 @@ components:
           type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSiteMetadata:
-      description: Metadata related to the progress of the SiteSearchEngineService.BatchCreateTargetSite operation. This will be returned by the google.longrunning.Operation.metadata field.
+      description: Metadata related to the progress of the SiteSearchEngineService.BatchCreateTargetSites operation. This will be returned by the google.longrunning.Operation.metadata field.
       properties:
         createTime:
           description: Operation create time.
@@ -1439,7 +1577,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaEngineChatEngineConfigAgentCreationConfig"
           description: The configurationt generate the Dialogflow agent that is associated to this Engine. Note that these configurations are one-time consumed by and passed to Dialogflow service. It means they cannot be retrieved using EngineService.GetEngine or EngineService.ListEngines API after engine creation.
         dialogflowAgentToLink:
-          description: "The resource name of an exist Dialogflow agent to link to this Chat Engine. Customers can either provide `agent_creation_config` to create agent or provide an agent name that links the agent with the Chat engine. Format: `projects//locations//agents/`. Note that the `dialogflow_agent_to_link` are one-time consumed by and passed to Dialogflow service. It means they cannot be retrieved using EngineService.GetEngine or EngineService.ListEngines API after engine creation. Please use chat_engine_metadata.dialogflow_agent for actual agent association after Engine is created."
+          description: "The resource name of an exist Dialogflow agent to link to this Chat Engine. Customers can either provide `agent_creation_config` to create agent or provide an agent name that links the agent with the Chat engine. Format: `projects//locations//agents/`. Note that the `dialogflow_agent_to_link` are one-time consumed by and passed to Dialogflow service. It means they cannot be retrieved using EngineService.GetEngine or EngineService.ListEngines API after engine creation. Please use ChatEngineMetadata.dialogflow_agent for actual agent association after Engine is created."
           type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaEngineChatEngineConfigAgentCreationConfig:
@@ -1450,6 +1588,9 @@ components:
           type: string
         defaultLanguageCode:
           description: Required. The default language of the agent as a language tag. See [Language Support](https://cloud.google.com/dialogflow/docs/reference/language) for a list of the currently supported language codes.
+          type: string
+        location:
+          description: "Agent location for Agent creation, supported values: global/us/eu. If not provided, us Engine will create Agent using us-central-1 by default; eu Engine will create Agent using eu-west-1 by default."
           type: string
         timeZone:
           description: Required. The time zone of the agent from the [time zone database](https://www.iana.org/time-zones), e.g., America/New_York, Europe/Paris.
@@ -1677,6 +1818,35 @@ components:
           description: Cloud Storage prefix for import errors. This must be an empty, existing Cloud Storage directory. Import errors are written to sharded files in this directory, one per line, as a JSON-encoded `google.rpc.Status` message.
           type: string
       type: object
+    GoogleCloudDiscoveryengineV1alphaImportSuggestionDenyListEntriesMetadata:
+      description: Metadata related to the progress of the ImportSuggestionDenyListEntries operation. This is returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaImportSuggestionDenyListEntriesResponse:
+      description: Response message for CompletionService.ImportSuggestionDenyListEntries method.
+      properties:
+        errorSamples:
+          description: A sample of errors encountered while processing the request.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+        failedEntriesCount:
+          description: Count of deny list entries that failed to be imported.
+          format: int64
+          type: string
+        importedEntriesCount:
+          description: Count of deny list entries successfully imported.
+          format: int64
+          type: string
+      type: object
     GoogleCloudDiscoveryengineV1alphaImportUserEventsMetadata:
       description: Metadata related to the progress of the Import operation. This is returned by the google.longrunning.Operation.metadata field.
       properties:
@@ -1721,7 +1891,7 @@ components:
       description: The OCR options for parsing documents.
       properties:
         enabled:
-          description: Required. If OCR is enabled or not. OCR must be enabled for other OcrConfig options to apply.
+          description: Required. If OCR is enabled or not. OCR must be enabled for other OcrConfig options to apply. We will only perform OCR on the first 80 pages of the PDF files.
           type: boolean
         enhancedDocumentElements:
           description: "Apply additional enhanced OCR processing to a list of document elements. Supported values: * `table`: advanced table parsing model."
@@ -1764,6 +1934,31 @@ components:
           items:
             type: string
           type: array
+      type: object
+    GoogleCloudDiscoveryengineV1alphaPurgeSuggestionDenyListEntriesMetadata:
+      description: Metadata related to the progress of the PurgeSuggestionDenyListEntries operation. This is returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaPurgeSuggestionDenyListEntriesResponse:
+      description: Response message for CompletionService.PurgeSuggestionDenyListEntries method.
+      properties:
+        errorSamples:
+          description: A sample of errors encountered while processing the request.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+        purgeCount:
+          description: Number of suggestion deny list entries purged.
+          format: int64
+          type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaPurgeUserEventsMetadata:
       description: Metadata related to the progress of the PurgeUserEvents operation. This will be returned by the google.longrunning.Operation.metadata field.
@@ -2269,7 +2464,7 @@ components:
           format: byte
           type: string
         uri:
-          description: The URI of the content. Only Cloud Storage URIs (e.g. `gs://bucket-name/path/to/file`) are supported. The maximum file size is 100 MB.
+          description: The URI of the content. Only Cloud Storage URIs (e.g. `gs://bucket-name/path/to/file`) are supported. The maximum file size is 2.5 MB for text-based formats, 100 MB for other formats.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1betaDocumentInfo:
@@ -2391,6 +2586,54 @@ components:
       properties:
         gcsPrefix:
           description: Cloud Storage prefix for import errors. This must be an empty, existing Cloud Storage directory. Import errors are written to sharded files in this directory, one per line, as a JSON-encoded `google.rpc.Status` message.
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesMetadata:
+      description: Metadata related to the progress of the ImportSuggestionDenyListEntries operation. This is returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesRequest:
+      description: Request message for CompletionService.ImportSuggestionDenyListEntries method.
+      properties:
+        gcsSource:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaGcsSource"
+          description: "Cloud Storage location for the input content. Only 1 file can be specified that contains all entries to import. Supported values `gcs_source.schema` for autocomplete suggestion deny list entry imports: * `suggestion_deny_list` (default): One JSON [SuggestionDenyListEntry] per line."
+        inlineSource:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesRequestInlineSource"
+          description: The Inline source for the input content for suggestion deny list entries.
+      type: object
+    GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesRequestInlineSource:
+      description: The inline source for SuggestionDenyListEntry.
+      properties:
+        entries:
+          description: Required. A list of all denylist entries to import. Max of 1000 items.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaSuggestionDenyListEntry"
+          type: array
+      type: object
+    GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesResponse:
+      description: Response message for CompletionService.ImportSuggestionDenyListEntries method.
+      properties:
+        errorSamples:
+          description: A sample of errors encountered while processing the request.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+        failedEntriesCount:
+          description: Count of deny list entries that failed to be imported.
+          format: int64
+          type: string
+        importedEntriesCount:
+          description: Count of deny list entries successfully imported.
+          format: int64
           type: string
       type: object
     GoogleCloudDiscoveryengineV1betaImportUserEventsMetadata:
@@ -2603,6 +2846,35 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudDiscoveryengineV1betaPurgeSuggestionDenyListEntriesMetadata:
+      description: Metadata related to the progress of the PurgeSuggestionDenyListEntries operation. This is returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1betaPurgeSuggestionDenyListEntriesRequest:
+      description: Request message for CompletionService.PurgeSuggestionDenyListEntries method.
+      properties: {}
+      type: object
+    GoogleCloudDiscoveryengineV1betaPurgeSuggestionDenyListEntriesResponse:
+      description: Response message for CompletionService.PurgeSuggestionDenyListEntries method.
+      properties:
+        errorSamples:
+          description: A sample of errors encountered while processing the request.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+        purgeCount:
+          description: Number of suggestion deny list entries purged.
+          format: int64
+          type: string
+      type: object
     GoogleCloudDiscoveryengineV1betaRecommendRequest:
       description: Request message for Recommend method.
       properties:
@@ -2745,7 +3017,7 @@ components:
           description: A specification for configuring the behavior of content search.
         embeddingSpec:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaSearchRequestEmbeddingSpec"
-          description: Uses the provided embedding to do additional semantic document retrieval. The retrieval is based on the dot product of SearchRequest.embedding_spec.embedding_vectors.vector and the document embedding that is provided in SearchRequest.embedding_spec.embedding_vectors.field_path. If SearchRequest.embedding_spec.embedding_vectors.field_path is not provided, it will use ServingConfig.embedding_config.field_paths.
+          description: Uses the provided embedding to do additional semantic document retrieval. The retrieval is based on the dot product of SearchRequest.EmbeddingSpec.EmbeddingVector.vector and the document embedding that is provided in SearchRequest.EmbeddingSpec.EmbeddingVector.field_path. If SearchRequest.EmbeddingSpec.EmbeddingVector.field_path is not provided, it will use ServingConfig.EmbeddingConfig.field_paths.
         facetSpecs:
           description: Facet specifications for faceted search. If empty, no facets are returned. A maximum of 100 values are allowed. Otherwise, an `INVALID_ARGUMENT` error is returned.
           items:
@@ -2839,7 +3111,7 @@ components:
       description: A specification for configuring the extractive content in a search response.
       properties:
         maxExtractiveAnswerCount:
-          description: The maximum number of extractive answers returned in each search result. An extractive answer is a verbatim answer extracted from the original document, which provides a precise and contextually relevant answer to the search query. If the number of matching answers is less than the `max_extractive_answer_count`, return all of the answers. Otherwise, return the `max_extractive_answer_count`. At most one answer is returned for each SearchResult.
+          description: The maximum number of extractive answers returned in each search result. An extractive answer is a verbatim answer extracted from the original document, which provides a precise and contextually relevant answer to the search query. If the number of matching answers is less than the `max_extractive_answer_count`, return all of the answers. Otherwise, return the `max_extractive_answer_count`. At most five answers are returned for each SearchResult.
           format: int32
           type: integer
         maxExtractiveSegmentCount:
@@ -2908,7 +3180,7 @@ components:
       description: Specification of the model.
       properties:
         version:
-          description: The string format of the model version. e.g. stable, preview, etc.
+          description: "The model version used to generate the summary. Supported values are: * `stable`: string. Default value when no value is specified. Uses a generally available, fine-tuned version of the text-bison@001 model. * `preview`: string. (Public preview) Uses a fine-tuned version of the text-bison@002 model. This model works only for summaries in English."
           type: string
       type: object
     GoogleCloudDiscoveryengineV1betaSearchRequestEmbeddingSpec:
@@ -3222,7 +3494,7 @@ components:
           description: Title of the document.
           type: string
         uri:
-          description: GCS or HTTP uri for the document.
+          description: Cloud Storage or HTTP uri for the document.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1betaSearchResponseSummarySafetyAttributes:
@@ -3253,6 +3525,20 @@ components:
           type: array
         summary:
           description: Summary text with no citation information.
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1betaSuggestionDenyListEntry:
+      description: Suggestion deny list entry identifying the phrase to block from suggestions and the applied operation for the phrase.
+      properties:
+        blockPhrase:
+          description: Required. Phrase to block from suggestions served. Can be maximum 125 characters.
+          type: string
+        matchOperator:
+          description: Required. The match operator to apply for this phrase. Whether to block the exact phrase, or block any suggestions containing this phrase.
+          enum:
+            - MATCH_OPERATOR_UNSPECIFIED
+            - EXACT_MATCH
+            - CONTAINS
           type: string
       type: object
     GoogleCloudDiscoveryengineV1betaTextInput:
@@ -3333,7 +3619,7 @@ components:
           description: "Required. User event type. Allowed values are: Generic values: * `search`: Search for Documents. * `view-item`: Detailed page view of a Document. * `view-item-list`: View of a panel or ordered list of Documents. * `view-home-page`: View of the home page. * `view-category-page`: View of a category page, e.g. Home > Men > Jeans Retail-related values: * `add-to-cart`: Add an item(s) to cart, e.g. in Retail online shopping * `purchase`: Purchase an item(s) Media-related values: * `media-play`: Start/resume watching a video, playing a song, etc. * `media-complete`: Finished or stopped midway through a video, song, etc."
           type: string
         filter:
-          description: The filter syntax consists of an expression language for constructing a predicate from one or more fields of the documents being filtered. One example is for `search` events, the associated SearchRequest may contain a filter expression in SearchRequest.filter conforming to https://google.aip.dev/160#filtering. Similarly, for `view-item-list` events that are generated from a RecommendationService.RecommendRequest, this field may be populated directly from RecommendationService.RecommendRequest.filter conforming to https://google.aip.dev/160#filtering. The value must be a UTF-8 encoded string with a length limit of 1,000 characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
+          description: The filter syntax consists of an expression language for constructing a predicate from one or more fields of the documents being filtered. One example is for `search` events, the associated SearchRequest may contain a filter expression in SearchRequest.filter conforming to https://google.aip.dev/160#filtering. Similarly, for `view-item-list` events that are generated from a RecommendRequest, this field may be populated directly from RecommendRequest.filter conforming to https://google.aip.dev/160#filtering. The value must be a UTF-8 encoded string with a length limit of 1,000 characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
           type: string
         mediaInfo:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaMediaInfo"

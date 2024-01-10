@@ -1851,6 +1851,14 @@ components:
           description: Schema name.
           type: string
       type: object
+    OracleScnPosition:
+      description: Oracle SCN position
+      properties:
+        scn:
+          description: Required. SCN number from where Logs will be read
+          format: int64
+          type: string
+      type: object
     OracleSourceConfig:
       description: Oracle data source configuration
       properties:
@@ -2153,6 +2161,9 @@ components:
         mysqlLogPosition:
           $ref: "#/components/schemas/MysqlLogPosition"
           description: MySQL specific log position to start replicating from.
+        oracleScnPosition:
+          $ref: "#/components/schemas/OracleScnPosition"
+          description: Oracle specific log position to start replicating from.
       type: object
     StartBackfillJobRequest:
       description: Request for manually initiating a backfill job for a specific stream object.
