@@ -1852,14 +1852,6 @@ components:
         machinePreferences:
           $ref: "#/components/schemas/MachinePreferences"
           description: Preferences concerning the machine types to consider on Compute Engine.
-        persistentDiskType:
-          description: Persistent disk type to use. If unspecified (default), all types are considered, based on available usage data.
-          enum:
-            - PERSISTENT_DISK_TYPE_UNSPECIFIED
-            - PERSISTENT_DISK_TYPE_STANDARD
-            - PERSISTENT_DISK_TYPE_BALANCED
-            - PERSISTENT_DISK_TYPE_SSD
-          type: string
       type: object
     ComputeEngineShapeDescriptor:
       description: Compute Engine target shape descriptor.

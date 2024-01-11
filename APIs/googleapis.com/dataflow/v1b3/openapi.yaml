@@ -2932,6 +2932,18 @@ components:
           format: int32
           type: integer
       type: object
+    Base2Exponent:
+      description: "Exponential buckets where the growth factor between buckets is `2**(2**-scale)`. e.g. for `scale=1` growth factor is `2**(2**(-1))=sqrt(2)`. `n` buckets will have the following boundaries. - 0th: [0, gf) - i in [1, n-1]: [gf^(i), gf^(i+1))"
+      properties:
+        numberOfBuckets:
+          description: Must be greater than 0.
+          format: int32
+          type: integer
+        scale:
+          description: Must be between -3 and 3. This forces the growth factor of the bucket boundaries to be between `2^(1/8)` and `256`.
+          format: int32
+          type: integer
+      type: object
     BigQueryIODetails:
       description: Metadata for a BigQuery connector used by the job.
       properties:
@@ -2960,6 +2972,16 @@ components:
         tableId:
           description: TableId accessed in the connection.
           type: string
+      type: object
+    BucketOptions:
+      description: "`BucketOptions` describes the bucket boundaries used in the histogram."
+      properties:
+        exponential:
+          $ref: "#/components/schemas/Base2Exponent"
+          description: Bucket boundaries grow exponentially.
+        linear:
+          $ref: "#/components/schemas/Linear"
+          description: Bucket boundaries grow linearly.
       type: object
     CPUTime:
       description: Modeled after information exposed by /proc/stat.
@@ -3292,6 +3314,26 @@ components:
           description: Optional. Delta of errors counts from retrieving, or translating the samples from previous report.
           format: int64
           type: string
+      type: object
+    DataflowHistogramValue:
+      description: Summary statistics for a population of values. HistogramValue contains a sequence of buckets and gives a count of values that fall into each bucket. Bucket boundares are defined by a formula and bucket widths are either fixed or exponentially increasing.
+      properties:
+        bucketCounts:
+          description: Optional. The number of values in each bucket of the histogram, as described in `bucket_options`. `bucket_counts` should contain N values, where N is the number of buckets specified in `bucket_options`. If `bucket_counts` has fewer than N values, the remaining values are assumed to be 0.
+          items:
+            format: int64
+            type: string
+          type: array
+        bucketOptions:
+          $ref: "#/components/schemas/BucketOptions"
+          description: Describes the bucket boundaries used in the histogram.
+        count:
+          description: Number of values recorded in this histogram.
+          format: int64
+          type: string
+        outlierStats:
+          $ref: "#/components/schemas/OutlierStats"
+          description: Statistics on the values recorded in the histogram that fall out of the bucket boundaries.
       type: object
     DatastoreIODetails:
       description: Metadata for a Datastore connector used by the job.
@@ -4285,6 +4327,22 @@ components:
             $ref: "#/components/schemas/WorkItem"
           type: array
       type: object
+    Linear:
+      description: "Linear buckets with the following boundaries for indices in 0 to n-1. - i in [0, n-1]: [start + (i)*width, start + (i+1)*width)"
+      properties:
+        numberOfBuckets:
+          description: Must be greater than 0.
+          format: int32
+          type: integer
+        start:
+          description: Lower bound of the first bucket.
+          format: double
+          type: number
+        width:
+          description: Distance between bucket boundaries. Must be greater than 0.
+          format: double
+          type: number
+      type: object
     ListJobMessagesResponse:
       description: Response to a request to list job messages.
       properties:
@@ -4428,6 +4486,25 @@ components:
           format: google-datetime
           type: string
       type: object
+    MetricValue:
+      description: The value of a metric along with its name and labels.
+      properties:
+        metric:
+          description: Base name for this metric.
+          type: string
+        metricLabels:
+          additionalProperties:
+            type: string
+          description: Optional. Set of metric labels for this metric.
+          type: object
+        valueHistogram:
+          $ref: "#/components/schemas/DataflowHistogramValue"
+          description: Histogram value of this metric.
+        valueInt64:
+          description: Integer value of this metric.
+          format: int64
+          type: string
+      type: object
     MountedDataDisk:
       description: Describes mounted data disk.
       properties:
@@ -4462,6 +4539,26 @@ components:
         name:
           description: Name of the counter.
           type: string
+      type: object
+    OutlierStats:
+      description: Statistics for the underflow and overflow bucket.
+      properties:
+        overflowCount:
+          description: Number of values that are larger than the upper bound of the largest bucket.
+          format: int64
+          type: string
+        overflowMean:
+          description: Mean of values in the overflow bucket.
+          format: double
+          type: number
+        underflowCount:
+          description: Number of values that are smaller than the lower bound of the smallest bucket.
+          format: int64
+          type: string
+        underflowMean:
+          description: Mean of values in the undeflow bucket.
+          format: double
+          type: number
       type: object
     Package:
       description: The packages that must be installed in order for a worker to run the steps of the Cloud Dataflow job that will be assigned to its worker pool. This is the mechanism by which the Cloud Dataflow SDK causes code to be loaded onto the workers. For example, the Cloud Dataflow Java SDK might use this to install jars containing the user's code and all of the various dependencies (libraries, data files, etc.) required in order for that code to run.
@@ -4650,6 +4747,30 @@ components:
             description: Properties of the object.
           description: The value combining function to invoke.
           type: object
+      type: object
+    PerStepNamespaceMetrics:
+      description: Metrics for a particular unfused step and namespace. A metric is uniquely identified by the `metrics_namespace`, `original_step`, `metric name` and `metric_labels`.
+      properties:
+        metricValues:
+          description: Optional. Metrics that are recorded for this namespace and unfused step.
+          items:
+            $ref: "#/components/schemas/MetricValue"
+          type: array
+        metricsNamespace:
+          description: The namespace of these metrics on the worker.
+          type: string
+        originalStep:
+          description: The original system name of the unfused step that these metrics are reported from.
+          type: string
+      type: object
+    PerWorkerMetrics:
+      description: Per worker metrics.
+      properties:
+        perStepNamespaceMetrics:
+          description: Optional. Metrics for a particular unfused step and namespace.
+          items:
+            $ref: "#/components/schemas/PerStepNamespaceMetrics"
+          type: array
       type: object
     PipelineDescription:
       description: A descriptive representation of submitted pipeline as well as the executed form. This data is provided by the Dataflow service for ease of visualizing the pipeline and interpreting Dataflow provided metrics.
@@ -6222,6 +6343,9 @@ components:
             type: string
           description: 'Labels are used to group WorkerMessages. For example, a worker_message about a particular container might have the labels: { "JOB_ID": "2015-04-22", "WORKER_ID": "wordcount-vm-2015…" "CONTAINER_TYPE": "worker", "CONTAINER_ID": "ac1234def"} Label tags typically correspond to Label enum values. However, for ease of development other strings can be used as tags. LABEL_UNSPECIFIED should not be used here.'
           type: object
+        perWorkerMetrics:
+          $ref: "#/components/schemas/PerWorkerMetrics"
+          description: System defined metrics for this worker.
         streamingScalingReport:
           $ref: "#/components/schemas/StreamingScalingReport"
           description: Contains per-user worker telemetry used in streaming autoscaling.

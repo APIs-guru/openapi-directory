@@ -3343,7 +3343,7 @@ components:
       properties:
         allAssetsStats:
           $ref: "#/components/schemas/ReportSummaryAssetAggregateStats"
-          description: Aggregate statistics for unique assets across all the groups.
+          description: Aggregate statistics for all the assets across all the groups.
         groupFindings:
           description: Findings for each Group included in this report.
           items:
@@ -3372,7 +3372,7 @@ components:
           description: Total memory split into Used/Free buckets.
         operatingSystem:
           $ref: "#/components/schemas/ReportSummaryChartData"
-          description: Count of assets grouped by Operating System families. Only present for virtual machines.
+          description: Count of assets grouped by Operating System families.
         storageBytesHistogram:
           $ref: "#/components/schemas/ReportSummaryHistogramChartData"
           description: Histogram showing a distribution of storage sizes.
@@ -3427,10 +3427,10 @@ components:
           $ref: "#/components/schemas/ReportSummaryAssetAggregateStats"
           description: Summary statistics for all the assets in this group.
         description:
-          description: Description for this group finding.
+          description: Description for the Group.
           type: string
         displayName:
-          description: Display Name for this group finding.
+          description: Display Name for the Group.
           type: string
         overlappingAssetCount:
           deprecated: true
@@ -3454,8 +3454,7 @@ components:
           type: string
         machineFinding:
           $ref: "#/components/schemas/ReportSummaryMachineFinding"
-          description: Output only. A set of findings that applies to all virtual machines in the input. Only present for virtual machines.
-          readOnly: true
+          description: A set of findings that applies to all machines in the input.
         machinePreferences:
           $ref: "#/components/schemas/VirtualMachinePreferences"
           description: A set of preferences that applies to all machines in the context.
@@ -3464,10 +3463,10 @@ components:
           description: Compute monthly cost for this preference set.
         monthlyCostNetworkEgress:
           $ref: "#/components/schemas/Money"
-          description: Network Egress monthly cost for this preference set. Only present for virtual machines.
+          description: Network Egress monthly cost for this preference set.
         monthlyCostOsLicense:
           $ref: "#/components/schemas/Money"
-          description: Operating system licensing monthly cost for this preference set. Only present for virtual machines.
+          description: Licensing monthly cost for this preference set.
         monthlyCostOther:
           $ref: "#/components/schemas/Money"
           description: Miscellaneous monthly cost for this preference set.
@@ -3487,14 +3486,14 @@ components:
           type: string
         soleTenantFinding:
           $ref: "#/components/schemas/ReportSummarySoleTenantFinding"
-          description: A set of findings that applies to Stole-Tenant machines in the input. Only present for virtual machines.
+          description: A set of findings that applies to Stole-Tenant machines in the input.
         topPriority:
           deprecated: true
           description: Text describing the business priority specified for this Preference Set
           type: string
         vmwareEngineFinding:
           $ref: "#/components/schemas/ReportSummaryVMWareEngineFinding"
-          description: A set of findings that applies to VMWare machines in the input. Only present for virtual machines.
+          description: A set of findings that applies to VMWare machines in the input.
       type: object
     ReportSummaryHistogramChartData:
       description: A Histogram Chart shows a distribution of values into buckets, showing a count of values which fall into a bucket.

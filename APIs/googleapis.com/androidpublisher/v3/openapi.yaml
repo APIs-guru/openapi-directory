@@ -3113,6 +3113,54 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /androidpublisher/v3/applications/{packageName}/purchases/subscriptionsv2/tokens/{token}:revoke:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Revoke a subscription purchase for the user.
+      operationId: androidpublisher.purchases.subscriptionsv2.revoke
+      parameters:
+        - description: Required. The package of the application for which this subscription was purchased (for example, 'com.some.thing').
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: Required. The token provided to the user's device when the subscription was purchased.
+          in: path
+          name: token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RevokeSubscriptionPurchaseRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RevokeSubscriptionPurchaseResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - purchases
   /androidpublisher/v3/applications/{packageName}/purchases/voidedpurchases:
     get:
       description: Lists the purchases that were canceled, refunded or charged-back.
@@ -7291,6 +7339,24 @@ components:
           $ref: "#/components/schemas/ReviewReplyResult"
           description: The result of replying/updating a reply to review.
       type: object
+    RevocationContext:
+      description: Revocation context of the purchases.subscriptionsv2.revoke API.
+      properties:
+        proratedRefund:
+          $ref: "#/components/schemas/UNDEFINED_packageNameRevocationContextProratedRefund"
+          description: Optional. Used when users should be refunded a prorated amount they paid for their subscription based on the amount of time remaining in a subscription. Not supported for subscriptions with multiple items.
+      type: object
+    RevokeSubscriptionPurchaseRequest:
+      description: Request for the purchases.subscriptionsv2.revoke API.
+      properties:
+        revocationContext:
+          $ref: "#/components/schemas/RevocationContext"
+          description: Required. Additional details around the subscription revocation.
+      type: object
+    RevokeSubscriptionPurchaseResponse:
+      description: Response for the purchases.subscriptionsv2.revoke API.
+      properties: {}
+      type: object
     ScreenDensity:
       description: Represents a screen density.
       properties:
@@ -8067,6 +8133,10 @@ components:
           items:
             $ref: "#/components/schemas/Track"
           type: array
+      type: object
+    UNDEFINED_packageNameRevocationContextProratedRefund:
+      description: Used to determine if the refund type in the RevocationContext is a prorated refund.
+      properties: {}
       type: object
     UpdateBasePlanStateRequest:
       description: Request message to update the state of a subscription base plan.
