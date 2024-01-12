@@ -440,11 +440,6 @@ components:
     GoogleCloudTexttospeechV1SynthesizeLongAudioMetadata:
       description: Metadata for response returned by the `SynthesizeLongAudio` method.
       properties:
-        lastUpdateTime:
-          deprecated: true
-          description: Deprecated. Do not use.
-          format: google-datetime
-          type: string
         progressPercentage:
           description: The progress of the most recent processing update in percentage, ie. 70.0%.
           format: double
@@ -529,11 +524,6 @@ components:
     SynthesizeLongAudioMetadata:
       description: Metadata for response returned by the `SynthesizeLongAudio` method.
       properties:
-        lastUpdateTime:
-          deprecated: true
-          description: Deprecated. Do not use.
-          format: google-datetime
-          type: string
         progressPercentage:
           description: The progress of the most recent processing update in percentage, ie. 70.0%.
           format: double

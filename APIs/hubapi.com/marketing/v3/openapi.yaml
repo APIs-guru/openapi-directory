@@ -7,7 +7,7 @@ info:
     * Create, Read or update Marketing Event information in HubSpot
     * Specify whether a HubSpot contact has registered, attended or cancelled a registration to a Marketing Event.
     * Specify a URL that can be called to get the details of a Marketing Event.
-  title: Marketing Marketing Events
+  title: Marketing Events
   version: v3
   x-hubspot-api-use-case: You have an external system that handles registration for your webinars and you want to ensure that attendee data and behavior is synced with your HubSpot CRM.
   x-hubspot-documentation-banner: NONE
@@ -27,13 +27,27 @@ info:
   x-providerName: hubapi.com
   x-serviceName: marketing
 tags:
-  - name: Batch
-  - name: Attendance Subscriber State Changes
-  - name: Subscriber State Changes
-  - name: Marketing_Events_External
-  - name: Basic
-  - name: Settings
-  - name: Search
+  - description: ""
+    name: Batch
+    x-hubspot-tag-name-english-source: Batch
+  - description: ""
+    name: Attendance Subscriber State Changes
+    x-hubspot-tag-name-english-source: Attendance Subscriber State Changes
+  - description: ""
+    name: Subscriber State Changes
+    x-hubspot-tag-name-english-source: Subscriber State Changes
+  - description: ""
+    name: Marketing_Events_External
+    x-hubspot-tag-name-english-source: Marketing_Events_External
+  - description: ""
+    name: Basic
+    x-hubspot-tag-name-english-source: Basic
+  - description: ""
+    name: Settings
+    x-hubspot-tag-name-english-source: Settings
+  - description: ""
+    name: Search
+    x-hubspot-tag-name-english-source: Search
 paths:
   /marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/create:
     post:

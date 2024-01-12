@@ -3,7 +3,7 @@ servers:
   - url: https://api.hubapi.com
 info:
   description: Retrieve Business Unit information.
-  title: Business Units Business Units
+  title: Business Units
   version: v3
   x-hubspot-api-use-case: You have a third-party service to manage organizational data for your business, and you need to confirm the business unit that a specific HubSpot user is in.
   x-hubspot-documentation-banner: NONE
@@ -22,7 +22,9 @@ info:
   x-providerName: hubapi.com
   x-serviceName: business units
 tags:
-  - name: Business Unit
+  - description: ""
+    name: Business Unit
+    x-hubspot-tag-name-english-source: Business Unit
 paths:
   /business-units/v3/business-units/user/{userId}:
     get:

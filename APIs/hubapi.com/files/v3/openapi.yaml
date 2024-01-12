@@ -4,7 +4,7 @@ servers:
 x-hasEquivalentPaths: true
 info:
   description: Upload and manage files.
-  title: Files
+  title: Files Files
   version: v3
   x-hubspot-api-use-case: When launching a company rebrand, upload a new set of branded images and assets to the file manager so that marketing and sales teams can update their assets accordingly.
   x-hubspot-documentation-banner: NONE
@@ -26,12 +26,8 @@ info:
   x-providerName: hubapi.com
   x-serviceName: files
 tags:
-  - description: ""
-    name: Files
-    x-hubspot-tag-name-english-source: Files
-  - description: ""
-    name: Folders
-    x-hubspot-tag-name-english-source: Folders
+  - name: Files
+  - name: Folders
 paths:
   /files/v3/files:
     post:

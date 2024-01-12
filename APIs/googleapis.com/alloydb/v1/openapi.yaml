@@ -2318,31 +2318,6 @@ components:
           description: Version of the standard or benchmark, for example, 1.1
           type: string
       type: object
-    StorageDatabasecenterPartnerapiV1mainCustomMetadataData:
-      description: Any custom metadata associated with the resource. i.e. A spanner instance can have multiple databases with its own unique metadata. Information for these individual databases can be captured in custom metadata data
-      properties:
-        databaseMetadata:
-          items:
-            $ref: "#/components/schemas/StorageDatabasecenterPartnerapiV1mainDatabaseMetadata"
-          type: array
-      type: object
-    StorageDatabasecenterPartnerapiV1mainDatabaseMetadata:
-      description: Metadata for individual databases created in an instance. i.e. spanner instance can have multiple databases with unique configuration settings.
-      properties:
-        backupConfiguration:
-          $ref: "#/components/schemas/StorageDatabasecenterPartnerapiV1mainBackupConfiguration"
-          description: Backup configuration for this database
-        backupRun:
-          $ref: "#/components/schemas/StorageDatabasecenterPartnerapiV1mainBackupRun"
-          description: Information about the last backup attempt for this database
-        product:
-          $ref: "#/components/schemas/StorageDatabasecenterProtoCommonProduct"
-        resourceId:
-          $ref: "#/components/schemas/StorageDatabasecenterPartnerapiV1mainDatabaseResourceId"
-        resourceName:
-          description: Required. Database name. Resource name to follow CAIS resource_name format as noted here go/condor-common-datamodel
-          type: string
-      type: object
     StorageDatabasecenterPartnerapiV1mainDatabaseResourceFeed:
       description: DatabaseResourceFeed is the top level proto to be used to ingest different database resource level events into Condor platform.
       properties:
@@ -2588,8 +2563,10 @@ components:
             - STATE_OTHER
           type: string
         customMetadata:
-          $ref: "#/components/schemas/StorageDatabasecenterPartnerapiV1mainCustomMetadataData"
-          description: Any custom metadata associated with the resource
+          additionalProperties:
+            description: Properties of the object.
+          description: Any custom metadata associated with the resource (a JSON field)
+          type: object
         expectedState:
           description: The state that the instance is expected to be in. For example, an instance state can transition to UNHEALTHY due to wrong patch update, while the expected state will remain at the HEALTHY.
           enum:
@@ -2696,7 +2673,7 @@ components:
             - ENGINE_NATIVE
             - NATIVE
             - ENGINE_CLOUD_SPANNER_WITH_POSTGRES_DIALECT
-            - ENGINE_CLOUD_SPANNER_WITH_GOOGLESQL_DIALECT
+            - SPANGRES
             - ENGINE_OTHER
           type: string
           x-enumDeprecated:
@@ -2710,7 +2687,7 @@ components:
             - false
             - true
             - false
-            - false
+            - true
             - false
         type:
           description: Type of specific database product. It could be CloudSQL, AlloyDB etc..
@@ -2721,6 +2698,7 @@ components:
             - PRODUCT_TYPE_ALLOYDB
             - ALLOYDB
             - PRODUCT_TYPE_SPANNER
+            - SPANNER
             - PRODUCT_TYPE_ON_PREM
             - ON_PREM
             - PRODUCT_TYPE_OTHER
@@ -2732,6 +2710,7 @@ components:
             - false
             - true
             - false
+            - true
             - false
             - true
             - false

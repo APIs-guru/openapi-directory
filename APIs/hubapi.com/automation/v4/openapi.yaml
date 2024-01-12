@@ -2,7 +2,7 @@ openapi: 3.0.1
 servers:
   - url: https://api.hubapi.com
 info:
-  title: Actions V4
+  title: Automation Actions V4
   version: v4
   x-hubspot-api-use-case: You want to empower other users in your account to automate specialized parts of their day-to-day processes (e.g., creating highly customized quotes based on the data from an enrolled contact and their associations).
   x-hubspot-documentation-banner: NONE
@@ -24,13 +24,9 @@ info:
   x-serviceName: automation
 tags:
   - name: Public_Callbacks
-    x-hubspot-tag-name-english-source: Public_Callbacks
   - name: Public_Action_Revisions
-    x-hubspot-tag-name-english-source: Public_Action_Revisions
   - name: Public_Action_Functions
-    x-hubspot-tag-name-english-source: Public_Action_Functions
   - name: Public_Action_Definitions
-    x-hubspot-tag-name-english-source: Public_Action_Definitions
 paths:
   /automation/v4/actions/callbacks/complete:
     post:
