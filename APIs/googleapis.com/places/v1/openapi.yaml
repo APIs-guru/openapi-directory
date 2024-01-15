@@ -505,7 +505,7 @@ components:
           description: Place has a children's menu.
           type: boolean
         name:
-          description: 'An ID representing this place which may be used to look up this place again (a.k.a. the API "resource" name: places/place_id).'
+          description: This Place's resource name, in `places/{place_id}` format. Can be used to look up the Place.
           type: string
         nationalPhoneNumber:
           description: A human-readable phone number for the place, in national format.

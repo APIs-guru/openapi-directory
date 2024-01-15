@@ -2190,6 +2190,9 @@ components:
         cancellationRequested:
           description: Identifies whether the user has requested cancellation of the operation.
           type: boolean
+        destination:
+          description: Destination to which to copy log entries.For example, a Cloud Storage bucket:"storage.googleapis.com/my-cloud-storage-bucket"
+          type: string
         endTime:
           description: The end time of an operation.
           format: google-datetime
@@ -2201,6 +2204,9 @@ components:
         request:
           $ref: "#/components/schemas/CopyLogEntriesRequest"
           description: CopyLogEntries RPC request.
+        source:
+          description: Source from which to copy log entries.For example, a log bucket:"projects/my-project/locations/global/buckets/my-source-bucket"
+          type: string
         startTime:
           description: The create time of an operation.
           format: google-datetime
@@ -2217,6 +2223,9 @@ components:
             - OPERATION_STATE_CANCELLED
             - OPERATION_STATE_PENDING
           readOnly: true
+          type: string
+        verb:
+          description: Name of the verb executed by the operation.For example,"copy"
           type: string
         writerIdentity:
           description: 'The IAM identity of a service account that must be granted access to the destination.If the service account is not granted permission to the destination within an hour, the operation will be cancelled.For example: "serviceAccount:foo@bar.com"'

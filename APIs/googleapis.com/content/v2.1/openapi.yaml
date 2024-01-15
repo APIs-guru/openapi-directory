@@ -6566,7 +6566,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Retrieves merchant performance mertrics matching the search query and optionally segmented by selected dimensions.
+      description: Retrieves merchant performance metrics matching the search query and optionally segmented by selected dimensions.
       operationId: content.reports.search
       parameters:
         - description: Required. Id of the merchant making the call. Must be a standalone account or an MCA subaccount.
@@ -14045,7 +14045,7 @@ components:
           format: int32
           type: integer
         id:
-          description: Required. Output only. The REST promotion ID to uniquely identify the promotion. Content API methods that operate on promotions take this as their `promotionId` parameter. The REST ID for a promotion is of the form channel:contentLanguage:targetCountry:promotionId The `channel` field has a value of `"online"`, `"in_store"`, or `"online_in_store"`.
+          description: Output only. The REST promotion ID to uniquely identify the promotion. Content API methods that operate on promotions take this as their `promotionId` parameter. The REST ID for a promotion is of the form channel:contentLanguage:targetCountry:promotionId The `channel` field has a value of `"online"`, `"in_store"`, or `"online_in_store"`.
           readOnly: true
           type: string
         itemGroupId:

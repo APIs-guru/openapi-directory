@@ -7343,8 +7343,12 @@ components:
       description: Revocation context of the purchases.subscriptionsv2.revoke API.
       properties:
         proratedRefund:
-          $ref: "#/components/schemas/UNDEFINED_packageNameRevocationContextProratedRefund"
+          $ref: "#/components/schemas/RevocationContextProratedRefund"
           description: Optional. Used when users should be refunded a prorated amount they paid for their subscription based on the amount of time remaining in a subscription. Not supported for subscriptions with multiple items.
+      type: object
+    RevocationContextProratedRefund:
+      description: Used to determine if the refund type in the RevocationContext is a prorated refund.
+      properties: {}
       type: object
     RevokeSubscriptionPurchaseRequest:
       description: Request for the purchases.subscriptionsv2.revoke API.
@@ -8133,10 +8137,6 @@ components:
           items:
             $ref: "#/components/schemas/Track"
           type: array
-      type: object
-    UNDEFINED_packageNameRevocationContextProratedRefund:
-      description: Used to determine if the refund type in the RevocationContext is a prorated refund.
-      properties: {}
       type: object
     UpdateBasePlanStateRequest:
       description: Request message to update the state of a subscription base plan.

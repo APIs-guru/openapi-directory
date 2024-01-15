@@ -2122,6 +2122,14 @@ components:
             - RISK_HIGH
           type: string
       type: object
+    GooglePrivacyDlpV2DataSourceType:
+      description: Message used to identify the type of resource being profiled.
+      properties:
+        dataSource:
+          description: "Output only. An identifying string to the type of resource being profiled. Current values: google/bigquery/table, google/project"
+          readOnly: true
+          type: string
+      type: object
     GooglePrivacyDlpV2DatastoreKey:
       description: Record key for a finding in Cloud Datastore.
       properties:
@@ -4532,6 +4540,9 @@ components:
         dataRiskLevel:
           $ref: "#/components/schemas/GooglePrivacyDlpV2DataRiskLevel"
           description: The data risk level of this table.
+        dataSourceType:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2DataSourceType"
+          description: The resource type that was profiled.
         datasetId:
           description: The BigQuery dataset ID.
           type: string

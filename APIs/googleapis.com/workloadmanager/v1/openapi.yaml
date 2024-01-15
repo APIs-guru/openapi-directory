@@ -720,6 +720,16 @@ components:
       schema:
         type: string
   schemas:
+    BigQueryDestination:
+      description: Message describing big query destination
+      properties:
+        createNewResultsTable:
+          description: Optional. determine if results will be saved in a new table
+          type: boolean
+        destinationDataset:
+          description: Optional. destination dataset to save evaluation results
+          type: string
+      type: object
     CancelOperationRequest:
       description: The request message for Operations.CancelOperation.
       properties: {}
@@ -731,6 +741,9 @@ components:
     Evaluation:
       description: LINT.IfChange Message describing Evaluation object
       properties:
+        bigQueryDestination:
+          $ref: "#/components/schemas/BigQueryDestination"
+          description: Optional. BigQuery destination
         createTime:
           description: Output only. [Output only] Create time stamp
           format: google-datetime
