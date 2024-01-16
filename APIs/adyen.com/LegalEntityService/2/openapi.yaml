@@ -32,7 +32,7 @@ info:
     ```
     https://kyc-test.adyen.com/lem/v2/legalEntities
     ```
-    >If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+    >If you are using hosted onboarding and just beginning your integration, use v3 for your API requests. Otherwise, use v2.
 
     ## Going live
     When going live, your Adyen contact will provide your API credential for the live environment. You can then use the API key or the username and password to send requests to `https://kyc-live.adyen.com/lem/v2`.
@@ -68,7 +68,7 @@ paths:
 
         This resource contains information about your user's line of business, including their industry and their source of funds. Adyen uses this information to verify your users as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses.
 
-        >If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+        >If you are using hosted onboarding and just beginning your integration, use v3 for your API requests. Otherwise, use v2.
 
       operationId: post-businessLines
       requestBody:
@@ -580,7 +580,7 @@ paths:
 
         This resource contains information about the user that will be onboarded in your platform. Adyen uses this information to perform verification checks as required by payment industry regulations. Adyen informs you of the verification results through webhooks or API responses. 
 
-        >If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+        >If you are using hosted onboarding and just beginning your integration, use v3 for your API requests. Otherwise, use v2.
 
       operationId: post-legalEntities
       parameters:
@@ -888,7 +888,7 @@ paths:
       description: |+
         Returns a link to an Adyen-hosted onboarding page where you need to redirect your user.
 
-        >If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+        >If you are using hosted onboarding and just beginning your integration, use v3 for your API requests. Otherwise, use v2.
 
       operationId: post-legalEntities-id-onboardingLinks
       parameters:
@@ -1484,7 +1484,7 @@ paths:
       description: |+
         Returns a list of hosted onboarding page themes.
 
-        >If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+        >If you are using hosted onboarding and just beginning your integration, use v3 for your API requests. Otherwise, use v2.
 
       operationId: get-themes
       responses:
@@ -1539,7 +1539,7 @@ paths:
   /themes/{id}:
     get:
       description: |+
-        Returns the details of the theme identified in the path.>If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+        Returns the details of the theme identified in the path.>If you are using hosted onboarding and just beginning your integration, use v3 for your API requests. Otherwise, use v2.
 
       operationId: get-themes-id
       parameters:

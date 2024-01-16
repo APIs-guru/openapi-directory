@@ -62,6 +62,8 @@ tags:
   - name: Network tokens
   - name: Grant accounts
   - name: Grant offers
+  - name: PIN functionality
+  - name: Card orders
   - name: Transfer routes
 paths:
   /accountHolders:
@@ -134,13 +136,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Create an account holder
       tags:
         - Account holders
       x-addedInVersion: "1"
-      x-groupName: Account holders
       x-methodName: createAccountHolder
       x-sortIndex: 1
   /accountHolders/{id}:
@@ -210,13 +212,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get an account holder
       tags:
         - Account holders
       x-addedInVersion: "1"
-      x-groupName: Account holders
       x-methodName: getAccountHolder
       x-sortIndex: 3
     patch:
@@ -297,13 +299,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update an account holder
       tags:
         - Account holders
       x-addedInVersion: "1"
-      x-groupName: Account holders
       x-methodName: updateAccountHolder
       x-sortIndex: 2
   /accountHolders/{id}/balanceAccounts:
@@ -390,13 +392,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get all balance accounts of an account holder
       tags:
         - Account holders
       x-addedInVersion: "1"
-      x-groupName: Account holders
       x-methodName: getAllBalanceAccountsOfAccountHolder
       x-sortIndex: 4
   /accountHolders/{id}/taxForms:
@@ -485,13 +487,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a tax form
       tags:
         - Account holders
       x-addedInVersion: "2"
-      x-groupName: Account holders
       x-methodName: getTaxForm
       x-sortIndex: 5
   /balanceAccounts:
@@ -562,13 +564,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Create a balance account
       tags:
         - Balance accounts
       x-addedInVersion: "1"
-      x-groupName: Balance accounts
       x-methodName: createBalanceAccount
       x-sortIndex: 1
   /balanceAccounts/{balanceAccountId}/sweeps:
@@ -655,13 +657,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get all sweeps for a balance account
       tags:
         - Balance accounts
       x-addedInVersion: "2"
-      x-groupName: Balance accounts
       x-methodName: getAllSweepsForBalanceAccount
       x-sortIndex: 7
     post:
@@ -749,13 +751,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Create a sweep
       tags:
         - Balance accounts
       x-addedInVersion: "2"
-      x-groupName: Balance accounts
       x-methodName: createSweep
       x-sortIndex: 5
   /balanceAccounts/{balanceAccountId}/sweeps/{sweepId}:
@@ -824,13 +826,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Delete a sweep
       tags:
         - Balance accounts
       x-addedInVersion: "2"
-      x-groupName: Balance accounts
       x-methodName: deleteSweep
       x-sortIndex: 9
     get:
@@ -905,13 +907,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a sweep
       tags:
         - Balance accounts
       x-addedInVersion: "2"
-      x-groupName: Balance accounts
       x-methodName: getSweep
       x-sortIndex: 8
     patch:
@@ -994,13 +996,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update a sweep
       tags:
         - Balance accounts
       x-addedInVersion: "2"
-      x-groupName: Balance accounts
       x-methodName: updateSweep
       x-sortIndex: 6
   /balanceAccounts/{id}:
@@ -1070,13 +1072,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a balance account
       tags:
         - Balance accounts
       x-addedInVersion: "1"
-      x-groupName: Balance accounts
       x-methodName: getBalanceAccount
       x-sortIndex: 3
     patch:
@@ -1153,13 +1155,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update a balance account
       tags:
         - Balance accounts
       x-addedInVersion: "1"
-      x-groupName: Balance accounts
       x-methodName: updateBalanceAccount
       x-sortIndex: 2
   /balanceAccounts/{id}/paymentInstruments:
@@ -1167,7 +1169,7 @@ paths:
       description: |-
         Returns a paginated list of the payment instruments associated with a balance account. 
 
-        To fetch multiple pages, use the query parameters.For example, to limit the page to 3 payment instruments and to skip the first 6, use `/balanceAccounts/{id}/paymentInstruments?limit=3&offset=6`.
+        To fetch multiple pages, use the query parameters.For example, to limit the page to 3 payment instruments which are in active status and to skip the first 6, use `/balanceAccounts/{id}/paymentInstruments?limit=3&offset=6&status=active`.
       operationId: get-balanceAccounts-id-paymentInstruments
       parameters:
         - description: The unique identifier of the balance account.
@@ -1190,6 +1192,12 @@ paths:
           schema:
             format: int32
             type: integer
+        - description: The status of the payment instruments that you want to get. By default, the response includes payment instruments with any status.
+          in: query
+          name: status
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -1246,14 +1254,14 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Get all payment instruments for a balance account
+      summary: Get payment instruments linked to a balance account
       tags:
         - Balance accounts
       x-addedInVersion: "1"
-      x-groupName: Balance accounts
-      x-methodName: getAllPaymentInstrumentsForBalanceAccount
+      x-methodName: getPaymentInstrumentsLinkedToBalanceAccount
       x-sortIndex: 4
   /balancePlatforms/{id}:
     get:
@@ -1322,13 +1330,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a balance platform
       tags:
         - Platform
       x-addedInVersion: "1"
-      x-groupName: Platform
       x-methodName: getBalancePlatform
       x-sortIndex: 1
   /balancePlatforms/{id}/accountHolders:
@@ -1415,14 +1423,237 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get all account holders under a balance platform
       tags:
         - Platform
       x-addedInVersion: "1"
-      x-groupName: Platform
       x-methodName: getAllAccountHoldersUnderBalancePlatform
+      x-sortIndex: 2
+  /cardorders:
+    get:
+      description: Returns a paginated list of card orders.
+      operationId: get-cardorders
+      parameters:
+        - description: "The unique identifier of the card order. "
+          in: query
+          name: id
+          required: false
+          schema:
+            type: string
+        - description: The unique identifier of the card manufacturer profile.
+          in: query
+          name: cardManufacturingProfileId
+          required: false
+          schema:
+            type: string
+        - description: The status of the card order.
+          in: query
+          name: status
+          required: false
+          schema:
+            type: string
+        - description: |-
+            The unique code of the card manufacturer profile.
+
+            Possible values: **mcmaestro**, **mc**, **visa**, **mcdebit**. 
+          in: query
+          name: txVariantCode
+          required: false
+          schema:
+            type: string
+        - description: Only include card orders that have been created on or after this point in time. The value must be in ISO 8601 format. For example, **2021-05-30T15:07:40Z**.
+          in: query
+          name: createdSince
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: Only include card orders that have been created on or before this point in time. The value must be in ISO 8601 format. For example, **2021-05-30T15:07:40Z**.
+          in: query
+          name: createdUntil
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: Only include card orders that have been locked on or after this point in time. The value must be in ISO 8601 format. For example, **2021-05-30T15:07:40Z**.
+          in: query
+          name: lockedSince
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: Only include card orders that have been locked on or before this point in time. The value must be in ISO 8601 format. For example, **2021-05-30T15:07:40Z**.
+          in: query
+          name: lockedUntil
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: "The service center at which the card is issued. The value is case-sensitive. "
+          in: query
+          name: serviceCenter
+          required: false
+          schema:
+            type: string
+        - description: |-
+            Specifies the position of an element in a list of card orders. The response includes a list of card orders that starts at the specified offset.
+
+            **Default:** 0, which means that the response contains all the elements in the list of card orders.
+          in: query
+          name: offset
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: The number of card orders returned per page. **Default:** 10.
+          in: query
+          name: limit
+          required: false
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                success:
+                  $ref: "#/components/examples/get-cardorders-success-200"
+              schema:
+                $ref: "#/components/schemas/PaginatedGetCardOrderResponse"
+          description: OK - the request has succeeded.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - clientKey: []
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Get a list of card orders
+      tags:
+        - Card orders
+      x-addedInVersion: "1"
+      x-methodName: listCardOrders
+      x-sortIndex: 1
+  /cardorders/{id}/items:
+    get:
+      description: Returns the item list of a specific card order.
+      operationId: get-cardorders-id-items
+      parameters:
+        - description: The unique identifier of the card order.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Specifies the position of an element in a list of card orders. The response includes a list of card order items that starts at the specified offset.
+
+            **Default:** 0, which means that the response contains all the elements in the list of card order items.
+          in: query
+          name: offset
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: The number of card order items returned per page. **Default:** 10.
+          in: query
+          name: limit
+          required: false
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                success:
+                  $ref: "#/components/examples/get-cardorders-id-items-success-200"
+              schema:
+                $ref: "#/components/schemas/PaginatedGetCardOrderItemResponse"
+          description: OK - the request has succeeded.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - clientKey: []
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Get card order items
+      tags:
+        - Card orders
+      x-addedInVersion: "1"
+      x-methodName: getCardOrderItems
       x-sortIndex: 2
   /grantAccounts/{id}:
     get:
@@ -1488,13 +1719,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a grant account
       tags:
         - Grant accounts
       x-addedInVersion: "1"
-      x-groupName: Grant accounts
       x-methodName: getGrantAccount
       x-sortIndex: 1
   /grantOffers:
@@ -1561,13 +1792,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get all available grant offers
       tags:
         - Grant offers
       x-addedInVersion: "2"
-      x-groupName: Grant offers
       x-methodName: getAllAvailableGrantOffers
       x-sortIndex: 1
   /grantOffers/{grantOfferId}:
@@ -1634,13 +1865,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a grant offer
       tags:
         - Grant offers
       x-addedInVersion: "2"
-      x-groupName: Grant offers
       x-methodName: getGrantOffer
       x-sortIndex: 1
   /networkTokens/{networkTokenId}:
@@ -1698,13 +1929,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a network token
       tags:
         - Network tokens
       x-addedInVersion: "1"
-      x-groupName: Network tokens
       x-methodName: getNetworkToken
       x-sortIndex: 1
     patch:
@@ -1762,13 +1993,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update a network token
       tags:
         - Network tokens
       x-addedInVersion: "1"
-      x-groupName: Network tokens
       x-methodName: updateNetworkToken
       x-sortIndex: 2
   /paymentInstrumentGroups:
@@ -1839,13 +2070,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Create a payment instrument group
       tags:
         - Payment instrument groups
       x-addedInVersion: "1"
-      x-groupName: Payment instrument groups
       x-methodName: createPaymentInstrumentGroup
       x-sortIndex: 1
   /paymentInstrumentGroups/{id}:
@@ -1915,13 +2146,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a payment instrument group
       tags:
         - Payment instrument groups
       x-addedInVersion: "1"
-      x-groupName: Payment instrument groups
       x-methodName: getPaymentInstrumentGroup
       x-sortIndex: 2
   /paymentInstrumentGroups/{id}/transactionRules:
@@ -1991,13 +2222,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get all transaction rules for a payment instrument group
       tags:
         - Payment instrument groups
       x-addedInVersion: "1"
-      x-groupName: Payment instrument groups
       x-methodName: getAllTransactionRulesForPaymentInstrumentGroup
       x-sortIndex: 3
   /paymentInstruments:
@@ -2083,13 +2314,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Create a payment instrument
       tags:
         - Payment instruments
       x-addedInVersion: "1"
-      x-groupName: Payment instruments
       x-methodName: createPaymentInstrument
       x-sortIndex: 11
   /paymentInstruments/{id}:
@@ -2159,13 +2390,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a payment instrument
       tags:
         - Payment instruments
       x-addedInVersion: "1"
-      x-groupName: Payment instruments
       x-methodName: getPaymentInstrument
       x-sortIndex: 13
     patch:
@@ -2246,13 +2477,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update a payment instrument
       tags:
         - Payment instruments
       x-addedInVersion: "1"
-      x-groupName: Payment instruments
       x-methodName: updatePaymentInstrument
       x-sortIndex: 12
   /paymentInstruments/{id}/networkTokens:
@@ -2319,13 +2550,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: List network tokens
       tags:
         - Payment instruments
       x-addedInVersion: "1"
-      x-groupName: Payment instruments
       x-methodName: listNetworkTokens
       x-sortIndex: 15
   /paymentInstruments/{id}/reveal:
@@ -2400,13 +2631,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get the PAN of a payment instrument
       tags:
         - Payment instruments
       x-addedInVersion: "1"
-      x-groupName: Payment instruments
       x-methodName: getPanOfPaymentInstrument
       x-sortIndex: 14
   /paymentInstruments/{id}/transactionRules:
@@ -2476,15 +2707,209 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get all transaction rules for a payment instrument
       tags:
         - Payment instruments
       x-addedInVersion: "1"
-      x-groupName: Payment instruments
       x-methodName: getAllTransactionRulesForPaymentInstrument
       x-sortIndex: 14
+  /pins/change:
+    post:
+      description: Change Pin
+      operationId: post-pins-change
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PinChangeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PinChangeResponse"
+          description: OK - the request has succeeded.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - clientKey: []
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Change Pin
+      tags:
+        - PIN functionality
+      x-addedInVersion: "1"
+      x-methodName: changePin
+      x-sortIndex: 2
+  /pins/publicKey:
+    get:
+      description: Get RSA publicKey
+      operationId: get-pins-publicKey
+      parameters:
+        - description: Purpose of publicKey.
+          in: query
+          name: purpose
+          required: false
+          schema:
+            type: string
+        - description: Format of publicKey.
+          in: query
+          name: format
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicKeyResponse"
+          description: OK - the request has succeeded.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - clientKey: []
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Get RSA publicKey
+      tags:
+        - PIN functionality
+      x-addedInVersion: "1"
+      x-methodName: getRsaPublickey
+      x-sortIndex: 1
+  /pins/reveal:
+    post:
+      description: Reveal Pin
+      operationId: post-pins-reveal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RevealPinRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RevealPinResponse"
+          description: OK - the request has succeeded.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - clientKey: []
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Reveal Pin
+      tags:
+        - PIN functionality
+      x-addedInVersion: "1"
+      x-methodName: revealPin
+      x-sortIndex: 2
   /transactionRules:
     post:
       description: Creates a [transaction rule](https://docs.adyen.com/issuing/transaction-rules). When your user makes a transaction with their Adyen-issued card, the transaction is allowed or declined based on the conditions and outcome defined in the transaction rule. You can apply the transaction rule to several cards, such as all the cards in your platform, or to a specific card. For use cases, see [examples](https://docs.adyen.com/issuing/transaction-rules/examples).
@@ -2565,13 +2990,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Create a transaction rule
       tags:
         - Transaction rules
       x-addedInVersion: "1"
-      x-groupName: Transaction rules
       x-methodName: createTransactionRule
       x-sortIndex: 1
   /transactionRules/{transactionRuleId}:
@@ -2641,13 +3066,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Delete a transaction rule
       tags:
         - Transaction rules
       x-addedInVersion: "1"
-      x-groupName: Transaction rules
       x-methodName: deleteTransactionRule
       x-sortIndex: 5
     get:
@@ -2716,13 +3141,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a transaction rule
       tags:
         - Transaction rules
       x-addedInVersion: "1"
-      x-groupName: Transaction rules
       x-methodName: getTransactionRule
       x-sortIndex: 2
     patch:
@@ -2804,13 +3229,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update a transaction rule
       tags:
         - Transaction rules
       x-addedInVersion: "1"
-      x-groupName: Transaction rules
       x-methodName: updateTransactionRule
       x-sortIndex: 3
   /transferRoutes/calculate:
@@ -2872,13 +3297,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Calculate transfer routes
       tags:
         - Transfer routes
       x-addedInVersion: "1"
-      x-groupName: Transfer routes
       x-methodName: calculateTransferRoutes
       x-sortIndex: 1
   /validateBankAccountIdentification:
@@ -2939,13 +3364,13 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - clientKey: []
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Validate a bank account
       tags:
         - Bank account validation
       x-addedInVersion: "1"
-      x-groupName: Bank account validation
       x-methodName: validateBankAccountIdentification
       x-sortIndex: 1
 components:
@@ -3227,6 +3652,34 @@ components:
       value:
         id: YOUR_BALANCE_PLATFORM
         status: Active
+    get-cardorders-id-items-success-200:
+      description: Example response for retrieving the item list of a specific card order
+      summary: Item list of a specific card order retrieved
+      value:
+        data:
+          - card:
+              status: shipped
+            cardOrderItemId: UNIQUE_CARD_ORDER_ITEM_ID
+            paymentInstrumentId: UNIQUE_PAYMENT_INSTRUMENT_ID
+            pin:
+              status: produced
+            shippingMethod: Cardholder Post Basic National
+        hasNext: false
+        hasPrevious: false
+    get-cardorders-success-200:
+      description: Example response for retrieving a paginated list of card orders
+      summary: List of card orders retrieved
+      value:
+        cardOrders:
+          - beginDate: 2022-12-05T00:00:00+01:00
+            cardManufacturingProfileId: UNIQUE_CARD_MANUFACTURER_PROFILE_ID
+            endDate: 2022-12-06T00:00:00+01:00
+            id: UNIQUE_CARD_ORDER_ID
+            lockDate: 2023-04-14T16:43:02+02:00
+            serviceCenter: IDEMIA Sittard
+            status: closed
+        hasNext: true
+        hasPrevious: false
     get-paymentInstrumentGroups-id-success-200:
       description: Example response when retrieving a payment instrument group
       summary: Payment instrument group retrieved
@@ -4325,6 +4778,7 @@ components:
           description: "Contains the status of the transfer instruments associated with this capability. "
           items:
             $ref: "#/components/schemas/AccountSupportingEntityCapability"
+          readOnly: true
           type: array
         verificationStatus:
           description: |
@@ -5057,6 +5511,16 @@ components:
       required:
         - accountIdentification
       type: object
+    BankAccountModel:
+      properties:
+        formFactor:
+          description: Form factor of the bank account - **virtual** or **physical** (default)
+          enum:
+            - physical
+            - unknown
+            - virtual
+          type: string
+      type: object
     BankIdentification:
       properties:
         country:
@@ -5517,6 +5981,99 @@ components:
         - cardholderName
         - brand
         - brandVariant
+      type: object
+    CardOrder:
+      properties:
+        beginDate:
+          description: The date when the card order is created.
+          format: date-time
+          type: string
+        cardManufacturingProfileId:
+          description: The unique identifier of the card manufacturer profile.
+          type: string
+        closedDate:
+          description: The date when the card order processing ends.
+          format: date-time
+          type: string
+        endDate:
+          description: |-
+            The date when you manually closed the card order.
+
+            Card orders are automatically closed by the end of the day it was created. If you manually closed it beforehand, the closing date is shown as the `endDate`.
+          format: date-time
+          type: string
+        id:
+          description: The unique identifier of the card order.
+          type: string
+        lockDate:
+          description: The date when the card order processing begins.
+          format: date-time
+          type: string
+        serviceCenter:
+          description: The service center.
+          type: string
+        status:
+          description: |-
+            The status of the card order.
+
+            Possible values: **Open**, **Closed**.
+          enum:
+            - closed
+            - open
+          type: string
+      type: object
+    CardOrderItem:
+      properties:
+        balancePlatform:
+          description: The unique identifier of the balance platform.
+          type: string
+        card:
+          $ref: "#/components/schemas/CardOrderItemDeliveryStatus"
+          description: |-
+            The status of the card delivery.
+
+            Possible values: **created**, **rejected**, **processing**, **produced**, **shipped**, **delivered**, **notApplicable**, **unknown**. 
+        cardOrderItemId:
+          description: The unique identifier of the card order item.
+          type: string
+        creationDate:
+          description: The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
+          format: date-time
+          type: string
+        id:
+          description: The ID of the resource.
+          readOnly: true
+          type: string
+        paymentInstrumentId:
+          description: The unique identifier of the payment instrument related to the card order item.
+          type: string
+        pin:
+          $ref: "#/components/schemas/CardOrderItemDeliveryStatus"
+          description: Contains information about the status of the PIN delivery.
+        shippingMethod:
+          description: The shipping method used to deliver the card or the PIN.
+          type: string
+      type: object
+    CardOrderItemDeliveryStatus:
+      properties:
+        errorMessage:
+          description: An error message.
+          type: string
+        status:
+          description: The status of the PIN delivery.
+          enum:
+            - created
+            - delivered
+            - notApplicable
+            - processing
+            - produced
+            - rejected
+            - shipped
+            - unknown
+          type: string
+        trackingNumber:
+          description: The tracking number of the PIN delivery.
+          type: string
       type: object
     ContactDetails:
       properties:
@@ -5990,8 +6547,9 @@ components:
             - loan
           type: string
         expiresAt:
-          $ref: "#/components/schemas/LocalDateTime"
           description: The end date of the grant offer validity period.
+          format: date-time
+          type: string
         fee:
           $ref: "#/components/schemas/Fee"
           description: Details of the fee configuration.
@@ -6002,8 +6560,9 @@ components:
           $ref: "#/components/schemas/Repayment"
           description: Details of the repayment configuration.
         startsAt:
-          $ref: "#/components/schemas/LocalDateTime"
           description: The starting date of the grant offer validity period.
+          format: date-time
+          type: string
       required:
         - accountHolderId
       type: object
@@ -6119,8 +6678,6 @@ components:
           items:
             $ref: "#/components/schemas/NetworkToken"
           type: array
-      type: object
-    LocalDateTime:
       type: object
     MatchingTransactionsRestriction:
       properties:
@@ -6342,6 +6899,41 @@ components:
         - hasPrevious
         - hasNext
       type: object
+    PaginatedGetCardOrderItemResponse:
+      properties:
+        data:
+          description: List of card order items in the card order batch.
+          items:
+            $ref: "#/components/schemas/CardOrderItem"
+          type: array
+        hasNext:
+          description: Indicates whether there are more items on the next page.
+          type: boolean
+        hasPrevious:
+          description: Indicates whether there are more items on the previous page.
+          type: boolean
+      required:
+        - data
+        - hasPrevious
+        - hasNext
+      type: object
+    PaginatedGetCardOrderResponse:
+      properties:
+        cardOrders:
+          description: Contains objects with information about card orders.
+          items:
+            $ref: "#/components/schemas/CardOrder"
+          type: array
+        hasNext:
+          description: Indicates whether there are more items on the next page.
+          type: boolean
+        hasPrevious:
+          description: Indicates whether there are more items on the previous page.
+          type: boolean
+      required:
+        - hasPrevious
+        - hasNext
+      type: object
     PaginatedPaymentInstrumentsResponse:
       properties:
         hasNext:
@@ -6501,6 +7093,9 @@ components:
         balanceAccountId:
           description: The unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/balanceAccounts__resParam_id) associated with the payment instrument.
           type: string
+        bankAccount:
+          $ref: "#/components/schemas/BankAccountModel"
+          description: Contains the business account details.
         card:
           $ref: "#/components/schemas/CardInfo"
           description: Contains information about the card. Required when you create a payment instrument of `type` **card**.
@@ -6713,6 +7308,38 @@ components:
             - SIP
           type: string
       type: object
+    PinChangeRequest:
+      properties:
+        encryptedKey:
+          description: Symmetric session key encrypted under the public key.
+          type: string
+        encryptedPinBlock:
+          description: The encrypted PIN block
+          type: string
+        paymentInstrumentId:
+          description: The unique identifier of the payment instrument.
+          type: string
+        token:
+          description: The token which is used to construct the pinblock.
+          type: string
+      required:
+        - paymentInstrumentId
+        - encryptedKey
+        - token
+        - encryptedPinBlock
+      type: object
+    PinChangeResponse:
+      properties:
+        status:
+          description: The pin change status.
+          enum:
+            - completed
+            - pending
+            - unavailable
+          type: string
+      required:
+        - status
+      type: object
     PlatformPaymentConfiguration:
       properties:
         salesDayClosingTime:
@@ -6761,6 +7388,18 @@ components:
           type: array
       required:
         - operation
+      type: object
+    PublicKeyResponse:
+      properties:
+        publicKey:
+          description: The public key to be used for encrypting the symmetric session key.
+          type: string
+        publicKeyExpiryDate:
+          description: The expiry date of the public key.
+          type: string
+      required:
+        - publicKey
+        - publicKeyExpiryDate
       type: object
     RemediatingAction:
       properties:
@@ -6837,6 +7476,30 @@ components:
         - title
         - detail
         - status
+      type: object
+    RevealPinRequest:
+      properties:
+        encryptedKey:
+          description: Symmetric session key encrypted under the public key.
+          type: string
+        paymentInstrumentId:
+          description: The unique identifier of the payment instrument.
+          type: string
+      required:
+        - paymentInstrumentId
+        - encryptedKey
+      type: object
+    RevealPinResponse:
+      properties:
+        encryptedPinBlock:
+          description: The encrypted PIN block.
+          type: string
+        token:
+          description: The encrypted PIN block extraction token.
+          type: string
+      required:
+        - encryptedPinBlock
+        - token
       type: object
     SELocalAccountIdentification:
       additionalProperties: false
@@ -8261,15 +8924,7 @@ components:
     BasicAuth:
       scheme: basic
       type: http
-x-groups:
-  - Platform
-  - Account holders
-  - Balance accounts
-  - Payment instruments
-  - Payment instrument groups
-  - Transaction rules
-  - Bank account validation
-  - Network tokens
-  - Grant accounts
-  - Grant offers
-  - Transfer routes
+    clientKey:
+      in: query
+      name: clientKey
+      type: apiKey

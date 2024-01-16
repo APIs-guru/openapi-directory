@@ -16228,13 +16228,6 @@ components:
           format: int64
           type: string
       type: object
-    GoogleCloudAiplatformV1beta1RebootPersistentResourceOperationMetadata:
-      description: Details of operations that perform reboot PersistentResource.
-      properties:
-        genericMetadata:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
-          description: Operation metadata for PersistentResource.
-      type: object
     GoogleCloudAiplatformV1beta1RemoveContextChildrenRequest:
       description: Request message for MetadataService.DeleteContextChildrenRequest.
       properties:
@@ -22685,6 +22678,8 @@ components:
             - FILTER_REASON_RAI_VIDEO_FRAME_CSAM
             - FILTER_REASON_RAI_VIDEO_FRAME_PEDO
             - FILTER_REASON_RAI_CONTEXTUAL_DANGEROUS
+            - FILTER_REASON_RAI_GRAIL_TEXT
+            - FILTER_REASON_RAI_GRAIL_IMAGE
             - FILTER_REASON_RAI_SAFETYCAT
             - FILTER_REASON_TOXICITY
             - FILTER_REASON_ATLAS_PRICING

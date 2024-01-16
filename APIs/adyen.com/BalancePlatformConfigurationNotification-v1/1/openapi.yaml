@@ -91,6 +91,95 @@ components:
           balancePlatform: YOUR_BALANCE_PLATFORM
         environment: test
         type: balancePlatform.accountHolder.created
+    post-balancePlatform.accountHolder.created-balancePlatform-accountHolder-created-lem-v3:
+      description: Example webhook when an account holder was created with LEM API v3
+      summary: Account holder created with LEM API v3
+      value:
+        data:
+          accountHolder:
+            capabilities:
+              sendToTransferInstrument:
+                allowed: false
+                enabled: true
+                problems:
+                  - entity:
+                      id: LE43319330319C8AYX89L2V59
+                      type: LegalEntity
+                    verificationErrors:
+                      - code: 2_902
+                        message: Terms Of Service forms are not accepted.
+                        remediatingActions:
+                          - code: 2_902
+                            message: Accept TOS
+                        type: invalidInput
+                  - entity:
+                      id: SE576BH223222F5GJVKHH6BDT
+                      type: BankAccount
+                    verificationErrors:
+                      - code: 2_8037
+                        message: "'bankStatement' was missing."
+                        remediatingActions:
+                          - code: 1_703
+                            message: Upload a bank statement
+                        type: dataMissing
+                  - entity:
+                      id: SE3222Z223222Q5J4D58K3DWP
+                      type: BankAccount
+                    verificationErrors:
+                      - code: 2_8037
+                        message: "'bankStatement' was missing."
+                        remediatingActions:
+                          - code: 1_703
+                            message: Upload a bank statement
+                        type: dataMissing
+                  - entity:
+                      id: LE43319330319C8AYX89L2V59
+                      type: LegalEntity
+                    verificationErrors:
+                      - code: 2_8189
+                        message: "'UBO through control' was missing."
+                        remediatingActions:
+                          - code: 2_151
+                            message: Add 'organization.entityAssociations' of type 'uboThroughControl' to legal entity
+                        type: dataMissing
+                      - code: 1_50
+                        message: Organization details couldn't be verified
+                        subErrors:
+                          - code: 1_5016
+                            message: The tax ID number couldn't be verified
+                            remediatingActions:
+                              - code: 1_500
+                                message: Update organization details
+                              - code: 1_501
+                                message: Upload a registration document
+                            type: invalidInput
+                        type: invalidInput
+                      - code: 2_8067
+                        message: "'Signatory' was missing."
+                        remediatingActions:
+                          - code: 2_124
+                            message: Add 'organization.entityAssociations' of type 'signatory' to legal entity
+                        type: dataMissing
+                requested: true
+                transferInstruments:
+                  - allowed: false
+                    enabled: true
+                    id: SE576BH223222F5GJVKHH6BDT
+                    requested: true
+                    verificationStatus: pending
+                  - allowed: false
+                    enabled: true
+                    id: SE3222Z223222Q5J4D58K3DWP
+                    requested: true
+                    verificationStatus: pending
+                verificationStatus: pending
+            id: AH32272223222B5CZW6QZ2V34
+            legalEntityId: LE43319330319C8AYX89L2V59
+            reference: YOUR_REFERENCE-2412C
+            status: Active
+          balancePlatform: YOUR_BALANCE_PLATFORM
+        environment: live
+        type: balancePlatform.accountHolder.created
     post-balancePlatform.accountHolder.updated-balancePlatform-accountHolder-updated:
       description: Example webhook when an account holder was updated
       summary: Account holder updated
@@ -132,6 +221,95 @@ components:
             status: Active
           balancePlatform: YOUR_BALANCE_PLATFORM
         environment: test
+        type: balancePlatform.accountHolder.updated
+    post-balancePlatform.accountHolder.updated-balancePlatform-accountHolder-updated-lem-v3:
+      description: Example webhook when an account holder was updated with LEM API v3
+      summary: Account holder updated with LEM API v3
+      value:
+        data:
+          accountHolder:
+            capabilities:
+              sendToTransferInstrument:
+                allowed: false
+                enabled: true
+                problems:
+                  - entity:
+                      id: LE43319330319C8AYX89L2V59
+                      type: LegalEntity
+                    verificationErrors:
+                      - code: 2_902
+                        message: Terms Of Service forms are not accepted.
+                        remediatingActions:
+                          - code: 2_902
+                            message: Accept TOS
+                        type: invalidInput
+                  - entity:
+                      id: SE576BH223222F5GJVKHH6BDT
+                      type: BankAccount
+                    verificationErrors:
+                      - code: 2_8037
+                        message: "'bankStatement' was missing."
+                        remediatingActions:
+                          - code: 1_703
+                            message: Upload a bank statement
+                        type: dataMissing
+                  - entity:
+                      id: SE3222Z223222Q5J4D58K3DWP
+                      type: BankAccount
+                    verificationErrors:
+                      - code: 2_8037
+                        message: "'bankStatement' was missing."
+                        remediatingActions:
+                          - code: 1_703
+                            message: Upload a bank statement
+                        type: dataMissing
+                  - entity:
+                      id: LE43319330319C8AYX89L2V59
+                      type: LegalEntity
+                    verificationErrors:
+                      - code: 2_8189
+                        message: "'UBO through control' was missing."
+                        remediatingActions:
+                          - code: 2_151
+                            message: Add 'organization.entityAssociations' of type 'uboThroughControl' to legal entity
+                        type: dataMissing
+                      - code: 1_50
+                        message: Organization details couldn't be verified
+                        subErrors:
+                          - code: 1_5016
+                            message: The tax ID number couldn't be verified
+                            remediatingActions:
+                              - code: 1_500
+                                message: Update organization details
+                              - code: 1_501
+                                message: Upload a registration document
+                            type: invalidInput
+                        type: invalidInput
+                      - code: 2_8067
+                        message: "'Signatory' was missing."
+                        remediatingActions:
+                          - code: 2_124
+                            message: Add 'organization.entityAssociations' of type 'signatory' to legal entity
+                        type: dataMissing
+                requested: true
+                transferInstruments:
+                  - allowed: false
+                    enabled: true
+                    id: SE576BH223222F5GJVKHH6BDT
+                    requested: true
+                    verificationStatus: pending
+                  - allowed: false
+                    enabled: true
+                    id: SE3222Z223222Q5J4D58K3DWP
+                    requested: true
+                    verificationStatus: pending
+                verificationStatus: pending
+            id: AH32272223222B5CZW6QZ2V34
+            legalEntityId: LE43319330319C8AYX89L2V59
+            reference: YOUR_REFERENCE-2412C
+            status: Active
+          balancePlatform: YOUR_BALANCE_PLATFORM
+        environment: live
         type: balancePlatform.accountHolder.updated
     post-balancePlatform.balanceAccount.created-balancePlatform-balanceAccount-created:
       description: Example webhook when a balance account was created
@@ -983,7 +1161,10 @@ components:
           type: string
         card:
           $ref: "#/components/schemas/CardOrderItemDeliveryStatus"
-          description: Card delivery status.
+          description: |-
+            The status of the card delivery.
+
+            Possible values: **created**, **rejected**, **processing**, **produced**, **shipped**, **delivered**, **notApplicable**, **unknown**. 
         cardOrderItemId:
           description: The unique identifier of the card order item.
           type: string
@@ -999,18 +1180,18 @@ components:
           type: string
         pin:
           $ref: "#/components/schemas/CardOrderItemDeliveryStatus"
-          description: PIN delivery status.
+          description: Contains information about the status of the PIN delivery.
         shippingMethod:
-          description: Shipping method used to deliver the card or the PIN.
+          description: The shipping method used to deliver the card or the PIN.
           type: string
       type: object
     CardOrderItemDeliveryStatus:
       properties:
         errorMessage:
-          description: Error message.
+          description: An error message.
           type: string
         status:
-          description: Status of the delivery.
+          description: The status of the PIN delivery.
           enum:
             - created
             - delivered
@@ -1022,7 +1203,7 @@ components:
             - unknown
           type: string
         trackingNumber:
-          description: Tracking number of the delivery.
+          description: The tracking number of the PIN delivery.
           type: string
       type: object
     CardOrderNotificationRequest:
@@ -1846,6 +2027,8 @@ webhooks:
             examples:
               balancePlatform-accountHolder-created:
                 $ref: "#/components/examples/post-balancePlatform.accountHolder.created-balancePlatform-accountHolder-created"
+              balancePlatform-accountHolder-created-lem-v3:
+                $ref: "#/components/examples/post-balancePlatform.accountHolder.created-balancePlatform-accountHolder-created-lem-v3"
             schema:
               $ref: "#/components/schemas/AccountHolderNotificationRequest"
       responses:
@@ -1855,6 +2038,8 @@ webhooks:
               examples:
                 balancePlatform-accountHolder-created:
                   $ref: "#/components/examples/WebhookAck"
+                balancePlatform-accountHolder-created-lem-v3:
+                  $ref: "#/components/examples/WebhookAck"
               schema:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
@@ -1863,7 +2048,6 @@ webhooks:
       summary: Account holder created
       tags:
         - Account holder
-      x-groupName: Account holder
       x-methodName: accountHolderCreated
       x-sortIndex: 1
   balancePlatform.accountHolder.updated:
@@ -1876,6 +2060,8 @@ webhooks:
             examples:
               balancePlatform-accountHolder-updated:
                 $ref: "#/components/examples/post-balancePlatform.accountHolder.updated-balancePlatform-accountHolder-updated"
+              balancePlatform-accountHolder-updated-lem-v3:
+                $ref: "#/components/examples/post-balancePlatform.accountHolder.updated-balancePlatform-accountHolder-updated-lem-v3"
             schema:
               $ref: "#/components/schemas/AccountHolderNotificationRequest"
       responses:
@@ -1885,6 +2071,8 @@ webhooks:
               examples:
                 balancePlatform-accountHolder-updated:
                   $ref: "#/components/examples/WebhookAck"
+                balancePlatform-accountHolder-updated-lem-v3:
+                  $ref: "#/components/examples/WebhookAck"
               schema:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
@@ -1893,7 +2081,6 @@ webhooks:
       summary: Account holder updated
       tags:
         - Account holder
-      x-groupName: Account holder
       x-methodName: accountHolderUpdated
       x-sortIndex: 2
   balancePlatform.balanceAccount.created:
@@ -1923,7 +2110,6 @@ webhooks:
       summary: Balance account created
       tags:
         - Balance account
-      x-groupName: Balance account
       x-methodName: balanceAccountCreated
       x-sortIndex: 1
   balancePlatform.balanceAccount.updated:
@@ -1953,7 +2139,6 @@ webhooks:
       summary: Balance account updated
       tags:
         - Balance account
-      x-groupName: Balance account
       x-methodName: balanceAccountUpdated
       x-sortIndex: 2
   balancePlatform.balanceAccountSweep.created:
@@ -1983,7 +2168,6 @@ webhooks:
       summary: Sweep created
       tags:
         - Balance account
-      x-groupName: Balance account
       x-methodName: sweepCreated
       x-sortIndex: 3
   balancePlatform.balanceAccountSweep.deleted:
@@ -2013,7 +2197,6 @@ webhooks:
       summary: Sweep deleted
       tags:
         - Balance account
-      x-groupName: Balance account
       x-methodName: sweepDeleted
       x-sortIndex: 5
   balancePlatform.balanceAccountSweep.updated:
@@ -2043,7 +2226,6 @@ webhooks:
       summary: Sweep updated
       tags:
         - Balance account
-      x-groupName: Balance account
       x-methodName: sweepUpdated
       x-sortIndex: 4
   balancePlatform.cardorder.created:
@@ -2067,7 +2249,6 @@ webhooks:
       summary: Card order created
       tags:
         - Card order
-      x-groupName: Card order
       x-methodName: cardOrderCreated
       x-sortIndex: 1
   balancePlatform.cardorder.updated:
@@ -2091,7 +2272,6 @@ webhooks:
       summary: Card order updated
       tags:
         - Card order
-      x-groupName: Card order
       x-methodName: cardOrderUpdated
       x-sortIndex: 2
   balancePlatform.paymentInstrument.created:
@@ -2123,7 +2303,6 @@ webhooks:
       summary: Payment instrument created
       tags:
         - Payment instrument
-      x-groupName: Payment instrument
       x-methodName: paymentInstrumentCreated
       x-sortIndex: 1
   balancePlatform.paymentInstrument.updated:
@@ -2153,12 +2332,6 @@ webhooks:
       summary: Payment instrument updated
       tags:
         - Payment instrument
-      x-groupName: Payment instrument
       x-methodName: paymentInstrumentUpdated
       x-sortIndex: 2
-x-groups:
-  - Account holder
-  - Balance account
-  - Payment instrument
-  - Card order
 x-staticResponse: response.json

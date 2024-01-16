@@ -126,7 +126,6 @@ paths:
       summary: Assign terminals
       tags:
         - General
-      x-groupName: General
       x-methodName: assignTerminals
       x-sortIndex: 1
   /findTerminal:
@@ -199,7 +198,6 @@ paths:
       summary: Get the account or store of a terminal
       tags:
         - General
-      x-groupName: General
       x-methodName: findTerminal
       x-sortIndex: 1
   /getStoresUnderAccount:
@@ -276,7 +274,6 @@ paths:
       summary: Get the stores of an account
       tags:
         - General
-      x-groupName: General
       x-methodName: getStoresUnderAccount
       x-sortIndex: 1
   /getTerminalDetails:
@@ -349,7 +346,6 @@ paths:
       summary: Get the details of a terminal
       tags:
         - General
-      x-groupName: General
       x-methodName: getTerminalDetails
       x-sortIndex: 1
   /getTerminalsUnderAccount:
@@ -430,7 +426,6 @@ paths:
       summary: Get the list of terminals
       tags:
         - General
-      x-groupName: General
       x-methodName: getTerminalsUnderAccount
       x-sortIndex: 1
 components:
@@ -1003,5 +998,3 @@ components:
     BasicAuth:
       scheme: basic
       type: http
-x-groups:
-  - General
