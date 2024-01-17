@@ -17489,7 +17489,7 @@ components:
           $ref: "#/components/schemas/BcmcInfo"
           description: Bancontact details.
         businessLineId:
-          description: The unique identifier of the business line.
+          description: The unique identifier of the business line. Required if you have a [platform setup](https://docs.adyen.com/marketplaces-and-platforms/platform-structure-resources/platform-setup/).
           type: string
         cartesBancaires:
           $ref: "#/components/schemas/CartesBancairesInfo"
@@ -17696,7 +17696,7 @@ components:
           $ref: "#/components/schemas/BcmcInfo"
           description: Bancontact details.
         businessLineId:
-          description: The unique identifier of the business line.
+          description: The unique identifier of the business line. Required if you have a [platform setup](https://docs.adyen.com/marketplaces-and-platforms/platform-structure-resources/platform-setup/).
           type: string
         cartesBancaires:
           $ref: "#/components/schemas/CartesBancairesInfo"

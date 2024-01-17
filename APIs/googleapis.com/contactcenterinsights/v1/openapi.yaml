@@ -2159,14 +2159,14 @@ components:
       description: Configuration that applies to all conversations.
       properties:
         agentChannel:
-          description: Optional. Indicates which of the channels, 1 or 2, contains the agent. Note that this must be set for conversations to be properly displayed and analyzed.
+          description: Optional. For audio conversations, this field indicates which of the channels, 1 or 2, contains the agent. Note that this must be set for audio conversations to be properly displayed and analyzed.
           format: int32
           type: integer
         agentId:
           description: An opaque, user-specified string representing the human agent who handled the conversations.
           type: string
         customerChannel:
-          description: Optional. Indicates which of the channels, 1 or 2, contains the agent. Note that this must be set for conversations to be properly displayed and analyzed.
+          description: Optional. For audio conversations, this field indicates which of the channels, 1 or 2, contains the customer. Note that this must be set for audio conversations to be properly displayed and analyzed.
           format: int32
           type: integer
       type: object
@@ -3774,14 +3774,14 @@ components:
       description: Configuration that applies to all conversations.
       properties:
         agentChannel:
-          description: Optional. Indicates which of the channels, 1 or 2, contains the agent. Note that this must be set for conversations to be properly displayed and analyzed.
+          description: Optional. For audio conversations, this field indicates which of the channels, 1 or 2, contains the agent. Note that this must be set for audio conversations to be properly displayed and analyzed.
           format: int32
           type: integer
         agentId:
           description: An opaque, user-specified string representing the human agent who handled the conversations.
           type: string
         customerChannel:
-          description: Optional. Indicates which of the channels, 1 or 2, contains the agent. Note that this must be set for conversations to be properly displayed and analyzed.
+          description: Optional. For audio conversations, this field indicates which of the channels, 1 or 2, contains the customer. Note that this must be set for audio conversations to be properly displayed and analyzed.
           format: int32
           type: integer
       type: object

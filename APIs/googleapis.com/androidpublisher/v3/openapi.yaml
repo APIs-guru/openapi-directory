@@ -7344,7 +7344,7 @@ components:
       properties:
         proratedRefund:
           $ref: "#/components/schemas/RevocationContextProratedRefund"
-          description: Optional. Used when users should be refunded a prorated amount they paid for their subscription based on the amount of time remaining in a subscription. Not supported for subscriptions with multiple items.
+          description: Optional. Used when users should be refunded a prorated amount they paid for their subscription based on the amount of time remaining in a subscription.
       type: object
     RevocationContextProratedRefund:
       description: Used to determine if the refund type in the RevocationContext is a prorated refund.
