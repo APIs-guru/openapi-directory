@@ -23,14 +23,18 @@ info:
   x-providerName: hubapi.com
   x-serviceName: automation
 tags:
+  - name: Callbacks
   - name: Public_Callbacks
-  - name: Public_Action_Revisions
-  - name: Public_Action_Functions
+  - name: Revisions
+  - name: Functions
+  - name: Definitions
   - name: Public_Action_Definitions
+  - name: Public_Action_Functions
+  - name: Public_Action_Revisions
 paths:
   /automation/v4/actions/callbacks/complete:
     post:
-      operationId: post-/automation/v4/actions/callbacks/complete_completeBatch
+      operationId: post-/automation/v4/actions/callbacks/complete
       parameters: []
       requestBody:
         content:
@@ -49,10 +53,10 @@ paths:
             - automation
         - private_apps_legacy: []
       tags:
-        - Public_Callbacks
+        - Callbacks
   /automation/v4/actions/callbacks/{callbackId}/complete:
     post:
-      operationId: post-/automation/v4/actions/callbacks/{callbackId}/complete_complete
+      operationId: post-/automation/v4/actions/callbacks/{callbackId}/complete
       parameters:
         - explode: false
           in: path
@@ -78,10 +82,10 @@ paths:
             - automation
         - private_apps_legacy: []
       tags:
-        - Public_Callbacks
+        - Callbacks
   /automation/v4/actions/{appId}:
     get:
-      operationId: get-/automation/v4/actions/{appId}_getPage
+      operationId: get-/automation/v4/actions/{appId}
       parameters:
         - description: The maximum number of results to display per page.
           explode: true
@@ -129,9 +133,9 @@ paths:
       security:
         - developer_hapikey: []
       tags:
-        - Public_Action_Definitions
+        - Definitions
     post:
-      operationId: post-/automation/v4/actions/{appId}_create
+      operationId: post-/automation/v4/actions/{appId}
       parameters:
         - explode: false
           in: path
@@ -159,10 +163,10 @@ paths:
       security:
         - developer_hapikey: []
       tags:
-        - Public_Action_Definitions
+        - Definitions
   /automation/v4/actions/{appId}/{definitionId}:
     delete:
-      operationId: delete-/automation/v4/actions/{appId}/{definitionId}_archive
+      operationId: delete-/automation/v4/actions/{appId}/{definitionId}
       parameters:
         - explode: false
           in: path
@@ -188,9 +192,9 @@ paths:
       security:
         - developer_hapikey: []
       tags:
-        - Public_Action_Definitions
+        - Definitions
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}_getById
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}
       parameters:
         - explode: false
           in: path
@@ -228,9 +232,9 @@ paths:
       security:
         - developer_hapikey: []
       tags:
-        - Public_Action_Definitions
+        - Definitions
     patch:
-      operationId: patch-/automation/v4/actions/{appId}/{definitionId}_update
+      operationId: patch-/automation/v4/actions/{appId}/{definitionId}
       parameters:
         - explode: false
           in: path
@@ -265,10 +269,10 @@ paths:
       security:
         - developer_hapikey: []
       tags:
-        - Public_Action_Definitions
+        - Definitions
   /automation/v4/actions/{appId}/{definitionId}/functions:
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions_getPage
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions
       parameters:
         - explode: false
           in: path
@@ -297,10 +301,10 @@ paths:
       security:
         - developer_hapikey: []
       tags:
-        - Public_Action_Functions
+        - Functions
   /automation/v4/actions/{appId}/{definitionId}/functions/{functionType}:
     delete:
-      operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}_archiveByFunctionType
+      operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}
       parameters:
         - explode: false
           in: path
@@ -338,9 +342,9 @@ paths:
       security:
         - developer_hapikey: []
       tags:
-        - Public_Action_Functions
+        - Functions
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}_getByFunctionType
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}
       parameters:
         - explode: false
           in: path
@@ -381,9 +385,9 @@ paths:
       security:
         - developer_hapikey: []
       tags:
-        - Public_Action_Functions
+        - Functions
     put:
-      operationId: put-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}_createOrReplaceByFunctionType
+      operationId: put-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}
       parameters:
         - explode: false
           in: path
@@ -430,10 +434,10 @@ paths:
       security:
         - developer_hapikey: []
       tags:
-        - Public_Action_Functions
+        - Functions
   /automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}:
     delete:
-      operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}_archive
+      operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}
       parameters:
         - explode: false
           in: path
@@ -478,9 +482,9 @@ paths:
       security:
         - developer_hapikey: []
       tags:
-        - Public_Action_Functions
+        - Functions
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}_getById
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}
       parameters:
         - explode: false
           in: path
@@ -528,9 +532,9 @@ paths:
       security:
         - developer_hapikey: []
       tags:
-        - Public_Action_Functions
+        - Functions
     put:
-      operationId: put-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}_createOrReplace
+      operationId: put-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}
       parameters:
         - explode: false
           in: path
@@ -584,10 +588,10 @@ paths:
       security:
         - developer_hapikey: []
       tags:
-        - Public_Action_Functions
+        - Functions
   /automation/v4/actions/{appId}/{definitionId}/revisions:
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions_getPage
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions
       parameters:
         - explode: false
           in: path
@@ -633,10 +637,10 @@ paths:
       security:
         - developer_hapikey: []
       tags:
-        - Public_Action_Revisions
+        - Revisions
   /automation/v4/actions/{appId}/{definitionId}/revisions/{revisionId}:
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions/{revisionId}_getById
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions/{revisionId}
       parameters:
         - explode: false
           in: path
@@ -672,7 +676,7 @@ paths:
       security:
         - developer_hapikey: []
       tags:
-        - Public_Action_Revisions
+        - Revisions
 components:
   responses:
     Error:

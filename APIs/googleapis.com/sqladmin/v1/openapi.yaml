@@ -3758,6 +3758,9 @@ components:
                   format: int32
                   type: integer
               type: object
+            parallel:
+              description: Optional. Whether or not the export should be parallel.
+              type: boolean
             schemaOnly:
               description: Export only schemas.
               type: boolean
@@ -3766,6 +3769,10 @@ components:
               items:
                 type: string
               type: array
+            threads:
+              description: Optional. The number of threads to use for parallel export.
+              format: int32
+              type: integer
           type: object
         uri:
           description: The path to the file in Google Cloud Storage where the export will be stored. The URI is in the form `gs://bucketName/fileName`. If the file already exists, the request succeeds, but the operation fails. If `fileType` is `SQL` and the filename ends with .gz, the contents are compressed.
@@ -4899,6 +4906,7 @@ components:
             - INCOMPATIBLE_DATABASE_MINOR_VERSION
             - SOURCE_MAX_SUBSCRIPTIONS
             - UNABLE_TO_VERIFY_DEFINERS
+            - SUBSCRIPTION_CALCULATION_STATUS
           type: string
       type: object
     SqlInstancesGetDiskShrinkConfigResponse:

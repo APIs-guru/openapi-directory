@@ -363,6 +363,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1/{parent}/firewallpolicies:reorder:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Reorders all firewall policies.
+      operationId: recaptchaenterprise.projects.firewallpolicies.reorder
+      parameters:
+        - description: Required. The name of the project to list the policies for, in the format `projects/{project}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1ReorderFirewallPoliciesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1ReorderFirewallPoliciesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{parent}/keys:
     get:
       description: Returns the list of all keys that belong to a project.
@@ -1252,6 +1294,19 @@ components:
         name:
           description: Required. Identifier. The resource name for this membership in the format `projects/{project}/relatedaccountgroups/{relatedaccountgroup}/memberships/{membership}`.
           type: string
+      type: object
+    GoogleCloudRecaptchaenterpriseV1ReorderFirewallPoliciesRequest:
+      description: The reorder firewall policies request message.
+      properties:
+        names:
+          description: Required. A list containing all policy names, in the new order. Each name is in the format `projects/{project}/firewallpolicies/{firewallpolicy}`.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudRecaptchaenterpriseV1ReorderFirewallPoliciesResponse:
+      description: The reorder firewall policies response message.
+      properties: {}
       type: object
     GoogleCloudRecaptchaenterpriseV1RetrieveLegacySecretKeyResponse:
       description: Secret key is used only in legacy reCAPTCHA. It must be used in a 3rd party integration with legacy reCAPTCHA.

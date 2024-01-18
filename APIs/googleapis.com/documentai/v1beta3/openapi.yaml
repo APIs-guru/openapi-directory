@@ -4129,6 +4129,11 @@ components:
         inputDocuments:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3BatchDocumentsInputConfig"
           description: The input documents for the BatchProcessDocuments method.
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. The labels with user-defined metadata for the request. Label keys and values can be no longer than 63 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter.
+          type: object
         outputConfig:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3BatchProcessRequestBatchOutputConfig"
           deprecated: true
@@ -4211,7 +4216,7 @@ components:
         documentWarehouseConfig:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DatasetDocumentWarehouseConfig"
           deprecated: true
-          description: Optional. Derepcated. Warehouse-based dataset configuration is not supported today.
+          description: Optional. Deprecated. Warehouse-based dataset configuration is not supported.
         gcsManagedConfig:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DatasetGCSManagedConfig"
           description: Optional. User-managed Cloud Storage dataset configuration. Use this configuration if the dataset documents are stored under a user-managed Cloud Storage location.
@@ -5868,7 +5873,7 @@ components:
           description: Which pages to process (1-indexed).
         ocrConfig:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3OcrConfig"
-          description: Only applicable to `OCR_PROCESSOR`. Returns error if set on other processor types.
+          description: Only applicable to `OCR_PROCESSOR` and `FORM_PARSER_PROCESSOR`. Returns error if set on other processor types.
         schemaOverride:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentSchema"
           description: Optional. Override the schema of the ProcessorVersion. Will return an Invalid Argument error if this field is set when the underlying ProcessorVersion doesn't support schema override.
@@ -5900,6 +5905,11 @@ components:
         inlineDocument:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3Document"
           description: An inline document proto.
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. The labels with user-defined metadata for the request. Label keys and values can be no longer than 63 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter.
+          type: object
         processOptions:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3ProcessOptions"
           description: Inference-time options for the process API
@@ -6305,11 +6315,11 @@ components:
       description: Options to control foundation model tuning of the processor.
       properties:
         learningRateMultiplier:
-          description: Optional. The multiplier to apply to the recommended learning rate. Valid values are between [0.1, 10]. If not provided, recommended learning rate will be used.
+          description: Optional. The multiplier to apply to the recommended learning rate. Valid values are between 0.1 and 10. If not provided, recommended learning rate will be used.
           format: float
           type: number
         trainSteps:
-          description: Optional. The number of steps to run for model tuning. Valid values are between [1, 400]. If not provided, recommended steps will be used.
+          description: Optional. The number of steps to run for model tuning. Valid values are between 1 and 400. If not provided, recommended steps will be used.
           format: int32
           type: integer
       type: object

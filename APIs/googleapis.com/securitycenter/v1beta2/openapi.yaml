@@ -296,7 +296,7 @@ components:
       description: An attack exposure contains the results of an attack path simulation run.
       properties:
         attackExposureResult:
-          description: "The resource name of the attack path simulation result that contains the details regarding this attack exposure score. Example: organizations/123/attackExposureResults/456"
+          description: "The resource name of the attack path simulation result that contains the details regarding this attack exposure score. Example: organizations/123/simulations/456/attackExposureResults/789"
           type: string
         exposedHighValueResourcesCount:
           description: The number of high value resources that are exposed as a result of this finding.
@@ -1868,6 +1868,19 @@ components:
           description: Kubernetes Pod namespace.
           type: string
       type: object
+    PolicyDriftDetails:
+      description: The policy field that violates the deployed posture and its expected and and detected values.
+      properties:
+        detectedValue:
+          description: The detected value that violates the deployed posture, for example, `false` or `allowed_values={"projects/22831892”}`.
+          type: string
+        expectedValue:
+          description: The value of this field that was configured in a posture, for example, `true` or `allowed_values={"projects/29831892”}`.
+          type: string
+        field:
+          description: The name of the updated field, for example constraint.implementation.policy_rules[0].enforce
+          type: string
+      type: object
     Process:
       description: Represents an operating system process.
       properties:
@@ -2060,16 +2073,27 @@ components:
       description: Represents a posture that is deployed on Google Cloud by the Security Command Center Posture Management service. A posture contains one or more policy sets. A policy set is a group of policies that enforce a set of security rules on Google Cloud.
       properties:
         changedPolicy:
-          description: The name of the policy that has been updated, for example, `projects/{project_id}/policies/{constraint_name}`.
+          description: The name of the updated policy, for example, `projects/{project_id}/policies/{constraint_name}`.
           type: string
         name:
-          description: Name of the posture, for example, `organizations/{org_id}/locations/{location}/postures/{posture_name}`.
+          description: Name of the posture, for example, `CIS-Posture`.
+          type: string
+        policy:
+          description: The ID of the updated policy, for example, `compute-policy-1`.
+          type: string
+        policyDriftDetails:
+          description: The details about a change in an updated policy that violates the deployed posture.
+          items:
+            $ref: "#/components/schemas/PolicyDriftDetails"
+          type: array
+        policySet:
+          description: The name of the updated policyset, for example, `cis-policyset`.
           type: string
         postureDeployment:
-          description: The name of the posture deployment, for example, `projects/{project_id}/posturedeployments/{posture_deployment_id}`.
+          description: The name of the posture deployment, for example, `organizations/{org_id}/posturedeployments/{posture_deployment_id}`.
           type: string
         postureDeploymentResource:
-          description: The project, folder, or organization on which the posture is deployed, for example, `projects/{project_id}`.
+          description: The project, folder, or organization on which the posture is deployed, for example, `projects/{project_number}`.
           type: string
         revisionId:
           description: The version of the posture, for example, `c7cfa2a8`.

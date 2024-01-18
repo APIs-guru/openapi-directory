@@ -3732,6 +3732,13 @@ components:
         stagingLocation:
           description: The Cloud Storage path for staging local files. Must be a valid Cloud Storage URL, beginning with `gs://`.
           type: string
+        streamingMode:
+          description: Optional. Specifies the Streaming Engine message processing guarantees. Reduces cost and latency but might result in duplicate messages committed to storage. Designed to run simple mapping streaming ETL jobs at the lowest cost. For example, Change Data Capture (CDC) to BigQuery is a canonical use case.
+          enum:
+            - STREAMING_MODE_UNSPECIFIED
+            - STREAMING_MODE_EXACTLY_ONCE
+            - STREAMING_MODE_AT_LEAST_ONCE
+          type: string
         subnetwork:
           description: Subnetwork to which VMs will be assigned, if desired. You can specify a subnetwork using either a complete URL or an abbreviated path. Expected to be of the form "https://www.googleapis.com/compute/v1/projects/HOST_PROJECT_ID/regions/REGION/subnetworks/SUBNETWORK" or "regions/REGION/subnetworks/SUBNETWORK". If the subnetwork is located in a Shared VPC network, you must use the complete URL.
           type: string
@@ -5024,6 +5031,13 @@ components:
         serviceAccountEmail:
           description: Optional. The email address of the service account to run the job as.
           type: string
+        streamingMode:
+          description: Optional. Specifies the Streaming Engine message processing guarantees. Reduces cost and latency but might result in duplicate messages committed to storage. Designed to run simple mapping streaming ETL jobs at the lowest cost. For example, Change Data Capture (CDC) to BigQuery is a canonical use case.
+          enum:
+            - STREAMING_MODE_UNSPECIFIED
+            - STREAMING_MODE_EXACTLY_ONCE
+            - STREAMING_MODE_AT_LEAST_ONCE
+          type: string
         subnetwork:
           description: Optional. Subnetwork to which VMs will be assigned, if desired. You can specify a subnetwork using either a complete URL or an abbreviated path. Expected to be of the form "https://www.googleapis.com/compute/v1/projects/HOST_PROJECT_ID/regions/REGION/subnetworks/SUBNETWORK" or "regions/REGION/subnetworks/SUBNETWORK". If the subnetwork is located in a Shared VPC network, you must use the complete URL.
           type: string
@@ -5809,7 +5823,7 @@ components:
       description: Contains per-user worker telemetry used in streaming autoscaling.
       properties:
         activeBundleCount:
-          description: Current acive bundle count.
+          deprecated: true
           format: int32
           type: integer
         activeThreadCount:
@@ -5817,19 +5831,31 @@ components:
           format: int32
           type: integer
         maximumBundleCount:
-          description: Maximum bundle count limit.
+          description: Maximum bundle count.
           format: int32
           type: integer
+        maximumBytes:
+          description: Maximum bytes.
+          format: int64
+          type: string
         maximumBytesCount:
-          description: Maximum bytes count limit.
+          deprecated: true
           format: int32
           type: integer
         maximumThreadCount:
           description: Maximum thread count limit.
           format: int32
           type: integer
+        outstandingBundleCount:
+          description: Current outstanding bundle count.
+          format: int32
+          type: integer
+        outstandingBytes:
+          description: Current outstanding bytes.
+          format: int64
+          type: string
         outstandingBytesCount:
-          description: Current outstanding bytes count.
+          deprecated: true
           format: int32
           type: integer
       type: object
