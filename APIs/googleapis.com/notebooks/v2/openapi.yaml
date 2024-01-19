@@ -691,6 +691,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v2/{notebookInstance}:resizeDisk:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Resize a notebook instance disk to a higher capacity.
+      operationId: notebooks.projects.locations.instances.resizeDisk
+      parameters:
+        - description: "Required. Format: `projects/{project_id}/locations/{location}/instances/{instance_id}`"
+          in: path
+          name: notebookInstance
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResizeDiskRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v2/{parent}/instances:
     get:
       description: Lists instances in a given project and location.
@@ -1542,6 +1584,16 @@ components:
     ResetInstanceRequest:
       description: Request for resetting a notebook instance
       properties: {}
+      type: object
+    ResizeDiskRequest:
+      description: Request for resizing the notebook instance disks
+      properties:
+        bootDisk:
+          $ref: "#/components/schemas/BootDisk"
+          description: Required. The boot disk to be resized. Only disk_size_gb will be used.
+        dataDisk:
+          $ref: "#/components/schemas/DataDisk"
+          description: Required. The data disk to be resized. Only disk_size_gb will be used.
       type: object
     RollbackInstanceRequest:
       description: Request for rollbacking a notebook instance

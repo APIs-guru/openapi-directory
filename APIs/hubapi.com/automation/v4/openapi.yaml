@@ -24,17 +24,13 @@ info:
   x-serviceName: automation
 tags:
   - name: Callbacks
-  - name: Public_Callbacks
   - name: Revisions
   - name: Functions
   - name: Definitions
-  - name: Public_Action_Definitions
-  - name: Public_Action_Functions
-  - name: Public_Action_Revisions
 paths:
   /automation/v4/actions/callbacks/complete:
     post:
-      operationId: post-/automation/v4/actions/callbacks/complete
+      operationId: post-/automation/v4/actions/callbacks/complete_completeBatch
       parameters: []
       requestBody:
         content:
@@ -52,11 +48,12 @@ paths:
         - oauth2_legacy:
             - automation
         - private_apps_legacy: []
+      summary: Completes a batch of callbacks
       tags:
         - Callbacks
   /automation/v4/actions/callbacks/{callbackId}/complete:
     post:
-      operationId: post-/automation/v4/actions/callbacks/{callbackId}/complete
+      operationId: post-/automation/v4/actions/callbacks/{callbackId}/complete_complete
       parameters:
         - explode: false
           in: path
@@ -81,11 +78,12 @@ paths:
         - oauth2_legacy:
             - automation
         - private_apps_legacy: []
+      summary: Completes a single callback
       tags:
         - Callbacks
   /automation/v4/actions/{appId}:
     get:
-      operationId: get-/automation/v4/actions/{appId}
+      operationId: get-/automation/v4/actions/{appId}_getPage
       parameters:
         - description: The maximum number of results to display per page.
           explode: true
@@ -130,12 +128,12 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security:
-        - developer_hapikey: []
+      security: []
+      summary: Get paged extension definitions
       tags:
         - Definitions
     post:
-      operationId: post-/automation/v4/actions/{appId}
+      operationId: post-/automation/v4/actions/{appId}_create
       parameters:
         - explode: false
           in: path
@@ -160,13 +158,13 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security:
-        - developer_hapikey: []
+      security: []
+      summary: Create a new extension definition
       tags:
         - Definitions
   /automation/v4/actions/{appId}/{definitionId}:
     delete:
-      operationId: delete-/automation/v4/actions/{appId}/{definitionId}
+      operationId: delete-/automation/v4/actions/{appId}/{definitionId}_archive
       parameters:
         - explode: false
           in: path
@@ -189,12 +187,12 @@ paths:
           description: No content
         default:
           $ref: "#/components/responses/Error"
-      security:
-        - developer_hapikey: []
+      security: []
+      summary: Archive an extension definition
       tags:
         - Definitions
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}_getById
       parameters:
         - explode: false
           in: path
@@ -229,12 +227,12 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security:
-        - developer_hapikey: []
+      security: []
+      summary: Get extension definition by Id
       tags:
         - Definitions
     patch:
-      operationId: patch-/automation/v4/actions/{appId}/{definitionId}
+      operationId: patch-/automation/v4/actions/{appId}/{definitionId}_update
       parameters:
         - explode: false
           in: path
@@ -266,13 +264,13 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security:
-        - developer_hapikey: []
+      security: []
+      summary: Patch an existing extension definition
       tags:
         - Definitions
   /automation/v4/actions/{appId}/{definitionId}/functions:
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions_getPage
       parameters:
         - explode: false
           in: path
@@ -298,13 +296,13 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security:
-        - developer_hapikey: []
+      security: []
+      summary: Get all functions for a given definition
       tags:
         - Functions
   /automation/v4/actions/{appId}/{definitionId}/functions/{functionType}:
     delete:
-      operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}
+      operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}_archiveByFunctionType
       parameters:
         - explode: false
           in: path
@@ -339,12 +337,12 @@ paths:
           description: No content
         default:
           $ref: "#/components/responses/Error"
-      security:
-        - developer_hapikey: []
+      security: []
+      summary: Delete a function for a definition
       tags:
         - Functions
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}_getByFunctionType
       parameters:
         - explode: false
           in: path
@@ -382,12 +380,12 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security:
-        - developer_hapikey: []
+      security: []
+      summary: Get all functions by a type for a given definition
       tags:
         - Functions
     put:
-      operationId: put-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}
+      operationId: put-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}_createOrReplaceByFunctionType
       parameters:
         - explode: false
           in: path
@@ -431,13 +429,13 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security:
-        - developer_hapikey: []
+      security: []
+      summary: Insert a function for a definition
       tags:
         - Functions
   /automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}:
     delete:
-      operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}
+      operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}_archive
       parameters:
         - explode: false
           in: path
@@ -479,12 +477,12 @@ paths:
           description: No content
         default:
           $ref: "#/components/responses/Error"
-      security:
-        - developer_hapikey: []
+      security: []
+      summary: Archive a function for a definition
       tags:
         - Functions
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}_getById
       parameters:
         - explode: false
           in: path
@@ -529,12 +527,12 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security:
-        - developer_hapikey: []
+      security: []
+      summary: Get a function for a given definition
       tags:
         - Functions
     put:
-      operationId: put-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}
+      operationId: put-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}_createOrReplace
       parameters:
         - explode: false
           in: path
@@ -585,13 +583,13 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security:
-        - developer_hapikey: []
+      security: []
+      summary: Insert a function for a definition
       tags:
         - Functions
   /automation/v4/actions/{appId}/{definitionId}/revisions:
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions_getPage
       parameters:
         - explode: false
           in: path
@@ -634,13 +632,13 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security:
-        - developer_hapikey: []
+      security: []
+      summary: Get all revisions for a given definition
       tags:
         - Revisions
   /automation/v4/actions/{appId}/{definitionId}/revisions/{revisionId}:
     get:
-      operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions/{revisionId}
+      operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions/{revisionId}_getById
       parameters:
         - explode: false
           in: path
@@ -673,8 +671,8 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security:
-        - developer_hapikey: []
+      security: []
+      summary: Gets a revision for a given definition by revision id
       tags:
         - Revisions
 components:
@@ -1018,6 +1016,11 @@ components:
             - KNOWLEDGE_ARTICLE
             - PROPERTY_INFO
             - DATA_PRIVACY_CONSENT
+            - GOAL_TEMPLATE
+            - SCORE_CONFIGURATION
+            - AUDIENCE
+            - PARTNER_CLIENT_REVENUE
+            - AUTOMATION_JOURNEY
             - UNKNOWN
           type: string
         type:
@@ -1394,10 +1397,6 @@ components:
       title: SINGLE_FIELD
       type: object
   securitySchemes:
-    developer_hapikey:
-      in: query
-      name: hapikey
-      type: apiKey
     oauth2_legacy:
       flows:
         authorizationCode:

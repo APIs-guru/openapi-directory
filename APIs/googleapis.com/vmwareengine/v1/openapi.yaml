@@ -262,8 +262,8 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Grants the bind permission to the customer provided principal(user / service account) to bind their DNS zone with the intranet VPC associated with the project.
-      operationId: vmwareengine.projects.locations.global.dnsBindPermission.grant
+      description: Grants the bind permission to the customer provided principal(user / service account) to bind their DNS zone with the intranet VPC associated with the project. DnsBindPermission is a global resource and location can only be global.
+      operationId: vmwareengine.projects.locations.dnsBindPermission.grant
       parameters:
         - description: "Required. The name of the resource which stores the users/service accounts having the permission to bind to the corresponding intranet VPC of the consumer project. DnsBindPermission is a global resource. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. For example: `projects/my-project/locations/global/dnsBindPermission`"
           in: path
@@ -346,8 +346,8 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Revokes the bind permission from the customer provided principal(user / service account) on the intranet VPC associated with the consumer project.
-      operationId: vmwareengine.projects.locations.global.dnsBindPermission.revoke
+      description: Revokes the bind permission from the customer provided principal(user / service account) on the intranet VPC associated with the consumer project. DnsBindPermission is a global resource and location can only be global.
+      operationId: vmwareengine.projects.locations.dnsBindPermission.revoke
       parameters:
         - description: "Required. The name of the resource which stores the users/service accounts having the permission to bind to the corresponding intranet VPC of the consumer project. DnsBindPermission is a global resource. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. For example: `projects/my-project/locations/global/dnsBindPermission`"
           in: path
@@ -1036,8 +1036,8 @@ paths:
         - projects
   /v1/{parent}/networkPeerings:
     get:
-      description: Lists `NetworkPeering` resources in a given project.
-      operationId: vmwareengine.projects.locations.global.networkPeerings.list
+      description: Lists `NetworkPeering` resources in a given project. NetworkPeering is a global resource and location can only be global.
+      operationId: vmwareengine.projects.locations.networkPeerings.list
       parameters:
         - description: "Required. The resource name of the location (global) to query for network peerings. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. For example: `projects/my-project/locations/global`"
           in: path
@@ -1092,8 +1092,8 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new network peering between the peer network and VMware Engine network provided in a `NetworkPeering` resource.
-      operationId: vmwareengine.projects.locations.global.networkPeerings.create
+      description: Creates a new network peering between the peer network and VMware Engine network provided in a `NetworkPeering` resource. NetworkPeering is a global resource and location can only be global.
+      operationId: vmwareengine.projects.locations.networkPeerings.create
       parameters:
         - description: "Required. The resource name of the location to create the new network peering in. This value is always `global`, because `NetworkPeering` is a global resource. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. For example: `projects/my-project/locations/global`"
           in: path
@@ -2180,7 +2180,7 @@ components:
       description: DnsBindPermission resource that contains the accounts having the consumer DNS bind permission on the corresponding intranet VPC of the consumer project.
       properties:
         name:
-          description: "Required. Output only. The name of the resource which stores the users/service accounts having the permission to bind to the corresponding intranet VPC of the consumer project. DnsBindPermission is a global resource. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. For example: `projects/my-project/locations/global/dnsBindPermission`"
+          description: "Required. Output only. The name of the resource which stores the users/service accounts having the permission to bind to the corresponding intranet VPC of the consumer project. DnsBindPermission is a global resource and location can only be global. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. For example: `projects/my-project/locations/global/dnsBindPermission`"
           readOnly: true
           type: string
         principals:
@@ -2909,7 +2909,7 @@ components:
           description: Optional. True if all subnet routes with public IP address range are imported; false otherwise. The default value is true. IPv4 special-use ranges (https://en.wikipedia.org/wiki/IPv4#Special_addresses) are always imported to peers and are not controlled by this field.
           type: boolean
         name:
-          description: "Output only. The resource name of the network peering. Resource names are scheme-less URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. For example: `projects/my-project/locations/global/networkPeerings/my-peering`"
+          description: "Output only. The resource name of the network peering. NetworkPeering is a global resource and location can only be global. Resource names are scheme-less URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. For example: `projects/my-project/locations/global/networkPeerings/my-peering`"
           readOnly: true
           type: string
         peerMtu:

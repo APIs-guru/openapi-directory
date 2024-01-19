@@ -279,7 +279,7 @@ paths:
       description: Finish a running hybrid DlpJob. Triggers the finalization steps and running of any enabled actions that have not yet run.
       operationId: dlp.projects.locations.dlpJobs.finish
       parameters:
-        - description: Required. The name of the DlpJob resource to be cancelled.
+        - description: Required. The name of the DlpJob resource to be finished.
           in: path
           name: name
           required: true
