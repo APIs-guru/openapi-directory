@@ -1299,6 +1299,11 @@ paths:
           name: filter
           schema:
             type: string
+        - description: 'Optional. The fields by which to order the valued resources response. Supported fields: * `exposed_score` * `resource_value` * `resource_type` * `resource` * `display_name` Values should be a comma separated list of fields. For example: `exposed_score,resource_value`. The default sorting order is descending. To specify ascending or descending order for a field, append a " ASC" or a " DESC" suffix, respectively; for example: `exposed_score DESC`.'
+          in: query
+          name: orderBy
+          schema:
+            type: string
         - description: The maximum number of results to return in a single response. Default is 10, minimum is 1, maximum is 1000.
           in: query
           name: pageSize
@@ -1919,7 +1924,7 @@ components:
             type: string
           type: array
         role:
-          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`. For an overview of the IAM roles and permissions, see the [IAM documentation](https://cloud.google.com/iam/docs/roles-overview). For a list of the available pre-defined roles, see [here](https://cloud.google.com/iam/docs/understanding-roles).
           type: string
       type: object
     BulkMuteFindingsRequest:

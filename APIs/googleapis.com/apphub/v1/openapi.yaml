@@ -599,6 +599,25 @@ components:
           format: int32
           type: integer
       type: object
+    ReconciliationOperationMetadata:
+      description: Operation metadata returned by the CLH during resource state reconciliation.
+      properties:
+        deleteResource:
+          deprecated: true
+          description: DEPRECATED. Use exclusive_action instead.
+          type: boolean
+        exclusiveAction:
+          description: Excluisive action returned by the CLH.
+          enum:
+            - UNKNOWN_REPAIR_ACTION
+            - DELETE
+            - RETRY
+          type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
+      type: object
     SetIamPolicyRequest:
       description: Request message for `SetIamPolicy` method.
       properties:
