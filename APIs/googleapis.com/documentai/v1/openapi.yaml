@@ -3190,6 +3190,14 @@ components:
         latestEvaluation:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1EvaluationReference"
           description: The most recently invoked evaluation for the processor version.
+        modelType:
+          description: Output only. The model type of this processor version.
+          enum:
+            - MODEL_TYPE_UNSPECIFIED
+            - MODEL_TYPE_GENERATIVE
+            - MODEL_TYPE_CUSTOM
+          readOnly: true
+          type: string
         name:
           description: "The resource name of the processor version. Format: `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processor_version}`"
           type: string

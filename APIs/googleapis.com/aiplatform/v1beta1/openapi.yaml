@@ -4311,7 +4311,7 @@ paths:
       description: Creates a new FeatureOnlineStore in a given project and location.
       operationId: aiplatform.projects.locations.featureOnlineStores.create
       parameters:
-        - description: "Required. The resource name of the Location to create FeatureOnlineStores. Format: `projects/{project}/locations/{location}'`"
+        - description: "Required. The resource name of the Location to create FeatureOnlineStores. Format: `projects/{project}/locations/{location}`"
           in: path
           name: parent
           required: true
@@ -8236,7 +8236,7 @@ components:
           description: Whether the text should be filtered and not shown to the end user. This is determined based on a combination of `triggered_recitation`, `triggered_blocklist`, `language_filter_result`, and `triggered_safety_filter`.
           type: boolean
         languageFilterResult:
-          $ref: "#/components/schemas/LearningServingLlmLanguageFilterResult"
+          $ref: "#/components/schemas/LearningGenaiRootLanguageFilterResult"
           description: Language filter result from SAFT LangId.
         raiSignals:
           description: The RAI signals for the text.
@@ -9618,6 +9618,9 @@ components:
         genericMetadata:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
           description: Operation metadata for PersistentResource.
+        progressMessage:
+          description: Progress Message for Create LRO
+          type: string
       type: object
     GoogleCloudAiplatformV1beta1CreatePipelineJobRequest:
       description: Request message for PipelineService.CreatePipelineJob.
@@ -13794,7 +13797,7 @@ components:
           type: string
         modelSourceInfo:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1ModelSourceInfo"
-          description: Output only. Source of a model. It can either be automl training pipeline, custom training pipeline, BigQuery ML, or existing Vertex AI Model.
+          description: Output only. Source of a model. It can either be automl training pipeline, custom training pipeline, BigQuery ML, or saved and tuned from Genie or Model Garden.
           readOnly: true
         name:
           description: The resource name of the Model.
@@ -14852,6 +14855,11 @@ components:
             - INVALID_EMBEDDING_ID
             - EMBEDDING_SIZE_MISMATCH
             - NAMESPACE_MISSING
+            - PARSING_ERROR
+            - DUPLICATE_NAMESPACE
+            - OP_IN_DATAPOINT
+            - MULTIPLE_VALUES
+            - INVALID_NUMERIC_VALUE
           type: string
         rawRecord:
           description: The original content of this record.
@@ -15356,6 +15364,9 @@ components:
     GoogleCloudAiplatformV1beta1PipelineJobRuntimeConfig:
       description: The runtime config of a PipelineJob.
       properties:
+        defaultRuntime:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1PipelineJobRuntimeConfigDefaultRuntime"
+          description: Optional. The default runtime for the PipelineJob. If not provided, Vertex Custom Job is used as the runtime. For Vertex Custom Job, please refer to https://cloud.google.com/vertex-ai/docs/training/overview
         failurePolicy:
           description: Represents the failure policy of a pipeline. Currently, the default of a pipeline is that the pipeline will continue to run until no more tasks can be executed, also known as PIPELINE_FAILURE_POLICY_FAIL_SLOW. However, if a pipeline is set to PIPELINE_FAILURE_POLICY_FAIL_FAST, it will stop scheduling any new tasks when a task has failed. Any scheduled tasks will continue to completion.
           enum:
@@ -15382,11 +15393,25 @@ components:
           description: Deprecated. Use RuntimeConfig.parameter_values instead. The runtime parameters of the PipelineJob. The parameters will be passed into PipelineJob.pipeline_spec to replace the placeholders at runtime. This field is used by pipelines built using `PipelineJob.pipeline_spec.schema_version` 2.0.0 or lower, such as pipelines built using Kubeflow Pipelines SDK 1.8 or lower.
           type: object
       type: object
+    GoogleCloudAiplatformV1beta1PipelineJobRuntimeConfigDefaultRuntime:
+      description: The default runtime for the PipelineJob.
+      properties:
+        persistentResourceRuntimeDetail:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1PipelineJobRuntimeConfigPersistentResourceRuntimeDetail"
+          description: Persistent resource based runtime detail.
+      type: object
     GoogleCloudAiplatformV1beta1PipelineJobRuntimeConfigInputArtifact:
       description: The type of an input artifact.
       properties:
         artifactId:
           description: "Artifact resource id from MLMD. Which is the last portion of an artifact resource name: `projects/{project}/locations/{location}/metadataStores/default/artifacts/{artifact_id}`. The artifact must stay within the same project, location and default metadatastore as the pipeline."
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1PipelineJobRuntimeConfigPersistentResourceRuntimeDetail:
+      description: Persistent resource based runtime detail. For more information, refer to https://cloud.google.com/vertex-ai/docs/training/persistent-resource-overview
+      properties:
+        persistentResourceName:
+          description: "Persistent resource name. Format: `projects/{project}/locations/{location}/persistentResources/{persistent_resource}`"
           type: string
       type: object
     GoogleCloudAiplatformV1beta1PipelineTaskDetail:
@@ -16277,7 +16302,7 @@ components:
       properties: {}
       type: object
     GoogleCloudAiplatformV1beta1ReportRuntimeEventRequest:
-      description: LINT.IfChange(report_event_message_types) Request message for NotebookInternalService.ReportRuntimeEvent.
+      description: Request message for NotebookInternalService.ReportRuntimeEvent.
       properties:
         eventDetails:
           additionalProperties:
@@ -20543,6 +20568,9 @@ components:
         genericMetadata:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
           description: Operation metadata for PersistentResource.
+        progressMessage:
+          description: Progress Message for Update LRO
+          type: string
       type: object
     GoogleCloudAiplatformV1beta1UpdateSpecialistPoolOperationMetadata:
       description: Runtime operation metadata for SpecialistPoolService.UpdateSpecialistPool.
@@ -21044,7 +21072,7 @@ components:
           type: array
       type: object
     LanguageLabsAidaTrustRecitationProtoDocAttribution:
-      description: The proto defines the attribution information for a document using whatever fields are most applicable for that document's datasource. For example, a Wikipedia article's attribution is in the form of its article title, a website is in the form of a URL, and a Github repo is in the form of a repo name. Next id:28
+      description: "The proto defines the attribution information for a document using whatever fields are most applicable for that document's datasource. For example, a Wikipedia article's attribution is in the form of its article title, a website is in the form of a URL, and a Github repo is in the form of a repo name. Next id: 30"
       properties:
         amarnaId:
           type: string
@@ -21053,6 +21081,9 @@ components:
         author:
           type: string
         bibkey:
+          type: string
+        biorxivId:
+          description: "ID of the paper in bioarxiv like ddoi.org/{biorxiv_id} eg: https://doi.org/10.1101/343517"
           type: string
         bookTitle:
           type: string
@@ -21423,6 +21454,9 @@ components:
           type: string
         wikipediaArticleTitle:
           description: Wikipedia article title. The Wikipedia TFDS dataset includes article titles but not URLs. While a URL is to the best of our knowledge a deterministic function of the title, we store the original title to reflect the information in the original dataset.
+          type: string
+        youtubeVideoId:
+          description: "The unique video id from Youtube. Example: AkoGsW52Ir0"
           type: string
       type: object
     LanguageLabsAidaTrustRecitationProtoRecitationResult:
@@ -21817,7 +21851,7 @@ components:
           type: array
       type: object
     LearningGenaiRecitationDocAttribution:
-      description: "The proto defines the attribution information for a document using whatever fields are most applicable for that document's datasource. For example, a Wikipedia article's attribution is in the form of its article title, a website is in the form of a URL, and a Github repo is in the form of a repo name. Next id: 28"
+      description: "The proto defines the attribution information for a document using whatever fields are most applicable for that document's datasource. For example, a Wikipedia article's attribution is in the form of its article title, a website is in the form of a URL, and a Github repo is in the form of a repo name. Next id: 30"
       properties:
         amarnaId:
           type: string
@@ -21826,6 +21860,9 @@ components:
         author:
           type: string
         bibkey:
+          type: string
+        biorxivId:
+          description: "ID of the paper in bioarxiv like ddoi.org/{biorxiv_id} eg: https://doi.org/10.1101/343517"
           type: string
         bookTitle:
           type: string
@@ -22190,6 +22227,8 @@ components:
           type: string
         wikipediaArticleTitle:
           description: Wikipedia article title. The Wikipedia TFDS dataset includes article titles but not URLs. While a URL is to the best of our knowledge a deterministic function of the title, we store the original title to reflect the information in the original dataset.
+          type: string
+        youtubeVideoId:
           type: string
       type: object
     LearningGenaiRecitationRecitationResult:
@@ -22699,7 +22738,7 @@ components:
         defaultMetadata:
           type: string
         languageFilterResult:
-          $ref: "#/components/schemas/LearningServingLlmLanguageFilterResult"
+          $ref: "#/components/schemas/LearningGenaiRootLanguageFilterResult"
         raiOutput:
           $ref: "#/components/schemas/LearningGenaiRootRAIOutput"
           description: Safety filter output information for LLM Root RAI harm check.
@@ -22715,6 +22754,39 @@ components:
           $ref: "#/components/schemas/LearningGenaiRootTakedownResult"
         toxicityResult:
           $ref: "#/components/schemas/LearningGenaiRootToxicityResult"
+      type: object
+    LearningGenaiRootGroundingMetadata:
+      properties:
+        citations:
+          items:
+            $ref: "#/components/schemas/LearningGenaiRootGroundingMetadataCitation"
+          type: array
+        groundingCancelled:
+          description: True if grounding is cancelled, for example, no facts being retrieved.
+          type: boolean
+        searchQueries:
+          items:
+            type: string
+          type: array
+      type: object
+    LearningGenaiRootGroundingMetadataCitation:
+      properties:
+        endIndex:
+          description: Index in the prediction output where the citation ends (exclusive). Must be > start_index and < len(output).
+          format: int32
+          type: integer
+        factIndex:
+          description: Index of the fact supporting this claim. Should be within the range of the `world_facts` in the GenerateResponse.
+          format: int32
+          type: integer
+        score:
+          description: Confidence score of this entailment. Value is [0,1] with 1 is the most confidence.
+          format: double
+          type: number
+        startIndex:
+          description: Index in the prediction output where the citation starts (inclusive). Must be >= 0 and < end_index.
+          format: int32
+          type: integer
       type: object
     LearningGenaiRootHarm:
       properties:
@@ -22846,6 +22918,19 @@ components:
           items:
             $ref: "#/components/schemas/LearningGenaiRootScoredToken"
           type: array
+      type: object
+    LearningGenaiRootLanguageFilterResult:
+      properties:
+        allowed:
+          description: False when query or response should be filtered out due to unsupported language.
+          type: boolean
+        detectedLanguage:
+          description: Language of the query or response.
+          type: string
+        detectedLanguageProbability:
+          description: Probability of the language predicted as returned by LangID.
+          format: float
+          type: number
       type: object
     LearningGenaiRootMetricOutput:
       properties:
@@ -23141,19 +23226,6 @@ components:
           format: float
           type: number
       type: object
-    LearningServingLlmLanguageFilterResult:
-      properties:
-        allowed:
-          description: False when query or response should be filtered out due to unsupported language.
-          type: boolean
-        detectedLanguage:
-          description: Language of the query or response.
-          type: string
-        detectedLanguageProbability:
-          description: Probability of the language predicted as returned by LangID.
-          format: float
-          type: number
-      type: object
     LearningServingLlmMessageMetadata:
       description: LINT.IfChange This metadata contains additional information required for debugging.
       properties:
@@ -23183,6 +23255,8 @@ components:
             - MAX_TOKENS
             - FILTER
           type: string
+        groundingMetadata:
+          $ref: "#/components/schemas/LearningGenaiRootGroundingMetadata"
         isFallback:
           description: Applies to Response message only. Indicates whether the message is a fallback and the response would have otherwise been empty.
           type: boolean

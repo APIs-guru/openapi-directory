@@ -83,40 +83,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  /v1alpha1/customers:checkHasProvisionedDeployment:
-    get:
-      description: Checks whether a SAS deployment for the authentication context exists.
-      operationId: prod_tt_sasportal.customers.checkHasProvisionedDeployment
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SasPortalCheckHasProvisionedDeploymentResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/sasportal
-          Oauth2c:
-            - https://www.googleapis.com/auth/sasportal
-      tags:
-        - customers
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
   /v1alpha1/customers:listGcpProjectDeployments:
     get:
       description: Returns a list of SAS deployments associated with current GCP project. Includes whether SAS analytics has been enabled or not.
@@ -1153,13 +1119,6 @@ components:
           description: The channel score, normalized to be in the range [0,100].
           format: double
           type: number
-      type: object
-    SasPortalCheckHasProvisionedDeploymentResponse:
-      description: Response for [CheckHasProvisionedDeployment]. [spectrum.sas.portal.v1alpha1.Provisioning.CheckHasProvisionedDeployment].
-      properties:
-        hasProvisionedDeployment:
-          description: Whether a SAS deployment for the authentication context exists.
-          type: boolean
       type: object
     SasPortalCreateSignedDeviceRequest:
       description: Request for CreateSignedDevice.

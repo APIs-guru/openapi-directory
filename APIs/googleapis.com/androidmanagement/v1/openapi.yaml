@@ -504,6 +504,82 @@ paths:
             - https://www.googleapis.com/auth/androidmanagement
       tags:
         - enterprises
+  /v1/{parent}/migrationTokens:
+    get:
+      description: Lists migration tokens.
+      operationId: androidmanagement.enterprises.migrationTokens.list
+      parameters:
+        - description: "Required. The enterprise which the migration tokens belong to. Format: enterprises/{enterprise}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of migration tokens to return. Fewer migration tokens may be returned. If unspecified, at most 100 migration tokens will be returned. The maximum value is 100; values above 100 will be coerced to 100.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous ListMigrationTokens call. Provide this to retrieve the subsequent page.When paginating, all other parameters provided to ListMigrationTokens must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListMigrationTokensResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidmanagement
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidmanagement
+      tags:
+        - enterprises
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a migration token, to migrate an existing device from being managed by the EMM's Device Policy Controller (DPC) to being managed by the Android Management API.
+      operationId: androidmanagement.enterprises.migrationTokens.create
+      parameters:
+        - description: "Required. The enterprise in which this migration token will be created. Format: enterprises/{enterprise}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MigrationToken"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MigrationToken"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidmanagement
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidmanagement
+      tags:
+        - enterprises
   /v1/{parent}/policies:
     get:
       description: Lists policies for a given enterprise.
@@ -1540,6 +1616,7 @@ components:
             - DELETED
             - PROVISIONING
             - LOST
+            - PREPARING_FOR_MIGRATION
           type: string
         commonCriteriaModeInfo:
           $ref: "#/components/schemas/CommonCriteriaModeInfo"
@@ -1555,6 +1632,10 @@ components:
           items:
             $ref: "#/components/schemas/Display"
           type: array
+        dpcMigrationInfo:
+          $ref: "#/components/schemas/DpcMigrationInfo"
+          description: Output only. Information related to whether this device was migrated from being managed by another Device Policy Controller (DPC).
+          readOnly: true
         enrollmentTime:
           description: The time of device enrollment.
           format: google-datetime
@@ -1650,6 +1731,7 @@ components:
             - DELETED
             - PROVISIONING
             - LOST
+            - PREPARING_FOR_MIGRATION
           type: string
         systemProperties:
           additionalProperties:
@@ -1825,6 +1907,18 @@ components:
         totalIpAddressesReturned:
           description: The number of IP addresses returned from the DNS lookup event. May be higher than the amount of ip_addresses if there were too many addresses to log.
           format: int64
+          type: string
+      type: object
+    DpcMigrationInfo:
+      description: Information related to whether this device was migrated from being managed by another Device Policy Controller (DPC).
+      properties:
+        additionalData:
+          description: Output only. If this device was migrated from another DPC, the additionalData field of the migration token is populated here.
+          readOnly: true
+          type: string
+        previousDpc:
+          description: Output only. If this device was migrated from another DPC, this is its package name. Not populated otherwise.
+          readOnly: true
           type: string
       type: object
     Empty:
@@ -2282,6 +2376,18 @@ components:
           description: If there are more results, a token to retrieve next page of results.
           type: string
       type: object
+    ListMigrationTokensResponse:
+      description: Response to a request to list migration tokens for a given enterprise.
+      properties:
+        migrationTokens:
+          description: The migration tokens from the specified enterprise.
+          items:
+            $ref: "#/components/schemas/MigrationToken"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as page_token to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
     ListOperationsResponse:
       description: The response message for Operations.ListOperations.
       properties:
@@ -2471,6 +2577,55 @@ components:
           format: int64
           type: string
       type: object
+    MigrationToken:
+      description: A token to initiate the migration of a device from being managed by a third-party DPC to being managed by Android Management API. A migration token is valid only for a single device.
+      properties:
+        additionalData:
+          description: Immutable. Optional EMM-specified additional data. Once the device is migrated this will be populated in the migrationAdditionalData field of the Device resource. This must be at most 1024 characters.
+          type: string
+        createTime:
+          description: Output only. Time when this migration token was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        device:
+          description: Output only. Once this migration token is used to migrate a device, the name of the resulting Device resource will be populated here, in the form enterprises/{enterprise}/devices/{device}.
+          readOnly: true
+          type: string
+        deviceId:
+          description: Required. Immutable. The id of the device, as in the Play EMM API. This corresponds to the deviceId parameter in Play EMM API's Devices.get (https://developers.google.com/android/work/play/emm-api/v1/devices/get#parameters) call.
+          type: string
+        expireTime:
+          description: Immutable. The time when this migration token expires. This can be at most seven days from the time of creation. The migration token is deleted seven days after it expires.
+          format: google-datetime
+          type: string
+        managementMode:
+          description: Required. Immutable. The management mode of the device or profile being migrated.
+          enum:
+            - MANAGEMENT_MODE_UNSPECIFIED
+            - WORK_PROFILE_PERSONALLY_OWNED
+            - WORK_PROFILE_COMPANY_OWNED
+            - FULLY_MANAGED
+          type: string
+        name:
+          description: Output only. The name of the migration token, which is generated by the server during creation, in the form enterprises/{enterprise}/migrationTokens/{migration_token}.
+          readOnly: true
+          type: string
+        policy:
+          description: Required. Immutable. The name of the policy initially applied to the enrolled device, in the form enterprises/{enterprise}/policies/{policy}.
+          type: string
+        ttl:
+          description: Input only. The time that this migration token is valid for. This is input-only, and for returning a migration token the server will populate the expireTime field. This can be at most seven days. The default is seven days.
+          format: google-duration
+          type: string
+        userId:
+          description: Required. Immutable. The user id of the Managed Google Play account on the device, as in the Play EMM API. This corresponds to the userId parameter in Play EMM API's Devices.get (https://developers.google.com/android/work/play/emm-api/v1/devices/get#parameters) call.
+          type: string
+        value:
+          description: Output only. The value of the migration token.
+          readOnly: true
+          type: string
+      type: object
     NetworkInfo:
       description: Device network info.
       properties:
@@ -2553,6 +2708,7 @@ components:
             - ONC_WIFI_INVALID_VALUE
             - ONC_WIFI_API_LEVEL
             - ONC_WIFI_INVALID_ENTERPRISE_CONFIG
+            - ONC_WIFI_USER_SHOULD_REMOVE_NETWORK
           type: string
       type: object
     NonComplianceDetailCondition:

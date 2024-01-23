@@ -423,6 +423,15 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: The product line to request cases for.
+          in: query
+          name: productLine
+          schema:
+            enum:
+              - PRODUCT_LINE_UNSPECIFIED
+              - GOOGLE_CLOUD
+              - GOOGLE_MAPS
+            type: string
       responses:
         "200":
           content:
@@ -789,6 +798,9 @@ components:
         id:
           description: The unique ID for a classification. Must be specified for case creation. To retrieve valid classification IDs for case creation, use `caseClassifications.search`. Classification IDs returned by `caseClassifications.search` are guaranteed to be valid for at least 6 months. If a given classification is deactiveated, it will immediately stop being returned. After 6 months, `case.create` requests using the classification ID will fail.
           type: string
+        product:
+          $ref: "#/components/schemas/Product"
+          description: The full product the classification corresponds to.
       type: object
     CloseCaseRequest:
       description: The request message for the CloseCase endpoint.
@@ -1162,6 +1174,20 @@ components:
           type: string
         objectName:
           description: "# gdata.* are outside protos with mising documentation"
+          type: string
+      type: object
+    Product:
+      description: The full product a case may be associated with, including Product Line and Product Subline.
+      properties:
+        productLine:
+          description: The Product Line of the Product.
+          enum:
+            - PRODUCT_LINE_UNSPECIFIED
+            - GOOGLE_CLOUD
+            - GOOGLE_MAPS
+          type: string
+        productSubline:
+          description: The Product Subline of the Product, such as "Maps Billing".
           type: string
       type: object
     SearchCaseClassificationsResponse:

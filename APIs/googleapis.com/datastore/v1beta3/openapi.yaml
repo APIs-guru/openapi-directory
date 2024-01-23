@@ -1263,6 +1263,15 @@ components:
           format: byte
           type: string
       type: object
+    QueryPlan:
+      description: Plan for the query.
+      properties:
+        planInfo:
+          additionalProperties:
+            description: Properties of the object.
+          description: 'Planning phase information for the query. It will include: { "indexes_used": [ {"query_scope": "Collection", "properties": "(foo ASC, __name__ ASC)"}, {"query_scope": "Collection", "properties": "(bar ASC, __name__ ASC)"} ] }'
+          type: object
+      type: object
     QueryResultBatch:
       description: A batch of results produced by a query.
       properties:
@@ -1360,6 +1369,18 @@ components:
       description: The response for Datastore.ReserveIds.
       properties: {}
       type: object
+    ResultSetStats:
+      description: Planning and execution statistics for the query.
+      properties:
+        queryPlan:
+          $ref: "#/components/schemas/QueryPlan"
+          description: Plan for the query.
+        queryStats:
+          additionalProperties:
+            description: Properties of the object.
+          description: 'Aggregated statistics from the execution of the query. This will only be present when the request specifies `PROFILE` mode. For example, a query will return the statistics including: { "results_returned": "20", "documents_scanned": "20", "indexes_entries_scanned": "10050", "total_execution_time": "100.7 msecs" }'
+          type: object
+      type: object
     RollbackRequest:
       description: The request for Datastore.Rollback.
       properties:
@@ -1381,6 +1402,13 @@ components:
         gqlQuery:
           $ref: "#/components/schemas/GqlQuery"
           description: The GQL query to run. This query must be an aggregation query.
+        mode:
+          description: Optional. The mode in which the query request is processed. This field is optional, and when not provided, it defaults to `NORMAL` mode where no additional statistics will be returned with the query results.
+          enum:
+            - NORMAL
+            - PLAN
+            - PROFILE
+          type: string
         partitionId:
           $ref: "#/components/schemas/PartitionId"
           description: Entities are partitioned into subsets, identified by a partition ID. Queries are scoped to a single partition. This partition ID is normalized with the standard default context partition ID.
@@ -1397,6 +1425,9 @@ components:
         query:
           $ref: "#/components/schemas/AggregationQuery"
           description: The parsed form of the `GqlQuery` from the request, if it was set.
+        stats:
+          $ref: "#/components/schemas/ResultSetStats"
+          description: Query plan and execution statistics. Note that the returned stats are subject to change as Firestore evolves. This is only present when the request specifies a mode other than `NORMAL`.
       type: object
     RunQueryRequest:
       description: The request for Datastore.RunQuery.
@@ -1404,6 +1435,13 @@ components:
         gqlQuery:
           $ref: "#/components/schemas/GqlQuery"
           description: The GQL query to run. This query must be a non-aggregation query.
+        mode:
+          description: Optional. The mode in which the query request is processed. This field is optional, and when not provided, it defaults to `NORMAL` mode where no additional statistics will be returned with the query results.
+          enum:
+            - NORMAL
+            - PLAN
+            - PROFILE
+          type: string
         partitionId:
           $ref: "#/components/schemas/PartitionId"
           description: Entities are partitioned into subsets, identified by a partition ID. Queries are scoped to a single partition. This partition ID is normalized with the standard default context partition ID.
@@ -1423,6 +1461,9 @@ components:
         query:
           $ref: "#/components/schemas/Query"
           description: The parsed form of the `GqlQuery` from the request, if it was set.
+        stats:
+          $ref: "#/components/schemas/ResultSetStats"
+          description: Query plan and execution statistics. Note that the returned stats are subject to change as Firestore evolves. This is only present when the request specifies a mode other than `NORMAL`.
       type: object
     Sum:
       description: Sum of the values of the requested property. * Only numeric values will be aggregated. All non-numeric values including `NULL` are skipped. * If the aggregated values contain `NaN`, returns `NaN`. Infinity math follows IEEE-754 standards. * If the aggregated value set is empty, returns 0. * Returns a 64-bit integer if all aggregated numbers are integers and the sum result does not overflow. Otherwise, the result is returned as a double. Note that even if all the aggregated values are integers, the result is returned as a double if it cannot fit within a 64-bit signed integer. When this occurs, the returned value will lose precision. * When underflow occurs, floating-point aggregation is non-deterministic. This means that running the same query repeatedly without any changes to the underlying values could produce slightly different results each time. In those cases, values should be stored as integers over floating-point numbers.
