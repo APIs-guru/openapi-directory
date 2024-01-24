@@ -2934,6 +2934,11 @@ components:
             - READY
           readOnly: true
           type: string
+        storageLimitPerProcessingUnit:
+          description: Output only. The storage limit in bytes per processing unit.
+          format: int64
+          readOnly: true
+          type: string
       type: object
     InstanceOperationProgress:
       description: Encapsulates progress related information for a Cloud Spanner long running instance operations.

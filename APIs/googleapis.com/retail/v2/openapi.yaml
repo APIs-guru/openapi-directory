@@ -4648,6 +4648,21 @@ components:
           description: "The resource name of the model that this create applies to. Format: `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/models/{model_id}`"
           type: string
       type: object
+    GoogleCloudRetailV2betaExportAnalyticsMetricsResponse:
+      description: Response of the ExportAnalyticsMetricsRequest. If the long running operation was successful, then this message is returned by the google.longrunning.Operations.response field if the operation was successful.
+      properties:
+        errorSamples:
+          description: A sample of errors encountered while processing the request.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+        errorsConfig:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaExportErrorsConfig"
+          description: This field is never set.
+        outputResult:
+          $ref: "#/components/schemas/GoogleCloudRetailV2betaOutputResult"
+          description: Output result indicating where the data were exported to.
+      type: object
     GoogleCloudRetailV2betaExportErrorsConfig:
       description: Configuration of destination for Export related errors.
       properties:

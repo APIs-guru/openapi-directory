@@ -9355,7 +9355,7 @@ components:
       description: 'The following are a list of conditions. A valid SecurityAction must contain at least one condition. Within a condition, each element is ORed. Across conditions elements are ANDed. For example if a SecurityAction has the following: api_keys: ["key1", "key2"] and developers: ["dev1", "dev2"] then this is interpreted as: enforce the action if the incoming request has ((api_key = "key1" OR api_key="key") AND (developer="dev1" OR developer="dev2")).'
       properties:
         botReasons:
-          description: "Optional. A list of Bot Reasons. Current options: Flooder, Brute Guessor, Static Content Scraper, OAuth Abuser, Robot Abuser, TorListRule, Advanced Anomaly Detection, Advanced API Scraper, Search Engine Crawlers, Public Cloud, Public Cloud AWS, Public Cloud Azure, and Public Cloud GCP."
+          description: "Optional. A list of Bot Reasons. Current options: Flooder, Brute Guessor, Static Content Scraper, OAuth Abuser, Robot Abuser, TorListRule, Advanced Anomaly Detection, Advanced API Scraper, Search Engine Crawlers, Public Clouds, Public Cloud AWS, Public Cloud Azure, and Public Cloud Google."
           items:
             type: string
           type: array
@@ -10215,7 +10215,7 @@ components:
             type: string
           type: array
         role:
-          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`. For an overview of the IAM roles and permissions, see the [IAM documentation](https://cloud.google.com/iam/docs/roles-overview). For a list of the available pre-defined roles, see [here](https://cloud.google.com/iam/docs/understanding-roles).
           type: string
       type: object
     GoogleIamV1Policy:

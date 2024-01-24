@@ -762,6 +762,11 @@ paths:
           name: categoryId
           schema:
             type: string
+        - description: Return the channel associated with a YouTube handle.
+          in: query
+          name: forHandle
+          schema:
+            type: string
         - description: Return the channel associated with a YouTube username.
           in: query
           name: forUsername
