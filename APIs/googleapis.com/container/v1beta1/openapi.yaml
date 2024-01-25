@@ -2572,7 +2572,7 @@ paths:
         - projects
   /v1beta1/{parent}/.well-known/openid-configuration:
     get:
-      description: Gets the OIDC discovery document for the cluster. See the [OpenID Connect Discovery 1.0 specification](https://openid.net/specs/openid-connect-discovery-1_0.html) for details. This API is not yet intended for general use, and is not available for all clusters.
+      description: Gets the OIDC discovery document for the cluster. See the [OpenID Connect Discovery 1.0 specification](https://openid.net/specs/openid-connect-discovery-1_0.html) for details.
       operationId: container.projects.locations.clusters.well-known.getOpenid-configuration
       parameters:
         - description: The cluster (project, location, cluster name) to get the discovery document for. Specified in the format `projects/*/locations/*/clusters/*`.
@@ -2732,7 +2732,7 @@ paths:
         - projects
   /v1beta1/{parent}/jwks:
     get:
-      description: Gets the public component of the cluster signing keys in JSON Web Key format. This API is not yet intended for general use, and is not available for all clusters.
+      description: Gets the public component of the cluster signing keys in JSON Web Key format.
       operationId: container.projects.locations.clusters.getJwks
       parameters:
         - description: The cluster (project, location, cluster name) to get keys for. Specified in the format `projects/*/locations/*/clusters/*`.

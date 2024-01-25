@@ -2572,7 +2572,7 @@ paths:
         - projects
   /v1/{parent}/.well-known/openid-configuration:
     get:
-      description: Gets the OIDC discovery document for the cluster. See the [OpenID Connect Discovery 1.0 specification](https://openid.net/specs/openid-connect-discovery-1_0.html) for details. This API is not yet intended for general use, and is not available for all clusters.
+      description: Gets the OIDC discovery document for the cluster. See the [OpenID Connect Discovery 1.0 specification](https://openid.net/specs/openid-connect-discovery-1_0.html) for details.
       operationId: container.projects.locations.clusters.well-known.getOpenid-configuration
       parameters:
         - description: The cluster (project, location, cluster name) to get the discovery document for. Specified in the format `projects/*/locations/*/clusters/*`.
@@ -2732,7 +2732,7 @@ paths:
         - projects
   /v1/{parent}/jwks:
     get:
-      description: Gets the public component of the cluster signing keys in JSON Web Key format. This API is not yet intended for general use, and is not available for all clusters.
+      description: Gets the public component of the cluster signing keys in JSON Web Key format.
       operationId: container.projects.locations.clusters.getJwks
       parameters:
         - description: The cluster (project, location, cluster name) to get keys for. Specified in the format `projects/*/locations/*/clusters/*`.
@@ -3662,6 +3662,13 @@ components:
         desiredImageType:
           description: 'The desired image type for the node pool. NOTE: Set the "desired_node_pool" field as well.'
           type: string
+        desiredInTransitEncryptionConfig:
+          description: Specify the details of in-transit encryption.
+          enum:
+            - IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED
+            - IN_TRANSIT_ENCRYPTION_DISABLED
+            - IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT
+          type: string
         desiredIntraNodeVisibilityConfig:
           $ref: "#/components/schemas/IntraNodeVisibilityConfig"
           description: The desired config of Intra-node visibility.
@@ -4575,6 +4582,13 @@ components:
         gatewayApiConfig:
           $ref: "#/components/schemas/GatewayAPIConfig"
           description: GatewayAPIConfig contains the desired config of Gateway API on this cluster.
+        inTransitEncryptionConfig:
+          description: Specify the details of in-transit encryption.
+          enum:
+            - IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED
+            - IN_TRANSIT_ENCRYPTION_DISABLED
+            - IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT
+          type: string
         network:
           description: "Output only. The relative name of the Google Compute Engine network(https://cloud.google.com/compute/docs/networks-and-firewalls#networks) to which the cluster is connected. Example: projects/my-project/global/networks/my-network"
           type: string
