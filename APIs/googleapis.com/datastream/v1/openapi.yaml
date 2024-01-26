@@ -1881,7 +1881,7 @@ components:
           type: integer
         streamLargeObjects:
           $ref: "#/components/schemas/StreamLargeObjects"
-          description: "Stream large object values. NOTE: This feature is currently experimental."
+          description: Stream large object values.
       type: object
     OracleSslConfig:
       description: Oracle SSL configuration information.
@@ -2163,7 +2163,7 @@ components:
           description: MySQL specific log position to start replicating from.
         oracleScnPosition:
           $ref: "#/components/schemas/OracleScnPosition"
-          description: Oracle specific log position to start replicating from.
+          description: Oracle SCN to start replicating from.
       type: object
     StartBackfillJobRequest:
       description: Request for manually initiating a backfill job for a specific stream object.

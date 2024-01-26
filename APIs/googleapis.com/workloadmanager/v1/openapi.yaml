@@ -1147,6 +1147,11 @@ components:
         severity:
           description: the severity of the rule
           type: string
+        tags:
+          description: List of user-defined tags
+          items:
+            type: string
+          type: array
         uri:
           description: the docuement url for the rule
           type: string
@@ -1379,6 +1384,9 @@ components:
       properties:
         resource:
           description: resource name
+          type: string
+        type:
+          description: resource type
           type: string
       type: object
     SqlserverValidation:

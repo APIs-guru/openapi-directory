@@ -862,6 +862,10 @@ components:
             - PSC_VPC_SC
             - SERVERLESS_NEG
             - STORAGE_BUCKET
+            - PRIVATE_NETWORK
+            - CLOUD_FUNCTION
+            - APP_ENGINE_VERSION
+            - CLOUD_RUN_REVISION
           type: string
       type: object
     DropInfo:
@@ -879,6 +883,11 @@ components:
             - ROUTE_WRONG_NETWORK
             - ROUTE_NEXT_HOP_IP_ADDRESS_NOT_RESOLVED
             - ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND
+            - ROUTE_NEXT_HOP_INSTANCE_WRONG_NETWORK
+            - ROUTE_NEXT_HOP_INSTANCE_NON_PRIMARY_IP
+            - ROUTE_NEXT_HOP_FORWARDING_RULE_IP_MISMATCH
+            - ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED
+            - ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID
             - NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS
             - VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH
             - VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH
@@ -1134,6 +1143,17 @@ components:
             - NCC_HUB
             - ROUTER_APPLIANCE
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - true
+            - false
+            - true
+            - false
+            - false
+            - false
       type: object
     ForwardingRuleInfo:
       description: For display only. Metadata associated with a Compute Engine forwarding rule.
@@ -1857,6 +1877,8 @@ components:
             - START_FROM_CLOUD_FUNCTION
             - START_FROM_APP_ENGINE_VERSION
             - START_FROM_CLOUD_RUN_REVISION
+            - START_FROM_STORAGE_BUCKET
+            - START_FROM_PSC_PUBLISHED_SERVICE
             - APPLY_INGRESS_FIREWALL_RULE
             - APPLY_EGRESS_FIREWALL_RULE
             - APPLY_ROUTE
@@ -1877,6 +1899,9 @@ components:
             - ABORT
             - VIEWER_PERMISSION_MISSING
           type: string
+        storageBucket:
+          $ref: "#/components/schemas/StorageBucketInfo"
+          description: Display information of a Storage Bucket. Used only for return traces.
         vpcConnector:
           $ref: "#/components/schemas/VpcConnectorInfo"
           description: Display information of a VPC connector.
@@ -1886,6 +1911,13 @@ components:
         vpnTunnel:
           $ref: "#/components/schemas/VpnTunnelInfo"
           description: Display information of a Compute Engine VPN tunnel.
+      type: object
+    StorageBucketInfo:
+      description: For display only. Metadata associated with Storage Bucket.
+      properties:
+        bucket:
+          description: Cloud Storage Bucket name.
+          type: string
       type: object
     TestIamPermissionsRequest:
       description: Request message for `TestIamPermissions` method.

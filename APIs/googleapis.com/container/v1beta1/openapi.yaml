@@ -3111,6 +3111,9 @@ components:
         networkPolicyConfig:
           $ref: "#/components/schemas/NetworkPolicyConfig"
           description: Configuration for NetworkPolicy. This only tracks whether the addon is enabled or not on the Master, it does not track whether network policy is enabled for the nodes.
+        statefulHaConfig:
+          $ref: "#/components/schemas/StatefulHAConfig"
+          description: Optional. Configuration for the StatefulHA add-on.
       type: object
     AdvancedDatapathObservabilityConfig:
       description: AdvancedDatapathObservabilityConfig specifies configuration of observability features of advanced datapath.
@@ -3163,7 +3166,8 @@ components:
       properties:
         conversionStatus:
           $ref: "#/components/schemas/AutopilotConversionStatus"
-          description: ConversionStatus shows conversion status.
+          description: Output only. ConversionStatus shows conversion status.
+          readOnly: true
         enabled:
           description: Enable Autopilot
           type: boolean
@@ -6228,6 +6232,13 @@ components:
           deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
+      type: object
+    StatefulHAConfig:
+      description: Configuration for the Stateful HA add-on.
+      properties:
+        enabled:
+          description: Whether the Stateful HA add-on is enabled for this cluster.
+          type: boolean
       type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."

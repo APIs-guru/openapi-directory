@@ -754,6 +754,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. Filter for the returned list.
+          in: query
+          name: filter
+          schema:
+            type: string
         - description: Optional. Maximum number of compilation results to return. The server may return fewer items than requested. If unspecified, the server will pick an appropriate default.
           in: query
           name: pageSize
@@ -1984,7 +1989,7 @@ components:
             type: string
           type: array
         role:
-          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`. For an overview of the IAM roles and permissions, see the [IAM documentation](https://cloud.google.com/iam/docs/roles-overview). For a list of the available pre-defined roles, see [here](https://cloud.google.com/iam/docs/understanding-roles).
           type: string
       type: object
     CancelWorkflowInvocationRequest:

@@ -5767,6 +5767,111 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v3/floodlightGroups/{floodlightGroupId}/floodlightActivities:
+    get:
+      description: Lists Floodlight activities in a Floodlight group.
+      operationId: displayvideo.floodlightGroups.floodlightActivities.list
+      parameters:
+        - description: Required. The ID of the parent Floodlight group to which the requested Floodlight activities belong.
+          in: path
+          name: floodlightGroupId
+          required: true
+          schema:
+            type: string
+        - description: 'Optional. Field by which to sort the list. Acceptable values are: * `displayName` (default) * `floodlightActivityId` The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `displayName desc`.'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A token identifying a page of results the server should return. Typically, this is the value of next_page_token returned from the previous call to `ListFloodlightActivities` method. If not specified, the first page of results will be returned.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Required. The ID of the partner through which the Floodlight activities are being accessed.
+          in: query
+          name: partnerId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListFloodlightActivitiesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - floodlightGroups
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v3/floodlightGroups/{floodlightGroupId}/floodlightActivities/{floodlightActivityId}:
+    get:
+      description: Gets a Floodlight activity.
+      operationId: displayvideo.floodlightGroups.floodlightActivities.get
+      parameters:
+        - description: Required. The ID of the parent Floodlight group to which the requested Floodlight activity belongs.
+          in: path
+          name: floodlightGroupId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the Floodlight activity to fetch.
+          in: path
+          name: floodlightActivityId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the partner through which the Floodlight activity is being accessed.
+          in: query
+          name: partnerId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FloodlightActivity"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - floodlightGroups
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v3/googleAudiences:
     get:
       description: Lists Google audiences. The order is defined by the order_by parameter.
@@ -8659,6 +8764,236 @@ components:
           readOnly: true
           type: string
       type: object
+    AlgorithmRules:
+      description: Rule-based algorithm.
+      properties:
+        impressionSignalRuleset:
+          $ref: "#/components/schemas/AlgorithmRulesRuleset"
+          description: Rules for the impression signals.
+      type: object
+    AlgorithmRulesComparisonValue:
+      description: A value to compare the signal to.
+      properties:
+        boolValue:
+          description: Boolean value.
+          type: boolean
+        creativeDimensionValue:
+          $ref: "#/components/schemas/Dimensions"
+          description: Creative dimension value.
+        dayAndTimeValue:
+          $ref: "#/components/schemas/DayAndTime"
+          description: Day and time value. Only `TIME_ZONE_RESOLUTION_END_USER` is supported.
+        deviceTypeValue:
+          description: Device type value.
+          enum:
+            - RULE_DEVICE_TYPE_UNSPECIFIED
+            - RULE_DEVICE_TYPE_COMPUTER
+            - RULE_DEVICE_TYPE_CONNECTED_TV
+            - RULE_DEVICE_TYPE_SMART_PHONE
+            - RULE_DEVICE_TYPE_TABLET
+            - RULE_DEVICE_TYPE_CONNECTED_DEVICE
+            - RULE_DEVICE_TYPE_SET_TOP_BOX
+          type: string
+        doubleValue:
+          description: Double value.
+          format: double
+          type: number
+        environmentValue:
+          description: Environment value.
+          enum:
+            - ENVIRONMENT_UNSPECIFIED
+            - ENVIRONMENT_WEB_OPTIMIZED
+            - ENVIRONMENT_WEB_NOT_OPTIMIZED
+            - ENVIRONMENT_APP
+          type: string
+        exchangeValue:
+          description: Exchange value.
+          enum:
+            - EXCHANGE_UNSPECIFIED
+            - EXCHANGE_GOOGLE_AD_MANAGER
+            - EXCHANGE_APPNEXUS
+            - EXCHANGE_BRIGHTROLL
+            - EXCHANGE_ADFORM
+            - EXCHANGE_ADMETA
+            - EXCHANGE_ADMIXER
+            - EXCHANGE_ADSMOGO
+            - EXCHANGE_ADSWIZZ
+            - EXCHANGE_BIDSWITCH
+            - EXCHANGE_BRIGHTROLL_DISPLAY
+            - EXCHANGE_CADREON
+            - EXCHANGE_DAILYMOTION
+            - EXCHANGE_FIVE
+            - EXCHANGE_FLUCT
+            - EXCHANGE_FREEWHEEL
+            - EXCHANGE_GENIEE
+            - EXCHANGE_GUMGUM
+            - EXCHANGE_IMOBILE
+            - EXCHANGE_IBILLBOARD
+            - EXCHANGE_IMPROVE_DIGITAL
+            - EXCHANGE_INDEX
+            - EXCHANGE_KARGO
+            - EXCHANGE_MICROAD
+            - EXCHANGE_MOPUB
+            - EXCHANGE_NEND
+            - EXCHANGE_ONE_BY_AOL_DISPLAY
+            - EXCHANGE_ONE_BY_AOL_MOBILE
+            - EXCHANGE_ONE_BY_AOL_VIDEO
+            - EXCHANGE_OOYALA
+            - EXCHANGE_OPENX
+            - EXCHANGE_PERMODO
+            - EXCHANGE_PLATFORMONE
+            - EXCHANGE_PLATFORMID
+            - EXCHANGE_PUBMATIC
+            - EXCHANGE_PULSEPOINT
+            - EXCHANGE_REVENUEMAX
+            - EXCHANGE_RUBICON
+            - EXCHANGE_SMARTCLIP
+            - EXCHANGE_SMARTRTB
+            - EXCHANGE_SMARTSTREAMTV
+            - EXCHANGE_SOVRN
+            - EXCHANGE_SPOTXCHANGE
+            - EXCHANGE_STROER
+            - EXCHANGE_TEADSTV
+            - EXCHANGE_TELARIA
+            - EXCHANGE_TVN
+            - EXCHANGE_UNITED
+            - EXCHANGE_YIELDLAB
+            - EXCHANGE_YIELDMO
+            - EXCHANGE_UNRULYX
+            - EXCHANGE_OPEN8
+            - EXCHANGE_TRITON
+            - EXCHANGE_TRIPLELIFT
+            - EXCHANGE_TABOOLA
+            - EXCHANGE_INMOBI
+            - EXCHANGE_SMAATO
+            - EXCHANGE_AJA
+            - EXCHANGE_SUPERSHIP
+            - EXCHANGE_NEXSTAR_DIGITAL
+            - EXCHANGE_WAZE
+            - EXCHANGE_SOUNDCAST
+            - EXCHANGE_SHARETHROUGH
+            - EXCHANGE_FYBER
+            - EXCHANGE_RED_FOR_PUBLISHERS
+            - EXCHANGE_MEDIANET
+            - EXCHANGE_TAPJOY
+            - EXCHANGE_VISTAR
+            - EXCHANGE_DAX
+            - EXCHANGE_JCD
+            - EXCHANGE_PLACE_EXCHANGE
+            - EXCHANGE_APPLOVIN
+            - EXCHANGE_CONNATIX
+            - EXCHANGE_RESET_DIGITAL
+            - EXCHANGE_HIVESTACK
+          type: string
+        int64Value:
+          description: Integer value.
+          format: int64
+          type: string
+        onScreenPositionValue:
+          description: Ad position value.
+          enum:
+            - ON_SCREEN_POSITION_UNSPECIFIED
+            - ON_SCREEN_POSITION_UNKNOWN
+            - ON_SCREEN_POSITION_ABOVE_THE_FOLD
+            - ON_SCREEN_POSITION_BELOW_THE_FOLD
+          type: string
+        stringValue:
+          description: String value.
+          type: string
+      type: object
+    AlgorithmRulesRule:
+      description: "Set of conditions. The return value of the rule is either: * The return value for single met condition or * The defined default return value if no conditions are met."
+      properties:
+        conditions:
+          description: List of conditions in this rule. The criteria among conditions should be mutually exclusive.
+          items:
+            $ref: "#/components/schemas/AlgorithmRulesRuleCondition"
+          type: array
+        defaultReturnValue:
+          $ref: "#/components/schemas/AlgorithmRulesSignalValue"
+          description: The default return value applied when none of the conditions are met.
+      type: object
+    AlgorithmRulesRuleCondition:
+      description: Set of signal comparisons. Equivalent of an `if` statement.
+      properties:
+        returnValue:
+          $ref: "#/components/schemas/AlgorithmRulesSignalValue"
+          description: The value returned if the `signalComparisons` condition evaluates to `TRUE`.
+        signalComparisons:
+          description: List of comparisons that build `if` statement condition. The comparisons are combined into a single condition with `AND` logical operators.
+          items:
+            $ref: "#/components/schemas/AlgorithmRulesSignalComparison"
+          type: array
+      type: object
+    AlgorithmRulesRuleset:
+      description: A ruleset consisting of a list of rules and how to aggregate the resulting values.
+      properties:
+        aggregationType:
+          description: How to aggregate values of evaluated rules.
+          enum:
+            - RULE_AGGREGATION_TYPE_UNSPECIFIED
+            - SUM_OF_VALUES
+            - PRODUCT_OF_VALUES
+            - MAXIMUM_VALUE
+          type: string
+        maxValue:
+          description: Maximum value the ruleset can evaluate to.
+          format: double
+          type: number
+        rules:
+          description: List of rules to generate the impression value.
+          items:
+            $ref: "#/components/schemas/AlgorithmRulesRule"
+          type: array
+      type: object
+    AlgorithmRulesSignal:
+      description: Signal used to evaluate rules.
+      properties:
+        impressionSignal:
+          description: Signal based on impressions.
+          enum:
+            - IMPRESSION_SIGNAL_UNSPECIFIED
+            - DAY_AND_TIME
+            - DEVICE_TYPE
+            - AD_POSITION
+            - OPERATING_SYSTEM_ID
+            - MOBILE_MODEL_ID
+            - EXCHANGE
+            - ENVIRONMENT
+            - COUNTRY_ID
+            - CITY_ID
+            - BROWSER_ID
+            - CREATIVE_DIMENSION
+          type: string
+      type: object
+    AlgorithmRulesSignalComparison:
+      description: "A single comparison. The comparison compares the `signal` to the `comparisonValue`. The comparison of `siteId==123` is represented with the following field values: * `signal` has an `impressionSignal` of `SITE_ID`. * `comparisonOperator` is set to `EQUAL`. * `comparisonValue` is set to 123."
+      properties:
+        comparisonOperator:
+          description: Operator used to compare the two values. In the resulting experession, the `signal` will be the first value and the `comparisonValue will be the second.
+          enum:
+            - COMPARISON_OPERATOR_UNSPECIFIED
+            - EQUAL
+            - GREATER_THAN
+            - LESS_THAN
+            - GREATER_THAN_OR_EQUAL_TO
+            - LESS_THAN_OR_EQUAL_TO
+          type: string
+        comparisonValue:
+          $ref: "#/components/schemas/AlgorithmRulesComparisonValue"
+          description: Value to compare signal to.
+        signal:
+          $ref: "#/components/schemas/AlgorithmRulesSignal"
+          description: Signal to compare.
+      type: object
+    AlgorithmRulesSignalValue:
+      description: Adjusted value of the signal used for rule evaluation.
+      properties:
+        number:
+          description: Value to use as result.
+          format: double
+          type: number
+      type: object
     AppAssignedTargetingOptionDetails:
       description: Details for assigned app targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_APP`.
       properties:
@@ -9861,6 +10196,13 @@ components:
           description: Required. Immutable. Account ID of the CM360 Floodlight configuration linked with the DV360 advertiser.
           format: int64
           type: string
+        cmAdvertiserIds:
+          description: Output only. The set of CM360 Advertiser IDs sharing the CM360 Floodlight configuration.
+          items:
+            format: int64
+            type: string
+          readOnly: true
+          type: array
         cmFloodlightConfigId:
           description: Required. Immutable. ID of the CM360 Floodlight configuration linked with the DV360 advertiser.
           format: int64
@@ -10864,6 +11206,33 @@ components:
         startDate:
           $ref: "#/components/schemas/Date"
           description: The lower bound of the date range, inclusive. Must specify a positive value for `year`, `month`, and `day`.
+      type: object
+    DayAndTime:
+      description: Representation of time defined by day of the week and hour of the day.
+      properties:
+        dayOfWeek:
+          description: Required. Day of the week.
+          enum:
+            - DAY_OF_WEEK_UNSPECIFIED
+            - MONDAY
+            - TUESDAY
+            - WEDNESDAY
+            - THURSDAY
+            - FRIDAY
+            - SATURDAY
+            - SUNDAY
+          type: string
+        hourOfDay:
+          description: Required. Hour of the day.
+          format: int32
+          type: integer
+        timeZoneResolution:
+          description: Required. The mechanism used to determine the relevant timezone.
+          enum:
+            - TIME_ZONE_RESOLUTION_UNSPECIFIED
+            - TIME_ZONE_RESOLUTION_END_USER
+            - TIME_ZONE_RESOLUTION_ADVERTISER
+          type: string
       type: object
     DayAndTimeAssignedTargetingOptionDetails:
       description: Representation of a segment of time defined on a specific day of the week and with a start and end time. The time represented by `start_hour` must be before the time represented by `end_hour`.
@@ -11929,6 +12298,50 @@ components:
           description: The fixed bid amount, in micros of the advertiser's currency. For insertion order entity, bid_amount_micros should be set as 0. For line item entity, bid_amount_micros must be greater than or equal to billable unit of the given currency and smaller than or equal to the upper limit 1000000000. For example, 1500000 represents 1.5 standard units of the currency.
           format: int64
           type: string
+      type: object
+    FloodlightActivity:
+      description: A single Floodlight activity.
+      properties:
+        advertiserIds:
+          description: Output only. IDs of the advertisers that have access to the parent Floodlight group. Only advertisers under the provided partner ID will be listed in this field.
+          items:
+            format: int64
+            type: string
+          readOnly: true
+          type: array
+        displayName:
+          description: Required. The display name of the Floodlight activity.
+          type: string
+        floodlightActivityId:
+          description: Output only. The unique ID of the Floodlight activity. Assigned by the system.
+          format: int64
+          readOnly: true
+          type: string
+        floodlightGroupId:
+          description: Required. Immutable. The ID of the parent Floodlight group.
+          format: int64
+          type: string
+        name:
+          description: Output only. The resource name of the Floodlight activity.
+          readOnly: true
+          type: string
+        remarketingConfigs:
+          description: Output only. A list of configuration objects designating whether remarketing for this Floodlight Activity is enabled and available for a specifc advertiser. If enabled, this Floodlight Activity generates a remarketing user list that is able to be used in targeting under the advertiser.
+          items:
+            $ref: "#/components/schemas/RemarketingConfig"
+          readOnly: true
+          type: array
+        servingStatus:
+          description: Optional. Whether the Floodlight activity is served.
+          enum:
+            - FLOODLIGHT_ACTIVITY_SERVING_STATUS_UNSPECIFIED
+            - FLOODLIGHT_ACTIVITY_SERVING_STATUS_ENABLED
+            - FLOODLIGHT_ACTIVITY_SERVING_STATUS_DISABLED
+          type: string
+        sslRequired:
+          description: Output only. Whether tags are required to be compliant.
+          readOnly: true
+          type: boolean
       type: object
     FloodlightGroup:
       description: A single Floodlight group.
@@ -13548,6 +13961,17 @@ components:
           description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListFirstAndThirdPartyAudiences` method to retrieve the next page of results.
           type: string
       type: object
+    ListFloodlightActivitiesResponse:
+      properties:
+        floodlightActivities:
+          description: The list of Floodlight activities. This list will be absent if empty.
+          items:
+            $ref: "#/components/schemas/FloodlightActivity"
+          type: array
+        nextPageToken:
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListFloodlightActivities` method to retrieve the next page of results.
+          type: string
+      type: object
     ListGoogleAudiencesResponse:
       properties:
         googleAudiences:
@@ -14641,6 +15065,19 @@ components:
           format: int64
           type: string
       type: object
+    RemarketingConfig:
+      description: Settings that control the whether remarketing is enabled for the given identified advertiser.
+      properties:
+        advertiserId:
+          description: Output only. The ID of the advertiser.
+          format: int64
+          readOnly: true
+          type: string
+        remarketingEnabled:
+          description: Output only. Whether the Floodlight activity remarketing user list is available to the identified advertiser.
+          readOnly: true
+          type: boolean
+      type: object
     ReplaceNegativeKeywordsRequest:
       description: Request message for NegativeKeywordService.ReplaceNegativeKeywords.
       properties:
@@ -14755,6 +15192,56 @@ components:
           type: string
         version:
           description: Required. The version of SDF being used.
+          enum:
+            - SDF_VERSION_UNSPECIFIED
+            - SDF_VERSION_3_1
+            - SDF_VERSION_4
+            - SDF_VERSION_4_1
+            - SDF_VERSION_4_2
+            - SDF_VERSION_5
+            - SDF_VERSION_5_1
+            - SDF_VERSION_5_2
+            - SDF_VERSION_5_3
+            - SDF_VERSION_5_4
+            - SDF_VERSION_5_5
+            - SDF_VERSION_6
+            - SDF_VERSION_7
+          type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - true
+            - true
+            - true
+            - true
+            - true
+            - true
+            - true
+            - false
+            - false
+            - false
+            - false
+      type: object
+    SdfDownloadTask:
+      description: Type for the response returned by [SdfDownloadTaskService.CreateSdfDownloadTask].
+      properties:
+        resourceName:
+          description: A resource name to be used in media.download to Download the prepared files. Resource names have the format `download/sdfdownloadtasks/media/{media_id}`. `media_id` will be made available by the long running operation service once the task status is done.
+          type: string
+      type: object
+    SdfDownloadTaskMetadata:
+      description: Type for the metadata returned by [SdfDownloadTaskService.CreateSdfDownloadTask].
+      properties:
+        createTime:
+          description: The time when the operation was created.
+          format: google-datetime
+          type: string
+        endTime:
+          description: The time when execution was completed.
+          format: google-datetime
+          type: string
+        version:
+          description: The SDF version used to execute this download task.
           enum:
             - SDF_VERSION_UNSPECIFIED
             - SDF_VERSION_3_1

@@ -1903,6 +1903,10 @@ components:
             $ref: "#/components/schemas/ComputeStorageDescriptor"
           type: array
       type: object
+    ComputeEngineSoleTenantMigrationTarget:
+      description: Compute engine sole tenant migration target.
+      properties: {}
+      type: object
     ComputeStorageDescriptor:
       description: Compute Engine storage option descriptor.
       properties:
@@ -2907,6 +2911,10 @@ components:
     MigrationInsight:
       description: An insight about potential migrations for an asset.
       properties:
+        computeEngineSoleTenantTarget:
+          $ref: "#/components/schemas/ComputeEngineSoleTenantMigrationTarget"
+          description: Output only. A Google Compute Engine Sole Tenant target.
+          readOnly: true
         computeEngineTarget:
           $ref: "#/components/schemas/ComputeEngineMigrationTarget"
           description: Output only. A Google Compute Engine target.

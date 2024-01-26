@@ -35,8 +35,8 @@ components:
       value:
         notificationResponse: "[accepted]"
     post-balancePlatform.accountHolder.created-balancePlatform-accountHolder-created:
-      description: Example webhook when an account holder was created
-      summary: Account holder created
+      description: Example webhook when an account holder was created with LEM API v1, v2
+      summary: Account holder created with LEM API v1, v2
       value:
         data:
           accountHolder:
@@ -65,12 +65,6 @@ components:
                 allowed: false
                 enabled: true
                 requested: true
-                transferInstruments:
-                  - allowed: false
-                    enabled: true
-                    id: SE576BH223222F5GJVKHH6BDT
-                    requested: true
-                    verificationStatus: pending
                 verificationStatus: pending
             contactDetails:
               address:
@@ -181,8 +175,8 @@ components:
         environment: live
         type: balancePlatform.accountHolder.created
     post-balancePlatform.accountHolder.updated-balancePlatform-accountHolder-updated:
-      description: Example webhook when an account holder was updated
-      summary: Account holder updated
+      description: Example webhook when an account holder was updated with LEM API v1, v2
+      summary: Account holder updated with LEM API v1, v2
       value:
         data:
           accountHolder:
@@ -192,7 +186,7 @@ components:
                 enabled: true
                 problems:
                   - entity:
-                      id: SE3222Z223222Q5J4D58K3DWP
+                      id: LE43319330319C8AYX89L2V59
                       type: BankAccount
                     verificationErrors:
                       - code: 2_8037
@@ -202,17 +196,6 @@ components:
                             message: Upload a bank statement
                         type: dataMissing
                 requested: true
-                transferInstruments:
-                  - allowed: true
-                    enabled: true
-                    id: SE576BH223222F5GJVKHH6BDT
-                    requested: true
-                    verificationStatus: valid
-                  - allowed: false
-                    enabled: true
-                    id: SE3222Z223222Q5J4D58K3DWP
-                    requested: true
-                    verificationStatus: invalid
                 verificationStatus: invalid
             description: Shelly Eller
             id: AH32272223222B5CZW6QZ2V34
