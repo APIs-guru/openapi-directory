@@ -128,7 +128,8 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security: []
+      security:
+        - developer_hapikey: []
       summary: Get paged extension definitions
       tags:
         - Definitions
@@ -158,7 +159,8 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security: []
+      security:
+        - developer_hapikey: []
       summary: Create a new extension definition
       tags:
         - Definitions
@@ -187,7 +189,8 @@ paths:
           description: No content
         default:
           $ref: "#/components/responses/Error"
-      security: []
+      security:
+        - developer_hapikey: []
       summary: Archive an extension definition
       tags:
         - Definitions
@@ -227,7 +230,8 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security: []
+      security:
+        - developer_hapikey: []
       summary: Get extension definition by Id
       tags:
         - Definitions
@@ -264,7 +268,8 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security: []
+      security:
+        - developer_hapikey: []
       summary: Patch an existing extension definition
       tags:
         - Definitions
@@ -296,7 +301,8 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security: []
+      security:
+        - developer_hapikey: []
       summary: Get all functions for a given definition
       tags:
         - Functions
@@ -337,7 +343,8 @@ paths:
           description: No content
         default:
           $ref: "#/components/responses/Error"
-      security: []
+      security:
+        - developer_hapikey: []
       summary: Delete a function for a definition
       tags:
         - Functions
@@ -380,7 +387,8 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security: []
+      security:
+        - developer_hapikey: []
       summary: Get all functions by a type for a given definition
       tags:
         - Functions
@@ -429,7 +437,8 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security: []
+      security:
+        - developer_hapikey: []
       summary: Insert a function for a definition
       tags:
         - Functions
@@ -477,7 +486,8 @@ paths:
           description: No content
         default:
           $ref: "#/components/responses/Error"
-      security: []
+      security:
+        - developer_hapikey: []
       summary: Archive a function for a definition
       tags:
         - Functions
@@ -527,7 +537,8 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security: []
+      security:
+        - developer_hapikey: []
       summary: Get a function for a given definition
       tags:
         - Functions
@@ -583,7 +594,8 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security: []
+      security:
+        - developer_hapikey: []
       summary: Insert a function for a definition
       tags:
         - Functions
@@ -632,7 +644,8 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security: []
+      security:
+        - developer_hapikey: []
       summary: Get all revisions for a given definition
       tags:
         - Revisions
@@ -671,7 +684,8 @@ paths:
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
-      security: []
+      security:
+        - developer_hapikey: []
       summary: Gets a revision for a given definition by revision id
       tags:
         - Revisions
@@ -1397,6 +1411,10 @@ components:
       title: SINGLE_FIELD
       type: object
   securitySchemes:
+    developer_hapikey:
+      in: query
+      name: hapikey
+      type: apiKey
     oauth2_legacy:
       flows:
         authorizationCode:

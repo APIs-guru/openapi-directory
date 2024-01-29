@@ -28,7 +28,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: bigqueryconnection
 externalDocs:
-  url: https://cloud.google.com/bigquery/
+  url: https://cloud.google.com/bigquery/docs/connections-api-intro
 tags:
   - name: projects
 paths:
@@ -529,7 +529,7 @@ components:
             type: string
           type: array
         role:
-          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`. For an overview of the IAM roles and permissions, see the [IAM documentation](https://cloud.google.com/iam/docs/roles-overview). For a list of the available pre-defined roles, see [here](https://cloud.google.com/iam/docs/understanding-roles).
           type: string
       type: object
     CloudResourceProperties:
@@ -616,6 +616,9 @@ components:
         cloudSql:
           $ref: "#/components/schemas/CloudSqlProperties"
           description: Cloud SQL properties.
+        configuration:
+          $ref: "#/components/schemas/ConnectorConfiguration"
+          description: Optional. Connector configuration.
         creationTime:
           description: Output only. The creation timestamp of the connection.
           format: int64
@@ -649,6 +652,57 @@ components:
         spark:
           $ref: "#/components/schemas/SparkProperties"
           description: Spark properties.
+      type: object
+    ConnectorConfiguration:
+      description: Represents concrete parameter values for Connector Configuration.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ConnectorConfigurationAuthentication"
+          description: Client authentication.
+        connectorId:
+          description: Required. Immutable. The ID of the Connector these parameters are configured for.
+          type: string
+        endpoint:
+          $ref: "#/components/schemas/ConnectorConfigurationEndpoint"
+          description: Specifies how to reach the remote system this connection is pointing to.
+      type: object
+    ConnectorConfigurationAuthentication:
+      description: Client authentication.
+      properties:
+        usernamePassword:
+          $ref: "#/components/schemas/ConnectorConfigurationUsernamePassword"
+          description: Username/password authentication.
+      type: object
+    ConnectorConfigurationEndpoint:
+      description: Remote endpoint specification.
+      properties:
+        hostPort:
+          description: Host and port in a format of `hostname:port` as defined in https://www.ietf.org/rfc/rfc3986.html#section-3.2.2 and https://www.ietf.org/rfc/rfc3986.html#section-3.2.3.
+          type: string
+      type: object
+    ConnectorConfigurationSecret:
+      description: Secret value parameter.
+      properties:
+        plaintext:
+          description: Input only. Secret as plaintext.
+          type: string
+        secretType:
+          description: Output only. Indicates type of secret. Can be used to check type of stored secret value even if it's `INPUT_ONLY`.
+          enum:
+            - SECRET_TYPE_UNSPECIFIED
+            - PLAINTEXT
+          readOnly: true
+          type: string
+      type: object
+    ConnectorConfigurationUsernamePassword:
+      description: Username and Password authentication.
+      properties:
+        password:
+          $ref: "#/components/schemas/ConnectorConfigurationSecret"
+          description: Required. Password.
+        username:
+          description: Required. Username.
+          type: string
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
