@@ -47,6 +47,20 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: The Product Line of the Product.
+          in: query
+          name: product.productLine
+          schema:
+            enum:
+              - PRODUCT_LINE_UNSPECIFIED
+              - GOOGLE_CLOUD
+              - GOOGLE_MAPS
+            type: string
+        - description: The Product Subline of the Product, such as "Maps Billing".
+          in: query
+          name: product.productSubline
+          schema:
+            type: string
         - description: An expression used to filter case classifications. If it's an empty string, then no filtering happens. Otherwise, case classifications will be returned that match the filter.
           in: query
           name: query
