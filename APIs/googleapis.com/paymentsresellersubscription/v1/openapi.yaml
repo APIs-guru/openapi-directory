@@ -1187,6 +1187,14 @@ components:
           items:
             type: string
           type: array
+        partnerPlanType:
+          description: Optional. Specifies the plan type offered to the end user by the partner.
+          enum:
+            - PARTNER_PLAN_TYPE_UNSPECIFIED
+            - PARTNER_PLAN_TYPE_STANDALONE
+            - PARTNER_PLAN_TYPE_HARD_BUNDLE
+            - PARTNER_PLAN_TYPE_SOFT_BUNDLE
+          type: string
       type: object
     GoogleTypeLocalizedText:
       description: Localized variant of a text in a particular language.

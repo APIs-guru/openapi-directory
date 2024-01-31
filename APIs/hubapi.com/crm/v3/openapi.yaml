@@ -1,6 +1,6 @@
 openapi: 3.0.1
 servers:
-  - url: https://api.hubapi.com/
+  - url: https://api.hubapi.com/crm/v3/extensions/cards
 info:
   description: Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
   title: CRM cards
@@ -19,10 +19,10 @@ tags:
   - description: Operations related to card detail responses sent to HubSpot by an app.
     name: SampleResponse
 paths:
-  /crm/v3/extensions/cards/sample-response:
+  /sample-response:
     get:
       description: Returns an example card detail response. This is the payload with displayed details for a card that will be shown to a user. An app should send this in response to the data fetch request.
-      operationId: get-/crm/v3/extensions/cards/sample-response_getCardsSampleResponse
+      operationId: get-/crm/v3/extensions/cards/sample-response
       responses:
         "200":
           content:
@@ -99,10 +99,10 @@ paths:
       summary: Get sample card detail response
       tags:
         - SampleResponse
-  /crm/v3/extensions/cards/{appId}:
+  /{appId}:
     get:
       description: Returns a list of cards for a given app.
-      operationId: get-/crm/v3/extensions/cards/{appId}_getAll
+      operationId: get-/crm/v3/extensions/cards/{appId}
       parameters:
         - description: The ID of the target app.
           explode: false
@@ -150,7 +150,7 @@ paths:
         - Cards
     post:
       description: Defines a new card that will become active on an account when this app is installed.
-      operationId: post-/crm/v3/extensions/cards/{appId}_create
+      operationId: post-/crm/v3/extensions/cards/{appId}
       parameters:
         - description: The ID of the target app.
           explode: false
@@ -201,10 +201,10 @@ paths:
       summary: Create a new card
       tags:
         - Cards
-  /crm/v3/extensions/cards/{appId}/{cardId}:
+  /{appId}/{cardId}:
     delete:
       description: Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can't be undone.
-      operationId: delete-/crm/v3/extensions/cards/{appId}/{cardId}_archive
+      operationId: delete-/crm/v3/extensions/cards/{appId}/{cardId}
       parameters:
         - description: The ID of the target app.
           explode: false
@@ -236,7 +236,7 @@ paths:
         - Cards
     get:
       description: Returns the definition for a card with the given ID.
-      operationId: get-/crm/v3/extensions/cards/{appId}/{cardId}_getById
+      operationId: get-/crm/v3/extensions/cards/{appId}/{cardId}
       parameters:
         - description: The ID of the target app.
           explode: false
@@ -290,7 +290,7 @@ paths:
         - Cards
     patch:
       description: Update a card definition with new details.
-      operationId: patch-/crm/v3/extensions/cards/{appId}/{cardId}_update
+      operationId: patch-/crm/v3/extensions/cards/{appId}/{cardId}
       parameters:
         - description: The ID of the target app.
           explode: false

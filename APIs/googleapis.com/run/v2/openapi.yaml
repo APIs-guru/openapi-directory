@@ -1873,6 +1873,9 @@ components:
           items:
             type: string
           type: array
+        defaultUriDisabled:
+          description: Optional. Disables public resolution of the default URI of this service.
+          type: boolean
         deleteTime:
           description: Output only. The deletion time.
           format: google-datetime

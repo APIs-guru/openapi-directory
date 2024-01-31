@@ -513,6 +513,63 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1alpha/{parent}/discoveredServices:find:
+    get:
+      description: Finds discovered services that could be added to an application in a host project and location.
+      operationId: apphub.projects.locations.discoveredServices.find
+      parameters:
+        - description: Required. Value for parent.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filtering results
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Hint for how to order the results
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FindDiscoveredServicesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1alpha/{parent}/discoveredServices:findUnregistered:
     get:
       description: Finds unregistered services in a host project and location.
@@ -607,6 +664,63 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListDiscoveredWorkloadsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1alpha/{parent}/discoveredWorkloads:find:
+    get:
+      description: Finds discovered workloads that could be added to an application in a host project and location.
+      operationId: apphub.projects.locations.discoveredWorkloads.find
+      parameters:
+        - description: Required. Value for parent.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filtering results
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Hint for how to order the results
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FindDiscoveredWorkloadsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1383,6 +1497,40 @@ components:
         title:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
+      type: object
+    FindDiscoveredServicesResponse:
+      description: Response for FindDiscoveredServices.
+      properties:
+        discoveredServices:
+          description: List of discovered services.
+          items:
+            $ref: "#/components/schemas/DiscoveredService"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results the server should return.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    FindDiscoveredWorkloadsResponse:
+      description: Response for FindDiscoveredWorkloads.
+      properties:
+        discoveredWorkloads:
+          description: List of discovered workloads.
+          items:
+            $ref: "#/components/schemas/DiscoveredWorkload"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results the server should return.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
       type: object
     FindUnregisteredServicesResponse:
       description: Response for FindUnregisteredServices.

@@ -1008,6 +1008,8 @@ components:
             - INCOMPATIBLE_CUDA_VERSION
             - LOCAL_WORKER_MANAGER_NOT_RUNNING
             - DOCKER_START_RUNTIME_FILE_FORMAT_ERROR
+            - DOCKER_START_RUNTIME_PERMISSION_DENIED
+            - DOCKER_PERMISSION_DENIED
           type: string
         message:
           description: The error message.

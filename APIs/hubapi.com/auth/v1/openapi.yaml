@@ -1,6 +1,6 @@
 openapi: 3.0.1
 servers:
-  - url: https://api.hubapi.com/
+  - url: https://api.hubapi.com/oauth
 info:
   title: ""
   version: v1
@@ -17,9 +17,9 @@ tags:
   - name: Refresh_Tokens
   - name: Tokens
 paths:
-  /oauth/v1/access-tokens/{token}:
+  /v1/access-tokens/{token}:
     get:
-      operationId: get-/oauth/v1/access-tokens/{token}_get
+      operationId: get-/oauth/v1/access-tokens/{token}
       parameters:
         - explode: false
           in: path
@@ -40,9 +40,9 @@ paths:
       security: []
       tags:
         - Access_Tokens
-  /oauth/v1/refresh-tokens/{token}:
+  /v1/refresh-tokens/{token}:
     delete:
-      operationId: delete-/oauth/v1/refresh-tokens/{token}_archive
+      operationId: delete-/oauth/v1/refresh-tokens/{token}
       parameters:
         - explode: false
           in: path
@@ -61,7 +61,7 @@ paths:
       tags:
         - Refresh_Tokens
     get:
-      operationId: get-/oauth/v1/refresh-tokens/{token}_get
+      operationId: get-/oauth/v1/refresh-tokens/{token}
       parameters:
         - explode: false
           in: path
@@ -82,9 +82,9 @@ paths:
       security: []
       tags:
         - Refresh_Tokens
-  /oauth/v1/token:
+  /v1/token:
     post:
-      operationId: post-/oauth/v1/token_create
+      operationId: post-/oauth/v1/token
       requestBody:
         content:
           application/x-www-form-urlencoded:
