@@ -3,15 +3,18 @@ servers:
   - url: https://api.hubapi.com
 info:
   description: HTTP API for triggering instances of custom behavioral events
-  title: Send Event Completions
+  title: Events Send Event Completions
   version: v3
   x-hubspot-api-use-case: You want to track more complex interactions that visitors perform when they navigate to your website and engage with your content.
   x-hubspot-documentation-banner: NONE
-  x-hubspot-introduction: Use the custom behavioral events API to define events that you can later create and associate with records in your HubSpot CRM.
+  x-hubspot-introduction: Use the custom events API to define events that you can later create and associate with records in your HubSpot CRM.
   x-hubspot-product-tier-requirements:
+    cms: ENTERPRISE
     marketing: ENTERPRISE
+    sales: ENTERPRISE
+    service: ENTERPRISE
   x-hubspot-related-documentation:
-    - name: Custom Behavioral Events Guide
+    - name: Custom events guide
       url: https://hubspot.dev/guides/api/analytics/events
   x-logo:
     url: https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/HubSpotOpenGraph.png
@@ -22,13 +25,13 @@ info:
   x-providerName: hubapi.com
   x-serviceName: analytics
 tags:
-  - description: ""
-    name: Behavioral_Events_Tracking
-    x-hubspot-tag-name-english-source: Behavioral_Events_Tracking
+  - name: Custom event data
+  - name: Behavioral_Events_Tracking
+  - name: ""
 paths:
   /events/v3/send:
     post:
-      description: Endpoint to send an instance of a behavioral event
+      description: Endpoint to send an instance of a custom event.
       operationId: post-/events/v3/send_send
       parameters: []
       requestBody:
@@ -47,9 +50,9 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - analytics.behavioral_events.send
-      summary: Sends Custom Behavioral Event
+      summary: Send custom event completion
       tags:
-        - Behavioral_Events_Tracking
+        - Custom event data
 components:
   responses:
     Error:
@@ -190,4 +193,7 @@ x-hubspot-available-client-libraries:
   - Python
 x-hubspot-documentation-banner: NONE
 x-hubspot-product-tier-requirements:
+  cms: ENTERPRISE
   marketing: ENTERPRISE
+  sales: ENTERPRISE
+  service: ENTERPRISE

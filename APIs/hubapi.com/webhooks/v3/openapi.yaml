@@ -478,7 +478,7 @@ components:
           period: SECONDLY
       properties:
         targetUrl:
-          description: A publicly available URL for Hubspot to call where event payloads will be delivered. See [link-so-some-doc](#) for details about the format of these event payloads.
+          description: A publicly available URL for HubSpot to call where event payloads will be delivered.
           example: https://www.example.com/hubspot/target
           type: string
         throttling:
@@ -502,7 +502,7 @@ components:
           format: date-time
           type: string
         targetUrl:
-          description: A publicly available URL for Hubspot to call where event payloads will be delivered. See [link-so-some-doc](#) for details about the format of these event payloads.
+          description: A publicly available URL for HubSpot to call where event payloads will be delivered. See [link-so-some-doc](#) for details about the format of these event payloads.
           example: https://www.example.com/hubspot/target
           type: string
         throttling:
@@ -722,18 +722,11 @@ components:
       description: Configuration details for webhook throttling.
       properties:
         maxConcurrentRequests:
-          description: The maximum number of HTTP requests HubSpot will attempt to make to your app in a given time frame determined by `period`.
+          description: The maximum number of concurrent HTTP requests HubSpot will attempt to make to your app.
           format: int32
           type: integer
-        period:
-          description: Time scale for this setting. Can be either `SECONDLY` (per second) or `ROLLING_MINUTE` (per minute).
-          enum:
-            - SECONDLY
-            - ROLLING_MINUTE
-          type: string
       required:
         - maxConcurrentRequests
-        - period
       type: object
   securitySchemes:
     developer_hapikey:

@@ -1,0 +1,638 @@
+openapi: 3.0.0
+servers:
+  - url: https://dataportability.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: The Data Portability API lets you build applications that request authorization from a user to move a copy of data from Google services into your application. This enables data portability and facilitates switching services.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Data Portability API
+  version: v1beta
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+  x-origin:
+    - format: google
+      url: https://dataportability.googleapis.com/$discovery/rest?version=v1beta
+      version: v1
+  x-providerName: googleapis.com
+  x-serviceName: dataportability
+externalDocs:
+  url: https://developers.google.com/data-portability
+tags:
+  - name: archiveJobs
+  - name: authorization
+  - name: portabilityArchive
+paths:
+  /v1beta/authorization:reset:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Revokes OAuth tokens and resets exhausted scopes for a user/project pair. This method allows you to initiate a Takeout request after a new consent is granted. This method also indicates that previous archives can be garbage collected. You should call this method when all jobs are complete and all archives are downloaded. Do not call it only when you start a new job.
+      operationId: dataportability.authorization.reset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetAuthorizationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.businessmessaging.conversations
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.businessmessaging.conversations
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.myactivity.search
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.myactivity.search
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.myactivity.shopping
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.myactivity.shopping
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.myactivity.youtube
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.myactivity.youtube
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.shopping.addresses
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.shopping.addresses
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.shopping.reviews
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.shopping.reviews
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.channel
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.channel
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.comments
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.comments
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.live_chat
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.live_chat
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.music
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.music
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.private_playlists
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.private_playlists
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.private_videos
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.private_videos
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.public_playlists
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.public_playlists
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.public_videos
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.public_videos
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.shopping
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.shopping
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.subscriptions
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.subscriptions
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.unlisted_playlists
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.unlisted_playlists
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.unlisted_videos
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.unlisted_videos
+      tags:
+        - authorization
+  /v1beta/portabilityArchive:initiate:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Initiates a new Takeout Archive job for the Portability API.
+      operationId: dataportability.portabilityArchive.initiate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InitiatePortabilityArchiveRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InitiatePortabilityArchiveResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.businessmessaging.conversations
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.businessmessaging.conversations
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.myactivity.search
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.myactivity.search
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.myactivity.shopping
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.myactivity.shopping
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.myactivity.youtube
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.myactivity.youtube
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.shopping.addresses
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.shopping.addresses
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.shopping.reviews
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.shopping.reviews
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.channel
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.channel
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.comments
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.comments
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.live_chat
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.live_chat
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.music
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.music
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.private_playlists
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.private_playlists
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.private_videos
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.private_videos
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.public_playlists
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.public_playlists
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.public_videos
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.public_videos
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.shopping
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.shopping
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.subscriptions
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.subscriptions
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.unlisted_playlists
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.unlisted_playlists
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.unlisted_videos
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.unlisted_videos
+      tags:
+        - portabilityArchive
+  /v1beta/{name}:
+    get:
+      description: Retrieves the state of a Takeout Archive job for the Portability API.
+      operationId: dataportability.archiveJobs.getPortabilityArchiveState
+      parameters:
+        - description: "Required. The archive job ID that is returned when you request the state of the job from Takeout. The format is: archiveJobs/{archive_job}/portabilityArchiveState. archive_job is the job ID returned by the InitiatePortabilityArchiveResponse."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PortabilityArchiveState"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.businessmessaging.conversations
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.businessmessaging.conversations
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.myactivity.search
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.myactivity.search
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.myactivity.shopping
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.myactivity.shopping
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.myactivity.youtube
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.myactivity.youtube
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.shopping.addresses
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.shopping.addresses
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.shopping.reviews
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.shopping.reviews
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.channel
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.channel
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.comments
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.comments
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.live_chat
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.live_chat
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.music
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.music
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.private_playlists
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.private_playlists
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.private_videos
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.private_videos
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.public_playlists
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.public_playlists
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.public_videos
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.public_videos
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.shopping
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.shopping
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.subscriptions
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.subscriptions
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.unlisted_playlists
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.unlisted_playlists
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.unlisted_videos
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.unlisted_videos
+      tags:
+        - archiveJobs
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1beta/{name}:retry:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Retries a failed Portability Archive job.
+      operationId: dataportability.archiveJobs.retry
+      parameters:
+        - description: Required. The archive job ID returned by the InitiatePortabilityArchiveResponse to be retried. Retrying is only executed if the initial job failed.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RetryPortabilityArchiveRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RetryPortabilityArchiveResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.businessmessaging.conversations
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.businessmessaging.conversations
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.myactivity.search
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.myactivity.search
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.myactivity.shopping
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.myactivity.shopping
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.myactivity.youtube
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.myactivity.youtube
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.shopping.addresses
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.shopping.addresses
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.shopping.reviews
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.shopping.reviews
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.channel
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.channel
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.comments
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.comments
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.live_chat
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.live_chat
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.music
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.music
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.private_playlists
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.private_playlists
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.private_videos
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.private_videos
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.public_playlists
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.public_playlists
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.public_videos
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.public_videos
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.shopping
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.shopping
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.subscriptions
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.subscriptions
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.unlisted_playlists
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.unlisted_playlists
+        - Oauth2:
+            - https://www.googleapis.com/auth/dataportability.youtube.unlisted_videos
+          Oauth2c:
+            - https://www.googleapis.com/auth/dataportability.youtube.unlisted_videos
+      tags:
+        - archiveJobs
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    Empty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+      properties: {}
+      type: object
+    InitiatePortabilityArchiveRequest:
+      description: Request to kick off a Takeout Archive job.
+      properties:
+        resources:
+          description: The resources from which you're exporting data. These values have a 1:1 correspondence with the OAuth scopes.
+          items:
+            type: string
+          type: array
+      type: object
+    InitiatePortabilityArchiveResponse:
+      description: Response from initiating a Take Archive job.
+      properties:
+        archiveJobId:
+          description: The archive job ID that is initiated in the Takeout API. This can be used to get the state of the job.
+          type: string
+      type: object
+    PortabilityArchiveState:
+      description: Resource that contains the state of a Takeout Archive job.
+      properties:
+        name:
+          description: "The resource name of ArchiveJob's PortabilityArchiveState singleton. The format is: archiveJobs/{archive_job}/portabilityArchiveState. archive_job is the job ID provided in the request."
+          type: string
+        state:
+          description: Resource that represents the state of the Takeout Archive job.
+          enum:
+            - STATE_UNSPECIFIED
+            - IN_PROGRESS
+            - COMPLETE
+            - FAILED
+            - CANCELLED
+          type: string
+        urls:
+          description: If the state is complete, this method returns the signed URLs of the objects in the Cloud Storage bucket.
+          items:
+            type: string
+          type: array
+      type: object
+    ResetAuthorizationRequest:
+      description: Request to reset exhausted OAuth scopes.
+      properties: {}
+      type: object
+    RetryPortabilityArchiveRequest:
+      description: Request to retry a failed Portability Archive job.
+      properties: {}
+      type: object
+    RetryPortabilityArchiveResponse:
+      description: Response from retrying a Portability Archive.
+      properties:
+        archiveJobId:
+          description: The archive job ID that is initiated by the retry endpoint. This can be used to get the state of the new job
+          type: string
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/dataportability.businessmessaging.conversations: Move a copy of messages between you and the businesses you have conversations with.
+            https://www.googleapis.com/auth/dataportability.myactivity.search: Move a copy of your search activity.
+            https://www.googleapis.com/auth/dataportability.myactivity.shopping: Move a copy of your Shopping activity.
+            https://www.googleapis.com/auth/dataportability.myactivity.youtube: Move a copy of your YouTube activity.
+            https://www.googleapis.com/auth/dataportability.shopping.addresses: Move a copy of your shipping information.
+            https://www.googleapis.com/auth/dataportability.shopping.reviews: Move a copy of reviews you wrote about products or online stores.
+            https://www.googleapis.com/auth/dataportability.youtube.channel: Move a copy of information about your channel.
+            https://www.googleapis.com/auth/dataportability.youtube.comments: Move a copy of your comments.
+            https://www.googleapis.com/auth/dataportability.youtube.live_chat: Move a copy of your messages in live chat.
+            https://www.googleapis.com/auth/dataportability.youtube.music: Move a copy of your uploaded YouTube Music tracks and your YouTube Music library.
+            https://www.googleapis.com/auth/dataportability.youtube.private_playlists: Move a copy of your private playlists.
+            https://www.googleapis.com/auth/dataportability.youtube.private_videos: Move a copy of your private videos and information about them.
+            https://www.googleapis.com/auth/dataportability.youtube.public_playlists: Move a copy of your public playlists.
+            https://www.googleapis.com/auth/dataportability.youtube.public_videos: Move a copy of your public videos and information about them.
+            https://www.googleapis.com/auth/dataportability.youtube.shopping: Move a copy of YouTube Shopping Wishlists, and wishlist items.
+            https://www.googleapis.com/auth/dataportability.youtube.subscriptions: Move a copy of your channel subscriptions, even if they're private.
+            https://www.googleapis.com/auth/dataportability.youtube.unlisted_playlists: Move a copy of your unlisted playlists.
+            https://www.googleapis.com/auth/dataportability.youtube.unlisted_videos: Move a copy of your unlisted videos and information about them.
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/dataportability.businessmessaging.conversations: Move a copy of messages between you and the businesses you have conversations with.
+            https://www.googleapis.com/auth/dataportability.myactivity.search: Move a copy of your search activity.
+            https://www.googleapis.com/auth/dataportability.myactivity.shopping: Move a copy of your Shopping activity.
+            https://www.googleapis.com/auth/dataportability.myactivity.youtube: Move a copy of your YouTube activity.
+            https://www.googleapis.com/auth/dataportability.shopping.addresses: Move a copy of your shipping information.
+            https://www.googleapis.com/auth/dataportability.shopping.reviews: Move a copy of reviews you wrote about products or online stores.
+            https://www.googleapis.com/auth/dataportability.youtube.channel: Move a copy of information about your channel.
+            https://www.googleapis.com/auth/dataportability.youtube.comments: Move a copy of your comments.
+            https://www.googleapis.com/auth/dataportability.youtube.live_chat: Move a copy of your messages in live chat.
+            https://www.googleapis.com/auth/dataportability.youtube.music: Move a copy of your uploaded YouTube Music tracks and your YouTube Music library.
+            https://www.googleapis.com/auth/dataportability.youtube.private_playlists: Move a copy of your private playlists.
+            https://www.googleapis.com/auth/dataportability.youtube.private_videos: Move a copy of your private videos and information about them.
+            https://www.googleapis.com/auth/dataportability.youtube.public_playlists: Move a copy of your public playlists.
+            https://www.googleapis.com/auth/dataportability.youtube.public_videos: Move a copy of your public videos and information about them.
+            https://www.googleapis.com/auth/dataportability.youtube.shopping: Move a copy of YouTube Shopping Wishlists, and wishlist items.
+            https://www.googleapis.com/auth/dataportability.youtube.subscriptions: Move a copy of your channel subscriptions, even if they're private.
+            https://www.googleapis.com/auth/dataportability.youtube.unlisted_playlists: Move a copy of your unlisted playlists.
+            https://www.googleapis.com/auth/dataportability.youtube.unlisted_videos: Move a copy of your unlisted videos and information about them.
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

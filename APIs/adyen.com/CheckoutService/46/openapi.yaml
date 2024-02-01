@@ -1128,8 +1128,6 @@ paths:
                 $ref: "#/components/examples/post-payments-enableOneClick-SF"
               enableOneClick-raw:
                 $ref: "#/components/examples/post-payments-enableOneClick-raw"
-              giropay:
-                $ref: "#/components/examples/post-payments-giropay"
               googlepay:
                 $ref: "#/components/examples/post-payments-googlepay"
               ideal:
@@ -1142,8 +1140,6 @@ paths:
                 $ref: "#/components/examples/post-payments-oneclick-securedfields"
               recurring:
                 $ref: "#/components/examples/post-payments-recurring"
-              sofort:
-                $ref: "#/components/examples/post-payments-sofort"
               split-balanceplatform:
                 $ref: "#/components/examples/post-payments-split-balanceplatform"
               split-classic:
@@ -1167,12 +1163,8 @@ paths:
                   $ref: "#/components/examples/post-payments-card-securedfields-200"
                 enableOneClick-raw:
                   $ref: "#/components/examples/post-payments-enableOneClick-raw-200"
-                giropay:
-                  $ref: "#/components/examples/post-payments-giropay-200"
                 ideal:
                   $ref: "#/components/examples/post-payments-ideal-200"
-                sofort:
-                  $ref: "#/components/examples/post-payments-sofort-200"
                 split-balanceplatform:
                   $ref: "#/components/examples/post-payments-split-balanceplatform-200"
               schema:
@@ -4674,28 +4666,6 @@ components:
           refusalReasonRaw: AUTHORISED
         pspReference: 993617894947495G
         resultCode: Authorised
-    post-payments-giropay:
-      summary: Make a giropay payment
-      value:
-        amount:
-          currency: EUR
-          value: 1000
-        merchantAccount: YOUR_MERCHANT_ACCOUNT
-        paymentMethod:
-          type: giropay
-        reference: Your order number
-        returnUrl: https://your-company.com/...
-    post-payments-giropay-200:
-      summary: Successful giropay payment
-      value:
-        details:
-          - key: payload
-            type: text
-        paymentData: Ab02b4c0!BQABAgBdNcOUwhrokraZtM/nJSduq+zXt1Hub2wGGxDvL/j8D63+t+oTWtpsKPus73V1DRhbeEsPDRc6MTCmNRFNlYzRB9+Qmedoot2ccLZvIeIp9JFNURi4eLi70MEjNsT0Me1nkbkkP8btIWrk5UzulQbYCPHUurWCXgIG84Nc5/SQH7t3cpVLWiZeuXDKTUiwFjOP05jgS96jWzZ9w8WYla+tJyOST94mC246dlveWuQCDb70MxoPVi9BcVdppUBtaIXPIXYAa4YbxLAHyi3lw5STnhI0y8/k3tc+dBAFL+vezYDWLZ8czUdl/uqDzsPEe/ewz6TyS9vXZvZOAjcJhJ4wDRwZ5AFQBRBNwSANMswOBXCyh/jJsp9ycJSAT+ahWmSWKaU4oe1jlWBmQ8rxnQNOSWkV9/ZpLsrN36eLCPo6VgQnNKhWx5zkkR5xMS0pVx+Ff7ZdFeKtl0Trc4OyON8lBHTFNd7Pyhl74C21dlZUNGxA5gIc1xNXNFOvCNJQvyO9sR2giM1dEAKXpOm7Ez2u7eDvlpQa2zwPxulu3vQ2xSDVmqboSPx6Wp7ywyiYIIJzUwphVu3IulMjWnmHQOTYatiO9l1O50tqepaFB3/mwdesPw1cJD6UYq+v8kshrYya4w4ojMmQy++0L8UxUBHis71ftJM+nIhXZBpJ3cXtehBMZx+06hofQjgUgsuP+rKKAEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMiffpA9iAv0lzUkDkBzjQG0XzMpxNd9Z7Jl1zf68QhTbJ53cSWhqs9FLu4XbuwyQ3ie/rNaLX7uypr+FmxHIZgehW2wSS0XKs7qp6b6z9OiTbZgcUEVtsyZ/Il3HrI+PZnavI3MB//BC5kjX/KE56BEIytAmQIovNHW7i+4YRVCjpNKAuBLr/DcSkLSqTb7HwV51btGbyhB9NwwSqO2rHUwjl+2WScEkbd5b+EUxc0jN7gdc4mu96Ak9ATN/2J/AHoiEdXDaZRkOBU6fSYOEQKpXw1UW9SOJdUji1+T7b8uVuC6gXAzS+wUXkA4ZsvW9UM5yyhaF6UgF3jY700Ufme7r98pjdBydAGGWSNVu9BdZmzDEiUke0eL2k7rYv2IfxtVvyacVNKnYmwmPpWRqvxQF+PJN2KqcVEWbNal5fleujujNZ6LACeSO5a5eREJ6bmdyKR82So08hMEwV9Ky+Sb1REXAMXY3o/FvwzN4HwHNaqi2pYNw37JkLEQTEIeWntLyC+pvc1cVhILipMx2bbBCx/CijEFGJSxVzma1mhv5Q+RJ8XtaqyzJoFOkoIoy63cq6IVYHEy47vgCfKjdnK8jDFfOU4ONDjaTb01vJYwF3XnWxNFspb7oq2ZMbmBtLDGkERkMmcrZV4XIhzF3uhbo8PEjrFhjMepOT/gB1/Tq5XkUAIViviWYaFgGByHjwzFPufEdu4ycZiG5KC0MFJ6Y+T6YrF++U9FRmeJpbdfF2oOM5Rc4jqg90YI3fi7FeKY125Dnl/uGKJhI07uaf5SRt9R3xwJJgUsGadj/AL
-        redirect:
-          method: GET
-          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1vozAQ-DXwFmQ*AuTBD0lKr9ylvSsHVa8vlWs2gBpsYhsU8utv4XJRVVWy1tbMandm12*KiXIrS6BVo2THRpv3SoHg4wwmRWa3oHjNhFlzLnthaA7a3F*wK5kKA5VippHCMWMHdHuXbH-8LPLXb8lDkqXbLzMHUBpvGpArncEepv5AtVGNqD4QplfihhlGVys3dKN4FayCIPSXyTXnd1PR3aPl3W6qh-bIwH0*RUXH63W2yZsz33VPskh1anmbF7L-k*mkfLT8Gxttt4AG29mfSwixFegi29HamM7y11gRz0FydqilNojEJCYI8Rr4u*yNrmXXgUJEgxoaDhqfv-6VTQWXLTrJoGwUcIPM4P4vd8m5B1PL0vJvPw0b1X0ct*WFah4DakNqUoeNlpPA5SQRwyh7tcCGHROjg-cMOo5ja9DTrJ-YoSkbM1KPeO6CBAsS526IjtwlhiB4sS9epj0pxqc90QQLTcrA1u*NmH9G1785g*dcVhGFURS5sR8453R49vPvYRkPY*LV69MrL*v6VJC0OO*D4*6Y3O2SCsaylH8BlM7anA
-        resultCode: RedirectShopper
     post-payments-googlepay:
       summary: Make a Google Pay payment
       value:
@@ -4931,28 +4901,6 @@ components:
         paymentMethod: ideal
         pspReference: V4HZ4RBFJGXXGN82
         shopperLocale: nl_NL
-    post-payments-sofort:
-      summary: Make a Sofort payment
-      value:
-        amount:
-          currency: EUR
-          value: 1000
-        merchantAccount: YOUR_MERCHANT_ACCOUNT
-        paymentMethod:
-          type: directEbanking
-        reference: Your order number
-        returnUrl: https://your-company.com/...
-    post-payments-sofort-200:
-      summary: Successful Sofort payment
-      value:
-        details:
-          - key: payload
-            type: text
-        paymentData: Ab02b4c0!BQABAgCrbmh+OQiaXUY3sofxY5aXEujSd/zIwdZ/zDiV440FsfTI6tfDuXPzi9jOQgmGr5UFM7mnTNjHY5fwFD9FmKQre5ewthnSTsBVmC0RxupWRh7OeHYCcLp+G8+vxR680uJwp1stzdzq/lXmyIinV6aC22NzapolomfBvxS3cANwHE4IC65sXt5eyzItZbHIxJqMC7ADM/dX9Qw9HolgxLQXZlmjdHjfEHEmTvvPHXe5cBv4cfKPJ2gp+RH1J4hds1BJxKwobazQ+a/fauTj5N0a2uotli9I+06B5Y9fR8+SFyOIT3X2jHVDrGMMiVTjBSVDYB6/76A6q6GPXUv3cPgLBRdYOxKJewp5o7raTYs39Tp69iZTPF/9+E9TvmSIjcc5yekrt3kUUxnJTITAN5EJa2AnmfdJBro7O5c0C4OQ43MIgMhiMUKzBewWb5rDzfDiUCQKkSdWEbJUWDEZSS3TPChvP6smI8m80rbgig/0IXgt7Zc2UT1GLdai0t30AoX0gcnbZJnS+4o07WivKPI9aagD68dYJZy3VN64p7Q84vzj4IzwftzKW3lWDf2gt6Reo3x4Sgo2KzznEfCeSRB3QtK8Tuk5ibgVgjkCx2p7KaxKtj1Mqdi+DgA63sM4juy2IAf/23TA4fu42OWovbF9DmXf4v8aSvLmCw3NYX0VyxBEf4xCIC8T14KfCMGbP4N9AEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifYDX5Nt00CX5QJ7OLRtmg5wXbL8+ctpyuEOjPJt2DpH30H0klwHPxbTfbVgctpO7GFGrUgl+mqy/pTDTlfKGmt2SRWGbo9cDMbUTrcKNh2MiEI7yOroy4iL/DYnvqbqQ3kQTjxtYtyM7qKI5/NbPotypE2Z6UlscFJnMYaaZCXenBnXU7e52p4tk1hQ5KkdZTbkjdZvNkEL7yGvoVgBNRPmTr7fZJib0XPyrAK76VL5yBq0A3mcwSMChj2Uu0ri7lp/g4yO1JNljWTxtEwaTCxGOY3tDF3IqnqELIHtZ3hyqG1n80muT4wVUX6kmCc5zeHybbZTJhPG2Q+fPAqvNXA0y4Zg3JOC51gGRhmN3m7L3eil3ks70Ejx6gpNzLnLZWpzZy/tff7coZGYW1Xo3973NOJcDkEA1QjhKiPycsHy3ZHZ04ShINLc2UssmV0o68FQ0R6sOVbjOevBaK27EySDaZfQnUjDSfgJdtIFDIEVzZtVyUWGo6w+cYLUYZCpeE9VQac1DinR/NH3w5nqHKyTBf9YqoqYZh3CuOA4jGbwadiG1HhAmZg6TOY7GZ+91hB1yOs4fsDfR42Rj6MEWOaqoH/yggwtjdNhdyeSIc0z3vfjsWJCLy4Uy0haQ7ww+81mqalJBILsTJuS3cwpuGuai68o4ApraA/8sXd+wJ7HBuCqaqJ1r9ZdPppgK+9QbZzGA8xvc5IzHqyOgPZ9oRCTbYOmENJO1grH15TyBHBB7N1Eu/76ojkCsdDEK/hu69T/jLin+x7X+aNuWVILJ4Je8HOdI8ddtr79R6WX88cU=
-        redirect:
-          method: GET
-          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1vozAQ-DXwFmS*4YGHXEpbemmvR6CK8lIZs8UoiU1sg0J*-RmaS6vTSchGM6vdmVlXArN6xWtI6lYAUWmF2b5ljUl6IYCRcebSMjePIAjFTC0J4T1TSQFSPV*xG5kxBY3AquXMUmMHyeoxXf38VRbvD*lLmmer-1YOIKS*Ew-d6Bw*YJoPiVRi0vNFqF6wO6xwEsd2YIdR7MV*HLjx061m0zZJ1W2bTf7juHfbZVFc3i77cdfsthuPxg8HStH51XupTvn5d1ca7p3Z4fEI2txx9mYjhEwBsszXCVWqM9yl4dzr78AJPlAulUYiFCENEQpkz3slKe86EBqRIIaWgNS-r59tM0b4UbvI4TNlzQz233bXmmdQlNeGe-9P0Frd96gNJxBzBFqbpiZ1epA-CfQnifoYeS8WemCH2WjpewYtyzIlyCnnN3xo61aNiYMce4G8BYoKO9CObF8ffrwzr16mHQlMph0lqW40KQNT6vcxv4qur6zBsa5rCIMwDO3I9axLNmzd4imoo2FMHbo8v5Oa0nOJsvLy4Z3Wp-RxnTYw1jX-A42b3RY
-        resultCode: RedirectShopper
     post-payments-split-balanceplatform:
       summary: Split a payment between balance accounts
       value:
@@ -6971,11 +6919,7 @@ components:
           type: array
           x-addedInVersion: "37"
         store:
-          description: |-
-            The ecommerce or point-of-sale store that is processing the payment. Used in:
-
-            * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
-            * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
+          description: Required for Adyen for Platforms integrations if you have a platform setup. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/marketplaces-and-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
           maxLength: 16
           minLength: 1
           type: string
@@ -8120,11 +8064,7 @@ components:
           type: array
           x-addedInVersion: "37"
         store:
-          description: |-
-            The ecommerce or point-of-sale store that is processing the payment. Used in:
-
-            * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
-            * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
+          description: Required for Adyen for Platforms integrations if you have a platform setup. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/marketplaces-and-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
           maxLength: 16
           minLength: 1
           type: string
@@ -9960,11 +9900,7 @@ components:
             > Your reference must not include personally identifiable information (PII), for example name or email address.
           type: string
         store:
-          description: |-
-            The ecommerce or point-of-sale store that is processing the payment. Used in:
-
-            * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
-            * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
+          description: Required for Adyen for Platforms integrations if you have a platform setup. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/marketplaces-and-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
           maxLength: 16
           minLength: 1
           type: string
@@ -10434,11 +10370,7 @@ components:
           type: array
           x-addedInVersion: "37"
         store:
-          description: |-
-            The ecommerce or point-of-sale store that is processing the payment. Used in:
-
-            * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
-            * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
+          description: Required for Adyen for Platforms integrations if you have a platform setup. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/marketplaces-and-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
           maxLength: 64
           minLength: 1
           type: string
@@ -10888,11 +10820,7 @@ components:
           type: array
           x-addedInVersion: "37"
         store:
-          description: |-
-            The ecommerce or point-of-sale store that is processing the payment. Used in:
-
-            * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
-            * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
+          description: Required for Adyen for Platforms integrations if you have a platform setup. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/marketplaces-and-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
           maxLength: 16
           minLength: 1
           type: string
