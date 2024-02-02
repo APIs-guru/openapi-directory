@@ -1156,6 +1156,9 @@ components:
         reserved:
           description: Whether the node is created under a reservation.
           type: boolean
+        spot:
+          description: Optional. Defines whether the node is Spot VM.
+          type: boolean
       type: object
     ServiceAccount:
       description: A service account.

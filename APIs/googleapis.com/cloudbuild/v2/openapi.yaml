@@ -940,7 +940,7 @@ components:
             type: string
           type: array
         role:
-          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`. For an overview of the IAM roles and permissions, see the [IAM documentation](https://cloud.google.com/iam/docs/roles-overview). For a list of the available pre-defined roles, see [here](https://cloud.google.com/iam/docs/understanding-roles).
           type: string
       type: object
     CancelOperationRequest:
@@ -1568,6 +1568,12 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        gcbParams:
+          additionalProperties:
+            type: string
+          description: Output only. GCB default params.
+          readOnly: true
+          type: object
         name:
           description: Output only. The `PipelineRun` name with format `projects/{project}/locations/{location}/pipelineRuns/{pipeline_run}`
           readOnly: true
@@ -1589,10 +1595,16 @@ components:
         pipelineSpec:
           $ref: "#/components/schemas/PipelineSpec"
           description: PipelineSpec defines the desired state of Pipeline.
+        provenance:
+          $ref: "#/components/schemas/Provenance"
+          description: Optional. Provenance configuration.
         resolvedPipelineSpec:
           $ref: "#/components/schemas/PipelineSpec"
           description: Output only. The exact PipelineSpec used to instantiate the run.
           readOnly: true
+        security:
+          $ref: "#/components/schemas/Security"
+          description: Optional. Security configuration.
         serviceAccount:
           description: Service account used in the Pipeline.
           type: string
@@ -1619,6 +1631,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        worker:
+          $ref: "#/components/schemas/Worker"
+          description: Optional. Worker configuration.
         workerPool:
           description: Output only. The WorkerPool used to run this PipelineRun.
           readOnly: true
@@ -1758,6 +1773,32 @@ components:
             - STRING
           type: string
       type: object
+    Provenance:
+      description: Provenance configuration.
+      properties:
+        enabled:
+          description: Optional. Provenance push mode.
+          enum:
+            - ENABLED_UNSPECIFIED
+            - REQUIRED
+            - OPTIMISTIC
+            - DISABLED
+          type: string
+        region:
+          description: Optional. Provenance region.
+          enum:
+            - REGION_UNSPECIFIED
+            - GLOBAL
+          type: string
+        storage:
+          description: Optional. Where provenance is stored.
+          enum:
+            - STORAGE_UNSPECIFIED
+            - PREFER_ARTIFACT_PROJECT
+            - ARTIFACT_PROJECT_ONLY
+            - BUILD_PROJECT_ONLY
+          type: string
+      type: object
     Repository:
       description: A repository associated to a parent connection.
       properties:
@@ -1833,6 +1874,20 @@ components:
         secretVersion:
           description: "Output only. Resource name of the SecretVersion. In format: projects/*/secrets/*/versions/*"
           readOnly: true
+          type: string
+      type: object
+    Security:
+      description: Security configuration.
+      properties:
+        privilegeMode:
+          description: Optional. Privilege mode.
+          enum:
+            - PRIVILEGE_MODE_UNSPECIFIED
+            - PRIVILEGED
+            - UNPRIVILEGED
+          type: string
+        serviceAccount:
+          description: IAM service account whose credentials will be used at runtime.
           type: string
       type: object
     SecurityContext:
@@ -2194,6 +2249,13 @@ components:
           items:
             type: string
           type: array
+      type: object
+    Worker:
+      description: Configuration for the worker.
+      properties:
+        machineType:
+          description: Optional. Machine type of a worker, default is "e2-standard-2".
+          type: string
       type: object
     WorkspaceBinding:
       description: WorkspaceBinding maps a workspace to a Volume. PipelineRef can be used to refer to a specific instance of a Pipeline.

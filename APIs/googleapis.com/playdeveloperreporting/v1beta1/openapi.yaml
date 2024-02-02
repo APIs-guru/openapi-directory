@@ -788,7 +788,7 @@ components:
           description: "Location where the issue happened. Depending on the type this can be either: * APPLICATION_NOT_RESPONDING: the name of the activity or service that stopped responding. * CRASH: the likely method name that caused the error."
           type: string
         name:
-          description: "Identifier. The resource name of the issue. Format: apps/{app}/errorIssues/{issue}"
+          description: "Identifier. The resource name of the issue. Format: apps/{app}/{issue}"
           type: string
         type:
           description: Type of the errors grouped in this issue.
@@ -815,7 +815,7 @@ components:
           description: The issue this report was associated with. **Please note:** this resource is currently in Alpha. There could be changes to the issue grouping that would result in similar but more recent error reports being assigned to a different issue.
           type: string
         name:
-          description: "The resource name of the report. Format: apps/{app}/errorReports/{report}"
+          description: "The resource name of the report. Format: apps/{app}/{report}"
           type: string
         osVersion:
           $ref: "#/components/schemas/GooglePlayDeveloperReportingV1beta1OsVersion"

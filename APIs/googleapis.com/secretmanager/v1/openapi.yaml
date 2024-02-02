@@ -66,7 +66,7 @@ paths:
       description: Gets metadata for a SecretVersion. `projects/*/secrets/*/versions/latest` is an alias to the most recently created SecretVersion.
       operationId: secretmanager.projects.secrets.versions.get
       parameters:
-        - description: Required. The resource name of the SecretVersion in the format `projects/*/secrets/*/versions/*`. `projects/*/secrets/*/versions/latest` is an alias to the most recently created SecretVersion.
+        - description: Required. The resource name of the SecretVersion in the format `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`. `projects/*/secrets/*/versions/latest` or `projects/*/locations/*/secrets/*/versions/latest` is an alias to the most recently created SecretVersion.
           in: path
           name: name
           required: true
@@ -189,7 +189,7 @@ paths:
       description: Accesses a SecretVersion. This call returns the secret data. `projects/*/secrets/*/versions/latest` is an alias to the most recently created SecretVersion.
       operationId: secretmanager.projects.secrets.versions.access
       parameters:
-        - description: Required. The resource name of the SecretVersion in the format `projects/*/secrets/*/versions/*`. `projects/*/secrets/*/versions/latest` is an alias to the most recently created SecretVersion.
+        - description: Required. The resource name of the SecretVersion in the format `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`. `projects/*/secrets/*/versions/latest` or `projects/*/locations/*/secrets/*/versions/latest` is an alias to the most recently created SecretVersion.
           in: path
           name: name
           required: true
@@ -238,7 +238,7 @@ paths:
       description: Destroys a SecretVersion. Sets the state of the SecretVersion to DESTROYED and irrevocably destroys the secret data.
       operationId: secretmanager.projects.secrets.versions.destroy
       parameters:
-        - description: Required. The resource name of the SecretVersion to destroy in the format `projects/*/secrets/*/versions/*`.
+        - description: Required. The resource name of the SecretVersion to destroy in the format `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
           in: path
           name: name
           required: true
@@ -280,7 +280,7 @@ paths:
       description: Disables a SecretVersion. Sets the state of the SecretVersion to DISABLED.
       operationId: secretmanager.projects.secrets.versions.disable
       parameters:
-        - description: Required. The resource name of the SecretVersion to disable in the format `projects/*/secrets/*/versions/*`.
+        - description: Required. The resource name of the SecretVersion to disable in the format `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
           in: path
           name: name
           required: true
@@ -322,7 +322,7 @@ paths:
       description: Enables a SecretVersion. Sets the state of the SecretVersion to ENABLED.
       operationId: secretmanager.projects.secrets.versions.enable
       parameters:
-        - description: Required. The resource name of the SecretVersion to enable in the format `projects/*/secrets/*/versions/*`.
+        - description: Required. The resource name of the SecretVersion to enable in the format `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
           in: path
           name: name
           required: true
@@ -352,7 +352,7 @@ paths:
       description: Lists Secrets.
       operationId: secretmanager.projects.secrets.list
       parameters:
-        - description: Required. The resource name of the project associated with the Secrets, in the format `projects/*`.
+        - description: Required. The resource name of the project associated with the Secrets, in the format `projects/*` or `projects/*/locations/*`
           in: path
           name: parent
           required: true
@@ -403,7 +403,7 @@ paths:
       description: Creates a new Secret containing no SecretVersions.
       operationId: secretmanager.projects.secrets.create
       parameters:
-        - description: Required. The resource name of the project to associate with the Secret, in the format `projects/*`.
+        - description: Required. The resource name of the project to associate with the Secret, in the format `projects/*` or `projects/*/locations/*`.
           in: path
           name: parent
           required: true
@@ -438,7 +438,7 @@ paths:
       description: Lists SecretVersions. This call does not return secret data.
       operationId: secretmanager.projects.secrets.versions.list
       parameters:
-        - description: Required. The resource name of the Secret associated with the SecretVersions to list, in the format `projects/*/secrets/*`.
+        - description: Required. The resource name of the Secret associated with the SecretVersions to list, in the format `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
           in: path
           name: parent
           required: true
@@ -502,7 +502,7 @@ paths:
       description: Creates a new SecretVersion containing secret data and attaches it to an existing Secret.
       operationId: secretmanager.projects.secrets.addVersion
       parameters:
-        - description: Required. The resource name of the Secret to associate with the SecretVersion in the format `projects/*/secrets/*`.
+        - description: Required. The resource name of the Secret to associate with the SecretVersion in the format `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
           in: path
           name: parent
           required: true
@@ -733,7 +733,7 @@ components:
       description: Response message for SecretManagerService.AccessSecretVersion.
       properties:
         name:
-          description: The resource name of the SecretVersion in the format `projects/*/secrets/*/versions/*`.
+          description: The resource name of the SecretVersion in the format `projects/*/secrets/*/versions/*` or `projects/*/locations/*/secrets/*/versions/*`.
           type: string
         payload:
           $ref: "#/components/schemas/SecretPayload"
@@ -802,7 +802,7 @@ components:
             type: string
           type: array
         role:
-          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`. For an overview of the IAM roles and permissions, see the [IAM documentation](https://cloud.google.com/iam/docs/roles-overview). For a list of the available pre-defined roles, see [here](https://cloud.google.com/iam/docs/understanding-roles).
           type: string
       type: object
     CustomerManagedEncryption:
@@ -1034,7 +1034,7 @@ components:
           type: string
         replication:
           $ref: "#/components/schemas/Replication"
-          description: Required. Immutable. The replication policy of the secret data attached to the Secret. The replication policy cannot be changed after the Secret has been created.
+          description: Optional. Immutable. The replication policy of the secret data attached to the Secret. The replication policy cannot be changed after the Secret has been created.
         rotation:
           $ref: "#/components/schemas/Rotation"
           description: Optional. Rotation policy attached to the Secret. May be excluded if there is no rotation policy.
@@ -1051,7 +1051,7 @@ components:
           additionalProperties:
             format: int64
             type: string
-          description: Optional. Mapping from version alias to version name. A version alias is a string with a maximum length of 63 characters and can contain uppercase and lowercase letters, numerals, and the hyphen (`-`) and underscore ('_') characters. An alias string must start with a letter and cannot be the string 'latest' or 'NEW'. No more than 50 aliases can be assigned to a given secret. Version-Alias pairs will be viewable via GetSecret and modifiable via UpdateSecret. At launch Access by Allias will only be supported on GetSecretVersion and AccessSecretVersion.
+          description: Optional. Mapping from version alias to version name. A version alias is a string with a maximum length of 63 characters and can contain uppercase and lowercase letters, numerals, and the hyphen (`-`) and underscore ('_') characters. An alias string must start with a letter and cannot be the string 'latest' or 'NEW'. No more than 50 aliases can be assigned to a given secret. Version-Alias pairs will be viewable via GetSecret and modifiable via UpdateSecret. Access by alias is only be supported on GetSecretVersion and AccessSecretVersion.
           type: object
       type: object
     SecretPayload:
