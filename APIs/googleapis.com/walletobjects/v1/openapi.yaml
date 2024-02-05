@@ -2756,41 +2756,6 @@ paths:
             - https://www.googleapis.com/auth/wallet_object.issuer
       tags:
         - permissions
-  /walletobjects/v1/privateContent/setPassUpdateNotice:
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Provide Google with information about awaiting private pass update. This will allow Google to provide the update notification to the device that currently holds this pass.
-      operationId: walletobjects.walletobjects.v1.privateContent.setPassUpdateNotice
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SetPassUpdateNoticeRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SetPassUpdateNoticeResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/wallet_object.issuer
-          Oauth2c:
-            - https://www.googleapis.com/auth/wallet_object.issuer
-      tags:
-        - walletobjects
   /walletobjects/v1/privateContent/uploadPrivateData:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -7063,14 +7028,6 @@ components:
             - false
             - false
             - true
-      type: object
-    SetPassUpdateNoticeRequest:
-      description: Request to send a private pass update notice information to Google, so that devices can then fetch the notice prompting the user to update a pass.
-      properties: {}
-      type: object
-    SetPassUpdateNoticeResponse:
-      description: A response to a request to notify Google of an awaiting update to a private pass.
-      properties: {}
       type: object
     SignUpInfo:
       properties:

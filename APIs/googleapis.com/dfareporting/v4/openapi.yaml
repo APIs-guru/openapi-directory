@@ -11728,6 +11728,12 @@ components:
     Conversion:
       description: A Conversion represents when a user successfully performs a desired action after seeing an ad.
       properties:
+        adUserDataConsent:
+          description: This represents consent for ad user data.
+          enum:
+            - GRANTED
+            - DENIED
+          type: string
         childDirectedTreatment:
           description: Whether this particular request may come from a user under the age of 13, under COPPA compliance.
           type: boolean
@@ -15399,6 +15405,9 @@ components:
           description: ID of the content category assigned to this placement.
           format: int64
           type: string
+        conversionDomainOverride:
+          $ref: "#/components/schemas/PlacementConversionDomainOverride"
+          description: Optional. Conversion domain overrides for a placement.
         createInfo:
           $ref: "#/components/schemas/LastModifiedInfo"
           description: Information about the creation of this placement. This is a read-only field.
@@ -15557,6 +15566,13 @@ components:
           description: Whether the placement to be assigned requires SSL. This is a read-only field that is auto-generated when the ad is inserted or updated.
           type: boolean
       type: object
+    PlacementConversionDomainOverride:
+      properties:
+        conversionDomains:
+          items:
+            $ref: "#/components/schemas/PlacementSingleConversionDomain"
+          type: array
+      type: object
     PlacementGroup:
       description: Contains properties of a package or roadblock.
       properties:
@@ -15675,6 +15691,14 @@ components:
           items:
             $ref: "#/components/schemas/PlacementGroup"
           type: array
+      type: object
+    PlacementSingleConversionDomain:
+      properties:
+        conversionDomainId:
+          format: int64
+          type: string
+        conversionDomainValue:
+          type: string
       type: object
     PlacementStrategiesListResponse:
       description: Placement Strategy List Response
@@ -17082,7 +17106,7 @@ components:
           description: Additional key-values to be included in tags. Each key-value pair must be of the form key=value, and pairs must be separated by a semicolon (;). Keys and values must not contain commas. For example, id=2;color=red is a valid value for this field.
           type: string
         includeClickThroughUrls:
-          description: Whether static landing page URLs should be included in the tags. This setting applies only to placements.
+          description: Whether static landing page URLs should be included in the tags. New placements will default to the value set on their site.
           type: boolean
         includeClickTracking:
           description: Whether click-tracking string should be included in the tags.
@@ -17351,6 +17375,7 @@ components:
             - AD_ID_OFFICIAL
             - CLEARCAST
             - DCM
+            - ARPP
           type: string
         value:
           description: 'ID value for this creative. Only alphanumeric characters and the following symbols are valid: "_/\-". Maximum length is 64 characters. Read only when registry is DCM.'

@@ -711,7 +711,7 @@ components:
             type: string
           type: array
         role:
-          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`. For an overview of the IAM roles and permissions, see the [IAM documentation](https://cloud.google.com/iam/docs/roles-overview). For a list of the available pre-defined roles, see [here](https://cloud.google.com/iam/docs/understanding-roles).
           type: string
       type: object
     CancelOperationRequest:
@@ -924,6 +924,7 @@ components:
             - PSC_CONNECTION_NOT_ACCEPTED
             - PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK
             - PSC_NEG_PRODUCER_ENDPOINT_NO_GLOBAL_ACCESS
+            - PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS
             - CLOUD_RUN_REVISION_NOT_READY
             - DROPPED_INSIDE_PSC_SERVICE_PRODUCER
             - LOAD_BALANCER_HAS_NO_PROXY_SUBNET
@@ -1337,6 +1338,9 @@ components:
     LoadBalancerBackendInfo:
       description: For display only. Metadata associated with the load balancer backend.
       properties:
+        backendBucketUri:
+          description: URI of the backend bucket this backend targets (if applicable).
+          type: string
         backendServiceUri:
           description: URI of the backend service this backend belongs to (if applicable).
           type: string
@@ -1364,6 +1368,12 @@ components:
           type: string
         networkEndpointGroupUri:
           description: URI of the network endpoint group this backend belongs to (if applicable).
+          type: string
+        pscGoogleApiTarget:
+          description: PSC Google API target this PSC NEG backend targets (if applicable).
+          type: string
+        pscServiceAttachmentUri:
+          description: URI of the PSC service attachment this PSC NEG backend targets (if applicable).
           type: string
       type: object
     LoadBalancerInfo:
@@ -1845,7 +1855,8 @@ components:
           description: Display information of a Compute Engine instance.
         loadBalancer:
           $ref: "#/components/schemas/LoadBalancerInfo"
-          description: Display information of the load balancers.
+          deprecated: true
+          description: Display information of the load balancers. Deprecated in favor of the `load_balancer_backend_info` field, not used in new tests.
         loadBalancerBackendInfo:
           $ref: "#/components/schemas/LoadBalancerBackendInfo"
           description: Display information of a specific load balancer backend.
@@ -1899,6 +1910,38 @@ components:
             - ABORT
             - VIEWER_PERMISSION_MISSING
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - true
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
         storageBucket:
           $ref: "#/components/schemas/StorageBucketInfo"
           description: Display information of a Storage Bucket. Used only for return traces.

@@ -5284,12 +5284,6 @@ components:
           default: storage#folder
           description: The kind of item this is. For folders, this is always storage#folder.
           type: string
-        metadata:
-          additionalProperties:
-            description: An individual metadata entry.
-            type: string
-          description: User-provided metadata, in key/value pairs.
-          type: object
         metageneration:
           description: The version of the metadata for this folder. Used for preconditions and for detecting changes in metadata.
           format: int64

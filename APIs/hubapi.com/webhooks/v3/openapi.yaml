@@ -725,8 +725,15 @@ components:
           description: The maximum number of concurrent HTTP requests HubSpot will attempt to make to your app.
           format: int32
           type: integer
+        period:
+          description: Time scale for this setting. Can be either `SECONDLY` (per second) or `ROLLING_MINUTE` (per minute).
+          enum:
+            - SECONDLY
+            - ROLLING_MINUTE
+          type: string
       required:
         - maxConcurrentRequests
+        - period
       type: object
   securitySchemes:
     developer_hapikey:
