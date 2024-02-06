@@ -176,7 +176,7 @@ paths:
       description: Deletes an HL7v2 message.
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.messages.delete
       parameters:
-        - description: The resource name of the HL7v2 message to delete.
+        - description: Required. The resource name of the HL7v2 message to delete.
           in: path
           name: name
           required: true
@@ -256,13 +256,13 @@ paths:
       description: Update the message. The contents of the message in Message.data and data extracted from the contents such as Message.create_time cannot be altered. Only the Message.labels field is allowed to be updated. The labels in the request are merged with the existing set of labels. Existing labels with the same keys are updated.
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.messages.patch
       parameters:
-        - description: Resource name of the Message, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/hl7V2Stores/{hl7_v2_store_id}/messages/{message_id}`. Assigned by the server.
+        - description: Output only. Resource name of the Message, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/hl7V2Stores/{hl7_v2_store_id}/messages/{message_id}`. Assigned by the server.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: The update mask applies to the resource. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+        - description: Required. The update mask applies to the resource. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
           in: query
           name: updateMask
           schema:
@@ -845,7 +845,7 @@ paths:
       description: Exports the messages to a destination. To filter messages to be exported, define a filter using the start and end time, relative to the message generation time (MSH.7). This API returns an Operation that can be used to track the status of the job by calling GetOperation. Immediate fatal errors appear in the error field. Otherwise, when the operation finishes, a detailed response of type ExportMessagesResponse is returned in the response field. The metadata field type for this operation is OperationMetadata.
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.export
       parameters:
-        - description: The name of the source HL7v2 store, in the format `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/hl7v2Stores/{hl7v2_store_id}`
+        - description: Required. The name of the source HL7v2 store, in the format `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/hl7v2Stores/{hl7v2_store_id}`
           in: path
           name: name
           required: true
@@ -961,7 +961,7 @@ paths:
       description: Gets metrics associated with the HL7v2 store.
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.getHL7v2StoreMetrics
       parameters:
-        - description: The resource name of the HL7v2 store to get metrics for, in the format `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/hl7V2Stores/{hl7v2_store_id}`.
+        - description: Required. The resource name of the HL7v2 store to get metrics for, in the format `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/hl7V2Stores/{hl7v2_store_id}`.
           in: path
           name: name
           required: true
@@ -1014,7 +1014,7 @@ paths:
       description: Import messages to the HL7v2 store by loading data from the specified sources. This method is optimized to load large quantities of data using import semantics that ignore some HL7v2 store configuration options and are not suitable for all use cases. It is primarily intended to load data into an empty HL7v2 store that is not being used by other clients. An existing message will be overwritten if a duplicate message is imported. A duplicate message is a message with the same raw bytes as a message that already exists in this HL7v2 store. When a message is overwritten, its labels will also be overwritten. The import operation is idempotent unless the input data contains multiple valid messages with the same raw bytes but different labels. In that case, after the import completes, the store contains exactly one message with those raw bytes but there is no ordering guarantee on which version of the labels it has. The operation result counters do not count duplicated raw bytes as an error and count one success for each message in the input, which might result in a success count larger than the number of messages in the HL7v2 store. If some messages fail to import, for example due to parsing errors, successfully imported messages are not rolled back. This method returns an Operation that can be used to track the status of the import by calling GetOperation. Immediate fatal errors appear in the error field, errors are also logged to Cloud Logging (see [Viewing error logs in Cloud Logging](https://cloud.google.com/healthcare/docs/how-tos/logging)). Otherwise, when the operation finishes, a response of type ImportMessagesResponse is returned in the response field. The metadata field type for this operation is OperationMetadata.
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.import
       parameters:
-        - description: The name of the target HL7v2 store, in the format `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/hl7v2Stores/{hl7v2_store_id}`
+        - description: Required. The name of the target HL7v2 store, in the format `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/hl7v2Stores/{hl7v2_store_id}`
           in: path
           name: name
           required: true
@@ -1654,7 +1654,7 @@ paths:
       description: Lists the health datasets in the current project.
       operationId: healthcare.projects.locations.datasets.list
       parameters:
-        - description: The name of the project whose datasets should be listed. For example, `projects/{project_id}/locations/{location_id}`.
+        - description: Required. The name of the project whose datasets should be listed. For example, `projects/{project_id}/locations/{location_id}`.
           in: path
           name: parent
           required: true
@@ -1704,13 +1704,13 @@ paths:
       description: Creates a new health dataset. Results are returned through the Operation interface which returns either an `Operation.response` which contains a Dataset or `Operation.error`. The metadata field type is OperationMetadata.
       operationId: healthcare.projects.locations.datasets.create
       parameters:
-        - description: The name of the project where the server creates the dataset. For example, `projects/{project_id}/locations/{location_id}`.
+        - description: Required. The name of the project where the server creates the dataset. For example, `projects/{project_id}/locations/{location_id}`.
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: "The ID of the dataset that is being created. The string must match the following regex: `[\\p{L}\\p{N}_\\-\\.]{1,256}`."
+        - description: "Required. The ID of the dataset that is being created. The string must match the following regex: `[\\p{L}\\p{N}_\\-\\.]{1,256}`."
           in: query
           name: datasetId
           schema:
@@ -2416,7 +2416,7 @@ paths:
       description: Lists the HL7v2 stores in the given dataset.
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.list
       parameters:
-        - description: Name of the dataset.
+        - description: Required. Name of the dataset.
           in: path
           name: parent
           required: true
@@ -2471,13 +2471,13 @@ paths:
       description: Creates a new HL7v2 store within the parent dataset.
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.create
       parameters:
-        - description: The name of the dataset this HL7v2 store belongs to.
+        - description: Required. The name of the dataset this HL7v2 store belongs to.
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: "The ID of the HL7v2 store that is being created. The string must match the following regex: `[\\p{L}\\p{N}_\\-\\.]{1,256}`."
+        - description: "Required. The ID of the HL7v2 store that is being created. The string must match the following regex: `[\\p{L}\\p{N}_\\-\\.]{1,256}`."
           in: query
           name: hl7V2StoreId
           schema:
@@ -2510,7 +2510,7 @@ paths:
       description: "Lists all the messages in the given HL7v2 store with support for filtering. Note: HL7v2 messages are indexed asynchronously, so there might be a slight delay between the time a message is created and when it can be found through a filter."
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.messages.list
       parameters:
-        - description: Name of the HL7v2 store to retrieve messages from.
+        - description: Required. Name of the HL7v2 store to retrieve messages from.
           in: path
           name: parent
           required: true
@@ -2582,7 +2582,7 @@ paths:
       description: Parses and stores an HL7v2 message. This method triggers an asynchronous notification to any Pub/Sub topic configured in Hl7V2Store.Hl7V2NotificationConfig, if the filtering matches the message. If an MLLP adapter is configured to listen to a Pub/Sub topic, the adapter transmits the message when a notification is received.
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.messages.create
       parameters:
-        - description: The name of the HL7v2 store this message belongs to.
+        - description: Required. The name of the HL7v2 store this message belongs to.
           in: path
           name: parent
           required: true
@@ -2628,7 +2628,7 @@ paths:
       description: Parses and stores an HL7v2 message. This method triggers an asynchronous notification to any Pub/Sub topic configured in Hl7V2Store.Hl7V2NotificationConfig, if the filtering matches the message. If an MLLP adapter is configured to listen to a Pub/Sub topic, the adapter transmits the message when a notification is received. If the method is successful, it generates a response containing an HL7v2 acknowledgment (`ACK`) message. If the method encounters an error, it returns a negative acknowledgment (`NACK`) message. This behavior is suitable for replying to HL7v2 interface systems that expect these acknowledgments.
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.messages.ingest
       parameters:
-        - description: The name of the HL7v2 store this message belongs to.
+        - description: Required. The name of the HL7v2 store this message belongs to.
           in: path
           name: parent
           required: true
@@ -3284,7 +3284,7 @@ components:
             type: string
           type: array
         role:
-          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`. For an overview of the IAM roles and permissions, see the [IAM documentation](https://cloud.google.com/iam/docs/roles-overview). For a list of the available pre-defined roles, see [here](https://cloud.google.com/iam/docs/understanding-roles).
           type: string
       type: object
     CancelOperationRequest:
@@ -3348,7 +3348,7 @@ components:
           description: "Optional. User-supplied key-value pairs used to organize Consent resources. Metadata keys must: - be between 1 and 63 characters long - have a UTF-8 encoding of maximum 128 bytes - begin with a letter - consist of up to 63 characters including lowercase letters, numeric characters, underscores, and dashes Metadata values must be: - be between 1 and 63 characters long - have a UTF-8 encoding of maximum 128 bytes - consist of up to 63 characters including lowercase letters, numeric characters, underscores, and dashes No more than 64 metadata entries can be associated with a given consent."
           type: object
         name:
-          description: Resource name of the Consent, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}/consents/{consent_id}`. Cannot be changed after creation.
+          description: Identifier. Resource name of the Consent, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}/consents/{consent_id}`. Cannot be changed after creation.
           type: string
         policies:
           description: Optional. Represents a user's consent in terms of the resources that can be accessed and under what conditions.
@@ -3452,7 +3452,7 @@ components:
           description: "Optional. User-supplied key-value pairs used to organize consent stores. Label keys must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: \\p{Ll}\\p{Lo}{0,62}. Label values must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: [\\p{Ll}\\p{Lo}\\p{N}_-]{0,63}. No more than 64 labels can be associated with a given store. For more information: https://cloud.google.com/healthcare/docs/how-tos/labeling-resources"
           type: object
         name:
-          description: Resource name of the consent store, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}`. Cannot be changed after creation.
+          description: Identifier. Resource name of the consent store, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}`. Cannot be changed after creation.
           type: string
       type: object
     CreateMessageRequest:
@@ -3460,7 +3460,7 @@ components:
       properties:
         message:
           $ref: "#/components/schemas/Message"
-          description: HL7v2 message.
+          description: Required. HL7v2 message.
       type: object
     CryptoHashConfig:
       description: Pseudonymization method that generates surrogates via cryptographic hashing. Uses SHA-256. Outputs a base64-encoded representation of the hashed output (for example, `L7k0BHmF1ha5U3NfGykjro4xWi1MPVQPjhMAZbSV9mM=`).
@@ -3477,7 +3477,7 @@ components:
       description: A message representing a health dataset. A health dataset represents a collection of healthcare data pertaining to one or more patients. This may include multiple modalities of healthcare data, such as electronic medical records or medical imaging data.
       properties:
         name:
-          description: Resource name of the dataset, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`.
+          description: Identifier. Resource name of the dataset, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`.
           type: string
         timeZone:
           description: The default timezone used by this dataset. Must be a either a valid IANA time zone name such as "America/New_York" or empty, which defaults to UTC. This is used for parsing times in resources, such as HL7 messages, where no explicit timezone is specified.
@@ -4188,7 +4188,7 @@ components:
           description: "User-supplied key-value pairs used to organize HL7v2 stores. Label keys must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: \\p{Ll}\\p{Lo}{0,62} Label values are optional, must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: [\\p{Ll}\\p{Lo}\\p{N}_-]{0,63} No more than 64 labels can be associated with a given store."
           type: object
         name:
-          description: Resource name of the HL7v2 store, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/hl7V2Stores/{hl7v2_store_id}`.
+          description: Identifier. Resource name of the HL7v2 store, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/hl7V2Stores/{hl7v2_store_id}`.
           type: string
         notificationConfigs:
           description: A list of notification configs. Each configuration uses a filter to determine whether to publish a message (both Ingest & Create) on the corresponding notification destination. Only the message name is sent as part of the notification. Supplied by the client.
@@ -4341,7 +4341,7 @@ components:
       properties:
         message:
           $ref: "#/components/schemas/Message"
-          description: HL7v2 message to ingest.
+          description: Required. HL7v2 message to ingest.
       type: object
     IngestMessageResponse:
       description: Acknowledges that a message has been ingested into the specified HL7v2 store.
@@ -4554,7 +4554,7 @@ components:
           readOnly: true
           type: string
         data:
-          description: Raw message bytes.
+          description: Required. Raw message bytes.
           format: byte
           type: string
         labels:
@@ -4566,7 +4566,8 @@ components:
           description: The message type for this message. MSH-9.1.
           type: string
         name:
-          description: Resource name of the Message, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/hl7V2Stores/{hl7_v2_store_id}/messages/{message_id}`. Assigned by the server.
+          description: Output only. Resource name of the Message, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/hl7V2Stores/{hl7_v2_store_id}/messages/{message_id}`. Assigned by the server.
+          readOnly: true
           type: string
         parsedData:
           $ref: "#/components/schemas/ParsedData"

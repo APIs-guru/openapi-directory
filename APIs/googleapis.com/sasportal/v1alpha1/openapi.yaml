@@ -83,16 +83,16 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  /v1alpha1/customers:checkHasProvisionedDeployment:
+  /v1alpha1/customers:listGcpProjectDeployments:
     get:
-      description: Checks whether a SAS deployment for the authentication context exists.
-      operationId: sasportal.customers.checkHasProvisionedDeployment
+      description: Returns a list of SAS deployments associated with current GCP project. Includes whether SAS analytics has been enabled or not.
+      operationId: sasportal.customers.listGcpProjectDeployments
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SasPortalCheckHasProvisionedDeploymentResponse"
+                $ref: "#/components/schemas/SasPortalListGcpProjectDeploymentsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -119,7 +119,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v1alpha1/customers:listLegacyOrganizations:
     get:
-      description: Checks whether account is legacy.
+      description: Returns a list of legacy organizations.
       operationId: sasportal.customers.listLegacyOrganizations
       responses:
         "200":
@@ -1120,13 +1120,6 @@ components:
           format: double
           type: number
       type: object
-    SasPortalCheckHasProvisionedDeploymentResponse:
-      description: Response for [CheckHasProvisionedDeployment]. [spectrum.sas.portal.v1alpha1.Provisioning.CheckHasProvisionedDeployment].
-      properties:
-        hasProvisionedDeployment:
-          description: Whether a SAS deployment for the authentication context exists.
-          type: boolean
-      type: object
     SasPortalCreateSignedDeviceRequest:
       description: Request for CreateSignedDevice.
       properties:
@@ -1419,6 +1412,16 @@ components:
           format: double
           type: number
       type: object
+    SasPortalGcpProjectDeployment:
+      description: Deployment associated with the GCP project. Includes whether SAS analytics has been enabled or not.
+      properties:
+        deployment:
+          $ref: "#/components/schemas/SasPortalDeployment"
+          description: Deployment associated with the GCP project.
+        hasEnabledAnalytics:
+          description: Whether SAS analytics has been enabled.
+          type: boolean
+      type: object
     SasPortalGenerateSecretRequest:
       description: Request for GenerateSecret.
       properties: {}
@@ -1532,6 +1535,15 @@ components:
         nextPageToken:
           description: A pagination token returned from a previous call to ListDevices that indicates from where listing should continue. If the field is missing or empty, it means there is no more devices.
           type: string
+      type: object
+    SasPortalListGcpProjectDeploymentsResponse:
+      description: Response for [ListGcpProjectDeployments].
+      properties:
+        deployments:
+          description: Optional. Deployments associated with the GCP project
+          items:
+            $ref: "#/components/schemas/SasPortalGcpProjectDeployment"
+          type: array
       type: object
     SasPortalListLegacyOrganizationsResponse:
       description: Response for [ListLegacyOrganizations]. [spectrum.sas.portal.v1alpha1.Provisioning.ListLegacyOrganizations].
