@@ -1932,7 +1932,6 @@ components:
           value: 8700
         countryCode: NL
         expiresAt: 2021-04-08T14:06:39Z
-        id: PL61C53A8B97E6915A
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         reference: shopper-reference-ekvL83
         shopperLocale: hu-HU
@@ -2043,9 +2042,6 @@ components:
         id: UNIQUE_RESOURCE_ID
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         payment:
-          amount:
-            currency: EUR
-            value: 1000
           merchantReference: YOUR_DONATION_REFERENCE
           pspReference: "8535762347980628"
           resultCode: Authorised
@@ -2160,7 +2156,6 @@ components:
           stateOrProvince: SP
           street: Roque Petroni Jr
         expiresAt: 2022-10-28T09:16:22Z
-        id: PLE83C39B0A0DE0C1E
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         reference: YOUR_ORDER_NUMBER
         reusable: false
@@ -3101,11 +3096,6 @@ components:
             type: genericgiftcard
           - name: GiftFor2
             type: giftfor2card
-          - details:
-              - key: bic
-                type: text
-            name: GiroPay
-            type: giropay
           - name: Givex
             type: givex
           - name: Globe GCash
@@ -4748,7 +4738,6 @@ components:
         shopperLocale: en_US
         shopperName:
           firstName: Testperson-se
-          gender: UNKNOWN
           lastName: Approved
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
         telephoneNumber: +46 840 839 298
@@ -4788,7 +4777,6 @@ components:
           currency: EUR
           value: 2500
         merchantAccount: YOUR_MERCHANT_ACCOUNT
-        reason: delayedCharge
         reference: YOUR_UNIQUE_REFERENCE
     post-payments-paymentPspReference-amountUpdates-amount-update-201:
       description: Example response when an amount update was requested
@@ -4800,7 +4788,6 @@ components:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentPspReference: 993617894903480A
         pspReference: 993617894906488A
-        reason: delayedCharge
         reference: YOUR_UNIQUE_REFERENCE
         status: received
     post-payments-paymentPspReference-cancels-cancel-with-psp-reference:
@@ -4896,7 +4883,6 @@ components:
     post-payments-result-basic-200:
       summary: Payment authorised
       value:
-        authResponse: Authorised
         merchantReference: Your order number
         paymentMethod: ideal
         pspReference: V4HZ4RBFJGXXGN82
@@ -12048,6 +12034,18 @@ components:
         notificationURL:
           description: URL to where the issuer should send the `CRes`. Required if you are not using components for `channel` **Web** or if you are using classic integration `deviceChannel` **browser**.
           type: string
+        platform:
+          description: |-
+            The platform of the shopper.
+            Allowed values:
+            * `iOS`
+            * `android`
+            * `browser`
+          enum:
+            - iOS
+            - android
+            - browser
+          type: string
         sdkAppID:
           description: |-
             The `sdkAppID` value as received from the 3D Secure 2 SDK.
@@ -12131,6 +12129,18 @@ components:
           type: string
         notificationURL:
           description: URL to where the issuer should send the `CRes`. Required if you are not using components for `channel` **Web** or if you are using classic integration `deviceChannel` **browser**.
+          type: string
+        platform:
+          description: |-
+            The platform of the shopper.
+            Allowed values:
+            * `iOS`
+            * `android`
+            * `browser`
+          enum:
+            - iOS
+            - android
+            - browser
           type: string
         sdkAppID:
           description: The `sdkAppID` value as received from the 3D Secure 2 SDK.

@@ -326,7 +326,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Unenroll data sources in a user project. This allows users to remove transfer configurations for these data sources. They will no longer appear in the ListDataSources RPC and will also no longer appear in the [BigQuery UI](https://console.cloud.google.com/bigquery).
+      description: Unenroll data sources in a user project. This allows users to remove transfer configurations for these data sources. They will no longer appear in the ListDataSources RPC and will also no longer appear in the [BigQuery UI](https://console.cloud.google.com/bigquery). Data transfers configurations of unenrolled data sources will not be scheduled.
       operationId: bigquerydatatransfer.projects.locations.unenrollDataSources
       parameters:
         - description: "The name of the project resource in the form: `projects/{project_id}`"
@@ -1120,11 +1120,11 @@ components:
           description: If true, automatic scheduling of data transfer runs for this configuration will be disabled. The runs can be started on ad-hoc basis using StartManualTransferRuns API. When automatic scheduling is disabled, the TransferConfig.schedule field will be ignored.
           type: boolean
         endTime:
-          description: Defines time to stop scheduling transfer runs. A transfer run cannot be scheduled at or after the end time. The end time can be changed at any moment. The time when a data transfer can be trigerred manually is not limited by this option.
+          description: Defines time to stop scheduling transfer runs. A transfer run cannot be scheduled at or after the end time. The end time can be changed at any moment. The time when a data transfer can be triggered manually is not limited by this option.
           format: google-datetime
           type: string
         startTime:
-          description: Specifies time to start scheduling transfer runs. The first run will be scheduled at or after the start time according to a recurrence pattern defined in the schedule string. The start time can be changed at any moment. The time when a data transfer can be trigerred manually is not limited by this option.
+          description: Specifies time to start scheduling transfer runs. The first run will be scheduled at or after the start time according to a recurrence pattern defined in the schedule string. The start time can be changed at any moment. The time when a data transfer can be triggered manually is not limited by this option.
           format: google-datetime
           type: string
       type: object
@@ -1217,7 +1217,7 @@ components:
           description: The BigQuery target dataset id.
           type: string
         disabled:
-          description: Is this config disabled. When set to true, no runs are scheduled for a given transfer.
+          description: Is this config disabled. When set to true, no runs will be scheduled for this transfer config.
           type: boolean
         displayName:
           description: User specified display name for the data transfer.
@@ -1237,7 +1237,7 @@ components:
           readOnly: true
           type: string
         notificationPubsubTopic:
-          description: "Pub/Sub topic where notifications will be sent after transfer runs associated with this transfer config finish. The format for specifying a pubsub topic is: `projects/{project}/topics/{topic}`"
+          description: "Pub/Sub topic where notifications will be sent after transfer runs associated with this transfer config finish. The format for specifying a pubsub topic is: `projects/{project_id}/topics/{topic_id}`"
           type: string
         ownerInfo:
           $ref: "#/components/schemas/UserInfo"
@@ -1321,7 +1321,7 @@ components:
           description: The resource name of the transfer run. Transfer run names have the form `projects/{project_id}/locations/{location}/transferConfigs/{config_id}/runs/{run_id}`. The name is ignored when creating a transfer run.
           type: string
         notificationPubsubTopic:
-          description: "Output only. Pub/Sub topic where a notification will be sent after this transfer run finishes. The format for specifying a pubsub topic is: `projects/{project}/topics/{topic}`"
+          description: "Output only. Pub/Sub topic where a notification will be sent after this transfer run finishes. The format for specifying a pubsub topic is: `projects/{project_id}/topics/{topic_id}`"
           readOnly: true
           type: string
         params:

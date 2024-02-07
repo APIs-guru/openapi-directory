@@ -3107,11 +3107,6 @@ components:
             type: genericgiftcard
           - name: GiftFor2
             type: giftfor2card
-          - details:
-              - key: bic
-                type: text
-            name: GiroPay
-            type: giropay
           - name: Givex
             type: givex
           - name: Globe GCash
@@ -3316,7 +3311,6 @@ components:
               - key: additionalData.amazonPayToken
                 type: text
             name: Amazon Pay
-            supportsRecurring: true
             type: amazonpay
           - name: Mercado Pago
             type: mercadopago
@@ -3919,7 +3913,6 @@ components:
               - key: additionalData.amazonPayToken
                 type: text
             name: Amazon Pay
-            supportsRecurring: true
             type: amazonpay
           - name: MOLPoints
             type: molpay_points
@@ -4235,7 +4228,6 @@ components:
               - key: additionalData.amazonPayToken
                 type: text
             name: Amazon Pay
-            supportsRecurring: true
             type: amazonpay
           - name: MOLPoints
             type: molpay_points
@@ -4773,7 +4765,6 @@ components:
         shopperLocale: en_US
         shopperName:
           firstName: Testperson-se
-          gender: UNKNOWN
           lastName: Approved
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
         telephoneNumber: +46 840 839 298
@@ -4813,7 +4804,6 @@ components:
           currency: EUR
           value: 2500
         merchantAccount: YOUR_MERCHANT_ACCOUNT
-        reason: delayedCharge
         reference: YOUR_UNIQUE_REFERENCE
     post-payments-paymentPspReference-amountUpdates-amount-update-201:
       description: Example response when an amount update was requested
@@ -4825,7 +4815,6 @@ components:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentPspReference: 993617894903480A
         pspReference: 993617894906488A
-        reason: delayedCharge
         reference: YOUR_UNIQUE_REFERENCE
         status: received
     post-payments-paymentPspReference-cancels-cancel-with-psp-reference:
@@ -4922,7 +4911,6 @@ components:
     post-payments-result-basic-200:
       summary: Payment authorised
       value:
-        authResponse: Authorised
         merchantReference: Your order number
         paymentMethod: ideal
         pspReference: V4HZ4RBFJGXXGN82
@@ -12840,6 +12828,18 @@ components:
         notificationURL:
           description: URL to where the issuer should send the `CRes`. Required if you are not using components for `channel` **Web** or if you are using classic integration `deviceChannel` **browser**.
           type: string
+        platform:
+          description: |-
+            The platform of the shopper.
+            Allowed values:
+            * `iOS`
+            * `android`
+            * `browser`
+          enum:
+            - iOS
+            - android
+            - browser
+          type: string
         sdkAppID:
           description: |-
             The `sdkAppID` value as received from the 3D Secure 2 SDK.
@@ -12958,6 +12958,18 @@ components:
           type: string
         notificationURL:
           description: URL to where the issuer should send the `CRes`. Required if you are not using components for `channel` **Web** or if you are using classic integration `deviceChannel` **browser**.
+          type: string
+        platform:
+          description: |-
+            The platform of the shopper.
+            Allowed values:
+            * `iOS`
+            * `android`
+            * `browser`
+          enum:
+            - iOS
+            - android
+            - browser
           type: string
         sdkAppID:
           description: The `sdkAppID` value as received from the 3D Secure 2 SDK.

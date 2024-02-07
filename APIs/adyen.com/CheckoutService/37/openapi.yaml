@@ -1219,8 +1219,6 @@ paths:
             examples:
               3d-secure:
                 $ref: "#/components/examples/post-payments-details-3d-secure"
-              app-switch:
-                $ref: "#/components/examples/post-payments-details-app-switch"
             schema:
               $ref: "#/components/schemas/PaymentDetailsRequest"
       responses:
@@ -1907,7 +1905,6 @@ components:
           value: 8700
         countryCode: NL
         expiresAt: 2021-04-08T14:06:39Z
-        id: PL61C53A8B97E6915A
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         reference: shopper-reference-ekvL83
         shopperLocale: hu-HU
@@ -2018,9 +2015,6 @@ components:
         id: UNIQUE_RESOURCE_ID
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         payment:
-          amount:
-            currency: EUR
-            value: 1000
           merchantReference: YOUR_DONATION_REFERENCE
           pspReference: "8535762347980628"
           resultCode: Authorised
@@ -2135,7 +2129,6 @@ components:
           stateOrProvince: SP
           street: Roque Petroni Jr
         expiresAt: 2022-10-28T09:16:22Z
-        id: PLE83C39B0A0DE0C1E
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         reference: YOUR_ORDER_NUMBER
         reusable: false
@@ -3076,11 +3069,6 @@ components:
             type: genericgiftcard
           - name: GiftFor2
             type: giftfor2card
-          - details:
-              - key: bic
-                type: text
-            name: GiroPay
-            type: giropay
           - name: Givex
             type: givex
           - name: Globe GCash
@@ -4498,12 +4486,6 @@ components:
       value:
         pspReference: V4HZ4RBFJGXXGN82
         resultCode: Authorised
-    post-payments-details-app-switch:
-      summary: Submit details for the payment with involved app switch
-      value:
-        details:
-          returnUrlQueryString: ref=eNrNV0mTo7gS&id=An78i...
-        paymentData: Hee57361f99....
     post-payments-oneclick-direct:
       summary: Make a one-off payment with a token and CVV
       value:
@@ -4540,7 +4522,6 @@ components:
           currency: EUR
           value: 2500
         merchantAccount: YOUR_MERCHANT_ACCOUNT
-        reason: delayedCharge
         reference: YOUR_UNIQUE_REFERENCE
     post-payments-paymentPspReference-amountUpdates-amount-update-201:
       description: Example response when an amount update was requested
@@ -4552,7 +4533,6 @@ components:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentPspReference: 993617894903480A
         pspReference: 993617894906488A
-        reason: delayedCharge
         reference: YOUR_UNIQUE_REFERENCE
         status: received
     post-payments-paymentPspReference-cancels-cancel-with-psp-reference:

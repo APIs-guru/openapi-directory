@@ -3102,11 +3102,6 @@ components:
             type: genericgiftcard
           - name: GiftFor2
             type: giftfor2card
-          - details:
-              - key: bic
-                type: text
-            name: GiroPay
-            type: giropay
           - name: Givex
             type: givex
           - name: Globe GCash
@@ -3311,7 +3306,6 @@ components:
               - key: additionalData.amazonPayToken
                 type: text
             name: Amazon Pay
-            supportsRecurring: true
             type: amazonpay
           - name: Mercado Pago
             type: mercadopago
@@ -3914,7 +3908,6 @@ components:
               - key: additionalData.amazonPayToken
                 type: text
             name: Amazon Pay
-            supportsRecurring: true
             type: amazonpay
           - name: MOLPoints
             type: molpay_points
@@ -4230,7 +4223,6 @@ components:
               - key: additionalData.amazonPayToken
                 type: text
             name: Amazon Pay
-            supportsRecurring: true
             type: amazonpay
           - name: MOLPoints
             type: molpay_points
@@ -4674,9 +4666,6 @@ components:
           paymentMethodType: ideal
           type: redirect
           url: https://test.adyen.com/hpp/checkout.shtml?u=redirectIdeal&p=eJxtUl1zmzAQ-DXwZgaB*XrQg0Nwg2s3DTVtJy8ZRbqAYlsikmCMf30FddNMpzOak2bvZm-3Ts*KCJZLBpgzIEeX9kqBoOMMFXXlcq17UCXDCAXIPYGiLRFmRanshcF70GZ3xd6TpTDQKGK4FJ4ZO8D5XZF-vq-3T5*KL0VV5v*tHEBpe*Pob5cKXmBSA1gbxUXzIWF6JW6JITjLUIySNItQliVxsH6v*cYbnNSHZsMfcydYr8SrE9yY7HRjavMAlyyIjhuK*tzszj9ew-uHrN854a3bkfEE1uBp9od833cV6Lra4taYzglXlsueo6Tk2EptLJL6qW8h2gI9yN7oVnYdKItoUAOnoO3z62-aUlB5sk4qYFwBNTYzoD9015odmFYyJ1z-M2yr7uO4nSBW8xisNpua1NlG0SQwmiTaMMpeLWzDjojRs-cMep7natDTrL*TI2fcjDjwA7Twlws-3aPYOkKZDVH26F69THtShE57woUlmpSBqw9czP*k65*9IfCuq0jiJElQGi69Szn8DPebmKXDWATt6vxEWduea7*sLy-Lt*1bcbctGhgZk78A5S7dyQ
-        details:
-          - key: payload
-            type: text
         paymentData: Ab02b4c0!BQABAgCINC3kOq5nsaj4k+VaArf6VIiTWkYALwijaS+VOvzTSf76Un3WYBgKJlEBqALZW3vlw+IDQGw5jqkVBO4axEJEFKu5fDL2RkeHbm+aHY7tlRVsjvNIcVTNbMtHJcclHakOVTrtTCQfspf11XGsmENUaL45bdeu07iDBtpnIvd39p6g8OVaLcSIGaA8Zosd93hs0h3lvIePt3QTekeOUH+zrMMfLyy/4QKBZtLjnWo3/4U0e2tsneOudynW0l5i+VyobWOZb7yZUj7v9GMVpAZ3YEqNZ1aWJlSmty9TJTpXp4PQQcNeELQAfTu4zaarMq5btRZpcmDRvSOQK0Qo/PvfWrv/si0c1NPr5EM43ebdkLiDEUSIGBDTellblheOaRsgD0JlrNLOHSpS6iCiyY5FQaWx7FpnYReP/un2f/2mMGxdehif1MqWWZzgAhjdA4kksQVb8eMIGLY2IveJ4iTmDAkFbhIATs2SuWhYBGqFnBGeH1jlJCJDDV8/XJ0IcX1/r0qC3wsUFecoElZ6gts+4tlfPUoeuSH/NFmyBEzrjZbgCqCH9YVXa/+W+dwQCOQ0G7K4SJepnlNcmpCtI29zMZgeRqmtzI0hImvQYt188MXK44ieh2wsmpVv6Y9EGIgJVR+t1IZKizm6Q2D5MCUC1uAVwu2iw7Xt5Re1XcWSaBC/nZt2iHaZF7kpgIXfrFshAEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifVTgdc9kCwE5LJyeGFVSr+P70S1hwc62Ad03Oy1Ksxr823klh1hxYQDWBJETNf/YmYC9cHDGr6LxMQ8OOnwfg2xjsVU7ZUwWJbHid1vU/oJzHBXe54lHMNNre0HaQD6TSokVpazQsY3hRB84uevmeT7KVal98iqXd755VuiIxwHhhywaub1ogyQQEVxNGWx2+vL5Vh8NKmoghZQ+NLSZWRn77hJTGV+lKJdseGA9nV7DSlWodNmZ8RyRfQoqwtaK9woQ87PIN7XqSznZMS1HWMOE/aDLEXLJEfozHWrHuGVmn6Hupt/fBnm1GckSsMGeQNKS+4XmKGrJefrHDmdoZVBaZS9UjxfKjD2sCwu5vutgb6SLrECgCvu3q5/LTyFeTuPV1ZZrlpapC6umnWmSKmj/SdnhXJO00PNuFT2WY/GyH0cyA498zApE6VtLx2e9IvS01Oex6ZCRFDJ6sDCBzVN5g60vsm9tBut6trpQWyryqVM2cQ39xh9olCQ5Ml+2h4YFV5gA+1c0i+e6SeMtFJN788NW2EnQT/2pzM/rNAaSVwSf8vJcx3ZB9n8Pf8xi2buKZFEkyJpZJSg22JC/38D1E0tPRpQ7gZ1Z86meAGXnfKUtA+w2FllB2Y0dMrqi8jXnS/mqMPBmPVnIxUW96e40cB7W8E0VDf1IKx/wQphI8/vM3UOSqC81agmnyQ3nIDrAy8vqMOD+d1xcoElzRNy0OxU6v/90IKkhfAKr3Tur7Vb3FD6Pi/XrujJX95UlRd7fmaAI7Po1cIh1v7HEhsCNoh1z7WFNag==
         redirect:
           method: GET
@@ -4729,7 +4718,6 @@ components:
         shopperLocale: en_US
         shopperName:
           firstName: Testperson-se
-          gender: UNKNOWN
           lastName: Approved
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
         telephoneNumber: +46 840 839 298
@@ -4771,7 +4759,6 @@ components:
           currency: EUR
           value: 2500
         merchantAccount: YOUR_MERCHANT_ACCOUNT
-        reason: delayedCharge
         reference: YOUR_UNIQUE_REFERENCE
     post-payments-paymentPspReference-amountUpdates-amount-update-201:
       description: Example response when an amount update was requested
@@ -4783,7 +4770,6 @@ components:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentPspReference: 993617894903480A
         pspReference: 993617894906488A
-        reason: delayedCharge
         reference: YOUR_UNIQUE_REFERENCE
         status: received
     post-payments-paymentPspReference-cancels-cancel-with-psp-reference:
@@ -4880,7 +4866,6 @@ components:
     post-payments-result-basic-200:
       summary: Payment authorised
       value:
-        authResponse: Authorised
         merchantReference: Your order number
         paymentMethod: ideal
         pspReference: V4HZ4RBFJGXXGN82
@@ -4953,7 +4938,6 @@ components:
           liabilityShift: "false"
           merchantReference: YOUR_ORDER_NUMBER
           networkTxReference: "777718270854480"
-          paymentMethod: visa
           paymentMethodVariant: visa
           payoutEligible: Y
           refusalReasonRaw: AUTHORISED
@@ -12762,6 +12746,18 @@ components:
         notificationURL:
           description: URL to where the issuer should send the `CRes`. Required if you are not using components for `channel` **Web** or if you are using classic integration `deviceChannel` **browser**.
           type: string
+        platform:
+          description: |-
+            The platform of the shopper.
+            Allowed values:
+            * `iOS`
+            * `android`
+            * `browser`
+          enum:
+            - iOS
+            - android
+            - browser
+          type: string
         sdkAppID:
           description: |-
             The `sdkAppID` value as received from the 3D Secure 2 SDK.
@@ -12880,6 +12876,18 @@ components:
           type: string
         notificationURL:
           description: URL to where the issuer should send the `CRes`. Required if you are not using components for `channel` **Web** or if you are using classic integration `deviceChannel` **browser**.
+          type: string
+        platform:
+          description: |-
+            The platform of the shopper.
+            Allowed values:
+            * `iOS`
+            * `android`
+            * `browser`
+          enum:
+            - iOS
+            - android
+            - browser
           type: string
         sdkAppID:
           description: The `sdkAppID` value as received from the 3D Secure 2 SDK.
