@@ -1029,6 +1029,8 @@ components:
           type: number
         diskUsage:
           $ref: "#/components/schemas/GoogleDevtoolsRemotebuildbotResourceUsageStat"
+        dockerRootDiskUsage:
+          $ref: "#/components/schemas/GoogleDevtoolsRemotebuildbotResourceUsageStat"
         memoryUsage:
           $ref: "#/components/schemas/GoogleDevtoolsRemotebuildbotResourceUsageStat"
         totalDiskIoStats:

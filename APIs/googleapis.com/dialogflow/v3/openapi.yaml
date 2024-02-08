@@ -1239,6 +1239,98 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
+  /v3/{parent}/entityTypes:export:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Exports the selected entity types.
+      operationId: dialogflow.projects.locations.agents.entityTypes.export
+      parameters:
+        - description: "Required. The name of the parent agent to export entity types. Format: `projects//locations//agents/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ExportEntityTypesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+  /v3/{parent}/entityTypes:import:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Imports the specified entitytypes into the agent.
+      operationId: dialogflow.projects.locations.agents.entityTypes.import
+      parameters:
+        - description: "Required. The agent to import the entity types into. Format: `projects//locations//agents/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ImportEntityTypesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
   /v3/{parent}/environments:
     get:
       description: Returns the list of all environments in the specified Agent.
@@ -3850,6 +3942,45 @@ components:
           description: Commit SHA of the git push. This field is populated if `git_destination` is specified in ExportAgentRequest.
           type: string
       type: object
+    GoogleCloudDialogflowCxV3ExportEntityTypesMetadata:
+      description: Metadata returned for the EntityTypes.ExportEntityTypes long running operation.
+      properties: {}
+      type: object
+    GoogleCloudDialogflowCxV3ExportEntityTypesRequest:
+      description: The request message for EntityTypes.ExportEntityTypes.
+      properties:
+        dataFormat:
+          description: Optional. The data format of the exported entity types. If not specified, `BLOB` is assumed.
+          enum:
+            - DATA_FORMAT_UNSPECIFIED
+            - BLOB
+            - JSON_PACKAGE
+          type: string
+        entityTypes:
+          description: "Required. The name of the entity types to export. Format: `projects//locations//agents//entityTypes/`."
+          items:
+            type: string
+          type: array
+        entityTypesContentInline:
+          description: Optional. The option to return the serialized entity types inline.
+          type: boolean
+        entityTypesUri:
+          description: Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to export the entity types to. The format of this URI must be `gs:///`. Dialogflow performs a write operation for the Cloud Storage object on the caller's behalf, so your request authentication must have write permissions for the object. For more information, see [Dialogflow access control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+          type: string
+        languageCode:
+          description: "Optional. The language to retrieve the entity type for. The following fields are language dependent: * `EntityType.entities.value` * `EntityType.entities.synonyms` * `EntityType.excluded_phrases.value` If not specified, all language dependent fields will be retrieved. [Many languages](https://cloud.google.com/dialogflow/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3ExportEntityTypesResponse:
+      description: The response message for EntityTypes.ExportEntityTypes.
+      properties:
+        entityTypesContent:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3InlineDestination"
+          description: Uncompressed byte content for entity types. This field is populated only if `entity_types_content_inline` is set to true in ExportEntityTypesRequest.
+        entityTypesUri:
+          description: The URI to a file containing the exported entity types. This field is populated only if `entity_types_uri` is specified in ExportEntityTypesRequest.
+          type: string
+      type: object
     GoogleCloudDialogflowCxV3ExportFlowRequest:
       description: The request message for Flows.ExportFlow.
       properties:
@@ -4299,6 +4430,59 @@ components:
           description: Includes details about skipped documents or any other warnings.
           items:
             $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3ImportEntityTypesMetadata:
+      description: Metadata returned for the EntityTypes.ImportEntityTypes long running operation.
+      properties: {}
+      type: object
+    GoogleCloudDialogflowCxV3ImportEntityTypesRequest:
+      description: The request message for EntityTypes.ImportEntityTypes.
+      properties:
+        entityTypesContent:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3InlineSource"
+          description: Uncompressed byte content of entity types.
+        entityTypesUri:
+          description: The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to import entity types from. The format of this URI must be `gs:///`. Dialogflow performs a read operation for the Cloud Storage object on the caller's behalf, so your request authentication must have read permissions for the object. For more information, see [Dialogflow access control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+          type: string
+        mergeOption:
+          description: Required. Merge option for importing entity types.
+          enum:
+            - MERGE_OPTION_UNSPECIFIED
+            - REPLACE
+            - MERGE
+            - RENAME
+            - REPORT_CONFLICT
+            - KEEP
+          type: string
+        targetEntityType:
+          description: "Optional. The target entity type to import into. Format: `projects//locations//agents//entity_types/`. If set, there should be only one entity type included in entity_types, of which the type should match the type of the target entity type. All entities in the imported entity type will be added to the target entity type."
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3ImportEntityTypesResponse:
+      description: The response message for EntityTypes.ImportEntityTypes.
+      properties:
+        conflictingResources:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ImportEntityTypesResponseConflictingResources"
+          description: Info which resources have conflicts when REPORT_CONFLICT merge_option is set in ImportEntityTypesRequest.
+        entityTypes:
+          description: "The unique identifier of the imported entity types. Format: `projects//locations//agents//entity_types/`."
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3ImportEntityTypesResponseConflictingResources:
+      description: Conflicting resources detected during the import process. Only filled when REPORT_CONFLICT is set in the request and there are conflicts in the display names.
+      properties:
+        entityDisplayNames:
+          description: Display names of conflicting entities.
+          items:
+            type: string
+          type: array
+        entityTypeDisplayNames:
+          description: Display names of conflicting entity types.
+          items:
+            type: string
           type: array
       type: object
     GoogleCloudDialogflowCxV3ImportFlowRequest:
@@ -6695,6 +6879,20 @@ components:
           description: Commit SHA of the git push. This field is populated if `git_destination` is specified in ExportAgentRequest.
           type: string
       type: object
+    GoogleCloudDialogflowCxV3beta1ExportEntityTypesMetadata:
+      description: Metadata returned for the EntityTypes.ExportEntityTypes long running operation.
+      properties: {}
+      type: object
+    GoogleCloudDialogflowCxV3beta1ExportEntityTypesResponse:
+      description: The response message for EntityTypes.ExportEntityTypes.
+      properties:
+        entityTypesContent:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1InlineDestination"
+          description: Uncompressed byte content for entity types. This field is populated only if `entity_types_content_inline` is set to true in ExportEntityTypesRequest.
+        entityTypesUri:
+          description: The URI to a file containing the exported entity types. This field is populated only if `entity_types_uri` is specified in ExportEntityTypesRequest.
+          type: string
+      type: object
     GoogleCloudDialogflowCxV3beta1ExportFlowResponse:
       description: The response message for Flows.ExportFlow.
       properties:
@@ -6891,6 +7089,36 @@ components:
           description: Includes details about skipped documents or any other warnings.
           items:
             $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1ImportEntityTypesMetadata:
+      description: Metadata returned for the EntityTypes.ImportEntityTypes long running operation.
+      properties: {}
+      type: object
+    GoogleCloudDialogflowCxV3beta1ImportEntityTypesResponse:
+      description: The response message for EntityTypes.ImportEntityTypes.
+      properties:
+        conflictingResources:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ImportEntityTypesResponseConflictingResources"
+          description: Info which resources have conflicts when REPORT_CONFLICT merge_option is set in ImportEntityTypesRequest.
+        entityTypes:
+          description: "The unique identifier of the imported entity types. Format: `projects//locations//agents//entity_types/`."
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1ImportEntityTypesResponseConflictingResources:
+      description: Conflicting resources detected during the import process. Only filled when REPORT_CONFLICT is set in the request and there are conflicts in the display names.
+      properties:
+        entityDisplayNames:
+          description: Display names of conflicting entities.
+          items:
+            type: string
+          type: array
+        entityTypeDisplayNames:
+          description: Display names of conflicting entity types.
+          items:
+            type: string
           type: array
       type: object
     GoogleCloudDialogflowCxV3beta1ImportFlowResponse:
