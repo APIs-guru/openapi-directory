@@ -6,12 +6,12 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Provides methods for detection, risk analysis, and de-identification of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.
+  description: Discover and protect your sensitive data. A fully managed service designed to help you discover, classify, and protect your valuable data assets with ease.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
-  title: Cloud Data Loss Prevention (DLP)
+  title: Sensitive Data Protection (DLP)
   version: v2
   x-apiClientRegistration:
     url: https://console.developers.google.com
@@ -1339,6 +1339,7 @@ components:
           format: int32
           type: integer
         sampleMethod:
+          description: How to sample the data.
           enum:
             - SAMPLE_METHOD_UNSPECIFIED
             - TOP
@@ -1595,6 +1596,7 @@ components:
           format: int32
           type: integer
         sampleMethod:
+          description: How to sample the data.
           enum:
             - SAMPLE_METHOD_UNSPECIFIED
             - TOP
@@ -1801,6 +1803,7 @@ components:
           type: string
       type: object
     GooglePrivacyDlpV2ContentItem:
+      description: Type of content to inspect.
       properties:
         byteItem:
           $ref: "#/components/schemas/GooglePrivacyDlpV2ByteContentItem"
@@ -2980,6 +2983,7 @@ components:
       description: A type of transformation that is applied over images.
       properties:
         transforms:
+          description: List of transforms to make.
           items:
             $ref: "#/components/schemas/GooglePrivacyDlpV2ImageTransformation"
           type: array
@@ -3938,6 +3942,7 @@ components:
           description: Numerical stats
       type: object
     GooglePrivacyDlpV2ProfileStatus:
+      description: Success or errors for the profile generation.
       properties:
         status:
           $ref: "#/components/schemas/GoogleRpcStatus"
@@ -4105,8 +4110,10 @@ components:
       properties:
         bigQueryKey:
           $ref: "#/components/schemas/GooglePrivacyDlpV2BigQueryKey"
+          description: Datastore key
         datastoreKey:
           $ref: "#/components/schemas/GooglePrivacyDlpV2DatastoreKey"
+          description: Bigquery key
         idValues:
           description: Values of identifying columns in the given row. Order of values matches the order of `identifying_fields` specified in the scanning request.
           items:
@@ -4134,6 +4141,7 @@ components:
           description: A condition that when it evaluates to true will result in the record being evaluated to be suppressed from the transformed content.
       type: object
     GooglePrivacyDlpV2RecordTransformation:
+      description: The field in a record to transform.
       properties:
         containerTimestamp:
           description: Findings container modification timestamp, if applicable.
@@ -4404,11 +4412,13 @@ components:
           description: Hybrid inspection options.
         timespanConfig:
           $ref: "#/components/schemas/GooglePrivacyDlpV2TimespanConfig"
+          description: Configuration of the timespan of the items to include in scanning.
       type: object
     GooglePrivacyDlpV2StorageMetadataLabel:
       description: Storage metadata label to indicate which metadata entry contains findings.
       properties:
         key:
+          description: Label name.
           type: string
       type: object
     GooglePrivacyDlpV2StoredInfoType:
@@ -4832,6 +4842,7 @@ components:
           type: string
       type: object
     GooglePrivacyDlpV2TransformationResultStatus:
+      description: The outcome of a transformation.
       properties:
         details:
           $ref: "#/components/schemas/GoogleRpcStatus"

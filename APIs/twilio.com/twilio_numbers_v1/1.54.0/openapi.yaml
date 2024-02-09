@@ -1,0 +1,497 @@
+openapi: 3.0.1
+servers:
+  - url: https://numbers.twilio.com
+info:
+  contact:
+    email: support@twilio.com
+    name: Twilio Support
+    url: https://support.twilio.com
+  description: This is the public Twilio REST API.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.twilio.com/legal/tos
+  title: Twilio - Numbers
+  version: 1.54.0
+  x-apisguru-categories:
+    - telecom
+    - messaging
+  x-logo:
+    url: https://static1.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_numbers_v1.json
+      version: "3.0"
+  x-providerName: twilio.com
+  x-serviceName: twilio_numbers_v1
+tags:
+  - name: NumbersV1BulkEligibility
+  - name: NumbersV1PortingBulkPortability
+  - name: NumbersV1PortingPortInFetch
+  - name: NumbersV1PortingPortability
+paths:
+  /v1/HostedNumber/Eligibility:
+    description: "TODO: Resource-level docs"
+    servers:
+      - url: https://numbers.twilio.com
+    x-twilio:
+      defaultOutputProperties: []
+      mountName: eligibilities
+      pathType: list
+  /v1/HostedNumber/Eligibility/Bulk:
+    description: "TODO: Resource-level docs"
+    servers:
+      - url: https://numbers.twilio.com
+    x-twilio:
+      defaultOutputProperties: []
+      mountName: bulk_eligibilities
+      pathType: list
+  /v1/HostedNumber/Eligibility/Bulk/{RequestId}:
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch an eligibility bulk check that you requested to host in Twilio.
+      operationId: FetchBulkEligibility
+      parameters:
+        - description: The SID of the bulk eligibility check that you want to know about.
+          in: path
+          name: RequestId
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^EC[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/numbers.v1.bulk_eligibility"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      tags:
+        - NumbersV1BulkEligibility
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://numbers.twilio.com
+    x-twilio:
+      defaultOutputProperties: []
+      mountName: bulk_eligibilities
+      pathType: instance
+  /v1/Porting/PortIn:
+    description: "TODO: Resource-level docs"
+    servers:
+      - url: https://numbers.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - port_in_request_sid
+      mountName: porting_port_ins
+      pathType: list
+  /v1/Porting/PortIn/{PortInRequestSid}:
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch a port in request by SID
+      operationId: FetchPortingPortInFetch
+      parameters:
+        - description: The SID of the Port In request. This is a unique identifier of the port in request.
+          in: path
+          name: PortInRequestSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^KW[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/numbers.v1.porting_port_in_fetch"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      tags:
+        - NumbersV1PortingPortInFetch
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://numbers.twilio.com
+    x-twilio:
+      className: porting_port_in_fetch
+      defaultOutputProperties:
+        - port_in_request_sid
+      mountName: porting_port_ins
+      pathType: instance
+  /v1/Porting/Portability:
+    description: "TODO: Resource-level docs"
+    post:
+      description: Allows to check if a list of phone numbers can be ported to Twilio or not. This is done asynchronous for each phone number.
+      operationId: CreatePortingBulkPortability
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                PhoneNumbers:
+                  description: The phone numbers which portability is to be checked. This should be a list of strings. Phone numbers are in E.164 format (e.g. +16175551212). .
+                  items:
+                    type: string
+                  type: array
+              required:
+                - PhoneNumbers
+              title: CreatePortingBulkPortabilityRequest
+              type: object
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/numbers.v1.porting_bulk_portability"
+          description: Accepted
+      security:
+        - accountSid_authToken: []
+      tags:
+        - NumbersV1PortingBulkPortability
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://numbers.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - status
+      mountName: porting_bulk_portabilities
+      pathType: list
+  /v1/Porting/Portability/PhoneNumber/{PhoneNumber}:
+    description: "TODO: Resource-level docs"
+    get:
+      description: Allows to check if a single phone number can be ported to Twilio or not.
+      operationId: FetchPortingPortability
+      parameters:
+        - description: The phone number which portability is to be checked. Phone numbers are in E.164 format (e.g. +16175551212).
+          in: path
+          name: PhoneNumber
+          required: true
+          schema:
+            format: phone-number
+            type: string
+        - description: The SID of the account where the phone number(s) will be ported.
+          in: query
+          name: TargetAccountSid
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^AC[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/numbers.v1.porting_portability"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      tags:
+        - NumbersV1PortingPortability
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://numbers.twilio.com
+    x-twilio:
+      defaultOutputProperties: []
+      mountName: porting_portabilities
+      pathType: instance
+  /v1/Porting/Portability/{Sid}:
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch a previous portability check. This should return the current status of the validation and the result for all the numbers provided, given that they have been validated (as this process is performed asynchronously).
+      operationId: FetchPortingBulkPortability
+      parameters:
+        - description: A 34 character string that uniquely identifies the Portability check.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^KZ[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/numbers.v1.porting_bulk_portability"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      tags:
+        - NumbersV1PortingBulkPortability
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://numbers.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - status
+      mountName: porting_bulk_portabilities
+      pathType: instance
+components:
+  schemas:
+    bulk_eligibility_enum_eligibility_status:
+      enum:
+        - ineligible
+        - eligible
+      type: string
+    bulk_eligibility_enum_eligibility_sub_status:
+      enum:
+        - country-ineligible
+        - number-format-ineligible
+        - number-type-ineligible
+        - carrier-ineligible
+        - already-in-twilio
+        - internal-processing-error
+        - invalid-phone-number
+        - invalid-hosting-account-sid
+        - eligible
+        - eligible-by-manual-process
+      type: string
+    eligibility_enum_eligibility_status:
+      enum:
+        - ineligible
+        - eligible
+      type: string
+    eligibility_enum_eligibility_sub_status:
+      enum:
+        - country-ineligible
+        - number-format-ineligible
+        - number-type-ineligible
+        - carrier-ineligible
+        - already-in-twilio
+        - internal-processing-error
+        - invalid-phone-number
+        - invalid-hosting-account-sid
+        - eligible
+      type: string
+    numbers.v1.bulk_eligibility:
+      properties:
+        date_completed:
+          format: date-time
+          nullable: true
+          type: string
+        date_created:
+          format: date-time
+          nullable: true
+          type: string
+        friendly_name:
+          description: This is the string that you assigned as a friendly name for describing the eligibility check request.
+          nullable: true
+          type: string
+        request_id:
+          description: The SID of the bulk eligibility check that you want to know about.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^EC[0-9a-fA-F]{32}$
+          type: string
+        results:
+          description: "The result set that contains the eligibility check response for each requested number, each result has at least the following attributes:  phone_number: The requested phone number ,hosting_account_sid: The account sid where the phone number will be hosted, country: Phone number’s country, eligibility_status: Indicates the eligibility status of the PN (Eligible/Ineligible), eligibility_sub_status: Indicates the sub status of the eligibility , ineligibility_reason: Reason for number's ineligibility (if applicable), next_step: Suggested next step in the hosting process based on the eligibility status."
+          items: {}
+          nullable: true
+          type: array
+        status:
+          description: "This is the status of the bulk eligibility check request. (Example: COMPLETE, IN_PROGRESS)"
+          nullable: true
+          type: string
+        url:
+          description: This is the url of the request that you're trying to reach out to locate the resource.
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    numbers.v1.eligibility:
+      properties:
+        results:
+          description: "The result set that contains the eligibility check response for the requested number, each result has at least the following attributes:  phone_number: The requested phone number ,hosting_account_sid: The account sid where the phone number will be hosted, date_last_checked: Datetime (ISO 8601) when the PN was last checked for eligibility, country: Phone number’s country, eligibility_status: Indicates the eligibility status of the PN (Eligible/Ineligible), eligibility_sub_status: Indicates the sub status of the eligibility , ineligibility_reason: Reason for number's ineligibility (if applicable), next_step: Suggested next step in the hosting process based on the eligibility status."
+          items: {}
+          nullable: true
+          type: array
+      type: object
+    numbers.v1.porting_bulk_portability:
+      properties:
+        datetime_created:
+          description: The date that the Portability check was created, given in ISO 8601 format.
+          format: date-time
+          nullable: true
+          type: string
+        phone_numbers:
+          description: "Contains a list with all the information of the requested phone numbers. Each phone number contains the following properties: `phone_number`: The phone number which portability is to be checked. `portable`: Boolean flag specifying if phone number is portable or not. `not_portable_reason`: Reason why the phone number cannot be ported into Twilio, `null` otherwise. `not_portable_reason_code`: The Portability Reason Code for the phone number if it cannot be ported in Twilio, `null` otherwise. `pin_and_account_number_required`: Boolean flag specifying if PIN and account number is required for the phone number. `number_type`: The type of the requested phone number. `country` Country the phone number belongs to. `messaging_carrier` Current messaging carrier of the phone number. `voice_carrier` Current voice carrier of the phone number."
+          items: {}
+          nullable: true
+          type: array
+        sid:
+          description: A 34 character string that uniquely identifies this Portability check.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^KZ[0-9a-fA-F]{32}$
+          type: string
+        status:
+          $ref: "#/components/schemas/porting_bulk_portability_enum_status"
+          description: The Status of this Portability check. One of `in-progress`, `completed` or `expired`.
+          nullable: true
+          type: string
+        url:
+          description: This is the url of the request that you're trying to reach out to locate the resource.
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    numbers.v1.porting_port_in:
+      properties:
+        port_in_request_sid:
+          description: The SID of the Port In request. This is a unique identifier of the port in request.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^KW[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    numbers.v1.porting_port_in_fetch:
+      properties:
+        account_sid:
+          description: The Account SID that the numbers will be added to after they are ported into Twilio.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        documents:
+          description: The list of documents SID referencing a utility bills
+          items:
+            type: string
+          nullable: true
+          type: array
+        losing_carrier_information:
+          description: "The information for the losing carrier. "
+          nullable: true
+        notification_emails:
+          description: List of emails for getting notifications about the LOA signing process. Allowed Max 10 emails.
+          items:
+            type: string
+          nullable: true
+          type: array
+        phone_numbers:
+          description: The list of phone numbers to Port in. Phone numbers are in E.164 format (e.g. +16175551212).
+          items: {}
+          nullable: true
+          type: array
+        port_in_request_sid:
+          description: The SID of the Port In request. This is a unique identifier of the port in request.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^KW[0-9a-fA-F]{32}$
+          type: string
+        target_port_in_date:
+          description: Minimum number of days in the future (at least 2 days) needs to be established with the Ops team for validation.
+          format: date
+          nullable: true
+          type: string
+        target_port_in_time_range_end:
+          description: Maximum hour in the future needs to be established with the Ops team for validation.
+          nullable: true
+          type: string
+        target_port_in_time_range_start:
+          description: Minimum hour in the future needs to be established with the Ops team for validation.
+          nullable: true
+          type: string
+        url:
+          description: The URL of this Port In request
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    numbers.v1.porting_portability:
+      properties:
+        account_sid:
+          description: The target account sid to which the number will be ported
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        country:
+          description: Country the phone number belongs to.
+          format: iso-country-code
+          nullable: true
+          type: string
+        messaging_carrier:
+          description: Current messaging carrier of the phone number
+          nullable: true
+          type: string
+        not_portable_reason:
+          description: Reason why the phone number cannot be ported into Twilio, `null` otherwise.
+          nullable: true
+          type: string
+        not_portable_reason_code:
+          description: The Portability Reason Code for the phone number if it cannot be ported into Twilio, `null` otherwise. One of `22131`, `22132`, `22130`, `22133`, `22102` or `22135`.
+          nullable: true
+          type: integer
+        number_type:
+          $ref: "#/components/schemas/porting_portability_enum_number_type"
+          description: The type of the requested phone number. One of `LOCAL`, `UNKNOWN`, `MOBILE`, `TOLL-FREE`.
+          nullable: true
+          type: string
+        phone_number:
+          description: The phone number which portability is to be checked. Phone numbers are in E.164 format (e.g. +16175551212).
+          format: phone-number
+          nullable: true
+          type: string
+        pin_and_account_number_required:
+          description: Boolean flag specifying if PIN and account number is required for the phone number.
+          nullable: true
+          type: boolean
+        portable:
+          description: Boolean flag specifying if phone number is portable or not.
+          nullable: true
+          type: boolean
+        url:
+          description: This is the url of the request that you're trying to reach out to locate the resource.
+          format: uri
+          nullable: true
+          type: string
+        voice_carrier:
+          description: Current voice carrier of the phone number
+          nullable: true
+          type: string
+      type: object
+    porting_bulk_portability_enum_status:
+      enum:
+        - in-progress
+        - completed
+        - expired
+      type: string
+    porting_portability_enum_number_type:
+      enum:
+        - LOCAL
+        - UNKNOWN
+        - MOBILE
+        - TOLL-FREE
+      type: string
+  securitySchemes:
+    accountSid_authToken:
+      scheme: basic
+      type: http
+x-maturity:
+  - description: PLEASE NOTE that this is a Beta product that is subject to change. Use it with caution.
+    name: Beta

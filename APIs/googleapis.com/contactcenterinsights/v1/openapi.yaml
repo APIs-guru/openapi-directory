@@ -348,6 +348,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1/{name}:export:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Exports an issue model to the provided destination.
+      operationId: contactcenterinsights.projects.locations.issueModels.export
+      parameters:
+        - description: Required. The issue model to export
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1ExportIssueModelRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{name}:undeploy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -485,6 +527,11 @@ paths:
         - description: A filter to reduce results to a specific subset. Useful for querying conversations with specific properties.
           in: query
           name: filter
+          schema:
+            type: string
+        - description: "Optional. The attribute by which to order conversations in the response. If empty, conversations will be ordered by descending creation time. Supported values are one of the following: * create_time * duration * turn_count * latest_analysis The default sort order is ascending. To specify order, append `asc` or `desc`, i.e. `create_time desc`. See https://google.aip.dev/132#ordering for more details."
+          in: query
+          name: orderBy
           schema:
             type: string
         - description: The maximum number of conversations to return in the response. A valid page size ranges from 0 to 1,000 inclusive. If the page size is zero or unspecified, a default page size of 100 will be chosen. Note that a call might return fewer results than the requested page size.
@@ -828,6 +875,48 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1IssueModel"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{parent}/issueModels:import:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Imports an issue model from a Cloud Storage bucket.
+      operationId: contactcenterinsights.projects.locations.issueModels.import
+      parameters:
+        - description: Required. The parent resource of the issue model.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1ImportIssueModelRequest"
       responses:
         "200":
           content:
@@ -2042,6 +2131,42 @@ components:
       description: Response for an export insights operation.
       properties: {}
       type: object
+    GoogleCloudContactcenterinsightsV1ExportIssueModelMetadata:
+      description: Metadata used for export issue model.
+      properties:
+        createTime:
+          description: The time the operation was created.
+          format: google-datetime
+          type: string
+        endTime:
+          description: The time the operation finished running.
+          format: google-datetime
+          type: string
+        request:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1ExportIssueModelRequest"
+          description: The original export request.
+      type: object
+    GoogleCloudContactcenterinsightsV1ExportIssueModelRequest:
+      description: Request to export an issue model.
+      properties:
+        gcsDestination:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1ExportIssueModelRequestGcsDestination"
+          description: Google Cloud Storage URI to export the Issue Model to.
+        name:
+          description: Required. The issue model to export
+          type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1ExportIssueModelRequestGcsDestination:
+      description: Google Cloud Storage Object URI to save the issue model to.
+      properties:
+        objectUri:
+          description: "Required. Format: `gs:///`"
+          type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1ExportIssueModelResponse:
+      description: Response from export issue model
+      properties: {}
+      type: object
     GoogleCloudContactcenterinsightsV1FaqAnswerData:
       description: Agent Assist frequently-asked-question answer data.
       properties:
@@ -2079,6 +2204,45 @@ components:
       type: object
     GoogleCloudContactcenterinsightsV1HoldData:
       description: The data for a hold annotation.
+      properties: {}
+      type: object
+    GoogleCloudContactcenterinsightsV1ImportIssueModelMetadata:
+      description: Metadata used for import issue model.
+      properties:
+        createTime:
+          description: The time the operation was created.
+          format: google-datetime
+          type: string
+        endTime:
+          description: The time the operation finished running.
+          format: google-datetime
+          type: string
+        request:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1ImportIssueModelRequest"
+          description: The original import request.
+      type: object
+    GoogleCloudContactcenterinsightsV1ImportIssueModelRequest:
+      description: Request to import an issue model.
+      properties:
+        createNewModel:
+          description: Optional. If set to true, will create a new issue model from the imported file with randomly generated IDs for the issue model and corresponding issues. Otherwise, replaces an existing model with the same ID as the file.
+          type: boolean
+        gcsSource:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1ImportIssueModelRequestGcsSource"
+          description: Google Cloud Storage source message.
+        parent:
+          description: Required. The parent resource of the issue model.
+          type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1ImportIssueModelRequestGcsSource:
+      description: Google Cloud Storage Object URI to get the issue model file from.
+      properties:
+        objectUri:
+          description: "Required. Format: `gs:///`"
+          type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1ImportIssueModelResponse:
+      description: Response from import issue model
       properties: {}
       type: object
     GoogleCloudContactcenterinsightsV1IngestConversationsMetadata:
@@ -2182,6 +2346,14 @@ components:
           type: string
         bucketUri:
           description: Required. The Cloud Storage bucket containing source objects.
+          type: string
+        customMetadataKeys:
+          description: Optional. Custom keys to extract as conversation labels from metadata files in `metadata_bucket_uri`. Keys not included in this field will be ignored. Note that there is a limit of 20 labels per conversation.
+          items:
+            type: string
+          type: array
+        metadataBucketUri:
+          description: "Optional. The Cloud Storage path to the source object metadata. Note that: [1] metadata files are expected to be in JSON format [2] metadata and source objects must be in separate buckets [3] a source object's metadata object must share the same name to be properly ingested"
           type: string
       type: object
     GoogleCloudContactcenterinsightsV1IngestConversationsRequestTranscriptObjectConfig:
@@ -3657,6 +3829,42 @@ components:
       description: Response for an export insights operation.
       properties: {}
       type: object
+    GoogleCloudContactcenterinsightsV1alpha1ExportIssueModelMetadata:
+      description: Metadata used for export issue model.
+      properties:
+        createTime:
+          description: The time the operation was created.
+          format: google-datetime
+          type: string
+        endTime:
+          description: The time the operation finished running.
+          format: google-datetime
+          type: string
+        request:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1ExportIssueModelRequest"
+          description: The original export request.
+      type: object
+    GoogleCloudContactcenterinsightsV1alpha1ExportIssueModelRequest:
+      description: Request to export an issue model.
+      properties:
+        gcsDestination:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1ExportIssueModelRequestGcsDestination"
+          description: Google Cloud Storage URI to export the Issue Model to.
+        name:
+          description: Required. The issue model to export
+          type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1alpha1ExportIssueModelRequestGcsDestination:
+      description: Google Cloud Storage Object URI to save the issue model to.
+      properties:
+        objectUri:
+          description: "Required. Format: `gs:///`"
+          type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1alpha1ExportIssueModelResponse:
+      description: Response from export issue model
+      properties: {}
+      type: object
     GoogleCloudContactcenterinsightsV1alpha1FaqAnswerData:
       description: Agent Assist frequently-asked-question answer data.
       properties:
@@ -3694,6 +3902,45 @@ components:
       type: object
     GoogleCloudContactcenterinsightsV1alpha1HoldData:
       description: The data for a hold annotation.
+      properties: {}
+      type: object
+    GoogleCloudContactcenterinsightsV1alpha1ImportIssueModelMetadata:
+      description: Metadata used for import issue model.
+      properties:
+        createTime:
+          description: The time the operation was created.
+          format: google-datetime
+          type: string
+        endTime:
+          description: The time the operation finished running.
+          format: google-datetime
+          type: string
+        request:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1ImportIssueModelRequest"
+          description: The original import request.
+      type: object
+    GoogleCloudContactcenterinsightsV1alpha1ImportIssueModelRequest:
+      description: Request to import an issue model.
+      properties:
+        createNewModel:
+          description: Optional. If set to true, will create a new issue model from the imported file with randomly generated IDs for the issue model and corresponding issues. Otherwise, replaces an existing model with the same ID as the file.
+          type: boolean
+        gcsSource:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1ImportIssueModelRequestGcsSource"
+          description: Google Cloud Storage source message.
+        parent:
+          description: Required. The parent resource of the issue model.
+          type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1alpha1ImportIssueModelRequestGcsSource:
+      description: Google Cloud Storage Object URI to get the issue model file from.
+      properties:
+        objectUri:
+          description: "Required. Format: `gs:///`"
+          type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1alpha1ImportIssueModelResponse:
+      description: Response from import issue model
       properties: {}
       type: object
     GoogleCloudContactcenterinsightsV1alpha1IngestConversationsMetadata:
@@ -3797,6 +4044,14 @@ components:
           type: string
         bucketUri:
           description: Required. The Cloud Storage bucket containing source objects.
+          type: string
+        customMetadataKeys:
+          description: Optional. Custom keys to extract as conversation labels from metadata files in `metadata_bucket_uri`. Keys not included in this field will be ignored. Note that there is a limit of 20 labels per conversation.
+          items:
+            type: string
+          type: array
+        metadataBucketUri:
+          description: "Optional. The Cloud Storage path to the source object metadata. Note that: [1] metadata files are expected to be in JSON format [2] metadata and source objects must be in separate buckets [3] a source object's metadata object must share the same name to be properly ingested"
           type: string
       type: object
     GoogleCloudContactcenterinsightsV1alpha1IngestConversationsRequestTranscriptObjectConfig:
