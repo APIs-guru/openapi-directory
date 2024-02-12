@@ -2882,6 +2882,11 @@ components:
     Repository:
       description: Represents a Dataform Git repository.
       properties:
+        createTime:
+          description: Output only. The timestamp of when the repository was created.
+          format: google-datetime
+          readOnly: true
+          type: string
         displayName:
           description: Optional. The repository's user-friendly name.
           type: string

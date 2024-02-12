@@ -34,13 +34,23 @@ tags:
 paths:
   /v2/{name}:
     delete:
-      description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: tpu.projects.locations.operations.delete
+      description: Deletes a QueuedResource TPU instance.
+      operationId: tpu.projects.locations.queuedResources.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: Required. The resource name.
           in: path
           name: name
           required: true
+          schema:
+            type: string
+        - description: Optional. If set to true, all running nodes belonging to this queued resource will be deleted first and then the queued resource will be deleted. Otherwise (i.e. force=false), the queued resource will only be deleted if its nodes have already been deleted or the queued resource is in the ACCEPTED, FAILED, or SUSPENDED state.
+          in: query
+          name: force
+          schema:
+            type: boolean
+        - description: Optional. Idempotent request UUID.
+          in: query
+          name: requestId
           schema:
             type: string
       responses:
@@ -48,7 +58,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Empty"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -310,6 +320,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v2/{name}:reset:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Resets a QueuedResource TPU instance
+      operationId: tpu.projects.locations.queuedResources.reset
+      parameters:
+        - description: Required. The name of the queued resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetQueuedResourceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v2/{name}:start:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -532,6 +584,92 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v2/{parent}/queuedResources:
+    get:
+      description: Lists queued resources.
+      operationId: tpu.projects.locations.queuedResources.list
+      parameters:
+        - description: Required. The parent resource name.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListQueuedResourcesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a QueuedResource TPU instance.
+      operationId: tpu.projects.locations.queuedResources.create
+      parameters:
+        - description: Required. The parent resource name.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The unqualified resource name. Should follow the `^[A-Za-z0-9_.~+%-]+$` regex format.
+          in: query
+          name: queuedResourceId
+          schema:
+            type: string
+        - description: Optional. Idempotent request UUID.
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueuedResource"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v2/{parent}/runtimeVersions:
     get:
       description: Lists runtime versions supported by this API.
@@ -737,6 +875,10 @@ components:
           description: The accelerator type.
           type: string
       type: object
+    AcceptedData:
+      description: Further data for the accepted state.
+      properties: {}
+      type: object
     AccessConfig:
       description: An access config attached to the TPU worker.
       properties:
@@ -744,6 +886,10 @@ components:
           description: Output only. An external IP address associated with the TPU worker.
           readOnly: true
           type: string
+      type: object
+    ActiveData:
+      description: Further data for the active state.
+      properties: {}
       type: object
     AttachedDisk:
       description: "A node-attached disk resource. Next ID: 8;"
@@ -759,9 +905,25 @@ components:
           description: 'Specifies the full path to an existing disk. For example: "projects/my-project/zones/us-central1-c/disks/my-disk".'
           type: string
       type: object
+    CreatingData:
+      description: Further data for the creating state.
+      properties: {}
+      type: object
+    DeletingData:
+      description: Further data for the deleting state.
+      properties: {}
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
+      type: object
+    FailedData:
+      description: Further data for the failed state.
+      properties:
+        error:
+          $ref: "#/components/schemas/Status"
+          description: Output only. The error that caused the queued resource to enter the FAILED state.
+          readOnly: true
       type: object
     GenerateServiceIdentityRequest:
       description: Request for GenerateServiceIdentity.
@@ -795,6 +957,14 @@ components:
             $ref: "#/components/schemas/GuestAttributes"
           type: array
       type: object
+    Guaranteed:
+      description: Guaranteed tier definition.
+      properties:
+        minDuration:
+          description: Optional. Defines the minimum duration of the guarantee. If specified, the requested resources will only be provisioned if they can be allocated for at least the given duration.
+          format: google-duration
+          type: string
+      type: object
     GuestAttributes:
       description: A guest attributes.
       properties:
@@ -826,6 +996,18 @@ components:
           items:
             $ref: "#/components/schemas/GuestAttributesEntry"
           type: array
+      type: object
+    Interval:
+      description: Represents a time interval, encoded as a Timestamp start (inclusive) and a Timestamp end (exclusive). The start must be less than or equal to the end. When the start equals the end, the interval is empty (matches no time). When both start and end are unspecified, the interval matches any time.
+      properties:
+        endTime:
+          description: Optional. Exclusive end of the interval. If specified, a Timestamp matching this interval will have to be before the end.
+          format: google-datetime
+          type: string
+        startTime:
+          description: Optional. Inclusive start of the interval. If specified, a Timestamp matching this interval will have to be the same or after the start.
+          format: google-datetime
+          type: string
       type: object
     ListAcceleratorTypesResponse:
       description: Response for ListAcceleratorTypes.
@@ -885,6 +1067,23 @@ components:
             $ref: "#/components/schemas/Operation"
           type: array
       type: object
+    ListQueuedResourcesResponse:
+      description: Response for ListQueuedResources.
+      properties:
+        nextPageToken:
+          description: The next page token or empty if none.
+          type: string
+        queuedResources:
+          description: The listed queued resources.
+          items:
+            $ref: "#/components/schemas/QueuedResource"
+          type: array
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
     ListRuntimeVersionsResponse:
       description: Response for ListRuntimeVersions.
       properties:
@@ -923,6 +1122,17 @@ components:
           type: object
         name:
           description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
+          type: string
+      type: object
+    MultisliceParams:
+      description: Parameters to specify for multislice QueuedResource requests. This message must be populated in case of multislice requests instead of node_id.
+      properties:
+        nodeCount:
+          description: Required. Number of nodes with this spec. The system will attempt to provison "node_count" nodes as part of the request. This needs to be > 1.
+          format: int32
+          type: integer
+        nodeIdPrefix:
+          description: Optional. Prefix of node_ids in case of multislice request. Should follow the `^[A-Za-z0-9_.~+%-]+$` regex format. If node_count = 3 and node_id_prefix = "np", node ids of nodes created will be "np-0", "np-1", "np-2". If this field is not provided we use queued_resource_id as the node_id_prefix.
           type: string
       type: object
     NetworkConfig:
@@ -1087,6 +1297,22 @@ components:
             type: string
           type: array
       type: object
+    NodeSpec:
+      description: Details of the TPU node(s) being requested. Users can request either a single node or multiple nodes. NodeSpec provides the specification for node(s) to be created.
+      properties:
+        multisliceParams:
+          $ref: "#/components/schemas/MultisliceParams"
+          description: Optional. Fields to specify in case of multislice request.
+        node:
+          $ref: "#/components/schemas/Node"
+          description: Required. The node.
+        nodeId:
+          description: Optional. The unqualified resource name. Should follow the `^[A-Za-z0-9_.~+%-]+$` regex format. This is only specified when requesting a single node. In case of multislice requests, multislice_params must be populated instead.
+          type: string
+        parent:
+          description: Required. The parent resource name.
+          type: string
+      type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
       properties:
@@ -1137,6 +1363,128 @@ components:
           description: Name of the verb executed by the operation.
           type: string
       type: object
+    ProvisioningData:
+      description: Further data for the provisioning state.
+      properties: {}
+      type: object
+    QueuedResource:
+      description: A QueuedResource represents a request for resources that will be placed in a queue and fulfilled when the necessary resources are available.
+      properties:
+        createTime:
+          description: Output only. The time when the QueuedResource was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        guaranteed:
+          $ref: "#/components/schemas/Guaranteed"
+          description: Optional. The Guaranteed tier
+        name:
+          description: Output only. Immutable. The name of the QueuedResource.
+          readOnly: true
+          type: string
+        queueingPolicy:
+          $ref: "#/components/schemas/QueueingPolicy"
+          description: Optional. The queueing policy of the QueuedRequest.
+        reservationName:
+          description: "Optional. Name of the reservation in which the resource should be provisioned. Format: projects/{project}/locations/{zone}/reservations/{reservation}"
+          type: string
+        spot:
+          $ref: "#/components/schemas/Spot"
+          description: Optional. The Spot tier.
+        state:
+          $ref: "#/components/schemas/QueuedResourceState"
+          description: Output only. State of the QueuedResource request.
+          readOnly: true
+        tpu:
+          $ref: "#/components/schemas/Tpu"
+          description: Optional. Defines a TPU resource.
+      type: object
+    QueuedResourceState:
+      description: QueuedResourceState defines the details of the QueuedResource request.
+      properties:
+        acceptedData:
+          $ref: "#/components/schemas/AcceptedData"
+          description: Output only. Further data for the accepted state.
+          readOnly: true
+        activeData:
+          $ref: "#/components/schemas/ActiveData"
+          description: Output only. Further data for the active state.
+          readOnly: true
+        creatingData:
+          $ref: "#/components/schemas/CreatingData"
+          description: Output only. Further data for the creating state.
+          readOnly: true
+        deletingData:
+          $ref: "#/components/schemas/DeletingData"
+          description: Output only. Further data for the deleting state.
+          readOnly: true
+        failedData:
+          $ref: "#/components/schemas/FailedData"
+          description: Output only. Further data for the failed state.
+          readOnly: true
+        provisioningData:
+          $ref: "#/components/schemas/ProvisioningData"
+          description: Output only. Further data for the provisioning state.
+          readOnly: true
+        state:
+          description: Output only. State of the QueuedResource request.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACCEPTED
+            - PROVISIONING
+            - FAILED
+            - DELETING
+            - ACTIVE
+            - SUSPENDING
+            - SUSPENDED
+            - WAITING_FOR_RESOURCES
+          readOnly: true
+          type: string
+        stateInitiator:
+          description: Output only. The initiator of the QueuedResources's current state. Used to indicate whether the SUSPENDING/SUSPENDED state was initiated by the user or the service.
+          enum:
+            - STATE_INITIATOR_UNSPECIFIED
+            - USER
+            - SERVICE
+          readOnly: true
+          type: string
+        suspendedData:
+          $ref: "#/components/schemas/SuspendedData"
+          description: Output only. Further data for the suspended state.
+          readOnly: true
+        suspendingData:
+          $ref: "#/components/schemas/SuspendingData"
+          description: Output only. Further data for the suspending state.
+          readOnly: true
+      type: object
+    QueueingPolicy:
+      description: Defines the policy of the QueuedRequest.
+      properties:
+        validAfterDuration:
+          description: Optional. A relative time after which resources may be created.
+          format: google-duration
+          type: string
+        validAfterTime:
+          description: Optional. An absolute time after which resources may be created.
+          format: google-datetime
+          type: string
+        validInterval:
+          $ref: "#/components/schemas/Interval"
+          description: Optional. An absolute time interval within which resources may be created.
+        validUntilDuration:
+          description: Optional. A relative time after which resources should not be created. If the request cannot be fulfilled by this time the request will be failed.
+          format: google-duration
+          type: string
+        validUntilTime:
+          description: Optional. An absolute time after which resources should not be created. If the request cannot be fulfilled by this time the request will be failed.
+          format: google-datetime
+          type: string
+      type: object
+    ResetQueuedResourceRequest:
+      description: Request for ResetQueuedResource.
+      properties: {}
+      type: object
     RuntimeVersion:
       description: A runtime version that a Node can be configured with.
       properties:
@@ -1186,6 +1534,10 @@ components:
           description: Defines whether the instance has Secure Boot enabled.
           type: boolean
       type: object
+    Spot:
+      description: Spot tier definition.
+      properties: {}
+      type: object
     StartNodeRequest:
       description: Request for StartNode.
       properties: {}
@@ -1212,6 +1564,14 @@ components:
       description: Request for StopNode.
       properties: {}
       type: object
+    SuspendedData:
+      description: Further data for the suspended state.
+      properties: {}
+      type: object
+    SuspendingData:
+      description: Further data for the suspending state.
+      properties: {}
+      type: object
     Symptom:
       description: A Symptom instance.
       properties:
@@ -1236,6 +1596,15 @@ components:
         workerId:
           description: A string used to uniquely distinguish a worker within a TPU node.
           type: string
+      type: object
+    Tpu:
+      description: Details of the TPU resource(s) being requested.
+      properties:
+        nodeSpec:
+          description: Optional. The TPU node(s) being requested.
+          items:
+            $ref: "#/components/schemas/NodeSpec"
+          type: array
       type: object
   securitySchemes:
     Oauth2:

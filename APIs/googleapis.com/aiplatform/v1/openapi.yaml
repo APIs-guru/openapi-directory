@@ -535,7 +535,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Perform an unary online prediction request for Vertex first-party products and frameworks.
+      description: Perform an unary online prediction request to a gRPC model server for Vertex first-party products and frameworks.
       operationId: aiplatform.projects.locations.endpoints.directPredict
       parameters:
         - description: "Required. The name of the Endpoint requested to serve the prediction. Format: `projects/{project}/locations/{location}/endpoints/{endpoint}`"
@@ -577,7 +577,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Perform an online prediction request through gRPC.
+      description: Perform an unary online prediction request to a gRPC model server for custom containers.
       operationId: aiplatform.projects.locations.endpoints.directRawPredict
       parameters:
         - description: "Required. The name of the Endpoint requested to serve the prediction. Format: `projects/{project}/locations/{location}/endpoints/{endpoint}`"
@@ -829,7 +829,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: ""
+      description: Perform a streaming online prediction with an arbitrary HTTP payload.
       operationId: aiplatform.projects.locations.publishers.models.streamRawPredict
       parameters:
         - description: "Required. The name of the Endpoint requested to serve the prediction. Format: `projects/{project}/locations/{location}/endpoints/{endpoint}`"
@@ -1264,6 +1264,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleCloudAiplatformV1FetchFeatureValuesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{featureView}:searchNearestEntities:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Search the nearest entities under a FeatureView. Search only works for indexable feature view; if a feature view isn't indexable, returns Invalid argument response.
+      operationId: aiplatform.projects.locations.featureOnlineStores.featureViews.searchNearestEntities
+      parameters:
+        - description: Required. FeatureView resource format `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}/featureViews/{featureView}`
+          in: path
+          name: featureView
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1SearchNearestEntitiesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1SearchNearestEntitiesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1736,6 +1778,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleCloudAiplatformV1SearchModelDeploymentMonitoringStatsAnomaliesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{model}:generateContent:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Generate content with multimodal inputs.
+      operationId: aiplatform.projects.locations.publishers.models.generateContent
+      parameters:
+        - description: "Required. The name of the publisher model requested to serve the prediction. Format: `projects/{project}/locations/{location}/publishers/*/models/*`"
+          in: path
+          name: model
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1GenerateContentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1GenerateContentResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -8020,25 +8104,10 @@ components:
           description: The end offset of the video.
           format: google-duration
           type: string
-        modelLevelMetaData:
-          $ref: "#/components/schemas/CloudAiNlLlmProtoServicePartVideoMetadataModelLevelMetadata"
-          description: Internal only model level metadata.
         startOffset:
           description: The start offset of the video.
           format: google-duration
           type: string
-      type: object
-    CloudAiNlLlmProtoServicePartVideoMetadataModelLevelMetadata:
-      description: Internal only fields
-      properties:
-        fps:
-          description: Frame rate to decode from this video.
-          format: float
-          type: number
-        numFrames:
-          description: Number of frames to decode from this video.
-          format: int32
-          type: integer
       type: object
     CloudAiNlLlmProtoServicePromptFeedback:
       description: Content filter results for a prompt sent in the request.
@@ -13309,11 +13378,11 @@ components:
       description: A trained machine learning Model.
       properties:
         artifactUri:
-          description: Immutable. The path to the directory containing the Model artifact and any of its supporting files. Not present for AutoML Models or Large Models.
+          description: Immutable. The path to the directory containing the Model artifact and any of its supporting files. Not required for AutoML Models.
           type: string
         containerSpec:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1ModelContainerSpec"
-          description: Input only. The specification of the container that is to be used when deploying this Model. The specification is ingested upon ModelService.UploadModel, and all binaries it contains are copied and stored internally by Vertex AI. Not present for AutoML Models or Large Models.
+          description: Input only. The specification of the container that is to be used when deploying this Model. The specification is ingested upon ModelService.UploadModel, and all binaries it contains are copied and stored internally by Vertex AI. Not required for AutoML Models.
         createTime:
           description: Output only. Timestamp when this Model was uploaded into Vertex AI.
           format: google-datetime
@@ -13534,6 +13603,10 @@ components:
             - LOG_TYPE_UNSPECIFIED
             - PREDICT
             - EXPLAIN
+          type: string
+        requestResponseLoggingSchemaVersion:
+          description: Output only. The schema version of the request/response logging BigQuery table. Default to v1 if unset.
+          readOnly: true
           type: string
       type: object
     GoogleCloudAiplatformV1ModelDeploymentMonitoringJob:
@@ -13847,6 +13920,7 @@ components:
           type: string
       type: object
     GoogleCloudAiplatformV1ModelMonitoringAlertConfig:
+      description: The alert config for model monitoring.
       properties:
         emailAlertConfig:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1ModelMonitoringAlertConfigEmailAlertConfig"
@@ -14035,6 +14109,7 @@ components:
             - MODEL_GARDEN
             - GENIE
             - CUSTOM_TEXT_EMBEDDING
+            - MARKETPLACE
           type: string
       type: object
     GoogleCloudAiplatformV1MutateDeployedIndexOperationMetadata:
@@ -14305,6 +14380,71 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1NasTrial"
           description: The train NasTrial corresponding to search_trial. Only populated if search_trial is used for training.
       type: object
+    GoogleCloudAiplatformV1NearestNeighborQuery:
+      description: A query to find a number of similar entities.
+      properties:
+        embedding:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1NearestNeighborQueryEmbedding"
+          description: Optional. The embedding vector that be used for similar search.
+        entityId:
+          description: Optional. The entity id whose similar entities should be searched for. If embedding is set, search will use embedding instead of entity_id.
+          type: string
+        neighborCount:
+          description: Optional. The number of similar entities to be retrieved from feature view for each query.
+          format: int32
+          type: integer
+        parameters:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1NearestNeighborQueryParameters"
+          description: Optional. Parameters that can be set to tune query on the fly.
+        perCrowdingAttributeNeighborCount:
+          description: Optional. Crowding is a constraint on a neighbor list produced by nearest neighbor search requiring that no more than sper_crowding_attribute_neighbor_count of the k neighbors returned have the same value of crowding_attribute. It's used for improving result diversity.
+          format: int32
+          type: integer
+        stringFilters:
+          description: Optional. The list of string filters.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1NearestNeighborQueryStringFilter"
+          type: array
+      type: object
+    GoogleCloudAiplatformV1NearestNeighborQueryEmbedding:
+      description: The embedding vector.
+      properties:
+        value:
+          description: Optional. Individual value in the embedding.
+          items:
+            format: float
+            type: number
+          type: array
+      type: object
+    GoogleCloudAiplatformV1NearestNeighborQueryParameters:
+      description: Parameters that can be overrided in each query to tune query latency and recall.
+      properties:
+        approximateNeighborCandidates:
+          description: Optional. The number of neighbors to find via approximate search before exact reordering is performed; if set, this value must be > neighbor_count.
+          format: int32
+          type: integer
+        leafNodesSearchFraction:
+          description: Optional. The fraction of the number of leaves to search, set at query time allows user to tune search performance. This value increase result in both search accuracy and latency increase. The value should be between 0.0 and 1.0.
+          format: double
+          type: number
+      type: object
+    GoogleCloudAiplatformV1NearestNeighborQueryStringFilter:
+      description: "String filter is used to search a subset of the entities by using boolean rules on string columns. For example: if a query specifies string filter with 'name = color, allow_tokens = {red, blue}, deny_tokens = {purple}',' then that query will match entities that are red or blue, but if those points are also purple, then they will be excluded even if they are red/blue. Only string filter is supported for now, numeric filter will be supported in the near future."
+      properties:
+        allowTokens:
+          description: Optional. The allowed tokens.
+          items:
+            type: string
+          type: array
+        denyTokens:
+          description: Optional. The denied tokens.
+          items:
+            type: string
+          type: array
+        name:
+          description: Required. Column names in BigQuery that used as filters.
+          type: string
+      type: object
     GoogleCloudAiplatformV1NearestNeighborSearchOperationMetadata:
       description: Runtime operation metadata with regard to Matching Engine Index.
       properties:
@@ -14361,6 +14501,7 @@ components:
             - OP_IN_DATAPOINT
             - MULTIPLE_VALUES
             - INVALID_NUMERIC_VALUE
+            - INVALID_ENCODING
           type: string
         rawRecord:
           description: The original content of this record.
@@ -14368,6 +14509,29 @@ components:
         sourceGcsUri:
           description: Cloud Storage URI pointing to the original file in user's bucket.
           type: string
+      type: object
+    GoogleCloudAiplatformV1NearestNeighbors:
+      description: Nearest neighbors for one query.
+      properties:
+        neighbors:
+          description: All its neighbors.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1NearestNeighborsNeighbor"
+          type: array
+      type: object
+    GoogleCloudAiplatformV1NearestNeighborsNeighbor:
+      description: A neighbor of the query vector.
+      properties:
+        distance:
+          description: The distance between the neighbor and the query vector.
+          format: double
+          type: number
+        entityId:
+          description: The id of the similar entity.
+          type: string
+        entityKeyValues:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1FetchFeatureValuesResponse"
+          description: The attributes of the neighbor, e.g. filters, crowding and metadata Note that full entities are returned only when "return_full_entity" is set to true. Otherwise, only the "entity_id" and "distance" fields are populated.
       type: object
     GoogleCloudAiplatformV1Neighbor:
       description: Neighbors for example-based explanations.
@@ -15225,6 +15389,9 @@ components:
         deploy:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1PublisherModelCallToActionDeploy"
           description: Optional. Deploy the PublisherModel to Vertex Endpoint.
+        deployGke:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1PublisherModelCallToActionDeployGke"
+          description: Optional. Deploy PublisherModel to Google Kubernetes Engine.
         openEvaluationPipeline:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1PublisherModelCallToActionRegionalResourceReferences"
           description: Optional. Open evaluation pipeline of the PublisherModel.
@@ -15286,6 +15453,15 @@ components:
         title:
           description: Required. The title of the regional resource reference.
           type: string
+      type: object
+    GoogleCloudAiplatformV1PublisherModelCallToActionDeployGke:
+      description: Configurations for PublisherModel GKE deployment
+      properties:
+        gkeYamlConfigs:
+          description: Optional. GKE deployment configuration in yaml format.
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudAiplatformV1PublisherModelCallToActionOpenFineTuningPipelines:
       description: Open fine tuning pipelines.
@@ -15942,10 +16118,6 @@ components:
         disableRetries:
           description: Optional. Indicates if the job should retry for internal errors after the job starts running. If true, overrides `Scheduling.restart_job_on_worker_restart` to false.
           type: boolean
-        maxWaitDuration:
-          description: Optional. This is the maximum time a user will wait in the QRM queue for resources. Default is 1 day
-          format: google-duration
-          type: string
         restartJobOnWorkerRestart:
           description: Restarts the entire CustomJob if a worker gets restarted. This feature can be used by distributed training jobs that are not resilient to workers leaving and joining a job.
           type: boolean
@@ -18614,6 +18786,23 @@ components:
           description: The page token that can be used by the next JobService.SearchModelDeploymentMonitoringStatsAnomalies call.
           type: string
       type: object
+    GoogleCloudAiplatformV1SearchNearestEntitiesRequest:
+      description: The request message for FeatureOnlineStoreService.SearchNearestEntities.
+      properties:
+        query:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1NearestNeighborQuery"
+          description: Required. The query.
+        returnFullEntity:
+          description: Optional. If set to true, the full entities (including all vector values and metadata) of the nearest neighbors are returned; otherwise only entity id of the nearest neighbors will be returned. Note that returning full entities will significantly increase the latency and cost of the query.
+          type: boolean
+      type: object
+    GoogleCloudAiplatformV1SearchNearestEntitiesResponse:
+      description: Response message for FeatureOnlineStoreService.SearchNearestEntities
+      properties:
+        nearestNeighbors:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1NearestNeighbors"
+          description: The nearest neighbors of the query entity.
+      type: object
     GoogleCloudAiplatformV1ShieldedVmConfig:
       description: A set of Shielded Instance options. See [Images using supported Shielded VM features](https://cloud.google.com/compute/docs/instances/modifying-shielded-vm).
       properties:
@@ -19927,6 +20116,10 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudAiplatformV1IndexDatapoint"
           type: array
+        updateMask:
+          description: "Optional. Update mask is used to specify the fields to be overwritten in the datapoints by the update. The fields specified in the update_mask are relative to each IndexDatapoint inside datapoints, not the full request. Updatable fields: * Use `all_restricts` to update both restricts and numeric_restricts."
+          format: google-fieldmask
+          type: string
       type: object
     GoogleCloudAiplatformV1UpsertDatapointsResponse:
       description: Response message for IndexService.UpsertDatapoints
@@ -20477,6 +20670,7 @@ components:
             - GEMINI_V1_DOCJOIN_100B_EN_TOXICITY_TAGGED_GCC_FIXED_TAGS
             - GEMINI_V1_PUBMED
             - GEMINI_V1_WEB_MATH_V2
+            - GEMINI_V1_CMS_GITHUB_V7
             - GEMINI_V1_CMS_GITHUB_DECONTAMINATED_V_7
             - GEMINI_V1_GITHUB_DIFF_WITH_COMMIT_MESSAGE_V2
             - GEMINI_V1_GITHUB_HTML_CSS_XML_V4
@@ -20560,6 +20754,8 @@ components:
             - GEMINI_IT_CLOUD_OASST
             - GEMINI_IT_CLOUD_SELF_INSTRUCT
             - GEMINI_IT_CLOUD_UCS_AQUAMUSE
+            - GEMINI_GOOSE_PUBLIC
+            - GEMINI_GOOSE_SILOED
             - GEMINI_V2_CMS_WIKIPEDIA_LANG_FILTERED_GCC_PII
             - GEMINI_V2_WIKIPEDIA_DIFFS_COMPLIANT
             - GEMINI_V2_ENGLISH_ARTICLES_TOP10B_211123_PII_FILTERED
@@ -20860,6 +21056,7 @@ components:
             - GEMINI_V1_DOCJOIN_100B_EN_TOXICITY_TAGGED_GCC_FIXED_TAGS
             - GEMINI_V1_PUBMED
             - GEMINI_V1_WEB_MATH_V2
+            - GEMINI_V1_CMS_GITHUB_V7
             - GEMINI_V1_CMS_GITHUB_DECONTAMINATED_V_7
             - GEMINI_V1_GITHUB_DIFF_WITH_COMMIT_MESSAGE_V2
             - GEMINI_V1_GITHUB_HTML_CSS_XML_V4
@@ -20943,6 +21140,8 @@ components:
             - GEMINI_IT_CLOUD_OASST
             - GEMINI_IT_CLOUD_SELF_INSTRUCT
             - GEMINI_IT_CLOUD_UCS_AQUAMUSE
+            - GEMINI_GOOSE_PUBLIC
+            - GEMINI_GOOSE_SILOED
             - GEMINI_V2_CMS_WIKIPEDIA_LANG_FILTERED_GCC_PII
             - GEMINI_V2_WIKIPEDIA_DIFFS_COMPLIANT
             - GEMINI_V2_ENGLISH_ARTICLES_TOP10B_211123_PII_FILTERED
@@ -21249,6 +21448,7 @@ components:
             - GEMINI_V1_DOCJOIN_100B_EN_TOXICITY_TAGGED_GCC_FIXED_TAGS
             - GEMINI_V1_PUBMED
             - GEMINI_V1_WEB_MATH_V2
+            - GEMINI_V1_CMS_GITHUB_V7
             - GEMINI_V1_CMS_GITHUB_DECONTAMINATED_V_7
             - GEMINI_V1_GITHUB_DIFF_WITH_COMMIT_MESSAGE_V2
             - GEMINI_V1_GITHUB_HTML_CSS_XML_V4
@@ -21332,6 +21532,8 @@ components:
             - GEMINI_IT_CLOUD_OASST
             - GEMINI_IT_CLOUD_SELF_INSTRUCT
             - GEMINI_IT_CLOUD_UCS_AQUAMUSE
+            - GEMINI_GOOSE_PUBLIC
+            - GEMINI_GOOSE_SILOED
             - GEMINI_V2_CMS_WIKIPEDIA_LANG_FILTERED_GCC_PII
             - GEMINI_V2_WIKIPEDIA_DIFFS_COMPLIANT
             - GEMINI_V2_ENGLISH_ARTICLES_TOP10B_211123_PII_FILTERED
@@ -21632,6 +21834,7 @@ components:
             - GEMINI_V1_DOCJOIN_100B_EN_TOXICITY_TAGGED_GCC_FIXED_TAGS
             - GEMINI_V1_PUBMED
             - GEMINI_V1_WEB_MATH_V2
+            - GEMINI_V1_CMS_GITHUB_V7
             - GEMINI_V1_CMS_GITHUB_DECONTAMINATED_V_7
             - GEMINI_V1_GITHUB_DIFF_WITH_COMMIT_MESSAGE_V2
             - GEMINI_V1_GITHUB_HTML_CSS_XML_V4
@@ -21715,6 +21918,8 @@ components:
             - GEMINI_IT_CLOUD_OASST
             - GEMINI_IT_CLOUD_SELF_INSTRUCT
             - GEMINI_IT_CLOUD_UCS_AQUAMUSE
+            - GEMINI_GOOSE_PUBLIC
+            - GEMINI_GOOSE_SILOED
             - GEMINI_V2_CMS_WIKIPEDIA_LANG_FILTERED_GCC_PII
             - GEMINI_V2_WIKIPEDIA_DIFFS_COMPLIANT
             - GEMINI_V2_ENGLISH_ARTICLES_TOP10B_211123_PII_FILTERED
@@ -22073,6 +22278,7 @@ components:
           $ref: "#/components/schemas/LearningGenaiRootHarmSafetyCatCategories"
         spii:
           $ref: "#/components/schemas/LearningGenaiRootHarmSpiiFilter"
+          description: Spii Filter uses buckets http://google3/google/privacy/dlp/v2/storage.proto;l=77;rcl=584719820 to classify the input. LMRoot converts the bucket into double score. For example the score for "POSSIBLE" is 3 / 5 = 0.6 .
         threshold:
           format: double
           type: number

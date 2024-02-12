@@ -2362,7 +2362,7 @@ components:
             type: string
           type: array
         protoDescriptors:
-          description: Optional. Proto descriptors used by CREATE/ALTER PROTO BUNDLE statements in 'extra_statements' above. Contains a protobuf-serialized [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto). To generate it, [install](https://grpc.io/docs/protoc-installation/) and run `protoc` with --include_imports and --descriptor_set_out. For example, to generate for moon/shot/app.proto, run """ $protoc --proto_path=/app_path --proto_path=/lib_path \ --include_imports \ --descriptor_set_out=descriptors.data \ moon/shot/app.proto """ For more details, see protobuffer [self description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
+          description: Optional. Proto descriptors used by CREATE/ALTER PROTO BUNDLE statements in 'extra_statements' above. Contains a protobuf-serialized [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto). To generate it, [install](https://grpc.io/docs/protoc-installation/) and run `protoc` with --include_imports and --descriptor_set_out. For example, to generate for moon/shot/app.proto, run ``` $protoc --proto_path=/app_path --proto_path=/lib_path \ --include_imports \ --descriptor_set_out=descriptors.data \ moon/shot/app.proto ``` For more details, see protobuffer [self description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
           format: byte
           type: string
       type: object
@@ -2403,6 +2403,13 @@ components:
         endTime:
           description: The time at which this operation failed or was completed successfully.
           format: google-datetime
+          type: string
+        expectedFulfillmentPeriod:
+          description: The expected fulfillment period of this create operation.
+          enum:
+            - FULFILLMENT_PERIOD_UNSPECIFIED
+            - FULFILLMENT_PERIOD_NORMAL
+            - FULFILLMENT_PERIOD_EXTENDED
           type: string
         instance:
           $ref: "#/components/schemas/Instance"
@@ -2564,7 +2571,7 @@ components:
       properties:
         excludeReplicas:
           $ref: "#/components/schemas/ExcludeReplicas"
-          description: Exclude_replicas indicates that should be excluded from serving requests. Spanner will not route requests to the replicas in this list.
+          description: Exclude_replicas indicates that specified replicas should be excluded from serving requests. Spanner will not route requests to the replicas in this list.
         includeReplicas:
           $ref: "#/components/schemas/IncludeReplicas"
           description: Include_replicas indicates the order of replicas (as they appear in this list) to process the request. If auto_failover_disabled is set to true and all replicas are exhausted without finding a healthy replica, Spanner will wait for a replica in the list to become available, requests may fail due to `DEADLINE_EXCEEDED` errors.
@@ -3653,7 +3660,7 @@ components:
           type: string
       type: object
     ReplicaSelection:
-      description: 'The directed read replica selector. Callers must provide one or more of the following fields for replica selection: * `location` - The location must be one of the regions within the multi-region configuration of your database. * `type` - The type of the replica. Some examples of using replica_selectors are: * `location:us-east1` --> The "us-east1" replica(s) of any available type will be used to process the request. * `type:READ_ONLY` --> The "READ_ONLY" type replica(s) in nearest . available location will be used to process the request. * `location:us-east1 type:READ_ONLY` --> The "READ_ONLY" type replica(s) in location "us-east1" will be used to process the request.'
+      description: 'The directed read replica selector. Callers must provide one or more of the following fields for replica selection: * `location` - The location must be one of the regions within the multi-region configuration of your database. * `type` - The type of the replica. Some examples of using replica_selectors are: * `location:us-east1` --> The "us-east1" replica(s) of any available type will be used to process the request. * `type:READ_ONLY` --> The "READ_ONLY" type replica(s) in nearest available location will be used to process the request. * `location:us-east1 type:READ_ONLY` --> The "READ_ONLY" type replica(s) in location "us-east1" will be used to process the request.'
       properties:
         location:
           description: The location or region of the serving requests, e.g. "us-east1".
@@ -4072,7 +4079,7 @@ components:
           description: "If empty, the new update request is assigned an automatically-generated operation ID. Otherwise, `operation_id` is used to construct the name of the resulting Operation. Specifying an explicit operation ID simplifies determining whether the statements were executed in the event that the UpdateDatabaseDdl call is replayed, or the return value is otherwise lost: the database and `operation_id` fields can be combined to form the name of the resulting longrunning.Operation: `/operations/`. `operation_id` should be unique within the database, and must be a valid identifier: `a-z*`. Note that automatically-generated operation IDs always begin with an underscore. If the named operation already exists, UpdateDatabaseDdl returns `ALREADY_EXISTS`."
           type: string
         protoDescriptors:
-          description: Optional. Proto descriptors used by CREATE/ALTER PROTO BUNDLE statements. Contains a protobuf-serialized [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto). To generate it, [install](https://grpc.io/docs/protoc-installation/) and run `protoc` with --include_imports and --descriptor_set_out. For example, to generate for moon/shot/app.proto, run """ $protoc --proto_path=/app_path --proto_path=/lib_path \ --include_imports \ --descriptor_set_out=descriptors.data \ moon/shot/app.proto """ For more details, see protobuffer [self description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
+          description: Optional. Proto descriptors used by CREATE/ALTER PROTO BUNDLE statements. Contains a protobuf-serialized [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto). To generate it, [install](https://grpc.io/docs/protoc-installation/) and run `protoc` with --include_imports and --descriptor_set_out. For example, to generate for moon/shot/app.proto, run ``` $protoc --proto_path=/app_path --proto_path=/lib_path \ --include_imports \ --descriptor_set_out=descriptors.data \ moon/shot/app.proto ``` For more details, see protobuffer [self description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
           format: byte
           type: string
         statements:
@@ -4144,6 +4151,13 @@ components:
         endTime:
           description: The time at which this operation failed or was completed successfully.
           format: google-datetime
+          type: string
+        expectedFulfillmentPeriod:
+          description: The expected fulfillment period of this update operation.
+          enum:
+            - FULFILLMENT_PERIOD_UNSPECIFIED
+            - FULFILLMENT_PERIOD_NORMAL
+            - FULFILLMENT_PERIOD_EXTENDED
           type: string
         instance:
           $ref: "#/components/schemas/Instance"
