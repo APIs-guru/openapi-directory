@@ -508,31 +508,9 @@ components:
         cvssv3:
           $ref: "#/components/schemas/Cvssv3"
           description: Describe Common Vulnerability Scoring System specified at https://www.first.org/cvss/v3.1/specification-document
-        exploitationActivity:
-          description: The exploitation activity of the vulnerability in the wild.
-          enum:
-            - EXPLOITATION_ACTIVITY_UNSPECIFIED
-            - WIDE
-            - CONFIRMED
-            - AVAILABLE
-            - ANTICIPATED
-            - NO_KNOWN
-          type: string
         id:
           description: The unique identifier for the vulnerability. e.g. CVE-2021-34527
           type: string
-        impact:
-          description: The potential impact of the vulnerability if it was to be exploited.
-          enum:
-            - RISK_RATING_UNSPECIFIED
-            - LOW
-            - MEDIUM
-            - HIGH
-            - CRITICAL
-          type: string
-        observedInTheWild:
-          description: Whether or not the vulnerability has been observed in the wild.
-          type: boolean
         references:
           description: Additional information about the CVE. e.g. https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-34527
           items:
@@ -540,9 +518,6 @@ components:
           type: array
         upstreamFixAvailable:
           description: Whether upstream fix is available for the CVE.
-          type: boolean
-        zeroDay:
-          description: Whether or not the vulnerability was zero day when the finding was published.
           type: boolean
       type: object
     Cvssv3:
@@ -1660,64 +1635,42 @@ components:
           items:
             enum:
               - TECHNIQUE_UNSPECIFIED
-              - MASQUERADING
-              - MATCH_LEGITIMATE_NAME_OR_LOCATION
-              - BOOT_OR_LOGON_INITIALIZATION_SCRIPTS
-              - STARTUP_ITEMS
-              - NETWORK_SERVICE_DISCOVERY
-              - PROCESS_DISCOVERY
+              - ACTIVE_SCANNING
+              - SCANNING_IP_BLOCKS
+              - INGRESS_TOOL_TRANSFER
+              - NATIVE_API
+              - SHARED_MODULES
               - COMMAND_AND_SCRIPTING_INTERPRETER
               - UNIX_SHELL
-              - PERMISSION_GROUPS_DISCOVERY
-              - CLOUD_GROUPS
-              - APPLICATION_LAYER_PROTOCOL
-              - DNS
-              - SOFTWARE_DEPLOYMENT_TOOLS
-              - VALID_ACCOUNTS
-              - DEFAULT_ACCOUNTS
-              - LOCAL_ACCOUNTS
-              - CLOUD_ACCOUNTS
+              - RESOURCE_HIJACKING
               - PROXY
               - EXTERNAL_PROXY
               - MULTI_HOP_PROXY
-              - ACCOUNT_MANIPULATION
-              - ADDITIONAL_CLOUD_CREDENTIALS
-              - SSH_AUTHORIZED_KEYS
-              - ADDITIONAL_CONTAINER_CLUSTER_ROLES
-              - INGRESS_TOOL_TRANSFER
-              - NATIVE_API
-              - BRUTE_FORCE
-              - SHARED_MODULES
-              - ACCESS_TOKEN_MANIPULATION
-              - TOKEN_IMPERSONATION_OR_THEFT
-              - EXPLOIT_PUBLIC_FACING_APPLICATION
-              - DOMAIN_POLICY_MODIFICATION
-              - DATA_DESTRUCTION
-              - SERVICE_STOP
-              - INHIBIT_SYSTEM_RECOVERY
-              - RESOURCE_HIJACKING
-              - NETWORK_DENIAL_OF_SERVICE
-              - CLOUD_SERVICE_DISCOVERY
-              - STEAL_APPLICATION_ACCESS_TOKEN
-              - ACCOUNT_ACCESS_REMOVAL
-              - STEAL_WEB_SESSION_COOKIE
-              - CREATE_OR_MODIFY_SYSTEM_PROCESS
-              - ABUSE_ELEVATION_CONTROL_MECHANISM
+              - DYNAMIC_RESOLUTION
               - UNSECURED_CREDENTIALS
-              - MODIFY_AUTHENTICATION_PROCESS
-              - IMPAIR_DEFENSES
-              - DISABLE_OR_MODIFY_TOOLS
+              - VALID_ACCOUNTS
+              - LOCAL_ACCOUNTS
+              - CLOUD_ACCOUNTS
+              - NETWORK_DENIAL_OF_SERVICE
+              - PERMISSION_GROUPS_DISCOVERY
+              - CLOUD_GROUPS
               - EXFILTRATION_OVER_WEB_SERVICE
               - EXFILTRATION_TO_CLOUD_STORAGE
-              - DYNAMIC_RESOLUTION
-              - LATERAL_TOOL_TRANSFER
+              - ACCOUNT_MANIPULATION
+              - SSH_AUTHORIZED_KEYS
+              - CREATE_OR_MODIFY_SYSTEM_PROCESS
+              - STEAL_WEB_SESSION_COOKIE
               - MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE
-              - CREATE_SNAPSHOT
-              - CLOUD_INFRASTRUCTURE_DISCOVERY
-              - OBTAIN_CAPABILITIES
-              - ACTIVE_SCANNING
-              - SCANNING_IP_BLOCKS
-              - CONTAINER_AND_RESOURCE_DISCOVERY
+              - EXPLOIT_PUBLIC_FACING_APPLICATION
+              - MODIFY_AUTHENTICATION_PROCESS
+              - DATA_DESTRUCTION
+              - DOMAIN_POLICY_MODIFICATION
+              - IMPAIR_DEFENSES
+              - NETWORK_SERVICE_DISCOVERY
+              - ACCESS_TOKEN_MANIPULATION
+              - ABUSE_ELEVATION_CONTROL_MECHANISM
+              - DEFAULT_ACCOUNTS
+              - INHIBIT_SYSTEM_RECOVERY
             type: string
           type: array
         primaryTactic:
@@ -1744,64 +1697,42 @@ components:
           items:
             enum:
               - TECHNIQUE_UNSPECIFIED
-              - MASQUERADING
-              - MATCH_LEGITIMATE_NAME_OR_LOCATION
-              - BOOT_OR_LOGON_INITIALIZATION_SCRIPTS
-              - STARTUP_ITEMS
-              - NETWORK_SERVICE_DISCOVERY
-              - PROCESS_DISCOVERY
+              - ACTIVE_SCANNING
+              - SCANNING_IP_BLOCKS
+              - INGRESS_TOOL_TRANSFER
+              - NATIVE_API
+              - SHARED_MODULES
               - COMMAND_AND_SCRIPTING_INTERPRETER
               - UNIX_SHELL
-              - PERMISSION_GROUPS_DISCOVERY
-              - CLOUD_GROUPS
-              - APPLICATION_LAYER_PROTOCOL
-              - DNS
-              - SOFTWARE_DEPLOYMENT_TOOLS
-              - VALID_ACCOUNTS
-              - DEFAULT_ACCOUNTS
-              - LOCAL_ACCOUNTS
-              - CLOUD_ACCOUNTS
+              - RESOURCE_HIJACKING
               - PROXY
               - EXTERNAL_PROXY
               - MULTI_HOP_PROXY
-              - ACCOUNT_MANIPULATION
-              - ADDITIONAL_CLOUD_CREDENTIALS
-              - SSH_AUTHORIZED_KEYS
-              - ADDITIONAL_CONTAINER_CLUSTER_ROLES
-              - INGRESS_TOOL_TRANSFER
-              - NATIVE_API
-              - BRUTE_FORCE
-              - SHARED_MODULES
-              - ACCESS_TOKEN_MANIPULATION
-              - TOKEN_IMPERSONATION_OR_THEFT
-              - EXPLOIT_PUBLIC_FACING_APPLICATION
-              - DOMAIN_POLICY_MODIFICATION
-              - DATA_DESTRUCTION
-              - SERVICE_STOP
-              - INHIBIT_SYSTEM_RECOVERY
-              - RESOURCE_HIJACKING
-              - NETWORK_DENIAL_OF_SERVICE
-              - CLOUD_SERVICE_DISCOVERY
-              - STEAL_APPLICATION_ACCESS_TOKEN
-              - ACCOUNT_ACCESS_REMOVAL
-              - STEAL_WEB_SESSION_COOKIE
-              - CREATE_OR_MODIFY_SYSTEM_PROCESS
-              - ABUSE_ELEVATION_CONTROL_MECHANISM
+              - DYNAMIC_RESOLUTION
               - UNSECURED_CREDENTIALS
-              - MODIFY_AUTHENTICATION_PROCESS
-              - IMPAIR_DEFENSES
-              - DISABLE_OR_MODIFY_TOOLS
+              - VALID_ACCOUNTS
+              - LOCAL_ACCOUNTS
+              - CLOUD_ACCOUNTS
+              - NETWORK_DENIAL_OF_SERVICE
+              - PERMISSION_GROUPS_DISCOVERY
+              - CLOUD_GROUPS
               - EXFILTRATION_OVER_WEB_SERVICE
               - EXFILTRATION_TO_CLOUD_STORAGE
-              - DYNAMIC_RESOLUTION
-              - LATERAL_TOOL_TRANSFER
+              - ACCOUNT_MANIPULATION
+              - SSH_AUTHORIZED_KEYS
+              - CREATE_OR_MODIFY_SYSTEM_PROCESS
+              - STEAL_WEB_SESSION_COOKIE
               - MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE
-              - CREATE_SNAPSHOT
-              - CLOUD_INFRASTRUCTURE_DISCOVERY
-              - OBTAIN_CAPABILITIES
-              - ACTIVE_SCANNING
-              - SCANNING_IP_BLOCKS
-              - CONTAINER_AND_RESOURCE_DISCOVERY
+              - EXPLOIT_PUBLIC_FACING_APPLICATION
+              - MODIFY_AUTHENTICATION_PROCESS
+              - DATA_DESTRUCTION
+              - DOMAIN_POLICY_MODIFICATION
+              - IMPAIR_DEFENSES
+              - NETWORK_SERVICE_DISCOVERY
+              - ACCESS_TOKEN_MANIPULATION
+              - ABUSE_ELEVATION_CONTROL_MECHANISM
+              - DEFAULT_ACCOUNTS
+              - INHIBIT_SYSTEM_RECOVERY
             type: string
           type: array
         version:
