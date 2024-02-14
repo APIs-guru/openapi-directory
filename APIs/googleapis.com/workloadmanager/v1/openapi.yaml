@@ -82,6 +82,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -97,10 +102,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: workloadmanager.projects.locations.operations.get
+      description: Gets details of a single workload.
+      operationId: workloadmanager.projects.locations.workloadProfiles.get
       parameters:
-        - description: The name of the operation resource.
+        - description: Required. Name of the resource
           in: path
           name: name
           required: true
@@ -111,7 +116,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/WorkloadProfile"
           description: Successful response
       security:
         - Oauth2:
@@ -644,6 +649,58 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1/{parent}/workloadProfiles:
+    get:
+      description: List workloads
+      operationId: workloadmanager.projects.locations.workloadProfiles.list
+      parameters:
+        - description: Required. Parent value for ListWorkloadRequest
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filtering results
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListWorkloadProfilesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:
@@ -720,6 +777,74 @@ components:
       schema:
         type: string
   schemas:
+    APILayerServer:
+      description: The API layer server
+      properties:
+        name:
+          description: Output only. The api layer name
+          readOnly: true
+          type: string
+        osVersion:
+          description: Output only. OS information
+          readOnly: true
+          type: string
+        resources:
+          description: Output only. resources in the component
+          items:
+            $ref: "#/components/schemas/CloudResource"
+          readOnly: true
+          type: array
+      type: object
+    AvailabilityGroup:
+      description: The availability groups for sqlserver
+      properties:
+        databases:
+          description: Output only. The databases
+          items:
+            type: string
+          readOnly: true
+          type: array
+        name:
+          description: Output only. The availability group name
+          readOnly: true
+          type: string
+        primaryServer:
+          description: Output only. The primary server
+          readOnly: true
+          type: string
+        secondaryServers:
+          description: Output only. The secondary servers
+          items:
+            type: string
+          readOnly: true
+          type: array
+      type: object
+    BackendServer:
+      description: The backend server
+      properties:
+        backupFile:
+          description: Output only. The backup file
+          readOnly: true
+          type: string
+        backupSchedule:
+          description: Output only. The backup schedule
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The backend name
+          readOnly: true
+          type: string
+        osVersion:
+          description: Output only. OS information
+          readOnly: true
+          type: string
+        resources:
+          description: Output only. resources in the component
+          items:
+            $ref: "#/components/schemas/CloudResource"
+          readOnly: true
+          type: array
+      type: object
     BigQueryDestination:
       description: Message describing big query destination
       properties:
@@ -733,6 +858,65 @@ components:
     CancelOperationRequest:
       description: The request message for Operations.CancelOperation.
       properties: {}
+      type: object
+    CloudResource:
+      description: The resource on GCP
+      properties:
+        kind:
+          description: Output only. ComputeInstance, ComputeDisk, VPC, Bare Metal server, etc.
+          enum:
+            - RESOURCE_KIND_UNSPECIFIED
+            - RESOURCE_KIND_INSTANCE
+            - RESOURCE_KIND_DISK
+            - RESOURCE_KIND_ADDRESS
+            - RESOURCE_KIND_FILESTORE
+            - RESOURCE_KIND_HEALTH_CHECK
+            - RESOURCE_KIND_FORWARDING_RULE
+            - RESOURCE_KIND_BACKEND_SERVICE
+            - RESOURCE_KIND_SUBNETWORK
+            - RESOURCE_KIND_NETWORK
+            - RESOURCE_KIND_PUBLIC_ADDRESS
+            - RESOURCE_KIND_INSTANCE_GROUP
+          readOnly: true
+          type: string
+        name:
+          description: Output only. resource name
+          readOnly: true
+          type: string
+      type: object
+    Cluster:
+      description: The cluster for sqlserver
+      properties:
+        nodes:
+          description: Output only. The nodes
+          items:
+            type: string
+          readOnly: true
+          type: array
+        witnessServer:
+          description: Output only. The witness server
+          readOnly: true
+          type: string
+      type: object
+    Database:
+      description: The database for sqlserver
+      properties:
+        backupFile:
+          description: Output only. The backup file
+          readOnly: true
+          type: string
+        backupSchedule:
+          description: Output only. The backup schedule
+          readOnly: true
+          type: string
+        hostVm:
+          description: Output only. The host VM
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The database name
+          readOnly: true
+          type: string
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
@@ -859,6 +1043,24 @@ components:
           description: the violation message of an execution
           type: string
       type: object
+    FrontEndServer:
+      description: The front end server
+      properties:
+        name:
+          description: Output only. The frontend name
+          readOnly: true
+          type: string
+        osVersion:
+          description: Output only. OS information
+          readOnly: true
+          type: string
+        resources:
+          description: Output only. resources in the component
+          items:
+            $ref: "#/components/schemas/CloudResource"
+          readOnly: true
+          type: array
+      type: object
     GceInstanceFilter:
       description: Message describing compute engine instance filter
       properties:
@@ -888,6 +1090,53 @@ components:
         sqlserverValidation:
           $ref: "#/components/schemas/SqlserverValidation"
           description: The insights data for the sqlserver workload validation.
+      type: object
+    Instance:
+      description: a vm instance
+      properties:
+        name:
+          description: Output only. name of the VM
+          readOnly: true
+          type: string
+        region:
+          description: Output only. The location of the VM
+          readOnly: true
+          type: string
+        status:
+          description: Output only. The state of the VM
+          enum:
+            - INSTANCESTATE_UNSPECIFIED
+            - PROVISIONING
+            - STAGING
+            - RUNNING
+            - STOPPING
+            - STOPPED
+            - TERMINATED
+            - SUSPENDING
+            - SUSPENDED
+            - REPAIRING
+            - DEPROVISIONING
+          readOnly: true
+          type: string
+      type: object
+    Layer:
+      description: The database layer
+      properties:
+        applicationType:
+          description: the application layer
+          type: string
+        databaseType:
+          description: Optional. the database layer
+          type: string
+        instances:
+          description: Optional. instances in a layer
+          items:
+            $ref: "#/components/schemas/Instance"
+          type: array
+        sid:
+          description: Output only. system identification of a layer
+          readOnly: true
+          type: string
       type: object
     ListEvaluationsResponse:
       description: Message for response to listing Evaluations
@@ -982,6 +1231,37 @@ components:
           items:
             $ref: "#/components/schemas/ScannedResource"
           type: array
+      type: object
+    ListWorkloadProfilesResponse:
+      description: List workloadResponse returns a response with the list of workload overview
+      properties:
+        nextPageToken:
+          description: Output only. A token identifying a page of results the server should return
+          readOnly: true
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+        workloadOverviews:
+          description: Output only. The list of Workload Overview
+          items:
+            $ref: "#/components/schemas/WorkloadProfileOverview"
+          readOnly: true
+          type: array
+      type: object
+    LoadBalancerServer:
+      description: The load balancer for sqlserver
+      properties:
+        ip:
+          description: Output only. The IP address
+          readOnly: true
+          type: string
+        vm:
+          description: Output only. The VM name
+          readOnly: true
+          type: string
       type: object
     Location:
       description: A resource that represents a Google Cloud location.
@@ -1169,6 +1449,20 @@ components:
           description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
           type: string
       type: object
+    SapComponent:
+      description: The component of sap workload
+      properties:
+        resources:
+          description: Output only. resources in the component
+          items:
+            $ref: "#/components/schemas/CloudResource"
+          readOnly: true
+          type: array
+        sid:
+          description: Output only. sid is the sap component identificator
+          readOnly: true
+          type: string
+      type: object
     SapDiscovery:
       description: The schema of SAP system discovery data.
       properties:
@@ -1192,6 +1486,9 @@ components:
           description: Required. Unix timestamp this system has been updated last.
           format: google-datetime
           type: string
+        workloadProperties:
+          $ref: "#/components/schemas/SapDiscoveryWorkloadProperties"
+          description: Optional. The properties of the workload.
       type: object
     SapDiscoveryComponent:
       description: Message describing the system component.
@@ -1340,6 +1637,46 @@ components:
           description: Optional. A virtual hostname of the instance if it has one.
           type: string
       type: object
+    SapDiscoveryWorkloadProperties:
+      description: A set of properties describing an SAP workload.
+      properties:
+        productVersions:
+          description: Optional. List of SAP Products and their versions running on the system.
+          items:
+            $ref: "#/components/schemas/SapDiscoveryWorkloadPropertiesProductVersion"
+          type: array
+        softwareComponentVersions:
+          description: Optional. A list of SAP software components and their versions running on the system.
+          items:
+            $ref: "#/components/schemas/SapDiscoveryWorkloadPropertiesSoftwareComponentProperties"
+          type: array
+      type: object
+    SapDiscoveryWorkloadPropertiesProductVersion:
+      description: A product name and version.
+      properties:
+        name:
+          description: Optional. Name of the product.
+          type: string
+        version:
+          description: Optional. Version of the product.
+          type: string
+      type: object
+    SapDiscoveryWorkloadPropertiesSoftwareComponentProperties:
+      description: A SAP software component name, version, and type.
+      properties:
+        extVersion:
+          description: Optional. The component's minor version.
+          type: string
+        name:
+          description: Optional. Name of the component.
+          type: string
+        type:
+          description: Optional. The component's type.
+          type: string
+        version:
+          description: Optional. The component's major version.
+          type: string
+      type: object
     SapValidation:
       description: A presentation of SAP workload insight. The schema of SAP workloads validation related data.
       properties:
@@ -1377,6 +1714,40 @@ components:
             - NETWEAVER
             - HANA_SECURITY
             - CUSTOM
+          type: string
+      type: object
+    SapWorkload:
+      description: The body of sap workload
+      properties:
+        application:
+          $ref: "#/components/schemas/SapComponent"
+          description: Output only. the acsc componment
+          readOnly: true
+        database:
+          $ref: "#/components/schemas/SapComponent"
+          description: Output only. the database componment
+          readOnly: true
+        metadata:
+          additionalProperties:
+            type: string
+          description: Output only. The metadata for SAP workload.
+          readOnly: true
+          type: object
+      type: object
+    SapWorkloadOverview:
+      description: The overview of sap workload
+      properties:
+        appSid:
+          description: Output only. The application SID
+          readOnly: true
+          type: string
+        dbSid:
+          description: Output only. The database SID
+          readOnly: true
+          type: string
+        sapSystemId:
+          description: Output only. The UUID for a SAP workload
+          readOnly: true
           type: string
       type: object
     ScannedResource:
@@ -1442,6 +1813,44 @@ components:
             - DB_BACKUP_POLICY
           type: string
       type: object
+    SqlserverWorkload:
+      description: The body of sqlserver workload
+      properties:
+        ags:
+          description: Output only. The availability groups for sqlserver
+          items:
+            $ref: "#/components/schemas/AvailabilityGroup"
+          readOnly: true
+          type: array
+        cluster:
+          $ref: "#/components/schemas/Cluster"
+          description: Output only. The cluster for sqlserver
+          readOnly: true
+        databases:
+          description: Output only. The databases for sqlserver
+          items:
+            $ref: "#/components/schemas/Database"
+          readOnly: true
+          type: array
+        loadBalancerServer:
+          $ref: "#/components/schemas/LoadBalancerServer"
+          description: Output only. The load balancer for sqlserver
+          readOnly: true
+      type: object
+    SqlserverWorkloadOverview:
+      description: The overview of sqlserver workload
+      properties:
+        availabilityGroup:
+          description: Output only. The availability groups
+          items:
+            type: string
+          readOnly: true
+          type: array
+        sqlserverSystemId:
+          description: Output only. The UUID for a Sqlserver workload
+          readOnly: true
+          type: string
+      type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
@@ -1460,6 +1869,34 @@ components:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
+    ThreeTierWorkload:
+      description: The body of three tier workload
+      properties:
+        apiLayer:
+          $ref: "#/components/schemas/APILayerServer"
+          description: Output only. The API layer for three tier workload
+          readOnly: true
+        backend:
+          $ref: "#/components/schemas/BackendServer"
+          description: Output only. The backend for three tier workload
+          readOnly: true
+        endpoint:
+          description: Output only. the workload endpoint
+          readOnly: true
+          type: string
+        frontend:
+          $ref: "#/components/schemas/FrontEndServer"
+          description: Output only. The frontend for three tier workload
+          readOnly: true
+      type: object
+    ThreeTierWorkloadOverview:
+      description: The overview of three tier workload
+      properties:
+        threeTierSystemId:
+          description: Output only. The UUID for a three tier workload
+          readOnly: true
+          type: string
+      type: object
     ViolationDetails:
       description: Message describing the violdation in execution result
       properties:
@@ -1474,6 +1911,75 @@ components:
         serviceAccount:
           description: the service account associate with resource
           type: string
+      type: object
+    WorkloadProfile:
+      description: workload resource
+      properties:
+        application:
+          $ref: "#/components/schemas/Layer"
+          deprecated: true
+          description: Optional. The application layer
+        ascs:
+          $ref: "#/components/schemas/Layer"
+          deprecated: true
+          description: Optional. The ascs layer
+        database:
+          $ref: "#/components/schemas/Layer"
+          deprecated: true
+          description: Optional. The database layer
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. such as name, description, version. More example can be found in deployment
+          type: object
+        name:
+          description: Identifier. name of resource names have the form 'projects/{project_id}/workloads/{workload_id}'
+          type: string
+        refreshedTime:
+          description: Required. time when the workload data was refreshed
+          format: google-datetime
+          type: string
+        sapWorkload:
+          $ref: "#/components/schemas/SapWorkload"
+          description: The sap workload content
+        sqlserverWorkload:
+          $ref: "#/components/schemas/SqlserverWorkload"
+          description: The sqlserver workload content
+        state:
+          deprecated: true
+          description: Output only. [output only] the current state if a a workload
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - DEPLOYING
+            - DESTROYING
+            - MAINTENANCE
+          readOnly: true
+          type: string
+        threeTierWorkload:
+          $ref: "#/components/schemas/ThreeTierWorkload"
+          description: The 3 tier web app workload content
+        workloadType:
+          description: Required. The type of the workload
+          enum:
+            - WORKLOAD_TYPE_UNSPECIFIED
+            - S4_HANA
+            - SQL_SERVER
+            - THREE_TIER_WEB_APP
+          type: string
+      type: object
+    WorkloadProfileOverview:
+      description: a workload profile overview
+      properties:
+        sapWorkloadOverview:
+          $ref: "#/components/schemas/SapWorkloadOverview"
+          description: The sap workload overview
+        sqlserverWorkloadOverview:
+          $ref: "#/components/schemas/SqlserverWorkloadOverview"
+          description: The sqlserver workload overview
+        threeTierWorkloadOverview:
+          $ref: "#/components/schemas/ThreeTierWorkloadOverview"
+          description: The three tier workload overview
       type: object
     WriteInsightRequest:
       description: Request for sending the data insights.

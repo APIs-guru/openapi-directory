@@ -1144,6 +1144,13 @@ components:
         name:
           description: A user-defined name of the dns authorization. DnsAuthorization names must be unique globally and match pattern `projects/*/locations/*/dnsAuthorizations/*`.
           type: string
+        type:
+          description: "Immutable. Type of DnsAuthorization. If unset during resource creation the following default will be used: - in location global: FIXED_RECORD."
+          enum:
+            - TYPE_UNSPECIFIED
+            - FIXED_RECORD
+            - PER_PROJECT_RECORD
+          type: string
         updateTime:
           description: Output only. The last update timestamp of a DnsAuthorization.
           format: google-datetime

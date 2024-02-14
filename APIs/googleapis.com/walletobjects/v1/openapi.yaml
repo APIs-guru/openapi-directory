@@ -46,7 +46,6 @@ tags:
   - name: smarttap
   - name: transitclass
   - name: transitobject
-  - name: walletobjects
 paths:
   /walletobjects/v1/eventTicketClass:
     get:
@@ -2756,41 +2755,6 @@ paths:
             - https://www.googleapis.com/auth/wallet_object.issuer
       tags:
         - permissions
-  /walletobjects/v1/privateContent/uploadPrivateData:
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Upload private data (text or URI) and returns an Id to be used in its place.
-      operationId: walletobjects.walletobjects.v1.privateContent.uploadPrivateData
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UploadPrivateDataRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UploadPrivateDataResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/wallet_object.issuer
-          Oauth2c:
-            - https://www.googleapis.com/auth/wallet_object.issuer
-      tags:
-        - walletobjects
   /walletobjects/v1/smartTap:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -5012,6 +4976,11 @@ components:
         linksModuleData:
           $ref: "#/components/schemas/LinksModuleData"
           description: Links module data. If `linksModuleData` is also defined on the object, both will be displayed. The maximum number of these fields displayed is 10 from class and 10 from object.
+        messages:
+          description: An array of messages displayed in the app. All users of this object will receive its associated messages. The maximum number of these fields is 10.
+          items:
+            $ref: "#/components/schemas/Message"
+          type: array
         multipleDevicesAndHoldersAllowedStatus:
           description: Identifies whether multiple users and devices will save the same object referencing this class.
           enum:
@@ -6775,26 +6744,6 @@ components:
             $ref: "#/components/schemas/Permission"
           type: array
       type: object
-    PrivateText:
-      description: Private data for TextModule. This data will be rendered as a TextModule for a pass.
-      properties:
-        body:
-          $ref: "#/components/schemas/LocalizedString"
-          description: Translated strings for the body.
-        header:
-          $ref: "#/components/schemas/LocalizedString"
-          description: Translated strings for the header.
-      type: object
-    PrivateUri:
-      description: Private data for LinkModule. This data will be rendered as the LinkModule for a pass.
-      properties:
-        description:
-          $ref: "#/components/schemas/LocalizedString"
-          description: The URI's title appearing in the app as text and its translated strings. Recommended maximum is 20 characters to ensure the full string is displayed on smaller screens.
-        uri:
-          description: The location of a web page, image, or other resource. URIs in the `LinksModuleData` can have different prefixes indicating the type of URI (a link to a web page, a link to a map, a telephone number, or an email address).
-          type: string
-      type: object
     PurchaseDetails:
       properties:
         accountId:
@@ -7742,46 +7691,6 @@ components:
         enableNotification:
           description: Indicates if the object needs to have upcoming notification enabled.
           type: boolean
-      type: object
-    UploadPrivateDataRequest:
-      description: Request for sending user private Text or URI by the Issuer.
-      properties:
-        issuerId:
-          description: The ID of the issuer sending the data.
-          format: int64
-          type: string
-        text:
-          $ref: "#/components/schemas/PrivateText"
-          description: Private text data of the user.
-        uri:
-          $ref: "#/components/schemas/PrivateUri"
-          description: Private URIs of the user.
-      type: object
-    UploadPrivateDataResponse:
-      description: Response for uploading user private data (text or URIs)
-      properties:
-        privateContentId:
-          description: A 64-bit content id for the private data that was uploaded by the Issuer.
-          format: int64
-          type: string
-      type: object
-    UploadPrivateImageRequest:
-      description: Request to upload user's private images by Issuers to be used in passes.
-      properties:
-        blob:
-          $ref: "#/components/schemas/Media"
-          description: A reference to the image payload that was uploaded by Scotty.
-        mediaRequestInfo:
-          $ref: "#/components/schemas/MediaRequestInfo"
-          description: Extra information about the uploaded media.
-      type: object
-    UploadPrivateImageResponse:
-      description: Response for uploading the private image
-      properties:
-        privateContentId:
-          description: A 64-bit content id for the image that was uploaded by the Issuer.
-          format: int64
-          type: string
       type: object
     Uri:
       properties:

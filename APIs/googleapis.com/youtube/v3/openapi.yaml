@@ -5969,6 +5969,9 @@ components:
     ChannelToStoreLinkDetails:
       description: Information specific to a store on a merchandising platform linked to a YouTube channel.
       properties:
+        billingDetails:
+          $ref: "#/components/schemas/ChannelToStoreLinkDetailsBillingDetails"
+          description: Information specific to billing (read-only).
         merchantId:
           description: Google Merchant Center id of the store.
           format: uint64
@@ -5978,6 +5981,18 @@ components:
           type: string
         storeUrl:
           description: Landing page of the store.
+          type: string
+      type: object
+    ChannelToStoreLinkDetailsBillingDetails:
+      description: Information specific to billing.
+      properties:
+        billingStatus:
+          description: The current billing profile status.
+          enum:
+            - billingStatusUnspecified
+            - billingStatusPending
+            - billingStatusActive
+            - billingStatusInactive
           type: string
       type: object
     ChannelTopicDetails:
@@ -7859,10 +7874,10 @@ components:
           type: string
       type: object
     LiveChatMessageSnippet:
-      description: "Next ID: 33"
+      description: "Next ID: 34"
       properties:
         authorChannelId:
-          description: The ID of the user that authored this message, this field is not always filled. textMessageEvent - the user that wrote the message fanFundingEvent - the user that funded the broadcast newSponsorEvent - the user that just became a sponsor memberMilestoneChatEvent - the member that sent the message membershipGiftingEvent - the user that made the purchase giftMembershipReceivedEvent - the user that received the gift membership messageDeletedEvent - the moderator that took the action messageRetractedEvent - the author that retracted their message userBannedEvent - the moderator that took the action superChatEvent - the user that made the purchase superStickerEvent - the user that made the purchase
+          description: The ID of the user that authored this message, this field is not always filled. textMessageEvent - the user that wrote the message fanFundingEvent - the user that funded the broadcast newSponsorEvent - the user that just became a sponsor memberMilestoneChatEvent - the member that sent the message membershipGiftingEvent - the user that made the purchase giftMembershipReceivedEvent - the user that received the gift membership messageDeletedEvent - the moderator that took the action messageRetractedEvent - the author that retracted their message userBannedEvent - the moderator that took the action superChatEvent - the user that made the purchase superStickerEvent - the user that made the purchase pollEvent - the user that created the poll
           type: string
         displayMessage:
           description: Contains a string that can be displayed to the user. If this field is not present the message is silent, at the moment only messages of type TOMBSTONE and CHAT_ENDED_EVENT are silent.
@@ -7892,6 +7907,9 @@ components:
         newSponsorDetails:
           $ref: "#/components/schemas/LiveChatNewSponsorDetails"
           description: Details about the New Member Announcement event, this is only set if the type is 'newSponsorEvent'. Please note that "member" is the new term for "sponsor".
+        pollDetails:
+          $ref: "#/components/schemas/LiveChatPollDetails"
+          description: Details about the poll event, this is only set if the type is 'pollEvent'.
         publishedAt:
           description: The date and time when the message was orignally published.
           format: date-time
@@ -7924,6 +7942,7 @@ components:
             - userBannedEvent
             - superChatEvent
             - superStickerEvent
+            - pollEvent
           type: string
         userBannedDetails:
           $ref: "#/components/schemas/LiveChatUserBannedMessageDetails"
@@ -7996,6 +8015,35 @@ components:
           type: boolean
         memberLevelName:
           description: The name of the Level that the viewer just had joined. The Level names are defined by the YouTube channel offering the Membership. In some situations this field isn't filled.
+          type: string
+      type: object
+    LiveChatPollDetails:
+      properties:
+        metadata:
+          $ref: "#/components/schemas/LiveChatPollDetailsPollMetadata"
+        status:
+          enum:
+            - unknown
+            - active
+            - closed
+          type: string
+      type: object
+    LiveChatPollDetailsPollMetadata:
+      properties:
+        options:
+          description: The options will be returned in the order that is displayed in 1P
+          items:
+            $ref: "#/components/schemas/LiveChatPollDetailsPollMetadataPollOption"
+          type: array
+        questionText:
+          type: string
+      type: object
+    LiveChatPollDetailsPollMetadataPollOption:
+      properties:
+        optionText:
+          type: string
+        tally:
+          format: int64
           type: string
       type: object
     LiveChatSuperChatDetails:

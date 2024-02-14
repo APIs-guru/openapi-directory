@@ -1,9 +1,15 @@
 openapi: 3.0.1
 servers:
-  - url: https://api.hubapi.com/oauth
+  - url: https://api.hubapi.com
 info:
-  title: ""
+  title: Auth Oauth
   version: v1
+  x-hubspot-documentation-banner: NONE
+  x-hubspot-product-tier-requirements:
+    cms: FREE
+    marketing: FREE
+    sales: FREE
+    service: FREE
   x-logo:
     url: https://developers.hubspot.com/hubfs/assets/hubspot.com/buzz/HubSpotOpenGraph.png
   x-origin:
@@ -17,9 +23,9 @@ tags:
   - name: Refresh_Tokens
   - name: Tokens
 paths:
-  /v1/access-tokens/{token}:
+  /oauth/v1/access-tokens/{token}:
     get:
-      operationId: get-/oauth/v1/access-tokens/{token}
+      operationId: get-/oauth/v1/access-tokens/{token}_get
       parameters:
         - explode: false
           in: path
@@ -40,9 +46,9 @@ paths:
       security: []
       tags:
         - Access_Tokens
-  /v1/refresh-tokens/{token}:
+  /oauth/v1/refresh-tokens/{token}:
     delete:
-      operationId: delete-/oauth/v1/refresh-tokens/{token}
+      operationId: delete-/oauth/v1/refresh-tokens/{token}_archive
       parameters:
         - explode: false
           in: path
@@ -61,7 +67,7 @@ paths:
       tags:
         - Refresh_Tokens
     get:
-      operationId: get-/oauth/v1/refresh-tokens/{token}
+      operationId: get-/oauth/v1/refresh-tokens/{token}_get
       parameters:
         - explode: false
           in: path
@@ -82,9 +88,10 @@ paths:
       security: []
       tags:
         - Refresh_Tokens
-  /v1/token:
+  /oauth/v1/token:
     post:
-      operationId: post-/oauth/v1/token
+      operationId: post-/oauth/v1/token_create
+      parameters: []
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -105,6 +112,7 @@ paths:
                   type: string
                 refresh_token:
                   type: string
+              type: object
       responses:
         "200":
           content:
@@ -129,53 +137,45 @@ components:
     AccessTokenInfoResponse:
       properties:
         app_id:
+          description: ""
           format: int32
           type: integer
         expires_in:
+          description: ""
           format: int32
           type: integer
         hub_domain:
+          description: ""
           type: string
         hub_id:
+          description: ""
           format: int32
           type: integer
-        scope_to_scope_group_pks:
-          items:
-            format: int32
-            type: integer
-          type: array
         scopes:
+          description: ""
           items:
             type: string
           type: array
         token:
+          description: ""
           type: string
         token_type:
+          description: ""
           type: string
-        trial_scope_to_scope_group_pks:
-          items:
-            format: int32
-            type: integer
-          type: array
-        trial_scopes:
-          items:
-            type: string
-          type: array
         user:
+          description: ""
           type: string
         user_id:
+          description: ""
           format: int32
           type: integer
       required:
         - app_id
         - expires_in
         - hub_id
-        - scope_to_scope_group_pks
         - scopes
         - token
         - token_type
-        - trial_scope_to_scope_group_pks
-        - trial_scopes
         - user_id
       type: object
     Error:
@@ -260,23 +260,31 @@ components:
     RefreshTokenInfoResponse:
       properties:
         client_id:
+          description: ""
           type: string
         hub_domain:
+          description: ""
           type: string
         hub_id:
+          description: ""
           format: int32
           type: integer
         scopes:
+          description: ""
           items:
             type: string
           type: array
         token:
+          description: ""
           type: string
         token_type:
+          description: ""
           type: string
         user:
+          description: ""
           type: string
         user_id:
+          description: ""
           format: int32
           type: integer
       required:
@@ -290,15 +298,20 @@ components:
     TokenResponseIF:
       properties:
         access_token:
+          description: ""
           type: string
         expires_in:
+          description: ""
           format: int32
           type: integer
         id_token:
+          description: ""
           type: string
         refresh_token:
+          description: ""
           type: string
         token_type:
+          description: ""
           type: string
       required:
         - access_token
@@ -310,5 +323,11 @@ components:
 x-hubspot-available-client-libraries:
   - PHP
   - Node
-  - Python
   - Ruby
+  - Python
+x-hubspot-documentation-banner: NONE
+x-hubspot-product-tier-requirements:
+  cms: FREE
+  marketing: FREE
+  sales: FREE
+  service: FREE

@@ -2959,6 +2959,10 @@ components:
           description: Optional. Defines the time travel window in hours. The value can be from 48 to 168 hours (2 to 7 days). The default value is 168 hours if this is not set.
           format: int64
           type: string
+        satisfiesPzi:
+          description: Output only. Reserved for future use.
+          readOnly: true
+          type: boolean
         satisfiesPzs:
           description: Output only. Reserved for future use.
           readOnly: true
@@ -3809,8 +3813,8 @@ components:
             - ESTIMATED_PERFORMANCE_GAIN_TOO_LOW
             - NOT_SUPPORTED_IN_STANDARD_EDITION
             - INDEX_SUPPRESSED_BY_FUNCTION_OPTION
-            - INTERNAL_ERROR
             - QUERY_CACHE_HIT
+            - INTERNAL_ERROR
             - OTHER_REASON
           type: string
         indexName:
@@ -4061,6 +4065,9 @@ components:
           items:
             $ref: "#/components/schemas/ConnectionProperty"
           type: array
+        copyFilesOnly:
+          description: "Optional. [Experimental] Configures the load job to only copy files to the destination BigLake managed table with an external storage_uri, without reading file content and writing them to new files. Copying files only is supported when: * source_uris are in the same external storage system as the destination table but they do not overlap with storage_uri of the destination table. * source_format is the same file format as the destination table. * destination_table is an existing BigLake managed table. Its schema does not have default value expression. It schema does not have type parameters other than precision and scale. * No options other than the above are specified."
+          type: boolean
         createDisposition:
           description: "Optional. Specifies whether the job is allowed to create new tables. The following values are supported: * CREATE_IF_NEEDED: If the table does not exist, BigQuery creates the table. * CREATE_NEVER: The table must already exist. If it does not, a 'notFound' error is returned in the job result. The default value is CREATE_IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion."
           type: string
@@ -4718,7 +4725,7 @@ components:
           type: array
         vectorSearchStatistics:
           $ref: "#/components/schemas/VectorSearchStatistics"
-          description: Output only. Search query specific statistics.
+          description: Output only. Vector Search query specific statistics.
           readOnly: true
       type: object
     JobStatistics3:

@@ -39,22 +39,22 @@ paths:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: cloudfunctions.operations.list
       parameters:
-        - description: "Required. A filter for matching the requested operations. The supported formats of *filter* are: To query for a specific function: project:*,location:*,function:* To query for all of the latest operations for a project: project:*,latest:true"
+        - description: The standard list filter.
           in: query
           name: filter
           schema:
             type: string
-        - description: Must not be set.
+        - description: The name of the operation's parent resource.
           in: query
           name: name
           schema:
             type: string
-        - description: The maximum number of records that should be returned. Requested page size cannot exceed 100. If not set, the default page size is 100. Pagination is only supported when querying for a specific function.
+        - description: The standard list page size.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Token identifying which result to start with, which is returned by a previous list call. Pagination is only supported when querying for a specific function.
+        - description: The standard list page token.
           in: query
           name: pageToken
           schema:
@@ -727,7 +727,6 @@ components:
       properties:
         automaticUpdatePolicy:
           $ref: "#/components/schemas/AutomaticUpdatePolicy"
-          description: See the comment next to this message for more details.
         availableMemoryMb:
           description: The amount of memory in MB available for a function. Defaults to 256MB.
           format: int32
@@ -811,7 +810,6 @@ components:
           type: string
         onDeployUpdatePolicy:
           $ref: "#/components/schemas/OnDeployUpdatePolicy"
-          description: See the comment next to this message for more details.
         runtime:
           description: The runtime in which to run the function. Required when deploying a new function, optional when updating an existing function. For a complete list of possible choices, see the [`gcloud` command reference](https://cloud.google.com/sdk/gcloud/reference/functions/deploy#--runtime).
           type: string
