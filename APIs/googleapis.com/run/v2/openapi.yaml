@@ -1763,6 +1763,9 @@ components:
             - EXECUTION_ENVIRONMENT_GEN1
             - EXECUTION_ENVIRONMENT_GEN2
           type: string
+        healthCheckDisabled:
+          description: Optional. Disables health checking containers during deployment.
+          type: boolean
         labels:
           additionalProperties:
             type: string
@@ -1782,7 +1785,7 @@ components:
           description: Email address of the IAM service account associated with the revision of the service. The service account represents the identity of the running revision, and determines what permissions the revision has. If not provided, the revision will use the project's default service account.
           type: string
         sessionAffinity:
-          description: Enable session affinity.
+          description: Optional. Enable session affinity.
           type: boolean
         timeout:
           description: Max allowed time for an instance to respond to a request.

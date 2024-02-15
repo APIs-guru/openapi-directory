@@ -3228,6 +3228,11 @@ components:
             - DECOMMISSIONED
             - END_OF_SUPPORT
           type: string
+        supportedOperatingSystems:
+          description: Supported operating systems for the runtime, e.g., 'ubuntu22', etc.
+          items:
+            type: string
+          type: array
         warnings:
           description: Warning messages, e.g., a deprecation warning.
           items:

@@ -1254,6 +1254,9 @@ components:
           description: Optional. Ordinal position
           format: int32
           type: integer
+        rangeElementType:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1ColumnSchemaFieldElementType"
+          description: "Optional. The subtype of the RANGE, if the type of this field is RANGE. If the type is RANGE, this field is required. Possible values for the field element type of a RANGE include: * DATE * DATETIME * TIMESTAMP"
         subcolumns:
           description: Optional. Schema of sub-columns. A column can have zero or more sub-columns.
           items:
@@ -1261,6 +1264,13 @@ components:
           type: array
         type:
           description: Required. Type of the column. Must be a UTF-8 string with the maximum size of 128 bytes.
+          type: string
+      type: object
+    GoogleCloudDatacatalogV1ColumnSchemaFieldElementType:
+      description: Represents the type of a field element.
+      properties:
+        type:
+          description: Required. The type of a field element. See ColumnSchema.type.
           type: string
       type: object
     GoogleCloudDatacatalogV1ColumnSchemaLookerColumnSpec:

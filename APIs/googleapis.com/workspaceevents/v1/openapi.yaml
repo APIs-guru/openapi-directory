@@ -1,0 +1,704 @@
+openapi: 3.0.0
+servers:
+  - url: https://workspaceevents.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: The Google Workspace Events API lets you subscribe to events and manage change notifications across Google Workspace applications.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Google Workspace Events API
+  version: v1
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+  x-origin:
+    - format: google
+      url: https://workspaceevents.googleapis.com/$discovery/rest?version=v1
+      version: v1
+  x-providerName: googleapis.com
+  x-serviceName: workspaceevents
+externalDocs:
+  url: https://developers.google.com/workspace/events
+tags:
+  - name: operations
+  - name: subscriptions
+paths:
+  /v1/subscriptions:
+    get:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview): Lists Google Workspace subscriptions. To learn how to use this method, see [List Google Workspace subscriptions](https://developers.google.com/workspace/events/guides/list-subscriptions)."
+      operationId: workspaceevents.subscriptions.list
+      parameters:
+        - description: 'Required. A query filter. You can filter subscriptions by event type (`event_types`) and target resource (`target_resource`). You must specify at least one event type in your query. To filter for multiple event types, use the `OR` operator. To filter by both event type and target resource, use the `AND` operator and specify the full resource name, such as `//chat.googleapis.com/spaces/{space}`. For example, the following queries are valid: ``` event_types:"google.workspace.chat.membership.v1.updated" OR event_types:"google.workspace.chat.message.v1.created" event_types:"google.workspace.chat.message.v1.created" AND target_resource="//chat.googleapis.com/spaces/{space}" ( event_types:"google.workspace.chat.membership.v1.updated" OR event_types:"google.workspace.chat.message.v1.created" ) AND target_resource="//chat.googleapis.com/spaces/{space}" ``` The server rejects invalid queries with an `INVALID_ARGUMENT` error.'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The maximum number of subscriptions to return. The service might return fewer than this value. If unspecified or set to `0`, up to 50 subscriptions are returned. The maximum value is 100. If you specify a value more than 100, the system only returns 100 subscriptions.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A page token, received from a previous list subscriptions call. Provide this parameter to retrieve the subsequent page. When paginating, the filter value should match the call that provided the page token. Passing a different value might lead to unexpected results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSubscriptionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.bot
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.bot
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.reactions
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.reactions
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.reactions.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.reactions.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces.readonly
+      tags:
+        - subscriptions
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview): Creates a Google Workspace subscription. To learn how to use this method, see [Create a Google Workspace subscription](https://developers.google.com/workspace/events/guides/create-subscription)."
+      operationId: workspaceevents.subscriptions.create
+      parameters:
+        - description: Optional. If set to `true`, validates and previews the request, but doesn't create the subscription.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Subscription"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.reactions
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.reactions
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.reactions.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.reactions.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces.readonly
+      tags:
+        - subscriptions
+  /v1/{name}:
+    delete:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview): Deletes a Google Workspace subscription. To learn how to use this method, see [Delete a Google Workspace subscription](https://developers.google.com/workspace/events/guides/delete-subscription)."
+      operationId: workspaceevents.subscriptions.delete
+      parameters:
+        - description: "Required. Resource name of the subscription to delete. Format: `subscriptions/{subscription}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Optional. If set to `true` and the subscription isn't found, the request succeeds but doesn't delete the subscription.
+          in: query
+          name: allowMissing
+          schema:
+            type: boolean
+        - description: Optional. Etag of the subscription. If present, it must match with the server's etag. Otherwise, request fails with the status `ABORTED`.
+          in: query
+          name: etag
+          schema:
+            type: string
+        - description: Optional. If set to `true`, validates and previews the request, but doesn't delete the subscription.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.bot
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.bot
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.reactions
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.reactions
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.reactions.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.reactions.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces.readonly
+      tags:
+        - subscriptions
+    get:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview): Gets details about a Google Workspace subscription. To learn how to use this method, see [Get details about a Google Workspace subscription](https://developers.google.com/workspace/events/guides/get-subscription)."
+      operationId: workspaceevents.subscriptions.get
+      parameters:
+        - description: "Required. Resource name of the subscription. Format: `subscriptions/{subscription}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscription"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.bot
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.bot
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.reactions
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.reactions
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.reactions.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.reactions.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces.readonly
+      tags:
+        - subscriptions
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview): Updates or renews a Google Workspace subscription. To learn how to use this method, see [Update or renew a Google Workspace subscription](https://developers.google.com/workspace/events/guides/update-subscription)."
+      operationId: workspaceevents.subscriptions.patch
+      parameters:
+        - description: "Optional. Immutable. Identifier. Resource name of the subscription. Format: `subscriptions/{subscription}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: "Optional. Required. The field to update. You can update one of the following fields in a subscription: * `expire_time`: The timestamp when the subscription expires. * `ttl`: The time-to-live (TTL) or duration of the subscription."
+          in: query
+          name: updateMask
+          schema:
+            type: string
+        - description: Optional. If set to `true`, validates and previews the request, but doesn't update the subscription.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Subscription"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.reactions
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.reactions
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.reactions.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.reactions.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces.readonly
+      tags:
+        - subscriptions
+  /v1/{name}:reactivate:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview): Reactivates a suspended Google Workspace subscription. This method resets your subscription's `State` field to `ACTIVE`. Before you use this method, you must fix the error that suspended the subscription. To learn how to use this method, see [Reactivate a Google Workspace subscription](https://developers.google.com/workspace/events/guides/reactivate-subscription)."
+      operationId: workspaceevents.subscriptions.reactivate
+      parameters:
+        - description: "Required. Resource name of the subscription. Format: `subscriptions/{subscription}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReactivateSubscriptionRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.reactions
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.reactions
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.reactions.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.reactions.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces.readonly
+      tags:
+        - subscriptions
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    ListSubscriptionsResponse:
+      description: The response message for SubscriptionsService.ListSubscriptions.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        subscriptions:
+          description: List of subscriptions.
+          items:
+            $ref: "#/components/schemas/Subscription"
+          type: array
+      type: object
+    NotificationEndpoint:
+      description: The endpoint where the subscription delivers events.
+      properties:
+        pubsubTopic:
+          description: "Immutable. The Cloud Pub/Sub topic that receives events for the subscription. Format: `projects/{project}/topics/{topic}` You must create the topic in the same Google Cloud project where you create this subscription. When the topic receives events, the events are encoded as Cloud Pub/Sub messages. For details, see the [Google Cloud Pub/Sub Protocol Binding for CloudEvents](https://github.com/googleapis/google-cloudevents/blob/main/docs/spec/pubsub.md)."
+          type: string
+      type: object
+    Operation:
+      description: This resource represents a long-running operation that is the result of a network API call.
+      properties:
+        done:
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
+          type: boolean
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The error result of the operation in case of failure or cancellation.
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          type: object
+        name:
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          type: object
+      type: object
+    PayloadOptions:
+      description: Options about what data to include in the event payload. Only supported for Google Chat events.
+      properties:
+        fieldMask:
+          description: Optional. If `include_resource` is set to `true`, the list of fields to include in the event payload. Separate fields with a comma. For example, to include a Google Chat message's sender and create time, enter `message.sender,message.createTime`. If omitted, the payload includes all fields for the resource. If you specify a field that doesn't exist for the resource, the system ignores the field.
+          format: google-fieldmask
+          type: string
+        includeResource:
+          description: Optional. Whether the event payload includes data about the resource that changed. For example, for an event where a Google Chat message was created, whether the payload contains data about the [`Message`](https://developers.google.com/chat/api/reference/rest/v1/spaces.messages) resource. If false, the event payload only includes the name of the changed resource.
+          type: boolean
+      type: object
+    ReactivateSubscriptionRequest:
+      description: The request message for SubscriptionsService.ReactivateSubscription.
+      properties: {}
+      type: object
+    Status:
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      properties:
+        code:
+          description: The status code, which should be an enum value of google.rpc.Code.
+          format: int32
+          type: integer
+        details:
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
+    Subscription:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview). A subscription to receive events about a Google Workspace resource. To learn more about subscriptions, see the [Google Workspace Events API overview](https://developers.google.com/workspace/events/guides)."
+      properties:
+        authority:
+          description: "Output only. The user who authorized the creation of the subscription. Format: `users/{user}` For Google Workspace users, the `{user}` value is the [`user.id`](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users#User.FIELDS.ids) field from the Directory API."
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. The time when the subscription is created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        etag:
+          description: Optional. This checksum is computed by the server based on the value of other fields, and might be sent on update requests to ensure the client has an up-to-date value before proceeding.
+          type: string
+        eventTypes:
+          description: "Required. Immutable. Unordered list. Input for creating a subscription. Otherwise, output only. One or more types of events to receive about the target resource. Formatted according to the CloudEvents specification. For a list of supported event types, see the following documentation: * [Google Chat events](https://developers.google.com/workspace/events/guides/events-chat) * [Google Meet events](https://developers.google.com/workspace/events/guides/events-meet) By default, you also receive events about the [lifecycle of your subscription](https://developers.google.com/workspace/events/guides/events-lifecycle). You don't need to specify lifecycle events for this field. If you specify an event type that doesn't exist for the target resource, the request returns an HTTP `400 Bad Request` status code."
+          items:
+            type: string
+          type: array
+        expireTime:
+          description: Non-empty default. The timestamp in UTC when the subscription expires. Always displayed on output, regardless of what was used on input.
+          format: google-datetime
+          type: string
+        name:
+          description: "Optional. Immutable. Identifier. Resource name of the subscription. Format: `subscriptions/{subscription}`"
+          type: string
+        notificationEndpoint:
+          $ref: "#/components/schemas/NotificationEndpoint"
+          description: Required. Immutable. The endpoint where the subscription delivers events, such as a Pub/Sub topic.
+        payloadOptions:
+          $ref: "#/components/schemas/PayloadOptions"
+          description: Optional. Options about what data to include in the event payload. Only supported for Google Chat events.
+        reconciling:
+          description: Output only. If `true`, the subscription is in the process of being updated.
+          readOnly: true
+          type: boolean
+        state:
+          description: Output only. The state of the subscription. Determines whether the subscription can receive events and deliver them to the notification endpoint.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - SUSPENDED
+            - DELETED
+          readOnly: true
+          type: string
+        suspensionReason:
+          description: Output only. The error that suspended the subscription. To reactivate the subscription, resolve the error and call the `ReactivateSubscription` method.
+          enum:
+            - ERROR_TYPE_UNSPECIFIED
+            - USER_SCOPE_REVOKED
+            - RESOURCE_DELETED
+            - USER_AUTHORIZATION_FAILURE
+            - ENDPOINT_PERMISSION_DENIED
+            - ENDPOINT_NOT_FOUND
+            - ENDPOINT_RESOURCE_EXHAUSTED
+            - OTHER
+          readOnly: true
+          type: string
+        targetResource:
+          description: Required. Immutable. The Google Workspace resource that's monitored for events, formatted as the [full resource name](https://google.aip.dev/122#full-resource-names). To learn about target resources, see [Supported Google Workspace resources](https://developers.google.com/workspace/events/guides#supported-resources). A user can only authorize your app to create one subscription for a given target resource. If your app tries to create another subscription with the same user credentials, the request returns an `ALREADY_EXISTS` error.
+          type: string
+        ttl:
+          description: Input only. The time-to-live (TTL) or duration for the subscription. If unspecified or set to `0`, uses the maximum possible duration.
+          format: google-duration
+          type: string
+        uid:
+          description: Output only. System-assigned unique identifier for the subscription.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The last time that the subscription is updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/chat.bot: "Private Service: https://www.googleapis.com/auth/chat.bot"
+            https://www.googleapis.com/auth/chat.memberships: View, add, and remove members from conversations in Google Chat
+            https://www.googleapis.com/auth/chat.memberships.readonly: View members in Google Chat conversations.
+            https://www.googleapis.com/auth/chat.messages: View, compose, send, update, and delete messages, and add, view, and delete reactions to messages.
+            https://www.googleapis.com/auth/chat.messages.reactions: View, add, and delete reactions to messages in Google Chat
+            https://www.googleapis.com/auth/chat.messages.reactions.readonly: View reactions to messages in Google Chat
+            https://www.googleapis.com/auth/chat.messages.readonly: View messages and reactions in Google Chat
+            https://www.googleapis.com/auth/chat.spaces: Create conversations and spaces and see or edit metadata (including history settings and access settings) in Google Chat
+            https://www.googleapis.com/auth/chat.spaces.readonly: View chat and spaces in Google Chat
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/chat.bot: "Private Service: https://www.googleapis.com/auth/chat.bot"
+            https://www.googleapis.com/auth/chat.memberships: View, add, and remove members from conversations in Google Chat
+            https://www.googleapis.com/auth/chat.memberships.readonly: View members in Google Chat conversations.
+            https://www.googleapis.com/auth/chat.messages: View, compose, send, update, and delete messages, and add, view, and delete reactions to messages.
+            https://www.googleapis.com/auth/chat.messages.reactions: View, add, and delete reactions to messages in Google Chat
+            https://www.googleapis.com/auth/chat.messages.reactions.readonly: View reactions to messages in Google Chat
+            https://www.googleapis.com/auth/chat.messages.readonly: View messages and reactions in Google Chat
+            https://www.googleapis.com/auth/chat.spaces: Create conversations and spaces and see or edit metadata (including history settings and access settings) in Google Chat
+            https://www.googleapis.com/auth/chat.spaces.readonly: View chat and spaces in Google Chat
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

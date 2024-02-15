@@ -217,48 +217,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  /v1/{name}:exportSBOM:
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Generates an SBOM for the given resource.
-      operationId: containeranalysis.projects.resources.exportSBOM
-      parameters:
-        - description: Required. The name of the resource in the form of `projects/[PROJECT_ID]/resources/[RESOURCE_URL]`.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ExportSBOMRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ExportSBOMResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   /v1/{parent}/notes:
     get:
       description: Lists notes for the specified project.
@@ -909,7 +867,7 @@ components:
             type: string
           type: array
         role:
-          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`. For an overview of the IAM roles and permissions, see the [IAM documentation](https://cloud.google.com/iam/docs/roles-overview). For a list of the available pre-defined roles, see [here](https://cloud.google.com/iam/docs/understanding-roles).
+          description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
     BuildDefinition:
@@ -1298,10 +1256,6 @@ components:
         revisionId:
           description: A revision ID.
           type: string
-      type: object
-    CloudStorageLocation:
-      description: Empty placeholder to denote that this is a Google Cloud Storage export request.
-      properties: {}
       type: object
     Command:
       description: Command describes a step performed as part of the build pipeline.
@@ -2470,20 +2424,6 @@ components:
           type: string
         sig:
           format: byte
-          type: string
-      type: object
-    ExportSBOMRequest:
-      description: The request to generate and export SBOM. Target must be specified for the request.
-      properties:
-        cloudStorageLocation:
-          $ref: "#/components/schemas/CloudStorageLocation"
-          description: Empty placeholder to denote that this is a Google Cloud Storage export request.
-      type: object
-    ExportSBOMResponse:
-      description: The response from a call to ExportSBOM.
-      properties:
-        discoveryOccurrence:
-          description: The name of the discovery occurrence in the form "projects/{project_id}/occurrences/{OCCURRENCE_ID} It can be used to track the progress of the SBOM export.
           type: string
       type: object
     Expr:

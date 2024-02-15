@@ -51,7 +51,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Optional. A filter constraining the clusters to list. Filters are case-sensitive and have the following syntax:field = value AND field = value ...where field is one of status.state, clusterName, or labels.[KEY], and [KEY] is a label key. value can be * to match all values. status.state can be one of the following: ACTIVE, INACTIVE, CREATING, RUNNING, ERROR, DELETING, or UPDATING. ACTIVE contains the CREATING, UPDATING, and RUNNING states. INACTIVE contains the DELETING and ERROR states. clusterName is the name of the cluster provided at creation time. Only the logical AND operator is supported; space-separated items are treated as having an implicit AND operator.Example filter:status.state = ACTIVE AND clusterName = mycluster AND labels.env = staging AND labels.starred = *"
+        - description: "Optional. A filter constraining the clusters to list. Filters are case-sensitive and have the following syntax:field = value AND field = value ...where field is one of status.state, clusterName, or labels.[KEY], and [KEY] is a label key. value can be * to match all values. status.state can be one of the following: ACTIVE, INACTIVE, CREATING, RUNNING, ERROR, DELETING, UPDATING, STOPPING, or STOPPED. ACTIVE contains the CREATING, UPDATING, and RUNNING states. INACTIVE contains the DELETING, ERROR, STOPPING, and STOPPED states. clusterName is the name of the cluster provided at creation time. Only the logical AND operator is supported; space-separated items are treated as having an implicit AND operator.Example filter:status.state = ACTIVE AND clusterName = mycluster AND labels.env = staging AND labels.starred = *"
           in: query
           name: filter
           schema:
@@ -1084,6 +1084,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1/{name}:repair:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Repair nodes in a node group.
+      operationId: dataproc.projects.regions.clusters.nodeGroups.repair
+      parameters:
+        - description: "Required. The name of the node group to resize. Format: projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{nodeGroup}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RepairNodeGroupRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{name}:resize:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1373,7 +1415,7 @@ paths:
           name: parentOperationId
           schema:
             type: string
-        - description: "Optional. A unique ID used to identify the request. If the server receives two CreateNodeGroupRequest (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateNodeGroupRequests) with the same ID, the second request is ignored and the first google.longrunning.Operation created and stored in the backend is returned.Recommendation: Set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters."
+        - description: "Optional. A unique ID used to identify the request. If the server receives two CreateNodeGroupRequest (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateNodeGroupRequest) with the same ID, the second request is ignored and the first google.longrunning.Operation created and stored in the backend is returned.Recommendation: Set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters."
           in: query
           name: requestId
           schema:
@@ -1959,6 +2001,51 @@ components:
           description: "Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See Compute Engine AcceleratorTypes (https://cloud.google.com/compute/docs/reference/v1/acceleratorTypes).Examples: https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]/acceleratorTypes/nvidia-tesla-k80 projects/[project_id]/zones/[zone]/acceleratorTypes/nvidia-tesla-k80 nvidia-tesla-k80Auto Zone Exception: If you are using the Dataproc Auto Zone Placement (https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement) feature, you must use the short name of the accelerator type resource, for example, nvidia-tesla-k80."
           type: string
       type: object
+    AnalyzeOperationMetadata:
+      description: Metadata describing the Analyze operation.
+      properties:
+        analyzedWorkloadName:
+          description: Output only. name of the workload being analyzed.
+          readOnly: true
+          type: string
+        analyzedWorkloadType:
+          description: Output only. Type of the workload being analyzed.
+          enum:
+            - WORKLOAD_TYPE_UNSPECIFIED
+            - BATCH
+          readOnly: true
+          type: string
+        analyzedWorkloadUuid:
+          description: Output only. unique identifier of the workload typically generated by control plane. E.g. batch uuid.
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. The time when the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Output only. Short description of the operation.
+          readOnly: true
+          type: string
+        doneTime:
+          description: Output only. The time when the operation finished.
+          format: google-datetime
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Output only. Labels associated with the operation.
+          readOnly: true
+          type: object
+        warnings:
+          description: Output only. Warnings encountered during operation execution.
+          items:
+            type: string
+          readOnly: true
+          type: array
+      type: object
     AutoscalingConfig:
       description: Autoscaling Policy config associated with the cluster.
       properties:
@@ -2176,7 +2263,7 @@ components:
             type: string
           type: array
         role:
-          description: Role that is assigned to the list of members, or principals. For example, roles/viewer, roles/editor, or roles/owner.
+          description: Role that is assigned to the list of members, or principals. For example, roles/viewer, roles/editor, or roles/owner.For an overview of the IAM roles and permissions, see the IAM documentation (https://cloud.google.com/iam/docs/roles-overview). For a list of the available pre-defined roles, see here (https://cloud.google.com/iam/docs/understanding-roles).
           type: string
       type: object
     CancelJobRequest:
@@ -3638,6 +3725,7 @@ components:
             - DELETE
             - RESIZE
             - REPAIR
+            - UPDATE_LABELS
           type: string
         status:
           $ref: "#/components/schemas/ClusterOperationStatus"
@@ -3972,6 +4060,23 @@ components:
           type: string
         requestId:
           description: "Optional. A unique ID used to identify the request. If the server receives two RepairClusterRequests with the same ID, the second request is ignored, and the first google.longrunning.Operation created and stored in the backend is returned.Recommendation: Set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters."
+          type: string
+      type: object
+    RepairNodeGroupRequest:
+      properties:
+        instanceNames:
+          description: Required. Name of instances to be repaired. These instances must belong to specified node pool.
+          items:
+            type: string
+          type: array
+        repairAction:
+          description: Required. Repair action to take on specified resources of the node pool.
+          enum:
+            - REPAIR_ACTION_UNSPECIFIED
+            - REPLACE
+          type: string
+        requestId:
+          description: "Optional. A unique ID used to identify the request. If the server receives two RepairNodeGroupRequest with the same ID, the second request is ignored and the first google.longrunning.Operation created and stored in the backend is returned.Recommendation: Set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters."
           type: string
       type: object
     RepositoryConfig:

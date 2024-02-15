@@ -1511,6 +1511,11 @@ components:
           $ref: "#/components/schemas/DirectAccessVersionInfo"
           description: Output only. Identifies supported clients for DirectAccess for this Android version.
           readOnly: true
+        interactiveDeviceAvailabilityEstimate:
+          description: Output only. The estimated wait time for a single interactive device session using Direct Access.
+          format: google-duration
+          readOnly: true
+          type: string
         versionId:
           description: An Android version.
           type: string
