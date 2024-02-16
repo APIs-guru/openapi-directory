@@ -707,9 +707,16 @@ components:
           description: "The entropy coder to use. The default is `cabac`. Supported entropy coders: - `cavlc` - `cabac`"
           type: string
         frameRate:
-          description: Required. The target video frame rate in frames per second (FPS). Must be less than or equal to 120. Will default to the input frame rate if larger than the input frame rate. The API will generate an output FPS that is divisible by the input FPS, and smaller or equal to the target FPS. See [Calculating frame rate](https://cloud.google.com/transcoder/docs/concepts/frame-rate) for more information.
+          description: Required. The target video frame rate in frames per second (FPS). Must be less than or equal to 120.
           format: double
           type: number
+        frameRateConversionStrategy:
+          description: Optional. Frame rate conversion strategy for desired frame rate. The default is `DOWNSAMPLE`.
+          enum:
+            - FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED
+            - DOWNSAMPLE
+            - DROP_DUPLICATE
+          type: string
         gopDuration:
           description: Select the GOP size based on the specified duration. The default is `3s`. Note that `gopDuration` must be less than or equal to [`segmentDuration`](#SegmentSettings), and [`segmentDuration`](#SegmentSettings) must be divisible by `gopDuration`.
           format: google-duration
@@ -793,9 +800,16 @@ components:
           description: Use two-pass encoding strategy to achieve better video quality. H265CodecSettings.rate_control_mode must be `vbr`. The default is `false`.
           type: boolean
         frameRate:
-          description: Required. The target video frame rate in frames per second (FPS). Must be less than or equal to 120. Will default to the input frame rate if larger than the input frame rate. The API will generate an output FPS that is divisible by the input FPS, and smaller or equal to the target FPS. See [Calculating frame rate](https://cloud.google.com/transcoder/docs/concepts/frame-rate) for more information.
+          description: Required. The target video frame rate in frames per second (FPS). Must be less than or equal to 120.
           format: double
           type: number
+        frameRateConversionStrategy:
+          description: Optional. Frame rate conversion strategy for desired frame rate. The default is `DOWNSAMPLE`.
+          enum:
+            - FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED
+            - DOWNSAMPLE
+            - DROP_DUPLICATE
+          type: string
         gopDuration:
           description: Select the GOP size based on the specified duration. The default is `3s`. Note that `gopDuration` must be less than or equal to [`segmentDuration`](#SegmentSettings), and [`segmentDuration`](#SegmentSettings) must be divisible by `gopDuration`.
           format: google-duration
@@ -1349,9 +1363,16 @@ components:
           format: int32
           type: integer
         frameRate:
-          description: Required. The target video frame rate in frames per second (FPS). Must be less than or equal to 120. Will default to the input frame rate if larger than the input frame rate. The API will generate an output FPS that is divisible by the input FPS, and smaller or equal to the target FPS. See [Calculating frame rate](https://cloud.google.com/transcoder/docs/concepts/frame-rate) for more information.
+          description: Required. The target video frame rate in frames per second (FPS). Must be less than or equal to 120.
           format: double
           type: number
+        frameRateConversionStrategy:
+          description: Optional. Frame rate conversion strategy for desired frame rate. The default is `DOWNSAMPLE`.
+          enum:
+            - FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED
+            - DOWNSAMPLE
+            - DROP_DUPLICATE
+          type: string
         gopDuration:
           description: Select the GOP size based on the specified duration. The default is `3s`. Note that `gopDuration` must be less than or equal to [`segmentDuration`](#SegmentSettings), and [`segmentDuration`](#SegmentSettings) must be divisible by `gopDuration`.
           format: google-duration

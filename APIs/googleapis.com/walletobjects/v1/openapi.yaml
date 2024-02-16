@@ -1277,6 +1277,48 @@ paths:
             - https://www.googleapis.com/auth/wallet_object.issuer
       tags:
         - genericobject
+  /walletobjects/v1/genericObject/{resourceId}/addMessage:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Adds a message to the generic object referenced by the given object ID.
+      operationId: walletobjects.genericobject.addmessage
+      parameters:
+        - description: The unique identifier for an object. This ID must be unique across all classes from an issuer. This value should follow the format issuer ID. identifier where the former is issued by Google and latter is chosen by you. Your unique identifier should only include alphanumeric characters, '.', '_', or '-'.
+          in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddMessageRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericObjectAddMessageResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+          Oauth2c:
+            - https://www.googleapis.com/auth/wallet_object.issuer
+      tags:
+        - genericobject
   /walletobjects/v1/giftCardClass:
     get:
       description: Returns a list of all gift card classes for a given issuer ID.
@@ -5196,6 +5238,13 @@ components:
         wideLogo:
           $ref: "#/components/schemas/Image"
           description: The wide logo of the pass. When provided, this will be used in place of the logo in the top left of the card view.
+      type: object
+    GenericObjectAddMessageResponse:
+      description: Response to adding a new issuer message to the object. This contains the entire updated GenericObject.
+      properties:
+        resource:
+          $ref: "#/components/schemas/GenericObject"
+          description: The updated GenericObject resource.
       type: object
     GenericObjectListResponse:
       description: List response which contains the list of all generic objects for a given issuer ID.
