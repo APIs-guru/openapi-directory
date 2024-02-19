@@ -12938,12 +12938,18 @@ components:
             * [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic): **Commission**, **Default**, **Marketplace**, **PaymentFee**, **VAT**.
             * [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms): **BalanceAccount**, **Commission**, **Default**, **PaymentFee**, **Remainder**, **Surcharge**, **Tip**, **VAT**.
           enum:
+            - AcquiringFees
+            - AdyenCommission
+            - AdyenFees
+            - AdyenMarkup
             - BalanceAccount
             - Commission
             - Default
+            - Interchange
             - MarketPlace
             - PaymentFee
             - Remainder
+            - SchemeFee
             - Surcharge
             - Tip
             - VAT

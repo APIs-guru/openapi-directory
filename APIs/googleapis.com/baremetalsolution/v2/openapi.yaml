@@ -2663,6 +2663,7 @@ components:
             - VOLUME_PERFORMANCE_TIER_SHARED
             - VOLUME_PERFORMANCE_TIER_ASSIGNED
             - VOLUME_PERFORMANCE_TIER_HT
+            - VOLUME_PERFORMANCE_TIER_QOS2_PERFORMANCE
           type: string
         pod:
           description: Immutable. Pod name. Pod is an independent part of infrastructure. Volume can only be connected to the instances allocated in the same pod.
@@ -2757,6 +2758,7 @@ components:
             - VOLUME_PERFORMANCE_TIER_SHARED
             - VOLUME_PERFORMANCE_TIER_ASSIGNED
             - VOLUME_PERFORMANCE_TIER_HT
+            - VOLUME_PERFORMANCE_TIER_QOS2_PERFORMANCE
           type: string
         protocol:
           description: Volume protocol.

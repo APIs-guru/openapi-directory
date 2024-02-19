@@ -2434,6 +2434,14 @@ components:
         specLocation:
           description: Optional. Location of the custom connector spec.
           type: string
+        state:
+          description: Output only. State of the custom connector version.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - DEPRECATED
+          readOnly: true
+          type: string
         updateTime:
           description: Output only. Updated time.
           format: google-datetime

@@ -8399,6 +8399,11 @@ components:
             - HARM_CATEGORY_HARASSMENT
             - HARM_CATEGORY_SEXUALLY_EXPLICIT
           type: string
+        influentialTerms:
+          description: The influential terms that could potentially block the response.
+          items:
+            $ref: "#/components/schemas/CloudAiNlLlmProtoServiceSafetyRatingInfluentialTerm"
+          type: array
         probability:
           description: Harm probability levels in the content.
           enum:
@@ -8407,6 +8412,45 @@ components:
             - LOW
             - MEDIUM
             - HIGH
+          type: string
+        probabilityScore:
+          description: Harm probability score.
+          format: float
+          type: number
+        severity:
+          description: Harm severity levels in the content.
+          enum:
+            - HARM_PROBABILITY_UNSPECIFIED
+            - NEGLIGIBLE
+            - LOW
+            - MEDIUM
+            - HIGH
+          type: string
+        severityScore:
+          description: Harm severity score.
+          format: float
+          type: number
+      type: object
+    CloudAiNlLlmProtoServiceSafetyRatingInfluentialTerm:
+      description: The influential term that could potentially block the response.
+      properties:
+        beginOffset:
+          description: The beginning offset of the influential term.
+          format: int32
+          type: integer
+        confidence:
+          description: The confidence score of the influential term.
+          format: float
+          type: number
+        source:
+          description: The source of the influential term, prompt or response.
+          enum:
+            - SOURCE_UNSPECIFIED
+            - PROMPT
+            - RESPONSE
+          type: string
+        term:
+          description: The influential term.
           type: string
       type: object
     CloudAiNlLlmProtoServiceUsageMetadata:
@@ -9264,6 +9308,10 @@ components:
             - OTHER
           readOnly: true
           type: string
+        groundingMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GroundingMetadata"
+          description: Output only. Metadata specifies sources used to ground generated content.
+          readOnly: true
         index:
           description: Output only. Index of the candidate.
           format: int32
@@ -10555,6 +10603,9 @@ components:
         predictRequestResponseLoggingConfig:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1PredictRequestResponseLoggingConfig"
           description: Configures the request-response logging for online prediction.
+        privateServiceConnectConfig:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1PrivateServiceConnectConfig"
+          description: Optional. Configuration for private service connect. network and private_service_connect_config are mutually exclusive.
         trafficSplit:
           additionalProperties:
             format: int32
@@ -11187,27 +11238,6 @@ components:
             type: string
           type: array
       type: object
-    GoogleCloudAiplatformV1beta1ExportEndpointOperationMetadata:
-      description: Details of EndpointService.ExportEndpoint operation.
-      properties:
-        genericMetadata:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
-          description: The common part of the operation metadata.
-      type: object
-    GoogleCloudAiplatformV1beta1ExportEndpointResponse:
-      description: Response message of EndpointService.ExportEndpoint operation.
-      properties:
-        outputInfo:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1ExportEndpointResponseOutputInfo"
-          description: Information further describing the output of this Endpoint export.
-      type: object
-    GoogleCloudAiplatformV1beta1ExportEndpointResponseOutputInfo:
-      description: Describes the output of the ExportEndpoint.
-      properties:
-        bigQueryDestination:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1BigQueryDestination"
-          description: If the Endpoint is being exported to BigQuery this is the full path of the BigQuery ML model created.
-      type: object
     GoogleCloudAiplatformV1beta1ExportFeatureValuesOperationMetadata:
       description: Details of operations that exports Features values.
       properties:
@@ -11759,6 +11789,10 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureViewFeatureRegistrySourceFeatureGroup"
           type: array
+        projectNumber:
+          description: Optional. The project number of the parent project of the Feature Groups.
+          format: int64
+          type: string
       type: object
     GoogleCloudAiplatformV1beta1FeatureViewFeatureRegistrySourceFeatureGroup:
       description: Features belonging to a single feature group that will be synced to Online Store.
@@ -11791,12 +11825,30 @@ components:
           $ref: "#/components/schemas/GoogleTypeInterval"
           description: Output only. Time when this FeatureViewSync is finished.
           readOnly: true
+        syncSummary:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FeatureViewSyncSyncSummary"
+          description: Output only. Summary of the sync job.
+          readOnly: true
       type: object
     GoogleCloudAiplatformV1beta1FeatureViewSyncConfig:
       description: Configuration for Sync. Only one option is set.
       properties:
         cron:
           description: 'Cron schedule (https://en.wikipedia.org/wiki/Cron) to launch scheduled runs. To explicitly set a timezone to the cron tab, apply a prefix in the cron tab: "CRON_TZ=${IANA_TIME_ZONE}" or "TZ=${IANA_TIME_ZONE}". The ${IANA_TIME_ZONE} may only be a valid string from IANA time zone database. For example, "CRON_TZ=America/New_York 1 * * * *", or "TZ=America/New_York 1 * * * *".'
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1FeatureViewSyncSyncSummary:
+      description: Summary from the Sync job. For continuous syncs, the summary is updated periodically. For batch syncs, it gets updated on completion of the sync.
+      properties:
+        rowSynced:
+          description: Output only. Total number of rows synced.
+          format: int64
+          readOnly: true
+          type: string
+        totalSlot:
+          description: Output only. BigQuery slot milliseconds consumed for the sync job.
+          format: int64
+          readOnly: true
           type: string
       type: object
     GoogleCloudAiplatformV1beta1FeatureViewVectorSearchConfig:
@@ -12238,7 +12290,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1SafetySetting"
           type: array
         tools:
-          description: Optional. A list of `Tools` the model may use to generate the next response. A `Tool` is a piece of code that enables the system to interact with external systems to perform an action, or set of actions, outside of knowledge and scope of the model. The only supported tool is currently `Function`
+          description: Optional. A list of `Tools` the model may use to generate the next response. A `Tool` is a piece of code that enables the system to interact with external systems to perform an action, or set of actions, outside of knowledge and scope of the model.
           items:
             $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Tool"
           type: array
@@ -12345,6 +12397,55 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+      type: object
+    GoogleCloudAiplatformV1beta1GoogleSearchRetrieval:
+      description: Tool to retrieve public web data for grounding, powered by Google.
+      properties:
+        disableAttribution:
+          description: Optional. Disable using the result from this tool in detecting grounding attribution. This does not affect how the result is given to the model for generation.
+          type: boolean
+      type: object
+    GoogleCloudAiplatformV1beta1GroundingAttribution:
+      description: Grounding attribution.
+      properties:
+        confidenceScore:
+          description: Optional. Output only. Confidence score of the attribution. Ranges from 0 to 1. 1 is the most confident.
+          format: float
+          readOnly: true
+          type: number
+        segment:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Segment"
+          description: Output only. Segment of the content this attribution belongs to.
+          readOnly: true
+        web:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GroundingAttributionWeb"
+          description: Optional. Attribution from the web.
+      type: object
+    GoogleCloudAiplatformV1beta1GroundingAttributionWeb:
+      description: Attribution from the web.
+      properties:
+        title:
+          description: Output only. Title of the attribution.
+          readOnly: true
+          type: string
+        uri:
+          description: Output only. URI reference of the attribution.
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1GroundingMetadata:
+      description: Metadata returned to client when grounding is enabled.
+      properties:
+        groundingAttributions:
+          description: Optional. List of grounding attributions.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GroundingAttribution"
+          type: array
+        webSearchQueries:
+          description: Optional. Web search queries for the following-up web search.
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudAiplatformV1beta1HyperparameterTuningJob:
       description: Represents a HyperparameterTuningJob. A HyperparameterTuningJob has a Study specification and multiple CustomJobs with identical CustomJob specification.
@@ -15446,9 +15547,6 @@ components:
     GoogleCloudAiplatformV1beta1PipelineJobRuntimeConfig:
       description: The runtime config of a PipelineJob.
       properties:
-        defaultRuntime:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1PipelineJobRuntimeConfigDefaultRuntime"
-          description: Optional. The default runtime for the PipelineJob. If not provided, Vertex Custom Job is used as the runtime. For Vertex Custom Job, please refer to https://cloud.google.com/vertex-ai/docs/training/overview
         failurePolicy:
           description: Represents the failure policy of a pipeline. Currently, the default of a pipeline is that the pipeline will continue to run until no more tasks can be executed, also known as PIPELINE_FAILURE_POLICY_FAIL_SLOW. However, if a pipeline is set to PIPELINE_FAILURE_POLICY_FAIL_FAST, it will stop scheduling any new tasks when a task has failed. Any scheduled tasks will continue to completion.
           enum:
@@ -15475,25 +15573,11 @@ components:
           description: Deprecated. Use RuntimeConfig.parameter_values instead. The runtime parameters of the PipelineJob. The parameters will be passed into PipelineJob.pipeline_spec to replace the placeholders at runtime. This field is used by pipelines built using `PipelineJob.pipeline_spec.schema_version` 2.0.0 or lower, such as pipelines built using Kubeflow Pipelines SDK 1.8 or lower.
           type: object
       type: object
-    GoogleCloudAiplatformV1beta1PipelineJobRuntimeConfigDefaultRuntime:
-      description: The default runtime for the PipelineJob.
-      properties:
-        persistentResourceRuntimeDetail:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1PipelineJobRuntimeConfigPersistentResourceRuntimeDetail"
-          description: Persistent resource based runtime detail.
-      type: object
     GoogleCloudAiplatformV1beta1PipelineJobRuntimeConfigInputArtifact:
       description: The type of an input artifact.
       properties:
         artifactId:
           description: "Artifact resource id from MLMD. Which is the last portion of an artifact resource name: `projects/{project}/locations/{location}/metadataStores/default/artifacts/{artifact_id}`. The artifact must stay within the same project, location and default metadatastore as the pipeline."
-          type: string
-      type: object
-    GoogleCloudAiplatformV1beta1PipelineJobRuntimeConfigPersistentResourceRuntimeDetail:
-      description: Persistent resource based runtime detail. For more information, refer to https://cloud.google.com/vertex-ai/docs/training/persistent-resource-overview
-      properties:
-        persistentResourceName:
-          description: "Persistent resource name. Format: `projects/{project}/locations/{location}/persistentResources/{persistent_resource}`"
           type: string
       type: object
     GoogleCloudAiplatformV1beta1PipelineTaskDetail:
@@ -16210,6 +16294,13 @@ components:
           $ref: "#/components/schemas/GoogleApiHttpBody"
           description: The prediction input. Supports HTTP headers and arbitrary data payload. A DeployedModel may have an upper limit on the number of instances it supports per request. When this limit it is exceeded for an AutoML model, the RawPredict method returns an error. When this limit is exceeded for a custom-trained model, the behavior varies depending on the model. You can specify the schema for each instance in the predict_schemata.instance_schema_uri field when you create a Model. This schema applies when you deploy the `Model` as a `DeployedModel` to an Endpoint and use the `RawPredict` method.
       type: object
+    GoogleCloudAiplatformV1beta1RayMetricSpec:
+      description: Configuration for the Ray metrics.
+      properties:
+        disabled:
+          description: Optional. Flag to disable the Ray metrics collection.
+          type: boolean
+      type: object
     GoogleCloudAiplatformV1beta1RaySpec:
       description: "Configuration information for the Ray cluster. For experimental launch, Ray cluster creation and Persistent cluster creation are 1:1 mapping: We will provision all the nodes within the Persistent cluster as Ray nodes."
       properties:
@@ -16219,6 +16310,9 @@ components:
         imageUri:
           description: Optional. Default image for user to choose a preferred ML framework (for example, TensorFlow or Pytorch) by choosing from [Vertex prebuilt images](https://cloud.google.com/vertex-ai/docs/training/pre-built-containers). Either this or the resource_pool_images is required. Use this field if you need all the resource pools to have the same Ray image. Otherwise, use the {@code resource_pool_images} field.
           type: string
+        rayMetricSpec:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1RayMetricSpec"
+          description: Optional. Ray metrics configurations.
         resourcePoolImages:
           additionalProperties:
             type: string
@@ -16532,6 +16626,16 @@ components:
         catchUp:
           description: Optional. Whether to backfill missed runs when the schedule is resumed from PAUSED state. If set to true, all missed runs will be scheduled. New runs will be scheduled after the backfill is complete. This will also update Schedule.catch_up field. Default to false.
           type: boolean
+      type: object
+    GoogleCloudAiplatformV1beta1Retrieval:
+      description: Defines a retrieval tool that model can call to access external knowledge.
+      properties:
+        disableAttribution:
+          description: Optional. Disable using the result from this tool in detecting grounding attribution. This does not affect how the result is given to the model for generation.
+          type: boolean
+        vertexAiSearch:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1VertexAISearch"
+          description: Set to use data source powered by Vertex AI Search.
       type: object
     GoogleCloudAiplatformV1beta1SafetyRating:
       description: Safety rating corresponding to the generated content.
@@ -19373,6 +19477,25 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1NearestNeighbors"
           description: The nearest neighbors of the query entity.
       type: object
+    GoogleCloudAiplatformV1beta1Segment:
+      description: Segment of the content.
+      properties:
+        endIndex:
+          description: Output only. End index in the given Part, measured in bytes. Offset from the start of the Part, exclusive, starting at zero.
+          format: int32
+          readOnly: true
+          type: integer
+        partIndex:
+          description: Output only. The index of a Part object within its parent Content object.
+          format: int32
+          readOnly: true
+          type: integer
+        startIndex:
+          description: Output only. Start index in the given Part, measured in bytes. Offset from the start of the Part, inclusive, starting at zero.
+          format: int32
+          readOnly: true
+          type: integer
+      type: object
     GoogleCloudAiplatformV1beta1ServiceAccountSpec:
       description: Configuration for the use of custom service account to run the workloads.
       properties:
@@ -20343,13 +20466,19 @@ components:
           type: array
       type: object
     GoogleCloudAiplatformV1beta1Tool:
-      description: Tool details that the model may use to generate response. A `Tool` is a piece of code that enables the system to interact with external systems to perform an action, or set of actions, outside of knowledge and scope of the model.
+      description: Tool details that the model may use to generate response. A `Tool` is a piece of code that enables the system to interact with external systems to perform an action, or set of actions, outside of knowledge and scope of the model. A Tool object should contain exactly one type of Tool.
       properties:
         functionDeclarations:
           description: Optional. One or more function declarations to be passed to the model along with the current user query. Model may decide to call a subset of these functions by populating FunctionCall in the response. User should provide a FunctionResponse for each function call in the next turn. Based on the function responses, Model will generate the final response back to the user. Maximum 64 function declarations can be provided.
           items:
             $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1FunctionDeclaration"
           type: array
+        googleSearchRetrieval:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GoogleSearchRetrieval"
+          description: Optional. Specialized retrieval tool that is powered by Google search.
+        retrieval:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Retrieval"
+          description: Optional. System will always execute the provided retrieval tool(s) to get external knowledge to answer the prompt. Retrieval results are presented to the model for generation.
       type: object
     GoogleCloudAiplatformV1beta1TrainingConfig:
       description: CMLE training config. For every active learning labeling iteration, system will train a machine learning model on CMLE. The trained model will be used by data sampling algorithm to select DataItems.
@@ -20784,6 +20913,13 @@ components:
           type: string
         stringValue:
           description: A string value.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1beta1VertexAISearch:
+      description: Retrieve from Vertex AI Search datastore for grounding. See https://cloud.google.com/vertex-ai-search-and-conversation
+      properties:
+        datastore:
+          description: Required. Fully-qualified Vertex AI Search's datastore resource ID. projects/<>/locations/<>/collections/<>/dataStores/<>
           type: string
       type: object
     GoogleCloudAiplatformV1beta1VideoMetadata:
@@ -21405,12 +21541,12 @@ components:
             - GEMINI_IT_MECH
             - GEMINI_IT_TABLE_GEN
             - GEMINI_IT_NIMBUS_DECIBEL
-            - GEMIT_BRIDGE_SUFFIX_FT
             - GEMINI_IT_CLOUD_CODE_IF
             - GEMINI_IT_CLOUD_EUR_LEX_JSON
             - GEMINI_IT_CLOUD_OASST
             - GEMINI_IT_CLOUD_SELF_INSTRUCT
             - GEMINI_IT_CLOUD_UCS_AQUAMUSE
+            - GEMIT_BRIDGE_SUFFIX_FT
             - GEMINI_GOOSE_PUBLIC
             - GEMINI_GOOSE_SILOED
             - GEMINI_V2_CMS_WIKIPEDIA_LANG_FILTERED_GCC_PII
@@ -21520,6 +21656,13 @@ components:
             - GEMINI_V2_NTL_SYN_BT_TRANSLATE_DEDUP_N5
             - GEMINI_V2_NTL_SYN_FT_FIXED_TRANSLATE_DEDUP_N5
             - GEMINI_V2_CANARIES_SHUFFLED_COMPLIANT
+            - CLOUD_GEMIT_CLOUD_FACTUALITY_GROUNDING_MAGI
+            - CLOUD_GEMIT_MT_DIALGUE_LMSYS
+            - CLOUD_GEMIT_MTS_DIALOGUE_V3
+            - CLOUD_GEMIT_COMMIT_MSG_GEN_V3
+            - CLOUD_GEMIT_CODE_IF_V1
+            - CLOUD_GEMIT_CODE_SELF_REPAIR
+            - CLOUD_GEMIT_IDENTITY
           type: string
         filepath:
           type: string
@@ -21577,7 +21720,7 @@ components:
             $ref: "#/components/schemas/LanguageLabsAidaTrustRecitationProtoSegmentResult"
           type: array
         recitationAction:
-          description: The recitation action for one given input. When its segments contain different actions, the overall action will be returned in the precedence of BLOCK > CITE > NO_ACTION.
+          description: The recitation action for one given input. When its segments contain different actions, the overall action will be returned in the precedence of BLOCK > CITE > NO_ACTION. When the given input is not found in any source, the recitation action will not be specified.
           enum:
             - ACTION_UNSPECIFIED
             - CITE
@@ -21791,12 +21934,12 @@ components:
             - GEMINI_IT_MECH
             - GEMINI_IT_TABLE_GEN
             - GEMINI_IT_NIMBUS_DECIBEL
-            - GEMIT_BRIDGE_SUFFIX_FT
             - GEMINI_IT_CLOUD_CODE_IF
             - GEMINI_IT_CLOUD_EUR_LEX_JSON
             - GEMINI_IT_CLOUD_OASST
             - GEMINI_IT_CLOUD_SELF_INSTRUCT
             - GEMINI_IT_CLOUD_UCS_AQUAMUSE
+            - GEMIT_BRIDGE_SUFFIX_FT
             - GEMINI_GOOSE_PUBLIC
             - GEMINI_GOOSE_SILOED
             - GEMINI_V2_CMS_WIKIPEDIA_LANG_FILTERED_GCC_PII
@@ -21906,6 +22049,13 @@ components:
             - GEMINI_V2_NTL_SYN_BT_TRANSLATE_DEDUP_N5
             - GEMINI_V2_NTL_SYN_FT_FIXED_TRANSLATE_DEDUP_N5
             - GEMINI_V2_CANARIES_SHUFFLED_COMPLIANT
+            - CLOUD_GEMIT_CLOUD_FACTUALITY_GROUNDING_MAGI
+            - CLOUD_GEMIT_MT_DIALGUE_LMSYS
+            - CLOUD_GEMIT_MTS_DIALOGUE_V3
+            - CLOUD_GEMIT_COMMIT_MSG_GEN_V3
+            - CLOUD_GEMIT_CODE_IF_V1
+            - CLOUD_GEMIT_CODE_SELF_REPAIR
+            - CLOUD_GEMIT_IDENTITY
           type: string
         displayAttributionMessage:
           description: human-friendly string that contains information from doc_attribution which could be shown by clients
@@ -22183,12 +22333,12 @@ components:
             - GEMINI_IT_MECH
             - GEMINI_IT_TABLE_GEN
             - GEMINI_IT_NIMBUS_DECIBEL
-            - GEMIT_BRIDGE_SUFFIX_FT
             - GEMINI_IT_CLOUD_CODE_IF
             - GEMINI_IT_CLOUD_EUR_LEX_JSON
             - GEMINI_IT_CLOUD_OASST
             - GEMINI_IT_CLOUD_SELF_INSTRUCT
             - GEMINI_IT_CLOUD_UCS_AQUAMUSE
+            - GEMIT_BRIDGE_SUFFIX_FT
             - GEMINI_GOOSE_PUBLIC
             - GEMINI_GOOSE_SILOED
             - GEMINI_V2_CMS_WIKIPEDIA_LANG_FILTERED_GCC_PII
@@ -22298,6 +22448,13 @@ components:
             - GEMINI_V2_NTL_SYN_BT_TRANSLATE_DEDUP_N5
             - GEMINI_V2_NTL_SYN_FT_FIXED_TRANSLATE_DEDUP_N5
             - GEMINI_V2_CANARIES_SHUFFLED_COMPLIANT
+            - CLOUD_GEMIT_CLOUD_FACTUALITY_GROUNDING_MAGI
+            - CLOUD_GEMIT_MT_DIALGUE_LMSYS
+            - CLOUD_GEMIT_MTS_DIALOGUE_V3
+            - CLOUD_GEMIT_COMMIT_MSG_GEN_V3
+            - CLOUD_GEMIT_CODE_IF_V1
+            - CLOUD_GEMIT_CODE_SELF_REPAIR
+            - CLOUD_GEMIT_IDENTITY
           type: string
         filepath:
           type: string
@@ -22355,7 +22512,7 @@ components:
             $ref: "#/components/schemas/LearningGenaiRecitationSegmentResult"
           type: array
         recitationAction:
-          description: The recitation action for one given input. When its segments contain different actions, the overall action will be returned in the precedence of BLOCK > CITE > NO_ACTION.
+          description: The recitation action for one given input. When its segments contain different actions, the overall action will be returned in the precedence of BLOCK > CITE > NO_ACTION. When the given input is not found in any source, the recitation action will be NO_ACTION.
           enum:
             - ACTION_UNSPECIFIED
             - CITE
@@ -22569,12 +22726,12 @@ components:
             - GEMINI_IT_MECH
             - GEMINI_IT_TABLE_GEN
             - GEMINI_IT_NIMBUS_DECIBEL
-            - GEMIT_BRIDGE_SUFFIX_FT
             - GEMINI_IT_CLOUD_CODE_IF
             - GEMINI_IT_CLOUD_EUR_LEX_JSON
             - GEMINI_IT_CLOUD_OASST
             - GEMINI_IT_CLOUD_SELF_INSTRUCT
             - GEMINI_IT_CLOUD_UCS_AQUAMUSE
+            - GEMIT_BRIDGE_SUFFIX_FT
             - GEMINI_GOOSE_PUBLIC
             - GEMINI_GOOSE_SILOED
             - GEMINI_V2_CMS_WIKIPEDIA_LANG_FILTERED_GCC_PII
@@ -22684,6 +22841,13 @@ components:
             - GEMINI_V2_NTL_SYN_BT_TRANSLATE_DEDUP_N5
             - GEMINI_V2_NTL_SYN_FT_FIXED_TRANSLATE_DEDUP_N5
             - GEMINI_V2_CANARIES_SHUFFLED_COMPLIANT
+            - CLOUD_GEMIT_CLOUD_FACTUALITY_GROUNDING_MAGI
+            - CLOUD_GEMIT_MT_DIALGUE_LMSYS
+            - CLOUD_GEMIT_MTS_DIALOGUE_V3
+            - CLOUD_GEMIT_COMMIT_MSG_GEN_V3
+            - CLOUD_GEMIT_CODE_IF_V1
+            - CLOUD_GEMIT_CODE_SELF_REPAIR
+            - CLOUD_GEMIT_IDENTITY
           type: string
         displayAttributionMessage:
           description: human-friendly string that contains information from doc_attribution which could be shown by clients
@@ -23377,6 +23541,9 @@ components:
           type: string
         groundingMetadata:
           $ref: "#/components/schemas/LearningGenaiRootGroundingMetadata"
+        isCode:
+          description: Applies to streaming response message only. Whether the message is a code.
+          type: boolean
         isFallback:
           description: Applies to Response message only. Indicates whether the message is a fallback and the response would have otherwise been empty.
           type: boolean

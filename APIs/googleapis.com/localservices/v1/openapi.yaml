@@ -386,6 +386,10 @@ components:
         geo:
           description: Location of the associated account's home city.
           type: string
+        googleAdsLeadId:
+          description: Unique identifier of a Detailed Lead Report.
+          format: int64
+          type: string
         leadCategory:
           description: Lead category (e.g. hvac, plumber)
           type: string
@@ -394,7 +398,7 @@ components:
           format: google-datetime
           type: string
         leadId:
-          description: Unique identifier of a Detailed Lead Report.
+          description: Deprecated in favor of google_ads_lead_id. Unique identifier of a Detailed Lead Report.
           format: int64
           type: string
         leadPrice:

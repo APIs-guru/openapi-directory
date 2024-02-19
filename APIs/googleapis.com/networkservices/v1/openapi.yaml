@@ -41,6 +41,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server can ignore the request if it has already been completed. The server guarantees that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, ignores the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -595,6 +600,198 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1/{parent}/lbRouteExtensions:
+    get:
+      description: Lists `LbRouteExtension` resources in a given project and location.
+      operationId: networkservices.projects.locations.lbRouteExtensions.list
+      parameters:
+        - description: "Required. The project and location from which the `LbRouteExtension` resources are listed, specified in the following format: `projects/{project}/locations/{location}`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filtering results.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Hint for how to order the results.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. Requested page size. The server might return fewer items than requested. If unspecified, the server picks an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A token identifying a page of results that the server returns.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLbRouteExtensionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new `LbRouteExtension` resource in a given project and location.
+      operationId: networkservices.projects.locations.lbRouteExtensions.create
+      parameters:
+        - description: Required. The parent resource of the `LbRouteExtension` resource. Must be in the format `projects/{project}/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. User-provided ID of the `LbRouteExtension` resource to be created.
+          in: query
+          name: lbRouteExtensionId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server can ignore the request if it has already been completed. The server guarantees that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, ignores the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LbRouteExtension"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{parent}/lbTrafficExtensions:
+    get:
+      description: Lists `LbTrafficExtension` resources in a given project and location.
+      operationId: networkservices.projects.locations.lbTrafficExtensions.list
+      parameters:
+        - description: "Required. The project and location from which the `LbTrafficExtension` resources are listed, specified in the following format: `projects/{project}/locations/{location}`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filtering results.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Hint for how to order the results.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. Requested page size. The server might return fewer items than requested. If unspecified, the server picks an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A token identifying a page of results that the server returns.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLbTrafficExtensionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new `LbTrafficExtension` resource in a given project and location.
+      operationId: networkservices.projects.locations.lbTrafficExtensions.create
+      parameters:
+        - description: Required. The parent resource of the `LbTrafficExtension` resource. Must be in the format `projects/{project}/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. User-provided ID of the `LbTrafficExtension` resource to be created.
+          in: query
+          name: lbTrafficExtensionId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server can ignore the request if it has already been completed. The server guarantees that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, ignores the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LbTrafficExtension"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{parent}/meshes:
     get:
       description: Lists Meshes in a given project and location.
@@ -743,6 +940,87 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ServiceBinding"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{parent}/serviceLbPolicies:
+    get:
+      description: Lists ServiceLbPolicies in a given project and location.
+      operationId: networkservices.projects.locations.serviceLbPolicies.list
+      parameters:
+        - description: Required. The project and location from which the ServiceLbPolicies should be listed, specified in the format `projects/{project}/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of ServiceLbPolicies to return per call.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The value returned by the last `ListServiceLbPoliciesResponse` Indicates that this is a continuation of a prior `ListRouters` call, and that the system should return the next page of data.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListServiceLbPoliciesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new ServiceLbPolicy in a given project and location.
+      operationId: networkservices.projects.locations.serviceLbPolicies.create
+      parameters:
+        - description: Required. The parent resource of the ServiceLbPolicy. Must be in the format `projects/{project}/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Short name of the ServiceLbPolicy resource to be created. E.g. for resource name `projects/{project}/locations/{location}/serviceLbPolicies/{service_lb_policy_name}`. the id is value of {service_lb_policy_name}
+          in: query
+          name: serviceLbPolicyId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceLbPolicy"
       responses:
         "200":
           content:
@@ -922,7 +1200,7 @@ paths:
   /v1/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-      operationId: networkservices.projects.locations.serviceBindings.getIamPolicy
+      operationId: networkservices.projects.locations.serviceLbPolicies.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -976,7 +1254,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
-      operationId: networkservices.projects.locations.serviceBindings.setIamPolicy
+      operationId: networkservices.projects.locations.serviceLbPolicies.setIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -1018,7 +1296,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
-      operationId: networkservices.projects.locations.serviceBindings.testIamPermissions
+      operationId: networkservices.projects.locations.serviceLbPolicies.testIamPermissions
       parameters:
         - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -1269,8 +1547,66 @@ components:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
+    ExtensionChain:
+      description: A single extension chain wrapper that contains the match conditions and extensions to execute.
+      properties:
+        extensions:
+          description: Required. A set of extensions to execute for the matching request. At least one extension is required. Up to 3 extensions can be defined for each extension chain for `LbTrafficExtension` resource. `LbRouteExtension` chains are limited to 1 extension per extension chain.
+          items:
+            $ref: "#/components/schemas/ExtensionChainExtension"
+          type: array
+        matchCondition:
+          $ref: "#/components/schemas/ExtensionChainMatchCondition"
+          description: Required. Conditions under which this chain is invoked for a request.
+        name:
+          description: Required. The name for this extension chain. The name is logged as part of the HTTP request logs. The name must conform with RFC-1034, is restricted to lower-cased letters, numbers and hyphens, and can have a maximum length of 63 characters. Additionally, the first character must be a letter and the last a letter or a number.
+          type: string
+      type: object
+    ExtensionChainExtension:
+      description: A single extension in the chain to execute for the matching request.
+      properties:
+        authority:
+          description: Optional. The `:authority` header in the gRPC request sent from Envoy to the extension service.
+          type: string
+        failOpen:
+          description: "Optional. Determines how the proxy behaves if the call to the extension fails or times out. When set to `TRUE`, request or response processing continues without error. Any subsequent extensions in the extension chain are also executed. When set to `FALSE`: * If response headers have not been delivered to the downstream client, a generic 500 error is returned to the client. The error response can be tailored by configuring a custom error response in the load balancer. * If response headers have been delivered, then the HTTP stream to the downstream client is reset. Default is `FALSE`."
+          type: boolean
+        forwardHeaders:
+          description: Optional. List of the HTTP headers to forward to the extension (from the client or backend). If omitted, all headers are sent. Each element is a string indicating the header name.
+          items:
+            type: string
+          type: array
+        name:
+          description: Required. The name for this extension. The name is logged as part of the HTTP request logs. The name must conform with RFC-1034, is restricted to lower-cased letters, numbers and hyphens, and can have a maximum length of 63 characters. Additionally, the first character must be a letter and the last a letter or a number.
+          type: string
+        service:
+          description: "Required. The reference to the service that runs the extension. Currently only Callout extensions are supported here. To configure a Callout extension, `service` must be a fully-qualified reference to a [backend service](https://cloud.google.com/compute/docs/reference/rest/v1/backendServices) in the format: `https://www.googleapis.com/compute/v1/projects/{project}/regions/{region}/backendServices/{backendService}` or `https://www.googleapis.com/compute/v1/projects/{project}/global/backendServices/{backendService}`."
+          type: string
+        supportedEvents:
+          description: Optional. A set of events during request or response processing for which this extension is called. This field is required for the `LbTrafficExtension` resource. It's not relevant for the `LbRouteExtension` resource.
+          items:
+            enum:
+              - EVENT_TYPE_UNSPECIFIED
+              - REQUEST_HEADERS
+              - REQUEST_BODY
+              - RESPONSE_HEADERS
+              - RESPONSE_BODY
+            type: string
+          type: array
+        timeout:
+          description: Required. Specifies the timeout for each individual message on the stream. The timeout must be between 10-1000 milliseconds.
+          format: google-duration
+          type: string
+      type: object
+    ExtensionChainMatchCondition:
+      description: Conditions under which this chain is invoked for a request.
+      properties:
+        celExpression:
+          description: Required. A Common Expression Language (CEL) expression that is used to match requests for which the extension chain is executed. For more information, see [CEL matcher language reference](https://cloud.google.com/service-extensions/docs/cel-matcher-language-reference).
+          type: string
+      type: object
     Gateway:
-      description: "Gateway represents the configuration for a proxy, typically a load balancer. It captures the ip:port over which the services are exposed by the proxy, along with any policy configurations. Routes have reference to to Gateways to dictate how requests should be routed by this Gateway. Next id: 30"
+      description: "Gateway represents the configuration for a proxy, typically a load balancer. It captures the ip:port over which the services are exposed by the proxy, along with any policy configurations. Routes have reference to to Gateways to dictate how requests should be routed by this Gateway. Next id: 32"
       properties:
         addresses:
           description: "Optional. Zero or one IPv4 or IPv6 address on which the Gateway will receive the traffic. When no address is provided, an IP from the subnetwork is allocated This field only applies to gateways of type 'SECURE_WEB_GATEWAY'. Gateways of type 'OPEN_MESH' listen on 0.0.0.0 for IPv4 and :: for IPv6."
@@ -1944,6 +2280,90 @@ components:
           description: Prior to forwarding the request to the selected destination, the matching portion of the requests path is replaced by this value.
           type: string
       type: object
+    LbRouteExtension:
+      description: "`LbRouteExtension` is a resource that lets you control where traffic is routed to for a given request."
+      properties:
+        createTime:
+          description: Output only. The timestamp when the resource was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. A human-readable description of the resource.
+          type: string
+        extensionChains:
+          description: Required. A set of ordered extension chains that contain the match conditions and extensions to execute. Match conditions for each extension chain are evaluated in sequence for a given request. The first extension chain that has a condition that matches the request is executed. Any subsequent extension chains do not execute. Limited to 5 extension chains per resource.
+          items:
+            $ref: "#/components/schemas/ExtensionChain"
+          type: array
+        forwardingRules:
+          description: Required. A list of references to the forwarding rules to which this service extension is attached to. At least one forwarding rule is required. There can be only one `LbRouteExtension` resource per forwarding rule.
+          items:
+            type: string
+          type: array
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Set of labels associated with the `LbRouteExtension` resource. The format must comply with [the following requirements](/compute/docs/labeling-resources#requirements).
+          type: object
+        loadBalancingScheme:
+          description: "Required. All backend services and forwarding rules referenced by this extension must share the same load balancing scheme. Supported values: `INTERNAL_MANAGED`, `EXTERNAL_MANAGED`. For more information, refer to [Choosing a load balancer](https://cloud.google.com/load-balancing/docs/backend-service)."
+          enum:
+            - LOAD_BALANCING_SCHEME_UNSPECIFIED
+            - INTERNAL_MANAGED
+            - EXTERNAL_MANAGED
+          type: string
+        name:
+          description: "Required. Identifier. Name of the `LbRouteExtension` resource in the following format: `projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}`."
+          type: string
+        updateTime:
+          description: Output only. The timestamp when the resource was updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    LbTrafficExtension:
+      description: "`LbTrafficExtension` is a resource that lets the extension service modify the headers and payloads of both requests and responses without impacting the choice of backend services or any other security policies associated with the backend service."
+      properties:
+        createTime:
+          description: Output only. The timestamp when the resource was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. A human-readable description of the resource.
+          type: string
+        extensionChains:
+          description: Required. A set of ordered extension chains that contain the match conditions and extensions to execute. Match conditions for each extension chain are evaluated in sequence for a given request. The first extension chain that has a condition that matches the request is executed. Any subsequent extension chains do not execute. Limited to 5 extension chains per resource.
+          items:
+            $ref: "#/components/schemas/ExtensionChain"
+          type: array
+        forwardingRules:
+          description: Required. A list of references to the forwarding rules to which this service extension is attached to. At least one forwarding rule is required. There can be only one `LBTrafficExtension` resource per forwarding rule.
+          items:
+            type: string
+          type: array
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Set of labels associated with the `LbTrafficExtension` resource. The format must comply with [the following requirements](/compute/docs/labeling-resources#requirements).
+          type: object
+        loadBalancingScheme:
+          description: "Required. All backend services and forwarding rules referenced by this extension must share the same load balancing scheme. Supported values: `INTERNAL_MANAGED`, `EXTERNAL_MANAGED`. For more information, refer to [Choosing a load balancer](https://cloud.google.com/load-balancing/docs/backend-service)."
+          enum:
+            - LOAD_BALANCING_SCHEME_UNSPECIFIED
+            - INTERNAL_MANAGED
+            - EXTERNAL_MANAGED
+          type: string
+        name:
+          description: "Required. Identifier. Name of the `LbTrafficExtension` resource in the following format: `projects/{project}/locations/{location}/lbTrafficExtensions/{lb_traffic_extension}`."
+          type: string
+        updateTime:
+          description: Output only. The timestamp when the resource was updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     ListEndpointPoliciesResponse:
       description: Response returned by the ListEndpointPolicies method.
       properties:
@@ -1997,6 +2417,40 @@ components:
           description: If there might be more results than those appearing in this response, then `next_page_token` is included. To get the next set of results, call this method again using the value of `next_page_token` as `page_token`.
           type: string
       type: object
+    ListLbRouteExtensionsResponse:
+      description: Message for response to listing `LbRouteExtension` resources.
+      properties:
+        lbRouteExtensions:
+          description: The list of `LbRouteExtension` resources.
+          items:
+            $ref: "#/components/schemas/LbRouteExtension"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results that the server returns.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListLbTrafficExtensionsResponse:
+      description: Message for response to listing `LbTrafficExtension` resources.
+      properties:
+        lbTrafficExtensions:
+          description: The list of `LbTrafficExtension` resources.
+          items:
+            $ref: "#/components/schemas/LbTrafficExtension"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results that the server returns.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
     ListLocationsResponse:
       description: The response message for Locations.ListLocations.
       properties:
@@ -2043,6 +2497,18 @@ components:
           description: List of ServiceBinding resources.
           items:
             $ref: "#/components/schemas/ServiceBinding"
+          type: array
+      type: object
+    ListServiceLbPoliciesResponse:
+      description: Response returned by the ListServiceLbPolicies method.
+      properties:
+        nextPageToken:
+          description: If there might be more results than those appearing in this response, then `next_page_token` is included. To get the next set of results, call this method again using the value of `next_page_token` as `page_token`.
+          type: string
+        serviceLbPolicies:
+          description: List of ServiceLbPolicy resources.
+          items:
+            $ref: "#/components/schemas/ServiceLbPolicy"
           type: array
       type: object
     ListTcpRoutesResponse:
@@ -2242,6 +2708,61 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+      type: object
+    ServiceLbPolicy:
+      description: ServiceLbPolicy holds global load balancing and traffic distribution configuration that can be applied to a BackendService.
+      properties:
+        autoCapacityDrain:
+          $ref: "#/components/schemas/ServiceLbPolicyAutoCapacityDrain"
+          description: Optional. Configuration to automatically move traffic away for unhealthy IG/NEG for the associated Backend Service.
+        createTime:
+          description: Output only. The timestamp when this resource was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. A free-text description of the resource. Max length 1024 characters.
+          type: string
+        failoverConfig:
+          $ref: "#/components/schemas/ServiceLbPolicyFailoverConfig"
+          description: Optional. Configuration related to health based failover.
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Set of label tags associated with the ServiceLbPolicy resource.
+          type: object
+        loadBalancingAlgorithm:
+          description: Optional. The type of load balancing algorithm to be used. The default behavior is WATERFALL_BY_REGION.
+          enum:
+            - LOAD_BALANCING_ALGORITHM_UNSPECIFIED
+            - SPRAY_TO_WORLD
+            - SPRAY_TO_REGION
+            - WATERFALL_BY_REGION
+            - WATERFALL_BY_ZONE
+          type: string
+        name:
+          description: Required. Name of the ServiceLbPolicy resource. It matches pattern `projects/{project}/locations/{location}/serviceLbPolicies/{service_lb_policy_name}`.
+          type: string
+        updateTime:
+          description: Output only. The timestamp when this resource was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    ServiceLbPolicyAutoCapacityDrain:
+      description: Option to specify if an unhealthy IG/NEG should be considered for global load balancing and traffic routing.
+      properties:
+        enable:
+          description: Optional. If set to 'True', an unhealthy IG/NEG will be set as drained. - An IG/NEG is considered unhealthy if less than 25% of the instances/endpoints in the IG/NEG are healthy. - This option will never result in draining more than 50% of the configured IGs/NEGs for the Backend Service.
+          type: boolean
+      type: object
+    ServiceLbPolicyFailoverConfig:
+      description: Option to specify health based failover behavior. This is not related to Network load balancer FailoverPolicy.
+      properties:
+        failoverHealthThreshold:
+          description: Optional. The percentage threshold that a load balancer will begin to send traffic to failover backends. If the percentage of endpoints in a MIG/NEG is smaller than this value, traffic would be sent to failover backends if possible. This field should be set to a value between 1 and 99. The default value is 50 for Global external HTTP(S) load balancer (classic) and Proxyless service mesh, and 70 for others.
+          format: int32
+          type: integer
       type: object
     SetIamPolicyRequest:
       description: Request message for `SetIamPolicy` method.

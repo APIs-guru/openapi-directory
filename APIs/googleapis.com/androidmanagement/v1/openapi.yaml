@@ -856,6 +856,14 @@ components:
             - VERIFY_APPS_ENFORCED
             - VERIFY_APPS_USER_CHOICE
           type: string
+        mtePolicy:
+          description: Optional. Controls Memory Tagging Extension (MTE) (https://source.android.com/docs/security/test/memory-safety/arm-mte) on the device. The device needs to be rebooted to apply changes to the MTE policy.
+          enum:
+            - MTE_POLICY_UNSPECIFIED
+            - MTE_USER_CHOICE
+            - MTE_ENFORCED
+            - MTE_DISABLED
+          type: string
         personalAppsThatCanReadWorkNotifications:
           description: Personal apps that can read work profile notifications using a NotificationListenerService (https://developer.android.com/reference/android/service/notification/NotificationListenerService). By default, no personal apps (aside from system apps) can read work notifications. Each value in the list must be a package name.
           items:
@@ -2749,6 +2757,7 @@ components:
             - ONC_WIFI_API_LEVEL
             - ONC_WIFI_INVALID_ENTERPRISE_CONFIG
             - ONC_WIFI_USER_SHOULD_REMOVE_NETWORK
+            - ONC_WIFI_KEY_PAIR_ALIAS_NOT_CORRESPONDING_TO_EXISTING_KEY
           type: string
       type: object
     NonComplianceDetailCondition:
