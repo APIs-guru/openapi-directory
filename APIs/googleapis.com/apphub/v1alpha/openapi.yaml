@@ -427,7 +427,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. The Application identifier.
+        - description: Required. The Application identifier. Must contain only lowercase letters, numbers or hyphens, with the first character a letter, the last a letter or a number, and a 63 character maximum.
           in: query
           name: applicationId
           schema:
@@ -458,7 +458,7 @@ paths:
         - projects
   /v1alpha/{parent}/discoveredServices:
     get:
-      description: Lists discovered services in a host project and location.
+      description: Lists discovered services that can be added to an application in a host project and location.
       operationId: apphub.projects.locations.discoveredServices.list
       parameters:
         - description: Required. Value for parent.
@@ -572,7 +572,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v1alpha/{parent}/discoveredWorkloads:
     get:
-      description: Lists discovered workloads in a host project and location.
+      description: Lists discovered workloads that can be added to an application in a host project and location.
       operationId: apphub.projects.locations.discoveredWorkloads.list
       parameters:
         - description: Required. Value for parent.
@@ -852,7 +852,7 @@ paths:
           name: requestId
           schema:
             type: string
-        - description: Required. The Service identifier.
+        - description: Required. The Service identifier. Must contain only lowercase letters, numbers or hyphens, with the first character a letter, the last a letter or a number, and a 63 character maximum.
           in: query
           name: serviceId
           schema:
@@ -948,7 +948,7 @@ paths:
           name: requestId
           schema:
             type: string
-        - description: Required. The Workload identifier.
+        - description: Required. The Workload identifier. Must contain only lowercase letters, numbers or hyphens, with the first character a letter, the last a letter or a number, and a 63 character maximum.
           in: query
           name: workloadId
           schema:
@@ -1186,10 +1186,10 @@ components:
           readOnly: true
           type: string
         description:
-          description: Optional. User-defined description of an Application.
+          description: Optional. User-defined description of an Application. Can have a maximum length of 2048 characters.
           type: string
         displayName:
-          description: Optional. User-defined name for the Application.
+          description: Optional. User-defined name for the Application. Can have a maximum length of 63 characters.
           type: string
         name:
           description: 'Identifier. The resource name of an Application. Format: "projects/{host-project-id}/locations/{location}/applications/{application-id}"'
@@ -1303,7 +1303,7 @@ components:
           $ref: "#/components/schemas/Channel"
           description: Optional. Communication channel of the contacts.
         displayName:
-          description: Optional. Contact's name.
+          description: Optional. Contact's name. Can have a maximum length of 63 characters.
           type: string
         email:
           description: Required. Email address of the contacts.
@@ -1313,11 +1313,20 @@ components:
       description: Criticality of the Application, Service, or Workload
       properties:
         level:
-          description: Required. Criticality level.
+          description: Optional. Criticality level. Can contain only lowercase letters, numeric characters, underscores, and dashes. Can have a maximum length of 63 characters.
           type: string
         missionCritical:
-          description: Required. Indicates mission-critical Application, Service, or Workload.
+          description: Optional. Indicates mission-critical Application, Service, or Workload.
           type: boolean
+        type:
+          description: Required. Criticality Type.
+          enum:
+            - TYPE_UNSPECIFIED
+            - MISSION_CRITICAL
+            - HIGH
+            - MEDIUM
+            - LOW
+          type: string
       type: object
     DetachServiceProjectAttachmentRequest:
       description: Request for DetachServiceProjectAttachment.
@@ -1365,7 +1374,16 @@ components:
       description: Environment of the Application, Service, or Workload
       properties:
         environment:
-          description: Required. Environment name.
+          description: Optional. Environment name. Can contain only lowercase letters, numeric characters, underscores, and dashes. Can have a maximum length of 63 characters.
+          type: string
+        type:
+          description: Required. Environment Type.
+          enum:
+            - TYPE_UNSPECIFIED
+            - PRODUCTION
+            - STAGING
+            - TEST
+            - DEVELOPMENT
           type: string
       type: object
     Expr:
@@ -1675,13 +1693,13 @@ components:
           readOnly: true
           type: string
         description:
-          description: Optional. User-defined description of a Service.
+          description: Optional. User-defined description of a Service. Can have a maximum length of 2048 characters.
           type: string
         discoveredService:
           description: Required. Immutable. The resource name of the original discovered service.
           type: string
         displayName:
-          description: Optional. User-defined name for the Service.
+          description: Optional. User-defined name for the Service. Can have a maximum length of 63 characters.
           type: string
         name:
           description: 'Identifier. The resource name of a Service. Format: "projects/{host-project-id}/locations/{location}/applications/{application-id}/services/{service-id}"'
@@ -1829,13 +1847,13 @@ components:
           readOnly: true
           type: string
         description:
-          description: Optional. User-defined description of a Workload.
+          description: Optional. User-defined description of a Workload. Can have a maximum length of 2048 characters.
           type: string
         discoveredWorkload:
           description: Required. Immutable. The resource name of the original discovered workload.
           type: string
         displayName:
-          description: Optional. User-defined name for the Workload.
+          description: Optional. User-defined name for the Workload. Can have a maximum length of 63 characters.
           type: string
         name:
           description: 'Identifier. The resource name of the Workload. Format: "projects/{host-project-id}/locations/{location}/applications/{application-id}/workloads/{workload-id}"'

@@ -180,13 +180,18 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: GenerateOrgPolicyViolationsPreview generates an OrgPolicyViolationsPreview for the proposed changes in the provided OrgPolicyViolationsPreview.OrgPolicyOverlay. The changes to OrgPolicy are specified by this `OrgPolicyOverlay`. The resources to scan are inferred from these specified changes.
-      operationId: policysimulator.organizations.locations.orgPolicyViolationsPreviews
+      description: CreateOrgPolicyViolationsPreview creates an OrgPolicyViolationsPreview for the proposed changes in the provided OrgPolicyViolationsPreview.OrgPolicyOverlay. The changes to OrgPolicy are specified by this `OrgPolicyOverlay`. The resources to scan are inferred from these specified changes.
+      operationId: policysimulator.organizations.locations.orgPolicyViolationsPreviews.create
       parameters:
         - description: "Required. The organization under which this OrgPolicyViolationsPreview will be created. Example: `organizations/my-example-org/locations/global`"
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: Optional. An optional user-specified ID for the OrgPolicyViolationsPreview. If not provided, a random ID will be generated.
+          in: query
+          name: orgPolicyViolationsPreviewId
           schema:
             type: string
       requestBody:
@@ -652,6 +657,40 @@ components:
           format: int32
           type: integer
       type: object
+    GoogleCloudPolicysimulatorV1alphaCreateOrgPolicyViolationsPreviewOperationMetadata:
+      description: CreateOrgPolicyViolationsPreviewOperationMetadata is metadata about an OrgPolicyViolationsPreview generations operation.
+      properties:
+        requestTime:
+          description: Time when the request was received.
+          format: google-datetime
+          type: string
+        resourcesFound:
+          description: Total number of resources that need scanning. Should equal resource_scanned + resources_pending
+          format: int32
+          type: integer
+        resourcesPending:
+          description: Number of resources still to scan.
+          format: int32
+          type: integer
+        resourcesScanned:
+          description: Number of resources already scanned.
+          format: int32
+          type: integer
+        startTime:
+          description: Time when the request started processing, i.e., when the state was set to RUNNING.
+          format: google-datetime
+          type: string
+        state:
+          description: Output only. The current state of the operation.
+          enum:
+            - PREVIEW_STATE_UNSPECIFIED
+            - PREVIEW_PENDING
+            - PREVIEW_RUNNING
+            - PREVIEW_SUCCEEDED
+            - PREVIEW_FAILED
+          readOnly: true
+          type: string
+      type: object
     GoogleCloudPolicysimulatorV1alphaGenerateOrgPolicyViolationsPreviewOperationMetadata:
       description: GenerateOrgPolicyViolationsPreviewOperationMetadata is metadata about an OrgPolicyViolationsPreview generations operation.
       properties:
@@ -887,6 +926,40 @@ components:
             - HEURISTIC_RELEVANCE_UNSPECIFIED
             - NORMAL
             - HIGH
+          type: string
+      type: object
+    GoogleCloudPolicysimulatorV1betaCreateOrgPolicyViolationsPreviewOperationMetadata:
+      description: CreateOrgPolicyViolationsPreviewOperationMetadata is metadata about an OrgPolicyViolationsPreview generations operation.
+      properties:
+        requestTime:
+          description: Time when the request was received.
+          format: google-datetime
+          type: string
+        resourcesFound:
+          description: Total number of resources that need scanning. Should equal resource_scanned + resources_pending
+          format: int32
+          type: integer
+        resourcesPending:
+          description: Number of resources still to scan.
+          format: int32
+          type: integer
+        resourcesScanned:
+          description: Number of resources already scanned.
+          format: int32
+          type: integer
+        startTime:
+          description: Time when the request started processing, i.e., when the state was set to RUNNING.
+          format: google-datetime
+          type: string
+        state:
+          description: Output only. The current state of the operation.
+          enum:
+            - PREVIEW_STATE_UNSPECIFIED
+            - PREVIEW_PENDING
+            - PREVIEW_RUNNING
+            - PREVIEW_SUCCEEDED
+            - PREVIEW_FAILED
+          readOnly: true
           type: string
       type: object
     GoogleCloudPolicysimulatorV1betaExplainedAccess:

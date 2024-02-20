@@ -518,7 +518,6 @@ components:
           expiryYear: "2030"
           holderName: John Smith
           number: "4111111111111111"
-        dateOfBirth: 1990-01-01
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         nationality: NL
         reference: P9999999999999999
@@ -569,7 +568,6 @@ components:
         shopperName:
           firstName: John
           lastName: Smith
-        shopperStatement: Payer Name
     post-storeDetail-storeDetail:
       description: Store payment details under the PAYOUT recurring contract
       summary: Store payout details
@@ -598,7 +596,6 @@ components:
         shopperEmail: shopper@email.com
         shopperName:
           firstName: Adyen
-          gender: MALE
           lastName: Test
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
     post-storeDetail-storeDetail-200:
@@ -625,12 +622,10 @@ components:
         nationality: NL
         recurring:
           contract: PAYOUT
-        reference: Your Reference Here
+        reference: Your Reference
         shopperEmail: s.hopper@test.com
-        shopperIP: 61.294.12.12
         shopperName:
           firstName: Adyen
-          gender: MALE
           lastName: Test
         shopperReference: YOUR_SHOPPER_REFERENCE
     post-storeDetailAndSubmitThirdParty-storeDetailAndSubmitThirdParty-Neteller:
@@ -654,7 +649,6 @@ components:
         shopperEmail: test@company.com
         shopperName:
           firstName: Test
-          gender: FEMALE
           lastName: Test2
         shopperReference: YOUR_SHOPPER_REFERENCE
     post-storeDetailAndSubmitThirdParty-storeDetailAndSubmitThirdParty-PayPal:
@@ -679,7 +673,6 @@ components:
         shopperEmail: test@company.com
         shopperName:
           firstName: Test
-          gender: FEMALE
           lastName: Test2
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
     post-storeDetailAndSubmitThirdParty-storeDetailAndSubmitThirdParty-Paysafecard:
@@ -700,10 +693,8 @@ components:
         reference: Test Payout
         selectedBrand: paysafecard
         shopperEmail: test@company.com
-        shopperIP: 61.294.12.12
         shopperName:
           firstName: Test
-          gender: MALE
           lastName: Test2
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
     post-storeDetailAndSubmitThirdParty-storeDetailAndSubmitThirdParty-Skrill:
@@ -727,7 +718,6 @@ components:
         shopperEmail: test@company.com
         shopperName:
           firstName: Test
-          gender: FEMALE
           lastName: Test2
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
     post-submitThirdParty-submitThirdParty:
@@ -748,7 +738,6 @@ components:
         shopperEmail: shopper@email.com
         shopperName:
           firstName: Adyen
-          gender: MALE
           lastName: Test
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
   schemas:
