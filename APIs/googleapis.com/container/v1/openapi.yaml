@@ -4695,6 +4695,9 @@ components:
         diskType:
           description: Type of the disk attached to each node (e.g. 'pd-standard', 'pd-ssd' or 'pd-balanced') If unspecified, the default disk type is 'pd-standard'
           type: string
+        enableConfidentialStorage:
+          description: Optional. Reserved for future use.
+          type: boolean
         ephemeralStorageLocalSsdConfig:
           $ref: "#/components/schemas/EphemeralStorageLocalSsdConfig"
           description: Parameters for the node ephemeral storage using Local SSDs. If unspecified, ephemeral storage is backed by the boot disk.
@@ -6088,6 +6091,9 @@ components:
           deprecated: true
           description: Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
+        queuedProvisioning:
+          $ref: "#/components/schemas/QueuedProvisioning"
+          description: Specifies the configuration of queued provisioning.
         resourceLabels:
           $ref: "#/components/schemas/ResourceLabels"
           description: The resource labels for the node pool to use to annotate any related Google Compute Engine resources.

@@ -4970,7 +4970,7 @@ components:
           description: Type of the disk attached to each node (e.g. 'pd-standard', 'pd-ssd' or 'pd-balanced') If unspecified, the default disk type is 'pd-standard'
           type: string
         enableConfidentialStorage:
-          description: Optional. Enable confidential storage on Hyperdisk. boot_disk_kms_key is required when enable_confidential_storage is true. This is only available for private preview.
+          description: Optional. Reserved for future use.
           type: boolean
         ephemeralStorageConfig:
           $ref: "#/components/schemas/EphemeralStorageConfig"
@@ -6446,6 +6446,9 @@ components:
           deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
+        queuedProvisioning:
+          $ref: "#/components/schemas/QueuedProvisioning"
+          description: Specifies the configuration of queued provisioning.
         resourceLabels:
           $ref: "#/components/schemas/ResourceLabels"
           description: The resource labels for the node pool to use to annotate any related Google Compute Engine resources.

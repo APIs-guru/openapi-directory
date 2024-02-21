@@ -4827,6 +4827,9 @@ components:
         displayName:
           description: The affected resource display name of the change.
           type: string
+        languageCode:
+          description: The affected language code of the change.
+          type: string
         name:
           description: "The unique identifier of the changelog. Format: `projects//locations//agents//changelogs/`."
           type: string
@@ -6889,6 +6892,22 @@ components:
         triggerIntent:
           description: "If an intent was provided as input, this field will contain a copy of the intent identifier. Format: `projects//locations//agents//intents/`."
           type: string
+        webhookDisplayNames:
+          description: The list of webhook display names in the order of call sequence.
+          items:
+            type: string
+          type: array
+        webhookIds:
+          description: The list of webhook ids in the order of call sequence.
+          items:
+            type: string
+          type: array
+        webhookLatencies:
+          description: The list of webhook latencies in the order of call sequence.
+          items:
+            format: google-duration
+            type: string
+          type: array
         webhookPayloads:
           description: The list of webhook payload in WebhookResponse.payload, in the order of call sequence. If some webhook call fails or doesn't return any payload, an empty `Struct` would be used instead.
           items:
@@ -6900,6 +6919,11 @@ components:
           description: The list of webhook call status in the order of call sequence.
           items:
             $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+        webhookTags:
+          description: The list of webhook tags in the order of call sequence.
+          items:
+            type: string
           type: array
       type: object
     GoogleCloudDialogflowCxV3beta1ReloadDocumentOperationMetadata:
