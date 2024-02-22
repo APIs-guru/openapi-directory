@@ -5454,13 +5454,15 @@ components:
             - RECOVERY_STATUS_ACTIVE
             - RECOVERY_STATUS_CANCELED
             - RECOVERY_STATUS_DRAFT
+            - RECOVERY_STATUS_GENERATION_IN_PROGRESS
+            - RECOVERY_STATUS_GENERATION_FAILED
           type: string
         targeting:
           $ref: "#/components/schemas/Targeting"
           description: Specifies targeting criteria for the recovery action such as regions, android sdk versions, app versions etc.
       type: object
     AppVersionList:
-      description: Data format for a list of app versions. Only one app version is supported for now.
+      description: Data format for a list of app versions.
       properties:
         versionCodes:
           description: List of app version codes.
@@ -6378,6 +6380,8 @@ components:
             - RECOVERY_STATUS_ACTIVE
             - RECOVERY_STATUS_CANCELED
             - RECOVERY_STATUS_DRAFT
+            - RECOVERY_STATUS_GENERATION_IN_PROGRESS
+            - RECOVERY_STATUS_GENERATION_FAILED
           type: string
       type: object
     GeneratedSplitApk:

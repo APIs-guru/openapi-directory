@@ -3466,6 +3466,13 @@ components:
     Settings:
       description: Describes the settings associated with a project, folder, organization, or billing account.
       properties:
+        analyticsMode:
+          description: Optional. The default analytics mode of an org or folder which is inherited by all newly created child project buckets.
+          enum:
+            - ANALYTICS_MODE_UNSPECIFIED
+            - ANALYTICS_ENABLED
+            - ANALYTICS_DISABLED
+          type: string
         defaultSinkConfig:
           $ref: "#/components/schemas/DefaultSinkConfig"
           description: Optional. Overrides the built-in configuration for _Default sink.

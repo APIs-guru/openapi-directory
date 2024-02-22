@@ -30,10 +30,6 @@ tags:
   - name: Card order
 components:
   examples:
-    WebhookAck:
-      summary: Acknowledge Webhook
-      value:
-        notificationResponse: "[accepted]"
     post-balancePlatform.accountHolder.created-balancePlatform-accountHolder-created:
       description: Example webhook when an account holder was created with LEM API v1, v2
       summary: Account holder created with LEM API v1, v2
@@ -1268,6 +1264,12 @@ components:
     IbanAccountIdentification:
       additionalProperties: false
       properties:
+        formFactor:
+          default: physical
+          description: The form factor of bank account.
+          type:
+            - string
+            - "null"
         iban:
           description: The international bank account number as defined in the [ISO-13616](https://www.iso.org/standard/81090.html) standard.
           type: string
@@ -1285,9 +1287,11 @@ components:
       properties:
         firstName:
           description: The first name.
+          maxLength: 80
           type: string
         lastName:
           description: The last name.
+          maxLength: 80
           type: string
       required:
         - firstName
@@ -1743,6 +1747,12 @@ components:
             - checking
             - savings
           type: string
+        formFactor:
+          default: physical
+          description: The form factor of bank account.
+          type:
+            - string
+            - "null"
         routingNumber:
           description: The 9-digit [routing number](https://en.wikipedia.org/wiki/ABA_routing_transit_number), without separators or whitespace.
           maxLength: 9
@@ -2018,11 +2028,6 @@ webhooks:
         "200":
           content:
             application/json:
-              examples:
-                balancePlatform-accountHolder-created:
-                  $ref: "#/components/examples/WebhookAck"
-                balancePlatform-accountHolder-created-lem-v3:
-                  $ref: "#/components/examples/WebhookAck"
               schema:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
@@ -2051,11 +2056,6 @@ webhooks:
         "200":
           content:
             application/json:
-              examples:
-                balancePlatform-accountHolder-updated:
-                  $ref: "#/components/examples/WebhookAck"
-                balancePlatform-accountHolder-updated-lem-v3:
-                  $ref: "#/components/examples/WebhookAck"
               schema:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
@@ -2082,9 +2082,6 @@ webhooks:
         "200":
           content:
             application/json:
-              examples:
-                balancePlatform-balanceAccount-created:
-                  $ref: "#/components/examples/WebhookAck"
               schema:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
@@ -2111,9 +2108,6 @@ webhooks:
         "200":
           content:
             application/json:
-              examples:
-                balancePlatform-balanceAccount-updated:
-                  $ref: "#/components/examples/WebhookAck"
               schema:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
@@ -2140,9 +2134,6 @@ webhooks:
         "200":
           content:
             application/json:
-              examples:
-                balancePlatform-sweep-created:
-                  $ref: "#/components/examples/WebhookAck"
               schema:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
@@ -2169,9 +2160,6 @@ webhooks:
         "200":
           content:
             application/json:
-              examples:
-                balancePlatform-sweep-deleted:
-                  $ref: "#/components/examples/WebhookAck"
               schema:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
@@ -2198,9 +2186,6 @@ webhooks:
         "200":
           content:
             application/json:
-              examples:
-                balancePlatform-sweep-updated:
-                  $ref: "#/components/examples/WebhookAck"
               schema:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
@@ -2275,9 +2260,6 @@ webhooks:
         "200":
           content:
             application/json:
-              examples:
-                balancePlatform-paymentInstrument-created:
-                  $ref: "#/components/examples/WebhookAck"
               schema:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
@@ -2304,9 +2286,6 @@ webhooks:
         "200":
           content:
             application/json:
-              examples:
-                balancePlatform-paymentInstrument-updated:
-                  $ref: "#/components/examples/WebhookAck"
               schema:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.

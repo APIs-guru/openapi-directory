@@ -10123,6 +10123,12 @@ components:
           description: Required. The ID of the owner advertiser of the updated Customer Match FirstAndThirdPartyAudience.
           format: int64
           type: string
+        removedContactInfoList:
+          $ref: "#/components/schemas/ContactInfoList"
+          description: Input only. A list of contact information to define the members to be removed.
+        removedMobileDeviceIdList:
+          $ref: "#/components/schemas/MobileDeviceIdList"
+          description: Input only. A list of mobile device IDs to define the members to be removed.
       type: object
     EditCustomerMatchMembersResponse:
       description: The response of FirstAndThirdPartyAudienceService.EditCustomerMatchMembers.
