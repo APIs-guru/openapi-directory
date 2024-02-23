@@ -6,7 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Enables apps to fetch information and perform actions in Google Chat. Authentication is a prerequisite for using the Google Chat REST API.
+  description: The Google Chat API lets you build Chat apps to integrate your services with Google Chat and manage Chat resources such as spaces, members, and messages.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -1205,7 +1205,7 @@ components:
         formInputs:
           additionalProperties:
             $ref: "#/components/schemas/Inputs"
-          description: "A map containing the current values of the widgets in a card. The map keys are the string IDs assigned to each widget, and the values represent inputs to the widget. Depending on the input data type, a different object represents each input: For single-value widgets, `StringInput`. For multi-value widgets, an array of `StringInput` objects. For a date-time picker, a `DateTimeInput`. For a date-only picker, a `DateInput`. For a time-only picker, a `TimeInput`. Corresponds with the data entered by a user on a card in a [dialog](https://developers.google.com/chat/how-tos/dialogs)."
+          description: A map containing the values that a user inputs in a widget from a card or dialog. The map keys are the string IDs assigned to each widget, and the values represent inputs to the widget. For details, see [Process information inputted by users](https://developers.google.com/chat/ui/read-form-data).
           type: object
         hostApp:
           description: The hostApp enum which indicates the app the add-on is invoked from. Always `CHAT` for Chat apps.
@@ -2152,20 +2152,20 @@ components:
           description: The `onclick` action.
       type: object
     Inputs:
-      description: Types of data that users can enter on cards or dialogs. To learn how to process information from users, see [Read form data input by users on cards](https://developers.google.com/chat/ui/read-form-data).
+      description: Types of data that users can [input on cards or dialogs](https://developers.google.com/chat/ui/read-form-data). The input type depends on the type of values that the widget accepts.
       properties:
         dateInput:
           $ref: "#/components/schemas/DateInput"
-          description: Date input values.
+          description: Date input values from a [`DateTimePicker`](https://developers.google.com/chat/api/reference/rest/v1/cards#DateTimePicker) widget that only accepts date values.
         dateTimeInput:
           $ref: "#/components/schemas/DateTimeInput"
-          description: Date and time input values.
+          description: Date and time input values from a [`DateTimePicker`](https://developers.google.com/chat/api/reference/rest/v1/cards#DateTimePicker) widget that accepts both a date and time.
         stringInputs:
           $ref: "#/components/schemas/StringInputs"
-          description: Input parameter for regular widgets. For single-valued widgets, it is a single value list. For multi-valued widgets, such as checkbox, all the values are presented.
+          description: A list of strings that represent the values that the user inputs in a widget. If the widget only accepts one value, such as a [`TextInput`](https://developers.google.com/chat/api/reference/rest/v1/cards#TextInput) widget, the list contains one string object. If the widget accepts multiple values, such as a [`SelectionInput`](https://developers.google.com/chat/api/reference/rest/v1/cards#selectioninput) widget of checkboxes, the list contains a string object for each value that the user inputs or selects.
         timeInput:
           $ref: "#/components/schemas/TimeInput"
-          description: Time input values.
+          description: Time input values from a [`DateTimePicker`](https://developers.google.com/chat/api/reference/rest/v1/cards#DateTimePicker) widget that only accepts time values.
       type: object
     KeyValue:
       description: A UI element contains a key (label) and a value (content). This element can also contain some actions such as `onclick` button.
@@ -2649,7 +2649,7 @@ components:
       description: Input parameter for regular widgets. For single-valued widgets, it is a single value list. For multi-valued widgets, such as checkbox, all the values are presented.
       properties:
         value:
-          description: An array of strings entered by the user.
+          description: An list of strings entered by the user.
           items:
             type: string
           type: array

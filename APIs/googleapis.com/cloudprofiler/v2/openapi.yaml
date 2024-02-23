@@ -394,6 +394,11 @@ components:
             - PEAK_HEAP
             - HEAP_ALLOC
           type: string
+        startTime:
+          description: Output only. Start time for the profile. This output is only present in response from the ListProfiles method.
+          format: google-datetime
+          readOnly: true
+          type: string
       type: object
   securitySchemes:
     Oauth2:

@@ -774,8 +774,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1FiniteBillingCycleDetails"
           description: Optional. Details for a subscription line item with finite billing cycles. If unset, the line item will be charged indefinitely.
         name:
-          description: Output only. Response only. Resource name of the product. It will have the format of "partners/{partner_id}/products/{product_id}"
-          readOnly: true
+          description: Identifier. Response only. Resource name of the product. It will have the format of "partners/{partner_id}/products/{product_id}"
           type: string
         priceConfigs:
           description: Output only. Price configs for the product in the available regions.
@@ -858,8 +857,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails"
           description: Optional. Specifies the introductory pricing details when the promotion_type is PROMOTION_TYPE_INTRODUCTORY_PRICING.
         name:
-          description: Output only. Response only. Resource name of the subscription promotion. It will have the format of "partners/{partner_id}/promotion/{promotion_id}"
-          readOnly: true
+          description: Identifier. Response only. Resource name of the subscription promotion. It will have the format of "partners/{partner_id}/promotion/{promotion_id}"
           type: string
         promotionType:
           description: Output only. Output Only. Specifies the type of the promotion.
@@ -890,9 +888,10 @@ components:
       description: The details of a introductory pricing promotion.
       properties:
         introductoryPricingSpecs:
-          description: Specifies the introductory pricing periods.
+          description: Output only. Specifies the introductory pricing periods.
           items:
             $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpec"
+          readOnly: true
           type: array
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpec:
@@ -961,7 +960,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem"
           type: array
         name:
-          description: Optional. Resource name of the subscription. It will have the format of "partners/{partner_id}/subscriptions/{subscription_id}". This is available for authorizeAddon, but otherwise is response only.
+          description: Identifier. Resource name of the subscription. It will have the format of "partners/{partner_id}/subscriptions/{subscription_id}". This is available for authorizeAddon, but otherwise is response only.
           type: string
         partnerUserToken:
           description: Required. Identifier of the end-user in partner’s system. The value is restricted to 63 ASCII characters at the maximum.
@@ -1026,7 +1025,7 @@ components:
       description: Describes the details of a cancelled or cancelling subscription.
       properties:
         reason:
-          description: The reason of the cancellation.
+          description: Output only. The reason of the cancellation.
           enum:
             - CANCELLATION_REASON_UNSPECIFIED
             - CANCELLATION_REASON_FRAUD
@@ -1039,6 +1038,7 @@ components:
             - CANCELLATION_REASON_SYSTEM_ERROR
             - CANCELLATION_REASON_SYSTEM_CANCEL
             - CANCELLATION_REASON_OTHER
+          readOnly: true
           type: string
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem:
@@ -1124,7 +1124,8 @@ components:
       properties:
         servicePeriod:
           $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1ServicePeriod"
-          description: The service period of the ONE_TIME line item.
+          description: Output only. The service period of the ONE_TIME line item.
+          readOnly: true
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpec:
       description: Describes the spec for one promotion.
@@ -1226,9 +1227,10 @@ components:
       description: The bundle details for a line item corresponding to a hard bundle.
       properties:
         bundleElementDetails:
-          description: The details for each element in the hard bundle.
+          description: Output only. The details for each element in the hard bundle.
           items:
             $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemBundleDetailsBundleElementDetails"
+          readOnly: true
           type: array
       type: object
   securitySchemes:

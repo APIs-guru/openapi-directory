@@ -1492,6 +1492,9 @@ components:
         displayName:
           description: Display name of an entry. The maximum size is 500 bytes when encoded in UTF-8. Default value is an empty string.
           type: string
+        featureOnlineStoreSpec:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1FeatureOnlineStoreSpec"
+          description: FeatureonlineStore spec for Vertex AI Feature Store.
         filesetSpec:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1FilesetSpec"
           description: Specification that applies to a fileset resource. Valid only for entries with the `FILESET` type.
@@ -1572,6 +1575,9 @@ components:
             - DASHBOARD
             - EXPLORE
             - LOOK
+            - FEATURE_ONLINE_STORE
+            - FEATURE_VIEW
+            - FEATURE_GROUP
           type: string
         usageSignal:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1UsageSignal"
@@ -1588,6 +1594,18 @@ components:
       properties:
         overview:
           description: Entry overview with support for rich text. The overview must only contain Unicode characters, and should be formatted using HTML. The maximum length is 10 MiB as this value holds HTML descriptions including encoded images. The maximum length of the text without images is 100 KiB.
+          type: string
+      type: object
+    GoogleCloudDatacatalogV1FeatureOnlineStoreSpec:
+      description: Detail description of the source information of a Vertex Feature Online Store.
+      properties:
+        storageType:
+          description: Output only. Type of underelaying storage for the FeatureOnlineStore.
+          enum:
+            - STORAGE_TYPE_UNSPECIFIED
+            - BIGTABLE
+            - OPTIMIZED
+          readOnly: true
           type: string
       type: object
     GoogleCloudDatacatalogV1FilesetSpec:

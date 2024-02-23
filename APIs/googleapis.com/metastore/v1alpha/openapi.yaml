@@ -32,10 +32,10 @@ tags:
 paths:
   /v1alpha/{name}:
     delete:
-      description: Deletes a single backup.
-      operationId: metastore.projects.locations.services.backups.delete
+      description: Deletes a single migration execution.
+      operationId: metastore.projects.locations.services.migrationExecutions.delete
       parameters:
-        - description: Required. The relative resource name of the backup to delete, in the following form:projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}.
+        - description: Required. The relative resource name of the migrationExecution to delete, in the following form:projects/{project_number}/locations/{location_id}/services/{service_id}/migrationExecutions/{migration_execution_id}.
           in: path
           name: name
           required: true
