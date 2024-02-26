@@ -7707,6 +7707,7 @@ components:
             - CHILD_TEXT
             - DANGEROUS_CONTENT
             - RECITATION_TEXT
+            - CELEBRITY_IMG
           type: string
         confidence:
           description: Filtered category
@@ -7760,10 +7761,13 @@ components:
           description: RAI scores for generated image.
         raiInfo:
           $ref: "#/components/schemas/CloudAiLargeModelsVisionRaiInfo"
-          description: RAI info for image
+          description: RAI info for image.
         semanticFilterResponse:
           $ref: "#/components/schemas/CloudAiLargeModelsVisionSemanticFilterResponse"
           description: Semantic filter info for image.
+        text:
+          description: Text/Expanded text input for imagen.
+          type: string
         uri:
           description: Path to another storage (typically Google Cloud Storage).
           type: string
@@ -8256,11 +8260,11 @@ components:
         severity:
           description: Harm severity levels in the content.
           enum:
-            - HARM_PROBABILITY_UNSPECIFIED
-            - NEGLIGIBLE
-            - LOW
-            - MEDIUM
-            - HIGH
+            - HARM_SEVERITY_UNSPECIFIED
+            - HARM_SEVERITY_NEGLIGIBLE
+            - HARM_SEVERITY_LOW
+            - HARM_SEVERITY_MEDIUM
+            - HARM_SEVERITY_HIGH
           type: string
         severityScore:
           description: Harm severity score.
@@ -9895,9 +9899,14 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        displayName:
+          description: The user-defined name of the DatasetVersion. The name can be up to 128 characters long and can consist of any UTF-8 characters.
+          type: string
         etag:
           description: Used to perform consistent read-modify-write updates. If not set, a blind "overwrite" update happens.
           type: string
+        metadata:
+          description: Required. Additional information about the DatasetVersion.
         name:
           description: Output only. The resource name of the DatasetVersion.
           readOnly: true
@@ -11174,6 +11183,9 @@ components:
         name:
           description: "Immutable. Name of the Feature. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}` `projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}` The last part feature is assigned by the client. The feature can be up to 64 characters long and can consist only of ASCII Latin letters A-Z and a-z, underscore(_), and ASCII digits 0-9 starting with a letter. The value will be unique given an entity type."
           type: string
+        pointOfContact:
+          description: Entity responsible for maintaining this feature. Can be comma separated list of email addresses or URIs.
+          type: string
         updateTime:
           description: Output only. Only applicable for Vertex AI Feature Store (Legacy). Timestamp when this EntityType was most recently updated.
           format: google-datetime
@@ -11235,7 +11247,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1BigQuerySource"
           description: Required. Immutable. The BigQuery source URI that points to either a BigQuery Table or View.
         entityIdColumns:
-          description: Optional. Columns to construct entity_id / row keys. Currently only supports 1 entity_id_column. If not provided defaults to `entity_id`.
+          description: Optional. Columns to construct entity_id / row keys. If not provided defaults to `entity_id`.
           items:
             type: string
           type: array
@@ -11474,7 +11486,7 @@ components:
     GoogleCloudAiplatformV1FeatureViewBigQuerySource:
       properties:
         entityIdColumns:
-          description: Required. Columns to construct entity_id / row keys. Start by supporting 1 only.
+          description: Required. Columns to construct entity_id / row keys.
           items:
             type: string
           type: array
@@ -11485,9 +11497,21 @@ components:
     GoogleCloudAiplatformV1FeatureViewDataKey:
       description: Lookup key for a feature view.
       properties:
+        compositeKey:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1FeatureViewDataKeyCompositeKey"
+          description: The actual Entity ID will be composed from this struct. This should match with the way ID is defined in the FeatureView spec.
         key:
           description: String key to use for lookup.
           type: string
+      type: object
+    GoogleCloudAiplatformV1FeatureViewDataKeyCompositeKey:
+      description: ID that is comprised from several parts (columns).
+      properties:
+        parts:
+          description: Parts to construct Entity ID. Should match with the same ID columns as defined in FeatureView in the same order.
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudAiplatformV1FeatureViewFeatureRegistrySource:
       description: A Feature Registry source for features that need to be synced to Online Store.
@@ -12021,13 +12045,6 @@ components:
           readOnly: true
           type: string
       type: object
-    GoogleCloudAiplatformV1GoogleSearchRetrieval:
-      description: Tool to retrieve public web data for grounding, powered by Google.
-      properties:
-        disableAttribution:
-          description: Optional. Disable using the result from this tool in detecting grounding attribution. This does not affect how the result is given to the model for generation.
-          type: boolean
-      type: object
     GoogleCloudAiplatformV1GroundingAttribution:
       description: Grounding attribution.
       properties:
@@ -12414,6 +12431,7 @@ components:
             - EQUAL
             - GREATER_EQUAL
             - GREATER
+            - NOT_EQUAL
           type: string
         valueDouble:
           description: Represents 64 bit float.
@@ -13192,6 +13210,7 @@ components:
             - NVIDIA_TESLA_A100
             - NVIDIA_A100_80GB
             - NVIDIA_L4
+            - NVIDIA_H100_80GB
             - TPU_V2
             - TPU_V3
             - TPU_V4_POD
@@ -15436,6 +15455,7 @@ components:
           description: Optional. Indicates the launch stage of the model.
           enum:
             - LAUNCH_STAGE_UNSPECIFIED
+            - DOGFOOD
             - EXPERIMENTAL
             - PRIVATE_PREVIEW
             - PUBLIC_PREVIEW
@@ -15975,16 +15995,6 @@ components:
           description: Optional. Whether to backfill missed runs when the schedule is resumed from PAUSED state. If set to true, all missed runs will be scheduled. New runs will be scheduled after the backfill is complete. This will also update Schedule.catch_up field. Default to false.
           type: boolean
       type: object
-    GoogleCloudAiplatformV1Retrieval:
-      description: Defines a retrieval tool that model can call to access external knowledge.
-      properties:
-        disableAttribution:
-          description: Optional. Disable using the result from this tool in detecting grounding attribution. This does not affect how the result is given to the model for generation.
-          type: boolean
-        vertexAiSearch:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1VertexAISearch"
-          description: Set to use data source powered by Vertex AI Search.
-      type: object
     GoogleCloudAiplatformV1SafetyRating:
       description: Safety rating corresponding to the generated content.
       properties:
@@ -16012,6 +16022,26 @@ components:
             - HIGH
           readOnly: true
           type: string
+        probabilityScore:
+          description: Output only. Harm probability score.
+          format: float
+          readOnly: true
+          type: number
+        severity:
+          description: Output only. Harm severity levels in the content.
+          enum:
+            - HARM_SEVERITY_UNSPECIFIED
+            - HARM_SEVERITY_NEGLIGIBLE
+            - HARM_SEVERITY_LOW
+            - HARM_SEVERITY_MEDIUM
+            - HARM_SEVERITY_HIGH
+          readOnly: true
+          type: string
+        severityScore:
+          description: Output only. Harm severity score.
+          format: float
+          readOnly: true
+          type: number
       type: object
     GoogleCloudAiplatformV1SafetySetting:
       description: Safety settings.
@@ -19853,19 +19883,13 @@ components:
           type: array
       type: object
     GoogleCloudAiplatformV1Tool:
-      description: Tool details that the model may use to generate response. A `Tool` is a piece of code that enables the system to interact with external systems to perform an action, or set of actions, outside of knowledge and scope of the model. A Tool object should contain exactly one type of Tool.
+      description: Tool details that the model may use to generate response. A `Tool` is a piece of code that enables the system to interact with external systems to perform an action, or set of actions, outside of knowledge and scope of the model. A Tool object should contain exactly one type of Tool (e.g FunctionDeclaration, Retrieval or GoogleSearchRetrieval).
       properties:
         functionDeclarations:
-          description: Optional. One or more function declarations to be passed to the model along with the current user query. Model may decide to call a subset of these functions by populating FunctionCall in the response. User should provide a FunctionResponse for each function call in the next turn. Based on the function responses, Model will generate the final response back to the user. Maximum 64 function declarations can be provided.
+          description: Optional. Function tool type. One or more function declarations to be passed to the model along with the current user query. Model may decide to call a subset of these functions by populating FunctionCall in the response. User should provide a FunctionResponse for each function call in the next turn. Based on the function responses, Model will generate the final response back to the user. Maximum 64 function declarations can be provided.
           items:
             $ref: "#/components/schemas/GoogleCloudAiplatformV1FunctionDeclaration"
           type: array
-        googleSearchRetrieval:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1GoogleSearchRetrieval"
-          description: Optional. Specialized retrieval tool that is powered by Google search.
-        retrieval:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1Retrieval"
-          description: Optional. System will always execute the provided retrieval tool(s) to get external knowledge to answer the prompt. Retrieval results are presented to the model for generation.
       type: object
     GoogleCloudAiplatformV1TrainingConfig:
       description: CMLE training config. For every active learning labeling iteration, system will train a machine learning model on CMLE. The trained model will be used by data sampling algorithm to select DataItems.
@@ -20283,13 +20307,6 @@ components:
           type: string
         stringValue:
           description: A string value.
-          type: string
-      type: object
-    GoogleCloudAiplatformV1VertexAISearch:
-      description: Retrieve from Vertex AI Search datastore for grounding. See https://cloud.google.com/vertex-ai-search-and-conversation
-      properties:
-        datastore:
-          description: Required. Fully-qualified Vertex AI Search's datastore resource ID. projects/<>/locations/<>/collections/<>/dataStores/<>
           type: string
       type: object
     GoogleCloudAiplatformV1VideoMetadata:
@@ -20858,6 +20875,7 @@ components:
             - GENESIS_NEWS_INSIGHTS
             - CLOUD_SECURITY_PRETRAINING
             - CLOUD_SECURITY_FINETUNING
+            - CLOUD_SECURITY_RAG_CISA
             - LABS_AQA_DSCOUT
             - LABS_AQA_TAILWIND
             - LABS_AQA_DELEWARE
@@ -21009,6 +21027,11 @@ components:
             - CLOUD_GEMIT_CODE_IF_V1
             - CLOUD_GEMIT_CODE_SELF_REPAIR
             - CLOUD_GEMIT_IDENTITY
+            - CLOUD_GEMIT_SEARCH_AUGMENTED_RESPONSE_GENERATION
+            - CLOUD_GEMIT_AMPS
+            - CLOUD_GEMIT_AQUA
+            - CLOUD_GEMIT_COMMON_SENSE_REASONING_SCHEMA
+            - CLOUD_GEMIT_GSM8K_SCHEMA
           type: string
         filepath:
           type: string
@@ -21251,6 +21274,7 @@ components:
             - GENESIS_NEWS_INSIGHTS
             - CLOUD_SECURITY_PRETRAINING
             - CLOUD_SECURITY_FINETUNING
+            - CLOUD_SECURITY_RAG_CISA
             - LABS_AQA_DSCOUT
             - LABS_AQA_TAILWIND
             - LABS_AQA_DELEWARE
@@ -21402,6 +21426,11 @@ components:
             - CLOUD_GEMIT_CODE_IF_V1
             - CLOUD_GEMIT_CODE_SELF_REPAIR
             - CLOUD_GEMIT_IDENTITY
+            - CLOUD_GEMIT_SEARCH_AUGMENTED_RESPONSE_GENERATION
+            - CLOUD_GEMIT_AMPS
+            - CLOUD_GEMIT_AQUA
+            - CLOUD_GEMIT_COMMON_SENSE_REASONING_SCHEMA
+            - CLOUD_GEMIT_GSM8K_SCHEMA
           type: string
         displayAttributionMessage:
           description: human-friendly string that contains information from doc_attribution which could be shown by clients
@@ -21648,8 +21677,6 @@ components:
             - MOBILE_ASSISTANT_MAGI_FILTERED_0825_373K
             - MOBILE_ASSISTANT_PALM24B_FILTERED_400K
             - GENESIS_NEWS_INSIGHTS
-            - CLOUD_SECURITY_PRETRAINING
-            - CLOUD_SECURITY_FINETUNING
             - LABS_AQA_DSCOUT
             - LABS_AQA_TAILWIND
             - LABS_AQA_DELEWARE
@@ -21685,6 +21712,9 @@ components:
             - GEMINI_IT_CLOUD_SELF_INSTRUCT
             - GEMINI_IT_CLOUD_UCS_AQUAMUSE
             - GEMIT_BRIDGE_SUFFIX_FT
+            - CLOUD_SECURITY_PRETRAINING
+            - CLOUD_SECURITY_FINETUNING
+            - CLOUD_SECURITY_RAG_CISA
             - GEMINI_GOOSE_PUBLIC
             - GEMINI_GOOSE_SILOED
             - GEMINI_V2_CMS_WIKIPEDIA_LANG_FILTERED_GCC_PII
@@ -21801,6 +21831,11 @@ components:
             - CLOUD_GEMIT_CODE_IF_V1
             - CLOUD_GEMIT_CODE_SELF_REPAIR
             - CLOUD_GEMIT_IDENTITY
+            - CLOUD_GEMIT_SEARCH_AUGMENTED_RESPONSE_GENERATION
+            - CLOUD_GEMIT_AMPS
+            - CLOUD_GEMIT_AQUA
+            - CLOUD_GEMIT_COMMON_SENSE_REASONING_SCHEMA
+            - CLOUD_GEMIT_GSM8K_SCHEMA
           type: string
         filepath:
           type: string
@@ -22041,8 +22076,6 @@ components:
             - MOBILE_ASSISTANT_MAGI_FILTERED_0825_373K
             - MOBILE_ASSISTANT_PALM24B_FILTERED_400K
             - GENESIS_NEWS_INSIGHTS
-            - CLOUD_SECURITY_PRETRAINING
-            - CLOUD_SECURITY_FINETUNING
             - LABS_AQA_DSCOUT
             - LABS_AQA_TAILWIND
             - LABS_AQA_DELEWARE
@@ -22078,6 +22111,9 @@ components:
             - GEMINI_IT_CLOUD_SELF_INSTRUCT
             - GEMINI_IT_CLOUD_UCS_AQUAMUSE
             - GEMIT_BRIDGE_SUFFIX_FT
+            - CLOUD_SECURITY_PRETRAINING
+            - CLOUD_SECURITY_FINETUNING
+            - CLOUD_SECURITY_RAG_CISA
             - GEMINI_GOOSE_PUBLIC
             - GEMINI_GOOSE_SILOED
             - GEMINI_V2_CMS_WIKIPEDIA_LANG_FILTERED_GCC_PII
@@ -22194,6 +22230,11 @@ components:
             - CLOUD_GEMIT_CODE_IF_V1
             - CLOUD_GEMIT_CODE_SELF_REPAIR
             - CLOUD_GEMIT_IDENTITY
+            - CLOUD_GEMIT_SEARCH_AUGMENTED_RESPONSE_GENERATION
+            - CLOUD_GEMIT_AMPS
+            - CLOUD_GEMIT_AQUA
+            - CLOUD_GEMIT_COMMON_SENSE_REASONING_SCHEMA
+            - CLOUD_GEMIT_GSM8K_SCHEMA
           type: string
         displayAttributionMessage:
           description: human-friendly string that contains information from doc_attribution which could be shown by clients
@@ -22280,6 +22321,113 @@ components:
           items:
             $ref: "#/components/schemas/LearningGenaiRootMetricOutput"
           type: array
+      type: object
+    LearningGenaiRootCodeyChatMetadata:
+      description: Stores all metadata relating to AIDA DoConversation.
+      properties:
+        codeLanguage:
+          description: Indicates the programming language of the code if the message is a code chunk.
+          enum:
+            - UNSPECIFIED
+            - ALL
+            - TEXT
+            - CPP
+            - PYTHON
+            - KOTLIN
+            - JAVA
+            - JAVASCRIPT
+            - GO
+            - R
+            - JUPYTER_NOTEBOOK
+            - TYPESCRIPT
+            - HTML
+            - SQL
+            - BASH
+            - C
+            - DART
+            - GRADLE
+            - JAVADOC
+            - JSON
+            - MAKEFILE
+            - MARKDOWN
+            - PROTO
+            - XML
+            - YAML
+          type: string
+      type: object
+    LearningGenaiRootCodeyCheckpoint:
+      description: Describes a sample at a checkpoint for post-processing.
+      properties:
+        codeyTruncatorMetadata:
+          $ref: "#/components/schemas/LearningGenaiRootCodeyTruncatorMetadata"
+          description: Metadata that describes what was truncated at this checkpoint.
+        currentSample:
+          description: Current state of the sample after truncator.
+          type: string
+        postInferenceStep:
+          description: Postprocessor run that yielded this checkpoint.
+          enum:
+            - STEP_POST_PROCESSING_STEP_UNSPECIFIED
+            - STEP_ORIGINAL_MODEL_OUTPUT
+            - STEP_MODEL_OUTPUT_DEDUPLICATION
+            - STEP_STOP_SEQUENCE_TRUNCATION
+            - STEP_HEURISTIC_TRUNCATION
+            - STEP_WALD_TRUNCATION
+            - STEP_WHITESPACE_TRUNCATION
+            - STEP_FINAL_DEDUPLICATION
+            - STEP_TOXICITY_CHECK
+            - STEP_RECITATION_CHECK
+            - STEP_RETURNED
+            - STEP_WALKBACK_CORRECTION
+            - STEP_SCORE_THRESHOLDING
+            - STEP_MODEL_CONFIG_STOP_SEQUENCE_TRUNCATION
+            - STEP_CUSTOM_STOP_SEQUENCE_TRUNCATION
+            - STEP_EXPECTED_SAMPLE_SIZE
+          type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+      type: object
+    LearningGenaiRootCodeyCompletionMetadata:
+      description: Stores all metadata relating to Completion.
+      properties:
+        checkpoints:
+          items:
+            $ref: "#/components/schemas/LearningGenaiRootCodeyCheckpoint"
+          type: array
+      type: object
+    LearningGenaiRootCodeyOutput:
+      description: Top-level wrapper used to store all things codey-related.
+      properties:
+        codeyChatMetadata:
+          $ref: "#/components/schemas/LearningGenaiRootCodeyChatMetadata"
+        codeyCompletionMetadata:
+          $ref: "#/components/schemas/LearningGenaiRootCodeyCompletionMetadata"
+      type: object
+    LearningGenaiRootCodeyTruncatorMetadata:
+      description: Metadata describing what was truncated at each checkpoint.
+      properties:
+        cutoffIndex:
+          description: Index of the current sample that trims off truncated text.
+          format: int32
+          type: integer
+        truncatedText:
+          description: Text that was truncated at a specific checkpoint.
+          type: string
       type: object
     LearningGenaiRootDataProviderOutput:
       properties:
@@ -22862,6 +23010,9 @@ components:
         classifierSummary:
           $ref: "#/components/schemas/LearningGenaiRootClassifierOutputSummary"
           description: Summary of classifier output. We attach this to all messages regardless of whether classification rules triggered or not.
+        codeyOutput:
+          $ref: "#/components/schemas/LearningGenaiRootCodeyOutput"
+          description: Contains metadata related to Codey Processors.
         currentStreamTextLength:
           format: uint32
           type: integer

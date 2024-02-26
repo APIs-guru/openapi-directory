@@ -14924,7 +14924,7 @@ components:
       description: Request message for the ReportService.Search method.
       properties:
         pageSize:
-          description: Number of ReportRows to retrieve in a single page. Defaults to the maximum of 1000. Values above 1000 are coerced to 1000.
+          description: Number of ReportRows to retrieve in a single page. Defaults to 1000. Values above 5000 are coerced to 5000.
           format: int32
           type: integer
         pageToken:

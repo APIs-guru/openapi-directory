@@ -1662,6 +1662,10 @@ components:
         pscConnectionId:
           description: The PSC connection id of the PSC forwarding rule connected to the service attachments in this service connection map.
           type: string
+        selectedSubnetwork:
+          description: Output only. The URI of the selected subnetwork selected to allocate IP address for this connection.
+          readOnly: true
+          type: string
         serviceAttachmentUri:
           description: The URI of a service attachment which is the target of the PSC connection.
           type: string
@@ -2453,6 +2457,10 @@ components:
           type: string
         pscConnectionId:
           description: The PSC connection id of the PSC forwarding rule.
+          type: string
+        selectedSubnetwork:
+          description: Output only. The URI of the subnetwork selected to allocate IP address for this connection.
+          readOnly: true
           type: string
         state:
           description: State of the PSC Connection

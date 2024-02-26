@@ -245,7 +245,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Optional. Specifies the filters for the product results. The syntax is defined in https://google.aip.dev/160 with the following caveats: - Only the following features are supported: - Logical operator `AND` - Comparison operator `=` (no wildcards `*`) - Traversal operator `.` - Has operator `:` (no wildcards `*`) - Only the following fields are supported: - `regionCodes` - `youtubePayload.partnerEligibilityId` - `youtubePayload.postalCode` - Unless explicitly mentioned above, other features are not supported. Example: `regionCodes:US AND youtubePayload.postalCode=94043 AND youtubePayload.partnerEligibilityId=eligibility-id`"
+        - description: "Optional. Specifies the filters for the product results. The syntax is defined in https://google.aip.dev/160 with the following caveats: 1. Only the following features are supported: - Logical operator `AND` - Comparison operator `=` (no wildcards `*`) - Traversal operator `.` - Has operator `:` (no wildcards `*`) 2. Only the following fields are supported: - `regionCodes` - `youtubePayload.partnerEligibilityId` - `youtubePayload.postalCode` 3. Unless explicitly mentioned above, other features are not supported. Example: `regionCodes:US AND youtubePayload.postalCode=94043 AND youtubePayload.partnerEligibilityId=eligibility-id`"
           in: query
           name: filter
           schema:
@@ -297,7 +297,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Optional. Specifies the filters for the promotion results. The syntax is defined in https://google.aip.dev/160 with the following caveats: - Only the following features are supported: - Logical operator `AND` - Comparison operator `=` (no wildcards `*`) - Traversal operator `.` - Has operator `:` (no wildcards `*`) - Only the following fields are supported: - `applicableProducts` - `regionCodes` - `youtubePayload.partnerEligibilityId` - `youtubePayload.postalCode` - Unless explicitly mentioned above, other features are not supported. Example: `applicableProducts:partners/partner1/products/product1 AND regionCodes:US AND youtubePayload.postalCode=94043 AND youtubePayload.partnerEligibilityId=eligibility-id`"
+        - description: "Optional. Specifies the filters for the promotion results. The syntax is defined in https://google.aip.dev/160 with the following caveats: 1. Only the following features are supported: - Logical operator `AND` - Comparison operator `=` (no wildcards `*`) - Traversal operator `.` - Has operator `:` (no wildcards `*`) 2. Only the following fields are supported: - `applicableProducts` - `regionCodes` - `youtubePayload.partnerEligibilityId` - `youtubePayload.postalCode` 3. Unless explicitly mentioned above, other features are not supported. Example: `applicableProducts:partners/partner1/products/product1 AND regionCodes:US AND youtubePayload.postalCode=94043 AND youtubePayload.partnerEligibilityId=eligibility-id`"
           in: query
           name: filter
           schema:
@@ -562,6 +562,7 @@ components:
           type: string
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequest:
+      description: Request to cancel a subscription.
       properties:
         cancelImmediately:
           description: Optional. If true, Google will cancel the subscription immediately, and may or may not (based on the contract) issue a prorated refund for the remainder of the billing cycle. Otherwise, Google defers the cancelation at renewal_time, and will not issue a refund.
@@ -583,6 +584,7 @@ components:
           type: string
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionResponse:
+      description: Response that contains the cancelled subscription resource.
       properties:
         subscription:
           $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1Subscription"
@@ -627,6 +629,7 @@ components:
           type: array
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1EntitleSubscriptionResponse:
+      description: Response that contains the entitled subscription resource.
       properties:
         subscription:
           $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1Subscription"
@@ -643,6 +646,7 @@ components:
           type: string
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1ExtendSubscriptionResponse:
+      description: Response that contains the timestamps after the extension.
       properties:
         cycleEndTime:
           description: The time at which the subscription is expected to be extended, in ISO 8061 format. UTC timezone. Example, "cycleEndTime":"2019-08-31T17:28:54.564Z"
@@ -663,15 +667,16 @@ components:
       properties:
         duration:
           $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1Duration"
-          description: Specifies the period of access the subscription should grant.
+          description: Required. Specifies the period of access the subscription should grant.
         partnerUserToken:
           description: Required. Identifier of the end-user in partner’s system.
           type: string
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsRequest:
+      description: Request to find eligible promotions for the current user.
       properties:
         filter:
-          description: "Optional. Specifies the filters for the promotion results. The syntax is defined in https://google.aip.dev/160 with the following caveats: - Only the following features are supported: - Logical operator `AND` - Comparison operator `=` (no wildcards `*`) - Traversal operator `.` - Has operator `:` (no wildcards `*`) - Only the following fields are supported: - `applicableProducts` - `regionCodes` - `youtubePayload.partnerEligibilityId` - `youtubePayload.postalCode` - Unless explicitly mentioned above, other features are not supported. Example: `applicableProducts:partners/partner1/products/product1 AND regionCodes:US AND youtubePayload.postalCode=94043 AND youtubePayload.partnerEligibilityId=eligibility-id`"
+          description: "Optional. Specifies the filters for the promotion results. The syntax is defined in https://google.aip.dev/160 with the following caveats: 1. Only the following features are supported: - Logical operator `AND` - Comparison operator `=` (no wildcards `*`) - Traversal operator `.` - Has operator `:` (no wildcards `*`) 2. Only the following fields are supported: - `applicableProducts` - `regionCodes` - `youtubePayload.partnerEligibilityId` - `youtubePayload.postalCode` 3. Unless explicitly mentioned above, other features are not supported. Example: `applicableProducts:partners/partner1/products/product1 AND regionCodes:US AND youtubePayload.postalCode=94043 AND youtubePayload.partnerEligibilityId=eligibility-id`"
           type: string
         pageSize:
           description: Optional. The maximum number of promotions to return. The service may return fewer than this value. If unspecified, at most 50 products will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
@@ -732,6 +737,7 @@ components:
           type: string
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1ListProductsResponse:
+      description: Response that contains the products.
       properties:
         nextPageToken:
           description: A token, which can be sent as `page_token` to retrieve the next page. If this field is empty, there are no subsequent pages.
@@ -743,6 +749,7 @@ components:
           type: array
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1ListPromotionsResponse:
+      description: Response that contains the promotions.
       properties:
         nextPageToken:
           description: A token, which can be sent as `page_token` to retrieve the next page. If this field is empty, there are no subsequent pages.

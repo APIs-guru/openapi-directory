@@ -2360,6 +2360,11 @@ components:
     CustomConnector:
       description: CustomConnector represents the custom connector defined by the customer as part of byoc.
       properties:
+        activeConnectorVersions:
+          description: Optional. Active connector versions.
+          items:
+            type: string
+          type: array
         createTime:
           description: Output only. Created time.
           format: google-datetime
@@ -2432,7 +2437,7 @@ components:
           description: Optional. Service account used by runtime plane to access auth config secrets.
           type: string
         specLocation:
-          description: Optional. Location of the custom connector spec.
+          description: Optional. Location of the custom connector spec. The location can be either a public url like `https://public-url.com/spec` Or a Google Cloud Storage location like `gs:///`
           type: string
         state:
           description: Output only. State of the custom connector version.
@@ -2800,6 +2805,11 @@ components:
         registrationDestinationConfig:
           $ref: "#/components/schemas/DestinationConfig"
           description: Registration endpoint for auto registration.
+        triggerConfigVariables:
+          description: Optional. Additional eventing related field values
+          items:
+            $ref: "#/components/schemas/ConfigVariable"
+          type: array
       type: object
     EventingConfigTemplate:
       description: Eventing Config details of a connector version.
@@ -2847,6 +2857,11 @@ components:
         registrationDestinationConfig:
           $ref: "#/components/schemas/DestinationConfigTemplate"
           description: Registration host destination config template.
+        triggerConfigVariables:
+          description: Trigger Config fields that needs to be rendered
+          items:
+            $ref: "#/components/schemas/ConfigVariableTemplate"
+          type: array
       type: object
     EventingDetails:
       description: Eventing Details message.

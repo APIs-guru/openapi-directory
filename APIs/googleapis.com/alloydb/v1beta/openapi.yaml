@@ -1580,6 +1580,10 @@ components:
             type: string
           readOnly: true
           type: array
+        pscDnsName:
+          description: Output only. The DNS name to use with PSC for the Instance.
+          readOnly: true
+          type: string
         publicIpAddress:
           description: Output only. The public IP addresses for the Instance. This is available ONLY when enable_public_ip is set. This is the connection endpoint for an end-user application.
           readOnly: true
@@ -1867,6 +1871,9 @@ components:
             $ref: "#/components/schemas/Node"
           readOnly: true
           type: array
+        pscInstanceConfig:
+          $ref: "#/components/schemas/PscInstanceConfig"
+          description: Optional. The configuration for Private Service Connect (PSC) for the instance.
         publicIpAddress:
           description: Output only. The public IP addresses for the Instance. This is available ONLY when enable_public_ip is set. This is the connection endpoint for an end-user application.
           readOnly: true
@@ -2165,6 +2172,49 @@ components:
           description: Optional. If set, performs request validation (e.g. permission checks and any other type of validation), but do not actually execute the delete.
           type: boolean
       type: object
+    PscInstanceConfig:
+      description: PscInstanceConfig contains PSC related configuration at an instance level.
+      properties:
+        allowedConsumerNetworks:
+          description: Optional. List of consumer networks that are allowed to create PSC endpoints to service-attachments to this instance.
+          items:
+            type: string
+          type: array
+        allowedConsumerProjects:
+          description: Optional. List of consumer projects that are allowed to create PSC endpoints to service-attachments to this instance.
+          items:
+            type: string
+          type: array
+        outgoingServiceAttachmentLinks:
+          description: Optional. List of service attachments that this instance has created endpoints to connect with. Currently, only a single outgoing service attachment is supported per instance.
+          items:
+            type: string
+          type: array
+        pscEnabled:
+          description: Optional. Whether PSC connectivity is enabled for this instance. This is populated by referencing the value from the parent cluster.
+          type: boolean
+        pscInterfaceConfigs:
+          description: Optional. Configurations for setting up PSC interfaces attached to the instance which are used for outbound connectivity. Only primary instances can have PSC interface attached. All the VMs created for the primary instance will share the same configurations. Currently we only support 0 or 1 PSC interface.
+          items:
+            $ref: "#/components/schemas/PscInterfaceConfig"
+          type: array
+        serviceAttachmentLink:
+          description: Output only. The service attachment created when Private Service Connect (PSC) is enabled for the instance. The name of the resource will be in the format of projects//regions//serviceAttachments/
+          readOnly: true
+          type: string
+      type: object
+    PscInterfaceConfig:
+      description: Configuration for setting up a PSC interface. This information needs to be provided by the customer. PSC interfaces will be created and added to VMs via SLM (adding a network interface will require recreating the VM). For HA instances this will be done via LDTM.
+      properties:
+        consumerEndpointIps:
+          description: A list of endpoints in the consumer VPC the interface might initiate outbound connections to. This list has to be provided when the PSC interface is created.
+          items:
+            type: string
+          type: array
+        networkAttachment:
+          description: 'The NetworkAttachment resource created in the consumer VPC to which the PSC interface will be linked, in the form of: "projects/${CONSUMER_PROJECT}/regions/${REGION}/networkAttachments/${NETWORK_ATTACHMENT_NAME}". NetworkAttachment has to be provided when the PSC interface is created.'
+          type: string
+      type: object
     QuantityBasedExpiry:
       description: "A backup's position in a quantity-based retention queue, of backups with the same source cluster and type, with length, retention, specified by the backup's retention policy. Once the position is greater than the retention, the backup is eligible to be garbage collected. Example: 5 backups from the same source cluster and type with a quantity-based retention of 3 and denoted by backup_id (position, retention). Safe: backup_5 (1, 3), backup_4, (2, 3), backup_3 (3, 3). Awaiting garbage collection: backup_2 (4, 3), backup_1 (5, 3)"
       properties:
@@ -2397,10 +2447,13 @@ components:
             - RESOURCE_METADATA
             - OBSERVABILITY_DATA
             - SECURITY_FINDING_DATA
+            - RECOMMENDATION_SIGNAL_DATA
           type: string
+        recommendationSignalData:
+          $ref: "#/components/schemas/StorageDatabasecenterPartnerapiV1mainDatabaseResourceRecommendationSignalData"
+          description: More feed data would be added in subsequent CLs
         resourceHealthSignalData:
           $ref: "#/components/schemas/StorageDatabasecenterPartnerapiV1mainDatabaseResourceHealthSignalData"
-          description: More feed data would be added in subsequent CLs
         resourceId:
           $ref: "#/components/schemas/StorageDatabasecenterPartnerapiV1mainDatabaseResourceId"
           deprecated: true
@@ -2517,6 +2570,17 @@ components:
             - SIGNAL_TYPE_DATABASE_NAMES_EXPOSED
             - SIGNAL_TYPE_SENSITIVE_TRACE_INFO_NOT_MASKED
             - SIGNAL_TYPE_PUBLIC_IP_ENABLED
+            - SIGNAL_TYPE_IDLE
+            - SIGNAL_TYPE_OVERPROVISIONED
+            - SIGNAL_TYPE_HIGH_NUMBER_OF_OPEN_TABLES
+            - SIGNAL_TYPE_HIGH_NUMBER_OF_TABLES
+            - SIGNAL_TYPE_HIGH_TRANSACTION_ID_UTILIZATION
+            - SIGNAL_TYPE_UNDERPROVISIONED
+            - SIGNAL_TYPE_OUT_OF_DISK
+            - SIGNAL_TYPE_SERVER_CERTIFICATE_NEAR_EXPIRY
+            - SIGNAL_TYPE_DATABASE_AUDITING_DISABLED
+            - SIGNAL_TYPE_RESTRICT_AUTHORIZED_NETWORKS
+            - SIGNAL_TYPE_VIOLATE_POLICY_RESTRICT_PUBLIC_IP
           type: string
           x-enumDeprecated:
             - false
@@ -2524,6 +2588,17 @@ components:
             - false
             - true
             - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
             - false
             - false
             - false
@@ -2595,7 +2670,7 @@ components:
           description: Optional. Needs to be used only when the provider is PROVIDER_OTHER.
           type: string
         resourceType:
-          description: Required. The type of resource this ID is identifying. Ex alloydb.googleapis.com/Cluster, alloydb.googleapis.com/Instance, spanner.googleapis.com/Instance REQUIRED Please refer go/condor-common-datamodel
+          description: Required. The type of resource this ID is identifying. Ex redis.googleapis.com/Instance, redis.googleapis.com/Cluster, alloydb.googleapis.com/Cluster, alloydb.googleapis.com/Instance, spanner.googleapis.com/Instance REQUIRED Please refer go/condor-common-datamodel
           type: string
         uniqueId:
           description: Required. A service-local token that distinguishes this resource from other resources within the same service.
@@ -2630,6 +2705,11 @@ components:
         customMetadata:
           $ref: "#/components/schemas/StorageDatabasecenterPartnerapiV1mainCustomMetadataData"
           description: Any custom metadata associated with the resource
+        entitlements:
+          description: Entitlements associated with the resource
+          items:
+            $ref: "#/components/schemas/StorageDatabasecenterPartnerapiV1mainEntitlement"
+          type: array
         expectedState:
           description: The state that the instance is expected to be in. For example, an instance state can transition to UNHEALTHY due to wrong patch update, while the expected state will remain at the HEALTHY.
           enum:
@@ -2693,6 +2773,185 @@ components:
           description: User-provided labels, represented as a dictionary where each label is a single key value pair.
           type: object
       type: object
+    StorageDatabasecenterPartnerapiV1mainDatabaseResourceRecommendationSignalData:
+      description: Common model for database resource recommendation signal data.
+      properties:
+        additionalMetadata:
+          additionalProperties:
+            description: Properties of the object.
+          description: Required. Any other additional metadata specific to recommendation
+          type: object
+        lastRefreshTime:
+          description: Required. last time recommendationw as refreshed
+          format: google-datetime
+          type: string
+        recommendationState:
+          description: Required. Recommendation state
+          enum:
+            - UNSPECIFIED
+            - ACTIVE
+            - CLAIMED
+            - SUCCEEDED
+            - FAILED
+            - DISMISSED
+          type: string
+        recommender:
+          description: "Required. Name of recommendation. Examples: organizations/1234/locations/us-central1/recommenders/google.cloudsql.instance.PerformanceRecommender/recommendations/9876"
+          type: string
+        recommenderId:
+          description: 'Required. ID of recommender. Examples: "google.cloudsql.instance.PerformanceRecommender"'
+          type: string
+        recommenderSubtype:
+          description: 'Required. Contains an identifier for a subtype of recommendations produced for the same recommender. Subtype is a function of content and impact, meaning a new subtype might be added when significant changes to `content` or `primary_impact.category` are introduced. See the Recommenders section to see a list of subtypes for a given Recommender. Examples: For recommender = "google.cloudsql.instance.PerformanceRecommender", recommender_subtype can be "MYSQL_HIGH_NUMBER_OF_OPEN_TABLES_BEST_PRACTICE"/"POSTGRES_HIGH_TRANSACTION_ID_UTILIZATION_BEST_PRACTICE"'
+          type: string
+        resourceName:
+          description: Required. Database resource name associated with the signal. Resource name to follow CAIS resource_name format as noted here go/condor-common-datamodel
+          type: string
+        signalType:
+          description: Required. Type of signal, for example, `SIGNAL_TYPE_IDLE`, `SIGNAL_TYPE_HIGH_NUMBER_OF_TABLES`, etc.
+          enum:
+            - SIGNAL_TYPE_UNSPECIFIED
+            - SIGNAL_TYPE_NOT_PROTECTED_BY_AUTOMATIC_FAILOVER
+            - SIGNAL_TYPE_GROUP_NOT_REPLICATING_ACROSS_REGIONS
+            - SIGNAL_TYPE_NOT_AVAILABLE_IN_MULTIPLE_ZONES
+            - SIGNAL_TYPE_NOT_AVAILABLE_IN_MULTIPLE_REGIONS
+            - SIGNAL_TYPE_NO_PROMOTABLE_REPLICA
+            - SIGNAL_TYPE_NO_AUTOMATED_BACKUP_POLICY
+            - SIGNAL_TYPE_SHORT_BACKUP_RETENTION
+            - SIGNAL_TYPE_LAST_BACKUP_FAILED
+            - SIGNAL_TYPE_LAST_BACKUP_OLD
+            - SIGNAL_TYPE_VIOLATES_CIS_GCP_FOUNDATION_2_0
+            - SIGNAL_TYPE_VIOLATES_CIS_GCP_FOUNDATION_1_3
+            - SIGNAL_TYPE_VIOLATES_CIS_GCP_FOUNDATION_1_2
+            - SIGNAL_TYPE_VIOLATES_CIS_GCP_FOUNDATION_1_1
+            - SIGNAL_TYPE_VIOLATES_CIS_GCP_FOUNDATION_1_0
+            - SIGNAL_TYPE_VIOLATES_NIST_800_53
+            - SIGNAL_TYPE_VIOLATES_ISO_27001
+            - SIGNAL_TYPE_VIOLATES_PCI_DSS_V3_2_1
+            - SIGNAL_TYPE_LOGS_NOT_OPTIMIZED_FOR_TROUBLESHOOTING
+            - SIGNAL_TYPE_QUERY_DURATIONS_NOT_LOGGED
+            - SIGNAL_TYPE_VERBOSE_ERROR_LOGGING
+            - SIGNAL_TYPE_QUERY_LOCK_WAITS_NOT_LOGGED
+            - SIGNAL_TYPE_LOGGING_MOST_ERRORS
+            - SIGNAL_TYPE_LOGGING_ONLY_CRITICAL_ERRORS
+            - SIGNAL_TYPE_MINIMAL_ERROR_LOGGING
+            - SIGNAL_TYPE_QUERY_STATISTICS_LOGGED
+            - SIGNAL_TYPE_EXCESSIVE_LOGGING_OF_CLIENT_HOSTNAME
+            - SIGNAL_TYPE_EXCESSIVE_LOGGING_OF_PARSER_STATISTICS
+            - SIGNAL_TYPE_EXCESSIVE_LOGGING_OF_PLANNER_STATISTICS
+            - SIGNAL_TYPE_NOT_LOGGING_ONLY_DDL_STATEMENTS
+            - SIGNAL_TYPE_LOGGING_QUERY_STATISTICS
+            - SIGNAL_TYPE_NOT_LOGGING_TEMPORARY_FILES
+            - SIGNAL_TYPE_CONNECTION_MAX_NOT_CONFIGURED
+            - SIGNAL_TYPE_USER_OPTIONS_CONFIGURED
+            - SIGNAL_TYPE_EXPOSED_TO_PUBLIC_ACCESS
+            - SIGNAL_TYPE_UNENCRYPTED_CONNECTIONS
+            - SIGNAL_TYPE_NO_ROOT_PASSWORD
+            - SIGNAL_TYPE_WEAK_ROOT_PASSWORD
+            - SIGNAL_TYPE_ENCRYPTION_KEY_NOT_CUSTOMER_MANAGED
+            - SIGNAL_TYPE_SERVER_AUTHENTICATION_NOT_REQUIRED
+            - SIGNAL_TYPE_EXPOSED_BY_OWNERSHIP_CHAINING
+            - SIGNAL_TYPE_EXPOSED_TO_EXTERNAL_SCRIPTS
+            - SIGNAL_TYPE_EXPOSED_TO_LOCAL_DATA_LOADS
+            - SIGNAL_TYPE_CONNECTION_ATTEMPTS_NOT_LOGGED
+            - SIGNAL_TYPE_DISCONNECTIONS_NOT_LOGGED
+            - SIGNAL_TYPE_LOGGING_EXCESSIVE_STATEMENT_INFO
+            - SIGNAL_TYPE_EXPOSED_TO_REMOTE_ACCESS
+            - SIGNAL_TYPE_DATABASE_NAMES_EXPOSED
+            - SIGNAL_TYPE_SENSITIVE_TRACE_INFO_NOT_MASKED
+            - SIGNAL_TYPE_PUBLIC_IP_ENABLED
+            - SIGNAL_TYPE_IDLE
+            - SIGNAL_TYPE_OVERPROVISIONED
+            - SIGNAL_TYPE_HIGH_NUMBER_OF_OPEN_TABLES
+            - SIGNAL_TYPE_HIGH_NUMBER_OF_TABLES
+            - SIGNAL_TYPE_HIGH_TRANSACTION_ID_UTILIZATION
+            - SIGNAL_TYPE_UNDERPROVISIONED
+            - SIGNAL_TYPE_OUT_OF_DISK
+            - SIGNAL_TYPE_SERVER_CERTIFICATE_NEAR_EXPIRY
+            - SIGNAL_TYPE_DATABASE_AUDITING_DISABLED
+            - SIGNAL_TYPE_RESTRICT_AUTHORIZED_NETWORKS
+            - SIGNAL_TYPE_VIOLATE_POLICY_RESTRICT_PUBLIC_IP
+          type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - true
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+      type: object
+    StorageDatabasecenterPartnerapiV1mainEntitlement:
+      description: "Proto representing the access that a user has to a specific feature/service. NextId: 3."
+      properties:
+        entitlementState:
+          description: The current state of user's accessibility to a feature/benefit.
+          enum:
+            - ENTITLEMENT_STATE_UNSPECIFIED
+            - ENTITLED
+            - REVOKED
+          type: string
+        type:
+          description: An enum that represents the type of this entitlement.
+          enum:
+            - ENTITLEMENT_TYPE_UNSPECIFIED
+            - DUET_AI
+          type: string
+      type: object
     StorageDatabasecenterPartnerapiV1mainOperationError:
       description: An error that occurred during a backup creation operation.
       properties:
@@ -2737,6 +2996,8 @@ components:
             - NATIVE
             - ENGINE_CLOUD_SPANNER_WITH_POSTGRES_DIALECT
             - ENGINE_CLOUD_SPANNER_WITH_GOOGLESQL_DIALECT
+            - ENGINE_MEMORYSTORE_FOR_REDIS
+            - ENGINE_MEMORYSTORE_FOR_REDIS_CLUSTER
             - ENGINE_OTHER
           type: string
           x-enumDeprecated:
@@ -2752,6 +3013,8 @@ components:
             - false
             - false
             - false
+            - false
+            - false
         type:
           description: Type of specific database product. It could be CloudSQL, AlloyDB etc..
           enum:
@@ -2763,6 +3026,7 @@ components:
             - PRODUCT_TYPE_SPANNER
             - PRODUCT_TYPE_ON_PREM
             - ON_PREM
+            - PRODUCT_TYPE_MEMORYSTORE
             - PRODUCT_TYPE_OTHER
           type: string
           x-enumDeprecated:
@@ -2774,6 +3038,7 @@ components:
             - false
             - false
             - true
+            - false
             - false
         version:
           description: 'Version of the underlying database engine. Example values: For MySQL, it could be "8.0", "5.7" etc.. For Postgres, it could be "14", "15" etc..'
