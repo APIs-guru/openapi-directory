@@ -29,10 +29,6 @@ tags:
   - name: Payment method
 components:
   examples:
-    WebhookAck:
-      summary: Acknowledge Webhook
-      value:
-        notificationResponse: "[accepted]"
     post-merchant.created-merchant.created:
       description: Example webhook when a merchant account was created
       summary: Merchant account created
@@ -506,9 +502,6 @@ webhooks:
         "200":
           content:
             application/json:
-              examples:
-                merchant.created:
-                  $ref: "#/components/examples/WebhookAck"
               schema:
                 $ref: "#/components/schemas/AccountNotificationResponse"
           description: OK - the request has succeeded.
@@ -538,11 +531,6 @@ webhooks:
         "200":
           content:
             application/json:
-              examples:
-                merchant-updated-valid:
-                  $ref: "#/components/examples/WebhookAck"
-                merchant-updated-with-errors:
-                  $ref: "#/components/examples/WebhookAck"
               schema:
                 $ref: "#/components/schemas/AccountNotificationResponse"
           description: OK - the request has succeeded.
@@ -570,9 +558,6 @@ webhooks:
         "200":
           content:
             application/json:
-              examples:
-                paymentMethod.created:
-                  $ref: "#/components/examples/WebhookAck"
               schema:
                 $ref: "#/components/schemas/PaymentMethodNotificationResponse"
           description: OK - the request has succeeded.

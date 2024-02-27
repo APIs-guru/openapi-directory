@@ -2678,7 +2678,13 @@ paths:
           style: form
       requestBody:
         content:
-          application/json:
+          application/octet-stream:
+            schema:
+              $ref: "#/components/schemas/PlaylistImage"
+          image/jpeg:
+            schema:
+              $ref: "#/components/schemas/PlaylistImage"
+          image/png:
             schema:
               $ref: "#/components/schemas/PlaylistImage"
       responses:

@@ -2247,13 +2247,6 @@ components:
           readOnly: true
           type: string
       type: object
-    VolumeClaim:
-      description: VolumeClaim is a user's request for a volume.
-      properties:
-        storage:
-          description: Volume size, e.g. 1gb.
-          type: string
-      type: object
     VolumeMount:
       description: Pod volumes to mount into the container's filesystem.
       properties:
@@ -2321,9 +2314,6 @@ components:
         subPath:
           description: Optional. SubPath is optionally a directory on the volume which should be used for this binding (i.e. the volume will be mounted at this sub directory). +optional
           type: string
-        volumeClaim:
-          $ref: "#/components/schemas/VolumeClaim"
-          description: Volume claim that will be created in the same namespace.
       type: object
     WorkspaceDeclaration:
       description: WorkspaceDeclaration is a declaration of a volume that a Task requires.

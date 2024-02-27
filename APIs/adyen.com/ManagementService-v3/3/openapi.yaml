@@ -4829,6 +4829,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: ""
         "500":
           content:
             application/json:
@@ -4861,10 +4867,10 @@ paths:
         content:
           application/json:
             examples:
-              01.add-payment-method-visa:
-                $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-01.add-payment-method-visa"
-              02.add-payment-method-partner-model:
-                $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-02.add-payment-method-partner-model"
+              add-payment-method:
+                $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-add-payment-method"
+              add-payment-method-partner-model:
+                $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-add-payment-method-partner-model"
             schema:
               $ref: "#/components/schemas/PaymentMethodSetupInfo"
       responses:
@@ -4872,10 +4878,10 @@ paths:
           content:
             application/json:
               examples:
-                01.add-payment-method-visa:
-                  $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-01.add-payment-method-visa-200"
-                02.add-payment-method-partner-model:
-                  $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-02.add-payment-method-partner-model-200"
+                add-payment-method:
+                  $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-add-payment-method-200"
+                add-payment-method-partner-model:
+                  $ref: "#/components/examples/post-merchants-merchantId-paymentMethodSettings-add-payment-method-partner-model-200"
               schema:
                 $ref: "#/components/schemas/PaymentMethod"
           description: OK - the request has succeeded.
@@ -4905,6 +4911,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: ""
         "500":
           content:
             application/json:
@@ -4973,6 +4985,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: ""
         "500":
           content:
             application/json:
@@ -5045,6 +5063,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: ""
         "500":
           content:
             application/json:
@@ -5115,6 +5139,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: ""
         "500":
           content:
             application/json:
@@ -10825,7 +10855,6 @@ components:
             hasPassword: true
             id: S2-4A3B33202A46
             populateSoapActionHeader: false
-            sslVersion: TLSv1.2
             type: standard
             url: YOUR_WEBHOOK_URL
             username: adyen
@@ -10918,7 +10947,6 @@ components:
         hasPassword: true
         id: S2-4A3B33202A46
         populateSoapActionHeader: false
-        sslVersion: TLSv1.2
         type: standard
         url: YOUR_WEBHOOK_URL
         username: adyen
@@ -11479,7 +11507,6 @@ components:
         phoneNumber: "+1813702551707653"
         reference: Springfield Shop
         status: active
-        storeId: ST322LJ223223K5F4SQNR9XL5
     get-merchants-merchantId-stores-success-200:
       description: Example response when getting a list of stores for a merchant account
       summary: Response code - 200 OK
@@ -11947,7 +11974,6 @@ components:
             hasPassword: false
             id: S2-3E5E42476641
             populateSoapActionHeader: false
-            sslVersion: TLSv1.2
             type: standard
             url: YOUR_WEBHOOK_URL
             username: ""
@@ -12039,7 +12065,6 @@ components:
         hasPassword: false
         id: S2-3E5E42476641
         populateSoapActionHeader: false
-        sslVersion: TLSv1.2
         type: standard
         url: YOUR_WEBHOOK_URL
         username: ""
@@ -12555,7 +12580,6 @@ components:
           - id: PART-620222-EU
             name: Receipt Roll
             quantity: 5
-        shippingLocation: S2-7973536B20662642215526704F302044452F714622375D476169
     patch-companies-companyId-terminalOrders-orderId-update-order-200:
       description: Example response after updating an order for terminal products
       summary: Response code - 200 OK
@@ -12925,7 +12949,6 @@ components:
         hasPassword: false
         id: S2-4A3B33202A46
         populateSoapActionHeader: false
-        sslVersion: TLSv1.2
         type: standard
         url: YOUR_WEBHOOK_URL
         username: ""
@@ -13465,7 +13488,6 @@ components:
           - id: PART-620222-EU
             name: Receipt Roll
             quantity: 20
-        shippingLocation: S2-73536B20665526704F30792642212044452F714622375D477270
     patch-merchants-merchantId-terminalOrders-orderId-update-order-200:
       description: Example response after updating an order for terminal products
       summary: Response code - 200 OK
@@ -13810,7 +13832,6 @@ components:
         hasPassword: false
         id: S2-3E5E42476641
         populateSoapActionHeader: false
-        sslVersion: TLSv1.2
         type: standard
         url: YOUR_WEBHOOK_URL
         username: ""
@@ -14593,7 +14614,6 @@ components:
         id: S2-5C334C6770
         name:
           firstName: John
-          gender: UNKNOWN
           lastName: Smith
         roles:
           - Merchant standard role
@@ -14614,7 +14634,6 @@ components:
           - YOUR_MERCHANT_ACCOUNT
         password: YOUR_PASSWORD
         populateSoapActionHeader: false
-        sslVersion: TLSv1.2
         type: standard
         url: YOUR_WEBHOOK_URL
         username: YOUR_USER
@@ -14708,7 +14727,6 @@ components:
         hasPassword: true
         id: S2-6933523D2772
         populateSoapActionHeader: false
-        sslVersion: TLSv1.2
         type: standard
         url: YOUR_WEBHOOK_URL
         username: myuser
@@ -14737,19 +14755,19 @@ components:
       value:
         data:
           - merchantId: YOUR_MERCHANT_ACCOUNT_AU
-            output: "[accepted]"
+            output: ""
             requestSent: '{"live":"false","notificationItems":[{"NotificationRequestItem":{"amount":{"currency":"EUR","value":100},"eventCode":"AUTHORISATION","eventDate":"2022-05-10T16:57:19+02:00","merchantAccountCode":"YOUR_MERCHANT_ACCOUNT_AU","merchantReference":"6GZBF5ML","operations":["CANCEL","CAPTURE","REFUND"],"paymentMethod":"visa","pspReference":"KDN7UP7S1JIK6XES","reason":"","success":"true"}}]}'
             responseCode: "200"
             responseTime: 657 ms
             status: success
           - merchantId: YOUR_MERCHANT_ACCOUNT_EU
-            output: "[accepted]"
+            output: ""
             requestSent: '{"live":"false","notificationItems":[{"NotificationRequestItem":{"amount":{"currency":"EUR","value":100},"eventCode":"AUTHORISATION","eventDate":"2022-05-10T16:57:19+02:00","merchantAccountCode":"YOUR_MERCHANT_ACCOUNT_EU","merchantReference":"6GZBF5ML","operations":["CANCEL","CAPTURE","REFUND"],"paymentMethod":"visa","pspReference":"KDN7UP7S1JIK6XES","reason":"","success":"true"}}]}'
             responseCode: "200"
             responseTime: 590 ms
             status: success
           - merchantId: YOUR_MERCHANT_ACCOUNT_US
-            output: "[accepted]"
+            output: ""
             requestSent: '{"live":"false","notificationItems":[{"NotificationRequestItem":{"amount":{"currency":"EUR","value":100},"eventCode":"AUTHORISATION","eventDate":"2022-05-10T16:57:19+02:00","merchantAccountCode":"YOUR_MERCHANT_ACCOUNT_US","merchantReference":"6GZBF5ML","operations":["CANCEL","CAPTURE","REFUND"],"paymentMethod":"visa","pspReference":"KDN7UP7S1JIK6XES","reason":"","success":"true"}}]}'
             responseCode: "200"
             responseTime: 248 ms
@@ -14767,7 +14785,6 @@ components:
           self:
             href: https://management-test.adyen.com/v1/merchants/YOUR_MERCHANT_ACCOUNT/apiCredentials/YOUR_API_CREDENTIAL/allowedOrigins/YOUR_ALLOWED_ORIGIN
         domain: https://www.eu.mystore.com
-        id: YOUR_ALLOWED_ORIGIN
     post-merchants-merchantId-apiCredentials-post-merchant-credential:
       description: Example request for adding an API credential.
       summary: Add an API credential
@@ -14806,34 +14823,26 @@ components:
         roles:
           - Checkout webservice role
         username: YOUR_USERNAME
-    post-merchants-merchantId-paymentMethodSettings-01.add-payment-method-visa:
-      description: Example request to add Visa as the payment method
-      summary: Request to add Visa
+    post-merchants-merchantId-paymentMethodSettings-add-payment-method:
+      description: Example request to add a payment method
+      summary: Request a payment method
       value:
-        businessLineId: BL322KV223222D5F8H2J4BQ6C
         countries:
-          - NL
+          - US
         currencies:
-          - EUR
-        storeIds:
-          - ST322LJ223223K5F4SQNR9XL5
+          - USD
         type: visa
-    post-merchants-merchantId-paymentMethodSettings-01.add-payment-method-visa-200:
-      description: Example response after sending a request to add Visa as a payment method
+    post-merchants-merchantId-paymentMethodSettings-add-payment-method-200:
+      description: Example response after sending a request to add a payment method
       summary: Response code - 200 OK
       value:
-        allowed: false
-        businessLineId: BL322KV223222D5F8H2J4BQ6C
         countries:
-          - NL
+          - US
         currencies:
-          - EUR
-        enabled: true
+          - USD
         id: PM3227C223224K5FH84M8CBNH
-        storeId: ST322LJ223223K5F4SQNR9XL5
         type: visa
-        verificationStatus: pending
-    post-merchants-merchantId-paymentMethodSettings-02.add-payment-method-partner-model:
+    post-merchants-merchantId-paymentMethodSettings-add-payment-method-partner-model:
       description: Example request to add Swish with a partner model setup
       summary: Request to add Swish
       value:
@@ -14842,12 +14851,11 @@ components:
           - SE
         currencies:
           - SEK
-        storeIds:
-          - ST322LJ223223K5F4SQNR9XL5
+        storeId: ST322LJ223223K5F4SQNR9XL5
         swish:
           swishNumber: "1231111111"
         type: swish
-    post-merchants-merchantId-paymentMethodSettings-02.add-payment-method-partner-model-200:
+    post-merchants-merchantId-paymentMethodSettings-add-payment-method-partner-model-200:
       description: Example response after sending a request to add Swish in a partner model setup
       summary: Response code - 200 OK
       value:
@@ -14857,8 +14865,7 @@ components:
         currencies:
           - SEK
         id: PM3227C223224K5FH84M8CBNH
-        storeIds:
-          - ST322LJ223223K5F4SQNR9XL5
+        storeId: ST322LJ223223K5F4SQNR9XL5
         swish:
           swishNumber: "1231111111"
         type: swish
@@ -15152,8 +15159,6 @@ components:
       description: Example request to create a user on the merchant level
       summary: Create a user
       value:
-        associatedMerchantAccounts:
-          - YOUR_MERCHANT_ACCOUNT
         email: john.smith@example.com
         name:
           firstName: John
@@ -15170,13 +15175,10 @@ components:
           self:
             href: https://management-test.adyen.com/v1/merchants/YOUR_MERCHANT_ACCOUNT/users/S2-3B3C3C3B22
         active: true
-        associatedMerchantAccounts:
-          - YOUR_MERCHANT_ACCOUNT
         email: john.smith@example.com
         id: S2-3B3C3C3B22
         name:
           firstName: John
-          gender: UNKNOWN
           lastName: Smith
         roles:
           - Merchant standard role
@@ -15193,7 +15195,6 @@ components:
         communicationFormat: json
         password: YOUR_PASSWORD
         populateSoapActionHeader: false
-        sslVersion: TLSv1.2
         type: standard
         url: YOUR_WEBHOOK_URL
         username: YOUR_USER
@@ -15284,7 +15285,6 @@ components:
         hasPassword: true
         id: S2-31433949437F
         populateSoapActionHeader: false
-        sslVersion: TLSv1.2
         type: standard
         url: YOUR_WEBHOOK_URL
         username: myuser
@@ -15313,7 +15313,7 @@ components:
       value:
         data:
           - merchantId: YOUR_MERCHANT_ACCOUNT
-            output: "[accepted]"
+            output: ""
             requestSent: '{"live":"false","notificationItems":[{"NotificationRequestItem":{"amount":{"currency":"EUR","value":100},"eventCode":"AUTHORISATION","eventDate":"2022-05-10T17:02:03+02:00","merchantAccountCode":"YOUR_MERCHANT_ACCOUNT","merchantReference":"4TZLD23Y","operations":["CANCEL","CAPTURE","REFUND"],"paymentMethod":"visa","pspReference":"E05WW50L6IOBRGA0","reason":"","success":"true"}}]}'
             responseCode: "200"
             responseTime: 532 ms
@@ -15405,10 +15405,6 @@ components:
             terminalId: S1F2-000150183300034
         scheduledAt: 2021-12-12T20:21:22-0100
         storeId: ""
-        terminalIds:
-          - S1E-000150183300032
-          - S1E-000150183300033
-          - S1F2-000150183300034
         terminalsWithErrors: {}
         totalErrors: 0
         totalScheduled: 3
@@ -15441,10 +15437,6 @@ components:
             terminalId: S1F2-000150183300034
         scheduledAt: 2021-12-12T20:21:22-0100
         storeId: ""
-        terminalIds:
-          - S1E-000150183300032
-          - S1E-000150183300033
-          - S1F2-000150183300034
         terminalsWithErrors: {}
         totalErrors: 0
         totalScheduled: 3
@@ -17420,9 +17412,11 @@ components:
       properties:
         firstName:
           description: The first name.
+          maxLength: 80
           type: string
         lastName:
           description: The last name.
+          maxLength: 80
           type: string
       required:
         - firstName
@@ -17432,9 +17426,11 @@ components:
       properties:
         firstName:
           description: The first name.
+          maxLength: 80
           type: string
         lastName:
           description: The last name.
+          maxLength: 80
           type: string
       type: object
     Nexo:
@@ -17467,6 +17463,7 @@ components:
           enum:
             - SaleWakeUp
             - KeyPressed
+            - ""
           type: string
         details:
           description: The text shown in the prompt which opens when you select the notification button. For example, the description of the input box for pay-at-table.
@@ -17593,7 +17590,9 @@ components:
           enum:
             - Cash
             - Card
-          type: string
+          type:
+            - string
+            - "null"
       type: object
     PayPalInfo:
       properties:
@@ -19037,6 +19036,12 @@ components:
           description: The SSID of the Wi-Fi network that the terminal is connected to.
           type: string
       type: object
+    TerminalInstructions:
+      properties:
+        adyenAppRestart:
+          description: Indicates whether the Adyen app on the payment terminal restarts automatically when the configuration is updated.
+          type: boolean
+      type: object
     TerminalModelsResponse:
       properties:
         data:
@@ -19241,6 +19246,9 @@ components:
         tapToPay:
           $ref: "#/components/schemas/TapToPay"
           description: Settings for Tap to Pay.
+        terminalInstructions:
+          $ref: "#/components/schemas/TerminalInstructions"
+          description: Settings to define the behaviour of the payment terminal.
         timeouts:
           $ref: "#/components/schemas/Timeouts"
           description: Settings for device [time-outs](https://docs.adyen.com/point-of-sale/pos-timeouts#device-time-out).

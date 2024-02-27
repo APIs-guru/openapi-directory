@@ -5050,6 +5050,11 @@ components:
         sandboxConfig:
           $ref: "#/components/schemas/SandboxConfig"
           description: Sandbox configuration for this node.
+        secondaryBootDisks:
+          description: List of secondary boot disks attached to the nodes.
+          items:
+            $ref: "#/components/schemas/SecondaryBootDisk"
+          type: array
         serviceAccount:
           description: The Google Cloud Platform Service Account to be used by the node VMs. Specify the email address of the Service Account; otherwise, if no Service Account is specified, the "default" service account is used.
           type: string
@@ -5777,6 +5782,19 @@ components:
           enum:
             - UNSPECIFIED
             - GVISOR
+          type: string
+      type: object
+    SecondaryBootDisk:
+      description: SecondaryBootDisk represents a persistent disk attached to a node with special configurations based on its mode.
+      properties:
+        diskImage:
+          description: Fully-qualified resource ID for an existing disk image.
+          type: string
+        mode:
+          description: Disk mode (container image cache, etc.)
+          enum:
+            - MODE_UNSPECIFIED
+            - CONTAINER_IMAGE_CACHE
           type: string
       type: object
     SecurityBulletinEvent:
