@@ -356,7 +356,7 @@ paths:
         - projects
   /v1/{resource}:getIamPolicy:
     get:
-      description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
+      description: Gets the IAM policy policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: sourcerepo.projects.repos.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
@@ -422,7 +422,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      description: Sets the IAM policy on the specified resource. Replaces any existing policy.
       operationId: sourcerepo.projects.repos.setIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
