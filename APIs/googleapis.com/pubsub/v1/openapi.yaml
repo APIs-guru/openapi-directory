@@ -2211,7 +2211,7 @@ components:
       properties:
         ingestionDataSourceSettings:
           $ref: "#/components/schemas/IngestionDataSourceSettings"
-          description: Optional. Settings for managed ingestion from a data source into this topic.
+          description: Optional. Settings for ingestion from a data source into this topic.
         kmsKeyName:
           description: Optional. The resource name of the Cloud KMS CryptoKey to be used to protect access to messages published on this topic. The expected format is `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
           type: string

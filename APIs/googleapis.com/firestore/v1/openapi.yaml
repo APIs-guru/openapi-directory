@@ -2029,19 +2029,6 @@ components:
           $ref: "#/components/schemas/GoogleFirestoreAdminV1WeeklyRecurrence"
           description: For a schedule that runs weekly on a specific day and time.
       type: object
-    GoogleFirestoreAdminV1CmekConfig:
-      description: The CMEK (Customer Managed Encryption Key) configuration for a Firestore database. If not present, the database is secured by the default Google encryption key.
-      properties:
-        activeKeyVersion:
-          description: Output only. Currently in-use [KMS key versions](https://cloud.google.com/kms/docs/resource-hierarchy#key_versions). During [key rotation](https://cloud.google.com/kms/docs/key-rotation), there can be multiple in-use key versions. The expected format is `projects/{project_id}/locations/{kms_location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{key_version}`.
-          items:
-            type: string
-          readOnly: true
-          type: array
-        kmsKeyName:
-          description: Required. Only keys in the same location as this database are allowed to be used for encryption. For Firestore's nam5 multi-region, this corresponds to Cloud KMS multi-region us. For Firestore's eur3 multi-region, this corresponds to Cloud KMS multi-region europe. See https://cloud.google.com/kms/docs/locations. The expected format is `projects/{project_id}/locations/{kms_location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
-          type: string
-      type: object
     GoogleFirestoreAdminV1CreateDatabaseMetadata:
       description: Metadata related to the create database operation.
       properties: {}
@@ -2060,9 +2047,6 @@ components:
             - ENABLED
             - DISABLED
           type: string
-        cmekConfig:
-          $ref: "#/components/schemas/GoogleFirestoreAdminV1CmekConfig"
-          description: Optional. Presence indicates CMEK is enabled for this database.
         concurrencyMode:
           description: The concurrency control mode to use for this database.
           enum:

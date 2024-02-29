@@ -616,30 +616,71 @@ components:
           enum:
             - CAUSE_UNSPECIFIED
             - UNKNOWN_NETWORK
-            - UNKNOWN_IP
             - UNKNOWN_PROJECT
-            - PERMISSION_DENIED
-            - NO_SOURCE_LOCATION
-            - INVALID_ARGUMENT
             - NO_EXTERNAL_IP
             - UNINTENDED_DESTINATION
-            - TRACE_TOO_LONG
-            - INTERNAL_ERROR
             - SOURCE_ENDPOINT_NOT_FOUND
             - MISMATCHED_SOURCE_NETWORK
             - DESTINATION_ENDPOINT_NOT_FOUND
             - MISMATCHED_DESTINATION_NETWORK
+            - UNKNOWN_IP
+            - SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK
+            - PERMISSION_DENIED
+            - PERMISSION_DENIED_NO_CLOUD_NAT_CONFIGS
+            - PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS
+            - NO_SOURCE_LOCATION
+            - INVALID_ARGUMENT
+            - TRACE_TOO_LONG
+            - INTERNAL_ERROR
             - UNSUPPORTED
             - MISMATCHED_IP_VERSION
             - GKE_KONNECTIVITY_PROXY_UNSUPPORTED
             - RESOURCE_CONFIG_NOT_FOUND
+            - VM_INSTANCE_CONFIG_NOT_FOUND
+            - NETWORK_CONFIG_NOT_FOUND
+            - FIREWALL_CONFIG_NOT_FOUND
+            - ROUTE_CONFIG_NOT_FOUND
             - GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT
             - SOURCE_PSC_CLOUD_SQL_UNSUPPORTED
             - SOURCE_FORWARDING_RULE_UNSUPPORTED
             - NON_ROUTABLE_IP_ADDRESS
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - true
+            - true
+            - true
+            - true
+            - true
+            - true
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+        ipAddress:
+          description: IP address that caused the abort.
+          type: string
         projectsMissingPermission:
-          description: List of project IDs that the user has specified in the request but does not have permission to access network configs. Analysis is aborted in this case with the PERMISSION_DENIED cause.
+          description: List of project IDs the user specified in the request but lacks access to. In this case, analysis is aborted with the PERMISSION_DENIED cause.
           items:
             type: string
           type: array
@@ -845,6 +886,9 @@ components:
     DeliverInfo:
       description: Details of the final state "deliver" and associated resource.
       properties:
+        ipAddress:
+          description: IP address of the target (if applicable).
+          type: string
         resourceUri:
           description: URI of the resource that the packet is delivered to.
           type: string
@@ -925,6 +969,7 @@ components:
             - PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK
             - PSC_NEG_PRODUCER_ENDPOINT_NO_GLOBAL_ACCESS
             - PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS
+            - NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT
             - HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED
             - HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED
             - CLOUD_RUN_REVISION_NOT_READY
@@ -1129,6 +1174,9 @@ components:
     ForwardInfo:
       description: Details of the final state "forward" and associated resource.
       properties:
+        ipAddress:
+          description: IP address of the target (if applicable).
+          type: string
         resourceUri:
           description: URI of the resource that the packet is forwarded to.
           type: string

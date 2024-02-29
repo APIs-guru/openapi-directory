@@ -2203,7 +2203,8 @@ components:
           type: integer
         request:
           $ref: "#/components/schemas/CopyLogEntriesRequest"
-          description: CopyLogEntries RPC request.
+          deprecated: true
+          description: CopyLogEntries RPC request. This field is deprecated and not used.
         source:
           description: Source from which to copy log entries.For example, a log bucket:"projects/my-project/locations/global/buckets/my-source-bucket"
           type: string
@@ -3462,17 +3463,17 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        visibility:
+          description: Required. The visibility status of this query, which determines its ownership.
+          enum:
+            - VISIBILITY_UNSPECIFIED
+            - PRIVATE
+            - SHARED
+          type: string
       type: object
     Settings:
       description: Describes the settings associated with a project, folder, organization, or billing account.
       properties:
-        analyticsMode:
-          description: Optional. The default analytics mode of an org or folder which is inherited by all newly created child project buckets.
-          enum:
-            - ANALYTICS_MODE_UNSPECIFIED
-            - ANALYTICS_ENABLED
-            - ANALYTICS_DISABLED
-          type: string
         defaultSinkConfig:
           $ref: "#/components/schemas/DefaultSinkConfig"
           description: Optional. Overrides the built-in configuration for _Default sink.

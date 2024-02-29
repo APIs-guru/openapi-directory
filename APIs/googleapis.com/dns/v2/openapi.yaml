@@ -3192,6 +3192,10 @@ components:
           description: Maximum allowed number of managed zones which can be attached to a network.
           format: int32
           type: integer
+        nameserversPerDelegation:
+          description: Maximum number of nameservers per delegation, meant to prevent abuse
+          format: int32
+          type: integer
         networksPerManagedZone:
           description: Maximum allowed number of networks to which a privately scoped zone can be attached.
           format: int32

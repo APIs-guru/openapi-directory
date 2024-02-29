@@ -1723,9 +1723,11 @@ components:
             - TYPE_RESTRICTION_VIOLATED
             - TYPE_RESOURCE_DELETED
             - TYPE_ROLLOUT_UPDATE
+            - TYPE_DEPLOY_POLICY_EVALUATION
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
             - false
             - false
             - false
@@ -1753,6 +1755,10 @@ components:
             type: string
           readOnly: true
           type: array
+        currentRepairAutomationRun:
+          description: Output only. The current AutomationRun repairing the rollout.
+          readOnly: true
+          type: string
         promoteAutomationRun:
           description: Output only. The ID of the AutomationRun initiated by a promote release rule.
           readOnly: true
@@ -1842,6 +1848,7 @@ components:
             - FAILED
             - IN_PROGRESS
             - PENDING
+            - ABORTED
           readOnly: true
           type: string
         stateDescription:
@@ -1894,9 +1901,11 @@ components:
             - TYPE_RESTRICTION_VIOLATED
             - TYPE_RESOURCE_DELETED
             - TYPE_ROLLOUT_UPDATE
+            - TYPE_DEPLOY_POLICY_EVALUATION
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
             - false
             - false
             - false
@@ -2277,9 +2286,11 @@ components:
             - TYPE_RESTRICTION_VIOLATED
             - TYPE_RESOURCE_DELETED
             - TYPE_ROLLOUT_UPDATE
+            - TYPE_DEPLOY_POLICY_EVALUATION
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
             - false
             - false
             - false
@@ -2653,9 +2664,11 @@ components:
             - TYPE_RESTRICTION_VIOLATED
             - TYPE_RESOURCE_DELETED
             - TYPE_ROLLOUT_UPDATE
+            - TYPE_DEPLOY_POLICY_EVALUATION
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
             - false
             - false
             - false
@@ -3337,9 +3350,11 @@ components:
             - TYPE_RESTRICTION_VIOLATED
             - TYPE_RESOURCE_DELETED
             - TYPE_ROLLOUT_UPDATE
+            - TYPE_DEPLOY_POLICY_EVALUATION
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
             - false
             - false
             - false
@@ -3386,9 +3401,11 @@ components:
             - TYPE_RESTRICTION_VIOLATED
             - TYPE_RESOURCE_DELETED
             - TYPE_ROLLOUT_UPDATE
+            - TYPE_DEPLOY_POLICY_EVALUATION
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
             - false
             - false
             - false
@@ -3522,6 +3539,7 @@ components:
             - REPAIR_STATE_IN_PROGRESS
             - REPAIR_STATE_PENDING
             - REPAIR_STATE_SKIPPED
+            - REPAIR_STATE_ABORTED
           readOnly: true
           type: string
         stateDesc:
@@ -3609,6 +3627,7 @@ components:
             - REPAIR_STATE_IN_PROGRESS
             - REPAIR_STATE_PENDING
             - REPAIR_STATE_SKIPPED
+            - REPAIR_STATE_ABORTED
           readOnly: true
           type: string
         stateDesc:
@@ -3816,9 +3835,11 @@ components:
             - TYPE_RESTRICTION_VIOLATED
             - TYPE_RESOURCE_DELETED
             - TYPE_ROLLOUT_UPDATE
+            - TYPE_DEPLOY_POLICY_EVALUATION
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
             - false
             - false
             - false
@@ -3877,9 +3898,11 @@ components:
             - TYPE_RESTRICTION_VIOLATED
             - TYPE_RESOURCE_DELETED
             - TYPE_ROLLOUT_UPDATE
+            - TYPE_DEPLOY_POLICY_EVALUATION
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
             - false
             - false
             - false
@@ -4194,9 +4217,11 @@ components:
             - TYPE_RESTRICTION_VIOLATED
             - TYPE_RESOURCE_DELETED
             - TYPE_ROLLOUT_UPDATE
+            - TYPE_DEPLOY_POLICY_EVALUATION
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
             - false
             - false
             - false
