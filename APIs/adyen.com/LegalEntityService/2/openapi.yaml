@@ -448,6 +448,12 @@ paths:
           required: true
           schema:
             type: string
+        - description: Do not load document content while fetching the document.
+          in: query
+          name: skipContent
+          required: false
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -2780,6 +2786,7 @@ components:
             *  **adyenAccount**
             *  **adyenCard**
             *  **adyenFranchisee**
+            *  **adyenPccr**
 
           enum:
             - adyenAccount
@@ -2789,6 +2796,7 @@ components:
             - adyenForPlatformsManage
             - adyenFranchisee
             - adyenIssuing
+            - adyenPccr
           type: string
       type: object
     Address:
@@ -3080,6 +3088,7 @@ components:
               - adyenForPlatformsManage
               - adyenFranchisee
               - adyenIssuing
+              - adyenPccr
             type: string
           type: array
       type: object
@@ -3216,9 +3225,9 @@ components:
           description: |-
             Type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity type.
 
-            * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, **proofOfIndustry**, or **proofOfFundingOrWealthSource**.
+            * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, **proofOfIndustry**, **proofOfSignatory**, or **proofOfFundingOrWealthSource**.
 
-            * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **proofOfResidency**, **proofOfIndustry**, **proofOfNationalIdNumber**, **proofOfIndividualTaxId**, or **proofOfFundingOrWealthSource**.
+            * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **liveSelfie**, **proofOfResidency**, **proofOfIndustry**, **proofOfNationalIdNumber**, **proofOfIndividualTaxId**, or **proofOfFundingOrWealthSource**.
 
             * For **soleProprietorship**, the `type` values can be **constitutionalDocument**, **proofOfAddress**, or **proofOfIndustry**.
 
@@ -3235,6 +3244,10 @@ components:
             - registrationDocument
             - vatDocument
             - proofOfOrganizationTaxInfo
+            - proofOfIndividualTaxId
+            - proofOfOwnership
+            - proofOfSignatory
+            - liveSelfie
             - proofOfIndustry
             - constitutionalDocument
             - proofOfFundingOrWealthSource
@@ -3380,6 +3393,7 @@ components:
             *  **adyenAccount**
             *  **adyenCard**
             *  **adyenFranchisee**
+            *  **adyenPccr**
 
           enum:
             - adyenAccount
@@ -3389,6 +3403,7 @@ components:
             - adyenForPlatformsManage
             - adyenFranchisee
             - adyenIssuing
+            - adyenPccr
           type: string
       required:
         - type
@@ -3421,6 +3436,7 @@ components:
             *  **adyenAccount**
             *  **adyenCard**
             *  **adyenFranchisee**
+            *  **adyenPccr**
 
           enum:
             - adyenAccount
@@ -3430,6 +3446,7 @@ components:
             - adyenForPlatformsManage
             - adyenFranchisee
             - adyenIssuing
+            - adyenPccr
           type: string
       type: object
     IdentificationData:
@@ -4297,6 +4314,7 @@ components:
             *  **adyenAccount**
             *  **adyenCard**
             *  **adyenFranchisee**
+            *  **adyenPccr**
 
           enum:
             - adyenAccount
@@ -4306,6 +4324,7 @@ components:
             - adyenForPlatformsManage
             - adyenFranchisee
             - adyenIssuing
+            - adyenPccr
           type: string
       type: object
     TransferInstrument:
@@ -4517,6 +4536,19 @@ components:
             *  **privateFundLimitedPartnership**
             *  **businessTrustEntity**
             *  **businessPartnership**
+            *  **limitedLiabilityPartnership**
+            *  **eg**
+            *  **cooperative**
+            *  **vos**
+            *  **comunidadDeBienes**
+            *  **herenciaYacente**
+            *  **comunidadDePropietarios**
+            *  **sep**
+            *  **sca**
+            *  **bt**
+            *  **kkt**
+            *  **scs**
+            *  **snc**
 
           enum:
             - limitedPartnership
@@ -4534,6 +4566,19 @@ components:
             - privateFundLimitedPartnership
             - businessTrustEntity
             - businessPartnership
+            - limitedLiabilityPartnership
+            - eg
+            - cooperative
+            - vos
+            - comunidadDeBienes
+            - herenciaYacente
+            - comunidadDePropietarios
+            - sep
+            - sca
+            - bt
+            - kkt
+            - scs
+            - snc
           type: string
         vatAbsenceReason:
           description: |-

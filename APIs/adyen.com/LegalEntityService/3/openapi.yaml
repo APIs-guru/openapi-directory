@@ -452,6 +452,12 @@ paths:
           required: true
           schema:
             type: string
+        - description: Do not load document content while fetching the document.
+          in: query
+          name: skipContent
+          required: false
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -3012,6 +3018,15 @@ components:
           maxLength: 6
           minLength: 6
           type: string
+        formFactor:
+          default: physical
+          description: |-
+            The form factor of the account.
+
+            Possible values: **physical**, **virtual**. Default value: **physical**.
+          type:
+            - string
+            - "null"
         type:
           default: auLocal
           description: "**auLocal**"
@@ -3068,6 +3083,7 @@ components:
             *  **adyenAccount**
             *  **adyenCard**
             *  **adyenFranchisee**
+            *  **adyenPccr**
 
           enum:
             - adyenAccount
@@ -3077,6 +3093,7 @@ components:
             - adyenForPlatformsManage
             - adyenFranchisee
             - adyenIssuing
+            - adyenPccr
           type: string
       type: object
     AdditionalBankIdentification:
@@ -3431,6 +3448,15 @@ components:
             - checking
             - savings
           type: string
+        formFactor:
+          default: physical
+          description: |-
+            The form factor of the account.
+
+            Possible values: **physical**, **virtual**. Default value: **physical**.
+          type:
+            - string
+            - "null"
         institutionNumber:
           description: The 3-digit institution number, without separators or whitespace.
           maxLength: 3
@@ -3481,6 +3507,15 @@ components:
           maxLength: 4
           minLength: 4
           type: string
+        formFactor:
+          default: physical
+          description: |-
+            The form factor of the account.
+
+            Possible values: **physical**, **virtual**. Default value: **physical**.
+          type:
+            - string
+            - "null"
         type:
           default: czLocal
           description: "**czLocal**"
@@ -3505,6 +3540,7 @@ components:
               - adyenForPlatformsManage
               - adyenFranchisee
               - adyenIssuing
+              - adyenPccr
             type: string
           type: array
       type: object
@@ -3596,6 +3632,15 @@ components:
           maxLength: 4
           minLength: 4
           type: string
+        formFactor:
+          default: physical
+          description: |-
+            The form factor of the account.
+
+            Possible values: **physical**, **virtual**. Default value: **physical**.
+          type:
+            - string
+            - "null"
         type:
           default: dkLocal
           description: "**dkLocal**"
@@ -3671,9 +3716,9 @@ components:
           description: |-
             Type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity type.
 
-            * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, **proofOfIndustry**, or **proofOfFundingOrWealthSource**.
+            * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, **proofOfIndustry**, **proofOfSignatory**, or **proofOfFundingOrWealthSource**.
 
-            * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, **proofOfIndividualTaxId**, or **proofOfFundingOrWealthSource**.
+            * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **liveSelfie**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, **proofOfIndividualTaxId**, or **proofOfFundingOrWealthSource**.
 
             * For **soleProprietorship**, the `type` values can be **constitutionalDocument**, **proofOfAddress**, or **proofOfIndustry**.
 
@@ -3690,6 +3735,10 @@ components:
             - registrationDocument
             - vatDocument
             - proofOfOrganizationTaxInfo
+            - proofOfIndividualTaxId
+            - proofOfOwnership
+            - proofOfSignatory
+            - liveSelfie
             - proofOfIndustry
             - constitutionalDocument
             - proofOfFundingOrWealthSource
@@ -3835,6 +3884,7 @@ components:
             *  **adyenAccount**
             *  **adyenCard**
             *  **adyenFranchisee**
+            *  **adyenPccr**
 
           enum:
             - adyenAccount
@@ -3844,6 +3894,7 @@ components:
             - adyenForPlatformsManage
             - adyenFranchisee
             - adyenIssuing
+            - adyenPccr
           type: string
       required:
         - type
@@ -3876,6 +3927,7 @@ components:
             *  **adyenAccount**
             *  **adyenCard**
             *  **adyenFranchisee**
+            *  **adyenPccr**
 
           enum:
             - adyenAccount
@@ -3885,6 +3937,7 @@ components:
             - adyenForPlatformsManage
             - adyenFranchisee
             - adyenIssuing
+            - adyenPccr
           type: string
       type: object
     HKLocalAccountIdentification:
@@ -3900,6 +3953,15 @@ components:
           maxLength: 3
           minLength: 3
           type: string
+        formFactor:
+          default: physical
+          description: |-
+            The form factor of the account.
+
+            Possible values: **physical**, **virtual**. Default value: **physical**.
+          type:
+            - string
+            - "null"
         type:
           default: hkLocal
           description: "**hkLocal**"
@@ -3919,6 +3981,15 @@ components:
           maxLength: 24
           minLength: 24
           type: string
+        formFactor:
+          default: physical
+          description: |-
+            The form factor of the account.
+
+            Possible values: **physical**, **virtual**. Default value: **physical**.
+          type:
+            - string
+            - "null"
         type:
           default: huLocal
           description: "**huLocal**"
@@ -3932,6 +4003,15 @@ components:
     IbanAccountIdentification:
       additionalProperties: false
       properties:
+        formFactor:
+          default: physical
+          description: |-
+            The form factor of the account.
+
+            Possible values: **physical**, **virtual**. Default value: **physical**.
+          type:
+            - string
+            - "null"
         iban:
           description: The international bank account number as defined in the [ISO-13616](https://www.iso.org/standard/81090.html) standard.
           type: string
@@ -4348,6 +4428,15 @@ components:
           maxLength: 11
           minLength: 11
           type: string
+        formFactor:
+          default: physical
+          description: |-
+            The form factor of the account.
+
+            Possible values: **physical**, **virtual**. Default value: **physical**.
+          type:
+            - string
+            - "null"
         type:
           default: noLocal
           description: "**noLocal**"
@@ -4366,6 +4455,15 @@ components:
           maxLength: 16
           minLength: 15
           type: string
+        formFactor:
+          default: physical
+          description: |-
+            The form factor of the account.
+
+            Possible values: **physical**, **virtual**. Default value: **physical**.
+          type:
+            - string
+            - "null"
         type:
           default: nzLocal
           description: "**nzLocal**"
@@ -4406,6 +4504,15 @@ components:
           maxLength: 11
           minLength: 8
           type: string
+        formFactor:
+          default: physical
+          description: |-
+            The form factor of the account.
+
+            Possible values: **physical**, **virtual**. Default value: **physical**.
+          type:
+            - string
+            - "null"
         type:
           default: numberAndBic
           description: "**numberAndBic**"
@@ -4616,6 +4723,15 @@ components:
           maxLength: 26
           minLength: 26
           type: string
+        formFactor:
+          default: physical
+          description: |-
+            The form factor of the account.
+
+            Possible values: **physical**, **virtual**. Default value: **physical**.
+          type:
+            - string
+            - "null"
         type:
           default: plLocal
           description: "**plLocal**"
@@ -4698,6 +4814,15 @@ components:
           maxLength: 5
           minLength: 4
           type: string
+        formFactor:
+          default: physical
+          description: |-
+            The form factor of the account.
+
+            Possible values: **physical**, **virtual**. Default value: **physical**.
+          type:
+            - string
+            - "null"
         type:
           default: seLocal
           description: "**seLocal**"
@@ -4722,6 +4847,15 @@ components:
           maxLength: 11
           minLength: 8
           type: string
+        formFactor:
+          default: physical
+          description: |-
+            The form factor of the account.
+
+            Possible values: **physical**, **virtual**. Default value: **physical**.
+          type:
+            - string
+            - "null"
         type:
           default: sgLocal
           description: "**sgLocal**"
@@ -4952,6 +5086,7 @@ components:
             *  **adyenAccount**
             *  **adyenCard**
             *  **adyenFranchisee**
+            *  **adyenPccr**
 
           enum:
             - adyenAccount
@@ -4961,6 +5096,7 @@ components:
             - adyenForPlatformsManage
             - adyenFranchisee
             - adyenIssuing
+            - adyenPccr
           type: string
       type: object
     TransferInstrument:
@@ -5137,6 +5273,15 @@ components:
           maxLength: 8
           minLength: 8
           type: string
+        formFactor:
+          default: physical
+          description: |-
+            The form factor of the account.
+
+            Possible values: **physical**, **virtual**. Default value: **physical**.
+          type:
+            - string
+            - "null"
         sortCode:
           description: The 6-digit [sort code](https://en.wikipedia.org/wiki/Sort_code), without separators or whitespace.
           maxLength: 6
@@ -5171,6 +5316,15 @@ components:
             - checking
             - savings
           type: string
+        formFactor:
+          default: physical
+          description: |-
+            The form factor of the account.
+
+            Possible values: **physical**, **virtual**. Default value: **physical**.
+          type:
+            - string
+            - "null"
         routingNumber:
           description: The 9-digit [routing number](https://en.wikipedia.org/wiki/ABA_routing_transit_number), without separators or whitespace.
           maxLength: 9
@@ -5250,6 +5404,19 @@ components:
             *  **privateFundLimitedPartnership**
             *  **businessTrustEntity**
             *  **businessPartnership**
+            *  **limitedLiabilityPartnership**
+            *  **eg**
+            *  **cooperative**
+            *  **vos**
+            *  **comunidadDeBienes**
+            *  **herenciaYacente**
+            *  **comunidadDePropietarios**
+            *  **sep**
+            *  **sca**
+            *  **bt**
+            *  **kkt**
+            *  **scs**
+            *  **snc**
 
           enum:
             - limitedPartnership
@@ -5267,6 +5434,19 @@ components:
             - privateFundLimitedPartnership
             - businessTrustEntity
             - businessPartnership
+            - limitedLiabilityPartnership
+            - eg
+            - cooperative
+            - vos
+            - comunidadDeBienes
+            - herenciaYacente
+            - comunidadDePropietarios
+            - sep
+            - sca
+            - bt
+            - kkt
+            - scs
+            - snc
           type: string
         vatAbsenceReason:
           description: |-
