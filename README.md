@@ -94,7 +94,7 @@ Existing integrations
  - [WinSwag](https://github.com/SvenEV/WinSwag) - A UWP app for loading Swagger definitions and exploring REST APIs
  - [ReadMe.io](https://preview.readme.io) - Beautiful, personalized, interactive developer hubs
  - [Velosimo](https://connect.velosimo.io/open_api_directory) - Integration platform for eGovernment
- - [Mockcoon](https://mockoon.com/mock-samples/category/all/) - API mock samples for your project
+ - [Mockoon](https://mockoon.com/mock-samples/category/all/) - API mock samples for your project
 
 Also used as test suite in the following projects:
  - [Speakeasy](https://www.speakeasyapi.dev/?utm_source=apigurus+repo&utm_medium=github+sponsorship) - **Generate SDKs Now. Gives your users the DevEx that makes API integrations easy**
