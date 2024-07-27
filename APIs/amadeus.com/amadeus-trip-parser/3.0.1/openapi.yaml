@@ -323,7 +323,7 @@ components:
       properties:
         name:
           description: Equipment name
-          pattern: "[a-zA-Z]{1-70}"
+          pattern: "[a-zA-Z]{1,70}"
           type: string
       title: associatedEquipments
       type: object
