@@ -1,0 +1,117 @@
+openapi: 3.1.0
+info:
+  title: Famxplor Family Travel API
+  description: |-
+    The **[Famxplor](https://famxplor.com)** Family Travel API offers:
+
+    * Seamless access to a growing collection of curated family travel activities from around the globe.
+    * Personalized, kid-friendly travel suggestions tailored to your users.
+    * Opportunities for developers, travel platforms, and businesses to enhance their offerings with family-focused content.
+
+    Whether you're building a travel website, mobile app, or integrating into an existing platform, the Famxplor API empowers you to deliver family-friendly travel ideas that parents and kids will love.
+
+    ## Get Started Today
+
+    1. [Request your access here](https://www.famxplor.com/api)
+    2. Read [developer documentation](https://www.famxplor.com/api/doc) to learn how to use the API.
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /v1/nearest-posts:
+    post:
+      summary: Nearest Posts
+      operationId: nearest_posts_v1_nearest_posts_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NearestInput'
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Posts'
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - APIKeyHeader: []
+components:
+  schemas:
+    HTTPValidationError:
+      title: HTTPValidationError
+      properties:
+        detail:
+          title: Detail
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    NearestInput:
+      title: NearestInput
+      required:
+      - lat
+      - lon
+      properties:
+        lat:
+          title: Lat
+        lon:
+          title: Lon
+        max_distance:
+          title: Max Distance
+          default: 1000
+    Post:
+      title: Post
+      required:
+      - img_url
+      - lat
+      - lon
+      - title
+      - url
+      properties:
+        title:
+          title: Title
+        url:
+          title: Url
+        img_url:
+          title: Img Url
+        lat:
+          title: Lat
+        lon:
+          title: Lon
+    Posts:
+      title: Posts
+      required:
+      - posts
+      properties:
+        posts:
+          title: Posts
+          items:
+            $ref: '#/components/schemas/Post'
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      properties:
+        loc:
+          title: Location
+          items:
+            anyOf:
+            - {}
+            - {}
+        msg:
+          title: Message
+        type:
+          title: Error Type
+  securitySchemes:
+    APIKeyHeader:
+      type: apiKey
+      name: api-key
+      in: header
