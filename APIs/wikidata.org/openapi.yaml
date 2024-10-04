@@ -1,0 +1,4304 @@
+openapi: 3.1.0
+servers:
+  - url: https://www.wikidata.org/w/rest.php/wikibase/v0
+info:
+  contact:
+    name: Wikimedia Deutschland - Wikibase Product Platform Team
+    url: https://phabricator.wikimedia.org/project/board/6692/
+    x-twitter: Wikidata
+  license:
+    name: GNU General Public License v2.0 or later,
+    url: https://spdx.org/licenses/GPL-2.0-or-later.html
+  description: OpenAPI definition of Wikibase REST API.  See https://www.wikidata.org/wiki/Wikidata:REST_API and also https://www.wikidata.org/wiki/Wikidata:Data_access#Wikibase_REST_API
+  title: Wikibase REST API
+  version: 0.4
+  x-apisguru-categories:
+    - media
+    - text
+    - knowledge_base
+    - open_data
+  x-tags:
+    - Wikimedia
+    - Mediawiki
+  x-logo:
+    url: https://upload.wikimedia.org/wikipedia/commons/6/66/Wikidata-logo-en.svg
+    href: https://
+    altText: Wikidata official logo
+  x-origin:
+    - format: openapi
+      url: https://www.wikidata.org/w/rest.php/wikibase/v0/openapi.json
+      version: "3.1"
+  x-providerName: wikidata.org
+  x-serviceName: wikibase
+externalDocs:
+  description: Wikidata REST API
+  url: https://www.wikidata.org/wiki/Wikidata:REST_API
+consumes:
+  - application/json
+produces:
+  - application/json
+security:
+  - OAuth2
+paths:
+  /openapi.json:
+    get:
+      operationId: getOpenApiDoc
+      tags:
+        - OpenAPI document
+      summary: Retrieve the OpenAPI document
+      responses:
+        "200":
+          description: OpenAPI document
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                openapi: ...
+                info:
+                  title: Wikibase REST API
+                  version: ...
+                  description: OpenAPI definition of Wikibase REST API
+                paths: ...
+  /property-data-types:
+    get:
+      operationId: getPropertyDataTypes
+      tags:
+        - Property data types
+      summary: Retrieve the map of Property data types to value types
+      responses:
+        "200":
+          description: The map of Property data types to value types
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+              example:
+                data-type: value-type
+  /entities/items:
+    post:
+      operationId: addItem
+      tags:
+        - items
+      summary: Create a Wikibase Item
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        $ref: "#/components/requestBodies/Item"
+      responses:
+        "201":
+          $ref: "#/components/responses/Item"
+        "400":
+          description: The request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                value-too-long:
+                  $ref: "#/components/examples/ValueTooLongExample"
+                statement-group-property-id-mismatch:
+                  $ref: "#/components/examples/StatementGroupPropertyIdMismatch"
+                referenced-resource-not-found:
+                  $ref: "#/components/examples/ReferencedResourceNotFoundExample"
+                invalid-value:
+                  $ref: "#/components/examples/InvalidValueExample"
+                missing-field:
+                  $ref: "#/components/examples/MissingFieldExample"
+                invalid-key:
+                  $ref: "#/components/examples/InvalidKeyExample"
+                resource-too-large:
+                  $ref: "#/components/examples/ResourceTooLargeExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "422":
+          $ref: "#/components/responses/DataPolicyViolation"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/items/{item_id}:
+    get:
+      operationId: getItem
+      tags:
+        - items
+      summary: Retrieve a single Wikibase Item by ID
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/ItemFields"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/Item"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "308":
+          $ref: "#/components/responses/MovedPermanently"
+        "400":
+          description: The request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                invalid-path-parameter:
+                  $ref: "#/components/examples/InvalidPathParameterExample"
+                invalid-query-parameter:
+                  $ref: "#/components/examples/InvalidQueryParameterExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    patch:
+      operationId: patchItem
+      tags:
+        - items
+      summary: Change a single Wikibase Item by ID
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/ItemPatch"
+      responses:
+        "200":
+          $ref: "#/components/responses/Item"
+        "400":
+          $ref: "#/components/responses/InvalidPatch"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/CannotApplyItemPatch"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          $ref: "#/components/responses/InvalidPatchedItem"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/items/{item_id}/sitelinks:
+    get:
+      operationId: getSitelinks
+      tags:
+        - sitelinks
+      summary: Retrieve an Item's Sitelinks
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/Sitelinks"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "308":
+          $ref: "#/components/responses/MovedPermanently"
+        "400":
+          $ref: "#/components/responses/InvalidEntityIdInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    patch:
+      operationId: patchSitelinks
+      tags:
+        - sitelinks
+      summary: Change an Item's Sitelinks
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/SitelinksPatch"
+      responses:
+        "200":
+          $ref: "#/components/responses/Sitelinks"
+        "400":
+          $ref: "#/components/responses/InvalidPatch"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/CannotApplyItemPatch"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          description: Applying the provided JSON Patch results in invalid Sitelinks
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                patch-result-referenced-resource-not-found:
+                  $ref: "#/components/examples/PatchResultResourceNotFoundExample"
+                patch-result-invalid-value:
+                  $ref: "#/components/examples/PatchResultInvalidValueExample"
+                patch-result-missing-field:
+                  $ref: "#/components/examples/PatchResultMissingFieldExample"
+                patch-result-invalid-key:
+                  $ref: "#/components/examples/PatchResultInvalidKeyExample"
+                url-not-modifiable:
+                  $ref: "#/components/examples/SitelinkUrlNotModifiableExample"
+                data-policy-violation:
+                  $ref: "#/components/examples/DataPolicyViolationExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/items/{item_id}/sitelinks/{site_id}:
+    get:
+      operationId: getSitelink
+      tags:
+        - sitelinks
+      summary: Retrieve an Item's Sitelink
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/SiteId"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/Sitelink"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "308":
+          $ref: "#/components/responses/MovedPermanently"
+        "400":
+          description: The request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                invalid-path-parameter:
+                  $ref: "#/components/examples/InvalidPathParameterExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    put:
+      operationId: setSitelink
+      tags:
+        - sitelinks
+      summary: Add / Replace an Item's Sitelink
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/SiteId"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        $ref: "#/components/requestBodies/Sitelink"
+      responses:
+        "200":
+          $ref: "#/components/responses/Sitelink"
+          description: The updated Sitelink
+        "201":
+          $ref: "#/components/responses/Sitelink"
+          description: The newly added Sitelink
+        "400":
+          description: The request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                invalid-path-parameter:
+                  $ref: "#/components/examples/InvalidPathParameterExample"
+                invalid-value:
+                  $ref: "#/components/examples/InvalidValueExample"
+                missing-field:
+                  $ref: "#/components/examples/MissingFieldExample"
+                value-too-long:
+                  $ref: "#/components/examples/ValueTooLongExample"
+                referenced-resource-not-found:
+                  $ref: "#/components/examples/ReferencedResourceNotFoundExample"
+                resource-too-large:
+                  $ref: "#/components/examples/ResourceTooLargeExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/ItemRedirected"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          $ref: "#/components/responses/DataPolicyViolation"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    delete:
+      operationId: deleteSitelink
+      tags:
+        - sitelinks
+      summary: Delete an Item's Sitelink
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/SiteId"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        $ref: "#/components/requestBodies/Edit"
+      responses:
+        "200":
+          description: The resource was deleted
+          headers:
+            Content-Language:
+              description: Language code of the language in which response is provided
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: string
+              example: Sitelink deleted
+        "400":
+          description: The request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                invalid-path-parameter:
+                  $ref: "#/components/examples/InvalidPathParameterExample"
+                invalid-value:
+                  $ref: "#/components/examples/InvalidValueExample"
+                value-too-long:
+                  $ref: "#/components/examples/ValueTooLongExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/ItemRedirected"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/properties/{property_id}:
+    get:
+      operationId: getProperty
+      tags:
+        - properties
+      summary: Retrieve a single Wikibase Property by ID
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/PropertyFields"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/Property"
+        "400":
+          description: The request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                invalid-path-parameter:
+                  $ref: "#/components/examples/InvalidPathParameterExample"
+                invalid-query-parameter:
+                  $ref: "#/components/examples/InvalidQueryParameterExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    patch:
+      operationId: patchProperty
+      tags:
+        - properties
+      summary: Change a single Wikibase Property by ID
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/PropertyPatch"
+      responses:
+        "200":
+          $ref: "#/components/responses/Property"
+        "400":
+          $ref: "#/components/responses/InvalidPatch"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/CannotApplyPropertyPatch"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          $ref: "#/components/responses/InvalidPatchedProperty"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/items/{item_id}/descriptions:
+    get:
+      operationId: getItemDescriptions
+      tags:
+        - descriptions
+      summary: Retrieve an Item's descriptions
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/ItemDescriptions"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "308":
+          $ref: "#/components/responses/MovedPermanently"
+        "400":
+          $ref: "#/components/responses/InvalidEntityIdInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    patch:
+      operationId: patchItemDescriptions
+      tags:
+        - descriptions
+      summary: Change an Item's descriptions
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/DescriptionsPatch"
+        description: Payload containing a JSON Patch document to be applied to an Item's
+          descriptions and, optionally, edit metadata
+      responses:
+        "200":
+          $ref: "#/components/responses/ItemDescriptions"
+        "400":
+          $ref: "#/components/responses/InvalidPatch"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/CannotApplyItemPatch"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          $ref: "#/components/responses/InvalidPatchedDescriptions"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/properties/{property_id}/descriptions:
+    get:
+      operationId: getPropertyDescriptions
+      tags:
+        - descriptions
+      summary: Retrieve a Property's descriptions
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/PropertyDescriptions"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "400":
+          $ref: "#/components/responses/InvalidEntityIdInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    patch:
+      operationId: patchPropertyDescriptions
+      tags:
+        - descriptions
+      summary: Change a Property's descriptions
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/DescriptionsPatch"
+        description: Payload containing a JSON Patch document to be applied to a
+          Property's descriptions and, optionally, edit metadata
+      responses:
+        "200":
+          $ref: "#/components/responses/PropertyDescriptions"
+        "400":
+          $ref: "#/components/responses/InvalidPatch"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/CannotApplyPropertyPatch"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          $ref: "#/components/responses/InvalidPatchedDescriptions"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/items/{item_id}/descriptions/{language_code}:
+    get:
+      operationId: getItemDescription
+      tags:
+        - descriptions
+      summary: Retrieve an Item's description in a specific language
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/Description"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "308":
+          $ref: "#/components/responses/MovedPermanently"
+        "400":
+          $ref: "#/components/responses/InvalidTermByLanguageInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    put:
+      operationId: replaceItemDescription
+      tags:
+        - descriptions
+      summary: Add / Replace an Item's description in a specific language
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        $ref: "#/components/requestBodies/Description"
+      responses:
+        "200":
+          $ref: "#/components/responses/Description"
+          description: The updated Description in a specific language
+        "201":
+          $ref: "#/components/responses/Description"
+          description: The newly added Description in a specific language
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "400":
+          $ref: "#/components/responses/InvalidSetDescriptionInput"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/ItemRedirected"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          $ref: "#/components/responses/DataPolicyViolation"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    delete:
+      operationId: deleteItemDescription
+      tags:
+        - descriptions
+      summary: Delete an Item's description in a specific language
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        $ref: "#/components/requestBodies/Edit"
+      responses:
+        "200":
+          $ref: "#/components/responses/DescriptionDeleted"
+        "400":
+          $ref: "#/components/responses/InvalidRemoveDescriptionInput"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/ItemRedirected"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/items/{item_id}/descriptions_with_language_fallback/{language_code}:
+    get:
+      operationId: getItemDescriptionWithFallback
+      tags:
+        - descriptions
+      summary: "[WIP] Retrieve an Item's description in a specific language, with
+        language fallback"
+      description: This endpoint is currently in development and is not recommended
+        for production use
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/Description"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "308":
+          $ref: "#/components/responses/MovedPermanently"
+        "400":
+          $ref: "#/components/responses/InvalidTermByLanguageInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/properties/{property_id}/descriptions/{language_code}:
+    get:
+      operationId: getPropertyDescription
+      tags:
+        - descriptions
+      summary: Retrieve a Property's description in a specific language
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/Description"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "400":
+          $ref: "#/components/responses/InvalidTermByLanguageInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    put:
+      operationId: replacePropertyDescription
+      tags:
+        - descriptions
+      summary: Add / Replace a Property's description in a specific language
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        $ref: "#/components/requestBodies/Description"
+      responses:
+        "200":
+          $ref: "#/components/responses/Description"
+          description: The updated Description in a specific language
+        "201":
+          $ref: "#/components/responses/Description"
+          description: The newly added Description in a specific language
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "400":
+          $ref: "#/components/responses/InvalidSetDescriptionInput"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          $ref: "#/components/responses/DataPolicyViolation"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    delete:
+      operationId: deletePropertyDescription
+      tags:
+        - descriptions
+      summary: Delete a Property's description in a specific language
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        $ref: "#/components/requestBodies/Edit"
+      responses:
+        "200":
+          $ref: "#/components/responses/DescriptionDeleted"
+        "400":
+          $ref: "#/components/responses/InvalidRemoveDescriptionInput"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/items/{item_id}/statements:
+    get:
+      operationId: getItemStatements
+      tags:
+        - statements
+      summary: Retrieve Statements from an Item
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/PropertyFilter"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          description: The Statements of an Item
+          headers:
+            Last-Modified:
+              schema:
+                type: string
+              description: Last modified date
+            ETag:
+              schema:
+                type: string
+              description: Last entity revision number
+            X-Authenticated-User:
+              schema:
+                type: string
+              description: Optional username of the user making the request
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: "#/components/responses/Statement/content/application~1json/schema"
+              example:
+                P370:
+                  - id: Q11$6403c562-401a-2b26-85cc-8327801145e1
+                    rank: normal
+                    property:
+                      id: P370
+                      data_type: string
+                    value:
+                      content: I am a goat
+                      type: value
+                    qualifiers: []
+                    references: []
+                P92:
+                  - id: Q11$6403c562-401a-2b26-85cc-8327801145e1
+                    rank: normal
+                    property:
+                      id: P92
+                      data_type: string
+                    value:
+                      content: I am a goat
+                      type: value
+                    qualifiers: []
+                    references: []
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "308":
+          $ref: "#/components/responses/MovedPermanently"
+        "400":
+          $ref: "#/components/responses/InvalidRetrieveStatementsInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    post:
+      operationId: addItemStatement
+      tags:
+        - statements
+      summary: Add a new Statement to an Item
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/IfNoneMatch"
+      requestBody:
+        $ref: "#/components/requestBodies/Statement"
+      responses:
+        "201":
+          description: A single newly created Wikibase Statement. Please note that the
+            value of the `ETag` header field refers to the entity's revision ID.
+          headers:
+            Last-Modified:
+              schema:
+                type: string
+              description: Last modified date
+            ETag:
+              schema:
+                type: string
+              description: Last entity revision number
+            X-Authenticated-User:
+              schema:
+                type: string
+              description: Optional username of the user making the request
+            Location:
+              schema:
+                type: string
+              description: The URI of the newly created Statement
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Statement/content/application~1json/schema"
+        "400":
+          $ref: "#/components/responses/InvalidNewStatementInput"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/ItemRedirected"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/items/{item_id}/statements/{statement_id}:
+    get:
+      operationId: getItemStatement
+      tags:
+        - statements
+      summary: Retrieve a single Statement from an Item
+      description: This endpoint is also accessible through `/statements/{statement_id}`
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/ItemStatementId"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/ItemStatement"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "400":
+          description: The request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                invalid-path-parameter:
+                  $ref: "#/components/examples/InvalidPathParameterExample"
+                item-statement-id-mismatch:
+                  $ref: "#/components/examples/ItemStatementIdMismatchExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    put:
+      operationId: replaceItemStatement
+      tags:
+        - statements
+      summary: Replace a single Statement of an Item
+      description: This endpoint is also accessible through `/statements/{statement_id}`
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/ItemStatementId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/Statement"
+      responses:
+        "200":
+          $ref: "#/components/responses/ItemStatement"
+        "400":
+          description: The request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                invalid-path-parameter:
+                  $ref: "#/components/examples/InvalidPathParameterExample"
+                item-statement-id-mismatch:
+                  $ref: "#/components/examples/ItemStatementIdMismatchExample"
+                invalid-value:
+                  $ref: "#/components/examples/InvalidValueExample"
+                missing-field:
+                  $ref: "#/components/examples/MissingFieldExample"
+                value-too-long:
+                  $ref: "#/components/examples/ValueTooLongExample"
+                cannot-modify-read-only-value:
+                  $ref: "#/components/examples/CannotModifyReadOnlyValue"
+                referenced-resource-not-found:
+                  $ref: "#/components/examples/ReferencedResourceNotFoundExample"
+                resource-too-large:
+                  $ref: "#/components/examples/ResourceTooLargeExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    patch:
+      operationId: patchItemStatement
+      tags:
+        - statements
+      summary: Change elements of a single Statement of an Item
+      description: This endpoint is also accessible through `/statements/{statement_id}`.
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/ItemStatementId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/StatementPatch"
+      responses:
+        "200":
+          $ref: "#/components/responses/ItemStatement"
+        "400":
+          description: The provided JSON Patch is invalid
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                invalid-path-parameter:
+                  $ref: "#/components/examples/InvalidPathParameterExample"
+                item-statement-id-mismatch:
+                  $ref: "#/components/examples/ItemStatementIdMismatchExample"
+                invalid-value:
+                  $ref: "#/components/examples/InvalidValueExample"
+                missing-field:
+                  $ref: "#/components/examples/MissingFieldExample"
+                value-too-long:
+                  $ref: "#/components/examples/ValueTooLongExample"
+                resource-too-large:
+                  $ref: "#/components/examples/ResourceTooLargeExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/CannotApplyStatementPatch"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          $ref: "#/components/responses/InvalidPatchedStatement"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    delete:
+      operationId: deleteItemStatement
+      tags:
+        - statements
+      summary: Delete a single Statement from an Item
+      description: This endpoint is also accessible through `/statements/{statement_id}`
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/ItemStatementId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/Edit"
+      responses:
+        "200":
+          $ref: "#/components/responses/StatementDeleted"
+        "400":
+          description: The request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                invalid-path-parameter:
+                  $ref: "#/components/examples/InvalidPathParameterExample"
+                item-statement-id-mismatch:
+                  $ref: "#/components/examples/ItemStatementIdMismatchExample"
+                invalid-value:
+                  $ref: "#/components/examples/InvalidValueExample"
+                value-too-long:
+                  $ref: "#/components/examples/ValueTooLongExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/items/{item_id}/labels:
+    get:
+      operationId: getItemLabels
+      tags:
+        - labels
+      summary: Retrieve an Item's labels
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/ItemLabels"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "308":
+          $ref: "#/components/responses/MovedPermanently"
+        "400":
+          $ref: "#/components/responses/InvalidEntityIdInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    patch:
+      operationId: patchItemLabels
+      tags:
+        - labels
+      summary: Change an Item's Labels
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/LabelsPatch"
+      responses:
+        "200":
+          $ref: "#/components/responses/ItemLabels"
+        "400":
+          $ref: "#/components/responses/InvalidPatch"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/CannotApplyItemPatch"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          $ref: "#/components/responses/InvalidPatchedLabels"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/properties/{property_id}/labels:
+    get:
+      operationId: getPropertyLabels
+      tags:
+        - labels
+      summary: Retrieve a Property's labels
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/PropertyLabels"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "400":
+          $ref: "#/components/responses/InvalidEntityIdInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    patch:
+      operationId: patchPropertyLabels
+      tags:
+        - labels
+      summary: Change a Property's Labels
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/LabelsPatch"
+      responses:
+        "200":
+          $ref: "#/components/responses/PropertyLabels"
+        "400":
+          $ref: "#/components/responses/InvalidPatch"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/CannotApplyPropertyPatch"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          $ref: "#/components/responses/InvalidPatchedLabels"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/items/{item_id}/labels/{language_code}:
+    get:
+      operationId: getItemLabel
+      tags:
+        - labels
+      summary: Retrieve an Item's label in a specific language
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/Label"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "308":
+          $ref: "#/components/responses/MovedPermanently"
+        "400":
+          $ref: "#/components/responses/InvalidTermByLanguageInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    put:
+      operationId: replaceItemLabel
+      tags:
+        - labels
+      summary: Add / Replace an Item's label in a specific language
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        $ref: "#/components/requestBodies/Label"
+      responses:
+        "200":
+          $ref: "#/components/responses/Label"
+          description: The updated Label in a specific language
+        "201":
+          $ref: "#/components/responses/Label"
+          description: The newly added Label in a specific language
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "400":
+          $ref: "#/components/responses/InvalidSetLabelInput"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/ItemRedirected"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          $ref: "#/components/responses/DataPolicyViolation"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    delete:
+      operationId: deleteItemLabel
+      tags:
+        - labels
+      summary: Delete an Item's label in a specific language
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        $ref: "#/components/requestBodies/Edit"
+      responses:
+        "200":
+          $ref: "#/components/responses/LabelDeleted"
+        "400":
+          $ref: "#/components/responses/InvalidRemoveLabelInput"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/ItemRedirected"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/items/{item_id}/labels_with_language_fallback/{language_code}:
+    get:
+      operationId: getItemLabelWithFallback
+      tags:
+        - labels
+      summary: "[WIP] Retrieve an Item's label in a specific language, with language
+        fallback"
+      description: This endpoint is currently in development and is not recommended
+        for production use
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/Label"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "307":
+          $ref: "#/components/responses/MovedTemporarily"
+        "308":
+          $ref: "#/components/responses/MovedPermanently"
+        "400":
+          $ref: "#/components/responses/InvalidTermByLanguageInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/properties/{property_id}/labels/{language_code}:
+    get:
+      operationId: getPropertyLabel
+      tags:
+        - labels
+      summary: Retrieve a Property's label in a specific language
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/Label"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "400":
+          $ref: "#/components/responses/InvalidTermByLanguageInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    put:
+      operationId: replacePropertyLabel
+      tags:
+        - labels
+      summary: Add / Replace a Property's label in a specific language
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        $ref: "#/components/requestBodies/Label"
+      responses:
+        "200":
+          $ref: "#/components/responses/Label"
+          description: The updated Label in a specific language
+        "201":
+          $ref: "#/components/responses/Label"
+          description: The newly added Label in a specific language
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "400":
+          $ref: "#/components/responses/InvalidSetLabelInput"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          $ref: "#/components/responses/DataPolicyViolation"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    delete:
+      operationId: deletePropertyLabel
+      tags:
+        - labels
+      summary: Delete a Property's label in a specific language
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        $ref: "#/components/requestBodies/Edit"
+      responses:
+        "200":
+          $ref: "#/components/responses/LabelDeleted"
+        "400":
+          $ref: "#/components/responses/InvalidRemoveLabelInput"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/properties/{property_id}/labels_with_language_fallback/{language_code}:
+    get:
+      operationId: getPropertyLabelWithFallback
+      tags:
+        - labels
+      summary: "[WIP] Retrieve a Property's label in a specific language, with
+        language fallback"
+      description: This endpoint is currently in development and is not recommended
+        for production use
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/Label"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "307":
+          $ref: "#/components/responses/MovedTemporarily"
+        "400":
+          $ref: "#/components/responses/InvalidTermByLanguageInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/items/{item_id}/aliases:
+    get:
+      operationId: getItemAliases
+      tags:
+        - aliases
+      summary: Retrieve an Item's aliases
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/ItemAliases"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "308":
+          $ref: "#/components/responses/MovedPermanently"
+        "400":
+          $ref: "#/components/responses/InvalidEntityIdInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    patch:
+      operationId: patchItemAliases
+      tags:
+        - aliases
+      summary: Change an Item's aliases
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/AliasesPatch"
+      responses:
+        "200":
+          $ref: "#/components/responses/ItemAliases"
+        "400":
+          $ref: "#/components/responses/InvalidPatch"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/CannotApplyItemPatch"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          $ref: "#/components/responses/InvalidPatchedAliases"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/properties/{property_id}/aliases:
+    get:
+      operationId: getPropertyAliases
+      tags:
+        - aliases
+      summary: Retrieve a Property's aliases
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/PropertyAliases"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "400":
+          $ref: "#/components/responses/InvalidEntityIdInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    patch:
+      operationId: patchPropertyAliases
+      tags:
+        - aliases
+      summary: Change a Property's aliases
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/AliasesPatch"
+      responses:
+        "200":
+          $ref: "#/components/responses/PropertyAliases"
+        "400":
+          $ref: "#/components/responses/InvalidPatch"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/CannotApplyPropertyPatch"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          $ref: "#/components/responses/InvalidPatchedAliases"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/items/{item_id}/aliases/{language_code}:
+    get:
+      operationId: getItemAliasesInLanguage
+      tags:
+        - aliases
+      summary: Retrieve an Item's aliases in a specific language
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/ItemAliasesInLanguage"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "308":
+          $ref: "#/components/responses/MovedPermanently"
+        "400":
+          $ref: "#/components/responses/InvalidTermByLanguageInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    post:
+      operationId: addItemAliasesInLanguage
+      tags:
+        - aliases
+      summary: Create / Add an Item's aliases in a specific language
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        $ref: "#/components/requestBodies/Aliases"
+      responses:
+        "200":
+          $ref: "#/components/responses/ItemAliasesInLanguage"
+          description: The updated list of Aliases in a specific language
+        "201":
+          $ref: "#/components/responses/ItemAliasesInLanguage"
+          description: The newly created List of Aliases in a specific language
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "400":
+          $ref: "#/components/responses/InvalidAddAliasesInput"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/ItemRedirected"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/properties/{property_id}/aliases/{language_code}:
+    get:
+      operationId: getPropertyAliasesInLanguage
+      tags:
+        - aliases
+      summary: Retrieve a Property's aliases in a specific language
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/PropertyAliasesInLanguage"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "400":
+          $ref: "#/components/responses/InvalidTermByLanguageInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    post:
+      operationId: addPropertyAliasesInLanguage
+      tags:
+        - aliases
+      summary: Create / Add a Property's aliases in a specific language
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/LanguageCode"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        $ref: "#/components/requestBodies/Aliases"
+      responses:
+        "200":
+          $ref: "#/components/responses/PropertyAliasesInLanguage"
+          description: The updated list of Aliases in a specific language
+        "201":
+          $ref: "#/components/responses/PropertyAliasesInLanguage"
+          description: The newly created List of Aliases in a specific language
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "400":
+          $ref: "#/components/responses/InvalidAddAliasesInput"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/properties/{property_id}/statements:
+    get:
+      operationId: getPropertyStatements
+      tags:
+        - statements
+      summary: Retrieve Statements from a Property
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/PropertyFilter"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          description: The Statements of a Property
+          headers:
+            Last-Modified:
+              schema:
+                type: string
+              description: Last modified date
+            ETag:
+              schema:
+                type: string
+              description: Last entity revision number
+            X-Authenticated-User:
+              schema:
+                type: string
+              description: Optional username of the user making the request
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: "#/components/responses/Statement/content/application~1json/schema"
+              example:
+                P370:
+                  - id: P11$6403c562-401a-2b26-85cc-8327801145e1
+                    rank: normal
+                    property:
+                      id: P370
+                      data_type: string
+                    value:
+                      content: I am a goat
+                      type: value
+                    qualifiers: []
+                    references: []
+                P92:
+                  - id: P11$6403c562-401a-2b26-85cc-8327801145e1
+                    rank: normal
+                    property:
+                      id: P92
+                      data_type: string
+                    value:
+                      content: I am a goat
+                      type: value
+                    qualifiers: []
+                    references: []
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "400":
+          $ref: "#/components/responses/InvalidRetrieveStatementsInput"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    post:
+      operationId: addPropertyStatement
+      tags:
+        - statements
+      summary: Add a new Statement to a Property
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/IfNoneMatch"
+      requestBody:
+        $ref: "#/components/requestBodies/Statement"
+      responses:
+        "201":
+          description: A single newly created Wikibase Statement. Please note that the
+            value of the `ETag` header field refers to the entity's revision ID.
+          headers:
+            Last-Modified:
+              schema:
+                type: string
+              description: Last modified date
+            ETag:
+              schema:
+                type: string
+              description: Last entity revision number
+            X-Authenticated-User:
+              schema:
+                type: string
+              description: Optional username of the user making the request
+            Location:
+              schema:
+                type: string
+              description: The URI of the newly created Statement
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/Statement/content/application~1json/schema"
+              example:
+                $ref: "#/components/examples/PropertyStatementResponseExample/value"
+        "400":
+          $ref: "#/components/responses/InvalidNewStatementInput"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /entities/properties/{property_id}/statements/{statement_id}:
+    get:
+      operationId: getPropertyStatement
+      tags:
+        - statements
+      summary: Retrieve a single Statement from a Property
+      description: This endpoint is also accessible through `/statements/{statement_id}`
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/PropertyStatementId"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/PropertyStatement"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "400":
+          description: The request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                invalid-path-parameter:
+                  $ref: "#/components/examples/InvalidPathParameterExample"
+                property-statement-id-mismatch:
+                  $ref: "#/components/examples/PropertyStatementIdMismatchExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    put:
+      operationId: replacePropertyStatement
+      tags:
+        - statements
+      summary: Replace a single Statement of a Property
+      description: This endpoint is also accessible through `/statements/{statement_id}`
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/PropertyStatementId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/Statement"
+      responses:
+        "200":
+          $ref: "#/components/responses/PropertyStatement"
+        "400":
+          description: The request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                invalid-path-parameter:
+                  $ref: "#/components/examples/InvalidPathParameterExample"
+                property-statement-id-mismatch:
+                  $ref: "#/components/examples/PropertyStatementIdMismatchExample"
+                invalid-value:
+                  $ref: "#/components/examples/InvalidValueExample"
+                missing-field:
+                  $ref: "#/components/examples/MissingFieldExample"
+                value-too-long:
+                  $ref: "#/components/examples/ValueTooLongExample"
+                cannot-modify-read-only-value:
+                  $ref: "#/components/examples/CannotModifyReadOnlyValue"
+                referenced-resource-not-found:
+                  $ref: "#/components/examples/ReferencedResourceNotFoundExample"
+                resource-too-large:
+                  $ref: "#/components/examples/ResourceTooLargeExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    patch:
+      operationId: patchPropertyStatement
+      tags:
+        - statements
+      summary: Change elements of a single Statement of a Property
+      description: This endpoint is also accessible through `/statements/{statement_id}`.
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/PropertyStatementId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/StatementPatch"
+      responses:
+        "200":
+          $ref: "#/components/responses/PropertyStatement"
+        "400":
+          description: The provided JSON Patch is invalid
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                invalid-path-parameter:
+                  $ref: "#/components/examples/InvalidPathParameterExample"
+                property-statement-id-mismatch:
+                  $ref: "#/components/examples/PropertyStatementIdMismatchExample"
+                invalid-value:
+                  $ref: "#/components/examples/InvalidValueExample"
+                missing-field:
+                  $ref: "#/components/examples/MissingFieldExample"
+                value-too-long:
+                  $ref: "#/components/examples/ValueTooLongExample"
+                resource-too-large:
+                  $ref: "#/components/examples/ResourceTooLargeExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/CannotApplyStatementPatch"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          $ref: "#/components/responses/InvalidPatchedStatement"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    delete:
+      operationId: deletePropertyStatement
+      tags:
+        - statements
+      summary: Delete a single Statement from a Property
+      description: This endpoint is also accessible through `/statements/{statement_id}`.
+      parameters:
+        - $ref: "#/components/parameters/PropertyId"
+        - $ref: "#/components/parameters/PropertyStatementId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/Edit"
+      responses:
+        "200":
+          $ref: "#/components/responses/StatementDeleted"
+        "400":
+          description: The request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                invalid-path-parameter:
+                  $ref: "#/components/examples/InvalidPathParameterExample"
+                property-statement-id-mismatch:
+                  $ref: "#/components/examples/PropertyStatementIdMismatchExample"
+                invalid-value:
+                  $ref: "#/components/examples/InvalidValueExample"
+                value-too-long:
+                  $ref: "#/components/examples/ValueTooLongExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+  /statements/{statement_id}:
+    get:
+      operationId: getStatement
+      tags:
+        - statements
+      summary: Retrieve a single Statement
+      description: This endpoint is also accessible through
+        `/entities/items/{item_id}/statements/{statement_id}` and
+        `/entities/properties/{property_id}/statements/{statement_id}`
+      parameters:
+        - $ref: "#/components/parameters/StatementId"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfModifiedSince"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          $ref: "#/components/responses/Statement"
+        "304":
+          $ref: "#/components/responses/NotModified"
+        "400":
+          description: The request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                invalid-path-parameter:
+                  $ref: "#/components/examples/InvalidPathParameterExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    put:
+      operationId: replaceStatement
+      tags:
+        - statements
+      summary: Replace a single Statement
+      description: This endpoint is also accessible through
+        `/entities/items/{item_id}/statements/{statement_id}` and
+        `/entities/properties/{property_id}/statements/{statement_id}`
+      parameters:
+        - $ref: "#/components/parameters/StatementId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/Statement"
+      responses:
+        "200":
+          $ref: "#/components/responses/Statement"
+        "400":
+          description: The request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                invalid-path-parameter:
+                  $ref: "#/components/examples/InvalidPathParameterExample"
+                invalid-value:
+                  $ref: "#/components/examples/InvalidValueExample"
+                missing-field:
+                  $ref: "#/components/examples/MissingFieldExample"
+                value-too-long:
+                  $ref: "#/components/examples/ValueTooLongExample"
+                cannot-modify-read-only-value:
+                  $ref: "#/components/examples/CannotModifyReadOnlyValue"
+                resource-too-large:
+                  $ref: "#/components/examples/ResourceTooLargeExample"
+                referenced-resource-not-found:
+                  $ref: "#/components/examples/ReferencedResourceNotFoundExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    patch:
+      operationId: patchStatement
+      tags:
+        - statements
+      summary: Change elements of a single Statement
+      description: This endpoint is also accessible through
+        `/entities/items/{item_id}/statements/{statement_id}` and
+        `/entities/properties/{property_id}/statements/{statement_id}`
+      parameters:
+        - $ref: "#/components/parameters/StatementId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/StatementPatch"
+      responses:
+        "200":
+          $ref: "#/components/responses/Statement"
+        "400":
+          $ref: "#/components/responses/InvalidPatch"
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "409":
+          $ref: "#/components/responses/CannotApplyStatementPatch"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "422":
+          $ref: "#/components/responses/InvalidPatchedStatement"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+    delete:
+      operationId: deleteStatement
+      tags:
+        - statements
+      summary: Delete a single Statement
+      description: This endpoint is also accessible through
+        `/entities/items/{item_id}/statements/{statement_id}` and
+        `/entities/properties/{property_id}/statements/{statement_id}`
+      parameters:
+        - $ref: "#/components/parameters/StatementId"
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/IfUnmodifiedSince"
+      requestBody:
+        $ref: "#/components/requestBodies/Edit"
+      responses:
+        "200":
+          $ref: "#/components/responses/StatementDeleted"
+        "400":
+          description: The request cannot be processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+              examples:
+                invalid-path-parameter:
+                  $ref: "#/components/examples/InvalidPathParameterExample"
+                invalid-value:
+                  $ref: "#/components/examples/InvalidValueExample"
+                value-too-long:
+                  $ref: "#/components/examples/ValueTooLongExample"
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: Language code of the language in which error message is provided
+        "403":
+          $ref: "#/components/responses/PermissionDenied"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+        "412":
+          $ref: "#/components/responses/PreconditionFailedError"
+        "429":
+          $ref: "#/components/responses/RequestLimitReached"
+        "500":
+          $ref: "#/components/responses/UnexpectedError"
+components:
+  parameters:
+    ItemId:
+      in: path
+      name: item_id
+      description: The ID of the required Item
+      required: true
+      schema:
+        type: string
+        pattern: ^Q[1-9]\d{0,9}$
+      examples:
+        item:
+          summary: Example of Item ID
+          value: Q42
+    PropertyId:
+      in: path
+      name: property_id
+      description: The ID of the required Property
+      required: true
+      schema:
+        type: string
+        pattern: ^P[1-9]\d{0,9}$
+      examples:
+        item:
+          summary: Example of Property ID
+          value: P31
+    StatementId:
+      in: path
+      name: statement_id
+      description: The ID of the required Statement
+      required: true
+      schema:
+        type: string
+        pattern: ^(Q|q|P|p)[1-9]\d{0,9}\$.+$
+      examples:
+        Statement on an Item:
+          $ref: "#/components/examples/ItemStatementIdExample"
+        Statement on a Property:
+          $ref: "#/components/examples/PropertyStatementIdExample"
+    ItemStatementId:
+      in: path
+      name: statement_id
+      description: The ID of the required Item Statement
+      required: true
+      schema:
+        type: string
+        pattern: ^(Q|q)[1-9]\d{0,9}\$.+$
+      example:
+        $ref: "#/components/examples/ItemStatementIdExample/value"
+    PropertyStatementId:
+      in: path
+      name: statement_id
+      description: The ID of the required Property Statement
+      required: true
+      schema:
+        type: string
+        pattern: ^(P|p)[1-9]\d{0,9}\$.+$
+      example:
+        $ref: "#/components/examples/PropertyStatementIdExample/value"
+    LanguageCode:
+      in: path
+      name: language_code
+      description: The requested resource language
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-z]{2}[a-z0-9-]*$
+      example: en
+    SiteId:
+      in: path
+      name: site_id
+      description: The ID of the required Site
+      required: true
+      schema:
+        type: string
+      examples:
+        item:
+          summary: Example of Site ID
+          value: dewiki
+    ItemFields:
+      in: query
+      name: _fields
+      description: Comma-separated list of fields to include in each response object.
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+            - type
+            - labels
+            - descriptions
+            - aliases
+            - statements
+            - sitelinks
+      explode: false
+      style: form
+    PropertyFields:
+      in: query
+      name: _fields
+      description: Comma-separated list of fields to include in each response object.
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+            - type
+            - data_type
+            - labels
+            - descriptions
+            - aliases
+            - statements
+      explode: false
+      style: form
+    PropertyFilter:
+      in: query
+      name: property
+      description: Single Property ID to filter Statements by.
+      required: false
+      schema:
+        type: string
+        pattern: ^P[1-9]\d{0,9}$
+      style: form
+      example: P31
+    IfNoneMatch:
+      name: If-None-Match
+      in: header
+      description: Conditionally perform the request only if the resource has been
+        modified since the specified entity revision numbers
+      schema:
+        type: array
+        items:
+          type: string
+          pattern: ^(?:".+"|\*)$
+      examples:
+        strong-etag:
+          summary: Single ETag
+          value:
+            - '"1276705620"'
+        multiple-etags:
+          summary: Multiple ETags
+          value:
+            - '"1276703231"'
+            - '"1276705620"'
+    IfModifiedSince:
+      name: If-Modified-Since
+      in: header
+      description: Conditionally perform the request only if the resource has been
+        modified after the specified date
+      schema:
+        type: string
+        format: http-date
+      example: Sat, 06 Jun 2020 16:38:47 GMT
+    IfMatch:
+      name: If-Match
+      in: header
+      description: Conditionally perform the request only if the resource has not been
+        modified since one of the specified entity revision numbers
+      schema:
+        type: array
+        items:
+          type: string
+          pattern: ^(?:".+"|\*)$
+      examples:
+        strong-etag:
+          summary: Single ETag
+          value:
+            - '"1276705620"'
+        multiple-etags:
+          summary: Multiple ETags
+          value:
+            - '"1276703231"'
+            - '"1276705620"'
+    IfUnmodifiedSince:
+      name: If-Unmodified-Since
+      in: header
+      description: Conditionally perform the request only if the resource has not been
+        modified after the specified date
+      schema:
+        type: string
+        format: http-date
+      example: Sat, 06 Jun 2020 16:38:47 GMT
+    Authorization:
+      name: Authorization
+      in: header
+      description: Make authenticated request using a provided bearer token
+      schema:
+        type: string
+      example: Bearer mF_9.B5f-4.1JqM
+  requestBodies:
+    Item:
+      description: Payload containing a Wikibase Item and edit metadata
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: object
+                properties:
+                  item:
+                    type: object
+                    properties:
+                      labels:
+                        $ref: "#/components/schemas/Labels"
+                      descriptions:
+                        $ref: "#/components/schemas/Descriptions"
+                      aliases:
+                        $ref: "#/components/schemas/Aliases"
+                      sitelinks:
+                        type: object
+                        additionalProperties:
+                          type: object
+                          items:
+                            $ref: "#/components/schemas/Sitelink"
+                        example:
+                          afwiki:
+                            title: Douglas Adams
+                            badges:
+                              - Q17437798
+                          arwiki:
+                            title: دوغلاس آدمز
+                            badges: []
+                      statements:
+                        type: object
+                        additionalProperties:
+                          type: array
+                          items:
+                            $ref: "#/components/schemas/Statement"
+                        example:
+                          P92:
+                            - rank: normal
+                              property:
+                                id: P92
+                              value:
+                                content: I am a goat
+                                type: value
+                              qualifiers: []
+                              references: []
+                required:
+                  - item
+              - $ref: "#/components/requestBodies/Edit/content/application~1json/schema"
+    ItemPatch:
+      required: true
+      content:
+        application/json-patch+json:
+          schema:
+            $ref: "#/components/requestBodies/ItemPatch/content/application~1json/schema"
+        application/json:
+          schema:
+            allOf:
+              - type: object
+                properties:
+                  patch:
+                    description: A JSON Patch document as defined by RFC 6902
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        op:
+                          description: The operation to perform
+                          type: string
+                          enum:
+                            - add
+                            - copy
+                            - move
+                            - remove
+                            - replace
+                            - test
+                          example: replace
+                        path:
+                          description: A JSON Pointer for the Property to manipulate
+                          type: string
+                        value:
+                          description: The value to be used within the operation
+                      required:
+                        - op
+                        - path
+                required:
+                  - patch
+              - properties:
+                  patch:
+                    items:
+                      properties:
+                        path:
+                          example: /labels/en
+                        value:
+                          example: Douglas Adams
+              - $ref: "#/components/requestBodies/Edit/content/application~1json/schema"
+    PropertyPatch:
+      required: true
+      content:
+        application/json-patch+json:
+          schema:
+            $ref: "#/components/requestBodies/PropertyPatch/content/application~1json/schem\
+              a"
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/appli\
+                  cation~1json/schema/allOf/0"
+              - properties:
+                  patch:
+                    items:
+                      properties:
+                        path:
+                          example: /labels/en
+                        value:
+                          example: Instance of
+              - $ref: "#/components/requestBodies/Edit/content/application~1json/schema"
+    Label:
+      description: Payload containing a Wikibase label in the specified language and
+        edit metadata
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: object
+                properties:
+                  label:
+                    type: string
+                    example: an example label
+                required:
+                  - label
+              - $ref: "#/components/requestBodies/Edit/content/application~1json/schema"
+    LabelsPatch:
+      description: Payload containing a JSON Patch document to be applied to Labels
+        and edit metadata
+      required: true
+      content:
+        application/json-patch+json:
+          schema:
+            $ref: "#/components/requestBodies/LabelsPatch/content/application~1json/schema"
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/appli\
+                  cation~1json/schema/allOf/0"
+              - properties:
+                  patch:
+                    items:
+                      properties:
+                        path:
+                          example: /en
+                        value:
+                          example: en-label
+              - $ref: "#/components/requestBodies/Edit/content/application~1json/schema"
+    Aliases:
+      description: Payload containing a list of Wikibase aliases in the specified
+        language and edit metadata
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: object
+                properties:
+                  aliases:
+                    type: array
+                    example:
+                      - alias-1
+                      - alias-2
+                required:
+                  - aliases
+              - $ref: "#/components/requestBodies/Edit/content/application~1json/schema"
+    AliasesPatch:
+      description: Payload containing a JSON Patch document to be applied to an Item's
+        aliases and edit metadata
+      required: true
+      content:
+        application/json-patch+json:
+          schema:
+            $ref: "#/components/requestBodies/AliasesPatch/content/application~1json/schema"
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/appli\
+                  cation~1json/schema/allOf/0"
+              - properties:
+                  patch:
+                    items:
+                      properties:
+                        path:
+                          example: /en/0
+                        value:
+                          example: en-alias1
+              - $ref: "#/components/requestBodies/Edit/content/application~1json/schema"
+    Description:
+      description: Payload containing a Wikibase description in the specified language
+        and edit metadata
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: object
+                properties:
+                  description:
+                    type: string
+                    example: an example description
+                required:
+                  - description
+              - $ref: "#/components/requestBodies/Edit/content/application~1json/schema"
+    DescriptionsPatch:
+      required: true
+      content:
+        application/json-patch+json:
+          schema:
+            $ref: "#/components/requestBodies/DescriptionsPatch/content/application~1json/s\
+              chema"
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/appli\
+                  cation~1json/schema/allOf/0"
+              - properties:
+                  patch:
+                    items:
+                      properties:
+                        path:
+                          example: /en
+                        value:
+                          example: en-description
+              - $ref: "#/components/requestBodies/Edit/content/application~1json/schema"
+    Statement:
+      description: Payload containing a Wikibase Statement object and edit metadata
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: object
+                properties:
+                  statement:
+                    allOf:
+                      - $ref: "#/components/schemas/Statement"
+                      - allOf:
+                          - required:
+                              - property
+                              - value
+                            properties:
+                              property:
+                                required:
+                                  - id
+                              value:
+                                required:
+                                  - type
+                          - properties:
+                              qualifiers:
+                                items:
+                                  $ref: "#/paths/~1statements~1%7Bstatement_id%7D/put/requestBody/content/applica\
+                                    tion~1json/schema/allOf/0/properties/statem\
+                                    ent/allOf/1/allOf/0"
+                              references:
+                                items:
+                                  required:
+                                    - parts
+                                  properties:
+                                    parts:
+                                      items:
+                                        $ref: "#/paths/~1statements~1%7Bstatement_id%7D/put/requestBody/content/applica\
+                                          tion~1json/schema/allOf/0/properties/\
+                                          statement/allOf/1/allOf/0"
+                required:
+                  - statement
+              - $ref: "#/components/requestBodies/Edit/content/application~1json/schema"
+    StatementPatch:
+      description: Payload containing a JSON Patch document to be applied to a
+        Statement and edit metadata
+      required: true
+      content:
+        application/json-patch+json:
+          schema:
+            $ref: "#/components/requestBodies/StatementPatch/content/application~1json/sche\
+              ma"
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/appli\
+                  cation~1json/schema/allOf/0"
+              - properties:
+                  patch:
+                    items:
+                      properties:
+                        path:
+                          example: /value/content
+                        value:
+                          example: Q5
+              - $ref: "#/components/requestBodies/Edit/content/application~1json/schema"
+    Sitelink:
+      description: Payload containing a Wikibase Sitelink object and edit metadata
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - type: object
+                properties:
+                  sitelink:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                        example: Douglas Adams
+                      badges:
+                        type: array
+                        example: []
+                        items:
+                          type: string
+                    required:
+                      - title
+                required:
+                  - sitelink
+              - $ref: "#/components/requestBodies/Edit/content/application~1json/schema"
+    SitelinksPatch:
+      required: true
+      content:
+        application/json-patch+json:
+          schema:
+            $ref: "#/components/requestBodies/SitelinksPatch/content/application~1json/sche\
+              ma"
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/paths/~1entities~1items~1%7Bitem_id%7D/patch/requestBody/content/appli\
+                  cation~1json/schema/allOf/0"
+              - properties:
+                  patch:
+                    items:
+                      properties:
+                        path:
+                          example: /afwiki/title
+                        value:
+                          example: Douglas Adams
+              - $ref: "#/components/requestBodies/Edit/content/application~1json/schema"
+    Edit:
+      description: Edit payload containing edit metadata
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              tags:
+                type: array
+                items:
+                  type: string
+                default: []
+                example:
+                  - mobile edit
+                  - external tool edit
+              bot:
+                type: boolean
+                default: false
+              comment:
+                type: string
+                example: API edit fixing the modelling as discussed in ...
+  responses:
+    LabelDeleted:
+      description: The resource was deleted
+      headers:
+        Content-Language:
+          description: Language code of the language in which response is provided
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            type: string
+          example: Label deleted
+    DescriptionDeleted:
+      description: The resource was deleted
+      headers:
+        Content-Language:
+          description: Language code of the language in which response is provided
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            type: string
+          example: Description deleted
+    StatementDeleted:
+      description: The resource was deleted
+      headers:
+        Content-Language:
+          description: Language code of the language in which response is provided
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            type: string
+          example: Statement deleted
+    ItemRedirected:
+      description: The specified Item was redirected
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            redirected-item:
+              $ref: "#/components/examples/RedirectedItemExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    DataPolicyViolation:
+      description: The edit request violates data policy
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            data-policy-violation:
+              $ref: "#/components/examples/DataPolicyViolationExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    PermissionDenied:
+      description: The access to resource was denied
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            permission-denied:
+              $ref: "#/components/examples/PermissionDeniedExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    RequestLimitReached:
+      description: Too many requests
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            request-limit-reached:
+              value:
+                code: request-limit-reached
+                message: Exceeded the limit of actions that can be performed in a given span of
+                  time
+                context:
+                  reason: "{reason_code}"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    ResourceNotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            resource-not-found:
+              $ref: "#/components/examples/ResourceNotFoundExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    InvalidEntityIdInput:
+      description: The request cannot be processed
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            invalid-path-parameter:
+              $ref: "#/components/examples/InvalidPathParameterExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    InvalidRetrieveStatementsInput:
+      description: The request cannot be processed
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            invalid-path-parameter:
+              $ref: "#/components/examples/InvalidPathParameterExample"
+            invalid-query-parameter:
+              $ref: "#/components/examples/InvalidQueryParameterExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    InvalidNewStatementInput:
+      description: The request cannot be processed
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            invalid-path-parameter:
+              $ref: "#/components/examples/InvalidPathParameterExample"
+            invalid-value:
+              $ref: "#/components/examples/InvalidValueExample"
+            missing-field:
+              $ref: "#/components/examples/MissingFieldExample"
+            value-too-long:
+              $ref: "#/components/examples/ValueTooLongExample"
+            resource-too-large:
+              $ref: "#/components/examples/ResourceTooLargeExample"
+            referenced-resource-not-found:
+              $ref: "#/components/examples/ReferencedResourceNotFoundExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    InvalidSetLabelInput:
+      description: The request cannot be processed
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            invalid-path-parameter:
+              $ref: "#/components/examples/InvalidPathParameterExample"
+            value-too-long:
+              $ref: "#/components/examples/ValueTooLongExample"
+            invalid-value:
+              $ref: "#/components/examples/InvalidValueExample"
+            missing-field:
+              $ref: "#/components/examples/MissingFieldExample"
+            resource-too-large:
+              $ref: "#/components/examples/ResourceTooLargeExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    InvalidSetDescriptionInput:
+      description: The request cannot be processed
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            invalid-path-parameter:
+              $ref: "#/components/examples/InvalidPathParameterExample"
+            invalid-value:
+              $ref: "#/components/examples/InvalidValueExample"
+            missing-field:
+              $ref: "#/components/examples/MissingFieldExample"
+            value-too-long:
+              $ref: "#/components/examples/ValueTooLongExample"
+            resource-too-large:
+              $ref: "#/components/examples/ResourceTooLargeExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    InvalidRemoveLabelInput:
+      description: The request cannot be processed
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            invalid-path-parameter:
+              $ref: "#/components/examples/InvalidPathParameterExample"
+            invalid-value:
+              $ref: "#/components/examples/InvalidValueExample"
+            value-too-long:
+              $ref: "#/components/examples/ValueTooLongExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    InvalidRemoveDescriptionInput:
+      description: The request cannot be processed
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            invalid-path-parameter:
+              $ref: "#/components/examples/InvalidPathParameterExample"
+            invalid-value:
+              $ref: "#/components/examples/InvalidValueExample"
+            value-too-long:
+              $ref: "#/components/examples/ValueTooLongExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    InvalidAddAliasesInput:
+      description: The request cannot be processed
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            invalid-path-parameter:
+              $ref: "#/components/examples/InvalidPathParameterExample"
+            invalid-value:
+              $ref: "#/components/examples/InvalidValueExample"
+            missing-field:
+              $ref: "#/components/examples/MissingFieldExample"
+            value-too-long:
+              $ref: "#/components/examples/ValueTooLongExample"
+            resource-too-large:
+              $ref: "#/components/examples/ResourceTooLargeExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    InvalidTermByLanguageInput:
+      description: The request cannot be processed
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            invalid-path-parameter:
+              $ref: "#/components/examples/InvalidPathParameterExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    InvalidPatch:
+      description: The provided JSON Patch request is invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+              context:
+                type: object
+            required:
+              - code
+              - message
+          examples:
+            invalid-path-parameter:
+              $ref: "#/components/examples/InvalidPathParameterExample"
+            invalid-value:
+              $ref: "#/components/examples/InvalidValueExample"
+            missing-field:
+              $ref: "#/components/examples/MissingFieldExample"
+            value-too-long:
+              $ref: "#/components/examples/ValueTooLongExample"
+            resource-too-large:
+              $ref: "#/components/examples/ResourceTooLargeExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    CannotApplyItemPatch:
+      description: The provided JSON Patch cannot be applied
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            redirected-item:
+              $ref: "#/components/examples/RedirectedItemExample"
+            patch-test-failed:
+              $ref: "#/components/examples/PatchTestFailedExample"
+            patch-target-not-found:
+              $ref: "#/components/examples/PatchTargetNotFoundExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    CannotApplyPropertyPatch:
+      description: The provided JSON Patch cannot be applied
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            patch-test-failed:
+              $ref: "#/components/examples/PatchTestFailedExample"
+            patch-target-not-found:
+              $ref: "#/components/examples/PatchTargetNotFoundExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    InvalidPatchedItem:
+      description: Applying the provided JSON Patch results in an invalid Property
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            patch-result-invalid-value:
+              $ref: "#/components/examples/PatchResultInvalidValueExample"
+            patched-statement-group-property-id-mismatch:
+              $ref: "#/components/examples/PatchedStatementGroupPropertyIdMismatchExample"
+            patched-invalid-sitelink-type:
+              $ref: "#/components/examples/PatchedInvalidSitelinkTypeExample"
+            patch-result-referenced-resource-not-found:
+              $ref: "#/components/examples/PatchResultResourceNotFoundExample"
+            patch-result-missing-field:
+              $ref: "#/components/examples/PatchResultMissingFieldExample"
+            patch-result-invalid-key:
+              $ref: "#/components/examples/PatchResultInvalidKeyExample"
+            patch-result-value-too-long:
+              $ref: "#/components/examples/PatchResultValueTooLongExample"
+            patch-result-modified-read-only-value:
+              $ref: "#/components/examples/PatchResultModifiedReadOnlyValue"
+            url-not-modifiable:
+              $ref: "#/components/examples/SitelinkUrlNotModifiableExample"
+            data-policy-violation:
+              $ref: "#/components/examples/DataPolicyViolationExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    InvalidPatchedProperty:
+      description: Applying the provided JSON Patch results in an invalid Property
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            patch-result-missing-field:
+              $ref: "#/components/examples/PatchResultMissingFieldExample"
+            patched-statement-group-property-id-mismatch:
+              $ref: "#/components/examples/PatchedStatementGroupPropertyIdMismatchExample"
+            patch-result-invalid-key:
+              $ref: "#/components/examples/PatchResultInvalidKeyExample"
+            patch-result-invalid-value:
+              $ref: "#/components/examples/PatchResultInvalidValueExample"
+            patch-result-referenced-resource-not-found:
+              $ref: "#/components/examples/PatchResultResourceNotFoundExample"
+            patch-result-value-too-long:
+              $ref: "#/components/examples/PatchResultValueTooLongExample"
+            patch-result-modified-read-only-value:
+              $ref: "#/components/examples/PatchResultModifiedReadOnlyValue"
+            data-policy-violation:
+              $ref: "#/components/examples/DataPolicyViolationExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    InvalidPatchedLabels:
+      description: Applying the provided JSON Patch results in invalid Labels
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            patch-result-invalid-key:
+              $ref: "#/components/examples/PatchResultInvalidKeyExample"
+            patch-result-invalid-value:
+              $ref: "#/components/examples/PatchResultInvalidValueExample"
+            patch-result-value-too-long:
+              $ref: "#/components/examples/PatchResultValueTooLongExample"
+            data-policy-violation:
+              $ref: "#/components/examples/DataPolicyViolationExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    InvalidPatchedDescriptions:
+      description: Applying the provided JSON Patch results in invalid descriptions
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            patch-result-invalid-key:
+              $ref: "#/components/examples/PatchResultInvalidKeyExample"
+            patch-result-invalid-value:
+              $ref: "#/components/examples/PatchResultInvalidValueExample"
+            patch-result-value-too-long:
+              $ref: "#/components/examples/PatchResultValueTooLongExample"
+            data-policy-violation:
+              $ref: "#/components/examples/DataPolicyViolationExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    InvalidPatchedAliases:
+      description: Applying the provided JSON Patch results in invalid Aliases
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            patch-result-invalid-value:
+              $ref: "#/components/examples/PatchResultInvalidValueExample"
+            patch-result-invalid-key:
+              $ref: "#/components/examples/PatchResultInvalidKeyExample"
+            patch-result-value-too-long:
+              $ref: "#/components/examples/PatchResultValueTooLongExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    CannotApplyStatementPatch:
+      description: The provided JSON Patch cannot be applied
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            patch-test-failed:
+              $ref: "#/components/examples/PatchTestFailedExample"
+            patch-target-not-found:
+              $ref: "#/components/examples/PatchTargetNotFoundExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    InvalidPatchedStatement:
+      description: Applying the provided JSON Patch results in an invalid Statement
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          examples:
+            patch-result-missing-field:
+              $ref: "#/components/examples/PatchResultMissingFieldExample"
+            patch-result-invalid-value:
+              $ref: "#/components/examples/PatchResultInvalidValueExample"
+            patch-result-modified-read-only-value:
+              $ref: "#/components/examples/PatchResultModifiedReadOnlyValue"
+            patch-result-referenced-resource-not-found:
+              $ref: "#/components/examples/PatchResultResourceNotFoundExample"
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    PreconditionFailedError:
+      description: The condition defined by a conditional request header is not fulfilled
+    UnexpectedError:
+      description: An unexpected error has occurred
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/InvalidPatch/content/application~1json/schema"
+          example:
+            code: unexpected-error
+            message: Unexpected Error
+      headers:
+        Content-Language:
+          schema:
+            type: string
+          description: Language code of the language in which error message is provided
+    Item:
+      description: A single Wikibase Item
+      headers:
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/Item"
+              - required:
+                  - id
+                  - type
+                  - labels
+                  - descriptions
+                  - aliases
+                  - statements
+                  - sitelinks
+                properties:
+                  sitelinks:
+                    additionalProperties:
+                      required:
+                        - title
+                        - badges
+                        - url
+                  statements:
+                    additionalProperties:
+                      items:
+                        $ref: "#/paths/~1statements~1%7Bstatement_id%7D/get/responses/200/content/appli\
+                          cation~1json/schema/allOf/1"
+    Sitelinks:
+      description: A list of Sitelinks by Item id
+      headers:
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Item/properties/sitelinks"
+    Sitelink:
+      description: A Sitelink by Item id
+      headers:
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Sitelink"
+    ItemLabels:
+      description: Item's labels by language
+      headers:
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Labels"
+    ItemDescriptions:
+      description: Item's descriptions by language
+      headers:
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Descriptions"
+    ItemAliases:
+      description: Item's aliases by language
+      headers:
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Aliases"
+    ItemAliasesInLanguage:
+      description: Item's aliases in a specific language
+      headers:
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: string
+            example:
+              - Douglas Noel Adams
+              - Douglas Noël Adams
+    Property:
+      description: A single Wikibase Property
+      headers:
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/Property"
+              - required:
+                  - id
+                  - type
+                  - data_type
+                  - labels
+                  - descriptions
+                  - aliases
+                  - statements
+                properties:
+                  statements:
+                    additionalProperties:
+                      items:
+                        $ref: "#/paths/~1statements~1%7Bstatement_id%7D/get/responses/200/content/appli\
+                          cation~1json/schema/allOf/1"
+    PropertyLabels:
+      description: Property's labels by language
+      headers:
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Labels"
+    Label:
+      description: A label in a specific language
+      headers:
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            type: string
+            example: an example label
+    PropertyDescriptions:
+      description: Property's descriptions by language
+      headers:
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Descriptions"
+    Description:
+      description: A description in a specific language
+      headers:
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            type: string
+            example: an example description
+    PropertyAliases:
+      description: Property's aliases by language
+      headers:
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Aliases"
+    PropertyAliasesInLanguage:
+      description: Property's aliases in a specific language
+      headers:
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: string
+            example:
+              - is a
+              - example of
+    Statement:
+      description: A single Wikibase Statement. Please note that the value of the
+        `ETag` header field refers to the entity's revision ID.
+      headers:
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/Statement"
+              - allOf:
+                  - required:
+                      - property
+                      - value
+                    properties:
+                      property:
+                        required:
+                          - id
+                          - data_type
+                      value:
+                        required:
+                          - type
+                  - required:
+                      - id
+                      - rank
+                      - qualifiers
+                      - references
+                    properties:
+                      qualifiers:
+                        items:
+                          $ref: "#/paths/~1statements~1%7Bstatement_id%7D/get/responses/200/content/appli\
+                            cation~1json/schema/allOf/1/allOf/0"
+                      references:
+                        items:
+                          required:
+                            - hash
+                            - parts
+                          properties:
+                            parts:
+                              items:
+                                $ref: "#/paths/~1statements~1%7Bstatement_id%7D/get/responses/200/content/appli\
+                                  cation~1json/schema/allOf/1/allOf/0"
+          examples:
+            Statement on an Item:
+              $ref: "#/components/examples/ItemStatementResponseExample"
+            Statement on a Property:
+              $ref: "#/components/examples/PropertyStatementResponseExample"
+    ItemStatement:
+      description: A single Wikibase Statement. Please note that the value of the
+        `ETag` header field refers to the Item's revision ID.
+      headers:
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/Statement/content/application~1json/schema"
+          example:
+            $ref: "#/components/examples/ItemStatementResponseExample/value"
+    PropertyStatement:
+      description: A single Wikibase Statement. Please note that the value of the
+        `ETag` header field refers to the Property's Revision ID.
+      headers:
+        Last-Modified:
+          schema:
+            type: string
+          description: Last modified date
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+        X-Authenticated-User:
+          schema:
+            type: string
+          description: Optional username of the user making the request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/responses/Statement/content/application~1json/schema"
+          example:
+            $ref: "#/components/examples/PropertyStatementResponseExample/value"
+    NotModified:
+      description: The specified resource has not been modified since last provided
+        revision number or date
+      headers:
+        ETag:
+          schema:
+            type: string
+          description: Last entity revision number
+    MovedPermanently:
+      description: The specified resource has permanently moved to the indicated location
+      headers:
+        Location:
+          schema:
+            type: string
+          description: The URL to which the requested resource has been moved
+    MovedTemporarily:
+      description: The specified resource has temporarily moved to the indicated location
+      headers:
+        Location:
+          schema:
+            type: string
+          description: The URL to which the requested resource has been moved
+  schemas:
+    Item:
+      type: object
+      properties:
+        id:
+          type: string
+          example: Q42
+        type:
+          type: string
+          example: item
+        labels:
+          allOf:
+            - $ref: "#/components/schemas/Labels"
+            - example:
+                en: Douglas Adams
+                fr: Douglas Adams
+        descriptions:
+          allOf:
+            - $ref: "#/components/schemas/Descriptions"
+            - example:
+                en: English science fiction writer and humourist
+                fr: écrivain de science-fiction et humoriste anglais
+        aliases:
+          allOf:
+            - $ref: "#/components/schemas/Aliases"
+            - example:
+                en:
+                  - Douglas Noel Adams
+                  - Douglas Noël Adams
+                fr:
+                  - Douglas Noel Adams
+        sitelinks:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/Sitelink"
+          example:
+            afwiki:
+              title: Douglas Adams
+              badges:
+                - Q17437798
+              url: https://af.wikipedia.org/wiki/Douglas_Adams
+            arwiki:
+              title: دوغلاس آدمز
+              badges: []
+              url: https://ar.wikipedia.org/wiki/%D8%AF%D9%88%D8%BA%D9%84%D8%A7%D8%B3_%D8%A2%D8%AF%D9%85%D8%B2
+        statements:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: "#/components/schemas/Statement"
+          example:
+            P92:
+              - id: Q42$97B777F7-238B-465E-909B-64B0AB4B4DFD
+                rank: normal
+                qualifiers: []
+                references: []
+                property:
+                  id: P92
+                  data_type: string
+                value:
+                  type: value
+                  content: I am a goat
+    Property:
+      type: object
+      properties:
+        id:
+          type: string
+          example: P31
+        type:
+          type: string
+          example: property
+        data_type:
+          type: string
+          example: wikibase-item
+        labels:
+          allOf:
+            - $ref: "#/components/schemas/Labels"
+            - example:
+                en: Instance of
+                fr: nature de l'élément
+        descriptions:
+          allOf:
+            - $ref: "#/components/schemas/Descriptions"
+            - example:
+                en: "that class of which this subject is a particular example and member;
+                  different from P279 (subclass of); for example: K2 is an
+                  instance of mountain; volcano is a subclass of mountain (and
+                  an instance of volcanic landform)"
+                fr: cet élément est un exemple spécifique de cette classe qui en précise la
+                  nature. Ne pas confondre avec la propriété P279 (sous-classe
+                  de)
+        aliases:
+          allOf:
+            - $ref: "#/components/schemas/Aliases"
+            - example:
+                en:
+                  - is a
+                  - is an
+                fr:
+                  - est un
+        statements:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: "#/components/schemas/Statement"
+          example:
+            P92:
+              - id: P31$97B777F7-238B-465E-909B-64B0AB4B4DFD
+                rank: normal
+                qualifiers: []
+                references: []
+                property:
+                  id: P92
+                  data_type: string
+                value:
+                  type: value
+                  content: I am a goat
+    Labels:
+      type: object
+      additionalProperties:
+        type: string
+      example:
+        en: en-label
+        fr: fr-label
+    Descriptions:
+      type: object
+      additionalProperties:
+        type: string
+      example:
+        en: en-description
+        fr: fr-description
+    Aliases:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          type: string
+      example:
+        en:
+          - en-alias1
+          - en-alias2
+        fr:
+          - fr-alias1
+          - fr-alias2
+    Sitelink:
+      type: object
+      properties:
+        title:
+          type: string
+        badges:
+          type: array
+          items:
+            type: string
+        url:
+          type: string
+      example:
+        title: Douglas Adams
+        badges: []
+        url: https://de.wikipedia.org/wiki/Douglas_Adams
+    Statement:
+      allOf:
+        - type: object
+          properties:
+            id:
+              description: The globally unique identifier for this Statement
+              type: string
+              readOnly: true
+              example: Q11$6403c562-401a-2b26-85cc-8327801145e1
+            rank:
+              description: The rank of the Statement
+              type: string
+              enum:
+                - deprecated
+                - normal
+                - preferred
+              default: normal
+        - $ref: "#/components/schemas/Qualifier"
+        - type: object
+          properties:
+            qualifiers:
+              type: array
+              items:
+                $ref: "#/components/schemas/Qualifier"
+              default: []
+            references:
+              type: array
+              items:
+                $ref: "#/components/schemas/Reference"
+              default: []
+    Qualifier:
+      type: object
+      properties:
+        property:
+          type: object
+          properties:
+            id:
+              description: The ID of the Property
+              type: string
+              example: P92
+            data_type:
+              description: The data type of the Property
+              type: string
+              readOnly: true
+              nullable: true
+              example: string
+        value:
+          type: object
+          properties:
+            content:
+              description: The value, if type == "value", otherwise omitted
+              example: I am a goat
+            type:
+              description: The value type
+              type: string
+              enum:
+                - value
+                - somevalue
+                - novalue
+    Reference:
+      type: object
+      properties:
+        hash:
+          description: Hash of the Reference
+          type: string
+          readOnly: true
+          example: 455481eeac76e6a8af71a6b493c073d54788e7e9
+        parts:
+          type: array
+          items:
+            $ref: "#/components/schemas/Qualifier"
+  examples:
+    InvalidValueExample:
+      value:
+        code: invalid-value
+        message: Invalid value at '{json_pointer}'
+        context:
+          path: "{json_pointer}"
+    InvalidKeyExample:
+      value:
+        code: invalid-key
+        message: Invalid key '{key}' in '{json_pointer_to_parent}'
+        context:
+          path: "{json_pointer_to_parent}"
+          key: "{key}"
+    MissingFieldExample:
+      value:
+        code: missing-field
+        message: Required field missing
+        context:
+          path: "{json_pointer_to_parent}"
+          field: "{missing_field}"
+    ValueTooLongExample:
+      value:
+        code: value-too-long
+        message: The input value is too long
+        context:
+          path: "{json_pointer_to_element}"
+          limit: "{configured_limit}"
+    DataPolicyViolationExample:
+      value:
+        code: data-policy-violation
+        message: Edit violates data policy
+        context:
+          violation: "{violation_code}"
+          violation_context:
+            some: context
+    PatchResultValueTooLongExample:
+      value:
+        code: patch-result-value-too-long
+        message: Patched value is too long
+        context:
+          path: "{json_pointer_to_patched_element}"
+          limit: "{configured_limit}"
+    InvalidQueryParameterExample:
+      value:
+        code: invalid-query-parameter
+        message: "Invalid query parameter: '{parameter}'"
+        context:
+          parameter: "{parameter}"
+    InvalidPathParameterExample:
+      value:
+        code: invalid-path-parameter
+        message: "Invalid path parameter: '{path_parameter}'"
+        context:
+          parameter: "{path_parameter}"
+    ResourceTooLargeExample:
+      value:
+        code: resource-too-large
+        message: Edit resulted in a resource that exceeds the size limit of
+          {configured_limit}
+        context:
+          limit: configured_limit_as_int
+    ReferencedResourceNotFoundExample:
+      value:
+        code: referenced-resource-not-found
+        message: The referenced resource does not exist
+        context:
+          path: "{json_pointer}"
+    CannotModifyReadOnlyValue:
+      value:
+        code: cannot-modify-read-only-value
+        message: The input value cannot be modified
+        context:
+          path: "{readonly_value_pointer}"
+    PatchResultModifiedReadOnlyValue:
+      value:
+        code: patch-result-modified-read-only-value
+        message: Read only value in patch result cannot be modified
+        context:
+          path: "{json_pointer_to_readonly_value}"
+    PatchTestFailedExample:
+      value:
+        code: patch-test-failed
+        message: Test operation in the provided patch failed
+        context:
+          path: "{json_pointer_to_patch_operation}"
+          actual_value: actual value
+    PatchTargetNotFoundExample:
+      value:
+        code: patch-target-not-found
+        message: Target not found on resource
+        context:
+          path: "{json_pointer_to_target_in_patch}"
+    RedirectedItemExample:
+      value:
+        code: redirected-item
+        message: Item {item_id} has been redirected to {redirect_target_id}
+        context:
+          redirect_target: "{redirect_target_id}"
+    ResourceNotFoundExample:
+      value:
+        code: resource-not-found
+        message: The requested resource does not exist
+        context:
+          resource_type: "{resource_type}"
+    PatchedInvalidSitelinkTypeExample:
+      value:
+        code: patched-invalid-sitelink-type'
+        message: Not a valid Sitelink type in patched Sitelinks
+        context:
+          site_id: "{site_id}"
+    PatchResultResourceNotFoundExample:
+      value:
+        code: patch-result-referenced-resource-not-found
+        message: The referenced resource does not exist
+        context:
+          path: "{json_pointer_to_missing_resource_in_patch_result}"
+          value: "{value}"
+    SitelinkUrlNotModifiableExample:
+      value:
+        code: url-not-modifiable
+        message: URL of Sitelink cannot be modified
+        context:
+          site_id: "{site_id}"
+    PatchResultInvalidKeyExample:
+      value:
+        code: patch-result-invalid-key
+        message: Invalid key in patch result
+        context:
+          path: "{json_pointer_to_parent_in_patch_result}"
+          key: "{key}"
+    PatchResultInvalidValueExample:
+      value:
+        code: patch-result-invalid-value
+        message: Invalid value in patch result
+        context:
+          value: "{value}"
+          path: "{path}"
+    PatchResultMissingFieldExample:
+      value:
+        code: patch-result-missing-field
+        message: Required field missing in patch result
+        context:
+          path: "{json_pointer_to_parent}"
+          field: "{missing_field}"
+    PatchedStatementGroupPropertyIdMismatchExample:
+      value:
+        code: patched-statement-group-property-id-mismatch
+        message: Statement's Property ID does not match the Statement group key
+        context:
+          path: "{property_id_key}/{index}/property/id"
+          statement_group_property_id: "{property_id_key}"
+          statement_property_id: "{property_id_value}"
+    ItemStatementIdMismatchExample:
+      value:
+        code: item-statement-id-mismatch
+        message: IDs of the Item and the Statement do not match
+        context:
+          item_id: "{item_id}"
+          statement_id: "{statement_id}"
+    PropertyStatementIdMismatchExample:
+      value:
+        code: property-statement-id-mismatch
+        message: IDs of the Property and the Statement do not match
+        context:
+          property_id: "{property_id}"
+          statement_id: "{statement_id}"
+    ItemStatementIdExample:
+      value: Q42$F078E5B3-F9A8-480E-B7AC-D97778CBBEF9
+    PropertyStatementIdExample:
+      value: P31$9d042001-4a7e-2432-a7e1-233360062379
+    ItemStatementResponseExample:
+      value:
+        id: Q42$F078E5B3-F9A8-480E-B7AC-D97778CBBEF9
+        rank: normal
+        property:
+          id: P31
+          data_type: wikibase-item
+        value:
+          type: value
+          content: Q5
+        qualifiers: []
+        references: []
+    PropertyStatementResponseExample:
+      value:
+        id: P31$9d042001-4a7e-2432-a7e1-233360062379
+        rank: normal
+        property:
+          id: P31
+          data_type: wikibase-item
+        value:
+          type: value
+          content: Q5
+        qualifiers: []
+        references: []
+    StatementGroupPropertyIdMismatch:
+      value:
+        code: statement-group-property-id-mismatch
+        message: Statement's Property ID does not match the Statement group key
+        context:
+          path: "{property_id_key}/{index}/property/id"
+          statement_group_property_id: "{property_id_key}"
+          statement_property_id: "{property_id_value}"
+    PermissionDeniedExample:
+      value:
+        code: permission-denied
+        message: Access to resource is denied
+        context:
+          denial_reason: "{reason_code}"
+          denial_context: "{additional_context}"
+  securitySchemes:
+    OAuth2:
+      description: provided through Wikimedia's central OAuth service. [More Info](https://www.mediawiki.org/wiki/OAuth/For_Developers)
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.wikidata.org/w/rest.php/oauth2/authorize
+          tokenUrl: https://www.wikidata.org/w/rest.php/oauth2/access_token
+          refreshUrl: 
+          scopes:
+            read: Grants read access
+            write: Grants write access
+
+tags:
+  - name: items
+    description: Wikibase Items
+    externalDocs:
+      description: Wikibase Data Model - Items
+      url: https://www.mediawiki.org/wiki/Wikibase/DataModel#Items
+  - name: sitelinks
+    description: Wikibase Item Sitelinks
+    externalDocs:
+      description: Wikibase Data Model - Sitelinks
+      url: https://www.mediawiki.org/wiki/Wikibase/DataModel#Sitelinks
+  - name: properties
+    description: Wikibase Properties
+    externalDocs:
+      description: Wikibase Data Model - Properties
+      url: https://www.mediawiki.org/wiki/Wikibase/DataModel#Properties
+  - name: labels
+    description: Wikibase Labels
+    externalDocs:
+      description: Wikibase Data Model - Terms
+      url: https://www.mediawiki.org/wiki/Wikibase/DataModel#EntityDescriptions_of_Items_and_Properties
+  - name: descriptions
+    description: Wikibase Descriptions
+    externalDocs:
+      description: Wikibase Data Model - Terms
+      url: https://www.mediawiki.org/wiki/Wikibase/DataModel#EntityDescriptions_of_Items_and_Properties
+  - name: aliases
+    description: Wikibase Aliases
+    externalDocs:
+      description: Wikibase Data Model - Terms
+      url: https://www.mediawiki.org/wiki/Wikibase/DataModel#EntityDescriptions_of_Items_and_Properties
+  - name: statements
+    description: Wikibase Statements
+    externalDocs:
+      description: Wikibase Data Model - Statements
+      url: https://www.mediawiki.org/wiki/Wikibase/DataModel#Statements
