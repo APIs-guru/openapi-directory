@@ -1,6 +1,4 @@
 openapi: 3.1.0
-schemes:
-  - https
 servers:
   - url: https://www.wikidata.org/w/rest.php/wikibase/v0
 info:
@@ -29,9 +27,12 @@ info:
   x-origin:
     - format: openapi
       url: https://www.wikidata.org/w/rest.php/wikibase/v0/openapi.json
-      version: 3.1
+      version: "3.1"
   x-providerName: wikidata.org
   x-serviceName: wikibase
+externalDocs:
+  description: Wikidata REST API
+  url: https://www.wikidata.org/wiki/Wikidata:REST_API
 consumes:
   - application/json
 produces:
@@ -4253,16 +4254,14 @@ components:
           denial_reason: "{reason_code}"
           denial_context: "{additional_context}"
   securitySchemes:
-    externalDocs:
-      description: Wikidata REST API Authentication
-      url: https://www.wikidata.org/wiki/Wikidata:REST_API/Authentication
     OAuth2:
-      description: Wikimedia's central OAuth service
+      description: provided through Wikimedia's central OAuth service. [More Info](https://www.mediawiki.org/wiki/OAuth/For_Developers)
       type: oauth2
       flows:
         authorizationCode:
           authorizationUrl: https://www.wikidata.org/w/rest.php/oauth2/authorize
           tokenUrl: https://www.wikidata.org/w/rest.php/oauth2/access_token
+          refreshUrl: 
           scopes:
             read: Grants read access
             write: Grants write access
