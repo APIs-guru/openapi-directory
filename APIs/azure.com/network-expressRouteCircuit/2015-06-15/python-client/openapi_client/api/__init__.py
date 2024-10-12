@@ -1,0 +1,9 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.express_route_circuit_authorizations_api import ExpressRouteCircuitAuthorizationsApi
+from openapi_client.api.express_route_circuit_peerings_api import ExpressRouteCircuitPeeringsApi
+from openapi_client.api.express_route_circuit_stats_api import ExpressRouteCircuitStatsApi
+from openapi_client.api.express_route_circuits_api import ExpressRouteCircuitsApi
+from openapi_client.api.express_route_service_providers_api import ExpressRouteServiceProvidersApi
+
