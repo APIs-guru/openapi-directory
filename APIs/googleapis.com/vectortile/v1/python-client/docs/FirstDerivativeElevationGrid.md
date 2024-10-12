@@ -1,0 +1,31 @@
+# FirstDerivativeElevationGrid
+
+A packed representation of a 2D grid of uniformly spaced points containing elevation data. Each point within the grid represents the altitude in meters above average sea level at that location within the tile. Elevations provided are (generally) relative to the EGM96 geoid, however some areas will be relative to NAVD88. EGM96 and NAVD88 are off by no more than 2 meters. The grid is oriented north-west to south-east, as illustrated: rows[0].a[0] rows[0].a[m] +-----------------+ | | | N | | ^ | | | | | W <-----> E | | | | | v | | S | | | +-----------------+ rows[n].a[0] rows[n].a[m] Rather than storing the altitudes directly, we store the diffs between them as integers at some requested level of precision to take advantage of integer packing. The actual altitude values a[] can be reconstructed using the scale and each row's first_altitude and altitude_diff fields. More details in go/elevation-encoding-options-for-enduro under \"Recommended implementation\".
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**altitude_multiplier** | **float** | A multiplier applied to the altitude fields below to extract the actual altitudes in meters from the elevation grid. | [optional] 
+**rows** | [**List[Row]**](Row.md) | Rows of points containing altitude data making up the elevation grid. Each row is the same length. Rows are ordered from north to south. E.g: rows[0] is the north-most row, and rows[n] is the south-most row. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.first_derivative_elevation_grid import FirstDerivativeElevationGrid
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of FirstDerivativeElevationGrid from a JSON string
+first_derivative_elevation_grid_instance = FirstDerivativeElevationGrid.from_json(json)
+# print the JSON string representation of the object
+print(FirstDerivativeElevationGrid.to_json())
+
+# convert the object into a dict
+first_derivative_elevation_grid_dict = first_derivative_elevation_grid_instance.to_dict()
+# create an instance of FirstDerivativeElevationGrid from a dict
+first_derivative_elevation_grid_from_dict = FirstDerivativeElevationGrid.from_dict(first_derivative_elevation_grid_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

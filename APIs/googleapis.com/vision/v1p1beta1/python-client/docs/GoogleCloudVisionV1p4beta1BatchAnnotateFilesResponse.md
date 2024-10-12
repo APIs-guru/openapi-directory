@@ -1,0 +1,30 @@
+# GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse
+
+A list of file annotation responses.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**responses** | [**List[GoogleCloudVisionV1p4beta1AnnotateFileResponse]**](GoogleCloudVisionV1p4beta1AnnotateFileResponse.md) | The list of file annotation responses, each response corresponding to each AnnotateFileRequest in BatchAnnotateFilesRequest. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.google_cloud_vision_v1p4beta1_batch_annotate_files_response import GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse from a JSON string
+google_cloud_vision_v1p4beta1_batch_annotate_files_response_instance = GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse.from_json(json)
+# print the JSON string representation of the object
+print(GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse.to_json())
+
+# convert the object into a dict
+google_cloud_vision_v1p4beta1_batch_annotate_files_response_dict = google_cloud_vision_v1p4beta1_batch_annotate_files_response_instance.to_dict()
+# create an instance of GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse from a dict
+google_cloud_vision_v1p4beta1_batch_annotate_files_response_from_dict = GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse.from_dict(google_cloud_vision_v1p4beta1_batch_annotate_files_response_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

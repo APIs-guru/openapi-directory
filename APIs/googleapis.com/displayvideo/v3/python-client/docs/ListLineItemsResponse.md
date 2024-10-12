@@ -1,0 +1,30 @@
+# ListLineItemsResponse
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**line_items** | [**List[LineItem]**](LineItem.md) | The list of line items. This list will be absent if empty. | [optional] 
+**next_page_token** | **str** | A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to &#x60;ListLineItems&#x60; method to retrieve the next page of results. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.list_line_items_response import ListLineItemsResponse
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ListLineItemsResponse from a JSON string
+list_line_items_response_instance = ListLineItemsResponse.from_json(json)
+# print the JSON string representation of the object
+print(ListLineItemsResponse.to_json())
+
+# convert the object into a dict
+list_line_items_response_dict = list_line_items_response_instance.to_dict()
+# create an instance of ListLineItemsResponse from a dict
+list_line_items_response_from_dict = ListLineItemsResponse.from_dict(list_line_items_response_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

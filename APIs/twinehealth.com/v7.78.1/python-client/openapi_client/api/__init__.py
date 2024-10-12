@@ -1,0 +1,26 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.action_api import ActionApi
+from openapi_client.api.bundle_api import BundleApi
+from openapi_client.api.calendar_event_api import CalendarEventApi
+from openapi_client.api.calendar_event_response_api import CalendarEventResponseApi
+from openapi_client.api.coach_api import CoachApi
+from openapi_client.api.email_history_api import EmailHistoryApi
+from openapi_client.api.group_api import GroupApi
+from openapi_client.api.health_profile_api import HealthProfileApi
+from openapi_client.api.health_profile_answer_api import HealthProfileAnswerApi
+from openapi_client.api.health_profile_question_api import HealthProfileQuestionApi
+from openapi_client.api.health_question_definition_api import HealthQuestionDefinitionApi
+from openapi_client.api.metric_api import MetricApi
+from openapi_client.api.oauth_api import OauthApi
+from openapi_client.api.organization_api import OrganizationApi
+from openapi_client.api.patient_api import PatientApi
+from openapi_client.api.plan_api import PlanApi
+from openapi_client.api.result_api import ResultApi
+from openapi_client.api.reward_api import RewardApi
+from openapi_client.api.reward_earning_api import RewardEarningApi
+from openapi_client.api.reward_earning_fulfillment_api import RewardEarningFulfillmentApi
+from openapi_client.api.reward_program_api import RewardProgramApi
+from openapi_client.api.reward_program_activation_api import RewardProgramActivationApi
+

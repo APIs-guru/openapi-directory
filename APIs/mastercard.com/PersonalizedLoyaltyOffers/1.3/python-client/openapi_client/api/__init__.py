@@ -1,0 +1,12 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.activate_statement_credit_offer_api import ActivateStatementCreditOfferApi
+from openapi_client.api.matched_offers_api import MatchedOffersApi
+from openapi_client.api.offer_details_api import OfferDetailsApi
+from openapi_client.api.redeemed_offers_api import RedeemedOffersApi
+from openapi_client.api.statement_credit_activation_detail_api import StatementCreditActivationDetailApi
+from openapi_client.api.user_feedback_api import UserFeedbackApi
+from openapi_client.api.user_savings_api import UserSavingsApi
+from openapi_client.api.user_token_api import UserTokenApi
+

@@ -1,0 +1,31 @@
+# BareMetalStorageConfig
+
+BareMetalStorageConfig specifies the cluster storage configuration.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**lvp_node_mounts_config** | [**BareMetalLvpConfig**](BareMetalLvpConfig.md) |  | [optional] 
+**lvp_share_config** | [**BareMetalLvpShareConfig**](BareMetalLvpShareConfig.md) |  | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.bare_metal_storage_config import BareMetalStorageConfig
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of BareMetalStorageConfig from a JSON string
+bare_metal_storage_config_instance = BareMetalStorageConfig.from_json(json)
+# print the JSON string representation of the object
+print(BareMetalStorageConfig.to_json())
+
+# convert the object into a dict
+bare_metal_storage_config_dict = bare_metal_storage_config_instance.to_dict()
+# create an instance of BareMetalStorageConfig from a dict
+bare_metal_storage_config_from_dict = BareMetalStorageConfig.from_dict(bare_metal_storage_config_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

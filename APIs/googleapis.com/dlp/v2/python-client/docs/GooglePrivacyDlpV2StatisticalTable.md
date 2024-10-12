@@ -1,0 +1,32 @@
+# GooglePrivacyDlpV2StatisticalTable
+
+An auxiliary table containing statistical information on the relative frequency of different quasi-identifiers values. It has one or several quasi-identifiers columns, and one column that indicates the relative frequency of each quasi-identifier tuple. If a tuple is present in the data but not in the auxiliary table, the corresponding relative frequency is assumed to be zero (and thus, the tuple is highly reidentifiable).
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**quasi_ids** | [**List[GooglePrivacyDlpV2QuasiIdentifierField]**](GooglePrivacyDlpV2QuasiIdentifierField.md) | Required. Quasi-identifier columns. | [optional] 
+**relative_frequency** | [**GooglePrivacyDlpV2FieldId**](GooglePrivacyDlpV2FieldId.md) |  | [optional] 
+**table** | [**GooglePrivacyDlpV2BigQueryTable**](GooglePrivacyDlpV2BigQueryTable.md) |  | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.google_privacy_dlp_v2_statistical_table import GooglePrivacyDlpV2StatisticalTable
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GooglePrivacyDlpV2StatisticalTable from a JSON string
+google_privacy_dlp_v2_statistical_table_instance = GooglePrivacyDlpV2StatisticalTable.from_json(json)
+# print the JSON string representation of the object
+print(GooglePrivacyDlpV2StatisticalTable.to_json())
+
+# convert the object into a dict
+google_privacy_dlp_v2_statistical_table_dict = google_privacy_dlp_v2_statistical_table_instance.to_dict()
+# create an instance of GooglePrivacyDlpV2StatisticalTable from a dict
+google_privacy_dlp_v2_statistical_table_from_dict = GooglePrivacyDlpV2StatisticalTable.from_dict(google_privacy_dlp_v2_statistical_table_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

@@ -1,0 +1,31 @@
+# ListInsightsResponse
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**data** | [**List[Insight]**](Insight.md) |  | [optional] 
+**timeframe** | **List[int]** |  | [optional] 
+**total_row_count** | **int** |  | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.list_insights_response import ListInsightsResponse
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ListInsightsResponse from a JSON string
+list_insights_response_instance = ListInsightsResponse.from_json(json)
+# print the JSON string representation of the object
+print(ListInsightsResponse.to_json())
+
+# convert the object into a dict
+list_insights_response_dict = list_insights_response_instance.to_dict()
+# create an instance of ListInsightsResponse from a dict
+list_insights_response_from_dict = ListInsightsResponse.from_dict(list_insights_response_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

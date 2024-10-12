@@ -1,0 +1,17 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.16_day_daily_forecast_api import 16DayDailyForecastApi
+from openapi_client.api.240_hour_hourly_forecast_api import 240HourHourlyForecastApi
+from openapi_client.api.air_quality_forecast_api import AirQualityForecastApi
+from openapi_client.api.alerts_api import AlertsApi
+from openapi_client.api.bulk_downloads_api import BulkDownloadsApi
+from openapi_client.api.current_air_quality_api import CurrentAirQualityApi
+from openapi_client.api.current_weather_data_api import CurrentWeatherDataApi
+from openapi_client.api.daily_historical_weather_data_api import DailyHistoricalWeatherDataApi
+from openapi_client.api.forecast_degree_day_api_api import ForecastDegreeDayAPIApi
+from openapi_client.api.historical_air_quality_api import HistoricalAirQualityApi
+from openapi_client.api.historical_degree_day_api_api import HistoricalDegreeDayAPIApi
+from openapi_client.api.hourly_historical_weather_data_api import HourlyHistoricalWeatherDataApi
+from openapi_client.api.sub_hourly_historical_weather_data_api import SubHourlyHistoricalWeatherDataApi
+

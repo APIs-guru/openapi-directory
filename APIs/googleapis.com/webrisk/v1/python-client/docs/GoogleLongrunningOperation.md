@@ -1,0 +1,34 @@
+# GoogleLongrunningOperation
+
+This resource represents a long-running operation that is the result of a network API call.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**done** | **bool** | If the value is &#x60;false&#x60;, it means the operation is still in progress. If &#x60;true&#x60;, the operation is completed, and either &#x60;error&#x60; or &#x60;response&#x60; is available. | [optional] 
+**error** | [**GoogleRpcStatus**](GoogleRpcStatus.md) |  | [optional] 
+**metadata** | **Dict[str, object]** | Contains a &#x60;SubmitUriMetadata&#x60; object. | [optional] 
+**name** | **str** | Matches the &#x60;/v1/{project-name}/operations/{operation-id}&#x60; pattern. | [optional] 
+**response** | **Dict[str, object]** | The normal, successful response of the operation. If the original method returns no data on success, such as &#x60;Delete&#x60;, the response is &#x60;google.protobuf.Empty&#x60;. If the original method is standard &#x60;Get&#x60;/&#x60;Create&#x60;/&#x60;Update&#x60;, the response should be the resource. For other methods, the response should have the type &#x60;XxxResponse&#x60;, where &#x60;Xxx&#x60; is the original method name. For example, if the original method name is &#x60;TakeSnapshot()&#x60;, the inferred response type is &#x60;TakeSnapshotResponse&#x60;. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.google_longrunning_operation import GoogleLongrunningOperation
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GoogleLongrunningOperation from a JSON string
+google_longrunning_operation_instance = GoogleLongrunningOperation.from_json(json)
+# print the JSON string representation of the object
+print(GoogleLongrunningOperation.to_json())
+
+# convert the object into a dict
+google_longrunning_operation_dict = google_longrunning_operation_instance.to_dict()
+# create an instance of GoogleLongrunningOperation from a dict
+google_longrunning_operation_from_dict = GoogleLongrunningOperation.from_dict(google_longrunning_operation_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

@@ -1,0 +1,34 @@
+# GoogleCloudPolicytroubleshooterV1betaExplainedPolicy
+
+Details about how a specific IAM Policy contributed to the access check.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**access** | **str** | Indicates whether _this policy_ provides the specified permission to the specified member for the specified resource. This field does _not_ indicate whether the member actually has the permission for the resource. There might be another policy that overrides this policy. To determine whether the member actually has the permission, use the &#x60;access&#x60; field in the TroubleshootIamPolicyResponse. | [optional] 
+**binding_explanations** | [**List[GoogleCloudPolicytroubleshooterV1betaBindingExplanation]**](GoogleCloudPolicytroubleshooterV1betaBindingExplanation.md) | Details about how each binding in the policy affects the member&#39;s ability, or inability, to use the permission for the resource. If the sender of the request does not have access to the policy, this field is omitted. | [optional] 
+**full_resource_name** | **str** | The full resource name that identifies the resource. For example, &#x60;//compute.googleapis.com/projects/my-project/zones/us-central1-a/instances/my-instance&#x60;. If the sender of the request does not have access to the policy, this field is omitted. For examples of full resource names for Google Cloud services, see https://cloud.google.com/iam/help/troubleshooter/full-resource-names. | [optional] 
+**policy** | [**GoogleIamV1Policy**](GoogleIamV1Policy.md) |  | [optional] 
+**relevance** | **str** | The relevance of this policy to the overall determination in the TroubleshootIamPolicyResponse. If the sender of the request does not have access to the policy, this field is omitted. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.google_cloud_policytroubleshooter_v1beta_explained_policy import GoogleCloudPolicytroubleshooterV1betaExplainedPolicy
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GoogleCloudPolicytroubleshooterV1betaExplainedPolicy from a JSON string
+google_cloud_policytroubleshooter_v1beta_explained_policy_instance = GoogleCloudPolicytroubleshooterV1betaExplainedPolicy.from_json(json)
+# print the JSON string representation of the object
+print(GoogleCloudPolicytroubleshooterV1betaExplainedPolicy.to_json())
+
+# convert the object into a dict
+google_cloud_policytroubleshooter_v1beta_explained_policy_dict = google_cloud_policytroubleshooter_v1beta_explained_policy_instance.to_dict()
+# create an instance of GoogleCloudPolicytroubleshooterV1betaExplainedPolicy from a dict
+google_cloud_policytroubleshooter_v1beta_explained_policy_from_dict = GoogleCloudPolicytroubleshooterV1betaExplainedPolicy.from_dict(google_cloud_policytroubleshooter_v1beta_explained_policy_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

@@ -1,0 +1,30 @@
+# GroupSettings
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**request_access** | [**ViewGroupSettings200ResponseRequestAccess**](ViewGroupSettings200ResponseRequestAccess.md) |  | [optional] 
+**session_length** | **float** | The new session length for the group in minutes. This must be an integer between 1 and 43200 (30 days). Setting this value to null will result in this group inheriting from the global default of 30 days. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.group_settings import GroupSettings
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GroupSettings from a JSON string
+group_settings_instance = GroupSettings.from_json(json)
+# print the JSON string representation of the object
+print(GroupSettings.to_json())
+
+# convert the object into a dict
+group_settings_dict = group_settings_instance.to_dict()
+# create an instance of GroupSettings from a dict
+group_settings_from_dict = GroupSettings.from_dict(group_settings_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

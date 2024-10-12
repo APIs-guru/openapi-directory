@@ -1,0 +1,31 @@
+# ClusterConfiguration
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**clustering** | [**ClusterConfigurationClustering**](ClusterConfigurationClustering.md) |  | [optional] 
+**response_type** | **str** | Specifies the response format. You can either choose &#x60;geojson&#x60; or &#x60;json&#x60;. | [optional] [default to 'json']
+**routing** | [**ClusterConfigurationRouting**](ClusterConfigurationRouting.md) |  | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.cluster_configuration import ClusterConfiguration
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ClusterConfiguration from a JSON string
+cluster_configuration_instance = ClusterConfiguration.from_json(json)
+# print the JSON string representation of the object
+print(ClusterConfiguration.to_json())
+
+# convert the object into a dict
+cluster_configuration_dict = cluster_configuration_instance.to_dict()
+# create an instance of ClusterConfiguration from a dict
+cluster_configuration_from_dict = ClusterConfiguration.from_dict(cluster_configuration_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

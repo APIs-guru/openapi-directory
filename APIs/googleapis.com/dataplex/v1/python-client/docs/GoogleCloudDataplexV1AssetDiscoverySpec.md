@@ -1,0 +1,35 @@
+# GoogleCloudDataplexV1AssetDiscoverySpec
+
+Settings to manage the metadata discovery and publishing for an asset.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**csv_options** | [**GoogleCloudDataplexV1AssetDiscoverySpecCsvOptions**](GoogleCloudDataplexV1AssetDiscoverySpecCsvOptions.md) |  | [optional] 
+**enabled** | **bool** | Optional. Whether discovery is enabled. | [optional] 
+**exclude_patterns** | **List[str]** | Optional. The list of patterns to apply for selecting data to exclude during discovery. For Cloud Storage bucket assets, these are interpreted as glob patterns used to match object names. For BigQuery dataset assets, these are interpreted as patterns to match table names. | [optional] 
+**include_patterns** | **List[str]** | Optional. The list of patterns to apply for selecting data to include during discovery if only a subset of the data should considered. For Cloud Storage bucket assets, these are interpreted as glob patterns used to match object names. For BigQuery dataset assets, these are interpreted as patterns to match table names. | [optional] 
+**json_options** | [**GoogleCloudDataplexV1AssetDiscoverySpecJsonOptions**](GoogleCloudDataplexV1AssetDiscoverySpecJsonOptions.md) |  | [optional] 
+**schedule** | **str** | Optional. Cron schedule (https://en.wikipedia.org/wiki/Cron) for running discovery periodically. Successive discovery runs must be scheduled at least 60 minutes apart. The default value is to run discovery every 60 minutes. To explicitly set a timezone to the cron tab, apply a prefix in the cron tab: \&quot;CRON_TZ&#x3D;${IANA_TIME_ZONE}\&quot; or TZ&#x3D;${IANA_TIME_ZONE}\&quot;. The ${IANA_TIME_ZONE} may only be a valid string from IANA time zone database. For example, CRON_TZ&#x3D;America/New_York 1 * * * *, or TZ&#x3D;America/New_York 1 * * * *. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.google_cloud_dataplex_v1_asset_discovery_spec import GoogleCloudDataplexV1AssetDiscoverySpec
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GoogleCloudDataplexV1AssetDiscoverySpec from a JSON string
+google_cloud_dataplex_v1_asset_discovery_spec_instance = GoogleCloudDataplexV1AssetDiscoverySpec.from_json(json)
+# print the JSON string representation of the object
+print(GoogleCloudDataplexV1AssetDiscoverySpec.to_json())
+
+# convert the object into a dict
+google_cloud_dataplex_v1_asset_discovery_spec_dict = google_cloud_dataplex_v1_asset_discovery_spec_instance.to_dict()
+# create an instance of GoogleCloudDataplexV1AssetDiscoverySpec from a dict
+google_cloud_dataplex_v1_asset_discovery_spec_from_dict = GoogleCloudDataplexV1AssetDiscoverySpec.from_dict(google_cloud_dataplex_v1_asset_discovery_spec_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

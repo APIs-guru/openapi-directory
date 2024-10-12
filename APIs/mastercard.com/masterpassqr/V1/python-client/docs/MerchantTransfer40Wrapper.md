@@ -1,0 +1,30 @@
+# MerchantTransfer40Wrapper
+
+Response details for a merchant transfer.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**merchant_transfer** | [**MerchantTransfer40**](MerchantTransfer40.md) |  | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.merchant_transfer40_wrapper import MerchantTransfer40Wrapper
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of MerchantTransfer40Wrapper from a JSON string
+merchant_transfer40_wrapper_instance = MerchantTransfer40Wrapper.from_json(json)
+# print the JSON string representation of the object
+print(MerchantTransfer40Wrapper.to_json())
+
+# convert the object into a dict
+merchant_transfer40_wrapper_dict = merchant_transfer40_wrapper_instance.to_dict()
+# create an instance of MerchantTransfer40Wrapper from a dict
+merchant_transfer40_wrapper_from_dict = MerchantTransfer40Wrapper.from_dict(merchant_transfer40_wrapper_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

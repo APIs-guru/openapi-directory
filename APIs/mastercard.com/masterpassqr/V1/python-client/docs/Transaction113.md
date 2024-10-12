@@ -1,0 +1,48 @@
+# Transaction113
+
+transaction array
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**account_uri** | **str** | account uri | [optional] 
+**authorization_id** | **str** | Transaction response ID code that the authorizing institution assigns.    Type: Alphanumeric [a-zA-Z 0-9], Length: 6. | [optional] 
+**create_timestamp** | **str** | Date and time the transaction was created as an ISO 8601 Timestamp. [YYYY-MM-DDTHH:MM:SSZ] | [optional] 
+**funds_availability** | **str** | An estimate of when the funds might be available. Actual Deposit Availability is determined by the financial institution.[One of: IMMEDIATE, NEXT_BUSINESS_DAY, or TWO_TO_FIVE_BUSINESS_DAYS.] | [optional] 
+**id** | **str** | System generated unique transfer identifier. | [optional] 
+**network** | **str** | Proposed network for the transaction. | [optional] 
+**network_status_code** | **str** | Network Status Code in case of Decline | [optional] 
+**network_status_description** | **str** | Network Status Description in case of Decline | [optional] 
+**payment_account_reference** | **str** | A unique value associated with a single PAN and attributed to all tokens associated with that PAN.    Type: Alphanumeric [a-zA-Z 0-9], Length: 29. | [optional] 
+**resource_type** | **str** | Type of resource. Valid value:  transaction | [optional] 
+**retrieval_reference** | **str** | Unique reference number that identifies the transaction at the network. Details- maxlength 24 | [optional] 
+**status** | **str** | Status of the disbursement. One of APPROVED, DECLINED, UNKNOWN, ERROR, or PENDING. | [optional] 
+**status_reason** | **str** | Reason for status, APPROVED, DECLINED, FRAUD, CARD_EXPIRED, LIMIT_EXCEEDED, UNKNOWN, ERROR, PENDING | [optional] 
+**status_timestamp** | **str** | Date and time of when the status was changed to its current value as an ISO 8601 Timestamp. [YYYY-MM-DDTHH:MM:SSZ | [optional] 
+**switch_serial_number** | **str** | Unique transaction identification number (switch serial number) generated (or assigned) by the Single Message System.Type: Numeric [0-9], Maximum Length: 9 | [optional] 
+**system_trace_audit_number** | **str** | Unique system trace audit number for the transaction, the STAN ( system trace audit number ). Details- maxlength 6 | [optional] 
+**transaction_amount** | [**TransactionAmount114**](TransactionAmount114.md) |  | [optional] 
+**type** | **str** | Type of the transaction. One of: FUNDING, PAYMENT, FUNDING_REVERSAL, or PAYMENT_REVERSAL. | [optional] 
+**unique_reference_number** | **str** | Unique reference number for the transaction. Type: Alphanumeric Special [a-zA-Z0-9* , - . _ ~ ], Length:19 | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.transaction113 import Transaction113
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Transaction113 from a JSON string
+transaction113_instance = Transaction113.from_json(json)
+# print the JSON string representation of the object
+print(Transaction113.to_json())
+
+# convert the object into a dict
+transaction113_dict = transaction113_instance.to_dict()
+# create an instance of Transaction113 from a dict
+transaction113_from_dict = Transaction113.from_dict(transaction113_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

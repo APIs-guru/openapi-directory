@@ -1,0 +1,31 @@
+# ChromeOsDeviceCpuStatusReportsInner
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**cpu_temperature_info** | [**List[ChromeOsDeviceCpuStatusReportsInnerCpuTemperatureInfoInner]**](ChromeOsDeviceCpuStatusReportsInnerCpuTemperatureInfoInner.md) | A list of CPU temperature samples. | [optional] 
+**cpu_utilization_percentage_info** | **List[int]** |  | [optional] 
+**report_time** | **datetime** | Date and time the report was received. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.chrome_os_device_cpu_status_reports_inner import ChromeOsDeviceCpuStatusReportsInner
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ChromeOsDeviceCpuStatusReportsInner from a JSON string
+chrome_os_device_cpu_status_reports_inner_instance = ChromeOsDeviceCpuStatusReportsInner.from_json(json)
+# print the JSON string representation of the object
+print(ChromeOsDeviceCpuStatusReportsInner.to_json())
+
+# convert the object into a dict
+chrome_os_device_cpu_status_reports_inner_dict = chrome_os_device_cpu_status_reports_inner_instance.to_dict()
+# create an instance of ChromeOsDeviceCpuStatusReportsInner from a dict
+chrome_os_device_cpu_status_reports_inner_from_dict = ChromeOsDeviceCpuStatusReportsInner.from_dict(chrome_os_device_cpu_status_reports_inner_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

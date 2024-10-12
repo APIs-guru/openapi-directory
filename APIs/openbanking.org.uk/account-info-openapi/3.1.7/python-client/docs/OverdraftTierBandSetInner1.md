@@ -1,0 +1,37 @@
+# OverdraftTierBandSetInner1
+
+Tier band set details
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**authorised_indicator** | **bool** | Indicates if the Overdraft is authorised (Y) or unauthorised (N) | [optional] 
+**buffer_amount** | **str** | When a customer exceeds their credit limit, a financial institution will not charge the customer unauthorised overdraft charges if they do not exceed by more than the buffer amount. Note: Authorised overdraft charges may still apply. | [optional] 
+**identification** | **str** | Unique and unambiguous identification of a  Tier Band for a overdraft product. | [optional] 
+**notes** | **List[str]** | Optional additional notes to supplement the overdraft Tier Band Set details | [optional] 
+**overdraft_fees_charges** | [**List[OverdraftFeesChargesInner2]**](OverdraftFeesChargesInner2.md) | Overdraft fees and charges details | [optional] 
+**overdraft_tier_band** | [**List[OverdraftTierBandInner1]**](OverdraftTierBandInner1.md) | Provides overdraft details for a specific tier or band | 
+**overdraft_type** | **str** | An overdraft can either be &#39;committed&#39; which means that the facility cannot be withdrawn without reasonable notification before it&#39;s agreed end date, or &#39;on demand&#39; which means that the financial institution can demand repayment at any point in time. | [optional] 
+**tier_band_method** | **str** | The methodology of how overdraft is charged. It can be: &#39;Whole&#39;  Where the same charge/rate is applied to the entirety of the overdraft balance (where charges are applicable).  &#39;Tiered&#39; Where different charges/rates are applied dependent on overdraft maximum and minimum balance amount tiers defined by the lending financial organisation &#39;Banded&#39; Where different charges/rates are applied dependent on overdraft maximum and minimum balance amount bands defined by a government organisation. | 
+
+## Example
+
+```python
+from openapi_client.models.overdraft_tier_band_set_inner1 import OverdraftTierBandSetInner1
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of OverdraftTierBandSetInner1 from a JSON string
+overdraft_tier_band_set_inner1_instance = OverdraftTierBandSetInner1.from_json(json)
+# print the JSON string representation of the object
+print(OverdraftTierBandSetInner1.to_json())
+
+# convert the object into a dict
+overdraft_tier_band_set_inner1_dict = overdraft_tier_band_set_inner1_instance.to_dict()
+# create an instance of OverdraftTierBandSetInner1 from a dict
+overdraft_tier_band_set_inner1_from_dict = OverdraftTierBandSetInner1.from_dict(overdraft_tier_band_set_inner1_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

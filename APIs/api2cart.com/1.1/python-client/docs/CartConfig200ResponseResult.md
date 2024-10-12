@@ -1,0 +1,31 @@
+# CartConfig200ResponseResult
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**db_prefix** | **str** |  | [optional] 
+**store_name** | **str** |  | [optional] 
+**store_url** | **str** |  | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.cart_config200_response_result import CartConfig200ResponseResult
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CartConfig200ResponseResult from a JSON string
+cart_config200_response_result_instance = CartConfig200ResponseResult.from_json(json)
+# print the JSON string representation of the object
+print(CartConfig200ResponseResult.to_json())
+
+# convert the object into a dict
+cart_config200_response_result_dict = cart_config200_response_result_instance.to_dict()
+# create an instance of CartConfig200ResponseResult from a dict
+cart_config200_response_result_from_dict = CartConfig200ResponseResult.from_dict(cart_config200_response_result_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

@@ -1,0 +1,38 @@
+# P2MPNetworkServiceRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**billing_account** | **str** | An account requires billing_information to be used as a &#x60;billing_account&#x60;. | 
+**consuming_account** | **str** | The &#x60;id&#x60; of the account consuming a service.  Used to be &#x60;owning_customer&#x60;.  | 
+**contract_ref** | **str** | A reference to a contract. If no specific contract is used, a default MAY be chosen by the implementer.  | [optional] 
+**external_ref** | **str** | Reference field, free to use for the API user. | [optional] 
+**managing_account** | **str** | The &#x60;id&#x60; of the account responsible for managing the service via the API. A manager can read and update the state of entities.  | 
+**name** | **str** | Name of the point to multi-point virtual circuit. | 
+**product_offering** | **str** |  | 
+**public** | **bool** | A public p2mp network service can be joined by everyone on the exchange unless denied by a member-joining-rule.  Public network services are visible to other members of the IXP, however only &#x60;name&#x60;, &#x60;type&#x60;, &#x60;product_offering&#x60;, &#x60;consuming_account&#x60; and &#x60;managing_account&#x60; are made available.  Other required fields are redacted. | [optional] [default to False]
+**purchase_order** | **str** | Purchase Order ID which will be displayed on the invoice.  | [optional] [default to '']
+**type** | **str** |  | 
+
+## Example
+
+```python
+from openapi_client.models.p2_mp_network_service_request import P2MPNetworkServiceRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of P2MPNetworkServiceRequest from a JSON string
+p2_mp_network_service_request_instance = P2MPNetworkServiceRequest.from_json(json)
+# print the JSON string representation of the object
+print(P2MPNetworkServiceRequest.to_json())
+
+# convert the object into a dict
+p2_mp_network_service_request_dict = p2_mp_network_service_request_instance.to_dict()
+# create an instance of P2MPNetworkServiceRequest from a dict
+p2_mp_network_service_request_from_dict = P2MPNetworkServiceRequest.from_dict(p2_mp_network_service_request_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

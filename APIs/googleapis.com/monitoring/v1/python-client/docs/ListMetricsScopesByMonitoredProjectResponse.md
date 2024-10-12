@@ -1,0 +1,30 @@
+# ListMetricsScopesByMonitoredProjectResponse
+
+Response for the ListMetricsScopesByMonitoredProject method.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**metrics_scopes** | [**List[MetricsScope]**](MetricsScope.md) | A set of all metrics scopes that the specified monitored project has been added to. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.list_metrics_scopes_by_monitored_project_response import ListMetricsScopesByMonitoredProjectResponse
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ListMetricsScopesByMonitoredProjectResponse from a JSON string
+list_metrics_scopes_by_monitored_project_response_instance = ListMetricsScopesByMonitoredProjectResponse.from_json(json)
+# print the JSON string representation of the object
+print(ListMetricsScopesByMonitoredProjectResponse.to_json())
+
+# convert the object into a dict
+list_metrics_scopes_by_monitored_project_response_dict = list_metrics_scopes_by_monitored_project_response_instance.to_dict()
+# create an instance of ListMetricsScopesByMonitoredProjectResponse from a dict
+list_metrics_scopes_by_monitored_project_response_from_dict = ListMetricsScopesByMonitoredProjectResponse.from_dict(list_metrics_scopes_by_monitored_project_response_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

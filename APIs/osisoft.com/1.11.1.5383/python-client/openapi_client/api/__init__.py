@@ -1,0 +1,44 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.analysis_api import AnalysisApi
+from openapi_client.api.analysis_category_api import AnalysisCategoryApi
+from openapi_client.api.analysis_rule_api import AnalysisRuleApi
+from openapi_client.api.analysis_rule_plug_in_api import AnalysisRulePlugInApi
+from openapi_client.api.analysis_template_api import AnalysisTemplateApi
+from openapi_client.api.asset_database_api import AssetDatabaseApi
+from openapi_client.api.asset_server_api import AssetServerApi
+from openapi_client.api.attribute_api import AttributeApi
+from openapi_client.api.attribute_category_api import AttributeCategoryApi
+from openapi_client.api.attribute_template_api import AttributeTemplateApi
+from openapi_client.api.attribute_trait_api import AttributeTraitApi
+from openapi_client.api.batch_api import BatchApi
+from openapi_client.api.calculation_api import CalculationApi
+from openapi_client.api.channel_api import ChannelApi
+from openapi_client.api.configuration_api import ConfigurationApi
+from openapi_client.api.data_server_api import DataServerApi
+from openapi_client.api.element_api import ElementApi
+from openapi_client.api.element_category_api import ElementCategoryApi
+from openapi_client.api.element_template_api import ElementTemplateApi
+from openapi_client.api.enumeration_set_api import EnumerationSetApi
+from openapi_client.api.enumeration_value_api import EnumerationValueApi
+from openapi_client.api.event_frame_api import EventFrameApi
+from openapi_client.api.home_api import HomeApi
+from openapi_client.api.notification_contact_template_api import NotificationContactTemplateApi
+from openapi_client.api.notification_plug_in_api import NotificationPlugInApi
+from openapi_client.api.notification_rule_api import NotificationRuleApi
+from openapi_client.api.notification_rule_subscriber_api import NotificationRuleSubscriberApi
+from openapi_client.api.notification_rule_template_api import NotificationRuleTemplateApi
+from openapi_client.api.point_api import PointApi
+from openapi_client.api.security_identity_api import SecurityIdentityApi
+from openapi_client.api.security_mapping_api import SecurityMappingApi
+from openapi_client.api.stream_api import StreamApi
+from openapi_client.api.stream_set_api import StreamSetApi
+from openapi_client.api.system_api import SystemApi
+from openapi_client.api.table_api import TableApi
+from openapi_client.api.table_category_api import TableCategoryApi
+from openapi_client.api.time_rule_api import TimeRuleApi
+from openapi_client.api.time_rule_plug_in_api import TimeRulePlugInApi
+from openapi_client.api.unit_api import UnitApi
+from openapi_client.api.unit_class_api import UnitClassApi
+

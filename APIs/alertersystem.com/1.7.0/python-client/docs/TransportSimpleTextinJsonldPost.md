@@ -1,0 +1,34 @@
+# TransportSimpleTextinJsonldPost
+
+The TransportSimpleTextin resource is a collection of transports that carry dispatched alerts to the external SimpleTextin service.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**data_segment_code** | **str** | User-provided string on which to segment and filter data. Max 50 characters. | [optional] 
+**partition** | **str** | The partition that contains this resource instance. The resource cannot be moved to another partition. | 
+**simple_textin_api_key** | **str** | The API key for the SimpleTextin service. Stored in encrypted format. | 
+**simple_textin_from** | **str** | The from value for the SimpleTextin service. | [optional] 
+**transport_name** | **str** | The name of the transport. | 
+
+## Example
+
+```python
+from openapi_client.models.transport_simple_textin_jsonld_post import TransportSimpleTextinJsonldPost
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of TransportSimpleTextinJsonldPost from a JSON string
+transport_simple_textin_jsonld_post_instance = TransportSimpleTextinJsonldPost.from_json(json)
+# print the JSON string representation of the object
+print(TransportSimpleTextinJsonldPost.to_json())
+
+# convert the object into a dict
+transport_simple_textin_jsonld_post_dict = transport_simple_textin_jsonld_post_instance.to_dict()
+# create an instance of TransportSimpleTextinJsonldPost from a dict
+transport_simple_textin_jsonld_post_from_dict = TransportSimpleTextinJsonldPost.from_dict(transport_simple_textin_jsonld_post_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

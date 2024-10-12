@@ -1,0 +1,35 @@
+# OwnerReference
+
+OwnerReference contains enough information to let you identify an owning object. Currently, an owning object must be in the same namespace, so there is no namespace field.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**api_version** | **str** | API version of the referent. | [optional] 
+**block_owner_deletion** | **bool** | If true, AND if the owner has the \&quot;foregroundDeletion\&quot; finalizer, then the owner cannot be deleted from the key-value store until this reference is removed. Defaults to false. To set this field, a user needs \&quot;delete\&quot; permission of the owner, otherwise 422 (Unprocessable Entity) will be returned. +optional | [optional] 
+**controller** | **bool** | If true, this reference points to the managing controller. +optional | [optional] 
+**kind** | **str** | Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds | [optional] 
+**name** | **str** | Name of the referent. More info: https://kubernetes.io/docs/user-guide/identifiers#names | [optional] 
+**uid** | **str** | UID of the referent. More info: https://kubernetes.io/docs/user-guide/identifiers#uids | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.owner_reference import OwnerReference
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of OwnerReference from a JSON string
+owner_reference_instance = OwnerReference.from_json(json)
+# print the JSON string representation of the object
+print(OwnerReference.to_json())
+
+# convert the object into a dict
+owner_reference_dict = owner_reference_instance.to_dict()
+# create an instance of OwnerReference from a dict
+owner_reference_from_dict = OwnerReference.from_dict(owner_reference_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
