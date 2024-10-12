@@ -1,0 +1,27 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.arm_templates_api import ArmTemplatesApi
+from openapi_client.api.artifact_sources_api import ArtifactSourcesApi
+from openapi_client.api.artifacts_api import ArtifactsApi
+from openapi_client.api.costs_api import CostsApi
+from openapi_client.api.custom_images_api import CustomImagesApi
+from openapi_client.api.disks_api import DisksApi
+from openapi_client.api.environments_api import EnvironmentsApi
+from openapi_client.api.formulas_api import FormulasApi
+from openapi_client.api.gallery_images_api import GalleryImagesApi
+from openapi_client.api.global_schedules_api import GlobalSchedulesApi
+from openapi_client.api.labs_api import LabsApi
+from openapi_client.api.notification_channels_api import NotificationChannelsApi
+from openapi_client.api.operations_api import OperationsApi
+from openapi_client.api.policies_api import PoliciesApi
+from openapi_client.api.policy_sets_api import PolicySetsApi
+from openapi_client.api.provider_operations_api import ProviderOperationsApi
+from openapi_client.api.schedules_api import SchedulesApi
+from openapi_client.api.secrets_api import SecretsApi
+from openapi_client.api.service_runners_api import ServiceRunnersApi
+from openapi_client.api.users_api import UsersApi
+from openapi_client.api.virtual_machine_schedules_api import VirtualMachineSchedulesApi
+from openapi_client.api.virtual_machines_api import VirtualMachinesApi
+from openapi_client.api.virtual_networks_api import VirtualNetworksApi
+

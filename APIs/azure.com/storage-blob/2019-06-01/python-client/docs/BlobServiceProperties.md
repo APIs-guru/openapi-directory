@@ -1,0 +1,34 @@
+# BlobServiceProperties
+
+The properties of a storage account’s Blob service.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**properties** | **object** | The properties of a storage account’s Blob service. | [optional] 
+**sku** | **object** | The SKU of the storage account. | [optional] 
+**id** | **str** | Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName} | [optional] [readonly] 
+**name** | **str** | The name of the resource | [optional] [readonly] 
+**type** | **str** | The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts. | [optional] [readonly] 
+
+## Example
+
+```python
+from openapi_client.models.blob_service_properties import BlobServiceProperties
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of BlobServiceProperties from a JSON string
+blob_service_properties_instance = BlobServiceProperties.from_json(json)
+# print the JSON string representation of the object
+print(BlobServiceProperties.to_json())
+
+# convert the object into a dict
+blob_service_properties_dict = blob_service_properties_instance.to_dict()
+# create an instance of BlobServiceProperties from a dict
+blob_service_properties_from_dict = BlobServiceProperties.from_dict(blob_service_properties_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

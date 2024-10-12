@@ -1,0 +1,31 @@
+# LabList
+
+The response of a list operation.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**next_link** | **str** | Link for next set of results. | [optional] 
+**value** | [**List[Lab]**](Lab.md) | Results of the list operation. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.lab_list import LabList
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of LabList from a JSON string
+lab_list_instance = LabList.from_json(json)
+# print the JSON string representation of the object
+print(LabList.to_json())
+
+# convert the object into a dict
+lab_list_dict = lab_list_instance.to_dict()
+# create an instance of LabList from a dict
+lab_list_from_dict = LabList.from_dict(lab_list_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

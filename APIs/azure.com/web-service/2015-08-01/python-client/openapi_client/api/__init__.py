@@ -1,0 +1,20 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.certificate_orders_api import CertificateOrdersApi
+from openapi_client.api.certificates_api import CertificatesApi
+from openapi_client.api.classic_mobile_services_api import ClassicMobileServicesApi
+from openapi_client.api.domains_api import DomainsApi
+from openapi_client.api.global_api import GlobalApi
+from openapi_client.api.global_certificate_order_api import GlobalCertificateOrderApi
+from openapi_client.api.global_domain_registration_api import GlobalDomainRegistrationApi
+from openapi_client.api.global_resource_groups_api import GlobalResourceGroupsApi
+from openapi_client.api.hosting_environments_api import HostingEnvironmentsApi
+from openapi_client.api.managed_hosting_environments_api import ManagedHostingEnvironmentsApi
+from openapi_client.api.provider_api import ProviderApi
+from openapi_client.api.recommendations_api import RecommendationsApi
+from openapi_client.api.server_farms_api import ServerFarmsApi
+from openapi_client.api.sites_api import SitesApi
+from openapi_client.api.top_level_domains_api import TopLevelDomainsApi
+from openapi_client.api.usage_api import UsageApi
+
