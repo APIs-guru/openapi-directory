@@ -1,0 +1,146 @@
+/**
+ * Portfolio Optimizer
+ * Portfolio Optimizer is a [Web API](https://en.wikipedia.org/wiki/Web_API) to analyze and optimize investment portfolios (collection of financial assets such as stocks, bonds, ETFs, crypto-currencies) using modern portfolio theory algorithms (mean-variance, VaR, etc.).  # API General Information    Portfolio Optimizer is based on [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) for easy integration, uses [JSON](https://en.wikipedia.org/wiki/JSON) for the exchange of data and uses a standard [HTTP verb](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) (`POST`) to represent the action(s).  Portfolio Optimizer is also as secured as a Web API could be:  * [256-bit HTTPS Encryption](https://en.wikipedia.org/wiki/HTTPS) * No usage of cookies * No usage of personal data    ## API Headers  The following HTTP header(s) are required when calling Portfolio Optimizer endpoints: * `Content-type: application/json`     This header specifies that the data provided in input to the endpoint is in JSON format  The following HTTP header(s) are optional when calling Portfolio Optimizer endpoints: * `Content-Encoding: gzip`     This header indicates that the data provided in input to the endpoint is compressed with gzip. * `X-API-Key: <private API key>`     This header enables [authenticated users](#auth) to provide their private [API key](#overview--api-key) in order to [benefit from higher API limits](#overview--api-limits)  ## API Key Portfolio Optimizer is free to use, but not free to run.  In order to obtain an API key and benefit from [higher API limits](#overview--api-limits), a *small* participation to Portfolio Optimizer running costs is required.  This participation takes the form of coffee(s), with one coffee = one month of usage.  <p><a href=\"https://www.buymeacoffee.com/portfolioopt\"><img alt='Buy a Coffee at buymeacoffee.com' src=\"https://img.buymeacoffee.com/button-api/?text=Buymeacoffee.com&emoji=&slug=portfolioopt&button_colour=000000&font_colour=ffffff&font_family=Cookie&outline_colour=ffffff&coffee_colour=FFDD00\"></a></p>   > **Notes:**  > * Please make sure not to expose your API key publicly!  ## API Limits   Portfolio Optimizer comes with *fairly reasonable* API limits.  For anonymous users:   * The API requests are restricted to a subset of all the available endpoints and/or endpoints features   * The API requests are limited to 1 request per second for all the anonymous users combined, with concurrent requests rejected  * The API requests are limited to 1 second of execution time * The API requests are limited to 20 assets, 250 portfolios, 500 series data points and 5 factors  For authenticated users with an [API key](#overview--api-key):   * The API requests have access to all the available endpoints and endpoints features * The API requests are limited to 10000 requests per 24 hour per API key, with concurrent requests queued * The API requests are limited to 2.5 seconds of execution time * The API requests are limited to 100 assets, 1250 portfolios, 2500 series data points and 25 factors  > **Notes:**  > * It is possible to further relax the API limits, or to disable the API limits alltogether; please [contact the support](https://portfoliooptimizer.io/contact/) for more details. > * Information on the API rate limits are provided in response messages HTTP headers `x-ratelimit-*`:   >   * `x-ratelimit-limit-second`, the limit on the number of API requests per second >   * `x-ratelimit-remaining-second`, the number of remaining API requests in the current second     >   * `x-ratelimit-limit-minute`, the limit on the number of API requests per minute >   * ...  ## API Regions Portfolio Optimizer servers are located in Western Europe.  > **Notes:**  > * It is possible to deploy Portfolio Optimizer in other geographical regions, for example to improve the API latency; please [contact the support](https://portfoliooptimizer.io/contact/) for more details.   ## API Response Codes         Standard [HTTP response codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) are used by Portfolio Optimizer to provide details on the status of API requests.  | HTTP Code | Description | Notes | | --------- | ----------- | ----- | | 200 | Request successfully processed | - | | 400 | Request failed to be processed because of incorrect content | The response message body contains information on the incorrect content | | 401 | Request failed to be processed because of invalid API key | - | | 404 | Request failed to be processed because of non existing endpoint | The requested endpoint might exist, but needs to be accessed with another HTTP method (e.g., `POST` instead of `GET`) | | 429 | Request failed to be processed because of API limits violated | The response message HTTP headers `x-ratelimit-*` contain information on the [API limits](#overview--api-limits) | | 500 | Request failed to be processed because of an internal error | Something went wrong on Portfolio Optimizer side, do not hesitate to [report the issue](#overview--support) | | 502 | Request failed to be processed because of a temporary connectivity error | Something went wrong on Portfolio Optimizer side, please check the [API status](#overview--api-status) and do not hesitate to [report the issue](#overview--support) |  ## API Status    Portfolio Optimizer is monitored 24/7 by [UptimeRobot](https://stats.uptimerobot.com/wgW71SL1AW).  # Support  For any issue or question about Portfolio Optimizer, please do not hesitate to [contact the support](https://portfoliooptimizer.io/contact/). 
+ *
+ * The version of the OpenAPI document: 1.0.9
+ * Contact: contact@portfoliooptimizer.io
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ *
+ */
+
+import ApiClient from '../ApiClient';
+import PortfolioAnalysisCorrelationSpectrumPostRequestOneOf from './PortfolioAnalysisCorrelationSpectrumPostRequestOneOf';
+import PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1 from './PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1';
+import PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1AssetsInner from './PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1AssetsInner';
+import PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1PortfoliosInner from './PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1PortfoliosInner';
+
+/**
+ * The PortfolioAnalysisCorrelationSpectrumPostRequest model module.
+ * @module model/PortfolioAnalysisCorrelationSpectrumPostRequest
+ * @version 1.0.9
+ */
+class PortfolioAnalysisCorrelationSpectrumPostRequest {
+    /**
+     * Constructs a new <code>PortfolioAnalysisCorrelationSpectrumPostRequest</code>.
+     * @alias module:model/PortfolioAnalysisCorrelationSpectrumPostRequest
+     * @param {(module:model/PortfolioAnalysisCorrelationSpectrumPostRequestOneOf|module:model/PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1)} instance The actual instance to initialize PortfolioAnalysisCorrelationSpectrumPostRequest.
+     */
+    constructor(instance = null) {
+        if (instance === null) {
+            this.actualInstance = null;
+            return;
+        }
+        var match = 0;
+        var errorMessages = [];
+        try {
+            if (typeof instance === "PortfolioAnalysisCorrelationSpectrumPostRequestOneOf") {
+                this.actualInstance = instance;
+            } else {
+                // plain JS object
+                // validate the object
+                PortfolioAnalysisCorrelationSpectrumPostRequestOneOf.validateJSON(instance); // throw an exception if no match
+                // create PortfolioAnalysisCorrelationSpectrumPostRequestOneOf from JS object
+                this.actualInstance = PortfolioAnalysisCorrelationSpectrumPostRequestOneOf.constructFromObject(instance);
+            }
+            match++;
+        } catch(err) {
+            // json data failed to deserialize into PortfolioAnalysisCorrelationSpectrumPostRequestOneOf
+            errorMessages.push("Failed to construct PortfolioAnalysisCorrelationSpectrumPostRequestOneOf: " + err)
+        }
+
+        try {
+            if (typeof instance === "PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1") {
+                this.actualInstance = instance;
+            } else {
+                // plain JS object
+                // validate the object
+                PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1.validateJSON(instance); // throw an exception if no match
+                // create PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1 from JS object
+                this.actualInstance = PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1.constructFromObject(instance);
+            }
+            match++;
+        } catch(err) {
+            // json data failed to deserialize into PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1
+            errorMessages.push("Failed to construct PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1: " + err)
+        }
+
+        if (match > 1) {
+            throw new Error("Multiple matches found constructing `PortfolioAnalysisCorrelationSpectrumPostRequest` with oneOf schemas PortfolioAnalysisCorrelationSpectrumPostRequestOneOf, PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1. Input: " + JSON.stringify(instance));
+        } else if (match === 0) {
+            this.actualInstance = null; // clear the actual instance in case there are multiple matches
+            throw new Error("No match found constructing `PortfolioAnalysisCorrelationSpectrumPostRequest` with oneOf schemas PortfolioAnalysisCorrelationSpectrumPostRequestOneOf, PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1. Details: " +
+                            errorMessages.join(", "));
+        } else { // only 1 match
+            // the input is valid
+        }
+    }
+
+    /**
+     * Constructs a <code>PortfolioAnalysisCorrelationSpectrumPostRequest</code> from a plain JavaScript object, optionally creating a new instance.
+     * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @param {module:model/PortfolioAnalysisCorrelationSpectrumPostRequest} obj Optional instance to populate.
+     * @return {module:model/PortfolioAnalysisCorrelationSpectrumPostRequest} The populated <code>PortfolioAnalysisCorrelationSpectrumPostRequest</code> instance.
+     */
+    static constructFromObject(data, obj) {
+        return new PortfolioAnalysisCorrelationSpectrumPostRequest(data);
+    }
+
+    /**
+     * Gets the actual instance, which can be <code>PortfolioAnalysisCorrelationSpectrumPostRequestOneOf</code>, <code>PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1</code>.
+     * @return {(module:model/PortfolioAnalysisCorrelationSpectrumPostRequestOneOf|module:model/PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1)} The actual instance.
+     */
+    getActualInstance() {
+        return this.actualInstance;
+    }
+
+    /**
+     * Sets the actual instance, which can be <code>PortfolioAnalysisCorrelationSpectrumPostRequestOneOf</code>, <code>PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1</code>.
+     * @param {(module:model/PortfolioAnalysisCorrelationSpectrumPostRequestOneOf|module:model/PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1)} obj The actual instance.
+     */
+    setActualInstance(obj) {
+       this.actualInstance = PortfolioAnalysisCorrelationSpectrumPostRequest.constructFromObject(obj).getActualInstance();
+    }
+
+    /**
+     * Returns the JSON representation of the actual instance.
+     * @return {string}
+     */
+    toJSON = function(){
+        return this.getActualInstance();
+    }
+
+    /**
+     * Create an instance of PortfolioAnalysisCorrelationSpectrumPostRequest from a JSON string.
+     * @param {string} json_string JSON string.
+     * @return {module:model/PortfolioAnalysisCorrelationSpectrumPostRequest} An instance of PortfolioAnalysisCorrelationSpectrumPostRequest.
+     */
+    static fromJSON = function(json_string){
+        return PortfolioAnalysisCorrelationSpectrumPostRequest.constructFromObject(JSON.parse(json_string));
+    }
+}
+
+/**
+ * @member {Array.<module:model/PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1AssetsInner>} assets
+ */
+PortfolioAnalysisCorrelationSpectrumPostRequest.prototype['assets'] = undefined;
+
+/**
+ * assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
+ * @member {Array.<Array.<Number>>} assetsCovarianceMatrix
+ */
+PortfolioAnalysisCorrelationSpectrumPostRequest.prototype['assetsCovarianceMatrix'] = undefined;
+
+/**
+ * @member {Array.<module:model/PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1PortfoliosInner>} portfolios
+ */
+PortfolioAnalysisCorrelationSpectrumPostRequest.prototype['portfolios'] = undefined;
+
+
+PortfolioAnalysisCorrelationSpectrumPostRequest.OneOf = ["PortfolioAnalysisCorrelationSpectrumPostRequestOneOf", "PortfolioAnalysisCorrelationSpectrumPostRequestOneOf1"];
+
+export default PortfolioAnalysisCorrelationSpectrumPostRequest;
+

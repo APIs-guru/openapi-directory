@@ -1,0 +1,251 @@
+/**
+ * Portfolio Optimizer
+ * Portfolio Optimizer is a [Web API](https://en.wikipedia.org/wiki/Web_API) to analyze and optimize investment portfolios (collection of financial assets such as stocks, bonds, ETFs, crypto-currencies) using modern portfolio theory algorithms (mean-variance, VaR, etc.).  # API General Information    Portfolio Optimizer is based on [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) for easy integration, uses [JSON](https://en.wikipedia.org/wiki/JSON) for the exchange of data and uses a standard [HTTP verb](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) (`POST`) to represent the action(s).  Portfolio Optimizer is also as secured as a Web API could be:  * [256-bit HTTPS Encryption](https://en.wikipedia.org/wiki/HTTPS) * No usage of cookies * No usage of personal data    ## API Headers  The following HTTP header(s) are required when calling Portfolio Optimizer endpoints: * `Content-type: application/json`     This header specifies that the data provided in input to the endpoint is in JSON format  The following HTTP header(s) are optional when calling Portfolio Optimizer endpoints: * `Content-Encoding: gzip`     This header indicates that the data provided in input to the endpoint is compressed with gzip. * `X-API-Key: <private API key>`     This header enables [authenticated users](#auth) to provide their private [API key](#overview--api-key) in order to [benefit from higher API limits](#overview--api-limits)  ## API Key Portfolio Optimizer is free to use, but not free to run.  In order to obtain an API key and benefit from [higher API limits](#overview--api-limits), a *small* participation to Portfolio Optimizer running costs is required.  This participation takes the form of coffee(s), with one coffee = one month of usage.  <p><a href=\"https://www.buymeacoffee.com/portfolioopt\"><img alt='Buy a Coffee at buymeacoffee.com' src=\"https://img.buymeacoffee.com/button-api/?text=Buymeacoffee.com&emoji=&slug=portfolioopt&button_colour=000000&font_colour=ffffff&font_family=Cookie&outline_colour=ffffff&coffee_colour=FFDD00\"></a></p>   > **Notes:**  > * Please make sure not to expose your API key publicly!  ## API Limits   Portfolio Optimizer comes with *fairly reasonable* API limits.  For anonymous users:   * The API requests are restricted to a subset of all the available endpoints and/or endpoints features   * The API requests are limited to 1 request per second for all the anonymous users combined, with concurrent requests rejected  * The API requests are limited to 1 second of execution time * The API requests are limited to 20 assets, 250 portfolios, 500 series data points and 5 factors  For authenticated users with an [API key](#overview--api-key):   * The API requests have access to all the available endpoints and endpoints features * The API requests are limited to 10000 requests per 24 hour per API key, with concurrent requests queued * The API requests are limited to 2.5 seconds of execution time * The API requests are limited to 100 assets, 1250 portfolios, 2500 series data points and 25 factors  > **Notes:**  > * It is possible to further relax the API limits, or to disable the API limits alltogether; please [contact the support](https://portfoliooptimizer.io/contact/) for more details. > * Information on the API rate limits are provided in response messages HTTP headers `x-ratelimit-*`:   >   * `x-ratelimit-limit-second`, the limit on the number of API requests per second >   * `x-ratelimit-remaining-second`, the number of remaining API requests in the current second     >   * `x-ratelimit-limit-minute`, the limit on the number of API requests per minute >   * ...  ## API Regions Portfolio Optimizer servers are located in Western Europe.  > **Notes:**  > * It is possible to deploy Portfolio Optimizer in other geographical regions, for example to improve the API latency; please [contact the support](https://portfoliooptimizer.io/contact/) for more details.   ## API Response Codes         Standard [HTTP response codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) are used by Portfolio Optimizer to provide details on the status of API requests.  | HTTP Code | Description | Notes | | --------- | ----------- | ----- | | 200 | Request successfully processed | - | | 400 | Request failed to be processed because of incorrect content | The response message body contains information on the incorrect content | | 401 | Request failed to be processed because of invalid API key | - | | 404 | Request failed to be processed because of non existing endpoint | The requested endpoint might exist, but needs to be accessed with another HTTP method (e.g., `POST` instead of `GET`) | | 429 | Request failed to be processed because of API limits violated | The response message HTTP headers `x-ratelimit-*` contain information on the [API limits](#overview--api-limits) | | 500 | Request failed to be processed because of an internal error | Something went wrong on Portfolio Optimizer side, do not hesitate to [report the issue](#overview--support) | | 502 | Request failed to be processed because of a temporary connectivity error | Something went wrong on Portfolio Optimizer side, please check the [API status](#overview--api-status) and do not hesitate to [report the issue](#overview--support) |  ## API Status    Portfolio Optimizer is monitored 24/7 by [UptimeRobot](https://stats.uptimerobot.com/wgW71SL1AW).  # Support  For any issue or question about Portfolio Optimizer, please do not hesitate to [contact the support](https://portfoliooptimizer.io/contact/). 
+ *
+ * The version of the OpenAPI document: 1.0.9
+ * Contact: contact@portfoliooptimizer.io
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+#include "OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request.h"
+
+#include <QDebug>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QObject>
+
+#include "OAIHelpers.h"
+
+namespace OpenAPI {
+
+OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request(QString json) {
+    this->initializeModel();
+    this->fromJson(json);
+}
+
+OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request() {
+    this->initializeModel();
+}
+
+OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::~OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request() {}
+
+void OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::initializeModel() {
+
+    m_asset_average_return_parameter_isSet = false;
+    m_asset_average_return_parameter_isValid = false;
+
+    m_asset_kurtosis_parameter_isSet = false;
+    m_asset_kurtosis_parameter_isValid = false;
+
+    m_asset_skewness_parameter_isSet = false;
+    m_asset_skewness_parameter_isValid = false;
+
+    m_asset_volatility_parameter_isSet = false;
+    m_asset_volatility_parameter_isValid = false;
+
+    m_simulations_isSet = false;
+    m_simulations_isValid = false;
+
+    m_simulations_length_isSet = false;
+    m_simulations_length_isValid = false;
+}
+
+void OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::fromJson(QString jsonString) {
+    QByteArray array(jsonString.toStdString().c_str());
+    QJsonDocument doc = QJsonDocument::fromJson(array);
+    QJsonObject jsonObject = doc.object();
+    this->fromJsonObject(jsonObject);
+}
+
+void OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::fromJsonObject(QJsonObject json) {
+
+    m_asset_average_return_parameter_isValid = ::OpenAPI::fromJsonValue(m_asset_average_return_parameter, json[QString("assetAverageReturnParameter")]);
+    m_asset_average_return_parameter_isSet = !json[QString("assetAverageReturnParameter")].isNull() && m_asset_average_return_parameter_isValid;
+
+    m_asset_kurtosis_parameter_isValid = ::OpenAPI::fromJsonValue(m_asset_kurtosis_parameter, json[QString("assetKurtosisParameter")]);
+    m_asset_kurtosis_parameter_isSet = !json[QString("assetKurtosisParameter")].isNull() && m_asset_kurtosis_parameter_isValid;
+
+    m_asset_skewness_parameter_isValid = ::OpenAPI::fromJsonValue(m_asset_skewness_parameter, json[QString("assetSkewnessParameter")]);
+    m_asset_skewness_parameter_isSet = !json[QString("assetSkewnessParameter")].isNull() && m_asset_skewness_parameter_isValid;
+
+    m_asset_volatility_parameter_isValid = ::OpenAPI::fromJsonValue(m_asset_volatility_parameter, json[QString("assetVolatilityParameter")]);
+    m_asset_volatility_parameter_isSet = !json[QString("assetVolatilityParameter")].isNull() && m_asset_volatility_parameter_isValid;
+
+    m_simulations_isValid = ::OpenAPI::fromJsonValue(m_simulations, json[QString("simulations")]);
+    m_simulations_isSet = !json[QString("simulations")].isNull() && m_simulations_isValid;
+
+    m_simulations_length_isValid = ::OpenAPI::fromJsonValue(m_simulations_length, json[QString("simulationsLength")]);
+    m_simulations_length_isSet = !json[QString("simulationsLength")].isNull() && m_simulations_length_isValid;
+}
+
+QString OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::asJson() const {
+    QJsonObject obj = this->asJsonObject();
+    QJsonDocument doc(obj);
+    QByteArray bytes = doc.toJson();
+    return QString(bytes);
+}
+
+QJsonObject OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::asJsonObject() const {
+    QJsonObject obj;
+    if (m_asset_average_return_parameter_isSet) {
+        obj.insert(QString("assetAverageReturnParameter"), ::OpenAPI::toJsonValue(m_asset_average_return_parameter));
+    }
+    if (m_asset_kurtosis_parameter_isSet) {
+        obj.insert(QString("assetKurtosisParameter"), ::OpenAPI::toJsonValue(m_asset_kurtosis_parameter));
+    }
+    if (m_asset_skewness_parameter_isSet) {
+        obj.insert(QString("assetSkewnessParameter"), ::OpenAPI::toJsonValue(m_asset_skewness_parameter));
+    }
+    if (m_asset_volatility_parameter_isSet) {
+        obj.insert(QString("assetVolatilityParameter"), ::OpenAPI::toJsonValue(m_asset_volatility_parameter));
+    }
+    if (m_simulations_isSet) {
+        obj.insert(QString("simulations"), ::OpenAPI::toJsonValue(m_simulations));
+    }
+    if (m_simulations_length_isSet) {
+        obj.insert(QString("simulationsLength"), ::OpenAPI::toJsonValue(m_simulations_length));
+    }
+    return obj;
+}
+
+double OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::getAssetAverageReturnParameter() const {
+    return m_asset_average_return_parameter;
+}
+void OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::setAssetAverageReturnParameter(const double &asset_average_return_parameter) {
+    m_asset_average_return_parameter = asset_average_return_parameter;
+    m_asset_average_return_parameter_isSet = true;
+}
+
+bool OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::is_asset_average_return_parameter_Set() const{
+    return m_asset_average_return_parameter_isSet;
+}
+
+bool OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::is_asset_average_return_parameter_Valid() const{
+    return m_asset_average_return_parameter_isValid;
+}
+
+double OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::getAssetKurtosisParameter() const {
+    return m_asset_kurtosis_parameter;
+}
+void OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::setAssetKurtosisParameter(const double &asset_kurtosis_parameter) {
+    m_asset_kurtosis_parameter = asset_kurtosis_parameter;
+    m_asset_kurtosis_parameter_isSet = true;
+}
+
+bool OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::is_asset_kurtosis_parameter_Set() const{
+    return m_asset_kurtosis_parameter_isSet;
+}
+
+bool OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::is_asset_kurtosis_parameter_Valid() const{
+    return m_asset_kurtosis_parameter_isValid;
+}
+
+double OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::getAssetSkewnessParameter() const {
+    return m_asset_skewness_parameter;
+}
+void OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::setAssetSkewnessParameter(const double &asset_skewness_parameter) {
+    m_asset_skewness_parameter = asset_skewness_parameter;
+    m_asset_skewness_parameter_isSet = true;
+}
+
+bool OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::is_asset_skewness_parameter_Set() const{
+    return m_asset_skewness_parameter_isSet;
+}
+
+bool OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::is_asset_skewness_parameter_Valid() const{
+    return m_asset_skewness_parameter_isValid;
+}
+
+double OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::getAssetVolatilityParameter() const {
+    return m_asset_volatility_parameter;
+}
+void OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::setAssetVolatilityParameter(const double &asset_volatility_parameter) {
+    m_asset_volatility_parameter = asset_volatility_parameter;
+    m_asset_volatility_parameter_isSet = true;
+}
+
+bool OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::is_asset_volatility_parameter_Set() const{
+    return m_asset_volatility_parameter_isSet;
+}
+
+bool OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::is_asset_volatility_parameter_Valid() const{
+    return m_asset_volatility_parameter_isValid;
+}
+
+qint32 OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::getSimulations() const {
+    return m_simulations;
+}
+void OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::setSimulations(const qint32 &simulations) {
+    m_simulations = simulations;
+    m_simulations_isSet = true;
+}
+
+bool OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::is_simulations_Set() const{
+    return m_simulations_isSet;
+}
+
+bool OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::is_simulations_Valid() const{
+    return m_simulations_isValid;
+}
+
+qint32 OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::getSimulationsLength() const {
+    return m_simulations_length;
+}
+void OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::setSimulationsLength(const qint32 &simulations_length) {
+    m_simulations_length = simulations_length;
+    m_simulations_length_isSet = true;
+}
+
+bool OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::is_simulations_length_Set() const{
+    return m_simulations_length_isSet;
+}
+
+bool OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::is_simulations_length_Valid() const{
+    return m_simulations_length_isValid;
+}
+
+bool OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::isSet() const {
+    bool isObjectUpdated = false;
+    do {
+        if (m_asset_average_return_parameter_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_asset_kurtosis_parameter_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_asset_skewness_parameter_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_asset_volatility_parameter_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_simulations_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_simulations_length_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+    } while (false);
+    return isObjectUpdated;
+}
+
+bool OAI_assets_returns_simulation_monte_carlo_cornish_fisher_post_request::isValid() const {
+    // only required properties are required for the object to be considered valid
+    return m_asset_average_return_parameter_isValid && m_asset_kurtosis_parameter_isValid && m_asset_skewness_parameter_isValid && m_asset_volatility_parameter_isValid && true;
+}
+
+} // namespace OpenAPI
