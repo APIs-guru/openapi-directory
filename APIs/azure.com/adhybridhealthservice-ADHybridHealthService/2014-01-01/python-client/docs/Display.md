@@ -1,0 +1,32 @@
+# Display
+
+Displays the details related to operations supported by Azure Active Directory Connect Health.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**description** | **str** |  The description for the operation. | [optional] 
+**operation** | **str** | The details of the operation. | [optional] 
+**provider** | **str** | The provider name. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.display import Display
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Display from a JSON string
+display_instance = Display.from_json(json)
+# print the JSON string representation of the object
+print(Display.to_json())
+
+# convert the object into a dict
+display_dict = display_instance.to_dict()
+# create an instance of Display from a dict
+display_from_dict = Display.from_dict(display_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
