@@ -1,0 +1,34 @@
+# Insight
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**filter_column** | **str** |  | [optional] 
+**filter_value** | **str** |  | [optional] 
+**metric** | **float** |  | [optional] 
+**negative_impact_score** | **float** |  | [optional] 
+**total_views** | **int** |  | [optional] 
+**total_watch_time** | **int** |  | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.insight import Insight
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Insight from a JSON string
+insight_instance = Insight.from_json(json)
+# print the JSON string representation of the object
+print(Insight.to_json())
+
+# convert the object into a dict
+insight_dict = insight_instance.to_dict()
+# create an instance of Insight from a dict
+insight_from_dict = Insight.from_dict(insight_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

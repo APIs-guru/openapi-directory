@@ -1,0 +1,1689 @@
+# openapi_client.ProjectsApi
+
+All URIs are relative to *https://eventarc.googleapis.com*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**eventarc_projects_locations_channel_connections_create**](ProjectsApi.md#eventarc_projects_locations_channel_connections_create) | **POST** /v1/{parent}/channelConnections | 
+[**eventarc_projects_locations_channel_connections_list**](ProjectsApi.md#eventarc_projects_locations_channel_connections_list) | **GET** /v1/{parent}/channelConnections | 
+[**eventarc_projects_locations_channels_create**](ProjectsApi.md#eventarc_projects_locations_channels_create) | **POST** /v1/{parent}/channels | 
+[**eventarc_projects_locations_channels_list**](ProjectsApi.md#eventarc_projects_locations_channels_list) | **GET** /v1/{parent}/channels | 
+[**eventarc_projects_locations_list**](ProjectsApi.md#eventarc_projects_locations_list) | **GET** /v1/{name}/locations | 
+[**eventarc_projects_locations_operations_cancel**](ProjectsApi.md#eventarc_projects_locations_operations_cancel) | **POST** /v1/{name}:cancel | 
+[**eventarc_projects_locations_operations_list**](ProjectsApi.md#eventarc_projects_locations_operations_list) | **GET** /v1/{name}/operations | 
+[**eventarc_projects_locations_providers_list**](ProjectsApi.md#eventarc_projects_locations_providers_list) | **GET** /v1/{parent}/providers | 
+[**eventarc_projects_locations_triggers_create**](ProjectsApi.md#eventarc_projects_locations_triggers_create) | **POST** /v1/{parent}/triggers | 
+[**eventarc_projects_locations_triggers_delete**](ProjectsApi.md#eventarc_projects_locations_triggers_delete) | **DELETE** /v1/{name} | 
+[**eventarc_projects_locations_triggers_get**](ProjectsApi.md#eventarc_projects_locations_triggers_get) | **GET** /v1/{name} | 
+[**eventarc_projects_locations_triggers_get_iam_policy**](ProjectsApi.md#eventarc_projects_locations_triggers_get_iam_policy) | **GET** /v1/{resource}:getIamPolicy | 
+[**eventarc_projects_locations_triggers_list**](ProjectsApi.md#eventarc_projects_locations_triggers_list) | **GET** /v1/{parent}/triggers | 
+[**eventarc_projects_locations_triggers_patch**](ProjectsApi.md#eventarc_projects_locations_triggers_patch) | **PATCH** /v1/{name} | 
+[**eventarc_projects_locations_triggers_set_iam_policy**](ProjectsApi.md#eventarc_projects_locations_triggers_set_iam_policy) | **POST** /v1/{resource}:setIamPolicy | 
+[**eventarc_projects_locations_triggers_test_iam_permissions**](ProjectsApi.md#eventarc_projects_locations_triggers_test_iam_permissions) | **POST** /v1/{resource}:testIamPermissions | 
+
+
+# **eventarc_projects_locations_channel_connections_create**
+> GoogleLongrunningOperation eventarc_projects_locations_channel_connections_create(parent, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, channel_connection_id=channel_connection_id, channel_connection=channel_connection)
+
+
+
+Create a new ChannelConnection in a particular project and location.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.channel_connection import ChannelConnection
+from openapi_client.models.google_longrunning_operation import GoogleLongrunningOperation
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://eventarc.googleapis.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://eventarc.googleapis.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProjectsApi(api_client)
+    parent = 'parent_example' # str | Required. The parent collection in which to add this channel connection.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    channel_connection_id = 'channel_connection_id_example' # str | Required. The user-provided ID to be assigned to the channel connection. (optional)
+    channel_connection = openapi_client.ChannelConnection() # ChannelConnection |  (optional)
+
+    try:
+        api_response = api_instance.eventarc_projects_locations_channel_connections_create(parent, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, channel_connection_id=channel_connection_id, channel_connection=channel_connection)
+        print("The response of ProjectsApi->eventarc_projects_locations_channel_connections_create:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectsApi->eventarc_projects_locations_channel_connections_create: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **parent** | **str**| Required. The parent collection in which to add this channel connection. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **channel_connection_id** | **str**| Required. The user-provided ID to be assigned to the channel connection. | [optional] 
+ **channel_connection** | [**ChannelConnection**](ChannelConnection.md)|  | [optional] 
+
+### Return type
+
+[**GoogleLongrunningOperation**](GoogleLongrunningOperation.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventarc_projects_locations_channel_connections_list**
+> ListChannelConnectionsResponse eventarc_projects_locations_channel_connections_list(parent, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, page_size=page_size, page_token=page_token)
+
+
+
+List channel connections.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.list_channel_connections_response import ListChannelConnectionsResponse
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://eventarc.googleapis.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://eventarc.googleapis.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProjectsApi(api_client)
+    parent = 'parent_example' # str | Required. The parent collection from which to list channel connections.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    page_size = 56 # int | The maximum number of channel connections to return on each page. Note: The service may send fewer responses. (optional)
+    page_token = 'page_token_example' # str | The page token; provide the value from the `next_page_token` field in a previous `ListChannelConnections` call to retrieve the subsequent page. When paginating, all other parameters provided to `ListChannelConnetions` match the call that provided the page token. (optional)
+
+    try:
+        api_response = api_instance.eventarc_projects_locations_channel_connections_list(parent, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, page_size=page_size, page_token=page_token)
+        print("The response of ProjectsApi->eventarc_projects_locations_channel_connections_list:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectsApi->eventarc_projects_locations_channel_connections_list: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **parent** | **str**| Required. The parent collection from which to list channel connections. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **page_size** | **int**| The maximum number of channel connections to return on each page. Note: The service may send fewer responses. | [optional] 
+ **page_token** | **str**| The page token; provide the value from the &#x60;next_page_token&#x60; field in a previous &#x60;ListChannelConnections&#x60; call to retrieve the subsequent page. When paginating, all other parameters provided to &#x60;ListChannelConnetions&#x60; match the call that provided the page token. | [optional] 
+
+### Return type
+
+[**ListChannelConnectionsResponse**](ListChannelConnectionsResponse.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventarc_projects_locations_channels_create**
+> GoogleLongrunningOperation eventarc_projects_locations_channels_create(parent, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, channel_id=channel_id, validate_only=validate_only, channel=channel)
+
+
+
+Create a new channel in a particular project and location.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.channel import Channel
+from openapi_client.models.google_longrunning_operation import GoogleLongrunningOperation
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://eventarc.googleapis.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://eventarc.googleapis.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProjectsApi(api_client)
+    parent = 'parent_example' # str | Required. The parent collection in which to add this channel.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    channel_id = 'channel_id_example' # str | Required. The user-provided ID to be assigned to the channel. (optional)
+    validate_only = True # bool | Optional. If set, validate the request and preview the review, but do not post it. (optional)
+    channel = openapi_client.Channel() # Channel |  (optional)
+
+    try:
+        api_response = api_instance.eventarc_projects_locations_channels_create(parent, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, channel_id=channel_id, validate_only=validate_only, channel=channel)
+        print("The response of ProjectsApi->eventarc_projects_locations_channels_create:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectsApi->eventarc_projects_locations_channels_create: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **parent** | **str**| Required. The parent collection in which to add this channel. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **channel_id** | **str**| Required. The user-provided ID to be assigned to the channel. | [optional] 
+ **validate_only** | **bool**| Optional. If set, validate the request and preview the review, but do not post it. | [optional] 
+ **channel** | [**Channel**](Channel.md)|  | [optional] 
+
+### Return type
+
+[**GoogleLongrunningOperation**](GoogleLongrunningOperation.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventarc_projects_locations_channels_list**
+> ListChannelsResponse eventarc_projects_locations_channels_list(parent, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, order_by=order_by, page_size=page_size, page_token=page_token)
+
+
+
+List channels.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.list_channels_response import ListChannelsResponse
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://eventarc.googleapis.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://eventarc.googleapis.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProjectsApi(api_client)
+    parent = 'parent_example' # str | Required. The parent collection to list channels on.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    order_by = 'order_by_example' # str | The sorting order of the resources returned. Value should be a comma-separated list of fields. The default sorting order is ascending. To specify descending order for a field, append a `desc` suffix; for example: `name desc, channel_id`. (optional)
+    page_size = 56 # int | The maximum number of channels to return on each page. Note: The service may send fewer. (optional)
+    page_token = 'page_token_example' # str | The page token; provide the value from the `next_page_token` field in a previous `ListChannels` call to retrieve the subsequent page. When paginating, all other parameters provided to `ListChannels` must match the call that provided the page token. (optional)
+
+    try:
+        api_response = api_instance.eventarc_projects_locations_channels_list(parent, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, order_by=order_by, page_size=page_size, page_token=page_token)
+        print("The response of ProjectsApi->eventarc_projects_locations_channels_list:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectsApi->eventarc_projects_locations_channels_list: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **parent** | **str**| Required. The parent collection to list channels on. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **order_by** | **str**| The sorting order of the resources returned. Value should be a comma-separated list of fields. The default sorting order is ascending. To specify descending order for a field, append a &#x60;desc&#x60; suffix; for example: &#x60;name desc, channel_id&#x60;. | [optional] 
+ **page_size** | **int**| The maximum number of channels to return on each page. Note: The service may send fewer. | [optional] 
+ **page_token** | **str**| The page token; provide the value from the &#x60;next_page_token&#x60; field in a previous &#x60;ListChannels&#x60; call to retrieve the subsequent page. When paginating, all other parameters provided to &#x60;ListChannels&#x60; must match the call that provided the page token. | [optional] 
+
+### Return type
+
+[**ListChannelsResponse**](ListChannelsResponse.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventarc_projects_locations_list**
+> ListLocationsResponse eventarc_projects_locations_list(name, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, filter=filter, page_size=page_size, page_token=page_token)
+
+
+
+Lists information about the supported locations for this service.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.list_locations_response import ListLocationsResponse
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://eventarc.googleapis.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://eventarc.googleapis.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProjectsApi(api_client)
+    name = 'name_example' # str | The resource that owns the locations collection, if applicable.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    filter = 'filter_example' # str | A filter to narrow down results to a preferred subset. The filtering language accepts strings like `\"displayName=tokyo\"`, and is documented in more detail in [AIP-160](https://google.aip.dev/160). (optional)
+    page_size = 56 # int | The maximum number of results to return. If not set, the service selects a default. (optional)
+    page_token = 'page_token_example' # str | A page token received from the `next_page_token` field in the response. Send that page token to receive the subsequent page. (optional)
+
+    try:
+        api_response = api_instance.eventarc_projects_locations_list(name, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, filter=filter, page_size=page_size, page_token=page_token)
+        print("The response of ProjectsApi->eventarc_projects_locations_list:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectsApi->eventarc_projects_locations_list: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The resource that owns the locations collection, if applicable. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **filter** | **str**| A filter to narrow down results to a preferred subset. The filtering language accepts strings like &#x60;\&quot;displayName&#x3D;tokyo\&quot;&#x60;, and is documented in more detail in [AIP-160](https://google.aip.dev/160). | [optional] 
+ **page_size** | **int**| The maximum number of results to return. If not set, the service selects a default. | [optional] 
+ **page_token** | **str**| A page token received from the &#x60;next_page_token&#x60; field in the response. Send that page token to receive the subsequent page. | [optional] 
+
+### Return type
+
+[**ListLocationsResponse**](ListLocationsResponse.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventarc_projects_locations_operations_cancel**
+> object eventarc_projects_locations_operations_cancel(name, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, body=body)
+
+
+
+Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://eventarc.googleapis.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://eventarc.googleapis.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProjectsApi(api_client)
+    name = 'name_example' # str | The name of the operation resource to be cancelled.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    body = None # object |  (optional)
+
+    try:
+        api_response = api_instance.eventarc_projects_locations_operations_cancel(name, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, body=body)
+        print("The response of ProjectsApi->eventarc_projects_locations_operations_cancel:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectsApi->eventarc_projects_locations_operations_cancel: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the operation resource to be cancelled. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **body** | **object**|  | [optional] 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventarc_projects_locations_operations_list**
+> GoogleLongrunningListOperationsResponse eventarc_projects_locations_operations_list(name, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, filter=filter, page_size=page_size, page_token=page_token)
+
+
+
+Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.google_longrunning_list_operations_response import GoogleLongrunningListOperationsResponse
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://eventarc.googleapis.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://eventarc.googleapis.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProjectsApi(api_client)
+    name = 'name_example' # str | The name of the operation's parent resource.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    filter = 'filter_example' # str | The standard list filter. (optional)
+    page_size = 56 # int | The standard list page size. (optional)
+    page_token = 'page_token_example' # str | The standard list page token. (optional)
+
+    try:
+        api_response = api_instance.eventarc_projects_locations_operations_list(name, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, filter=filter, page_size=page_size, page_token=page_token)
+        print("The response of ProjectsApi->eventarc_projects_locations_operations_list:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectsApi->eventarc_projects_locations_operations_list: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| The name of the operation&#39;s parent resource. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **filter** | **str**| The standard list filter. | [optional] 
+ **page_size** | **int**| The standard list page size. | [optional] 
+ **page_token** | **str**| The standard list page token. | [optional] 
+
+### Return type
+
+[**GoogleLongrunningListOperationsResponse**](GoogleLongrunningListOperationsResponse.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventarc_projects_locations_providers_list**
+> ListProvidersResponse eventarc_projects_locations_providers_list(parent, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, filter=filter, order_by=order_by, page_size=page_size, page_token=page_token)
+
+
+
+List providers.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.list_providers_response import ListProvidersResponse
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://eventarc.googleapis.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://eventarc.googleapis.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProjectsApi(api_client)
+    parent = 'parent_example' # str | Required. The parent of the provider to get.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    filter = 'filter_example' # str | The filter field that the list request will filter on. (optional)
+    order_by = 'order_by_example' # str | The sorting order of the resources returned. Value should be a comma-separated list of fields. The default sorting oder is ascending. To specify descending order for a field, append a `desc` suffix; for example: `name desc, _id`. (optional)
+    page_size = 56 # int | The maximum number of providers to return on each page. (optional)
+    page_token = 'page_token_example' # str | The page token; provide the value from the `next_page_token` field in a previous `ListProviders` call to retrieve the subsequent page. When paginating, all other parameters provided to `ListProviders` must match the call that provided the page token. (optional)
+
+    try:
+        api_response = api_instance.eventarc_projects_locations_providers_list(parent, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, filter=filter, order_by=order_by, page_size=page_size, page_token=page_token)
+        print("The response of ProjectsApi->eventarc_projects_locations_providers_list:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectsApi->eventarc_projects_locations_providers_list: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **parent** | **str**| Required. The parent of the provider to get. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **filter** | **str**| The filter field that the list request will filter on. | [optional] 
+ **order_by** | **str**| The sorting order of the resources returned. Value should be a comma-separated list of fields. The default sorting oder is ascending. To specify descending order for a field, append a &#x60;desc&#x60; suffix; for example: &#x60;name desc, _id&#x60;. | [optional] 
+ **page_size** | **int**| The maximum number of providers to return on each page. | [optional] 
+ **page_token** | **str**| The page token; provide the value from the &#x60;next_page_token&#x60; field in a previous &#x60;ListProviders&#x60; call to retrieve the subsequent page. When paginating, all other parameters provided to &#x60;ListProviders&#x60; must match the call that provided the page token. | [optional] 
+
+### Return type
+
+[**ListProvidersResponse**](ListProvidersResponse.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventarc_projects_locations_triggers_create**
+> GoogleLongrunningOperation eventarc_projects_locations_triggers_create(parent, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, trigger_id=trigger_id, validate_only=validate_only, trigger=trigger)
+
+
+
+Create a new trigger in a particular project and location.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.google_longrunning_operation import GoogleLongrunningOperation
+from openapi_client.models.trigger import Trigger
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://eventarc.googleapis.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://eventarc.googleapis.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProjectsApi(api_client)
+    parent = 'parent_example' # str | Required. The parent collection in which to add this trigger.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    trigger_id = 'trigger_id_example' # str | Required. The user-provided ID to be assigned to the trigger. (optional)
+    validate_only = True # bool | Optional. If set, validate the request and preview the review, but do not post it. (optional)
+    trigger = openapi_client.Trigger() # Trigger |  (optional)
+
+    try:
+        api_response = api_instance.eventarc_projects_locations_triggers_create(parent, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, trigger_id=trigger_id, validate_only=validate_only, trigger=trigger)
+        print("The response of ProjectsApi->eventarc_projects_locations_triggers_create:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectsApi->eventarc_projects_locations_triggers_create: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **parent** | **str**| Required. The parent collection in which to add this trigger. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **trigger_id** | **str**| Required. The user-provided ID to be assigned to the trigger. | [optional] 
+ **validate_only** | **bool**| Optional. If set, validate the request and preview the review, but do not post it. | [optional] 
+ **trigger** | [**Trigger**](Trigger.md)|  | [optional] 
+
+### Return type
+
+[**GoogleLongrunningOperation**](GoogleLongrunningOperation.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventarc_projects_locations_triggers_delete**
+> GoogleLongrunningOperation eventarc_projects_locations_triggers_delete(name, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, allow_missing=allow_missing, etag=etag, validate_only=validate_only)
+
+
+
+Delete a single trigger.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.google_longrunning_operation import GoogleLongrunningOperation
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://eventarc.googleapis.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://eventarc.googleapis.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProjectsApi(api_client)
+    name = 'name_example' # str | Required. The name of the trigger to be deleted.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    allow_missing = True # bool | If set to true, and the trigger is not found, the request will succeed but no action will be taken on the server. (optional)
+    etag = 'etag_example' # str | If provided, the trigger will only be deleted if the etag matches the current etag on the resource. (optional)
+    validate_only = True # bool | Optional. If set, validate the request and preview the review, but do not post it. (optional)
+
+    try:
+        api_response = api_instance.eventarc_projects_locations_triggers_delete(name, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, allow_missing=allow_missing, etag=etag, validate_only=validate_only)
+        print("The response of ProjectsApi->eventarc_projects_locations_triggers_delete:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectsApi->eventarc_projects_locations_triggers_delete: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| Required. The name of the trigger to be deleted. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **allow_missing** | **bool**| If set to true, and the trigger is not found, the request will succeed but no action will be taken on the server. | [optional] 
+ **etag** | **str**| If provided, the trigger will only be deleted if the etag matches the current etag on the resource. | [optional] 
+ **validate_only** | **bool**| Optional. If set, validate the request and preview the review, but do not post it. | [optional] 
+
+### Return type
+
+[**GoogleLongrunningOperation**](GoogleLongrunningOperation.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventarc_projects_locations_triggers_get**
+> Trigger eventarc_projects_locations_triggers_get(name, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type)
+
+
+
+Get a single trigger.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.trigger import Trigger
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://eventarc.googleapis.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://eventarc.googleapis.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProjectsApi(api_client)
+    name = 'name_example' # str | Required. The name of the trigger to get.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+
+    try:
+        api_response = api_instance.eventarc_projects_locations_triggers_get(name, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type)
+        print("The response of ProjectsApi->eventarc_projects_locations_triggers_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectsApi->eventarc_projects_locations_triggers_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| Required. The name of the trigger to get. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+
+### Return type
+
+[**Trigger**](Trigger.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventarc_projects_locations_triggers_get_iam_policy**
+> Policy eventarc_projects_locations_triggers_get_iam_policy(resource, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, options_requested_policy_version=options_requested_policy_version)
+
+
+
+Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.policy import Policy
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://eventarc.googleapis.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://eventarc.googleapis.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProjectsApi(api_client)
+    resource = 'resource_example' # str | REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    options_requested_policy_version = 56 # int | Optional. The maximum policy version that will be used to format the policy. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional role bindings must specify version 3. Policies with no conditional role bindings may specify any valid value or leave the field unset. The policy in the response might use the policy version that you specified, or it might use a lower policy version. For example, if you specify version 3, but the policy has no conditional role bindings, the response uses version 1. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). (optional)
+
+    try:
+        api_response = api_instance.eventarc_projects_locations_triggers_get_iam_policy(resource, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, options_requested_policy_version=options_requested_policy_version)
+        print("The response of ProjectsApi->eventarc_projects_locations_triggers_get_iam_policy:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectsApi->eventarc_projects_locations_triggers_get_iam_policy: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource** | **str**| REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **options_requested_policy_version** | **int**| Optional. The maximum policy version that will be used to format the policy. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional role bindings must specify version 3. Policies with no conditional role bindings may specify any valid value or leave the field unset. The policy in the response might use the policy version that you specified, or it might use a lower policy version. For example, if you specify version 3, but the policy has no conditional role bindings, the response uses version 1. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). | [optional] 
+
+### Return type
+
+[**Policy**](Policy.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventarc_projects_locations_triggers_list**
+> ListTriggersResponse eventarc_projects_locations_triggers_list(parent, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, filter=filter, order_by=order_by, page_size=page_size, page_token=page_token)
+
+
+
+List triggers.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.list_triggers_response import ListTriggersResponse
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://eventarc.googleapis.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://eventarc.googleapis.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProjectsApi(api_client)
+    parent = 'parent_example' # str | Required. The parent collection to list triggers on.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    filter = 'filter_example' # str | Filter field. Used to filter the Triggers to be listed. Possible filters are described in https://google.aip.dev/160. For example, using \"?filter=destination:gke\" would list only Triggers with a gke destination. (optional)
+    order_by = 'order_by_example' # str | The sorting order of the resources returned. Value should be a comma-separated list of fields. The default sorting order is ascending. To specify descending order for a field, append a `desc` suffix; for example: `name desc, trigger_id`. (optional)
+    page_size = 56 # int | The maximum number of triggers to return on each page. Note: The service may send fewer. (optional)
+    page_token = 'page_token_example' # str | The page token; provide the value from the `next_page_token` field in a previous `ListTriggers` call to retrieve the subsequent page. When paginating, all other parameters provided to `ListTriggers` must match the call that provided the page token. (optional)
+
+    try:
+        api_response = api_instance.eventarc_projects_locations_triggers_list(parent, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, filter=filter, order_by=order_by, page_size=page_size, page_token=page_token)
+        print("The response of ProjectsApi->eventarc_projects_locations_triggers_list:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectsApi->eventarc_projects_locations_triggers_list: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **parent** | **str**| Required. The parent collection to list triggers on. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **filter** | **str**| Filter field. Used to filter the Triggers to be listed. Possible filters are described in https://google.aip.dev/160. For example, using \&quot;?filter&#x3D;destination:gke\&quot; would list only Triggers with a gke destination. | [optional] 
+ **order_by** | **str**| The sorting order of the resources returned. Value should be a comma-separated list of fields. The default sorting order is ascending. To specify descending order for a field, append a &#x60;desc&#x60; suffix; for example: &#x60;name desc, trigger_id&#x60;. | [optional] 
+ **page_size** | **int**| The maximum number of triggers to return on each page. Note: The service may send fewer. | [optional] 
+ **page_token** | **str**| The page token; provide the value from the &#x60;next_page_token&#x60; field in a previous &#x60;ListTriggers&#x60; call to retrieve the subsequent page. When paginating, all other parameters provided to &#x60;ListTriggers&#x60; must match the call that provided the page token. | [optional] 
+
+### Return type
+
+[**ListTriggersResponse**](ListTriggersResponse.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventarc_projects_locations_triggers_patch**
+> GoogleLongrunningOperation eventarc_projects_locations_triggers_patch(name, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, allow_missing=allow_missing, update_mask=update_mask, validate_only=validate_only, trigger=trigger)
+
+
+
+Update a single trigger.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.google_longrunning_operation import GoogleLongrunningOperation
+from openapi_client.models.trigger import Trigger
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://eventarc.googleapis.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://eventarc.googleapis.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProjectsApi(api_client)
+    name = 'name_example' # str | Required. The resource name of the trigger. Must be unique within the location of the project and must be in `projects/{project}/locations/{location}/triggers/{trigger}` format.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    allow_missing = True # bool | If set to true, and the trigger is not found, a new trigger will be created. In this situation, `update_mask` is ignored. (optional)
+    update_mask = 'update_mask_example' # str | The fields to be updated; only fields explicitly provided are updated. If no field mask is provided, all provided fields in the request are updated. To update all fields, provide a field mask of \"*\". (optional)
+    validate_only = True # bool | Optional. If set, validate the request and preview the review, but do not post it. (optional)
+    trigger = openapi_client.Trigger() # Trigger |  (optional)
+
+    try:
+        api_response = api_instance.eventarc_projects_locations_triggers_patch(name, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, allow_missing=allow_missing, update_mask=update_mask, validate_only=validate_only, trigger=trigger)
+        print("The response of ProjectsApi->eventarc_projects_locations_triggers_patch:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectsApi->eventarc_projects_locations_triggers_patch: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **str**| Required. The resource name of the trigger. Must be unique within the location of the project and must be in &#x60;projects/{project}/locations/{location}/triggers/{trigger}&#x60; format. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **allow_missing** | **bool**| If set to true, and the trigger is not found, a new trigger will be created. In this situation, &#x60;update_mask&#x60; is ignored. | [optional] 
+ **update_mask** | **str**| The fields to be updated; only fields explicitly provided are updated. If no field mask is provided, all provided fields in the request are updated. To update all fields, provide a field mask of \&quot;*\&quot;. | [optional] 
+ **validate_only** | **bool**| Optional. If set, validate the request and preview the review, but do not post it. | [optional] 
+ **trigger** | [**Trigger**](Trigger.md)|  | [optional] 
+
+### Return type
+
+[**GoogleLongrunningOperation**](GoogleLongrunningOperation.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventarc_projects_locations_triggers_set_iam_policy**
+> Policy eventarc_projects_locations_triggers_set_iam_policy(resource, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, set_iam_policy_request=set_iam_policy_request)
+
+
+
+Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.policy import Policy
+from openapi_client.models.set_iam_policy_request import SetIamPolicyRequest
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://eventarc.googleapis.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://eventarc.googleapis.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProjectsApi(api_client)
+    resource = 'resource_example' # str | REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    set_iam_policy_request = openapi_client.SetIamPolicyRequest() # SetIamPolicyRequest |  (optional)
+
+    try:
+        api_response = api_instance.eventarc_projects_locations_triggers_set_iam_policy(resource, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, set_iam_policy_request=set_iam_policy_request)
+        print("The response of ProjectsApi->eventarc_projects_locations_triggers_set_iam_policy:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectsApi->eventarc_projects_locations_triggers_set_iam_policy: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource** | **str**| REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **set_iam_policy_request** | [**SetIamPolicyRequest**](SetIamPolicyRequest.md)|  | [optional] 
+
+### Return type
+
+[**Policy**](Policy.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **eventarc_projects_locations_triggers_test_iam_permissions**
+> TestIamPermissionsResponse eventarc_projects_locations_triggers_test_iam_permissions(resource, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, test_iam_permissions_request=test_iam_permissions_request)
+
+
+
+Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.test_iam_permissions_request import TestIamPermissionsRequest
+from openapi_client.models.test_iam_permissions_response import TestIamPermissionsResponse
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://eventarc.googleapis.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://eventarc.googleapis.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProjectsApi(api_client)
+    resource = 'resource_example' # str | REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    test_iam_permissions_request = openapi_client.TestIamPermissionsRequest() # TestIamPermissionsRequest |  (optional)
+
+    try:
+        api_response = api_instance.eventarc_projects_locations_triggers_test_iam_permissions(resource, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, test_iam_permissions_request=test_iam_permissions_request)
+        print("The response of ProjectsApi->eventarc_projects_locations_triggers_test_iam_permissions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectsApi->eventarc_projects_locations_triggers_test_iam_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource** | **str**| REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **test_iam_permissions_request** | [**TestIamPermissionsRequest**](TestIamPermissionsRequest.md)|  | [optional] 
+
+### Return type
+
+[**TestIamPermissionsResponse**](TestIamPermissionsResponse.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

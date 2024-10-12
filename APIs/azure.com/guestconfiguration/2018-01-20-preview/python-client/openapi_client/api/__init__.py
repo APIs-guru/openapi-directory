@@ -1,0 +1,7 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.guest_configuration_assignment_reports_api import GuestConfigurationAssignmentReportsApi
+from openapi_client.api.guest_configuration_assignments_api import GuestConfigurationAssignmentsApi
+from openapi_client.api.operations_api import OperationsApi
+

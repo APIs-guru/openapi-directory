@@ -1,0 +1,44 @@
+# DomainRegistrationProviderListOperations200ResponseValueInnerPropertiesServiceSpecificationMetricSpecificationsInner
+
+Definition of a single resource metric.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**aggregation_type** | **str** |  | [optional] 
+**availabilities** | [**List[DomainRegistrationProviderListOperations200ResponseValueInnerPropertiesServiceSpecificationMetricSpecificationsInnerAvailabilitiesInner]**](DomainRegistrationProviderListOperations200ResponseValueInnerPropertiesServiceSpecificationMetricSpecificationsInnerAvailabilitiesInner.md) |  | [optional] 
+**category** | **str** |  | [optional] 
+**dimensions** | [**List[DomainRegistrationProviderListOperations200ResponseValueInnerPropertiesServiceSpecificationMetricSpecificationsInnerDimensionsInner]**](DomainRegistrationProviderListOperations200ResponseValueInnerPropertiesServiceSpecificationMetricSpecificationsInnerDimensionsInner.md) |  | [optional] 
+**display_description** | **str** |  | [optional] 
+**display_name** | **str** |  | [optional] 
+**enable_regional_mdm_account** | **bool** |  | [optional] 
+**fill_gap_with_zero** | **bool** |  | [optional] 
+**is_internal** | **bool** |  | [optional] 
+**metric_filter_pattern** | **str** |  | [optional] 
+**name** | **str** |  | [optional] 
+**source_mdm_account** | **str** |  | [optional] 
+**source_mdm_namespace** | **str** |  | [optional] 
+**supports_instance_level_aggregation** | **bool** |  | [optional] 
+**unit** | **str** |  | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.domain_registration_provider_list_operations200_response_value_inner_properties_service_specification_metric_specifications_inner import DomainRegistrationProviderListOperations200ResponseValueInnerPropertiesServiceSpecificationMetricSpecificationsInner
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of DomainRegistrationProviderListOperations200ResponseValueInnerPropertiesServiceSpecificationMetricSpecificationsInner from a JSON string
+domain_registration_provider_list_operations200_response_value_inner_properties_service_specification_metric_specifications_inner_instance = DomainRegistrationProviderListOperations200ResponseValueInnerPropertiesServiceSpecificationMetricSpecificationsInner.from_json(json)
+# print the JSON string representation of the object
+print(DomainRegistrationProviderListOperations200ResponseValueInnerPropertiesServiceSpecificationMetricSpecificationsInner.to_json())
+
+# convert the object into a dict
+domain_registration_provider_list_operations200_response_value_inner_properties_service_specification_metric_specifications_inner_dict = domain_registration_provider_list_operations200_response_value_inner_properties_service_specification_metric_specifications_inner_instance.to_dict()
+# create an instance of DomainRegistrationProviderListOperations200ResponseValueInnerPropertiesServiceSpecificationMetricSpecificationsInner from a dict
+domain_registration_provider_list_operations200_response_value_inner_properties_service_specification_metric_specifications_inner_from_dict = DomainRegistrationProviderListOperations200ResponseValueInnerPropertiesServiceSpecificationMetricSpecificationsInner.from_dict(domain_registration_provider_list_operations200_response_value_inner_properties_service_specification_metric_specifications_inner_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

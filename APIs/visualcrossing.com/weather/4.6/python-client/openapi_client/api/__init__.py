@@ -1,0 +1,9 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.historical_weather_api import HistoricalWeatherApi
+from openapi_client.api.timeline_weather_api15_day_forecast_request_api import TimelineWeatherAPI15DayForecastRequestApi
+from openapi_client.api.timeline_weather_api_date_range_request_api import TimelineWeatherAPIDateRangeRequestApi
+from openapi_client.api.timeline_weather_api_single_date_request_api import TimelineWeatherAPISingleDateRequestApi
+from openapi_client.api.weather_forecast_api import WeatherForecastApi
+

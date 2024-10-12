@@ -1,0 +1,30 @@
+# ImportTargetsRequestAnyOf4
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**files** | **List[object]** | an array of file objects | [optional] 
+**target** | [**ImportTargetsRequestAnyOf4Target**](ImportTargetsRequestAnyOf4Target.md) |  | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.import_targets_request_any_of4 import ImportTargetsRequestAnyOf4
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ImportTargetsRequestAnyOf4 from a JSON string
+import_targets_request_any_of4_instance = ImportTargetsRequestAnyOf4.from_json(json)
+# print the JSON string representation of the object
+print(ImportTargetsRequestAnyOf4.to_json())
+
+# convert the object into a dict
+import_targets_request_any_of4_dict = import_targets_request_any_of4_instance.to_dict()
+# create an instance of ImportTargetsRequestAnyOf4 from a dict
+import_targets_request_any_of4_from_dict = ImportTargetsRequestAnyOf4.from_dict(import_targets_request_any_of4_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

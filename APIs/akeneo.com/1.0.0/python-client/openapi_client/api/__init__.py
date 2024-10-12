@@ -1,0 +1,42 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.asset_api import AssetApi
+from openapi_client.api.asset_attribute_api import AssetAttributeApi
+from openapi_client.api.asset_attribute_option_api import AssetAttributeOptionApi
+from openapi_client.api.asset_family_api import AssetFamilyApi
+from openapi_client.api.asset_media_file_api import AssetMediaFileApi
+from openapi_client.api.association_type_api import AssociationTypeApi
+from openapi_client.api.attribute_api import AttributeApi
+from openapi_client.api.attribute_group_api import AttributeGroupApi
+from openapi_client.api.attribute_option_api import AttributeOptionApi
+from openapi_client.api.authentication_api import AuthenticationApi
+from openapi_client.api.catalog_products_api import CatalogProductsApi
+from openapi_client.api.catalogs_api import CatalogsApi
+from openapi_client.api.category_api import CategoryApi
+from openapi_client.api.channel_api import ChannelApi
+from openapi_client.api.currency_api import CurrencyApi
+from openapi_client.api.family_api import FamilyApi
+from openapi_client.api.family_variant_api import FamilyVariantApi
+from openapi_client.api.locale_api import LocaleApi
+from openapi_client.api.mapping_schema_for_products_api import MappingSchemaForProductsApi
+from openapi_client.api.measure_family_api import MeasureFamilyApi
+from openapi_client.api.measurement_family_api import MeasurementFamilyApi
+from openapi_client.api.overview_api import OverviewApi
+from openapi_client.api.pam_asset_api import PAMAssetApi
+from openapi_client.api.pam_asset_category_api import PAMAssetCategoryApi
+from openapi_client.api.pam_asset_reference_file_api import PAMAssetReferenceFileApi
+from openapi_client.api.pam_asset_tag_api import PAMAssetTagApi
+from openapi_client.api.pam_asset_variation_file_api import PAMAssetVariationFileApi
+from openapi_client.api.product_identifier_api import ProductIdentifierApi
+from openapi_client.api.product_uuid_api import ProductUuidApi
+from openapi_client.api.product_media_file_api import ProductMediaFileApi
+from openapi_client.api.product_model_api import ProductModelApi
+from openapi_client.api.published_product_api import PublishedProductApi
+from openapi_client.api.reference_entity_api import ReferenceEntityApi
+from openapi_client.api.reference_entity_attribute_api import ReferenceEntityAttributeApi
+from openapi_client.api.reference_entity_attribute_option_api import ReferenceEntityAttributeOptionApi
+from openapi_client.api.reference_entity_media_file_api import ReferenceEntityMediaFileApi
+from openapi_client.api.reference_entity_record_api import ReferenceEntityRecordApi
+from openapi_client.api.system_api import SystemApi
+

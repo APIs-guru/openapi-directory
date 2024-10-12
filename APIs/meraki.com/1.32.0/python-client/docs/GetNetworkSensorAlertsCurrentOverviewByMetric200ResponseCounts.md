@@ -1,0 +1,37 @@
+# GetNetworkSensorAlertsCurrentOverviewByMetric200ResponseCounts
+
+Counts of currently alerting sensors, aggregated by alerting metric
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**door** | **int** | Number of sensors that are currently alerting due to an open door | [optional] 
+**humidity** | **int** | Number of sensors that are currently alerting due to humidity readings | [optional] 
+**indoor_air_quality** | **int** | Number of sensors that are currently alerting due to indoor air quality readings | [optional] 
+**noise** | [**GetNetworkSensorAlertsCurrentOverviewByMetric200ResponseCountsNoise**](GetNetworkSensorAlertsCurrentOverviewByMetric200ResponseCountsNoise.md) |  | [optional] 
+**pm25** | **int** | Number of sensors that are currently alerting due to PM2.5 readings | [optional] 
+**temperature** | **int** | Number of sensors that are currently alerting due to temperature readings | [optional] 
+**tvoc** | **int** | Number of sensors that are currently alerting due to TVOC readings | [optional] 
+**water** | **int** | Number of sensors that are currently alerting due to the presence of water | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.get_network_sensor_alerts_current_overview_by_metric200_response_counts import GetNetworkSensorAlertsCurrentOverviewByMetric200ResponseCounts
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GetNetworkSensorAlertsCurrentOverviewByMetric200ResponseCounts from a JSON string
+get_network_sensor_alerts_current_overview_by_metric200_response_counts_instance = GetNetworkSensorAlertsCurrentOverviewByMetric200ResponseCounts.from_json(json)
+# print the JSON string representation of the object
+print(GetNetworkSensorAlertsCurrentOverviewByMetric200ResponseCounts.to_json())
+
+# convert the object into a dict
+get_network_sensor_alerts_current_overview_by_metric200_response_counts_dict = get_network_sensor_alerts_current_overview_by_metric200_response_counts_instance.to_dict()
+# create an instance of GetNetworkSensorAlertsCurrentOverviewByMetric200ResponseCounts from a dict
+get_network_sensor_alerts_current_overview_by_metric200_response_counts_from_dict = GetNetworkSensorAlertsCurrentOverviewByMetric200ResponseCounts.from_dict(get_network_sensor_alerts_current_overview_by_metric200_response_counts_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

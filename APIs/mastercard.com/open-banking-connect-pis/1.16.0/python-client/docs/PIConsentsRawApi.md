@@ -1,0 +1,81 @@
+# openapi_client.PIConsentsRawApi
+
+All URIs are relative to */openbanking/sandbox/connect/api*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**payments_consents_raw_post**](PIConsentsRawApi.md#payments_consents_raw_post) | **POST** /payments/consents/raw | Extracts the original raw consent given by the aspsp
+
+
+# **payments_consents_raw_post**
+> PostPaymentsConsentsRawOKBody payments_consents_raw_post(body)
+
+Extracts the original raw consent given by the aspsp
+
+Extracts the original raw consent given by the aspsp
+
+### Example
+
+
+```python
+import openapi_client
+from openapi_client.models.post_payments_consents_raw_ok_body import PostPaymentsConsentsRawOKBody
+from openapi_client.models.post_payments_consents_raw_params_body import PostPaymentsConsentsRawParamsBody
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to /openbanking/sandbox/connect/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "/openbanking/sandbox/connect/api"
+)
+
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.PIConsentsRawApi(api_client)
+    body = openapi_client.PostPaymentsConsentsRawParamsBody() # PostPaymentsConsentsRawParamsBody | Request Body
+
+    try:
+        # Extracts the original raw consent given by the aspsp
+        api_response = api_instance.payments_consents_raw_post(body)
+        print("The response of PIConsentsRawApi->payments_consents_raw_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PIConsentsRawApi->payments_consents_raw_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**PostPaymentsConsentsRawParamsBody**](PostPaymentsConsentsRawParamsBody.md)| Request Body | 
+
+### Return type
+
+[**PostPaymentsConsentsRawOKBody**](PostPaymentsConsentsRawOKBody.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad request |  -  |
+**500** | Error |  -  |
+**504** | Server while acting as a gateway or proxy, cannot get a response in time. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

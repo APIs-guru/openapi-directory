@@ -1,0 +1,202 @@
+/**
+ * Portfolio Optimizer
+ * Portfolio Optimizer is a [Web API](https://en.wikipedia.org/wiki/Web_API) to analyze and optimize investment portfolios (collection of financial assets such as stocks, bonds, ETFs, crypto-currencies) using modern portfolio theory algorithms (mean-variance, VaR, etc.).  # API General Information    Portfolio Optimizer is based on [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) for easy integration, uses [JSON](https://en.wikipedia.org/wiki/JSON) for the exchange of data and uses a standard [HTTP verb](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) (`POST`) to represent the action(s).  Portfolio Optimizer is also as secured as a Web API could be:  * [256-bit HTTPS Encryption](https://en.wikipedia.org/wiki/HTTPS) * No usage of cookies * No usage of personal data    ## API Headers  The following HTTP header(s) are required when calling Portfolio Optimizer endpoints: * `Content-type: application/json`     This header specifies that the data provided in input to the endpoint is in JSON format  The following HTTP header(s) are optional when calling Portfolio Optimizer endpoints: * `Content-Encoding: gzip`     This header indicates that the data provided in input to the endpoint is compressed with gzip. * `X-API-Key: <private API key>`     This header enables [authenticated users](#auth) to provide their private [API key](#overview--api-key) in order to [benefit from higher API limits](#overview--api-limits)  ## API Key Portfolio Optimizer is free to use, but not free to run.  In order to obtain an API key and benefit from [higher API limits](#overview--api-limits), a *small* participation to Portfolio Optimizer running costs is required.  This participation takes the form of coffee(s), with one coffee = one month of usage.  <p><a href=\"https://www.buymeacoffee.com/portfolioopt\"><img alt='Buy a Coffee at buymeacoffee.com' src=\"https://img.buymeacoffee.com/button-api/?text=Buymeacoffee.com&emoji=&slug=portfolioopt&button_colour=000000&font_colour=ffffff&font_family=Cookie&outline_colour=ffffff&coffee_colour=FFDD00\"></a></p>   > **Notes:**  > * Please make sure not to expose your API key publicly!  ## API Limits   Portfolio Optimizer comes with *fairly reasonable* API limits.  For anonymous users:   * The API requests are restricted to a subset of all the available endpoints and/or endpoints features   * The API requests are limited to 1 request per second for all the anonymous users combined, with concurrent requests rejected  * The API requests are limited to 1 second of execution time * The API requests are limited to 20 assets, 250 portfolios, 500 series data points and 5 factors  For authenticated users with an [API key](#overview--api-key):   * The API requests have access to all the available endpoints and endpoints features * The API requests are limited to 10000 requests per 24 hour per API key, with concurrent requests queued * The API requests are limited to 2.5 seconds of execution time * The API requests are limited to 100 assets, 1250 portfolios, 2500 series data points and 25 factors  > **Notes:**  > * It is possible to further relax the API limits, or to disable the API limits alltogether; please [contact the support](https://portfoliooptimizer.io/contact/) for more details. > * Information on the API rate limits are provided in response messages HTTP headers `x-ratelimit-*`:   >   * `x-ratelimit-limit-second`, the limit on the number of API requests per second >   * `x-ratelimit-remaining-second`, the number of remaining API requests in the current second     >   * `x-ratelimit-limit-minute`, the limit on the number of API requests per minute >   * ...  ## API Regions Portfolio Optimizer servers are located in Western Europe.  > **Notes:**  > * It is possible to deploy Portfolio Optimizer in other geographical regions, for example to improve the API latency; please [contact the support](https://portfoliooptimizer.io/contact/) for more details.   ## API Response Codes         Standard [HTTP response codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) are used by Portfolio Optimizer to provide details on the status of API requests.  | HTTP Code | Description | Notes | | --------- | ----------- | ----- | | 200 | Request successfully processed | - | | 400 | Request failed to be processed because of incorrect content | The response message body contains information on the incorrect content | | 401 | Request failed to be processed because of invalid API key | - | | 404 | Request failed to be processed because of non existing endpoint | The requested endpoint might exist, but needs to be accessed with another HTTP method (e.g., `POST` instead of `GET`) | | 429 | Request failed to be processed because of API limits violated | The response message HTTP headers `x-ratelimit-*` contain information on the [API limits](#overview--api-limits) | | 500 | Request failed to be processed because of an internal error | Something went wrong on Portfolio Optimizer side, do not hesitate to [report the issue](#overview--support) | | 502 | Request failed to be processed because of a temporary connectivity error | Something went wrong on Portfolio Optimizer side, please check the [API status](#overview--api-status) and do not hesitate to [report the issue](#overview--support) |  ## API Status    Portfolio Optimizer is monitored 24/7 by [UptimeRobot](https://stats.uptimerobot.com/wgW71SL1AW).  # Support  For any issue or question about Portfolio Optimizer, please do not hesitate to [contact the support](https://portfoliooptimizer.io/contact/). 
+ *
+ * The version of the OpenAPI document: 1.0.9
+ * Contact: contact@portfoliooptimizer.io
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+#include "OAI_assets_correlation_matrix_shrinkage_post_request_oneOf.h"
+
+#include <QDebug>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QObject>
+
+#include "OAIHelpers.h"
+
+namespace OpenAPI {
+
+OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::OAI_assets_correlation_matrix_shrinkage_post_request_oneOf(QString json) {
+    this->initializeModel();
+    this->fromJson(json);
+}
+
+OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::OAI_assets_correlation_matrix_shrinkage_post_request_oneOf() {
+    this->initializeModel();
+}
+
+OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::~OAI_assets_correlation_matrix_shrinkage_post_request_oneOf() {}
+
+void OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::initializeModel() {
+
+    m_assets_isSet = false;
+    m_assets_isValid = false;
+
+    m_assets_correlation_matrix_isSet = false;
+    m_assets_correlation_matrix_isValid = false;
+
+    m_shrinkage_factor_isSet = false;
+    m_shrinkage_factor_isValid = false;
+
+    m_target_equicorrelation_matrix_isSet = false;
+    m_target_equicorrelation_matrix_isValid = false;
+}
+
+void OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::fromJson(QString jsonString) {
+    QByteArray array(jsonString.toStdString().c_str());
+    QJsonDocument doc = QJsonDocument::fromJson(array);
+    QJsonObject jsonObject = doc.object();
+    this->fromJsonObject(jsonObject);
+}
+
+void OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::fromJsonObject(QJsonObject json) {
+
+    m_assets_isValid = ::OpenAPI::fromJsonValue(m_assets, json[QString("assets")]);
+    m_assets_isSet = !json[QString("assets")].isNull() && m_assets_isValid;
+
+    if(json["assetsCorrelationMatrix"].isArray()){
+        auto arr = json["assetsCorrelationMatrix"].toArray();
+        m_assets_correlation_matrix_isValid = true;
+        if(arr.count() > 0) {
+            for (const QJsonValue jval : arr) {
+                QList<double> item;
+                m_assets_correlation_matrix_isValid &= ::OpenAPI::fromJsonValue(item, jval);
+                m_assets_correlation_matrix_isSet = !jval.isNull() && m_assets_correlation_matrix_isValid;
+                m_assets_correlation_matrix.push_back(item);
+            }
+        }
+    }
+
+    m_shrinkage_factor_isValid = ::OpenAPI::fromJsonValue(m_shrinkage_factor, json[QString("shrinkageFactor")]);
+    m_shrinkage_factor_isSet = !json[QString("shrinkageFactor")].isNull() && m_shrinkage_factor_isValid;
+
+    m_target_equicorrelation_matrix_isValid = ::OpenAPI::fromJsonValue(m_target_equicorrelation_matrix, json[QString("targetEquicorrelationMatrix")]);
+    m_target_equicorrelation_matrix_isSet = !json[QString("targetEquicorrelationMatrix")].isNull() && m_target_equicorrelation_matrix_isValid;
+}
+
+QString OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::asJson() const {
+    QJsonObject obj = this->asJsonObject();
+    QJsonDocument doc(obj);
+    QByteArray bytes = doc.toJson();
+    return QString(bytes);
+}
+
+QJsonObject OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::asJsonObject() const {
+    QJsonObject obj;
+    if (m_assets_isSet) {
+        obj.insert(QString("assets"), ::OpenAPI::toJsonValue(m_assets));
+    }
+    if (m_assets_correlation_matrix.size() > 0) {
+        
+        obj.insert(QString("assetsCorrelationMatrix"), toJsonValue(m_assets_correlation_matrix));
+    }
+    if (m_shrinkage_factor_isSet) {
+        obj.insert(QString("shrinkageFactor"), ::OpenAPI::toJsonValue(m_shrinkage_factor));
+    }
+    if (m_target_equicorrelation_matrix_isSet) {
+        obj.insert(QString("targetEquicorrelationMatrix"), ::OpenAPI::toJsonValue(m_target_equicorrelation_matrix));
+    }
+    return obj;
+}
+
+qint32 OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::getAssets() const {
+    return m_assets;
+}
+void OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::setAssets(const qint32 &assets) {
+    m_assets = assets;
+    m_assets_isSet = true;
+}
+
+bool OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::is_assets_Set() const{
+    return m_assets_isSet;
+}
+
+bool OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::is_assets_Valid() const{
+    return m_assets_isValid;
+}
+
+QList<QList<double>> OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::getAssetsCorrelationMatrix() const {
+    return m_assets_correlation_matrix;
+}
+void OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::setAssetsCorrelationMatrix(const QList<QList<double>> &assets_correlation_matrix) {
+    m_assets_correlation_matrix = assets_correlation_matrix;
+    m_assets_correlation_matrix_isSet = true;
+}
+
+bool OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::is_assets_correlation_matrix_Set() const{
+    return m_assets_correlation_matrix_isSet;
+}
+
+bool OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::is_assets_correlation_matrix_Valid() const{
+    return m_assets_correlation_matrix_isValid;
+}
+
+double OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::getShrinkageFactor() const {
+    return m_shrinkage_factor;
+}
+void OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::setShrinkageFactor(const double &shrinkage_factor) {
+    m_shrinkage_factor = shrinkage_factor;
+    m_shrinkage_factor_isSet = true;
+}
+
+bool OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::is_shrinkage_factor_Set() const{
+    return m_shrinkage_factor_isSet;
+}
+
+bool OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::is_shrinkage_factor_Valid() const{
+    return m_shrinkage_factor_isValid;
+}
+
+QString OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::getTargetEquicorrelationMatrix() const {
+    return m_target_equicorrelation_matrix;
+}
+void OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::setTargetEquicorrelationMatrix(const QString &target_equicorrelation_matrix) {
+    m_target_equicorrelation_matrix = target_equicorrelation_matrix;
+    m_target_equicorrelation_matrix_isSet = true;
+}
+
+bool OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::is_target_equicorrelation_matrix_Set() const{
+    return m_target_equicorrelation_matrix_isSet;
+}
+
+bool OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::is_target_equicorrelation_matrix_Valid() const{
+    return m_target_equicorrelation_matrix_isValid;
+}
+
+bool OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::isSet() const {
+    bool isObjectUpdated = false;
+    do {
+        if (m_assets_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_assets_correlation_matrix.size() > 0) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_shrinkage_factor_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_target_equicorrelation_matrix_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+    } while (false);
+    return isObjectUpdated;
+}
+
+bool OAI_assets_correlation_matrix_shrinkage_post_request_oneOf::isValid() const {
+    // only required properties are required for the object to be considered valid
+    return m_assets_isValid && m_assets_correlation_matrix_isValid && m_shrinkage_factor_isValid && m_target_equicorrelation_matrix_isValid && true;
+}
+
+} // namespace OpenAPI

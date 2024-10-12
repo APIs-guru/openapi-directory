@@ -1,0 +1,137 @@
+/**
+ * Portfolio Optimizer
+ * Portfolio Optimizer is a [Web API](https://en.wikipedia.org/wiki/Web_API) to analyze and optimize investment portfolios (collection of financial assets such as stocks, bonds, ETFs, crypto-currencies) using modern portfolio theory algorithms (mean-variance, VaR, etc.).  # API General Information    Portfolio Optimizer is based on [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) for easy integration, uses [JSON](https://en.wikipedia.org/wiki/JSON) for the exchange of data and uses a standard [HTTP verb](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) (`POST`) to represent the action(s).  Portfolio Optimizer is also as secured as a Web API could be:  * [256-bit HTTPS Encryption](https://en.wikipedia.org/wiki/HTTPS) * No usage of cookies * No usage of personal data    ## API Headers  The following HTTP header(s) are required when calling Portfolio Optimizer endpoints: * `Content-type: application/json`     This header specifies that the data provided in input to the endpoint is in JSON format  The following HTTP header(s) are optional when calling Portfolio Optimizer endpoints: * `Content-Encoding: gzip`     This header indicates that the data provided in input to the endpoint is compressed with gzip. * `X-API-Key: <private API key>`     This header enables [authenticated users](#auth) to provide their private [API key](#overview--api-key) in order to [benefit from higher API limits](#overview--api-limits)  ## API Key Portfolio Optimizer is free to use, but not free to run.  In order to obtain an API key and benefit from [higher API limits](#overview--api-limits), a *small* participation to Portfolio Optimizer running costs is required.  This participation takes the form of coffee(s), with one coffee = one month of usage.  <p><a href=\"https://www.buymeacoffee.com/portfolioopt\"><img alt='Buy a Coffee at buymeacoffee.com' src=\"https://img.buymeacoffee.com/button-api/?text=Buymeacoffee.com&emoji=&slug=portfolioopt&button_colour=000000&font_colour=ffffff&font_family=Cookie&outline_colour=ffffff&coffee_colour=FFDD00\"></a></p>   > **Notes:**  > * Please make sure not to expose your API key publicly!  ## API Limits   Portfolio Optimizer comes with *fairly reasonable* API limits.  For anonymous users:   * The API requests are restricted to a subset of all the available endpoints and/or endpoints features   * The API requests are limited to 1 request per second for all the anonymous users combined, with concurrent requests rejected  * The API requests are limited to 1 second of execution time * The API requests are limited to 20 assets, 250 portfolios, 500 series data points and 5 factors  For authenticated users with an [API key](#overview--api-key):   * The API requests have access to all the available endpoints and endpoints features * The API requests are limited to 10000 requests per 24 hour per API key, with concurrent requests queued * The API requests are limited to 2.5 seconds of execution time * The API requests are limited to 100 assets, 1250 portfolios, 2500 series data points and 25 factors  > **Notes:**  > * It is possible to further relax the API limits, or to disable the API limits alltogether; please [contact the support](https://portfoliooptimizer.io/contact/) for more details. > * Information on the API rate limits are provided in response messages HTTP headers `x-ratelimit-*`:   >   * `x-ratelimit-limit-second`, the limit on the number of API requests per second >   * `x-ratelimit-remaining-second`, the number of remaining API requests in the current second     >   * `x-ratelimit-limit-minute`, the limit on the number of API requests per minute >   * ...  ## API Regions Portfolio Optimizer servers are located in Western Europe.  > **Notes:**  > * It is possible to deploy Portfolio Optimizer in other geographical regions, for example to improve the API latency; please [contact the support](https://portfoliooptimizer.io/contact/) for more details.   ## API Response Codes         Standard [HTTP response codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) are used by Portfolio Optimizer to provide details on the status of API requests.  | HTTP Code | Description | Notes | | --------- | ----------- | ----- | | 200 | Request successfully processed | - | | 400 | Request failed to be processed because of incorrect content | The response message body contains information on the incorrect content | | 401 | Request failed to be processed because of invalid API key | - | | 404 | Request failed to be processed because of non existing endpoint | The requested endpoint might exist, but needs to be accessed with another HTTP method (e.g., `POST` instead of `GET`) | | 429 | Request failed to be processed because of API limits violated | The response message HTTP headers `x-ratelimit-*` contain information on the [API limits](#overview--api-limits) | | 500 | Request failed to be processed because of an internal error | Something went wrong on Portfolio Optimizer side, do not hesitate to [report the issue](#overview--support) | | 502 | Request failed to be processed because of a temporary connectivity error | Something went wrong on Portfolio Optimizer side, please check the [API status](#overview--api-status) and do not hesitate to [report the issue](#overview--support) |  ## API Status    Portfolio Optimizer is monitored 24/7 by [UptimeRobot](https://stats.uptimerobot.com/wgW71SL1AW).  # Support  For any issue or question about Portfolio Optimizer, please do not hesitate to [contact the support](https://portfoliooptimizer.io/contact/). 
+ *
+ * The version of the OpenAPI document: 1.0.9
+ * Contact: contact@portfoliooptimizer.io
+ *
+ * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
+ * https://openapi-generator.tech
+ * Do not edit the class manually.
+ */
+
+/*
+ * OAI_portfolio_optimization_maximum_sharpe_ratio_subset_resampling_based_post_request.h
+ *
+ * 
+ */
+
+#ifndef OAI_portfolio_optimization_maximum_sharpe_ratio_subset_resampling_based_post_request_H
+#define OAI_portfolio_optimization_maximum_sharpe_ratio_subset_resampling_based_post_request_H
+
+#include <QJsonObject>
+
+#include "OAI_portfolio_analysis_mean_variance_efficient_frontier_post_request_constraints.h"
+#include <QList>
+#include <QString>
+
+#include "OAIEnum.h"
+#include "OAIObject.h"
+
+namespace OpenAPI {
+class OAI_portfolio_analysis_mean_variance_efficient_frontier_post_request_constraints;
+
+class OAI_portfolio_optimization_maximum_sharpe_ratio_subset_resampling_based_post_request : public OAIObject {
+public:
+    OAI_portfolio_optimization_maximum_sharpe_ratio_subset_resampling_based_post_request();
+    OAI_portfolio_optimization_maximum_sharpe_ratio_subset_resampling_based_post_request(QString json);
+    ~OAI_portfolio_optimization_maximum_sharpe_ratio_subset_resampling_based_post_request() override;
+
+    QString asJson() const override;
+    QJsonObject asJsonObject() const override;
+    void fromJsonObject(QJsonObject json) override;
+    void fromJson(QString jsonString) override;
+
+    qint32 getAssets() const;
+    void setAssets(const qint32 &assets);
+    bool is_assets_Set() const;
+    bool is_assets_Valid() const;
+
+    QList<QList<double>> getAssetsCovarianceMatrix() const;
+    void setAssetsCovarianceMatrix(const QList<QList<double>> &assets_covariance_matrix);
+    bool is_assets_covariance_matrix_Set() const;
+    bool is_assets_covariance_matrix_Valid() const;
+
+    QList<double> getAssetsReturns() const;
+    void setAssetsReturns(const QList<double> &assets_returns);
+    bool is_assets_returns_Set() const;
+    bool is_assets_returns_Valid() const;
+
+    OAI_portfolio_analysis_mean_variance_efficient_frontier_post_request_constraints getConstraints() const;
+    void setConstraints(const OAI_portfolio_analysis_mean_variance_efficient_frontier_post_request_constraints &constraints);
+    bool is_constraints_Set() const;
+    bool is_constraints_Valid() const;
+
+    double getRiskFreeRate() const;
+    void setRiskFreeRate(const double &risk_free_rate);
+    bool is_risk_free_rate_Set() const;
+    bool is_risk_free_rate_Valid() const;
+
+    qint32 getSubsetPortfolios() const;
+    void setSubsetPortfolios(const qint32 &subset_portfolios);
+    bool is_subset_portfolios_Set() const;
+    bool is_subset_portfolios_Valid() const;
+
+    QString getSubsetPortfoliosAggregationMethod() const;
+    void setSubsetPortfoliosAggregationMethod(const QString &subset_portfolios_aggregation_method);
+    bool is_subset_portfolios_aggregation_method_Set() const;
+    bool is_subset_portfolios_aggregation_method_Valid() const;
+
+    QString getSubsetPortfoliosEnumerationMethod() const;
+    void setSubsetPortfoliosEnumerationMethod(const QString &subset_portfolios_enumeration_method);
+    bool is_subset_portfolios_enumeration_method_Set() const;
+    bool is_subset_portfolios_enumeration_method_Valid() const;
+
+    qint32 getSubsetSize() const;
+    void setSubsetSize(const qint32 &subset_size);
+    bool is_subset_size_Set() const;
+    bool is_subset_size_Valid() const;
+
+    virtual bool isSet() const override;
+    virtual bool isValid() const override;
+
+private:
+    void initializeModel();
+
+    qint32 m_assets;
+    bool m_assets_isSet;
+    bool m_assets_isValid;
+
+    QList<QList<double>> m_assets_covariance_matrix;
+    bool m_assets_covariance_matrix_isSet;
+    bool m_assets_covariance_matrix_isValid;
+
+    QList<double> m_assets_returns;
+    bool m_assets_returns_isSet;
+    bool m_assets_returns_isValid;
+
+    OAI_portfolio_analysis_mean_variance_efficient_frontier_post_request_constraints m_constraints;
+    bool m_constraints_isSet;
+    bool m_constraints_isValid;
+
+    double m_risk_free_rate;
+    bool m_risk_free_rate_isSet;
+    bool m_risk_free_rate_isValid;
+
+    qint32 m_subset_portfolios;
+    bool m_subset_portfolios_isSet;
+    bool m_subset_portfolios_isValid;
+
+    QString m_subset_portfolios_aggregation_method;
+    bool m_subset_portfolios_aggregation_method_isSet;
+    bool m_subset_portfolios_aggregation_method_isValid;
+
+    QString m_subset_portfolios_enumeration_method;
+    bool m_subset_portfolios_enumeration_method_isSet;
+    bool m_subset_portfolios_enumeration_method_isValid;
+
+    qint32 m_subset_size;
+    bool m_subset_size_isSet;
+    bool m_subset_size_isValid;
+};
+
+} // namespace OpenAPI
+
+Q_DECLARE_METATYPE(OpenAPI::OAI_portfolio_optimization_maximum_sharpe_ratio_subset_resampling_based_post_request)
+
+#endif // OAI_portfolio_optimization_maximum_sharpe_ratio_subset_resampling_based_post_request_H

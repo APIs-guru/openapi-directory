@@ -1,0 +1,37 @@
+# PosSaleRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**content_language** | **str** | Required. The two-letter ISO 639-1 language code for the item. | [optional] 
+**gtin** | **str** | Global Trade Item Number. | [optional] 
+**item_id** | **str** | Required. A unique identifier for the item. | [optional] 
+**price** | [**Price**](Price.md) |  | [optional] 
+**quantity** | **str** | Required. The relative change of the available quantity. Negative for items returned. | [optional] 
+**sale_id** | **str** | A unique ID to group items from the same sale event. | [optional] 
+**store_code** | **str** | Required. The identifier of the merchant&#39;s store. Either a &#x60;storeCode&#x60; inserted through the API or the code of the store in a Business Profile. | [optional] 
+**target_country** | **str** | Required. The CLDR territory code for the item. | [optional] 
+**timestamp** | **str** | Required. The inventory timestamp, in ISO 8601 format. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.pos_sale_request import PosSaleRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of PosSaleRequest from a JSON string
+pos_sale_request_instance = PosSaleRequest.from_json(json)
+# print the JSON string representation of the object
+print(PosSaleRequest.to_json())
+
+# convert the object into a dict
+pos_sale_request_dict = pos_sale_request_instance.to_dict()
+# create an instance of PosSaleRequest from a dict
+pos_sale_request_from_dict = PosSaleRequest.from_dict(pos_sale_request_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

@@ -1,0 +1,32 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.apps_api import AppsApi
+from openapi_client.api.categories_api import CategoriesApi
+from openapi_client.api.checkout_custom_fields_api import CheckoutCustomFieldsApi
+from openapi_client.api.countries_api import CountriesApi
+from openapi_client.api.custom_field_select_options_api import CustomFieldSelectOptionsApi
+from openapi_client.api.custom_fields_api import CustomFieldsApi
+from openapi_client.api.customer_additional_fields_api import CustomerAdditionalFieldsApi
+from openapi_client.api.customer_categories_api import CustomerCategoriesApi
+from openapi_client.api.customers_api import CustomersApi
+from openapi_client.api.fulfillments_api import FulfillmentsApi
+from openapi_client.api.hooks_api import HooksApi
+from openapi_client.api.orders_api import OrdersApi
+from openapi_client.api.pages_api import PagesApi
+from openapi_client.api.partners_api import PartnersApi
+from openapi_client.api.payment_methods_api import PaymentMethodsApi
+from openapi_client.api.product_attachments_api import ProductAttachmentsApi
+from openapi_client.api.product_custom_fields_api import ProductCustomFieldsApi
+from openapi_client.api.product_digital_products_api import ProductDigitalProductsApi
+from openapi_client.api.product_images_api import ProductImagesApi
+from openapi_client.api.product_option_values_api import ProductOptionValuesApi
+from openapi_client.api.product_options_api import ProductOptionsApi
+from openapi_client.api.product_variants_api import ProductVariantsApi
+from openapi_client.api.products_api import ProductsApi
+from openapi_client.api.promotions_api import PromotionsApi
+from openapi_client.api.regions_api import RegionsApi
+from openapi_client.api.shipping_methods_api import ShippingMethodsApi
+from openapi_client.api.stores_api import StoresApi
+from openapi_client.api.taxes_api import TaxesApi
+

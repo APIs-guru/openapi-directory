@@ -1,0 +1,413 @@
+# openapi_client.CameraQualityRetentionProfilesApi
+
+All URIs are relative to *https://api.meraki.com/api/v0*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**create_network_camera_quality_retention_profile**](CameraQualityRetentionProfilesApi.md#create_network_camera_quality_retention_profile) | **POST** /networks/{networkId}/camera/qualityRetentionProfiles | Creates new quality retention profile for this network.
+[**delete_network_camera_quality_retention_profile**](CameraQualityRetentionProfilesApi.md#delete_network_camera_quality_retention_profile) | **DELETE** /networks/{networkId}/camera/qualityRetentionProfiles/{qualityRetentionProfileId} | Delete an existing quality retention profile for this network.
+[**get_network_camera_quality_retention_profile**](CameraQualityRetentionProfilesApi.md#get_network_camera_quality_retention_profile) | **GET** /networks/{networkId}/camera/qualityRetentionProfiles/{qualityRetentionProfileId} | Retrieve a single quality retention profile
+[**get_network_camera_quality_retention_profiles**](CameraQualityRetentionProfilesApi.md#get_network_camera_quality_retention_profiles) | **GET** /networks/{networkId}/camera/qualityRetentionProfiles | List the quality retention profiles for this network
+[**update_network_camera_quality_retention_profile**](CameraQualityRetentionProfilesApi.md#update_network_camera_quality_retention_profile) | **PUT** /networks/{networkId}/camera/qualityRetentionProfiles/{qualityRetentionProfileId} | Update an existing quality retention profile for this network.
+
+
+# **create_network_camera_quality_retention_profile**
+> object create_network_camera_quality_retention_profile(network_id, create_network_camera_quality_retention_profile_request)
+
+Creates new quality retention profile for this network.
+
+Creates new quality retention profile for this network.
+
+### Example
+
+* Api Key Authentication (meraki_api_key):
+
+```python
+import openapi_client
+from openapi_client.models.create_network_camera_quality_retention_profile_request import CreateNetworkCameraQualityRetentionProfileRequest
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.meraki.com/api/v0
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://api.meraki.com/api/v0"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: meraki_api_key
+configuration.api_key['meraki_api_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['meraki_api_key'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.CameraQualityRetentionProfilesApi(api_client)
+    network_id = 'network_id_example' # str | 
+    create_network_camera_quality_retention_profile_request = openapi_client.CreateNetworkCameraQualityRetentionProfileRequest() # CreateNetworkCameraQualityRetentionProfileRequest | 
+
+    try:
+        # Creates new quality retention profile for this network.
+        api_response = api_instance.create_network_camera_quality_retention_profile(network_id, create_network_camera_quality_retention_profile_request)
+        print("The response of CameraQualityRetentionProfilesApi->create_network_camera_quality_retention_profile:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CameraQualityRetentionProfilesApi->create_network_camera_quality_retention_profile: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **network_id** | **str**|  | 
+ **create_network_camera_quality_retention_profile_request** | [**CreateNetworkCameraQualityRetentionProfileRequest**](CreateNetworkCameraQualityRetentionProfileRequest.md)|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[meraki_api_key](../README.md#meraki_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_network_camera_quality_retention_profile**
+> delete_network_camera_quality_retention_profile(network_id, quality_retention_profile_id)
+
+Delete an existing quality retention profile for this network.
+
+Delete an existing quality retention profile for this network.
+
+### Example
+
+* Api Key Authentication (meraki_api_key):
+
+```python
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.meraki.com/api/v0
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://api.meraki.com/api/v0"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: meraki_api_key
+configuration.api_key['meraki_api_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['meraki_api_key'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.CameraQualityRetentionProfilesApi(api_client)
+    network_id = 'network_id_example' # str | 
+    quality_retention_profile_id = 'quality_retention_profile_id_example' # str | 
+
+    try:
+        # Delete an existing quality retention profile for this network.
+        api_instance.delete_network_camera_quality_retention_profile(network_id, quality_retention_profile_id)
+    except Exception as e:
+        print("Exception when calling CameraQualityRetentionProfilesApi->delete_network_camera_quality_retention_profile: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **network_id** | **str**|  | 
+ **quality_retention_profile_id** | **str**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[meraki_api_key](../README.md#meraki_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_network_camera_quality_retention_profile**
+> object get_network_camera_quality_retention_profile(network_id, quality_retention_profile_id)
+
+Retrieve a single quality retention profile
+
+Retrieve a single quality retention profile
+
+### Example
+
+* Api Key Authentication (meraki_api_key):
+
+```python
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.meraki.com/api/v0
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://api.meraki.com/api/v0"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: meraki_api_key
+configuration.api_key['meraki_api_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['meraki_api_key'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.CameraQualityRetentionProfilesApi(api_client)
+    network_id = 'network_id_example' # str | 
+    quality_retention_profile_id = 'quality_retention_profile_id_example' # str | 
+
+    try:
+        # Retrieve a single quality retention profile
+        api_response = api_instance.get_network_camera_quality_retention_profile(network_id, quality_retention_profile_id)
+        print("The response of CameraQualityRetentionProfilesApi->get_network_camera_quality_retention_profile:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CameraQualityRetentionProfilesApi->get_network_camera_quality_retention_profile: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **network_id** | **str**|  | 
+ **quality_retention_profile_id** | **str**|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[meraki_api_key](../README.md#meraki_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_network_camera_quality_retention_profiles**
+> List[object] get_network_camera_quality_retention_profiles(network_id)
+
+List the quality retention profiles for this network
+
+List the quality retention profiles for this network
+
+### Example
+
+* Api Key Authentication (meraki_api_key):
+
+```python
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.meraki.com/api/v0
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://api.meraki.com/api/v0"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: meraki_api_key
+configuration.api_key['meraki_api_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['meraki_api_key'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.CameraQualityRetentionProfilesApi(api_client)
+    network_id = 'network_id_example' # str | 
+
+    try:
+        # List the quality retention profiles for this network
+        api_response = api_instance.get_network_camera_quality_retention_profiles(network_id)
+        print("The response of CameraQualityRetentionProfilesApi->get_network_camera_quality_retention_profiles:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CameraQualityRetentionProfilesApi->get_network_camera_quality_retention_profiles: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **network_id** | **str**|  | 
+
+### Return type
+
+**List[object]**
+
+### Authorization
+
+[meraki_api_key](../README.md#meraki_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_network_camera_quality_retention_profile**
+> object update_network_camera_quality_retention_profile(network_id, quality_retention_profile_id, update_network_camera_quality_retention_profile_request=update_network_camera_quality_retention_profile_request)
+
+Update an existing quality retention profile for this network.
+
+Update an existing quality retention profile for this network.
+
+### Example
+
+* Api Key Authentication (meraki_api_key):
+
+```python
+import openapi_client
+from openapi_client.models.update_network_camera_quality_retention_profile_request import UpdateNetworkCameraQualityRetentionProfileRequest
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.meraki.com/api/v0
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://api.meraki.com/api/v0"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: meraki_api_key
+configuration.api_key['meraki_api_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['meraki_api_key'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.CameraQualityRetentionProfilesApi(api_client)
+    network_id = 'network_id_example' # str | 
+    quality_retention_profile_id = 'quality_retention_profile_id_example' # str | 
+    update_network_camera_quality_retention_profile_request = openapi_client.UpdateNetworkCameraQualityRetentionProfileRequest() # UpdateNetworkCameraQualityRetentionProfileRequest |  (optional)
+
+    try:
+        # Update an existing quality retention profile for this network.
+        api_response = api_instance.update_network_camera_quality_retention_profile(network_id, quality_retention_profile_id, update_network_camera_quality_retention_profile_request=update_network_camera_quality_retention_profile_request)
+        print("The response of CameraQualityRetentionProfilesApi->update_network_camera_quality_retention_profile:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CameraQualityRetentionProfilesApi->update_network_camera_quality_retention_profile: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **network_id** | **str**|  | 
+ **quality_retention_profile_id** | **str**|  | 
+ **update_network_camera_quality_retention_profile_request** | [**UpdateNetworkCameraQualityRetentionProfileRequest**](UpdateNetworkCameraQualityRetentionProfileRequest.md)|  | [optional] 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[meraki_api_key](../README.md#meraki_api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

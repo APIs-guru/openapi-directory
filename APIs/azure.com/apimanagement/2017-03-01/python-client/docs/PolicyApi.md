@@ -1,0 +1,345 @@
+# openapi_client.PolicyApi
+
+All URIs are relative to *https://management.azure.com*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**policy_create_or_update**](PolicyApi.md#policy_create_or_update) | **PUT** /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId} | 
+[**policy_delete**](PolicyApi.md#policy_delete) | **DELETE** /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId} | 
+[**policy_get**](PolicyApi.md#policy_get) | **GET** /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies/{policyId} | 
+[**policy_list_by_service**](PolicyApi.md#policy_list_by_service) | **GET** /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policies | 
+
+
+# **policy_create_or_update**
+> PolicyContract policy_create_or_update(resource_group_name, service_name, policy_id, api_version, subscription_id, parameters)
+
+
+
+Creates or updates the global policy configuration of the Api Management service.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.models.policy_contract import PolicyContract
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.PolicyApi(api_client)
+    resource_group_name = 'resource_group_name_example' # str | The name of the resource group.
+    service_name = 'service_name_example' # str | The name of the API Management service.
+    policy_id = 'policy_id_example' # str | The identifier of the Policy.
+    api_version = 'api_version_example' # str | Version of the API to be used with the client request.
+    subscription_id = 'subscription_id_example' # str | Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    parameters = openapi_client.PolicyContract() # PolicyContract | The policy contents to apply.
+
+    try:
+        api_response = api_instance.policy_create_or_update(resource_group_name, service_name, policy_id, api_version, subscription_id, parameters)
+        print("The response of PolicyApi->policy_create_or_update:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PolicyApi->policy_create_or_update: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_group_name** | **str**| The name of the resource group. | 
+ **service_name** | **str**| The name of the API Management service. | 
+ **policy_id** | **str**| The identifier of the Policy. | 
+ **api_version** | **str**| Version of the API to be used with the client request. | 
+ **subscription_id** | **str**| Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. | 
+ **parameters** | [**PolicyContract**](PolicyContract.md)| The policy contents to apply. | 
+
+### Return type
+
+[**PolicyContract**](PolicyContract.md)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/vnd.ms-azure-apim.policy+xml, application/vnd.ms-azure-apim.policy.raw+xml
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Global policy configuration of the Api Management service was successfully updated. |  -  |
+**201** | Global policy configuration was successfully created. |  -  |
+**0** | Error response describing why the operation failed. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **policy_delete**
+> policy_delete(resource_group_name, service_name, policy_id, if_match, api_version, subscription_id)
+
+
+
+Deletes the global policy configuration of the Api Management Service.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.PolicyApi(api_client)
+    resource_group_name = 'resource_group_name_example' # str | The name of the resource group.
+    service_name = 'service_name_example' # str | The name of the API Management service.
+    policy_id = 'policy_id_example' # str | The identifier of the Policy.
+    if_match = 'if_match_example' # str | The entity state (Etag) version of the policy to be deleted. A value of \"*\" can be used for If-Match to unconditionally apply the operation.
+    api_version = 'api_version_example' # str | Version of the API to be used with the client request.
+    subscription_id = 'subscription_id_example' # str | Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+
+    try:
+        api_instance.policy_delete(resource_group_name, service_name, policy_id, if_match, api_version, subscription_id)
+    except Exception as e:
+        print("Exception when calling PolicyApi->policy_delete: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_group_name** | **str**| The name of the resource group. | 
+ **service_name** | **str**| The name of the API Management service. | 
+ **policy_id** | **str**| The identifier of the Policy. | 
+ **if_match** | **str**| The entity state (Etag) version of the policy to be deleted. A value of \&quot;*\&quot; can be used for If-Match to unconditionally apply the operation. | 
+ **api_version** | **str**| Version of the API to be used with the client request. | 
+ **subscription_id** | **str**| Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successfully deleted the policy configuration at the Global level. |  -  |
+**0** | Error response describing why the operation failed. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **policy_get**
+> PolicyContract policy_get(resource_group_name, service_name, policy_id, api_version, subscription_id)
+
+
+
+Get the Global policy definition of the Api Management service.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.models.policy_contract import PolicyContract
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.PolicyApi(api_client)
+    resource_group_name = 'resource_group_name_example' # str | The name of the resource group.
+    service_name = 'service_name_example' # str | The name of the API Management service.
+    policy_id = 'policy_id_example' # str | The identifier of the Policy.
+    api_version = 'api_version_example' # str | Version of the API to be used with the client request.
+    subscription_id = 'subscription_id_example' # str | Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+
+    try:
+        api_response = api_instance.policy_get(resource_group_name, service_name, policy_id, api_version, subscription_id)
+        print("The response of PolicyApi->policy_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PolicyApi->policy_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_group_name** | **str**| The name of the resource group. | 
+ **service_name** | **str**| The name of the API Management service. | 
+ **policy_id** | **str**| The identifier of the Policy. | 
+ **api_version** | **str**| Version of the API to be used with the client request. | 
+ **subscription_id** | **str**| Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. | 
+
+### Return type
+
+[**PolicyContract**](PolicyContract.md)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/vnd.ms-azure-apim.policy+xml, application/vnd.ms-azure-apim.policy.raw+xml
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Returns the Policy Contracts. |  * ETag - Current entity state version. Should be treated as opaque and used to make conditional HTTP requests. <br>  |
+**0** | Error response describing why the operation failed. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **policy_list_by_service**
+> PolicyCollection policy_list_by_service(resource_group_name, service_name, api_version, subscription_id, scope=scope)
+
+
+
+Lists all the Global Policy definitions of the Api Management service.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.models.policy_collection import PolicyCollection
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.PolicyApi(api_client)
+    resource_group_name = 'resource_group_name_example' # str | The name of the resource group.
+    service_name = 'service_name_example' # str | The name of the API Management service.
+    api_version = 'api_version_example' # str | Version of the API to be used with the client request.
+    subscription_id = 'subscription_id_example' # str | Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    scope = 'scope_example' # str | Policy scope. (optional)
+
+    try:
+        api_response = api_instance.policy_list_by_service(resource_group_name, service_name, api_version, subscription_id, scope=scope)
+        print("The response of PolicyApi->policy_list_by_service:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PolicyApi->policy_list_by_service: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_group_name** | **str**| The name of the resource group. | 
+ **service_name** | **str**| The name of the API Management service. | 
+ **api_version** | **str**| Version of the API to be used with the client request. | 
+ **subscription_id** | **str**| Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. | 
+ **scope** | **str**| Policy scope. | [optional] 
+
+### Return type
+
+[**PolicyCollection**](PolicyCollection.md)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Returns an array of Policy Contracts. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

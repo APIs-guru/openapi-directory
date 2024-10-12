@@ -1,0 +1,72 @@
+# openapi_client.FastSendDeviceValuesApi
+
+All URIs are relative to *https://smart-me.com:443*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**fast_send_device_values_get**](FastSendDeviceValuesApi.md#fast_send_device_values_get) | **GET** /api/FastSendDeviceValues/{id} | Force a device to send the data every second (if supported). This for about 30s.              Don&#39;t use this call to force a device to send the data every second for a longer time.
+
+
+# **fast_send_device_values_get**
+> fast_send_device_values_get(id)
+
+Force a device to send the data every second (if supported). This for about 30s.              Don't use this call to force a device to send the data every second for a longer time.
+
+### Example
+
+
+```python
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://smart-me.com:443
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://smart-me.com:443"
+)
+
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.FastSendDeviceValuesApi(api_client)
+    id = 'id_example' # str | 
+
+    try:
+        # Force a device to send the data every second (if supported). This for about 30s.              Don't use this call to force a device to send the data every second for a longer time.
+        api_instance.fast_send_device_values_get(id)
+    except Exception as e:
+        print("Exception when calling FastSendDeviceValuesApi->fast_send_device_values_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | No Content |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

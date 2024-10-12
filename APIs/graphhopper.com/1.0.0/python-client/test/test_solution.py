@@ -1,0 +1,81 @@
+# coding: utf-8
+
+"""
+    GraphHopper Directions API
+
+     With the [GraphHopper Directions API](https://www.graphhopper.com/products/) you can integrate A-to-B route planning, turn-by-turn navigation, route optimization, isochrone calculations and other tools in your application.  The GraphHopper Directions API consists of the following RESTful web services:   * [Routing API](#tag/Routing-API),  * [Route Optimization API](#tag/Route-Optimization-API),  * [Isochrone API](#tag/Isochrone-API),  * [Map Matching API](#tag/Map-Matching-API),  * [Matrix API](#tag/Matrix-API),  * [Geocoding API](#tag/Geocoding-API) and  * [Cluster API](#tag/Cluster-API).  # Explore our APIs  ## Get started  1. [Sign up for GraphHopper](https://support.graphhopper.com/a/solutions/articles/44001976025) 2. [Create an API key](https://support.graphhopper.com/a/solutions/articles/44001976027)  Each API part has its own documentation. Jump to the desired API part and learn about the API through the given examples and tutorials.  In addition, for each API there are specific sample requests that you can send via Insomnia or Postman to see what the requests and responses look like.  ## Insomnia  To explore our APIs with [Insomnia](https://insomnia.rest/), follow these steps:  1. Open Insomnia and Import [our workspace](https://raw.githubusercontent.com/graphhopper/directions-api-doc/master/web/restclients/GraphHopper-Direction-API-Insomnia.json). 2. Specify [your API key](https://graphhopper.com/dashboard/#/register) in your workspace: Manage Environments -> Base Environment -> `\"api_key\": your API key` 3. Start exploring  ![Insomnia](./img/insomnia.png)  ## Postman  To explore our APIs with [Postman](https://www.getpostman.com/), follow these steps:  1. Import our [request collections](https://raw.githubusercontent.com/graphhopper/directions-api-doc/master/web/restclients/graphhopper_directions_api.postman_collection.json) as well as our [environment file](https://raw.githubusercontent.com/graphhopper/directions-api-doc/master/web/restclients/graphhopper_directions_api.postman_environment.json). 2. Specify [your API key](https://graphhopper.com/dashboard/#/register) in your environment: `\"api_key\": your API key` 3. Start exploring  ![Postman](./img/postman.png)  ## API Client Libraries  To speed up development and make coding easier, we offer the following client libraries:   * [JavaScript client](https://github.com/graphhopper/directions-api-js-client) - try the [live examples](https://graphhopper.com/api/1/examples/)  * [Others](https://github.com/graphhopper/directions-api-clients) like C#, Ruby, PHP, Python, ... automatically created for the Route Optimization API  ### Bandwidth reduction  If you create your own client, make sure it supports http/2 and gzipped responses for best speed.  If you use the Matrix, the Route Optimization API or the Cluster API and want to solve large problems, we recommend you to reduce bandwidth by [compressing your POST request](https://gist.github.com/karussell/82851e303ea7b3459b2dea01f18949f4) and specifying the header as follows: `Content-Encoding: gzip`. This will also avoid the HTTP 413 error \"Request Entity Too Large\".  ## Contact Us  If you have problems or questions, please read the following information:  - [FAQ](https://graphhopper.com/api/1/docs/FAQ/) - [Public forum](https://discuss.graphhopper.com/c/directions-api) - [Contact us](https://www.graphhopper.com/contact-form/) - [GraphHopper Status Page](https://status.graphhopper.com/)  To stay informed about the latest developments, you can  - follow us on [twitter](https://twitter.com/graphhopper/), - read [our blog](https://graphhopper.com/blog/), - watch [our documentation repository](https://github.com/graphhopper/directions-api-doc), - sign up for our newsletter or - [our forum](https://discuss.graphhopper.com/c/directions-api).  Select the channel you like the most.   # Map Data and Routing Profiles  Currently, our main data source is [OpenStreetMap](https://www.openstreetmap.org). We also integrated other network data providers. This chapter gives an overview about the options you have.  ## OpenStreetMap  #### Geographical Coverage  [OpenStreetMap](https://www.openstreetmap.org) covers the whole world. If you want to see for yourself if we can provide data suitable for your region, please visit [GraphHopper Maps](https://graphhopper.com/maps/). You can edit and modify OpenStreetMap data if you find that important information is missing, e.g. a weight limit for a bridge. [Here](https://wiki.openstreetmap.org/wiki/Beginners%27_guide) is a beginner's guide that shows how to add data. If you have edited data, we usually consider your data after 1 week at the latest.  #### Supported Vehicle Profiles  The Routing, Matrix and Route Optimization APIs support the following vehicle profiles:  Name       | Description           | Restrictions              | Icon -----------|:----------------------|:--------------------------|:--------------------------------------------------------- car        | Car mode              | car access                | ![car image](https://graphhopper.com/maps/img/car.png) small_truck| Small truck like a Mercedes Sprinter, Ford Transit or Iveco Daily | height=2.7m, width=2+0.4m, length=5.5m, weight=2080+1400 kg | ![small truck image](https://graphhopper.com/maps/img/small_truck.png) truck      | Truck like a MAN or Mercedes-Benz Actros | height=3.7m, width=2.6+0.5m, length=12m, weight=13000 + 13000 kg, hgv=yes, 3 Axes | ![truck image](https://graphhopper.com/maps/img/truck.png) scooter    | Moped mode | Fast inner city, often used for food delivery, is able to ignore certain bollards, maximum speed of roughly 50km/h | ![scooter image](https://graphhopper.com/maps/img/scooter.png) foot       | Pedestrian or walking without dangerous [SAC-scales](https://wiki.openstreetmap.org/wiki/Key:sac_scale) | foot access         | ![foot image](https://graphhopper.com/maps/img/foot.png) hike       | Pedestrian or walking with priority for more beautiful hiking tours and potentially a bit longer than `foot`. Walking duration is influenced by elevation differences.  | foot access         | ![hike image](https://graphhopper.com/maps/img/hike.png) bike       | Trekking bike avoiding hills | bike access  | ![bike image](https://graphhopper.com/maps/img/bike.png) mtb        | Mountainbike          | bike access         | ![Mountainbike image](https://graphhopper.com/maps/img/mtb.png) racingbike| Bike preferring roads | bike access         | ![racingbike image](https://graphhopper.com/maps/img/racingbike.png)  Please note:   * all motor vehicles (`car`, `small_truck`, `truck` and `scooter`) support turn restrictions via `turn_costs=true`  * the free package supports only the vehicle profiles `car`, `bike` or `foot`  * up to 2 different vehicle profiles can be used in a single optimization request. The number of vehicles is unaffected and depends on your subscription.  * we offer custom vehicle profiles with different properties, different speed profiles or different access options. To find out more about custom profiles, please [contact us](https://www.graphhopper.com/contact-form/).  * a sophisticated `motorcycle` profile is available up on request. It is powered by the [Kurviger](https://kurviger.de/en) Routing API and favors curves and slopes while avoiding cities and highways.   ## TomTom  If you want to include traffic, you can purchase the TomTom Add-on. This Add-on only uses TomTom's road network and historical traffic information. Live traffic is not yet considered. If you are interested to learn how we consider traffic information, we recommend that you read [this article](https://www.graphhopper.com/blog/2017/11/06/time-dependent-optimization/).  Please note the following:   * Currently we only offer this for our [Route Optimization API](#tag/Route-Optimization-API).  * In addition to our terms, you need to accept TomTom's [End User License Aggreement](https://www.graphhopper.com/tomtom-end-user-license-agreement/).  * We do *not* use TomTom's web services. We only use their data with our software.   [Contact us](https://www.graphhopper.com/contact-form/) for more details.  #### Geographical Coverage  We offer  - Europe including Russia - North, Central and South America - Saudi Arabia - United Arab Emirates - South Africa - Australia  #### Supported Vehicle Profiles  Name       | Description           | Restrictions              | Icon -----------|:----------------------|:--------------------------|:--------------------------------------------------------- car        | Car mode              | car access                | ![car image](https://graphhopper.com/maps/img/car.png) small_truck| Small truck like a Mercedes Sprinter, Ford Transit or Iveco Daily | height=2.7m, width=2+0.4m, length=5.5m, weight=2080+1400 kg | ![small truck image](https://graphhopper.com/maps/img/small_truck.png) 
+
+    The version of the OpenAPI document: 1.0.0
+    Contact: support@graphhopper.com
+    Generated by OpenAPI Generator (https://openapi-generator.tech)
+
+    Do not edit the class manually.
+"""  # noqa: E501
+
+
+import unittest
+
+from openapi_client.models.solution import Solution
+
+class TestSolution(unittest.TestCase):
+    """Solution unit test stubs"""
+
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def make_instance(self, include_optional) -> Solution:
+        """Test Solution
+            include_optional is a boolean, when False only required
+            params are included, when True both required and
+            optional params are included """
+        # uncomment below to create an instance of `Solution`
+        """
+        model = Solution()
+        if include_optional:
+            return Solution(
+                completion_time = 12000,
+                costs = 56,
+                distance = 1200,
+                max_operation_time = 4000,
+                no_unassigned = 1,
+                no_vehicles = 10,
+                preparation_time = 56,
+                routes = [
+                    openapi_client.models.route.Route(
+                        activities = [{"address":{"lat":52.537,"location_id":"berlin","lon":13.406},"distance":0,"driving_time":0,"end_date_time":"2019-02-25T20:20+01:00","end_time":1551122400,"load_after":[0],"location_id":"berlin","preparation_time":0,"type":"start","waiting_time":0},{"address":{"lat":52.527094,"location_id":"13.408642_52.527094","lon":13.408642},"arr_date_time":"2019-02-25T20:25:13+01:00","arr_time":1551122713,"distance":1777,"driving_time":313,"end_date_time":"2019-02-25T20:25:13+01:00","end_time":1551122713,"id":"berlin-2","load_after":[0],"load_before":[0],"location_id":"13.408642_52.527094","preparation_time":0,"type":"service","waiting_time":0},{"address":{"lat":52.527303,"location_id":"13.398170_52.527303","lon":13.39817},"arr_date_time":"2019-02-25T20:27:44+01:00","arr_time":1551122864,"distance":2562,"driving_time":464,"end_date_time":"2019-02-25T20:27:44+01:00","end_time":1551122864,"id":"berlin-1","load_after":[0],"load_before":[0],"location_id":"13.398170_52.527303","preparation_time":0,"type":"service","waiting_time":0},{"address":{"lat":52.537,"location_id":"berlin","lon":13.406},"arr_date_time":"2019-02-25T20:33:09+01:00","arr_time":1551123189,"distance":4334,"driving_time":789,"load_before":[0],"location_id":"berlin","preparation_time":0,"type":"end","waiting_time":0}], 
+                        completion_time = 1800, 
+                        distance = 10000, 
+                        points = [{"coordinates":[[13.4061,52.53701],[13.40643,52.53634],[13.4067,52.53573],[13.40722,52.53479],[13.40729,52.53468],[13.40735,52.53463],[13.41205,52.53275],[13.41245,52.53264],[13.41218,52.53166],[13.41205,52.53139],[13.41177,52.53112],[13.41072,52.53033],[13.41049,52.53014],[13.4098,52.52928],[13.40937,52.5287],[13.40994,52.52858],[13.41032,52.52782],[13.41054,52.52745],[13.41097,52.52656],[13.41107,52.5265],[13.41119,52.52614],[13.41119,52.52604],[13.41109,52.52587],[13.40971,52.52631],[13.40981,52.52659],[13.40891,52.52683],[13.40852,52.52695]],"type":"LineString"},{"coordinates":[[13.40852,52.52695],[13.4081,52.52706],[13.40802,52.52696],[13.40469,52.52758],[13.4033,52.52781],[13.40331,52.52767],[13.40298,52.52763],[13.40261,52.52807],[13.39818,52.52726]],"type":"LineString"},{"coordinates":[[13.39818,52.52726],[13.39808,52.52725],[13.39785,52.52768],[13.39727,52.52866],[13.39762,52.52876],[13.3976,52.52914],[13.39756,52.52943],[13.39597,52.53243],[13.39777,52.5325],[13.39843,52.53254],[13.39891,52.53259],[13.40288,52.53354],[13.40297,52.53359],[13.40338,52.534],[13.40466,52.53419],[13.40433,52.53503],[13.40443,52.53511],[13.40541,52.53611],[13.40547,52.53615],[13.40643,52.53634],[13.4061,52.53701]],"type":"LineString"}], 
+                        preparation_time = 56, 
+                        service_duration = 56, 
+                        transport_time = 1800, 
+                        vehicle_id = 'driver-stefan', 
+                        waiting_time = 56, )
+                    ],
+                service_duration = 1200,
+                time = 56,
+                transport_time = 12000,
+                unassigned = openapi_client.models.solution_unassigned.Solution_unassigned(
+                    breaks = [
+                        ''
+                        ], 
+                    details = [{"code":3,"id":"service-1","reason":"does not fit into any vehicle due to capacity"},{"code":27,"id":"service-2","reason":"could not be assigned due to max job constraint"},{"code":2,"id":"shipment-5","reason":"cannot be visited within time window"}], 
+                    services = ["service-1","service-3"], 
+                    shipments = ["shipment-5"], ),
+                waiting_time = 200
+            )
+        else:
+            return Solution(
+        )
+        """
+
+    def testSolution(self):
+        """Test Solution"""
+        # inst_req_only = self.make_instance(include_optional=False)
+        # inst_req_and_optional = self.make_instance(include_optional=True)
+
+if __name__ == '__main__':
+    unittest.main()

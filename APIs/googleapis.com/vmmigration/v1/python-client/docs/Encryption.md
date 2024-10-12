@@ -1,0 +1,30 @@
+# Encryption
+
+Encryption message describes the details of the applied encryption.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**kms_key** | **str** | Required. The name of the encryption key that is stored in Google Cloud KMS. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.encryption import Encryption
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Encryption from a JSON string
+encryption_instance = Encryption.from_json(json)
+# print the JSON string representation of the object
+print(Encryption.to_json())
+
+# convert the object into a dict
+encryption_dict = encryption_instance.to_dict()
+# create an instance of Encryption from a dict
+encryption_from_dict = Encryption.from_dict(encryption_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

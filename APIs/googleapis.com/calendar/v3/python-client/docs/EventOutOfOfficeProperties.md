@@ -1,0 +1,30 @@
+# EventOutOfOfficeProperties
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**auto_decline_mode** | **str** | Whether to decline meeting invitations which overlap Out of office events. Valid values are declineNone, meaning that no meeting invitations are declined; declineAllConflictingInvitations, meaning that all conflicting meeting invitations that conflict with the event are declined; and declineOnlyNewConflictingInvitations, meaning that only new conflicting meeting invitations which arrive while the Out of office event is present are to be declined. | [optional] 
+**decline_message** | **str** | Response message to set if an existing event or new invitation is automatically declined by Calendar. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.event_out_of_office_properties import EventOutOfOfficeProperties
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of EventOutOfOfficeProperties from a JSON string
+event_out_of_office_properties_instance = EventOutOfOfficeProperties.from_json(json)
+# print the JSON string representation of the object
+print(EventOutOfOfficeProperties.to_json())
+
+# convert the object into a dict
+event_out_of_office_properties_dict = event_out_of_office_properties_instance.to_dict()
+# create an instance of EventOutOfOfficeProperties from a dict
+event_out_of_office_properties_from_dict = EventOutOfOfficeProperties.from_dict(event_out_of_office_properties_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

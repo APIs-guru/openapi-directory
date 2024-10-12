@@ -1,0 +1,8 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.create_or_update_web_application_firewall_policy_api import CreateOrUpdateWebApplicationFirewallPolicyApi
+from openapi_client.api.delete_web_application_firewall_policy_api import DeleteWebApplicationFirewallPolicyApi
+from openapi_client.api.get_webapplicationfirewall_policy_api import GetWebapplicationfirewallPolicyApi
+from openapi_client.api.list_web_application_firewall_policies_api import ListWebApplicationFirewallPoliciesApi
+

@@ -1,0 +1,15 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.bytes_difference_data_api import BytesDifferenceDataApi
+from openapi_client.api.edited_pages_data_api import EditedPagesDataApi
+from openapi_client.api.editors_data_api import EditorsDataApi
+from openapi_client.api.edits_data_api import EditsDataApi
+from openapi_client.api.feed_content_availability_api import FeedContentAvailabilityApi
+from openapi_client.api.legacy_data_api import LegacyDataApi
+from openapi_client.api.math_api import MathApi
+from openapi_client.api.pageviews_data_api import PageviewsDataApi
+from openapi_client.api.registered_users_data_api import RegisteredUsersDataApi
+from openapi_client.api.transform_api import TransformApi
+from openapi_client.api.unique_devices_data_api import UniqueDevicesDataApi
+

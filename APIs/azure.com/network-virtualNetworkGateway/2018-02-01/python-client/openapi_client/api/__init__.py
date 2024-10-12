@@ -1,0 +1,7 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.local_network_gateways_api import LocalNetworkGatewaysApi
+from openapi_client.api.virtual_network_gateway_connections_api import VirtualNetworkGatewayConnectionsApi
+from openapi_client.api.virtual_network_gateways_api import VirtualNetworkGatewaysApi
+

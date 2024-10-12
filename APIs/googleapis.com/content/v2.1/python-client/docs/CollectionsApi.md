@@ -1,0 +1,415 @@
+# openapi_client.CollectionsApi
+
+All URIs are relative to *https://shoppingcontent.googleapis.com/content/v2.1*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**content_collections_create**](CollectionsApi.md#content_collections_create) | **POST** /{merchantId}/collections | 
+[**content_collections_delete**](CollectionsApi.md#content_collections_delete) | **DELETE** /{merchantId}/collections/{collectionId} | 
+[**content_collections_get**](CollectionsApi.md#content_collections_get) | **GET** /{merchantId}/collections/{collectionId} | 
+[**content_collections_list**](CollectionsApi.md#content_collections_list) | **GET** /{merchantId}/collections | 
+
+
+# **content_collections_create**
+> Collection content_collections_create(merchant_id, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, collection=collection)
+
+
+
+Uploads a collection to your Merchant Center account. If a collection with the same collectionId already exists, this method updates that entry. In each update, the collection is completely replaced by the fields in the body of the update request.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.collection import Collection
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://shoppingcontent.googleapis.com/content/v2.1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://shoppingcontent.googleapis.com/content/v2.1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.CollectionsApi(api_client)
+    merchant_id = 'merchant_id_example' # str | Required. The ID of the account that contains the collection. This account cannot be a multi-client account.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    collection = openapi_client.Collection() # Collection |  (optional)
+
+    try:
+        api_response = api_instance.content_collections_create(merchant_id, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, collection=collection)
+        print("The response of CollectionsApi->content_collections_create:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CollectionsApi->content_collections_create: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **merchant_id** | **str**| Required. The ID of the account that contains the collection. This account cannot be a multi-client account. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **collection** | [**Collection**](Collection.md)|  | [optional] 
+
+### Return type
+
+[**Collection**](Collection.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **content_collections_delete**
+> content_collections_delete(merchant_id, collection_id, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type)
+
+
+
+Deletes a collection from your Merchant Center account.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://shoppingcontent.googleapis.com/content/v2.1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://shoppingcontent.googleapis.com/content/v2.1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.CollectionsApi(api_client)
+    merchant_id = 'merchant_id_example' # str | Required. The ID of the account that contains the collection. This account cannot be a multi-client account.
+    collection_id = 'collection_id_example' # str | Required. The collectionId of the collection. CollectionId is the same as the REST ID of the collection.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+
+    try:
+        api_instance.content_collections_delete(merchant_id, collection_id, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type)
+    except Exception as e:
+        print("Exception when calling CollectionsApi->content_collections_delete: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **merchant_id** | **str**| Required. The ID of the account that contains the collection. This account cannot be a multi-client account. | 
+ **collection_id** | **str**| Required. The collectionId of the collection. CollectionId is the same as the REST ID of the collection. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **content_collections_get**
+> Collection content_collections_get(merchant_id, collection_id, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type)
+
+
+
+Retrieves a collection from your Merchant Center account.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.collection import Collection
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://shoppingcontent.googleapis.com/content/v2.1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://shoppingcontent.googleapis.com/content/v2.1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.CollectionsApi(api_client)
+    merchant_id = 'merchant_id_example' # str | Required. The ID of the account that contains the collection. This account cannot be a multi-client account.
+    collection_id = 'collection_id_example' # str | Required. The REST ID of the collection.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+
+    try:
+        api_response = api_instance.content_collections_get(merchant_id, collection_id, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type)
+        print("The response of CollectionsApi->content_collections_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CollectionsApi->content_collections_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **merchant_id** | **str**| Required. The ID of the account that contains the collection. This account cannot be a multi-client account. | 
+ **collection_id** | **str**| Required. The REST ID of the collection. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+
+### Return type
+
+[**Collection**](Collection.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **content_collections_list**
+> ListCollectionsResponse content_collections_list(merchant_id, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, page_size=page_size, page_token=page_token)
+
+
+
+Lists the collections in your Merchant Center account. The response might contain fewer items than specified by page_size. Rely on next_page_token to determine if there are more items to be requested.
+
+### Example
+
+* OAuth Authentication (Oauth2c):
+* OAuth Authentication (Oauth2):
+
+```python
+import openapi_client
+from openapi_client.models.list_collections_response import ListCollectionsResponse
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://shoppingcontent.googleapis.com/content/v2.1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://shoppingcontent.googleapis.com/content/v2.1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.CollectionsApi(api_client)
+    merchant_id = 'merchant_id_example' # str | Required. The ID of the account that contains the collection. This account cannot be a multi-client account.
+    xgafv = 'xgafv_example' # str | V1 error format. (optional)
+    access_token = 'access_token_example' # str | OAuth access token. (optional)
+    alt = 'alt_example' # str | Data format for response. (optional)
+    param_callback = 'param_callback_example' # str | JSONP (optional)
+    fields = 'fields_example' # str | Selector specifying which fields to include in a partial response. (optional)
+    key = 'key_example' # str | API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. (optional)
+    oauth_token = 'oauth_token_example' # str | OAuth 2.0 token for the current user. (optional)
+    pretty_print = True # bool | Returns response with indentations and line breaks. (optional)
+    quota_user = 'quota_user_example' # str | Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. (optional)
+    upload_protocol = 'upload_protocol_example' # str | Upload protocol for media (e.g. \"raw\", \"multipart\"). (optional)
+    upload_type = 'upload_type_example' # str | Legacy upload protocol for media (e.g. \"media\", \"multipart\"). (optional)
+    page_size = 56 # int | The maximum number of collections to return in the response, used for paging. Defaults to 50; values above 1000 will be coerced to 1000. (optional)
+    page_token = 'page_token_example' # str | Token (if provided) to retrieve the subsequent page. All other parameters must match the original call that provided the page token. (optional)
+
+    try:
+        api_response = api_instance.content_collections_list(merchant_id, xgafv=xgafv, access_token=access_token, alt=alt, param_callback=param_callback, fields=fields, key=key, oauth_token=oauth_token, pretty_print=pretty_print, quota_user=quota_user, upload_protocol=upload_protocol, upload_type=upload_type, page_size=page_size, page_token=page_token)
+        print("The response of CollectionsApi->content_collections_list:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CollectionsApi->content_collections_list: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **merchant_id** | **str**| Required. The ID of the account that contains the collection. This account cannot be a multi-client account. | 
+ **xgafv** | **str**| V1 error format. | [optional] 
+ **access_token** | **str**| OAuth access token. | [optional] 
+ **alt** | **str**| Data format for response. | [optional] 
+ **param_callback** | **str**| JSONP | [optional] 
+ **fields** | **str**| Selector specifying which fields to include in a partial response. | [optional] 
+ **key** | **str**| API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token. | [optional] 
+ **oauth_token** | **str**| OAuth 2.0 token for the current user. | [optional] 
+ **pretty_print** | **bool**| Returns response with indentations and line breaks. | [optional] 
+ **quota_user** | **str**| Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. | [optional] 
+ **upload_protocol** | **str**| Upload protocol for media (e.g. \&quot;raw\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **upload_type** | **str**| Legacy upload protocol for media (e.g. \&quot;media\&quot;, \&quot;multipart\&quot;). | [optional] 
+ **page_size** | **int**| The maximum number of collections to return in the response, used for paging. Defaults to 50; values above 1000 will be coerced to 1000. | [optional] 
+ **page_token** | **str**| Token (if provided) to retrieve the subsequent page. All other parameters must match the original call that provided the page token. | [optional] 
+
+### Return type
+
+[**ListCollectionsResponse**](ListCollectionsResponse.md)
+
+### Authorization
+
+[Oauth2c](../README.md#Oauth2c), [Oauth2](../README.md#Oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

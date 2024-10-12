@@ -1,0 +1,33 @@
+# BigOvenModelAPIUserInfoTiny
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**first_name** | **str** |  | [optional] 
+**last_name** | **str** |  | [optional] 
+**photo_url** | **str** |  | [optional] 
+**user_id** | **int** |  | [optional] 
+**user_name** | **str** |  | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.big_oven_model_api_user_info_tiny import BigOvenModelAPIUserInfoTiny
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of BigOvenModelAPIUserInfoTiny from a JSON string
+big_oven_model_api_user_info_tiny_instance = BigOvenModelAPIUserInfoTiny.from_json(json)
+# print the JSON string representation of the object
+print(BigOvenModelAPIUserInfoTiny.to_json())
+
+# convert the object into a dict
+big_oven_model_api_user_info_tiny_dict = big_oven_model_api_user_info_tiny_instance.to_dict()
+# create an instance of BigOvenModelAPIUserInfoTiny from a dict
+big_oven_model_api_user_info_tiny_from_dict = BigOvenModelAPIUserInfoTiny.from_dict(big_oven_model_api_user_info_tiny_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

@@ -1,0 +1,16 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.aspsps_api import ASPSPsApi
+from openapi_client.api.cross_border_payments_api import CrossBorderPaymentsApi
+from openapi_client.api.cross_border_payments_consent_api import CrossBorderPaymentsConsentApi
+from openapi_client.api.cross_border_payments_status_api import CrossBorderPaymentsStatusApi
+from openapi_client.api.domestic_payments_api import DomesticPaymentsApi
+from openapi_client.api.domestic_payments_consent_api import DomesticPaymentsConsentApi
+from openapi_client.api.domestic_payments_status_api import DomesticPaymentsStatusApi
+from openapi_client.api.health_api import HealthApi
+from openapi_client.api.pi_consents_raw_api import PIConsentsRawApi
+from openapi_client.api.sepa_payments_api import SEPAPaymentsApi
+from openapi_client.api.sepa_payments_consent_api import SEPAPaymentsConsentApi
+from openapi_client.api.sepa_payments_status_api import SEPAPaymentsStatusApi
+

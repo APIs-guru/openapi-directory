@@ -1,0 +1,13 @@
+# OBExternalAccountType1Code
+
+Specifies the type of account (personal or business).
+
+## Enum
+
+* `BUSINESS` (value: `'Business'`)
+
+* `PERSONAL` (value: `'Personal'`)
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

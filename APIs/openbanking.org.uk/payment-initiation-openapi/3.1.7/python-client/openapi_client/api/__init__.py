@@ -1,0 +1,12 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.domestic_payments_api import DomesticPaymentsApi
+from openapi_client.api.domestic_scheduled_payments_api import DomesticScheduledPaymentsApi
+from openapi_client.api.domestic_standing_orders_api import DomesticStandingOrdersApi
+from openapi_client.api.file_payments_api import FilePaymentsApi
+from openapi_client.api.international_payments_api import InternationalPaymentsApi
+from openapi_client.api.international_scheduled_payments_api import InternationalScheduledPaymentsApi
+from openapi_client.api.international_standing_orders_api import InternationalStandingOrdersApi
+from openapi_client.api.payment_details_api import PaymentDetailsApi
+

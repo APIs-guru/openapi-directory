@@ -1,0 +1,45 @@
+# MigrationDetails
+
+Migration properties that can be shared by various publishers.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**bios_id** | **str** | Gets or sets the BIOS ID of the machine. | [optional] 
+**enqueue_time** | **str** | Gets or sets the time the message was enqueued. | [optional] 
+**extended_info** | **Dict[str, str]** | Gets or sets the ISV specific extended information. | [optional] 
+**fabric_type** | **str** | Gets or sets the fabric type. | [optional] 
+**fqdn** | **str** | Gets or sets the FQDN of the machine. | [optional] 
+**ip_addresses** | **List[str]** | Gets or sets the list of IP addresses of the machine. IP addresses could be IP V4 or IP V6. | [optional] 
+**last_updated_time** | **datetime** | Gets or sets the time of the last modification of the machine details. | [optional] 
+**mac_addresses** | **List[str]** | Gets or sets the list of MAC addresses of the machine. | [optional] 
+**machine_id** | **str** | Gets or sets the unique identifier of the machine. | [optional] 
+**machine_manager_id** | **str** | Gets or sets the unique identifier of the virtual machine manager(vCenter/VMM). | [optional] 
+**machine_name** | **str** | Gets or sets the name of the machine. | [optional] 
+**migration_phase** | **str** | Gets or sets the phase of migration of the machine. | [optional] 
+**migration_tested** | **bool** | Gets or sets a value indicating whether migration was tested on the machine. | [optional] 
+**replication_progress_percentage** | **int** | Gets or sets the progress percentage of migration on the machine. | [optional] 
+**solution_name** | **str** | Gets or sets the name of the solution that sent the data. | [optional] 
+**target_vm_arm_id** | **str** | Gets or sets the ARM id the migrated VM. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.migration_details import MigrationDetails
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of MigrationDetails from a JSON string
+migration_details_instance = MigrationDetails.from_json(json)
+# print the JSON string representation of the object
+print(MigrationDetails.to_json())
+
+# convert the object into a dict
+migration_details_dict = migration_details_instance.to_dict()
+# create an instance of MigrationDetails from a dict
+migration_details_from_dict = MigrationDetails.from_dict(migration_details_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

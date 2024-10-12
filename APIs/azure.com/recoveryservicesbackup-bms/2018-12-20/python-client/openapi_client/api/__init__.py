@@ -1,0 +1,13 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.aad_properties_api import AadPropertiesApi
+from openapi_client.api.backup_crr_jobs_api import BackupCrrJobsApi
+from openapi_client.api.backup_protected_items_crr_api import BackupProtectedItemsCrrApi
+from openapi_client.api.cross_region_restore_api import CrossRegionRestoreApi
+from openapi_client.api.crr_job_details_api import CrrJobDetailsApi
+from openapi_client.api.crr_operation_results_api import CrrOperationResultsApi
+from openapi_client.api.crr_operation_status_api import CrrOperationStatusApi
+from openapi_client.api.recovery_points_api import RecoveryPointsApi
+from openapi_client.api.recovery_points_crr_api import RecoveryPointsCrrApi
+

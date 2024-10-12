@@ -1,0 +1,50 @@
+# JobBaseProperties
+
+The properties of a Batch AI Job.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**caffe2_settings** | [**Caffe2Settings**](Caffe2Settings.md) |  | [optional] 
+**caffe_settings** | [**CaffeSettings**](CaffeSettings.md) |  | [optional] 
+**chainer_settings** | [**ChainerSettings**](ChainerSettings.md) |  | [optional] 
+**cluster** | [**ResourceId**](ResourceId.md) |  | 
+**cntk_settings** | [**CNTKsettings**](CNTKsettings.md) |  | [optional] 
+**constraints** | [**JobBasePropertiesConstraints**](JobBasePropertiesConstraints.md) |  | [optional] 
+**container_settings** | [**ContainerSettings**](ContainerSettings.md) |  | [optional] 
+**custom_mpi_settings** | [**CustomMpiSettings**](CustomMpiSettings.md) |  | [optional] 
+**custom_toolkit_settings** | [**CustomToolkitSettings**](CustomToolkitSettings.md) |  | [optional] 
+**environment_variables** | [**List[EnvironmentVariable]**](EnvironmentVariable.md) | A list of user defined environment variables which will be setup for the job. | [optional] 
+**horovod_settings** | [**HorovodSettings**](HorovodSettings.md) |  | [optional] 
+**input_directories** | [**List[InputDirectory]**](InputDirectory.md) | A list of input directories for the job. | [optional] 
+**job_preparation** | [**JobPreparation**](JobPreparation.md) |  | [optional] 
+**mount_volumes** | [**MountVolumes**](MountVolumes.md) |  | [optional] 
+**node_count** | **int** | Number of compute nodes to run the job on. The job will be gang scheduled on that many compute nodes. | 
+**output_directories** | [**List[OutputDirectory]**](OutputDirectory.md) | A list of output directories for the job. | [optional] 
+**py_torch_settings** | [**PyTorchSettings**](PyTorchSettings.md) |  | [optional] 
+**scheduling_priority** | **str** | Scheduling priority associated with the job. Possible values: low, normal, high. | [optional] [default to 'normal']
+**secrets** | [**List[EnvironmentVariableWithSecretValue]**](EnvironmentVariableWithSecretValue.md) | A list of user defined environment variables with secret values which will be setup for the job. Server will never report values of these variables back. | [optional] 
+**std_out_err_path_prefix** | **str** | The path where the Batch AI service will store stdout, stderror and execution log of the job. | 
+**tensor_flow_settings** | [**TensorFlowSettings**](TensorFlowSettings.md) |  | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.job_base_properties import JobBaseProperties
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of JobBaseProperties from a JSON string
+job_base_properties_instance = JobBaseProperties.from_json(json)
+# print the JSON string representation of the object
+print(JobBaseProperties.to_json())
+
+# convert the object into a dict
+job_base_properties_dict = job_base_properties_instance.to_dict()
+# create an instance of JobBaseProperties from a dict
+job_base_properties_from_dict = JobBaseProperties.from_dict(job_base_properties_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

@@ -1,0 +1,1082 @@
+# openapi_client.ResourcesApi
+
+All URIs are relative to *https://management.azure.com*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**resources_check_existence**](ResourcesApi.md#resources_check_existence) | **HEAD** /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName} | 
+[**resources_check_existence_by_id**](ResourcesApi.md#resources_check_existence_by_id) | **HEAD** /{resourceId} | 
+[**resources_create_or_update**](ResourcesApi.md#resources_create_or_update) | **PUT** /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName} | 
+[**resources_create_or_update_by_id**](ResourcesApi.md#resources_create_or_update_by_id) | **PUT** /{resourceId} | 
+[**resources_delete**](ResourcesApi.md#resources_delete) | **DELETE** /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName} | 
+[**resources_delete_by_id**](ResourcesApi.md#resources_delete_by_id) | **DELETE** /{resourceId} | 
+[**resources_get**](ResourcesApi.md#resources_get) | **GET** /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName} | 
+[**resources_get_by_id**](ResourcesApi.md#resources_get_by_id) | **GET** /{resourceId} | 
+[**resources_list**](ResourcesApi.md#resources_list) | **GET** /subscriptions/{subscriptionId}/resources | 
+[**resources_move_resources**](ResourcesApi.md#resources_move_resources) | **POST** /subscriptions/{subscriptionId}/resourceGroups/{sourceResourceGroupName}/moveResources | Moves resources from one resource group to another resource group.
+[**resources_update**](ResourcesApi.md#resources_update) | **PATCH** /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName} | 
+[**resources_update_by_id**](ResourcesApi.md#resources_update_by_id) | **PATCH** /{resourceId} | 
+[**resources_validate_move_resources**](ResourcesApi.md#resources_validate_move_resources) | **POST** /subscriptions/{subscriptionId}/resourceGroups/{sourceResourceGroupName}/validateMoveResources | Validates whether resources can be moved from one resource group to another resource group.
+
+
+# **resources_check_existence**
+> resources_check_existence(resource_group_name, resource_provider_namespace, parent_resource_path, resource_type, resource_name, api_version, subscription_id)
+
+
+
+Checks whether a resource exists.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ResourcesApi(api_client)
+    resource_group_name = 'resource_group_name_example' # str | The name of the resource group containing the resource to check. The name is case insensitive.
+    resource_provider_namespace = 'resource_provider_namespace_example' # str | The resource provider of the resource to check.
+    parent_resource_path = 'parent_resource_path_example' # str | The parent resource identity.
+    resource_type = 'resource_type_example' # str | The resource type.
+    resource_name = 'resource_name_example' # str | The name of the resource to check whether it exists.
+    api_version = 'api_version_example' # str | The API version to use for the operation.
+    subscription_id = 'subscription_id_example' # str | The ID of the target subscription.
+
+    try:
+        api_instance.resources_check_existence(resource_group_name, resource_provider_namespace, parent_resource_path, resource_type, resource_name, api_version, subscription_id)
+    except Exception as e:
+        print("Exception when calling ResourcesApi->resources_check_existence: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_group_name** | **str**| The name of the resource group containing the resource to check. The name is case insensitive. | 
+ **resource_provider_namespace** | **str**| The resource provider of the resource to check. | 
+ **parent_resource_path** | **str**| The parent resource identity. | 
+ **resource_type** | **str**| The resource type. | 
+ **resource_name** | **str**| The name of the resource to check whether it exists. | 
+ **api_version** | **str**| The API version to use for the operation. | 
+ **subscription_id** | **str**| The ID of the target subscription. | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | No Content |  -  |
+**404** | Not Found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **resources_check_existence_by_id**
+> resources_check_existence_by_id(resource_id, api_version)
+
+
+
+Checks by ID whether a resource exists.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ResourcesApi(api_client)
+    resource_id = 'resource_id_example' # str | The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name}
+    api_version = 'api_version_example' # str | The API version to use for the operation.
+
+    try:
+        api_instance.resources_check_existence_by_id(resource_id, api_version)
+    except Exception as e:
+        print("Exception when calling ResourcesApi->resources_check_existence_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_id** | **str**| The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name} | 
+ **api_version** | **str**| The API version to use for the operation. | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | No Content |  -  |
+**404** | Not Found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **resources_create_or_update**
+> GenericResource resources_create_or_update(resource_group_name, resource_provider_namespace, parent_resource_path, resource_type, resource_name, api_version, subscription_id, parameters)
+
+
+
+Creates a resource.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.models.generic_resource import GenericResource
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ResourcesApi(api_client)
+    resource_group_name = 'resource_group_name_example' # str | The name of the resource group for the resource. The name is case insensitive.
+    resource_provider_namespace = 'resource_provider_namespace_example' # str | The namespace of the resource provider.
+    parent_resource_path = 'parent_resource_path_example' # str | The parent resource identity.
+    resource_type = 'resource_type_example' # str | The resource type of the resource to create.
+    resource_name = 'resource_name_example' # str | The name of the resource to create.
+    api_version = 'api_version_example' # str | The API version to use for the operation.
+    subscription_id = 'subscription_id_example' # str | The ID of the target subscription.
+    parameters = openapi_client.GenericResource() # GenericResource | Parameters for creating or updating the resource.
+
+    try:
+        api_response = api_instance.resources_create_or_update(resource_group_name, resource_provider_namespace, parent_resource_path, resource_type, resource_name, api_version, subscription_id, parameters)
+        print("The response of ResourcesApi->resources_create_or_update:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ResourcesApi->resources_create_or_update: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_group_name** | **str**| The name of the resource group for the resource. The name is case insensitive. | 
+ **resource_provider_namespace** | **str**| The namespace of the resource provider. | 
+ **parent_resource_path** | **str**| The parent resource identity. | 
+ **resource_type** | **str**| The resource type of the resource to create. | 
+ **resource_name** | **str**| The name of the resource to create. | 
+ **api_version** | **str**| The API version to use for the operation. | 
+ **subscription_id** | **str**| The ID of the target subscription. | 
+ **parameters** | [**GenericResource**](GenericResource.md)| Parameters for creating or updating the resource. | 
+
+### Return type
+
+[**GenericResource**](GenericResource.md)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK - Returns information about the resource. |  -  |
+**201** | Created - Returns information about the resource. |  -  |
+**202** | Accepted |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **resources_create_or_update_by_id**
+> GenericResource resources_create_or_update_by_id(resource_id, api_version, parameters)
+
+
+
+Create a resource by ID.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.models.generic_resource import GenericResource
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ResourcesApi(api_client)
+    resource_id = 'resource_id_example' # str | The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name}
+    api_version = 'api_version_example' # str | The API version to use for the operation.
+    parameters = openapi_client.GenericResource() # GenericResource | Create or update resource parameters.
+
+    try:
+        api_response = api_instance.resources_create_or_update_by_id(resource_id, api_version, parameters)
+        print("The response of ResourcesApi->resources_create_or_update_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ResourcesApi->resources_create_or_update_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_id** | **str**| The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name} | 
+ **api_version** | **str**| The API version to use for the operation. | 
+ **parameters** | [**GenericResource**](GenericResource.md)| Create or update resource parameters. | 
+
+### Return type
+
+[**GenericResource**](GenericResource.md)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK - Returns information about the resource. |  -  |
+**201** | Created - Returns information about the resource. |  -  |
+**202** | Accepted |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **resources_delete**
+> resources_delete(resource_group_name, resource_provider_namespace, parent_resource_path, resource_type, resource_name, api_version, subscription_id)
+
+
+
+Deletes a resource.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ResourcesApi(api_client)
+    resource_group_name = 'resource_group_name_example' # str | The name of the resource group that contains the resource to delete. The name is case insensitive.
+    resource_provider_namespace = 'resource_provider_namespace_example' # str | The namespace of the resource provider.
+    parent_resource_path = 'parent_resource_path_example' # str | The parent resource identity.
+    resource_type = 'resource_type_example' # str | The resource type.
+    resource_name = 'resource_name_example' # str | The name of the resource to delete.
+    api_version = 'api_version_example' # str | The API version to use for the operation.
+    subscription_id = 'subscription_id_example' # str | The ID of the target subscription.
+
+    try:
+        api_instance.resources_delete(resource_group_name, resource_provider_namespace, parent_resource_path, resource_type, resource_name, api_version, subscription_id)
+    except Exception as e:
+        print("Exception when calling ResourcesApi->resources_delete: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_group_name** | **str**| The name of the resource group that contains the resource to delete. The name is case insensitive. | 
+ **resource_provider_namespace** | **str**| The namespace of the resource provider. | 
+ **parent_resource_path** | **str**| The parent resource identity. | 
+ **resource_type** | **str**| The resource type. | 
+ **resource_name** | **str**| The name of the resource to delete. | 
+ **api_version** | **str**| The API version to use for the operation. | 
+ **subscription_id** | **str**| The ID of the target subscription. | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**204** | No Content |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **resources_delete_by_id**
+> resources_delete_by_id(resource_id, api_version)
+
+
+
+Deletes a resource by ID.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ResourcesApi(api_client)
+    resource_id = 'resource_id_example' # str | The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name}
+    api_version = 'api_version_example' # str | The API version to use for the operation.
+
+    try:
+        api_instance.resources_delete_by_id(resource_id, api_version)
+    except Exception as e:
+        print("Exception when calling ResourcesApi->resources_delete_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_id** | **str**| The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name} | 
+ **api_version** | **str**| The API version to use for the operation. | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**202** | Accepted |  -  |
+**204** | No Content |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **resources_get**
+> GenericResource resources_get(resource_group_name, resource_provider_namespace, parent_resource_path, resource_type, resource_name, api_version, subscription_id)
+
+
+
+Gets a resource.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.models.generic_resource import GenericResource
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ResourcesApi(api_client)
+    resource_group_name = 'resource_group_name_example' # str | The name of the resource group containing the resource to get. The name is case insensitive.
+    resource_provider_namespace = 'resource_provider_namespace_example' # str | The namespace of the resource provider.
+    parent_resource_path = 'parent_resource_path_example' # str | The parent resource identity.
+    resource_type = 'resource_type_example' # str | The resource type of the resource.
+    resource_name = 'resource_name_example' # str | The name of the resource to get.
+    api_version = 'api_version_example' # str | The API version to use for the operation.
+    subscription_id = 'subscription_id_example' # str | The ID of the target subscription.
+
+    try:
+        api_response = api_instance.resources_get(resource_group_name, resource_provider_namespace, parent_resource_path, resource_type, resource_name, api_version, subscription_id)
+        print("The response of ResourcesApi->resources_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ResourcesApi->resources_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_group_name** | **str**| The name of the resource group containing the resource to get. The name is case insensitive. | 
+ **resource_provider_namespace** | **str**| The namespace of the resource provider. | 
+ **parent_resource_path** | **str**| The parent resource identity. | 
+ **resource_type** | **str**| The resource type of the resource. | 
+ **resource_name** | **str**| The name of the resource to get. | 
+ **api_version** | **str**| The API version to use for the operation. | 
+ **subscription_id** | **str**| The ID of the target subscription. | 
+
+### Return type
+
+[**GenericResource**](GenericResource.md)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK - Returns information about the resource. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **resources_get_by_id**
+> GenericResource resources_get_by_id(resource_id, api_version)
+
+
+
+Gets a resource by ID.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.models.generic_resource import GenericResource
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ResourcesApi(api_client)
+    resource_id = 'resource_id_example' # str | The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name}
+    api_version = 'api_version_example' # str | The API version to use for the operation.
+
+    try:
+        api_response = api_instance.resources_get_by_id(resource_id, api_version)
+        print("The response of ResourcesApi->resources_get_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ResourcesApi->resources_get_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_id** | **str**| The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name} | 
+ **api_version** | **str**| The API version to use for the operation. | 
+
+### Return type
+
+[**GenericResource**](GenericResource.md)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK - Returns information about the resource. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **resources_list**
+> ResourceListResult resources_list(api_version, subscription_id, filter=filter, expand=expand, top=top)
+
+
+
+Get all the resources in a subscription.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.models.resource_list_result import ResourceListResult
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ResourcesApi(api_client)
+    api_version = 'api_version_example' # str | The API version to use for this operation.
+    subscription_id = 'subscription_id_example' # str | The ID of the target subscription.
+    filter = 'filter_example' # str | The filter to apply on the operation.<br><br>The properties you can use for eq (equals) or ne (not equals) are: location, resourceType, name, resourceGroup, identity, identity/principalId, plan, plan/publisher, plan/product, plan/name, plan/version, and plan/promotionCode.<br><br>For example, to filter by a resource type, use: $filter=resourceType eq 'Microsoft.Network/virtualNetworks'<br><br>You can use substringof(value, property) in the filter. The properties you can use for substring are: name and resourceGroup.<br><br>For example, to get all resources with 'demo' anywhere in the name, use: $filter=substringof('demo', name)<br><br>You can link more than one substringof together by adding and/or operators.<br><br>You can filter by tag names and values. For example, to filter for a tag name and value, use $filter=tagName eq 'tag1' and tagValue eq 'Value1'<br><br>You can use some properties together when filtering. The combinations you can use are: substringof and/or resourceType, plan and plan/publisher and plan/name, identity and identity/principalId. (optional)
+    expand = 'expand_example' # str | The $expand query parameter. You can expand createdTime and changedTime. For example, to expand both properties, use $expand=changedTime,createdTime (optional)
+    top = 56 # int | The number of results to return. If null is passed, returns all resource groups. (optional)
+
+    try:
+        api_response = api_instance.resources_list(api_version, subscription_id, filter=filter, expand=expand, top=top)
+        print("The response of ResourcesApi->resources_list:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ResourcesApi->resources_list: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **api_version** | **str**| The API version to use for this operation. | 
+ **subscription_id** | **str**| The ID of the target subscription. | 
+ **filter** | **str**| The filter to apply on the operation.&lt;br&gt;&lt;br&gt;The properties you can use for eq (equals) or ne (not equals) are: location, resourceType, name, resourceGroup, identity, identity/principalId, plan, plan/publisher, plan/product, plan/name, plan/version, and plan/promotionCode.&lt;br&gt;&lt;br&gt;For example, to filter by a resource type, use: $filter&#x3D;resourceType eq &#39;Microsoft.Network/virtualNetworks&#39;&lt;br&gt;&lt;br&gt;You can use substringof(value, property) in the filter. The properties you can use for substring are: name and resourceGroup.&lt;br&gt;&lt;br&gt;For example, to get all resources with &#39;demo&#39; anywhere in the name, use: $filter&#x3D;substringof(&#39;demo&#39;, name)&lt;br&gt;&lt;br&gt;You can link more than one substringof together by adding and/or operators.&lt;br&gt;&lt;br&gt;You can filter by tag names and values. For example, to filter for a tag name and value, use $filter&#x3D;tagName eq &#39;tag1&#39; and tagValue eq &#39;Value1&#39;&lt;br&gt;&lt;br&gt;You can use some properties together when filtering. The combinations you can use are: substringof and/or resourceType, plan and plan/publisher and plan/name, identity and identity/principalId. | [optional] 
+ **expand** | **str**| The $expand query parameter. You can expand createdTime and changedTime. For example, to expand both properties, use $expand&#x3D;changedTime,createdTime | [optional] 
+ **top** | **int**| The number of results to return. If null is passed, returns all resource groups. | [optional] 
+
+### Return type
+
+[**ResourceListResult**](ResourceListResult.md)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK - Returns an array of resources. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **resources_move_resources**
+> resources_move_resources(source_resource_group_name, api_version, subscription_id, parameters)
+
+Moves resources from one resource group to another resource group.
+
+The resources to move must be in the same source resource group. The target resource group may be in a different subscription. When moving resources, both the source group and the target group are locked for the duration of the operation. Write and delete operations are blocked on the groups until the move completes. 
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.models.resources_move_info import ResourcesMoveInfo
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ResourcesApi(api_client)
+    source_resource_group_name = 'source_resource_group_name_example' # str | The name of the resource group containing the resources to move.
+    api_version = 'api_version_example' # str | The API version to use for this operation.
+    subscription_id = 'subscription_id_example' # str | The ID of the target subscription.
+    parameters = openapi_client.ResourcesMoveInfo() # ResourcesMoveInfo | Parameters for moving resources.
+
+    try:
+        # Moves resources from one resource group to another resource group.
+        api_instance.resources_move_resources(source_resource_group_name, api_version, subscription_id, parameters)
+    except Exception as e:
+        print("Exception when calling ResourcesApi->resources_move_resources: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **source_resource_group_name** | **str**| The name of the resource group containing the resources to move. | 
+ **api_version** | **str**| The API version to use for this operation. | 
+ **subscription_id** | **str**| The ID of the target subscription. | 
+ **parameters** | [**ResourcesMoveInfo**](ResourcesMoveInfo.md)| Parameters for moving resources. | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**204** | No Content |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **resources_update**
+> GenericResource resources_update(resource_group_name, resource_provider_namespace, parent_resource_path, resource_type, resource_name, api_version, subscription_id, parameters)
+
+
+
+Updates a resource.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.models.generic_resource import GenericResource
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ResourcesApi(api_client)
+    resource_group_name = 'resource_group_name_example' # str | The name of the resource group for the resource. The name is case insensitive.
+    resource_provider_namespace = 'resource_provider_namespace_example' # str | The namespace of the resource provider.
+    parent_resource_path = 'parent_resource_path_example' # str | The parent resource identity.
+    resource_type = 'resource_type_example' # str | The resource type of the resource to update.
+    resource_name = 'resource_name_example' # str | The name of the resource to update.
+    api_version = 'api_version_example' # str | The API version to use for the operation.
+    subscription_id = 'subscription_id_example' # str | The ID of the target subscription.
+    parameters = openapi_client.GenericResource() # GenericResource | Parameters for updating the resource.
+
+    try:
+        api_response = api_instance.resources_update(resource_group_name, resource_provider_namespace, parent_resource_path, resource_type, resource_name, api_version, subscription_id, parameters)
+        print("The response of ResourcesApi->resources_update:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ResourcesApi->resources_update: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_group_name** | **str**| The name of the resource group for the resource. The name is case insensitive. | 
+ **resource_provider_namespace** | **str**| The namespace of the resource provider. | 
+ **parent_resource_path** | **str**| The parent resource identity. | 
+ **resource_type** | **str**| The resource type of the resource to update. | 
+ **resource_name** | **str**| The name of the resource to update. | 
+ **api_version** | **str**| The API version to use for the operation. | 
+ **subscription_id** | **str**| The ID of the target subscription. | 
+ **parameters** | [**GenericResource**](GenericResource.md)| Parameters for updating the resource. | 
+
+### Return type
+
+[**GenericResource**](GenericResource.md)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK - Returns information about the resource. |  -  |
+**202** | Accepted |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **resources_update_by_id**
+> GenericResource resources_update_by_id(resource_id, api_version, parameters)
+
+
+
+Updates a resource by ID.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.models.generic_resource import GenericResource
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ResourcesApi(api_client)
+    resource_id = 'resource_id_example' # str | The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name}
+    api_version = 'api_version_example' # str | The API version to use for the operation.
+    parameters = openapi_client.GenericResource() # GenericResource | Update resource parameters.
+
+    try:
+        api_response = api_instance.resources_update_by_id(resource_id, api_version, parameters)
+        print("The response of ResourcesApi->resources_update_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ResourcesApi->resources_update_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_id** | **str**| The fully qualified ID of the resource, including the resource name and resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/{resource-provider-namespace}/{resource-type}/{resource-name} | 
+ **api_version** | **str**| The API version to use for the operation. | 
+ **parameters** | [**GenericResource**](GenericResource.md)| Update resource parameters. | 
+
+### Return type
+
+[**GenericResource**](GenericResource.md)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK - Returns information about the resource. |  -  |
+**202** | Accepted |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **resources_validate_move_resources**
+> resources_validate_move_resources(source_resource_group_name, api_version, subscription_id, parameters)
+
+Validates whether resources can be moved from one resource group to another resource group.
+
+This operation checks whether the specified resources can be moved to the target. The resources to move must be in the same source resource group. The target resource group may be in a different subscription. If validation succeeds, it returns HTTP response code 204 (no content). If validation fails, it returns HTTP response code 409 (Conflict) with an error message. Retrieve the URL in the Location header value to check the result of the long-running operation.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.models.resources_move_info import ResourcesMoveInfo
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ResourcesApi(api_client)
+    source_resource_group_name = 'source_resource_group_name_example' # str | The name of the resource group containing the resources to validate for move.
+    api_version = 'api_version_example' # str | The API version to use for this operation.
+    subscription_id = 'subscription_id_example' # str | The ID of the target subscription.
+    parameters = openapi_client.ResourcesMoveInfo() # ResourcesMoveInfo | Parameters for moving resources.
+
+    try:
+        # Validates whether resources can be moved from one resource group to another resource group.
+        api_instance.resources_validate_move_resources(source_resource_group_name, api_version, subscription_id, parameters)
+    except Exception as e:
+        print("Exception when calling ResourcesApi->resources_validate_move_resources: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **source_resource_group_name** | **str**| The name of the resource group containing the resources to validate for move. | 
+ **api_version** | **str**| The API version to use for this operation. | 
+ **subscription_id** | **str**| The ID of the target subscription. | 
+ **parameters** | [**ResourcesMoveInfo**](ResourcesMoveInfo.md)| Parameters for moving resources. | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**204** | No Content |  -  |
+**409** | Conflict |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

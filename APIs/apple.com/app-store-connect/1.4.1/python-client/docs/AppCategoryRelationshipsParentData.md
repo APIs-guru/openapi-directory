@@ -1,0 +1,30 @@
+# AppCategoryRelationshipsParentData
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **str** |  | 
+**type** | **str** |  | 
+
+## Example
+
+```python
+from openapi_client.models.app_category_relationships_parent_data import AppCategoryRelationshipsParentData
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of AppCategoryRelationshipsParentData from a JSON string
+app_category_relationships_parent_data_instance = AppCategoryRelationshipsParentData.from_json(json)
+# print the JSON string representation of the object
+print(AppCategoryRelationshipsParentData.to_json())
+
+# convert the object into a dict
+app_category_relationships_parent_data_dict = app_category_relationships_parent_data_instance.to_dict()
+# create an instance of AppCategoryRelationshipsParentData from a dict
+app_category_relationships_parent_data_from_dict = AppCategoryRelationshipsParentData.from_dict(app_category_relationships_parent_data_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

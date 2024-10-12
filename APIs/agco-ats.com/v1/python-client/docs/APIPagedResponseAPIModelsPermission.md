@@ -1,0 +1,31 @@
+# APIPagedResponseAPIModelsPermission
+
+A response containing a page of results and metadata concerning the results
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**entities** | [**List[APIModelsPermission]**](APIModelsPermission.md) |  | [readonly] 
+**metadata** | [**APIPagedResponseMetadata**](APIPagedResponseMetadata.md) |  | 
+
+## Example
+
+```python
+from openapi_client.models.api_paged_response_api_models_permission import APIPagedResponseAPIModelsPermission
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of APIPagedResponseAPIModelsPermission from a JSON string
+api_paged_response_api_models_permission_instance = APIPagedResponseAPIModelsPermission.from_json(json)
+# print the JSON string representation of the object
+print(APIPagedResponseAPIModelsPermission.to_json())
+
+# convert the object into a dict
+api_paged_response_api_models_permission_dict = api_paged_response_api_models_permission_instance.to_dict()
+# create an instance of APIPagedResponseAPIModelsPermission from a dict
+api_paged_response_api_models_permission_from_dict = APIPagedResponseAPIModelsPermission.from_dict(api_paged_response_api_models_permission_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

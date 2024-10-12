@@ -1,0 +1,37 @@
+# OperationMetadata
+
+Represents the metadata of a long-running operation.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**additional_status** | **Dict[str, str]** | Map to hold any additional status info for the operation If there is an accelerator being enabled/disabled/deleted, this will be populated with accelerator name as key and status as ENABLING, DISABLING or DELETING | [optional] 
+**api_version** | **str** | API version used to start the operation. | [optional] 
+**create_time** | **str** | The time the operation was created. | [optional] 
+**end_time** | **str** | The time the operation finished running. | [optional] 
+**requested_cancellation** | **bool** | Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to &#x60;Code.CANCELLED&#x60;. | [optional] 
+**status_detail** | **str** | Human-readable status of the operation if any. | [optional] 
+**target** | **str** | Server-defined resource path for the target of the operation. | [optional] 
+**verb** | **str** | Name of the verb executed by the operation. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.operation_metadata import OperationMetadata
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of OperationMetadata from a JSON string
+operation_metadata_instance = OperationMetadata.from_json(json)
+# print the JSON string representation of the object
+print(OperationMetadata.to_json())
+
+# convert the object into a dict
+operation_metadata_dict = operation_metadata_instance.to_dict()
+# create an instance of OperationMetadata from a dict
+operation_metadata_from_dict = OperationMetadata.from_dict(operation_metadata_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

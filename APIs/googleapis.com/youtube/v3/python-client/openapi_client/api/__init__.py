@@ -1,0 +1,35 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.abuse_reports_api import AbuseReportsApi
+from openapi_client.api.activities_api import ActivitiesApi
+from openapi_client.api.captions_api import CaptionsApi
+from openapi_client.api.channel_banners_api import ChannelBannersApi
+from openapi_client.api.channel_sections_api import ChannelSectionsApi
+from openapi_client.api.channels_api import ChannelsApi
+from openapi_client.api.comment_threads_api import CommentThreadsApi
+from openapi_client.api.comments_api import CommentsApi
+from openapi_client.api.i18n_languages_api import I18nLanguagesApi
+from openapi_client.api.i18n_regions_api import I18nRegionsApi
+from openapi_client.api.live_broadcasts_api import LiveBroadcastsApi
+from openapi_client.api.live_chat_bans_api import LiveChatBansApi
+from openapi_client.api.live_chat_messages_api import LiveChatMessagesApi
+from openapi_client.api.live_chat_moderators_api import LiveChatModeratorsApi
+from openapi_client.api.live_streams_api import LiveStreamsApi
+from openapi_client.api.members_api import MembersApi
+from openapi_client.api.memberships_levels_api import MembershipsLevelsApi
+from openapi_client.api.playlist_images_api import PlaylistImagesApi
+from openapi_client.api.playlist_items_api import PlaylistItemsApi
+from openapi_client.api.playlists_api import PlaylistsApi
+from openapi_client.api.search_api import SearchApi
+from openapi_client.api.subscriptions_api import SubscriptionsApi
+from openapi_client.api.super_chat_events_api import SuperChatEventsApi
+from openapi_client.api.tests_api import TestsApi
+from openapi_client.api.third_party_links_api import ThirdPartyLinksApi
+from openapi_client.api.thumbnails_api import ThumbnailsApi
+from openapi_client.api.video_abuse_report_reasons_api import VideoAbuseReportReasonsApi
+from openapi_client.api.video_categories_api import VideoCategoriesApi
+from openapi_client.api.videos_api import VideosApi
+from openapi_client.api.watermarks_api import WatermarksApi
+from openapi_client.api.youtube_api import YoutubeApi
+

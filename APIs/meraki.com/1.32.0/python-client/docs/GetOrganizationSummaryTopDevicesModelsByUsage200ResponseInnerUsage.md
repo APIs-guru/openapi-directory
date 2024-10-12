@@ -1,0 +1,31 @@
+# GetOrganizationSummaryTopDevicesModelsByUsage200ResponseInnerUsage
+
+Usage info in megabytes
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**average** | **float** | Average usage in megabytes | [optional] 
+**total** | **float** | Total usage in megabytes | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.get_organization_summary_top_devices_models_by_usage200_response_inner_usage import GetOrganizationSummaryTopDevicesModelsByUsage200ResponseInnerUsage
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GetOrganizationSummaryTopDevicesModelsByUsage200ResponseInnerUsage from a JSON string
+get_organization_summary_top_devices_models_by_usage200_response_inner_usage_instance = GetOrganizationSummaryTopDevicesModelsByUsage200ResponseInnerUsage.from_json(json)
+# print the JSON string representation of the object
+print(GetOrganizationSummaryTopDevicesModelsByUsage200ResponseInnerUsage.to_json())
+
+# convert the object into a dict
+get_organization_summary_top_devices_models_by_usage200_response_inner_usage_dict = get_organization_summary_top_devices_models_by_usage200_response_inner_usage_instance.to_dict()
+# create an instance of GetOrganizationSummaryTopDevicesModelsByUsage200ResponseInnerUsage from a dict
+get_organization_summary_top_devices_models_by_usage200_response_inner_usage_from_dict = GetOrganizationSummaryTopDevicesModelsByUsage200ResponseInnerUsage.from_dict(get_organization_summary_top_devices_models_by_usage200_response_inner_usage_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

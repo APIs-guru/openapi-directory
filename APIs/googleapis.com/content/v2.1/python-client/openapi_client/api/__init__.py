@@ -1,0 +1,41 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.accounts_api import AccountsApi
+from openapi_client.api.accountstatuses_api import AccountstatusesApi
+from openapi_client.api.accounttax_api import AccounttaxApi
+from openapi_client.api.buyongoogleprograms_api import BuyongoogleprogramsApi
+from openapi_client.api.collections_api import CollectionsApi
+from openapi_client.api.collectionstatuses_api import CollectionstatusesApi
+from openapi_client.api.conversionsources_api import ConversionsourcesApi
+from openapi_client.api.csses_api import CssesApi
+from openapi_client.api.datafeeds_api import DatafeedsApi
+from openapi_client.api.datafeedstatuses_api import DatafeedstatusesApi
+from openapi_client.api.freelistingsprogram_api import FreelistingsprogramApi
+from openapi_client.api.liasettings_api import LiasettingsApi
+from openapi_client.api.localinventory_api import LocalinventoryApi
+from openapi_client.api.merchantsupport_api import MerchantsupportApi
+from openapi_client.api.orderinvoices_api import OrderinvoicesApi
+from openapi_client.api.orderreports_api import OrderreportsApi
+from openapi_client.api.orderreturns_api import OrderreturnsApi
+from openapi_client.api.orders_api import OrdersApi
+from openapi_client.api.ordertrackingsignals_api import OrdertrackingsignalsApi
+from openapi_client.api.pos_api import PosApi
+from openapi_client.api.productdeliverytime_api import ProductdeliverytimeApi
+from openapi_client.api.products_api import ProductsApi
+from openapi_client.api.productstatuses_api import ProductstatusesApi
+from openapi_client.api.promotions_api import PromotionsApi
+from openapi_client.api.pubsubnotificationsettings_api import PubsubnotificationsettingsApi
+from openapi_client.api.quotas_api import QuotasApi
+from openapi_client.api.recommendations_api import RecommendationsApi
+from openapi_client.api.regionalinventory_api import RegionalinventoryApi
+from openapi_client.api.regions_api import RegionsApi
+from openapi_client.api.reports_api import ReportsApi
+from openapi_client.api.returnaddress_api import ReturnaddressApi
+from openapi_client.api.returnpolicy_api import ReturnpolicyApi
+from openapi_client.api.returnpolicyonline_api import ReturnpolicyonlineApi
+from openapi_client.api.settlementreports_api import SettlementreportsApi
+from openapi_client.api.settlementtransactions_api import SettlementtransactionsApi
+from openapi_client.api.shippingsettings_api import ShippingsettingsApi
+from openapi_client.api.shoppingadsprogram_api import ShoppingadsprogramApi
+

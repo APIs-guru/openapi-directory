@@ -1,0 +1,29 @@
+# AddNewIntegrationRequestAnyOfCredentialsOneOf7
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**ecr_credentials** | [**AddNewIntegrationRequestAnyOfCredentialsOneOf7EcrCredentials**](AddNewIntegrationRequestAnyOfCredentialsOneOf7EcrCredentials.md) |  | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.add_new_integration_request_any_of_credentials_one_of7 import AddNewIntegrationRequestAnyOfCredentialsOneOf7
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of AddNewIntegrationRequestAnyOfCredentialsOneOf7 from a JSON string
+add_new_integration_request_any_of_credentials_one_of7_instance = AddNewIntegrationRequestAnyOfCredentialsOneOf7.from_json(json)
+# print the JSON string representation of the object
+print(AddNewIntegrationRequestAnyOfCredentialsOneOf7.to_json())
+
+# convert the object into a dict
+add_new_integration_request_any_of_credentials_one_of7_dict = add_new_integration_request_any_of_credentials_one_of7_instance.to_dict()
+# create an instance of AddNewIntegrationRequestAnyOfCredentialsOneOf7 from a dict
+add_new_integration_request_any_of_credentials_one_of7_from_dict = AddNewIntegrationRequestAnyOfCredentialsOneOf7.from_dict(add_new_integration_request_any_of_credentials_one_of7_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

@@ -1,0 +1,14 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.additional_tax_identifiers_api import AdditionalTaxIdentifiersApi
+from openapi_client.api.administrations_api import AdministrationsApi
+from openapi_client.api.discovery_api import DiscoveryApi
+from openapi_client.api.document_submissions_api import DocumentSubmissionsApi
+from openapi_client.api.invoice_submissions_api import InvoiceSubmissionsApi
+from openapi_client.api.legal_entities_api import LegalEntitiesApi
+from openapi_client.api.peppol_identifiers_api import PeppolIdentifiersApi
+from openapi_client.api.purchase_invoices_api import PurchaseInvoicesApi
+from openapi_client.api.received_documents_api import ReceivedDocumentsApi
+from openapi_client.api.webhook_instances_api import WebhookInstancesApi
+

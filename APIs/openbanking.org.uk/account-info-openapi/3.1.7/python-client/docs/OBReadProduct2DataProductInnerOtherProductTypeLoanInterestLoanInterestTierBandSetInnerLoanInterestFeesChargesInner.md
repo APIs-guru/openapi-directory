@@ -1,0 +1,31 @@
+# OBReadProduct2DataProductInnerOtherProductTypeLoanInterestLoanInterestTierBandSetInnerLoanInterestFeesChargesInner
+
+Contains details of fees and charges which are not associated with either LoanRepayment or features/benefits
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**loan_interest_fee_charge_cap** | [**List[OBReadProduct2DataProductInnerOtherProductTypeLoanInterestLoanInterestTierBandSetInnerLoanInterestFeesChargesInnerLoanInterestFeeChargeCapInner]**](OBReadProduct2DataProductInnerOtherProductTypeLoanInterestLoanInterestTierBandSetInnerLoanInterestFeesChargesInnerLoanInterestFeeChargeCapInner.md) |  | [optional] 
+**loan_interest_fee_charge_detail** | [**List[OBReadProduct2DataProductInnerOtherProductTypeLoanInterestLoanInterestTierBandSetInnerLoanInterestFeesChargesInnerLoanInterestFeeChargeDetailInner]**](OBReadProduct2DataProductInnerOtherProductTypeLoanInterestLoanInterestTierBandSetInnerLoanInterestFeesChargesInnerLoanInterestFeeChargeDetailInner.md) |  | 
+
+## Example
+
+```python
+from openapi_client.models.ob_read_product2_data_product_inner_other_product_type_loan_interest_loan_interest_tier_band_set_inner_loan_interest_fees_charges_inner import OBReadProduct2DataProductInnerOtherProductTypeLoanInterestLoanInterestTierBandSetInnerLoanInterestFeesChargesInner
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of OBReadProduct2DataProductInnerOtherProductTypeLoanInterestLoanInterestTierBandSetInnerLoanInterestFeesChargesInner from a JSON string
+ob_read_product2_data_product_inner_other_product_type_loan_interest_loan_interest_tier_band_set_inner_loan_interest_fees_charges_inner_instance = OBReadProduct2DataProductInnerOtherProductTypeLoanInterestLoanInterestTierBandSetInnerLoanInterestFeesChargesInner.from_json(json)
+# print the JSON string representation of the object
+print(OBReadProduct2DataProductInnerOtherProductTypeLoanInterestLoanInterestTierBandSetInnerLoanInterestFeesChargesInner.to_json())
+
+# convert the object into a dict
+ob_read_product2_data_product_inner_other_product_type_loan_interest_loan_interest_tier_band_set_inner_loan_interest_fees_charges_inner_dict = ob_read_product2_data_product_inner_other_product_type_loan_interest_loan_interest_tier_band_set_inner_loan_interest_fees_charges_inner_instance.to_dict()
+# create an instance of OBReadProduct2DataProductInnerOtherProductTypeLoanInterestLoanInterestTierBandSetInnerLoanInterestFeesChargesInner from a dict
+ob_read_product2_data_product_inner_other_product_type_loan_interest_loan_interest_tier_band_set_inner_loan_interest_fees_charges_inner_from_dict = OBReadProduct2DataProductInnerOtherProductTypeLoanInterestLoanInterestTierBandSetInnerLoanInterestFeesChargesInner.from_dict(ob_read_product2_data_product_inner_other_product_type_loan_interest_loan_interest_tier_band_set_inner_loan_interest_fees_charges_inner_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

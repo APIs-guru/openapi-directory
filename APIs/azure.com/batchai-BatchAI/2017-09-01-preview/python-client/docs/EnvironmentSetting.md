@@ -1,0 +1,31 @@
+# EnvironmentSetting
+
+A collection of environment variables to set.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**name** | **str** |  | 
+**value** | **str** |  | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.environment_setting import EnvironmentSetting
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of EnvironmentSetting from a JSON string
+environment_setting_instance = EnvironmentSetting.from_json(json)
+# print the JSON string representation of the object
+print(EnvironmentSetting.to_json())
+
+# convert the object into a dict
+environment_setting_dict = environment_setting_instance.to_dict()
+# create an instance of EnvironmentSetting from a dict
+environment_setting_from_dict = EnvironmentSetting.from_dict(environment_setting_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

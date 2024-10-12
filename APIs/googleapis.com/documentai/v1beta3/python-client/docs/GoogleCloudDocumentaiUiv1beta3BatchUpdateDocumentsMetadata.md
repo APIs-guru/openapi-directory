@@ -1,0 +1,30 @@
+# GoogleCloudDocumentaiUiv1beta3BatchUpdateDocumentsMetadata
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**common_metadata** | [**GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata**](GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata.md) |  | [optional] 
+**individual_batch_update_statuses** | [**List[GoogleCloudDocumentaiUiv1beta3BatchUpdateDocumentsMetadataIndividualBatchUpdateStatus]**](GoogleCloudDocumentaiUiv1beta3BatchUpdateDocumentsMetadataIndividualBatchUpdateStatus.md) | The list of response details of each document. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.google_cloud_documentai_uiv1beta3_batch_update_documents_metadata import GoogleCloudDocumentaiUiv1beta3BatchUpdateDocumentsMetadata
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GoogleCloudDocumentaiUiv1beta3BatchUpdateDocumentsMetadata from a JSON string
+google_cloud_documentai_uiv1beta3_batch_update_documents_metadata_instance = GoogleCloudDocumentaiUiv1beta3BatchUpdateDocumentsMetadata.from_json(json)
+# print the JSON string representation of the object
+print(GoogleCloudDocumentaiUiv1beta3BatchUpdateDocumentsMetadata.to_json())
+
+# convert the object into a dict
+google_cloud_documentai_uiv1beta3_batch_update_documents_metadata_dict = google_cloud_documentai_uiv1beta3_batch_update_documents_metadata_instance.to_dict()
+# create an instance of GoogleCloudDocumentaiUiv1beta3BatchUpdateDocumentsMetadata from a dict
+google_cloud_documentai_uiv1beta3_batch_update_documents_metadata_from_dict = GoogleCloudDocumentaiUiv1beta3BatchUpdateDocumentsMetadata.from_dict(google_cloud_documentai_uiv1beta3_batch_update_documents_metadata_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
