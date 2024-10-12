@@ -1,0 +1,32 @@
+# SignalRCreateOrUpdateProperties
+
+Settings used to provision or configure the resource.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**cors** | [**SignalRCorsSettings**](SignalRCorsSettings.md) |  | [optional] 
+**features** | [**List[SignalRFeature]**](SignalRFeature.md) | List of SignalR featureFlags. e.g. ServiceMode.    FeatureFlags that are not included in the parameters for the update operation will not be modified.  And the response will only include featureFlags that are explicitly set.   When a featureFlag is not explicitly set, SignalR service will use its globally default value.   But keep in mind, the default value doesn&#39;t mean \&quot;false\&quot;. It varies in terms of different FeatureFlags. | [optional] 
+**host_name_prefix** | **str** | Prefix for the hostName of the SignalR service. Retained for future use.  The hostname will be of format: &amp;lt;hostNamePrefix&amp;gt;.service.signalr.net. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.signal_r_create_or_update_properties import SignalRCreateOrUpdateProperties
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of SignalRCreateOrUpdateProperties from a JSON string
+signal_r_create_or_update_properties_instance = SignalRCreateOrUpdateProperties.from_json(json)
+# print the JSON string representation of the object
+print(SignalRCreateOrUpdateProperties.to_json())
+
+# convert the object into a dict
+signal_r_create_or_update_properties_dict = signal_r_create_or_update_properties_instance.to_dict()
+# create an instance of SignalRCreateOrUpdateProperties from a dict
+signal_r_create_or_update_properties_from_dict = SignalRCreateOrUpdateProperties.from_dict(signal_r_create_or_update_properties_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
