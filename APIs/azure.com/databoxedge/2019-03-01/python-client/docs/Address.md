@@ -1,0 +1,36 @@
+# Address
+
+The shipping address of the customer.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**address_line1** | **str** | The address line1. | 
+**address_line2** | **str** | The address line2. | [optional] 
+**address_line3** | **str** | The address line3. | [optional] 
+**city** | **str** | The city name. | 
+**country** | **str** | The country name. | 
+**postal_code** | **str** | The postal code. | 
+**state** | **str** | The state name. | 
+
+## Example
+
+```python
+from openapi_client.models.address import Address
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Address from a JSON string
+address_instance = Address.from_json(json)
+# print the JSON string representation of the object
+print(Address.to_json())
+
+# convert the object into a dict
+address_dict = address_instance.to_dict()
+# create an instance of Address from a dict
+address_from_dict = Address.from_dict(address_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
