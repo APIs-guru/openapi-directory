@@ -1,0 +1,32 @@
+# ApplicationGatewayBackendHealthServerIpConfigurationPropertiesSubnetPropertiesPrivateEndpointsInnerPropertiesPrivateLinkServiceConnectionsInnerPropertiesPrivateLinkServiceConnectionState
+
+A collection of information about the state of the connection between service consumer and provider.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**actions_required** | **str** | A message indicating if changes on the service provider require any updates on the consumer. | [optional] 
+**description** | **str** | The reason for approval/rejection of the connection. | [optional] 
+**status** | **str** | Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.application_gateway_backend_health_server_ip_configuration_properties_subnet_properties_private_endpoints_inner_properties_private_link_service_connections_inner_properties_private_link_service_connection_state import ApplicationGatewayBackendHealthServerIpConfigurationPropertiesSubnetPropertiesPrivateEndpointsInnerPropertiesPrivateLinkServiceConnectionsInnerPropertiesPrivateLinkServiceConnectionState
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ApplicationGatewayBackendHealthServerIpConfigurationPropertiesSubnetPropertiesPrivateEndpointsInnerPropertiesPrivateLinkServiceConnectionsInnerPropertiesPrivateLinkServiceConnectionState from a JSON string
+application_gateway_backend_health_server_ip_configuration_properties_subnet_properties_private_endpoints_inner_properties_private_link_service_connections_inner_properties_private_link_service_connection_state_instance = ApplicationGatewayBackendHealthServerIpConfigurationPropertiesSubnetPropertiesPrivateEndpointsInnerPropertiesPrivateLinkServiceConnectionsInnerPropertiesPrivateLinkServiceConnectionState.from_json(json)
+# print the JSON string representation of the object
+print(ApplicationGatewayBackendHealthServerIpConfigurationPropertiesSubnetPropertiesPrivateEndpointsInnerPropertiesPrivateLinkServiceConnectionsInnerPropertiesPrivateLinkServiceConnectionState.to_json())
+
+# convert the object into a dict
+application_gateway_backend_health_server_ip_configuration_properties_subnet_properties_private_endpoints_inner_properties_private_link_service_connections_inner_properties_private_link_service_connection_state_dict = application_gateway_backend_health_server_ip_configuration_properties_subnet_properties_private_endpoints_inner_properties_private_link_service_connections_inner_properties_private_link_service_connection_state_instance.to_dict()
+# create an instance of ApplicationGatewayBackendHealthServerIpConfigurationPropertiesSubnetPropertiesPrivateEndpointsInnerPropertiesPrivateLinkServiceConnectionsInnerPropertiesPrivateLinkServiceConnectionState from a dict
+application_gateway_backend_health_server_ip_configuration_properties_subnet_properties_private_endpoints_inner_properties_private_link_service_connections_inner_properties_private_link_service_connection_state_from_dict = ApplicationGatewayBackendHealthServerIpConfigurationPropertiesSubnetPropertiesPrivateEndpointsInnerPropertiesPrivateLinkServiceConnectionsInnerPropertiesPrivateLinkServiceConnectionState.from_dict(application_gateway_backend_health_server_ip_configuration_properties_subnet_properties_private_endpoints_inner_properties_private_link_service_connections_inner_properties_private_link_service_connection_state_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

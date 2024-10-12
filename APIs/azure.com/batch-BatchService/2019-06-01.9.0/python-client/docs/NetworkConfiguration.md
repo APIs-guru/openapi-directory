@@ -1,0 +1,32 @@
+# NetworkConfiguration
+
+The network configuration for a Pool.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**dynamic_v_net_assignment_scope** | **str** |  | [optional] 
+**endpoint_configuration** | [**PoolEndpointConfiguration**](PoolEndpointConfiguration.md) |  | [optional] 
+**subnet_id** | **str** | The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes in the Pool. If the subnet doesn&#39;t have enough free IP addresses, the Pool will partially allocate Nodes, and a resize error will occur. The &#39;MicrosoftAzureBatch&#39; service principal must have the &#39;Classic Virtual Machine Contributor&#39; Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. For Pools created with virtualMachineConfiguration only ARM virtual networks (&#39;Microsoft.Network/virtualNetworks&#39;) are supported, but for Pools created with cloudServiceConfiguration both ARM and classic virtual networks are supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication. For Pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. For Pools created with a cloud service configuration, enable ports 10100, 20100, and 30100. Also enable outbound connections to Azure Storage on port 443. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.network_configuration import NetworkConfiguration
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of NetworkConfiguration from a JSON string
+network_configuration_instance = NetworkConfiguration.from_json(json)
+# print the JSON string representation of the object
+print(NetworkConfiguration.to_json())
+
+# convert the object into a dict
+network_configuration_dict = network_configuration_instance.to_dict()
+# create an instance of NetworkConfiguration from a dict
+network_configuration_from_dict = NetworkConfiguration.from_dict(network_configuration_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
