@@ -1,0 +1,324 @@
+# openapi_client.ProvidersApi
+
+All URIs are relative to *https://management.azure.com*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**providers_get**](ProvidersApi.md#providers_get) | **GET** /subscriptions/{subscriptionId}/providers/{resourceProviderNamespace} | 
+[**providers_list**](ProvidersApi.md#providers_list) | **GET** /subscriptions/{subscriptionId}/providers | 
+[**providers_register**](ProvidersApi.md#providers_register) | **POST** /subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/register | 
+[**providers_unregister**](ProvidersApi.md#providers_unregister) | **POST** /subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/unregister | 
+
+
+# **providers_get**
+> Provider providers_get(resource_provider_namespace, api_version, subscription_id)
+
+
+
+Gets a resource provider.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.models.provider import Provider
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProvidersApi(api_client)
+    resource_provider_namespace = 'resource_provider_namespace_example' # str | Namespace of the resource provider.
+    api_version = 'api_version_example' # str | Client Api Version.
+    subscription_id = 'subscription_id_example' # str | Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+
+    try:
+        api_response = api_instance.providers_get(resource_provider_namespace, api_version, subscription_id)
+        print("The response of ProvidersApi->providers_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProvidersApi->providers_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_provider_namespace** | **str**| Namespace of the resource provider. | 
+ **api_version** | **str**| Client Api Version. | 
+ **subscription_id** | **str**| Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. | 
+
+### Return type
+
+[**Provider**](Provider.md)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **providers_list**
+> ProviderListResult providers_list(api_version, subscription_id, top=top)
+
+
+
+Gets a list of resource providers.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.models.provider_list_result import ProviderListResult
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProvidersApi(api_client)
+    api_version = 'api_version_example' # str | Client Api Version.
+    subscription_id = 'subscription_id_example' # str | Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    top = 56 # int | Query parameters. If null is passed returns all deployments. (optional)
+
+    try:
+        api_response = api_instance.providers_list(api_version, subscription_id, top=top)
+        print("The response of ProvidersApi->providers_list:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProvidersApi->providers_list: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **api_version** | **str**| Client Api Version. | 
+ **subscription_id** | **str**| Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. | 
+ **top** | **int**| Query parameters. If null is passed returns all deployments. | [optional] 
+
+### Return type
+
+[**ProviderListResult**](ProviderListResult.md)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **providers_register**
+> Provider providers_register(resource_provider_namespace, api_version, subscription_id)
+
+
+
+Registers provider to be used with a subscription.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.models.provider import Provider
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProvidersApi(api_client)
+    resource_provider_namespace = 'resource_provider_namespace_example' # str | Namespace of the resource provider.
+    api_version = 'api_version_example' # str | Client Api Version.
+    subscription_id = 'subscription_id_example' # str | Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+
+    try:
+        api_response = api_instance.providers_register(resource_provider_namespace, api_version, subscription_id)
+        print("The response of ProvidersApi->providers_register:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProvidersApi->providers_register: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_provider_namespace** | **str**| Namespace of the resource provider. | 
+ **api_version** | **str**| Client Api Version. | 
+ **subscription_id** | **str**| Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. | 
+
+### Return type
+
+[**Provider**](Provider.md)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **providers_unregister**
+> Provider providers_unregister(resource_provider_namespace, api_version, subscription_id)
+
+
+
+Unregisters provider from a subscription.
+
+### Example
+
+* OAuth Authentication (azure_auth):
+
+```python
+import openapi_client
+from openapi_client.models.provider import Provider
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.ProvidersApi(api_client)
+    resource_provider_namespace = 'resource_provider_namespace_example' # str | Namespace of the resource provider.
+    api_version = 'api_version_example' # str | Client Api Version.
+    subscription_id = 'subscription_id_example' # str | Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+
+    try:
+        api_response = api_instance.providers_unregister(resource_provider_namespace, api_version, subscription_id)
+        print("The response of ProvidersApi->providers_unregister:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProvidersApi->providers_unregister: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resource_provider_namespace** | **str**| Namespace of the resource provider. | 
+ **api_version** | **str**| Client Api Version. | 
+ **subscription_id** | **str**| Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. | 
+
+### Return type
+
+[**Provider**](Provider.md)
+
+### Authorization
+
+[azure_auth](../README.md#azure_auth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
