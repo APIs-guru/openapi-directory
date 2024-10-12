@@ -1,0 +1,32 @@
+# RecoveryPlanShutdownGroupTaskDetails
+
+This class represents the recovery plan shutdown group task details.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**group_id** | **str** | The group identifier. | [optional] 
+**name** | **str** | The name. | [optional] 
+**rp_group_type** | **str** | The group type. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.recovery_plan_shutdown_group_task_details import RecoveryPlanShutdownGroupTaskDetails
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of RecoveryPlanShutdownGroupTaskDetails from a JSON string
+recovery_plan_shutdown_group_task_details_instance = RecoveryPlanShutdownGroupTaskDetails.from_json(json)
+# print the JSON string representation of the object
+print(RecoveryPlanShutdownGroupTaskDetails.to_json())
+
+# convert the object into a dict
+recovery_plan_shutdown_group_task_details_dict = recovery_plan_shutdown_group_task_details_instance.to_dict()
+# create an instance of RecoveryPlanShutdownGroupTaskDetails from a dict
+recovery_plan_shutdown_group_task_details_from_dict = RecoveryPlanShutdownGroupTaskDetails.from_dict(recovery_plan_shutdown_group_task_details_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

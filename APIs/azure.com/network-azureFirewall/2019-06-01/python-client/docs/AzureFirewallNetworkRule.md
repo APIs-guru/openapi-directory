@@ -1,0 +1,35 @@
+# AzureFirewallNetworkRule
+
+Properties of the network rule.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**description** | **str** | Description of the rule. | [optional] 
+**destination_addresses** | **List[str]** | List of destination IP addresses. | [optional] 
+**destination_ports** | **List[str]** | List of destination ports. | [optional] 
+**name** | **str** | Name of the network rule. | [optional] 
+**protocols** | [**List[AzureFirewallNetworkRuleProtocol]**](AzureFirewallNetworkRuleProtocol.md) | Array of AzureFirewallNetworkRuleProtocols. | [optional] 
+**source_addresses** | **List[str]** | List of source IP addresses for this rule. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.azure_firewall_network_rule import AzureFirewallNetworkRule
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of AzureFirewallNetworkRule from a JSON string
+azure_firewall_network_rule_instance = AzureFirewallNetworkRule.from_json(json)
+# print the JSON string representation of the object
+print(AzureFirewallNetworkRule.to_json())
+
+# convert the object into a dict
+azure_firewall_network_rule_dict = azure_firewall_network_rule_instance.to_dict()
+# create an instance of AzureFirewallNetworkRule from a dict
+azure_firewall_network_rule_from_dict = AzureFirewallNetworkRule.from_dict(azure_firewall_network_rule_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

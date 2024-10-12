@@ -1,0 +1,814 @@
+# openapi_client.DefaultApi
+
+All URIs are relative to *https://management.azure.com*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**alerts_change_state**](DefaultApi.md#alerts_change_state) | **POST** /{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate | 
+[**alerts_get_all**](DefaultApi.md#alerts_get_all) | **GET** /{scope}/providers/Microsoft.AlertsManagement/alerts | 
+[**alerts_get_by_id**](DefaultApi.md#alerts_get_by_id) | **GET** /{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId} | Get a specific alert.
+[**alerts_get_history**](DefaultApi.md#alerts_get_history) | **GET** /{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history | 
+[**alerts_get_summary**](DefaultApi.md#alerts_get_summary) | **GET** /{scope}/providers/Microsoft.AlertsManagement/alertsSummary | 
+[**operations_list**](DefaultApi.md#operations_list) | **GET** /providers/Microsoft.AlertsManagement/operations | 
+[**smart_groups_change_state**](DefaultApi.md#smart_groups_change_state) | **POST** /subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/changeState | 
+[**smart_groups_get_all**](DefaultApi.md#smart_groups_get_all) | **GET** /subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups | Get all Smart Groups within a specified subscription
+[**smart_groups_get_by_id**](DefaultApi.md#smart_groups_get_by_id) | **GET** /subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId} | Get information related to a specific Smart Group.
+[**smart_groups_get_history**](DefaultApi.md#smart_groups_get_history) | **GET** /subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/history | 
+
+
+# **alerts_change_state**
+> Alert alerts_change_state(scope, alert_id, api_version, new_state)
+
+
+
+Change the state of an alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to change state of this particular alert then use parent resource of scope. So in this example change state call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.
+
+### Example
+
+
+```python
+import openapi_client
+from openapi_client.models.alert import Alert
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.DefaultApi(api_client)
+    scope = 'scope_example' # str | scope here is resourceId for which alert is created.
+    alert_id = 'alert_id_example' # str | Unique ID of an alert instance.
+    api_version = 'api_version_example' # str | API version.
+    new_state = 'new_state_example' # str | New state of the alert.
+
+    try:
+        api_response = api_instance.alerts_change_state(scope, alert_id, api_version, new_state)
+        print("The response of DefaultApi->alerts_change_state:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->alerts_change_state: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| scope here is resourceId for which alert is created. | 
+ **alert_id** | **str**| Unique ID of an alert instance. | 
+ **api_version** | **str**| API version. | 
+ **new_state** | **str**| New state of the alert. | 
+
+### Return type
+
+[**Alert**](Alert.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK. Alert state updated. |  -  |
+**0** | Error response describing why the operation failed. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **alerts_get_all**
+> AlertsList alerts_get_all(scope, api_version, target_resource=target_resource, target_resource_type=target_resource_type, target_resource_group=target_resource_group, monitor_service=monitor_service, monitor_condition=monitor_condition, severity=severity, alert_state=alert_state, alert_rule=alert_rule, smart_group_id=smart_group_id, include_context=include_context, include_egress_config=include_egress_config, page_count=page_count, sort_by=sort_by, sort_order=sort_order, select=select, time_range=time_range, custom_time_range=custom_time_range)
+
+
+
+List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime. 
+
+### Example
+
+
+```python
+import openapi_client
+from openapi_client.models.alerts_list import AlertsList
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.DefaultApi(api_client)
+    scope = 'scope_example' # str | scope here is resourceId for which alert is created.
+    api_version = 'api_version_example' # str | API version.
+    target_resource = 'target_resource_example' # str | Filter by target resource( which is full ARM ID) Default value is select all. (optional)
+    target_resource_type = 'target_resource_type_example' # str | Filter by target resource type. Default value is select all. (optional)
+    target_resource_group = 'target_resource_group_example' # str | Filter by target resource group name. Default value is select all. (optional)
+    monitor_service = 'monitor_service_example' # str | Filter by monitor service which generates the alert instance. Default value is select all. (optional)
+    monitor_condition = 'monitor_condition_example' # str | Filter by monitor condition which is either 'Fired' or 'Resolved'. Default value is to select all. (optional)
+    severity = 'severity_example' # str | Filter by severity.  Default value is select all. (optional)
+    alert_state = 'alert_state_example' # str | Filter by state of the alert instance. Default value is to select all. (optional)
+    alert_rule = 'alert_rule_example' # str | Filter by specific alert rule.  Default value is to select all. (optional)
+    smart_group_id = 'smart_group_id_example' # str | Filter the alerts list by the Smart Group Id. Default value is none. (optional)
+    include_context = True # bool | Include context which has contextual data specific to the monitor service. Default value is false' (optional)
+    include_egress_config = True # bool | Include egress config which would be used for displaying the content in portal.  Default value is 'false'. (optional)
+    page_count = 56 # int | Determines number of alerts returned per page in response. Permissible value is between 1 to 250. When the \"includeContent\"  filter is selected, maximum value allowed is 25. Default value is 25. (optional)
+    sort_by = 'sort_by_example' # str | Sort the query results by input field,  Default value is 'lastModifiedDateTime'. (optional)
+    sort_order = 'sort_order_example' # str | Sort the query results order in either ascending or descending.  Default value is 'desc' for time fields and 'asc' for others. (optional)
+    select = 'select_example' # str | This filter allows to selection of the fields(comma separated) which would  be part of the essential section. This would allow to project only the  required fields rather than getting entire content.  Default is to fetch all the fields in the essentials section. (optional)
+    time_range = 'time_range_example' # str | Filter by time range by below listed values. Default value is 1 day. (optional)
+    custom_time_range = 'custom_time_range_example' # str | Filter by custom time range in the format <start-time>/<end-time>  where time is in (ISO-8601 format)'. Permissible values is within 30 days from  query time. Either timeRange or customTimeRange could be used but not both. Default is none. (optional)
+
+    try:
+        api_response = api_instance.alerts_get_all(scope, api_version, target_resource=target_resource, target_resource_type=target_resource_type, target_resource_group=target_resource_group, monitor_service=monitor_service, monitor_condition=monitor_condition, severity=severity, alert_state=alert_state, alert_rule=alert_rule, smart_group_id=smart_group_id, include_context=include_context, include_egress_config=include_egress_config, page_count=page_count, sort_by=sort_by, sort_order=sort_order, select=select, time_range=time_range, custom_time_range=custom_time_range)
+        print("The response of DefaultApi->alerts_get_all:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->alerts_get_all: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| scope here is resourceId for which alert is created. | 
+ **api_version** | **str**| API version. | 
+ **target_resource** | **str**| Filter by target resource( which is full ARM ID) Default value is select all. | [optional] 
+ **target_resource_type** | **str**| Filter by target resource type. Default value is select all. | [optional] 
+ **target_resource_group** | **str**| Filter by target resource group name. Default value is select all. | [optional] 
+ **monitor_service** | **str**| Filter by monitor service which generates the alert instance. Default value is select all. | [optional] 
+ **monitor_condition** | **str**| Filter by monitor condition which is either &#39;Fired&#39; or &#39;Resolved&#39;. Default value is to select all. | [optional] 
+ **severity** | **str**| Filter by severity.  Default value is select all. | [optional] 
+ **alert_state** | **str**| Filter by state of the alert instance. Default value is to select all. | [optional] 
+ **alert_rule** | **str**| Filter by specific alert rule.  Default value is to select all. | [optional] 
+ **smart_group_id** | **str**| Filter the alerts list by the Smart Group Id. Default value is none. | [optional] 
+ **include_context** | **bool**| Include context which has contextual data specific to the monitor service. Default value is false&#39; | [optional] 
+ **include_egress_config** | **bool**| Include egress config which would be used for displaying the content in portal.  Default value is &#39;false&#39;. | [optional] 
+ **page_count** | **int**| Determines number of alerts returned per page in response. Permissible value is between 1 to 250. When the \&quot;includeContent\&quot;  filter is selected, maximum value allowed is 25. Default value is 25. | [optional] 
+ **sort_by** | **str**| Sort the query results by input field,  Default value is &#39;lastModifiedDateTime&#39;. | [optional] 
+ **sort_order** | **str**| Sort the query results order in either ascending or descending.  Default value is &#39;desc&#39; for time fields and &#39;asc&#39; for others. | [optional] 
+ **select** | **str**| This filter allows to selection of the fields(comma separated) which would  be part of the essential section. This would allow to project only the  required fields rather than getting entire content.  Default is to fetch all the fields in the essentials section. | [optional] 
+ **time_range** | **str**| Filter by time range by below listed values. Default value is 1 day. | [optional] 
+ **custom_time_range** | **str**| Filter by custom time range in the format &lt;start-time&gt;/&lt;end-time&gt;  where time is in (ISO-8601 format)&#39;. Permissible values is within 30 days from  query time. Either timeRange or customTimeRange could be used but not both. Default is none. | [optional] 
+
+### Return type
+
+[**AlertsList**](AlertsList.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK. Successfully listed alert objects. |  -  |
+**0** | Error response describing why the operation failed. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **alerts_get_by_id**
+> Alert alerts_get_by_id(scope, alert_id, api_version)
+
+Get a specific alert.
+
+Get information related to a specific alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to get alert by id then use parent resource of scope. So in this example get alert by id call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.
+
+### Example
+
+
+```python
+import openapi_client
+from openapi_client.models.alert import Alert
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.DefaultApi(api_client)
+    scope = 'scope_example' # str | scope here is resourceId for which alert is created.
+    alert_id = 'alert_id_example' # str | Unique ID of an alert instance.
+    api_version = 'api_version_example' # str | API version.
+
+    try:
+        # Get a specific alert.
+        api_response = api_instance.alerts_get_by_id(scope, alert_id, api_version)
+        print("The response of DefaultApi->alerts_get_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->alerts_get_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| scope here is resourceId for which alert is created. | 
+ **alert_id** | **str**| Unique ID of an alert instance. | 
+ **api_version** | **str**| API version. | 
+
+### Return type
+
+[**Alert**](Alert.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK. Returns the alert with the specified ID. |  -  |
+**0** | Error response describing why the operation failed. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **alerts_get_history**
+> AlertModification alerts_get_history(scope, alert_id, api_version)
+
+
+
+Get the history of an alert, which captures any monitor condition changes (Fired/Resolved), alert state changes (New/Acknowledged/Closed) and applied action rules for that particular alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to get history of this particular alert then use parent resource of scope. So in this example get history call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history'.
+
+### Example
+
+
+```python
+import openapi_client
+from openapi_client.models.alert_modification import AlertModification
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.DefaultApi(api_client)
+    scope = 'scope_example' # str | scope here is resourceId for which alert is created.
+    alert_id = 'alert_id_example' # str | Unique ID of an alert instance.
+    api_version = 'api_version_example' # str | API version.
+
+    try:
+        api_response = api_instance.alerts_get_history(scope, alert_id, api_version)
+        print("The response of DefaultApi->alerts_get_history:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->alerts_get_history: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| scope here is resourceId for which alert is created. | 
+ **alert_id** | **str**| Unique ID of an alert instance. | 
+ **api_version** | **str**| API version. | 
+
+### Return type
+
+[**AlertModification**](AlertModification.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK. Returns the history of the specified alert. |  -  |
+**0** | Error response describing why the operation failed. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **alerts_get_summary**
+> AlertsSummary alerts_get_summary(scope, groupby, api_version, include_smart_groups_count=include_smart_groups_count, target_resource=target_resource, target_resource_type=target_resource_type, target_resource_group=target_resource_group, monitor_service=monitor_service, monitor_condition=monitor_condition, severity=severity, alert_state=alert_state, alert_rule=alert_rule, time_range=time_range, custom_time_range=custom_time_range)
+
+
+
+Get a summarized count of your alerts grouped by various parameters (e.g. grouping by 'Severity' returns the count of alerts for each severity).
+
+### Example
+
+
+```python
+import openapi_client
+from openapi_client.models.alerts_summary import AlertsSummary
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.DefaultApi(api_client)
+    scope = 'scope_example' # str | scope here is resourceId for which alert is created.
+    groupby = 'groupby_example' # str | This parameter allows the result set to be grouped by input fields. For example, groupby=severity,alertstate.
+    api_version = 'api_version_example' # str | API version.
+    include_smart_groups_count = True # bool | Include count of the SmartGroups as part of the summary. Default value is 'false'. (optional)
+    target_resource = 'target_resource_example' # str | Filter by target resource( which is full ARM ID) Default value is select all. (optional)
+    target_resource_type = 'target_resource_type_example' # str | Filter by target resource type. Default value is select all. (optional)
+    target_resource_group = 'target_resource_group_example' # str | Filter by target resource group name. Default value is select all. (optional)
+    monitor_service = 'monitor_service_example' # str | Filter by monitor service which generates the alert instance. Default value is select all. (optional)
+    monitor_condition = 'monitor_condition_example' # str | Filter by monitor condition which is either 'Fired' or 'Resolved'. Default value is to select all. (optional)
+    severity = 'severity_example' # str | Filter by severity.  Default value is select all. (optional)
+    alert_state = 'alert_state_example' # str | Filter by state of the alert instance. Default value is to select all. (optional)
+    alert_rule = 'alert_rule_example' # str | Filter by specific alert rule.  Default value is to select all. (optional)
+    time_range = 'time_range_example' # str | Filter by time range by below listed values. Default value is 1 day. (optional)
+    custom_time_range = 'custom_time_range_example' # str | Filter by custom time range in the format <start-time>/<end-time>  where time is in (ISO-8601 format)'. Permissible values is within 30 days from  query time. Either timeRange or customTimeRange could be used but not both. Default is none. (optional)
+
+    try:
+        api_response = api_instance.alerts_get_summary(scope, groupby, api_version, include_smart_groups_count=include_smart_groups_count, target_resource=target_resource, target_resource_type=target_resource_type, target_resource_group=target_resource_group, monitor_service=monitor_service, monitor_condition=monitor_condition, severity=severity, alert_state=alert_state, alert_rule=alert_rule, time_range=time_range, custom_time_range=custom_time_range)
+        print("The response of DefaultApi->alerts_get_summary:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->alerts_get_summary: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| scope here is resourceId for which alert is created. | 
+ **groupby** | **str**| This parameter allows the result set to be grouped by input fields. For example, groupby&#x3D;severity,alertstate. | 
+ **api_version** | **str**| API version. | 
+ **include_smart_groups_count** | **bool**| Include count of the SmartGroups as part of the summary. Default value is &#39;false&#39;. | [optional] 
+ **target_resource** | **str**| Filter by target resource( which is full ARM ID) Default value is select all. | [optional] 
+ **target_resource_type** | **str**| Filter by target resource type. Default value is select all. | [optional] 
+ **target_resource_group** | **str**| Filter by target resource group name. Default value is select all. | [optional] 
+ **monitor_service** | **str**| Filter by monitor service which generates the alert instance. Default value is select all. | [optional] 
+ **monitor_condition** | **str**| Filter by monitor condition which is either &#39;Fired&#39; or &#39;Resolved&#39;. Default value is to select all. | [optional] 
+ **severity** | **str**| Filter by severity.  Default value is select all. | [optional] 
+ **alert_state** | **str**| Filter by state of the alert instance. Default value is to select all. | [optional] 
+ **alert_rule** | **str**| Filter by specific alert rule.  Default value is to select all. | [optional] 
+ **time_range** | **str**| Filter by time range by below listed values. Default value is 1 day. | [optional] 
+ **custom_time_range** | **str**| Filter by custom time range in the format &lt;start-time&gt;/&lt;end-time&gt;  where time is in (ISO-8601 format)&#39;. Permissible values is within 30 days from  query time. Either timeRange or customTimeRange could be used but not both. Default is none. | [optional] 
+
+### Return type
+
+[**AlertsSummary**](AlertsSummary.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK. Alert summary returned. |  -  |
+**0** | Error response describing why the operation failed. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **operations_list**
+> OperationsList operations_list(api_version)
+
+
+
+List all operations available through Azure Alerts Management Resource Provider.
+
+### Example
+
+
+```python
+import openapi_client
+from openapi_client.models.operations_list import OperationsList
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.DefaultApi(api_client)
+    api_version = 'api_version_example' # str | API version.
+
+    try:
+        api_response = api_instance.operations_list(api_version)
+        print("The response of DefaultApi->operations_list:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->operations_list: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **api_version** | **str**| API version. | 
+
+### Return type
+
+[**OperationsList**](OperationsList.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK. Successfully retrieved operations list. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **smart_groups_change_state**
+> SmartGroup smart_groups_change_state(subscription_id, smart_group_id, api_version, new_state)
+
+
+
+Change the state of a Smart Group.
+
+### Example
+
+
+```python
+import openapi_client
+from openapi_client.models.smart_group import SmartGroup
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.DefaultApi(api_client)
+    subscription_id = 'subscription_id_example' # str | Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    smart_group_id = 'smart_group_id_example' # str | Smart group unique id. 
+    api_version = 'api_version_example' # str | API version.
+    new_state = 'new_state_example' # str | New state of the alert.
+
+    try:
+        api_response = api_instance.smart_groups_change_state(subscription_id, smart_group_id, api_version, new_state)
+        print("The response of DefaultApi->smart_groups_change_state:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->smart_groups_change_state: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **subscription_id** | **str**| Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. | 
+ **smart_group_id** | **str**| Smart group unique id.  | 
+ **api_version** | **str**| API version. | 
+ **new_state** | **str**| New state of the alert. | 
+
+### Return type
+
+[**SmartGroup**](SmartGroup.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK. Smart Group state updated. |  * x-ms-request-id - Service generated Request ID. <br>  |
+**0** | Error response describing why the operation failed. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **smart_groups_get_all**
+> SmartGroupsList smart_groups_get_all(subscription_id, api_version, target_resource=target_resource, target_resource_group=target_resource_group, target_resource_type=target_resource_type, monitor_service=monitor_service, monitor_condition=monitor_condition, severity=severity, smart_group_state=smart_group_state, time_range=time_range, page_count=page_count, sort_by=sort_by, sort_order=sort_order)
+
+Get all Smart Groups within a specified subscription
+
+List all the Smart Groups within a specified subscription. 
+
+### Example
+
+
+```python
+import openapi_client
+from openapi_client.models.smart_groups_list import SmartGroupsList
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.DefaultApi(api_client)
+    subscription_id = 'subscription_id_example' # str | Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    api_version = 'api_version_example' # str | API version.
+    target_resource = 'target_resource_example' # str | Filter by target resource( which is full ARM ID) Default value is select all. (optional)
+    target_resource_group = 'target_resource_group_example' # str | Filter by target resource group name. Default value is select all. (optional)
+    target_resource_type = 'target_resource_type_example' # str | Filter by target resource type. Default value is select all. (optional)
+    monitor_service = 'monitor_service_example' # str | Filter by monitor service which generates the alert instance. Default value is select all. (optional)
+    monitor_condition = 'monitor_condition_example' # str | Filter by monitor condition which is either 'Fired' or 'Resolved'. Default value is to select all. (optional)
+    severity = 'severity_example' # str | Filter by severity.  Default value is select all. (optional)
+    smart_group_state = 'smart_group_state_example' # str | Filter by state of the smart group. Default value is to select all. (optional)
+    time_range = 'time_range_example' # str | Filter by time range by below listed values. Default value is 1 day. (optional)
+    page_count = 56 # int | Determines number of alerts returned per page in response. Permissible value is between 1 to 250. When the \"includeContent\"  filter is selected, maximum value allowed is 25. Default value is 25. (optional)
+    sort_by = 'sort_by_example' # str | Sort the query results by input field. Default value is sort by 'lastModifiedDateTime'. (optional)
+    sort_order = 'sort_order_example' # str | Sort the query results order in either ascending or descending.  Default value is 'desc' for time fields and 'asc' for others. (optional)
+
+    try:
+        # Get all Smart Groups within a specified subscription
+        api_response = api_instance.smart_groups_get_all(subscription_id, api_version, target_resource=target_resource, target_resource_group=target_resource_group, target_resource_type=target_resource_type, monitor_service=monitor_service, monitor_condition=monitor_condition, severity=severity, smart_group_state=smart_group_state, time_range=time_range, page_count=page_count, sort_by=sort_by, sort_order=sort_order)
+        print("The response of DefaultApi->smart_groups_get_all:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->smart_groups_get_all: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **subscription_id** | **str**| Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. | 
+ **api_version** | **str**| API version. | 
+ **target_resource** | **str**| Filter by target resource( which is full ARM ID) Default value is select all. | [optional] 
+ **target_resource_group** | **str**| Filter by target resource group name. Default value is select all. | [optional] 
+ **target_resource_type** | **str**| Filter by target resource type. Default value is select all. | [optional] 
+ **monitor_service** | **str**| Filter by monitor service which generates the alert instance. Default value is select all. | [optional] 
+ **monitor_condition** | **str**| Filter by monitor condition which is either &#39;Fired&#39; or &#39;Resolved&#39;. Default value is to select all. | [optional] 
+ **severity** | **str**| Filter by severity.  Default value is select all. | [optional] 
+ **smart_group_state** | **str**| Filter by state of the smart group. Default value is to select all. | [optional] 
+ **time_range** | **str**| Filter by time range by below listed values. Default value is 1 day. | [optional] 
+ **page_count** | **int**| Determines number of alerts returned per page in response. Permissible value is between 1 to 250. When the \&quot;includeContent\&quot;  filter is selected, maximum value allowed is 25. Default value is 25. | [optional] 
+ **sort_by** | **str**| Sort the query results by input field. Default value is sort by &#39;lastModifiedDateTime&#39;. | [optional] 
+ **sort_order** | **str**| Sort the query results order in either ascending or descending.  Default value is &#39;desc&#39; for time fields and &#39;asc&#39; for others. | [optional] 
+
+### Return type
+
+[**SmartGroupsList**](SmartGroupsList.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK. Returns list of all smartGroups. |  -  |
+**0** | Error response describing why the operation failed. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **smart_groups_get_by_id**
+> SmartGroup smart_groups_get_by_id(subscription_id, smart_group_id, api_version)
+
+Get information related to a specific Smart Group.
+
+Get information related to a specific Smart Group.
+
+### Example
+
+
+```python
+import openapi_client
+from openapi_client.models.smart_group import SmartGroup
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.DefaultApi(api_client)
+    subscription_id = 'subscription_id_example' # str | Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    smart_group_id = 'smart_group_id_example' # str | Smart group unique id. 
+    api_version = 'api_version_example' # str | API version.
+
+    try:
+        # Get information related to a specific Smart Group.
+        api_response = api_instance.smart_groups_get_by_id(subscription_id, smart_group_id, api_version)
+        print("The response of DefaultApi->smart_groups_get_by_id:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->smart_groups_get_by_id: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **subscription_id** | **str**| Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. | 
+ **smart_group_id** | **str**| Smart group unique id.  | 
+ **api_version** | **str**| API version. | 
+
+### Return type
+
+[**SmartGroup**](SmartGroup.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK. Returns the group with the specified smart group Id. |  * x-ms-request-id - Service generated Request ID. <br>  |
+**0** | Error response describing why the operation failed. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **smart_groups_get_history**
+> SmartGroupModification smart_groups_get_history(subscription_id, smart_group_id, api_version)
+
+
+
+Get the history a smart group, which captures any Smart Group state changes (New/Acknowledged/Closed) .
+
+### Example
+
+
+```python
+import openapi_client
+from openapi_client.models.smart_group_modification import SmartGroupModification
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://management.azure.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = "https://management.azure.com"
+)
+
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = openapi_client.DefaultApi(api_client)
+    subscription_id = 'subscription_id_example' # str | Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    smart_group_id = 'smart_group_id_example' # str | Smart group unique id. 
+    api_version = 'api_version_example' # str | API version.
+
+    try:
+        api_response = api_instance.smart_groups_get_history(subscription_id, smart_group_id, api_version)
+        print("The response of DefaultApi->smart_groups_get_history:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->smart_groups_get_history: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **subscription_id** | **str**| Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. | 
+ **smart_group_id** | **str**| Smart group unique id.  | 
+ **api_version** | **str**| API version. | 
+
+### Return type
+
+[**SmartGroupModification**](SmartGroupModification.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK. Returns the list of changes of smart group. |  -  |
+**0** | Error response describing why the operation failed. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
