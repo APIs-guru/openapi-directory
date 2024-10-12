@@ -1,0 +1,40 @@
+# USqlJobProperties
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**algebra_file_path** | **str** | Gets the U-SQL algebra file path after the job has completed | [optional] [readonly] 
+**compile_mode** | **str** | Gets or sets the compile mode for the job. | [optional] 
+**debug_data** | [**JobDataPath**](JobDataPath.md) |  | [optional] 
+**resources** | [**List[JobResource]**](JobResource.md) | Gets or sets the list of resources that are required by the job | [optional] 
+**root_process_node_id** | **str** | Gets the ID used to identify the job manager coordinating job execution. This value should not be set by the user and will be ignored if it is. | [optional] [readonly] 
+**statistics** | [**JobStatistics**](JobStatistics.md) |  | [optional] 
+**total_compilation_time** | **str** | Gets the total time this job spent compiling. This value should not be set by the user and will be ignored if it is. | [optional] [readonly] 
+**total_pause_time** | **str** | Gets the total time this job spent paused. This value should not be set by the user and will be ignored if it is. | [optional] [readonly] 
+**total_queued_time** | **str** | Gets the total time this job spent queued. This value should not be set by the user and will be ignored if it is. | [optional] [readonly] 
+**total_running_time** | **str** | Gets the total time this job spent executing. This value should not be set by the user and will be ignored if it is. | [optional] [readonly] 
+**yarn_application_id** | **str** | Gets the ID used to identify the yarn application executing the job. This value should not be set by the user and will be ignored if it is. | [optional] [readonly] 
+**yarn_application_time_stamp** | **int** | Gets the timestamp (in ticks) for the yarn application executing the job. This value should not be set by the user and will be ignored if it is. | [optional] [readonly] 
+
+## Example
+
+```python
+from openapi_client.models.u_sql_job_properties import USqlJobProperties
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of USqlJobProperties from a JSON string
+u_sql_job_properties_instance = USqlJobProperties.from_json(json)
+# print the JSON string representation of the object
+print(USqlJobProperties.to_json())
+
+# convert the object into a dict
+u_sql_job_properties_dict = u_sql_job_properties_instance.to_dict()
+# create an instance of USqlJobProperties from a dict
+u_sql_job_properties_from_dict = USqlJobProperties.from_dict(u_sql_job_properties_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
