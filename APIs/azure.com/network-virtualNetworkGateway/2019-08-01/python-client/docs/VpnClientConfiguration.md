@@ -1,0 +1,39 @@
+# VpnClientConfiguration
+
+VpnClientConfiguration for P2S client.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**aad_audience** | **str** | The AADAudience property of the VirtualNetworkGateway resource for vpn client connection used for AAD authentication. | [optional] 
+**aad_issuer** | **str** | The AADIssuer property of the VirtualNetworkGateway resource for vpn client connection used for AAD authentication. | [optional] 
+**aad_tenant** | **str** | The AADTenant property of the VirtualNetworkGateway resource for vpn client connection used for AAD authentication. | [optional] 
+**radius_server_address** | **str** | The radius server address property of the VirtualNetworkGateway resource for vpn client connection. | [optional] 
+**radius_server_secret** | **str** | The radius secret property of the VirtualNetworkGateway resource for vpn client connection. | [optional] 
+**vpn_client_address_pool** | [**LocalNetworkGatewayPropertiesFormatLocalNetworkAddressSpace**](LocalNetworkGatewayPropertiesFormatLocalNetworkAddressSpace.md) |  | [optional] 
+**vpn_client_ipsec_policies** | [**List[IpsecPolicy]**](IpsecPolicy.md) | VpnClientIpsecPolicies for virtual network gateway P2S client. | [optional] 
+**vpn_client_protocols** | **List[str]** | VpnClientProtocols for Virtual network gateway. | [optional] 
+**vpn_client_revoked_certificates** | [**List[VpnClientRevokedCertificate]**](VpnClientRevokedCertificate.md) | VpnClientRevokedCertificate for Virtual network gateway. | [optional] 
+**vpn_client_root_certificates** | [**List[VpnClientRootCertificate]**](VpnClientRootCertificate.md) | VpnClientRootCertificate for virtual network gateway. | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.vpn_client_configuration import VpnClientConfiguration
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of VpnClientConfiguration from a JSON string
+vpn_client_configuration_instance = VpnClientConfiguration.from_json(json)
+# print the JSON string representation of the object
+print(VpnClientConfiguration.to_json())
+
+# convert the object into a dict
+vpn_client_configuration_dict = vpn_client_configuration_instance.to_dict()
+# create an instance of VpnClientConfiguration from a dict
+vpn_client_configuration_from_dict = VpnClientConfiguration.from_dict(vpn_client_configuration_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
