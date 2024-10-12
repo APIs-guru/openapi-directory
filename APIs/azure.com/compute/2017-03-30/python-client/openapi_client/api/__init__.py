@@ -1,0 +1,17 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.availability_sets_api import AvailabilitySetsApi
+from openapi_client.api.images_api import ImagesApi
+from openapi_client.api.skus_api import SkusApi
+from openapi_client.api.usage_api import UsageApi
+from openapi_client.api.virtual_machine_extension_images_api import VirtualMachineExtensionImagesApi
+from openapi_client.api.virtual_machine_extensions_api import VirtualMachineExtensionsApi
+from openapi_client.api.virtual_machine_images_api import VirtualMachineImagesApi
+from openapi_client.api.virtual_machine_scale_set_extensions_api import VirtualMachineScaleSetExtensionsApi
+from openapi_client.api.virtual_machine_scale_set_rolling_upgrades_api import VirtualMachineScaleSetRollingUpgradesApi
+from openapi_client.api.virtual_machine_scale_set_vms_api import VirtualMachineScaleSetVMsApi
+from openapi_client.api.virtual_machine_scale_sets_api import VirtualMachineScaleSetsApi
+from openapi_client.api.virtual_machine_sizes_api import VirtualMachineSizesApi
+from openapi_client.api.virtual_machines_api import VirtualMachinesApi
+
