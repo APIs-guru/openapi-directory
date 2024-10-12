@@ -1,7 +1,6 @@
 .github/workflows/python.yml
 .gitignore
 .gitlab-ci.yml
-.openapi-generator-ignore
 .travis.yml
 README.md
 docs/DefaultApi.md
@@ -42,15 +41,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_default_api.py
-test/test_error_invalid_id.py
-test/test_error_invalid_json.py
-test/test_error_premature_redaction.py
-test/test_error_throttled.py
-test/test_error_unauthorized.py
-test/test_error_unprovisioned.py
-test/test_error_unsupported_product.py
-test/test_redact_message403_response.py
-test/test_redact_message422_response.py
-test/test_redact_transaction.py
 tox.ini
