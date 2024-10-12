@@ -1,0 +1,17 @@
+# flake8: noqa
+
+# import apis into api package
+from openapi_client.api.check_name_availability_api import CheckNameAvailabilityApi
+from openapi_client.api.configurations_api import ConfigurationsApi
+from openapi_client.api.databases_api import DatabasesApi
+from openapi_client.api.firewall_rules_api import FirewallRulesApi
+from openapi_client.api.location_based_performance_tier_api import LocationBasedPerformanceTierApi
+from openapi_client.api.log_files_api import LogFilesApi
+from openapi_client.api.operations_api import OperationsApi
+from openapi_client.api.replicas_api import ReplicasApi
+from openapi_client.api.server_administrators_api import ServerAdministratorsApi
+from openapi_client.api.server_restart_api import ServerRestartApi
+from openapi_client.api.server_security_alert_policies_api import ServerSecurityAlertPoliciesApi
+from openapi_client.api.servers_api import ServersApi
+from openapi_client.api.virtual_network_rules_api import VirtualNetworkRulesApi
+
