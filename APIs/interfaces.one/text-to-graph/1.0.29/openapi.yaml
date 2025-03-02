@@ -1,0 +1,68 @@
+openapi: 3.0.3
+info:
+  title: Text To Graph API
+  description: |-
+    Transform your text into stunning, interactive graphs effortlessly with our Text-to-Graph API. Whether you need flowcharts, mind maps, pie charts, or state diagrams, our powerful API lets you generate them dynamically—no manual design required.  This file is OpenAPI 3.0 specification compatible.  
+    
+    Some useful links:
+    - [Charts via REST API](https://interfaces.one/products/documentation/text-to-graph)
+  termsOfService: https://interfaces.one/terms
+  contact:
+    email: support@interfaces.one
+  version: 1.0.29
+servers:
+  - url: https://api.interfaces.one
+paths:
+    /diagrams/mermaid:
+        post:
+          summary:  Get various graphs as images just by giving text as input via API.  
+          description:  Get various graphs as images just by giving text as input via API. 
+          operationId: getGraphs
+          requestBody:
+              description: Get Graphs
+              required: true
+              content:
+                application/x-www-form-urlencoded:
+                  schema:
+                    type: object
+                    properties:
+                      text: # <!--- form field name
+                        type: string
+                      format: 
+                        type: string 
+                      theme:
+                        type: string
+                    required:
+                      - text
+          security:
+              - bearerAuth: []            
+          responses:
+            '200':
+              description: successful operation
+              content:
+                application/json:
+                  examples: 
+                    response:
+                      value: |-
+                          {
+                              "success": {
+                                  "total": 6
+                              },
+                              "contents": {
+                                  "success": true,
+                                  "format": "png",
+                                  "theme": "dark",
+                                  "image": "iVBORw0KGgo...",
+                                  "mmd": "mindmap\n  root((mindmap))\n    Origins\n      Long history\n      ::icon(fa fa-book)\n      Popularisation\n        British popular psychology author Tony Buzan\n    Research\n      On effectivness<br/>and features\n      On Automatic creation\n        Uses\n            Creative techniques\n            Strategic planning\n            Argument mapping\n    Tools\n      Pen and paper\n      Mermaid",
+                                  "encoding": "base64"
+                              },
+                              "copyright": {
+                                  "url": "api.interfaces.one",
+                                  "year": "2025"
+                              }
+                          }          
+components:
+  securitySchemes:
+      bearerAuth:
+        type: http
+        scheme: bearer
