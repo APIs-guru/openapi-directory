@@ -1,0 +1,123 @@
+openapi: 3.0.3
+info:
+  title: Inspiration API
+  description: |-
+    Have you seen daily inpiration on your refrigrator or your smart mirror? Most likely our service powers that. Now you can also leverage our platform for your needs. Simple no nonsense subscription and super easy REST API for your integration. Each day you get a unique message to show it in your device/app/platform. Simple!
+  termsOfService: https://theysaidso.com/terms
+  version: 1.0.20
+externalDocs:
+  description: Find out more about Inspiration API
+  url: https://theysaidso.com/api/inspiration
+servers:
+  - url: https://quotes.rest/inspiration
+tags:
+  - name: Activity
+    description: Daily activities to do
+    externalDocs:
+      description: Find out more
+      url:  https://quotes.rest/inspiration
+  - name: Saying
+    description: Daily inspirational saying
+    externalDocs:
+      description: Find out more
+      url: https://quotes.rest/inspiration
+  - name: Action
+    description: Call to action
+paths:
+  /activity:
+    get:
+      tags:
+        - Activity
+      summary: Get today's activity
+      description: Retrieve today's activity. For a given date this will remain the same. Everyday a new activity will be returned.
+      operationId: getActivity
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inpiration'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Inpiration'
+        '403':
+          description: Access not allowed
+        '404':
+          description: Not found
+      security:
+        - bearerAuth: []
+  /saying:
+    get:
+      tags:
+        - Saying
+      summary: Get today's inspirational saying
+      description: Retrieve today's inspirational saying. For a given date this will remain the same. Everyday a new saying will be returned.
+      operationId: getSaying
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inpiration'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Inpiration'
+        '403':
+          description: Access not allowed
+        '404':
+          description: Not found
+      security:
+        - bearerAuth: []        
+  /calltoaction:
+    get:
+      tags:
+        - Action
+      summary: Get today's inspirational call to action
+      description: Retrieve today's inspirational call to action. For a given date this will remain the same. Everyday a new call to action will be returned.
+      operationId: getAction
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inpiration'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Inpiration'
+        '403':
+          description: Access not allowed
+        '404':
+          description: Not found
+      security:
+        - bearerAuth: []                
+components:
+  schemas:
+    Inpiration:
+      type: object
+      properties:
+        id:
+          type: string
+          example: T5iVYPTynVdskkPPxCpRvweF
+        inspiration:
+          type: string
+          example: "Take a family cooking class"
+        title:
+          type: string
+          example: "Daily Inspiration - Call To Action"
+        date:
+          type: string
+          format: date-time
+        type:
+          type: string
+          description: Inspiration Type
+          example: activity
+          enum:
+            - activity
+            - saying
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
