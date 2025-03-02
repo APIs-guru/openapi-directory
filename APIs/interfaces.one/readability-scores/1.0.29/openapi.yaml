@@ -1,0 +1,114 @@
+openapi: 3.0.3
+info:
+  title: Readability Scores
+  description: |-
+    Make your content accessible to everyone with our Readability Scores API—an advanced tool that analyzes text readability and ensures your message resonates with your target audience. This file is OpenAPI 3.0 specification compatible.  
+    
+    Some useful links:
+    - [Readability Scores](https://interfaces.one/products/documentation/readability-scores)
+  termsOfService: https://interfaces.one/terms
+  contact:
+    email: support@interfaces.one
+  version: 1.0.29
+servers:
+  - url: https://api.interfaces.one
+paths:
+    /readability/scores:
+        post:
+          summary: Getvarious readability scores for a given text. 
+          description: Getvarious readability scores for a given text. 
+          operationId: getScores
+          requestBody:
+              description: Get scores
+              required: true
+              content:
+                application/x-www-form-urlencoded:
+                  schema:
+                    type: object
+                    properties:
+                      text: # <!--- form field name
+                        type: string
+                    required:
+                      - text
+          security:
+              - bearerAuth: []            
+          responses:
+            '200':
+              description: successful operation
+              content:
+                application/json:
+                  examples: 
+                    response:
+                      value: |-
+                          {
+                              "success": {
+                                  "total": 13
+                              },
+                              "contents": [
+                                  {
+                                      "name": "Flesch-Kincaid Reading Ease",
+                                      "score": 48.8,
+                                      "description": "The Flesch-Kincaid Reading Ease score is the result of a mathematical formula that incorporates the average number of syllables per word and the average number of words per sentence for a 100-word block of text. Results are measured on a scale of 1-100 (1 is the hardest and 100 is the easiest.). This is one of the oldest readability scores, commonly used in academics and government and incorporated into most word processing software. "
+                                  },
+                                  {
+                                      "name": "Flesch-Kincaid Grade Level",
+                                      "score": 9.7,
+                                      "description": "Like the Flesch- Kincaid Reading Ease score, this is a mathematical formula that measures syllables and sentence length. However, the results are given as an academic grade level, from 0-12. Usually your goal is 7th-8th grade as that encompasses about 80% of US adults."
+                                  },
+                                  {
+                                      "name": "Coleman-Liau Index",
+                                      "score": 12,
+                                      "description": "The Coleman-Liau Index is a readability formula that estimates the grade level needed to understand a piece of text. Unlike other readability formulas, it uses letters per word and sentences per word instead of syllables or word length.  The formula looks like this: CLI=0.0588L\u22120.296S\u221215.8\nWhere:\n    L = Average number of letters per 100 words.\n    S = Average number of sentences per 100 words."
+                                  },
+                                  {
+                                      "name": "Gunning-Fog score",
+                                      "score": 11.7,
+                                      "description": "The Gunning Fog Index takes into account \u201ccomplex\u201d words, those with three or more syllables, as part of its mathematical formula for readability. It gives a grade-level score from 1-unlimited. Ideal score is between 7-8."
+                                  }, {
+                                      "name": "SMOG Index",
+                                      "score": 11.8,
+                                      "description": "The SMOG Index (Simple Measure of Gobbledygook) is a readability formula that predicts the years of education someone needs to understand a piece of text. It focuses on the complexity of words by counting the number of polysyllabic words (words with three or more syllables) in a given section of text."
+                                  }, {
+                                      "name": "Automated Readability Index",
+                                      "score": 9.5,
+                                      "description": "The Automated Readability Index (ARI) is a readability formula used to estimate the grade level required to understand a text. It's based on the average word length (measured in characters) and sentence length (measured in words), making it easy to calculate with modern tools."
+                                  }, {
+                                      "name": "Dale-Chall readability score",
+                                      "score": 6.7,
+                                      "description": "The Dale-Chall Readability Score is a readability formula that assesses the difficulty of a text based on sentence complexity and the familiarity of words. It uses a specially designed list of 3,000 common, easy-to-understand words. Words not on this list are considered \"difficult.\""
+                                  }, {
+                                      "name": "Spache readability score",
+                                      "score": 4.9,
+                                      "description": ""
+                                  }, {
+                                      "name": "Average words per sentence",
+                                      "score": 13,
+                                      "description": ""
+                                  }, {
+                                      "name": "Average syllables per word",
+                                      "score": 1.71,
+                                      "description": ""
+                                  }, {
+                                      "name": "3 Syllable words Percentage",
+                                      "score": "17.31%",
+                                      "description": ""
+                                  }, {
+                                      "name": "Total words",
+                                      "count": 104,
+                                      "description": "Total word count"
+                                  }, {
+                                      "name": "Reading Time",
+                                      "count": 1,
+                                      "description": "Approx. Reading Time in minutes"
+                                  }
+                              ],
+                              "copyright": {
+                                  "url": "api.interfaces.one",
+                                  "year": "2025"
+                              }
+                          }                  
+components:
+  securitySchemes:
+      bearerAuth:
+        type: http
+        scheme: bearer
