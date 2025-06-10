@@ -105,6 +105,7 @@ Also used as test suite in the following projects:
  - [ardoq-swagger-addon](https://github.com/ardoq/ardoq-swagger-addon) - Ardoq OpenAPI addon
  - [swagvali](https://github.com/subeeshcbabu/swagvali/) - Module to build validators for OpenAPI Request parameters and Response objects
  - [swagger-search](https://github.com/IG-Group/swagger-search) - An application that collects and indexes swagger docs from your microservices architecture
+ - [php-openapi](https://github.com/cebe/php-openapi) - PHP OpenAPI library for reading and writing
 
 
 Integration with 3rd-party services
