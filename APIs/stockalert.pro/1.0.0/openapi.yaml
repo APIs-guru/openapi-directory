@@ -1,0 +1,552 @@
+openapi: 3.0.0
+info:
+  title: StockAlert.pro API
+  version: 1.0.0
+  description: Create and manage stock alerts programmatically
+  contact:
+    email: support@stockalert.pro
+    url: https://stockalert.pro
+servers:
+  - url: https://stockalert.pro/api/public/v1
+    description: Production API
+security:
+  - ApiKeyAuth: []
+paths:
+  /alerts:
+    get:
+      summary: List alerts
+      description: Get a paginated list of your alerts
+      operationId: listAlerts
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [active, paused, triggered]
+          description: Filter by alert status
+        - name: condition
+          in: query
+          schema:
+            type: string
+          description: Filter by alert type (e.g., price_above, price_below)
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: sortField
+          in: query
+          schema:
+            type: string
+            default: created_at
+        - name: sortDirection
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: desc
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Alert'
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                      limit:
+                        type: integer
+                      total:
+                        type: integer
+                      totalPages:
+                        type: integer
+    post:
+      summary: Create alert
+      description: Create a new stock alert
+      operationId: createAlert
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAlertRequest'
+            examples:
+              priceAlert:
+                summary: Price Alert Example
+                value:
+                  symbol: AAPL
+                  condition: price_above
+                  threshold: 200
+                  notification: email
+              percentageAlert:
+                summary: Percentage Change Alert
+                value:
+                  symbol: GOOGL
+                  condition: price_change_down
+                  threshold: 10
+                  notification: sms
+              technicalAlert:
+                summary: Technical Indicator Alert
+                value:
+                  symbol: MSFT
+                  condition: ma_crossover_golden
+                  notification: email
+              fundamentalAlert:
+                summary: Fundamental Alert
+                value:
+                  symbol: AMZN
+                  condition: pe_ratio_below
+                  threshold: 25
+                  notification: email
+              timeBasedAlert:
+                summary: Time-based Alert
+                value:
+                  symbol: TSLA
+                  condition: daily_reminder
+                  notification: email
+              maAlert:
+                summary: Moving Average Touch Alert
+                value:
+                  symbol: NVDA
+                  condition: ma_touch_above
+                  notification: email
+                  parameters:
+                    period: 200
+              rsiAlert:
+                summary: RSI Alert
+                value:
+                  symbol: AMD
+                  condition: rsi_limit
+                  threshold: 70
+                  notification: email
+                  parameters:
+                    direction: above
+      responses:
+        '201':
+          description: Alert created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Alert'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Stock not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitError'
+  /alerts/{id}:
+    get:
+      summary: Get alert
+      description: Get details of a specific alert
+      operationId: getAlert
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Alert'
+    put:
+      summary: Update alert
+      description: Update an existing alert
+      operationId: updateAlert
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+                  enum: [active, paused]
+                  description: Set to "active" to activate the alert, "paused" to pause it
+      responses:
+        '200':
+          description: Alert updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Alert'
+    delete:
+      summary: Delete alert
+      description: Permanently delete an alert
+      operationId: deleteAlert
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Alert deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                    example: Alert deleted successfully
+  /webhooks:
+    get:
+      summary: List webhooks
+      description: Get a list of all your webhooks. When events occur (like alert.triggered), we'll send a WebhookPayload to your configured URLs.
+      operationId: listWebhooks
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Webhook'
+    post:
+      summary: Create webhook
+      description: Create a new webhook. Maximum 5 webhooks per account. When events occur, we'll send a WebhookPayload (see schemas) to your URL.
+      operationId: createWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+                - events
+              properties:
+                url:
+                  type: string
+                  format: uri
+                  example: https://your-app.com/webhook
+                events:
+                  type: array
+                  items:
+                    type: string
+                    enum: [alert.triggered, alert.created, alert.updated, alert.deleted]
+      responses:
+        '200':
+          description: Webhook created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Webhook'
+  /webhooks/{id}:
+    delete:
+      summary: Delete webhook
+      description: Delete a webhook
+      operationId: deleteWebhook
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Webhook deleted successfully
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    CreateAlertRequest:
+      type: object
+      required:
+        - symbol
+        - condition
+      properties:
+        symbol:
+          type: string
+          example: AAPL
+          description: Stock ticker symbol
+        condition:
+          type: string
+          enum: [
+            price_above, 
+            price_below, 
+            price_change_up, 
+            price_change_down, 
+            new_high, 
+            new_low,
+            reminder,
+            daily_reminder,
+            ma_crossover_golden,
+            ma_crossover_death,
+            ma_touch_above,
+            ma_touch_below,
+            volume_change,
+            rsi_limit,
+            pe_ratio_below,
+            pe_ratio_above,
+            forward_pe_below,
+            forward_pe_above,
+            earnings_announcement,
+            dividend_ex_date,
+            dividend_payment
+          ]
+          description: Type of alert to create
+        threshold:
+          type: number
+          example: 200
+          description: Target value for the alert (not required for some alert types)
+        notification:
+          type: string
+          enum: [email, sms]
+          default: email
+          description: Notification channel (SMS only for account phone)
+        parameters:
+          type: object
+          description: Additional parameters for specific alert types
+    Alert:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        symbol:
+          type: string
+          description: Stock ticker symbol
+        condition:
+          type: string
+          enum: [
+            price_above, 
+            price_below, 
+            price_change_up, 
+            price_change_down, 
+            new_high, 
+            new_low,
+            reminder,
+            daily_reminder,
+            ma_crossover_golden,
+            ma_crossover_death,
+            ma_touch_above,
+            ma_touch_below,
+            volume_change,
+            rsi_limit,
+            pe_ratio_below,
+            pe_ratio_above,
+            forward_pe_below,
+            forward_pe_above,
+            earnings_announcement,
+            dividend_ex_date,
+            dividend_payment
+          ]
+          description: Alert type condition
+        threshold:
+          type: number
+          nullable: true
+          description: Target value for the alert
+        notification:
+          type: string
+          enum: [email, sms]
+          description: Notification channel
+        status:
+          type: string
+          enum: [active, paused, triggered]
+          description: Current status of the alert
+        created_at:
+          type: string
+          format: date-time
+        initial_price:
+          type: number
+          description: Stock price when alert was created
+        parameters:
+          type: object
+          nullable: true
+          description: Additional parameters specific to the alert type
+        stocks:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Company name
+            last_price:
+              type: number
+              description: Current stock price
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+        secret:
+          type: string
+        is_active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: Invalid API key
+    RateLimitError:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: Rate limit exceeded
+        rateLimit:
+          type: object
+          properties:
+            limit:
+              type: integer
+              example: 100
+            remaining:
+              type: integer
+              example: 0
+            reset:
+              type: integer
+              example: 1640995200
+    WebhookPayload:
+      type: object
+      description: Payload sent to webhook endpoints
+      properties:
+        event:
+          type: string
+          description: The event type
+          example: alert.triggered
+        timestamp:
+          type: string
+          format: date-time
+          description: When the event occurred
+          example: 2024-01-05T10:30:00Z
+        data:
+          type: object
+          description: Event-specific data
+          properties:
+            alert_id:
+              type: string
+              format: uuid
+              description: The triggered alert ID
+            symbol:
+              type: string
+              description: Stock ticker symbol
+              example: AAPL
+            condition:
+              type: string
+              description: Alert condition that was triggered
+              example: price_below
+            threshold:
+              type: number
+              description: The alert's target value
+              example: 300
+            current_value:
+              type: number
+              description: The current stock price that triggered the alert
+              example: 213.55
+            triggered_at:
+              type: string
+              format: date-time
+              description: When the alert was triggered
+            reason:
+              type: string
+              description: Human-readable reason for trigger
+              example: Alert condition met
+            parameters:
+              type: object
+              nullable: true
+              description: Additional alert-specific parameters
