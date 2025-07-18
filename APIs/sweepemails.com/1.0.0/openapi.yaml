@@ -1,0 +1,80 @@
+openapi: 3.1.3
+info:
+  title: SweepEmails API
+  version: 1.0.0
+  description: API for validating email to protect againest disposable email providers
+  contact:
+    name: SweepEmails Support
+    url: https://sweepemails.com
+    email: contact@sweepemails.com
+
+x-apisguru-categories:
+  - validation
+  - email
+
+x-logo:
+  url: https://pbs.twimg.com/profile_images/1936376369199390720/ZirsIZQd_400x400.jpg
+  backgroundColor: "#ffffff"
+
+servers:
+  - url: https://api.sweepemails.com
+
+paths:
+  /v1/check:
+    post:
+      summary: Validate an email address
+      operationId: validateEmail
+      requestBody:
+        description: Email address to be validated.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: e1d30bfb1a@emaily.pro
+      responses:
+        '200':
+          description: Validation result returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Code:
+                    type: integer
+                    example: 20000
+                  data:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                        example: e1d30bfb1a@emaily.pro
+                      is_fake:
+                        type: boolean
+                        example: true
+                      provider:
+                        type: string
+                        example: mohmal.com
+        '400':
+          description: Invalid request payload.
+        '401':
+          description: Missing or invalid API key.
+        '500':
+          description: Server error.
+
+      security:
+        - ApiKeyAuth: []
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
