@@ -1,0 +1,258 @@
+openapi: '3.0.0'
+info:
+  title: VIES API Service
+  description: VIES API Service
+  version: '1.2.4'
+  termsOfService: https://viesapi.eu/terms/
+  contact:
+    name: VIES API Service
+    url: https://viesapi.eu
+    email: contact@viesapi.eu
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: https://viesapi.eu/api
+    description: Production Service
+  - url: https://viesapi.eu/api-test
+    description: Test Service
+tags:
+  - name: API
+    description: List of service functions
+paths:
+  /check/account/status:
+    get:
+      operationId: getAccountStatus
+      summary: Get current VIES API account status.
+      tags:
+        - API
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/AccountStatusResult'
+                  - $ref: '#/components/schemas/ErrorResult'
+            text/xml:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/AccountStatusResult'
+                  - $ref: '#/components/schemas/ErrorResult'
+        default:
+          $ref: '#/components/responses/Error'
+  /get/vies/euvat/{number}:
+    get:
+      operationId: getVIESData
+      summary: Get firm data from VIES registry.
+      tags:
+        - API
+      parameters:
+        - $ref: '#/components/parameters/AuthHeader'
+        - $ref: '#/components/parameters/NumberParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/VIESDataResult'
+                  - $ref: '#/components/schemas/ErrorResult'
+            text/xml:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/VIESDataResult'
+                  - $ref: '#/components/schemas/ErrorResult'
+        default:
+          $ref: '#/components/responses/Error'
+components:
+  schemas:
+    AccountStatus:
+      type: object
+      properties:
+        uid:
+          type: string
+        type:
+          type: string
+        validTo:
+          type: string
+          format: date-time
+        billingPlan:
+          type: object
+          properties:
+            name:
+              type: string
+            subscriptionPrice:
+              type: number
+              format: double
+            itemPrice:
+              type: number
+              format: double
+            itemPriceCheckStatus:
+              type: number
+              format: double
+            limit:
+              type: integer
+              format: int32
+            requestDelay:
+              type: integer
+              format: int32
+            domainLimit:
+              type: integer
+              format: int32
+            overplanAllowed:
+              type: boolean
+            excelAddin:
+              type: boolean
+            app:
+              type: boolean
+            cli:
+              type: boolean
+            stats:
+              type: boolean
+            monitor:
+              type: boolean
+            funcGetVIESData:
+              type: boolean
+          required:
+            - name
+            - subscriptionPrice
+            - limit
+            - requestDelay
+            - domainLimit
+            - overplanAllowed
+            - excelAddin
+            - app
+            - cli
+            - stats
+            - monitor
+            - funcGetVIESData
+        requests:
+          type: object
+          properties:
+            viesData:
+              type: integer
+              format: int32
+            total:
+              type: integer
+              format: int32
+          required:
+            - viesData
+            - total
+      required:
+        - uid
+        - type
+        - billingPlan
+        - requests
+    AccountStatusResult:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/AccountStatus'
+      required:
+        - account
+      xml:
+        name: 'result'
+    VIESData:
+      type: object
+      properties:
+        uid:
+          type: string
+        countryCode:
+          type: string
+          minLength: 2
+          maxLength: 2
+        vatNumber:
+          type: string
+        valid:
+          type: boolean
+        traderName:
+          type: string
+        traderCompanyType:
+          type: string
+        traderAddress:
+          type: string
+        id:
+          type: string
+        date:
+          type: string
+          format: date
+        source:
+          type: string
+          format: url
+      required:
+        - uid
+        - countryCode
+        - vatNumber
+        - valid
+        - traderName
+        - traderCompanyType
+        - traderAddress
+        - id
+        - date
+        - source
+    VIESDataResult:
+      type: object
+      properties:
+        vies:
+          $ref: '#/components/schemas/VIESData'
+      required:
+        - vies
+      xml:
+        name: 'result'
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        description:
+          type: string
+        details:
+          type: string
+      required:
+        - code
+        - description
+    ErrorResult:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+        - error
+      xml:
+        name: 'result'
+  parameters:
+    NumberParam:
+      name: number
+      in: path
+      description: Number value depends on the type.
+      required: true
+      schema:
+        type: string
+    AuthHeader:
+      name: Authorization
+      in: header
+      description: |
+        Header with authorization data. Authorization data must be prepared in accordance with
+        [HTTP Authentication: MAC Access Authentication](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-http-mac-01)
+        and this is recommended first choice method. It is also possible to use the
+        [HTTP Authentication: Basic Authentication](https://datatracker.ietf.org/doc/html/rfc7617) method,
+        however for security reasons, please use it only when using the first method is not possible for some reason.
+      required: true
+      schema:
+        type: string
+  responses:
+    Error:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResult'
+        text/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResult'
