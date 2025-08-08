@@ -1,0 +1,72 @@
+openapi: 3.0.0
+info:
+  termsOfService: https://fungenerators.com/terms
+  description: >
+     Generate random writing prompts from tens of thousands of ever growing manually curated collection of writing prompts. You can try them out right here. [Click here to subscribe](http://fungenerators.com/products/documentation/writing-prompt)
+  title: Writing Prompt Generation API
+  version: "2.5"
+  contact:
+    name: Fun Generators
+    url: https://fungenerators.com/
+tags:
+  - name: Prompt Generation
+    description: Generate Writing Prompt
+paths:
+  /writing-prompt:
+    get:
+      tags:
+        - Prompt Generation
+      description: Generate a random writing primpt.
+      security:
+        - bearerAuth: []
+      parameters:
+        - description: Number of prompts to generate (defaults to 1)
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: integer
+      responses:
+        "200":
+          description: 200  response
+          content:
+            application/json:
+              examples:
+                response:
+                  value: >-
+                      {
+                        "success": {
+                          "total": 1
+                        },
+                        "contents": {
+                          "prompts": [
+                            "It is known that ever since the incident that made air poisounous, you have to take a [pick a name] pill once a day to survive. One day you didn't. You survived."
+                          ]
+                        },
+                        "copyright": {
+                          "url": "https://fungenerators.com",
+                          "year": "2024"
+                        }
+                      }
+        "401":
+          description: 401  response
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                        "error": {
+                            "code": 401,
+                            "message": "Unauthorized"
+                        }
+                    }
+servers:
+  - url: https://api.fungenerators.com
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+
