@@ -1,0 +1,170 @@
+openapi: "3.0.3"
+info:
+  title: NanoStack Execution API
+  version: "1.0.0"
+  description: Permissionless cross-chain execution. Native assets. No wrapping. No SDK. 46 chains, 6 ecosystems, 8-15 bps.
+  contact:
+    url: https://github.com/nano-labs-io/nanostack-api
+  x-logo:
+    url: https://api.nano-labs.io/logo.png
+servers:
+  - url: https://api.nano-labs.io
+paths:
+  /v1/quote:
+    post:
+      summary: Get a fee quote
+      description: "Returns a fee quote for any of 46 chains. 8-15 bps, locked 30 seconds. Permissionless."
+      operationId: getQuote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuoteRequest"
+            example:
+              chain_id: 8453
+              amount: "1000000000000000000"
+              destination: "0xYourAddress"
+      responses:
+        "200":
+          description: Fee quote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuoteResponse"
+  /v1/execute:
+    post:
+      summary: Execute on any chain
+      description: "Permissionless execution. Fee auto-deducted. Conservation: gross == net + fee."
+      operationId: execute
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuoteRequest"
+      responses:
+        "200":
+          description: Execution result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExecuteResponse"
+  /v1/cross-chain:
+    post:
+      summary: Cross-chain execution
+      description: Execute across ecosystems. Native asset settlement — no wrapping.
+      operationId: crossChain
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CrossChainRequest"
+            example:
+              src_chain_id: 118
+              dst_chain_id: 1
+              amount: "1000000"
+              denom: "uatom"
+              destination: "0xYourAddress"
+      responses:
+        "200":
+          description: Execution result
+  /v1/health:
+    get:
+      summary: Liveness check
+      operationId: health
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                ok: true
+                status: healthy
+  /.well-known/nanostack.json:
+    get:
+      summary: Full protocol manifest
+      description: Machine-readable manifest with all chains, fee model, schemas.
+      operationId: manifest
+      responses:
+        "200":
+          description: Protocol manifest
+components:
+  schemas:
+    QuoteRequest:
+      type: object
+      required: [chain_id, amount, destination]
+      properties:
+        chain_id:
+          type: integer
+          description: "Chain ID: ETH=1, Base=8453, ARB=42161, OP=10, SOL=501, BTC=0, ATOM=118, XRP=144, APT=637, SUI=784"
+        amount:
+          type: string
+          description: "Smallest unit: wei, satoshi, lamport, uatom, drops, octas"
+        destination:
+          type: string
+          description: Chain-native address
+        token_address:
+          type: string
+          description: EVM ERC20 address
+        token_mint:
+          type: string
+          description: Solana SPL mint (base58)
+        denom:
+          type: string
+          description: Cosmos denom (e.g. uatom)
+        memo:
+          type: string
+          description: Cosmos memo (required for exchange deposits)
+        destination_tag:
+          type: integer
+          description: XRP destination tag (required for exchange deposits)
+        fee_rate:
+          type: integer
+          description: BTC fee rate sat/vbyte
+        coin_type:
+          type: string
+          description: Move full coin type path
+    CrossChainRequest:
+      type: object
+      required: [src_chain_id, dst_chain_id, amount, destination]
+      properties:
+        src_chain_id:
+          type: integer
+        dst_chain_id:
+          type: integer
+        amount:
+          type: string
+        destination:
+          type: string
+        denom:
+          type: string
+    QuoteResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        quote_id:
+          type: string
+        fee_bps:
+          type: integer
+        fee_amount:
+          type: string
+        net_amount:
+          type: string
+        expires_at:
+          type: integer
+    ExecuteResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        tx_hash:
+          type: string
+        proof:
+          type: string
+        fee_bps:
+          type: integer
+        fee_amount:
+          type: string
