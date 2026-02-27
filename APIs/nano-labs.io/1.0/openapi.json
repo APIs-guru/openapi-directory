@@ -1,0 +1,377 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "NanoStack Execution API",
+    "version": "1.0.0",
+    "description": "Permissionless cross-chain execution. Native assets. No wrapping. No SDK. 8-15 bps.",
+    "contact": {
+      "url": "https://api.nano-labs.io",
+      "email": "ops@nano-labs.io"
+    },
+    "license": {
+      "name": "MIT"
+    },
+    "x-apisguru-categories": [
+      "financial"
+    ],
+    "x-logo": {
+      "url": "https://api.nano-labs.io/logo.png"
+    },
+    "x-providerName": "nano-labs.io"
+  },
+  "servers": [
+    {
+      "url": "https://api.nano-labs.io"
+    }
+  ],
+  "paths": {
+    "/v1/quote": {
+      "post": {
+        "summary": "Get a fee quote",
+        "description": "Returns a fee quote for any of 46 chains. 8-15 bps, locked 30 seconds. Permissionless.",
+        "tags": [
+          "Execution"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuoteRequest"
+              },
+              "example": {
+                "chain_id": 8453,
+                "amount": "1000000000000000000",
+                "destination": "0xYourAddress"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Fee quote",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuoteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          }
+        }
+      }
+    },
+    "/v1/execute": {
+      "post": {
+        "summary": "Execute on any chain",
+        "description": "Permissionless execution. Fee auto-deducted. Conservation invariant: gross == net + fee.",
+        "tags": [
+          "Execution"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuoteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Execution result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecuteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          }
+        }
+      }
+    },
+    "/v1/cross-chain": {
+      "post": {
+        "summary": "Cross-chain execution",
+        "description": "Execute across ecosystems. Native asset settlement \u2014 no wrapping.",
+        "tags": [
+          "Execution"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrossChainRequest"
+              },
+              "example": {
+                "src_chain_id": 118,
+                "dst_chain_id": 1,
+                "amount": "1000000",
+                "denom": "uatom",
+                "destination": "0xYourAddress"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Execution result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecuteResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/register": {
+      "post": {
+        "summary": "Register for API key",
+        "description": "Optional. Execution is permissionless without a key. Keys enable attribution and higher rate limits.",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "API key"
+          }
+        }
+      }
+    },
+    "/v1/health": {
+      "get": {
+        "summary": "Liveness check",
+        "tags": [
+          "Status"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "ok": true,
+                  "status": "healthy"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/status": {
+      "get": {
+        "summary": "Protocol status and counters",
+        "tags": [
+          "Status"
+        ],
+        "responses": {
+          "200": {
+            "description": "Status"
+          }
+        }
+      }
+    },
+    "/v1/signal": {
+      "get": {
+        "summary": "Real-time signal data",
+        "tags": [
+          "Signal"
+        ],
+        "responses": {
+          "200": {
+            "description": "Signal atoms"
+          }
+        }
+      }
+    },
+    "/.well-known/nanostack.json": {
+      "get": {
+        "summary": "Full protocol manifest",
+        "description": "Machine-readable manifest: all chains, fee model, request schemas, address formats.",
+        "tags": [
+          "Discovery"
+        ],
+        "responses": {
+          "200": {
+            "description": "Protocol manifest"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "QuoteRequest": {
+        "type": "object",
+        "required": [
+          "chain_id",
+          "amount",
+          "destination"
+        ],
+        "properties": {
+          "chain_id": {
+            "type": "integer",
+            "format": "uint64",
+            "description": "Target chain ID"
+          },
+          "amount": {
+            "type": "string",
+            "description": "Amount in smallest unit (wei, satoshi, lamport, uatom, drops)"
+          },
+          "destination": {
+            "type": "string",
+            "description": "Chain-native destination address"
+          },
+          "source": {
+            "type": "string",
+            "description": "Source address (optional)"
+          },
+          "intent": {
+            "type": "string",
+            "enum": [
+              "execute",
+              "quote"
+            ],
+            "default": "execute"
+          },
+          "quote_id": {
+            "type": "string",
+            "description": "Lock a prior quote for execution"
+          },
+          "token_address": {
+            "type": "string",
+            "description": "EVM ERC20 token address"
+          },
+          "token_mint": {
+            "type": "string",
+            "description": "Solana SPL token mint (base58)"
+          },
+          "denom": {
+            "type": "string",
+            "description": "Cosmos denom (e.g. uatom)"
+          },
+          "memo": {
+            "type": "string",
+            "description": "Cosmos memo \u2014 required for exchange deposits"
+          },
+          "destination_tag": {
+            "type": "integer",
+            "description": "XRP destination tag \u2014 required for exchange deposits"
+          },
+          "fee_rate": {
+            "type": "integer",
+            "description": "BTC fee rate in sat/vbyte"
+          },
+          "coin_type": {
+            "type": "string",
+            "description": "Move (APT/SUI) fully qualified coin type"
+          }
+        }
+      },
+      "CrossChainRequest": {
+        "type": "object",
+        "required": [
+          "src_chain_id",
+          "dst_chain_id",
+          "amount",
+          "destination"
+        ],
+        "properties": {
+          "src_chain_id": {
+            "type": "integer",
+            "format": "uint64"
+          },
+          "dst_chain_id": {
+            "type": "integer",
+            "format": "uint64"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          },
+          "denom": {
+            "type": "string",
+            "description": "Cosmos source denom"
+          },
+          "memo": {
+            "type": "string"
+          }
+        }
+      },
+      "QuoteResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "quote_id": {
+            "type": "string"
+          },
+          "fee_bps": {
+            "type": "integer"
+          },
+          "fee_amount": {
+            "type": "string"
+          },
+          "net_amount": {
+            "type": "string"
+          },
+          "expires_at": {
+            "type": "integer",
+            "description": "Unix timestamp"
+          }
+        }
+      },
+      "ExecuteResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "tx_hash": {
+            "type": "string"
+          },
+          "proof": {
+            "type": "string",
+            "description": "BLAKE3 conservation proof"
+          },
+          "fee_bps": {
+            "type": "integer"
+          },
+          "fee_amount": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
