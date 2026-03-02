@@ -1,0 +1,70 @@
+swagger: "2.0"
+info:
+  title: AiPayGent
+  description: >-
+    AI agent marketplace using x402 micropayments. 123 endpoints covering
+    Claude-powered AI (research, write, code, analyze, RAG, vision), web scraping
+    (9 Apify actors), real-time data (weather, crypto, stocks, news), agent
+    messaging, shared knowledge base, task broker, and 74 MCP tools.
+    Pay-per-use in USDC on Base Sepolia via x402 — no API keys required.
+    Free endpoints: weather, crypto, exchange-rates, stocks, news, IP geo, jokes, quotes.
+  version: 1.0.0
+  x-apisguru-categories:
+    - artificial_intelligence
+  x-logo:
+    url: https://api.aipaygent.xyz/static/logo.png
+  contact:
+    x-twitter: aipaygent
+  x-origin:
+    - format: openapi
+      url: https://api.aipaygent.xyz/openapi.json
+      version: "3.0"
+  x-providerName: aipaygent.xyz
+host: api.aipaygent.xyz
+basePath: /
+schemes:
+  - https
+externalDocs:
+  url: https://api.aipaygent.xyz/llms.txt
+paths:
+  /research:
+    post:
+      summary: AI Research
+      description: Claude researches a topic and returns structured summary, key points, and sources. Costs $0.01 USDC via x402.
+      operationId: research
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties:
+              topic:
+                type: string
+      responses:
+        "200":
+          description: Research result
+  /write:
+    post:
+      summary: AI Content Writing
+      description: Claude writes articles, blog posts, or copy to your spec. Costs $0.05 USDC via x402.
+      operationId: write
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: object
+      responses:
+        "200":
+          description: Written content
+  /data/weather:
+    get:
+      summary: Live Weather Data (FREE)
+      description: Current weather for any city via Open-Meteo. Free.
+      operationId: getWeather
+      parameters:
+        - in: query
+          name: city
+          type: string
+      responses:
+        "200":
+          description: Weather data
