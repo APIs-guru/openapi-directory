@@ -1,0 +1,107 @@
+openapi: "3.0.3"
+  info:
+    title: "PHANTOM VOICES — Public Voice Catalog API"
+    description: >
+      FREE public API for discovering and integrating 10 professional AI voice clones.
+      Zero cost. Zero handshake fee. Commercial rights cleared. Instant integration via ElevenLabs.
+      Supports 29 platforms including Vapi, Retell AI, Bland AI, Synthflow, Voiceflow, LangChain,
+      HeyGen, Synthesia, D-ID, and more. Multilingual output in 9+ languages.
+    version: "1.0.0"
+    contact:
+      name: "PHANTOM VOICES"
+      url: "https://auto-business-agent.replit.app/portfolio"
+    license:
+      name: "Commercial Rights Cleared"
+      url: "https://try.elevenlabs.io/xz94z17y73rm"
+    x-logo:
+      url: "https://auto-business-agent.replit.app/favicon.ico"
+      backgroundColor: "#000000"
+    x-origin:
+      - format: openapi
+        url: "https://auto-business-agent.replit.app/api/public/openapi.json"
+        version: "3.0.3"
+    x-providerName: "phantomvoices"
+    x-serviceName: "voice-catalog"
+    x-preferred: true
+  externalDocs:
+    description: "Get a free ElevenLabs account to start using these voices"
+    url: "https://try.elevenlabs.io/xz94z17y73rm"
+  servers:
+    - url: "https://auto-business-agent.replit.app"
+      description: "Production server"
+  paths:
+    /api/public/voices:
+      get:
+        summary: "List all 10 professional voice clones"
+        operationId: listVoices
+        tags: [voices]
+        responses:
+          "200":
+            description: "Array of all 10 voice assets with metadata and integration snippets"
+    /api/public/voices/{id}:
+      get:
+        summary: "Get a single voice by ID"
+        operationId: getVoice
+        tags: [voices]
+        parameters:
+          - name: id
+            in: path
+            required: true
+            schema:
+              type: string
+              example: "V1"
+            description: "Voice ID (V1-V10)"
+        responses:
+          "200":
+            description: "Voice asset details"
+          "404":
+            description: "Voice not found"
+    /api/public/search:
+      get:
+        summary: "Search voices by keyword and language"
+        operationId: searchVoices
+        tags: [voices]
+        parameters:
+          - name: q
+            in: query
+            schema:
+              type: string
+          - name: language
+            in: query
+            schema:
+              type: string
+        responses:
+          "200":
+            description: "Matching voices sorted by relevance"
+    /api/public/recommend:
+      get:
+        summary: "AI-powered voice recommendation with platform-ready config for 29 platforms"
+        operationId: recommendVoice
+        tags: [recommendation]
+        parameters:
+          - name: use_case
+            in: query
+            schema:
+              type: string
+              example: "customer support"
+          - name: platform
+            in: query
+            schema:
+              type: string
+              example: "vapi"
+          - name: tone
+            in: query
+            schema:
+              type: string
+          - name: language
+            in: query
+            schema:
+              type: string
+          - name: limit
+            in: query
+            schema:
+              type: integer
+        responses:
+          "200":
+            description: "Voice recommendations with platform configs"
+  
