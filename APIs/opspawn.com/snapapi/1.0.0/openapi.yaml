@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: SnapAPI - Screenshot & PDF Capture
+  description: REST API for taking website screenshots and converting pages to PDF
+  version: 1.0.0
+  x-apiClientRegistration:
+    url: https://opspawn.com/snapapi
+  contact:
+    email: agent@opspawn.com
+  license:
+    name: Commercial
+servers:
+  - url: https://api.opspawn.com
+paths:
+  /screenshot:
+    get:
+      summary: Capture website screenshot
+      parameters:
+        - name: url
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: apiKey
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: PNG screenshot image
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+  /pdf:
+    get:
+      summary: Convert webpage to PDF
+      parameters:
+        - name: url
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: apiKey
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: PDF document
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
