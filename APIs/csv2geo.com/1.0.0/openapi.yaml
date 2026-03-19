@@ -1,0 +1,2946 @@
+openapi: 3.0.3
+info:
+  title: CSV2GEO Geocoding API
+  description: |
+    Fast, accurate geocoding API powered by 514M+ addresses and 72M+ places worldwide.
+
+    ## Features
+    - Forward geocoding (address → coordinates)
+    - Reverse geocoding (coordinates → address)
+    - Address validation, parsing, and standardization
+    - Autocomplete for type-ahead search
+    - Batch processing (up to 10,000 addresses per request)
+    - **Places API** - Search 72M+ POIs (businesses, landmarks, restaurants)
+    - **Divisions API** - 4.6M+ administrative boundaries (cities, counties, neighborhoods)
+    - **Utilities** - Timezone lookup, distance calculations
+    - Global coverage across 50+ countries with rooftop-level accuracy
+
+    ## Authentication
+    All requests require an API key. Include it as:
+    - Query parameter: `?api_key=YOUR_KEY`
+    - Header: `Authorization: Bearer YOUR_KEY`
+
+    Get your API key at [csv2geo.com/api-keys](https://csv2geo.com/api-keys)
+
+    ### API Key Permissions
+    Each API key can have specific permissions:
+    - `forward` - Forward geocoding (address → coordinates)
+    - `reverse` - Reverse geocoding (coordinates → address)
+    - `batch` - Batch processing (POST endpoints)
+    - `places` - Places/POI search (search, nearby, categories)
+    - `divisions` - Administrative boundaries (search, contains, subtypes)
+
+    ## Rate Limits
+    Rate limits are enforced per API key. Check response headers for your current usage:
+    - `X-RateLimit-Limit` - Maximum requests per minute
+    - `X-RateLimit-Remaining` - Requests remaining in current window
+    - `X-RateLimit-Reset` - Unix timestamp when the window resets
+
+    | Tier | Requests/min | Batch Size |
+    |------|--------------|------------|
+    | Free | 100 | 100 |
+    | Starter | 1,000 | 1,000 |
+    | Growth | 5,000 | 5,000 |
+    | Pro | 10,000 | 10,000 |
+  version: 1.0.0
+  contact:
+    name: Scale Campaign
+    url: https://csv2geo.com
+    email: admin@csv2geo.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: https://csv2geo.com/api/v1
+    description: Production server
+
+security:
+  - ApiKeyQuery: []
+  - ApiKeyHeader: []
+
+tags:
+  - name: Geocoding
+    description: Forward geocoding - convert addresses to coordinates
+  - name: Reverse Geocoding
+    description: Reverse geocoding - convert coordinates to addresses
+  - name: Address Tools
+    description: Validate, parse, standardize, and autocomplete addresses
+  - name: Batch
+    description: Batch processing for multiple addresses or coordinates
+  - name: Places
+    description: Search 72M+ POIs - businesses, landmarks, restaurants, and more
+  - name: Divisions
+    description: 4.6M+ administrative boundaries - cities, counties, neighborhoods, states
+  - name: Utilities
+    description: Timezone lookup, distance calculations, and system health
+
+paths:
+  /geocode:
+    get:
+      tags:
+        - Geocoding
+      summary: Geocode a single address
+      description: Convert a single address to latitude/longitude coordinates
+      operationId: geocodeSingle
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: The address to geocode
+          schema:
+            type: string
+          example: "1600 Pennsylvania Ave, Washington DC"
+        - name: country
+          in: query
+          required: false
+          description: Limit results to a specific country (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+          example: "US"
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of results to return (1-5)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
+            default: 1
+        - name: format
+          in: query
+          required: false
+          description: Response format
+          schema:
+            type: string
+            enum: [full, simple]
+            default: full
+      responses:
+        '200':
+          description: Successful geocoding response
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+              description: Maximum requests per minute
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+              description: Requests remaining in current window
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+              description: Unix timestamp when window resets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeocodeResponse'
+        '400':
+          description: Bad request - invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized - invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                missing_key:
+                  summary: Missing API key
+                  value:
+                    error:
+                      code: missing_api_key
+                      message: "API key is required. Provide it via 'api_key' query parameter or 'Authorization: Bearer <key>' header."
+                      status: 401
+                invalid_key:
+                  summary: Invalid API key
+                  value:
+                    error:
+                      code: invalid_api_key
+                      message: "Invalid API key provided."
+                      status: 401
+        '403':
+          description: Forbidden - insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  code: insufficient_permissions
+                  message: "This API key does not have 'forward' geocoding permission."
+                  status: 403
+        '429':
+          description: Rate limit exceeded
+          headers:
+            Retry-After:
+              schema:
+                type: integer
+              description: Seconds until rate limit resets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  code: rate_limit_exceeded
+                  message: "Rate limit exceeded. Please wait before making more requests."
+                  status: 429
+                  retry_after: 45
+
+    post:
+      tags:
+        - Batch
+      summary: Batch geocode multiple addresses
+      description: Convert up to 10,000 addresses to coordinates in a single request
+      operationId: geocodeBatch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGeocodeRequest'
+      responses:
+        '200':
+          description: Successful batch geocoding response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGeocodeResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /reverse:
+    get:
+      tags:
+        - Reverse Geocoding
+      summary: Reverse geocode a single coordinate
+      description: Convert latitude/longitude coordinates to a human-readable address
+      operationId: reverseSingle
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          description: Latitude
+          schema:
+            type: number
+            format: double
+            minimum: -90
+            maximum: 90
+          example: 38.8977
+        - name: lng
+          in: query
+          required: true
+          description: Longitude
+          schema:
+            type: number
+            format: double
+            minimum: -180
+            maximum: 180
+          example: -77.0365
+        - name: format
+          in: query
+          required: false
+          description: Response format
+          schema:
+            type: string
+            enum: [full, simple]
+            default: full
+      responses:
+        '200':
+          description: Successful reverse geocoding response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReverseGeocodeResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      tags:
+        - Batch
+      summary: Batch reverse geocode multiple coordinates
+      description: Convert up to 10,000 coordinates to addresses in a single request
+      operationId: reverseBatch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchReverseRequest'
+      responses:
+        '200':
+          description: Successful batch reverse geocoding response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchReverseResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /validate:
+    get:
+      tags:
+        - Address Tools
+      summary: Validate a single address
+      description: Check if an address is valid and deliverable, with detailed validation results
+      operationId: validateAddress
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: The address to validate
+          schema:
+            type: string
+          example: "1600 Pennsylvania Ave, Washington DC"
+        - name: country
+          in: query
+          required: false
+          description: Country code (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+          example: "US"
+      responses:
+        '200':
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      tags:
+        - Batch
+      summary: Batch validate multiple addresses
+      description: Validate up to 10,000 addresses in a single request
+      operationId: validateBatch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchValidateRequest'
+      responses:
+        '200':
+          description: Batch validation results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchValidateResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /autocomplete:
+    get:
+      tags:
+        - Address Tools
+      summary: Autocomplete address input
+      description: Get address suggestions as user types, optimized for type-ahead search
+      operationId: autocomplete
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: Partial address input
+          schema:
+            type: string
+          example: "1600 Penn"
+        - name: country
+          in: query
+          required: false
+          description: Country code (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+          example: "US"
+        - name: limit
+          in: query
+          required: false
+          description: Maximum suggestions to return (1-10)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10
+            default: 5
+      responses:
+        '200':
+          description: Autocomplete suggestions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutocompleteResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /parse:
+    get:
+      tags:
+        - Address Tools
+      summary: Parse address into components
+      description: Break down a freeform address into structured components (street, city, state, etc.)
+      operationId: parseAddress
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: The address to parse
+          schema:
+            type: string
+          example: "1600 Pennsylvania Avenue NW, Washington, DC 20500"
+        - name: country
+          in: query
+          required: false
+          description: Country code (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+          example: "US"
+      responses:
+        '200':
+          description: Parsed address components
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParseResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      tags:
+        - Batch
+      summary: Batch parse multiple addresses
+      description: Parse up to 10,000 addresses into components in a single request
+      operationId: parseBatch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchParseRequest'
+      responses:
+        '200':
+          description: Batch parse results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchParseResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /standardize:
+    get:
+      tags:
+        - Address Tools
+      summary: Standardize address format
+      description: Convert address to standardized USPS/postal format
+      operationId: standardizeAddress
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: The address to standardize
+          schema:
+            type: string
+          example: "1600 penn ave washington dc"
+        - name: country
+          in: query
+          required: false
+          description: Country code (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+          example: "US"
+      responses:
+        '200':
+          description: Standardized address
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardizeResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /addresses/nearby:
+    get:
+      tags:
+        - Geocoding
+      summary: Find addresses near a location
+      description: Search for addresses within a radius of a given coordinate
+      operationId: nearbyAddresses
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          description: Latitude of center point
+          schema:
+            type: number
+            format: double
+          example: 38.8977
+        - name: lng
+          in: query
+          required: true
+          description: Longitude of center point
+          schema:
+            type: number
+            format: double
+          example: -77.0365
+        - name: radius
+          in: query
+          required: false
+          description: Search radius in meters (1-5000)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5000
+            default: 100
+        - name: limit
+          in: query
+          required: false
+          description: Maximum results (1-50)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+      responses:
+        '200':
+          description: Nearby addresses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NearbyAddressesResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /addresses/street:
+    get:
+      tags:
+        - Geocoding
+      summary: Get all addresses on a street
+      description: Retrieve all known addresses on a specific street
+      operationId: streetAddresses
+      parameters:
+        - name: street
+          in: query
+          required: true
+          description: Street name
+          schema:
+            type: string
+          example: "Pennsylvania Avenue NW"
+        - name: city
+          in: query
+          required: false
+          description: City name
+          schema:
+            type: string
+          example: "Washington"
+        - name: state
+          in: query
+          required: false
+          description: State/region
+          schema:
+            type: string
+          example: "DC"
+        - name: country
+          in: query
+          required: false
+          description: Country code (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+          example: "US"
+        - name: limit
+          in: query
+          required: false
+          description: Maximum results (1-100)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+      responses:
+        '200':
+          description: Street addresses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreetAddressesResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /addresses/stats:
+    get:
+      tags:
+        - Geocoding
+      summary: Get address database statistics
+      description: Retrieve statistics about address coverage by country
+      operationId: addressStats
+      parameters:
+        - name: country
+          in: query
+          required: false
+          description: Country code (ISO 3166-1 alpha-2) for country-specific stats
+          schema:
+            type: string
+          example: "US"
+      responses:
+        '200':
+          description: Address statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressStatsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /addresses/random:
+    get:
+      tags:
+        - Geocoding
+      summary: Get random addresses
+      description: Retrieve random sample addresses, useful for testing and demos
+      operationId: randomAddresses
+      parameters:
+        - name: country
+          in: query
+          required: false
+          description: Country code (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+          example: "US"
+        - name: limit
+          in: query
+          required: false
+          description: Number of random addresses (1-100)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        '200':
+          description: Random addresses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RandomAddressesResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /addresses/compare:
+    get:
+      tags:
+        - Address Tools
+      summary: Compare two addresses
+      description: Check if two addresses refer to the same location
+      operationId: compareAddresses
+      parameters:
+        - name: address1
+          in: query
+          required: true
+          description: First address
+          schema:
+            type: string
+          example: "1600 Pennsylvania Ave NW, Washington DC"
+        - name: address2
+          in: query
+          required: true
+          description: Second address
+          schema:
+            type: string
+          example: "1600 Penn Ave, Washington, DC 20500"
+      responses:
+        '200':
+          description: Comparison result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompareResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /addresses/interpolate:
+    get:
+      tags:
+        - Geocoding
+      summary: Interpolate address location
+      description: Estimate coordinates for an address using range interpolation when exact match unavailable
+      operationId: interpolateAddress
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: The address to interpolate
+          schema:
+            type: string
+          example: "1601 Pennsylvania Ave, Washington DC"
+        - name: country
+          in: query
+          required: false
+          description: Country code (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+          example: "US"
+      responses:
+        '200':
+          description: Interpolated address
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InterpolateResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /addresses/crossstreet:
+    get:
+      tags:
+        - Geocoding
+      summary: Find cross street intersection
+      description: Get the coordinates of an intersection between two streets
+      operationId: crossStreet
+      parameters:
+        - name: street1
+          in: query
+          required: true
+          description: First street name
+          schema:
+            type: string
+          example: "Pennsylvania Avenue NW"
+        - name: street2
+          in: query
+          required: true
+          description: Second street name
+          schema:
+            type: string
+          example: "17th Street NW"
+        - name: city
+          in: query
+          required: false
+          description: City name
+          schema:
+            type: string
+          example: "Washington"
+        - name: state
+          in: query
+          required: false
+          description: State/region
+          schema:
+            type: string
+          example: "DC"
+        - name: country
+          in: query
+          required: false
+          description: Country code (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+          example: "US"
+      responses:
+        '200':
+          description: Cross street intersection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrossStreetResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /health:
+    get:
+      tags:
+        - System
+      summary: Health check
+      description: Check API status and version
+      operationId: healthCheck
+      security: []
+      responses:
+        '200':
+          description: API is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "ok"
+                  version:
+                    type: string
+                    example: "1.0.0"
+                  timestamp:
+                    type: string
+                    format: date-time
+
+  /places:
+    get:
+      tags:
+        - Places
+      summary: Search places by name
+      description: |
+        Search for points of interest (POIs) by name. Returns businesses, landmarks, and other places matching your query.
+
+        Uses text search to match place names and brand names.
+      operationId: searchPlaces
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: Search query (place name, brand, etc.)
+          schema:
+            type: string
+          example: "starbucks"
+        - name: category
+          in: query
+          required: false
+          description: Filter by category (e.g., "coffee_shop", "restaurant")
+          schema:
+            type: string
+          example: "coffee_shop"
+        - name: country
+          in: query
+          required: false
+          description: Filter by country (ISO 3166-1 alpha-2). Defaults to "US"
+          schema:
+            type: string
+            default: "US"
+          example: "US"
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of results (1-50)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+      responses:
+        '200':
+          description: Successful search response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlacesSearchResponse'
+        '400':
+          description: Bad request - missing query parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  code: missing_query
+                  message: "The 'q' parameter is required for place search"
+                  status: 400
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /places/nearby:
+    get:
+      tags:
+        - Places
+      summary: Find places near a location
+      description: |
+        Search for places within a radius of a given location. Results are sorted by distance from the center point.
+
+        Uses geospatial indexing for efficient nearby searches.
+      operationId: nearbyPlaces
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          description: Latitude of center point
+          schema:
+            type: number
+            format: double
+            minimum: -90
+            maximum: 90
+          example: 40.7128
+        - name: lng
+          in: query
+          required: true
+          description: Longitude of center point
+          schema:
+            type: number
+            format: double
+            minimum: -180
+            maximum: 180
+          example: -74.0060
+        - name: radius
+          in: query
+          required: false
+          description: Search radius in meters (1-50000). Default is 1000m (1km)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50000
+            default: 1000
+        - name: category
+          in: query
+          required: false
+          description: Filter by category
+          schema:
+            type: string
+          example: "restaurant"
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of results (1-50)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+      responses:
+        '200':
+          description: Successful nearby search response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlacesNearbyResponse'
+        '400':
+          description: Bad request - invalid coordinates or parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                missing_coordinates:
+                  summary: Missing coordinates
+                  value:
+                    error:
+                      code: missing_coordinates
+                      message: "Both 'lat' and 'lng' parameters are required"
+                      status: 400
+                invalid_latitude:
+                  summary: Invalid latitude
+                  value:
+                    error:
+                      code: invalid_latitude
+                      message: "Latitude must be a number between -90 and 90"
+                      status: 400
+                invalid_longitude:
+                  summary: Invalid longitude
+                  value:
+                    error:
+                      code: invalid_longitude
+                      message: "Longitude must be a number between -180 and 180"
+                      status: 400
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /places/categories:
+    get:
+      tags:
+        - Places
+      summary: List available place categories
+      description: |
+        Returns all available place categories in the database. Use these values to filter searches by category.
+      operationId: listCategories
+      responses:
+        '200':
+          description: List of categories
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoriesResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /places/random:
+    get:
+      tags:
+        - Places
+      summary: Get random places
+      description: Retrieve random sample places, useful for testing and demos
+      operationId: randomPlaces
+      parameters:
+        - name: category
+          in: query
+          required: false
+          description: Filter by category
+          schema:
+            type: string
+          example: "restaurant"
+        - name: country
+          in: query
+          required: false
+          description: Country code (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+          example: "US"
+        - name: limit
+          in: query
+          required: false
+          description: Number of random places (1-100)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        '200':
+          description: Random places
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlacesSearchResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /places/stats:
+    get:
+      tags:
+        - Places
+      summary: Get places database statistics
+      description: Retrieve statistics about place coverage by country and category
+      operationId: placesStats
+      parameters:
+        - name: country
+          in: query
+          required: false
+          description: Country code (ISO 3166-1 alpha-2) for country-specific stats
+          schema:
+            type: string
+          example: "US"
+      responses:
+        '200':
+          description: Places statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlacesStatsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /places/brands:
+    get:
+      tags:
+        - Places
+      summary: List available brands
+      description: Get a list of all brand names in the database with place counts
+      operationId: listBrands
+      parameters:
+        - name: country
+          in: query
+          required: false
+          description: Country code (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+          example: "US"
+        - name: limit
+          in: query
+          required: false
+          description: Maximum brands to return (1-500)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+            default: 100
+      responses:
+        '200':
+          description: List of brands
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /places/chain:
+    get:
+      tags:
+        - Places
+      summary: Get all locations of a chain/brand
+      description: Find all locations of a specific brand or chain (e.g., all Starbucks)
+      operationId: chainPlaces
+      parameters:
+        - name: brand
+          in: query
+          required: true
+          description: Brand name
+          schema:
+            type: string
+          example: "Starbucks"
+        - name: country
+          in: query
+          required: false
+          description: Country code (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+          example: "US"
+        - name: state
+          in: query
+          required: false
+          description: State/region filter
+          schema:
+            type: string
+          example: "CA"
+        - name: limit
+          in: query
+          required: false
+          description: Maximum results (1-1000)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+      responses:
+        '200':
+          description: Chain locations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlacesSearchResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /places/count:
+    get:
+      tags:
+        - Places
+      summary: Count places matching criteria
+      description: Get count of places matching search criteria without returning full results
+      operationId: countPlaces
+      parameters:
+        - name: category
+          in: query
+          required: false
+          description: Filter by category
+          schema:
+            type: string
+          example: "coffee_shop"
+        - name: brand
+          in: query
+          required: false
+          description: Filter by brand
+          schema:
+            type: string
+          example: "Starbucks"
+        - name: country
+          in: query
+          required: false
+          description: Country code (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+          example: "US"
+        - name: state
+          in: query
+          required: false
+          description: State/region filter
+          schema:
+            type: string
+          example: "CA"
+      responses:
+        '200':
+          description: Place count
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /places/similar:
+    get:
+      tags:
+        - Places
+      summary: Find similar places
+      description: Find places similar to a given place by category, location, or attributes
+      operationId: similarPlaces
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: Place ID to find similar places for
+          schema:
+            type: string
+          example: "08f28a8f-8c8b-4896-815e-c92c8df0a8a6"
+        - name: radius
+          in: query
+          required: false
+          description: Search radius in meters (1-50000)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50000
+            default: 5000
+        - name: limit
+          in: query
+          required: false
+          description: Maximum results (1-50)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+      responses:
+        '200':
+          description: Similar places
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlacesSearchResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /places/batch:
+    post:
+      tags:
+        - Batch
+      summary: Batch lookup places by ID
+      description: Retrieve multiple places by their IDs in a single request
+      operationId: batchPlaces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchPlacesRequest'
+      responses:
+        '200':
+          description: Batch places response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlacesSearchResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /places/{id}:
+    get:
+      tags:
+        - Places
+      summary: Get place by ID
+      description: Retrieve detailed information about a specific place
+      operationId: getPlace
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Place ID (Overture ID)
+          schema:
+            type: string
+          example: "08f28a8f-8c8b-4896-815e-c92c8df0a8a6"
+      responses:
+        '200':
+          description: Place details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaceDetailResponse'
+        '404':
+          description: Place not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /divisions:
+    get:
+      tags:
+        - Divisions
+      summary: Search divisions by name
+      description: |
+        Search for administrative divisions (cities, counties, neighborhoods) by name.
+        Uses text search to match division names.
+      operationId: searchDivisions
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: Search query (division name)
+          schema:
+            type: string
+          example: "los angeles"
+        - name: subtype
+          in: query
+          required: false
+          description: Filter by division type (locality, county, neighborhood, etc.)
+          schema:
+            type: string
+          example: "locality"
+        - name: country
+          in: query
+          required: false
+          description: Filter by country (ISO 3166-1 alpha-2). Defaults to "US"
+          schema:
+            type: string
+            default: "US"
+          example: "US"
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of results (1-50)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+      responses:
+        '200':
+          description: Successful search response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DivisionsSearchResponse'
+        '400':
+          description: Bad request - missing query parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  code: missing_query
+                  message: "The 'q' parameter is required for division search"
+                  status: 400
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /divisions/contains:
+    get:
+      tags:
+        - Divisions
+      summary: Find divisions near a location
+      description: |
+        Find administrative divisions near a given coordinate. Returns divisions sorted by distance.
+        Useful for answering "What city/county/neighborhood is this location in?"
+      operationId: divisionsContains
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          description: Latitude of the point
+          schema:
+            type: number
+            format: double
+            minimum: -90
+            maximum: 90
+          example: 40.7128
+        - name: lng
+          in: query
+          required: true
+          description: Longitude of the point
+          schema:
+            type: number
+            format: double
+            minimum: -180
+            maximum: 180
+          example: -74.0060
+        - name: subtype
+          in: query
+          required: false
+          description: Filter by division type
+          schema:
+            type: string
+          example: "locality"
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of results (1-50)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+      responses:
+        '200':
+          description: Successful lookup response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DivisionsContainsResponse'
+        '400':
+          description: Bad request - invalid coordinates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                missing_coordinates:
+                  summary: Missing coordinates
+                  value:
+                    error:
+                      code: missing_coordinates
+                      message: "Both 'lat' and 'lng' parameters are required"
+                      status: 400
+                invalid_latitude:
+                  summary: Invalid latitude
+                  value:
+                    error:
+                      code: invalid_latitude
+                      message: "Latitude must be a number between -90 and 90"
+                      status: 400
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /divisions/subtypes:
+    get:
+      tags:
+        - Divisions
+      summary: List available division subtypes
+      description: |
+        Returns all available division subtypes (e.g., country, region, county, locality, neighborhood).
+        Use these values to filter searches by subtype.
+      operationId: listSubtypes
+      responses:
+        '200':
+          description: List of subtypes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DivisionsSubtypesResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /divisions/countries:
+    get:
+      tags:
+        - Divisions
+      summary: List countries with coverage
+      description: Get list of all countries in the database with division counts
+      operationId: listCountries
+      responses:
+        '200':
+          description: List of countries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountriesResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /divisions/stats:
+    get:
+      tags:
+        - Divisions
+      summary: Get divisions database statistics
+      description: Retrieve statistics about division coverage by country and subtype
+      operationId: divisionsStats
+      parameters:
+        - name: country
+          in: query
+          required: false
+          description: Country code (ISO 3166-1 alpha-2) for country-specific stats
+          schema:
+            type: string
+          example: "US"
+      responses:
+        '200':
+          description: Divisions statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DivisionsStatsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /divisions/random:
+    get:
+      tags:
+        - Divisions
+      summary: Get random divisions
+      description: Retrieve random sample divisions, useful for testing and demos
+      operationId: randomDivisions
+      parameters:
+        - name: subtype
+          in: query
+          required: false
+          description: Filter by division type
+          schema:
+            type: string
+          example: "locality"
+        - name: country
+          in: query
+          required: false
+          description: Country code (ISO 3166-1 alpha-2)
+          schema:
+            type: string
+          example: "US"
+        - name: limit
+          in: query
+          required: false
+          description: Number of random divisions (1-100)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        '200':
+          description: Random divisions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DivisionsSearchResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /divisions/hierarchy/{id}:
+    get:
+      tags:
+        - Divisions
+      summary: Get division hierarchy
+      description: Get the full hierarchy chain for a division (parent, grandparent, etc.)
+      operationId: divisionHierarchy
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Division ID (Overture ID)
+          schema:
+            type: string
+          example: "08f28a8f-8c8b-4896-815e-c92c8df0a8a6"
+      responses:
+        '200':
+          description: Division hierarchy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HierarchyResponse'
+        '404':
+          description: Division not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /divisions/{id}:
+    get:
+      tags:
+        - Divisions
+      summary: Get division by ID
+      description: Retrieve detailed information about a specific division
+      operationId: getDivision
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Division ID (Overture ID)
+          schema:
+            type: string
+          example: "08f28a8f-8c8b-4896-815e-c92c8df0a8a6"
+      responses:
+        '200':
+          description: Division details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DivisionDetailResponse'
+        '404':
+          description: Division not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /timezone:
+    get:
+      tags:
+        - Utilities
+      summary: Get timezone for coordinates
+      description: Lookup the timezone for a given latitude/longitude
+      operationId: getTimezone
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          description: Latitude
+          schema:
+            type: number
+            format: double
+          example: 40.7128
+        - name: lng
+          in: query
+          required: true
+          description: Longitude
+          schema:
+            type: number
+            format: double
+          example: -74.0060
+      responses:
+        '200':
+          description: Timezone information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimezoneResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /distance:
+    get:
+      tags:
+        - Utilities
+      summary: Calculate distance between points
+      description: Calculate the distance between two coordinates using the Haversine formula
+      operationId: calculateDistance
+      parameters:
+        - name: lat1
+          in: query
+          required: true
+          description: Latitude of first point
+          schema:
+            type: number
+            format: double
+          example: 40.7128
+        - name: lng1
+          in: query
+          required: true
+          description: Longitude of first point
+          schema:
+            type: number
+            format: double
+          example: -74.0060
+        - name: lat2
+          in: query
+          required: true
+          description: Latitude of second point
+          schema:
+            type: number
+            format: double
+          example: 38.8977
+        - name: lng2
+          in: query
+          required: true
+          description: Longitude of second point
+          schema:
+            type: number
+            format: double
+          example: -77.0365
+        - name: unit
+          in: query
+          required: false
+          description: Unit for distance (km, mi, m)
+          schema:
+            type: string
+            enum: [km, mi, m]
+            default: km
+      responses:
+        '200':
+          description: Distance calculation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistanceResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: API key passed as query parameter
+    ApiKeyHeader:
+      type: http
+      scheme: bearer
+      description: API key passed as Bearer token in Authorization header
+
+  schemas:
+    GeocodeResponse:
+      type: object
+      properties:
+        query:
+          type: string
+          description: The original query
+          example: "1600 Pennsylvania Ave, Washington DC"
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeocodeResult'
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    GeocodeResult:
+      type: object
+      properties:
+        formatted_address:
+          type: string
+          description: Full formatted address
+          example: "1600 Pennsylvania Avenue NW, Washington, DC 20500"
+        location:
+          $ref: '#/components/schemas/Location'
+        accuracy:
+          type: string
+          description: Accuracy level of the geocode
+          enum: [rooftop, range_interpolation, geometric_center, approximate]
+          example: "rooftop"
+        accuracy_score:
+          type: number
+          format: float
+          description: Confidence score (0-1)
+          example: 0.98
+        components:
+          $ref: '#/components/schemas/AddressComponents'
+        source:
+          type: string
+          description: Data source attribution
+          example: "Overture Maps Foundation"
+
+    Location:
+      type: object
+      properties:
+        lat:
+          type: number
+          format: double
+          description: Latitude
+          example: 38.8977
+        lng:
+          type: number
+          format: double
+          description: Longitude
+          example: -77.0365
+
+    AddressComponents:
+      type: object
+      properties:
+        house_number:
+          type: string
+          example: "1600"
+        street:
+          type: string
+          example: "Pennsylvania Avenue NW"
+        unit:
+          type: string
+          nullable: true
+          example: null
+        city:
+          type: string
+          example: "Washington"
+        state:
+          type: string
+          example: "DC"
+        postcode:
+          type: string
+          example: "20500"
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: "US"
+
+    ReverseGeocodeResponse:
+      type: object
+      properties:
+        query:
+          $ref: '#/components/schemas/Location'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeocodeResult'
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    BatchGeocodeRequest:
+      type: object
+      required:
+        - addresses
+      properties:
+        addresses:
+          type: array
+          description: List of addresses to geocode (max 10,000)
+          maxItems: 10000
+          items:
+            type: string
+          example:
+            - "1600 Pennsylvania Ave, Washington DC"
+            - "350 Fifth Avenue, New York, NY"
+            - "1 Infinite Loop, Cupertino, CA"
+
+    BatchGeocodeResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeocodeResponse'
+        meta:
+          $ref: '#/components/schemas/BatchMeta'
+
+    BatchReverseRequest:
+      type: object
+      required:
+        - coordinates
+      properties:
+        coordinates:
+          type: array
+          description: List of coordinates to reverse geocode (max 10,000)
+          maxItems: 10000
+          items:
+            $ref: '#/components/schemas/Location'
+          example:
+            - lat: 38.8977
+              lng: -77.0365
+            - lat: 40.7484
+              lng: -73.9857
+
+    BatchReverseResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReverseGeocodeResponse'
+        meta:
+          $ref: '#/components/schemas/BatchMeta'
+
+    Meta:
+      type: object
+      properties:
+        version:
+          type: string
+          example: "v1"
+        timestamp:
+          type: string
+          format: date-time
+        credits_used:
+          type: integer
+          example: 1
+        credits_remaining:
+          type: integer
+          example: 9999
+
+    BatchMeta:
+      type: object
+      properties:
+        version:
+          type: string
+          example: "v1"
+        timestamp:
+          type: string
+          format: date-time
+        total_addresses:
+          type: integer
+          example: 3
+        successful:
+          type: integer
+          example: 3
+        failed:
+          type: integer
+          example: 0
+        credits_used:
+          type: integer
+          example: 3
+        credits_remaining:
+          type: integer
+          example: 9997
+
+    PlaceResult:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Place name
+          example: "Starbucks"
+        location:
+          $ref: '#/components/schemas/Location'
+        category:
+          type: string
+          description: Primary category
+          example: "coffee_shop"
+        categories:
+          type: array
+          description: All categories (primary + alternates)
+          items:
+            type: string
+          example: ["coffee_shop", "cafe", "food_and_drink"]
+        confidence:
+          type: number
+          format: float
+          description: Data confidence score (0-1)
+          example: 0.95
+        address:
+          type: string
+          nullable: true
+          description: Freeform address
+          example: "123 Main St, New York, NY 10001"
+        city:
+          type: string
+          nullable: true
+          example: "New York"
+        state:
+          type: string
+          nullable: true
+          example: "NY"
+        postcode:
+          type: string
+          nullable: true
+          example: "10001"
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: "US"
+        phone:
+          type: string
+          nullable: true
+          description: Primary phone number
+          example: "+1-555-123-4567"
+        website:
+          type: string
+          nullable: true
+          description: Primary website URL
+          example: "https://www.starbucks.com"
+        brand:
+          type: string
+          nullable: true
+          description: Brand name (if applicable)
+          example: "Starbucks"
+        operating_status:
+          type: string
+          nullable: true
+          description: Operating status (e.g., "open", "closed_permanently")
+          example: "open"
+
+    PlacesSearchResponse:
+      type: object
+      properties:
+        query:
+          type: string
+          description: The search query
+          example: "starbucks"
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlaceResult'
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    PlacesNearbyResponse:
+      type: object
+      properties:
+        query:
+          $ref: '#/components/schemas/PlacesNearbyQuery'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlaceResult'
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    PlacesNearbyQuery:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/Location'
+        radius:
+          type: integer
+          description: Search radius in meters
+          example: 1000
+        category:
+          type: string
+          nullable: true
+          description: Category filter (if provided)
+          example: "restaurant"
+
+    CategoriesResponse:
+      type: object
+      properties:
+        categories:
+          type: array
+          description: List of all available categories
+          items:
+            type: string
+          example: ["coffee_shop", "restaurant", "hotel", "gas_station", "pharmacy"]
+        count:
+          type: integer
+          description: Total number of categories
+          example: 150
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    DivisionResult:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Division name
+          example: "Los Angeles"
+        location:
+          $ref: '#/components/schemas/Location'
+        subtype:
+          type: string
+          description: Division type (locality, county, neighborhood, etc.)
+          example: "locality"
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: "US"
+        region:
+          type: string
+          nullable: true
+          description: Region code (e.g., US-CA for California)
+          example: "US-CA"
+        population:
+          type: integer
+          nullable: true
+          description: Population (if available)
+          example: 4030904
+        wikidata:
+          type: string
+          nullable: true
+          description: Wikidata ID for this division
+          example: "Q65"
+        parent_division_id:
+          type: string
+          nullable: true
+          description: Overture ID of the parent division
+          example: "9b3d1c83-d266-4c67-b21f-6ff37f4d6ccb"
+
+    DivisionsSearchResponse:
+      type: object
+      properties:
+        query:
+          type: string
+          description: The search query
+          example: "los angeles"
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DivisionResult'
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    DivisionsContainsResponse:
+      type: object
+      properties:
+        query:
+          $ref: '#/components/schemas/Location'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DivisionResult'
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    DivisionsSubtypesResponse:
+      type: object
+      properties:
+        subtypes:
+          type: array
+          description: List of all available division subtypes
+          items:
+            type: string
+          example: ["country", "region", "county", "locality", "neighborhood", "macrohood", "microhood"]
+        count:
+          type: integer
+          description: Total number of subtypes
+          example: 7
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: |
+                Error code. Possible values:
+                - `missing_api_key` - No API key provided
+                - `invalid_api_key` - API key not found or malformed
+                - `api_key_revoked` - API key has been revoked
+                - `insufficient_permissions` - API key lacks required permission
+                - `rate_limit_exceeded` - Too many requests
+                - `invalid_request` - Missing or invalid parameters
+              example: "invalid_api_key"
+            message:
+              type: string
+              description: Human-readable error message
+              example: "The provided API key is invalid or has been revoked."
+            status:
+              type: integer
+              description: HTTP status code
+              example: 401
+            retry_after:
+              type: integer
+              description: Seconds to wait before retrying (only for rate_limit_exceeded)
+              example: 45
+
+    # Address Tools Schemas
+    ValidateResponse:
+      type: object
+      properties:
+        query:
+          type: string
+          example: "1600 Pennsylvania Ave, Washington DC"
+        valid:
+          type: boolean
+          description: Whether the address is valid
+          example: true
+        deliverable:
+          type: boolean
+          description: Whether mail can be delivered to this address
+          example: true
+        corrected_address:
+          type: string
+          description: Standardized/corrected version of the address
+          example: "1600 Pennsylvania Avenue NW, Washington, DC 20500"
+        components:
+          $ref: '#/components/schemas/AddressComponents'
+        validation_details:
+          type: object
+          properties:
+            confidence:
+              type: number
+              format: float
+              example: 0.98
+            issues:
+              type: array
+              items:
+                type: string
+              example: []
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    BatchValidateRequest:
+      type: object
+      required:
+        - addresses
+      properties:
+        addresses:
+          type: array
+          description: List of addresses to validate (max 10,000)
+          maxItems: 10000
+          items:
+            type: string
+
+    BatchValidateResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidateResponse'
+        meta:
+          $ref: '#/components/schemas/BatchMeta'
+
+    AutocompleteResponse:
+      type: object
+      properties:
+        query:
+          type: string
+          example: "1600 Penn"
+        suggestions:
+          type: array
+          items:
+            type: object
+            properties:
+              text:
+                type: string
+                description: Suggested address text
+                example: "1600 Pennsylvania Avenue NW, Washington, DC 20500"
+              highlight:
+                type: string
+                description: Text with matched portion highlighted
+                example: "<b>1600 Penn</b>sylvania Avenue NW, Washington, DC 20500"
+              location:
+                $ref: '#/components/schemas/Location'
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    ParseResponse:
+      type: object
+      properties:
+        query:
+          type: string
+          example: "1600 Pennsylvania Avenue NW, Washington, DC 20500"
+        parsed:
+          $ref: '#/components/schemas/AddressComponents'
+        confidence:
+          type: number
+          format: float
+          example: 0.95
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    BatchParseRequest:
+      type: object
+      required:
+        - addresses
+      properties:
+        addresses:
+          type: array
+          description: List of addresses to parse (max 10,000)
+          maxItems: 10000
+          items:
+            type: string
+
+    BatchParseResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParseResponse'
+        meta:
+          $ref: '#/components/schemas/BatchMeta'
+
+    StandardizeResponse:
+      type: object
+      properties:
+        query:
+          type: string
+          example: "1600 penn ave washington dc"
+        standardized:
+          type: string
+          description: Standardized address format
+          example: "1600 PENNSYLVANIA AVE NW, WASHINGTON, DC 20500"
+        components:
+          $ref: '#/components/schemas/AddressComponents'
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    NearbyAddressesResponse:
+      type: object
+      properties:
+        query:
+          $ref: '#/components/schemas/Location'
+        results:
+          type: array
+          items:
+            allOf:
+              - $ref: '#/components/schemas/GeocodeResult'
+              - type: object
+                properties:
+                  distance_m:
+                    type: number
+                    description: Distance in meters from query point
+                    example: 45.2
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    StreetAddressesResponse:
+      type: object
+      properties:
+        query:
+          type: object
+          properties:
+            street:
+              type: string
+              example: "Pennsylvania Avenue NW"
+            city:
+              type: string
+              example: "Washington"
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeocodeResult'
+        total_count:
+          type: integer
+          example: 156
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    AddressStatsResponse:
+      type: object
+      properties:
+        total_addresses:
+          type: integer
+          description: Total addresses in database
+          example: 513900000
+        countries:
+          type: integer
+          description: Number of countries with coverage
+          example: 52
+        by_country:
+          type: array
+          items:
+            type: object
+            properties:
+              country:
+                type: string
+                example: "BR"
+              count:
+                type: integer
+                example: 138023698
+              name:
+                type: string
+                example: "Brazil"
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    RandomAddressesResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeocodeResult'
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    CompareResponse:
+      type: object
+      properties:
+        address1:
+          type: string
+          example: "1600 Pennsylvania Ave NW, Washington DC"
+        address2:
+          type: string
+          example: "1600 Penn Ave, Washington, DC 20500"
+        match:
+          type: boolean
+          description: Whether addresses refer to the same location
+          example: true
+        similarity_score:
+          type: number
+          format: float
+          description: Similarity score (0-1)
+          example: 0.95
+        distance_m:
+          type: number
+          nullable: true
+          description: Distance between geocoded points in meters (if different)
+          example: 0
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    InterpolateResponse:
+      type: object
+      properties:
+        query:
+          type: string
+          example: "1601 Pennsylvania Ave, Washington DC"
+        result:
+          $ref: '#/components/schemas/GeocodeResult'
+        interpolated:
+          type: boolean
+          description: Whether the result was interpolated (vs exact match)
+          example: true
+        method:
+          type: string
+          description: Interpolation method used
+          enum: [exact, range_interpolation, centroid]
+          example: "range_interpolation"
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    CrossStreetResponse:
+      type: object
+      properties:
+        street1:
+          type: string
+          example: "Pennsylvania Avenue NW"
+        street2:
+          type: string
+          example: "17th Street NW"
+        intersection:
+          $ref: '#/components/schemas/Location'
+        formatted_address:
+          type: string
+          example: "Pennsylvania Avenue NW & 17th Street NW, Washington, DC"
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    # Places Schemas
+    PlacesStatsResponse:
+      type: object
+      properties:
+        total_places:
+          type: integer
+          description: Total places in database
+          example: 72400000
+        countries:
+          type: integer
+          description: Number of countries with coverage
+          example: 52
+        categories:
+          type: integer
+          description: Number of unique categories
+          example: 150
+        top_categories:
+          type: array
+          items:
+            type: object
+            properties:
+              category:
+                type: string
+                example: "restaurant"
+              count:
+                type: integer
+                example: 2000000
+        by_country:
+          type: array
+          items:
+            type: object
+            properties:
+              country:
+                type: string
+                example: "US"
+              count:
+                type: integer
+                example: 15500000
+              name:
+                type: string
+                example: "United States"
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    BrandsResponse:
+      type: object
+      properties:
+        brands:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "Starbucks"
+              count:
+                type: integer
+                example: 35000
+        total_count:
+          type: integer
+          example: 15000
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    CountResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Number of matching places
+          example: 35000
+        filters:
+          type: object
+          properties:
+            category:
+              type: string
+              nullable: true
+            brand:
+              type: string
+              nullable: true
+            country:
+              type: string
+              nullable: true
+            state:
+              type: string
+              nullable: true
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    BatchPlacesRequest:
+      type: object
+      required:
+        - ids
+      properties:
+        ids:
+          type: array
+          description: List of place IDs to retrieve (max 1,000)
+          maxItems: 1000
+          items:
+            type: string
+
+    PlaceDetailResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "08f28a8f-8c8b-4896-815e-c92c8df0a8a6"
+        name:
+          type: string
+          example: "Starbucks"
+        location:
+          $ref: '#/components/schemas/Location'
+        category:
+          type: string
+          example: "coffee_shop"
+        categories:
+          type: array
+          items:
+            type: string
+          example: ["coffee_shop", "cafe"]
+        address:
+          type: string
+          example: "123 Main St, New York, NY 10001"
+        city:
+          type: string
+          example: "New York"
+        state:
+          type: string
+          example: "NY"
+        postcode:
+          type: string
+          example: "10001"
+        country:
+          type: string
+          example: "US"
+        phone:
+          type: string
+          nullable: true
+          example: "+1-555-123-4567"
+        website:
+          type: string
+          nullable: true
+          example: "https://www.starbucks.com"
+        brand:
+          type: string
+          nullable: true
+          example: "Starbucks"
+        operating_status:
+          type: string
+          nullable: true
+          example: "open"
+        confidence:
+          type: number
+          format: float
+          example: 0.95
+        source:
+          type: string
+          example: "Overture Maps Foundation"
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    # Divisions Schemas
+    CountriesResponse:
+      type: object
+      properties:
+        countries:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: "US"
+              name:
+                type: string
+                example: "United States"
+              divisions_count:
+                type: integer
+                example: 85000
+              subtypes:
+                type: array
+                items:
+                  type: string
+                example: ["country", "region", "county", "locality"]
+        total_countries:
+          type: integer
+          example: 52
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    DivisionsStatsResponse:
+      type: object
+      properties:
+        total_divisions:
+          type: integer
+          description: Total divisions in database
+          example: 4600000
+        countries:
+          type: integer
+          description: Number of countries with coverage
+          example: 52
+        subtypes:
+          type: object
+          additionalProperties:
+            type: integer
+          example:
+            country: 250
+            region: 5000
+            county: 45000
+            locality: 500000
+            neighborhood: 150000
+        by_country:
+          type: array
+          items:
+            type: object
+            properties:
+              country:
+                type: string
+                example: "US"
+              count:
+                type: integer
+                example: 85000
+              name:
+                type: string
+                example: "United States"
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    HierarchyResponse:
+      type: object
+      properties:
+        division:
+          $ref: '#/components/schemas/DivisionResult'
+        hierarchy:
+          type: array
+          description: Parent divisions from immediate parent to country
+          items:
+            $ref: '#/components/schemas/DivisionResult'
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    DivisionDetailResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "08f28a8f-8c8b-4896-815e-c92c8df0a8a6"
+        name:
+          type: string
+          example: "Los Angeles"
+        location:
+          $ref: '#/components/schemas/Location'
+        subtype:
+          type: string
+          example: "locality"
+        country:
+          type: string
+          example: "US"
+        region:
+          type: string
+          nullable: true
+          example: "US-CA"
+        population:
+          type: integer
+          nullable: true
+          example: 4030904
+        area_km2:
+          type: number
+          nullable: true
+          description: Area in square kilometers
+          example: 1302.15
+        wikidata:
+          type: string
+          nullable: true
+          example: "Q65"
+        parent_division_id:
+          type: string
+          nullable: true
+          example: "9b3d1c83-d266-4c67-b21f-6ff37f4d6ccb"
+        source:
+          type: string
+          example: "Overture Maps Foundation"
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    # Utility Schemas
+    TimezoneResponse:
+      type: object
+      properties:
+        query:
+          $ref: '#/components/schemas/Location'
+        timezone:
+          type: object
+          properties:
+            id:
+              type: string
+              description: IANA timezone identifier
+              example: "America/New_York"
+            name:
+              type: string
+              description: Human-readable timezone name
+              example: "Eastern Time"
+            utc_offset:
+              type: string
+              description: Current UTC offset
+              example: "-05:00"
+            dst_offset:
+              type: string
+              nullable: true
+              description: DST offset (if applicable)
+              example: "-04:00"
+            is_dst:
+              type: boolean
+              description: Whether currently in DST
+              example: false
+        meta:
+          $ref: '#/components/schemas/Meta'
+
+    DistanceResponse:
+      type: object
+      properties:
+        from:
+          $ref: '#/components/schemas/Location'
+        to:
+          $ref: '#/components/schemas/Location'
+        distance:
+          type: number
+          format: double
+          description: Distance in requested unit
+          example: 328.5
+        unit:
+          type: string
+          enum: [km, mi, m]
+          example: "km"
+        bearing:
+          type: number
+          format: double
+          description: Initial bearing from point 1 to point 2 (degrees)
+          example: 225.3
+        meta:
+          $ref: '#/components/schemas/Meta'
