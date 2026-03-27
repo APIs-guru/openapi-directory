@@ -1,0 +1,130 @@
+openapi: 3.0.3
+info:
+  title: SEC Insider Trading API
+  description: |
+    Real-time SEC EDGAR Form 4 insider trading data. Track stock purchases, sales, and option exercises
+    by corporate officers, directors, and 10%+ shareholders. Automated polling every 5 minutes during
+    market hours. Filter by ticker, insider name, trade type, dollar value, and date range.
+  version: 1.0.0
+servers:
+  - url: https://joyful-charm-production-bf6d.up.railway.app
+paths:
+  /health:
+    get:
+      summary: Health check
+      operationId: health
+      responses:
+        '200':
+          description: Service status and trade count
+  /trades/recent:
+    get:
+      summary: Get recent insider trades (last 24h)
+      operationId: getRecentTrades
+      security: [{ apiKey: [] }]
+      parameters:
+        - name: limit
+          in: query
+          schema: { type: integer, default: 50, maximum: 200 }
+        - name: offset
+          in: query
+          schema: { type: integer, default: 0 }
+      responses:
+        '200':
+          description: Recent insider trades
+  /trades/ticker/{symbol}:
+    get:
+      summary: Get insider trades by stock ticker
+      operationId: getTradesByTicker
+      security: [{ apiKey: [] }]
+      parameters:
+        - name: symbol
+          in: path
+          required: true
+          schema: { type: string }
+          description: Stock ticker symbol (e.g., AAPL, TSLA, NVDA)
+        - name: limit
+          in: query
+          schema: { type: integer, default: 50, maximum: 200 }
+        - name: offset
+          in: query
+          schema: { type: integer, default: 0 }
+      responses:
+        '200':
+          description: Trades for the specified ticker
+  /trades/insider/{name}:
+    get:
+      summary: Get trades by insider name
+      operationId: getTradesByInsider
+      security: [{ apiKey: [] }]
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema: { type: string }
+          description: Insider name (partial match supported)
+        - name: limit
+          in: query
+          schema: { type: integer, default: 50, maximum: 200 }
+        - name: offset
+          in: query
+          schema: { type: integer, default: 0 }
+      responses:
+        '200':
+          description: Trades by the specified insider
+  /trades/search:
+    get:
+      summary: Search trades with filters
+      operationId: searchTrades
+      security: [{ apiKey: [] }]
+      parameters:
+        - name: ticker
+          in: query
+          schema: { type: string }
+          description: Filter by stock ticker
+        - name: role
+          in: query
+          schema: { type: string }
+          description: Filter by insider role (CEO, CFO, Director, 10% Owner)
+        - name: type
+          in: query
+          schema: { type: string, enum: [P, S, A, M, C, F] }
+          description: "Trade type: P=Purchase, S=Sale, A=Award, M=Exercise, C=Conversion, F=Tax"
+        - name: min_value
+          in: query
+          schema: { type: number }
+          description: Minimum total trade value in USD
+        - name: max_value
+          in: query
+          schema: { type: number }
+          description: Maximum total trade value in USD
+        - name: from_date
+          in: query
+          schema: { type: string, format: date }
+          description: Start date (YYYY-MM-DD)
+        - name: to_date
+          in: query
+          schema: { type: string, format: date }
+          description: End date (YYYY-MM-DD)
+        - name: limit
+          in: query
+          schema: { type: integer, default: 50, maximum: 200 }
+        - name: offset
+          in: query
+          schema: { type: integer, default: 0 }
+      responses:
+        '200':
+          description: Filtered trade results
+  /stats:
+    get:
+      summary: Trading statistics and top tickers/insiders
+      operationId: getStats
+      security: [{ apiKey: [] }]
+      responses:
+        '200':
+          description: Aggregate statistics
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
