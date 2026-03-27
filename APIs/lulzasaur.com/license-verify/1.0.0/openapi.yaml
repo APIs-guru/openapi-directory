@@ -1,0 +1,198 @@
+openapi: 3.0.0
+info:
+  title: License Verify API
+  description: Multi-state professional license verification. Verify contractor and nurse licenses across CA, TX, FL, NY. Real-time status, expiration, bond info, and enforcement actions from official state boards.
+  version: "1.0"
+servers:
+  - url: https://license-verify-api-production.up.railway.app
+paths:
+  /contractor-license/verify:
+    get:
+      summary: Verify a contractor license
+      description: Search contractor licenses by license number, person name, or business name across 4 US states. Data from official state boards (CA CSLB, TX TDLR, FL DBPR, NYC DOB/DCWP).
+      operationId: verifyContractorLicense
+      parameters:
+        - name: state
+          in: query
+          required: true
+          description: US state code
+          schema:
+            type: string
+            enum: [CA, TX, FL, NY]
+            example: CA
+        - name: licenseNumber
+          in: query
+          required: false
+          description: License number to look up
+          schema:
+            type: string
+            example: "1096738"
+        - name: lastName
+          in: query
+          required: false
+          description: Last name for person name search
+          schema:
+            type: string
+        - name: firstName
+          in: query
+          required: false
+          description: First name (optional, used with lastName)
+          schema:
+            type: string
+        - name: businessName
+          in: query
+          required: false
+          description: Business or company name to search
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: Max results (1-25)
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 25
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  count:
+                    type: integer
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        state:
+                          type: string
+                        source:
+                          type: string
+                        licenseNumber:
+                          type: string
+                        businessName:
+                          type: string
+                        personName:
+                          type: string
+                        licenseStatus:
+                          type: string
+                        licenseType:
+                          type: string
+                        expirationDate:
+                          type: string
+                        issueDate:
+                          type: string
+                        streetAddress:
+                          type: string
+                        city:
+                          type: string
+                        stateCode:
+                          type: string
+                        zip:
+                          type: string
+                        phone:
+                          type: string
+                        scrapedAt:
+                          type: string
+                          format: date-time
+        "400":
+          description: Missing or invalid parameters
+        "500":
+          description: Server error
+  /nurse-license/verify:
+    get:
+      summary: Verify a nurse license
+      description: Search nurse licenses by license number or name in Florida and New York. Data from official state boards (FL DOH MQA, NY NYSED OP).
+      operationId: verifyNurseLicense
+      parameters:
+        - name: state
+          in: query
+          required: true
+          description: US state code
+          schema:
+            type: string
+            enum: [FL, NY]
+            example: FL
+        - name: licenseNumber
+          in: query
+          required: false
+          description: License number to look up
+          schema:
+            type: string
+            example: "RN766302"
+        - name: lastName
+          in: query
+          required: false
+          description: Last name to search
+          schema:
+            type: string
+        - name: firstName
+          in: query
+          required: false
+          description: First name (optional, used with lastName)
+          schema:
+            type: string
+        - name: licenseType
+          in: query
+          required: false
+          description: Filter by license type
+          schema:
+            type: string
+            enum: [RN, LPN, NP, APRN, CNA]
+        - name: limit
+          in: query
+          required: false
+          description: Max results (1-25)
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 25
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  count:
+                    type: integer
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        state:
+                          type: string
+                        source:
+                          type: string
+                        licenseNumber:
+                          type: string
+                        personName:
+                          type: string
+                        licenseType:
+                          type: string
+                        licenseStatus:
+                          type: string
+                        city:
+                          type: string
+                        detailUrl:
+                          type: string
+                          format: uri
+                        scrapedAt:
+                          type: string
+                          format: date-time
+        "400":
+          description: Missing or invalid parameters
+        "500":
+          description: Server error
