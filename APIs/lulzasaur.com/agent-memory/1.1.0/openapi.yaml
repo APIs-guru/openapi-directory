@@ -1,0 +1,249 @@
+openapi: 3.0.3
+info:
+  title: Agent Memory Persistence API
+  description: |
+    Hosted persistent key-value memory for AI agents. Store, retrieve, full-text search, and manage
+    agent state with namespace isolation, TTL expiry, metadata filtering, and access tracking.
+    Built for production agent systems that need durable, inspectable state across sessions.
+  version: 1.1.0
+servers:
+  - url: https://agent-memory-api-production-f2c4.up.railway.app
+paths:
+  /health:
+    get:
+      summary: Health check
+      operationId: health
+      responses:
+        '200':
+          description: Service status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  memories: { type: integer }
+                  timestamp: { type: string }
+  /v1/memories:
+    post:
+      summary: Store a memory
+      operationId: storeMemory
+      security: [{ apiKey: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [namespace, key, value]
+              properties:
+                namespace: { type: string, maxLength: 128, description: Isolation scope (e.g. agent ID) }
+                key: { type: string, maxLength: 256, description: Memory identifier }
+                value: { description: Any JSON value or string }
+                metadata: { type: object, description: Arbitrary metadata for filtering }
+                ttl_seconds: { type: integer, description: Auto-expire after N seconds }
+      responses:
+        '201':
+          description: Memory stored
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Memory' }
+  /v1/memories/batch:
+    post:
+      summary: Batch store up to 100 memories
+      operationId: batchStoreMemories
+      security: [{ apiKey: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [memories]
+              properties:
+                memories:
+                  type: array
+                  maxItems: 100
+                  items:
+                    type: object
+                    required: [namespace, key, value]
+                    properties:
+                      namespace: { type: string, maxLength: 128 }
+                      key: { type: string, maxLength: 256 }
+                      value: { description: Any JSON value or string }
+                      metadata: { type: object }
+                      ttl_seconds: { type: integer }
+      responses:
+        '201':
+          description: Batch result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stored: { type: integer }
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        index: { type: integer }
+                        error: { type: string }
+  /v1/memories/{namespace}:
+    get:
+      summary: List memories in namespace
+      operationId: listMemories
+      security: [{ apiKey: [] }]
+      parameters:
+        - name: namespace
+          in: path
+          required: true
+          schema: { type: string }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 50, maximum: 200 }
+        - name: offset
+          in: query
+          schema: { type: integer, default: 0 }
+        - name: sort
+          in: query
+          schema: { type: string, enum: [updated, recent], default: updated }
+          description: Sort order — "updated" by last modified, "recent" by last accessed
+      responses:
+        '200':
+          description: Memories list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  namespace: { type: string }
+                  count: { type: integer }
+                  total: { type: integer }
+                  memories:
+                    type: array
+                    items: { $ref: '#/components/schemas/Memory' }
+    delete:
+      summary: Delete all memories in namespace
+      operationId: deleteNamespace
+      security: [{ apiKey: [] }]
+      parameters:
+        - name: namespace
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Namespace deleted
+  /v1/memories/{namespace}/{key}:
+    get:
+      summary: Get a specific memory (updates last_accessed_at)
+      operationId: getMemory
+      security: [{ apiKey: [] }]
+      parameters:
+        - name: namespace
+          in: path
+          required: true
+          schema: { type: string }
+        - name: key
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Memory found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Memory' }
+        '404':
+          description: Memory not found
+    put:
+      summary: Update a memory
+      operationId: updateMemory
+      security: [{ apiKey: [] }]
+      parameters:
+        - name: namespace
+          in: path
+          required: true
+          schema: { type: string }
+        - name: key
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value: { description: New value }
+                metadata: { type: object }
+                ttl_seconds: { type: integer }
+      responses:
+        '200':
+          description: Memory updated
+    delete:
+      summary: Delete a memory
+      operationId: deleteMemory
+      security: [{ apiKey: [] }]
+      parameters:
+        - name: namespace
+          in: path
+          required: true
+          schema: { type: string }
+        - name: key
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Memory deleted
+  /v1/memories/{namespace}/search:
+    post:
+      summary: Full-text search memories (FTS5 ranked)
+      operationId: searchMemories
+      security: [{ apiKey: [] }]
+      parameters:
+        - name: namespace
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query: { type: string, description: "Full-text search query (FTS5 syntax: AND, OR, NOT, phrases)" }
+                metadata_filter: { type: object, description: Filter by metadata fields }
+                sort: { type: string, enum: [relevance, recent], default: relevance, description: "Sort by FTS5 relevance rank or last_accessed_at" }
+      responses:
+        '200':
+          description: Search results ranked by relevance
+  /v1/stats:
+    get:
+      summary: Get namespace statistics
+      operationId: getStats
+      security: [{ apiKey: [] }]
+      responses:
+        '200':
+          description: Stats
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+  schemas:
+    Memory:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        namespace: { type: string }
+        key: { type: string }
+        value: { description: Stored value (any JSON) }
+        metadata: { type: object }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+        last_accessed_at: { type: string, format: date-time }
+        expires_at: { type: string, format: date-time, nullable: true }
