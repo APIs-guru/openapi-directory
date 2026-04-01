@@ -1,0 +1,1759 @@
+openapi: 3.1.0
+info:
+  title: ToolPipe API
+  description: 112+ free developer utility APIs and MCP server. JSON formatting, PDF
+    generation, QR codes, hash computation, UUID generation, DNS lookup, regex testing,
+    JWT decoding, IP geolocation, and more.
+  version: 1.0.0
+  contact:
+    url: https://github.com/COSAI-Labs/make-money-30day-challenge
+  x-origin:
+  - url: https://assessing-scoop-authorities-sheet.trycloudflare.com/openapi.json
+    format: openapi
+    version: '3.1'
+paths:
+  /:
+    get:
+      summary: Root
+      operationId: root__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  /tools:
+    get:
+      summary: Tools Page
+      operationId: tools_page_tools_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  /invoice:
+    get:
+      summary: Invoice Page
+      operationId: invoice_page_invoice_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  /api:
+    get:
+      summary: Api Info
+      operationId: api_info_api_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /health:
+    get:
+      summary: Health
+      operationId: health_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /qr/generate:
+    post:
+      summary: Generate Qr
+      operationId: generate_qr_qr_generate_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QRRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      summary: Generate Qr Get
+      operationId: generate_qr_get_qr_generate_get
+      parameters:
+      - name: data
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Data
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 300
+          title: Size
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /meta/extract:
+    get:
+      summary: Extract Metadata
+      operationId: extract_metadata_meta_extract_get
+      parameters:
+      - name: url
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Url
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /markdown/to-html:
+    post:
+      summary: Markdown To Html
+      operationId: markdown_to_html_markdown_to_html_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarkdownRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /text/analyze:
+    post:
+      summary: Analyze Text
+      operationId: analyze_text_text_analyze_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /hash/generate:
+    post:
+      summary: Generate Hash
+      operationId: generate_hash_hash_generate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HashRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /image/resize:
+    post:
+      summary: Resize Image
+      operationId: resize_image_image_resize_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageResizeRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /json/to-csv:
+    post:
+      summary: Json To Csv
+      operationId: json_to_csv_json_to_csv_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JsonToCsvRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /uuid/generate:
+    get:
+      summary: Generate Uuid
+      operationId: generate_uuid_uuid_generate_get
+      parameters:
+      - name: count
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 1
+          title: Count
+      - name: version
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 4
+          title: Version
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /dns/lookup:
+    get:
+      summary: Dns Lookup
+      operationId: dns_lookup_dns_lookup_get
+      parameters:
+      - name: domain
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Domain
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /color/convert:
+    get:
+      summary: Convert Color
+      operationId: convert_color_color_convert_get
+      parameters:
+      - name: hex
+        in: query
+        required: true
+        schema:
+          type: string
+          description: 'Hex color like #FF5733 or FF5733'
+          title: Hex
+        description: 'Hex color like #FF5733 or FF5733'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /base64:
+    post:
+      summary: Base64 Convert
+      operationId: base64_convert_base64_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Base64Request'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/css/minify:
+    post:
+      summary: Css Minify
+      operationId: css_minify_api_css_minify_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MinifyRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/js/minify:
+    post:
+      summary: Js Minify
+      operationId: js_minify_api_js_minify_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MinifyRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/convert/json-to-yaml:
+    post:
+      summary: Json To Yaml Api
+      operationId: json_to_yaml_api_api_convert_json_to_yaml_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/YamlConvertRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /monitor:
+    get:
+      summary: Monitor Page
+      operationId: monitor_page_monitor_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  /monitor/add:
+    post:
+      summary: Add Monitor
+      operationId: add_monitor_monitor_add_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddMonitorRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /monitor/list:
+    get:
+      summary: List Monitors
+      operationId: list_monitors_monitor_list_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /monitor/{monitor_id}:
+    delete:
+      summary: Delete Monitor
+      operationId: delete_monitor_monitor__monitor_id__delete
+      parameters:
+      - name: monitor_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Monitor Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /monitor/{monitor_id}/check:
+    post:
+      summary: Check Monitor Now
+      operationId: check_monitor_now_monitor__monitor_id__check_post
+      parameters:
+      - name: monitor_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Monitor Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /monitor/run-all:
+    post:
+      summary: Run All Checks
+      operationId: run_all_checks_monitor_run_all_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /seo:
+    get:
+      summary: Seo Page
+      operationId: seo_page_seo_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  /seo/analyze:
+    get:
+      summary: Analyze Seo
+      operationId: analyze_seo_seo_analyze_get
+      parameters:
+      - name: url
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Url
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /sitemap.xml:
+    get:
+      summary: Sitemap
+      operationId: sitemap_sitemap_xml_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /robots.txt:
+    get:
+      summary: Robots
+      operationId: robots_robots_txt_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /pdf:
+    get:
+      summary: Pdf Tools Page
+      operationId: pdf_tools_page_pdf_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  /pdf/merge:
+    post:
+      summary: Pdf Merge
+      operationId: pdf_merge_pdf_merge_post
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_pdf_merge_pdf_merge_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pdf/split:
+    post:
+      summary: Pdf Split
+      operationId: pdf_split_pdf_split_post
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_pdf_split_pdf_split_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pdf/compress:
+    post:
+      summary: Pdf Compress
+      operationId: pdf_compress_pdf_compress_post
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_pdf_compress_pdf_compress_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pdf/protect:
+    post:
+      summary: Pdf Protect
+      operationId: pdf_protect_pdf_protect_post
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_pdf_protect_pdf_protect_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pdf/unlock:
+    post:
+      summary: Pdf Unlock
+      operationId: pdf_unlock_pdf_unlock_post
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_pdf_unlock_pdf_unlock_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pdf/rotate:
+    post:
+      summary: Pdf Rotate
+      operationId: pdf_rotate_pdf_rotate_post
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_pdf_rotate_pdf_rotate_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pdf/watermark:
+    post:
+      summary: Pdf Watermark
+      operationId: pdf_watermark_pdf_watermark_post
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_pdf_watermark_pdf_watermark_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pdf/info:
+    post:
+      summary: Pdf Info
+      operationId: pdf_info_pdf_info_post
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_pdf_info_pdf_info_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /webhooks:
+    get:
+      summary: Webhooks Page
+      operationId: webhooks_page_webhooks_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  /webhook/create:
+    post:
+      summary: Webhook Create
+      operationId: webhook_create_webhook_create_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /webhook/bin/{bin_id}/requests:
+    get:
+      summary: Webhook Get Requests
+      operationId: webhook_get_requests_webhook_bin__bin_id__requests_get
+      parameters:
+      - name: bin_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Bin Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /webhook/bin/{bin_id}/clear:
+    post:
+      summary: Webhook Clear
+      operationId: webhook_clear_webhook_bin__bin_id__clear_post
+      parameters:
+      - name: bin_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Bin Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /webhook/catch/{bin_id}:
+    delete:
+      summary: Webhook Capture
+      operationId: webhook_capture_webhook_catch__bin_id__delete
+      parameters:
+      - name: bin_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Bin Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    head:
+      summary: Webhook Capture
+      operationId: webhook_capture_webhook_catch__bin_id__delete
+      parameters:
+      - name: bin_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Bin Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      summary: Webhook Capture
+      operationId: webhook_capture_webhook_catch__bin_id__delete
+      parameters:
+      - name: bin_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Bin Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    options:
+      summary: Webhook Capture
+      operationId: webhook_capture_webhook_catch__bin_id__delete
+      parameters:
+      - name: bin_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Bin Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      summary: Webhook Capture
+      operationId: webhook_capture_webhook_catch__bin_id__delete
+      parameters:
+      - name: bin_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Bin Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      summary: Webhook Capture
+      operationId: webhook_capture_webhook_catch__bin_id__delete
+      parameters:
+      - name: bin_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Bin Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      summary: Webhook Capture
+      operationId: webhook_capture_webhook_catch__bin_id__delete
+      parameters:
+      - name: bin_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Bin Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /short:
+    get:
+      summary: Shortener Page
+      operationId: shortener_page_short_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  /s/create:
+    post:
+      summary: Create Short Url
+      operationId: create_short_url_s_create_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShortenRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /s/{short_code}/stats:
+    get:
+      summary: Get Url Stats
+      operationId: get_url_stats_s__short_code__stats_get
+      parameters:
+      - name: short_code
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Short Code
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /s/{short_code}:
+    get:
+      summary: Redirect Short Url
+      operationId: redirect_short_url_s__short_code__get
+      parameters:
+      - name: short_code
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Short Code
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /paste:
+    get:
+      summary: Paste Page
+      operationId: paste_page_paste_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  /paste/create:
+    post:
+      summary: Create Paste
+      operationId: create_paste_paste_create_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasteRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /paste/{paste_id}/raw:
+    get:
+      summary: Get Paste Raw
+      operationId: get_paste_raw_paste__paste_id__raw_get
+      parameters:
+      - name: paste_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Paste Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /paste/{paste_id}:
+    get:
+      summary: View Paste
+      operationId: view_paste_paste__paste_id__get
+      parameters:
+      - name: paste_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Paste Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /down:
+    get:
+      summary: Down Page
+      operationId: down_page_down_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  /down/check:
+    get:
+      summary: Check Down
+      operationId: check_down_down_check_get
+      parameters:
+      - name: url
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Url
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /ip/lookup:
+    get:
+      summary: Ip Lookup
+      description: Look up geolocation info for an IP address. Uses ip-api.com free
+        tier.
+      operationId: ip_lookup_ip_lookup_get
+      parameters:
+      - name: ip
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ip
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /ip/my:
+    get:
+      summary: My Ip
+      description: Returns the requester's IP address.
+      operationId: my_ip_ip_my_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /useragent/parse:
+    get:
+      summary: Parse User Agent
+      description: Parse a user agent string into components.
+      operationId: parse_user_agent_useragent_parse_get
+      parameters:
+      - name: ua
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ua
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api-keys/register:
+    post:
+      summary: Register Key
+      operationId: register_key_api_keys_register_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKeyRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api-keys:
+    get:
+      summary: Api Keys Dashboard
+      operationId: api_keys_dashboard_api_keys_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  /waitlist/join:
+    post:
+      summary: Join Waitlist
+      operationId: join_waitlist_waitlist_join_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WaitlistRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/polymarket/markets:
+    get:
+      summary: Polymarket Markets
+      description: Fetch and analyze current Polymarket markets.
+      operationId: polymarket_markets_api_polymarket_markets_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /polymarket:
+    get:
+      summary: Polymarket Dashboard
+      operationId: polymarket_dashboard_polymarket_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  /analytics/track:
+    post:
+      summary: Track Pageview
+      operationId: track_pageview_analytics_track_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrackRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /analytics/dashboard:
+    get:
+      summary: Analytics Dashboard
+      operationId: analytics_dashboard_analytics_dashboard_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  /donate:
+    get:
+      summary: Donate Page
+      operationId: donate_page_donate_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+  /{page_name}:
+    get:
+      summary: Seo Page Handler
+      operationId: seo_page_handler__page_name__get
+      parameters:
+      - name: page_name
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Page Name
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AddMonitorRequest:
+      properties:
+        name:
+          type: string
+          title: Name
+        url:
+          type: string
+          title: Url
+        interval_seconds:
+          type: integer
+          title: Interval Seconds
+          default: 300
+      type: object
+      required:
+      - name
+      - url
+      title: AddMonitorRequest
+    ApiKeyRequest:
+      properties:
+        email:
+          type: string
+          title: Email
+      type: object
+      required:
+      - email
+      title: ApiKeyRequest
+    Base64Request:
+      properties:
+        data:
+          type: string
+          title: Data
+        action:
+          type: string
+          title: Action
+          default: encode
+      type: object
+      required:
+      - data
+      title: Base64Request
+    Body_pdf_compress_pdf_compress_post:
+      properties:
+        files:
+          items:
+            type: string
+            contentMediaType: application/octet-stream
+          type: array
+          title: Files
+      type: object
+      required:
+      - files
+      title: Body_pdf_compress_pdf_compress_post
+    Body_pdf_info_pdf_info_post:
+      properties:
+        files:
+          items:
+            type: string
+            contentMediaType: application/octet-stream
+          type: array
+          title: Files
+      type: object
+      required:
+      - files
+      title: Body_pdf_info_pdf_info_post
+    Body_pdf_merge_pdf_merge_post:
+      properties:
+        files:
+          items:
+            type: string
+            contentMediaType: application/octet-stream
+          type: array
+          title: Files
+      type: object
+      required:
+      - files
+      title: Body_pdf_merge_pdf_merge_post
+    Body_pdf_protect_pdf_protect_post:
+      properties:
+        files:
+          items:
+            type: string
+            contentMediaType: application/octet-stream
+          type: array
+          title: Files
+        password:
+          type: string
+          title: Password
+      type: object
+      required:
+      - files
+      - password
+      title: Body_pdf_protect_pdf_protect_post
+    Body_pdf_rotate_pdf_rotate_post:
+      properties:
+        files:
+          items:
+            type: string
+            contentMediaType: application/octet-stream
+          type: array
+          title: Files
+        angle:
+          type: integer
+          title: Angle
+          default: 90
+      type: object
+      required:
+      - files
+      title: Body_pdf_rotate_pdf_rotate_post
+    Body_pdf_split_pdf_split_post:
+      properties:
+        files:
+          items:
+            type: string
+            contentMediaType: application/octet-stream
+          type: array
+          title: Files
+        pages:
+          type: string
+          title: Pages
+      type: object
+      required:
+      - files
+      - pages
+      title: Body_pdf_split_pdf_split_post
+    Body_pdf_unlock_pdf_unlock_post:
+      properties:
+        files:
+          items:
+            type: string
+            contentMediaType: application/octet-stream
+          type: array
+          title: Files
+        password:
+          type: string
+          title: Password
+      type: object
+      required:
+      - files
+      - password
+      title: Body_pdf_unlock_pdf_unlock_post
+    Body_pdf_watermark_pdf_watermark_post:
+      properties:
+        files:
+          items:
+            type: string
+            contentMediaType: application/octet-stream
+          type: array
+          title: Files
+        text:
+          type: string
+          title: Text
+      type: object
+      required:
+      - files
+      - text
+      title: Body_pdf_watermark_pdf_watermark_post
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    HashRequest:
+      properties:
+        data:
+          type: string
+          title: Data
+        algorithms:
+          items:
+            type: string
+          type: array
+          title: Algorithms
+          default:
+          - md5
+          - sha256
+      type: object
+      required:
+      - data
+      title: HashRequest
+    ImageResizeRequest:
+      properties:
+        url:
+          type: string
+          title: Url
+        width:
+          type: integer
+          title: Width
+        height:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Height
+        format:
+          type: string
+          title: Format
+          default: PNG
+      type: object
+      required:
+      - url
+      - width
+      title: ImageResizeRequest
+    JsonToCsvRequest:
+      properties:
+        data:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Data
+        delimiter:
+          type: string
+          title: Delimiter
+          default: ','
+      type: object
+      required:
+      - data
+      title: JsonToCsvRequest
+    MarkdownRequest:
+      properties:
+        content:
+          type: string
+          title: Content
+        extensions:
+          items:
+            type: string
+          type: array
+          title: Extensions
+          default:
+          - extra
+          - codehilite
+          - toc
+      type: object
+      required:
+      - content
+      title: MarkdownRequest
+    MinifyRequest:
+      properties:
+        code:
+          type: string
+          title: Code
+          default: ''
+        css:
+          type: string
+          title: Css
+          default: ''
+      type: object
+      title: MinifyRequest
+    PasteRequest:
+      properties:
+        content:
+          type: string
+          title: Content
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        language:
+          type: string
+          title: Language
+          default: text
+        expiry:
+          type: string
+          title: Expiry
+          default: 24h
+      type: object
+      required:
+      - content
+      title: PasteRequest
+    QRRequest:
+      properties:
+        data:
+          type: string
+          title: Data
+        size:
+          type: integer
+          title: Size
+          default: 300
+        error_correction:
+          type: string
+          title: Error Correction
+          default: M
+      type: object
+      required:
+      - data
+      title: QRRequest
+    ShortenRequest:
+      properties:
+        url:
+          type: string
+          title: Url
+        custom_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Custom Code
+      type: object
+      required:
+      - url
+      title: ShortenRequest
+    TextRequest:
+      properties:
+        text:
+          type: string
+          title: Text
+      type: object
+      required:
+      - text
+      title: TextRequest
+    TrackRequest:
+      properties:
+        path:
+          type: string
+          title: Path
+        ref:
+          type: string
+          title: Ref
+          default: ''
+      type: object
+      required:
+      - path
+      title: TrackRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    WaitlistRequest:
+      properties:
+        email:
+          type: string
+          title: Email
+      type: object
+      required:
+      - email
+      title: WaitlistRequest
+    YamlConvertRequest:
+      properties:
+        json_data:
+          type: string
+          title: Json Data
+          default: ''
+        yaml_data:
+          type: string
+          title: Yaml Data
+          default: ''
+      type: object
+      title: YamlConvertRequest
+servers:
+- url: https://assessing-scoop-authorities-sheet.trycloudflare.com
