@@ -1,0 +1,73 @@
+openapi: "3.0.0"
+info:
+  title: SnapAPI
+  description: Screenshot any URL with a single HTTP request. Returns PNG, JPEG, WebP or PDF.
+  version: "1.0.0"
+  x-logo:
+    url: https://snappapi.dev/logo.svg
+  contact:
+    email: noreply@snappapi.dev
+    url: https://snappapi.dev
+  license:
+    name: Commercial
+    url: https://snappapi.dev/legal.html
+externalDocs:
+  url: https://snappapi.dev/docs.html
+servers:
+  - url: https://api.snappapi.dev
+security:
+  - ApiKeyAuth: []
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+paths:
+  /screenshot:
+    get:
+      summary: Screenshot any URL
+      parameters:
+        - name: url
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum: [png, jpg, webp, pdf]
+            default: png
+        - name: width
+          in: query
+          schema:
+            type: integer
+            default: 1280
+        - name: full_page
+          in: query
+          schema:
+            type: boolean
+        - name: dark_mode
+          in: query
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: Image binary
+  /register:
+    post:
+      summary: Get an API key
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        "200":
+          description: API key
