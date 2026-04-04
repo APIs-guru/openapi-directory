@@ -1,0 +1,248 @@
+openapi: 3.0.3
+info:
+  title: Behavioral Science API
+  description: Apply behavioral science to products, funnels, copy, and pricing. Credit-based
+    billing.
+  version: 1.0.0
+  contact:
+    url: https://phoslabs.io
+  x-origin:
+  - format: openapi
+    url: https://phoslabs.io/api/v1/openapi.json
+    version: '3.0'
+  x-providerName: phoslabs.io
+servers:
+- url: https://phoslabs.io
+  description: Production
+security:
+- BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: API key from /api/trial or purchased at /credits
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        result:
+          type: object
+          description: Tool-specific result
+        credits_remaining:
+          type: integer
+          nullable: true
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        credits_remaining:
+          type: integer
+          nullable: true
+paths:
+  /api/v1/audit:
+    post:
+      summary: Full behavioral audit
+      description: Run a comprehensive behavioral science audit on a product or service.
+        80 credits.
+      operationId: audit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_description:
+                  type: string
+                  description: Description of the product or service to audit
+                url:
+                  type: string
+                  description: URL of the product (optional)
+                industry:
+                  type: string
+                goal:
+                  type: string
+              required:
+              - product_description
+      responses:
+        '200':
+          description: Audit results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Invalid API key
+        '402':
+          description: Insufficient credits
+  /api/v1/diagnose:
+    post:
+      summary: Diagnose funnel dropoff
+      description: Identify behavioral reasons for funnel dropoff. 10 credits.
+      operationId: diagnose
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                funnel_description:
+                  type: string
+                  description: Description of the funnel or journey
+                data:
+                  type: object
+                  description: Optional analytics data
+                industry:
+                  type: string
+              required:
+              - funnel_description
+      responses:
+        '200':
+          description: Diagnosis results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Invalid API key
+        '402':
+          description: Insufficient credits
+  /api/v1/fix-checkout:
+    post:
+      summary: Redesign checkout flow
+      description: Behavioral science redesign of a checkout or decision flow. 30
+        credits.
+      operationId: fixCheckout
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                checkout_flow:
+                  type: string
+                  description: Current checkout flow description
+              required:
+              - checkout_flow
+      responses:
+        '200':
+          description: Redesigned flow
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Invalid API key
+        '402':
+          description: Insufficient credits
+  /api/v1/copy:
+    post:
+      summary: Behavioral copywriting
+      description: Rewrite copy using social proof, scarcity, framing, and other behavioral
+        principles. 20 credits.
+      operationId: copy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                draft:
+                  type: string
+                  description: Draft copy to rewrite
+                goal:
+                  type: string
+                  description: Goal of the copy (e.g. increase signups)
+              required:
+              - draft
+              - goal
+      responses:
+        '200':
+          description: Rewritten copy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Invalid API key
+        '402':
+          description: Insufficient credits
+  /api/v1/pricing:
+    post:
+      summary: Pricing optimization
+      description: Optimize pricing strategy using anchoring, decoy effects, and behavioral
+        economics. 25 credits.
+      operationId: pricing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product:
+                  type: string
+                  description: Product or service to optimize pricing for
+                context:
+                  type: string
+                persona:
+                  type: string
+              required:
+              - product
+      responses:
+        '200':
+          description: Pricing strategy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Invalid API key
+        '402':
+          description: Insufficient credits
+  /api/v1/detect-biases:
+    post:
+      summary: Detect cognitive biases
+      description: Identify cognitive biases in decision text or recommendations.
+        3 credits.
+      operationId: detectBiases
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  description: Text to analyze for biases
+              required:
+              - text
+      responses:
+        '200':
+          description: Detected biases
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Invalid API key
+        '402':
+          description: Insufficient credits
+  /api/v1/tools:
+    get:
+      summary: List available tools
+      description: List all REST API tools with descriptions, pricing, and input schemas.
+      operationId: listTools
+      security: []
+      responses:
+        '200':
+          description: Tool listing
