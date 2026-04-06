@@ -1,0 +1,441 @@
+openapi: 3.0.3
+info:
+  title: CatchDoms API
+  description: "Search 40,000+ expired and auction domains from 12 platforms with SEO metrics, quality scores, and auction prices. Updated daily."
+  version: 1.0.0
+  contact:
+    name: CatchDoms
+    url: "https://catchdoms.com"
+    email: "support@catchdoms.com"
+  x-logo:
+    url: "https://catchdoms.com/img/favicons/android-chrome-192x192.png"
+servers:
+  - url: "https://catchdoms.com/api"
+    description: Production
+security:
+  - BearerAuth:
+
+paths:
+  /domains:
+    get:
+      operationId: listDomains
+      summary: Search expired and auction domains
+      description: "Returns paginated list of domains matching the given filters, sorted by quality score."
+      tags:
+        - Domains
+      parameters:
+        - name: source
+          in: query
+          description: Filter by source platform
+          schema:
+            type: string
+            enum:
+              - dynadot
+              - catched
+              - dropcatch
+              - godaddy
+              - gname
+              - snapnames
+              - ukdroplists
+              - subreg
+              - webexpire
+              - parkio
+              - bloomup
+              - seodomains
+        - name: tld
+          in: query
+          description: "Filter by TLD (e.g. .com, .fr). Comma-separated for multiple."
+          schema:
+            type: string
+          example: ".fr,.de,.it"
+        - name: score_min
+          in: query
+          description: "Minimum quality score (0-100). 50+ for good, 70+ for excellent."
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: age_min
+          in: query
+          description: Minimum domain age in years (Wayback Machine first snapshot).
+          schema:
+            type: integer
+            minimum: 0
+        - name: type
+          in: query
+          description: Filter by domain type
+          schema:
+            type: string
+            enum:
+              - auction
+              - closeout
+              - backorder
+        - name: has_bids
+          in: query
+          description: Only domains with active auction bids
+          schema:
+            type: boolean
+        - name: has_backlinks
+          in: query
+          description: Only domains with referring domains
+          schema:
+            type: boolean
+        - name: has_gmb
+          in: query
+          description: Only domains with a Google Business listing
+          schema:
+            type: boolean
+        - name: has_edu_gov
+          in: query
+          description: Only domains with .edu or .gov referring domains
+          schema:
+            type: boolean
+        - name: da_min
+          in: query
+          description: "Minimum Domain Authority (0-100)"
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: rd_min
+          in: query
+          description: Minimum referring domains count
+          schema:
+            type: integer
+            minimum: 0
+        - name: tf_min
+          in: query
+          description: "Minimum Trust Flow (0-100)"
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: cf_min
+          in: query
+          description: "Minimum Citation Flow (0-100)"
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: categories
+          in: query
+          description: "Comma-separated TTF topic categories (e.g. Business,Health)"
+          schema:
+            type: string
+        - name: language
+          in: query
+          description: "Filter by detected language code (EN, FR, DE, ES, etc.)"
+          schema:
+            type: string
+            maxLength: 5
+        - name: contains
+          in: query
+          description: Keyword the domain name must contain
+          schema:
+            type: string
+            maxLength: 50
+        - name: price_min
+          in: query
+          description: Minimum price or bid (USD)
+          schema:
+            type: number
+            minimum: 0
+        - name: price_max
+          in: query
+          description: Maximum price or bid (USD)
+          schema:
+            type: number
+            minimum: 0
+        - name: snapshots_min
+          in: query
+          description: Minimum Wayback Machine snapshots
+          schema:
+            type: integer
+            minimum: 0
+        - name: per_page
+          in: query
+          description: "Results per page (1-100, default 50)"
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+        - name: page
+          in: query
+          description: Page number
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+      responses:
+        200:
+          description: Paginated list of domains
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Domain"
+                  links:
+                    $ref: "#/components/schemas/PaginationLinks"
+                  meta:
+                    $ref: "#/components/schemas/PaginationMeta"
+        401:
+          description: Missing or invalid API token
+        403:
+          description: Valid token but no Pro subscription
+  /domains/{domain}:
+    get:
+      operationId: getDomain
+      summary: Get a single domain by ID
+      description: Returns full details for a specific domain.
+      tags:
+        - Domains
+      parameters:
+        - name: domain
+          in: path
+          required: true
+          description: Domain ID
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Domain details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Domain"
+        404:
+          description: Domain not found
+components:
+  securitySchemes:
+    BearerAuth:
+      type: "http"
+      scheme: bearer
+      description: "API token from your CatchDoms account. Get one at https://catchdoms.com/api-access"
+  schemas:
+    Domain:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique domain identifier
+        name:
+          type: string
+          description: Full domain name
+          example: example.fr
+        tld:
+          type: string
+          description: TLD with dot prefix
+          example: .fr
+        source:
+          type: string
+          description: Source platform
+          enum:
+            - dynadot
+            - catched
+            - dropcatch
+            - godaddy
+            - gname
+            - snapnames
+            - ukdroplists
+            - subreg
+            - webexpire
+            - parkio
+            - bloomup
+            - seodomains
+        type:
+          type: string
+          description: Domain type
+          enum:
+            - auction
+            - closeout
+            - backorder
+        auction_type:
+          type: string
+          nullable: true
+          description: "Sub-type (DropCatch: Dropped/PreRelease/PrivateSeller, GoDaddy: Bid/BuyNow)"
+        price:
+          type: number
+          nullable: true
+          description: Fixed price or starting price (USD)
+        max_bid:
+          type: number
+          nullable: true
+          description: Current highest bid (USD)
+        effective_price:
+          type: number
+          nullable: true
+          description: "Actual price: max_bid if set, otherwise price"
+        bids_count:
+          type: integer
+          nullable: true
+          description: Number of bids
+        auction_end_date:
+          type: string
+          format: "date-time"
+          nullable: true
+          description: Auction end date (ISO 8601)
+        estibot_appraisal:
+          type: number
+          nullable: true
+          description: Automated valuation estimate
+        score:
+          type: integer
+          nullable: true
+          description: "Quality score (0-100)"
+        is_spammy:
+          type: boolean
+          description: Whether flagged as spammy
+        age:
+          type: integer
+          nullable: true
+          description: Domain age in years
+        wayback_snapshots:
+          type: integer
+          nullable: true
+          description: Wayback Machine snapshot count
+        wayback_first_date:
+          type: string
+          format: date
+          nullable: true
+          description: First Wayback snapshot
+        wayback_last_date:
+          type: string
+          format: date
+          nullable: true
+          description: Last Wayback snapshot
+        pagerank:
+          type: integer
+          nullable: true
+          description: "Open PageRank (0-10)"
+        domain_authority:
+          type: integer
+          nullable: true
+          description: "Domain Authority (0-100)"
+        backlinks_count:
+          type: integer
+          nullable: true
+          description: Total backlinks
+        referring_domains:
+          type: integer
+          nullable: true
+          description: Unique referring domains
+        trust_flow:
+          type: integer
+          nullable: true
+          description: "Trust Flow (0-100)"
+        citation_flow:
+          type: integer
+          nullable: true
+          description: "Citation Flow (0-100)"
+        ttf_topic:
+          type: string
+          nullable: true
+          description: Topical Trust Flow category
+          example: Business/Marketing
+        ref_domains_edu:
+          type: integer
+          nullable: true
+          description: EDU referring domains
+        ref_domains_gov:
+          type: integer
+          nullable: true
+          description: GOV referring domains
+        ref_domains_dofollow:
+          type: integer
+          nullable: true
+          description: Dofollow referring domains
+        seo_domains_category:
+          type: string
+          nullable: true
+          description: SEO.Domains category (seodomains source only)
+        seo_domains_subcategory:
+          type: string
+          nullable: true
+          description: SEO.Domains subcategory (seodomains source only)
+        indexed_pages:
+          type: integer
+          nullable: true
+          description: Google indexed pages
+        monthly_visitors:
+          type: integer
+          nullable: true
+          description: Estimated monthly visitors
+        language:
+          type: string
+          nullable: true
+          description: Detected language code
+          example: FR
+        has_gmb:
+          type: boolean
+          description: Has Google Business listing
+        gmb_name:
+          type: string
+          nullable: true
+          description: GMB business name
+        gmb_category:
+          type: string
+          nullable: true
+          description: GMB business category
+        gmb_address:
+          type: string
+          nullable: true
+          description: GMB business address
+        purchase_url:
+          type: string
+          nullable: true
+          description: Direct buy/bid link
+        purchase_platform:
+          type: string
+          nullable: true
+          description: Source platform name
+        created_at:
+          type: string
+          format: "date-time"
+          description: Added to CatchDoms
+        updated_at:
+          type: string
+          format: "date-time"
+          description: Last updated
+    PaginationLinks:
+      type: object
+      properties:
+        first:
+          type: string
+          nullable: true
+        last:
+          type: string
+          nullable: true
+        prev:
+          type: string
+          nullable: true
+        next:
+          type: string
+          nullable: true
+    PaginationMeta:
+      type: object
+      properties:
+        current_page:
+          type: integer
+        last_page:
+          type: integer
+        per_page:
+          type: integer
+        total:
+          type: integer
+        from:
+          type: integer
+          nullable: true
+        to:
+          type: integer
+          nullable: true
+externalDocs:
+  description: Full API documentation
+  url: "https://catchdoms.com/api/docs"
