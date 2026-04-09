@@ -1,0 +1,1810 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "HYDRA Arm 3 \u2014 Regulatory Intelligence SaaS",
+    "description": "AI-powered regulatory compliance analysis via API. Pay-per-use in USDC on Base via the x402 HTTP payment protocol.",
+    "contact": {
+      "name": "HYDRA Arm 3 API",
+      "url": "https://github.com/hydra-arm3"
+    },
+    "license": {
+      "name": "Proprietary"
+    },
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Root",
+        "description": "Root endpoint \u2014 landing page.",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Health Check",
+        "description": "Returns application health status and automaton snapshot.\nNo payment required. Publicly accessible.",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pricing": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Get Pricing",
+        "description": "Returns pricing for all paid endpoints. No payment required.",
+        "operationId": "get_pricing_pricing_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PricingResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/regulatory/scan": {
+      "post": {
+        "tags": [
+          "Regulatory Intelligence"
+        ],
+        "summary": "Regulatory Risk Scan ($1.00 USDC)",
+        "description": "Analyzes a business description against all applicable regulatory frameworks. Returns risk score, applicable regulations, compliance gaps, and priority actions. **Requires x402 payment of $1.00 USDC on Base.**",
+        "operationId": "regulatory_scan_v1_regulatory_scan_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegulatoryScenRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegulatoryScenResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/regulatory/changes": {
+      "post": {
+        "tags": [
+          "Regulatory Intelligence"
+        ],
+        "summary": "Recent Regulatory Changes ($0.50 USDC)",
+        "description": "Fetches recent regulatory changes, proposed rules, and enforcement actions from official RSS feeds of SEC, CFTC, FinCEN, OCC, and CFPB. Results are cached for 1 hour. **Requires x402 payment of $0.50 USDC on Base.**",
+        "operationId": "regulatory_changes_v1_regulatory_changes_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegulatoryChangesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegulatoryChangesResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/regulatory/jurisdiction": {
+      "post": {
+        "tags": [
+          "Regulatory Intelligence"
+        ],
+        "summary": "Jurisdiction Comparison ($2.00 USDC)",
+        "description": "Compares regulatory requirements across US states and international jurisdictions for a specific business type (crypto, fintech, securities, banking). Includes friendliness scores, key advantages/risks, and incorporation details. **Requires x402 payment of $2.00 USDC on Base.**",
+        "operationId": "jurisdiction_comparison_v1_regulatory_jurisdiction_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JurisdictionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/regulatory/query": {
+      "post": {
+        "tags": [
+          "Regulatory Intelligence"
+        ],
+        "summary": "Regulatory Q&A ($0.50 USDC)",
+        "description": "Answers natural-language questions about regulatory requirements using a structured knowledge base covering SEC, CFTC, FinCEN, state regulators, and international frameworks. **Requires x402 payment of $0.50 USDC on Base.**",
+        "operationId": "regulatory_query_v1_regulatory_query_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegulatoryQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegulatoryQueryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/markets": {
+      "get": {
+        "tags": [
+          "Prediction Markets",
+          "Prediction Markets \u2014 Free"
+        ],
+        "summary": "All Active Regulatory Prediction Markets (FREE)",
+        "description": "Returns all active regulatory prediction markets across Polymarket and Kalshi. **Free.** Basic info only: title, platform, current price, 24h volume. This is the hook \u2014 see the breadth of HYDRA's coverage before purchasing signals. For full signals, regulatory analysis, and trading intelligence, use the paid endpoints.",
+        "operationId": "list_markets_v1_markets_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/markets/discovery": {
+      "get": {
+        "tags": [
+          "Prediction Markets",
+          "Prediction Markets \u2014 Free"
+        ],
+        "summary": "Regulatory Market Discovery (FREE)",
+        "description": "Returns all active regulatory prediction markets across Polymarket and Kalshi that HYDRA currently tracks. **Free.** This is the discovery endpoint \u2014 see what HYDRA covers before purchasing signals. Includes market titles, current prices, volumes, and which regulatory domains each market falls into. No payment required.",
+        "operationId": "discover_markets_v1_markets_discovery_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/markets/pricing": {
+      "get": {
+        "tags": [
+          "Prediction Markets",
+          "Prediction Markets \u2014 Free"
+        ],
+        "summary": "Prediction Market Endpoint Pricing (FREE)",
+        "description": "Returns pricing for all prediction market intelligence endpoints. Free \u2014 no payment required. All prices in USDC on Base (chain ID 8453).",
+        "operationId": "get_prediction_pricing_v1_markets_pricing_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/markets/signals": {
+      "post": {
+        "tags": [
+          "Prediction Markets",
+          "Prediction Markets \u2014 Paid"
+        ],
+        "summary": "Regulatory Trading Signals \u2014 All Markets ($0.25 USDC)",
+        "description": "**$0.25 USDC via x402.** Full HYDRA regulatory intelligence signals for all matching prediction markets. This is the core product for prediction market trading bots \u2014 call this before every significant trade to get HYDRA's regulatory analysis, confidence score, and directional signal. Filters: platform (polymarket/kalshi/all) and category (fed/sec/crypto/regulation/all). Each signal includes: regulatory context, historical precedent, key upcoming dates, risk factors, signal direction (bullish_yes/bullish_no/neutral), and confidence 0-100.",
+        "operationId": "get_market_signals_v1_markets_signals_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignalsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/markets/signal/{market_id}": {
+      "post": {
+        "tags": [
+          "Prediction Markets",
+          "Prediction Markets \u2014 Paid"
+        ],
+        "summary": "Deep Signal \u2014 Single Market ($0.10 USDC)",
+        "description": "**$0.10 USDC via x402.** Deep regulatory intelligence signal for one specific market. Pass a Polymarket condition_id (0x...) or Kalshi ticker (e.g., KXFED-25APR30). Returns full analysis: regulatory context, historical precedent, upcoming key dates, risk factors, signal direction, and confidence score. Cheaper than bulk signals when you already know which market to trade.",
+        "operationId": "get_single_market_signal_v1_markets_signal__market_id__post",
+        "parameters": [
+          {
+            "name": "market_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Market Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SingleMarketRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/markets/events": {
+      "post": {
+        "tags": [
+          "Prediction Markets",
+          "Prediction Markets \u2014 Paid"
+        ],
+        "summary": "Regulatory Event Feed \u2014 Matched to Markets ($0.15 USDC)",
+        "description": "**$0.15 USDC via x402.** Real-time regulatory event feed from SEC EDGAR, CFTC, FinCEN, OCC, CFPB \u2014 each event pre-matched to which active prediction markets it affects. Ideal for bots that want to react to breaking regulatory events. Filters: since_hours (1-168) and agencies (SEC, CFTC, Fed, FinCEN, OCC, CFPB, all). Each event includes: impact assessment for matched markets, urgency level (high/medium/low).",
+        "operationId": "get_regulatory_events_v1_markets_events_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/markets/resolution": {
+      "post": {
+        "tags": [
+          "Prediction Markets",
+          "Prediction Markets \u2014 Paid"
+        ],
+        "summary": "Oracle Resolution Assessment ($1.00 USDC)",
+        "description": "**$1.00 USDC via x402.** HYDRA's assessment of how a prediction market should resolve based on regulatory data. This is the premium product for oracle asserters and market creators. Before posting a $750 USDC.e bond to UMA's Optimistic Oracle, verify with HYDRA ($1.00). Returns: resolved (bool), resolution_value (Yes/No), confidence (0-100), evidence_summary, relevant regulations, and sources. Includes guidance on whether bond-posting is advisable given HYDRA's confidence level.",
+        "operationId": "get_market_resolution_v1_markets_resolution_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolutionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/oracle/uma": {
+      "post": {
+        "tags": [
+          "Prediction Markets",
+          "Prediction Markets \u2014 Oracle"
+        ],
+        "summary": "UMA Optimistic Oracle Formatted Data ($0.50 USDC)",
+        "description": "**$0.50 USDC via x402.** Formats HYDRA regulatory data as UMA Optimistic Oracle (OOv2) assertion data. Provides the complete ancillary data, proposed price, bond currency details, and evidence chain required to submit a resolution proposal to UMA. Used by oracle asserters posting to Polymarket's resolution layer. Input: assertion_claim (factual statement), bond_currency, optional market_question.",
+        "operationId": "get_uma_oracle_data_v1_oracle_uma_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UMAOracleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/oracle/chainlink": {
+      "post": {
+        "tags": [
+          "Prediction Markets",
+          "Prediction Markets \u2014 Oracle"
+        ],
+        "summary": "Chainlink External Adapter Response ($0.50 USDC)",
+        "description": "**$0.50 USDC via x402.** Returns HYDRA regulatory data in Chainlink External Adapter format. Chainlink node operators configure HYDRA as an external adapter; this endpoint handles their data requests and returns on-chain-ready responses. Compatible with Chainlink Any API (Direct Request Model). Result format: {\"jobRunID\": \"1\", \"data\": {\"result\": value}, \"statusCode\": 200}",
+        "operationId": "get_chainlink_oracle_data_v1_oracle_chainlink_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChainlinkRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/markets/feed": {
+      "get": {
+        "tags": [
+          "Prediction Markets",
+          "Prediction Markets \u2014 Paid"
+        ],
+        "summary": "Micro Event Feed \u2014 High Frequency Bot Polling ($0.05 USDC)",
+        "description": "**$0.05 USDC via x402.** Minimal payload, fast response \u2014 designed to be called every few minutes by trading bots. Returns the latest 10 regulatory events from the last hour, each pre-matched to active prediction markets. Tiny response size keeps latency low. When this feed shows a HIGH urgency event matched to a market you hold, call /v1/markets/signal/{market_id} for the full analysis ($0.10).",
+        "operationId": "get_micro_feed_v1_markets_feed_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/markets/alpha": {
+      "post": {
+        "tags": [
+          "Prediction Markets",
+          "Prediction Markets \u2014 Paid"
+        ],
+        "summary": "Full Alpha Report \u2014 Premium ($2.00 USDC)",
+        "description": "**$2.00 USDC via x402.** The highest-value prediction market endpoint. Given a specific market, position (yes/no), and position size, HYDRA returns a complete alpha report: regulatory probability assessment, edge vs current market price, risk/reward ratio, optimal entry price, similar historical trades with outcomes, expected resolution timeline, and whether to take the trade. Designed for quant funds and serious traders sizing $1,000+ positions. The $2.00 cost is asymmetric versus potential alpha on a large position.",
+        "operationId": "get_market_alpha_v1_markets_alpha_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlphaRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/fed/signal": {
+      "post": {
+        "tags": [
+          "Fed Decision Package"
+        ],
+        "summary": "Pre-FOMC Signal ($5.00 USDC)",
+        "description": "Pre-FOMC analysis signal \u2014 rate probability model, speech tone analysis, dot plot tracking, and key economic indicators. **Requires x402 payment of $5.00 USDC on Base.**",
+        "operationId": "fed_signal_v1_fed_signal_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FedSignalRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/fed/decision": {
+      "post": {
+        "tags": [
+          "Fed Decision Package"
+        ],
+        "summary": "FOMC Decision Classification ($25.00 USDC)",
+        "description": "Real-time FOMC decision endpoint. On FOMC announcement days, attempts to fetch the live statement from federalreserve.gov and classify the decision within 30 seconds of release. On non-FOMC days, returns the most recent known decision with a note. Includes vote breakdown, statement summary, dot plot shift, and market impact assessment. **Requires x402 payment of $25.00 USDC on Base.**",
+        "operationId": "fed_decision_v1_fed_decision_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FedDecisionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/fed/resolution": {
+      "post": {
+        "tags": [
+          "Fed Decision Package"
+        ],
+        "summary": "FOMC Resolution Verdict ($50.00 USDC)",
+        "description": "Resolution verdict for FOMC prediction markets. Returns all FOMC decision data plus UMA Optimistic Oracle assertion data, Kalshi KXFED resolution format, Polymarket resolution format, and a full evidence chain with source URLs and timestamps. Designed for UMA bond asserters, Kalshi resolvers, and automated oracle systems. **Requires x402 payment of $50.00 USDC on Base.**",
+        "operationId": "fed_resolution_v1_fed_resolution_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FedResolutionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/wallet": {
+      "post": {
+        "tags": [
+          "System Management"
+        ],
+        "summary": "Set receiving wallet address",
+        "description": "Configure the EVM wallet address that receives USDC distributions. Performs EVM format validation, zero-address check, self-address check, and OFAC sanctions screening. **Localhost or Bearer token required.**",
+        "operationId": "set_wallet_system_wallet_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetWalletRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/remittance/status": {
+      "get": {
+        "tags": [
+          "System Management"
+        ],
+        "summary": "Remittance system status",
+        "description": "Returns current treasury balance, remittable amount, and remittance configuration. If balance >= $5K and no wallet is configured, includes the wallet setup prompt. **Localhost or Bearer token required.**",
+        "operationId": "remittance_status_system_remittance_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/remittance/execute": {
+      "post": {
+        "tags": [
+          "System Management"
+        ],
+        "summary": "Manually trigger remittance",
+        "description": "Manually execute a USDC remittance to the configured receiving wallet. All constitution checks (OFAC + solvency) still apply. **Localhost or Bearer token required.**",
+        "operationId": "execute_remittance_system_remittance_execute_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/transactions": {
+      "get": {
+        "tags": [
+          "System Management"
+        ],
+        "summary": "View transaction log",
+        "description": "View internal transaction log. Filter by year, direction, or category. **Localhost or Bearer token required.**",
+        "operationId": "get_transactions_system_transactions_get",
+        "parameters": [
+          {
+            "name": "year",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by tax year (e.g. 2026)",
+              "title": "Year"
+            },
+            "description": "Filter by tax year (e.g. 2026)"
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "inbound | outbound",
+              "title": "Direction"
+            },
+            "description": "inbound | outbound"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "x402-revenue | member-distribution | operating-expense",
+              "title": "Category"
+            },
+            "description": "x402-revenue | member-distribution | operating-expense"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/status": {
+      "get": {
+        "tags": [
+          "System Management"
+        ],
+        "summary": "Full automaton status",
+        "description": "Returns complete HYDRA automaton status including phase, survival tier, balance, entity formation state, compliance deadlines, and lifetime financials. **Localhost or Bearer token required.**",
+        "operationId": "automaton_status_system_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/shutdown": {
+      "post": {
+        "tags": [
+          "System Management"
+        ],
+        "summary": "Kill switch \u2014 graceful shutdown",
+        "description": "Execute a graceful shutdown sequence: remit remaining USDC above $100 to the receiving wallet (if configured), then terminate the automaton. **Bearer token required \u2014 localhost-only access is insufficient for safety.**",
+        "operationId": "system_shutdown_system_shutdown_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Agency": {
+        "type": "string",
+        "enum": [
+          "SEC",
+          "CFTC",
+          "FinCEN",
+          "OCC",
+          "CFPB",
+          "all"
+        ],
+        "title": "Agency"
+      },
+      "AlphaRequest": {
+        "properties": {
+          "market_id": {
+            "type": "string",
+            "title": "Market Id",
+            "description": "Polymarket condition_id (0x...) or Kalshi ticker (e.g., KXFED-25APR30)",
+            "example": "0xabc123... or KXFED-25APR30"
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "title": "Position",
+            "description": "Which side of the market you are evaluating (yes or no)"
+          },
+          "size_usdc": {
+            "type": "number",
+            "maximum": 10000000.0,
+            "minimum": 1.0,
+            "title": "Size Usdc",
+            "description": "Position size in USDC \u2014 used for risk/reward and expected value calculations",
+            "default": 1000.0,
+            "example": 1000.0
+          }
+        },
+        "type": "object",
+        "required": [
+          "market_id",
+          "position"
+        ],
+        "title": "AlphaRequest"
+      },
+      "ApplicableRegulation": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "citation": {
+            "type": "string",
+            "title": "Citation"
+          },
+          "regulator": {
+            "type": "string",
+            "title": "Regulator"
+          },
+          "relevance": {
+            "type": "string",
+            "title": "Relevance"
+          },
+          "risk_level": {
+            "$ref": "#/components/schemas/RiskLevel"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "recommended_actions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Recommended Actions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "citation",
+          "regulator",
+          "relevance",
+          "risk_level",
+          "description",
+          "recommended_actions"
+        ],
+        "title": "ApplicableRegulation"
+      },
+      "BusinessType": {
+        "type": "string",
+        "enum": [
+          "crypto",
+          "fintech",
+          "securities",
+          "banking"
+        ],
+        "title": "BusinessType"
+      },
+      "ChainlinkRequest": {
+        "properties": {
+          "data_request": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 5,
+            "title": "Data Request",
+            "description": "What regulatory data point to retrieve for Chainlink on-chain delivery",
+            "example": "SEC enforcement action count 2026"
+          },
+          "job_run_id": {
+            "type": "string",
+            "title": "Job Run Id",
+            "description": "Chainlink job run ID (pass through from node request)",
+            "default": "1"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data_request"
+        ],
+        "title": "ChainlinkRequest"
+      },
+      "EndpointPricing": {
+        "properties": {
+          "endpoint": {
+            "type": "string",
+            "title": "Endpoint"
+          },
+          "amount_usdc": {
+            "type": "string",
+            "title": "Amount Usdc"
+          },
+          "amount_base_units": {
+            "type": "integer",
+            "title": "Amount Base Units"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          }
+        },
+        "type": "object",
+        "required": [
+          "endpoint",
+          "amount_usdc",
+          "amount_base_units",
+          "description"
+        ],
+        "title": "EndpointPricing"
+      },
+      "EventsRequest": {
+        "properties": {
+          "since_hours": {
+            "type": "integer",
+            "maximum": 168.0,
+            "minimum": 1.0,
+            "title": "Since Hours",
+            "description": "How many hours back to look for regulatory events (1-168, default 24)",
+            "default": 24
+          },
+          "agencies": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "SEC",
+                "CFTC",
+                "Fed",
+                "FinCEN",
+                "OCC",
+                "CFPB",
+                "all"
+              ]
+            },
+            "type": "array",
+            "title": "Agencies",
+            "description": "Which regulatory agencies to pull events from",
+            "default": [
+              "all"
+            ]
+          }
+        },
+        "type": "object",
+        "title": "EventsRequest"
+      },
+      "FedDecisionRequest": {
+        "properties": {
+          "include_market_impact": {
+            "type": "boolean",
+            "title": "Include Market Impact",
+            "description": "Include expected impact assessment on prediction markets.",
+            "default": true
+          }
+        },
+        "type": "object",
+        "title": "FedDecisionRequest",
+        "description": "Request body for /v1/fed/decision.\n\nOn FOMC days, the engine attempts to fetch live data from federalreserve.gov.\nOn non-FOMC days, the most recent known decision is returned."
+      },
+      "FedResolutionRequest": {
+        "properties": {
+          "market_question": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 10,
+            "title": "Market Question",
+            "description": "Natural-language prediction market question to resolve. Example: 'Will the Fed cut rates by 25 bp at the May 2026 FOMC meeting?'",
+            "default": "Will the Federal Reserve hold interest rates at the next FOMC meeting?"
+          },
+          "include_uma_data": {
+            "type": "boolean",
+            "title": "Include Uma Data",
+            "description": "Include UMA Optimistic Oracle formatted assertion data.",
+            "default": true
+          },
+          "include_kalshi_format": {
+            "type": "boolean",
+            "title": "Include Kalshi Format",
+            "description": "Include Kalshi KXFED series resolution format.",
+            "default": true
+          },
+          "include_polymarket_format": {
+            "type": "boolean",
+            "title": "Include Polymarket Format",
+            "description": "Include Polymarket FOMC market resolution format.",
+            "default": true
+          }
+        },
+        "type": "object",
+        "title": "FedResolutionRequest",
+        "description": "Request body for /v1/fed/resolution."
+      },
+      "FedSignalRequest": {
+        "properties": {
+          "include_speech_analysis": {
+            "type": "boolean",
+            "title": "Include Speech Analysis",
+            "description": "Include analysis of recent Fed governor speeches.",
+            "default": true
+          },
+          "include_indicators": {
+            "type": "boolean",
+            "title": "Include Indicators",
+            "description": "Include detailed economic indicator breakdowns.",
+            "default": true
+          }
+        },
+        "type": "object",
+        "title": "FedSignalRequest",
+        "description": "Request body for /v1/fed/signal. All fields optional \u2014 engine uses current data."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "ok"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "app_name": {
+            "type": "string",
+            "title": "App Name"
+          },
+          "payment_network": {
+            "type": "string",
+            "title": "Payment Network"
+          },
+          "payment_token": {
+            "type": "string",
+            "title": "Payment Token"
+          },
+          "wallet_address": {
+            "type": "string",
+            "title": "Wallet Address"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
+          "automaton": {
+            "title": "Automaton",
+            "description": "Current HydraAutomaton state snapshot (survival tier, balance, phase)"
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "app_name",
+          "payment_network",
+          "payment_token",
+          "wallet_address"
+        ],
+        "title": "HealthResponse"
+      },
+      "JurisdictionRequest": {
+        "properties": {
+          "jurisdictions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 10,
+            "minItems": 1,
+            "title": "Jurisdictions",
+            "description": "List of jurisdiction codes to compare (e.g. ['WY', 'DE', 'NV', 'EU'])",
+            "examples": [
+              [
+                "WY",
+                "DE",
+                "NV"
+              ]
+            ]
+          },
+          "business_type": {
+            "$ref": "#/components/schemas/BusinessType",
+            "description": "Type of business for jurisdiction comparison"
+          }
+        },
+        "type": "object",
+        "required": [
+          "jurisdictions",
+          "business_type"
+        ],
+        "title": "JurisdictionRequest"
+      },
+      "PricingResponse": {
+        "properties": {
+          "endpoints": {
+            "items": {
+              "$ref": "#/components/schemas/EndpointPricing"
+            },
+            "type": "array",
+            "title": "Endpoints"
+          },
+          "payment_network": {
+            "type": "string",
+            "title": "Payment Network"
+          },
+          "payment_token": {
+            "type": "string",
+            "title": "Payment Token"
+          },
+          "wallet_address": {
+            "type": "string",
+            "title": "Wallet Address"
+          },
+          "chain_id": {
+            "type": "integer",
+            "title": "Chain Id"
+          },
+          "instructions": {
+            "type": "string",
+            "title": "Instructions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "endpoints",
+          "payment_network",
+          "payment_token",
+          "wallet_address",
+          "chain_id",
+          "instructions"
+        ],
+        "title": "PricingResponse"
+      },
+      "RegulatoryChangesRequest": {
+        "properties": {
+          "agency": {
+            "$ref": "#/components/schemas/Agency",
+            "description": "Regulatory agency to query",
+            "default": "all"
+          },
+          "days": {
+            "type": "integer",
+            "maximum": 180.0,
+            "minimum": 1.0,
+            "title": "Days",
+            "description": "Number of days back to fetch regulatory changes",
+            "default": 30
+          }
+        },
+        "type": "object",
+        "title": "RegulatoryChangesRequest"
+      },
+      "RegulatoryChangesResponse": {
+        "properties": {
+          "agency": {
+            "type": "string",
+            "title": "Agency"
+          },
+          "days_requested": {
+            "type": "integer",
+            "title": "Days Requested"
+          },
+          "total_items": {
+            "type": "integer",
+            "title": "Total Items"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RegulatoryItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "data_sources": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Data Sources"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fetched At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "agency",
+          "days_requested",
+          "total_items",
+          "items",
+          "data_sources"
+        ],
+        "title": "RegulatoryChangesResponse"
+      },
+      "RegulatoryItem": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "agency": {
+            "type": "string",
+            "title": "Agency"
+          },
+          "published": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published"
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "item_type": {
+            "type": "string",
+            "title": "Item Type",
+            "description": "press_release, proposed_rule, final_rule, enforcement, notice"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "agency",
+          "summary",
+          "item_type"
+        ],
+        "title": "RegulatoryItem"
+      },
+      "RegulatoryQueryRequest": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Question",
+            "description": "Natural-language question about regulatory requirements",
+            "examples": [
+              "Do I need a money transmitter license to operate a crypto exchange in Wyoming?"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "question"
+        ],
+        "title": "RegulatoryQueryRequest"
+      },
+      "RegulatoryQueryResponse": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "answer": {
+            "type": "string",
+            "title": "Answer"
+          },
+          "confidence": {
+            "type": "string",
+            "title": "Confidence",
+            "description": "high|medium|low \u2014 based on knowledge base coverage"
+          },
+          "relevant_regulations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Relevant Regulations"
+          },
+          "relevant_agencies": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Relevant Agencies"
+          },
+          "follow_up_questions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Follow Up Questions"
+          },
+          "disclaimer": {
+            "type": "string",
+            "title": "Disclaimer",
+            "default": "This answer is generated from a structured regulatory knowledge base and does not constitute legal advice. Consult qualified legal counsel for your specific situation."
+          }
+        },
+        "type": "object",
+        "required": [
+          "question",
+          "answer",
+          "confidence",
+          "relevant_regulations",
+          "relevant_agencies",
+          "follow_up_questions"
+        ],
+        "title": "RegulatoryQueryResponse"
+      },
+      "RegulatoryScenRequest": {
+        "properties": {
+          "business_description": {
+            "type": "string",
+            "maxLength": 5000,
+            "minLength": 20,
+            "title": "Business Description",
+            "description": "Plain-English description of the business, its activities, and target markets",
+            "examples": [
+              "A platform allowing US retail investors to trade tokenized equities via a mobile app"
+            ]
+          },
+          "jurisdiction": {
+            "type": "string",
+            "title": "Jurisdiction",
+            "description": "Primary jurisdiction of operation (e.g. 'US', 'US-WY', 'US-DE', 'EU', 'UK')",
+            "default": "US",
+            "examples": [
+              "US",
+              "US-WY",
+              "EU"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "business_description"
+        ],
+        "title": "RegulatoryScenRequest"
+      },
+      "RegulatoryScenResponse": {
+        "properties": {
+          "business_description": {
+            "type": "string",
+            "title": "Business Description"
+          },
+          "jurisdiction": {
+            "type": "string",
+            "title": "Jurisdiction"
+          },
+          "overall_risk_score": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Overall Risk Score",
+            "description": "0=minimal risk, 100=severe risk"
+          },
+          "overall_risk_level": {
+            "$ref": "#/components/schemas/RiskLevel"
+          },
+          "applicable_regulations": {
+            "items": {
+              "$ref": "#/components/schemas/ApplicableRegulation"
+            },
+            "type": "array",
+            "title": "Applicable Regulations"
+          },
+          "key_compliance_gaps": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Key Compliance Gaps"
+          },
+          "priority_actions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Priority Actions"
+          },
+          "disclaimer": {
+            "type": "string",
+            "title": "Disclaimer",
+            "default": "This analysis is provided for informational purposes only and does not constitute legal advice. Consult qualified legal counsel before making compliance decisions."
+          }
+        },
+        "type": "object",
+        "required": [
+          "business_description",
+          "jurisdiction",
+          "overall_risk_score",
+          "overall_risk_level",
+          "applicable_regulations",
+          "key_compliance_gaps",
+          "priority_actions"
+        ],
+        "title": "RegulatoryScenResponse"
+      },
+      "ResolutionRequest": {
+        "properties": {
+          "market_question": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 5,
+            "title": "Market Question",
+            "description": "The exact market question string from Polymarket or Kalshi",
+            "example": "Will the SEC approve a spot Solana ETF by June 30, 2026?"
+          },
+          "market_id": {
+            "type": "string",
+            "title": "Market Id",
+            "description": "Polymarket condition_id or Kalshi ticker (used for reference)",
+            "default": "",
+            "example": "0xabc123... or KXSOLANA-2026"
+          },
+          "evidence": {
+            "type": "string",
+            "maxLength": 2000,
+            "title": "Evidence",
+            "description": "Optional: paste in relevant news text or regulatory announcement for HYDRA to analyze",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "market_question"
+        ],
+        "title": "ResolutionRequest"
+      },
+      "RiskLevel": {
+        "type": "string",
+        "enum": [
+          "low",
+          "medium",
+          "high",
+          "critical"
+        ],
+        "title": "RiskLevel"
+      },
+      "SetWalletRequest": {
+        "properties": {
+          "address": {
+            "type": "string",
+            "title": "Address"
+          }
+        },
+        "type": "object",
+        "required": [
+          "address"
+        ],
+        "title": "SetWalletRequest",
+        "description": "Request body for POST /system/wallet."
+      },
+      "SignalsRequest": {
+        "properties": {
+          "platform": {
+            "type": "string",
+            "enum": [
+              "polymarket",
+              "kalshi",
+              "all"
+            ],
+            "title": "Platform",
+            "description": "Which prediction market platform(s) to query",
+            "default": "all"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "regulation",
+              "crypto",
+              "fed",
+              "sec",
+              "all"
+            ],
+            "title": "Category",
+            "description": "Filter signals by regulatory category. 'fed' = Federal Reserve rate decisions; 'sec' = SEC enforcement and approvals; 'crypto' = crypto legislation (GENIUS Act, FIT21, etc.); 'regulation' = all regulatory; 'all' = everything HYDRA covers.",
+            "default": "all"
+          }
+        },
+        "type": "object",
+        "title": "SignalsRequest"
+      },
+      "SingleMarketRequest": {
+        "properties": {
+          "platform": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "polymarket",
+                  "kalshi"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Platform",
+            "description": "Platform hint to accelerate lookup. If None, HYDRA searches both."
+          }
+        },
+        "type": "object",
+        "title": "SingleMarketRequest"
+      },
+      "UMAOracleRequest": {
+        "properties": {
+          "assertion_claim": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 10,
+            "title": "Assertion Claim",
+            "description": "The factual claim you want to assert to UMA's Optimistic Oracle",
+            "example": "The SEC approved a spot Solana ETF on March 28, 2026"
+          },
+          "bond_currency": {
+            "type": "string",
+            "enum": [
+              "USDC",
+              "USDC.e"
+            ],
+            "title": "Bond Currency",
+            "description": "Bond currency for UMA assertion. Use USDC.e for Polygon (Polymarket standard).",
+            "default": "USDC.e"
+          },
+          "market_question": {
+            "type": "string",
+            "title": "Market Question",
+            "description": "Optional: the Polymarket market question this assertion is for",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "assertion_claim"
+        ],
+        "title": "UMAOracleRequest"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "System",
+      "description": "Health check and pricing \u2014 free endpoints"
+    },
+    {
+      "name": "System Management",
+      "description": "Automaton management endpoints \u2014 **localhost or bearer token required**. Configure receiving wallet, view treasury status, trigger remittance, and inspect the transaction log."
+    },
+    {
+      "name": "Regulatory Intelligence",
+      "description": "Paid endpoints \u2014 require USDC payment via x402 protocol. Send USDC to the wallet address on Base (chain 8453), then include the tx hash in X-Payment-Proof header."
+    },
+    {
+      "name": "Prediction Markets",
+      "description": "Prediction market integration \u2014 regulatory signals for Polymarket, Kalshi, and oracle data feeds. Free discovery endpoints + paid trading signals."
+    },
+    {
+      "name": "Fed Decision Package",
+      "description": "Federal Reserve / FOMC intelligence \u2014 the highest-value recurring regulatory data category. $80M+ volume per FOMC meeting. Pre-decision signals, real-time classification, resolution verdicts."
+    }
+  ]
+}
