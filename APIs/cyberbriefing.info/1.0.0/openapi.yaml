@@ -1,0 +1,531 @@
+openapi: 3.1.0
+info:
+  title: CyberBriefing API
+  description: |
+    ## CyberBriefing Threat Intelligence API
+
+    **2.7 million cybersecurity articles. 103,000 CVEs. 27 years of threat intelligence.**
+
+    A REST API for security teams, SOC analysts, and developers who need programmatic access to threat intelligence.
+
+    ### Authentication
+
+    All protected endpoints require an `X-API-Key` header. [Get a free API key](https://cyberbriefing.info/#pricing).
+
+    ### Rate Limits
+
+    | Tier       | Requests/day | Requests/min |
+    |------------|-------------|--------------|
+    | Free       | 200         | 6            |
+    | Pro        | 10,000      | 120          |
+    | Enterprise | 100,000     | 600          |
+  contact:
+    name: CyberBriefing Support
+    url: https://cyberbriefing.info/docs/api
+    email: info@cyberbriefing.info
+    x-twitter: cyberbriefing
+  license:
+    name: Commercial
+    url: https://cyberbriefing.info/terms
+  version: 1.0.0
+  x-logo:
+    url: https://cyberbriefing.info/static/logo.png
+    backgroundColor: "#0a0d14"
+  termsOfService: https://cyberbriefing.info/terms
+externalDocs:
+  description: CyberBriefing API Documentation
+  url: https://cyberbriefing.info/docs
+servers:
+  - url: https://cyberbriefing.info
+    description: Production
+tags:
+  - name: IOCs
+    description: Lookup and search Indicators of Compromise (IPs, domains, hashes, URLs)
+  - name: CVEs
+    description: CVE details with CVSS scores, exploit data, and related articles
+  - name: Threats
+    description: Threat actor profiles, campaign tracking, TTPs
+  - name: Search
+    description: Full-text search across 2.7M+ cybersecurity articles
+  - name: Briefings
+    description: AI-generated daily threat intelligence briefings
+  - name: Alerts
+    description: Set up CVE/IOC/keyword monitoring alerts
+  - name: Auth
+    description: Account creation and API key management
+  - name: Health
+    description: Service health probes
+paths:
+  /api/v1/health:
+    get:
+      tags: [Health]
+      summary: Liveness probe
+      responses:
+        '200':
+          description: Service is alive
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+  /api/v1/search:
+    get:
+      tags: [Search]
+      summary: Search threat intelligence
+      description: Full-text search across 2.7M+ cybersecurity articles, CVEs, IOCs, and threat actors.
+      security:
+        - apiKeyHeader: []
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 2
+          description: Search query (e.g. "ransomware", "CVE-2024-12345")
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+        - name: category
+          in: query
+          schema:
+            type: string
+          description: Filter by category (ransomware, cve, apt, etc.)
+        - name: since
+          in: query
+          schema:
+            type: string
+            format: date-time
+          description: Filter to results after this date
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/v1/cves:
+    get:
+      tags: [CVEs]
+      summary: List CVEs
+      security:
+        - apiKeyHeader: []
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+          description: Search by CVE ID or description
+        - name: severity
+          in: query
+          schema:
+            type: string
+            enum: [CRITICAL, HIGH, MEDIUM, LOW]
+        - name: exploits_available
+          in: query
+          schema:
+            type: boolean
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of CVEs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CVE'
+  /api/v1/cves/{cve_id}:
+    get:
+      tags: [CVEs]
+      summary: Get CVE by ID
+      security:
+        - apiKeyHeader: []
+      parameters:
+        - name: cve_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: CVE-2024-21762
+      responses:
+        '200':
+          description: CVE details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CVE'
+        '404':
+          description: CVE not found
+  /api/v1/iocs:
+    get:
+      tags: [IOCs]
+      summary: List and search IOCs
+      security:
+        - apiKeyHeader: []
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+          description: Search query (IP, domain, hash, or keyword)
+        - name: type
+          in: query
+          schema:
+            type: string
+          description: Filter by IOC type (ip, domain, url, hash_sha256, etc.)
+        - name: severity
+          in: query
+          schema:
+            type: string
+            enum: [low, medium, high, critical]
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of IOCs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IOC'
+  /api/v1/iocs/lookup/{value}:
+    get:
+      tags: [IOCs]
+      summary: Lookup IOC by value
+      description: Look up an exact IOC value (IP, domain, hash, URL).
+      security:
+        - apiKeyHeader: []
+      parameters:
+        - name: value
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 192.168.1.100
+      responses:
+        '200':
+          description: IOC records matching the value
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IOC'
+  /api/v1/iocs/batch:
+    post:
+      tags: [IOCs]
+      summary: Batch IOC lookup
+      description: Lookup multiple IOC values in one request. Free tier: 10. Pro: 500. Enterprise: 1,000.
+      security:
+        - apiKeyHeader: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [values]
+              properties:
+                values:
+                  type: array
+                  items:
+                    type: string
+                  maxItems: 1000
+                  example: ["192.168.1.1", "malicious.example.com"]
+      responses:
+        '200':
+          description: Batch lookup results
+  /api/v1/iocs/export:
+    get:
+      tags: [IOCs]
+      summary: Bulk IOC export (Pro/Enterprise)
+      description: Export all IOCs as CSV or JSON. Requires Pro or Enterprise tier.
+      security:
+        - apiKeyHeader: []
+      parameters:
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum: [csv, json]
+            default: csv
+        - name: type
+          in: query
+          schema:
+            type: string
+        - name: severity
+          in: query
+          schema:
+            type: string
+        - name: days
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Exported IOC data
+        '403':
+          description: Pro or Enterprise tier required
+  /api/v1/threats/actors:
+    get:
+      tags: [Threats]
+      summary: List threat actors
+      description: Browse APT groups, cybercriminal organizations, and nation-state actors.
+      security:
+        - apiKeyHeader: []
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+          description: Search by actor name or description
+        - name: origin_country
+          in: query
+          schema:
+            type: string
+          description: Filter by origin country code
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: List of threat actors
+  /api/v1/trends/cves:
+    get:
+      tags: [CVEs]
+      summary: Trending CVEs
+      description: Most-discussed CVEs in threat intelligence articles this week.
+      parameters:
+        - name: days
+          in: query
+          schema:
+            type: integer
+            default: 7
+            maximum: 30
+      responses:
+        '200':
+          description: Trending CVEs
+  /api/v1/briefings/daily:
+    get:
+      tags: [Briefings]
+      summary: Get daily threat briefing
+      description: AI-generated daily threat briefing for your role. Pro/Enterprise only.
+      security:
+        - apiKeyHeader: []
+      parameters:
+        - name: persona
+          in: query
+          schema:
+            type: string
+            enum: [soc_analyst, ciso, threat_hunter, pentest]
+            default: soc_analyst
+      responses:
+        '200':
+          description: Daily briefing
+        '403':
+          description: Pro or Enterprise tier required
+  /api/v1/auth/signup:
+    post:
+      tags: [Auth]
+      summary: Create account and get free API key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  minLength: 8
+      responses:
+        '201':
+          description: Account created, API key returned
+  /api/v1/auth/account:
+    get:
+      tags: [Auth]
+      summary: Get account and API key info
+      security:
+        - apiKeyHeader: []
+      responses:
+        '200':
+          description: Account details
+  /api/v1/alerts:
+    get:
+      tags: [Alerts]
+      summary: List your alerts
+      security:
+        - apiKeyHeader: []
+      responses:
+        '200':
+          description: List of alerts
+    post:
+      tags: [Alerts]
+      summary: Create an alert
+      description: Monitor CVEs, IOCs, or keywords. Free tier: 3 alerts. Pro: 50.
+      security:
+        - apiKeyHeader: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [alert_type, value]
+              properties:
+                alert_type:
+                  type: string
+                  enum: [cve, ioc, keyword]
+                value:
+                  type: string
+                  example: ransomware
+      responses:
+        '201':
+          description: Alert created
+        '403':
+          description: Alert limit reached (upgrade to Pro)
+  /api/v1/alerts/{alert_id}:
+    delete:
+      tags: [Alerts]
+      summary: Delete an alert
+      security:
+        - apiKeyHeader: []
+      parameters:
+        - name: alert_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Alert deleted
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Get a free API key at https://cyberbriefing.info/#pricing
+  schemas:
+    CVE:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        cve_id:
+          type: string
+          example: CVE-2024-21762
+        description:
+          type: string
+        severity:
+          type: string
+          enum: [CRITICAL, HIGH, MEDIUM, LOW]
+        cvss_score:
+          type: number
+        exploits_available:
+          type: boolean
+        published_at:
+          type: string
+          format: date-time
+    IOC:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          example: ip
+        value:
+          type: string
+          example: 192.168.1.100
+        severity:
+          type: string
+          enum: [low, medium, high, critical]
+        confidence:
+          type: number
+        tags:
+          type: array
+          items:
+            type: string
+        source:
+          type: string
+        description:
+          type: string
+        first_seen:
+          type: string
+          format: date-time
+        last_seen:
+          type: string
+          format: date-time
+    SearchResponse:
+      type: object
+      properties:
+        query:
+          type: string
+        total:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+    SearchResult:
+      type: object
+      properties:
+        entity_type:
+          type: string
+          enum: [article, ioc, cve, threat_actor]
+        entity_id:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+        score:
+          type: number
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: Invalid API key
