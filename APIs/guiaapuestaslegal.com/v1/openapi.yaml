@@ -1,0 +1,109 @@
+openapi: 3.1.0
+info:
+  title: Guía Apuestas Legal API
+  description: |
+    API pública de datos en tiempo real sobre casinos online legales en Argentina.
+    Incluye bonos, rollover, velocidad de retiro, métodos de pago y cuotas de partidos.
+
+    **100% gratis. Sin auth. CORS abierto.**
+
+    Docs: https://guiaapuestaslegal.com/api/
+  version: 1.0.0
+  contact:
+    name: Guía Apuestas Legal
+    url: https://guiaapuestaslegal.com
+    email: hola@guiaapuestaslegal.com
+  license:
+    name: Datos de uso libre — atribución apreciada
+    url: https://guiaapuestaslegal.com/api/
+
+servers:
+  - url: https://guiaapuestaslegal.com/wp-json/gal/v1
+    description: Producción
+
+paths:
+  /status:
+    get:
+      summary: Health check + listado de endpoints
+      operationId: getStatus
+      responses:
+        '200':
+          description: API operational
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: operational }
+                  api_version: { type: string }
+                  timestamp: { type: string, format: date-time }
+
+  /casinos:
+    get:
+      summary: Lista completa de casinos legales de Argentina
+      description: Devuelve los 6 casinos con licencia .bet.ar con todos sus datos (bonos, rollover, retiros, métodos, provincias).
+      operationId: getCasinos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fuente: { type: string }
+                  total_casinos: { type: integer }
+                  casinos:
+                    type: array
+                    items: { $ref: '#/components/schemas/Casino' }
+
+  /rollover:
+    get:
+      summary: Ranking de casinos por rollover (menor = mejor)
+      operationId: getRollover
+      responses:
+        '200':
+          description: OK
+
+  /retiros:
+    get:
+      summary: Ranking de casinos por velocidad de retiro (Mercado Pago)
+      operationId: getRetiros
+      responses:
+        '200':
+          description: OK
+
+  /bonos:
+    get:
+      summary: Ranking de casinos por valor efectivo del bono (bono / rollover)
+      operationId: getBonos
+      responses:
+        '200':
+          description: OK
+
+  /cuotas-hoy:
+    get:
+      summary: Partidos del día con cuotas comparadas de los 6 casinos
+      operationId: getCuotasHoy
+      responses:
+        '200':
+          description: OK
+
+components:
+  schemas:
+    Casino:
+      type: object
+      properties:
+        nombre: { type: string }
+        slug: { type: string }
+        sitio_web: { type: string, format: uri }
+        licencia_argentina: { type: boolean }
+        bono_bienvenida: { type: string }
+        rollover: { type: string }
+        retiro_mas_rapido: { type: string }
+        metodos_pago:
+          type: array
+          items: { type: string }
+        provincias:
+          type: array
+          items: { type: string }
