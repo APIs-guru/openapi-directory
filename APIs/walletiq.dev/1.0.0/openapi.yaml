@@ -1,0 +1,718 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "WalletIQ API",
+    "version": "1.0.0",
+    "description": "Wallet intelligence API for EVM addresses. One call returns a full wallet profile: age, activity history, DeFi protocol detection (75+ protocols), risk score, and behavioral labels across 5 EVM chains.\n\n## Authentication\n\n- **Free tier (playground):** No auth, IP rate-limited to 5 req/min.\n- **API key tier:** Create an account, pass `Authorization: Bearer <key>` header. Includes 100 monthly credits, then uses prepaid Stripe credits.\n- **Stripe billing:** Upgrade to monthly plans or buy prepaid credit packs in the dashboard.\n- **x402 / MPP:** No signup. Pay $0.005 USDC per lookup on Base or Avalanche. Standard x402 flow \u2014 client receives a `402 Payment Required` response with `payment-required` header, signs a USDC transfer, and retries with `x-payment` header.",
+    "contact": {
+      "name": "WalletIQ",
+      "url": "https://walletiq.dev"
+    },
+    "license": {
+      "name": "Proprietary"
+    },
+    "x-apisguru-categories": [
+      "finance",
+      "blockchain",
+      "tools"
+    ],
+    "x-logo": {
+      "url": "https://walletiq.dev/favicon.ico"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://walletiq-zeta.vercel.app/openapi.json",
+        "version": "3.1.0"
+      }
+    ],
+    "x-providerName": "walletiq.dev",
+    "x-serviceName": "walletiq"
+  },
+  "servers": [
+    {
+      "url": "https://walletiq-zeta.vercel.app",
+      "description": "Production (Vercel)"
+    },
+    {
+      "url": "https://walletiq.dev",
+      "description": "Production (custom domain)"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Profile",
+      "description": "Wallet profile lookups"
+    },
+    {
+      "name": "Auth",
+      "description": "API key registration and usage"
+    }
+  ],
+  "paths": {
+    "/api/v1/playground/{address}": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "operationId": "getPlaygroundProfile",
+        "summary": "Wallet profile (free playground)",
+        "description": "Returns a full wallet intelligence profile for any EVM address. No API key or payment required. IP rate-limited to 5 requests per minute. Ideal for testing and demos.",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "description": "EVM wallet address (checksummed or lowercase, 0x-prefixed, 20 bytes)",
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$",
+              "example": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Wallet profile retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletProfile"
+                },
+                "example": {
+                  "address": "0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+                  "chains": [
+                    "ethereum",
+                    "base",
+                    "arbitrum"
+                  ],
+                  "firstSeen": "2017-08-03T12:00:00.000Z",
+                  "lastActive": "2026-03-07T18:00:00.000Z",
+                  "age": {
+                    "days": 3127,
+                    "label": "OG (2017)"
+                  },
+                  "stats": {
+                    "totalTransactions": 4521,
+                    "uniqueContractsInteracted": 312,
+                    "totalValueWei": "24500000000000000000"
+                  },
+                  "defi": {
+                    "protocols": [
+                      "Uniswap V3",
+                      "Aave V3",
+                      "Lido"
+                    ],
+                    "protocolDetails": [
+                      {
+                        "name": "Uniswap V3",
+                        "category": "dex"
+                      },
+                      {
+                        "name": "Aave V3",
+                        "category": "lending"
+                      },
+                      {
+                        "name": "Lido",
+                        "category": "yield"
+                      }
+                    ],
+                    "isLiquidityProvider": true,
+                    "isStaker": true
+                  },
+                  "risk": {
+                    "score": 8,
+                    "level": "low",
+                    "flags": []
+                  },
+                  "labels": [
+                    "og",
+                    "defi-user",
+                    "multichain",
+                    "dex-trader",
+                    "yield-farmer"
+                  ],
+                  "tokenInteractions": [
+                    "USDC",
+                    "WETH",
+                    "stETH"
+                  ],
+                  "messaging": {
+                    "has_xmtp_inbox": true
+                  },
+                  "walletType": "eoa",
+                  "scanDurationMs": 1240
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/api/v1/profile/{address}": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "operationId": "getProfile",
+        "summary": "Wallet profile (API key)",
+        "description": "Returns a full wallet intelligence profile. Requires a valid API key passed as a Bearer token. Every account includes 100 monthly credits and can add Stripe prepaid credits or upgrade plans in the dashboard.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "description": "EVM wallet address (checksummed or lowercase, 0x-prefixed, 20 bytes)",
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$",
+              "example": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Wallet profile retrieved successfully",
+            "headers": {
+              "X-WalletIQ-Cache": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "HIT",
+                    "MISS"
+                  ]
+                },
+                "description": "Whether the response was served from cache"
+              },
+              "X-WalletIQ-Cache-Age": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Cache age in seconds (only present on cache HIT)"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletProfile"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/api/v1/x402/profile/{address}": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "operationId": "getX402Profile",
+        "summary": "Wallet profile (x402 / MPP pay-per-call)",
+        "description": "Returns a full wallet intelligence profile. Payment via x402-compatible flows \u2014 $0.005 USDC per call on Base mainnet or Avalanche C-Chain. No API key or account required.\n\n**Flow:**\n1. Send GET request without payment header.\n2. Receive `402 Payment Required` with `payment-required` header containing Base64-encoded payment requirements (supported chains, token address, payee).\n3. Sign and submit a USDC transfer using a compatible x402 or MPP client.\n4. Retry the request with the `x-payment` header containing your signed payment proof.\n5. Receive the wallet profile + settlement confirmation.",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "description": "EVM wallet address (checksummed or lowercase, 0x-prefixed, 20 bytes)",
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$",
+              "example": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+            }
+          },
+          {
+            "name": "x-payment",
+            "in": "header",
+            "required": false,
+            "description": "Base64-encoded x402 payment proof (EIP-3009 signed USDC transfer). Omit on first request to receive payment requirements.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment verified \u2014 wallet profile returned",
+            "headers": {
+              "X-WalletIQ-Payment": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Payment method used (\"x402\")"
+              },
+              "X-WalletIQ-Cache": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "HIT",
+                    "MISS"
+                  ]
+                }
+              },
+              "x-payment-response": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Base64-encoded x402 settlement confirmation"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletProfile"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "402": {
+            "description": "Payment required. Decode the `payment-required` header (Base64 JSON) to get payment terms.",
+            "headers": {
+              "payment-required": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Base64-encoded JSON containing payment requirements: price, accepted chains/tokens, payee address, facilitator URLs"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Payment required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/api/v1/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "registerApiKey",
+        "summary": "Register for an API key",
+        "description": "Creates a WalletIQ account and returns the first API key. New accounts start on the free plan with 100 monthly credits.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "dev@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "example": "correct-horse-battery-staple"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "API key created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "apiKey": {
+                      "type": "string",
+                      "example": "wiq_abc123..."
+                    },
+                    "tier": {
+                      "type": "string",
+                      "example": "free"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "dashboardUrl": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "409": {
+            "description": "Email already registered"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/api/v1/usage": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "getUsage",
+        "summary": "Check API key usage",
+        "description": "Returns usage statistics for the authenticated API key.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usage data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "calls_today": {
+                      "type": "integer"
+                    },
+                    "calls_total": {
+                      "type": "integer"
+                    },
+                    "daily_limit": {
+                      "type": "integer"
+                    },
+                    "reset_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "API key from walletiq.dev/api-keys. Format: `Authorization: Bearer wiq_...`"
+      }
+    },
+    "schemas": {
+      "ProtocolDetail": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Protocol name (e.g. \"Uniswap V3\", \"Aave V3\", \"Lido\")"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "dex",
+              "lending",
+              "yield",
+              "bridge",
+              "nft",
+              "aggregator",
+              "other"
+            ]
+          }
+        }
+      },
+      "WalletProfile": {
+        "type": "object",
+        "description": "Full intelligence profile for an EVM wallet address",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Lowercase EVM address",
+            "example": "0xd8da6bf26964af9d7eed9e03e53415d37aa96045"
+          },
+          "chains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "EVM chains where this wallet has been active",
+            "example": [
+              "ethereum",
+              "base",
+              "arbitrum"
+            ]
+          },
+          "firstSeen": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Timestamp of the wallet's first transaction (ISO 8601)"
+          },
+          "lastActive": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Timestamp of the wallet's most recent transaction"
+          },
+          "age": {
+            "type": "object",
+            "properties": {
+              "days": {
+                "type": "integer",
+                "description": "Wallet age in days"
+              },
+              "label": {
+                "type": "string",
+                "description": "Human-readable age label",
+                "example": "OG (2017)"
+              }
+            }
+          },
+          "stats": {
+            "type": "object",
+            "properties": {
+              "totalTransactions": {
+                "type": "integer"
+              },
+              "uniqueContractsInteracted": {
+                "type": "integer"
+              },
+              "totalValueWei": {
+                "type": "string",
+                "description": "Cumulative value of all outbound transactions in wei (string to avoid overflow)"
+              }
+            }
+          },
+          "defi": {
+            "type": "object",
+            "properties": {
+              "protocols": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Names of DeFi protocols detected in transaction history (75+ protocols tracked)"
+              },
+              "protocolDetails": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProtocolDetail"
+                }
+              },
+              "isLiquidityProvider": {
+                "type": "boolean",
+                "description": "Has provided liquidity to an AMM (Uniswap, Curve, Balancer, etc.)"
+              },
+              "isStaker": {
+                "type": "boolean",
+                "description": "Has staked ETH via Lido, Rocket Pool, EigenLayer, ether.fi, etc."
+              }
+            }
+          },
+          "risk": {
+            "type": "object",
+            "properties": {
+              "score": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100,
+                "description": "Risk score 0\u2013100. Lower = safer/more established. Computed from age, activity, diversity, and risk flags."
+              },
+              "level": {
+                "type": "string",
+                "enum": [
+                  "low",
+                  "medium-low",
+                  "medium",
+                  "high",
+                  "critical"
+                ]
+              },
+              "flags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Risk flags (e.g. mixer usage, known scam interactions)"
+              }
+            }
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Behavioral labels derived from on-chain activity",
+            "example": [
+              "og",
+              "defi-user",
+              "multichain",
+              "dex-trader",
+              "yield-farmer",
+              "whale",
+              "nft-collector"
+            ]
+          },
+          "tokenInteractions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Token symbols (or addresses) seen in ERC-20 transfer history"
+          },
+          "messaging": {
+            "type": "object",
+            "properties": {
+              "has_xmtp_inbox": {
+                "type": "boolean",
+                "nullable": true,
+                "description": "Whether the wallet has an XMTP inbox (null = check failed)"
+              }
+            }
+          },
+          "walletType": {
+            "type": "string",
+            "enum": [
+              "eoa",
+              "contract",
+              "unknown"
+            ],
+            "description": "Wallet type: externally owned account, smart contract, or unknown"
+          },
+          "scanDurationMs": {
+            "type": "integer",
+            "description": "Time taken to generate the profile in milliseconds"
+          },
+          "cached": {
+            "type": "boolean",
+            "description": "Present and true when the response was served from cache (playground/x402 endpoints)"
+          },
+          "cachedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Timestamp when this result was cached (present when cached=true)"
+          }
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Invalid request (e.g. malformed address)",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Missing or invalid API key",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      },
+      "RateLimited": {
+        "description": "Rate limit exceeded",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Rate limit exceeded"
+                }
+              }
+            }
+          }
+        }
+      },
+      "InternalError": {
+        "description": "Server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
