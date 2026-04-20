@@ -1,0 +1,285 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Site Informant Public API",
+    "version": "1.0.0",
+    "description": "Read-only endpoints that expose website uptime status, SSL expiration info, and public plan details for Site Informant.",
+    "contact": {
+      "name": "Site Informant Support",
+      "email": "informant@siteinformant.com",
+      "url": "https://siteinformant.com"
+    },
+    "termsOfService": "https://siteinformant.com/terms",
+    "license": {
+      "name": "Proprietary",
+      "url": "https://siteinformant.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.siteinformant.com",
+      "description": "Production"
+    },
+    {
+      "url": "http://localhost:5000",
+      "description": "Local"
+    }
+  ],
+  "externalDocs": {
+    "description": "Website & docs",
+    "url": "https://siteinformant.com"
+  },
+  "tags": [
+    {
+      "name": "Public",
+      "description": "Public, anonymous, read-only endpoints. Privacy is respected via per-site opt-in."
+    }
+  ],
+  "paths": {
+    "/api/public/status/{domain}": {
+      "get": {
+        "tags": [ "Public" ],
+        "summary": "Get public status for a monitored domain",
+        "description": "Returns uptime percentage calculated from recent checks, current online/offline state, average response time, and SSL certificate details (if applicable). Only domains explicitly opted-in by the site owner are returned.",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "example.com"
+            },
+            "description": "Domain without scheme. If a full URL is provided, the host is extracted."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status for the requested domain.",
+            "headers": {
+              "Cache-Control": {
+                "description": "Clients may cache this response for a short period.",
+                "schema": {
+                  "type": "string",
+                  "example": "public, max-age=30"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PublicStatusResponse" },
+                "examples": {
+                  "ok": {
+                    "summary": "Typical response",
+                    "value": {
+                      "domain": "example.com",
+                      "uptimePercent": 99.92,
+                      "isOnline": true,
+                      "lastCheckUtc": "2025-11-03T07:45:00Z",
+                      "averageResponseMs": 238,
+                      "sslExpiresUtc": "2026-01-04T00:00:00Z",
+                      "sslIssuer": "Let's Encrypt"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Domain not found or not public.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+                "examples": { "notPublic": { "value": { "error": "Not found or not public." } } }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+                "examples": { "bad": { "value": { "error": "Domain is required." } } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/public/plans": {
+      "get": {
+        "tags": [ "Public" ],
+        "summary": "List public pricing plans",
+        "description": "Returns the current public plans, their monthly price, and included site counts.",
+        "responses": {
+          "200": {
+            "description": "Plan list.",
+            "headers": {
+              "Cache-Control": {
+                "description": "Clients may cache the plan list.",
+                "schema": {
+                  "type": "string",
+                  "example": "public, max-age=3600"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PublicPlansResponse" },
+                "examples": {
+                  "plans": {
+                    "value": {
+                      "plans": [
+                        {
+                          "name": "Free",
+                          "monthlyPrice": 0.0,
+                          "includedSites": 1,
+                          "notes": "1 site free."
+                        },
+                        {
+                          "name": "Pay-As-You-Go",
+                          "monthlyPrice": 1.0,
+                          "includedSites": 5,
+                          "notes": "5-site blocks."
+                        },
+                        {
+                          "name": "Professional",
+                          "monthlyPrice": 9.99,
+                          "includedSites": 75,
+                          "notes": "Great for teams."
+                        },
+                        {
+                          "name": "Enterprise",
+                          "monthlyPrice": 29.99,
+                          "includedSites": 200,
+                          "notes": "Agencies & large portfolios."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/public/example": {
+      "get": {
+        "tags": [ "Public" ],
+        "summary": "Sample status payload",
+        "description": "Provides a representative status response for testing and quick integration checks.",
+        "responses": {
+          "200": {
+            "description": "Example status payload.",
+            "headers": {
+              "Cache-Control": {
+                "description": "Clients may cache this example payload.",
+                "schema": {
+                  "type": "string",
+                  "example": "public, max-age=300"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PublicStatusResponse" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PublicStatusResponse": {
+        "type": "object",
+        "description": "Public view of recent availability and certificate data for a domain.",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "description": "Normalized domain (host)."
+          },
+          "uptimePercent": {
+            "type": "number",
+            "format": "double",
+            "description": "Percentage of successful checks across recent samples (0–100)."
+          },
+          "isOnline": {
+            "type": "boolean",
+            "description": "Latest check result."
+          },
+          "lastCheckUtc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Timestamp of the most recent check in UTC (null if unavailable)."
+          },
+          "averageResponseMs": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Average response time (ms) across recent samples, excluding zeros (null if unavailable)."
+          },
+          "sslExpiresUtc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "SSL certificate expiration in UTC (null if not HTTPS or unknown)."
+          },
+          "sslIssuer": {
+            "type": "string",
+            "nullable": true,
+            "description": "Certificate issuer if known."
+          }
+        },
+        "required": [ "domain", "uptimePercent", "isOnline" ]
+      },
+      "PublicPlansResponse": {
+        "type": "object",
+        "properties": {
+          "plans": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/PublicPlan" },
+            "description": "Available public plans."
+          }
+        },
+        "required": [ "plans" ]
+      },
+      "PublicPlan": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Plan name."
+          },
+          "monthlyPrice": {
+            "type": "number",
+            "format": "double",
+            "description": "USD monthly price."
+          },
+          "includedSites": {
+            "type": "integer",
+            "description": "Included site count."
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true,
+            "description": "Short description."
+          }
+        },
+        "required": [ "name", "monthlyPrice", "includedSites" ]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Short error message."
+          }
+        },
+        "required": [ "error" ]
+      }
+    }
+  }
+}
