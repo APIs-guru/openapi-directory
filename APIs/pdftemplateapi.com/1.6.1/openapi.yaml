@@ -1,0 +1,1600 @@
+openapi: 3.1.0
+info:
+  title: TemplateFox API
+  description: Generate beautiful PDFs from HTML/CSS templates with Jinja2 via API. Design once, generate thousands.
+  version: 1.6.1
+  contact:
+    name: TemplateFox Support
+    email: support@pdftemplateapi.com
+    url: https://pdftemplateapi.com
+  x-apisguru-categories:
+  - developer_tools
+  x-logo:
+    url: https://pdftemplateapi.com/icon-200x200.png
+  x-origin:
+  - format: openapi
+    url: https://api.pdftemplateapi.com/openapi.json
+    version: '3.1'
+  x-providerName: pdftemplateapi.com
+servers:
+- url: https://api.pdftemplateapi.com
+  description: Production
+paths:
+  /v1/pdf/create:
+    post:
+      tags:
+      - PDF
+      summary: Generate PDF from template
+      description: 'Generate a PDF from a saved template with dynamic data.
+
+
+        **Authentication:** API Key required (`x-api-key` header)
+
+
+        ## Request Body
+
+
+        | Field | Type | Required | Description |
+
+        |-------|------|----------|-------------|
+
+        | `template_id` | string | ✅ Yes | Template short ID (12 characters) |
+
+        | `data` | object | ✅ Yes | Key-value data to render in template |
+
+        | `export_type` | string | No | `url` (default) or `binary` |
+
+        | `expiration` | integer | No | URL expiration in seconds (60-604800, default: 86400) |
+
+
+        ## Export Types
+
+        - `url` (default): PDF is uploaded to CDN, returns JSON with URL
+
+        - `binary`: Returns raw PDF bytes directly
+
+
+        **Credits:** 1 credit deducted per successful generation.
+
+
+        **Rate Limits:** 60 requests/min (free), 120 requests/min (paid). Headers included in response.'
+      operationId: createPdf
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePdfRequest'
+        required: true
+      responses:
+        '200':
+          description: PDF generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePdfResponse'
+              example:
+                url: https://cdn.pdftemplateapi.com/generated/abc123.pdf
+                filename: invoice-001.pdf
+                credits_remaining: 99
+                expires_in: 86400
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+              description: Binary PDF content (when export_type=binary)
+        '402':
+          description: Insufficient credits
+        '403':
+          description: Access denied - not your template
+        '404':
+          description: Template not found
+        '429':
+          description: Rate limit exceeded
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - ApiKeyAuth: []
+  /v1/pdf/create-async:
+    post:
+      tags:
+      - PDF Async
+      summary: Generate PDF asynchronously
+      description: "Queue a PDF generation job for async processing.\n\n**Authentication:** API Key required (`x-api-key`\
+        \ header)\n\n## How It Works\n\n1. Submit a job with template and data\n2. Receive a `job_id` immediately\n3. Poll\
+        \ `/v1/pdf/status/{job_id}` for completion\n4. Optionally receive a webhook notification\n\n## When to Use Async\n\
+        \nUse async generation when:\n- Processing large documents or batches\n- You can't wait for synchronous response\n\
+        - You want webhook notifications\n\n## Webhooks\n\nIf `webhook_url` is provided, we'll POST to it when the job completes\
+        \ or fails:\n\n```json\n{\n    \"event\": \"pdf.completed\",\n    \"job_id\": \"...\",\n    \"status\": \"completed\"\
+        ,\n    \"result\": {\n        \"url\": \"https://...\",\n        \"filename\": \"invoice.pdf\"\n    }\n}\n```\n\n\
+        Webhooks include HMAC-SHA256 signature in `X-TemplateFox-Signature` header\nif you provide a `webhook_secret`.\n\n\
+        **Credits:** 1 credit deducted immediately (refunded if job fails permanently)."
+      operationId: createPdfAsync
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAsyncPdfRequest'
+        required: true
+      responses:
+        '200':
+          description: Job queued successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAsyncPdfResponse'
+              example:
+                job_id: 550e8400-e29b-41d4-a716-446655440000
+                status: pending
+                credits_remaining: 99
+        '402':
+          description: Insufficient credits
+        '403':
+          description: Access denied - not your template
+        '404':
+          description: Template not found
+        '429':
+          description: Rate limit exceeded
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - ApiKeyAuth: []
+  /v1/pdf/jobs/{job_id}:
+    get:
+      tags:
+      - PDF Async
+      summary: Get PDF job status
+      description: 'Get the current status of an async PDF generation job.
+
+
+        **Authentication:** API Key required (`x-api-key` header)
+
+
+        ## Status Values
+
+
+        | Status | Description |
+
+        |--------|-------------|
+
+        | `pending` | Job is queued, waiting to be processed |
+
+        | `processing` | Job is being processed |
+
+        | `completed` | PDF generated successfully |
+
+        | `failed` | Job failed (check error_message) |
+
+
+        ## Polling Recommendations
+
+
+        - Poll every 1-2 seconds for small documents
+
+        - Poll every 5-10 seconds for large documents
+
+        - Consider using webhooks instead of polling'
+      operationId: getPdfJob
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Job Id
+      responses:
+        '200':
+          description: Job status retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatusResponse'
+        '404':
+          description: Job not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/pdf/jobs:
+    get:
+      tags:
+      - PDF Async
+      summary: List PDF jobs
+      description: 'List async PDF generation jobs for your team.
+
+
+        **Authentication:** API Key required (`x-api-key` header)
+
+
+        Supports pagination and filtering by status.'
+      operationId: listPdfJobs
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Offset
+      - name: status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/JobStatus'
+          - type: 'null'
+          title: Status
+      responses:
+        '200':
+          description: Jobs list retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobListResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/templates:
+    get:
+      tags:
+      - Templates
+      summary: List templates
+      description: 'List all templates for the authenticated user.
+
+
+        **Authentication:** API Key required (`x-api-key` header) or JWT token
+
+
+        **Usage:** This endpoint is designed for no-code tools (Zapier, Make, n8n) to populate
+
+        template selection dropdowns.
+
+
+        **No credits consumed:** This is a read-only endpoint.
+
+
+        **Rate Limits:** 60 requests/min (free), 120 requests/min (paid). Headers included in response.'
+      operationId: listTemplates
+      responses:
+        '200':
+          description: List of templates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplatesListResponse'
+              example:
+                templates:
+                - id: HMQywVpZxqAM
+                  name: Invoice Template
+                  created_at: '2024-01-15T10:30:00Z'
+                  updated_at: '2024-01-20T14:45:00Z'
+                - id: xK9mNpQrStUv
+                  name: Contract Template
+                  created_at: '2024-02-01T09:00:00Z'
+                  updated_at: '2024-02-01T09:00:00Z'
+        '403':
+          description: Invalid or missing API key
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - ApiKeyAuth: []
+  /v1/templates/{template_id}/fields:
+    get:
+      tags:
+      - Templates
+      summary: Get template fields
+      description: 'Get the dynamic fields for a template.
+
+
+        **Authentication:** API Key required (`x-api-key` header) or JWT token
+
+
+        **Usage:** This endpoint is designed for no-code tool integrations (Zapier, Make.com).
+
+        It returns an array of field definitions used to dynamically generate input forms.
+
+
+        **Response format:** Array of field objects with: `key`, `label`, `type`, `required`,
+
+        optional `helpText`, and optional `spec` (for array fields).
+
+
+        **Field types:**
+
+        - `string`: Text input
+
+        - `integer`: Integer number
+
+        - `number`: Decimal number
+
+        - `boolean`: True/False checkbox
+
+        - `array`: Array of items with nested `spec` defining item structure
+
+
+        **Array fields:** When a field is an array of objects, the response includes a `spec`
+
+        array defining the structure of each item (name, label, type for each nested field).
+
+
+        **No credits consumed:** This is a read-only endpoint.
+
+
+        **Rate Limits:** 60 requests/min (free), 120 requests/min (paid). Headers included in response.'
+      operationId: getTemplateFields
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: template_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Template Id
+      responses:
+        '200':
+          description: List of template fields
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TemplateField'
+                title: Response Gettemplatefields
+              example:
+              - key: customer_name
+                label: Customer Name
+                type: string
+                required: true
+                helpText: e.g., John Doe
+              - key: total_amount
+                label: Total Amount
+                type: number
+                required: false
+                helpText: e.g., 1234.56
+              - key: items
+                label: Items
+                type: array
+                required: false
+                helpText: 'Array of items with fields: qty, description, price'
+                spec:
+                - name: qty
+                  label: Quantity
+                  type: number
+                - name: description
+                  label: Description
+                  type: text
+                - name: price
+                  label: Price
+                  type: number
+        '403':
+          description: Invalid or missing API key
+        '404':
+          description: Template not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/account:
+    get:
+      tags:
+      - Account
+      summary: Get account info
+      description: 'Get account information including remaining credits.
+
+
+        **Authentication:** API Key required (`x-api-key` header) or JWT token
+
+
+        **Usage:** Check credit balance before performing operations.
+
+
+        **No credits consumed:** This is a read-only endpoint.
+
+
+        **Rate Limits:** 60 requests/min (free), 120 requests/min (paid). Headers included in response.'
+      operationId: getAccount
+      responses:
+        '200':
+          description: Account information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountInfoResponse'
+              example:
+                credits: 150
+                email: user@example.com
+        '403':
+          description: Invalid or missing API key
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - ApiKeyAuth: []
+  /v1/account/transactions:
+    get:
+      tags:
+      - Account
+      summary: List transactions
+      description: 'List transaction history for the authenticated user.
+
+
+        **Authentication:** API Key required (`x-api-key` header) or JWT token
+
+
+        **Pagination:** Use `limit` and `offset` query parameters.
+
+
+        **Transaction types:**
+
+        - `PDFGEN`: PDF generation (consumes credits)
+
+        - `REFUND`: Credit refund (on failed generation)
+
+        - `PURCHASE`: Credit purchase
+
+        - `BONUS`: Bonus credits
+
+
+        **Credits field:**
+
+        - Positive value = credits consumed
+
+        - Negative value = credits added
+
+
+        **No credits consumed:** This is a read-only endpoint.
+
+
+        **Rate Limits:** 60 requests/min (free), 120 requests/min (paid). Headers included in response.'
+      operationId: listTransactions
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 1
+          description: Number of records to return
+          default: 300
+          title: Limit
+        description: Number of records to return
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          description: Number of records to skip
+          default: 0
+          title: Offset
+        description: Number of records to skip
+      responses:
+        '200':
+          description: Transaction history
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionsResponse'
+              example:
+                transactions:
+                - transaction_ref: 550e8400-e29b-41d4-a716-446655440000
+                  transaction_type: PDFGEN
+                  template_id: HMQywVpZxqAM
+                  exec_tm: 1250
+                  credits: 1
+                  created_at: '2024-01-20T14:30:00Z'
+                - transaction_ref: 660e8400-e29b-41d4-a716-446655440001
+                  transaction_type: PURCHASE
+                  credits: -100
+                  created_at: '2024-01-15T10:00:00Z'
+                total: 42
+                limit: 300
+                offset: 0
+        '403':
+          description: Invalid or missing API key
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/integrations/s3:
+    get:
+      tags:
+      - Integrations
+      summary: Get S3 configuration
+      description: 'Get current S3 storage configuration.
+
+
+        **Authentication:** API Key required (`x-api-key` header)
+
+
+        **Usage:** Retrieve your S3 integration settings. Secret access key is masked for security.
+
+
+        **Returns 404** if S3 is not configured.
+
+
+        **No credits consumed:** This is a read-only endpoint.
+
+
+        **Rate Limits:** 60 requests/min (free), 120 requests/min (paid). Headers included in response.'
+      operationId: getS3Config
+      responses:
+        '200':
+          description: S3 configuration retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3ConfigResponse'
+              example:
+                configured: true
+                endpoint_url: https://s3.amazonaws.com
+                access_key_id: AKIAIOSFODNN7EXAMPLE
+                secret_access_key_masked: wJal...EKEY
+                bucket_name: my-pdf-bucket
+                default_prefix: generated/pdfs/
+        '404':
+          description: S3 is not configured
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - ApiKeyAuth: []
+    post:
+      tags:
+      - Integrations
+      summary: Save S3 configuration
+      description: 'Save or update S3-compatible storage configuration.
+
+
+        **Authentication:** API Key required (`x-api-key` header)
+
+
+        **Usage:** Configure your S3-compatible storage to receive generated PDFs directly
+
+        in your own bucket instead of the default CDN.
+
+
+        **Supported providers:**
+
+        - Amazon S3
+
+        - DigitalOcean Spaces
+
+        - Cloudflare R2
+
+        - MinIO
+
+        - Any S3-compatible storage
+
+
+        **Secret key behavior:**
+
+        - For new configuration: `secret_access_key` is required
+
+        - For updates: Omit `secret_access_key` to keep existing value
+
+
+        **No credits consumed:** This is a configuration endpoint.
+
+
+        **Rate Limits:** 60 requests/min (free), 120 requests/min (paid). Headers included in response.'
+      operationId: saveS3Config
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/S3ConfigRequest'
+        required: true
+      responses:
+        '200':
+          description: Configuration saved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3SuccessResponse'
+              example:
+                success: true
+        '400':
+          description: Invalid configuration (e.g., missing secret key for new config)
+        '429':
+          description: Rate limit exceeded
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - ApiKeyAuth: []
+    delete:
+      tags:
+      - Integrations
+      summary: Delete S3 configuration
+      description: 'Delete S3 storage configuration.
+
+
+        **Authentication:** API Key required (`x-api-key` header)
+
+
+        **Usage:** Remove your S3 integration. Generated PDFs will use the default CDN storage after deletion.
+
+
+        **Warning:** This action is irreversible. You''ll need to reconfigure S3 to use it again.
+
+
+        **No credits consumed:** This is a configuration endpoint.
+
+
+        **Rate Limits:** 60 requests/min (free), 120 requests/min (paid). Headers included in response.'
+      operationId: deleteS3Config
+      responses:
+        '200':
+          description: Configuration deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3SuccessResponse'
+              example:
+                success: true
+        '429':
+          description: Rate limit exceeded
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - ApiKeyAuth: []
+  /v1/integrations/s3/test:
+    post:
+      tags:
+      - Integrations
+      summary: Test S3 connection
+      description: 'Test S3 connection with stored credentials.
+
+
+        **Authentication:** API Key required (`x-api-key` header)
+
+
+        **Usage:** Verify your S3 configuration is working correctly. The test will:
+
+        1. Connect to the endpoint
+
+        2. Verify bucket access
+
+        3. Check write permissions by uploading a small test file
+
+
+        **Prerequisite:** S3 must be configured first using `POST /v1/integrations/s3`
+
+
+        **No credits consumed:** This is a diagnostic endpoint.
+
+
+        **Rate Limits:** 60 requests/min (free), 120 requests/min (paid). Headers included in response.'
+      operationId: testS3Connection
+      responses:
+        '200':
+          description: Connection test successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3TestResponse'
+              example:
+                success: true
+                message: Connection successful. Bucket is accessible.
+        '400':
+          description: Connection test failed
+          content:
+            application/json:
+              examples:
+                not_configured:
+                  summary: S3 not configured
+                  value:
+                    detail: S3 is not configured
+                connection_failed:
+                  summary: Connection failed
+                  value:
+                    detail: Could not connect to endpoint
+                bucket_not_found:
+                  summary: Bucket not found
+                  value:
+                    detail: Bucket 'my-bucket' not found
+        '429':
+          description: Rate limit exceeded
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - ApiKeyAuth: []
+components:
+  schemas:
+    AccountInfoResponse:
+      properties:
+        credits:
+          type: integer
+          title: Credits
+          description: Remaining credits
+          examples:
+          - 150
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+          description: User email address
+          examples:
+          - user@example.com
+      type: object
+      required:
+      - credits
+      title: AccountInfoResponse
+      description: Response for account info endpoint
+      examples:
+      - credits: 150
+        email: user@example.com
+    CreateAsyncPdfRequest:
+      properties:
+        template_id:
+          type: string
+          maxLength: 12
+          minLength: 12
+          title: Template ID
+          description: '**Required.** Template short ID (12 characters)'
+          examples:
+          - HMQywVpZxqAM
+        data:
+          additionalProperties: true
+          type: object
+          title: Template Data
+          description: '**Required.** Key-value data to render in the template.'
+          examples:
+          - invoice_number: INV-001
+            name: John Doe
+        export_type:
+          $ref: '#/components/schemas/app__routers__v1__pdf_async__ExportType'
+          title: Export Type
+          description: Export format. Currently only `url` is supported for async.
+          default: url
+        expiration:
+          type: integer
+          maximum: 604800.0
+          minimum: 60.0
+          title: URL Expiration
+          description: 'URL expiration in seconds (60-604800). Default: 86400 (24 hours).'
+          default: 86400
+          examples:
+          - 86400
+          - 3600
+        filename:
+          anyOf:
+          - type: string
+            maxLength: 100
+            pattern: ^[a-zA-Z0-9_\-\.]+$
+          - type: 'null'
+          title: Filename
+          description: Custom filename for the PDF (without .pdf extension).
+          examples:
+          - invoice-123
+          - report_2024
+        store_s3:
+          type: boolean
+          title: Store to S3
+          description: Upload to your configured S3 bucket instead of CDN.
+          default: false
+        s3_filepath:
+          anyOf:
+          - type: string
+            maxLength: 500
+            pattern: ^[a-zA-Z0-9_\-\./]+$
+          - type: 'null'
+          title: S3 File Path
+          description: Custom path prefix in your S3 bucket.
+        s3_bucket:
+          anyOf:
+          - type: string
+            maxLength: 63
+            minLength: 3
+            pattern: ^[a-z0-9][a-z0-9.\-]*[a-z0-9]$
+          - type: 'null'
+          title: S3 Bucket Override
+          description: Override the default bucket configured in your S3 integration.
+        webhook_url:
+          anyOf:
+          - type: string
+            maxLength: 2083
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Webhook URL
+          description: URL to receive POST notification when job completes or fails. Must be a public HTTPS URL.
+          examples:
+          - https://example.com/webhooks/pdf
+        webhook_secret:
+          anyOf:
+          - type: string
+            maxLength: 256
+            minLength: 16
+          - type: 'null'
+          title: Webhook Secret
+          description: Secret for HMAC-SHA256 signing of webhook payloads (min 16 chars).
+      type: object
+      required:
+      - template_id
+      - data
+      title: CreateAsyncPdfRequest
+      description: Request model for async PDF generation
+      examples:
+      - data:
+          invoice_number: INV-001
+          name: John Doe
+        expiration: 86400
+        export_type: url
+        filename: invoice-001
+        template_id: HMQywVpZxqAM
+        webhook_url: https://example.com/webhooks/pdf
+    CreateAsyncPdfResponse:
+      properties:
+        job_id:
+          type: string
+          title: Job Id
+          description: Unique job identifier for status polling
+          examples:
+          - 550e8400-e29b-41d4-a716-446655440000
+        status:
+          $ref: '#/components/schemas/JobStatus'
+          description: Initial job status (always 'pending')
+          examples:
+          - pending
+        credits_remaining:
+          type: integer
+          title: Credits Remaining
+          description: Remaining credits after this request
+          examples:
+          - 99
+      type: object
+      required:
+      - job_id
+      - status
+      - credits_remaining
+      title: CreateAsyncPdfResponse
+      description: Response for async PDF creation
+    CreatePdfRequest:
+      properties:
+        template_id:
+          type: string
+          maxLength: 12
+          minLength: 12
+          title: Template ID
+          description: '**Required.** Template short ID (12 characters)'
+          examples:
+          - HMQywVpZxqAM
+        data:
+          additionalProperties: true
+          type: object
+          title: Template Data
+          description: '**Required.** Key-value data to render in the template. Keys must match template variables.'
+          examples:
+          - invoice_number: INV-001
+            name: John Doe
+        export_type:
+          $ref: '#/components/schemas/app__routers__v1__pdf__ExportType'
+          title: Export Type
+          description: 'Export format: `url` uploads to CDN and returns URL, `binary` returns raw PDF bytes'
+          default: url
+        expiration:
+          type: integer
+          maximum: 604800.0
+          minimum: 60.0
+          title: URL Expiration
+          description: 'URL expiration in seconds. Min: 60 (1 min), Max: 604800 (7 days). Only applies to `url` export type.'
+          default: 86400
+          examples:
+          - 86400
+          - 3600
+        filename:
+          anyOf:
+          - type: string
+            maxLength: 100
+            pattern: ^[a-zA-Z0-9_\-\.]+$
+          - type: 'null'
+          title: Filename
+          description: Custom filename for the PDF (without .pdf extension). If not provided, defaults to 'document'. Only
+            applies to `url` export type.
+          examples:
+          - invoice-123
+          - report_2024
+        store_s3:
+          type: boolean
+          title: Store to S3
+          description: Upload to your configured S3 bucket instead of CDN
+          default: false
+        s3_filepath:
+          anyOf:
+          - type: string
+            maxLength: 500
+            pattern: ^[a-zA-Z0-9_\-\./]+$
+          - type: 'null'
+          title: S3 File Path
+          description: Custom path prefix in your S3 bucket. Uses default prefix if not provided.
+        s3_bucket:
+          anyOf:
+          - type: string
+            maxLength: 63
+            minLength: 3
+            pattern: ^[a-z0-9][a-z0-9.\-]*[a-z0-9]$
+          - type: 'null'
+          title: S3 Bucket Override
+          description: Override the default bucket configured in your S3 integration.
+      type: object
+      required:
+      - template_id
+      - data
+      title: CreatePdfRequest
+      description: Request model for PDF generation
+      examples:
+      - data:
+          invoice_number: INV-001
+          name: John Doe
+        expiration: 86400
+        export_type: url
+        filename: invoice-001
+        template_id: HMQywVpZxqAM
+    CreatePdfResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+          description: Signed URL to download the PDF (expires after specified time)
+          examples:
+          - https://cdn.pdftemplateapi.com/generated/abc123/invoice.pdf
+        filename:
+          type: string
+          title: Filename
+          description: Filename of the generated PDF
+          examples:
+          - invoice-001.pdf
+        credits_remaining:
+          type: integer
+          title: Credits Remaining
+          description: Remaining credits after this request
+          examples:
+          - 99
+        expires_in:
+          type: integer
+          title: Expires In
+          description: Seconds until URL expires
+          examples:
+          - 86400
+      type: object
+      required:
+      - url
+      - filename
+      - credits_remaining
+      - expires_in
+      title: CreatePdfResponse
+      description: Response for URL export type
+      examples:
+      - credits_remaining: 99
+        expires_in: 86400
+        filename: invoice-001.pdf
+        url: https://cdn.pdftemplateapi.com/generated/abc123/invoice.pdf
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    JobListResponse:
+      properties:
+        jobs:
+          items:
+            $ref: '#/components/schemas/JobStatusResponse'
+          type: array
+          title: Jobs
+          description: List of jobs
+        total:
+          type: integer
+          title: Total
+          description: Total number of jobs matching filter
+        limit:
+          type: integer
+          title: Limit
+          description: Page size
+        offset:
+          type: integer
+          title: Offset
+          description: Page offset
+      type: object
+      required:
+      - jobs
+      - total
+      - limit
+      - offset
+      title: JobListResponse
+      description: Response for job list query
+    JobStatus:
+      type: string
+      enum:
+      - pending
+      - processing
+      - completed
+      - failed
+      title: JobStatus
+      description: PDF job status values
+    JobStatusResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Job ID
+        status:
+          $ref: '#/components/schemas/JobStatus'
+          description: Current job status
+        template_id:
+          type: string
+          title: Template Id
+          description: Template used for generation
+        export_type:
+          type: string
+          title: Export Type
+          description: Export type (url)
+        filename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Filename
+          description: Custom filename if provided
+        store_s3:
+          type: boolean
+          title: Store S3
+          description: Whether S3 storage was requested
+        created_at:
+          type: string
+          title: Created At
+          description: Job creation timestamp (ISO 8601)
+        updated_at:
+          type: string
+          title: Updated At
+          description: Last update timestamp (ISO 8601)
+        completed_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Completed At
+          description: Completion timestamp (ISO 8601)
+        result_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Result Url
+          description: Signed URL to download PDF
+        result_filename:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Result Filename
+          description: Final filename
+        result_expires_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Result Expires At
+          description: URL expiration (ISO 8601)
+        result_s3_bucket:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Result S3 Bucket
+          description: S3 bucket (if store_s3)
+        result_s3_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Result S3 Key
+          description: S3 object key (if store_s3)
+        error_message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Message
+          description: Error description if failed
+        error_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Code
+          description: Error code if failed
+      type: object
+      required:
+      - id
+      - status
+      - template_id
+      - export_type
+      - store_s3
+      - created_at
+      - updated_at
+      title: JobStatusResponse
+      description: Response for job status query
+    S3ConfigRequest:
+      properties:
+        endpoint_url:
+          type: string
+          maxLength: 200
+          minLength: 10
+          pattern: ^https://
+          title: Endpoint Url
+          description: S3-compatible endpoint URL. Must start with https://
+          examples:
+          - https://s3.amazonaws.com
+          - https://nyc3.digitaloceanspaces.com
+        access_key_id:
+          type: string
+          maxLength: 128
+          minLength: 16
+          title: Access Key Id
+          description: Access key ID for S3 authentication
+          examples:
+          - AKIAIOSFODNN7EXAMPLE
+        secret_access_key:
+          anyOf:
+          - type: string
+            maxLength: 128
+            minLength: 16
+          - type: 'null'
+          title: Secret Access Key
+          description: Secret access key. Required for new configuration, optional for updates (keeps existing if omitted)
+          examples:
+          - wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+        bucket_name:
+          type: string
+          maxLength: 63
+          minLength: 3
+          pattern: ^[a-z0-9][a-z0-9.\-]*[a-z0-9]$
+          title: Bucket Name
+          description: S3 bucket name. Must follow S3 naming conventions (lowercase, no underscores)
+          examples:
+          - my-pdf-bucket
+          - company.documents
+        default_prefix:
+          type: string
+          maxLength: 500
+          pattern: ^[a-zA-Z0-9_\-\./]*$
+          title: Default Prefix
+          description: Default path prefix for uploaded files. Can include slashes for folder structure
+          default: ''
+          examples:
+          - generated/pdfs/
+          - documents/2024/
+      type: object
+      required:
+      - endpoint_url
+      - access_key_id
+      - bucket_name
+      title: S3ConfigRequest
+      description: Request model for S3 configuration
+      examples:
+      - access_key_id: AKIAIOSFODNN7EXAMPLE
+        bucket_name: my-pdf-bucket
+        default_prefix: generated/pdfs/
+        endpoint_url: https://s3.amazonaws.com
+        secret_access_key: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+    S3ConfigResponse:
+      properties:
+        configured:
+          type: boolean
+          title: Configured
+          description: Whether S3 is configured
+          examples:
+          - true
+        endpoint_url:
+          type: string
+          title: Endpoint Url
+          description: S3-compatible endpoint URL
+          examples:
+          - https://s3.amazonaws.com
+        access_key_id:
+          type: string
+          title: Access Key Id
+          description: Access key ID
+          examples:
+          - AKIAIOSFODNN7EXAMPLE
+        secret_access_key_masked:
+          type: string
+          title: Secret Access Key Masked
+          description: Masked secret access key (shows first 4 and last 4 characters)
+          examples:
+          - wJal...EKEY
+        bucket_name:
+          type: string
+          title: Bucket Name
+          description: S3 bucket name
+          examples:
+          - my-pdf-bucket
+        default_prefix:
+          type: string
+          title: Default Prefix
+          description: Default path prefix for uploads
+          examples:
+          - generated/pdfs/
+      type: object
+      required:
+      - configured
+      - endpoint_url
+      - access_key_id
+      - secret_access_key_masked
+      - bucket_name
+      - default_prefix
+      title: S3ConfigResponse
+      description: Response for S3 configuration (with masked secret)
+      examples:
+      - access_key_id: AKIAIOSFODNN7EXAMPLE
+        bucket_name: my-pdf-bucket
+        configured: true
+        default_prefix: generated/pdfs/
+        endpoint_url: https://s3.amazonaws.com
+        secret_access_key_masked: wJal...EKEY
+    S3SuccessResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+          description: Whether the operation succeeded
+          examples:
+          - true
+      type: object
+      required:
+      - success
+      title: S3SuccessResponse
+      description: Generic success response for S3 operations
+    S3TestResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+          description: Whether the connection test succeeded
+          examples:
+          - true
+        message:
+          type: string
+          title: Message
+          description: Test result message
+          examples:
+          - Connection successful. Bucket is accessible.
+      type: object
+      required:
+      - success
+      - message
+      title: S3TestResponse
+      description: Response for S3 connection test
+      examples:
+      - message: Connection successful. Bucket is accessible.
+        success: true
+    TemplateField:
+      properties:
+        key:
+          type: string
+          title: Key
+          description: Field key/identifier
+          examples:
+          - customer_name
+        label:
+          type: string
+          title: Label
+          description: Human-readable label
+          examples:
+          - Customer Name
+        type:
+          type: string
+          title: Type
+          description: 'Field type: string, integer, number, boolean, array'
+          default: string
+          examples:
+          - string
+        required:
+          type: boolean
+          title: Required
+          description: Whether the field is required
+          default: false
+          examples:
+          - true
+        helpText:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Helptext
+          description: Help text with example value
+          examples:
+          - e.g., John Doe
+        spec:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/TemplateFieldSpec'
+            type: array
+          - type: 'null'
+          title: Spec
+          description: 'For array fields: spec defining the structure of each item'
+          examples:
+          - - label: Quantity
+              name: qty
+              type: number
+            - label: Description
+              name: description
+              type: text
+      type: object
+      required:
+      - key
+      - label
+      title: TemplateField
+      description: Field definition for template variables (compatible with Zapier and Make.com)
+    TemplateFieldSpec:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Field name
+          examples:
+          - qty
+        label:
+          type: string
+          title: Label
+          description: Field label
+          examples:
+          - Quantity
+        type:
+          type: string
+          title: Type
+          description: 'Field type: text, number'
+          default: text
+          examples:
+          - number
+      type: object
+      required:
+      - name
+      - label
+      title: TemplateFieldSpec
+      description: Spec for array item fields
+    TemplateListItem:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Template short ID (12 characters)
+          examples:
+          - HMQywVpZxqAM
+        name:
+          type: string
+          title: Name
+          description: Template name
+          examples:
+          - Invoice Template
+        created_at:
+          type: string
+          title: Created At
+          description: ISO 8601 timestamp
+          examples:
+          - '2024-01-15T10:30:00Z'
+        updated_at:
+          type: string
+          title: Updated At
+          description: ISO 8601 timestamp
+          examples:
+          - '2024-01-20T14:45:00Z'
+      type: object
+      required:
+      - id
+      - name
+      - created_at
+      - updated_at
+      title: TemplateListItem
+      description: Template item in list response
+    TemplatesListResponse:
+      properties:
+        templates:
+          items:
+            $ref: '#/components/schemas/TemplateListItem'
+          type: array
+          title: Templates
+      type: object
+      required:
+      - templates
+      title: TemplatesListResponse
+      description: Response for template list endpoint
+      examples:
+      - templates:
+        - created_at: '2024-01-15T10:30:00Z'
+          id: HMQywVpZxqAM
+          name: Invoice Template
+          updated_at: '2024-01-20T14:45:00Z'
+        - created_at: '2024-02-01T09:00:00Z'
+          id: xK9mNpQrStUv
+          name: Contract Template
+          updated_at: '2024-02-01T09:00:00Z'
+    Transaction:
+      properties:
+        transaction_ref:
+          type: string
+          title: Transaction Ref
+          description: Unique transaction reference (UUID)
+          examples:
+          - 550e8400-e29b-41d4-a716-446655440000
+        transaction_type:
+          type: string
+          title: Transaction Type
+          description: 'Transaction type: PDFGEN, PURCHASE, REFUND, BONUS'
+          examples:
+          - PDFGEN
+        template_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Template Id
+          description: Template short ID (for PDFGEN)
+          examples:
+          - HMQywVpZxqAM
+        exec_tm:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Exec Tm
+          description: Execution time in milliseconds
+          examples:
+          - 1250
+        credits:
+          type: integer
+          title: Credits
+          description: Credits consumed (positive) or added (negative)
+          examples:
+          - 1
+        created_at:
+          type: string
+          title: Created At
+          description: ISO 8601 timestamp
+          examples:
+          - '2024-01-20T14:30:00Z'
+      type: object
+      required:
+      - transaction_ref
+      - transaction_type
+      - credits
+      - created_at
+      title: Transaction
+      description: Transaction record
+    TransactionsResponse:
+      properties:
+        transactions:
+          items:
+            $ref: '#/components/schemas/Transaction'
+          type: array
+          title: Transactions
+        total:
+          type: integer
+          title: Total
+          description: Total number of transactions
+          examples:
+          - 42
+        limit:
+          type: integer
+          title: Limit
+          description: Number of records returned
+          examples:
+          - 300
+        offset:
+          type: integer
+          title: Offset
+          description: Number of records skipped
+          examples:
+          - 0
+      type: object
+      required:
+      - transactions
+      - total
+      - limit
+      - offset
+      title: TransactionsResponse
+      description: Response for transactions list endpoint
+      examples:
+      - limit: 300
+        offset: 0
+        total: 42
+        transactions:
+        - created_at: '2024-01-20T14:30:00Z'
+          credits: 1
+          exec_tm: 1250
+          template_id: HMQywVpZxqAM
+          transaction_ref: 550e8400-e29b-41d4-a716-446655440000
+          transaction_type: PDFGEN
+        - created_at: '2024-01-15T10:00:00Z'
+          credits: -100
+          transaction_ref: 660e8400-e29b-41d4-a716-446655440001
+          transaction_type: PURCHASE
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    app__routers__v1__pdf__ExportType:
+      type: string
+      enum:
+      - url
+      - binary
+      title: ExportType
+      description: PDF export type options
+    app__routers__v1__pdf_async__ExportType:
+      type: string
+      enum:
+      - url
+      title: ExportType
+      description: PDF export type options for async generation
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key for authentication. Get yours at https://pdftemplateapi.com/dashboard/api-keys
+security:
+- ApiKeyAuth: []
