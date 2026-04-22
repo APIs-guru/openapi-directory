@@ -1,0 +1,2084 @@
+openapi: 3.1.0
+info:
+  title: DepScope — Package Intelligence API
+  summary: Free, open API that tells AI agents if a package is safe, maintained, and
+    up-to-date before they suggest installing it.
+  description: "# DepScope\n\nPackage Intelligence for AI coding agents. **31,000+\
+    \ packages** across **17 ecosystems** (npm, PyPI, Cargo, Go, Maven, NuGet, RubyGems,\
+    \ Composer, Pub, Hex, Swift, CocoaPods, CPAN, Hackage, CRAN, Conda, Homebrew),\
+    \ **2,200+ CVEs** enriched with CISA KEV + EPSS. Three verticals on one shared\
+    \ infrastructure:\n\n1. **Package health** — /api/check for full report, /api/prompt\
+    \ for LLM-optimized text (~74% smaller), /api/alternatives for replacements, /api/scan\
+    \ to audit a lockfile.\n2. **Error -> fix database** — POST a stack trace to /api/error/resolve.\n\
+    3. **Stack compatibility matrix** — /api/compat?stack=next@16,react@19.\n\n##\
+    \ Quick start (for agents)\n\n    curl https://depscope.dev/api/prompt/npm/react\n\
+    \n## MCP server\n\nZero-install remote URL: `https://mcp.depscope.dev/mcp`. 22\
+    \ tools. Install in one line: `claude mcp add depscope https://mcp.depscope.dev/mcp`.\n\
+    \n## Rate limits\n\n100 req/min anonymous, 200/min for whitelisted AI UAs (ClaudeBot,\
+    \ GPTBot, Cursor, MCP-Client, …). Optional API keys for higher limits.\n\nSave\
+    \ tokens, save energy, ship safer code."
+  termsOfService: https://depscope.dev/terms
+  contact:
+    name: DepScope support
+    url: https://depscope.dev/
+    email: depscope@cuttalo.com
+  license:
+    name: MIT
+    identifier: MIT
+    url: https://github.com/cuttalo/depscope/blob/main/LICENSE
+  version: 0.7.0
+  x-apisguru-categories:
+  - developer_tools
+  - security
+  x-logo:
+    url: https://depscope.dev/logo.png
+    backgroundColor: '#060f11'
+  x-origin:
+  - format: openapi
+    version: '3.1'
+    url: https://depscope.dev/openapi.json
+  x-providerName: depscope.dev
+servers:
+- url: https://depscope.dev
+  description: Production
+- url: https://stage.depscope.dev
+  description: Staging
+paths:
+  /api/auth/magic-link:
+    post:
+      tags:
+      - auth
+      summary: Send Magic Link
+      operationId: send_magic_link_api_auth_magic_link_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/auth/magic-link/request:
+    post:
+      tags:
+      - auth
+      summary: Send Magic Link
+      operationId: send_magic_link_api_auth_magic_link_request_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/auth/magic-link/verify:
+    post:
+      tags:
+      - auth
+      summary: Magic Link Verify Post
+      operationId: magic_link_verify_post_api_auth_magic_link_verify_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/auth/verify:
+    get:
+      tags:
+      - auth
+      summary: Verify Magic Link
+      description: 'Legacy GET verify: sets cookie and redirects to /dashboard.'
+      operationId: verify_magic_link_api_auth_verify_get
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Token
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/auth/me:
+    get:
+      tags:
+      - auth
+      summary: Get Me
+      operationId: get_me_api_auth_me_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/auth/logout:
+    post:
+      tags:
+      - auth
+      summary: Logout
+      operationId: logout_api_auth_logout_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/auth/usage:
+    get:
+      tags:
+      - auth
+      summary: Get Usage
+      operationId: get_usage_api_auth_usage_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/auth/keys:
+    get:
+      tags:
+      - auth
+      summary: List Api Keys
+      operationId: list_api_keys_api_auth_keys_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+    post:
+      tags:
+      - auth
+      summary: Create Api Key
+      operationId: create_api_key_api_auth_keys_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/auth/keys/{key_id}:
+    delete:
+      tags:
+      - auth
+      summary: Revoke Api Key
+      operationId: revoke_api_key_api_auth_keys__key_id__delete
+      parameters:
+      - name: key_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Key Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /mcp:
+    get:
+      tags:
+      - mcp
+      summary: Mcp Info
+      operationId: mcp_info_mcp_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+    post:
+      tags:
+      - mcp
+      summary: Mcp Endpoint
+      operationId: mcp_endpoint_mcp_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/check_bulk:
+    post:
+      tags:
+      - verticals-v2
+      summary: Check Bulk
+      description: "Pre-flight existence + risk check for up to 100 (ecosystem, package)\
+        \ pairs.\n\nDB-only: no live registry fetch. Returns a status per item:\n\
+        \  - `stdlib`:             language builtin (no install needed)\n  - `malicious`:\
+        \          actively flagged by OSV/OpenSSF\n  - `typosquat_suspect`:  matches\
+        \ a typosquat pattern (pre-computed or runtime)\n  - `historical_incident`:\
+        \ previously compromised (check current version)\n  - `exists`:          \
+        \   known safe in our index\n  - `unknown`:            not in our index —\
+        \ caller may fall back to /api/check\nTypical latency: <100ms for 100 items."
+      operationId: check_bulk_api_check_bulk_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_BulkRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Check Bulk Api Check Bulk Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/install/{ecosystem}/{package}:
+    get:
+      tags:
+      - verticals-v2
+      summary: Install Command
+      description: 'Canonical install commands for ecosystem+package across common
+        tools.
+
+
+        Saves agents 100-200 tokens of "how do I install this" reasoning and
+
+        prevents syntax hallucinations (pnpm flags, pyproject.toml quoting,
+
+        Maven XML structure).
+
+
+        If `version` is omitted, DepScope resolves the latest from its index.'
+      operationId: install_command_api_install__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      - name: version
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Version
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+                title: Response Install Command Api Install  Ecosystem   Package  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/pin_safe/{ecosystem}/{package}:
+    get:
+      tags:
+      - verticals-v2
+      summary: Pin Safe
+      description: 'Return the highest version whose known CVEs are below the given
+        severity.
+
+
+        - `min_severity=high` (default) excludes versions with any critical or high
+        CVE.
+
+        - `constraint` accepts npm-style `^X.Y.Z`, `~X.Y.Z`, `>=X`, or exact `X.Y.Z`.
+
+        - `include_prerelease=false` (default) skips alpha/beta/rc/canary/nightly.
+
+        - `limit_checked` caps how many versions we walk through (newest-first).
+
+
+        Sources: versions table → packages.data_json.versions → live registry.'
+      operationId: pin_safe_api_pin_safe__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      - name: min_severity
+        in: query
+        required: false
+        schema:
+          type: string
+          default: high
+          title: Min Severity
+      - name: constraint
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Constraint
+      - name: limit_checked
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 50
+          title: Limit Checked
+      - name: include_prerelease
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Include Prerelease
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+                title: Response Pin Safe Api Pin Safe  Ecosystem   Package  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /:
+    get:
+      tags:
+      - discovery
+      summary: Root
+      operationId: root__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/migration/{ecosystem}/{from_pkg}/{to_pkg}:
+    get:
+      tags:
+      - ai
+      summary: Get Migration Path
+      description: 'Return a prescriptive migration from `from_pkg` to `to_pkg` with:
+
+        - rationale (why migrate)
+
+        - code diff examples (before/after snippets)
+
+        - breaking changes to handle manually
+
+        - estimated effort in minutes
+
+        If no curated path exists, we still return a minimal scaffold built from
+
+        live check data of both packages.'
+      operationId: get_migration_path_api_migration__ecosystem___from_pkg___to_pkg__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: from_pkg
+        in: path
+        required: true
+        schema:
+          type: string
+          title: From Pkg
+      - name: to_pkg
+        in: path
+        required: true
+        schema:
+          type: string
+          title: To Pkg
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/ai/brief/{ecosystem}/{package}:
+    get:
+      tags:
+      - ai
+      summary: Ai Brief
+      description: 'AI-native compact package brief. ~300 tokens, prescriptive format.
+
+        Drop this directly in your LLM system prompt.'
+      operationId: ai_brief_api_ai_brief__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/ai/stack:
+    post:
+      tags:
+      - ai
+      summary: Ai Stack
+      description: 'Audit a whole dependency stack in one call. Returns action items.
+
+        Designed for AI agents evaluating a proposed install list before executing.'
+      operationId: ai_stack_api_ai_stack_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_StackRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/check/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Check Package
+      description: 'Full package intelligence. Returns everything: health, vulns,
+        versions, recommendation.
+
+        100% free. No auth. No limits on data. Use it.'
+      operationId: check_package_api_check__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      - name: version
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Version
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/prompt/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Get Prompt
+      description: 'LLM-optimized plain-text context for a package.
+
+
+        Token-efficient, decision-ready, ~500 tokens. Use this from AI agents
+
+        instead of /api/check to save context and tokens.'
+      operationId: get_prompt_api_prompt__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/health/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Get Health
+      description: 'Health score (0-100) + breakdown only — cheaper than /api/check.
+
+
+        Runs the same scoring logic as /api/check but returns just the score object
+
+        (no alternatives, no recommendation narrative). Useful for badges/dashboards.'
+      operationId: get_health_api_health__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/typosquat/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Check Typosquat
+      description: 'Is this package name a typosquat of a popular one?
+
+
+        Returns legitimate targets the name looks close to, with Levenshtein distance
+
+        and popularity delta.'
+      operationId: check_typosquat_api_typosquat__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/malicious/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Check Malicious
+      description: 'Is this package flagged as malicious by OpenSSF / OSV?
+
+
+        Dedicated fast-path for security gates (CI/CD pre-install hooks). Returns
+
+        `is_malicious` + advisory id + historical-compromise hint when applicable.
+
+        Mainstream packages with >100k weekly downloads are heuristically flagged
+        as
+
+        likely false-positives in the response (action=review_advisory).'
+      operationId: check_malicious_api_malicious__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/scorecard/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Get Scorecard
+      description: OSS Scorecard (OpenSSF) security posture score 0-10 for the linked
+        GitHub repo.
+      operationId: get_scorecard_api_scorecard__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/quality/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Get Quality
+      description: 'Package quality signals: criticality score, download velocity,
+        publish security (npm 2FA / PyPI Trusted Publishing).'
+      operationId: get_quality_api_quality__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/license/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Get License
+      description: 'SPDX license of a single package + commercial-safety classification.
+
+
+        Returns: `license` (SPDX), `class` (permissive / weak_copyleft / strong_copyleft
+        / proprietary / unknown),
+
+        plus `commercial_safe` and `copyleft` booleans. Cheap lookup on `packages.license`
+        column.
+
+
+        For transitive-tree license aggregation, use /api/licenses (plural).'
+      operationId: get_license_api_license__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/provenance/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Get Provenance
+      description: 'Best-effort: inspect registry metadata for provenance / signing
+        signals.'
+      operationId: get_provenance_api_provenance__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/maintainers/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Get Maintainer Signals
+      description: 'Maintainer trust signals: bus factor, primary author dominance,
+        account age, ownership change.'
+      operationId: get_maintainer_signals_api_maintainers__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/vulns/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Get Vulns
+      description: Vulnerabilities affecting the LATEST version only, enriched with
+        CISA KEV + EPSS.
+      operationId: get_vulns_api_vulns__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/versions/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Get Versions
+      description: 'Version metadata for a package: latest + total count + recent
+        list + deprecated flag.
+
+
+        Heavier than /api/latest (which returns only the latest string). Use this
+        when you
+
+        need the version history preview or total-versions count.'
+      operationId: get_versions_api_versions__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/history/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Get History Endpoint
+      description: 'Last N days of health snapshot + trend direction (up/down/stable).
+
+
+        Data is populated by the daily cron /scripts/record_health_snapshot.py.
+
+        Max 365 days; if the package is new the series will be shorter.'
+      operationId: get_history_endpoint_api_history__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      - name: days
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 90
+          title: Days
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/tree/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Get Tree Endpoint
+      description: 'Transitive dependency tree with health score per sub-dep.
+
+
+        Cached aggressively (24h) — expensive to build.'
+      operationId: get_tree_endpoint_api_tree__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      - name: max_depth
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 3
+          title: Max Depth
+      - name: max_deps
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 200
+          title: Max Deps
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/licenses/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Get Licenses Endpoint
+      description: 'Aggregated licenses across the transitive dependency tree.
+
+
+        Flags GPL/AGPL/LGPL for commercial-safety review. Reuses the same tree cache.'
+      operationId: get_licenses_endpoint_api_licenses__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/error:
+    get:
+      tags:
+      - errors
+      summary: Search Error
+      description: Search the error database by message (full-text + exact hash).
+      operationId: search_error_api_error_get
+      parameters:
+      - name: q
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Q
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 5
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/error/resolve:
+    post:
+      tags:
+      - errors
+      summary: Resolve Error
+      description: POST a stack trace or error message, get solutions back.
+      operationId: resolve_error_api_error_resolve_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/error/popular:
+    get:
+      tags:
+      - errors
+      summary: List Errors Popular
+      description: Top error patterns by votes, used for sitemap generation and indexing.
+      operationId: list_errors_popular_api_error_popular_get
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 500
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/error/{error_hash}:
+    get:
+      tags:
+      - errors
+      summary: Get Error
+      description: Get a specific error entry by its normalised-pattern SHA256.
+      operationId: get_error_api_error__error_hash__get
+      parameters:
+      - name: error_hash
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Error Hash
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/compat:
+    get:
+      tags:
+      - compat
+      summary: Check Compatibility
+      description: Check compatibility for a stack like 'next@16,react@19,prisma@6'.
+      operationId: check_compatibility_api_compat_get
+      parameters:
+      - name: stack
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Stack
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - compat
+      summary: Check Compatibility Post
+      operationId: check_compatibility_post_api_compat_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/bugs/search:
+    get:
+      tags:
+      - bugs
+      summary: Search Bugs Endpoint
+      description: Search the known-bugs database by text.
+      operationId: search_bugs_endpoint_api_bugs_search_get
+      parameters:
+      - name: q
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Q
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/bugs/{ecosystem}/{package}:
+    get:
+      tags:
+      - bugs
+      summary: Get Bugs
+      description: Get known bugs for a package, optionally filtered by version.
+      operationId: get_bugs_api_bugs__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      - name: version
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Version
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/breaking:
+    get:
+      tags:
+      - breaking
+      summary: List Breaking Sample
+      description: 'Sample of most recent curated breaking changes across all packages.
+
+
+        Used by the /explore/breaking SSR page to show real examples
+
+        without requiring the user to pick a package first.'
+      operationId: list_breaking_sample_api_breaking_get
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 12
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/breaking/{ecosystem}/{package}:
+    get:
+      tags:
+      - breaking
+      summary: Get Breaking
+      description: "Breaking changes for a package, optionally scoped to a version\
+        \ transition.\n\nExamples:\n  GET /api/breaking/npm/react\n  GET /api/breaking/npm/next?from_version=14&to_version=15\n\
+        \  GET /api/breaking/pypi/pydantic?from_version=1&to_version=2"
+      operationId: get_breaking_api_breaking__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      - name: from_version
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: From Version
+      - name: to_version
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: To Version
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/bugs/popular:
+    get:
+      tags:
+      - bugs
+      summary: List Bugs Popular
+      description: Top packages with recorded bugs, used for sitemap generation and
+        indexing.
+      operationId: list_bugs_popular_api_bugs_popular_get
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/compare/{ecosystem}/{packages_csv}:
+    get:
+      tags:
+      - packages
+      summary: Compare Packages
+      description: 'Compare 2+ packages side by side.
+
+        Usage: GET /api/compare/npm/express,fastify,hono
+
+        Returns comparative table with health, vulns, downloads, last release.'
+      operationId: compare_packages_api_compare__ecosystem___packages_csv__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: packages_csv
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Packages Csv
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/scan:
+    post:
+      tags:
+      - packages
+      summary: Scan Dependencies
+      description: 'Audit an entire project''s dependencies in one shot.
+
+        POST body: {"packages": {"express": "^4.0.0", "lodash": "^4.17.0"}, "ecosystem":
+        "npm"}
+
+        Or: {"packages": {"fastapi": ">=0.100.0", "pydantic": "^2.0"}, "ecosystem":
+        "pypi"}'
+      operationId: scan_dependencies_api_scan_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/ecosystems:
+    get:
+      tags:
+      - public
+      summary: List Ecosystems
+      description: List supported ecosystems with package counts, vulnerability counts
+        and metadata.
+      operationId: list_ecosystems_api_ecosystems_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/stats:
+    get:
+      tags:
+      - public
+      summary: Get Stats
+      description: Public usage stats.
+      operationId: get_stats_api_stats_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /.well-known/mcp.json:
+    get:
+      tags:
+      - discovery
+      summary: Mcp Manifest
+      description: 'MCP server discovery manifest — emerging standard used by Claude
+        / Cursor /
+
+        Windsurf for one-click install. Mirrors the info in ai-plugin.json but shaped
+
+        around Model Context Protocol clients.'
+      operationId: mcp_manifest__well_known_mcp_json_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /.well-known/ai-plugin.json:
+    get:
+      tags:
+      - discovery
+      summary: Ai Plugin
+      operationId: ai_plugin__well_known_ai_plugin_json_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/latest/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Get Latest Version
+      description: 'Just the latest version. Nothing else. Fastest possible response.
+
+        Use this before suggesting any package install.'
+      operationId: get_latest_version_api_latest__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/exists/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Check Exists
+      description: Does this package exist? Yes or no. Use before suggesting npm install
+        X.
+      operationId: check_exists_api_exists__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/anomaly:
+    post:
+      tags:
+      - public
+      summary: Submit Anomaly
+      operationId: submit_anomaly_api_anomaly_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_AnomalyRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/contact:
+    post:
+      tags:
+      - public
+      summary: Submit Contact
+      description: Submit a contact request (form, CLI, MCP, agent). Free, no auth.
+      operationId: submit_contact_api_contact_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_ContactRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/contact/types:
+    get:
+      tags:
+      - public
+      summary: Contact Types
+      description: List allowed values for the type field of /api/contact.
+      operationId: contact_types_api_contact_types_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/now:
+    get:
+      tags:
+      - public
+      summary: Get Current Time
+      description: 'Current UTC time. Agents don''t know what time it is.
+
+        Also returns useful context: day of week, unix timestamp.'
+      operationId: get_current_time_api_now_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/health:
+    get:
+      tags:
+      - public
+      summary: Healthcheck
+      description: 'Liveness + readiness probe. External uptime monitors hit this
+        every 5m.
+
+
+        Returns 200 with subsystem statuses when everything is up. If Postgres or
+
+        Redis fail, individual fields flip to the error string but we still return
+
+        200 (monitor will alert on the overall "status" field) — bumping to 500
+
+        would cause PM2 to restart us, which masks the real problem.'
+      operationId: healthcheck_api_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/search/{ecosystem}:
+    get:
+      tags:
+      - packages
+      summary: Search Packages
+      description: 'Search packages by keyword. When user says ''I need an HTTP client
+        for Python'',
+
+        the agent can search instead of hallucinating package names.'
+      operationId: search_packages_api_search__ecosystem__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: Q
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/alternatives/{ecosystem}/{package}:
+    get:
+      tags:
+      - packages
+      summary: Get Alternatives
+      description: 'What to use instead of a deprecated/unhealthy package.
+
+        AI agents need this when they suggest something deprecated.'
+      operationId: get_alternatives_api_alternatives__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/track:
+    post:
+      tags:
+      - public
+      summary: Track Pageview
+      description: Lightweight page view tracking. No cookies, no personal data.
+      operationId: track_pageview_api_track_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /badge/{ecosystem}/{package}:
+    get:
+      tags:
+      - badges
+      summary: Package Badge
+      description: Generate SVG badge for README embedding. Like shields.io but for
+        package health.
+      operationId: package_badge_badge__ecosystem___package__get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /badge/{ecosystem}/{package}/score:
+    get:
+      tags:
+      - badges
+      summary: Package Badge Score Only
+      description: Minimal badge with just the score.
+      operationId: package_badge_score_only_badge__ecosystem___package__score_get
+      parameters:
+      - name: ecosystem
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Ecosystem
+      - name: package
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Package
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/savings:
+    get:
+      tags:
+      - public
+      summary: Get Savings
+      description: Real-time token and energy savings calculator based on actual API
+        calls.
+      operationId: get_savings_api_savings_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/translate:
+    get:
+      tags:
+      - public
+      summary: Translate Text
+      description: Free translation via MyMemory API.
+      operationId: translate_text_api_translate_get
+      parameters:
+      - name: text
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Text
+      - name: to
+        in: query
+        required: false
+        schema:
+          type: string
+          default: it
+          title: To
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/trending:
+    get:
+      tags:
+      - discover
+      summary: Public Trending
+      description: 'Public endpoint: top packages getting queried by AI agents this
+        week.'
+      operationId: public_trending_api_trending_get
+      parameters:
+      - name: ecosystem
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Ecosystem
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    _AnomalyRequest:
+      properties:
+        tool_called:
+          type: string
+          title: Tool Called
+        ecosystem:
+          type: string
+          title: Ecosystem
+          default: ''
+        package:
+          type: string
+          title: Package
+          default: ''
+        version:
+          type: string
+          title: Version
+          default: ''
+        observed:
+          type: string
+          title: Observed
+        expected:
+          type: string
+          title: Expected
+        evidence_url:
+          type: string
+          title: Evidence Url
+          default: ''
+        source:
+          type: string
+          title: Source
+          default: mcp
+      type: object
+      required:
+      - tool_called
+      - observed
+      - expected
+      title: _AnomalyRequest
+    _BulkItem:
+      properties:
+        ecosystem:
+          type: string
+          title: Ecosystem
+        package:
+          type: string
+          title: Package
+      type: object
+      required:
+      - ecosystem
+      - package
+      title: _BulkItem
+    _BulkRequest:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/_BulkItem'
+          type: array
+          title: Items
+      type: object
+      required:
+      - items
+      title: _BulkRequest
+    _ContactRequest:
+      properties:
+        name:
+          type: string
+          title: Name
+          default: ''
+        email:
+          type: string
+          title: Email
+        type:
+          type: string
+          title: Type
+          default: other
+        subject:
+          type: string
+          title: Subject
+        body:
+          type: string
+          title: Body
+        company:
+          type: string
+          title: Company
+          default: ''
+        source:
+          type: string
+          title: Source
+          default: web
+        consent:
+          type: boolean
+          title: Consent
+          default: true
+        honeypot:
+          type: string
+          title: Honeypot
+          default: ''
+      type: object
+      required:
+      - email
+      - subject
+      - body
+      title: _ContactRequest
+    _StackRequest:
+      properties:
+        packages:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Packages
+        format:
+          type: string
+          title: Format
+          default: text
+      type: object
+      required:
+      - packages
+      title: _StackRequest
+tags:
+- name: packages
+  description: 'Core package intelligence: health score, vulnerabilities, recommendations,
+    alternatives, comparisons, batch scan, version metadata, dependency tree. These
+    are the endpoints AI agents call before suggesting any `npm install` / `pip install`
+    / `cargo add`.'
+- name: errors
+  description: Error -> fix database. POST a stack trace, get solutions back. Full-text
+    error search by message or stable hash.
+- name: compat
+  description: Stack compatibility matrix. Verify a set of `pkg@version` pins work
+    together (e.g. `next@16,react@19,prisma@6`) before upgrading.
+- name: discover
+  description: Trending packages per ecosystem, typosquats, malicious advisories,
+    trust signals. Use these to surface or avoid packages.
+- name: verticals
+  description: Breaking changes (v1->v2 with migration hints) and non-CVE known bugs
+    per version.
+- name: discovery
+  description: 'Well-known files for AI agents: /openapi.json, /ai-plugin.json, /mcp.json,
+    /llms.txt, /llms-full.txt, /security.txt, /sitemap.xml, /robots.txt.'
+- name: auth
+  description: Optional API keys for higher rate limits + usage analytics. No auth
+    required for public endpoints.
