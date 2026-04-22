@@ -1,0 +1,202 @@
+openapi: "3.0.3"
+info:
+  title: BenchGecko API
+  description: |
+    The data layer of the AI economy. BenchGecko tracks thousands of AI models
+    across hundreds of providers with cross-provider pricing, benchmark scores,
+    and real-time updates.
+
+    Free tier: 100 requests/hour, no API key required.
+
+    Website: https://benchgecko.ai
+    Documentation: https://benchgecko.ai/api-docs
+  version: "1.0.0"
+  contact:
+    name: BenchGecko
+    url: https://benchgecko.ai
+    email: api@benchgecko.ai
+  license:
+    name: Free to use with attribution
+    url: https://benchgecko.ai/api-docs
+  x-logo:
+    url: https://benchgecko.ai/logo.png
+    altText: BenchGecko
+servers:
+  - url: https://benchgecko.ai/api/v1
+    description: Production
+paths:
+  /models:
+    get:
+      summary: List AI models
+      description: Returns all tracked AI models with benchmark scores and pricing.
+      operationId: listModels
+      tags: [Models]
+      parameters:
+        - name: sort
+          in: query
+          schema:
+            type: string
+            enum: [score, price, name, date]
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+        - name: provider
+          in: query
+          schema:
+            type: string
+        - name: open_source
+          in: query
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: List of models
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Model"
+                  meta:
+                    $ref: "#/components/schemas/Pagination"
+  /models/{slug}:
+    get:
+      summary: Get model details
+      operationId: getModel
+      tags: [Models]
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Model details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Model"
+        "404":
+          description: Model not found
+  /benchmarks:
+    get:
+      summary: List benchmarks
+      description: Returns all tracked benchmark evaluation suites.
+      operationId: listBenchmarks
+      tags: [Benchmarks]
+      responses:
+        "200":
+          description: List of benchmarks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Benchmark"
+  /compare:
+    get:
+      summary: Compare models
+      description: Side-by-side comparison of 2-6 models across all benchmarks and pricing.
+      operationId: compareModels
+      tags: [Compare]
+      parameters:
+        - name: models
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Comma-separated model slugs
+      responses:
+        "200":
+          description: Comparison result
+          content:
+            application/json:
+              schema:
+                type: object
+  /pricing:
+    get:
+      summary: Get pricing data
+      description: Cross-provider pricing for all models.
+      operationId: listPricing
+      tags: [Pricing]
+      responses:
+        "200":
+          description: Pricing data
+          content:
+            application/json:
+              schema:
+                type: object
+  /pricing/{slug}:
+    get:
+      summary: Get model pricing across providers
+      operationId: getModelPricing
+      tags: [Pricing]
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Pricing across providers
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    Model:
+      type: object
+      properties:
+        slug:
+          type: string
+        name:
+          type: string
+        provider:
+          type: string
+        input_price:
+          type: number
+        output_price:
+          type: number
+        context_window:
+          type: integer
+        average_score:
+          type: number
+        open_source:
+          type: boolean
+        release_date:
+          type: string
+          format: date
+    Benchmark:
+      type: object
+      properties:
+        slug:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+        max_score:
+          type: integer
+    Pagination:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
