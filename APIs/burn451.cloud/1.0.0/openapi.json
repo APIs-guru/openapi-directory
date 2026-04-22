@@ -1,0 +1,739 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Burn 451 API",
+    "version": "1.0.0",
+    "summary": "Public HTTP API for Burn 451 — a read-later app that burns articles after 24 hours.",
+    "description": "Burn 451 is a read-later app with a 24-hour countdown: save an article, read it today, or it's gone. This spec documents the public HTTP endpoints exposed at https://www.burn451.cloud — saving bookmarks from the web clipper, fetching curated Vault collections, extracting a single article's cleaned content, and generating YouTube video digests.\n\nInternal admin endpoints (cache revalidation, service-role operations) are intentionally excluded. For the stateful MCP server that powers AI agent integrations, see the `burn-mcp-server` npm package and https://www.burn451.cloud/developers.\n\nMore: https://www.burn451.cloud",
+    "termsOfService": "https://www.burn451.cloud",
+    "contact": {
+      "name": "Burn 451",
+      "url": "https://www.burn451.cloud/?ref=openapi",
+      "email": "hi@burn451.cloud"
+    },
+    "license": {
+      "name": "Proprietary",
+      "url": "https://www.burn451.cloud"
+    },
+    "x-apisguru-categories": [
+      "developer_tools"
+    ],
+    "x-logo": {
+      "url": "https://www.burn451.cloud/apple-icon.png",
+      "backgroundColor": "#0a0a0a"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://www.burn451.cloud/openapi.json",
+        "version": "3.1"
+      }
+    ],
+    "x-providerName": "burn451.cloud"
+  },
+  "servers": [
+    {
+      "url": "https://www.burn451.cloud",
+      "description": "Production"
+    }
+  ],
+  "externalDocs": {
+    "description": "Burn 451 developer hub — MCP server, CLI, integrations.",
+    "url": "https://www.burn451.cloud/developers"
+  },
+  "tags": [
+    {
+      "name": "Bookmarks",
+      "description": "Save URLs to your Burn 451 reading queue. Requires a long-lived MCP token generated in the iOS app (Settings → MCP Server)."
+    },
+    {
+      "name": "Vault",
+      "description": "Curated public collections of essays, talks, and writing by specific authors (Karpathy, Simon Willison, Paul Graham, and others). No auth required."
+    },
+    {
+      "name": "YouTube",
+      "description": "Lightweight YouTube video digest — extracts captions and generates a summary with key points and timestamps. No auth required."
+    }
+  ],
+  "paths": {
+    "/api/save": {
+      "post": {
+        "tags": [
+          "Bookmarks"
+        ],
+        "operationId": "saveBookmark",
+        "summary": "Save a URL to the Burn 451 reading queue",
+        "description": "Insert a bookmark into the authenticated user's reading queue with a 24-hour countdown (status `active`). Auth is a long-lived MCP token generated in the iOS Burn app under Settings → MCP Server. This is the endpoint used by the Burn Web Clipper browser extension.\n\nRate limit: 30 requests per minute per token. Extracted article content (the `content` field) is stored under `content_metadata.extracted_content` and is capped at 50,000 characters; URLs are capped at 2,048 characters; title at 300.",
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "burnTokenHeader": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveRequest"
+              },
+              "examples": {
+                "minimal": {
+                  "summary": "URL only",
+                  "value": {
+                    "url": "https://karpathy.ai/posts/vibe-coding.html"
+                  }
+                },
+                "webClipper": {
+                  "summary": "Web Clipper payload",
+                  "value": {
+                    "url": "https://simonwillison.net/2025/Oct/14/agentic-engineering/",
+                    "title": "Agentic engineering patterns",
+                    "content": "Full extracted article text...",
+                    "source": "web-clipper"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Bookmark saved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SaveResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body (bad JSON, missing/invalid URL).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid MCP token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded (30 saves per minute per token).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server misconfigured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Downstream insert failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "Bookmarks"
+        ],
+        "operationId": "saveBookmarkPreflight",
+        "summary": "CORS preflight for /api/save",
+        "description": "Returns the CORS headers allowed for the save endpoint. Wildcard origin, `POST, OPTIONS` methods, accepts `Content-Type`, `Authorization`, and `X-Burn-Token` request headers.",
+        "security": [],
+        "responses": {
+          "204": {
+            "description": "No content."
+          },
+          "4XX": {
+            "description": "The preflight handler is unconditional; error statuses are not expected but listed to satisfy linter coverage.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/vault/{id}": {
+      "get": {
+        "tags": [
+          "Vault"
+        ],
+        "operationId": "getVaultCollection",
+        "summary": "Fetch a curated Vault collection",
+        "description": "Return a curated Vault collection — a themed reading list of essays, talks, and writing by a specific author or topic. Includes an AI-generated overview (theme + phases), the ordered list of articles with slug/title/source/summary, and topic sections for SEO-friendly grouping.\n\nResponses are cached at the edge (`s-maxage=300, stale-while-revalidate=3600`). Unknown slugs return 404.",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Vault slug. Known values include: `karpathy`, `simon-willison`, `paul-graham`, `naval-ravikant`, `vibe-coding`, `lenny-rachitsky`, `swyx`, `pieter-levels`, `tiago-forte`, `context-engineering`, `lilian-weng`.",
+            "schema": {
+              "type": "string",
+              "examples": [
+                "karpathy",
+                "simon-willison"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Vault found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VaultCollection"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Vault slug not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Upstream data source unreachable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/vault/article": {
+      "get": {
+        "tags": [
+          "Vault"
+        ],
+        "operationId": "getVaultArticle",
+        "summary": "Fetch a single Vault article with extracted content",
+        "description": "Return a single Vault article by its bookmark ID, with cleaned article content extracted via Jina Reader (cleaned of site chrome, footers, subscribe prompts, and tag clusters). YouTube links are unwrapped, chapters are parsed into a markdown section, and site-specific boilerplate is stripped.\n\nResponses are cached at the edge (`s-maxage=86400, stale-while-revalidate=604800`). If Jina extraction fails or times out, `content` is `null` but metadata still returns.",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "Bookmark UUID from the Vault collection `items[].id` array.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Article found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VaultArticle"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing `id` query parameter.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bookmark not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Upstream data source unreachable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/youtube-digest": {
+      "post": {
+        "tags": [
+          "YouTube"
+        ],
+        "operationId": "youtubeDigest",
+        "summary": "Generate a digest for a YouTube video",
+        "description": "Extract captions from a public YouTube video via YouTube's Innertube API (no YouTube API key required) and return a digest: verdict, estimated watch time, key points, chapter-style timestamps, a short summary, and the full transcript.\n\nThe endpoint prefers manual captions and falls back to auto-generated. Videos without any captions return 422.",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/YoutubeDigestRequest"
+              },
+              "examples": {
+                "standardUrl": {
+                  "summary": "Standard watch URL",
+                  "value": {
+                    "url": "https://www.youtube.com/watch?v=7xTGNNLPyMI"
+                  }
+                },
+                "shortUrl": {
+                  "summary": "youtu.be short URL",
+                  "value": {
+                    "url": "https://youtu.be/7xTGNNLPyMI"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Digest generated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/YoutubeDigestResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing YouTube URL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "No transcript available for this video.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "opaque",
+        "description": "Long-lived MCP token. Generate in the Burn iOS app under Settings → MCP Server, then pass as `Authorization: Bearer <token>`."
+      },
+      "burnTokenHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Burn-Token",
+        "description": "Alternate header for the same MCP token, used by the Web Clipper extension when browser CORS makes Authorization headers inconvenient."
+      }
+    },
+    "schemas": {
+      "SaveRequest": {
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 2048,
+            "description": "HTTP(S) URL to save. Must be http: or https:."
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 300,
+            "description": "Article title. Defaults to the URL if omitted."
+          },
+          "content": {
+            "type": "string",
+            "maxLength": 50000,
+            "description": "Pre-extracted article content (optional). Stored under `content_metadata.extracted_content` and used to skip re-fetching."
+          },
+          "source": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "Free-text source identifier (e.g. `web-clipper`, `ios-share-sheet`). Defaults to `web-clipper`."
+          }
+        }
+      },
+      "SaveResponse": {
+        "type": "object",
+        "required": [
+          "ok",
+          "bookmarkId"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "const": true
+          },
+          "bookmarkId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "UUID of the newly inserted bookmark."
+          }
+        }
+      },
+      "VaultCollection": {
+        "type": "object",
+        "required": [
+          "items",
+          "updatedAt"
+        ],
+        "properties": {
+          "overview": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "AI-generated theme + phases for the collection.",
+            "properties": {
+              "theme": {
+                "type": "string"
+              },
+              "phases": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "range": {
+                      "type": "string"
+                    },
+                    "insight": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VaultItem"
+            }
+          },
+          "topics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VaultTopic"
+            },
+            "description": "Topic-based grouping for SEO sections. Missing when the vault has no categorization config."
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "VaultItem": {
+        "type": "object",
+        "required": [
+          "id",
+          "slug",
+          "title",
+          "url",
+          "platform"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string",
+            "description": "Hostname of the article (www prefix stripped)."
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "platform": {
+            "type": "string",
+            "enum": [
+              "web",
+              "x",
+              "youtube",
+              "wechat",
+              "xiaohongshu",
+              "reddit",
+              "bilibili",
+              "hackernews"
+            ]
+          },
+          "author": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "summary": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "AI summary in English (falls back to any-lang summary if English is not available)."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "VaultTopic": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "articleIds"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "articleIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "VaultArticle": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "url",
+          "platform",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "platform": {
+            "type": "string"
+          },
+          "author": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "summary": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "content": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Cleaned markdown content extracted from the original URL. `null` if extraction failed or timed out."
+          },
+          "youtubeId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "11-character YouTube video ID if the article is a YouTube link."
+          }
+        }
+      },
+      "YoutubeDigestRequest": {
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "YouTube video URL in any supported format: watch URL, youtu.be short URL, embed URL, or /shorts URL."
+          }
+        }
+      },
+      "YoutubeDigestResponse": {
+        "type": "object",
+        "required": [
+          "verdict",
+          "estimatedMinutes",
+          "keyPoints",
+          "timestamps",
+          "summary",
+          "transcript"
+        ],
+        "properties": {
+          "verdict": {
+            "type": "string",
+            "description": "One-line recommendation written by the digest engine."
+          },
+          "shouldWatch": {
+            "type": "boolean"
+          },
+          "estimatedMinutes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "keyPoints": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 5
+          },
+          "timestamps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "time",
+                "label"
+              ],
+              "properties": {
+                "time": {
+                  "type": "string",
+                  "description": "MM:SS or HH:MM:SS."
+                },
+                "label": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "summary": {
+            "type": "string"
+          },
+          "transcript": {
+            "type": "string",
+            "description": "Full flattened transcript text."
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Machine-readable error code (e.g. `invalid_url`, `missing_token`, `rate_limited`)."
+          },
+          "hint": {
+            "type": "string",
+            "description": "Human-readable hint, when available."
+          }
+        }
+      }
+    }
+  }
+}
