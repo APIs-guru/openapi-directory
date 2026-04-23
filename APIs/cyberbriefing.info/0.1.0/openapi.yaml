@@ -1,0 +1,3534 @@
+openapi: 3.1.0
+info:
+  title: CyberBriefing API
+  description: "\n## CyberBriefing API\n\nCybersecurity threat intelligence platform\
+    \ providing:\n\n- **IOCs** \u2014 Indicators of Compromise (IPs, domains, hashes,\
+    \ URLs, emails)\n- **Threats** \u2014 Threat actor profiles and campaign tracking\n\
+    - **CVEs** \u2014 CVE lookup with enrichment and exploit status\n- **Feed** \u2014\
+    \ STIX 2.1 compatible threat feed (TAXII-ready)\n- **Search** \u2014 Full-text\
+    \ search across all intelligence\n\nAll endpoints require an API key via `X-API-Key`\
+    \ header.\n    "
+  version: 0.1.0
+  x-apisguru-categories:
+  - security
+  x-logo:
+    url: https://cyberbriefing.info/favicon.ico
+    backgroundColor: '#0f172a'
+paths:
+  /api/v1/health:
+    get:
+      tags:
+      - Health
+      - Health
+      summary: Liveness probe
+      description: "Basic liveness probe \u2014 returns immediately without DB access."
+      operationId: liveness_api_v1_health_get
+      responses:
+        '200':
+          description: Returns ok when the process is alive.
+          content:
+            application/json:
+              schema: {}
+  /api/v1/health/db:
+    get:
+      tags:
+      - Health
+      - Health
+      summary: Database readiness probe
+      description: 'Readiness probe that verifies a live DB connection.
+
+
+        Returns HTTP 200 ``{"status": "ready"}`` on success.
+
+        Returns HTTP 503 ``{"status": "unavailable", "detail": "..."}`` on failure.
+
+
+        Suitable for use as a container/service readiness endpoint that prevents
+
+        traffic from reaching the API before the database is accessible.'
+      operationId: db_readiness_api_v1_health_db_get
+      responses:
+        '200':
+          description: Returns ready when a DB query succeeds; 503 otherwise.
+          content:
+            application/json:
+              schema: {}
+  /api/v1/health/system:
+    get:
+      tags:
+      - Health
+      - Health
+      summary: System resource health check
+      description: Check system resource usage (CPU, memory, disk).
+      operationId: system_health_api_v1_health_system_get
+      responses:
+        '200':
+          description: Returns system resource usage (CPU, memory, disk).
+          content:
+            application/json:
+              schema: {}
+  /api/v1/health/jobs:
+    get:
+      tags:
+      - Health
+      - Health
+      summary: Background jobs health check
+      description: Check status of background job schedulers.
+      operationId: jobs_health_api_v1_health_jobs_get
+      responses:
+        '200':
+          description: Returns status of background job schedulers.
+          content:
+            application/json:
+              schema: {}
+  /api/v1/health/services:
+    get:
+      tags:
+      - Health
+      - Health
+      summary: External services health check
+      description: Check status of external services.
+      operationId: services_health_api_v1_health_services_get
+      responses:
+        '200':
+          description: Returns status of external services (Stripe, email).
+          content:
+            application/json:
+              schema: {}
+  /api/v1/health/full:
+    get:
+      tags:
+      - Health
+      - Health
+      summary: Comprehensive health check
+      description: Comprehensive health check including all subsystems.
+      operationId: full_health_api_v1_health_full_get
+      responses:
+        '200':
+          description: Returns comprehensive health status including all subsystems.
+          content:
+            application/json:
+              schema: {}
+  /api/v1/iocs:
+    get:
+      tags:
+      - IOCs
+      summary: List and search IOCs
+      operationId: list_iocs_api_v1_iocs_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Search query
+          title: Q
+        description: Search query
+      - name: type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: IOC type filter
+          title: Type
+        description: IOC type filter
+      - name: severity
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Severity
+      - name: is_active
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+          title: Is Active
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 1
+          default: 20
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IOCResponse'
+                title: Response List Iocs Api V1 Iocs Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - IOCs
+      summary: Create IOC
+      operationId: create_ioc_api_v1_iocs_post
+      security:
+      - APIKeyHeader: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IOCCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IOCResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/iocs/{ioc_id}:
+    get:
+      tags:
+      - IOCs
+      summary: Get IOC by ID
+      operationId: get_ioc_api_v1_iocs__ioc_id__get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: ioc_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Ioc Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IOCResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - IOCs
+      summary: Update IOC
+      operationId: update_ioc_api_v1_iocs__ioc_id__patch
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: ioc_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Ioc Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IOCUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IOCResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/iocs/lookup/{value}:
+    get:
+      tags:
+      - IOCs
+      summary: Lookup IOC by value
+      operationId: lookup_ioc_api_v1_iocs_lookup__value__get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: value
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Value
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IOCResponse'
+                title: Response Lookup Ioc Api V1 Iocs Lookup  Value  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/threats/actors:
+    get:
+      tags:
+      - Threats
+      summary: List threat actors
+      operationId: list_threat_actors_api_v1_threats_actors_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Q
+      - name: origin_country
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Origin Country
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 20
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThreatActorResponse'
+                title: Response List Threat Actors Api V1 Threats Actors Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Threats
+      summary: Create Threat Actor
+      operationId: create_threat_actor_api_v1_threats_actors_post
+      security:
+      - APIKeyHeader: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThreatActorCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreatActorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/threats:
+    get:
+      tags:
+      - Threats
+      summary: List threat actors (compat)
+      operationId: list_threat_actors_api_v1_threats_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Q
+      - name: origin_country
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Origin Country
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 20
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThreatActorResponse'
+                title: Response List Threat Actors Api V1 Threats Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/threats/actors/{actor_id}:
+    get:
+      tags:
+      - Threats
+      summary: Get threat actor
+      operationId: get_threat_actor_api_v1_threats_actors__actor_id__get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: actor_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Actor Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreatActorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/cves:
+    get:
+      tags:
+      - CVEs
+      summary: List CVEs
+      operationId: list_cves_api_v1_cves_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Search by CVE ID or description
+          title: Q
+        description: Search by CVE ID or description
+      - name: severity
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: CRITICAL, HIGH, MEDIUM, LOW
+          title: Severity
+        description: CRITICAL, HIGH, MEDIUM, LOW
+      - name: exploits_available
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Exploits Available
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 1
+          default: 20
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CVEResponse'
+                title: Response List Cves Api V1 Cves Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - CVEs
+      summary: Ingest CVE
+      operationId: create_cve_api_v1_cves_post
+      security:
+      - APIKeyHeader: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CVECreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CVEResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/cves/{cve_id_str}:
+    get:
+      tags:
+      - CVEs
+      summary: Get CVE by CVE ID
+      operationId: get_cve_api_v1_cves__cve_id_str__get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: cve_id_str
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Cve Id Str
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CVEResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/feed:
+    get:
+      tags:
+      - Feed
+      summary: STIX/TAXII threat feed (Enterprise only)
+      operationId: get_feed_api_v1_feed_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 5000
+          minimum: 1
+          default: 100
+          title: Limit
+      - name: since
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: ISO8601 datetime for delta feed
+          title: Since
+        description: ISO8601 datetime for delta feed
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/STIXBundle'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/search:
+    get:
+      tags:
+      - Search
+      summary: Search across all threat intel
+      operationId: search_api_v1_search_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: q
+        in: query
+        required: true
+        schema:
+          type: string
+          minLength: 2
+          description: Search query
+          title: Q
+        description: Search query
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 20
+          title: Limit
+      - name: category
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Optional category filter (e.g. ransomware, cve, apt)
+          title: Category
+        description: Optional category filter (e.g. ransomware, cve, apt)
+      - name: since
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: "ISO8601 datetime \u2014 restrict to data after this date"
+          title: Since
+        description: "ISO8601 datetime \u2014 restrict to data after this date"
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/auth/signup:
+    post:
+      tags:
+      - Auth
+      summary: Create account and get a free API key
+      operationId: signup_api_v1_auth_signup_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUpRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignUpResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/auth/login:
+    post:
+      tags:
+      - Auth
+      summary: 'Step 1: verify credentials and receive a 2FA code by email'
+      description: 'Verify email + password. On success, a 6-digit code is sent to
+        the customer''s email.
+
+        The returned `tfa_token_id` must be passed to `POST /login/verify` along with
+        the code.'
+      operationId: login_init_api_v1_auth_login_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginInitResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/auth/login/verify:
+    post:
+      tags:
+      - Auth
+      summary: 'Step 2: verify the emailed 2FA code and receive a JWT'
+      description: Submit the `tfa_token_id` and the code received by email. Returns
+        a JWT on success.
+      operationId: login_verify_api_v1_auth_login_verify_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyTwoFARequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/auth/account/keys:
+    get:
+      tags:
+      - Auth
+      summary: List your API keys (JWT required)
+      operationId: list_keys_api_v1_auth_account_keys_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountKeysResponse'
+      security:
+      - HTTPBearer: []
+  /api/v1/auth/account/keys/rotate:
+    post:
+      tags:
+      - Auth
+      summary: Rotate your active API key (JWT required)
+      operationId: rotate_key_api_v1_auth_account_keys_rotate_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RotateKeyResponse'
+      security:
+      - HTTPBearer: []
+  /api/v1/auth/account:
+    get:
+      tags:
+      - Auth
+      summary: Get current account info (JWT required)
+      description: Return basic account details and active API keys. Used by the dashboard
+        page.
+      operationId: account_info_api_v1_auth_account_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Account Info Api V1 Auth Account Get
+      security:
+      - HTTPBearer: []
+  /api/v1/auth/password/reset:
+    post:
+      tags:
+      - Auth
+      summary: Request password reset
+      description: Request a password reset link to be sent to the email.
+      operationId: request_password_reset_api_v1_auth_password_reset_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordResetRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordResetResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/auth/password/reset/confirm:
+    post:
+      tags:
+      - Auth
+      summary: Confirm password reset with token
+      description: Confirm password reset using token from email.
+      operationId: confirm_password_reset_api_v1_auth_password_reset_confirm_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirmRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordResetConfirmResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/billing/checkout:
+    post:
+      tags:
+      - Billing
+      summary: Create a Stripe Checkout session to upgrade your plan (JWT required)
+      operationId: create_checkout_api_v1_billing_checkout_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/briefings/personas:
+    get:
+      tags:
+      - Briefings
+      summary: List available briefing personas
+      description: Lists all available personas, which tiers unlock each, and what
+        your key can access.
+      operationId: list_personas_api_v1_briefings_personas_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonasResponse'
+      security:
+      - APIKeyHeader: []
+  /api/v1/briefings/daily:
+    get:
+      tags:
+      - Briefings
+      summary: "Today's persona briefing (Pro/Enterprise \u2014 see /briefings/personas\
+        \ for tier access)"
+      description: 'Returns today''s threat intelligence briefing tailored to the
+        requested persona.
+
+
+        - **soc_analyst**: IOC packs, detection rules, triage steps (Pro+)
+
+        - **ciso**: Executive risk summary, compliance posture, board metrics (Pro+)
+
+        - **threat_hunter**: TTP hunting packs, MITRE coverage, telemetry tips (Enterprise)
+
+        - **pentest**: Exploit PoC status, attack-path narrative, technique hints
+        (Enterprise)
+
+
+        Free users receive HTTP 403 with an upgrade URL.'
+      operationId: get_daily_briefing_api_v1_briefings_daily_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: persona
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 'Persona: soc_analyst | ciso | threat_hunter | pentest'
+          default: soc_analyst
+          title: Persona
+        description: 'Persona: soc_analyst | ciso | threat_hunter | pentest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/app__api__v1__endpoints__briefings__BriefingResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/briefings/daily/history:
+    get:
+      tags:
+      - Briefings
+      summary: Historical persona briefings (Pro/Enterprise)
+      description: 'Returns the last N days of briefings for the given persona.  Pro:
+        up to 7 days.  Enterprise: up to 30 days.'
+      operationId: get_briefing_history_api_v1_briefings_daily_history_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: persona
+        in: query
+        required: false
+        schema:
+          type: string
+          default: soc_analyst
+          title: Persona
+      - name: days
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 30
+          minimum: 1
+          description: Number of past days to retrieve (max 30)
+          default: 7
+          title: Days
+        description: Number of past days to retrieve (max 30)
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BriefingHistoryResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/categories:
+    get:
+      tags:
+      - Categories
+      summary: List supported article categories
+      operationId: list_categories_api_v1_categories_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryListResponse'
+      security:
+      - APIKeyHeader: []
+  /api/v1/categories/subscriptions:
+    get:
+      tags:
+      - Categories
+      summary: Get your category subscriptions (JWT required)
+      operationId: get_subscriptions_api_v1_categories_subscriptions_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategorySubscriptionsResponse'
+      security:
+      - HTTPBearer: []
+    put:
+      tags:
+      - Categories
+      summary: Replace your category subscriptions (JWT required)
+      operationId: put_subscriptions_api_v1_categories_subscriptions_put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategorySubscriptionsRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategorySubscriptionsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/admin/analytics:
+    get:
+      tags:
+      - Admin
+      summary: Usage analytics dashboard
+      operationId: analytics_api_v1_admin_analytics_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      security:
+      - APIKeyHeader: []
+  /api/v1/admin/audit-log:
+    get:
+      tags:
+      - Admin
+      summary: Admin audit trail (last 200 entries, newest first)
+      operationId: audit_log_api_v1_admin_audit_log_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: resource_type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Resource Type
+      - name: action
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Action
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/admin/rotate-key:
+    post:
+      tags:
+      - Admin
+      summary: Generate a new ADMIN_SECRET_KEY candidate (does not auto-apply)
+      description: 'Generate a cryptographically random admin key candidate.
+
+
+        The new key is **not** applied automatically.  The operator must:
+
+        1. Copy the returned ``new_key`` value.
+
+        2. Update ``ADMIN_SECRET_KEY`` in ``.env``.
+
+        3. Restart the API container (or send SIGHUP if hot-reload is enabled).
+
+
+        The old key remains valid until the container restarts with the new value.'
+      operationId: rotate_admin_key_api_v1_admin_rotate_key_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      security:
+      - APIKeyHeader: []
+  /api/v1/admin/users:
+    get:
+      tags:
+      - Admin
+      summary: List all customers (paginated)
+      operationId: list_users_api_v1_admin_users_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: tier
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'Filter by tier: free, pro, enterprise'
+          title: Tier
+        description: 'Filter by tier: free, pro, enterprise'
+      - name: is_active
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Active
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/admin/users/{customer_id}:
+    get:
+      tags:
+      - Admin
+      summary: Customer detail including API keys
+      operationId: get_user_api_v1_admin_users__customer_id__get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Customer Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Admin
+      summary: Hard-delete a customer and all their API keys
+      operationId: delete_user_api_v1_admin_users__customer_id__delete
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Customer Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/admin/users/{customer_id}/suspend:
+    post:
+      tags:
+      - Admin
+      summary: Suspend a customer account (deactivates all API keys)
+      operationId: suspend_user_api_v1_admin_users__customer_id__suspend_post
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Customer Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/admin/users/{customer_id}/reactivate:
+    post:
+      tags:
+      - Admin
+      summary: Reactivate a suspended customer account
+      operationId: reactivate_user_api_v1_admin_users__customer_id__reactivate_post
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Customer Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/admin/users/{customer_id}/reset-key:
+    post:
+      tags:
+      - Admin
+      summary: Revoke all API keys and issue a new one (emergency reset)
+      operationId: reset_user_key_api_v1_admin_users__customer_id__reset_key_post
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Customer Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/admin/jobs/status:
+    get:
+      tags:
+      - Admin
+      summary: Check status of scheduled jobs and DB readiness
+      operationId: jobs_status_api_v1_admin_jobs_status_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      security:
+      - APIKeyHeader: []
+  /api/v1/admin/briefings/generate:
+    post:
+      tags:
+      - Admin
+      summary: Trigger on-demand briefing generation (admin only)
+      description: 'Trigger persona briefing generation for a given date.
+
+
+        Useful for backfilling missed days or forcing regeneration after content updates.
+
+        Skips personas that already have a briefing for that date (idempotent).'
+      operationId: trigger_briefing_generation_api_v1_admin_briefings_generate_post
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: target_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          description: Date to generate briefings for (ISO 8601, e.g. 2026-04-01).
+            Defaults to today.
+          title: Target Date
+        description: Date to generate briefings for (ISO 8601, e.g. 2026-04-01). Defaults
+          to today.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/admin/email/send-weekly:
+    post:
+      tags:
+      - Admin
+      summary: Trigger weekly email briefings (admin only)
+      description: 'Trigger sending of weekly email briefings to all active subscribers.
+
+
+        This endpoint starts the email sending process in the background.
+
+        Returns immediately with a status message.'
+      operationId: trigger_weekly_emails_api_v1_admin_email_send_weekly_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      security:
+      - APIKeyHeader: []
+  /api/v1/admin/jobs/reindex:
+    post:
+      tags:
+      - Admin
+      summary: Trigger article category assignment reindex
+      description: 'Trigger a background reindex of article category assignments.
+
+
+        This re-runs category classification for articles that are missing
+
+        assignments or have stale ones.  The operation is non-destructive:
+
+        existing assignments are only updated if the classifier disagrees.
+
+
+        Returns immediately with a job token.  Poll ``GET /admin/jobs/status``
+
+        to monitor briefing job health (the reindex does not block the API).'
+      operationId: trigger_reindex_api_v1_admin_jobs_reindex_post
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 50000
+          minimum: 1
+          description: Maximum number of articles to reindex in this run.
+          default: 1000
+          title: Limit
+        description: Maximum number of articles to reindex in this run.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/admin/articles:
+    get:
+      tags:
+      - Admin
+      summary: List articles (paginated)
+      operationId: list_articles_api_v1_admin_articles_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      - name: category
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by category
+          title: Category
+        description: Filter by category
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/admin/articles/categories:
+    get:
+      tags:
+      - Admin
+      summary: List distinct article categories
+      operationId: list_article_categories_api_v1_admin_articles_categories_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      security:
+      - APIKeyHeader: []
+  /api/v1/admin/sources:
+    get:
+      tags:
+      - Admin
+      summary: "Intel source health \u2014 all feeds with status and article counts"
+      description: 'Return health status for every tracked intel source.
+
+
+        Sources that have never been fetched (source_health row absent) are
+
+        returned as status=unknown with null timestamps.  The gather_intel.py
+
+        script upserts a row on every fetch attempt, so this list will grow
+
+        automatically as feeds are processed.'
+      operationId: list_sources_api_v1_admin_sources_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      security:
+      - APIKeyHeader: []
+  /api/v1/admin/sources/preview:
+    get:
+      tags:
+      - Admin
+      summary: Recent articles fetched from a specific source URL
+      description: Return the most recent articles whose URL domain matches the source
+        feed domain.
+      operationId: source_article_preview_api_v1_admin_sources_preview_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: url
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Source feed URL
+          title: Url
+        description: Source feed URL
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 20
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/admin/sources/{source_name}/scrape:
+    post:
+      tags:
+      - Admin
+      summary: Trigger an on-demand re-scrape for a specific intel source
+      description: 'Trigger gather_intel.py for a single source feed.
+
+
+        Looks up the source URL by name, then spawns gather_intel.py with
+
+        ``--feed-url`` in a background task.  Returns immediately with a job token.'
+      operationId: trigger_source_scrape_api_v1_admin_sources__source_name__scrape_post
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: source_name
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Source Name
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/track:
+    post:
+      tags:
+      - Analytics
+      summary: Track CTA conversion event
+      description: "Record a CTA interaction for funnel analytics.\nNo authentication\
+        \ required. IP is one-way hashed for privacy.\nAlways returns 200 \u2014 never\
+        \ blocks the user."
+      operationId: track_event_api_v1_track_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrackRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/entities:
+    get:
+      tags:
+      - Entities
+      summary: List entities by type
+      description: Returns distinct entity values with article counts. Filter by `type`
+        (threat_actor, malware, victim_org, country, technique, ioc_ip, ioc_domain,
+        ioc_hash, cve, campaign). Optionally search by `q`.
+      operationId: list_entities_api_v1_entities_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Entity type filter
+          title: Type
+        description: Entity type filter
+      - name: q
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Search entity value (case-insensitive prefix)
+          title: Q
+        description: Search entity value (case-insensitive prefix)
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EntitySummary'
+                title: Response List Entities Api V1 Entities Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/entities/{name}/timeline:
+    get:
+      tags:
+      - Entities
+      summary: Entity mention timeline
+      description: Returns articles that mention the named entity, ordered by most
+        recent first.
+      operationId: entity_timeline_api_v1_entities__name__timeline_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Name
+      - name: type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Narrow to a specific entity type
+          title: Type
+        description: Narrow to a specific entity type
+      - name: days
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 3650
+          minimum: 1
+          description: Lookback window in days
+          default: 90
+          title: Days
+        description: Lookback window in days
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          default: 20
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EntityTimelineEntry'
+                title: Response Entity Timeline Api V1 Entities  Name  Timeline Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/entities/techniques:
+    get:
+      tags:
+      - Entities
+      summary: MITRE ATT&CK technique frequency
+      description: Returns MITRE ATT&CK technique IDs ranked by number of articles
+        mentioning them.
+      operationId: list_techniques_api_v1_entities_techniques_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TechniqueSummary'
+                title: Response List Techniques Api V1 Entities Techniques Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/trends/trending/threats:
+    get:
+      tags:
+      - Trends
+      summary: Get trending cybersecurity threats
+      description: 'Get trending cybersecurity threats based on article frequency
+        and recency.
+
+
+        Analyzes articles from the specified period to identify:
+
+        - Most frequently mentioned threat actors
+
+        - Most discussed vulnerability types
+
+        - Emerging threat patterns
+
+
+        Returns trending threats with frequency counts and trend indicators.'
+      operationId: get_trending_threats_api_v1_trends_trending_threats_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: days
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 30
+          minimum: 1
+          description: Number of days to analyze
+          default: 7
+          title: Days
+        description: Number of days to analyze
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 50
+          minimum: 1
+          description: Number of trends to return
+          default: 10
+          title: Limit
+        description: Number of trends to return
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/trends/cve/{cve_id}/historical:
+    get:
+      tags:
+      - Trends
+      summary: Get CVE historical context and related intelligence
+      description: 'Get comprehensive historical context for a CVE including:
+
+
+        - CVE details (CVSS scores, description, affected products)
+
+        - Exploit timeline and maturity
+
+        - Related articles and threat intelligence
+
+        - Threat actor associations
+
+        - Historical comparison with similar CVEs
+
+
+        This endpoint provides enriched CVE intelligence beyond basic CVE lookup.'
+      operationId: get_cve_historical_context_api_v1_trends_cve__cve_id__historical_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: cve_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Cve Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/trends/threats/comparison:
+    get:
+      tags:
+      - Trends
+      summary: Compare threat intelligence across time periods
+      description: 'Compare threat intelligence across two different time periods.
+
+
+        Provides insights into:
+
+        - Emerging vs declining threats
+
+        - Changes in threat actor activity
+
+        - Shifts in vulnerability focus
+
+        - Evolution of attack techniques
+
+
+        Useful for identifying trends and changes in the threat landscape.'
+      operationId: compare_threats_api_v1_trends_threats_comparison_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: period1_days
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 90
+          minimum: 1
+          description: First period in days
+          default: 7
+          title: Period1 Days
+        description: First period in days
+      - name: period2_days
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 90
+          minimum: 1
+          description: Second period in days
+          default: 30
+          title: Period2 Days
+        description: Second period in days
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/trends/threat-actors/{actor_id}/profile:
+    get:
+      tags:
+      - Trends
+      summary: Get comprehensive threat actor profile
+      description: 'Get comprehensive threat actor profiling including:
+
+
+        - Basic actor information and aliases
+
+        - Campaign history and timeline
+
+        - Associated IOCs and CVEs
+
+        - TTPs (Tactics, Techniques, and Procedures)
+
+        - Targeting patterns and motivations
+
+        - Recent activity and threat level assessment
+
+
+        Provides deep intelligence for threat actor analysis and attribution.'
+      operationId: get_threat_actor_profile_api_v1_trends_threat_actors__actor_id__profile_get
+      security:
+      - APIKeyHeader: []
+      parameters:
+      - name: actor_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Actor Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/email/subscribe:
+    post:
+      tags:
+      - Email
+      summary: Subscribe to free weekly cybersecurity briefings
+      description: 'Subscribe an email address to receive free weekly cybersecurity
+        briefings.
+
+
+        This creates a single-opt-in subscription (immediate subscription with consent
+        tracking).
+
+        For double opt-in, the subscriber would need to verify via email confirmation.'
+      operationId: subscribe_to_newsletter_api_v1_email_subscribe_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailSubscribeRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailSubscribeResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/email/unsubscribe:
+    post:
+      tags:
+      - Email
+      summary: Unsubscribe from weekly briefings
+      description: Unsubscribe an email address from weekly briefings.
+      operationId: unsubscribe_from_newsletter_api_v1_email_unsubscribe_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailUnsubscribeRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailUnsubscribeResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/email/verify:
+    post:
+      tags:
+      - Email
+      summary: Verify email subscription (double opt-in)
+      description: Verify email subscription using verification token (double opt-in).
+      operationId: verify_email_subscription_api_v1_email_verify_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailVerificationRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailVerificationResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /search:
+    get:
+      tags:
+      - Search
+      summary: Search Articles
+      description: "Full-text search across 1.1M cybersecurity articles (1998\u2013\
+        2023)."
+      operationId: search_articles_search_get
+      parameters:
+      - name: q
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Search query (keywords or phrase)
+          title: Q
+        description: Search query (keywords or phrase)
+      - name: from
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: From
+      - name: to
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: To
+      - name: cve
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by CVE ID, e.g. CVE-2021-44228
+          title: Cve
+        description: Filter by CVE ID, e.g. CVE-2021-44228
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 20
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Article'
+                title: Response Search Articles Search Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /briefings:
+    post:
+      tags:
+      - Briefings
+      summary: Generate Briefing
+      description: "Generate an AI-powered cybersecurity briefing from historical\
+        \ threat data.\n\n- `depth=quick` \u2192 short summary (fast + cheap)\n- `depth=standard`\
+        \ \u2192 structured briefing with key findings\n- `depth=deep` \u2192 comprehensive\
+        \ threat analysis"
+      operationId: generate_briefing_briefings_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BriefingRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/app__routes_compat__briefings__BriefingResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /briefings/topics:
+    get:
+      tags:
+      - Briefings
+      - Briefings
+      summary: Top Topics
+      description: Return the most common CVEs and high-CVSS entries to suggest briefing
+        topics.
+      operationId: top_topics_briefings_topics_get
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 50
+          minimum: 1
+          default: 10
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /health:
+    get:
+      tags:
+      - Health
+      summary: Health
+      operationId: health_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+components:
+  schemas:
+    AccountKeysResponse:
+      properties:
+        keys:
+          items:
+            $ref: '#/components/schemas/ApiKeyResponse'
+          type: array
+          title: Keys
+      type: object
+      required:
+      - keys
+      title: AccountKeysResponse
+    ApiKeyResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        key:
+          type: string
+          title: Key
+        name:
+          type: string
+          title: Name
+        tier:
+          type: string
+          title: Tier
+        is_active:
+          type: boolean
+          title: Is Active
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+      type: object
+      required:
+      - id
+      - key
+      - name
+      - tier
+      - is_active
+      - created_at
+      title: ApiKeyResponse
+    Article:
+      properties:
+        id:
+          type: integer
+          title: Id
+        title:
+          type: string
+          title: Title
+        url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url
+        published_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Published At
+        cvss:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cvss
+        cve:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Cve
+        snippet:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Snippet
+      type: object
+      required:
+      - id
+      - title
+      - url
+      - published_at
+      - cvss
+      - cve
+      - snippet
+      title: Article
+    BriefingHistoryItem:
+      properties:
+        briefing_date:
+          type: string
+          format: date
+          title: Briefing Date
+        title:
+          type: string
+          title: Title
+        executive_summary:
+          type: string
+          title: Executive Summary
+        severity:
+          type: string
+          title: Severity
+        topics:
+          items:
+            type: string
+          type: array
+          title: Topics
+      type: object
+      required:
+      - briefing_date
+      - title
+      - executive_summary
+      - severity
+      - topics
+      title: BriefingHistoryItem
+    BriefingHistoryResponse:
+      properties:
+        persona:
+          type: string
+          title: Persona
+        persona_label:
+          type: string
+          title: Persona Label
+        days_returned:
+          type: integer
+          title: Days Returned
+        briefings:
+          items:
+            $ref: '#/components/schemas/BriefingHistoryItem'
+          type: array
+          title: Briefings
+      type: object
+      required:
+      - persona
+      - persona_label
+      - days_returned
+      - briefings
+      title: BriefingHistoryResponse
+    BriefingRequest:
+      properties:
+        topic:
+          type: string
+          title: Topic
+        industry:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Industry
+        depth:
+          type: string
+          title: Depth
+          default: standard
+        from_year:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: From Year
+        to_year:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: To Year
+      type: object
+      required:
+      - topic
+      title: BriefingRequest
+    CVECreate:
+      properties:
+        cve_id:
+          type: string
+          title: Cve Id
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        cvss_v3_score:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Cvss V3 Score
+        cvss_v3_vector:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cvss V3 Vector
+        cvss_v2_score:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Cvss V2 Score
+        severity:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Severity
+        cwe_ids:
+          items:
+            type: string
+          type: array
+          title: Cwe Ids
+          default: []
+        affected_products:
+          items: {}
+          type: array
+          title: Affected Products
+          default: []
+        exploits_available:
+          type: boolean
+          title: Exploits Available
+          default: false
+        exploit_maturity:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Exploit Maturity
+        patch_available:
+          type: boolean
+          title: Patch Available
+          default: false
+        mitre_techniques:
+          items:
+            type: string
+          type: array
+          title: Mitre Techniques
+          default: []
+        published_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Published At
+      type: object
+      required:
+      - cve_id
+      title: CVECreate
+    CVEResponse:
+      properties:
+        cve_id:
+          type: string
+          title: Cve Id
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        cvss_v3_score:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Cvss V3 Score
+        cvss_v3_vector:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cvss V3 Vector
+        cvss_v2_score:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Cvss V2 Score
+        severity:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Severity
+        cwe_ids:
+          items:
+            type: string
+          type: array
+          title: Cwe Ids
+          default: []
+        affected_products:
+          items: {}
+          type: array
+          title: Affected Products
+          default: []
+        exploits_available:
+          type: boolean
+          title: Exploits Available
+          default: false
+        exploit_maturity:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Exploit Maturity
+        patch_available:
+          type: boolean
+          title: Patch Available
+          default: false
+        mitre_techniques:
+          items:
+            type: string
+          type: array
+          title: Mitre Techniques
+          default: []
+        id:
+          type: string
+          format: uuid
+          title: Id
+        published_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Published At
+        modified_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Modified At
+        is_active:
+          type: boolean
+          title: Is Active
+          default: true
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - cve_id
+      - id
+      - created_at
+      - updated_at
+      title: CVEResponse
+    CategoryListResponse:
+      properties:
+        categories:
+          items:
+            type: string
+          type: array
+          title: Categories
+      type: object
+      required:
+      - categories
+      title: CategoryListResponse
+    CategorySubscriptionsRequest:
+      properties:
+        categories:
+          items:
+            type: string
+          type: array
+          maxItems: 50
+          title: Categories
+      type: object
+      title: CategorySubscriptionsRequest
+    CategorySubscriptionsResponse:
+      properties:
+        categories:
+          items:
+            type: string
+          type: array
+          title: Categories
+      type: object
+      required:
+      - categories
+      title: CategorySubscriptionsResponse
+    CheckoutRequest:
+      properties:
+        tier:
+          type: string
+          title: Tier
+      type: object
+      required:
+      - tier
+      title: CheckoutRequest
+    CheckoutResponse:
+      properties:
+        checkout_url:
+          type: string
+          title: Checkout Url
+      type: object
+      required:
+      - checkout_url
+      title: CheckoutResponse
+    EmailSubscribeRequest:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source
+        consent_opt_in:
+          type: boolean
+          title: Consent Opt In
+          default: true
+      type: object
+      required:
+      - email
+      title: EmailSubscribeRequest
+    EmailSubscribeResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+        subscribed:
+          type: boolean
+          title: Subscribed
+        email:
+          type: string
+          title: Email
+      type: object
+      required:
+      - message
+      - subscribed
+      - email
+      title: EmailSubscribeResponse
+    EmailUnsubscribeRequest:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+      type: object
+      required:
+      - email
+      title: EmailUnsubscribeRequest
+    EmailUnsubscribeResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+        unsubscribed:
+          type: boolean
+          title: Unsubscribed
+        email:
+          type: string
+          title: Email
+      type: object
+      required:
+      - message
+      - unsubscribed
+      - email
+      title: EmailUnsubscribeResponse
+    EmailVerificationRequest:
+      properties:
+        token:
+          type: string
+          title: Token
+      type: object
+      required:
+      - token
+      title: EmailVerificationRequest
+    EmailVerificationResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+        verified:
+          type: boolean
+          title: Verified
+        email:
+          type: string
+          title: Email
+      type: object
+      required:
+      - message
+      - verified
+      - email
+      title: EmailVerificationResponse
+    EntitySummary:
+      properties:
+        entity_type:
+          type: string
+          title: Entity Type
+        entity_value:
+          type: string
+          title: Entity Value
+        article_count:
+          type: integer
+          title: Article Count
+      type: object
+      required:
+      - entity_type
+      - entity_value
+      - article_count
+      title: EntitySummary
+    EntityTimelineEntry:
+      properties:
+        article_id:
+          type: integer
+          title: Article Id
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url
+        published_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Published At
+      type: object
+      required:
+      - article_id
+      - title
+      - url
+      - published_at
+      title: EntityTimelineEntry
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    IOCCreate:
+      properties:
+        type:
+          type: string
+          title: Type
+          description: 'IOC type: ip, domain, url, hash_md5, hash_sha1, hash_sha256,
+            email'
+        value:
+          type: string
+          title: Value
+          description: The IOC value
+        confidence:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Confidence
+          default: 0.5
+        severity:
+          type: string
+          title: Severity
+          description: low, medium, high, critical
+          default: medium
+        tags:
+          items:
+            type: string
+          type: array
+          title: Tags
+          default: []
+        tlp:
+          type: string
+          title: Tlp
+          description: 'Traffic Light Protocol: white, green, amber, red'
+          default: white
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source
+        mitre_techniques:
+          items:
+            type: string
+          type: array
+          title: Mitre Techniques
+          default: []
+      type: object
+      required:
+      - type
+      - value
+      title: IOCCreate
+    IOCResponse:
+      properties:
+        type:
+          type: string
+          title: Type
+          description: 'IOC type: ip, domain, url, hash_md5, hash_sha1, hash_sha256,
+            email'
+        value:
+          type: string
+          title: Value
+          description: The IOC value
+        confidence:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Confidence
+          default: 0.5
+        severity:
+          type: string
+          title: Severity
+          description: low, medium, high, critical
+          default: medium
+        tags:
+          items:
+            type: string
+          type: array
+          title: Tags
+          default: []
+        tlp:
+          type: string
+          title: Tlp
+          description: 'Traffic Light Protocol: white, green, amber, red'
+          default: white
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source
+        mitre_techniques:
+          items:
+            type: string
+          type: array
+          title: Mitre Techniques
+          default: []
+        id:
+          type: string
+          format: uuid
+          title: Id
+        first_seen:
+          type: string
+          format: date-time
+          title: First Seen
+        last_seen:
+          type: string
+          format: date-time
+          title: Last Seen
+        is_active:
+          type: boolean
+          title: Is Active
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - type
+      - value
+      - id
+      - first_seen
+      - last_seen
+      - is_active
+      - created_at
+      - updated_at
+      title: IOCResponse
+    IOCUpdate:
+      properties:
+        confidence:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Confidence
+        severity:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Severity
+        tags:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Tags
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        is_active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Active
+      type: object
+      title: IOCUpdate
+    LoginInitResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+        tfa_token_id:
+          type: string
+          title: Tfa Token Id
+      type: object
+      required:
+      - message
+      - tfa_token_id
+      title: LoginInitResponse
+      description: Returned after step-1 (password verification). Client must submit
+        the emailed code.
+    LoginRequest:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+        password:
+          type: string
+          title: Password
+      type: object
+      required:
+      - email
+      - password
+      title: LoginRequest
+    PasswordResetConfirmRequest:
+      properties:
+        token:
+          type: string
+          title: Token
+        new_password:
+          type: string
+          title: New Password
+      type: object
+      required:
+      - token
+      - new_password
+      title: PasswordResetConfirmRequest
+    PasswordResetConfirmResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+        email:
+          type: string
+          title: Email
+      type: object
+      required:
+      - message
+      - email
+      title: PasswordResetConfirmResponse
+    PasswordResetRequest:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+      type: object
+      required:
+      - email
+      title: PasswordResetRequest
+    PasswordResetResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+        email:
+          type: string
+          title: Email
+      type: object
+      required:
+      - message
+      - email
+      title: PasswordResetResponse
+    PersonaInfo:
+      properties:
+        persona:
+          type: string
+          title: Persona
+        label:
+          type: string
+          title: Label
+        available_on:
+          items:
+            type: string
+          type: array
+          title: Available On
+      type: object
+      required:
+      - persona
+      - label
+      - available_on
+      title: PersonaInfo
+    PersonasResponse:
+      properties:
+        personas:
+          items:
+            $ref: '#/components/schemas/PersonaInfo'
+          type: array
+          title: Personas
+        your_tier:
+          type: string
+          title: Your Tier
+        your_accessible_personas:
+          items:
+            type: string
+          type: array
+          title: Your Accessible Personas
+      type: object
+      required:
+      - personas
+      - your_tier
+      - your_accessible_personas
+      title: PersonasResponse
+    RotateKeyResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+        new_key:
+          type: string
+          title: New Key
+      type: object
+      required:
+      - message
+      - new_key
+      title: RotateKeyResponse
+    STIXBundle:
+      properties:
+        type:
+          type: string
+          title: Type
+          default: bundle
+        id:
+          type: string
+          title: Id
+        spec_version:
+          type: string
+          title: Spec Version
+          default: '2.1'
+        objects:
+          items: {}
+          type: array
+          title: Objects
+          default: []
+      type: object
+      required:
+      - id
+      title: STIXBundle
+    SearchResponse:
+      properties:
+        query:
+          type: string
+          title: Query
+        total:
+          type: integer
+          title: Total
+        results:
+          items:
+            $ref: '#/components/schemas/SearchResult'
+          type: array
+          title: Results
+      type: object
+      required:
+      - query
+      - total
+      - results
+      title: SearchResponse
+    SearchResult:
+      properties:
+        entity_type:
+          type: string
+          title: Entity Type
+        entity_id:
+          type: string
+          title: Entity Id
+        title:
+          type: string
+          title: Title
+        summary:
+          type: string
+          title: Summary
+        score:
+          type: number
+          title: Score
+        meta:
+          additionalProperties: true
+          type: object
+          title: Meta
+          default: {}
+      type: object
+      required:
+      - entity_type
+      - entity_id
+      - title
+      - summary
+      - score
+      title: SearchResult
+    SignUpRequest:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+        password:
+          type: string
+          title: Password
+      type: object
+      required:
+      - email
+      - password
+      title: SignUpRequest
+    SignUpResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+        api_key:
+          type: string
+          title: Api Key
+        tier:
+          type: string
+          title: Tier
+      type: object
+      required:
+      - message
+      - api_key
+      - tier
+      title: SignUpResponse
+    TechniqueSummary:
+      properties:
+        technique:
+          type: string
+          title: Technique
+        article_count:
+          type: integer
+          title: Article Count
+      type: object
+      required:
+      - technique
+      - article_count
+      title: TechniqueSummary
+    ThreatActorCreate:
+      properties:
+        name:
+          type: string
+          title: Name
+        aliases:
+          items:
+            type: string
+          type: array
+          title: Aliases
+          default: []
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        motivation:
+          items:
+            type: string
+          type: array
+          title: Motivation
+          default: []
+        sophistication:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sophistication
+        origin_country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Origin Country
+        targets:
+          items:
+            type: string
+          type: array
+          title: Targets
+          default: []
+        ttps:
+          items:
+            type: string
+          type: array
+          title: Ttps
+          default: []
+        tools:
+          items:
+            type: string
+          type: array
+          title: Tools
+          default: []
+      type: object
+      required:
+      - name
+      title: ThreatActorCreate
+    ThreatActorResponse:
+      properties:
+        name:
+          type: string
+          title: Name
+        aliases:
+          items:
+            type: string
+          type: array
+          title: Aliases
+          default: []
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        motivation:
+          items:
+            type: string
+          type: array
+          title: Motivation
+          default: []
+        sophistication:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sophistication
+        origin_country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Origin Country
+        targets:
+          items:
+            type: string
+          type: array
+          title: Targets
+          default: []
+        ttps:
+          items:
+            type: string
+          type: array
+          title: Ttps
+          default: []
+        tools:
+          items:
+            type: string
+          type: array
+          title: Tools
+          default: []
+        id:
+          type: string
+          format: uuid
+          title: Id
+        is_active:
+          type: boolean
+          title: Is Active
+        first_seen:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: First Seen
+        last_seen:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Seen
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - name
+      - id
+      - is_active
+      - created_at
+      - updated_at
+      title: ThreatActorResponse
+    TokenResponse:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+        token_type:
+          type: string
+          title: Token Type
+          default: bearer
+      type: object
+      required:
+      - access_token
+      title: TokenResponse
+    TrackRequest:
+      properties:
+        event:
+          type: string
+          maxLength: 50
+          title: Event
+          description: 'Event type: cta_click, page_view, signup_complete'
+        placement:
+          anyOf:
+          - type: string
+            maxLength: 100
+          - type: 'null'
+          title: Placement
+          description: UI placement identifier
+        source:
+          anyOf:
+          - type: string
+            maxLength: 200
+          - type: 'null'
+          title: Source
+          description: Source context e.g. topic:ransomware
+        page:
+          anyOf:
+          - type: string
+            maxLength: 500
+          - type: 'null'
+          title: Page
+          description: Current page path
+        utm_source:
+          anyOf:
+          - type: string
+            maxLength: 100
+          - type: 'null'
+          title: Utm Source
+        utm_medium:
+          anyOf:
+          - type: string
+            maxLength: 100
+          - type: 'null'
+          title: Utm Medium
+        utm_campaign:
+          anyOf:
+          - type: string
+            maxLength: 100
+          - type: 'null'
+          title: Utm Campaign
+      type: object
+      required:
+      - event
+      title: TrackRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    VerifyTwoFARequest:
+      properties:
+        tfa_token_id:
+          type: string
+          title: Tfa Token Id
+        code:
+          type: string
+          title: Code
+      type: object
+      required:
+      - tfa_token_id
+      - code
+      title: VerifyTwoFARequest
+      description: 'Step-2: verify the emailed code and receive a full JWT.'
+    app__api__v1__endpoints__briefings__BriefingResponse:
+      properties:
+        briefing_date:
+          type: string
+          format: date
+          title: Briefing Date
+        persona:
+          type: string
+          title: Persona
+        persona_label:
+          type: string
+          title: Persona Label
+        title:
+          type: string
+          title: Title
+        executive_summary:
+          type: string
+          title: Executive Summary
+        content:
+          type: string
+          title: Content
+        severity:
+          type: string
+          title: Severity
+        topics:
+          items:
+            type: string
+          type: array
+          title: Topics
+        tier_note:
+          type: string
+          title: Tier Note
+      type: object
+      required:
+      - briefing_date
+      - persona
+      - persona_label
+      - title
+      - executive_summary
+      - content
+      - severity
+      - topics
+      - tier_note
+      title: BriefingResponse
+    app__routes_compat__briefings__BriefingResponse:
+      properties:
+        topic:
+          type: string
+          title: Topic
+        industry:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Industry
+        briefing:
+          type: string
+          title: Briefing
+        sources_used:
+          type: integer
+          title: Sources Used
+        model:
+          type: string
+          title: Model
+      type: object
+      required:
+      - topic
+      - industry
+      - briefing
+      - sources_used
+      - model
+      title: BriefingResponse
+  securitySchemes:
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    HTTPBearer:
+      type: http
+      scheme: bearer
