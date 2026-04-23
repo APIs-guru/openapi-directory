@@ -1,0 +1,761 @@
+openapi: 3.0.3
+servers:
+  - url: https://snapapi-production-3fa2.up.railway.app
+    description: Production server
+info:
+  title: SnapAPI
+  version: 1.0.0
+  description: >-
+    SnapAPI is a developer utility API that bundles 13+ common tools into a
+    single REST API with one API key. Generate QR codes, resize images, capture
+    screenshots, convert HTML to PDF, hash strings, generate UUIDs, extract URL
+    metadata, encode/decode base64, decode JWTs, convert colors, generate lorem
+    ipsum text, convert Markdown to HTML, and generate placeholder images. Free
+    tier includes 100 API calls/month with no credit card required. All
+    endpoints support CORS and return JSON or binary data as appropriate.
+  contact:
+    name: SnapAPI Support
+    url: https://api-snap.com
+  license:
+    name: Proprietary
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: https://api-snap.com/favicon.ico
+  x-origin:
+    - format: openapi
+      url: https://api-snap.com/openapi.json
+      version: '3.0'
+  x-providerName: api-snap.com
+externalDocs:
+  description: SnapAPI Documentation
+  url: https://api-snap.com
+security:
+  - BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        API key obtained from your SnapAPI dashboard. Pass as
+        `Authorization: Bearer <key>` header or as `?api_key=<key>` query
+        parameter.
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Human-readable error message
+      required:
+        - error
+    RateLimitError:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Rate limit exceeded
+        usage:
+          type: integer
+          description: Number of API calls used this month
+        limit:
+          type: integer
+          description: Monthly call limit for your plan
+        upgrade_url:
+          type: string
+          format: uri
+          description: URL to upgrade your plan
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimitExceeded:
+      description: Monthly API call limit reached
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RateLimitError'
+      headers:
+        X-RateLimit-Limit:
+          schema:
+            type: integer
+          description: Monthly call limit
+        X-RateLimit-Remaining:
+          schema:
+            type: integer
+          description: Remaining calls this month
+paths:
+  /api/qr:
+    get:
+      operationId: generateQrCode
+      summary: Generate QR code
+      description: Generate a QR code image for any text or URL. Returns PNG or SVG.
+      tags:
+        - Images
+      parameters:
+        - name: data
+          in: query
+          description: The text or URL to encode in the QR code.
+          required: true
+          schema:
+            type: string
+          example: https://example.com
+        - name: size
+          in: query
+          description: Width/height of the QR code in pixels (max 1000).
+          required: false
+          schema:
+            type: integer
+            default: 300
+            maximum: 1000
+            minimum: 1
+        - name: format
+          in: query
+          description: Output format.
+          required: false
+          schema:
+            type: string
+            enum:
+              - png
+              - svg
+            default: png
+      responses:
+        '200':
+          description: QR code image
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/svg+xml:
+              schema:
+                type: string
+        '400':
+          description: Missing or invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /api/resize:
+    post:
+      operationId: resizeImage
+      summary: Resize and convert images
+      description: >-
+        Resize and/or convert images to PNG, WebP, JPEG, or AVIF. Accepts
+        multipart form data or a JSON body with a base64-encoded image or image
+        URL.
+      tags:
+        - Images
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - image
+              properties:
+                image:
+                  type: string
+                  format: binary
+                width:
+                  type: integer
+                  maximum: 4096
+                height:
+                  type: integer
+                  maximum: 4096
+                format:
+                  type: string
+                  enum:
+                    - png
+                    - jpeg
+                    - webp
+                    - avif
+                  default: png
+      responses:
+        '200':
+          description: Resized image binary
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/webp:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Missing image input or invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /api/screenshot:
+    get:
+      operationId: captureScreenshot
+      summary: Capture webpage screenshot
+      description: >-
+        Capture a screenshot of any publicly accessible URL. Returns PNG or
+        JPEG.
+      tags:
+        - Browser
+      parameters:
+        - name: url
+          in: query
+          description: The URL of the webpage to screenshot.
+          required: true
+          schema:
+            type: string
+            format: uri
+          example: https://example.com
+        - name: width
+          in: query
+          description: Viewport width in pixels (max 1920).
+          required: false
+          schema:
+            type: integer
+            default: 1280
+            maximum: 1920
+        - name: format
+          in: query
+          description: Image output format.
+          required: false
+          schema:
+            type: string
+            enum:
+              - png
+              - jpeg
+            default: png
+        - name: full_page
+          in: query
+          description: Capture the full scrollable page.
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Screenshot image
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Missing or invalid URL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /api/pdf:
+    post:
+      operationId: htmlToPdf
+      summary: Convert HTML to PDF
+      description: Convert an HTML string to a downloadable PDF file.
+      tags:
+        - Documents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - html
+              properties:
+                html:
+                  type: string
+                  description: HTML content to convert to PDF.
+                title:
+                  type: string
+                  description: Document title, used as the PDF filename.
+                  default: Document
+      responses:
+        '200':
+          description: PDF file
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Missing html field
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /api/hash:
+    get:
+      operationId: hashStringGet
+      summary: Hash a string (GET)
+      description: Compute a cryptographic hash of a string.
+      tags:
+        - Security
+      parameters:
+        - name: text
+          in: query
+          description: The string to hash.
+          required: true
+          schema:
+            type: string
+        - name: algorithm
+          in: query
+          description: Hash algorithm to use.
+          required: false
+          schema:
+            type: string
+            enum:
+              - md5
+              - sha1
+              - sha256
+              - sha512
+              - sha384
+              - sha3-256
+              - sha3-512
+            default: sha256
+      responses:
+        '200':
+          description: Hash result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hash:
+                    type: string
+                  algorithm:
+                    type: string
+                  encoding:
+                    type: string
+        '400':
+          description: Missing text or invalid algorithm
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /api/uuid:
+    get:
+      operationId: generateId
+      summary: Generate UUIDs and unique IDs
+      description: >-
+        Generate one or more unique identifiers in various formats: UUID v4,
+        nanoid, hex token, base64, numeric, or timestamp-prefixed.
+      tags:
+        - Utilities
+      parameters:
+        - name: format
+          in: query
+          description: ID format to generate.
+          required: false
+          schema:
+            type: string
+            enum:
+              - uuid
+              - v4
+              - nanoid
+              - hex
+              - base64
+              - numeric
+              - timestamp
+            default: uuid
+        - name: count
+          in: query
+          description: Number of IDs to generate (1-100).
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 1
+      responses:
+        '200':
+          description: Generated ID(s)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  ids:
+                    type: array
+                    items:
+                      type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /api/meta:
+    get:
+      operationId: extractUrlMetadata
+      summary: Extract URL metadata and Open Graph tags
+      description: >-
+        Fetch a URL and extract its title, description, Open Graph image,
+        favicon, and other metadata.
+      tags:
+        - Utilities
+      parameters:
+        - name: url
+          in: query
+          description: The URL to extract metadata from.
+          required: true
+          schema:
+            type: string
+            format: uri
+          example: https://example.com
+      responses:
+        '200':
+          description: Extracted metadata
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                  title:
+                    type: string
+                    nullable: true
+                  description:
+                    type: string
+                    nullable: true
+                  image:
+                    type: string
+                    nullable: true
+                  favicon:
+                    type: string
+                    nullable: true
+        '400':
+          description: Missing or invalid URL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /api/base64:
+    post:
+      operationId: base64EncodeDecode
+      summary: Base64 encode or decode
+      description: Encode a string to Base64 or decode a Base64 string back to plain text.
+      tags:
+        - Utilities
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - input
+              properties:
+                input:
+                  type: string
+                action:
+                  type: string
+                  enum:
+                    - encode
+                    - decode
+                  default: encode
+      responses:
+        '200':
+          description: Encoded or decoded result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                  action:
+                    type: string
+        '400':
+          description: Missing input or invalid base64 data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /api/jwt-decode:
+    post:
+      operationId: decodeJwt
+      summary: Decode a JWT token
+      description: >-
+        Decode a JSON Web Token (JWT) and return its header, payload, and
+        expiry information. Does not verify the signature.
+      tags:
+        - Security
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - token
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: Decoded JWT
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  header:
+                    type: object
+                    additionalProperties: true
+                  payload:
+                    type: object
+                    additionalProperties: true
+                  expired:
+                    type: boolean
+                  expiresAt:
+                    type: string
+                    format: date-time
+        '400':
+          description: Missing token or invalid JWT format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /api/color:
+    get:
+      operationId: convertColor
+      summary: Convert color formats
+      description: >-
+        Convert a color between hex, RGB, HSL and get metadata like brightness
+        and isDark.
+      tags:
+        - Utilities
+      parameters:
+        - name: color
+          in: query
+          description: Color value to convert (hex, rgb(), or hsl()).
+          required: true
+          schema:
+            type: string
+          example: '#ff0000'
+      responses:
+        '200':
+          description: Color in all supported formats
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hex:
+                    type: string
+                  rgbString:
+                    type: string
+                  hslString:
+                    type: string
+                  brightness:
+                    type: integer
+                  isDark:
+                    type: boolean
+        '400':
+          description: Missing color parameter or unsupported format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /api/lorem:
+    get:
+      operationId: generateLoremIpsum
+      summary: Generate lorem ipsum text
+      description: Generate placeholder lorem ipsum text as plain JSON or HTML.
+      tags:
+        - Utilities
+      parameters:
+        - name: paragraphs
+          in: query
+          description: Number of paragraphs to generate (1-20).
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 20
+            default: 3
+        - name: format
+          in: query
+          description: Output format.
+          required: false
+          schema:
+            type: string
+            enum:
+              - text
+              - html
+            default: text
+      responses:
+        '200':
+          description: Generated lorem ipsum content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  text:
+                    type: string
+                  paragraphs:
+                    type: array
+                    items:
+                      type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /api/markdown:
+    post:
+      operationId: markdownToHtml
+      summary: Convert Markdown to HTML
+      description: Convert a Markdown string to HTML.
+      tags:
+        - Documents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - markdown
+              properties:
+                markdown:
+                  type: string
+                styled:
+                  type: boolean
+                  default: true
+      responses:
+        '200':
+          description: Converted HTML
+          content:
+            text/html:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: object
+                properties:
+                  html:
+                    type: string
+        '400':
+          description: Missing markdown field
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /api/placeholder:
+    get:
+      operationId: generatePlaceholderImage
+      summary: Generate placeholder image
+      description: >-
+        Generate an SVG placeholder image of any size with customizable
+        background color, text color, and label.
+      tags:
+        - Images
+      parameters:
+        - name: w
+          in: query
+          description: Image width in pixels (1-2000).
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 2000
+            default: 300
+        - name: h
+          in: query
+          description: Image height in pixels (1-2000).
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 2000
+            default: 200
+        - name: bg
+          in: query
+          description: Background hex color (without #).
+          required: false
+          schema:
+            type: string
+            default: cccccc
+        - name: text
+          in: query
+          description: Label text to display.
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: SVG placeholder image
+          content:
+            image/svg+xml:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+tags:
+  - name: Images
+    description: QR codes, image resizing, and placeholder image generation
+  - name: Browser
+    description: Headless browser operations like screenshot capture
+  - name: Documents
+    description: Document generation and conversion (PDF, Markdown)
+  - name: Security
+    description: Cryptographic hashing and JWT decoding
+  - name: Utilities
+    description: General-purpose developer utilities
