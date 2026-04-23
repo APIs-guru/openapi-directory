@@ -66376,6 +66376,9 @@ components:
         locationHint:
           description: An opaque location hint used to place the instance close to other resources. This field is for use by internal tools that use the public API.
           type: string
+        maxRunDuration:
+          $ref: "#/components/schemas/Duration"
+          description: Specifies the max run duration for the given instance. If specified, the instance termination action will be performed at the end of the run duration.
         minNodeCpus:
           description: The minimum number of virtual CPUs this instance will consume when running on a sole-tenant node.
           format: int32
@@ -66399,6 +66402,9 @@ components:
           enum:
             - SPOT
             - STANDARD
+          type: string
+        terminationTime:
+          description: Specifies the timestamp, when the instance will be terminated, in RFC3339 text format. If specified, the instance termination action will be performed at the termination time.
           type: string
       type: object
     SchedulingNodeAffinity:
