@@ -1,0 +1,178 @@
+openapi: 3.1.0
+info:
+  title: upres.ai API
+  version: 1.0.0
+  description: |
+    Programmatic access to upres.ai image upscaling.
+    Business-tier API keys are required for all /v1/* endpoints.
+
+    **Authentication**: Include your API key in the `Authorization` header:
+    ```
+    Authorization: Bearer upres_<your-key>
+    ```
+
+    Keys are generated from your account settings at `/app/settings/api`.
+    Each key is shown once on creation and cannot be retrieved again.
+  contact:
+    email: support@upres.ai
+    url: https://upres.ai
+  license:
+    name: Proprietary
+  x-logo:
+    url: https://upres.ai/favicon.ico
+  x-apisguru-categories:
+    - media
+    - machine_learning
+externalDocs:
+  description: API Documentation
+  url: https://upres.ai/docs/api
+servers:
+  - url: https://api.upres.ai/v1
+    description: Production API
+security:
+  - BearerAuth: []
+tags:
+  - name: Jobs
+    description: Submit and poll upscaling jobs
+paths:
+  /jobs:
+    post:
+      tags: [Jobs]
+      summary: Submit an upscaling job
+      description: |
+        Submit an image for upscaling. Accepts either a file upload (multipart/form-data)
+        or a JSON body with an image URL.
+      operationId: createJob
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [image, model, scale]
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: Image file to upscale
+                model:
+                  type: string
+                  example: wavespeed-ai/real-esrgan
+                  description: Model to use for upscaling
+                scale:
+                  type: integer
+                  minimum: 2
+                  maximum: 8
+                  example: 4
+          application/json:
+            schema:
+              type: object
+              required: [image_url, model, scale]
+              properties:
+                image_url:
+                  type: string
+                  format: uri
+                  description: Publicly accessible image URL
+                model:
+                  type: string
+                  example: wavespeed-ai/real-esrgan
+                scale:
+                  type: integer
+                  minimum: 2
+                  maximum: 8
+                  example: 4
+      responses:
+        '202':
+          description: Job accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '401':
+          description: Unauthorized
+        '402':
+          description: Quota exceeded
+        '422':
+          description: Validation error
+    get:
+      tags: [Jobs]
+      summary: List jobs
+      description: List all upscaling jobs for the authenticated user
+      operationId: listJobs
+      responses:
+        '200':
+          description: List of jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Job'
+  /jobs/{id}:
+    get:
+      tags: [Jobs]
+      summary: Get job status
+      description: Poll the status of an upscaling job. When status is 'completed', result_url contains a presigned S3 URL valid for 1 hour.
+      operationId: getJob
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Job details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '404':
+          description: Job not found
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key in format: upres_<key>'
+  schemas:
+    Job:
+      type: object
+      required: [id, status, model, scale, created_at, updated_at]
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 550e8400-e29b-41d4-a716-446655440000
+        status:
+          type: string
+          enum: [pending, processing, completed, failed]
+          example: completed
+        model:
+          type: string
+          example: wavespeed-ai/real-esrgan
+        scale:
+          type: integer
+          minimum: 2
+          maximum: 8
+          example: 4
+        result_url:
+          type: string
+          format: uri
+          nullable: true
+          description: Presigned S3 URL to the upscaled image. Valid for 1 hour.
+          example: https://cdn.upres.ai/results/abc123.png
+        error:
+          type: string
+          nullable: true
+          description: Error message if status is 'failed'.
+        original_filename:
+          type: string
+          example: photo.jpg
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
