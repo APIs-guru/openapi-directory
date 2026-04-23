@@ -1,0 +1,507 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Clicks Protocol API",
+    "description": "Autonomous yield for AI agents on Base L2. Split USDC payments 80/20: 80% liquid, 20% earning 4-8% APY via Aave V3 or Morpho. No lockup. One SDK call.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Clicks Protocol",
+      "url": "https://clicksprotocol.xyz",
+      "email": "hello@clicksprotocol.xyz"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "x-logo": {
+      "url": "https://clicksprotocol.xyz/icon-1024.png",
+      "backgroundColor": "#0A0A0B"
+    },
+    "x-apisguru-categories": [
+      "blockchain",
+      "financial"
+    ],
+    "x-origin": [
+      {
+        "format": "openapi",
+        "version": "3.1.0",
+        "url": "https://clicksprotocol.xyz/api/openapi.json"
+      }
+    ],
+    "x-providerName": "clicksprotocol.xyz",
+    "termsOfService": "https://clicksprotocol.xyz/security"
+  },
+  "externalDocs": {
+    "description": "Full SDK Reference",
+    "url": "https://clicksprotocol.xyz/docs/api"
+  },
+  "servers": [
+    {
+      "url": "https://mainnet.base.org",
+      "description": "Base Mainnet (Chain ID 8453)"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Quick Start",
+      "description": "Get started with one SDK call"
+    },
+    {
+      "name": "Agent Management",
+      "description": "Register and manage AI agents"
+    },
+    {
+      "name": "Payments",
+      "description": "Receive payments with automatic 80/20 split"
+    },
+    {
+      "name": "Yield",
+      "description": "Withdraw yield and manage earnings"
+    },
+    {
+      "name": "Read",
+      "description": "Query agent info, balances, and protocol state"
+    }
+  ],
+  "paths": {
+    "/sdk/quickStart": {
+      "post": {
+        "operationId": "quickStart",
+        "summary": "One-call setup: register agent, approve USDC, receive first payment",
+        "description": "Handles registration, USDC approval, and payment splitting in a single call. This is the recommended entry point.\n\n```typescript\nimport { ClicksClient } from '@clicks-protocol/sdk';\nconst clicks = new ClicksClient(signer);\nawait clicks.quickStart('1000', agentAddress);\n// 800 USDC \u2192 liquid, 200 USDC \u2192 earning 4-8% APY\n```",
+        "tags": [
+          "Quick Start"
+        ],
+        "parameters": [
+          {
+            "name": "amount",
+            "in": "query",
+            "required": true,
+            "description": "USDC amount in human-readable format (e.g. '1000' = 1000 USDC)",
+            "schema": {
+              "type": "string",
+              "example": "1000"
+            }
+          },
+          {
+            "name": "agentAddress",
+            "in": "query",
+            "required": true,
+            "description": "Ethereum address of the AI agent",
+            "schema": {
+              "type": "string",
+              "example": "0x1234...abcd"
+            }
+          },
+          {
+            "name": "referrer",
+            "in": "query",
+            "required": false,
+            "description": "Optional referrer address for referral rewards",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction receipt. 80% USDC sent to agent wallet, 20% deposited into DeFi yield.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "txHash": {
+                      "type": "string",
+                      "description": "Transaction hash on Base"
+                    },
+                    "liquid": {
+                      "type": "string",
+                      "description": "USDC sent to agent wallet"
+                    },
+                    "toYield": {
+                      "type": "string",
+                      "description": "USDC deposited into yield"
+                    },
+                    "yieldPct": {
+                      "type": "integer",
+                      "description": "Yield split percentage"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sdk/registerAgent": {
+      "post": {
+        "operationId": "registerAgent",
+        "summary": "Register an AI agent. Caller becomes the operator.",
+        "tags": [
+          "Agent Management"
+        ],
+        "parameters": [
+          {
+            "name": "agentAddress",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent registered. Returns transaction receipt."
+          }
+        }
+      }
+    },
+    "/sdk/receivePayment": {
+      "post": {
+        "operationId": "receivePayment",
+        "summary": "Split a USDC payment: 80% liquid, 20% yield (configurable 5-50%)",
+        "tags": [
+          "Payments"
+        ],
+        "parameters": [
+          {
+            "name": "amount",
+            "in": "query",
+            "required": true,
+            "description": "USDC amount (e.g. '100' = 100 USDC)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agentAddress",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment split. Returns liquid amount, yield amount, and transaction receipt."
+          }
+        }
+      }
+    },
+    "/sdk/withdrawYield": {
+      "post": {
+        "operationId": "withdrawYield",
+        "summary": "Withdraw earned yield + principal. No lockup, withdraw anytime.",
+        "tags": [
+          "Yield"
+        ],
+        "parameters": [
+          {
+            "name": "agentAddress",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "required": false,
+            "description": "Amount to withdraw. Omit or '0' for full withdrawal.",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Yield withdrawn. Returns amount and transaction receipt."
+          }
+        }
+      }
+    },
+    "/sdk/approveUSDC": {
+      "post": {
+        "operationId": "approveUSDC",
+        "summary": "Approve the splitter contract to spend USDC (one-time setup)",
+        "tags": [
+          "Agent Management"
+        ],
+        "parameters": [
+          {
+            "name": "amount",
+            "in": "query",
+            "required": true,
+            "description": "Amount to approve, or 'max' for unlimited",
+            "schema": {
+              "type": "string",
+              "default": "max"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "USDC approved."
+          }
+        }
+      }
+    },
+    "/sdk/setOperatorYieldPct": {
+      "post": {
+        "operationId": "setOperatorYieldPct",
+        "summary": "Set custom yield split percentage (5-50%). Default is 20%.",
+        "tags": [
+          "Agent Management"
+        ],
+        "parameters": [
+          {
+            "name": "pct",
+            "in": "query",
+            "required": true,
+            "description": "Yield percentage (5-50). Pass 0 to revert to default.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Yield split updated."
+          }
+        }
+      }
+    },
+    "/sdk/simulateSplit": {
+      "get": {
+        "operationId": "simulateSplit",
+        "summary": "Preview how a payment would be split without executing",
+        "tags": [
+          "Read"
+        ],
+        "parameters": [
+          {
+            "name": "amount",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agentAddress",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Split preview",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "liquid": {
+                      "type": "string",
+                      "description": "USDC that would go to agent wallet"
+                    },
+                    "toYield": {
+                      "type": "string",
+                      "description": "USDC that would go to yield"
+                    },
+                    "yieldPct": {
+                      "type": "integer",
+                      "description": "Current yield split percentage"
+                    },
+                    "protocolFee": {
+                      "type": "string",
+                      "description": "Estimated protocol fee (2% on yield)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sdk/getAgentInfo": {
+      "get": {
+        "operationId": "getAgentInfo",
+        "summary": "Get agent registration status, operator, deposited amount, yield percentage",
+        "tags": [
+          "Read"
+        ],
+        "parameters": [
+          {
+            "name": "agentAddress",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isRegistered": {
+                      "type": "boolean"
+                    },
+                    "operator": {
+                      "type": "string",
+                      "description": "Operator address"
+                    },
+                    "deposited": {
+                      "type": "string",
+                      "description": "USDC deposited in yield"
+                    },
+                    "yieldPct": {
+                      "type": "integer",
+                      "description": "Yield split percentage"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sdk/getYieldInfo": {
+      "get": {
+        "operationId": "getYieldInfo",
+        "summary": "Get protocol-wide yield information (active protocol, APYs, balances)",
+        "tags": [
+          "Read"
+        ],
+        "responses": {
+          "200": {
+            "description": "Yield information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "activeProtocol": {
+                      "type": "string",
+                      "description": "Current yield protocol (Aave V3 or Morpho)"
+                    },
+                    "currentAPY": {
+                      "type": "number",
+                      "description": "Current APY percentage"
+                    },
+                    "totalDeposited": {
+                      "type": "string",
+                      "description": "Total USDC in yield across all agents"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sdk/getCurrentAPY": {
+      "get": {
+        "operationId": "getCurrentAPY",
+        "summary": "Get current APY from the active yield protocol",
+        "tags": [
+          "Read"
+        ],
+        "responses": {
+          "200": {
+            "description": "Current APY",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "apy": {
+                      "type": "number",
+                      "description": "Annual Percentage Yield",
+                      "example": 6.2
+                    },
+                    "protocol": {
+                      "type": "string",
+                      "example": "Morpho"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ContractAddresses": {
+        "type": "object",
+        "description": "Clicks Protocol contract addresses on Base Mainnet (Chain ID 8453)",
+        "properties": {
+          "ClicksRegistry": {
+            "type": "string",
+            "example": "0x23bb0Ea69b2BD2e527D5DbA6093155A6E1D0C0a3"
+          },
+          "ClicksSplitterV4": {
+            "type": "string",
+            "example": "0xB7E0016d543bD443ED2A6f23d5008400255bf3C8"
+          },
+          "ClicksYieldRouter": {
+            "type": "string",
+            "example": "0x053167a233d18E05Bc65a8d5F3F8808782a3EECD"
+          },
+          "ClicksFee": {
+            "type": "string",
+            "example": "0x8C4E07bBF0BDc3949eA133D636601D8ba17e0fb5"
+          },
+          "ClicksReferral": {
+            "type": "string",
+            "example": "0x1E5Ab896D3b3A542C5E91852e221b2D849944ccC"
+          },
+          "USDC": {
+            "type": "string",
+            "example": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+          }
+        }
+      },
+      "Installation": {
+        "type": "object",
+        "description": "Install the SDK",
+        "properties": {
+          "npm": {
+            "type": "string",
+            "example": "npm install @clicks-protocol/sdk"
+          },
+          "yarn": {
+            "type": "string",
+            "example": "yarn add @clicks-protocol/sdk"
+          },
+          "mcp": {
+            "type": "string",
+            "example": "npx @clicks-protocol/mcp-server"
+          }
+        }
+      }
+    }
+  }
+}
