@@ -1,0 +1,797 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SKU Monster \u2014 Barcode to Product Data + Images",
+    "description": "## What is SKU Monster?\n\nSKU Monster converts any barcode or SKU into rich product data + studio-quality images. Send an EAN, UPC, ASIN, or SKU \u2014 get back product name, brand, category, description, and up to 5 white-background PNG images (2000\u00d72000, Amazon-compliant).\n\n**2.4 million products indexed. Sub-200ms for cached lookups.**\n\n---\n\n## Who uses it?\n\n- **Amazon FBA sellers** \u2014 Build ASINs from barcodes. Get compliant images instantly.\n- **Shopify operators** \u2014 Automate catalog enrichment at scale.\n- **Dropshippers** \u2014 Research products before ordering.\n- **Barcode scanner apps** \u2014 Get instant product info in any app.\n- **Price comparison engines** \u2014 Structured product metadata at volume.\n- **Inventory systems** \u2014 Sync product data from physical barcodes.\n\n---\n\n## Key Features\n\n| Feature | Detail |\n|---|---|\n| Coverage | 2.4M products (EAN-13, UPC-A, ISBN, generic) |\n| Images | Up to 5 white-background PNGs, 2000\u00d72000px |\n| Speed | <200ms cached, 15\u201330s fresh enrichment |\n| Batch | Up to 50 barcodes per request |\n| Search | Full-text across name, brand, description |\n| Languages | 30+ locales supported |\n\n---\n\n## Getting Started\n\n1. Subscribe to a plan below\n2. Copy your RapidAPI key from the header\n3. Make your first call: `GET /api/v1/lookup?ean=5000112637922`\n\n---\n\n## Pricing\n\nPay-as-you-go plans. Unused credits roll over. Cancel anytime.\n\n---\n\n## Support\n\n- Docs: https://sku.monster/docs\n- Email: support@sku.monster",
+    "version": "1.0.0",
+    "contact": {
+      "name": "SKU Monster Support",
+      "url": "https://sku.monster/docs",
+      "email": "support@sku.monster"
+    },
+    "license": {
+      "name": "Proprietary",
+      "url": "https://sku.monster/terms"
+    },
+    "x-logo": {
+      "url": "https://sku.monster/logo.png",
+      "altText": "SKU Monster"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://sku.monster",
+      "description": "Production API"
+    }
+  ],
+  "security": [
+    {
+      "RapidAPIKey": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "RapidAPIKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-RapidAPI-Key",
+        "description": "Your RapidAPI subscription key. Get one by subscribing to a plan above."
+      }
+    },
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "description": "Full product record with metadata and studio-quality images",
+        "required": [
+          "id",
+          "name",
+          "brand",
+          "category",
+          "images",
+          "updated_at",
+          "cached"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "SKU Monster internal product ID",
+            "example": "prod_5k8xmn2p"
+          },
+          "name": {
+            "type": "string",
+            "description": "Full product name including size and variant",
+            "example": "Coca-Cola Original Taste 330ml Can"
+          },
+          "brand": {
+            "type": "string",
+            "description": "Brand or manufacturer name",
+            "example": "Coca-Cola"
+          },
+          "category": {
+            "type": "string",
+            "description": "Product category",
+            "example": "Beverages > Carbonated Drinks"
+          },
+          "description": {
+            "type": "string",
+            "description": "Product description suitable for e-commerce listings",
+            "example": "Classic Coca-Cola in a 330ml aluminium can. Refreshing, iconic taste. Perfect for everyday enjoyment."
+          },
+          "ean": {
+            "type": "string",
+            "description": "EAN-13 barcode",
+            "example": "5000112637922"
+          },
+          "upc": {
+            "type": "string",
+            "nullable": true,
+            "description": "UPC-A barcode (12 digits)",
+            "example": "049000028911"
+          },
+          "asin": {
+            "type": "string",
+            "nullable": true,
+            "description": "Amazon ASIN if known",
+            "example": "B07GNZD7ZP"
+          },
+          "sku": {
+            "type": "string",
+            "nullable": true,
+            "description": "Internal SKU if provided"
+          },
+          "images": {
+            "type": "array",
+            "description": "Studio-quality PNG images: white background, 2000\u00d72000px, Amazon-compliant",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "maxItems": 5,
+            "example": [
+              "https://r2.sku.monster/scrapes/5000112637922/studio_1.png",
+              "https://r2.sku.monster/scrapes/5000112637922/studio_2.png",
+              "https://r2.sku.monster/scrapes/5000112637922/studio_3.png"
+            ]
+          },
+          "price": {
+            "type": "number",
+            "nullable": true,
+            "description": "Reference price if available",
+            "example": 1.29
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true,
+            "description": "ISO 4217 currency code",
+            "example": "GBP"
+          },
+          "weight": {
+            "type": "string",
+            "nullable": true,
+            "description": "Product weight",
+            "example": "330g"
+          },
+          "dimensions": {
+            "type": "string",
+            "nullable": true,
+            "description": "Product dimensions (W\u00d7H\u00d7D)",
+            "example": "66mm \u00d7 115mm \u00d7 66mm"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When this data was last updated",
+            "example": "2026-03-15T12:30:00Z"
+          },
+          "cached": {
+            "type": "boolean",
+            "description": "true = served from cache (<200ms), false = freshly enriched (15\u201330s)",
+            "example": true
+          }
+        }
+      },
+      "BatchItem": {
+        "type": "object",
+        "description": "Single item in a batch lookup result",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "The input barcode that was looked up",
+            "example": "5000112637922"
+          },
+          "product": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Product"
+              }
+            ],
+            "nullable": true,
+            "description": "Product data if found, null if not found"
+          },
+          "found": {
+            "type": "boolean",
+            "description": "Whether the product was found",
+            "example": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true,
+            "description": "Error message if lookup failed",
+            "example": null
+          }
+        }
+      },
+      "SearchResult": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "Total matching products",
+            "example": 142
+          },
+          "limit": {
+            "type": "integer",
+            "example": 10
+          },
+          "offset": {
+            "type": "integer",
+            "example": 0
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            }
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message",
+              "request_id"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Machine-readable error code",
+                "enum": [
+                  "NOT_FOUND",
+                  "INVALID_IDENTIFIER",
+                  "MISSING_IDENTIFIER",
+                  "RATE_LIMITED",
+                  "UNAUTHORIZED",
+                  "QUOTA_EXCEEDED"
+                ],
+                "example": "NOT_FOUND"
+              },
+              "message": {
+                "type": "string",
+                "description": "Human-readable error message",
+                "example": "No product found for EAN 0000000000000"
+              },
+              "request_id": {
+                "type": "string",
+                "description": "Unique request ID for debugging",
+                "example": "req_8xk2mnd9"
+              }
+            }
+          }
+        }
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "cat_beverages"
+          },
+          "name": {
+            "type": "string",
+            "example": "Beverages"
+          },
+          "parent_id": {
+            "type": "string",
+            "nullable": true,
+            "example": null
+          },
+          "product_count": {
+            "type": "integer",
+            "example": 45820
+          }
+        }
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Invalid or missing API key",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": {
+                "code": "UNAUTHORIZED",
+                "message": "Missing or invalid X-RapidAPI-Key header",
+                "request_id": "req_abc123"
+              }
+            }
+          }
+        }
+      },
+      "RateLimited": {
+        "description": "Rate limit exceeded \u2014 upgrade your plan",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": {
+                "code": "RATE_LIMITED",
+                "message": "Monthly quota exceeded. Upgrade your plan at rapidapi.com",
+                "request_id": "req_xyz789"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/api/v1/lookup": {
+      "get": {
+        "operationId": "lookupProduct",
+        "summary": "Lookup product by barcode or SKU",
+        "description": "Returns full product data including name, brand, category, description, and studio-quality images for a given barcode.\n\n**Supported formats:** EAN-13, UPC-A, ISBN-13, and generic barcodes.\n\n**Performance:**\n- Cached products (2.4M): <200ms\n- Fresh enrichment: 15\u201330 seconds\n\nAt least one identifier parameter is required.",
+        "tags": [
+          "Products"
+        ],
+        "parameters": [
+          {
+            "name": "ean",
+            "in": "query",
+            "description": "EAN-13 barcode (13 digits)",
+            "schema": {
+              "type": "string",
+              "example": "5000112637922"
+            }
+          },
+          {
+            "name": "upc",
+            "in": "query",
+            "description": "UPC-A barcode (12 digits)",
+            "schema": {
+              "type": "string",
+              "example": "049000028911"
+            }
+          },
+          {
+            "name": "barcode",
+            "in": "query",
+            "description": "Any barcode \u2014 format auto-detected (EAN, UPC, ISBN, etc.)",
+            "schema": {
+              "type": "string",
+              "example": "737628064502"
+            }
+          },
+          {
+            "name": "sku",
+            "in": "query",
+            "description": "Internal SKU code",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                },
+                "example": {
+                  "id": "prod_5k8xmn2p",
+                  "name": "Coca-Cola Original Taste 330ml Can",
+                  "brand": "Coca-Cola",
+                  "category": "Beverages > Carbonated Drinks",
+                  "description": "Classic Coca-Cola in a 330ml aluminium can.",
+                  "ean": "5000112637922",
+                  "upc": "049000028911",
+                  "asin": null,
+                  "sku": null,
+                  "images": [
+                    "https://r2.sku.monster/scrapes/5000112637922/studio_1.png",
+                    "https://r2.sku.monster/scrapes/5000112637922/studio_2.png"
+                  ],
+                  "price": 1.29,
+                  "currency": "GBP",
+                  "weight": "330g",
+                  "dimensions": null,
+                  "updated_at": "2026-03-15T12:30:00Z",
+                  "cached": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing or invalid identifier",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "MISSING_IDENTIFIER",
+                    "message": "Provide at least one of: ean, upc, barcode, sku",
+                    "request_id": "req_missing"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Product not found in database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "NOT_FOUND",
+                    "message": "No product found for EAN 0000000000000",
+                    "request_id": "req_notfound"
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -X GET \\\n  'https://api.sku.monster/api/v1/lookup?ean=5000112637922' \\\n  -H 'X-RapidAPI-Key: YOUR_RAPIDAPI_KEY' \\\n  -H 'X-RapidAPI-Host: sku-monster.p.rapidapi.com'"
+          },
+          {
+            "lang": "Python",
+            "label": "Python",
+            "source": "import requests\n\nurl = 'https://api.sku.monster/api/v1/lookup'\nparams = {'ean': '5000112637922'}\nheaders = {\n    'X-RapidAPI-Key': 'YOUR_RAPIDAPI_KEY',\n    'X-RapidAPI-Host': 'sku-monster.p.rapidapi.com'\n}\n\nresponse = requests.get(url, params=params, headers=headers)\nproduct = response.json()\nprint(product['name'])  # Coca-Cola Original Taste 330ml Can\nprint(product['images'][0])  # Studio PNG URL"
+          },
+          {
+            "lang": "JavaScript",
+            "label": "JavaScript",
+            "source": "const response = await fetch(\n  'https://api.sku.monster/api/v1/lookup?ean=5000112637922',\n  {\n    headers: {\n      'X-RapidAPI-Key': 'YOUR_RAPIDAPI_KEY',\n      'X-RapidAPI-Host': 'sku-monster.p.rapidapi.com'\n    }\n  }\n);\nconst product = await response.json();\nconsole.log(product.name); // Coca-Cola Original Taste 330ml Can\nconsole.log(product.images[0]); // Studio PNG URL"
+          },
+          {
+            "lang": "PHP",
+            "label": "PHP",
+            "source": "<?php\n$curl = curl_init();\ncurl_setopt_array($curl, [\n  CURLOPT_URL => 'https://api.sku.monster/api/v1/lookup?ean=5000112637922',\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_HTTPHEADER => [\n    'X-RapidAPI-Key: YOUR_RAPIDAPI_KEY',\n    'X-RapidAPI-Host: sku-monster.p.rapidapi.com',\n  ],\n]);\n$response = curl_exec($curl);\n$product = json_decode($response, true);\necho $product['name'];\ncurl_close($curl);"
+          }
+        ]
+      }
+    },
+    "/api/v1/lookup/batch": {
+      "post": {
+        "operationId": "batchLookup",
+        "summary": "Batch lookup (up to 50 barcodes)",
+        "description": "Look up multiple products in a single API call. Up to 50 identifiers per request. Returns results in the same order as input. Each result includes the found product or an error message.\n\n**Use case:** Import a spreadsheet of barcodes and enrich all of them at once.",
+        "tags": [
+          "Products"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "items"
+                ],
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "description": "List of barcodes to look up (max 50)",
+                    "maxItems": 50,
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "description": "Provide at least one identifier per item",
+                      "properties": {
+                        "ean": {
+                          "type": "string"
+                        },
+                        "upc": {
+                          "type": "string"
+                        },
+                        "barcode": {
+                          "type": "string"
+                        },
+                        "sku": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "items": [
+                  {
+                    "ean": "5000112637922"
+                  },
+                  {
+                    "upc": "049000028911"
+                  },
+                  {
+                    "barcode": "737628064502"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Batch results (one per input item)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/BatchItem"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "example": 3
+                    },
+                    "found": {
+                      "type": "integer",
+                      "example": 3
+                    },
+                    "not_found": {
+                      "type": "integer",
+                      "example": 0
+                    }
+                  }
+                },
+                "example": {
+                  "results": [
+                    {
+                      "identifier": "5000112637922",
+                      "found": true,
+                      "product": {
+                        "name": "Coca-Cola Original Taste 330ml Can",
+                        "brand": "Coca-Cola",
+                        "images": [
+                          "https://r2.sku.monster/scrapes/5000112637922/studio_1.png"
+                        ],
+                        "cached": true
+                      }
+                    }
+                  ],
+                  "total": 3,
+                  "found": 3,
+                  "not_found": 0
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -X POST \\\n  'https://api.sku.monster/api/v1/lookup/batch' \\\n  -H 'Content-Type: application/json' \\\n  -H 'X-RapidAPI-Key: YOUR_RAPIDAPI_KEY' \\\n  -H 'X-RapidAPI-Host: sku-monster.p.rapidapi.com' \\\n  -d '{\"items\":[{\"ean\":\"5000112637922\"},{\"upc\":\"049000028911\"}]}'"
+          },
+          {
+            "lang": "Python",
+            "label": "Python",
+            "source": "import requests\n\nbarcodes = ['5000112637922', '049000028911', '737628064502']\n\nresponse = requests.post(\n    'https://api.sku.monster/api/v1/lookup/batch',\n    headers={\n        'X-RapidAPI-Key': 'YOUR_RAPIDAPI_KEY',\n        'X-RapidAPI-Host': 'sku-monster.p.rapidapi.com'\n    },\n    json={'items': [{'ean': b} for b in barcodes]}\n)\n\nfor item in response.json()['results']:\n    if item['found']:\n        print(f\"{item['identifier']}: {item['product']['name']}\")"
+          }
+        ]
+      }
+    },
+    "/api/v1/lookup/search": {
+      "get": {
+        "operationId": "searchProducts",
+        "summary": "Search products by keyword",
+        "description": "Full-text search across 2.4M product names, brands, and descriptions. Returns ranked results with images.\n\n**Use case:** Search \"coca cola 330ml\" to find matching products without knowing the exact barcode.",
+        "tags": [
+          "Products"
+        ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "description": "Search query (product name, brand, or keywords)",
+            "schema": {
+              "type": "string",
+              "example": "coca cola 330ml can"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Filter results by category name",
+            "schema": {
+              "type": "string",
+              "example": "Beverages"
+            }
+          },
+          {
+            "name": "brand",
+            "in": "query",
+            "description": "Filter results by brand name",
+            "schema": {
+              "type": "string",
+              "example": "Coca-Cola"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results per page (1\u2013100)",
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Pagination offset",
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      }
+    },
+    "/api/v1/products/{id}": {
+      "get": {
+        "operationId": "getProductById",
+        "summary": "Get product by ID",
+        "description": "Retrieve a product by its SKU Monster internal ID. Use this when you've already done a lookup and stored the product ID.",
+        "tags": [
+          "Products"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "SKU Monster product ID (starts with prod_)",
+            "schema": {
+              "type": "string",
+              "example": "prod_5k8xmn2p"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Product not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/categories": {
+      "get": {
+        "operationId": "listCategories",
+        "summary": "List product categories",
+        "description": "Returns the full category hierarchy used to classify products. Useful for building category filters or navigation.",
+        "tags": [
+          "Categories"
+        ],
+        "responses": {
+          "200": {
+            "description": "Category tree",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Category"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "example": 847
+                    }
+                  }
+                },
+                "example": {
+                  "categories": [
+                    {
+                      "id": "cat_beverages",
+                      "name": "Beverages",
+                      "parent_id": null,
+                      "product_count": 45820
+                    },
+                    {
+                      "id": "cat_carbonated",
+                      "name": "Carbonated Drinks",
+                      "parent_id": "cat_beverages",
+                      "product_count": 12400
+                    }
+                  ],
+                  "total": 847
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Products",
+      "description": "**Core product data.** Look up by barcode, search by keyword, or batch-enrich up to 50 products at once."
+    },
+    {
+      "name": "Categories",
+      "description": "**Product taxonomy.** Browse and filter by category."
+    }
+  ],
+  "x-rapidapi": {
+    "hostnames": [
+      "sku-monster.p.rapidapi.com"
+    ],
+    "plans": {
+      "Free": {
+        "limit": 50,
+        "interval": "month"
+      },
+      "Basic": {
+        "limit": 500,
+        "interval": "month",
+        "price": 9
+      },
+      "Pro": {
+        "limit": 2500,
+        "interval": "month",
+        "price": 29
+      },
+      "Business": {
+        "limit": 15000,
+        "interval": "month",
+        "price": 99
+      }
+    }
+  }
+}
