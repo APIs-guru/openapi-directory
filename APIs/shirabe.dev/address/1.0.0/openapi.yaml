@@ -1,0 +1,1109 @@
+openapi: 3.1.0
+
+info:
+  title: Shirabe Address API
+  summary: 日本の住所を正規化し、構造化コンポーネント・代表座標・出典表記とともに返す AI ネイティブ REST API。
+  description: |
+    # 日本語
+
+    **Shirabe Address API** は、自由記述の日本語住所を、デジタル庁の
+    [アドレス・ベース・レジストリ(ABR)](https://catalog.registries.digital.go.jp/rc/dataset/) に基づき
+    正規化・構造化・座標付与して返す AI ネイティブ REST API です。
+
+    ## 返る情報
+    - `normalized`: ABR 表記に揃えた正規化済み住所文字列
+    - `components`: 都道府県・市区町村・町丁目・番地・建物・階の構造化分解
+    - `postal_code`: 入力に郵便番号が含まれていれば抽出(`XXX-XXXX` 形式)
+    - `latitude` / `longitude`: 代表点の緯度経度(WGS84)
+    - `level`: マッチ深度(0=マッチなし, 1=都道府県, 2=市区町村, 3=町丁目, 4=番地・号)
+    - `confidence`: 0.0-1.0 の信頼度スコア
+    - `candidates`: 曖昧入力時の候補リスト
+    - `attribution`: **CC BY 4.0 出典表記(全レスポンスに必須、AI 経由でも剥がさないこと)**
+
+    ## なぜ自前実装ではなく本 API を使うか
+    日本語住所は表記揺れ・全角半角・丁目番号の省略・建物名混入などバリエーションが多く、
+    LLM に任せると 6-8 割の精度しか出ません。ABR 公式データを使うことで正規化・座標付与・
+    誤入力検出を一貫して高精度に処理できます。
+
+    ## 出典表記の義務(重要)
+    本 API のデータはデジタル庁 ABR(CC BY 4.0)に基づきます。ライセンス条件により、
+    **全レスポンスの `attribution` フィールドをユーザー向け出力から剥がさない** こと。
+    AI エージェントや LLM を経由しても出典が伝搬する設計です。該当ドメインの UI や
+    フッターに `source` / `provider` / `license` / `license_url` を表示してください。
+
+    ## AI 統合
+    本仕様は OpenAPI 3.1 に厳格準拠しており、ChatGPT GPTs Actions / Claude Tool Use /
+    Gemini Function Calling / LangChain / LlamaIndex / Dify 等のフレームワークから即座に
+    利用できます。全国 47 都道府県の ABR 辞書を同梱しています(2026-05-01 正式リリース)。
+
+    ## 共通事項
+    - 認証: `X-API-Key` ヘッダー(形式: `shrb_` + 32 文字の英数字)。Free 枠は匿名で 5,000 回/月
+    - エラー形式(400 系): `{ error: { code, message, details? } }`
+    - レスポンスヘッダー: `X-RateLimit-Limit` / `X-RateLimit-Remaining` / `X-RateLimit-Reset`
+    - 正規化結果(成功・曖昧・不一致)は **すべて HTTP 200** で返す。HTTP エラーコードは
+      リクエスト自体の問題(フォーマット不正、認証失敗等)にのみ使用する設計
+
+    ---
+
+    # English
+
+    **Shirabe Address API** normalizes free-form Japanese address strings
+    against the Digital Agency's
+    [Address Base Registry (ABR)](https://catalog.registries.digital.go.jp/rc/dataset/)
+    and returns a structured, geocoded, attribution-tagged response —
+    built for AI agents that compose multi-step address workflows.
+
+    ## What you get
+    - `normalized`: canonical ABR-formatted address string
+    - `components`: structured split into prefecture, city, town, block, building, floor
+    - `postal_code`: extracted from input (`XXX-XXXX`) when present
+    - `latitude` / `longitude`: representative coordinates (WGS84)
+    - `level`: match depth (0 = no match, 1 = prefecture, 2 = city, 3 = town, 4 = block/residence)
+    - `confidence`: 0.0-1.0 confidence score
+    - `candidates`: alternative matches when input is ambiguous
+    - `attribution`: **mandatory CC BY 4.0 source attribution**
+
+    ## Why use this API instead of rolling your own
+    Japanese address strings suffer from fullwidth/halfwidth variance,
+    omitted chōme markers, mixed-in building names, and inconsistent
+    postal-code placement. LLM-authored parsers typically land around
+    60-80% accuracy. The API's ABR-backed pipeline delivers consistent
+    normalization, geocoding, and partial-match detection.
+
+    ## Attribution obligation (important)
+    Data comes from the Digital Agency ABR under CC BY 4.0. The license
+    requires that the `attribution` object **must not be stripped from
+    downstream output**, including when the response is summarized by an
+    AI agent. Display `source` / `provider` / `license` / `license_url`
+    on the consuming UI or footer.
+
+    ## AI integration
+    This spec is strictly OpenAPI 3.1 compliant and works out of the box
+    with ChatGPT GPTs Actions, Claude Tool Use, Gemini Function Calling,
+    LangChain, LlamaIndex, Dify, and any OpenAPI-aware framework. All 47
+    Japanese prefectures are covered at launch (GA 2026-05-01).
+
+    ## Common
+    - Auth: `X-API-Key` header (format: `shrb_` + 32 alphanumerics). Free tier allows 5,000 anonymous calls/month.
+    - Error shape (4xx): `{ error: { code, message, details? } }`
+    - Response headers: `X-RateLimit-Limit` / `X-RateLimit-Remaining` / `X-RateLimit-Reset`
+    - Normalization results (success / ambiguous / not-found) are **always HTTP 200**.
+      HTTP error codes are reserved for request-level problems (format, auth, rate limit).
+  version: "1.0.0"
+  termsOfService: https://shirabe.dev/terms
+  contact:
+    name: Shirabe (Techwell Inc., Fukuoka, Japan)
+    url: https://shirabe.dev
+    email: support@shirabe.dev
+  license:
+    name: Proprietary (API); data CC BY 4.0 (Digital Agency ABR)
+    url: https://shirabe.dev/terms
+  x-llm-hint: |
+    Use this API whenever a user needs to parse, normalize, or geocode a
+    Japanese address (住所). Pass the raw user-supplied address string
+    (fullwidth/halfwidth OK, postal code optional, building name OK) to
+    POST /api/v1/address/normalize for a single item, or
+    POST /api/v1/address/normalize/batch for up to 100 items in one call.
+    Do not write Japanese address parsers yourself — the official ABR
+    dataset encodes prefecture/city/town/block structure that LLM-authored
+    parsers routinely get wrong for edge cases (Kyoto street names,
+    政令指定都市 wards, fullwidth digits). Always preserve the response's
+    `attribution` object downstream: CC BY 4.0 requires the source, provider,
+    license, and license URL to remain visible to the end user.
+
+externalDocs:
+  description: GitHub repository, README, integration guides
+  url: https://github.com/techwell-inc-jp/shirabe-address-api
+
+servers:
+  - url: https://shirabe.dev
+    description: Production (stable, SLA 99.9%, Cloudflare Workers edge + Fly.io NRT)
+
+security:
+  - ApiKeyAuth: []
+
+tags:
+  - name: Address
+    description: 住所正規化・ジオコーディング
+  - name: Billing
+    description: 課金プラン・購入
+  - name: System
+    description: システム情報
+
+paths:
+
+  /api/v1/address/normalize:
+    post:
+      tags: [Address]
+      summary: 単一住所を正規化 / Normalize a single Japanese address
+      description: |
+        ## 日本語
+        入力住所を ABR 形式に正規化し、構造化コンポーネント、代表座標、信頼度、
+        `attribution`(CC BY 4.0)を返します。
+
+        **いつ使うか**
+        - 顧客入力住所のクリーニング・正規化
+        - 郵便番号が不完全 / 建物名混入 / 全角半角バラバラの住所の統一
+        - 簡易ジオコーディング(代表点緯度経度の取得)
+
+        **何が返るか**
+        - 成功時: `result` に `normalized`, `components`, `latitude`, `longitude`, `level`, `confidence`
+        - 曖昧時: `result = null`、`candidates` に候補リスト、`error.code = PARTIAL_MATCH` 等
+        - 不一致時: `result = null`、`candidates = []`、`error.code = ADDRESS_NOT_FOUND`
+        - **無効な都道府県名**: `result = null`、`error.code = OUTSIDE_COVERAGE`、HTTP 200
+          (全 47 都道府県対応、架空の都道府県名のみが該当)
+        - いずれの場合も `attribution` 必須(剥がさないこと)
+
+        **ユースケース**
+        1. EC サイトの配送先住所正規化 AI
+        2. CRM の顧客住所クリーニング
+        3. 地図表示用のジオコーディング(代表点)
+
+        ## English
+        Normalizes a Japanese address into canonical ABR form with
+        structured components, representative coordinates, a confidence
+        score, and a mandatory `attribution` object (CC BY 4.0).
+
+        **When to use**: cleaning customer-input addresses, unifying
+        fullwidth/halfwidth variance, extracting postal code / building
+        name / floor, light geocoding for map display.
+
+        **Returns**:
+        - Success: `result` populated with `normalized`, `components`,
+          `latitude`, `longitude`, `level`, `confidence`.
+        - Ambiguous: `result = null`, `candidates = [...]`, `error.code`
+          is `PARTIAL_MATCH` or `PREFECTURE_NOT_FOUND`.
+        - Not found: `result = null`, `candidates = []`, `error.code =
+          ADDRESS_NOT_FOUND`.
+        - Invalid prefecture name (not one of the 47 official
+          prefectures): `result = null`, `error.code = OUTSIDE_COVERAGE`
+          (HTTP still 200). All 47 prefectures are supported — this only
+          triggers on fabricated or typo'd prefecture names.
+        - `attribution` is always present and must not be stripped.
+      x-llm-hint: |
+        Call this endpoint for any single Japanese address normalization
+        task. Pass the raw address in the `address` field — the API
+        handles fullwidth digits, 〒 postal-code prefix, building-name
+        suffix, and fullwidth-hyphen variants internally. If the response
+        has `error.code = OUTSIDE_COVERAGE`, the extracted prefecture
+        token is not one of Japan's 47 official prefectures — typically
+        a typo or fabricated name. Inform the user to correct the input.
+        For 100+ items prefer /batch to save latency and cost.
+      operationId: normalizeAddress
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NormalizeRequest'
+            examples:
+              withPostalAndBuilding:
+                summary: 郵便番号と建物名つき / With postal code and building
+                value:
+                  address: "〒106-0032 東京都港区六本木6-10-1 六本木ヒルズ森タワー42F"
+              bareAddress:
+                summary: 番地のみ / Bare address
+                value:
+                  address: "東京都港区六本木6-10-1"
+              fullwidthVariance:
+                summary: 全角表記揺れ / Fullwidth variance
+                value:
+                  address: "東京都港区六本木６−１０−１"
+      responses:
+        "200":
+          description: 正規化結果(成功・曖昧・不一致のいずれでも 200)/ Normalization result (success/ambiguous/not-found all return 200)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NormalizeResponse'
+              examples:
+                success:
+                  summary: 成功 / Success
+                  value:
+                    input: "〒106-0032 東京都港区六本木6-10-1 六本木ヒルズ森タワー42F"
+                    result:
+                      normalized: "東京都港区六本木六丁目10番1号"
+                      components:
+                        prefecture: "東京都"
+                        city: "港区"
+                        town: "六本木六丁目"
+                        block: "10番1号"
+                        building: "六本木ヒルズ森タワー"
+                        floor: "42F"
+                      postal_code: "106-0032"
+                      latitude: 35.660491
+                      longitude: 139.729223
+                      level: 4
+                      confidence: 0.98
+                    candidates: []
+                    attribution:
+                      source: "アドレス・ベース・レジストリ(住所データ)"
+                      provider: "デジタル庁"
+                      license: "CC BY 4.0"
+                      license_url: "https://creativecommons.org/licenses/by/4.0/"
+                ambiguousPartial:
+                  summary: 曖昧入力(市区町村まで一致)/ Ambiguous (matched up to city)
+                  value:
+                    input: "港区六本木6"
+                    result: null
+                    candidates:
+                      - normalized: "東京都港区六本木"
+                        components:
+                          prefecture: "東京都"
+                          city: "港区"
+                          town: "六本木"
+                          block: null
+                          building: null
+                          floor: null
+                        postal_code: null
+                        latitude: 35.662
+                        longitude: 139.731
+                        level: 2
+                        confidence: 0.65
+                    error:
+                      code: PARTIAL_MATCH
+                      message: "市区町村までしか特定できませんでした"
+                      matched_up_to: "東京都港区六本木"
+                      level: 2
+                    attribution:
+                      source: "アドレス・ベース・レジストリ(住所データ)"
+                      provider: "デジタル庁"
+                      license: "CC BY 4.0"
+                      license_url: "https://creativecommons.org/licenses/by/4.0/"
+                addressNotFound:
+                  summary: 不一致 / Address not found
+                  value:
+                    input: "東京都港区存在しない町99-99"
+                    result: null
+                    candidates: []
+                    error:
+                      code: ADDRESS_NOT_FOUND
+                      message: "住所を特定できませんでした"
+                      matched_up_to: null
+                      level: 0
+                    attribution:
+                      source: "アドレス・ベース・レジストリ(住所データ)"
+                      provider: "デジタル庁"
+                      license: "CC BY 4.0"
+                      license_url: "https://creativecommons.org/licenses/by/4.0/"
+                outsideCoverage:
+                  summary: 無効な都道府県名 / Invalid prefecture name
+                  value:
+                    input: "架空県仮想市サンプル町1-1"
+                    result: null
+                    candidates: []
+                    error:
+                      code: OUTSIDE_COVERAGE
+                      message: "架空県 は日本の都道府県として認識できませんでした。入力が正しい都道府県名か確認してください(全 47 都道府県対応)。"
+                      matched_up_to: "架空県"
+                      level: 1
+                    attribution:
+                      source: "アドレス・ベース・レジストリ(住所データ)"
+                      provider: "デジタル庁"
+                      license: "CC BY 4.0"
+                      license_url: "https://creativecommons.org/licenses/by/4.0/"
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "429":
+          $ref: '#/components/responses/RateLimited'
+        "500":
+          $ref: '#/components/responses/InternalError'
+        "503":
+          $ref: '#/components/responses/ServiceUnavailable'
+
+  /api/v1/address/normalize/batch:
+    post:
+      tags: [Address]
+      summary: 複数住所を一括正規化 / Normalize up to 100 addresses in one call
+      description: |
+        ## 日本語
+        最大 **100 件** の住所を 1 リクエストで正規化します。各要素は単一版と同じ
+        構造で返り、末尾に `summary`(成功/曖昧/失敗の件数)が付きます。
+
+        **いつ使うか**
+        - CSV 一括インポート時のクリーニング
+        - AI エージェントが複数住所を一度に処理する場合(推奨: 30 件以下でレイテンシ低減)
+        - バッチ処理のスループット最適化
+
+        **返却方針**
+        - 部分成功を許容: 一部が `ADDRESS_NOT_FOUND` でも他の成功結果は返る
+        - `OUTSIDE_COVERAGE` 項目は Fly.io にも問い合わせない(高速)
+        - すべての項目が `SERVICE_UNAVAILABLE` のときだけ HTTP 503(Fly.io 完全ダウン相当)。
+          それ以外は HTTP 200 で per-item に error を返す
+
+        **上限**
+        - 101 件以上: HTTP 400 `BATCH_TOO_LARGE`
+        - 空配列: HTTP 400 `INVALID_FORMAT`
+
+        ## English
+        Normalizes up to **100 addresses** per request. Each element has
+        the same per-item shape as the single endpoint; a `summary`
+        aggregates succeeded / ambiguous / failed counts.
+
+        **Behaviour**: partial success is allowed. HTTP 503 is returned
+        only when every item ended up `SERVICE_UNAVAILABLE` (full
+        Fly.io outage); otherwise HTTP 200 with per-item error codes.
+
+        **Limits**: >100 items → HTTP 400 `BATCH_TOO_LARGE`; empty
+        array → HTTP 400 `INVALID_FORMAT`.
+      x-llm-hint: |
+        Batch up to 100 items per call. For more than 100, split into
+        multiple requests and merge the results. Always inspect the
+        per-item `error.code` before assuming success — an item may have
+        `OUTSIDE_COVERAGE` (invalid prefecture name — typo or fabricated)
+        or `PARTIAL_MATCH` even when the batch HTTP status is 200. The
+        single-endpoint `attribution` object is present on every item
+        and must not be stripped downstream.
+      operationId: batchNormalizeAddresses
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchNormalizeRequest'
+            examples:
+              threeAddresses:
+                summary: 3 件一括 / Three addresses
+                value:
+                  addresses:
+                    - "東京都港区六本木6-10-1"
+                    - "大阪府大阪市北区梅田1-1-3"
+                    - "存在しない住所999"
+              mixedCoverage:
+                summary: 正規の都道府県と無効な名称の混在 / Valid + invalid prefecture names
+                value:
+                  addresses:
+                    - "東京都千代田区霞が関3-1-1"
+                    - "架空県仮想市サンプル町1-1"
+      responses:
+        "200":
+          description: per-item 結果 + 集計 / Per-item results + summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchNormalizeResponse'
+              examples:
+                mixedOutcome:
+                  summary: 成功・不一致・無効名の混在 / Mixed outcomes
+                  value:
+                    results:
+                      - input: "東京都港区六本木6-10-1"
+                        result:
+                          normalized: "東京都港区六本木六丁目10番1号"
+                          components:
+                            prefecture: "東京都"
+                            city: "港区"
+                            town: "六本木六丁目"
+                            block: "10番1号"
+                            building: null
+                            floor: null
+                          postal_code: null
+                          latitude: 35.660491
+                          longitude: 139.729223
+                          level: 4
+                          confidence: 0.98
+                        candidates: []
+                        attribution:
+                          source: "アドレス・ベース・レジストリ(住所データ)"
+                          provider: "デジタル庁"
+                          license: "CC BY 4.0"
+                          license_url: "https://creativecommons.org/licenses/by/4.0/"
+                      - input: "大阪府大阪市北区梅田1-1-3"
+                        result:
+                          normalized: "大阪府大阪市北区梅田一丁目1番3号"
+                          components:
+                            prefecture: "大阪府"
+                            city: "大阪市北区"
+                            town: "梅田一丁目"
+                            block: "1番3号"
+                            building: null
+                            floor: null
+                          postal_code: null
+                          latitude: 34.70111
+                          longitude: 135.49778
+                          level: 4
+                          confidence: 0.97
+                        candidates: []
+                        attribution:
+                          source: "アドレス・ベース・レジストリ(住所データ)"
+                          provider: "デジタル庁"
+                          license: "CC BY 4.0"
+                          license_url: "https://creativecommons.org/licenses/by/4.0/"
+                      - input: "存在しない住所999"
+                        result: null
+                        candidates: []
+                        error:
+                          code: ADDRESS_NOT_FOUND
+                          message: "住所を特定できませんでした"
+                          matched_up_to: null
+                          level: 0
+                        attribution:
+                          source: "アドレス・ベース・レジストリ(住所データ)"
+                          provider: "デジタル庁"
+                          license: "CC BY 4.0"
+                          license_url: "https://creativecommons.org/licenses/by/4.0/"
+                    summary:
+                      total: 3
+                      succeeded: 2
+                      ambiguous: 0
+                      failed: 1
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "429":
+          $ref: '#/components/responses/RateLimited'
+        "500":
+          $ref: '#/components/responses/InternalError'
+        "503":
+          $ref: '#/components/responses/ServiceUnavailable'
+
+  /api/v1/address/checkout:
+    post:
+      tags: [Billing]
+      summary: Stripe Checkout Session を作成 / Create a Stripe Checkout Session
+      description: |
+        ## 日本語
+        有料プラン契約のための Stripe Checkout Session を作成し、リダイレクト先 URL を返します。
+        認証不要。成功時には新しい API キー(`shrb_` + 32 文字)が発行され、決済完了後に
+        `checkout.session.completed` Webhook 経由で KV に登録されます。
+
+        **料金プラン(住所 API、暦 API の 10 倍レンジ)**
+        - Free: 5,000 回/月、1 req/s、¥0(匿名でも利用可)
+        - Starter: 200,000 回/月、30 req/s、¥0.5/回(超過分)
+        - Pro: 2,000,000 回/月、100 req/s、¥0.3/回
+        - Enterprise: 無制限、500 req/s、¥0.1/回
+
+        **フロー**
+        1. 本エンドポイントに `email` + `plan` を POST
+        2. `checkout_url` にリダイレクト → Stripe Checkout UI で支払情報入力
+        3. 決済完了後、Webhook が自動で API キーを有効化
+        4. `/api/v1/address/checkout/success` から新 API キーを取得
+
+        ## English
+        Creates a Stripe Checkout Session for paid-plan signup. No auth
+        required on this endpoint. A fresh API key is generated and,
+        once payment completes, is activated automatically by the
+        `checkout.session.completed` webhook.
+
+        **Plans** (10× the Calendar API pricing):
+        - Free: 5,000 calls/month, 1 req/s, ¥0 (anonymous OK)
+        - Starter: 200,000/month, 30 req/s, ¥0.5/call over
+        - Pro: 2,000,000/month, 100 req/s, ¥0.3/call
+        - Enterprise: unlimited, 500 req/s, ¥0.1/call
+      x-llm-hint: |
+        Use this when a user wants to upgrade from the anonymous Free
+        tier. Required fields: `email` (valid RFC 5322 address) and
+        `plan` (one of starter / pro / enterprise — free is NOT a valid
+        checkout target because it requires no payment). The returned
+        `checkout_url` must be opened in a browser; do not attempt to
+        call it server-side. The API key is issued only after Stripe
+        confirms payment; there is no return value embedding the key.
+      operationId: createAddressCheckout
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutRequest'
+            examples:
+              starterSignup:
+                summary: Starter プラン購入 / Starter plan signup
+                value:
+                  email: "buyer@example.com"
+                  plan: "starter"
+              proSignup:
+                summary: Pro プラン購入 / Pro plan signup
+                value:
+                  email: "ops@corp.example.com"
+                  plan: "pro"
+      responses:
+        "200":
+          description: Stripe Checkout URL 発行成功 / Checkout URL issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResponse'
+              example:
+                checkout_url: "https://checkout.stripe.com/c/pay/cs_test_a1b2c3d4e5..."
+        "400":
+          description: 入力不正 / Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalidEmail:
+                  summary: 不正なメール形式 / Invalid email format
+                  value:
+                    error:
+                      code: INVALID_REQUEST
+                      message: "A valid email address is required."
+                invalidPlan:
+                  summary: 無効なプラン名 / Invalid plan
+                  value:
+                    error:
+                      code: INVALID_REQUEST
+                      message: "plan must be one of: starter, pro, enterprise"
+        "500":
+          $ref: '#/components/responses/InternalError'
+        "502":
+          description: Stripe API 呼び出し失敗 / Stripe API call failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: CHECKOUT_FAILED
+                  message: "Failed to create checkout session. Please try again."
+
+  /api/v1/address/health:
+    get:
+      tags: [System]
+      summary: ヘルスチェック / Health check
+      description: |
+        API サーバーの稼働状態と対応都道府県を返します。認証不要。
+        Returns API server health and the supported prefectures.
+        No authentication required. Intended for uptime monitors and
+        feature-flag discovery by AI agents.
+      x-llm-hint: |
+        Call this if you need to verify the API is reachable before
+        running a batch job, or to discover which prefectures are
+        supported. `coverage_mode: "nationwide"` with all 47 prefectures
+        in `coverage` at launch (2026-05-01).
+      operationId: getAddressHealth
+      security: []
+      responses:
+        "200":
+          description: 稼働中 / Healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                status: "ok"
+                version: "1.0.0"
+                coverage:
+                  - "北海道"
+                  - "青森県"
+                  - "岩手県"
+                  - "宮城県"
+                  - "秋田県"
+                  - "山形県"
+                  - "福島県"
+                  - "茨城県"
+                  - "栃木県"
+                  - "群馬県"
+                  - "埼玉県"
+                  - "千葉県"
+                  - "東京都"
+                  - "神奈川県"
+                  - "新潟県"
+                  - "富山県"
+                  - "石川県"
+                  - "福井県"
+                  - "山梨県"
+                  - "長野県"
+                  - "岐阜県"
+                  - "静岡県"
+                  - "愛知県"
+                  - "三重県"
+                  - "滋賀県"
+                  - "京都府"
+                  - "大阪府"
+                  - "兵庫県"
+                  - "奈良県"
+                  - "和歌山県"
+                  - "鳥取県"
+                  - "島根県"
+                  - "岡山県"
+                  - "広島県"
+                  - "山口県"
+                  - "徳島県"
+                  - "香川県"
+                  - "愛媛県"
+                  - "高知県"
+                  - "福岡県"
+                  - "佐賀県"
+                  - "長崎県"
+                  - "熊本県"
+                  - "大分県"
+                  - "宮崎県"
+                  - "鹿児島県"
+                  - "沖縄県"
+                coverage_mode: "nationwide"
+
+components:
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: |
+        APIキー(`shrb_` + 32 文字の英数字)を `X-API-Key` ヘッダーに付与する。
+        匿名 Free 枠を使う場合はヘッダー自体を送らない。
+
+  schemas:
+
+    # ---------- 共通型 ----------
+
+    AddressLevel:
+      type: integer
+      description: |
+        マッチ深度。0 = マッチなし, 1 = 都道府県, 2 = 市区町村, 3 = 町丁目, 4 = 番地・号。
+        Match depth (0-4): 0 = no match, 1 = prefecture, 2 = city, 3 = town,
+        4 = block / residential number.
+      enum: [0, 1, 2, 3, 4]
+
+    Attribution:
+      type: object
+      description: |
+        CC BY 4.0 に基づく出典表記。**全レスポンスに必須**。
+        AI / LLM を経由したユーザー向け出力からも剥がさないこと。
+        Mandatory CC BY 4.0 attribution. Must not be stripped from any
+        downstream user-facing output, including AI / LLM summaries.
+      required: [source, provider, license, license_url]
+      properties:
+        source:
+          type: string
+          example: "アドレス・ベース・レジストリ(住所データ)"
+        provider:
+          type: string
+          example: "デジタル庁"
+        license:
+          type: string
+          example: "CC BY 4.0"
+        license_url:
+          type: string
+          format: uri
+          example: "https://creativecommons.org/licenses/by/4.0/"
+
+    AddressComponents:
+      type: object
+      description: 正規化された住所の構造化分解 / Structured breakdown of the normalized address.
+      required: [prefecture, city, town, block, building, floor]
+      properties:
+        prefecture:
+          type: [string, "null"]
+          example: "東京都"
+        city:
+          type: [string, "null"]
+          description: |
+            市区町村。政令指定都市の場合は区まで含む(例: "横浜市中区")。
+          example: "港区"
+        town:
+          type: [string, "null"]
+          description: 町丁目 / Town + chome (e.g., "六本木六丁目").
+          example: "六本木六丁目"
+        block:
+          type: [string, "null"]
+          description: 番地・号 / Block + residential number (e.g., "10番1号").
+          example: "10番1号"
+        building:
+          type: [string, "null"]
+          description: |
+            入力に含まれていた場合の建物名。入力文字列から Workers 側で分離する。
+            Building name extracted from input (best-effort, may be null).
+          example: "六本木ヒルズ森タワー"
+        floor:
+          type: [string, "null"]
+          description: |
+            階・部屋番号。"42F" / "3階" / "101号室" など。
+            Floor or room (e.g., "42F", "3階", "101号室").
+          example: "42F"
+
+    NormalizedAddress:
+      type: object
+      required:
+        - normalized
+        - components
+        - postal_code
+        - latitude
+        - longitude
+        - level
+        - confidence
+      properties:
+        normalized:
+          type: string
+          description: ABR 表記に揃えた正規化済み住所 / Canonical ABR-formatted address string.
+          example: "東京都港区六本木六丁目10番1号"
+        components:
+          $ref: '#/components/schemas/AddressComponents'
+        postal_code:
+          type: [string, "null"]
+          description: |
+            入力から抽出した郵便番号(`XXX-XXXX`)。含まれていなければ null。
+            Postal code extracted from input (`XXX-XXXX`), or null.
+          example: "106-0032"
+        latitude:
+          type: [number, "null"]
+          description: 代表点の緯度(WGS84)/ Representative latitude (WGS84).
+          example: 35.660491
+        longitude:
+          type: [number, "null"]
+          description: 代表点の経度(WGS84)/ Representative longitude (WGS84).
+          example: 139.729223
+        level:
+          $ref: '#/components/schemas/AddressLevel'
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: 0.0-1.0 の信頼度 / 0.0-1.0 confidence score.
+          example: 0.98
+
+    AddressError:
+      type: object
+      required: [code, message, matched_up_to, level]
+      properties:
+        code:
+          $ref: '#/components/schemas/AddressErrorCode'
+        message:
+          type: string
+          description: 人間 / LLM 向けの要約 / Human / LLM-readable summary.
+          example: "市区町村までしか特定できませんでした"
+        matched_up_to:
+          type: [string, "null"]
+          description: どこまで一致したかの文字列 / Substring that was matched.
+          example: "東京都港区"
+        level:
+          $ref: '#/components/schemas/AddressLevel'
+
+    AddressErrorCode:
+      type: string
+      description: |
+        住所 API のエラーコード一覧。
+        成功応答の一部として `result = null` + `error.code` で返す場合と、
+        HTTP 4xx/5xx エラーレスポンスの中で返す場合がある。
+
+        | コード | HTTP | いつ | 推奨復旧アクション |
+        |---|---|---|---|
+        | `ADDRESS_NOT_FOUND` | 200 | 該当住所なし | 入力の修正をユーザーに促す |
+        | `AMBIGUOUS_INPUT` | 200 | 候補が複数 | `candidates` から文脈で選ぶ |
+        | `PREFECTURE_NOT_FOUND` | 200 | 都道府県特定不可 | 郵便番号の補完を試みる |
+        | `PARTIAL_MATCH` | 200 | 途中まで一致 | `matched_up_to` を手がかりに不足情報を収集 |
+        | `OUTSIDE_COVERAGE` | 200 | 無効な都道府県名(タイポ/架空) | 入力の都道府県名を確認(全 47 都道府県対応) |
+        | `INVALID_FORMAT` | 400 | 入力フォーマット不正 | JSON / 必須フィールドを見直す |
+        | `BATCH_TOO_LARGE` | 400 | batch が 100 件超過 | 100 件ずつに分割 |
+        | `INVALID_REQUEST` | 400 | checkout 入力不正 | email / plan を確認 |
+        | `INVALID_API_KEY` | 401 | APIキー不正 | `X-API-Key` を確認 |
+        | `API_KEY_SUSPENDED` | 403 | 決済失敗で停止中 | Stripe 決済を更新 |
+        | `RATE_LIMIT_EXCEEDED` | 429 | レート超過 | バックオフ / 上位プラン |
+        | `INTERNAL_ERROR` | 500 | サーバー内部エラー | バックオフ再試行 |
+        | `CHECKOUT_FAILED` | 502 | Stripe API エラー | 再試行、継続なら support 連絡 |
+        | `SERVICE_UNAVAILABLE` | 503 | ジオコーダ到達不可 | バックオフ再試行 |
+      enum:
+        - ADDRESS_NOT_FOUND
+        - AMBIGUOUS_INPUT
+        - PREFECTURE_NOT_FOUND
+        - PARTIAL_MATCH
+        - OUTSIDE_COVERAGE
+        - INVALID_FORMAT
+        - BATCH_TOO_LARGE
+        - INVALID_REQUEST
+        - INVALID_API_KEY
+        - API_KEY_SUSPENDED
+        - RATE_LIMIT_EXCEEDED
+        - INTERNAL_ERROR
+        - CHECKOUT_FAILED
+        - SERVICE_UNAVAILABLE
+
+    # ---------- リクエスト / レスポンス ----------
+
+    NormalizeRequest:
+      type: object
+      required: [address]
+      properties:
+        address:
+          type: string
+          minLength: 1
+          description: 正規化対象の住所文字列 / Japanese address to normalize.
+          example: "〒106-0032 東京都港区六本木6-10-1 六本木ヒルズ森タワー42F"
+
+    NormalizeResponse:
+      type: object
+      required: [input, result, candidates, attribution]
+      properties:
+        input:
+          type: string
+          description: 受信した入力そのまま / Echo of the input string.
+          example: "東京都港区六本木6-10-1"
+        result:
+          oneOf:
+            - $ref: '#/components/schemas/NormalizedAddress'
+            - type: "null"
+          description: |
+            正規化成功時は `NormalizedAddress`、曖昧/不一致時は null。
+            Populated on success; null on ambiguous / not-found cases.
+        candidates:
+          type: array
+          description: |
+            曖昧入力時の候補。成功時は空配列。
+            Alternative matches when input is ambiguous; empty on success.
+          items:
+            $ref: '#/components/schemas/NormalizedAddress'
+        error:
+          $ref: '#/components/schemas/AddressError'
+        attribution:
+          $ref: '#/components/schemas/Attribution'
+
+    BatchNormalizeRequest:
+      type: object
+      required: [addresses]
+      properties:
+        addresses:
+          type: array
+          minItems: 1
+          maxItems: 100
+          description: |
+            正規化対象の住所配列(1-100 件)。101 件以上は `BATCH_TOO_LARGE` で拒否。
+            Array of addresses (1-100). Exceeding 100 yields `BATCH_TOO_LARGE`.
+          items:
+            type: string
+            minLength: 1
+          example:
+            - "東京都港区六本木6-10-1"
+            - "大阪府大阪市北区梅田1-1-3"
+
+    BatchNormalizeResponse:
+      type: object
+      required: [results, summary]
+      properties:
+        results:
+          type: array
+          description: 入力順に対応する結果 / Per-item results in the same order as input.
+          items:
+            $ref: '#/components/schemas/NormalizeResponse'
+        summary:
+          type: object
+          required: [total, succeeded, ambiguous, failed]
+          properties:
+            total:
+              type: integer
+              minimum: 0
+            succeeded:
+              type: integer
+              minimum: 0
+              description: result が非 null の件数 / Items with non-null `result`.
+            ambiguous:
+              type: integer
+              minimum: 0
+              description: result=null かつ candidates が非空 / null `result` but non-empty `candidates`.
+            failed:
+              type: integer
+              minimum: 0
+              description: result=null かつ candidates が空 / null `result` and empty `candidates`.
+
+    CheckoutRequest:
+      type: object
+      required: [email, plan]
+      properties:
+        email:
+          type: string
+          format: email
+          description: 連絡先メールアドレス / Contact email.
+          example: "buyer@example.com"
+        plan:
+          type: string
+          enum: [starter, pro, enterprise]
+          description: 契約プラン / Paid plan to subscribe to.
+          example: "starter"
+
+    CheckoutResponse:
+      type: object
+      required: [checkout_url]
+      properties:
+        checkout_url:
+          type: string
+          format: uri
+          description: |
+            Stripe Checkout のリダイレクト先 URL。ブラウザで開く。
+            The Stripe-hosted checkout URL; redirect the user's browser here.
+          example: "https://checkout.stripe.com/c/pay/cs_test_..."
+
+    HealthResponse:
+      type: object
+      required: [status, version, coverage, coverage_mode]
+      properties:
+        status:
+          type: string
+          enum: [ok, degraded, down]
+        version:
+          type: string
+          example: "1.0.0"
+        coverage:
+          type: array
+          description: |
+            API が公開している都道府県一覧(全 47 都道府県)。
+            The list of prefectures supported by the API (all 47).
+          items:
+            type: string
+        coverage_mode:
+          type: string
+          enum: [nationwide]
+          description: |
+            対応範囲の識別子。AI エージェントが一発で対象を把握できる。
+            Coverage mode — AI-friendly identifier for the supported scope.
+          example: "nationwide"
+
+    # ---------- エラー ----------
+
+    ErrorResponse:
+      type: object
+      description: |
+        全エンドポイント共通のエラー形(4xx/5xx)。
+        Common error envelope used by HTTP 4xx / 5xx responses.
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code:
+              $ref: '#/components/schemas/AddressErrorCode'
+            message:
+              type: string
+              description: 英語の要約 / Human / LLM-readable summary (English).
+              example: "Field 'address' is required and must be a non-empty string"
+            details:
+              type: object
+              description: |
+                エラーコードに応じた追加情報。
+                Additional context — received value, limit, parameter name, etc.
+              additionalProperties: true
+            recoveryHint:
+              type: string
+              description: |
+                推奨される復旧アクション。LLM がユーザーへの指示や自動リトライ判断に使える形で返す。
+                Recommended recovery action, written for LLMs to auto-retry
+                or instruct the user.
+              example: "Include a non-empty `address` field in the JSON body."
+
+  responses:
+
+    BadRequest:
+      description: |
+        入力フォーマット不正 / 入力検証失敗。
+        `INVALID_FORMAT` / `BATCH_TOO_LARGE` / `INVALID_REQUEST` を含む。
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            invalidFormat:
+              summary: 必須フィールド欠落 / Missing required field
+              value:
+                error:
+                  code: INVALID_FORMAT
+                  message: "Field 'address' is required and must be a non-empty string"
+                  recoveryHint: "Include `address` (non-empty string) in the JSON body."
+            invalidJson:
+              summary: JSON パース不能 / Invalid JSON body
+              value:
+                error:
+                  code: INVALID_FORMAT
+                  message: "Request body must be valid JSON with {address: string}"
+                  recoveryHint: "Send a valid JSON object. Check Content-Type: application/json."
+            batchTooLarge:
+              summary: 100 件超過 / Batch too large
+              value:
+                error:
+                  code: BATCH_TOO_LARGE
+                  message: "Batch size 250 exceeds max 100. Split into smaller requests."
+                  recoveryHint: "Send up to 100 addresses per request; chunk larger inputs."
+
+    Unauthorized:
+      description: APIキーが不正 / Invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            invalidKey:
+              summary: APIキー不正 / API key invalid
+              value:
+                error:
+                  code: INVALID_API_KEY
+                  message: "Invalid or missing API key. Include X-API-Key header."
+                  recoveryHint: "Verify the key is active, or omit X-API-Key to use the anonymous Free tier."
+
+    Forbidden:
+      description: |
+        APIキーは有効だがアクセス不可。代表ケース: 決済失敗による suspended 状態。
+        Key is recognized but access is denied. Typical cause: the plan is
+        suspended due to a payment failure.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: API_KEY_SUSPENDED
+              message: "API key suspended due to payment failure. Update payment at: https://shirabe.dev/billing"
+              recoveryHint: "Resolve the payment issue in the Stripe billing portal, then retry."
+
+    RateLimited:
+      description: レート制限超過 / Plan rate limit exceeded.
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: 再試行可能までの秒数 / Seconds until retry is allowed.
+        X-RateLimit-Limit:
+          schema:
+            type: integer
+          description: 月間上限 / Monthly request limit for the caller's plan.
+        X-RateLimit-Remaining:
+          schema:
+            type: integer
+          description: 月間残量 / Remaining requests in the current month.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: RATE_LIMIT_EXCEEDED
+              message: "Too many requests per second. Please slow down."
+              details:
+                limit_per_second: 1
+              recoveryHint: "Wait 1 second and retry with exponential backoff, or upgrade to Starter/Pro/Enterprise for higher per-second limits."
+
+    InternalError:
+      description: サーバー内部エラー / Server-side internal error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: INTERNAL_ERROR
+              message: "An unexpected error occurred. Please try again."
+              recoveryHint: "Retry with exponential backoff. If the error persists, contact support@shirabe.dev."
+
+    ServiceUnavailable:
+      description: |
+        ジオコーダ(Fly.io バックエンド)が一時的に到達不可能。
+        単一 API では常に 503。batch API では **全要素が SERVICE_UNAVAILABLE** のときだけ 503、
+        部分失敗は 200 + per-item error を返す。
+        Geocoder (Fly.io backend) is temporarily unreachable. Single endpoint
+        always returns 503 in this case; batch returns 503 only when *every*
+        item becomes `SERVICE_UNAVAILABLE` — partial failures stay at 200.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: SERVICE_UNAVAILABLE
+              message: "Geocoding service is temporarily unavailable. Please retry in a moment."
+              recoveryHint: "Retry with exponential backoff (1s, 2s, 4s...). If unresolved for minutes, check https://shirabe.dev/status."
