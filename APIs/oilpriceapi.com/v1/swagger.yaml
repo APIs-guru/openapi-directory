@@ -1,0 +1,2841 @@
+---
+openapi: 3.0.1
+info:
+  title: Oil Price API V1
+  version: v1
+  description: |
+    Real-time oil and energy price data API providing comprehensive commodity pricing information.
+    
+    ## Authentication
+    
+    The API uses two authentication methods:
+    
+    1. **API Key Authentication**: Required for price data endpoints (`/v1/prices/*`)
+       - Add header: `Authorization: Bearer <your_api_key>`
+    
+    2. **Session Authentication (JWT)**: Required for user management and billing
+       - Add header: `Authorization: Bearer <jwt_token>`
+    
+    ## Rate Limiting
+    
+    - Free tier: 100 requests per day
+    - Paid tiers: Higher limits based on subscription
+    - Rate limit headers are included in responses
+    
+    ## Available Data Categories
+    
+    ### 🛢️ Traditional Commodities (via `/v1/prices/*`)
+    - **Oil**: Brent Crude (BRENT_CRUDE_USD), WTI Crude (WTI_USD), Gasoline RBOB, Heating Oil, ULSD Diesel, Jet Fuel
+    - **Natural Gas**: US Natural Gas (NATURAL_GAS_USD), UK Natural Gas (NATURAL_GAS_GBP), Dutch TTF (DUTCH_TTF_EUR)
+    - **Coal**: API2 CIF ARA Coal (COAL_USD)
+    - **Metals**: Gold (GOLD_USD), Uranium
+    - **Forex**: GBP/USD, EUR/USD
+    - **Energy**: Ethanol, EU Carbon Allowances
+    - **Crude Blends**: Urals Crude, Western Canadian Select (WCS)
+    
+    ### ⚓ Marine Bunker Fuels (via `/v1/marine-ports/*`)
+    - **MGO 0.5%S**: Marine Gas Oil 0.5% Sulfur
+    - **VLSFO**: Very Low Sulfur Fuel Oil (IMO 2020 compliant)
+    - **HFO 380**: High Sulfur Fuel Oil 380 CST
+    - **HFO 180**: High Sulfur Fuel Oil 180 CST
+    - **Coverage**: 8 major ports (Singapore, Rotterdam, Houston, Fujairah, Hong Kong, Los Angeles, New York, Santos)
+    
+    ### 🔧 Drilling Intelligence (via `/v1/drilling-intelligence/*`) - *Reservoir Mastery Only*
+    - **Rig Counts**: US, Canada, International active drilling rigs
+    - **Frac Spreads**: Permian, Eagle Ford, Bakken completion crews  
+    - **Well Permits**: Texas, North Dakota, Oklahoma regulatory data
+    - **DUC Wells**: Drilled but Uncompleted wells by basin
+    
+  contact:
+    name: Oil Price API Support
+    email: support@oilpriceapi.com
+    url: https://oilpriceapi.com
+  license:
+    name: Commercial License
+    url: https://oilpriceapi.com/terms
+
+servers:
+- url: https://api.oilpriceapi.com
+  description: Production server
+- url: http://localhost:5000
+  description: Development server
+
+paths:
+  "/v1/prices/latest":
+    get:
+      summary: Get latest price for a commodity
+      tags:
+      - Prices
+      description: Retrieve the most recent price for a specific commodity
+      parameters:
+      - name: by_code
+        in: query
+        required: false
+        description: Commodity code (defaults to BRENT_CRUDE_USD)
+        schema:
+          type: string
+          enum: [BAKKEN_DUC_WELLS, BAKKEN_FRAC_SPREADS, BRENT_CRUDE_USD, CANADA_RIG_COUNT, COAL_USD, DUBAI_CRUDE_USD, DUTCH_TTF_EUR, EAGLEFORD_DUC_WELLS, EAGLEFORD_FRAC_SPREADS, ETHANOL_USD, EUR_USD, EU_CARBON_EUR, GASOLINE_RBOB_USD, GBP_USD, GOLD_USD, HEATING_OIL_USD, HFO_180_USD, HFO_380_USD, INTERNATIONAL_RIG_COUNT, JET_FUEL_USD, MGO_05S_USD, NATURAL_GAS_GBP, NATURAL_GAS_STORAGE, NATURAL_GAS_USD, NORTH_DAKOTA_WELL_PERMITS, OKLAHOMA_WELL_PERMITS, PERMIAN_DUC_WELLS, PERMIAN_FRAC_SPREADS, TEXAS_WELL_PERMITS, ULSD_DIESEL_USD, URALS_CRUDE_USD, URANIUM_USD, US_RIG_COUNT, VLSFO_USD, WCS_CRUDE_USD, WTI_USD]
+          default: BRENT_CRUDE_USD
+      - name: by_type
+        in: query
+        required: false
+        description: Price type
+        schema:
+          type: string
+          enum: [spot_price, daily_average_price]
+          default: spot_price
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Latest price data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/LatestPriceResponse"
+        '401':
+          description: Unauthorized - Invalid API key
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RateLimitErrorResponse"
+                
+  "/v1/prices":
+    get:
+      summary: Get historical prices with pagination
+      tags:
+      - Prices
+      description: Retrieve historical price data with filtering and pagination
+      parameters:
+      - name: by_code
+        in: query
+        required: false
+        description: Commodity code
+        schema:
+          type: string
+          enum: [BAKKEN_DUC_WELLS, BAKKEN_FRAC_SPREADS, BRENT_CRUDE_USD, CANADA_RIG_COUNT, COAL_USD, DUBAI_CRUDE_USD, DUTCH_TTF_EUR, EAGLEFORD_DUC_WELLS, EAGLEFORD_FRAC_SPREADS, ETHANOL_USD, EUR_USD, EU_CARBON_EUR, GASOLINE_RBOB_USD, GBP_USD, GOLD_USD, HEATING_OIL_USD, HFO_180_USD, HFO_380_USD, INTERNATIONAL_RIG_COUNT, JET_FUEL_USD, MGO_05S_USD, NATURAL_GAS_GBP, NATURAL_GAS_STORAGE, NATURAL_GAS_USD, NORTH_DAKOTA_WELL_PERMITS, OKLAHOMA_WELL_PERMITS, PERMIAN_DUC_WELLS, PERMIAN_FRAC_SPREADS, TEXAS_WELL_PERMITS, ULSD_DIESEL_USD, URALS_CRUDE_USD, URANIUM_USD, US_RIG_COUNT, VLSFO_USD, WCS_CRUDE_USD, WTI_USD]
+          default: BRENT_CRUDE_USD
+      - name: by_type
+        in: query
+        required: false
+        description: Price type
+        schema:
+          type: string
+          enum: [spot_price, daily_average_price]
+          default: spot_price
+      - name: page
+        in: query
+        required: false
+        description: Page number for pagination
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: per_page
+        in: query
+        required: false
+        description: Number of items per page
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 25
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Historical price data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PricesResponse"
+                
+  "/v1/prices/past_day":
+    get:
+      summary: Get prices from the past 24 hours
+      tags:
+      - Prices
+      parameters:
+      - name: by_code
+        in: query
+        required: false
+        schema:
+          type: string
+          enum: [BAKKEN_DUC_WELLS, BAKKEN_FRAC_SPREADS, BRENT_CRUDE_USD, CANADA_RIG_COUNT, COAL_USD, DUBAI_CRUDE_USD, DUTCH_TTF_EUR, EAGLEFORD_DUC_WELLS, EAGLEFORD_FRAC_SPREADS, ETHANOL_USD, EUR_USD, EU_CARBON_EUR, GASOLINE_RBOB_USD, GBP_USD, GOLD_USD, HEATING_OIL_USD, HFO_180_USD, HFO_380_USD, INTERNATIONAL_RIG_COUNT, JET_FUEL_USD, MGO_05S_USD, NATURAL_GAS_GBP, NATURAL_GAS_STORAGE, NATURAL_GAS_USD, NORTH_DAKOTA_WELL_PERMITS, OKLAHOMA_WELL_PERMITS, PERMIAN_DUC_WELLS, PERMIAN_FRAC_SPREADS, TEXAS_WELL_PERMITS, ULSD_DIESEL_USD, URALS_CRUDE_USD, URANIUM_USD, US_RIG_COUNT, VLSFO_USD, WCS_CRUDE_USD, WTI_USD]
+          default: BRENT_CRUDE_USD
+      - name: by_type
+        in: query
+        required: false
+        schema:
+          type: string
+          enum: [spot_price, daily_average_price]
+          default: spot_price
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Past day price data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PricesResponse"
+                
+  "/v1/prices/past_week":
+    get:
+      summary: Get prices from the past 7 days
+      tags:
+      - Prices
+      parameters:
+      - name: by_code
+        in: query
+        required: false
+        schema:
+          type: string
+          enum: [BAKKEN_DUC_WELLS, BAKKEN_FRAC_SPREADS, BRENT_CRUDE_USD, CANADA_RIG_COUNT, COAL_USD, DUBAI_CRUDE_USD, DUTCH_TTF_EUR, EAGLEFORD_DUC_WELLS, EAGLEFORD_FRAC_SPREADS, ETHANOL_USD, EUR_USD, EU_CARBON_EUR, GASOLINE_RBOB_USD, GBP_USD, GOLD_USD, HEATING_OIL_USD, HFO_180_USD, HFO_380_USD, INTERNATIONAL_RIG_COUNT, JET_FUEL_USD, MGO_05S_USD, NATURAL_GAS_GBP, NATURAL_GAS_STORAGE, NATURAL_GAS_USD, NORTH_DAKOTA_WELL_PERMITS, OKLAHOMA_WELL_PERMITS, PERMIAN_DUC_WELLS, PERMIAN_FRAC_SPREADS, TEXAS_WELL_PERMITS, ULSD_DIESEL_USD, URALS_CRUDE_USD, URANIUM_USD, US_RIG_COUNT, VLSFO_USD, WCS_CRUDE_USD, WTI_USD]
+          default: BRENT_CRUDE_USD
+      - name: by_type
+        in: query
+        required: false
+        schema:
+          type: string
+          enum: [spot_price, daily_average_price]
+          default: spot_price
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Past week price data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PricesResponse"
+                
+  "/v1/prices/past_month":
+    get:
+      summary: Get prices from the past month
+      tags:
+      - Prices
+      parameters:
+      - name: by_code
+        in: query
+        required: false
+        schema:
+          type: string
+          enum: [BAKKEN_DUC_WELLS, BAKKEN_FRAC_SPREADS, BRENT_CRUDE_USD, CANADA_RIG_COUNT, COAL_USD, DUBAI_CRUDE_USD, DUTCH_TTF_EUR, EAGLEFORD_DUC_WELLS, EAGLEFORD_FRAC_SPREADS, ETHANOL_USD, EUR_USD, EU_CARBON_EUR, GASOLINE_RBOB_USD, GBP_USD, GOLD_USD, HEATING_OIL_USD, HFO_180_USD, HFO_380_USD, INTERNATIONAL_RIG_COUNT, JET_FUEL_USD, MGO_05S_USD, NATURAL_GAS_GBP, NATURAL_GAS_STORAGE, NATURAL_GAS_USD, NORTH_DAKOTA_WELL_PERMITS, OKLAHOMA_WELL_PERMITS, PERMIAN_DUC_WELLS, PERMIAN_FRAC_SPREADS, TEXAS_WELL_PERMITS, ULSD_DIESEL_USD, URALS_CRUDE_USD, URANIUM_USD, US_RIG_COUNT, VLSFO_USD, WCS_CRUDE_USD, WTI_USD]
+          default: BRENT_CRUDE_USD
+      - name: by_type
+        in: query
+        required: false
+        schema:
+          type: string
+          enum: [spot_price, daily_average_price]
+          default: spot_price
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Past month price data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PricesResponse"
+                
+  "/v1/prices/past_year":
+    get:
+      summary: Get prices from the past year
+      tags:
+      - Prices
+      parameters:
+      - name: by_code
+        in: query
+        required: false
+        schema:
+          type: string
+          enum: [BAKKEN_DUC_WELLS, BAKKEN_FRAC_SPREADS, BRENT_CRUDE_USD, CANADA_RIG_COUNT, COAL_USD, DUBAI_CRUDE_USD, DUTCH_TTF_EUR, EAGLEFORD_DUC_WELLS, EAGLEFORD_FRAC_SPREADS, ETHANOL_USD, EUR_USD, EU_CARBON_EUR, GASOLINE_RBOB_USD, GBP_USD, GOLD_USD, HEATING_OIL_USD, HFO_180_USD, HFO_380_USD, INTERNATIONAL_RIG_COUNT, JET_FUEL_USD, MGO_05S_USD, NATURAL_GAS_GBP, NATURAL_GAS_STORAGE, NATURAL_GAS_USD, NORTH_DAKOTA_WELL_PERMITS, OKLAHOMA_WELL_PERMITS, PERMIAN_DUC_WELLS, PERMIAN_FRAC_SPREADS, TEXAS_WELL_PERMITS, ULSD_DIESEL_USD, URALS_CRUDE_USD, URANIUM_USD, US_RIG_COUNT, VLSFO_USD, WCS_CRUDE_USD, WTI_USD]
+          default: BRENT_CRUDE_USD
+      - name: by_type
+        in: query
+        required: false
+        schema:
+          type: string
+          enum: [spot_price, daily_average_price]
+          default: spot_price
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Past year price data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PricesResponse"
+
+  "/v1/prices/all":
+    get:
+      summary: Get all commodity prices in one call
+      tags:
+      - Prices
+      - Premium
+      description: |
+        Retrieve current prices for 40+ commodities in a single API call.
+        Perfect for dashboards and market overviews. Reduces API calls and provides synchronized data.
+      parameters:
+      - name: categories
+        in: query
+        required: false
+        description: Comma-separated list of categories to filter (oil,gas,metals,forex,marine_fuels)
+        schema:
+          type: string
+          example: "oil,gas"
+      - name: codes
+        in: query
+        required: false
+        description: Comma-separated list of specific commodity codes
+        schema:
+          type: string
+          example: "WTI_USD,BRENT_CRUDE_USD,GOLD_USD"
+      - name: currency
+        in: query
+        required: false
+        description: Convert prices to specific currency (Premium only)
+        schema:
+          type: string
+          enum: [USD, EUR, GBP]
+          default: USD
+      - name: include_metadata
+        in: query
+        required: false
+        description: Include additional metadata
+        schema:
+          type: boolean
+          default: false
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: All commodity prices
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/AllPricesResponse"
+        '401':
+          description: Unauthorized - Invalid API key
+        '429':
+          description: Too many requests
+
+  "/v1/prices/all/health":
+    get:
+      summary: Check data freshness for all commodities
+      tags:
+      - Prices
+      - Premium
+      description: Monitor which commodities have fresh data and which are stale
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Data freshness status
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DataHealthResponse"
+
+  "/v1/storage/cushing":
+    get:
+      summary: Get Cushing oil storage data
+      tags:
+      - Storage
+      - Premium
+      description: |
+        Real-time Cushing, Oklahoma oil storage intelligence with market signals.
+        Cushing is the delivery point for WTI crude and North America's largest oil storage hub.
+        **Premium Feature** - Reservoir Mastery tier required.
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Cushing storage data with analytics
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CushingStorageResponse"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Premium access required
+
+  "/v1/futures/ice-brent":
+    get:
+      summary: Get ICE Brent futures curve
+      tags:
+      - Futures
+      - Premium
+      description: |
+        Complete ICE Brent futures curve with contract prices and spreads.
+        **Premium Feature** - Reservoir Mastery tier required.
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Brent futures data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/BrentFuturesResponse"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Premium access required
+
+  "/v1/futures/ice-brent/historical":
+    get:
+      summary: Get historical ICE Brent futures data
+      tags:
+      - Futures
+      - Premium
+      parameters:
+      - name: contract_month
+        in: query
+        required: false
+        description: Specific contract month (e.g., "M1", "M2")
+        schema:
+          type: string
+      - name: period
+        in: query
+        required: false
+        description: Time period
+        schema:
+          type: string
+          enum: [1d, 1w, 1m, 3m, 1y]
+          default: 1w
+      - name: interval
+        in: query
+        required: false
+        description: Data interval for historical data
+        schema:
+          type: string
+          enum: [hourly, daily, weekly, monthly]
+          default: daily
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Historical futures data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HistoricalFuturesResponse"
+
+  "/v1/futures/ice-brent/spreads":
+    get:
+      summary: Get ICE Brent calendar spreads
+      tags:
+      - Futures
+      - Premium
+      description: Calendar spread analysis between contract months
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Futures spreads data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/FuturesSpreadsResponse"
+
+  "/v1/marine-fuels":
+    get:
+      summary: Get marine fuel prices for all ports
+      tags:
+      - Marine Fuels
+      - Premium
+      description: |
+        Global marine bunker fuel prices including VLSFO, HFO 380, and MGO.
+        Covers major bunkering ports worldwide.
+        **Premium Feature** - Professional tier and above.
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Marine fuel prices
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/MarineFuelsResponse"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Premium access required
+
+  "/v1/marine-fuels/latest":
+    get:
+      summary: Get latest marine fuel prices by port
+      tags:
+      - Marine Fuels
+      - Premium
+      parameters:
+      - name: port_code
+        in: query
+        required: false
+        description: Port code (e.g., SINGAPORE, ROTTERDAM)
+        schema:
+          type: string
+          enum: [SINGAPORE, ROTTERDAM, HOUSTON, FUJAIRAH, HONG_KONG, LOS_ANGELES, NEW_YORK, SANTOS, DUBAI, GIBRALTAR, ALGECIRAS, PIRAEUS, ISTANBUL, BUSAN, SHANGHAI]
+      - name: fuel_type
+        in: query
+        required: false
+        description: Fuel type
+        schema:
+          type: string
+          enum: [VLSFO, HFO_380, HFO_180, MGO]
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Latest marine fuel prices
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/MarineFuelLatestResponse"
+
+  "/v1/marine-fuels/historical":
+    get:
+      summary: Get historical marine fuel prices
+      tags:
+      - Marine Fuels
+      - Premium
+      parameters:
+      - name: port_code
+        in: query
+        required: true
+        description: Port code
+        schema:
+          type: string
+      - name: fuel_type
+        in: query
+        required: true
+        description: Fuel type
+        schema:
+          type: string
+      - name: period
+        in: query
+        required: false
+        description: Time period
+        schema:
+          type: string
+          enum: [1d, 1w, 1m, 3m, 1y]
+          default: 1w
+      - name: interval
+        in: query
+        required: false
+        description: Data interval for historical data
+        schema:
+          type: string
+          enum: [hourly, daily, weekly, monthly]
+          default: daily
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Historical marine fuel data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/MarineFuelHistoricalResponse"
+
+  "/v1/drilling/overview":
+    get:
+      summary: Get drilling intelligence overview
+      tags:
+      - Drilling
+      - Premium
+      description: |
+        Real-time drilling activity intelligence including rig counts and DUC wells.
+        Data sourced from Baker Hughes and EIA official reports.
+        **Premium Feature** - Reservoir Mastery tier required.
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Drilling overview data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DrillingOverviewResponse"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Premium access required
+
+  "/v1/drilling/rig-count":
+    get:
+      summary: Get detailed rig count data
+      tags:
+      - Drilling
+      - Premium
+      description: Detailed Baker Hughes rig count by region and type
+      parameters:
+      - name: region
+        in: query
+        required: false
+        description: Filter by region
+        schema:
+          type: string
+          enum: [US, CANADA, INTERNATIONAL, PERMIAN, EAGLE_FORD, BAKKEN, DJ_BASIN, HAYNESVILLE]
+      - name: type
+        in: query
+        required: false
+        description: Filter by rig type
+        schema:
+          type: string
+          enum: [OIL, GAS, MISC]
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Rig count data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RigCountResponse"
+
+  "/v1/drilling/duc-wells":
+    get:
+      summary: Get DUC wells data
+      tags:
+      - Drilling
+      - Premium
+      description: Drilled but Uncompleted wells from EIA reports
+      parameters:
+      - name: basin
+        in: query
+        required: false
+        description: Filter by basin
+        schema:
+          type: string
+          enum: [PERMIAN, EAGLE_FORD, BAKKEN, NIOBRARA, ANADARKO, APPALACHIA, HAYNESVILLE]
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: DUC wells data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DucWellsResponse"
+
+  "/v1/drilling/historical":
+    get:
+      summary: Get historical drilling data
+      tags:
+      - Drilling
+      - Premium
+      parameters:
+      - name: metric
+        in: query
+        required: true
+        description: Metric to retrieve
+        schema:
+          type: string
+          enum: [rig_count, duc_wells]
+      - name: period
+        in: query
+        required: false
+        description: Time period
+        schema:
+          type: string
+          enum: [1w, 1m, 3m, 6m, 1y, 2y]
+          default: 1m
+      - name: interval
+        in: query
+        required: false
+        description: Data interval for historical data
+        schema:
+          type: string
+          enum: [daily, weekly, monthly]
+          default: weekly
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Historical drilling data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DrillingHistoricalResponse"
+
+  "/v1/commodities":
+    get:
+      summary: Get all available commodities
+      tags:
+      - Commodities
+      description: Retrieve metadata for all supported commodities including pricing details, units, and validation ranges
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: List of all commodities
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CommoditiesResponse"
+        '401':
+          description: Unauthorized - Invalid API key
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+                
+  "/v1/commodities/{code}":
+    get:
+      summary: Get commodity details by code
+      tags:
+      - Commodities
+      description: Retrieve detailed information about a specific commodity including current pricing if available
+      parameters:
+      - name: code
+        in: path
+        required: true
+        description: Commodity code
+        schema:
+          type: string
+          enum: [BRENT_CRUDE_USD, WTI_USD, NATURAL_GAS_USD, NATURAL_GAS_GBP, DUTCH_TTF_EUR, COAL_USD, GOLD_USD, GBP_USD, EUR_USD, GASOLINE_RBOB_USD, HEATING_OIL_USD, ULSD_DIESEL_USD, ETHANOL_USD, JET_FUEL_USD, EU_CARBON_EUR, URALS_CRUDE_USD, WCS_CRUDE_USD, URANIUM_USD]
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Commodity details
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CommodityDetailResponse"
+        '404':
+          description: Commodity not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+                
+  "/v1/commodities/categories":
+    get:
+      summary: Get commodities grouped by category
+      tags:
+      - Commodities
+      description: Retrieve commodities organized by their categories (oil, gas, metal, forex, coal)
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Commodities grouped by category
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CommodityCategoriesResponse"
+
+  "/v1/marine-ports":
+    get:
+      summary: Get all marine fuel ports
+      tags:
+      - Marine Fuels
+      description: |
+        Retrieve all available marine fuel ports with their details and capabilities.
+        Returns port information including coordinates, fuel services, and trading hours.
+      parameters:
+      - name: region
+        in: query
+        required: false
+        description: Filter ports by geographic region
+        schema:
+          type: string
+          enum: [Asia, Europe, Americas, "Middle East"]
+          example: "Asia"
+      - name: country
+        in: query
+        required: false
+        description: Filter ports by country name
+        schema:
+          type: string
+          example: "Singapore"
+      - name: major_ports
+        in: query
+        required: false
+        description: Return only major bunkering hubs
+        schema:
+          type: boolean
+          default: false
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: List of marine fuel ports
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/MarinePortsResponse"
+        '401':
+          description: Unauthorized - Invalid API key
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RateLimitErrorResponse"
+
+  "/v1/marine-ports/{port_code}":
+    get:
+      summary: Get specific marine fuel port with prices
+      tags:
+      - Marine Fuels
+      description: |
+        Retrieve detailed information about a specific marine fuel port including
+        current bunker prices for all available fuel grades.
+      parameters:
+      - name: port_code
+        in: path
+        required: true
+        description: Port identifier code
+        schema:
+          type: string
+          enum: [SGSIN, NLRTM, USHOU, AEFUJ, HKHKG, USLAX, USNYC, BRSSZ]
+          example: "SGSIN"
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Port details with current prices
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/MarinePortDetailResponse"
+        '404':
+          description: Port not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        '401':
+          description: Unauthorized - Invalid API key
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+
+  "/v1/rig-counts/latest":
+    get:
+      summary: Get latest rig count data (simplified)
+      tags:
+      - Drilling Intelligence
+      description: |
+        Retrieve the latest rig count data in a simplified format.
+        This endpoint returns the most recent US rig count with week-over-week and year-over-year changes.
+        **Requires Reservoir Mastery subscription ($129/month).**
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Latest rig count data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RigCountLatestResponse"
+        '403':
+          description: Insufficient plan - Reservoir Mastery required
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InsufficientPlanError"
+        '401':
+          description: Unauthorized - Invalid API key
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+
+  "/v1/rig-counts":
+    get:
+      summary: Get historical rig count data
+      tags:
+      - Drilling Intelligence
+      description: |
+        Retrieve historical rig count data with filtering options.
+        **Requires Reservoir Mastery subscription ($129/month).**
+      parameters:
+      - name: region
+        in: query
+        required: false
+        description: Filter by region
+        schema:
+          type: string
+          enum: [us, canada, international]
+          default: us
+      - name: start_date
+        in: query
+        required: false
+        description: Start date (YYYY-MM-DD)
+        schema:
+          type: string
+          format: date
+          example: "2025-01-01"
+      - name: end_date
+        in: query
+        required: false
+        description: End date (YYYY-MM-DD)
+        schema:
+          type: string
+          format: date
+          example: "2025-08-10"
+      - name: page
+        in: query
+        required: false
+        description: Page number for pagination
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: per_page
+        in: query
+        required: false
+        description: Results per page (max 100)
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Historical rig count data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RigCountHistoricalResponse"
+        '403':
+          description: Insufficient plan - Reservoir Mastery required
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InsufficientPlanError"
+
+  "/v1/drilling-intelligence":
+    get:
+      summary: Get comprehensive drilling intelligence data
+      tags:
+      - Drilling Intelligence
+      description: |
+        Retrieve comprehensive drilling intelligence data including rig counts, frac spreads, 
+        well permits, and DUC wells. **Requires Reservoir Mastery subscription ($129/month).**
+      parameters:
+      - name: by_code
+        in: query
+        required: false
+        description: Filter by specific commodity code
+        schema:
+          type: string
+          enum: [US_RIG_COUNT, CANADA_RIG_COUNT, INTERNATIONAL_RIG_COUNT, PERMIAN_FRAC_SPREADS, EAGLEFORD_FRAC_SPREADS, BAKKEN_FRAC_SPREADS, TEXAS_WELL_PERMITS, NORTH_DAKOTA_WELL_PERMITS, OKLAHOMA_WELL_PERMITS, PERMIAN_DUC_WELLS, EAGLEFORD_DUC_WELLS, BAKKEN_DUC_WELLS]
+      - name: by_period[from]
+        in: query
+        required: false
+        description: Start date for filtering (YYYY-MM-DD)
+        schema:
+          type: string
+          format: date
+      - name: by_period[to]
+        in: query
+        required: false
+        description: End date for filtering (YYYY-MM-DD)
+        schema:
+          type: string
+          format: date
+      - name: page
+        in: query
+        required: false
+        description: Page number for pagination
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: per_page
+        in: query
+        required: false
+        description: Results per page (max 100)
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Comprehensive drilling intelligence data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DrillingIntelligenceResponse"
+        '403':
+          description: Insufficient plan - Reservoir Mastery required
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InsufficientPlanError"
+
+  "/v1/drilling-intelligence/summary":
+    get:
+      summary: Get drilling intelligence summary
+      tags:
+      - Drilling Intelligence
+      description: |
+        Get latest data points for each category in a consolidated summary view.
+        **Requires Reservoir Mastery subscription ($129/month).**
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Drilling intelligence summary
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DrillingIntelligenceSummaryResponse"
+        '403':
+          description: Insufficient plan - Reservoir Mastery required
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InsufficientPlanError"
+
+  "/v1/drilling-intelligence/frac-spreads":
+    get:
+      summary: Get frac spreads data
+      tags:
+      - Drilling Intelligence
+      description: |
+        Get completion crew activity data by basin.
+        **Requires Reservoir Mastery subscription ($129/month).**
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: Page number for pagination
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: per_page
+        in: query
+        required: false
+        description: Results per page (max 100)
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Frac spreads data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/FracSpreadsResponse"
+        '403':
+          description: Insufficient plan - Reservoir Mastery required
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InsufficientPlanError"
+
+  "/v1/drilling-intelligence/well-permits":
+    get:
+      summary: Get well permits data
+      tags:
+      - Drilling Intelligence
+      description: |
+        Get weekly drilling permit data by state.
+        **Requires Reservoir Mastery subscription ($129/month).**
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: Page number for pagination
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: per_page
+        in: query
+        required: false
+        description: Results per page (max 100)
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Well permits data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/WellPermitsResponse"
+        '403':
+          description: Insufficient plan - Reservoir Mastery required
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InsufficientPlanError"
+
+  "/v1/drilling-intelligence/duc-wells":
+    get:
+      summary: Get DUC wells data
+      tags:
+      - Drilling Intelligence
+      description: |
+        Get drilled but uncompleted (DUC) wells inventory data.
+        **Requires Reservoir Mastery subscription ($129/month).**
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: Page number for pagination
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: per_page
+        in: query
+        required: false
+        description: Results per page (max 100)
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: DUC wells data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DucWellsResponse"
+        '403':
+          description: Insufficient plan - Reservoir Mastery required
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InsufficientPlanError"
+
+  "/v1/drilling-intelligence/basin/{basin}":
+    get:
+      summary: Get basin-specific drilling data
+      tags:
+      - Drilling Intelligence
+      description: |
+        Get all drilling intelligence data for a specific basin.
+        **Requires Reservoir Mastery subscription ($129/month).**
+      parameters:
+      - name: basin
+        in: path
+        required: true
+        description: Basin identifier
+        schema:
+          type: string
+          enum: [permian, eagle_ford, eagleford, bakken, williston]
+          example: "permian"
+      - name: page
+        in: query
+        required: false
+        description: Page number for pagination
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: per_page
+        in: query
+        required: false
+        description: Results per page (max 100)
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Basin-specific drilling data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/BasinDrillingDataResponse"
+        '404':
+          description: Basin not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        '403':
+          description: Insufficient plan - Reservoir Mastery required
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InsufficientPlanError"
+
+  "/v1/drilling-intelligence/trends":
+    get:
+      summary: Get drilling intelligence trend analysis
+      tags:
+      - Drilling Intelligence
+      description: |
+        Get trend analysis and historical patterns for drilling intelligence data.
+        **Requires Reservoir Mastery subscription ($129/month).**
+      parameters:
+      - name: type
+        in: query
+        required: false
+        description: Filter by data type
+        schema:
+          type: string
+          enum: [all, frac_spreads, well_permits, duc_wells, rig_counts]
+          default: all
+      - name: period
+        in: query
+        required: false
+        description: Time period for trend analysis
+        schema:
+          type: string
+          enum: [1month, 3months, 6months, 1year, 2years]
+          default: 6months
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Trend analysis data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DrillingTrendsResponse"
+        '403':
+          description: Insufficient plan - Reservoir Mastery required
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InsufficientPlanError"
+
+  "/v1/webhooks":
+    get:
+      summary: List webhook endpoints
+      tags:
+      - Webhooks
+      description: |
+        Get all configured webhook endpoints for the authenticated user.
+        **Requires Reservoir Mastery subscription ($129/month).**
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: List of webhook endpoints
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/WebhookListResponse"
+        '403':
+          description: Insufficient plan - Reservoir Mastery required
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InsufficientPlanError"
+    post:
+      summary: Create webhook endpoint
+      tags:
+      - Webhooks
+      description: |
+        Create a new webhook endpoint to receive real-time updates.
+        **Requires Reservoir Mastery subscription ($129/month).**
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CreateWebhookRequest"
+      responses:
+        '201':
+          description: Webhook endpoint created successfully
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/WebhookResponse"
+        '400':
+          description: Bad request - Invalid webhook configuration
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        '403':
+          description: Insufficient plan - Reservoir Mastery required
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InsufficientPlanError"
+
+  "/v1/webhooks/{webhook_id}":
+    get:
+      summary: Get webhook endpoint details
+      tags:
+      - Webhooks
+      description: |
+        Get details of a specific webhook endpoint.
+        **Requires Reservoir Mastery subscription ($129/month).**
+      parameters:
+      - name: webhook_id
+        in: path
+        required: true
+        description: Webhook endpoint ID
+        schema:
+          type: string
+          example: "wh_1a2b3c4d5e6f"
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Webhook endpoint details
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/WebhookResponse"
+        '404':
+          description: Webhook not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        '403':
+          description: Insufficient plan - Reservoir Mastery required
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InsufficientPlanError"
+    put:
+      summary: Update webhook endpoint
+      tags:
+      - Webhooks
+      description: |
+        Update an existing webhook endpoint configuration.
+        **Requires Reservoir Mastery subscription ($129/month).**
+      parameters:
+      - name: webhook_id
+        in: path
+        required: true
+        description: Webhook endpoint ID
+        schema:
+          type: string
+          example: "wh_1a2b3c4d5e6f"
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UpdateWebhookRequest"
+      responses:
+        '200':
+          description: Webhook endpoint updated successfully
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/WebhookResponse"
+        '404':
+          description: Webhook not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        '403':
+          description: Insufficient plan - Reservoir Mastery required
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InsufficientPlanError"
+    delete:
+      summary: Delete webhook endpoint
+      tags:
+      - Webhooks
+      description: |
+        Delete a webhook endpoint.
+        **Requires Reservoir Mastery subscription ($129/month).**
+      parameters:
+      - name: webhook_id
+        in: path
+        required: true
+        description: Webhook endpoint ID
+        schema:
+          type: string
+          example: "wh_1a2b3c4d5e6f"
+      security:
+      - ApiKeyAuth: []
+      responses:
+        '204':
+          description: Webhook endpoint deleted successfully
+        '404':
+          description: Webhook not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        '403':
+          description: Insufficient plan - Reservoir Mastery required
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InsufficientPlanError"
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: API Key authentication for price endpoints
+    JWTAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token authentication for user management endpoints
+      
+  schemas:
+    Price:
+      type: object
+      properties:
+        price:
+          type: number
+          format: float
+          description: Numeric price value
+          example: 75.42
+        formatted:
+          type: string
+          description: Formatted price with currency symbol
+          example: "$75.42"
+        currency:
+          type: string
+          description: Currency code
+          example: "USD"
+        code:
+          type: string
+          description: Commodity code
+          example: "BRENT_CRUDE_USD"
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when price was recorded
+          example: "2025-01-20T10:30:00.000Z"
+        type:
+          type: string
+          description: Price type
+          example: "spot_price"
+          
+    LatestPriceResponse:
+      type: object
+      properties:
+        price:
+          type: number
+          format: float
+          example: 75.42
+        formatted:
+          type: string
+          example: "$75.42"
+        currency:
+          type: string
+          example: "USD"
+        code:
+          type: string
+          example: "BRENT_CRUDE_USD"
+        created_at:
+          type: string
+          format: date-time
+          example: "2025-01-20T10:30:00.000Z"
+        type:
+          type: string
+          example: "spot_price"
+          
+    PricesResponse:
+      type: object
+      properties:
+        prices:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Price"
+        meta:
+          type: object
+          properties:
+            current_page:
+              type: integer
+              example: 1
+            total_pages:
+              type: integer
+              example: 10
+            total_count:
+              type: integer
+              example: 250
+            per_page:
+              type: integer
+              example: 25
+              
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: "UNAUTHORIZED"
+            message:
+              type: string
+              example: "Invalid API key"
+            documentation_url:
+              type: string
+              example: "https://docs.oilpriceapi.com/authentication"
+              
+    RateLimitErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: "RATE_LIMIT_EXCEEDED"
+            message:
+              type: string
+              example: "Rate limit exceeded"
+            details:
+              type: object
+              properties:
+                limit:
+                  type: integer
+                  example: 100
+                remaining:
+                  type: integer
+                  example: 0
+                reset_at:
+                  type: string
+                  format: date-time
+                  example: "2025-01-20T11:00:00.000Z"
+                retry_after:
+                  type: integer
+                  example: 3600
+            documentation_url:
+              type: string
+              example: "https://docs.oilpriceapi.com/rate-limits"
+              
+    Commodity:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Unique commodity identifier
+          example: "BRENT_CRUDE_USD"
+        name:
+          type: string
+          description: Human-readable commodity name
+          example: "Brent Crude Oil"
+        currency:
+          type: string
+          description: Base currency for pricing
+          example: "USD"
+        category:
+          type: string
+          description: Commodity category
+          example: "oil"
+        description:
+          type: string
+          description: Detailed description
+          example: "North Sea Brent Crude Oil"
+        unit:
+          type: string
+          description: Unit of measurement
+          example: "barrel"
+        unit_description:
+          type: string
+          description: Detailed unit description
+          example: "Price per barrel"
+        multiplier:
+          type: integer
+          description: Storage multiplier for price values
+          example: 100
+        validation:
+          type: object
+          properties:
+            min:
+              type: number
+              description: Minimum valid price
+              example: 0
+            max:
+              type: number
+              description: Maximum valid price
+              example: 200
+        price_change_threshold:
+          type: number
+          description: Threshold for significant price change alerts
+          example: 10
+          
+    CommodityWithPrice:
+      allOf:
+        - "$ref": "#/components/schemas/Commodity"
+        - type: object
+          properties:
+            current_price:
+              type: object
+              nullable: true
+              properties:
+                value:
+                  type: number
+                  format: float
+                  example: 75.42
+                formatted:
+                  type: string
+                  example: "$75.42"
+                currency:
+                  type: string
+                  example: "USD"
+                last_updated:
+                  type: string
+                  format: date-time
+                  example: "2025-01-20T10:30:00.000Z"
+                  
+    CommoditiesResponse:
+      type: object
+      properties:
+        commodities:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Commodity"
+            
+    CommodityDetailResponse:
+      "$ref": "#/components/schemas/CommodityWithPrice"
+      
+    CommodityCategoriesResponse:
+      type: object
+      properties:
+        categories:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "Oil"
+              commodities:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                      example: "BRENT_CRUDE_USD"
+                    name:
+                      type: string
+                      example: "Brent Crude Oil"
+                    currency:
+                      type: string
+                      example: "USD"
+                    description:
+                      type: string
+                      example: "North Sea Brent Crude Oil"
+                    unit:
+                      type: string
+                      example: "barrel"
+                    unit_description:
+                      type: string
+                      example: "Price per barrel"
+
+    MarinePortsResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        data:
+          type: object
+          properties:
+            ports:
+              type: array
+              items:
+                "$ref": "#/components/schemas/MarinePort"
+            count:
+              type: integer
+              example: 8
+            filters:
+              type: object
+              properties:
+                region:
+                  type: string
+                  nullable: true
+                country:
+                  type: string
+                  nullable: true
+                major_ports_only:
+                  type: boolean
+
+    MarinePortDetailResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        data:
+          type: object
+          properties:
+            port:
+              "$ref": "#/components/schemas/MarinePortWithPrices"
+
+    MarinePort:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "SGSIN"
+          description: "Unique port identifier"
+        name:
+          type: string
+          example: "Singapore"
+          description: "Port name"
+        country:
+          type: string
+          example: "Singapore"
+          description: "Country where port is located"
+        region:
+          type: string
+          example: "Asia"
+          description: "Geographic region"
+        major_port:
+          type: boolean
+          example: true
+          description: "Whether this is a major bunkering hub"
+        coordinates:
+          type: object
+          properties:
+            latitude:
+              type: number
+              format: float
+              example: 1.2966
+            longitude:
+              type: number
+              format: float
+              example: 103.7764
+        fuel_services:
+          type: array
+          items:
+            type: string
+          example: ["MGO_05S", "VLSFO", "HFO_380", "HFO_180"]
+          description: "Available fuel types at this port"
+        trading_hours:
+          type: string
+          example: "24/7"
+          description: "Port operating hours"
+
+    MarinePortWithPrices:
+      allOf:
+        - "$ref": "#/components/schemas/MarinePort"
+        - type: object
+          properties:
+            metadata:
+              type: object
+              properties:
+                timezone:
+                  type: string
+                  example: "Asia/Singapore"
+                annual_volume_mt:
+                  type: integer
+                  example: 50000000
+                  description: "Annual bunkering volume in metric tons"
+            recent_prices:
+              type: array
+              items:
+                "$ref": "#/components/schemas/MarineFuelPrice"
+            statistics:
+              type: object
+              properties:
+                total_fuel_types:
+                  type: integer
+                  example: 4
+                recent_price_updates:
+                  type: integer
+                  example: 10
+                last_update:
+                  type: string
+                  format: date-time
+                  example: "2025-08-05T00:32:10Z"
+
+    MarineFuelPrice:
+      type: object
+      properties:
+        fuel_type:
+          type: string
+          example: "MGO_05S"
+          description: "Fuel grade code"
+        fuel_name:
+          type: string
+          example: "Marine Gas Oil 0.5%S"
+          description: "Full fuel name"
+        price:
+          type: number
+          format: float
+          example: 682.50
+          description: "Price in USD per metric ton"
+        formatted:
+          type: string
+          example: "$682.50"
+          description: "Formatted price string"
+        currency:
+          type: string
+          example: "USD"
+          description: "Price currency"
+        unit:
+          type: string
+          example: "metric_ton"
+          description: "Price unit"
+        source:
+          type: string
+          example: "shipandbunker"
+          description: "Data source"
+        timestamp:
+          type: string
+          format: date-time
+          example: "2025-08-05T00:32:05.928Z"
+          description: "Price update timestamp"
+
+    # Drilling Intelligence Schemas
+    RigCountLatestResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        data:
+          type: object
+          properties:
+            code:
+              type: string
+              example: "US_RIG_COUNT"
+            region:
+              type: string
+              example: "United States"
+            count:
+              type: integer
+              example: 540
+            unit:
+              type: string
+              example: "rigs"
+            source:
+              type: string
+              example: "baker_hughes"
+            created_at:
+              type: string
+              format: date-time
+              example: "2025-08-02T20:15:00Z"
+            week_over_week_change:
+              type: integer
+              example: -5
+            year_over_year_change:
+              type: integer
+              example: 45
+
+    RigCountHistoricalResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        rig_counts:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: "US_RIG_COUNT"
+              region:
+                type: string
+                example: "United States"
+              count:
+                type: integer
+                example: 540
+              unit:
+                type: string
+                example: "rigs"
+              source:
+                type: string
+                example: "baker_hughes"
+              created_at:
+                type: string
+                format: date-time
+                example: "2025-08-02T20:15:00Z"
+        meta:
+          "$ref": "#/components/schemas/PaginationMeta"
+
+    DrillingIntelligenceResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        drilling_intelligence:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: "US_RIG_COUNT"
+              name:
+                type: string
+                example: "US Rig Count"
+              type:
+                type: string
+                example: "rig_count"
+                enum: [rig_count, frac_spread, well_permit, duc_well]
+              region:
+                type: string
+                example: "United States"
+              value:
+                type: integer
+                example: 622
+              unit:
+                type: string
+                example: "rigs"
+              currency:
+                type: string
+                example: "COUNT"
+              source:
+                type: string
+                example: "baker_hughes"
+              created_at:
+                type: string
+                format: date-time
+                example: "2025-07-15T18:00:00.000Z"
+              formatted_date:
+                type: string
+                example: "2025-07-15 18:00:00 UTC"
+        meta:
+          "$ref": "#/components/schemas/PaginationMeta"
+
+    DrillingIntelligenceSummaryResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        rig_counts:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: "US_RIG_COUNT"
+              region:
+                type: string
+                example: "United States"
+              value:
+                type: integer
+                example: 622
+              updated_at:
+                type: string
+                format: date-time
+                example: "2025-07-15T18:00:00.000Z"
+        frac_spreads:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: "PERMIAN_FRAC_SPREADS"
+              region:
+                type: string
+                example: "Permian Basin"
+              value:
+                type: integer
+                example: 125
+              updated_at:
+                type: string
+                format: date-time
+                example: "2025-07-15T16:00:00.000Z"
+        well_permits:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: "TEXAS_WELL_PERMITS"
+              region:
+                type: string
+                example: "Texas"
+              value:
+                type: integer
+                example: 89
+              updated_at:
+                type: string
+                format: date-time
+                example: "2025-07-15T12:00:00.000Z"
+        duc_wells:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: "PERMIAN_DUC_WELLS"
+              region:
+                type: string
+                example: "Permian Basin"
+              value:
+                type: integer
+                example: 2450
+              updated_at:
+                type: string
+                format: date-time
+                example: "2025-07-15T08:00:00.000Z"
+        last_updated:
+          type: string
+          format: date-time
+          example: "2025-07-15T18:00:00.000Z"
+
+    FracSpreadsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        frac_spreads:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: "PERMIAN_FRAC_SPREADS"
+              name:
+                type: string
+                example: "Permian Frac Spreads"
+              region:
+                type: string
+                example: "Permian Basin"
+              value:
+                type: integer
+                example: 125
+              unit:
+                type: string
+                example: "spreads"
+        summary:
+          type: object
+          properties:
+            total_active_spreads:
+              type: integer
+              example: 200
+            by_basin:
+              type: object
+              properties:
+                "Permian Basin":
+                  type: integer
+                  example: 125
+                "Eagle Ford":
+                  type: integer
+                  example: 45
+                "Bakken":
+                  type: integer
+                  example: 30
+            last_updated:
+              type: string
+              format: date-time
+              example: "2025-07-15T16:00:00.000Z"
+        meta:
+          "$ref": "#/components/schemas/PaginationMeta"
+
+    WellPermitsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        well_permits:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: "TEXAS_WELL_PERMITS"
+              name:
+                type: string
+                example: "Texas Well Permits"
+              region:
+                type: string
+                example: "Texas"
+              value:
+                type: integer
+                example: 89
+              unit:
+                type: string
+                example: "permits"
+              source:
+                type: string
+                example: "texas_rrc"
+        meta:
+          "$ref": "#/components/schemas/PaginationMeta"
+
+    DucWellsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        duc_wells:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: "PERMIAN_DUC_WELLS"
+              name:
+                type: string
+                example: "Permian DUC Wells"
+              region:
+                type: string
+                example: "Permian Basin"
+              value:
+                type: integer
+                example: 2450
+              unit:
+                type: string
+                example: "wells"
+              source:
+                type: string
+                example: "eia_dpr"
+        meta:
+          "$ref": "#/components/schemas/PaginationMeta"
+
+    BasinDrillingDataResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        basin:
+          type: string
+          example: "permian"
+        data:
+          type: object
+          properties:
+            rig_counts:
+              type: array
+              items:
+                "$ref": "#/components/schemas/DrillingDataPoint"
+            frac_spreads:
+              type: array
+              items:
+                "$ref": "#/components/schemas/DrillingDataPoint"
+            well_permits:
+              type: array
+              items:
+                "$ref": "#/components/schemas/DrillingDataPoint"
+            duc_wells:
+              type: array
+              items:
+                "$ref": "#/components/schemas/DrillingDataPoint"
+        meta:
+          "$ref": "#/components/schemas/PaginationMeta"
+
+    DrillingTrendsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        type:
+          type: string
+          example: "all"
+        period:
+          type: string
+          example: "6months"
+        trends:
+          type: object
+          properties:
+            rig_counts:
+              type: object
+              properties:
+                current:
+                  type: integer
+                  example: 540
+                change:
+                  type: integer
+                  example: 45
+                change_percent:
+                  type: number
+                  example: 9.1
+                trend:
+                  type: string
+                  example: "increasing"
+            frac_spreads:
+              type: object
+              properties:
+                current:
+                  type: integer
+                  example: 200
+                change:
+                  type: integer
+                  example: 15
+                change_percent:
+                  type: number
+                  example: 8.1
+                trend:
+                  type: string
+                  example: "increasing"
+
+    DrillingDataPoint:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "US_RIG_COUNT"
+        name:
+          type: string
+          example: "US Rig Count"
+        region:
+          type: string
+          example: "United States"
+        value:
+          type: integer
+          example: 540
+        unit:
+          type: string
+          example: "rigs"
+        source:
+          type: string
+          example: "baker_hughes"
+        created_at:
+          type: string
+          format: date-time
+          example: "2025-08-02T20:15:00Z"
+
+    # Webhook Schemas
+    WebhookListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        webhooks:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Webhook"
+        meta:
+          "$ref": "#/components/schemas/PaginationMeta"
+
+    WebhookResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        webhook:
+          "$ref": "#/components/schemas/Webhook"
+
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "wh_1a2b3c4d5e6f"
+        url:
+          type: string
+          format: uri
+          example: "https://api.yourcompany.com/webhooks/oilpriceapi"
+        events:
+          type: array
+          items:
+            type: string
+            enum: 
+            - price.updated
+            - price.significant_change
+            - drilling.rig_count.updated
+            - drilling.frac_spread.updated
+            - drilling.well_permit.updated
+            - drilling.duc_well.updated
+            - api.limit.warning
+            - api.limit.exceeded
+          example: ["price.updated", "drilling.rig_count.updated"]
+        secret:
+          type: string
+          example: "whsec_1234567890abcdef"
+          description: "HMAC signing secret for verification"
+        active:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          format: date-time
+          example: "2025-08-10T10:30:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2025-08-10T10:30:00Z"
+        last_delivery:
+          type: object
+          properties:
+            attempted_at:
+              type: string
+              format: date-time
+              example: "2025-08-10T12:00:00Z"
+            status:
+              type: string
+              enum: [success, failed, pending]
+              example: "success"
+            response_code:
+              type: integer
+              example: 200
+
+    CreateWebhookRequest:
+      type: object
+      required:
+        - url
+        - events
+      properties:
+        url:
+          type: string
+          format: uri
+          example: "https://api.yourcompany.com/webhooks/oilpriceapi"
+          description: "Webhook endpoint URL (must be HTTPS)"
+        events:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            enum: 
+            - price.updated
+            - price.significant_change
+            - drilling.rig_count.updated
+            - drilling.frac_spread.updated
+            - drilling.well_permit.updated
+            - drilling.duc_well.updated
+            - api.limit.warning
+            - api.limit.exceeded
+          example: ["price.updated", "drilling.rig_count.updated"]
+          description: "Events to subscribe to"
+        description:
+          type: string
+          example: "Production webhook for price updates"
+          description: "Optional description for the webhook"
+
+    UpdateWebhookRequest:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          example: "https://api.yourcompany.com/webhooks/oilpriceapi"
+          description: "Webhook endpoint URL (must be HTTPS)"
+        events:
+          type: array
+          items:
+            type: string
+            enum: 
+            - price.updated
+            - price.significant_change
+            - drilling.rig_count.updated
+            - drilling.frac_spread.updated
+            - drilling.well_permit.updated
+            - drilling.duc_well.updated
+            - api.limit.warning
+            - api.limit.exceeded
+          example: ["price.updated", "drilling.rig_count.updated"]
+          description: "Events to subscribe to"
+        active:
+          type: boolean
+          example: true
+          description: "Enable or disable the webhook"
+        description:
+          type: string
+          example: "Production webhook for price updates"
+          description: "Optional description for the webhook"
+
+    InsufficientPlanError:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "error"
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: "INSUFFICIENT_PLAN"
+            message:
+              type: string
+              example: "Drilling intelligence data is available exclusively to Reservoir Mastery subscribers"
+            details:
+              type: object
+              properties:
+                required_tier:
+                  type: string
+                  example: "reservoir_mastery"
+                upgrade_url:
+                  type: string
+                  example: "https://oilpriceapi.com/pricing"
+                current_plan:
+                  type: string
+                  example: "free"
+
+    PaginationMeta:
+      type: object
+      properties:
+        current_page:
+          type: integer
+          example: 1
+        per_page:
+          type: integer
+          example: 100
+        total_pages:
+          type: integer
+          example: 5
+        total_count:
+          type: integer
+          example: 450
+        next_page:
+          type: integer
+          nullable: true
+          example: 2
+        prev_page:
+          type: integer
+          nullable: true
+          example: null
+
+    AllPricesResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        data:
+          type: object
+          properties:
+            oil:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Price"
+            gas:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Price"
+            metals:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Price"
+            forex:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Price"
+            marine_fuels:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Price"
+        timestamp:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          example: 42
+
+    DataHealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        data:
+          type: object
+          properties:
+            fresh:
+              type: array
+              items:
+                type: string
+              example: ["WTI_USD", "BRENT_CRUDE_USD"]
+            stale:
+              type: array
+              items:
+                type: string
+              example: ["COAL_USD"]
+            last_update:
+              type: string
+              format: date-time
+
+    CushingStorageResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        data:
+          type: object
+          properties:
+            current_storage:
+              type: number
+              example: 42500000
+              description: "Current storage in barrels"
+            capacity:
+              type: number
+              example: 76000000
+              description: "Total capacity in barrels"
+            utilization:
+              type: number
+              example: 55.92
+              description: "Utilization percentage"
+            week_change:
+              type: number
+              example: -1250000
+              description: "Week-over-week change in barrels"
+            month_change:
+              type: number
+              example: -3500000
+              description: "Month-over-month change in barrels"
+            market_signal:
+              type: string
+              enum: ["bullish", "bearish", "neutral"]
+              example: "bullish"
+            trend:
+              type: string
+              enum: ["building", "drawing", "stable"]
+              example: "drawing"
+            updated_at:
+              type: string
+              format: date-time
+
+    BrentFuturesResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        data:
+          type: object
+          properties:
+            spot:
+              type: number
+              example: 82.45
+            contracts:
+              type: array
+              items:
+                type: object
+                properties:
+                  month:
+                    type: string
+                    example: "M1"
+                  contract_date:
+                    type: string
+                    example: "2025-02"
+                  price:
+                    type: number
+                    example: 82.30
+                  volume:
+                    type: integer
+                    example: 125000
+                  open_interest:
+                    type: integer
+                    example: 450000
+            curve_structure:
+              type: string
+              enum: ["contango", "backwardation", "flat"]
+              example: "backwardation"
+            updated_at:
+              type: string
+              format: date-time
+
+    HistoricalFuturesResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              contract_month:
+                type: string
+                example: "M1"
+              price:
+                type: number
+                example: 82.45
+              volume:
+                type: integer
+              open_interest:
+                type: integer
+
+    FuturesSpreadsResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              spread:
+                type: string
+                example: "M1-M2"
+              value:
+                type: number
+                example: 0.15
+              percentage:
+                type: number
+                example: 0.18
+
+    MarineFuelsResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              port_code:
+                type: string
+                example: "SINGAPORE"
+              port_name:
+                type: string
+                example: "Singapore"
+              prices:
+                type: object
+                properties:
+                  VLSFO:
+                    type: number
+                    example: 685
+                  HFO_380:
+                    type: number
+                    example: 545
+                  MGO:
+                    type: number
+                    example: 875
+              currency:
+                type: string
+                example: "USD"
+              unit:
+                type: string
+                example: "per MT"
+              updated_at:
+                type: string
+                format: date-time
+
+    MarineFuelLatestResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        data:
+          type: object
+          properties:
+            port_code:
+              type: string
+              example: "SINGAPORE"
+            fuel_type:
+              type: string
+              example: "VLSFO"
+            price:
+              type: number
+              example: 685
+            currency:
+              type: string
+              example: "USD"
+            unit:
+              type: string
+              example: "per MT"
+            week_change:
+              type: number
+              example: 15
+            month_change:
+              type: number
+              example: -25
+            updated_at:
+              type: string
+              format: date-time
+
+    MarineFuelHistoricalResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              price:
+                type: number
+                example: 685
+              volume:
+                type: integer
+                nullable: true
+
+    DrillingOverviewResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        data:
+          type: object
+          properties:
+            rig_count:
+              type: object
+              properties:
+                total:
+                  type: integer
+                  example: 621
+                oil:
+                  type: integer
+                  example: 479
+                gas:
+                  type: integer
+                  example: 138
+                misc:
+                  type: integer
+                  example: 4
+                week_change:
+                  type: integer
+                  example: -5
+                month_change:
+                  type: integer
+                  example: 12
+            duc_wells:
+              type: object
+              properties:
+                total:
+                  type: integer
+                  example: 4523
+                permian:
+                  type: integer
+                  example: 893
+                eagle_ford:
+                  type: integer
+                  example: 345
+                bakken:
+                  type: integer
+                  example: 328
+                month_change:
+                  type: integer
+                  example: -125
+            updated_at:
+              type: string
+              format: date-time
+
+    RigCountResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              region:
+                type: string
+                example: "PERMIAN"
+              oil_rigs:
+                type: integer
+                example: 303
+              gas_rigs:
+                type: integer
+                example: 12
+              misc_rigs:
+                type: integer
+                example: 1
+              total:
+                type: integer
+                example: 316
+              week_change:
+                type: integer
+                example: -2
+
+    DucWellsResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              basin:
+                type: string
+                example: "PERMIAN"
+              duc_count:
+                type: integer
+                example: 893
+              month_change:
+                type: integer
+                example: -45
+              completion_rate:
+                type: number
+                example: 72.5
+                description: "Percentage of wells being completed"
+
+    DrillingHistoricalResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "success"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              value:
+                type: integer
+                example: 621
+              metric:
+                type: string
+                example: "rig_count"
