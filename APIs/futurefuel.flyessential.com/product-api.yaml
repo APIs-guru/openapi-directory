@@ -1,0 +1,55 @@
+openapi: 3.0.0
+info:
+  title: Future Fuel Product API
+  version: 1.0.0
+  description: |
+    Public API for retrieving structured schema.org product data from Future Fuel.
+    This endpoint returns a list of wellness products in JSON-LD format using ItemList and Product schema.
+
+servers:
+  - url: https://futurefuel.flyessential.com
+
+paths:
+  /data/products/:
+    get:
+      summary: Get all product schema data
+      description: Returns a structured list of Future Fuel products with schema.org markup.
+      operationId: getProducts
+      responses:
+        '200':
+          description: Successful response with JSON-LD product schema
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  @context:
+                    type: string
+                    example: "https://schema.org"
+                  @type:
+                    type: string
+                    example: "ItemList"
+                  itemListElement:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        @type:
+                          type: string
+                          example: "Product"
+                        name:
+                          type: string
+                          example: "Femi 9"
+                        description:
+                          type: string
+                          example: "Supports women’s hormonal balance"
+                        image:
+                          type: string
+                          format: uri
+                          example: "https://futurefuel.flyessential.com/media/femi9.jpg"
+                        brand:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              example: "Future Fuel"
