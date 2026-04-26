@@ -1,0 +1,65 @@
+openapi: 3.0.3
+info:
+  title: Pluralization API
+  description: |-
+    Never worry about awkward plurals again! Our Pluralization API takes the guesswork out of handling singular and plural word forms, supporting complex rules, irregular nouns, and multiple languages. This file is OpenAPI 3.0 specification compatible.  
+    
+    Some useful links:
+    - [Singularize Pluralize REST API](https://interfaces.one/products/documentation/pluralization)
+  termsOfService: https://interfaces.one/terms
+  contact:
+    email: support@interfaces.one
+  version: 1.0.29
+servers:
+  - url: https://api.interfaces.one
+paths:
+  /pluralize:
+    get:
+      tags:
+      - Pluralize
+      description: Get singular / plural form of a given word. Support for 5+ languages. 
+      parameters:
+      - name: word
+        in: query
+        description: word to get singular/plural form
+        schema:
+          type: string
+          format: string
+      security:
+          - bearerAuth: []                    
+      responses:
+        "200":
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                    "success": {
+                        "total": 3
+                    },
+                    "contents": {
+                        "original": "child",
+                        "singular": "child",
+                        "plural": "children"
+                    },
+                    "copyright": {
+                        "url": "api.interfaces.one",
+                        "year": "2025"
+                    }
+                }
+        "401":
+          description: 401  response
+          content:
+            application/json:
+              example: |-
+                {
+                    "error": {
+                        "code": 401,
+                        "message": "Unauthorized"
+                    }
+                }
+components:
+  securitySchemes:
+      bearerAuth:
+        type: http
+        scheme: bearer
