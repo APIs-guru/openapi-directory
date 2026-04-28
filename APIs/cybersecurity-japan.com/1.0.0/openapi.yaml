@@ -1,0 +1,154 @@
+openapi: 3.1.0
+info:
+  title: Website Security Snapshot API
+  version: 1.0.0
+  description: >-
+    One URL in, machine-readable security hygiene out.
+    Checks HSTS, CSP, X-Frame-Options, X-Content-Type-Options,
+    Referrer-Policy, Permissions-Policy and more.
+    Paid via x402 protocol (0.05 USDC / call on Base). No account required.
+  contact:
+    email: support@cybersecurity-japan.com
+  x-apisguru-categories:
+    - security
+  x-logo:
+    url: https://api.cybersecurity-japan.com/favicon.ico
+servers:
+  - url: https://api.cybersecurity-japan.com
+paths:
+  /v1/snapshot:
+    post:
+      summary: Run a security snapshot on a URL
+      description: >-
+        Requires x402 payment of 0.05 USDC on Base.
+        Returns 402 Payment Required until payment proof is provided.
+      operationId: postSnapshot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+              properties:
+                url:
+                  type: string
+                  example: https://example.com
+                  description: Public HTTPS/HTTP URL to inspect.
+      responses:
+        "200":
+          description: Snapshot result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SnapshotResult"
+        "400":
+          description: Invalid URL or SSRF-blocked target
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SnapshotError"
+        "402":
+          description: Payment required (x402 challenge)
+  /demo/snapshot:
+    get:
+      summary: Canned demo snapshot (no payment, no live fetch)
+      operationId: getDemoSnapshot
+      responses:
+        "200":
+          description: Pre-baked example snapshot
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SnapshotResult"
+  /health:
+    get:
+      summary: Health check
+      operationId: getHealth
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  version:
+                    type: string
+                    example: 1.0.0
+components:
+  schemas:
+    SnapshotResult:
+      type: object
+      properties:
+        requested_url:
+          type: string
+        normalized_url:
+          type: string
+        final_url:
+          type: string
+        fetched_at:
+          type: string
+          format: date-time
+        reachable:
+          type: boolean
+        final_status_code:
+          type:
+            - integer
+            - "null"
+        redirect_count:
+          type: integer
+        https_ok:
+          type: boolean
+        hsts_present:
+          type: boolean
+        csp_present:
+          type: boolean
+        x_frame_options_present:
+          type: boolean
+        x_content_type_options_present:
+          type: boolean
+        referrer_policy_present:
+          type: boolean
+        permissions_policy_present:
+          type: boolean
+        security_txt_present:
+          type:
+            - boolean
+            - "null"
+        robots_txt_present:
+          type:
+            - boolean
+            - "null"
+        sitemap_xml_present:
+          type:
+            - boolean
+            - "null"
+        notes:
+          type: array
+          items:
+            type: string
+        checks:
+          type: object
+          additionalProperties:
+            type:
+              - boolean
+              - "null"
+    SnapshotError:
+      type: object
+      properties:
+        requested_url:
+          type: string
+        error:
+          type: string
+        error_type:
+          type: string
+          enum:
+            - ssrf
+            - timeout
+            - unreachable
+            - invalid_url
