@@ -1,0 +1,292 @@
+components:
+  schemas:
+    AnalyzeRequest:
+      properties:
+        text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Raw text or HTML content to analyze.
+          title: Text
+        url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: URL to fetch and analyze.
+          title: Url
+      title: AnalyzeRequest
+      type: object
+    AnalyzeResponse:
+      properties:
+        analyzed_at:
+          format: date-time
+          title: Analyzed At
+          type: string
+        fixes:
+          items:
+            type: string
+          title: Fixes
+          type: array
+        flesch_reading_ease:
+          title: Flesch Reading Ease
+          type: number
+        geo_score:
+          title: Geo Score
+          type: integer
+        has_bullet_lists:
+          title: Has Bullet Lists
+          type: boolean
+        has_data_tables:
+          title: Has Data Tables
+          type: boolean
+        has_faq_section:
+          title: Has Faq Section
+          type: boolean
+        has_numbered_lists:
+          title: Has Numbered Lists
+          type: boolean
+        has_quick_answer:
+          title: Has Quick Answer
+          type: boolean
+        has_sources_section:
+          title: Has Sources Section
+          type: boolean
+        heading_count:
+          title: Heading Count
+          type: integer
+        question_headings_count:
+          title: Question Headings Count
+          type: integer
+        question_headings_pct:
+          title: Question Headings Pct
+          type: number
+        reading_grade_level:
+          title: Reading Grade Level
+          type: number
+        reading_time_mins:
+          title: Reading Time Mins
+          type: number
+        word_count:
+          title: Word Count
+          type: integer
+      required:
+      - geo_score
+      - word_count
+      - reading_time_mins
+      - reading_grade_level
+      - flesch_reading_ease
+      - has_quick_answer
+      - has_faq_section
+      - has_data_tables
+      - has_sources_section
+      - has_numbered_lists
+      - has_bullet_lists
+      - heading_count
+      - question_headings_count
+      - question_headings_pct
+      - fixes
+      - analyzed_at
+      title: AnalyzeResponse
+      type: object
+    CreateKeyRequest:
+      properties:
+        email:
+          default: ''
+          title: Email
+          type: string
+      title: CreateKeyRequest
+      type: object
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          title: Detail
+          type: array
+      title: HTTPValidationError
+      type: object
+    HealthResponse:
+      properties:
+        database:
+          title: Database
+          type: string
+        status:
+          title: Status
+          type: string
+        version:
+          title: Version
+          type: string
+      required:
+      - status
+      - version
+      - database
+      title: HealthResponse
+      type: object
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          title: Location
+          type: array
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+      type: object
+info:
+  contact:
+    name: GeoScore
+    url: https://geoscoreapi.com/
+  description: Score any text or URL for AI/Generative-Engine-Optimization (GEO) readability.
+    Returns a 0–100 score, structural metrics (quick answer, FAQ, tables, sources,
+    headings, reading grade), and a list of concrete fixes.
+  license:
+    name: Proprietary
+  title: GeoScore API
+  version: 1.0.0
+openapi: 3.1.0
+paths:
+  /api/analyze:
+    post:
+      description: 'Submit `text` (raw text, markdown, or HTML) **or** a `url` to
+        fetch.
+
+        Returns a 0–100 GEO score plus structural metrics and improvement fixes.'
+      operationId: analyze_api_analyze_post
+      parameters:
+      - in: header
+        name: X-RapidAPI-Key
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Rapidapi-Key
+      - in: header
+        name: X-Admin-Key
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Admin-Key
+      - in: header
+        name: X-GeoScore-Key
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Geoscore-Key
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalyzeRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyzeResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Score content for AI / GEO readability
+      tags:
+      - Analyze
+  /api/keys/create:
+    post:
+      operationId: create_api_key_api_keys_create_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKeyRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Generate a new free-tier API key
+      tags:
+      - API Keys
+  /api/keys/usage:
+    get:
+      operationId: get_usage_api_keys_usage_get
+      parameters:
+      - in: header
+        name: X-GeoScore-Key
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Geoscore-Key
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get usage stats for your API key
+      tags:
+      - API Keys
+  /health:
+    get:
+      operationId: health_check_health_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+          description: Successful Response
+      summary: Health Check
+      tags:
+      - Health
+  /webhooks/stripe:
+    post:
+      description: 'Handles Stripe subscription events:
+
+        - customer.subscription.created / updated → upgrade/create API key
+
+        - customer.subscription.deleted → downgrade to free tier'
+      operationId: stripe_webhook_webhooks_stripe_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Handle Stripe subscription webhook events
+      tags:
+      - Webhooks
