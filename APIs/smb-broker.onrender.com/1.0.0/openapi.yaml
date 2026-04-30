@@ -1,0 +1,687 @@
+openapi: "3.1.0"
+info:
+  x-providerName: smb-broker.onrender.com
+  x-origin:
+    - format: openapi
+      url: https://smb-broker.onrender.com/openapi.yaml
+      version: "3.0"
+
+  title: SMB Transaction & Communication Broker
+  version: "0.1.0"
+  description: |
+    A horizontal, agent-callable broker for the long-tail SMB layer.
+    Lets autonomous AI agents discover, verify, communicate with, schedule with,
+    and transact with small/mid businesses through one clean tool surface.
+  contact:
+    email: support@smb-broker.example
+
+servers:
+  - url: https://api.smb-broker.example/v1
+
+security:
+  - AgentIdentity: []
+
+components:
+  securitySchemes:
+    AgentIdentity:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        Signed JWT with claims: agent_id, principal, scope, expiry, issuer.
+        Required for all state-changing operations. Read-only operations require
+        a minimal Agent-Identity with no principal claim.
+
+  schemas:
+    OutcomeReceipt:
+      type: object
+      required: [operation_id, status, retriable, trace_id]
+      properties:
+        operation_id:
+          type: string
+          description: Unique identifier for this operation instance
+        status:
+          type: string
+          enum: [success, partial, failure, pending_async]
+        reason_code:
+          type: string
+          description: Machine-readable reason code (see errors.md for full enum per operation)
+        human_message:
+          type: string
+          description: Short, agent-consumable explanation
+        result:
+          type: object
+          description: Operation-specific payload
+        cost:
+          type: object
+          properties:
+            amount:
+              type: number
+            currency:
+              type: string
+              default: USD
+            basis:
+              type: string
+        latency_ms:
+          type: integer
+        channel_used:
+          type: string
+          description: e.g. "direct_api:square", "voice_ai:vapi", "sms:twilio"
+        channel_fallback_chain:
+          type: array
+          items:
+            type: string
+          description: Channels attempted before the one that succeeded
+        estimated_completion_time:
+          type: string
+          format: date-time
+          description: Populated when status == pending_async
+        next_actions:
+          type: array
+          items:
+            type: string
+        retriable:
+          type: boolean
+        trace_id:
+          type: string
+
+    Error:
+      type: object
+      required: [code, category, retriable, message]
+      properties:
+        code:
+          type: string
+          enum:
+            - bad_input
+            - missing_capability
+            - rate_limited
+            - upstream_failure
+            - policy_blocked
+            - budget_exceeded
+            - idempotency_conflict
+            - transient
+            - internal
+            - supply_unreachable
+            - supply_unverified
+            - out_of_supply_network
+            - compliance_violation
+            - out_of_scope
+            - consent_missing
+            - recording_consent_missing
+        category:
+          type: string
+          enum: [client_error, server_error, compliance_error, policy_error]
+        retriable:
+          type: boolean
+        retry_after_ms:
+          type: integer
+          description: Present when retriable is true
+        message:
+          type: string
+        next_action:
+          type: string
+          description: Suggested action to resolve the error
+
+    FindBusinessRequest:
+      type: object
+      required: [vertical, location]
+      properties:
+        vertical:
+          type: string
+          enum: [personal_services, home_services, professional_services]
+        location:
+          type: object
+          required: [zip_or_city]
+          properties:
+            zip_or_city:
+              type: string
+            radius_miles:
+              type: number
+              default: 10
+        capability:
+          type: string
+        price_band:
+          type: object
+          properties:
+            max_usd:
+              type: number
+        availability_window:
+          type: object
+          properties:
+            start_iso:
+              type: string
+              format: date-time
+            end_iso:
+              type: string
+              format: date-time
+        max_results:
+          type: integer
+          default: 5
+          maximum: 20
+
+    ScheduleAppointmentRequest:
+      type: object
+      required: [smb_id, action]
+      properties:
+        smb_id:
+          type: string
+        action:
+          type: string
+          enum: [book, reschedule, cancel, check_availability]
+        service:
+          type: string
+        customer:
+          type: object
+          properties:
+            name:
+              type: string
+            phone:
+              type: string
+            email:
+              type: string
+        requested_time:
+          type: object
+          properties:
+            preferred_iso:
+              type: string
+              format: date-time
+            window_start_iso:
+              type: string
+              format: date-time
+            window_end_iso:
+              type: string
+              format: date-time
+            duration_minutes:
+              type: integer
+        existing_appointment_id:
+          type: string
+        notes:
+          type: string
+
+    SendMessageRequest:
+      type: object
+      required: [recipient, message_type, content]
+      properties:
+        recipient:
+          type: object
+          required: [id_type, id_value]
+          properties:
+            id_type:
+              type: string
+              enum: [phone, email, smb_id, customer_id]
+            id_value:
+              type: string
+            country_code:
+              type: string
+        message_type:
+          type: string
+          enum: [transactional, marketing, reminder, follow_up, notification]
+        content:
+          type: object
+          required: [body]
+          properties:
+            body:
+              type: string
+            subject:
+              type: string
+            template_id:
+              type: string
+            template_vars:
+              type: object
+        preferred_channel:
+          type: string
+          enum: [sms, email, voice, auto]
+          default: auto
+        send_at_iso:
+          type: string
+          format: date-time
+
+    WebhookRegistrationRequest:
+      type: object
+      required: [url, secret]
+      properties:
+        url:
+          type: string
+          format: uri
+        secret:
+          type: string
+          description: Shared secret for HMAC-SHA256 signature verification
+        operations:
+          type: array
+          items:
+            type: string
+          description: Filter to specific operations; omit for all
+
+paths:
+  /.well-known/agent-manifest.json:
+    get:
+      summary: Full capability manifest
+      operationId: getAgentManifest
+      security: []
+      responses:
+        "200":
+          description: Capability manifest JSON
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /mcp/tools:
+    get:
+      summary: MCP-style tool listing
+      operationId: getMcpTools
+      security: []
+      responses:
+        "200":
+          description: MCP tool definitions
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /self-test:
+    get:
+      summary: Live capability probe
+      operationId: selfTest
+      security: []
+      responses:
+        "200":
+          description: Health and capability status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  healthy:
+                    type: boolean
+                  capabilities_verified:
+                    type: array
+                    items:
+                      type: string
+                  version:
+                    type: string
+                  supply_network_size:
+                    type: integer
+                  degraded_channels:
+                    type: array
+                    items:
+                      type: string
+
+  /webhooks/register:
+    post:
+      summary: Register a webhook callback URL
+      operationId: registerWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookRegistrationRequest"
+      responses:
+        "201":
+          description: Webhook registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  webhook_id:
+                    type: string
+                  verified:
+                    type: boolean
+        "400":
+          description: Bad input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /preview-cost:
+    post:
+      summary: Preview cost and success probability for a proposed call
+      operationId: previewCost
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [operation, params]
+              properties:
+                operation:
+                  type: string
+                params:
+                  type: object
+      responses:
+        "200":
+          description: Cost preview
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estimated_cost_usd:
+                    type: number
+                  cost_range:
+                    type: object
+                    properties:
+                      min_usd:
+                        type: number
+                      max_usd:
+                        type: number
+                  estimated_latency_p50_ms:
+                    type: integer
+                  estimated_latency_p95_ms:
+                    type: integer
+                  success_probability_estimate:
+                    type: number
+                  channel_likely:
+                    type: string
+                  cost_accuracy_slo:
+                    type: string
+
+  /find-business:
+    post:
+      summary: Find verified SMBs matching criteria
+      operationId: findBusiness
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FindBusinessRequest"
+      responses:
+        "200":
+          description: Matched businesses
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutcomeReceipt"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Bad input
+
+  /verify-business:
+    post:
+      summary: Confirm an SMB is real and capable
+      operationId: verifyBusiness
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [smb_id]
+              properties:
+                smb_id:
+                  type: string
+                capability_to_verify:
+                  type: string
+      responses:
+        "200":
+          description: Verification result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutcomeReceipt"
+
+  /send-message:
+    post:
+      summary: Send outbound message to SMB or customer
+      operationId: sendMessage
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: Budget-Cap
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendMessageRequest"
+      responses:
+        "200":
+          description: Message sent or pending
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutcomeReceipt"
+        "422":
+          description: Compliance violation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /capture-lead:
+    post:
+      summary: Intake a prospect into an SMB's pipeline
+      operationId: captureLead
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [smb_id, prospect]
+              properties:
+                smb_id:
+                  type: string
+                prospect:
+                  type: object
+                source:
+                  type: string
+      responses:
+        "200":
+          description: Lead captured
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutcomeReceipt"
+
+  /schedule-appointment:
+    post:
+      summary: Book, reschedule, or cancel an appointment (async)
+      operationId: scheduleAppointment
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: Webhook-URL
+          schema:
+            type: string
+        - in: header
+          name: Budget-Cap
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScheduleAppointmentRequest"
+      responses:
+        "202":
+          description: Accepted — async operation started
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutcomeReceipt"
+
+  /send-transactional-confirmation:
+    post:
+      summary: Send OTPs, receipts, and confirmations
+      operationId: sendTransactionalConfirmation
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [recipient, confirmation_type, data]
+              properties:
+                recipient:
+                  type: object
+                confirmation_type:
+                  type: string
+                  enum: [otp, booking_confirmation, payment_receipt, cancellation_notice, reminder]
+                data:
+                  type: object
+                preferred_channel:
+                  type: string
+      responses:
+        "200":
+          description: Confirmation sent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutcomeReceipt"
+
+  /handle-inbound:
+    post:
+      summary: Classify and route inbound messages for an SMB
+      operationId: handleInbound
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [smb_id, inbound_channel, raw_message]
+              properties:
+                smb_id:
+                  type: string
+                inbound_channel:
+                  type: string
+                  enum: [sms, email, voice_voicemail, web_form, api]
+                sender:
+                  type: object
+                raw_message:
+                  type: string
+                received_at_iso:
+                  type: string
+      responses:
+        "202":
+          description: Inbound message accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutcomeReceipt"
+
+  /escalate-to-human:
+    post:
+      summary: Hand off to human operator with full context
+      operationId: escalateToHuman
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [smb_id, reason, context]
+              properties:
+                smb_id:
+                  type: string
+                reason:
+                  type: string
+                  enum: [automation_failed, customer_requested, compliance_hold, ambiguous_intent, exception_required]
+                context:
+                  type: object
+                priority:
+                  type: string
+                  enum: [normal, urgent]
+      responses:
+        "202":
+          description: Escalation accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutcomeReceipt"
+
+  /operations/{operation_id}/status:
+    get:
+      summary: Get current status of an async operation
+      operationId: getStatus
+      parameters:
+        - in: path
+          name: operation_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Current status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  operation_id:
+                    type: string
+                  status:
+                    type: string
+                    enum: [pending, executing, success, failure, partial]
+                  estimated_completion_time:
+                    type: string
+                  last_updated_at:
+                    type: string
+
+  /operations/{operation_id}/outcome:
+    get:
+      summary: Retrieve final OutcomeReceipt for a completed operation
+      operationId: getOutcome
+      parameters:
+        - in: path
+          name: operation_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Final outcome
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutcomeReceipt"
+        "404":
+          description: Operation not found or not yet complete
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
