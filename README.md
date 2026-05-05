@@ -153,3 +153,4 @@ Support this project by becoming a partner. Your logo will be displayed prominen
 
 
 This project is tested with BrowserStack.
+- [EventTrader / Cymetica](https://cymetica.com) - Prediction markets API. REST + WebSocket, AI agents, on-chain settlement. [OpenAPI Spec](https://cymetica.com/openapi.json)
