@@ -3,7 +3,7 @@
   "info": {
     "title": "WalletIQ API",
     "version": "1.0.0",
-    "description": "Wallet intelligence API for EVM addresses. One call returns a full wallet profile: age, activity history, DeFi protocol detection (75+ protocols), risk score, and behavioral labels across 5 EVM chains.\n\n## Authentication\n\n- **Free tier (playground):** No auth, IP rate-limited to 5 req/min.\n- **API key tier:** Create an account, pass `Authorization: Bearer <key>` header. Includes 100 monthly credits, then uses prepaid Stripe credits.\n- **Stripe billing:** Upgrade to monthly plans or buy prepaid credit packs in the dashboard.\n- **x402 / MPP:** No signup. Pay $0.005 USDC per lookup on Base or Avalanche. Standard x402 flow \u2014 client receives a `402 Payment Required` response with `payment-required` header, signs a USDC transfer, and retries with `x-payment` header.",
+    "description": "Wallet intelligence API for EVM addresses. One call returns a full wallet profile: age, activity history, DeFi protocol detection (75+ protocols), risk score, and behavioral labels across 5 EVM chains.\n\n## Access\n\n- **Default path \u2014 x402 / MPP:** No signup. Pay $0.005 USDC per lookup on Base or Avalanche. Standard x402 flow \u2014 client receives a `402 Payment Required` response with `payment-required` header, signs a USDC transfer, and retries with `x-payment` header.\n- **Free playground:** No auth, IP rate-limited to 5 req/min for testing and demos.\n- **Optional API key path:** Create an account, pass `Authorization: Bearer <key>` header for dashboard-managed team access.",
     "contact": {
       "name": "WalletIQ",
       "url": "https://walletiq.dev"
@@ -165,7 +165,7 @@
         ],
         "operationId": "getProfile",
         "summary": "Wallet profile (API key)",
-        "description": "Returns a full wallet intelligence profile. Requires a valid API key passed as a Bearer token. Every account includes 100 monthly credits and can add Stripe prepaid credits or upgrade plans in the dashboard.",
+        "description": "Returns a full wallet intelligence profile through the optional API-key path. Requires a valid API key passed as a Bearer token for dashboard-managed team access. For the default no-signup flow, use the x402 endpoint instead.",
         "security": [
           {
             "bearerAuth": []
@@ -332,7 +332,7 @@
         ],
         "operationId": "registerApiKey",
         "summary": "Register for an API key",
-        "description": "Creates a WalletIQ account and returns the first API key. New accounts start on the free plan with 100 monthly credits.",
+        "description": "Creates a WalletIQ account and returns the first API key for teams that want dashboard-managed access. The core developer path remains the no-signup x402 endpoint.",
         "requestBody": {
           "required": true,
           "content": {
@@ -450,7 +450,7 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "API key from walletiq.dev/api-keys. Format: `Authorization: Bearer wiq_...`"
+        "description": "Optional API key for dashboard-managed team access. Format: `Authorization: Bearer wiq_...`"
       }
     },
     "schemas": {
