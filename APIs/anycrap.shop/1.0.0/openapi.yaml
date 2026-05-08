@@ -1,0 +1,345 @@
+openapi: 3.1.0
+info:
+  title: Anycrap.shop API
+  version: 1.0.0
+  description: >-
+    35,000+ hand-curated absurdist AI-generated product concepts with names,
+    descriptions, AI-generated images, and category labels. Free API key,
+    instant access.
+  contact:
+    url: https://anycrap.shop/developers
+  license:
+    name: CC BY 4.0
+    url: https://creativecommons.org/licenses/by/4.0/
+  x-apisguru-categories:
+    - entertainment
+  x-logo:
+    url: https://anycrap.shop/logo.png
+  x-origin:
+    - format: openapi
+      url: https://anycrap.shop/openapi.json
+      version: "3.1"
+  x-providerName: anycrap.shop
+servers:
+  - url: https://anycrap.shop/api/v1
+    description: Production
+security:
+  - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Free API key. Get one at https://anycrap.shop/developers
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 1a156178-0240-4c3e-861c-47b6568123f0
+        slug:
+          type: string
+          example: thought-cancelling-headphones
+        name:
+          type: string
+          example: Thought-Cancelling Headphones
+        description:
+          type: string
+          example: Headphones that don't just block sound — they block thoughts.
+        image:
+          type: string
+          format: uri
+          example: https://cdn.crapify.me/products/...
+        categories:
+          type: array
+          items:
+            type: string
+          example:
+            - gadgets
+            - anti-productivity
+        created_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - slug
+        - name
+        - description
+        - image
+        - categories
+        - created_at
+    Category:
+      type: object
+      properties:
+        slug:
+          type: string
+          example: gadgets
+        name:
+          type: string
+          example: Innovative Gadgets
+        description:
+          type: string
+        product_count:
+          type: integer
+          example: 4231
+      required:
+        - slug
+        - name
+        - product_count
+    Meta:
+      type: object
+      properties:
+        total:
+          type: integer
+          example: 35201
+        page:
+          type: integer
+          example: 1
+        per_page:
+          type: integer
+          example: 10
+        pages:
+          type: integer
+          example: 3521
+      required:
+        - total
+        - page
+        - per_page
+        - pages
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+      required:
+        - error
+        - code
+paths:
+  /products:
+    get:
+      summary: List products
+      description: >-
+        Paginated list of featured products. Filter by category, name search,
+        or minimum quality score.
+      operationId: listProducts
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 50
+        - name: category
+          in: query
+          description: Filter by category slug. See /categories for full list.
+          schema:
+            type: string
+            example: gadgets
+        - name: min_score
+          in: query
+          description: Minimum Crap-O-Meter score (0–10).
+          schema:
+            type: number
+            minimum: 0
+            maximum: 10
+            example: 7.0
+        - name: q
+          in: query
+          description: Name search (case-insensitive substring).
+          schema:
+            type: string
+            example: underwater
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Product"
+                  meta:
+                    $ref: "#/components/schemas/Meta"
+        "401":
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /products/random:
+    get:
+      summary: Random product(s)
+      description: Returns 1–10 random featured products.
+      operationId: randomProducts
+      parameters:
+        - name: count
+          in: query
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+            maximum: 10
+        - name: category
+          in: query
+          description: Random within a specific category slug.
+          schema:
+            type: string
+            example: food
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Product"
+        "401":
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /products/{slug}:
+    get:
+      summary: Get product by slug
+      operationId: getProduct
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            example: thought-cancelling-headphones
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Product"
+        "401":
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /categories:
+    get:
+      summary: List categories
+      description: All product categories with featured product counts.
+      operationId: listCategories
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Category"
+        "401":
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /keys:
+    post:
+      summary: Register API key
+      description: Get a free API key instantly. The key is shown once — store it securely.
+      operationId: createKey
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: dev@example.com
+                app_name:
+                  type: string
+                  example: My Party Game
+                  maxLength: 100
+              required:
+                - email
+      responses:
+        "201":
+          description: Key created. Shown once — not retrievable again.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key:
+                    type: string
+                    example: ak_a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4
+                  prefix:
+                    type: string
+                    example: ak_a1b2c3
+                  email:
+                    type: string
+                    example: dev@example.com
+        "400":
+          description: Invalid email
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
