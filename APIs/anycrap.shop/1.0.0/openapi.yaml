@@ -51,7 +51,7 @@ components:
         image:
           type: string
           format: uri
-          example: https://cdn.crapify.me/products/...
+          example: https://cdn.crapify.me/products/thought-cancelling-headphones.jpg
         categories:
           type: array
           items:
@@ -113,8 +113,10 @@ components:
       properties:
         error:
           type: string
+          description: A human-readable error message.
         code:
           type: string
+          description: A machine-readable error code.
       required:
         - error
         - code
@@ -174,6 +176,9 @@ paths:
                       $ref: "#/components/schemas/Product"
                   meta:
                     $ref: "#/components/schemas/Meta"
+                required:
+                  - data
+                  - meta
         "401":
           description: Missing or invalid API key
           content:
@@ -217,6 +222,8 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Product"
+                required:
+                  - data
         "401":
           description: Missing or invalid API key
           content:
@@ -250,6 +257,8 @@ paths:
                 properties:
                   data:
                     $ref: "#/components/schemas/Product"
+                required:
+                  - data
         "401":
           description: Missing or invalid API key
           content:
@@ -285,6 +294,8 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Category"
+                required:
+                  - data
         "401":
           description: Missing or invalid API key
           content:
@@ -337,6 +348,10 @@ paths:
                   email:
                     type: string
                     example: dev@example.com
+                required:
+                  - key
+                  - prefix
+                  - email
         "400":
           description: Invalid email
           content:
