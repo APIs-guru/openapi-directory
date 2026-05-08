@@ -1,0 +1,276 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "NEXUS Agent Services",
+    "version": "14.0",
+    "description": "Pay-per-request AI data and analysis APIs. No API key or subscription needed. Pay $0.001-0.10 USDC per call on Base via x402 protocol. Real-time crypto prices, Reddit intelligence with AI sentiment analysis, HackerNews stories, trending topics, text sentiment analysis, entity extraction, summarization, risk analysis, and trust scoring for URLs and wallets.",
+    "x-apisguru-categories": [
+      "financial",
+      "ai",
+      "data"
+    ],
+    "x-logo": {
+      "url": "https://rileycraig14.github.io/nexus-dashboard/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://nexus-agent-xa12.onrender.com",
+      "description": "NEXUS Production"
+    }
+  ],
+  "paths": {
+    "/data/crypto": {
+      "post": {
+        "summary": "Get current prices for one or more cryptocurrencies in USD with 24h change data.",
+        "description": "Real-time cryptocurrency prices. Returns price, 24h change for Bitcoin, Ethereum, Solana, and 100+ coins. Pay per request in USDC on Base via x402.",
+        "x-keywords": [
+          "crypto price",
+          "coin price",
+          "bitcoin price",
+          "ethereum price",
+          "real-time price",
+          "market data",
+          "cryptocurrency",
+          "24h change",
+          "token price"
+        ],
+        "x-use-cases": [
+          "get the current price of Bitcoin in USD",
+          "look up Ethereum price",
+          "check prices for multiple coins",
+          "retrieve 24h price change"
+        ],
+        "x-auth-mode": "paid",
+        "x-price": "0.02",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "coins": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "coins"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cryptocurrency prices"
+          },
+          "402": {
+            "description": "Payment required"
+          }
+        }
+      }
+    },
+    "/data/reddit": {
+      "post": {
+        "summary": "Fetch Reddit posts from any subreddit with AI-powered sentiment analysis and key themes.",
+        "description": "Reddit intelligence API. Returns top posts from any subreddit plus AI sentiment analysis showing bullish/bearish/neutral sentiment, key themes, and summary. Perfect for market research and social listening.",
+        "x-keywords": [
+          "reddit posts",
+          "subreddit data",
+          "reddit sentiment",
+          "social media data",
+          "reddit intelligence",
+          "community sentiment",
+          "reddit scraping"
+        ],
+        "x-use-cases": [
+          "get top posts from a subreddit",
+          "analyze Reddit sentiment",
+          "find what people are saying on Reddit",
+          "monitor Reddit for mentions"
+        ],
+        "x-auth-mode": "paid",
+        "x-price": "0.05",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "subreddit": {
+                    "type": "string"
+                  },
+                  "limit": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "subreddit"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reddit posts with sentiment"
+          },
+          "402": {
+            "description": "Payment required"
+          }
+        }
+      }
+    },
+    "/v1/sentiment": {
+      "post": {
+        "summary": "Analyze the sentiment of any text, returning score, emotions, and classification.",
+        "description": "Text sentiment analysis. Returns sentiment classification (positive/negative/neutral), confidence score 0-1, detected emotions, and one-sentence summary. Powered by Claude AI.",
+        "x-keywords": [
+          "sentiment analysis",
+          "text sentiment",
+          "opinion mining",
+          "emotion detection",
+          "NLP",
+          "text classification",
+          "positive negative neutral"
+        ],
+        "x-use-cases": [
+          "analyze sentiment of a review",
+          "classify customer feedback",
+          "detect emotions in text",
+          "measure sentiment score"
+        ],
+        "x-auth-mode": "paid",
+        "x-price": "0.001",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sentiment analysis result"
+          },
+          "402": {
+            "description": "Payment required"
+          }
+        }
+      }
+    },
+    "/v1/trust": {
+      "post": {
+        "summary": "Score the trustworthiness of any URL, domain, or wallet address from 0-100.",
+        "description": "Trust and security scoring. Analyzes any URL, domain, or wallet address for trustworthiness. Returns trust score 0-100, risk level, red flags, green flags, and recommendation. Essential for agents before paying unknown endpoints.",
+        "x-keywords": [
+          "trust score",
+          "security scoring",
+          "url safety",
+          "wallet trust",
+          "domain reputation",
+          "risk assessment",
+          "scam detection",
+          "x402 safety"
+        ],
+        "x-use-cases": [
+          "check if a URL is safe",
+          "score wallet trustworthiness",
+          "verify domain reputation",
+          "assess x402 endpoint safety"
+        ],
+        "x-auth-mode": "paid",
+        "x-price": "0.01",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "url"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Trust score result"
+          },
+          "402": {
+            "description": "Payment required"
+          }
+        }
+      }
+    },
+    "/execute": {
+      "post": {
+        "summary": "Execute any AI task or question using Claude, returning a complete professional response.",
+        "description": "General AI task execution powered by Claude. Send any task, question, or instruction and receive a complete professional response. Research, writing, analysis, coding, summarization, translation - any task.",
+        "x-keywords": [
+          "AI task",
+          "claude AI",
+          "general intelligence",
+          "research",
+          "writing",
+          "analysis",
+          "question answering",
+          "LLM inference"
+        ],
+        "x-use-cases": [
+          "research a topic",
+          "write content",
+          "analyze data",
+          "answer questions",
+          "summarize text",
+          "generate code"
+        ],
+        "x-auth-mode": "paid",
+        "x-price": "0.01",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "task": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "task"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "AI task result"
+          },
+          "402": {
+            "description": "Payment required"
+          }
+        }
+      }
+    }
+  }
+}
