@@ -1,0 +1,65 @@
+openapi: 3.0.3
+servers:
+  - url: https://kiprio.com/v1/email-validate
+info:
+  description: >-
+    Validate email addresses: syntax, MX record check, disposable address
+    detection, role-based detection (admin@, info@), free provider detection,
+    and smart typo suggestions. No API key required for demo tier.
+  title: Email Validation API
+  version: 1.0.0
+  x-apisguru-categories:
+    - email
+  x-logo:
+    url: https://kiprio.com/logo.png
+  x-origin:
+    - format: openapi
+      url: https://kiprio.com/v1/email-validate/openapi.json
+      version: '3.0'
+  x-providerName: kiprio.com
+  x-serviceName: email-validate
+externalDocs:
+  description: API documentation
+  url: https://kiprio.com/docs/
+paths:
+  /:
+    get:
+      summary: Validate an email address
+      operationId: validateEmail
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+            example: user@example.com
+          description: Email address to validate
+      responses:
+        '200':
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  input:
+                    type: string
+                  valid:
+                    type: boolean
+                  syntax_ok:
+                    type: boolean
+                  mx_found:
+                    type: boolean
+                  disposable:
+                    type: boolean
+                  role_based:
+                    type: boolean
+                  free_provider:
+                    type: boolean
+                  suggest:
+                    type: string
+                  confidence:
+                    type: number
+                    format: float
+                  reason:
+                    type: string
