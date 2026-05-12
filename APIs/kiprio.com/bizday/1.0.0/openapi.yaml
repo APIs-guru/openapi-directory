@@ -1,0 +1,68 @@
+openapi: 3.0.3
+servers:
+  - url: https://kiprio.com/v1/bizday
+info:
+  description: >-
+    Calculate business days between dates, skip weekends and public holidays
+    for 100+ countries and regions. Supports adding/subtracting business days,
+    checking if a date is a business day, and listing holidays.
+  title: Business Days Calculator API
+  version: 1.0.0
+  x-apisguru-categories:
+    - calendar
+    - time
+  x-logo:
+    url: https://kiprio.com/logo.png
+  x-origin:
+    - format: openapi
+      url: https://kiprio.com/v1/bizday/openapi.json
+      version: '3.0'
+  x-providerName: kiprio.com
+  x-serviceName: bizday
+externalDocs:
+  description: API documentation
+  url: https://kiprio.com/docs/
+paths:
+  /:
+    get:
+      summary: Calculate business days between two dates
+      operationId: bizdayCount
+      parameters:
+        - name: from
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+          example: '2026-01-01'
+        - name: to
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+          example: '2026-01-31'
+        - name: country
+          in: query
+          schema:
+            type: string
+            default: GB
+          example: GB
+      responses:
+        '200':
+          description: Business day count
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  from:
+                    type: string
+                  to:
+                    type: string
+                  business_days:
+                    type: integer
+                  calendar_days:
+                    type: integer
+                  country:
+                    type: string
