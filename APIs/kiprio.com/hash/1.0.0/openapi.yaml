@@ -1,0 +1,77 @@
+openapi: 3.0.3
+servers:
+  - url: https://kiprio.com/v1/hash
+info:
+  description: >-
+    Hash strings using MD5, SHA-1, SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-512.
+    HMAC signing with secret keys, constant-time comparison, Base64 and hex
+    encoding/decoding. Free demo tier, no API key required.
+  title: Hash & Encode API
+  version: 1.0.0
+  x-apisguru-categories:
+    - developer_tools
+    - security
+  x-logo:
+    url: https://kiprio.com/logo.png
+  x-origin:
+    - format: openapi
+      url: https://kiprio.com/v1/hash/openapi.json
+      version: '3.0'
+  x-providerName: kiprio.com
+  x-serviceName: hash
+externalDocs:
+  description: API documentation
+  url: https://kiprio.com/docs/
+paths:
+  /:
+    get:
+      summary: Hash a string
+      operationId: hashString
+      parameters:
+        - name: input
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: algo
+          in: query
+          schema:
+            type: string
+            enum: [md5, sha1, sha256, sha384, sha512, sha3-256, sha3-512]
+            default: sha256
+      responses:
+        '200':
+          description: Hash result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  input:
+                    type: string
+                  algo:
+                    type: string
+                  hash:
+                    type: string
+  /hmac:
+    post:
+      summary: HMAC-sign a string
+      operationId: hmacSign
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [input, secret]
+              properties:
+                input:
+                  type: string
+                secret:
+                  type: string
+                algo:
+                  type: string
+                  default: sha256
+      responses:
+        '200':
+          description: HMAC result
