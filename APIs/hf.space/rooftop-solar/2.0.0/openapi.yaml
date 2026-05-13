@@ -1,0 +1,141 @@
+openapi: "3.0.0"
+info:
+  title: Rooftop Solar Suitability API
+  version: "2.0.0"
+  description: |
+    POST a latitude and longitude — the API detects the building via
+    OpenStreetMap, measures the roof polygon, runs the NREL physics engine,
+    and returns a full solar suitability analysis. No address input needed.
+    Free plan returns full analysis. Pro plan adds NPV, IRR, LCOE, demand
+    savings, BESS sizing, and batch processing for up to 20 sites per call.
+  contact:
+    name: Tinashe Nedi
+    email: support@solartruth.app
+    url: https://rapidapi.com/user/bethelnedi
+  x-apisguru-categories:
+    - energy
+  x-logo:
+    url: https://solartruth.app/logo.png
+externalDocs:
+  url: https://amfumu-rooftop-solar-api.hf.space/docs
+servers:
+  - url: https://amfumu-rooftop-solar-api.hf.space
+paths:
+  /health:
+    get:
+      summary: API status and methodology register
+      operationId: getHealth
+      responses:
+        "200":
+          description: API status
+  /pricing:
+    get:
+      summary: Plan details and rate limits
+      operationId: getPricing
+      responses:
+        "200":
+          description: Pricing plans
+  /ping:
+    get:
+      summary: Internal keepalive
+      operationId: getPing
+      responses:
+        "200":
+          description: Pong
+  /rooftop/quick:
+    post:
+      summary: Quick rooftop analysis — Free plan
+      operationId: rooftopQuick
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - latitude
+                - longitude
+              properties:
+                latitude:
+                  type: number
+                longitude:
+                  type: number
+      responses:
+        "200":
+          description: Full rooftop solar suitability analysis
+        "422":
+          description: Validation error
+  /rooftop/full:
+    post:
+      summary: Full rooftop analysis with financials — Pro plan
+      operationId: rooftopFull
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - latitude
+                - longitude
+              properties:
+                latitude:
+                  type: number
+                longitude:
+                  type: number
+                annual_kwh_consumption:
+                  type: number
+                flat_rate_usd_kwh:
+                  type: number
+                roof_pct:
+                  type: number
+      responses:
+        "200":
+          description: Full analysis with NPV, IRR, LCOE, BESS
+        "403":
+          description: Pro plan required
+  /rooftop/batch:
+    post:
+      summary: Batch analysis up to 20 sites — Pro plan
+      operationId: rooftopBatch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sites:
+                  type: array
+                  maxItems: 20
+                  items:
+                    type: object
+                    properties:
+                      latitude:
+                        type: number
+                      longitude:
+                        type: number
+      responses:
+        "200":
+          description: Batch results array
+  /reference/building-types:
+    get:
+      summary: Building types with usable roof fractions
+      operationId: getReferenceBuildingtypes
+      responses:
+        "200":
+          description: Building type reference data
+  /reference/climate-zones:
+    get:
+      summary: Climate zones with specific yield
+      operationId: getReferenceClimatezones
+      responses:
+        "200":
+          description: Climate zone and yield data
+  /reference/methodology:
+    get:
+      summary: Full methodology and citations
+      operationId: getReferenceMethodology
+      responses:
+        "200":
+          description: All data sources and citations
