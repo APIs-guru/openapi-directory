@@ -1,0 +1,1410 @@
+---
+openapi: 3.0.0
+info:
+  title: Sharpe API
+  version: 1.0.0
+  description: |-
+    Institutional-grade crypto market data API. Access funding rates, futures, options, arbitrage opportunities, narratives, ecosystems, and more.
+
+    Authentication is supported via two production-safe methods:
+    1. **Bearer token** in the Authorization header: `Authorization: Bearer sk_...`
+    2. **X-API-Key header**: `X-API-Key: sk_...`
+
+    API keys in query parameters are rejected by default because URLs are commonly stored in logs, browser history, analytics tools, and referrer headers.
+  contact:
+    name: Sharpe API Support
+    url: https://sharpe.ai
+    email: support@sharpe.ai
+  x-apisguru-categories:
+  - financial
+  x-origin:
+  - format: openapi
+    url: https://www.sharpe.ai/openapi.json
+    version: 3.0.0
+  x-providerName: sharpe.ai
+servers:
+- url: https://www.sharpe.ai/api
+  description: Production
+security:
+- BearerAuth: []
+- ApiKeyAuth: []
+tags:
+- name: System
+  description: Health checks and service status
+- name: Account
+  description: API key usage and quota information
+- name: Derivatives
+  description: Funding rates, futures, and options data
+- name: Market Data
+  description: Heatmaps, correlations, tracker, price predictions, news, gem finder,
+    and market cap search
+- name: Arbitrage
+  description: Spot-perp and cross-exchange arbitrage opportunities
+- name: Categories
+  description: Narratives, ecosystems, and memecoins data
+- name: Exchange Listings
+  description: Tokens listed on Binance, OKX, Bybit, Gate.io, and MEXC, tagged by
+    narrative. A forward signal for exchange capital deployment.
+- name: Signals
+  description: 'Composite signal scores derived from cross-exchange derivatives data:
+    insider selling pressure and pump-and-dump detection.'
+paths:
+  "/v1/arbitrage/cross-exchange":
+    get:
+      operationId: getCrossExchangeArbitrage
+      tags:
+      - Arbitrage
+      summary: Cross-exchange arbitrage
+      description: Returns cross-exchange price discrepancies and arbitrage opportunities.
+      parameters:
+      - name: exchanges
+        in: query
+        description: Comma-separated list of exchanges to compare.
+        schema:
+          type: string
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Arbitrage data returned successfully.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/arbitrage/spot-perp":
+    get:
+      operationId: getSpotPerpArbitrage
+      tags:
+      - Arbitrage
+      summary: Spot-perp arbitrage
+      description: Returns current spot-perpetual funding rate arbitrage opportunities
+        across exchanges.
+      parameters:
+      - name: exchange
+        in: query
+        description: Filter by exchange name, or "all" for all exchanges.
+        schema:
+          type: string
+          default: all
+      - name: direction
+        in: query
+        description: Filter by trade direction.
+        schema:
+          type: string
+          enum:
+          - all
+          - long
+          - short
+          default: all
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Arbitrage opportunities returned successfully.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/correlation/matrix":
+    get:
+      operationId: getCorrelationMatrix
+      tags:
+      - Market Data
+      summary: Correlation matrix
+      description: Returns a price correlation matrix for the requested coins over
+        the specified period.
+      parameters:
+      - name: period
+        in: query
+        description: Lookback period for correlation calculation.
+        schema:
+          type: string
+          enum:
+          - 30d
+          - 90d
+          - 1y
+          - 3y
+          default: 30d
+      - name: ids
+        in: query
+        description: Comma-separated list of CoinGecko IDs. If omitted, returns the
+          default set.
+        schema:
+          type: string
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Correlation matrix returned successfully.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/ecosystems/data":
+    get:
+      operationId: getEcosystemsData
+      tags:
+      - Categories
+      summary: Ecosystems data
+      description: Returns ecosystem-level market data (Ethereum, Solana, BNB, Arbitrum,
+        Base, etc.) including market cap, volume, TVL, and performance metrics.
+      parameters:
+      - name: ecosystem
+        in: query
+        description: Ecosystem slug to filter by (e.g. ethereum, solana, arbitrum).
+        schema:
+          type: string
+      - name: correlation
+        in: query
+        description: Set to "true" to include correlation data.
+        schema:
+          type: string
+      - name: timeframe
+        in: query
+        description: Timeframe for correlation data.
+        schema:
+          type: string
+      - name: excludeNative
+        in: query
+        description: Set to "true" to exclude the native token from aggregated metrics.
+        schema:
+          type: string
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Ecosystems data returned successfully.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/funding/rates":
+    get:
+      operationId: getFundingRates
+      tags:
+      - Derivatives
+      summary: Funding rates
+      description: Returns perpetual funding rates across all supported exchanges.
+        Supports current snapshots, accumulated rates over multiple windows, and per-coin
+        historical rates.
+      parameters:
+      - name: type
+        in: query
+        description: Type of funding rate data to retrieve.
+        schema:
+          type: string
+          enum:
+          - current
+          - accumulated
+          - history
+          default: current
+      - name: coin
+        in: query
+        description: Base coin ticker (e.g. BTC). Required when type=history.
+        schema:
+          type: string
+      - name: days
+        in: query
+        description: Number of days of history to retrieve (type=history only).
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1095
+          default: 30
+      - name: limit
+        in: query
+        description: Maximum number of records to return per page.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 5000
+      - name: cursor
+        in: query
+        description: Opaque pagination cursor from a previous response.
+        schema:
+          type: string
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Funding rates returned successfully.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - "$ref": "#/components/schemas/SuccessEnvelope"
+                - "$ref": "#/components/schemas/PaginatedEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/futures/coins":
+    get:
+      operationId: getFuturesCoins
+      tags:
+      - Derivatives
+      summary: Available futures coins
+      description: Returns the list of coins with futures data, including capability
+        flags for open interest, liquidations, and long/short ratios.
+      responses:
+        '200':
+          description: Coin list returned successfully.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - "$ref": "#/components/schemas/SuccessEnvelope"
+                - type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        coins:
+                          type: array
+                          items:
+                            "$ref": "#/components/schemas/FuturesCoin"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/futures/data":
+    get:
+      operationId: getFuturesData
+      tags:
+      - Derivatives
+      summary: Futures chart data
+      description: Returns time-series data for a specific futures chart. Supports
+        open interest, volume, funding rate history, liquidations, long/short ratios,
+        basis, term structure, OHLCV, and more.
+      parameters:
+      - name: chart
+        in: query
+        required: true
+        description: Chart identifier (e.g. oi-stacked, funding-rate, liquidations,
+          perpetual-price, volume-history, long-short-ratio, annualized-basis, term-structure,
+          etc.).
+        schema:
+          type: string
+          minLength: 1
+      - name: coin
+        in: query
+        description: Base coin ticker.
+        schema:
+          type: string
+          default: BTC
+      - name: timeframe
+        in: query
+        description: Lookback window for the data.
+        schema:
+          type: string
+          enum:
+          - 1W
+          - 2W
+          - 1M
+          - 3M
+          - 6M
+          - 1Y
+          - 3Y
+          default: 3M
+      - name: exchanges
+        in: query
+        description: Comma-separated list of exchanges to include (e.g. Binance,Bybit).
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of data points per page.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 10000
+      - name: cursor
+        in: query
+        description: Opaque pagination cursor from a previous response.
+        schema:
+          type: string
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Futures chart data returned successfully.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/gem-finder/data":
+    get:
+      operationId: getGemFinderData
+      tags:
+      - Market Data
+      summary: Gem finder
+      description: Returns a curated list of low-cap, high-potential tokens identified
+        by the gem finder algorithm.
+      parameters:
+      - name: limit
+        in: query
+        description: Maximum number of tokens to return per page.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+      - name: cursor
+        in: query
+        description: Opaque pagination cursor from a previous response.
+        schema:
+          type: string
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Gem finder data returned successfully.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/health":
+    get:
+      operationId: getHealth
+      tags:
+      - System
+      summary: Health check
+      description: Returns the current health status of the API and its backing services.
+        No authentication required.
+      security: []
+      responses:
+        '200':
+          description: Service is healthy.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HealthResponse"
+        '503':
+          description: Service is degraded.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HealthResponse"
+  "/v1/heatmap/data":
+    get:
+      operationId: getHeatmapData
+      tags:
+      - Market Data
+      summary: Market heatmap
+      description: Returns heatmap data for coins, narratives, or ecosystems. Useful
+        for visualizing relative performance across the market.
+      parameters:
+      - name: mode
+        in: query
+        description: Heatmap grouping mode.
+        schema:
+          type: string
+          enum:
+          - coins
+          - narratives
+          - ecosystems
+          default: coins
+      - name: category
+        in: query
+        description: Category filter for the heatmap (e.g. top-100, defi, layer-1).
+        schema:
+          type: string
+          default: top-100
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Heatmap data returned successfully.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/insider-selling/data":
+    get:
+      operationId: getInsiderSellingData
+      tags:
+      - Signals
+      summary: Insider selling pressure
+      description: Composite score (0-10) flagging coins with persistent negative
+        funding rates across 13 perpetual futures exchanges. Higher scores indicate
+        stronger evidence of systematic short positioning. Updates every 30 minutes.
+      parameters:
+      - name: limit
+        in: query
+        description: Maximum number of coins to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 100
+      - name: min_score
+        in: query
+        description: Filter to coins scoring at or above this value.
+        schema:
+          type: number
+          minimum: 0
+          maximum: 10
+          default: 0
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/listings/data":
+    get:
+      operationId: getListingsData
+      tags:
+      - Exchange Listings
+      summary: Exchange listings hub data
+      description: 'Returns aggregated weekly and monthly listing counts plus the
+        last-90-day recent listings for the Exchange Listings product. Optionally
+        filter by narrative slug or exchange. The response matches the internal hub
+        payload: `weekly`, `monthly`, `recent`, `totals`, `topNarrativesThisMonth`,
+        `topExchangesThisMonth`, and freshness timestamps. Updated daily via exchange
+        ingest crons.'
+      parameters:
+      - name: narrative
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter to a single narrative slug (e.g. `ai-agents`, `memes`,
+          `layer-1`).
+      - name: exchange
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - binance
+          - okx
+          - bybit
+          - gateio
+          - mexc
+        description: Filter to a single exchange.
+      responses:
+        '200':
+          description: Hub payload.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/listings/recent":
+    get:
+      operationId: getListingsRecent
+      tags:
+      - Exchange Listings
+      summary: Recent exchange listings
+      description: Returns a flat list of recent listings (token, exchange, narrative,
+        listing date). Intended for trade-signal consumers that want a simple feed.
+        Filter by narrative, exchange, and time window.
+      parameters:
+      - name: narrative
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter to a single narrative slug.
+      - name: exchange
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - binance
+          - okx
+          - bybit
+          - gateio
+          - mexc
+        description: Filter to a single exchange.
+      - name: days
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 365
+          default: 90
+        description: How many days back to include. Default 90.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 200
+        description: Max rows returned.
+      responses:
+        '200':
+          description: Recent listings.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/market-cap/search":
+    get:
+      operationId: searchMarketCap
+      tags:
+      - Market Data
+      summary: Market cap search
+      description: Search for coins by name or ticker. Returns matching coins with
+        market cap, price, and 24h change.
+      parameters:
+      - name: q
+        in: query
+        required: true
+        description: Search query (2-100 characters).
+        schema:
+          type: string
+          minLength: 2
+          maxLength: 100
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Search results returned successfully.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/market/derivatives-overview":
+    get:
+      operationId: getDerivativesOverview
+      tags:
+      - Market Data
+      summary: Market-wide derivatives overview
+      description: 'Returns aggregated derivatives metrics: total open interest, 24h
+        liquidations, average and OI-weighted funding rates.'
+      responses:
+        '200':
+          description: Derivatives overview returned successfully.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/memecoins/data":
+    get:
+      operationId: getMemecoinsData
+      tags:
+      - Categories
+      summary: Memecoins data
+      description: Returns memecoin narrative data across curated categories (Dog,
+        Cat, Frog, AI, Political, etc.) with market cap, volume, and performance.
+      parameters:
+      - name: narrative
+        in: query
+        description: Memecoin narrative slug to filter by (e.g. dog, cat, frog, ai).
+        schema:
+          type: string
+      - name: historical
+        in: query
+        description: Include historical time-series data for the specified window.
+        schema:
+          type: string
+          enum:
+          - 24h
+          - 7d
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Memecoins data returned successfully.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/meta/coverage":
+    get:
+      operationId: getCoverage
+      tags:
+      - System
+      summary: API data coverage
+      description: Returns metadata about available data products, supported exchanges,
+        coins, chart types, and timeframes. No authentication required.
+      security: []
+      responses:
+        '200':
+          description: Coverage metadata returned successfully.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/narratives/data":
+    get:
+      operationId: getNarrativesData
+      tags:
+      - Categories
+      summary: Narratives data
+      description: Returns narrative-level market data (L1, L2, DeFi, AI Agents, etc.)
+        including market cap, volume, performance, and social metrics.
+      parameters:
+      - name: narrative
+        in: query
+        description: Narrative slug to filter by (e.g. layer-1, defi, ai-agents).
+        schema:
+          type: string
+      - name: correlation
+        in: query
+        description: Set to "true" to include correlation data.
+        schema:
+          type: string
+      - name: timeframe
+        in: query
+        description: Timeframe for correlation data.
+        schema:
+          type: string
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Narratives data returned successfully.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/news/curated":
+    get:
+      operationId: getCuratedNews
+      tags:
+      - Market Data
+      summary: Curated news stories
+      description: AI-curated top crypto news stories with banner headlines and source
+        attribution. Refreshed every 15 minutes. Supports keyset pagination via the
+        cursor field returned alongside results.
+      parameters:
+      - name: limit
+        in: query
+        description: Maximum number of stories to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      - name: category
+        in: query
+        description: Filter by curation category.
+        schema:
+          type: string
+          enum:
+          - all
+          - crypto
+          - ai
+          - markets
+          - geopolitics
+      - name: cursor
+        in: query
+        description: Opaque pagination cursor in the format 'ISO_DATE|ID'. Use the
+          nextCursor field from the previous response.
+        schema:
+          type: string
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/news/feed":
+    get:
+      operationId: getNewsFeed
+      tags:
+      - Market Data
+      summary: News feed
+      description: Returns aggregated crypto news articles from multiple sources,
+        with optional filtering by category or coin.
+      parameters:
+      - name: limit
+        in: query
+        description: Maximum number of articles to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 200
+      - name: offset
+        in: query
+        description: Number of articles to skip for pagination.
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+      - name: category
+        in: query
+        description: Filter by news category.
+        schema:
+          type: string
+      - name: coin
+        in: query
+        description: Filter by coin ticker.
+        schema:
+          type: string
+      - name: since
+        in: query
+        description: ISO 8601 timestamp. Only return articles published after this
+          time.
+        schema:
+          type: string
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: News articles returned successfully.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/options/data":
+    get:
+      operationId: getOptionsData
+      tags:
+      - Derivatives
+      summary: Options chart data
+      description: Returns time-series data for options charts including volatility
+        surfaces, open interest by expiry, volume, implied volatility, Greeks, and
+        more.
+      parameters:
+      - name: chart
+        in: query
+        required: true
+        description: Chart identifier (e.g. atm-iv, iv-smile, oi-by-expiry, volume-by-strike,
+          greeks, vol-cones, etc.).
+        schema:
+          type: string
+          minLength: 1
+      - name: coin
+        in: query
+        description: Base coin ticker.
+        schema:
+          type: string
+          default: BTC
+      - name: timeframe
+        in: query
+        description: Lookback window for the data.
+        schema:
+          type: string
+          enum:
+          - 1W
+          - 1M
+          - 3M
+          - 6M
+          - 1Y
+          - 3Y
+          - ALL
+          default: 3M
+      - name: exchanges
+        in: query
+        description: Comma-separated list of exchanges to include (e.g. Deribit,OKX).
+        schema:
+          type: string
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Options chart data returned successfully.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/price-prediction/data":
+    get:
+      operationId: getPricePredictionData
+      tags:
+      - Market Data
+      summary: Price prediction
+      description: Returns ML-based price prediction data for the specified coin.
+      parameters:
+      - name: coin
+        in: query
+        description: Coin ticker to get predictions for.
+        schema:
+          type: string
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Prediction data returned successfully.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/pump-dump/data":
+    get:
+      operationId: getPumpDumpData
+      tags:
+      - Signals
+      summary: Pump and dump detection
+      description: Composite score (0-10) flagging coins where price is rising while
+        funding is negative — a divergence pattern consistent with pump-and-dump activity.
+        Gated on negative 72h average funding AND positive 7d price change. Updates
+        every 30 minutes.
+      parameters:
+      - name: limit
+        in: query
+        description: Maximum number of coins to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 100
+      - name: min_score
+        in: query
+        description: Filter to coins scoring at or above this value.
+        schema:
+          type: number
+          minimum: 0
+          maximum: 10
+          default: 0
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '400':
+          "$ref": "#/components/responses/BadRequest"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/Forbidden"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/tracker/market-overview":
+    get:
+      operationId: getMarketOverview
+      tags:
+      - Market Data
+      summary: Market overview
+      description: Returns a broad market overview including total market cap, 24h
+        volume, BTC dominance, top gainers/losers, and trending coins.
+      parameters:
+      - "$ref": "#/components/parameters/FormatParam"
+      responses:
+        '200':
+          description: Market overview returned successfully.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SuccessEnvelope"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+  "/v1/usage":
+    get:
+      operationId: getUsage
+      tags:
+      - Account
+      summary: API usage and quota
+      description: Returns your current plan tier, rate limits, monthly quota usage,
+        and a breakdown of requests by endpoint over the last 24 hours.
+      responses:
+        '200':
+          description: Usage data returned successfully.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - "$ref": "#/components/schemas/SuccessEnvelope"
+                - type: object
+                  properties:
+                    data:
+                      "$ref": "#/components/schemas/UsageData"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '429':
+          "$ref": "#/components/responses/RateLimited"
+        '500':
+          "$ref": "#/components/responses/InternalError"
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Pass your API key as a Bearer token in the Authorization header:
+        `Authorization: Bearer sk_...`'
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Alternatively, pass your API key via the X-API-Key header.
+  parameters:
+    FormatParam:
+      name: format
+      in: query
+      description: Response format. When set to "csv", the response Content-Type is
+        text/csv instead of JSON.
+      schema:
+        type: string
+        enum:
+        - json
+        - csv
+        default: json
+  schemas:
+    ApiMeta:
+      type: object
+      required:
+      - request_id
+      - timestamp
+      properties:
+        request_id:
+          type: string
+          description: Unique request identifier (e.g. req_a1b2c3d4e5f6g7h8i9j0).
+          example: req_a1b2c3d4e5f6g7h8i9j0
+        timestamp:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of the response.
+    SuccessEnvelope:
+      type: object
+      required:
+      - data
+      - meta
+      properties:
+        data:
+          description: Response payload. Structure varies by endpoint.
+        meta:
+          "$ref": "#/components/schemas/ApiMeta"
+    PaginatedEnvelope:
+      type: object
+      required:
+      - data
+      - pagination
+      - meta
+      properties:
+        data:
+          type: array
+          items: {}
+          description: Array of result items.
+        pagination:
+          "$ref": "#/components/schemas/PaginationInfo"
+        meta:
+          "$ref": "#/components/schemas/ApiMeta"
+    PaginationInfo:
+      type: object
+      required:
+      - cursor
+      - has_more
+      properties:
+        cursor:
+          type: string
+          nullable: true
+          description: Opaque cursor to pass in the next request. Null when there
+            are no more pages.
+        has_more:
+          type: boolean
+          description: Whether more pages are available.
+        total:
+          type: integer
+          description: Total number of records (when available).
+    ErrorResponse:
+      type: object
+      description: Error response following RFC 9457 (Problem Details for HTTP APIs).
+      required:
+      - type
+      - title
+      - status
+      - detail
+      - request_id
+      - doc_url
+      - suggested_action
+      properties:
+        type:
+          type: string
+          format: uri
+          description: URI identifying the error type.
+          example: https://www.sharpe.ai/errors/invalid_parameter
+        title:
+          type: string
+          description: Short human-readable summary.
+          example: Invalid Parameter
+        status:
+          type: integer
+          description: HTTP status code.
+          example: 400
+        detail:
+          type: string
+          description: Human-readable explanation specific to this occurrence.
+          example: 'Invalid parameter "coin": must not be empty'
+        request_id:
+          type: string
+          description: Unique request identifier for support reference.
+          example: req_a1b2c3d4e5f6g7h8i9j0
+        doc_url:
+          type: string
+          format: uri
+          description: Link to the relevant documentation page for troubleshooting.
+          example: https://www.sharpe.ai/docs/errors#error-codes
+        suggested_action:
+          type: string
+          description: Actionable suggestion for resolving the error.
+          example: Check the 'coin' parameter value and ensure it is a valid ticker
+            symbol.
+    HealthResponse:
+      type: object
+      required:
+      - status
+      - version
+      - checks
+      - timestamp
+      properties:
+        status:
+          type: string
+          enum:
+          - healthy
+          - degraded
+          description: Overall service status.
+        version:
+          type: string
+          example: v1
+        checks:
+          type: object
+          properties:
+            database:
+              type: boolean
+        timestamp:
+          type: string
+          format: date-time
+    UsageData:
+      type: object
+      properties:
+        plan:
+          type: object
+          properties:
+            tier:
+              type: string
+              enum:
+              - free
+              - analyst
+              - pro
+              - enterprise
+            rpm:
+              type: integer
+              description: Requests per minute limit.
+            monthly_limit:
+              type: integer
+              description: Monthly request quota.
+        rate_limit:
+          type: object
+          properties:
+            requests_per_minute:
+              type: integer
+        quota:
+          type: object
+          properties:
+            used:
+              type: integer
+              description: Requests used this billing period.
+            limit:
+              type: integer
+              description: Total monthly quota.
+            remaining:
+              type: integer
+              description: Requests remaining.
+            resets_at:
+              type: string
+              format: date-time
+              description: When the monthly quota resets.
+        last_24h:
+          type: object
+          properties:
+            total_requests:
+              type: integer
+            by_endpoint:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  avg_response_ms:
+                    type: integer
+                  errors:
+                    type: integer
+    FuturesCoin:
+      type: object
+      properties:
+        baseCoin:
+          type: string
+          description: Base coin ticker.
+          example: BTC
+        displayName:
+          type: string
+          description: Human-readable display name.
+          example: BTC
+        hasOI:
+          type: boolean
+          description: Whether open interest data is available.
+        hasLiquidations:
+          type: boolean
+          description: Whether liquidation data is available.
+        hasLongShort:
+          type: boolean
+          description: Whether long/short ratio data is available.
+  responses:
+    BadRequest:
+      description: Invalid or missing parameter.
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          example:
+            type: https://www.sharpe.ai/errors/invalid_parameter
+            title: Invalid Parameter
+            status: 400
+            detail: 'Invalid parameter "coin": must not be empty'
+            request_id: req_a1b2c3d4e5f6g7h8i9j0
+            doc_url: https://www.sharpe.ai/docs/errors#error-codes
+            suggested_action: Check the parameter value against the endpoint documentation.
+              Use GET /v1/futures/coins or GET /v1/meta/coverage to discover valid
+              values.
+    Unauthorized:
+      description: Missing, invalid, or expired API key.
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          example:
+            type: https://www.sharpe.ai/errors/invalid_api_key
+            title: Invalid API Key
+            status: 401
+            detail: 'Missing API key. Pass via Authorization: Bearer <key> or the
+              X-API-Key header.'
+            request_id: req_a1b2c3d4e5f6g7h8i9j0
+            doc_url: https://www.sharpe.ai/docs/authentication
+            suggested_action: 'Check your API key is correct. Pass it via Authorization:
+              Bearer <key> or the X-API-Key header.'
+    Forbidden:
+      description: Insufficient scope or monthly quota exceeded.
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          example:
+            type: https://www.sharpe.ai/errors/monthly_quota_exceeded
+            title: Monthly Quota Exceeded
+            status: 403
+            detail: Monthly quota of 10,000 requests exceeded. Resets at 2026-04-01T00:00:00Z.
+            request_id: req_a1b2c3d4e5f6g7h8i9j0
+            doc_url: https://www.sharpe.ai/docs/rate-limits
+            suggested_action: Upgrade your plan for a higher monthly quota, or wait
+              for the next billing cycle. Check usage at GET /v1/usage.
+    RateLimited:
+      description: Rate limit exceeded.
+      headers:
+        X-RateLimit-Limit:
+          schema:
+            type: integer
+          description: Requests allowed per minute.
+        X-RateLimit-Remaining:
+          schema:
+            type: integer
+          description: Requests remaining in current window.
+        X-RateLimit-Reset:
+          schema:
+            type: integer
+          description: Unix timestamp when the rate limit window resets.
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          example:
+            type: https://www.sharpe.ai/errors/rate_limit_exceeded
+            title: Rate Limit Exceeded
+            status: 429
+            detail: Rate limit of 30 requests per minute exceeded.
+            request_id: req_a1b2c3d4e5f6g7h8i9j0
+            doc_url: https://www.sharpe.ai/docs/rate-limits
+            suggested_action: Wait until the time in the X-RateLimit-Reset header
+              before retrying. Upgrade your plan for higher limits.
+    InternalError:
+      description: Unexpected server error.
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+          example:
+            type: https://www.sharpe.ai/errors/internal_error
+            title: Internal Server Error
+            status: 500
+            detail: An unexpected error occurred. Please try again later.
+            request_id: req_a1b2c3d4e5f6g7h8i9j0
+            doc_url: https://www.sharpe.ai/docs/errors#retry-guidance
+            suggested_action: Retry with exponential backoff (1s, 2s, 4s, up to 30s).
+              If the error persists, contact support with the X-Request-Id.
