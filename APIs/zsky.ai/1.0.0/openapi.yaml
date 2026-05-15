@@ -1,0 +1,475 @@
+openapi: 3.0.3
+info:
+  title: ZSky AI API
+  description: 'Public API for free unlimited AI image and AI video generation with synchronized audio.
+
+
+    The API exposes a small surface: submit a generation job, poll for status, and download the result from the returned media
+    URL. All free-tier accounts get unlimited generations with ads. Paid tiers unlock higher resolution, longer videos, priority
+    queueing, and an ad-free experience.
+
+
+    Authentication uses a Bearer token tied to your ZSky account. Sign up at https://zsky.ai/ to obtain one.
+
+
+    This specification documents only the publicly accessible endpoints. Internal admin, billing webhook, and infrastructure
+    routes are intentionally omitted.'
+  version: 1.0.0
+  contact:
+    name: ZSky AI
+    url: https://zsky.ai
+    email: marketing@zsky.ai
+  license:
+    name: MIT
+    url: https://opensource.org/license/mit
+  termsOfService: https://zsky.ai/terms.html
+  x-logo:
+    url: https://zsky.ai/favicon.svg
+    altText: ZSky AI
+  x-providerName: zsky.ai
+  x-apisguru-categories:
+  - machine_learning
+  - media
+  x-origin:
+  - format: openapi
+    url: https://zsky.ai/openapi.json
+    version: '3.0'
+externalDocs:
+  description: Human-readable API overview
+  url: https://zsky.ai/api.html
+servers:
+- url: https://zsky.ai/api
+  description: Production
+tags:
+- name: image
+  description: Text-to-image and image-to-image generation. Output up to 2048px.
+- name: video
+  description: Text-to-video and image-to-video generation with synchronized audio. Output up to 1080p HD on paid tiers.
+- name: status
+  description: Job polling and service health.
+security:
+- bearerAuth: []
+paths:
+  /generate:
+    post:
+      summary: Submit a generation job
+      description: Submit a prompt for image or video generation. The endpoint returns immediately with a job_id; poll /job/{job_id}
+        until status is `completed` or `failed`. Free tier is unlimited at HD; paid tiers unlock higher resolution and longer
+        videos.
+      operationId: createGeneration
+      tags:
+      - image
+      - video
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateRequest'
+            examples:
+              imageHD:
+                summary: HD image (free tier)
+                value:
+                  type: image
+                  prompt: a serene mountain lake at golden hour, cinematic, photorealistic
+                  width: 1024
+                  height: 1024
+                  age_verified: true
+              image1080p:
+                summary: 1080p image (Pro tier or above)
+                value:
+                  type: image_1080p
+                  prompt: art deco poster of a phoenix rising over a city skyline
+                  width: 1920
+                  height: 1080
+                  age_verified: true
+              videoWithAudio:
+                summary: Text-to-video with synchronized audio
+                value:
+                  type: video_av
+                  prompt: a fox running through autumn leaves with crisp ambient sound
+                  width: 1280
+                  height: 720
+                  length: 121
+                  age_verified: true
+              imageToVideo:
+                summary: Animate an uploaded image
+                value:
+                  type: i2v
+                  prompt: the subject turns toward the camera and smiles
+                  image_base64: <base64-encoded PNG or JPEG>
+                  length: 121
+                  age_verified: true
+      responses:
+        '200':
+          description: Job accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateResponse'
+        '400':
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Sign in required to generate
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Age verification required or tier upgrade required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '413':
+          description: Request body too large
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded or too many concurrent jobs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '451':
+          description: Content policy violation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Service temporarily unavailable or all workers busy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /job/{job_id}:
+    get:
+      summary: Poll a generation job
+      description: Returns the current state of a previously submitted generation job. Poll roughly every one to two seconds
+        until `status` is `completed`, `failed`, or `blocked`. On completion the `results` array contains one or more public
+        media URLs.
+      operationId: getJob
+      tags:
+      - status
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        description: The job identifier returned by POST /generate.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Job status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatus'
+        '404':
+          description: Job not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /health:
+    get:
+      summary: Service health
+      description: Returns a snapshot of worker health across the image and video pools. Use this for status pages and uptime
+        monitors.
+      operationId: getHealth
+      tags:
+      - status
+      security: []
+      responses:
+        '200':
+          description: Health snapshot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+  /report:
+    post:
+      summary: Report content
+      description: Submit a content report for a generated asset. Used for trust and safety review.
+      operationId: reportContent
+      tags:
+      - status
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportRequest'
+      responses:
+        '200':
+          description: Report received
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+        '400':
+          description: Invalid report payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: ZSky account access token. Obtain one by signing in at https://zsky.ai/.
+  schemas:
+    GenerateRequest:
+      type: object
+      required:
+      - type
+      - prompt
+      - age_verified
+      properties:
+        type:
+          type: string
+          description: 'Generation kind. Image kinds: `image`, `image_hd`, `image_1080p`, `image_4k`. Video kinds: `video`,
+            `video_hd`, `video_1080p`, `video_av` (with audio). Image-to-image: `i2i`. Image-to-video: `i2v`, `i2v_hd`, `i2v_1080p`,
+            `i2v_av`. Upscale: `upscale`, `upscale_pro`. Higher resolutions and `_av` audio variants require a paid tier.'
+          enum:
+          - image
+          - image_hd
+          - image_1080p
+          - image_4k
+          - i2i
+          - video
+          - video_hd
+          - video_1080p
+          - video_av
+          - i2v
+          - i2v_hd
+          - i2v_1080p
+          - i2v_av
+          - upscale
+          - upscale_pro
+          example: image
+        prompt:
+          type: string
+          description: Natural-language description of the asset to generate. Maximum 2000 characters.
+          maxLength: 2000
+          example: a serene mountain lake at golden hour, cinematic, photorealistic
+        width:
+          type: integer
+          description: Output width in pixels. Clamped to the user's tier limits.
+          minimum: 256
+          maximum: 4096
+          default: 1024
+        height:
+          type: integer
+          description: Output height in pixels. Clamped to the user's tier limits.
+          minimum: 256
+          maximum: 4096
+          default: 1024
+        length:
+          type: integer
+          description: Video length in frames. Roughly 24 frames per second. Only used by video and i2v kinds.
+          minimum: 17
+          maximum: 257
+          default: 121
+        seed:
+          type: integer
+          description: Optional deterministic seed. Omit for a random seed.
+          minimum: 0
+        image_base64:
+          type: string
+          description: Base64-encoded source image. Required for `i2i`, `i2v*`, and `upscale*` kinds. Accepts PNG, JPEG, or
+            WebP.
+        age_verified:
+          type: boolean
+          description: Must be true. Users must be 18 or older. Falsy values are rejected with HTTP 403.
+          example: true
+    GenerateResponse:
+      type: object
+      properties:
+        job_id:
+          type: string
+          format: uuid
+          description: Use this with GET /job/{job_id}.
+        status:
+          type: string
+          enum:
+          - queued
+          description: Initial status. Poll /job/{job_id} for progress.
+        type:
+          type: string
+          description: Echo of the requested kind.
+        worker:
+          type: string
+          description: Pool label.
+          example: GPU
+        poll_url:
+          type: string
+          description: Relative path to poll. Append to the server base.
+          example: /job/2b3c4d5e-...
+        credit_cost:
+          type: integer
+          description: Credits debited for this job. Always 0 on the free unlimited tier.
+          example: 0
+        tier:
+          type: string
+          description: Caller's tier as resolved server-side.
+          example: free
+        priority:
+          type: integer
+          description: Queue priority. Higher tiers get higher priority.
+        seed:
+          type: integer
+          description: Resolved seed for this job (echoed when client supplied one or when one was chosen).
+    JobStatus:
+      type: object
+      properties:
+        job_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum:
+          - queued
+          - generating
+          - completed
+          - failed
+          - blocked
+        type:
+          type: string
+        worker:
+          type: string
+        created:
+          type: number
+          description: Unix epoch seconds when the job was submitted.
+        elapsed:
+          type: number
+          description: Seconds since submission.
+        progress:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Fractional progress, 0 to 1.
+        priority:
+          type: integer
+        queue_type:
+          type: string
+          enum:
+          - standard
+          - priority
+        queue_position:
+          type: integer
+          description: Position in the standard queue when still waiting. Omitted on paid tiers.
+        estimated_wait:
+          type: integer
+          description: Estimated seconds remaining for free-tier callers.
+        results:
+          type: array
+          description: Public media URLs. Present only when status is `completed`.
+          items:
+            $ref: '#/components/schemas/GenerationResult'
+        seed:
+          type: integer
+        error:
+          type: string
+          description: Reason when status is `failed` or `blocked`.
+    GenerationResult:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: Public media URL, served by zsky.ai/media/...
+          example: https://zsky.ai/media/img/2b3c4d5e-....webp
+        kind:
+          type: string
+          enum:
+          - image
+          - video
+          description: Asset kind.
+        width:
+          type: integer
+        height:
+          type: integer
+        duration:
+          type: number
+          description: Video duration in seconds. Omitted for images.
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+        image_healthy:
+          type: string
+          description: Healthy / total image workers.
+          example: 3/3
+        video_healthy:
+          type: string
+          description: Healthy / total video workers.
+          example: 6/7
+        image_workers:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/WorkerHealth'
+        video_workers:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/WorkerHealth'
+    WorkerHealth:
+      type: object
+      properties:
+        healthy:
+          type: boolean
+        gpu:
+          type: string
+          description: GPU class label.
+          example: RTX 4090
+        queue_size:
+          type: integer
+        vram_free_gb:
+          type: number
+    ReportRequest:
+      type: object
+      required:
+      - content_id
+      - reason
+      properties:
+        content_id:
+          type: string
+          description: The gen_id of the offending asset.
+        reason:
+          type: string
+          description: Short reason code (csam, nonconsensual, copyright, other).
+        details:
+          type: string
+          description: Optional free text.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        retry_after:
+          type: integer
+          description: Seconds to wait before retrying. Present on 429 responses.
+        blocked:
+          type: boolean
+          description: Present on 451 content-policy responses.
