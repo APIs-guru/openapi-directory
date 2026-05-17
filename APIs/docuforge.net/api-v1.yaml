@@ -1,0 +1,227 @@
+openapi: "3.0.3"
+info:
+  title: DocuForge API
+  description: "Document processing API. Clean Excel, convert CSV, extract PDF text — all through simple REST endpoints. Free 50 calls/month."
+  version: "1.0.0"
+  contact:
+    name: Ronald Howard
+    email: rnhowcla@gmail.com
+  x-logo:
+    url: "https://raw.githubusercontent.com/rnhowcla/docuforge-api/master/logo.png"
+  x-apisguru-categories:
+    - "tools"
+    - "developer_tools"
+servers:
+  - url: http://[2409:893d:dcd:8c60:3058:eb94:1d9:c7fa]:5000
+    description: Production server
+security:
+  - ApiKeyAuth: []
+paths:
+  /api/v1/excel/clean:
+    post:
+      summary: Clean Excel file
+      description: Deduplicate rows, trim whitespace, remove empty cells
+      operationId: excelClean
+      tags:
+        - Excel
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Excel file (.xlsx)
+              required:
+                - file
+      responses:
+        "200":
+          description: Cleaned Excel file
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                type: string
+                format: binary
+  /api/v1/excel/to-csv:
+    post:
+      summary: Convert Excel to CSV
+      operationId: excelToCsv
+      tags:
+        - Excel
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+      responses:
+        "200":
+          description: CSV file
+  /api/v1/excel/format:
+    post:
+      summary: Auto-format Excel
+      description: Auto-fit column widths, style headers
+      operationId: excelFormat
+      tags:
+        - Excel
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+      responses:
+        "200":
+          description: Formatted Excel file
+  /api/v1/csv/to-excel:
+    post:
+      summary: Convert CSV to Excel
+      operationId: csvToExcel
+      tags:
+        - CSV
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+      responses:
+        "200":
+          description: Excel file
+  /api/v1/csv/clean:
+    post:
+      summary: Clean CSV file
+      description: Trim cells, remove empty rows
+      operationId: csvClean
+      tags:
+        - CSV
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+      responses:
+        "200":
+          description: Cleaned CSV file
+  /api/v1/pdf/extract-text:
+    post:
+      summary: Extract text from PDF
+      operationId: pdfExtractText
+      tags:
+        - PDF
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+      responses:
+        "200":
+          description: Extracted text
+  /api/v1/pdf/metadata:
+    post:
+      summary: Get PDF metadata
+      description: Pages, author, title, creation date
+      operationId: pdfMetadata
+      tags:
+        - PDF
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+      responses:
+        "200":
+          description: PDF metadata JSON
+  /api/v1/pdf/merge:
+    post:
+      summary: Merge multiple PDFs
+      operationId: pdfMerge
+      tags:
+        - PDF
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+              required:
+                - files
+      responses:
+        "200":
+          description: Merged PDF
+  /api/v1/me:
+    get:
+      summary: Check API key info
+      operationId: getMe
+      tags:
+        - Account
+      responses:
+        "200":
+          description: API key details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  tier:
+                    type: string
+                  call_count:
+                    type: integer
+                  created_at:
+                    type: string
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
