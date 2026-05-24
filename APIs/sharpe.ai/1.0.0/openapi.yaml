@@ -70,6 +70,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '400':
           "$ref": "#/components/responses/BadRequest"
         '401':
@@ -113,6 +116,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '400':
           "$ref": "#/components/responses/BadRequest"
         '401':
@@ -157,6 +163,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '400':
           "$ref": "#/components/responses/BadRequest"
         '401':
@@ -204,6 +213,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '400':
           "$ref": "#/components/responses/BadRequest"
         '401':
@@ -269,6 +281,9 @@ paths:
                 oneOf:
                 - "$ref": "#/components/schemas/SuccessEnvelope"
                 - "$ref": "#/components/schemas/PaginatedEnvelope"
+            text/csv:
+              schema:
+                type: string
         '400':
           "$ref": "#/components/responses/BadRequest"
         '401':
@@ -374,6 +389,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '400':
           "$ref": "#/components/responses/BadRequest"
         '401':
@@ -414,6 +432,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '401':
           "$ref": "#/components/responses/Unauthorized"
         '403':
@@ -477,6 +498,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '400':
           "$ref": "#/components/responses/BadRequest"
         '401':
@@ -521,6 +545,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '400':
           "$ref": "#/components/responses/BadRequest"
         '401':
@@ -664,6 +691,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '400':
           "$ref": "#/components/responses/BadRequest"
         '401':
@@ -725,6 +755,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '400':
           "$ref": "#/components/responses/BadRequest"
         '401':
@@ -785,6 +818,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '400':
           "$ref": "#/components/responses/BadRequest"
         '401':
@@ -838,6 +874,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '400':
           "$ref": "#/components/responses/BadRequest"
         '401':
@@ -896,6 +935,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '400':
           "$ref": "#/components/responses/BadRequest"
         '401':
@@ -957,6 +999,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '400':
           "$ref": "#/components/responses/BadRequest"
         '401':
@@ -988,6 +1033,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '400':
           "$ref": "#/components/responses/BadRequest"
         '401':
@@ -1033,6 +1081,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '400':
           "$ref": "#/components/responses/BadRequest"
         '401':
@@ -1060,6 +1111,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/SuccessEnvelope"
+            text/csv:
+              schema:
+                type: string
         '401':
           "$ref": "#/components/responses/Unauthorized"
         '429':
