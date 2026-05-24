@@ -1,0 +1,1801 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MVR API - Minimum Viable Relationships",
+    "version": "6.32.0",
+    "description": "Curated MVR API surface for AI agents and developer quickstarts. The full enterprise OpenAPI contract is available separately; this file intentionally exposes the safest common routes for entity resolution, evidence completeness, decision checks, playbooks, model transparency, and ledger verification. Public sandbox: send X-API-Key: mvr-demo-key-2026 for non-commercial evaluation. Sandbox responses are full_advisory, client_safe, rate-limited, illustrative_only, and not_for_production.\n\nThe MVR API is the relational-readiness layer for AI agents and developer systems operating in emerging and high-context markets. It evaluates trust, permission, embeddedness, evidence completeness, and decision authorization boundaries. Public sandbox access is non-commercial and evaluation-only.",
+    "x-providerName": "africanmarketos.com",
+    "x-serviceName": "mvr",
+    "x-apisguru-categories": [
+      "developer_tools",
+      "machine_learning"
+    ],
+    "x-origin": [
+      {
+        "format": "openapi",
+        "url": "https://africanmarketos.com/api/openapi.agent.json",
+        "version": "3.0"
+      }
+    ]
+  },
+  "x-compatibility-policy": {
+    "principle": "No output may claim a decision level, confidence level, category fit, or scope stronger than verified evidence permits.",
+    "verdict_order": [
+      "permission_not_yet_earned",
+      "pilot_only",
+      "pilot_ready",
+      "ready_to_scale"
+    ],
+    "weakest_link_floors": {
+      "ready_to_scale": 45,
+      "pilot_ready": 35
+    },
+    "score_direct": "non_decisive_operator_review"
+  },
+  "x-public-metrics-schema-version": "v6.32.0",
+  "x-modality-examples": {
+    "public_osint": "Use public_metrics with evidence_origin:'public_osint'. Read reconciled_assessment first, then public_reality for entity-scale interpretation.",
+    "field_research": "Use structured_values on field items. Read reconciled_assessment first, then local_relational_assessment for zone-level interpretation.",
+    "corporate_telemetry": "Use evidence_origin:'corporate_telemetry' or collection_method:'corporate_telemetry' for proxy-derived internal data. The engine routes it into the local lane with capped confidence and explicit proxy transparency.",
+    "compiled_evidence": "Use mode:'compiled_evidence' with compiled_pack lanes from compiled_pack_registry. You may nest legacy evidence_pack[] inside compiled_pack; the runtime maps it into localized_observed_pack (or public lane when pack_type indicates public). Items with full provenance_ledger use compiled_evidence validation; others use evidence_backed rules.",
+    "mixed": "Mixed packs reconcile both lanes. Public facts do not impersonate local truth; local friction does not erase entity-scale reality.",
+    "abstention": "Scope-limited abstentions are returned when localized claims are unsupported by direct field evidence."
+  },
+  "paths": {
+    "/v1/model-card": {
+      "get": {
+        "summary": "Model transparency, calibration docs, preflight endpoints, and validation metadata.",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/capabilities": {
+      "get": {
+        "summary": "Return enabled routes, release channel, supported archetypes, connectors, strict-mode readiness, and storage availability.",
+        "description": "Capability and route maturity manifest for clients and release gates.",
+        "parameters": [],
+        "x-mvr-registry-route": "/v1/capabilities",
+        "x-mvr-maturity": "release_candidate",
+        "x-mvr-labels": [
+          "developer_surface"
+        ],
+        "x-mvr-validator-contract": {
+          "name": "validateCapabilities",
+          "status": "registry_metadata_enforced_by_shared_gateway"
+        },
+        "x-mvr-idempotency-key-required": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation or calibration failure"
+          },
+          "429": {
+            "description": "Rate or compute limit exceeded"
+          }
+        }
+      }
+    },
+    "/v1/schema": {
+      "get": {
+        "summary": "Full profile documentation including strict_calibrated requirements, frontend enums, and terminal_templates (see JSON body key terminal_templates).",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/evidence-guide": {
+      "get": {
+        "summary": "Per-tier evidence standards, informal_logistics, bifurcated decay.",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/entity-resolve": {
+      "post": {
+        "summary": "Deterministic registry-based entity resolution for corporate identity before enterprise execution.",
+        "description": "Release-candidate route. Verify with route, evidence, output-mode, security, and regression harnesses before production promotion.",
+        "parameters": [],
+        "x-mvr-registry-route": "/v1/entity-resolve",
+        "x-mvr-maturity": "release_candidate",
+        "x-mvr-labels": [
+          "board_safe_supported"
+        ],
+        "x-mvr-validator-contract": {
+          "name": "validateEntityResolve",
+          "status": "registry_metadata_enforced_by_shared_gateway"
+        },
+        "x-mvr-idempotency-key-required": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation or calibration failure"
+          },
+          "429": {
+            "description": "Rate or compute limit exceeded"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "description": "This route has a constrained runtime contract. Use /v1/recommended-inputs or /v1/schema for route-specific guidance before sending production payloads."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/corpus-search": {
+      "post": {
+        "summary": "Search the entity corpus by name, country, sector, or archetype and return matching corpus records.",
+        "description": "Searches the entity corpus by name, country, sector, or archetype.",
+        "parameters": [],
+        "x-mvr-registry-route": "/v1/corpus-search",
+        "x-mvr-maturity": "stable",
+        "x-mvr-labels": [
+          "entity_resolution",
+          "plan_gated"
+        ],
+        "x-mvr-validator-contract": {
+          "name": "validateLegacyUtility",
+          "status": "registry_metadata_enforced_by_shared_gateway"
+        },
+        "x-mvr-idempotency-key-required": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation or calibration failure"
+          },
+          "429": {
+            "description": "Rate or compute limit exceeded"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "description": "This route has a constrained runtime contract. Use /v1/recommended-inputs or /v1/schema for route-specific guidance before sending production payloads."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/evidence-completeness": {
+      "post": {
+        "summary": "Archetype-aware modality completeness scoring. Public_osint packs are checked for public-metric richness and provenance integrity; field packs are checked for sample depth and local evidence sufficiency.",
+        "description": "Release-candidate route. Verify with route, evidence, output-mode, security, and regression harnesses before production promotion.",
+        "parameters": [],
+        "x-mvr-registry-route": "/v1/evidence-completeness",
+        "x-mvr-maturity": "release_candidate",
+        "x-mvr-labels": [
+          "board_safe_supported"
+        ],
+        "x-mvr-validator-contract": {
+          "name": "validateEvidenceCompleteness",
+          "status": "registry_metadata_enforced_by_shared_gateway"
+        },
+        "x-mvr-idempotency-key-required": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation or calibration failure"
+          },
+          "429": {
+            "description": "Rate or compute limit exceeded"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "subject": {
+                    "type": "object"
+                  },
+                  "market_scope": {
+                    "type": "object"
+                  },
+                  "stakeholder_scope": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "consumer",
+                        "retailer",
+                        "guardian",
+                        "influencer",
+                        "farmer",
+                        "distributor",
+                        "informal_logistics",
+                        "internal_operations",
+                        "internal_operator",
+                        "beneficiary",
+                        "donor",
+                        "implementing_partner",
+                        "service_provider",
+                        "public_official",
+                        "community_leader",
+                        "religious_leader",
+                        "clinic",
+                        "school",
+                        "teacher",
+                        "enumerator",
+                        "field_supervisor",
+                        "research_respondent_group",
+                        "civil_society_org",
+                        "institutional_guardian",
+                        "community_guardian",
+                        "political_guardian",
+                        "donor_guardian",
+                        "channel_gatekeeper",
+                        "member"
+                      ]
+                    }
+                  },
+                  "evidence_pack": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/EvidenceItem"
+                    }
+                  },
+                  "compiled_pack": {
+                    "type": "object",
+                    "properties": {
+                      "public_reality_pack": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/EvidenceItem"
+                        }
+                      },
+                      "telemetry_proxy_pack": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/EvidenceItem"
+                        }
+                      },
+                      "localized_observed_pack": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/EvidenceItem"
+                        }
+                      },
+                      "survey_pack": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/EvidenceItem"
+                        }
+                      },
+                      "retail_audit_pack": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/EvidenceItem"
+                        }
+                      },
+                      "ngo_program_pack": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/EvidenceItem"
+                        }
+                      },
+                      "evaluation_pack": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/EvidenceItem"
+                        }
+                      },
+                      "administrative_data_pack": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/EvidenceItem"
+                        }
+                      },
+                      "partner_network_pack": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/EvidenceItem"
+                        }
+                      },
+                      "social_listening_pack": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/EvidenceItem"
+                        }
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "target_verdict": {
+                    "type": "string",
+                    "enum": [
+                      "permission_not_yet_earned",
+                      "pilot_only",
+                      "pilot_ready",
+                      "ready_to_scale"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/decision-check": {
+      "post": {
+        "summary": "Additive v6 dual-lane MVR evaluation. Accepts exploratory, evidence_backed, score_direct, compiled_evidence, and backtest modes. score_direct is operator triage only and may return verdict.recommendation=null until evidence is submitted. backtest is historical replay, not a confidence tier, and requires case_id plus backtest_window, baseline_period, or t0_date. Returns public_reality, local_relational_assessment, reconciled_assessment, assembly_summary, provenance_mix, gap_closure_required, market_translation, override_events, crisis_elasticity, and calibration_attestation in audit_metadata. Includes governance_display (dashboard_lines, field_legend) joining scale_recommendation, decision_authorization, and decision_reliability - do not treat scale_recommendation or verdict alone as execution permission. Client guidance: read reconciled_assessment first; verdict.recommendation is retained for backward compatibility.",
+        "description": "Release-candidate route. Verify with route, evidence, output-mode, security, and regression harnesses before production promotion.",
+        "parameters": [],
+        "x-mvr-registry-route": "/v1/decision-check",
+        "x-mvr-maturity": "release_candidate",
+        "x-mvr-labels": [
+          "board_safe_supported"
+        ],
+        "x-mvr-validator-contract": {
+          "name": "validateDecisionCheck",
+          "status": "registry_metadata_enforced_by_shared_gateway"
+        },
+        "x-mvr-idempotency-key-required": false,
+        "security": [
+          {
+            "ApiKeyAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation or calibration failure"
+          },
+          "429": {
+            "description": "Rate or compute limit exceeded"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecisionCheckRequest"
+              },
+              "example": {
+                "mode": "compiled_evidence",
+                "case_type": "scaling",
+                "maturity_level": "startup",
+                "subject": {
+                  "entity_name": "ExampleCo",
+                  "entity_type": "company",
+                  "entity_archetype": "fmcg_brand"
+                },
+                "market_scope": {
+                  "country": "UG",
+                  "region": "Kampala",
+                  "regulatory_velocity": "stable"
+                },
+                "stakeholder_scope": [
+                  "consumer",
+                  "retailer",
+                  "guardian",
+                  "influencer",
+                  "farmer",
+                  "distributor",
+                  "informal_logistics",
+                  "internal_operations"
+                ],
+                "analysis_date": "2026-04-29",
+                "compiled_pack": {
+                  "public_reality_pack": [],
+                  "telemetry_proxy_pack": [],
+                  "localized_observed_pack": [
+                    {
+                      "id": "EV-DC-1",
+                      "stakeholder_class": "consumer",
+                      "evidence_origin": "field_research",
+                      "evidence_type": "observation",
+                      "source_class": "structured_field_research",
+                      "source_grade": "A",
+                      "evidence_geography": {
+                        "country": "UG"
+                      },
+                      "collection_method": "field_observation",
+                      "collection_context": {
+                        "sample_size": 30
+                      },
+                      "source_confidence": "high",
+                      "freshness_date": "2026-04-29",
+                      "structured_values": {
+                        "trust": 62,
+                        "permission": 58,
+                        "guardian_strength": 55,
+                        "channel_permission": 54
+                      },
+                      "provenance_ledger": {
+                        "source_family": "field_observation",
+                        "source_doc_id": "EV-DC-1-source-doc",
+                        "source_locator": "template://example",
+                        "extraction_method": "deterministic_parser",
+                        "extraction_confidence": 0.95,
+                        "compiler_stage": "template"
+                      }
+                    }
+                  ],
+                  "survey_pack": [],
+                  "retail_audit_pack": [],
+                  "ngo_program_pack": [],
+                  "evaluation_pack": [],
+                  "administrative_data_pack": [],
+                  "partner_network_pack": [],
+                  "social_listening_pack": []
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/category-playbook/{entity_archetype}": {
+      "get": {
+        "summary": "Return category-specific evidence requirements, risk map, telemetry sources, board questions, and failure modes.",
+        "description": "Release-candidate route. Verify with route, evidence, output-mode, security, and regression harnesses before production promotion.",
+        "parameters": [
+          {
+            "name": "entity_archetype",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-mvr-registry-route": "/v1/category-playbook/:entity_archetype",
+        "x-mvr-maturity": "release_candidate",
+        "x-mvr-labels": [
+          "board_safe_supported"
+        ],
+        "x-mvr-validator-contract": {
+          "name": "validateCategoryPlaybook",
+          "status": "registry_metadata_enforced_by_shared_gateway"
+        },
+        "x-mvr-idempotency-key-required": false,
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation or calibration failure"
+          },
+          "429": {
+            "description": "Rate or compute limit exceeded"
+          }
+        }
+      }
+    },
+    "/v1/ledger/verify/{hash}": {
+      "get": {
+        "summary": "Public cryptographic verification of a locked Evidence Ledger hash or logged response_hash.",
+        "description": "Release-candidate route. Verify with route, evidence, output-mode, security, and regression harnesses before production promotion.",
+        "parameters": [
+          {
+            "name": "hash",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-mvr-registry-route": "/v1/ledger/verify/:hash",
+        "x-mvr-maturity": "release_candidate",
+        "x-mvr-labels": [
+          "board_safe_supported"
+        ],
+        "x-mvr-validator-contract": {
+          "name": "none",
+          "status": "none"
+        },
+        "x-mvr-idempotency-key-required": false,
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "422": {
+            "description": "Validation or calibration failure"
+          },
+          "429": {
+            "description": "Rate or compute limit exceeded"
+          }
+        }
+      }
+    },
+    "/v1/auth-check": {
+      "post": {
+        "tags": [
+          "Sandbox"
+        ],
+        "summary": "Verify API key, active plan, sandbox status, and response-profile boundary.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Key valid"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Profile or policy forbidden"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      },
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "EvidenceItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "evidence_id": {
+            "type": "string"
+          },
+          "evidence_type": {
+            "type": "string",
+            "enum": [
+              "public_filing",
+              "survey",
+              "interview",
+              "observation",
+              "telemetry",
+              "admin_data",
+              "evaluation",
+              "retail_audit",
+              "social_listening",
+              "partner_network",
+              "program_monitoring"
+            ]
+          },
+          "entity_archetype": {
+            "type": "string",
+            "enum": [
+              "telecom_operator",
+              "mobile_money_operator",
+              "fintech_platform",
+              "financial_services_bank",
+              "fintech_lending",
+              "logistics_platform",
+              "healthtech_platform",
+              "insurance_platform",
+              "fmcg_brand",
+              "retail_chain",
+              "ecommerce_platform",
+              "manufacturer",
+              "distributor_network",
+              "ngo",
+              "development_program",
+              "public_institution",
+              "survey_dataset",
+              "solo_entrepreneur",
+              "family_business",
+              "cooperative_sacco",
+              "cross_border_trader",
+              "university_spinout",
+              "diaspora_venture",
+              "creator_economy_individual",
+              "agritech_aggregator",
+              "impact_enterprise",
+              "religious_institution",
+              "chama_savings_group"
+            ]
+          },
+          "source_class": {
+            "type": "string",
+            "enum": [
+              "entity_reported",
+              "independently_audited",
+              "regulator_published",
+              "administrative_record",
+              "probability_sample_survey",
+              "nonprobability_survey",
+              "structured_field_research",
+              "third_party_evaluation",
+              "retail_audit",
+              "telemetry_internal",
+              "media_reported",
+              "model_inferred"
+            ]
+          },
+          "source_grade": {
+            "type": "string",
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "stakeholder_class": {
+            "type": "string",
+            "enum": [
+              "consumer",
+              "retailer",
+              "guardian",
+              "influencer",
+              "farmer",
+              "distributor",
+              "informal_logistics",
+              "internal_operations",
+              "internal_operator",
+              "beneficiary",
+              "donor",
+              "implementing_partner",
+              "service_provider",
+              "public_official",
+              "community_leader",
+              "religious_leader",
+              "clinic",
+              "school",
+              "teacher",
+              "enumerator",
+              "field_supervisor",
+              "research_respondent_group",
+              "civil_society_org",
+              "institutional_guardian",
+              "community_guardian",
+              "political_guardian",
+              "donor_guardian",
+              "channel_gatekeeper",
+              "member"
+            ]
+          },
+          "guardian_tier": {
+            "type": "string",
+            "enum": [
+              "macro_regulator",
+              "meso_community",
+              "micro_street"
+            ]
+          },
+          "evidence_origin": {
+            "type": "string",
+            "enum": [
+              "public_osint",
+              "field_research",
+              "mixed",
+              "corporate_telemetry",
+              "platform_telemetry"
+            ]
+          },
+          "collection_method": {
+            "type": "string",
+            "enum": [
+              "structured_interview_protocol",
+              "expert_ethnographic_observation",
+              "field_observation",
+              "survey_platform_verified",
+              "survey_paper_based",
+              "key_informant_interview",
+              "team_consensus_estimate",
+              "founder_intuition",
+              "inferred_from_secondary",
+              "direct",
+              "inferred",
+              "secondary_source",
+              "corporate_telemetry",
+              "database_aggregation",
+              "expert_opinion",
+              "intercept_interview"
+            ]
+          },
+          "source_confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "freshness_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "evidence_geography": {
+            "type": "object"
+          },
+          "geography": {
+            "type": "object"
+          },
+          "temporal": {
+            "type": "object"
+          },
+          "public_metric_scope": {
+            "type": "string",
+            "enum": [
+              "entity_scale",
+              "country_scale",
+              "regional_scale",
+              "city_scale",
+              "site_scale"
+            ]
+          },
+          "public_metrics": {
+            "type": "object"
+          },
+          "structured_values": {
+            "type": "object"
+          },
+          "behavioral_values": {
+            "type": "object",
+            "description": "Platform telemetry: retention, churn, frequency - used for survey vs behavior dissonance checks."
+          },
+          "structured_values_provenance": {
+            "type": "object"
+          },
+          "privacy_envelope": {
+            "type": "object",
+            "properties": {
+              "contains_pii": {
+                "type": "boolean"
+              },
+              "contains_sensitive_personal_data": {
+                "type": "boolean"
+              },
+              "consent_basis": {
+                "type": "string",
+                "enum": [
+                  "consent",
+                  "contract",
+                  "legitimate_interest",
+                  "public_interest",
+                  "legal_obligation",
+                  "not_applicable"
+                ]
+              },
+              "retention_class": {
+                "type": "string",
+                "enum": [
+                  "session_only",
+                  "30d",
+                  "90d",
+                  "1y",
+                  "7y",
+                  "contractual"
+                ]
+              },
+              "redaction_status": {
+                "type": "string",
+                "enum": [
+                  "raw",
+                  "minimized",
+                  "redacted",
+                  "aggregated"
+                ]
+              },
+              "safe_for_modeling": {
+                "type": "boolean"
+              }
+            }
+          },
+          "uncertainty_envelope": {
+            "type": "object"
+          },
+          "survey_payload": {
+            "type": "object"
+          },
+          "program_payload": {
+            "type": "object"
+          },
+          "admin_data_payload": {
+            "type": "object"
+          },
+          "retail_audit_payload": {
+            "type": "object"
+          },
+          "provenance_ledger": {
+            "type": "object",
+            "properties": {
+              "source_family": {
+                "type": "string",
+                "example": "annual_report"
+              },
+              "source_doc_id": {
+                "type": "string"
+              },
+              "source_locator": {
+                "type": "string",
+                "example": "Page 83, Section B"
+              },
+              "extraction_method": {
+                "type": "string",
+                "enum": [
+                  "human",
+                  "deterministic_parser",
+                  "llm_inferred",
+                  "automated_query"
+                ]
+              },
+              "extraction_confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "compiler_stage": {
+                "type": "string"
+              },
+              "data_integrity": {
+                "type": "object",
+                "description": "Survey-farm defense: variance anomaly or bot probability gates institutional use."
+              }
+            }
+          },
+          "source_artifacts": {
+            "type": "array",
+            "maxItems": 20,
+            "items": {
+              "type": "object",
+              "properties": {
+                "artifact_id": {
+                  "type": "string"
+                },
+                "media_type": {
+                  "type": "string",
+                  "example": "application/pdf"
+                },
+                "storage_uri": {
+                  "type": "string",
+                  "example": "r2://mvr-evidence/project/artifact.pdf"
+                },
+                "sha256": {
+                  "type": "string"
+                },
+                "extraction_method": {
+                  "type": "string",
+                  "enum": [
+                    "human",
+                    "deterministic_parser",
+                    "llm_inferred",
+                    "automated_query"
+                  ]
+                },
+                "extractor_version": {
+                  "type": "string"
+                },
+                "extracted_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "human_reviewed": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "DecisionCheckRequest": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "exploratory",
+              "evidence_backed",
+              "score_direct",
+              "compiled_evidence",
+              "backtest",
+              "backtest_demo",
+              "synthetic_fixture"
+            ]
+          },
+          "case_type": {
+            "type": "string",
+            "enum": [
+              "greenfield_entry",
+              "partnership_trust_transfer",
+              "scaling",
+              "test_market",
+              "fmcg_rollout",
+              "channel_choice",
+              "startup_readiness"
+            ]
+          },
+          "subject": {
+            "type": "object"
+          },
+          "market_scope": {
+            "type": "object"
+          },
+          "stakeholder_scope": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "consumer",
+                "retailer",
+                "guardian",
+                "influencer",
+                "farmer",
+                "distributor",
+                "informal_logistics",
+                "internal_operations",
+                "internal_operator",
+                "beneficiary",
+                "donor",
+                "implementing_partner",
+                "service_provider",
+                "public_official",
+                "community_leader",
+                "religious_leader",
+                "clinic",
+                "school",
+                "teacher",
+                "enumerator",
+                "field_supervisor",
+                "research_respondent_group",
+                "civil_society_org",
+                "institutional_guardian",
+                "community_guardian",
+                "political_guardian",
+                "donor_guardian",
+                "channel_gatekeeper",
+                "member"
+              ]
+            }
+          },
+          "evidence_pack": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvidenceItem"
+            }
+          },
+          "compiled_pack": {
+            "type": "object",
+            "properties": {
+              "public_reality_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "telemetry_proxy_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "localized_observed_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "survey_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "retail_audit_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "ngo_program_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "evaluation_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "administrative_data_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "partner_network_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "social_listening_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              }
+            }
+          },
+          "unit_economics": {
+            "type": "object",
+            "description": "Enterprise blueprint: LTV÷CAC, runway, margin - gates scaling verdict when structurally unprofitable."
+          },
+          "financial_context": {
+            "type": "object",
+            "description": "Optional unit economics overlay (CAC/LTV/runway/margin). Advisory; does not mutate relational scores. Treasury-grade models still required."
+          },
+          "competitive_context": {
+            "type": "object",
+            "description": "Optional incumbent share, switching costs, price-war risk. Pair with /v1/competitive-wargame for scenarios."
+          },
+          "behavioral_signals": {
+            "type": "object",
+            "description": "Optional revealed-preference telemetry (DAU, churn fraction). Complements interview-derived evidence."
+          },
+          "operational_readiness": {
+            "type": "object",
+            "description": "Optional execution SLAs/uptime/fulfillment proxies for internal capacity."
+          },
+          "sentiment_velocity": {
+            "type": "object",
+            "description": "Optional wave-over-wave deltas on trust/permission to detect momentum vs static snapshots."
+          },
+          "network_economics": {
+            "type": "object",
+            "description": "Two-sided marketplace density / attachment (ecommerce_platform)."
+          },
+          "b2b_context": {
+            "type": "object",
+            "description": "Procurement/SLA/RFP signals where relational consumer metrics are weak proxies."
+          },
+          "scaling_physics": {
+            "type": "object",
+            "description": "Expected intimacy decay at scale; friction coefficient for pilot->mass transitions."
+          },
+          "market_education_profile": {
+            "type": "object",
+            "description": "Ignorance vs hostility: discovery/education phases for category creation."
+          },
+          "backtest_mode": {
+            "type": "boolean",
+            "description": "When true, response echoes backtest_mode and optional t0_date for replay transparency."
+          },
+          "t0_date": {
+            "type": "string",
+            "description": "Backtest as-of date echoed when backtest_mode is true."
+          }
+        }
+      },
+      "EvidenceCompilerRequest": {
+        "type": "object",
+        "properties": {
+          "subject": {
+            "type": "object"
+          },
+          "market_scope": {
+            "type": "object"
+          },
+          "compiled_pack": {
+            "type": "object",
+            "properties": {
+              "public_reality_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "telemetry_proxy_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "localized_observed_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "survey_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "retail_audit_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "ngo_program_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "evaluation_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "administrative_data_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "partner_network_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "social_listening_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              }
+            }
+          },
+          "analysis_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "lock_pack": {
+            "type": "boolean"
+          }
+        }
+      },
+      "DecisionRoomRequest": {
+        "type": "object",
+        "properties": {
+          "decision_result": {
+            "type": "object"
+          },
+          "subject": {
+            "type": "object"
+          },
+          "market_scope": {
+            "type": "object"
+          },
+          "compiled_pack": {
+            "type": "object",
+            "properties": {
+              "public_reality_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "telemetry_proxy_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "localized_observed_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "survey_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "retail_audit_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "ngo_program_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "evaluation_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "administrative_data_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "partner_network_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "social_listening_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              }
+            }
+          },
+          "case_type": {
+            "type": "string",
+            "enum": [
+              "greenfield_entry",
+              "partnership_trust_transfer",
+              "scaling",
+              "test_market",
+              "fmcg_rollout",
+              "channel_choice",
+              "startup_readiness"
+            ]
+          },
+          "stakeholder_scope": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "consumer",
+                "retailer",
+                "guardian",
+                "influencer",
+                "farmer",
+                "distributor",
+                "informal_logistics",
+                "internal_operations",
+                "internal_operator",
+                "beneficiary",
+                "donor",
+                "implementing_partner",
+                "service_provider",
+                "public_official",
+                "community_leader",
+                "religious_leader",
+                "clinic",
+                "school",
+                "teacher",
+                "enumerator",
+                "field_supervisor",
+                "research_respondent_group",
+                "civil_society_org",
+                "institutional_guardian",
+                "community_guardian",
+                "political_guardian",
+                "donor_guardian",
+                "channel_gatekeeper",
+                "member"
+              ]
+            }
+          },
+          "maturity_level": {
+            "type": "string",
+            "enum": [
+              "startup",
+              "mature",
+              "scaled",
+              "seed"
+            ]
+          },
+          "analysis_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "audience": {
+            "type": "string"
+          },
+          "include_gap_plan": {
+            "type": "boolean"
+          },
+          "include_red_team": {
+            "type": "boolean"
+          }
+        }
+      },
+      "VerdictDeltaRequest": {
+        "type": "object",
+        "properties": {
+          "current_verdict": {
+            "type": "string",
+            "enum": [
+              "permission_not_yet_earned",
+              "pilot_only",
+              "pilot_ready",
+              "ready_to_scale"
+            ]
+          },
+          "target_verdict": {
+            "type": "string",
+            "enum": [
+              "permission_not_yet_earned",
+              "pilot_only",
+              "pilot_ready",
+              "ready_to_scale"
+            ]
+          },
+          "proposed_verdict": {
+            "type": "string",
+            "enum": [
+              "permission_not_yet_earned",
+              "pilot_only",
+              "pilot_ready",
+              "ready_to_scale"
+            ],
+            "description": "Alias of target_verdict for client compatibility."
+          },
+          "mvr_scores": {
+            "type": "object"
+          },
+          "compiled_pack": {
+            "type": "object"
+          },
+          "market_scope": {
+            "type": "object"
+          },
+          "delta_reason": {
+            "type": "string"
+          }
+        }
+      },
+      "RedTeamRequest": {
+        "type": "object",
+        "properties": {
+          "decision_result": {
+            "type": "object"
+          },
+          "compiled_pack": {
+            "type": "object",
+            "properties": {
+              "public_reality_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "telemetry_proxy_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "localized_observed_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "survey_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "retail_audit_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "ngo_program_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "evaluation_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "administrative_data_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "partner_network_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              },
+              "social_listening_pack": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvidenceItem"
+                }
+              }
+            }
+          },
+          "subject": {
+            "type": "object"
+          },
+          "market_scope": {
+            "type": "object"
+          },
+          "red_team_depth": {
+            "type": "string"
+          }
+        }
+      },
+      "WatchlistRequest": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "create",
+              "list",
+              "update",
+              "delete",
+              "evaluate"
+            ]
+          },
+          "project_id": {
+            "type": "string"
+          },
+          "watchlist_id": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "watched_dimensions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "trigger_rules": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "SchemaDiffRequest": {
+        "type": "object",
+        "properties": {
+          "previous_manifest": {
+            "type": "object"
+          }
+        }
+      },
+      "WorkflowRunRequest": {
+        "type": "object",
+        "properties": {
+          "workflow": {
+            "type": "string",
+            "enum": [
+              "market_entry_readiness",
+              "brand_trust_audit",
+              "partner_due_diligence",
+              "scale_readiness_review",
+              "investor_committee_pack",
+              "distribution_fragility_scan",
+              "guardian_veto_review",
+              "category_launch_check",
+              "early_market_readiness"
+            ]
+          },
+          "subject": {
+            "type": "object"
+          },
+          "market_scope": {
+            "type": "object"
+          },
+          "compiled_pack": {
+            "type": "object"
+          },
+          "available_data": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ProductReportRequest": {
+        "type": "object",
+        "properties": {
+          "report_type": {
+            "type": "string"
+          },
+          "decision_result": {
+            "type": "object"
+          },
+          "compiled_pack": {
+            "type": "object"
+          },
+          "red_team": {
+            "type": "object"
+          }
+        }
+      },
+      "GovernanceDisplay": {
+        "type": "object",
+        "description": "Dashboard-oriented join of model pacing (scale_recommendation), formal API gates (decision_authorization), and reliability ceilings (decision_reliability). Prefer dashboard_lines for primary UI copy.",
+        "properties": {
+          "field_legend": {
+            "type": "object",
+            "description": "Glossary entries keyed by field name (decision_authorization, decision_reliability, governance_display, scale_recommendation); each value has path, label, ui_hint, scope.",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "model_scale_signal": {
+            "type": "object",
+            "description": "velocity, capital_deployment_cap_percent, interpretation — mirrors scale_recommendation signal, not permission to execute."
+          },
+          "formal_authorization": {
+            "type": "object",
+            "description": "status, blocking_gates, authorized_use, not_authorized_use — same semantics as decision_authorization."
+          },
+          "reliability_constraints": {
+            "type": "object",
+            "description": "level, authorized_for_decision, not_authorized_for — same semantics as decision_reliability ceilings."
+          },
+          "human_review": {
+            "type": "object",
+            "properties": {
+              "required": {
+                "type": "boolean"
+              }
+            }
+          },
+          "dashboard_lines": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Human-readable lines for governance strip / hero messaging."
+          }
+        }
+      }
+    }
+  },
+  "x-mvr-publication-note": "Use this curated spec for AI-agent tool registration. Do not expose private runtime source code in public repositories.",
+  "x-mvr-sandbox": {
+    "api_key_header": "X-API-Key",
+    "api_key_value": "mvr-demo-key-2026",
+    "authorized_use": "evaluation_only_non_commercial",
+    "response_profile": "full_advisory_only",
+    "output_mode": "client_safe_only",
+    "rate_limit": {
+      "requests_per_minute": 60,
+      "requests_per_day": 500
+    },
+    "blocked": [
+      "strict_calibrated",
+      "score_direct",
+      "backtest",
+      "enterprise_only_routes"
+    ],
+    "docs": "https://africanmarketos.com/docs/sandbox.md"
+  },
+  "servers": [
+    {
+      "url": "https://africanmarketos.com",
+      "description": "African Market OS MVR API"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Sandbox",
+      "description": "Public evaluation key: X-API-Key mvr-demo-key-2026. Evaluation only; not for production."
+    }
+  ],
+  "x-mvr-examples": {
+    "sandbox_auth_check": {
+      "curl": "curl -X POST https://africanmarketos.com/v1/auth-check -H \"Content-Type: application/json\" -H \"X-API-Key: mvr-demo-key-2026\" -d \"{}\""
+    },
+    "sandbox_evidence_completeness": {
+      "request": {
+        "subject": {
+          "entity_name": "Kampala Retailer",
+          "entity_archetype": "retail_chain"
+        },
+        "market_scope": {
+          "country": "UG"
+        },
+        "evidence_pack": [
+          {
+            "id": "EV-1",
+            "evidence_origin": "field_research",
+            "evidence_type": "observation",
+            "source_class": "structured_field_research",
+            "stakeholder_class": "guardian",
+            "source_grade": "C",
+            "collection_method": "field_observation",
+            "evidence_geography": {
+              "country": "UG",
+              "region": "Kampala"
+            },
+            "freshness_date": "2026-05-01",
+            "structured_values": {
+              "guardian_strength": 58,
+              "permission": 55
+            },
+            "claim": "Local authority licence receipt was observed for the current year."
+          }
+        ]
+      }
+    }
+  },
+  "x-response-contract-version": "2026-05-01.v1",
+  "externalDocs": {
+    "description": "MVR API agent instructions, sandbox rules, attribution, and usage boundaries",
+    "url": "https://africanmarketos.com/AGENTS.md"
+  }
+}
