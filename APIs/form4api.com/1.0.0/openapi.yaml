@@ -1,0 +1,699 @@
+openapi: 3.0.1
+info:
+  title: Form4API
+  description: Real-time SEC Form 4 insider trading data plus Form 144 notices, Form 13F-HR institutional holdings, cluster
+    buy/sell signals, MSPR-style sentiment scores (10b5-1-clean), and post-trade returns. Built for quants, financial publications,
+    AI agents, and IR teams.
+  contact:
+    name: Form4API support
+    url: https://form4api.com
+    email: support@form4api.com
+  license:
+    name: Commercial â€” see https://form4api.com/terms
+    url: https://form4api.com/terms
+  version: v1
+servers:
+- url: https://api.form4api.com
+  description: Production
+paths:
+  /v1/form144:
+    get:
+      tags:
+      - Form 144
+      summary: List Form 144 'notice of proposed sale' filings (Business plan+)
+      operationId: ListForm144
+      parameters:
+      - name: ticker
+        in: query
+        schema:
+          type: string
+      - name: insider_name
+        in: query
+        schema:
+          type: string
+      - name: from
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: to
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: exclude_10b5
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/holdings:
+    get:
+      tags:
+      - Institutional Holdings (13F-HR)
+      summary: List institutional holdings from Form 13F-HR (Business plan+)
+      operationId: ListHoldings
+      parameters:
+      - name: ticker
+        in: query
+        schema:
+          type: string
+      - name: cusip
+        in: query
+        schema:
+          type: string
+      - name: manager_cik
+        in: query
+        schema:
+          type: string
+      - name: quarter
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: min_value
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/managers:
+    get:
+      tags:
+      - Institutional Holdings (13F-HR)
+      summary: List institutional managers with their latest 13F-HR (Business plan+)
+      operationId: ListManagers
+      parameters:
+      - name: name
+        in: query
+        schema:
+          type: string
+      - name: min_aum
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /health:
+    get:
+      tags:
+      - Health
+      summary: Liveness check
+      operationId: HealthLive
+      responses:
+        '200':
+          description: OK
+  /health/ready:
+    get:
+      tags:
+      - Health
+      summary: Readiness check â€” verifies DB connectivity and reports queue depth
+      operationId: HealthReady
+      responses:
+        '200':
+          description: OK
+  /v1/transactions:
+    get:
+      tags:
+      - Transactions
+      summary: Query insider transactions with optional filters
+      operationId: ListTransactions
+      parameters:
+      - name: ticker
+        in: query
+        schema:
+          type: string
+      - name: cik
+        in: query
+        schema:
+          type: string
+      - name: insider_cik
+        in: query
+        schema:
+          type: string
+      - name: code
+        in: query
+        schema:
+          type: string
+      - name: exclude_10b5
+        in: query
+        schema:
+          type: boolean
+      - name: from
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: to
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: min_return_1d
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: max_return_1d
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: min_return_1w
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: max_return_1w
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: min_return_1m
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: max_return_1m
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: min_return_3m
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: max_return_3m
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: min_return_6m
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: max_return_6m
+        in: query
+        schema:
+          type: number
+          format: double
+      - name: has_returns
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/insiders:
+    get:
+      tags:
+      - Insiders
+      summary: Search insiders by name
+      operationId: ListInsiders
+      parameters:
+      - name: name
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/insiders/{cik}:
+    get:
+      tags:
+      - Insiders
+      summary: Get insider profile by CIK
+      operationId: GetInsider
+      parameters:
+      - name: cik
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/insiders/{cik}/transactions:
+    get:
+      tags:
+      - Insiders
+      summary: Get transactions for a specific insider
+      operationId: GetInsiderTransactions
+      parameters:
+      - name: cik
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: from
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: to
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/insiders/{cik}/summary:
+    get:
+      tags:
+      - Insiders
+      summary: Get aggregate career summary for an insider (Pro plan+)
+      operationId: GetInsiderSummary
+      parameters:
+      - name: cik
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/companies/{ticker}:
+    get:
+      tags:
+      - Companies
+      summary: Get company profile by ticker
+      operationId: GetCompany
+      parameters:
+      - name: ticker
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/companies/{ticker}/insiders:
+    get:
+      tags:
+      - Companies
+      summary: List all insiders who have filed for this company
+      operationId: GetCompanyInsiders
+      parameters:
+      - name: ticker
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/filings/recent:
+    get:
+      tags:
+      - Filings
+      summary: Get the most recent filings, optionally filtered by ticker
+      operationId: GetRecentFilings
+      parameters:
+      - name: ticker
+        in: query
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/filings/{accession}:
+    get:
+      tags:
+      - Filings
+      summary: Get a single filing by accession number
+      operationId: GetFiling
+      parameters:
+      - name: accession
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/signals:
+    get:
+      tags:
+      - Signals & Sentiment
+      summary: Get insider trading signals (Business plan+)
+      operationId: GetSignals
+      parameters:
+      - name: ticker
+        in: query
+        schema:
+          type: string
+      - name: cluster_buy
+        in: query
+        schema:
+          type: boolean
+      - name: cluster_sell
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/signals/sentiment/{ticker}:
+    get:
+      tags:
+      - Signals & Sentiment
+      summary: Monthly insider sentiment score for a ticker (Business plan+)
+      operationId: GetSentiment
+      parameters:
+      - name: ticker
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: months
+        in: query
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/webhooks:
+    post:
+      tags:
+      - Webhooks
+      summary: Register a webhook subscription
+      operationId: CreateWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebhookRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+    get:
+      tags:
+      - Webhooks
+      summary: List webhook subscriptions for this API key
+      operationId: ListWebhooks
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/webhooks/{id}:
+    delete:
+      tags:
+      - Webhooks
+      summary: Deactivate a webhook subscription
+      operationId: DeleteWebhook
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/webhooks/events:
+    get:
+      tags:
+      - Webhooks
+      summary: 'Replay webhook delivery events since a given timestamp (default: last 24h)'
+      operationId: GetWebhookEvents
+      parameters:
+      - name: since
+        in: query
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/keys:
+    post:
+      tags:
+      - API Keys & Usage
+      summary: Generate a new API key (returned once)
+      operationId: CreateApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKeyRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+  /v1/keys/usage:
+    get:
+      tags:
+      - API Keys & Usage
+      summary: Usage stats for the authenticated key
+      operationId: GetKeyUsage
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/keys/usage/history:
+    get:
+      tags:
+      - API Keys & Usage
+      summary: Daily request counts for the last N days
+      operationId: GetUsageHistory
+      parameters:
+      - name: days
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 30
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/keys/usage/activity:
+    get:
+      tags:
+      - API Keys & Usage
+      summary: Recent API requests for the authenticated key
+      operationId: GetKeyActivity
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/billing/checkout:
+    post:
+      tags:
+      - Billing
+      summary: Create a Stripe Checkout session to upgrade plan
+      operationId: CreateCheckout
+      parameters:
+      - name: plan
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+  /v1/billing/portal:
+    post:
+      tags:
+      - Billing
+      summary: Create a Stripe Customer Portal session to manage subscription
+      operationId: CreateBillingPortal
+      responses:
+        '200':
+          description: OK
+      security:
+      - ApiKey: []
+components:
+  schemas:
+    CreateKeyRequest:
+      required:
+      - label
+      - plan
+      type: object
+      properties:
+        label:
+          type: string
+          nullable: true
+        plan:
+          type: string
+          nullable: true
+    CreateWebhookRequest:
+      required:
+      - url
+      - eventTypes
+      type: object
+      properties:
+        url:
+          type: string
+          nullable: true
+        eventTypes:
+          type: array
+          items:
+            type: string
+          nullable: true
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      description: API key. Get one at https://form4api.com/dashboard (free signup) and pass on every request. Plan-gated
+        endpoints (Signals, Sentiment, Form 144, Holdings, Managers) additionally require Business or higher.
+      name: X-Api-Key
+      in: header
+tags:
+- name: Form 144
+- name: Institutional Holdings (13F-HR)
+- name: Health
+- name: Transactions
+- name: Insiders
+- name: Companies
+- name: Filings
+- name: Signals & Sentiment
+- name: Webhooks
+- name: API Keys & Usage
+- name: Billing
