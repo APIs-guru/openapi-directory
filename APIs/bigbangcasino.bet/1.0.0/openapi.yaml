@@ -1,0 +1,229 @@
+openapi: 3.0.3
+info:
+  title: BigBang Casino Aggregator API
+  description: |
+    B2B casino game aggregator API. Access 1,400+ games across 14 providers
+    (Pragmatic Play, Greentube, Habanero, Evoplay, Playtech, PG Soft, BGaming,
+    3 Oaks, Mascot Gaming, Inout Games, Gamzix, Hacksaw Gaming, Novomatic, Bellink)
+    through one signed REST integration. Normalized RGS callbacks, signed launch
+    URLs, demo and real-money modes.
+
+    **Free sandbox tier:** no card required.
+    **Pro/Enterprise:** crypto-friendly billing via NOWPayments or USD via Stripe.
+
+    Sign up: https://api.bigbangcasino.bet/portal?register=1
+  x-apisguru-categories:
+    - entertainment
+  x-logo:
+    url: https://api.bigbangcasino.bet/og-cover.png
+    backgroundColor: "#ef4444"
+  x-providerName: bigbangcasino.bet
+  x-origin:
+    - format: openapi
+      url: https://api.bigbangcasino.bet/openapi.yaml
+      version: "3.0"
+  version: "1.0.0"
+  termsOfService: https://api.bigbangcasino.bet/docs/
+  contact:
+    name: BigBang Casino API
+    email: support@bigbangcasino.bet
+    url: https://api.bigbangcasino.bet
+  license:
+    name: Commercial
+    url: https://api.bigbangcasino.bet/docs/
+servers:
+  - url: https://api.bigbangcasino.bet
+    description: Production
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Catalog
+    description: Game and provider catalog endpoints
+  - name: Launch
+    description: Game launch (signed URL generation)
+  - name: Session
+    description: Player session lifecycle
+paths:
+  /games:
+    get:
+      tags: [Catalog]
+      summary: List games
+      description: Returns the full game catalog with metadata. Filterable by provider, vertical, RTP, volatility.
+      parameters:
+        - name: provider
+          in: query
+          schema: { type: string }
+          description: Filter by provider slug (pragmatic-play, greentube, etc.)
+        - name: vertical
+          in: query
+          schema:
+            type: string
+            enum: [slot, live, crash, table, scratch, instant, bonus-buy]
+        - name: min_rtp
+          in: query
+          schema: { type: number, format: float }
+          description: Minimum RTP percentage (e.g. 96.5)
+        - name: volatility
+          in: query
+          schema:
+            type: string
+            enum: [low, medium, high, extreme]
+        - name: lang
+          in: query
+          schema: { type: string }
+          description: Language code (ISO 639-1) for game name localization
+      responses:
+        '200':
+          description: Game catalog
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  games:
+                    type: array
+                    items: { $ref: '#/components/schemas/Game' }
+                  count: { type: integer }
+  /games/{code}:
+    get:
+      tags: [Catalog]
+      summary: Get a single game by code
+      parameters:
+        - name: code
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Game metadata
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Game' }
+        '404':
+          description: Game not found
+  /providers:
+    get:
+      tags: [Catalog]
+      summary: List supported providers
+      responses:
+        '200':
+          description: Provider list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  providers:
+                    type: array
+                    items: { $ref: '#/components/schemas/Provider' }
+  /launch:
+    post:
+      tags: [Launch]
+      summary: Launch a game (real money)
+      description: Generates a signed, time-bound launch URL for a real-money session. Implement the wallet callback endpoint to handle bets and wins.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [game_code, player_id, currency]
+              properties:
+                game_code: { type: string, example: vs20fruitsw }
+                player_id: { type: string }
+                currency: { type: string, example: EUR }
+                lang: { type: string, example: en }
+                return_url: { type: string, format: uri }
+      responses:
+        '200':
+          description: Signed launch URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  launch_url: { type: string, format: uri }
+                  session_id: { type: string }
+                  expires_at: { type: string, format: date-time }
+  /launch/demo:
+    post:
+      tags: [Launch]
+      summary: Launch a game (demo / fun mode)
+      description: Generates a signed launch URL for demo play. No real money flows; no RGS callbacks triggered.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [game_code]
+              properties:
+                game_code: { type: string }
+                lang: { type: string, example: en }
+                return_url: { type: string, format: uri }
+      responses:
+        '200':
+          description: Demo launch URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  launch_url: { type: string, format: uri }
+  /session/{id}:
+    get:
+      tags: [Session]
+      summary: Get player session status
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Session state
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  session_id: { type: string }
+                  player_id: { type: string }
+                  game_code: { type: string }
+                  state:
+                    type: string
+                    enum: [active, ended, expired]
+                  started_at: { type: string, format: date-time }
+                  ended_at: { type: string, format: date-time, nullable: true }
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    Game:
+      type: object
+      properties:
+        code: { type: string, example: vs20fruitsw }
+        name: { type: string, example: Sweet Bonanza }
+        provider: { type: string, example: pragmatic-play }
+        vertical:
+          type: string
+          enum: [slot, live, crash, table, scratch, instant, bonus-buy]
+        thumb: { type: string, format: uri }
+        rtp: { type: number, format: float, example: 96.51 }
+        volatility:
+          type: string
+          enum: [low, medium, high, extreme]
+        paylines: { type: integer, example: 20 }
+        max_win: { type: integer, description: Max win multiplier of bet, example: 21100 }
+        languages: { type: array, items: { type: string } }
+        currencies: { type: array, items: { type: string } }
+    Provider:
+      type: object
+      properties:
+        slug: { type: string, example: pragmatic-play }
+        name: { type: string, example: Pragmatic Play }
+        game_count: { type: integer }
+        verticals: { type: array, items: { type: string } }
