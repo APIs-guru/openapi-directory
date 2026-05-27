@@ -1,0 +1,297 @@
+openapi: 3.0.3
+info:
+  title: Euro365 Sportsbook API
+  description: |
+    Real-time sports betting odds, prematch & in-play event data, scores, and a
+    drop-in match-tracker widget across 25 sports and 4,800+ markets — aggregated
+    from 250+ source books.
+
+    **Free tier:** 100 requests/minute, no card required.
+    **Pro tier:** 3,000 requests/minute. Billed via Stripe, PayPal, or
+    cryptocurrency (BTC/USDT/USDC) through NOWPayments.
+
+    Sign up: https://api.euro365.bet/portal?register=1
+  x-apisguru-categories:
+    - sports
+  x-providerName: euro365.bet
+  x-origin:
+    - format: openapi
+      url: https://api.euro365.bet/openapi.yaml
+      version: "3.0"
+  version: "1.0.0"
+  termsOfService: https://api.euro365.bet/terms/
+  contact:
+    name: Euro365 API support
+    email: support@euro365.bet
+    url: https://api.euro365.bet
+  license:
+    name: Commercial
+    url: https://api.euro365.bet/terms/
+  x-logo:
+    url: https://api.euro365.bet/og-cover.png
+    backgroundColor: "#10b981"
+    altText: Euro365 API
+
+servers:
+  - url: https://api.euro365.bet
+    description: Production
+
+security:
+  - ApiKeyHeader: []
+  - ApiKeyQuery: []
+
+tags:
+  - name: Catalog
+    description: Sports and market dictionary
+  - name: Events
+    description: Prematch and live (in-play) events
+  - name: Odds
+    description: Live-priced outcomes
+  - name: Scores
+    description: Settled and in-progress scores
+  - name: Settlements
+    description: Per-outcome win/lose/void results for ended events
+  - name: Operational
+    description: Health and status
+
+paths:
+  /v1/sports:
+    get:
+      tags: [Catalog]
+      summary: List supported sports with live/prematch counts
+      responses:
+        "200":
+          description: Sport list
+          content:
+            application/json:
+              example:
+                success: true
+                data:
+                  - { id: 1, name: Soccer,     live_count: 51, prematch_count: 1447 }
+                  - { id: 2, name: Basketball, live_count: 12, prematch_count:  214 }
+                  - { id: 5, name: Tennis,     live_count: 34, prematch_count:  172 }
+
+  /v1/markets:
+    get:
+      tags: [Catalog]
+      summary: Market dictionary (4,800+ markets across 25 sports)
+      parameters:
+        - { name: sport,  in: query, schema: { type: integer }, description: "Filter to a single sport ID (see /v1/sports)" }
+        - { name: nested, in: query, schema: { type: string, enum: ["0","1"] }, description: "Set to 1 for nested groups+outcomes payload" }
+      responses:
+        "200":
+          description: Market catalog
+          content:
+            application/json:
+              example:
+                success: true
+                data:
+                  markets: { "1001": "1x2", "1018": "Total Goals - Over / Under" }
+                  outcomes: { "2001": "1", "2002": "x", "2003": "2" }
+
+  /v1/market-groups:
+    get:
+      tags: [Catalog]
+      summary: Prematch / live market group layout per sport
+      parameters:
+        - { name: sport, in: query, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: Groups
+          content:
+            application/json:
+              example:
+                success: true
+                data:
+                  sport: 1
+                  prematch:
+                    - { key: main_markets, name: Main, markets: [1001, 1018, 1007] }
+
+  /v1/prematch:
+    get:
+      tags: [Events]
+      summary: Upcoming events for a sport
+      parameters:
+        - { name: sport, in: query, schema: { type: integer }, description: "Sport ID (omit for all)" }
+        - { name: limit, in: query, schema: { type: integer, default: 100 } }
+      responses:
+        "200":
+          description: Prematch events keyed by event ID
+          content:
+            application/json:
+              example:
+                success: true
+                sport: 1
+                data:
+                  "s5-18938270":
+                    h: "Ferro Carril Oeste"
+                    a: "CA Central Norte"
+                    t: [93703, "Primera B Nacional", 7]
+                    c: [32, "Argentina", 69, "ar"]
+                    ts: 1779649200
+                    map: { "s5_p18938270": { p: 0 } }
+
+  /v1/live:
+    get:
+      tags: [Events]
+      summary: Live (in-play) events
+      parameters:
+        - { name: sport, in: query, schema: { type: integer } }
+        - { name: limit, in: query, schema: { type: integer, default: 100 } }
+      responses:
+        "200":
+          description: Live events with current state
+          content:
+            application/json:
+              example:
+                success: true
+                ts: 1779392383188
+                sport: 1
+                data:
+                  "s2-43.133925148":
+                    h: "Al Hazm"
+                    a: "Al Taawon Buraidah"
+                    g: 65
+                    s: 0
+                    live: true
+
+  /v1/event:
+    get:
+      tags: [Events]
+      summary: Lookup a single event by ID
+      parameters:
+        - { name: id,    in: query, required: true, schema: { type: string } }
+        - { name: sport, in: query, schema: { type: integer } }
+      responses:
+        "200": { description: Event payload }
+
+  /v1/odds:
+    get:
+      tags: [Odds]
+      summary: Live-priced outcomes for one or more event-odds keys
+      parameters:
+        - name: ids
+          in: query
+          required: true
+          schema: { type: string }
+          description: "Comma-separated odds keys from event.map (e.g. s5_p18938270,s2_l43.133925148)"
+      responses:
+        "200":
+          description: Odds payload — keys are scaled integers, divide by 1000 for decimal odds
+          content:
+            application/json:
+              example:
+                success: true
+                data:
+                  "s5_p18938270":
+                    "2001": 2350
+                    "2002": 3100
+                    "2003": 2900
+
+  /v1/scores:
+    get:
+      tags: [Scores]
+      summary: Recent scores across all sports
+      responses:
+        "200": { description: Score payload }
+
+  /v1/settlements:
+    get:
+      tags: [Settlements]
+      summary: Per-outcome win/lose/void/pending settlement for ended events
+      description: |
+        Returns deterministic settlement results for each market line of one or more
+        ended events. Each outcome resolves to `win`, `lose`, `void` (push or
+        suspended) or `pending` (engine cannot resolve from the data available in
+        the current version — typically half-only or stat-driven markets).
+
+        V1 coverage (live): 1X2, Double Chance, DNB, Total Goals O/U + Asian Total
+        + Odd/Even + Bands, BTTS, Correct Score, European & Asian Handicap (whole
+        and half lines), Home/Away Team Total Goals, 1x2 combo markets.
+
+        Pending in V1 (handled in V2/V3): 1st-half / 2nd-half / HT-FT markets,
+        corner/card/free-kick/shot/scorer markets.
+
+        Binding rules at /docs/#settlement-policy.
+      parameters:
+        - name: ids
+          in: query
+          required: true
+          schema: { type: string }
+          description: "Comma-separated event ids (max 100). Aliases: event_id, fixture_id."
+      responses:
+        "200":
+          description: Settlement payload
+          content:
+            application/json:
+              example:
+                success: true
+                version: "v1"
+                policy_url: "https://api.euro365.bet/docs/#settlement-policy"
+                data:
+                  "s2-43.134044570":
+                    fixture_id: "s2-43.134044570"
+                    status: "ended"
+                    score: { home: 1, away: 1 }
+                    settled_at: 1779687757000
+                    coverage: { covered: 192, void: 14, pending: 67, markets: 25 }
+                    markets:
+                      "1001":
+                        name: "1x2"
+                        lines:
+                          "s":
+                            line: null
+                            outcomes:
+                              "2001": { name: "1", result: "lose" }
+                              "2002": { name: "x", result: "win"  }
+                              "2003": { name: "2", result: "lose" }
+                      "1009":
+                        name: "Draw No Bet"
+                        lines:
+                          "s":
+                            line: null
+                            outcomes:
+                              "2001": { name: "1", result: "void", reason: "push" }
+                              "2003": { name: "2", result: "void", reason: "push" }
+
+  /v1/status:
+    get:
+      tags: [Operational]
+      summary: Service status, live/prematch counts, last-update timestamp
+      responses:
+        "200":
+          description: Status
+          content:
+            application/json:
+              example:
+                success: true
+                live_events: 124
+                prematch_events: 2891
+                last_update: 1779392383188
+
+  /rdstn:
+    post:
+      tags: [Odds]
+      summary: High-throughput batch read endpoint (Redis-style commands)
+      description: |
+        POST a JSON-encoded array of `[op, args]` commands. Useful when fetching odds
+        for hundreds of events in a single round-trip.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              - ["ga", ["s5_p18938270", "s5_p18932047"]]
+      responses:
+        "200": { description: Batch response }
+
+components:
+  securitySchemes:
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-api-key
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
