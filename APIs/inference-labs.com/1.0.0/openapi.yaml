@@ -1,0 +1,283 @@
+openapi: 3.1.0
+info:
+  title: Inference Labs Public API
+  summary: Vendor-neutral multimodal LLM router and free LLM pricing dataset.
+  description: |
+    The Inference Labs Public API exposes two surfaces:
+
+    1. **Free public LLM pricing dataset** at `/api/prices.json` -- no auth,
+       no rate limit, CC BY 4.0. Lists per-token pricing, context window,
+       vendor, and quality tier for every major 2026 frontier LLM
+       (GPT-5, Claude, Gemini, Bedrock, Llama, Nova).
+    2. **Authenticated routing API** at `/api/v1/generate` -- vendor-neutral
+       multi-provider LLM router. One Bearer token, single endpoint, automatic
+       failover, policy-based model selection (cost-first / quality-first /
+       latency-first / balanced / judge), semantic + exact-hash cache.
+
+    Python SDK: <https://github.com/bosslesss/inference-labs-python>
+    MCP server: <https://github.com/bosslesss/inference-labs-mcp>
+  version: 1.0.0
+  termsOfService: https://inference-labs.com/terms.html
+  contact:
+    name: Inference Labs
+    url: https://inference-labs.com
+    email: hello@inference-labs.com
+  license:
+    name: CC BY 4.0 (pricing dataset) / commercial (router)
+    url: https://creativecommons.org/licenses/by/4.0/
+  x-logo:
+    url: https://inference-labs.com/logo.png
+    altText: Inference Labs
+
+servers:
+  - url: https://inference-labs.com
+    description: Public pricing dataset (no auth required)
+  - url: https://app.inference-labs.com
+    description: Routing API (Bearer token from https://app.inference-labs.com)
+
+externalDocs:
+  description: Marketing site, full docs, dashboard
+  url: https://inference-labs.com
+
+tags:
+  - name: Pricing
+    description: Free public LLM pricing dataset. No authentication required.
+  - name: Routing
+    description: Vendor-neutral multi-provider LLM router. Requires Bearer API key.
+
+paths:
+  /api/prices.json:
+    get:
+      operationId: getAllPrices
+      summary: Get the full LLM pricing dataset
+      description: |
+        Returns current per-token pricing for every model in the catalog.
+        Free, no auth, no rate limit, CC BY 4.0.
+      tags: [Pricing]
+      servers:
+        - url: https://inference-labs.com
+      responses:
+        "200":
+          description: Pricing dataset
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PriceDataset"
+
+  /api/prices/{modelId}.json:
+    get:
+      operationId: getModelPricing
+      summary: Get pricing for a single model
+      tags: [Pricing]
+      servers:
+        - url: https://inference-labs.com
+      parameters:
+        - name: modelId
+          in: path
+          required: true
+          description: Lowercase model id (e.g. `gpt-5`, `claude-sonnet-4-5`).
+          schema:
+            type: string
+            example: gpt-5
+      responses:
+        "200":
+          description: Single-model pricing
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PriceDataset"
+        "404":
+          description: Unknown model id
+
+  /api/prices.schema.json:
+    get:
+      operationId: getPricesSchema
+      summary: JSON Schema for the pricing dataset
+      tags: [Pricing]
+      servers:
+        - url: https://inference-labs.com
+      responses:
+        "200":
+          description: Draft-07 JSON Schema
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/v1/generate:
+    post:
+      operationId: routeRequest
+      summary: Route one prompt through the multi-provider router
+      description: |
+        Sends `prompt` to the best model in the workspace's allowlist
+        according to `constraints.strategy`. Returns the response plus
+        which model was chosen, the cost, and the cache flag.
+      tags: [Routing]
+      servers:
+        - url: https://app.inference-labs.com
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateRequest"
+            examples:
+              minimal:
+                value:
+                  modality: text
+                  prompt: "Summarize: 'Hello world.'"
+              full:
+                value:
+                  modality: text
+                  prompt: "Classify intent: Where is my order?"
+                  constraints:
+                    strategy: cost-first
+                    max_cost_usd: 0.005
+                    max_latency_ms: 3000
+                  allow_models: ["gpt-5-mini", "claude-haiku-4-5", "gemini-2-5-flash"]
+      responses:
+        "200":
+          description: Routed response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenerateResponse"
+        "401":
+          description: Missing or invalid Bearer token
+        "402":
+          description: Insufficient workspace credits
+        "429":
+          description: Rate limit exceeded
+
+  /api/v1/generate/stream:
+    post:
+      operationId: routeRequestStreaming
+      summary: Streaming variant (Server-Sent Events)
+      tags: [Routing]
+      servers:
+        - url: https://app.inference-labs.com
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateRequest"
+      responses:
+        "200":
+          description: SSE stream of `delta` text chunks, terminated by `[DONE]`.
+          content:
+            text/event-stream:
+              schema:
+                type: string
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key (il_live_*)
+      description: |
+        Issue an API key at <https://app.inference-labs.com/#/keys> and pass
+        it as `Authorization: Bearer il_live_...`.
+
+  schemas:
+    PriceDataset:
+      type: object
+      required: [version, updated, currency, unit, count, models]
+      properties:
+        version: { type: string, enum: ["1"] }
+        updated: { type: string, format: date }
+        currency: { type: string, enum: ["USD"] }
+        unit: { type: string, enum: ["per_million_tokens"] }
+        source: { type: string, format: uri }
+        license: { type: string, example: CC-BY-4.0 }
+        attribution: { type: string }
+        count: { type: integer, minimum: 0 }
+        models:
+          type: array
+          items: { $ref: "#/components/schemas/Model" }
+
+    Model:
+      type: object
+      required: [id, display_name, vendor, tier, context_tokens, price_per_million]
+      properties:
+        id:
+          type: string
+          example: claude-sonnet-4-5
+        display_name:
+          type: string
+          example: Claude Sonnet 4.5
+        vendor:
+          type: string
+          example: Anthropic
+        tier:
+          type: string
+          enum: [cheap, balanced, premium]
+        context_tokens:
+          type: integer
+          minimum: 0
+          example: 200000
+        price_per_million:
+          type: object
+          required: [input_usd, output_usd]
+          properties:
+            input_usd: { type: number, minimum: 0, example: 3.0 }
+            output_usd: { type: number, minimum: 0, example: 15.0 }
+        strengths:
+          type: array
+          items: { type: string }
+        weaknesses:
+          type: array
+          items: { type: string }
+
+    GenerateRequest:
+      type: object
+      required: [modality, prompt]
+      properties:
+        modality:
+          type: string
+          enum: [text, image, video]
+        prompt:
+          type: string
+        constraints:
+          type: object
+          properties:
+            strategy:
+              type: string
+              enum: [balanced, cost-first, quality-first, latency-first, judge]
+              default: balanced
+            max_cost_usd: { type: number, minimum: 0 }
+            max_latency_ms: { type: integer, minimum: 0 }
+        allow_models:
+          type: array
+          items: { type: string }
+        deny_models:
+          type: array
+          items: { type: string }
+        workspace_id: { type: string }
+        trace:
+          type: object
+          properties:
+            collect: { type: boolean, default: true }
+            redact_pii: { type: boolean, default: true }
+
+    GenerateResponse:
+      type: object
+      required: [data]
+      properties:
+        data:
+          type: object
+          required: [text, model, provider, cost_usd, latency_ms, cached]
+          properties:
+            text: { type: string }
+            model: { type: string, example: claude-sonnet-4-5 }
+            provider: { type: string, example: Anthropic }
+            cost_usd: { type: number, minimum: 0, example: 0.00123 }
+            latency_ms: { type: integer, minimum: 0, example: 842 }
+            cached: { type: boolean }
+            trace_id:
+              type: [string, "null"]
