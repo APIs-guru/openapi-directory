@@ -187,16 +187,16 @@ components:
   schemas:
     PriceDataset:
       type: object
-      required: [version, updated, currency, unit, models]
+      required: [version, updated, currency, unit, count, models]
       properties:
-        version: { type: string, const: "1" }
+        version: { type: string, enum: ["1"] }
         updated: { type: string, format: date }
-        currency: { type: string, const: USD }
-        unit: { type: string, const: per_million_tokens }
+        currency: { type: string, enum: ["USD"] }
+        unit: { type: string, enum: ["per_million_tokens"] }
         source: { type: string, format: uri }
         license: { type: string, example: CC-BY-4.0 }
         attribution: { type: string }
-        count: { type: integer }
+        count: { type: integer, minimum: 0 }
         models:
           type: array
           items: { $ref: "#/components/schemas/Model" }
@@ -219,13 +219,14 @@ components:
           enum: [cheap, balanced, premium]
         context_tokens:
           type: integer
+          minimum: 0
           example: 200000
         price_per_million:
           type: object
           required: [input_usd, output_usd]
           properties:
-            input_usd: { type: number, example: 3.0 }
-            output_usd: { type: number, example: 15.0 }
+            input_usd: { type: number, minimum: 0, example: 3.0 }
+            output_usd: { type: number, minimum: 0, example: 15.0 }
         strengths:
           type: array
           items: { type: string }
@@ -249,8 +250,8 @@ components:
               type: string
               enum: [balanced, cost-first, quality-first, latency-first, judge]
               default: balanced
-            max_cost_usd: { type: number }
-            max_latency_ms: { type: integer }
+            max_cost_usd: { type: number, minimum: 0 }
+            max_latency_ms: { type: integer, minimum: 0 }
         allow_models:
           type: array
           items: { type: string }
@@ -266,14 +267,17 @@ components:
 
     GenerateResponse:
       type: object
+      required: [data]
       properties:
         data:
           type: object
+          required: [text, model, provider, cost_usd, latency_ms, cached]
           properties:
             text: { type: string }
             model: { type: string, example: claude-sonnet-4-5 }
             provider: { type: string, example: Anthropic }
-            cost_usd: { type: number, example: 0.00123 }
-            latency_ms: { type: integer, example: 842 }
+            cost_usd: { type: number, minimum: 0, example: 0.00123 }
+            latency_ms: { type: integer, minimum: 0, example: 842 }
             cached: { type: boolean }
-            trace_id: { type: string, nullable: true }
+            trace_id:
+              type: [string, "null"]
