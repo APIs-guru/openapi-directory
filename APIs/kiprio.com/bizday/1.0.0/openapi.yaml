@@ -55,14 +55,27 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - from
+                  - to
+                  - business_days
+                  - calendar_days
+                  - country
                 properties:
                   from:
                     type: string
+                    format: date
+                    example: '2026-01-01'
                   to:
                     type: string
+                    format: date
+                    example: '2026-01-31'
                   business_days:
                     type: integer
+                    example: 21
                   calendar_days:
                     type: integer
+                    example: 30
                   country:
                     type: string
+                    example: GB

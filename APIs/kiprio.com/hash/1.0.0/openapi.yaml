@@ -46,13 +46,20 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - input
+                  - algo
+                  - hash
                 properties:
                   input:
                     type: string
+                    example: hello
                   algo:
                     type: string
+                    example: sha256
                   hash:
                     type: string
+                    example: 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
   /hmac:
     post:
       summary: HMAC-sign a string
@@ -71,7 +78,24 @@ paths:
                   type: string
                 algo:
                   type: string
+                  enum: [md5, sha1, sha256, sha384, sha512, sha3-256, sha3-512]
                   default: sha256
       responses:
         '200':
           description: HMAC result
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - input
+                  - algo
+                  - hmac
+                properties:
+                  input:
+                    type: string
+                  algo:
+                    type: string
+                  hmac:
+                    type: string
+                    description: HMAC hex digest

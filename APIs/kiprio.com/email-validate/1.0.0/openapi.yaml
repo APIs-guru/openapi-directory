@@ -32,6 +32,7 @@ paths:
           required: true
           schema:
             type: string
+            format: email
             example: user@example.com
           description: Email address to validate
       responses:
@@ -41,9 +42,19 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - input
+                  - valid
+                  - syntax_ok
+                  - mx_found
+                  - disposable
+                  - role_based
+                  - free_provider
+                  - confidence
                 properties:
                   input:
                     type: string
+                    example: user@example.com
                   valid:
                     type: boolean
                   syntax_ok:
@@ -58,8 +69,11 @@ paths:
                     type: boolean
                   suggest:
                     type: string
+                    nullable: true
                   confidence:
                     type: number
                     format: float
+                    example: 0.95
                   reason:
                     type: string
+                    nullable: true
