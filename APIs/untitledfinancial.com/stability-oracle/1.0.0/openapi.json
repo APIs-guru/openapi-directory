@@ -1,0 +1,518 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "DPX Stability Oracle API",
+    "description": "Agent-native API for DPX programmable stablecoin settlement rails. Provides real-time stability scores, ESG-weighted fee quotes, and on-chain settlement verification. No authentication required. All responses are machine-parseable JSON.\n\n**Fee structure (Option F):**\n- Core: 0.85% (every settlement)\n- FX: 0.40% (cross-currency only)\n- ESG: 0.00–0.50% live from oracle — formula: (100 - avgScore) / 200\n- License: 0.01% (fixed)\n- Typical all-in (score 75, cross-border): **1.385%**\n\n**Agent integration order:** /manifest → /fee-schedule → /quote → /verify-fees → settle on-chain",
+    "version": "2.1.0",
+    "contact": {
+      "name": "DPX — Victoria Lee Case",
+      "email": "victoria@dpx.finance",
+      "url": "https://docs.dpx.finance"
+    },
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local development"
+    },
+    {
+      "url": "https://stability.dpx.finance",
+      "description": "Production (Base Mainnet)"
+    }
+  ],
+  "tags": [
+    { "name": "Discovery",    "description": "Protocol discovery for agent onboarding" },
+    { "name": "Pricing",      "description": "Fee quotes and schedules" },
+    { "name": "Reliability",  "description": "Oracle health and trust signals" },
+    { "name": "Oracle",       "description": "Raw stability oracle data" }
+  ],
+  "paths": {
+    "/manifest": {
+      "get": {
+        "tags": ["Discovery"],
+        "summary": "Protocol manifest",
+        "description": "Complete machine-readable description of DPX capabilities, fee structure, supported currencies, contract addresses, and all available endpoints. Call this first. Agents should cache this response.",
+        "operationId": "getManifest",
+        "responses": {
+          "200": {
+            "description": "DPX protocol manifest",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Manifest" },
+                "example": {
+                  "schema": "dpx-manifest/1.0",
+                  "name": "DPX",
+                  "version": "2.1.0",
+                  "category": "settlement_rail",
+                  "network": "base",
+                  "chainId": 8453,
+                  "fees": {
+                    "coreBps": 85,
+                    "fxBps": 40,
+                    "licenseBps": 1,
+                    "esgMaxBps": 50,
+                    "typicalTotalBps": 138.5
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fee-schedule": {
+      "get": {
+        "tags": ["Pricing"],
+        "summary": "Full fee schedule",
+        "description": "Complete fee structure as structured data. Agents should cache this and use it for local fee pre-computation before calling /quote. Includes volume discount tiers, ESG fee table, and competitive benchmarks.",
+        "operationId": "getFeeSchedule",
+        "responses": {
+          "200": {
+            "description": "Complete fee schedule",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/FeeSchedule" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote": {
+      "get": {
+        "tags": ["Pricing"],
+        "summary": "Get fee quote (GET)",
+        "description": "Returns the exact fee breakdown for a transaction. Use this before any settlement. Returns a quoteId valid for 300 seconds. Pass quoteId to the settlement router for the on-chain audit trail.",
+        "operationId": "getQuote",
+        "parameters": [
+          {
+            "name": "amountUsd",
+            "in": "query",
+            "required": true,
+            "description": "Transaction amount in USD",
+            "schema": { "type": "number", "example": 1000000 }
+          },
+          {
+            "name": "hasFx",
+            "in": "query",
+            "required": false,
+            "description": "Set to true if source and destination currencies differ (triggers FX fee)",
+            "schema": { "type": "boolean", "default": false }
+          },
+          {
+            "name": "esgScore",
+            "in": "query",
+            "required": false,
+            "description": "ESG score 0–100. Omit to use live oracle score. Score 75 = 0.125% fee.",
+            "schema": { "type": "number", "minimum": 0, "maximum": 100, "default": 50 }
+          },
+          {
+            "name": "monthlyVolumeUsd",
+            "in": "query",
+            "required": false,
+            "description": "Monthly volume for volume discount tier calculation",
+            "schema": { "type": "number", "default": 0 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fee quote",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Quote" }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Pricing"],
+        "summary": "Get fee quote (POST)",
+        "description": "Same as GET /quote but accepts a JSON body. Preferred for agents passing structured data.",
+        "operationId": "postQuote",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/QuoteRequest" },
+              "example": {
+                "amountUsd": 1000000,
+                "hasFx": true,
+                "esgScore": 75,
+                "monthlyVolumeUsd": 10000000
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Fee quote",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Quote" }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/verify-fees": {
+      "get": {
+        "tags": ["Pricing"],
+        "summary": "Verify off-chain quote matches on-chain router",
+        "description": "Compares the /quote fee calculation against the live DPXSettlementRouter.previewFees() on Base mainnet. Use before settlement to confirm the on-chain contract will charge the quoted amount. Requires ROUTER_ADDRESS to be deployed.",
+        "operationId": "verifyFees",
+        "parameters": [
+          {
+            "name": "amountUsd",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "number", "example": 1000000 }
+          },
+          {
+            "name": "hasFx",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean", "default": false }
+          },
+          {
+            "name": "esgScore",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "number", "minimum": 0, "maximum": 100, "default": 50 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fee verification result",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/FeeVerification" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reliability": {
+      "get": {
+        "tags": ["Reliability"],
+        "summary": "Oracle reliability metrics",
+        "description": "Live trust signals: uptime, stability score, peg deviation, confidence score, data coverage. Agents use this to decide whether to proceed with settlement. isHealthy=true means all systems nominal.",
+        "operationId": "getReliability",
+        "responses": {
+          "200": {
+            "description": "Reliability metrics",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Reliability" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": ["Reliability"],
+        "summary": "Liveness check",
+        "description": "Lightweight health check. Returns status=healthy if the server is running. No oracle data included — use /reliability for full trust signals.",
+        "operationId": "getHealth",
+        "responses": {
+          "200": {
+            "description": "Server is healthy",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Health" },
+                "example": {
+                  "status": "healthy",
+                  "oracle": "SUCCESS",
+                  "uptimeSeconds": 3600,
+                  "network": "base",
+                  "chainId": 8453
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/status": {
+      "get": {
+        "tags": ["Oracle"],
+        "summary": "Latest oracle results",
+        "description": "Full raw output from the most recent stability oracle run. Includes all 6 tier scores, alerts, recommendations, and overall stability status.",
+        "operationId": "getStatus",
+        "responses": {
+          "200": {
+            "description": "Latest oracle results",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/OracleStatus" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/history": {
+      "get": {
+        "tags": ["Oracle"],
+        "summary": "24-hour oracle history",
+        "description": "Array of the last 24 oracle run results. Use for trend analysis and stability scoring over time.",
+        "operationId": "getHistory",
+        "responses": {
+          "200": {
+            "description": "Oracle history",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/OracleHistoryEntry" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Manifest": {
+        "type": "object",
+        "properties": {
+          "schema":      { "type": "string" },
+          "name":        { "type": "string" },
+          "version":     { "type": "string" },
+          "description": { "type": "string" },
+          "category":    { "type": "string" },
+          "network":     { "type": "string" },
+          "chainId":     { "type": "integer" },
+          "capabilities":{ "type": "array", "items": { "type": "string" } },
+          "fees":        { "$ref": "#/components/schemas/ManifestFees" },
+          "contracts":   { "$ref": "#/components/schemas/Contracts" },
+          "endpoints":   { "type": "object" },
+          "timestamp":   { "type": "string", "format": "date-time" }
+        }
+      },
+      "ManifestFees": {
+        "type": "object",
+        "properties": {
+          "coreBps":          { "type": "number", "example": 85 },
+          "fxBps":            { "type": "number", "example": 40 },
+          "licenseBps":       { "type": "number", "example": 1 },
+          "esgMaxBps":        { "type": "number", "example": 50 },
+          "esgFormula":       { "type": "string", "example": "(100 - esgScore) / 200" },
+          "typicalTotalBps":  { "type": "number", "example": 138.5 },
+          "worstCaseTotalBps":{ "type": "number", "example": 176 },
+          "bestCaseTotalBps": { "type": "number", "example": 86 }
+        }
+      },
+      "Contracts": {
+        "type": "object",
+        "properties": {
+          "token":          { "type": "string", "example": "0x7A62dEcF6936675480F0991A2EF4a0d6f1023891" },
+          "esgOracle":      { "type": "string", "example": "0x7717e89bC45cBD5199b44595f6E874ac62d79786" },
+          "redistribution": { "type": "string", "example": "0x4F3741252847E4F07730c4CEC3018b201Ac6ce87" },
+          "stabilityPID":   { "type": "string", "example": "0xda8aA06cDa9D06001554d948dA473EBe5282Ea17" },
+          "basketPeg":      { "type": "string", "example": "0xB5071fA48B92e3652701053eEd8826ab94014AaA" }
+        }
+      },
+      "FeeSchedule": {
+        "type": "object",
+        "properties": {
+          "schema":      { "type": "string" },
+          "timestamp":   { "type": "string", "format": "date-time" },
+          "components":  { "type": "object" },
+          "volumeTiers": { "type": "array" },
+          "scenarioExamples": { "type": "array" },
+          "competitive": { "type": "object" }
+        }
+      },
+      "QuoteRequest": {
+        "type": "object",
+        "required": ["amountUsd"],
+        "properties": {
+          "amountUsd":        { "type": "number", "description": "Transaction amount in USD", "example": 1000000 },
+          "hasFx":            { "type": "boolean", "description": "Cross-currency settlement?", "default": false },
+          "esgScore":         { "type": "number", "minimum": 0, "maximum": 100, "description": "ESG score 0–100", "default": 50 },
+          "monthlyVolumeUsd": { "type": "number", "description": "Monthly volume for discount tier", "default": 0 }
+        }
+      },
+      "Quote": {
+        "type": "object",
+        "properties": {
+          "schema":          { "type": "string", "example": "dpx-quote/1.0" },
+          "timestamp":       { "type": "string", "format": "date-time" },
+          "quoteId":         { "type": "string", "description": "Pass to settlement router for on-chain audit trail", "example": "dpx-1234567890-abc123" },
+          "validForSeconds": { "type": "integer", "example": 300 },
+          "input":           { "type": "object" },
+          "fees": {
+            "type": "object",
+            "properties": {
+              "core":    { "$ref": "#/components/schemas/FeeLine" },
+              "fx":      { "$ref": "#/components/schemas/FeeLine" },
+              "esg":     { "$ref": "#/components/schemas/EsgFeeLine" },
+              "license": { "$ref": "#/components/schemas/FeeLine" },
+              "total":   { "$ref": "#/components/schemas/TotalFeeLine" }
+            }
+          },
+          "settlement": {
+            "type": "object",
+            "properties": {
+              "netUsd":   { "type": "number" },
+              "grossUsd": { "type": "number" }
+            }
+          },
+          "esgImpact":    { "type": "object" },
+          "volumeTier":   { "type": "string" },
+          "competitive":  { "type": "object" },
+          "oracleContext":{ "type": "object" }
+        }
+      },
+      "FeeLine": {
+        "type": "object",
+        "properties": {
+          "bps": { "type": "number" },
+          "usd": { "type": "number" }
+        }
+      },
+      "EsgFeeLine": {
+        "type": "object",
+        "properties": {
+          "bps":     { "type": "number" },
+          "pct":     { "type": "number" },
+          "usd":     { "type": "number" },
+          "score":   { "type": "number" },
+          "tier":    { "type": "string" },
+          "formula": { "type": "string" }
+        }
+      },
+      "TotalFeeLine": {
+        "type": "object",
+        "properties": {
+          "bps": { "type": "number", "example": 138.5 },
+          "pct": { "type": "number", "example": 1.385 },
+          "usd": { "type": "number", "example": 13850 }
+        }
+      },
+      "FeeVerification": {
+        "type": "object",
+        "properties": {
+          "schema":       { "type": "string" },
+          "timestamp":    { "type": "string", "format": "date-time" },
+          "offChain":     { "type": "object" },
+          "onChain":      { "type": "object", "nullable": true },
+          "onChainError": { "type": "string", "nullable": true },
+          "feesMatch":    { "type": "boolean", "nullable": true },
+          "note":         { "type": "string" }
+        }
+      },
+      "Reliability": {
+        "type": "object",
+        "properties": {
+          "schema":    { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "isHealthy": { "type": "boolean" },
+          "oracle": {
+            "type": "object",
+            "properties": {
+              "status":                 { "type": "string", "example": "SUCCESS" },
+              "lastUpdate":             { "type": "string" },
+              "uptimeSeconds":          { "type": "integer" },
+              "uptimePct":              { "type": "number", "example": 99.97 },
+              "updateFrequencySeconds": { "type": "integer", "example": 3600 }
+            }
+          },
+          "stability": {
+            "type": "object",
+            "properties": {
+              "currentScore":    { "type": "number" },
+              "averageScore24h": { "type": "number" },
+              "threshold": {
+                "type": "object",
+                "properties": {
+                  "stable":   { "type": "integer", "example": 90 },
+                  "caution":  { "type": "integer", "example": 75 },
+                  "unstable": { "type": "integer", "example": 0 }
+                }
+              }
+            }
+          },
+          "peg": {
+            "type": "object",
+            "properties": {
+              "deviationBps":             { "type": "number" },
+              "deviationThresholdBps":    { "type": "integer", "example": 50 },
+              "basketWeights":            { "type": "object" },
+              "verificationCycleSeconds": { "type": "integer", "example": 60 }
+            }
+          },
+          "confidence": {
+            "type": "object",
+            "properties": {
+              "score": { "type": "number" },
+              "scale": { "type": "string", "example": "0–100" }
+            }
+          }
+        }
+      },
+      "Health": {
+        "type": "object",
+        "properties": {
+          "status":        { "type": "string", "example": "healthy" },
+          "oracle":        { "type": "string", "example": "SUCCESS" },
+          "uptimeSeconds": { "type": "integer" },
+          "uptimeHuman":   { "type": "string", "example": "2h 30m 15s" },
+          "network":       { "type": "string", "example": "base" },
+          "chainId":       { "type": "integer", "example": 8453 },
+          "timestamp":     { "type": "string", "format": "date-time" }
+        }
+      },
+      "OracleStatus": {
+        "type": "object",
+        "properties": {
+          "timestamp":  { "type": "integer" },
+          "status":     { "type": "string" },
+          "data":       { "type": "object" },
+          "lastUpdate": { "type": "string" }
+        }
+      },
+      "OracleHistoryEntry": {
+        "type": "object",
+        "properties": {
+          "timestamp":      { "type": "integer" },
+          "stabilityScore": { "type": "number" },
+          "overall":        { "type": "string" }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error":   { "type": "string" },
+          "example": { "type": "object" }
+        }
+      }
+    }
+  }
+}

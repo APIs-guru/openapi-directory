@@ -1,0 +1,2100 @@
+openapi: 3.1.0
+
+info:
+  title: DPX Oracle & Intelligence API
+  version: 1.0.0
+  description: |
+    Two production APIs from DPX / Untitled Financial:
+
+    **Stability Oracle** (`stability.untitledfinancial.com`)
+    Real-time stablecoin stability scoring across 6 tiers of macro, climate, FX,
+    geopolitical, on-chain, and basket signals. Updated hourly via Cloudflare Worker.
+
+    **Intelligence API** (`intelligence.untitledfinancial.com`)
+    Standalone per-call data product. Climate, planetary health, credit stress,
+    supply chain, energy transition, and entity ESG intelligence — all x402-gated
+    with USDC micropayments on Base mainnet.
+
+    ## Authentication
+
+    ### x402 (direct / crypto-native)
+    Call any gated endpoint without headers to receive a `402 Payment Required`
+    response with `paymentRequirements`. Attach a signed USDC payment as the
+    `X-PAYMENT` header (base64-encoded). Payments verified on-chain via Coinbase
+    x402 facilitator.
+
+    ### API Key (marketplace / traditional)
+    Pass `X-API-Key: <your-key>` on Intelligence API endpoints. Keys are issued
+    per-plan on RapidAPI and directly.
+
+  contact:
+    name: Untitled Financial
+    url: https://untitledfinancial.com
+    email: case@untitledfinancial.com
+  license:
+    name: BUSL-1.1
+    url: https://mariadb.com/bsl11/
+
+servers:
+  - url: https://stability.untitledfinancial.com
+    description: Stability Oracle
+  - url: https://intelligence.untitledfinancial.com
+    description: Intelligence API
+
+tags:
+  - name: Oracle
+    description: Stability Oracle — real-time scoring and quotes
+  - name: Intelligence
+    description: Intelligence API — paid per-call data products
+  - name: Meta
+    description: Discovery, health, and spec endpoints
+
+# ── Security schemes ──────────────────────────────────────────────────────────
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key for marketplace and direct access (Intelligence API)
+    x402Payment:
+      type: apiKey
+      in: header
+      name: X-PAYMENT
+      description: |
+        Base64-encoded signed USDC payment (x402 protocol).
+        Call without this header first to receive `paymentRequirements`,
+        then attach the signed payment and retry.
+
+  schemas:
+
+    StabilityScore:
+      type: object
+      required: [score, tier, pegDeviation, generatedAt]
+      properties:
+        score:
+          type: number
+          minimum: 0
+          maximum: 100
+          example: 74
+          description: Composite stability score. 100 = fully stable.
+        tier:
+          type: string
+          enum: [STABLE, WATCH, STRESSED, CRITICAL]
+          example: WATCH
+        pegDeviation:
+          type: number
+          example: 0.0012
+          description: Current peg deviation as a decimal (0.0012 = 0.12%).
+        generatedAt:
+          type: string
+          format: date-time
+          example: "2026-05-16T08:00:00Z"
+
+    QuoteResponse:
+      type: object
+      properties:
+        amountUsd:
+          type: number
+          example: 1000000
+        stabilityFeeRate:
+          type: number
+          example: 0.0025
+        annualizedFeePct:
+          type: number
+          example: 0.25
+        fxAdjustment:
+          type: number
+          example: -0.0002
+        esgAdjustment:
+          type: number
+          example: -0.0005
+        finalRate:
+          type: number
+          example: 0.0018
+        generatedAt:
+          type: string
+          format: date-time
+
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [ok, degraded]
+          example: ok
+        kvOk:
+          type: boolean
+        generatedAt:
+          type: string
+          format: date-time
+
+    x402Required:
+      type: object
+      required: [x402Version, error, paymentRequirements]
+      properties:
+        x402Version:
+          type: integer
+          example: 1
+        error:
+          type: string
+          example: X-PAYMENT header required
+        paymentRequirements:
+          type: array
+          items:
+            type: object
+            properties:
+              scheme:
+                type: string
+                example: exact
+              network:
+                type: string
+                example: base-mainnet
+              maxAmountRequired:
+                type: string
+                example: "0.25"
+              asset:
+                type: string
+                example: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+              payTo:
+                type: string
+                example: "0x39062c70F1Fce3D821e1B1Dc46E8F7b17f66a6E"
+              resource:
+                type: string
+                example: "https://intelligence.untitledfinancial.com/intelligence/climate"
+
+    ClimateIntelligence:
+      type: object
+      properties:
+        generatedAt:
+          type: string
+          format: date-time
+        cacheHit:
+          type: boolean
+        summary:
+          type: object
+          properties:
+            globalFoodSystemRisk:
+              type: string
+              enum: [CRITICAL, ELEVATED, MODERATE, LOW]
+            regionsAtRisk:
+              type: integer
+            criticalCommodities:
+              type: array
+              items:
+                type: string
+            cascadeSignals:
+              type: array
+              items:
+                type: string
+        regions:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              precipitationShiftPct:
+                type: number
+                description: "% change vs 1972-1974 baseline. Negative = drier."
+              classification:
+                type: string
+                enum: [CRITICAL, SIGNIFICANT, NOTABLE, EMERGING, STABLE]
+              commodities:
+                type: array
+                items:
+                  type: string
+        transmission:
+          type: object
+          properties:
+            foodInflationPressure:
+              type: string
+            migrationPressure:
+              type: string
+            basketImplications:
+              type: object
+
+    EarthSystemsIntelligence:
+      type: object
+      properties:
+        generatedAt:
+          type: string
+          format: date-time
+        cacheHit:
+          type: boolean
+        sustainability:
+          type: object
+          properties:
+            earthHealthIndex:
+              type: integer
+              minimum: 0
+              maximum: 100
+              description: "100 = pre-industrial health. Current: ~61."
+            planetaryStatus:
+              type: string
+              enum: [STABLE, WATCH, ELEVATED, SEVERE, CRITICAL]
+            atmosphericHealth:
+              type: string
+            cryosphereHealth:
+              type: string
+            immediateSignals:
+              type: array
+              items:
+                type: string
+            tippingPointAlert:
+              type: string
+        atmosphere:
+          type: object
+          properties:
+            co2:
+              type: object
+              properties:
+                currentPpm:
+                  type: number
+                  example: 424.5
+                changeSincePreind:
+                  type: string
+                  example: "+51.6%"
+                signal:
+                  type: string
+                  enum: [NORMAL, WATCH, ELEVATED, CRITICAL]
+            temperature:
+              type: object
+              properties:
+                currentAnomalyC:
+                  type: number
+                  example: 1.29
+                distanceToParisC:
+                  type: number
+                  example: 0.21
+                signal:
+                  type: string
+        tippingPoints:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              proximityRisk:
+                type: string
+                enum: [BREACHED, IMMINENT, HIGH, MODERATE, LOW]
+              threshold:
+                type: string
+              timeHorizon:
+                type: string
+              cascadeRisk:
+                type: string
+
+    MacroStressIntelligence:
+      type: object
+      properties:
+        generatedAt:
+          type: string
+          format: date-time
+        cacheHit:
+          type: boolean
+        stressIndex:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: "0 = no stress. 100 = maximum stress."
+        regime:
+          type: string
+          enum: [EXPANSION, LATE_CYCLE, STRESS, CRISIS]
+        components:
+          type: object
+          properties:
+            igSpread:
+              $ref: '#/components/schemas/ComponentReading'
+            hySpread:
+              $ref: '#/components/schemas/ComponentReading'
+            tedSpread:
+              $ref: '#/components/schemas/ComponentReading'
+            vix:
+              $ref: '#/components/schemas/ComponentReading'
+            lendingStandards:
+              $ref: '#/components/schemas/ComponentReading'
+        leadSignals:
+          type: object
+          properties:
+            fxImplication:
+              type: string
+            commodityImplication:
+              type: string
+            basketImplication:
+              type: string
+            lookAheadWeeks:
+              type: integer
+
+    ComponentReading:
+      type: object
+      properties:
+        value:
+          type: number
+          nullable: true
+        signal:
+          type: string
+          enum: [NORMAL, WATCH, ELEVATED, CRITICAL]
+        asOf:
+          type: string
+          nullable: true
+        context:
+          type: string
+
+    SupplyChainIntelligence:
+      type: object
+      properties:
+        generatedAt:
+          type: string
+          format: date-time
+        cacheHit:
+          type: boolean
+        gscpiZScore:
+          type: number
+          nullable: true
+          description: "Global supply chain pressure index z-score. 0 = neutral."
+        regime:
+          type: string
+          enum: [SEVERELY_STRESSED, MODERATELY_STRESSED, MILDLY_ELEVATED, NORMAL]
+        waterLevels:
+          type: object
+          properties:
+            rhineKaub:
+              $ref: '#/components/schemas/WaterLevel'
+            mississippi:
+              $ref: '#/components/schemas/WaterLevel'
+            panamaCanal:
+              $ref: '#/components/schemas/WaterLevel'
+            greatLakes:
+              $ref: '#/components/schemas/WaterLevel'
+        lanes:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              bottleneckRisk:
+                type: string
+                enum: [CRITICAL, HIGH, MODERATE, LOW, NORMAL]
+              keyConstraint:
+                type: string
+              commodities:
+                type: array
+                items:
+                  type: string
+        goodsInflationLeadSignal:
+          type: string
+        lookAheadWeeks:
+          type: integer
+
+    WaterLevel:
+      type: object
+      properties:
+        levelCm:
+          type: integer
+          nullable: true
+        trend:
+          type: string
+          enum: [FALLING, RISING, STABLE, UNKNOWN]
+        status:
+          type: string
+          enum: [CRITICAL, LOW_WATER, WATCH, NORMAL]
+        bottleneckRisk:
+          type: string
+          enum: [CRITICAL, HIGH, MODERATE, LOW, NORMAL]
+        context:
+          type: string
+        asOf:
+          type: string
+          nullable: true
+
+    EnergyTransitionIntelligence:
+      type: object
+      properties:
+        generatedAt:
+          type: string
+          format: date-time
+        cacheHit:
+          type: boolean
+        renewableSharePct:
+          type: number
+          nullable: true
+          description: "% of total US generation from wind + solar + hydro"
+        renewableTrend:
+          type: string
+          enum: [ACCELERATING, STEADY, SLOWING, STALLING]
+        fossilDemandCurve:
+          type: string
+          enum: [DECLINING_FAST, DECLINING, PLATEAUING, GROWING, GROWING_FAST]
+        signal:
+          type: string
+          enum: [BULLISH_TRANSITION, ON_TRACK, WATCH, LAGGING]
+        gridCarbonIntensity:
+          type: object
+          properties:
+            us:
+              type: integer
+              example: 386
+            eu:
+              type: integer
+              example: 241
+            global:
+              type: integer
+              example: 436
+            unit:
+              type: string
+              example: gCO2/kWh
+
+    ESGIntelligence:
+      type: object
+      properties:
+        generatedAt:
+          type: string
+          format: date-time
+        cacheHit:
+          type: boolean
+        address:
+          type: string
+          description: Input identifier (Ethereum address or LEI)
+        entityName:
+          type: string
+          nullable: true
+        esgScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+        tier:
+          type: string
+          enum: [LEADER, ACCEPTABLE, WATCH, ELEVATED_RISK, UNACCEPTABLE]
+        components:
+          type: object
+          properties:
+            environmental:
+              type: object
+              properties:
+                score:
+                  type: integer
+                violations:
+                  type: integer
+                  nullable: true
+                penalties:
+                  type: integer
+                  nullable: true
+                  description: Total EPA penalties in USD
+                riskLevel:
+                  type: string
+                  enum: [NONE, LOW, MODERATE, HIGH, CRITICAL]
+            governance:
+              type: object
+              properties:
+                score:
+                  type: integer
+                riskLevel:
+                  type: string
+            social:
+              type: object
+              properties:
+                score:
+                  type: integer
+                incidents:
+                  type: integer
+                  nullable: true
+                fatalities:
+                  type: integer
+                  nullable: true
+                riskLevel:
+                  type: string
+        flags:
+          type: array
+          items:
+            type: string
+          example: ["EPA_VIOLATION_HISTORY", "NO_ESG_DISCLOSURE"]
+        recommendedTier:
+          type: string
+          example: "TIER_2 — standard terms"
+
+    CascadeIntelligence:
+      type: object
+      properties:
+        generatedAt:
+          type: string
+          format: date-time
+        cacheHit:
+          type: boolean
+        methodology:
+          type: string
+        nervousSystem:
+          type: object
+          properties:
+            systemicRiskScore:
+              type: number
+              minimum: 0
+              maximum: 100
+              description: Cross-layer cascade stress. 100 = maximum.
+            overallStatus:
+              type: string
+              enum: [ACUTE_CASCADE, ACTIVE_CASCADE, WATCH, CALM]
+            activeCascadeCount:
+              type: integer
+            layers:
+              type: array
+              items:
+                type: object
+                properties:
+                  layer:
+                    type: integer
+                    minimum: 1
+                    maximum: 7
+                  name:
+                    type: string
+                    example: "L2 — Energy & Commodities"
+                  status:
+                    type: string
+                    enum: [SHOCK, ELEVATED, WATCH, NORMAL]
+                  keySignals:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+                        direction:
+                          type: string
+                          enum: [UP, DOWN, FLAT, UNKNOWN]
+                        significance:
+                          type: string
+                          enum: [HIGH, MODERATE, LOW]
+                  summary:
+                    type: string
+                  dataAge:
+                    type: string
+                    nullable: true
+        activeCascades:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                  - MIDDLE_EAST_OIL_SHOCK
+                  - TRADE_WAR_ESCALATION
+                  - FINANCIAL_CONTAGION
+                  - FOOD_SUPPLY_CRISIS
+                  - ENERGY_TRANSITION_DISRUPTION
+                  - EM_CURRENCY_CRISIS
+                  - CENTRAL_BANK_POLICY_SHOCK
+                  - SOVEREIGN_DEBT_CRISIS
+              label:
+                type: string
+              confidence:
+                type: string
+                enum: [HIGH, MODERATE, LOW]
+              entryLayer:
+                type: integer
+              entrySignal:
+                type: string
+              propagation:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    layer:
+                      type: integer
+                    layerName:
+                      type: string
+                    status:
+                      type: string
+                      enum: [ACTIVE, FORMING, EXPECTED, NOT_YET, ABSORBED]
+                    evidence:
+                      type: string
+                    typicalLag:
+                      type: string
+                      example: "2-4 weeks"
+                    pricedIn:
+                      type: boolean
+                    leadSignal:
+                      type: string
+              unpricedEffects:
+                type: array
+                items:
+                  type: string
+              historicalAnalog:
+                type: string
+                example: "2022 Russia-Ukraine energy shock"
+              timelineNarrative:
+                type: string
+        transmissionPaths:
+          type: array
+          items:
+            type: object
+            properties:
+              from:
+                type: string
+              to:
+                type: string
+              mechanism:
+                type: string
+              typicalLag:
+                type: string
+              currentFlow:
+                type: string
+                enum: [ACTIVE, BUILDING, DORMANT]
+        unpricedRisks:
+          type: array
+          items:
+            type: string
+        systemicNarrative:
+          type: string
+        earlyWarningSignals:
+          type: array
+          items:
+            type: string
+
+    InstabilityIntelligenceResult:
+      type: object
+      properties:
+        generatedAt:
+          type: string
+          format: date-time
+        cacheHit:
+          type: boolean
+        methodology:
+          type: string
+          description: Scoring formula — EPU, trade volatility, dollar weaponization, fiscal components
+        usInstabilityScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: |
+            Composite US policy instability score. Components: EPU (0-40),
+            trade volatility (0-20), dollar weaponization (0-20), EPU trend (0-20).
+        fiscalDominanceScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: |
+            Fiscal dominance risk score. Components: debt/GDP (0-40),
+            deficit trend (0-30), inflation expectations (0-30).
+        overallIntensity:
+          type: string
+          enum: [ACUTE, ELEVATED, MODERATE, LOW, NONE]
+        origins:
+          type: array
+          description: Persistent actor-level instability sources
+          items:
+            type: object
+            properties:
+              actor:
+                type: string
+                example: "United States"
+              mode:
+                type: string
+                example: "TRADE_POLICY_VOLATILITY_AND_DOLLAR_WEAPONIZATION"
+              intensity:
+                type: string
+                enum: [ACUTE, ELEVATED, MODERATE, LOW]
+              ongoingSince:
+                type: string
+                nullable: true
+                example: "2025-01-20"
+              keySignals:
+                type: array
+                items:
+                  type: string
+              policyReversal:
+                type: string
+              globalExposure:
+                type: object
+                properties:
+                  highRiskActors:
+                    type: array
+                    items:
+                      type: string
+                  transmissionMechanisms:
+                    type: array
+                    items:
+                      type: string
+              absorptionOutlook:
+                type: string
+                enum: [LOW, MODERATE, HIGH]
+              historicalComparisons:
+                type: array
+                items:
+                  type: string
+        scenarios:
+          type: array
+          description: Structural scenario detections (US_POLICY_INSTABILITY, US_FISCAL_DOMINANCE_RISK)
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum: [US_POLICY_INSTABILITY, US_FISCAL_DOMINANCE_RISK]
+              label:
+                type: string
+              confidence:
+                type: string
+                enum: [HIGH, MODERATE, LOW]
+              entryLayer:
+                type: integer
+              entrySignal:
+                type: string
+              propagation:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    layer:
+                      type: integer
+                    layerName:
+                      type: string
+                    status:
+                      type: string
+                      enum: [ACTIVE, FORMING, EXPECTED, NOT_YET, ABSORBED]
+                    evidence:
+                      type: string
+                    typicalLag:
+                      type: string
+                    pricedIn:
+                      type: boolean
+                    leadSignal:
+                      type: string
+              unpricedEffects:
+                type: array
+                items:
+                  type: string
+              historicalAnalog:
+                type: string
+              timelineNarrative:
+                type: string
+        dataAsOf:
+          type: object
+          properties:
+            epuDate:
+              type: string
+              nullable: true
+            tradeDate:
+              type: string
+              nullable: true
+            deficitDate:
+              type: string
+              nullable: true
+        systemicNarrative:
+          type: string
+        watchList:
+          type: array
+          items:
+            type: string
+          description: Lead signals to monitor across active structural scenarios
+
+# ── Paths ─────────────────────────────────────────────────────────────────────
+
+paths:
+
+  # ── Stability Oracle ──────────────────────────────────────────────────────
+
+  /health:
+    get:
+      tags: [Oracle, Meta]
+      summary: Oracle health check
+      description: Returns worker liveness and KV connectivity status.
+      operationId: getOracleHealth
+      servers:
+        - url: https://stability.untitledfinancial.com
+      responses:
+        '200':
+          description: Worker is live
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+
+  /score:
+    get:
+      tags: [Oracle]
+      summary: Latest stability score
+      description: |
+        Returns the most recent stability score from KV cache.
+        Updated hourly by the scheduled Cron worker.
+        Free — no payment required.
+      operationId: getScore
+      servers:
+        - url: https://stability.untitledfinancial.com
+      responses:
+        '200':
+          description: Current stability score
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StabilityScore'
+
+  /reliability:
+    get:
+      tags: [Oracle]
+      summary: Oracle uptime and run statistics
+      description: Returns uptime percentage, run count, and last compute elapsed time.
+      operationId: getReliability
+      servers:
+        - url: https://stability.untitledfinancial.com
+      responses:
+        '200':
+          description: Uptime and run metrics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uptimePct:
+                    type: number
+                    example: 99.97
+                  runCount:
+                    type: integer
+                    example: 8472
+                  lastElapsedMs:
+                    type: integer
+                    example: 2341
+
+  /quote:
+    get:
+      tags: [Oracle]
+      summary: Stability fee quote
+      description: |
+        Returns a real-time stability fee quote for a given transaction size.
+        Fee is derived from the current stability score, FX conditions, and
+        optional ESG score adjustment.
+      operationId: getQuote
+      servers:
+        - url: https://stability.untitledfinancial.com
+      parameters:
+        - name: amountUsd
+          in: query
+          required: true
+          schema:
+            type: number
+            example: 1000000
+          description: Transaction size in USD
+        - name: hasFx
+          in: query
+          schema:
+            type: boolean
+            default: false
+          description: Include FX adjustment (for cross-currency transactions)
+        - name: esgScore
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100
+          description: Counterparty ESG score for rate adjustment (optional)
+      responses:
+        '200':
+          description: Fee quote
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteResponse'
+
+  /intelligence:
+    post:
+      tags: [Oracle]
+      summary: AI synthesis intelligence — $0.10/call
+      description: |
+        Runs the full stability compute pipeline through a Claude AI narrative layer.
+        Returns prose synthesis of the current macro, climate, FX, geopolitical,
+        and on-chain environment, including risk flags.
+
+        **Payment:** x402 — $0.10 USDC on Base mainnet.
+        Call without `X-PAYMENT` to receive payment requirements.
+      operationId: getOracleIntelligence
+      servers:
+        - url: https://stability.untitledfinancial.com
+      security:
+        - x402Payment: []
+      responses:
+        '200':
+          description: AI intelligence synthesis
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  score:
+                    type: number
+                  tier:
+                    type: string
+                  narrative:
+                    type: string
+                  alerts:
+                    type: array
+                    items:
+                      type: object
+                  generatedAt:
+                    type: string
+                    format: date-time
+        '402':
+          description: Payment required (x402)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/x402Required'
+
+  /rail-status:
+    get:
+      tags: [Oracle]
+      summary: Global shipping lane and rail network status
+      description: |
+        Returns current operational status of major global shipping lanes
+        and rail corridors. Free — no payment required.
+      operationId: getRailStatus
+      servers:
+        - url: https://stability.untitledfinancial.com
+      responses:
+        '200':
+          description: Rail and shipping status
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /.well-known/x402:
+    get:
+      tags: [Meta]
+      summary: x402 payment discovery manifest
+      description: |
+        Returns x402 payment requirements for all gated endpoints.
+        Used by x402-compatible clients for automatic payment negotiation.
+      operationId: getX402Discovery
+      responses:
+        '200':
+          description: x402 manifest
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  x402Version:
+                    type: integer
+                    example: 1
+                  endpoints:
+                    type: array
+                    items:
+                      type: object
+
+  /openapi.json:
+    get:
+      tags: [Meta]
+      summary: OpenAPI specification (JSON)
+      operationId: getOpenApiJson
+      responses:
+        '200':
+          description: OpenAPI 3.1 spec
+          content:
+            application/json:
+              schema:
+                type: object
+
+  # ── Intelligence API ──────────────────────────────────────────────────────
+
+  /v1/intelligence/climate:
+    get:
+      tags: [Intelligence]
+      summary: Climate structural intelligence — $0.25/call
+      description: |
+        Long-run climate pattern analysis for economic and supply chain planning.
+        Identifies structural precipitation shifts across 10 global agricultural
+        zones — not short-term weather, but permanent pattern changes — and maps
+        them to commodity exposure, food inflation risk, supply chain vulnerability,
+        and migration pressure.
+
+        Used by sovereign wealth funds, agricultural commodity desks, multinational
+        food and beverage companies, and institutional investors with exposure to
+        climate-sensitive supply chains. Answers the question institutions can't
+        easily answer today: which production zones are structurally drying out,
+        what does that mean for specific commodities over the next 6–36 months,
+        and which regions are approaching habitability thresholds.
+
+        **Cache:** 24h · **Payment:** x402 ($0.25 USDC) or API key
+      operationId: getClimateIntelligence
+      servers:
+        - url: https://intelligence.untitledfinancial.com
+      security:
+        - ApiKeyAuth: []
+        - x402Payment: []
+      responses:
+        '200':
+          description: Climate structural intelligence
+          headers:
+            X-DPX-Climate-Score:
+              schema:
+                type: string
+              description: Global food system risk level
+            X-DPX-Cache-Hit:
+              schema:
+                type: string
+                enum: [true, false]
+            X-DPX-Generated:
+              schema:
+                type: string
+                format: date-time
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClimateIntelligence'
+        '402':
+          description: Payment required (x402)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/x402Required'
+        '429':
+          description: Rate limit exceeded (API key tier)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Rate limit exceeded
+                  resetAt:
+                    type: string
+                    format: date-time
+
+  /v1/intelligence/climate-pulse:
+    get:
+      tags: [Intelligence]
+      summary: Climate Pulse — $0.25/call
+      description: |
+        Near-real-time temperature anomaly and drought intelligence across 8 US
+        economic regions — updated every 3 hours. Compares current conditions
+        against the same calendar-period average for the prior 5 years.
+
+        Classifies heat anomaly (`EXTREME_HEAT` → `COLD`) and drought severity
+        (`EXCEPTIONAL` → `WET`) per region and maps directly to commodity supply
+        disruption, migration pressure, raw materials risk, labor productivity,
+        and energy demand. Includes 7-day forecast trend and weekly narrative context.
+
+        **Regions:** Northeast, South Florida/Everglades, Corn Belt, Southern
+        Great Plains, California Central Valley, Gulf Coast, Pacific Northwest,
+        Texas High Plains.
+
+        **Cache:** 3h · **Payment:** x402 ($0.25 USDC) or API key
+      operationId: getClimatePulse
+      servers:
+        - url: https://intelligence.untitledfinancial.com
+      security:
+        - ApiKeyAuth: []
+        - x402Payment: []
+      responses:
+        '200':
+          description: Climate Pulse intelligence
+          headers:
+            X-DPX-Climate-Signal:
+              schema:
+                type: string
+                enum: [CRITICAL_STRESS, ELEVATED_STRESS, MODERATE_STRESS, WATCH, NORMAL]
+              description: Overall climate stress signal across all regions
+            X-DPX-Heat-Regions:
+              schema:
+                type: string
+              description: Comma-separated region IDs with active heat anomaly
+            X-DPX-Drought-Regions:
+              schema:
+                type: string
+              description: Comma-separated region IDs with active drought
+            X-DPX-Cache-Hit:
+              schema:
+                type: string
+                enum: [true, false]
+            X-DPX-Generated:
+              schema:
+                type: string
+                format: date-time
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  generatedAt:
+                    type: string
+                    format: date-time
+                  cacheHit:
+                    type: boolean
+                  summary:
+                    type: object
+                    properties:
+                      regionsWithHeatAnomaly:
+                        type: integer
+                      regionsWithDrought:
+                        type: integer
+                      overallSignal:
+                        type: string
+                        enum: [CRITICAL_STRESS, ELEVATED_STRESS, MODERATE_STRESS, WATCH, NORMAL]
+                      commoditiesAtRisk:
+                        type: array
+                        items:
+                          type: string
+                      migrationPressureRegions:
+                        type: array
+                        items:
+                          type: string
+                      rawMaterialsAtRisk:
+                        type: array
+                        items:
+                          type: string
+                      systemicNarrative:
+                        type: string
+                  regions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        currentConditions:
+                          type: object
+                          properties:
+                            avgMaxTempF:
+                              type: number
+                            avgMinTempF:
+                              type: number
+                            forecastMaxTempF:
+                              type: number
+                            precip30dIn:
+                              type: number
+                        normals:
+                          type: object
+                          properties:
+                            maxTempF:
+                              type: number
+                            precip30dIn:
+                              type: number
+                            refYears:
+                              type: array
+                              items:
+                                type: integer
+                        anomaly:
+                          type: object
+                          properties:
+                            tempF:
+                              type: number
+                            precipPct:
+                              type: number
+                            tempSignal:
+                              type: string
+                              enum: [EXTREME_HEAT, HEAT, WARM, NORMAL, COOL, COLD]
+                            droughtStatus:
+                              type: string
+                              enum: [EXCEPTIONAL, EXTREME, SEVERE, MODERATE, ABNORMALLY_DRY, NORMAL, WET]
+                            trend:
+                              type: string
+                              enum: [WORSENING, STABLE, IMPROVING]
+                        impacts:
+                          type: object
+                          properties:
+                            foodSupply:
+                              type: string
+                              enum: [CRITICAL, HIGH, MODERATE, LOW, NONE]
+                            migrationPressure:
+                              type: string
+                              enum: [CRITICAL, HIGH, MODERATE, LOW, NONE]
+                            rawMaterials:
+                              type: string
+                              enum: [CRITICAL, HIGH, MODERATE, LOW, NONE]
+                            laborProductivity:
+                              type: string
+                              enum: [CRITICAL, HIGH, MODERATE, LOW, NONE]
+                            energyDemand:
+                              type: string
+                              enum: [CRITICAL, HIGH, MODERATE, LOW, NONE]
+                        commoditiesAtRisk:
+                          type: array
+                          items:
+                            type: string
+                        keySignals:
+                          type: array
+                          items:
+                            type: string
+        '402':
+          description: Payment required (x402)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/x402Required'
+        '429':
+          description: Rate limit exceeded (API key tier)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Rate limit exceeded
+                  resetAt:
+                    type: string
+                    format: date-time
+
+  /v1/intelligence/earth-systems:
+    get:
+      tags: [Intelligence]
+      summary: Earth systems intelligence — $0.50/call
+      description: |
+        Planetary health intelligence for long-horizon investors and institutions
+        with 20–50 year capital commitments. Earth Health Index (0–100) with
+        50–100 year historical context and proximity assessment to 9 known
+        climate tipping points across atmospheric, cryosphere, and ocean systems.
+
+        Used by pension funds and endowments stress-testing infrastructure
+        investments against long-run physical climate risk, development banks
+        evaluating sovereign lending in climate-exposed regions, sustainability
+        officers benchmarking portfolio alignment against planetary boundaries,
+        and institutional investors quantifying exposure to non-linear climate
+        risk — the kind that doesn't appear in standard scenario models.
+
+        **Cache:** 48h · **Payment:** x402 ($0.50 USDC) or API key
+      operationId: getEarthSystemsIntelligence
+      servers:
+        - url: https://intelligence.untitledfinancial.com
+      security:
+        - ApiKeyAuth: []
+        - x402Payment: []
+      responses:
+        '200':
+          description: Earth systems intelligence
+          headers:
+            X-DPX-Earth-Health-Index:
+              schema:
+                type: integer
+            X-DPX-Cache-Hit:
+              schema:
+                type: string
+            X-DPX-Generated:
+              schema:
+                type: string
+                format: date-time
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EarthSystemsIntelligence'
+        '402':
+          description: Payment required (x402)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/x402Required'
+
+  /v1/intelligence/macro-stress:
+    get:
+      tags: [Intelligence]
+      summary: Macro credit stress intelligence — $0.15/call
+      description: |
+        Classifies the current macroeconomic credit regime — EXPANSION,
+        LATE_CYCLE, STRESS, or CRISIS — with 2–6 week lead time on FX and
+        commodity market moves.
+
+        Used by treasury teams, central banks, macro hedge funds, and
+        multinational corporations to time large transactions, adjust hedging
+        positions, anticipate credit market tightening, and inform capital
+        allocation decisions. Helps governments and institutions anticipate
+        macroeconomic and policy risks before they are fully priced into markets.
+
+        **Cache:** 1h · **Payment:** x402 ($0.15 USDC) or API key
+      operationId: getMacroStressIntelligence
+      servers:
+        - url: https://intelligence.untitledfinancial.com
+      security:
+        - ApiKeyAuth: []
+        - x402Payment: []
+      responses:
+        '200':
+          description: Macro stress intelligence
+          headers:
+            X-DPX-Stress-Index:
+              schema:
+                type: string
+            X-DPX-Regime:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MacroStressIntelligence'
+        '402':
+          description: Payment required (x402)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/x402Required'
+
+  /v1/intelligence/supply-chain:
+    get:
+      tags: [Intelligence]
+      summary: Supply chain pressure intelligence — $0.25/call
+      description: |
+        Global supply chain pressure intelligence with live conditions at
+        4 critical waterway chokepoints. Per-lane bottleneck scoring with
+        a lead signal on goods inflation and availability disruptions.
+
+        Used by multinational procurement teams managing inventory timing,
+        logistics operators optimizing routing, commodity traders anticipating
+        price dislocations, and central banks monitoring imported inflation
+        risk. Identifies where goods are backing up before the impact reaches
+        consumer prices or production lines.
+
+        **Cache:** 6h · **Payment:** x402 ($0.25 USDC) or API key
+      operationId: getSupplyChainIntelligence
+      servers:
+        - url: https://intelligence.untitledfinancial.com
+      security:
+        - ApiKeyAuth: []
+        - x402Payment: []
+      responses:
+        '200':
+          description: Supply chain intelligence
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplyChainIntelligence'
+        '402':
+          description: Payment required (x402)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/x402Required'
+
+  /v1/intelligence/energy-transition:
+    get:
+      tags: [Intelligence]
+      summary: Energy transition intelligence — $0.25/call
+      description: |
+        Structural energy shift intelligence for investors and corporates
+        navigating the energy transition. Tracks renewable generation share
+        by source (wind, solar, hydro), fossil demand curve trajectory
+        (PLATEAUING / DECLINING / DECLINING_FAST), and grid carbon intensity
+        across US, EU, and global benchmarks.
+
+        Used by energy sector investors allocating between fossil and renewable
+        assets, utilities planning grid investment, institutional investors
+        managing climate transition risk in their portfolios, and corporates
+        benchmarking their operations against grid carbon intensity for
+        Scope 2 emissions reporting.
+
+        **Cache:** 24h · **Payment:** x402 ($0.25 USDC) or API key
+      operationId: getEnergyTransitionIntelligence
+      servers:
+        - url: https://intelligence.untitledfinancial.com
+      security:
+        - ApiKeyAuth: []
+        - x402Payment: []
+      responses:
+        '200':
+          description: Energy transition intelligence
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnergyTransitionIntelligence'
+        '402':
+          description: Payment required (x402)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/x402Required'
+
+  /v1/intelligence/esg/{address}:
+    get:
+      tags: [Intelligence]
+      summary: Entity ESG intelligence — $0.25/call
+      description: |
+        Entity-level ESG scoring for investment screening, counterparty
+        risk assessment, and regulatory compliance. Pass an Ethereum address
+        or Legal Entity Identifier (LEI) to score any legal entity across
+        Environmental, Social, and Governance dimensions.
+
+        Used by institutional investors screening investments against ESG
+        mandates, banks assessing counterparty sustainability risk before
+        lending or settlement, M&A due diligence teams evaluating acquisition
+        targets, and compliance teams preparing SFDR counterparty assessments.
+
+        **Cache:** 6h per address · **Payment:** x402 ($0.25 USDC) or API key
+      operationId: getEsgIntelligence
+      servers:
+        - url: https://intelligence.untitledfinancial.com
+      security:
+        - ApiKeyAuth: []
+        - x402Payment: []
+      parameters:
+        - name: address
+          in: path
+          required: true
+          schema:
+            type: string
+          description: |
+            Ethereum address (`0x...`) or 20-character LEI.
+            Example: `0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984`
+          example: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984"
+      responses:
+        '200':
+          description: ESG intelligence for entity
+          headers:
+            X-DPX-ESG-Score:
+              schema:
+                type: string
+            X-DPX-ESG-Tier:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ESGIntelligence'
+        '400':
+          description: Address required
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '402':
+          description: Payment required (x402)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/x402Required'
+
+  /v1/intelligence/cascade:
+    get:
+      tags: [Intelligence]
+      summary: Shock Cascade — financial shock propagation intelligence — $0.75/call
+      description: |
+        Models how exogenous shocks propagate through 7 interconnected layers
+        of the global financial system. Identifies active and forming cascades,
+        surfaces what is already priced into markets, and highlights the
+        downstream effects that are still incoming.
+
+        Detects 8 episodic cascade types: energy shocks, trade war escalation,
+        financial contagion, food supply crises, energy transition disruption,
+        emerging market currency crises, central bank policy shocks, and
+        sovereign debt crises. Each cascade includes a propagation timeline,
+        historical analog, and a clear distinction between priced-in and
+        unpriced risk.
+
+        Used by macro hedge funds positioning against systemic dislocations,
+        corporate geopolitical risk desks advising on capital repatriation and
+        supply chain exposure, treasury teams timing large cross-border
+        transactions, and multinational boards assessing cascading risks to
+        operations across multiple markets.
+
+        **Cache:** 2h · **Payment:** x402 ($0.75 USDC) or API key
+      operationId: getCascadeIntelligence
+      servers:
+        - url: https://intelligence.untitledfinancial.com
+      security:
+        - ApiKeyAuth: []
+        - x402Payment: []
+      responses:
+        '200':
+          description: Financial nervous system cascade analysis
+          headers:
+            X-DPX-Systemic-Risk:
+              schema:
+                type: string
+              description: Systemic risk score 0-100
+            X-DPX-Cascade-Status:
+              schema:
+                type: string
+              description: ACUTE_CASCADE | ACTIVE_CASCADE | WATCH | CALM
+            X-DPX-Active-Cascades:
+              schema:
+                type: string
+              description: Number of active cascades detected
+            X-DPX-Cache-Hit:
+              schema:
+                type: string
+            X-DPX-Generated:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CascadeIntelligence'
+        '402':
+          description: Payment required (x402)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/x402Required'
+
+  /v1/intelligence/instability:
+    get:
+      tags: [Intelligence]
+      summary: Instability Origins — structural geopolitical risk intelligence — $0.50/call
+      description: |
+        Persistent structural instability intelligence across 4 major economies.
+        Distinct from episodic shock events — tracks the sustained policy regimes
+        that continuously raise the baseline risk floor for global markets:
+        US policy uncertainty and fiscal dominance, China currency and capital
+        management stress, Russia energy weaponization, EU sovereign fragmentation.
+
+        Unlike a news-driven geopolitical risk feed, this captures the structural
+        conditions that persist for months or years — the backdrop against which
+        episodic events amplify or dampen.
+
+        Used by multinational corporations assessing country risk before long-term
+        capital commitments, governments and sovereign wealth funds managing
+        foreign reserve and investment exposure, long-duration infrastructure
+        investors stress-testing against structural regime shifts, and financial
+        institutions pricing country and currency risk into their portfolios.
+
+        Signals are derived from institutional macroeconomic, fiscal, currency, and sovereign indicators
+        across all 4 actors.
+
+        **Cache:** 24h · **Payment:** x402 ($0.50 USDC) or API key
+      operationId: getInstabilityIntelligence
+      servers:
+        - url: https://intelligence.untitledfinancial.com
+      security:
+        - ApiKeyAuth: []
+        - x402Payment: []
+      responses:
+        '200':
+          description: Structural instability origins analysis
+          headers:
+            X-DPX-US-Instability:
+              schema:
+                type: string
+              description: US instability score 0-100
+            X-DPX-Fiscal-Dominance:
+              schema:
+                type: string
+              description: Fiscal dominance risk score 0-100
+            X-DPX-Instability-Intensity:
+              schema:
+                type: string
+              description: ACUTE | ELEVATED | MODERATE | LOW | NONE
+            X-DPX-Cache-Hit:
+              schema:
+                type: string
+            X-DPX-Generated:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstabilityIntelligenceResult'
+        '402':
+          description: Payment required (x402)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/x402Required'
+
+  /v1/intelligence/commodity:
+    get:
+      tags: [Intelligence]
+      summary: Commodity Intelligence — multi-commodity stress index — $0.25/call
+      description: |
+        Multi-commodity stress index covering energy, agricultural, and critical
+        mineral markets. Returns a composite stress score (0–100), regime
+        classification (CALM / MODERATE / STRESSED / CRISIS), per-commodity
+        analysis for oil, natural gas, gold, wheat, corn, and copper, cross-commodity
+        signal correlation, and a forward inflation lead signal.
+
+        Used by commodity desks tracking input cost regimes, central banks
+        modelling inflation pass-through, macro funds positioning across commodity
+        cycles, and treasury teams assessing raw material cost exposure.
+
+        **Cache:** 6h · **Payment:** x402 ($0.25 USDC) or API key
+      operationId: getCommodityIntelligence
+      servers:
+        - url: https://intelligence.untitledfinancial.com
+      security:
+        - ApiKeyAuth: []
+        - x402Payment: []
+      responses:
+        '200':
+          description: Multi-commodity stress intelligence
+          headers:
+            X-DPX-Commodity-Stress:
+              schema:
+                type: string
+              description: Commodity stress index 0-100
+            X-DPX-Commodity-Regime:
+              schema:
+                type: string
+              description: CALM | MODERATE | STRESSED | CRISIS
+            X-DPX-Cache-Hit:
+              schema:
+                type: string
+            X-DPX-Generated:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  generatedAt:
+                    type: string
+                    format: date-time
+                  cacheHit:
+                    type: boolean
+                  stressIndex:
+                    type: number
+                    description: Composite commodity stress score 0-100
+                  regime:
+                    type: string
+                    enum: [CALM, MODERATE, STRESSED, CRISIS]
+                  commodities:
+                    type: object
+                    additionalProperties: true
+                  inflationLeadSignal:
+                    type: string
+                  narrative:
+                    type: string
+        '402':
+          description: Payment required (x402)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/x402Required'
+
+  /v1/intelligence/sovereign-debt:
+    get:
+      tags: [Intelligence]
+      summary: Sovereign Debt Intelligence — debt sustainability and default risk — $0.25/call
+      description: |
+        Debt sustainability and default risk assessment for major sovereigns:
+        United States, European Union, United Kingdom, and Japan. Returns
+        debt/GDP trajectories, fiscal deficit trends, yield curve dynamics,
+        systemic contagion risk scoring, and settlement corridor impact assessment.
+
+        Used by fixed income desks pricing sovereign credit risk, sovereign wealth
+        funds managing foreign reserve exposure, cross-border payment teams
+        assessing corridor risk in high-debt economies, and institutional
+        investors stress-testing long-duration portfolios against fiscal dominance
+        scenarios.
+
+        **Cache:** 12h · **Payment:** x402 ($0.25 USDC) or API key
+      operationId: getSovereignDebtIntelligence
+      servers:
+        - url: https://intelligence.untitledfinancial.com
+      security:
+        - ApiKeyAuth: []
+        - x402Payment: []
+      responses:
+        '200':
+          description: Sovereign debt sustainability intelligence
+          headers:
+            X-DPX-Sovereign-Regime:
+              schema:
+                type: string
+              description: Global debt regime classification
+            X-DPX-Cache-Hit:
+              schema:
+                type: string
+            X-DPX-Generated:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  generatedAt:
+                    type: string
+                    format: date-time
+                  cacheHit:
+                    type: boolean
+                  sovereigns:
+                    type: object
+                    additionalProperties: true
+                  systemicSignals:
+                    type: object
+                    properties:
+                      globalDebtRegime:
+                        type: string
+                      contagionRisk:
+                        type: string
+                      settlementImpact:
+                        type: string
+                  narrative:
+                    type: string
+        '402':
+          description: Payment required (x402)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/x402Required'
+
+  /v1/intelligence/water-risk:
+    get:
+      tags: [Intelligence]
+      summary: Water Risk Intelligence — physical water stress across major economies — $0.25/call
+      description: |
+        Physical water stress intelligence across 6 major economic regions:
+        US Southwest, US Midwest, Western Europe, South Asia, East Asia, and
+        Sub-Saharan Africa. Returns drought severity index, sector-level exposure
+        mapping (agriculture, semiconductors, beverages, energy), TNFD-aligned
+        physical risk rating, and forward supply chain impact signals.
+
+        Used by asset managers with physical climate risk mandates, corporate
+        treasury teams assessing operational exposure in water-stressed regions,
+        TNFD reporters quantifying nature-related financial risks, and supply chain
+        teams modelling raw material availability under water scarcity scenarios.
+
+        Data: USDA drought monitor, FRED, NOAA precipitation, BEA regional data.
+
+        **Cache:** 12h · **Payment:** x402 ($0.25 USDC) or API key
+      operationId: getWaterRiskIntelligence
+      servers:
+        - url: https://intelligence.untitledfinancial.com
+      security:
+        - ApiKeyAuth: []
+        - x402Payment: []
+      responses:
+        '200':
+          description: Physical water risk intelligence
+          headers:
+            X-DPX-Water-Stress:
+              schema:
+                type: string
+              description: Global water stress index 0-100
+            X-DPX-TNFD-Rating:
+              schema:
+                type: string
+              description: TNFD physical risk rating
+            X-DPX-Cache-Hit:
+              schema:
+                type: string
+            X-DPX-Generated:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  generatedAt:
+                    type: string
+                    format: date-time
+                  cacheHit:
+                    type: boolean
+                  globalStressIndex:
+                    type: number
+                    description: Composite water stress score 0-100
+                  regions:
+                    type: object
+                    additionalProperties: true
+                  sectorExposure:
+                    type: object
+                    additionalProperties: true
+                  tnfdAlignment:
+                    type: object
+                    properties:
+                      physicalRiskRating:
+                        type: string
+                      disclosureRecommendation:
+                        type: string
+                  narrative:
+                    type: string
+        '402':
+          description: Payment required (x402)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/x402Required'
+
+  /health:
+    get:
+      tags: [Meta]
+      summary: Intelligence API health check
+      operationId: getIntelligenceHealth
+      servers:
+        - url: https://intelligence.untitledfinancial.com
+      responses:
+        '200':
+          description: Worker liveness and endpoint index
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [ok]
+                  service:
+                    type: string
+                    example: dpx-intelligence
+                  kvOk:
+                    type: boolean
+                  endpoints:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        path:
+                          type: string
+                        price:
+                          type: string
+                        cache:
+                          type: string
+                        status:
+                          type: string
+
+  /v1/intelligence/mycelium:
+    get:
+      tags: [Intelligence]
+      summary: Mycelium Network Oracle — financial system network health — $0.50/call
+      description: |
+        Every major financial crisis follows the same pattern: visible market
+        stress appears last. The spread widens, the currency crashes, the bank
+        fails — but underground, the network had been deteriorating for weeks.
+        Standard financial models read individual metrics. The Mycelium Oracle
+        reads the network.
+
+        In nature, mycelium connects a forest as an underground network of
+        threads. It transfers nutrients between nodes, propagates stress signals
+        when one node is under attack, and reroutes around dead zones. The
+        mushroom (fruiting body) only appears after the underground process has
+        been running for weeks or months. It is the visible end product of an
+        invisible system.
+
+        This oracle applies the same model to financial markets:
+
+        **Nodes** are the major funding markets and capital flow hubs:
+        US Treasury/interbank, EM dollar funding, European sovereign, global
+        trade finance, the crypto/DeFi bridge to traditional credit, and Asian
+        capital flows.
+
+        **Threads** are the connections between them — correspondent banking
+        relationships, capital flow channels, trade finance corridors.
+
+        **Nutrients** are liquidity — the thing the network exists to transfer.
+
+        **Dead zones** are severed connections: sanctioned corridors, failed
+        correspondent relationships, liquidity traps where capital has stopped
+        moving.
+
+        **The fruiting body** is the visible crisis. It appears last.
+
+        The oracle tracks all six nodes for connectivity health, monitors thread
+        thinning and dead zone formation, measures how fast stress signals are
+        propagating, and produces a `fruitingBodyRisk` probability with a lead
+        time estimate — typically 6–14 weeks before the visible event.
+
+        This is not a reactive model. It does not tell you what happens after
+        a shock hits. It tells you whether the network is forming a crisis
+        before anyone can see it.
+
+        **Significant for:** macro hedge funds detecting systemic risk before
+        it appears in spread data; corporate treasury teams assessing whether
+        cross-border settlement counterparty networks are intact; central banks
+        monitoring correspondent banking health; long-duration investors
+        stress-testing against network topology shifts that precede recessions.
+
+        **Cache:** 6h · **Payment:** x402 ($0.50 USDC) or API key
+      operationId: getMyceliumOracle
+      servers:
+        - url: https://intelligence.untitledfinancial.com
+      security:
+        - ApiKeyAuth: []
+        - x402Payment: []
+      responses:
+        '200':
+          description: Financial network health analysis
+          headers:
+            X-DPX-Network-Health:
+              schema:
+                type: string
+              description: Network vitality score 0-100
+            X-DPX-Network-Regime:
+              schema:
+                type: string
+              description: HEALTHY | THINNING | STRESSED_CONNECTIVITY | DEAD_ZONE_FORMING | FRUITING_BODY_IMMINENT
+            X-DPX-Fruiting-Body-Risk:
+              schema:
+                type: string
+              description: Crisis formation probability 0-1
+            X-DPX-Lead-Time-Weeks:
+              schema:
+                type: string
+              description: Estimated weeks until surface manifestation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  networkHealth:
+                    type: number
+                    description: Composite network vitality 0–100. 100 = all nodes robust, all threads flowing.
+                  regime:
+                    type: string
+                    enum: [HEALTHY, THINNING, STRESSED_CONNECTIVITY, DEAD_ZONE_FORMING, FRUITING_BODY_IMMINENT]
+                  nodes:
+                    type: object
+                    description: Health assessment for each major network node
+                  threadHealth:
+                    type: object
+                    properties:
+                      thinningThreads:
+                        type: array
+                        items:
+                          type: string
+                        description: Connections losing flow — not yet severed
+                      deadZones:
+                        type: array
+                        items:
+                          type: string
+                        description: Fully severed network corridors
+                      newConnections:
+                        type: array
+                        items:
+                          type: string
+                        description: Emerging pathways as network reroutes
+                  fruitingBodyRisk:
+                    type: object
+                    properties:
+                      probability:
+                        type: number
+                        description: 0–1 probability of visible crisis within leadTimeWeeks
+                      leadTimeWeeks:
+                        type: integer
+                        description: Estimated weeks before surface manifestation
+                      mostLikelyType:
+                        type: string
+                        description: Crisis type if it surfaces
+                      underground:
+                        type: string
+                        description: Narrative of the underground process currently forming
+                      historicalAnalog:
+                        type: string
+                        description: Comparable historical network state
+                  networkNarrative:
+                    type: string
+                    description: Plain-language synthesis of current network state
+        '402':
+          description: Payment required (x402)
+
+  /v1/intelligence/currency-stress:
+    get:
+      tags: [Intelligence]
+      summary: Currency Stress Intelligence — G10 and EM currency stress — $0.25/call
+      description: |
+        G10 and EM currency stress assessment. Returns a dollar regime
+        classification, per-currency stress signals, capital flow direction by
+        corridor, and settlement corridor impact for cross-border payments.
+
+        Covers USD, EUR, GBP, JPY, CHF, CAD, AUD, NZD, SEK, NOK plus 10 major
+        EM pairs. Data sources: FRED (DTWEXBGS, DEXUSEU, DEXJPUS, DEXCHUS,
+        DEXUSUK) and IMF/BIS capital flow indicators.
+
+        Settlement corridor impact field is directly relevant to payment routing
+        — surfacing which corridors carry elevated FX cost or intervention risk.
+      operationId: getCurrencyStress
+      security:
+        - ApiKeyAuth: []
+        - x402Payment: []
+      responses:
+        '200':
+          description: Currency stress intelligence
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  generatedAt:
+                    type: string
+                    format: date-time
+                  dollarRegime:
+                    type: string
+                    enum: [STRONG_USD, NEUTRAL, WEAK_USD, VOLATILE]
+                  stressIndex:
+                    type: number
+                    minimum: 0
+                    maximum: 100
+                  g10:
+                    type: object
+                    description: Per-currency signal for G10 currencies
+                  emergingMarkets:
+                    type: object
+                    description: Per-currency signal for major EM pairs
+                  settlementCorridorImpact:
+                    type: object
+                    description: Per-corridor settlement friction assessment
+                  narrative:
+                    type: string
+        '402':
+          description: Payment required (x402)
+
+  /v1/intelligence/biodiversity:
+    get:
+      tags: [Intelligence]
+      summary: Biodiversity & Nature Risk — TNFD-aligned — $0.25/call
+      description: |
+        TNFD-aligned nature risk assessment. Returns IUCN Red List species threat
+        signals by sector exposure, habitat integrity indices, and SFDR PAI 7
+        biodiversity-sensitive area data for portfolio compliance.
+
+        Frameworks covered: TNFD LEAP, SFDR PAI 7, CSRD ESRS E4.
+
+        Data sources: IUCN Red List API, GBIF species occurrence (open),
+        NASA MODIS land cover, USGS land use change.
+
+        The sector dependency matrix identifies which sectors carry material
+        nature dependency risk — relevant for portfolio ESG screening and
+        mandatory EU SFDR PAI 7 disclosures.
+      operationId: getBiodiversity
+      security:
+        - ApiKeyAuth: []
+        - x402Payment: []
+      responses:
+        '200':
+          description: Biodiversity and nature risk intelligence
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  generatedAt:
+                    type: string
+                    format: date-time
+                  globalBiodiversityIndex:
+                    type: number
+                    minimum: 0
+                    maximum: 100
+                  tnfdRating:
+                    type: string
+                    enum: [LOW, MODERATE, HIGH, CRITICAL]
+                  iucnSignals:
+                    type: object
+                    properties:
+                      criticallyEndangered:
+                        type: integer
+                      endangered:
+                        type: integer
+                      trend:
+                        type: string
+                      hotspots:
+                        type: array
+                        items:
+                          type: string
+                  sectorDependencyMatrix:
+                    type: object
+                    description: Sector-level nature dependency scores
+                  sfdPai7:
+                    type: object
+                    description: SFDR PAI 7 biodiversity-sensitive area data
+                  narrative:
+                    type: string
+        '402':
+          description: Payment required (x402)
