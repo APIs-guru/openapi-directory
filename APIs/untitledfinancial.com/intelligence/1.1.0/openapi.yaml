@@ -2,7 +2,7 @@ openapi: 3.1.0
 
 info:
   title: DPX Oracle & Intelligence API
-  version: 1.0.0
+  version: 1.1.0
   description: |
     Two production APIs from DPX / Untitled Financial:
 
@@ -11,9 +11,10 @@ info:
     geopolitical, on-chain, and basket signals. Updated hourly via Cloudflare Worker.
 
     **Intelligence API** (`intelligence.untitledfinancial.com`)
-    Standalone per-call data product. Climate, planetary health, credit stress,
-    supply chain, energy transition, and entity ESG intelligence — all x402-gated
-    with USDC micropayments on Base mainnet.
+    15 per-call paid endpoints covering macro stress, climate, G10/EM currency stress,
+    supply chain, energy transition, entity ESG, sovereign debt, water risk, financial
+    network topology, nature risk (TNFD-aligned), and financial shock cascade propagation.
+    All x402-gated with USDC micropayments on Base mainnet, or API key.
 
     ## Authentication
 
@@ -21,11 +22,16 @@ info:
     Call any gated endpoint without headers to receive a `402 Payment Required`
     response with `paymentRequirements`. Attach a signed USDC payment as the
     `X-PAYMENT` header (base64-encoded). Payments verified on-chain via Coinbase
-    x402 facilitator.
+    x402 facilitator. No account required.
 
     ### API Key (marketplace / traditional)
     Pass `X-API-Key: <your-key>` on Intelligence API endpoints. Keys are issued
-    per-plan on RapidAPI and directly.
+    per-plan on RapidAPI (https://rapidapi.com/untitledfinancial/api/dpx-intelligence)
+    and directly via untitledfinancial.com.
+
+  x-rapidapi-url: https://rapidapi.com/untitledfinancial/api/dpx-intelligence
+  x-mcp-server: https://mcp.untitledfinancial.com
+  x-mcp-npm: "@untitledfinancial/dpx-mcp"
 
   contact:
     name: Untitled Financial
@@ -34,6 +40,10 @@ info:
   license:
     name: BUSL-1.1
     url: https://mariadb.com/bsl11/
+
+externalDocs:
+  description: Full documentation
+  url: https://docs.untitledfinancial.com/api/intelligence-api
 
 servers:
   - url: https://stability.untitledfinancial.com
