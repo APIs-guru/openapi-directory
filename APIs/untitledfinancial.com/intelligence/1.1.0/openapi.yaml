@@ -342,14 +342,12 @@ components:
       type: object
       properties:
         value:
-          type: number
-          nullable: true
+          type: [number, 'null']
         signal:
           type: string
           enum: [NORMAL, WATCH, ELEVATED, CRITICAL]
         asOf:
-          type: string
-          nullable: true
+          type: [string, 'null']
         context:
           type: string
 
@@ -362,8 +360,7 @@ components:
         cacheHit:
           type: boolean
         gscpiZScore:
-          type: number
-          nullable: true
+          type: [number, 'null']
           description: "Global supply chain pressure index z-score. 0 = neutral."
         regime:
           type: string
@@ -404,8 +401,7 @@ components:
       type: object
       properties:
         levelCm:
-          type: integer
-          nullable: true
+          type: [integer, 'null']
         trend:
           type: string
           enum: [FALLING, RISING, STABLE, UNKNOWN]
@@ -418,8 +414,7 @@ components:
         context:
           type: string
         asOf:
-          type: string
-          nullable: true
+          type: [string, 'null']
 
     EnergyTransitionIntelligence:
       type: object
@@ -430,8 +425,7 @@ components:
         cacheHit:
           type: boolean
         renewableSharePct:
-          type: number
-          nullable: true
+          type: [number, 'null']
           description: "% of total US generation from wind + solar + hydro"
         renewableTrend:
           type: string
@@ -470,8 +464,7 @@ components:
           type: string
           description: Input identifier (Ethereum address or LEI)
         entityName:
-          type: string
-          nullable: true
+          type: [string, 'null']
         esgScore:
           type: integer
           minimum: 0
@@ -488,11 +481,9 @@ components:
                 score:
                   type: integer
                 violations:
-                  type: integer
-                  nullable: true
+                  type: [integer, 'null']
                 penalties:
-                  type: integer
-                  nullable: true
+                  type: [integer, 'null']
                   description: Total EPA penalties in USD
                 riskLevel:
                   type: string
@@ -510,11 +501,9 @@ components:
                 score:
                   type: integer
                 incidents:
-                  type: integer
-                  nullable: true
+                  type: [integer, 'null']
                 fatalities:
-                  type: integer
-                  nullable: true
+                  type: [integer, 'null']
                 riskLevel:
                   type: string
         flags:
@@ -582,8 +571,7 @@ components:
                   summary:
                     type: string
                   dataAge:
-                    type: string
-                    nullable: true
+                    type: [string, 'null']
         activeCascades:
           type: array
           items:
@@ -710,8 +698,7 @@ components:
                 type: string
                 enum: [ACUTE, ELEVATED, MODERATE, LOW]
               ongoingSince:
-                type: string
-                nullable: true
+                type: [string, 'null']
                 example: "2025-01-20"
               keySignals:
                 type: array
@@ -787,14 +774,11 @@ components:
           type: object
           properties:
             epuDate:
-              type: string
-              nullable: true
+              type: [string, 'null']
             tradeDate:
-              type: string
-              nullable: true
+              type: [string, 'null']
             deficitDate:
-              type: string
-              nullable: true
+              type: [string, 'null']
         systemicNarrative:
           type: string
         watchList:
@@ -1824,7 +1808,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/x402Required'
 
-  /health:
+  /intelligence/health:
     get:
       tags: [Meta]
       summary: Intelligence API health check

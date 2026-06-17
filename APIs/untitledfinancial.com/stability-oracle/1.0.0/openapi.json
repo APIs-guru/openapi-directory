@@ -344,8 +344,8 @@
           "schema":      { "type": "string" },
           "timestamp":   { "type": "string", "format": "date-time" },
           "components":  { "type": "object" },
-          "volumeTiers": { "type": "array" },
-          "scenarioExamples": { "type": "array" },
+          "volumeTiers": { "type": "array", "items": { "type": "object" } },
+          "scenarioExamples": { "type": "array", "items": { "type": "string" } },
           "competitive": { "type": "object" }
         }
       },
