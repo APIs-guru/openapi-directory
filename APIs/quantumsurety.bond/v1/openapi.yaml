@@ -8,7 +8,7 @@ info:
     data.texas.gov (Socrata dataset 7358-krk7) and Texas Secretary of State.
     Updated daily. No authentication required for public endpoints.
 
-    Maintained by Quantum Surety LLC — Texas-licensed surety bond agency
+    Maintained by Quantum Surety LLC - Texas-licensed surety bond agency
     (TDI License #3480229). https://quantumsurety.bond
   version: 1.0.0
   contact:
@@ -16,7 +16,7 @@ info:
     url: https://quantumsurety.bond
     email: api@quantumsurety.bond
   license:
-    name: Public Domain (source data under Texas Government Code § 552)
+    name: Public Domain (source data under Texas Government Code s. 552)
     url: https://statutes.capitol.texas.gov/Docs/GV/htm/GV.552.htm
   x-apisguru-categories:
     - open_data
@@ -50,11 +50,11 @@ paths:
                         type: integer
                         example: 240627
                       expiring_30d:
-                        type: string
-                        example: "33442"
+                        type: integer
+                        example: 33442
                       expiring_90d:
-                        type: string
-                        example: "102781"
+                        type: integer
+                        example: 102781
                   notaries:
                     type: object
                     properties:
@@ -65,11 +65,11 @@ paths:
                         type: integer
                         example: 102522
                       expiring_30d:
-                        type: string
-                        example: "10121"
+                        type: integer
+                        example: 10121
                       expiring_90d:
-                        type: string
-                        example: "33263"
+                        type: integer
+                        example: 33263
                   generated_at:
                     type: string
                     format: date-time
@@ -168,6 +168,36 @@ paths:
                 type: array
                 items:
                   type: object
+                  properties:
+                    notary_id:
+                      type: string
+                      example: "10000125"
+                    first_name:
+                      type: string
+                      example: "Jane"
+                    last_name:
+                      type: string
+                      example: "Smith"
+                    city:
+                      type: string
+                      example: "Houston"
+                    county:
+                      type: string
+                      example: "Harris"
+                    status:
+                      type: string
+                      enum: [active, expiring, expired]
+                      example: active
+                    expires_at:
+                      type: string
+                      format: date
+                      example: "2027-03-15"
+                    surety_company:
+                      type: string
+                      example: "Quantum Surety LLC"
+                    bond_amount:
+                      type: integer
+                      example: 10000
   /api/contractor-search:
     get:
       summary: Search TDLR contractors by name, county, or license type
@@ -196,6 +226,33 @@ paths:
                 type: array
                 items:
                   type: object
+                  properties:
+                    license_number:
+                      type: string
+                      example: "TECL28853"
+                    business_name:
+                      type: string
+                      example: "Bayway Electric LLC"
+                    owner_name:
+                      type: string
+                      example: "John Bayway"
+                    license_type:
+                      type: string
+                      example: "Electrical Contractor"
+                    county:
+                      type: string
+                      example: "Harris"
+                    city:
+                      type: string
+                      example: "Houston"
+                    status:
+                      type: string
+                      enum: [active, expiring, expired]
+                      example: active
+                    bond_expiry_date:
+                      type: string
+                      format: date
+                      example: "2027-06-30"
   /api/v1/status:
     get:
       summary: API status and record counts
@@ -207,5 +264,21 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  notaries:
+                    type: integer
+                    description: Total Texas notary records in database
+                    example: 558898
+                  contractors:
+                    type: integer
+                    description: Total TDLR contractor records in database
+                    example: 775173
+                  last_updated:
+                    type: string
+                    format: date-time
+                    description: Timestamp of last data refresh from TDLR/TX SOS
 x-apisguru-urls:
   - https://verify.quantumsurety.bond/api-docs.html
