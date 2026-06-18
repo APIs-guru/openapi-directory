@@ -1,0 +1,211 @@
+openapi: 3.0.0
+info:
+  title: Quantum Surety Bond Watch API
+  description: |
+    Live Texas contractor and notary bond compliance data, covering all 775,173
+    TDLR contractor license records and 558,898 Texas notary commissions.
+    Data sourced from Texas Department of Licensing and Regulation (TDLR) via
+    data.texas.gov (Socrata dataset 7358-krk7) and Texas Secretary of State.
+    Updated daily. No authentication required for public endpoints.
+
+    Maintained by Quantum Surety LLC — Texas-licensed surety bond agency
+    (TDI License #3480229). https://quantumsurety.bond
+  version: 1.0.0
+  contact:
+    name: Quantum Surety LLC
+    url: https://quantumsurety.bond
+    email: api@quantumsurety.bond
+  license:
+    name: Public Domain (source data under Texas Government Code § 552)
+    url: https://statutes.capitol.texas.gov/Docs/GV/htm/GV.552.htm
+  x-apisguru-categories:
+    - open_data
+    - government
+  x-logo:
+    url: https://quantumsurety.bond/QS_Logo.png
+servers:
+  - url: https://verify.quantumsurety.bond
+    description: Production
+paths:
+  /api/bond-watch/summary:
+    get:
+      summary: Statewide bond compliance summary
+      description: Returns aggregate bond compliance statistics for all Texas TDLR contractors and SOS notaries.
+      operationId: getBondWatchSummary
+      responses:
+        '200':
+          description: Statewide summary
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  contractors:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                        example: 775173
+                      expired:
+                        type: integer
+                        example: 240627
+                      expiring_30d:
+                        type: string
+                        example: "33442"
+                      expiring_90d:
+                        type: string
+                        example: "102781"
+                  notaries:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                        example: 558898
+                      expired:
+                        type: integer
+                        example: 102522
+                      expiring_30d:
+                        type: string
+                        example: "10121"
+                      expiring_90d:
+                        type: string
+                        example: "33263"
+                  generated_at:
+                    type: string
+                    format: date-time
+  /api/bond-watch/counties:
+    get:
+      summary: All 254 Texas counties ranked by bond lapsed rate
+      description: Returns bond compliance data for every Texas county, sortable by lapsed rate.
+      operationId: getBondWatchCounties
+      responses:
+        '200':
+          description: County-level compliance data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    county:
+                      type: string
+                      example: Harris
+                    total:
+                      type: integer
+                    expired:
+                      type: integer
+                    lapsed_rate:
+                      type: number
+                      format: float
+  /api/bond-watch/expiring:
+    get:
+      summary: Contractors expiring in a county within N days
+      description: Returns TDLR contractors in a specific county whose bonds expire within the specified number of days.
+      operationId: getBondWatchExpiring
+      parameters:
+        - name: county
+          in: query
+          required: true
+          schema:
+            type: string
+            example: Harris
+        - name: days
+          in: query
+          schema:
+            type: integer
+            default: 30
+            example: 30
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+            maximum: 500
+      responses:
+        '200':
+          description: List of expiring contractors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    license_number:
+                      type: string
+                    business_name:
+                      type: string
+                    license_type:
+                      type: string
+                    county:
+                      type: string
+                    bond_expiry_date:
+                      type: string
+                      format: date
+  /api/search:
+    get:
+      summary: Search notaries by name or city
+      description: Public search of Texas notary bond records.
+      operationId: searchNotaries
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+            example: "Smith"
+        - name: city
+          in: query
+          schema:
+            type: string
+            example: "Houston"
+      responses:
+        '200':
+          description: Notary search results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /api/contractor-search:
+    get:
+      summary: Search TDLR contractors by name, county, or license type
+      description: Public search of Texas TDLR contractor bond records (816,000+ records).
+      operationId: searchContractors
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+        - name: county
+          in: query
+          schema:
+            type: string
+        - name: type
+          in: query
+          schema:
+            type: string
+            example: "Electrical Contractor"
+      responses:
+        '200':
+          description: Contractor search results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /api/v1/status:
+    get:
+      summary: API status and record counts
+      operationId: getApiStatus
+      responses:
+        '200':
+          description: Status
+          content:
+            application/json:
+              schema:
+                type: object
+x-apisguru-urls:
+  - https://verify.quantumsurety.bond/api-docs.html
