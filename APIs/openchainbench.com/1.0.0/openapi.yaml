@@ -96,8 +96,9 @@ components:
         unit:
           type: string
         value:
-          type: number
-          nullable: true
+          type:
+            - number
+            - "null"
         headline:
           type: string
         url:
@@ -120,12 +121,15 @@ components:
         title:
           type: string
         value:
-          type: number
-          nullable: true
+          type:
+            - number
+            - "null"
         unit:
           type: string
         rankings:
           type: array
+          items:
+            $ref: "#/components/schemas/Ranking"
         sparkline:
           type: array
           items:
@@ -140,3 +144,40 @@ components:
         asOf:
           type: string
           format: date-time
+    Ranking:
+      type: object
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        ms:
+          type: object
+          properties:
+            p50:
+              type: number
+            p90:
+              type: number
+            p99:
+              type: number
+            mean:
+              type: number
+        successRate:
+          type: number
+        sampleSize:
+          type:
+            - integer
+            - "null"
+        sampleHealth:
+          type:
+            - number
+            - "null"
+        dataConfidence:
+          type:
+            - string
+            - "null"
+          enum:
+            - healthy
+            - low
+            - insufficient
+            - null
