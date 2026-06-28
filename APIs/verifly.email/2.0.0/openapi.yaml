@@ -1,0 +1,2489 @@
+openapi: 3.1.0
+info:
+  title: Verifly Email Verification API
+  version: 2.0.0
+  description: |-
+    Pay-as-you-go email verification API for developers, SaaS products, signup validation, bulk email list cleaning, CSV workflows, and AI agents. Verifly verifies deliverability, cleans lists, extracts emails from text, detects risky/disposable/role addresses, checks domain DNS health, and exposes usage/credit/billing endpoints.
+
+    AGENT SELF-ONBOARDING: An autonomous agent can get a working API key with NO human, captcha, or payment by calling POST /api/v1/autonomous/register with an email + password. It returns a vf_ API key and 100 free credits (auto-confirmed). Use that key as 'Authorization: Bearer vf_...' on every /api/v1 endpoint.
+
+    PURCHASING (agent-native): POST /api/v1/billing with method 'crypto' and a currency (BTC/ETH/LTC/USDT/USDC) returns a raw wallet address + amount + QR so an agent can top up credits from a wallet with no browser.
+
+    RATE LIMITS: Responses include X-RateLimit-Limit, X-RateLimit-Remaining and X-RateLimit-Reset headers; 429 responses also include Retry-After (seconds).
+  contact:
+    name: Verifly Support
+    email: hello@veriflyemail.com
+    url: https://verifly.email/docs
+  termsOfService: https://verifly.email/terms
+  x-apisguru-categories:
+  - email
+  - developer_tools
+  x-logo:
+    url: https://verifly.email/logo.svg
+  x-origin:
+  - format: openapi
+    version: '3.1'
+    url: https://verifly.email/openapi.json
+  x-providerName: verifly.email
+jsonSchemaDialect: https://json-schema.org/draft/2020-12/schema
+servers:
+- url: https://verifly.email
+  description: 'Production API. All /api/v1/* paths require Authorization: Bearer vf_<key>.'
+externalDocs:
+  description: Verifly API docs
+  url: https://verifly.email/docs
+tags:
+- name: Onboarding
+  description: Self-service agent registration. Get a first API key + free credits with no human.
+- name: Verification
+  description: Single, batch, and asynchronous bulk email verification.
+- name: Jobs
+  description: Asynchronous bulk verification job lifecycle (status, results, download, process).
+- name: Files
+  description: Saved file storage for cleaned/verified lists, with raw download.
+- name: List Cleaning
+  description: Email list cleaning and extraction utilities (no mailbox verification).
+- name: Account
+  description: Account profile, credits, usage, and API key management.
+- name: Billing
+  description: Credit packages and Stripe / crypto checkout. Agent-native crypto pay.
+- name: Tools
+  description: Public utility endpoints such as domain DNS health.
+security:
+- bearerAuth: []
+paths:
+  /api/v1/autonomous/register:
+    post:
+      tags:
+      - Onboarding
+      operationId: autonomousRegister
+      summary: Self-register and get an API key (no human, 100 free credits)
+      description: THE agent self-onboarding path. Creates an auto-confirmed account from {email, password} and returns a usable vf_ API key plus 100 free credits. No captcha, no email confirmation, no payment. Rate limited to 60 registrations per hour per IP (429 with Retry-After). The full api_key.key is shown ONCE and never again.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+            examples:
+              agent:
+                value:
+                  email: my-agent@example.com
+                  password: a-strong-password-8+
+      responses:
+        '200':
+          description: Account created. Returns account + a one-time API key (api_key may be null in the rare case key generation fails after account creation).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterResult'
+              examples:
+                created:
+                  value:
+                    success: true
+                    message: Account created successfully
+                    account:
+                      id: 676c92d0-0060-4c9a-af2a-cd64bc8fa720
+                      email: my-agent@example.com
+                      credits: 100
+                    api_key:
+                      key: vf_5U1y33fpfBkr1Hv3-XF4eawkSOpCnn8w-JMo84z94qQ
+                      prefix: vf_5U1y33...
+                      warning: Save this API key now. It will not be shown again.
+        '400':
+          description: invalid_email (bad email format) or invalid_password (too short, min 8 chars).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+        '409':
+          description: email_exists - an account already uses this email.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResult'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      x-openai-isConsequential: true
+  /api/v1/verify:
+    get:
+      tags:
+      - Verification
+      operationId: verifyEmail
+      summary: Verify one email address
+      description: Verify a single email address (deliverability, syntax, MX, SMTP, disposable, role, catch-all, free-provider). Costs one credit only when the upstream result is chargeable (credits_charged=true); catch-all/unknown results are commonly free (credits_charged=false).
+      parameters:
+      - name: email
+        in: query
+        required: true
+        description: Email address to verify, for example lead@example.com.
+        schema:
+          type: string
+          format: email
+          maxLength: 254
+      responses:
+        '200':
+          description: Verification result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationResult'
+              examples:
+                undeliverable:
+                  value:
+                    success: true
+                    email: test@gmail.com
+                    is_valid: false
+                    result: undeliverable
+                    reason: Mailbox does not exist
+                    details:
+                      syntax_valid: true
+                      domain_exists: true
+                      mx_records: true
+                      smtp_valid: false
+                      is_disposable: false
+                      is_role_account: true
+                      is_catch_all: false
+                      is_free_provider: true
+                      provider: gmail.com
+                    recommendation: do_not_send
+                    credits_charged: true
+                    credits:
+                      used: 1
+                      remaining: 99
+                risky_catch_all:
+                  value:
+                    success: true
+                    email: hello@example.com
+                    is_valid: true
+                    result: risky
+                    reason: Catch-all server - cannot confirm individual address
+                    details:
+                      syntax_valid: true
+                      domain_exists: true
+                      mx_records: true
+                      smtp_valid: false
+                      is_disposable: false
+                      is_role_account: true
+                      is_catch_all: true
+                      is_free_provider: false
+                      provider: example.com
+                    recommendation: risky
+                    credits_charged: false
+                    credits:
+                      used: 0
+                      remaining: 100
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/InsufficientCredits'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      x-openai-isConsequential: true
+  /api/v1/verify/batch:
+    post:
+      tags:
+      - Verification
+      operationId: verifyEmailBatch
+      summary: Verify up to 100 email addresses synchronously
+      description: Verify a batch of up to 100 emails synchronously. Invalid-format emails are NOT rejected for the whole request; they are placed in the skipped[] array (with skipped_count) alongside duplicates and any filtered addresses. Honors options.deduplicate (default true). Only successfully verified addresses appear in results[] and are charged.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailBatchRequest'
+            examples:
+              simple:
+                value:
+                  emails:
+                  - lead@example.com
+                  - sales@example.com
+                  - bad-format
+                  options:
+                    deduplicate: true
+      responses:
+        '200':
+          description: Batch results, skipped list, counts, and credit balance.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchVerificationResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/InsufficientCredits'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      x-openai-isConsequential: true
+  /api/v1/verify/bulk:
+    post:
+      tags:
+      - Verification
+      - Jobs
+      operationId: createBulkVerificationJob
+      summary: Create an asynchronous bulk verification job
+      description: Submit a large email list (as emails[], raw text, or a multipart CSV file) for asynchronous verification. Returns a job with check_status_url / results_url / download_url. Small jobs may complete inline (status 'completed'); larger jobs return status 'pending'. Poll GET /api/v1/jobs/{id} for progress.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkVerificationRequest'
+            examples:
+              emails:
+                value:
+                  emails:
+                  - lead1@example.com
+                  - lead2@example.com
+                  filename: leads.csv
+                  webhook_url: https://example.com/verifly-webhook
+              text:
+                value:
+                  text: |-
+                    lead1@example.com
+                    lead2@example.com
+                  filename: paste.txt
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: CSV file of emails.
+                filename:
+                  type: string
+                webhook_url:
+                  type: string
+                  format: uri
+      responses:
+        '200':
+          description: Bulk job accepted (pending) or completed inline.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkJobResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/InsufficientCredits'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      x-openai-isConsequential: true
+  /api/v1/jobs:
+    get:
+      tags:
+      - Jobs
+      operationId: listJobs
+      summary: List bulk verification jobs
+      description: List the authenticated account's bulk verification jobs, newest first.
+      parameters:
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - pending
+          - processing
+          - completed
+          - failed
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+      responses:
+        '200':
+          description: Paginated list of jobs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobListResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      x-openai-isConsequential: false
+  /api/v1/jobs/{id}:
+    get:
+      tags:
+      - Jobs
+      operationId: getJob
+      summary: Get bulk job status
+      description: Get status and progress for a single bulk verification job.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Job status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-openai-isConsequential: false
+  /api/v1/jobs/{id}/process:
+    post:
+      tags:
+      - Jobs
+      operationId: processJob
+      summary: Trigger processing of a pending job
+      description: 'Process (or continue processing) a pending bulk job. Auth: the API key that owns the job, OR an internal service key (X-Internal-Key header). Returns the number of emails processed in this pass.'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Processing result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  processed:
+                    type: integer
+                    minimum: 0
+                required:
+                - success
+                - processed
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-openai-isConsequential: true
+  /api/v1/jobs/{id}/results:
+    get:
+      tags:
+      - Jobs
+      operationId: getJobResults
+      summary: Get bulk job results as JSON
+      description: Get the per-email verification results for a completed job as JSON.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Job results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobResults'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-openai-isConsequential: false
+  /api/v1/jobs/{id}/download:
+    get:
+      tags:
+      - Jobs
+      operationId: downloadJobResults
+      summary: Download bulk job results as CSV
+      description: 'Download the results of a completed job as a CSV attachment (columns: email, result, is_valid, recommendation, reason).'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'CSV file (Content-Disposition: attachment).'
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-openai-isConsequential: false
+  /api/v1/files:
+    get:
+      tags:
+      - Files
+      operationId: listFiles
+      summary: List saved files
+      description: List the account's saved cleaned/verified list files.
+      responses:
+        '200':
+          description: Saved files.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileListResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-openai-isConsequential: false
+    post:
+      tags:
+      - Files
+      - List Cleaning
+      operationId: processFile
+      summary: Clean (and optionally verify and save) a list
+      description: Clean a list supplied as emails[], raw text, or a multipart CSV file. Optionally verify=true (costs credits) and save=true to store the result as a downloadable file. Returns cleaning stats, results, and (when saved) a file reference.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileProcessRequest'
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                verify:
+                  type: string
+                save:
+                  type: string
+                filename:
+                  type: string
+      responses:
+        '200':
+          description: Processing result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileProcessResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/InsufficientCredits'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      x-openai-isConsequential: true
+  /api/v1/files/{id}:
+    get:
+      tags:
+      - Files
+      operationId: getFile
+      summary: Get saved file details
+      description: Get metadata and a preview (first rows) of a saved file.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: File details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileDetailResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-openai-isConsequential: false
+    delete:
+      tags:
+      - Files
+      operationId: deleteFile
+      summary: Delete a saved file
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: File deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-openai-isConsequential: true
+  /api/v1/files/{id}/download:
+    get:
+      tags:
+      - Files
+      operationId: downloadFile
+      summary: Download a saved file (raw bytes)
+      description: Download the saved file's raw bytes (CSV or JSON) as an attachment.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'Raw file (Content-Disposition: attachment).'
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-openai-isConsequential: false
+  /api/v1/clean:
+    post:
+      tags:
+      - List Cleaning
+      operationId: cleanEmailList
+      summary: Clean and filter an email list
+      description: Clean a list (up to 10000 emails) without mailbox verification. Removes duplicates, invalid formats, and optionally public-domain emails, role accounts, disposable domains, blacklisted domains, and pattern matches. Free (no credits).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CleanRequest'
+            examples:
+              list:
+                value:
+                  emails:
+                  - lead@example.com
+                  - lead@example.com
+                  - info@example.com
+                  - bad-email
+                  options:
+                    exclude_role_accounts: true
+                    remove_disposable: true
+      responses:
+        '200':
+          description: Cleaned list and stats.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CleanResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      x-openai-isConsequential: false
+  /api/v1/extract:
+    post:
+      tags:
+      - List Cleaning
+      operationId: extractEmails
+      summary: Extract email addresses from text
+      description: Extract email addresses from raw text, documents, logs, scraped snippets, or pasted notes. Does not verify deliverability. Free (no credits).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExtractRequest'
+            examples:
+              note:
+                value:
+                  text: Contact jane@example.com and sales@example.com.
+                  options:
+                    deduplicate: true
+                    lowercase: true
+      responses:
+        '200':
+          description: Extracted emails and stats.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtractResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      x-openai-isConsequential: false
+  /api/v1/credits:
+    get:
+      tags:
+      - Account
+      operationId: getCreditBalance
+      summary: Get credit balance
+      description: Read the authenticated account's credit balance and usage today / this month. Read-only; agents use this to decide whether a workflow can continue.
+      responses:
+        '200':
+          description: Credit balance.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditsResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      x-openai-isConsequential: false
+  /api/v1/usage:
+    get:
+      tags:
+      - Account
+      operationId: getUsageSummary
+      summary: Get API usage summary
+      description: Read recent API usage for the authenticated account, including totals by endpoint/source, daily rollups, and recent rows.
+      parameters:
+      - name: period
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - day
+          - week
+          - month
+          default: month
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 100
+      responses:
+        '200':
+          description: Usage summary.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-openai-isConsequential: false
+  /api/v1/account:
+    get:
+      tags:
+      - Account
+      operationId: getAccountProfile
+      summary: Get account profile and credit summary
+      description: Returns profile fields, credit balance, API key count, and usage totals for the API key owner.
+      responses:
+        '200':
+          description: Account profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      x-openai-isConsequential: false
+    patch:
+      tags:
+      - Account
+      operationId: updateAccountProfile
+      summary: Update account profile fields
+      description: Updates account email, name, company, or timezone for the API key owner.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountUpdateRequest'
+            examples:
+              profile:
+                value:
+                  name: Avery Lee
+                  company: Example Inc
+                  timezone: America/Chicago
+      responses:
+        '200':
+          description: Account updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountUpdateResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      x-openai-isConsequential: true
+  /api/v1/keys:
+    get:
+      tags:
+      - Account
+      operationId: listApiKeys
+      summary: List API keys
+      description: List the account's API keys (prefix only - full keys are never returned after creation).
+      responses:
+        '200':
+          description: API keys.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyListResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-openai-isConsequential: false
+    post:
+      tags:
+      - Account
+      operationId: createApiKey
+      summary: Create a new API key
+      description: Create a new API key. The full key is returned ONCE in the 'key' field; store it immediately.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  maxLength: 255
+                  description: Optional friendly name.
+            examples:
+              named:
+                value:
+                  name: ci-pipeline
+      responses:
+        '200':
+          description: Key created (full key shown once).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyCreateResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      x-openai-isConsequential: true
+  /api/v1/keys/{id}:
+    get:
+      tags:
+      - Account
+      operationId: getApiKey
+      summary: Get an API key
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Key metadata.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  key:
+                    $ref: '#/components/schemas/ApiKey'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-openai-isConsequential: false
+    patch:
+      tags:
+      - Account
+      operationId: renameApiKey
+      summary: Rename an API key
+      description: Rename an API key. Body {name} is required.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                  maxLength: 255
+            examples:
+              rename:
+                value:
+                  name: production-key
+      responses:
+        '200':
+          description: Key renamed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  key:
+                    $ref: '#/components/schemas/ApiKey'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-openai-isConsequential: true
+    delete:
+      tags:
+      - Account
+      operationId: deleteApiKey
+      summary: Revoke an API key
+      description: Delete/revoke an API key. You cannot delete the key currently being used to authenticate the request.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Key deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-openai-isConsequential: true
+  /api/v1/billing:
+    get:
+      tags:
+      - Billing
+      operationId: getBilling
+      summary: List credit packages or payment history
+      description: action=packages (default) lists available credit packages. action=history lists the account's transactions.
+      parameters:
+      - name: action
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - packages
+          - history
+          default: packages
+      responses:
+        '200':
+          description: Packages or history.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/PackagesResult'
+                - $ref: '#/components/schemas/HistoryResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-openai-isConsequential: false
+    post:
+      tags:
+      - Billing
+      operationId: createCheckout
+      summary: Create a checkout to buy credits (Stripe or crypto)
+      description: Create a payment to buy a credit package. method 'stripe' (default) returns a hosted Stripe checkout_url. method 'crypto' returns a Plisio invoice; when a 'currency' (BTC/ETH/LTC/USDT/USDC) is supplied the response also includes a RAW wallet address + amount + qr_code so an autonomous agent can pay from a wallet with no browser. This is the documented purchase path.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutRequest'
+            examples:
+              stripe:
+                value:
+                  package_id: starter
+                  method: stripe
+              crypto:
+                value:
+                  package_id: pro
+                  method: crypto
+                  currency: USDT
+      responses:
+        '200':
+          description: Checkout created.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/StripeCheckoutResult'
+                - $ref: '#/components/schemas/CryptoCheckoutResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      x-openai-isConsequential: true
+  /api/checkout:
+    post:
+      tags:
+      - Billing
+      operationId: createStripeCheckout
+      summary: Create a Stripe checkout session (API key or session)
+      description: 'Create a hosted Stripe checkout session for a credit package. Accepts an API key (Authorization: Bearer vf_...) OR a logged-in browser session. Body accepts package_id or packageId.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimpleCheckoutRequest'
+            examples:
+              buy:
+                value:
+                  package_id: starter
+      responses:
+        '200':
+          description: Stripe session.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleStripeResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      x-openai-isConsequential: true
+  /api/checkout/crypto:
+    post:
+      tags:
+      - Billing
+      operationId: createCryptoCheckout
+      summary: Create a crypto (Plisio) checkout (API key or session)
+      description: Create a Plisio crypto invoice for a credit package. Accepts an API key OR a logged-in browser session. Body accepts package_id or packageId and an optional currency (BTC/ETH/LTC/USDT/USDC); when currency is supplied the response includes a raw wallet address + amount + qr_code.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimpleCryptoRequest'
+            examples:
+              buy:
+                value:
+                  package_id: starter
+                  currency: BTC
+      responses:
+        '200':
+          description: Crypto invoice.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleCryptoResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      x-openai-isConsequential: true
+  /api/tools/domain-health:
+    get:
+      tags:
+      - Tools
+      operationId: domainHealth
+      summary: Check a domain's email DNS health (MX/SPF/DMARC)
+      description: 'Public endpoint (no API key required). Returns a 0-100 health score plus MX, SPF, and DMARC findings for a domain. Note: this lives under /api/tools, NOT /api/v1.'
+      security: []
+      parameters:
+      - name: domain
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Domain to check, e.g. example.com. Provide either domain or email.
+      - name: email
+        in: query
+        required: false
+        schema:
+          type: string
+          format: email
+        description: Email whose domain will be checked.
+      responses:
+        '200':
+          description: Domain health report.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainHealthResult'
+              examples:
+                google:
+                  value:
+                    domain: google.com
+                    score: 100
+                    mx:
+                    - exchange: smtp.google.com
+                      priority: 10
+                    spf:
+                      found: true
+                      count: 1
+                      records:
+                      - v=spf1 include:_spf.google.com ~all
+                    dmarc:
+                      found: true
+                      policy: reject
+                      records:
+                      - v=DMARC1; p=reject; rua=mailto:mailauth-reports@google.com
+                    txtLookup:
+                      rootError: ''
+                      dmarcError: ''
+                    warnings: []
+                    checkedAt: '2026-06-27T07:30:44.726Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      x-openai-isConsequential: false
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Verifly API key
+      description: 'Use ''Authorization: Bearer vf_your_api_key''. Get a key with no human via POST /api/v1/autonomous/register. Never expose API keys in prompts, logs, screenshots, client-side code, or public examples.'
+  responses:
+    BadRequest:
+      description: Invalid request or invalid input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResult'
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResult'
+    NotFound:
+      description: Resource not found or not owned by the authenticated account.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResult'
+    InsufficientCredits:
+      description: Not enough Verifly credits to complete the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResult'
+    RateLimited:
+      description: Too many requests. Includes Retry-After (seconds) and the X-RateLimit-* headers.
+      headers:
+        Retry-After:
+          schema:
+            type: string
+          description: Seconds to wait before retrying.
+        X-RateLimit-Limit:
+          schema:
+            type: string
+        X-RateLimit-Remaining:
+          schema:
+            type: string
+        X-RateLimit-Reset:
+          schema:
+            type: string
+          description: Unix epoch seconds when the limit window resets.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResult'
+    ServerError:
+      description: Internal server error. Credits are refunded on failed verification exceptions where possible.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResult'
+  schemas:
+    ErrorResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+          const: false
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Machine-readable code, e.g. invalid_email, invalid_password, email_exists, invalid_api_key, invalid_package, invalid_currency, invalid_method, insufficient_credits, rate_limit_exceeded.
+            message:
+              type: string
+            suggestion:
+              type: string
+          required:
+          - code
+          - message
+      required:
+      - success
+      - error
+    Credits:
+      type: object
+      properties:
+        used:
+          type: integer
+          minimum: 0
+          description: Credits charged by this request.
+        remaining:
+          type: integer
+          minimum: 0
+      required:
+      - used
+      - remaining
+    RegisterRequest:
+      type: object
+      required:
+      - email
+      - password
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          minLength: 8
+          description: Minimum 8 characters.
+      additionalProperties: false
+    RegisterResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        account:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            email:
+              type: string
+              format: email
+            credits:
+              type: integer
+              description: Free starting credits (100).
+          required:
+          - id
+          - email
+          - credits
+        api_key:
+          type:
+          - object
+          - 'null'
+          description: Full key shown only once. Null only if account creation succeeded but key generation failed.
+          properties:
+            key:
+              type: string
+              description: Full vf_ API key. Store immediately.
+            prefix:
+              type: string
+            warning:
+              type: string
+          required:
+          - key
+          - prefix
+          - warning
+      required:
+      - success
+      - message
+      - account
+      - api_key
+    VerificationDetails:
+      type: object
+      properties:
+        syntax_valid:
+          type: boolean
+        domain_exists:
+          type: boolean
+        mx_records:
+          type: boolean
+        smtp_valid:
+          type: boolean
+        is_disposable:
+          type: boolean
+        is_role_account:
+          type: boolean
+        is_catch_all:
+          type: boolean
+        is_free_provider:
+          type: boolean
+        provider:
+          type: string
+          description: Mail provider / domain.
+      required:
+      - syntax_valid
+      - domain_exists
+      - mx_records
+      - smtp_valid
+      - is_disposable
+      - is_role_account
+      - is_catch_all
+      - is_free_provider
+      - provider
+    VerificationResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        email:
+          type: string
+          format: email
+          description: Normalized (lowercased/trimmed) email.
+        email_original:
+          type: string
+          description: Present only when the input differed from the normalized email.
+        is_valid:
+          type:
+          - boolean
+          - 'null'
+        result:
+          type: string
+          enum:
+          - deliverable
+          - undeliverable
+          - risky
+          - unknown
+          description: Overall verdict.
+        reason:
+          type: string
+          description: Human-readable explanation of the verdict.
+        details:
+          $ref: '#/components/schemas/VerificationDetails'
+        recommendation:
+          type: string
+          enum:
+          - safe_to_send
+          - risky
+          - do_not_send
+        credits_charged:
+          type: boolean
+          description: True if this verification consumed a credit.
+        credits:
+          $ref: '#/components/schemas/Credits'
+      required:
+      - success
+      - email
+      - is_valid
+      - result
+      - reason
+      - details
+      - recommendation
+      - credits_charged
+      - credits
+    BatchResultItem:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        is_valid:
+          type:
+          - boolean
+          - 'null'
+        result:
+          type: string
+          enum:
+          - deliverable
+          - undeliverable
+          - risky
+          - unknown
+        recommendation:
+          type: string
+          enum:
+          - safe_to_send
+          - risky
+          - do_not_send
+        reason:
+          type: string
+      required:
+      - email
+      - result
+      - recommendation
+    EmailBatchRequest:
+      type: object
+      required:
+      - emails
+      properties:
+        emails:
+          type: array
+          minItems: 1
+          maxItems: 100
+          items:
+            type: string
+            maxLength: 254
+        options:
+          type: object
+          properties:
+            deduplicate:
+              type: boolean
+              default: true
+            exclude_public_domains:
+              type: boolean
+              default: false
+            exclude_role_accounts:
+              type: boolean
+              default: false
+            domain_blacklist:
+              type: array
+              items:
+                type: string
+            pattern_blacklist:
+              type: array
+              items:
+                type: string
+          additionalProperties: false
+    BatchVerificationResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        total:
+          type: integer
+        verified_count:
+          type: integer
+        skipped_count:
+          type: integer
+        valid_count:
+          type: integer
+        invalid_count:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchResultItem'
+        skipped:
+          type: array
+          items:
+            $ref: '#/components/schemas/SkippedEmail'
+          description: 'Emails not verified: invalid format, duplicates, or filtered by options.'
+        credits:
+          $ref: '#/components/schemas/Credits'
+      required:
+      - success
+      - total
+      - verified_count
+      - skipped_count
+      - results
+      - skipped
+      - credits
+    BulkVerificationRequest:
+      type: object
+      properties:
+        emails:
+          type: array
+          minItems: 1
+          maxItems: 1000000
+          items:
+            type: string
+            maxLength: 254
+        text:
+          type: string
+          description: Raw text/CSV to extract emails from when 'emails' is not provided.
+        filename:
+          type: string
+          maxLength: 255
+          default: bulk_upload.csv
+        webhook_url:
+          type: string
+          format: uri
+          description: Optional public HTTPS webhook called when the job completes.
+      additionalProperties: false
+    BulkJobResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        job_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - pending
+          - processing
+          - completed
+          - failed
+        total_emails:
+          type: integer
+          minimum: 0
+        estimated_seconds:
+          type: integer
+          minimum: 0
+        summary:
+          $ref: '#/components/schemas/JobSummary'
+        credits_used:
+          type: integer
+          minimum: 0
+        credits_remaining:
+          type: integer
+          minimum: 0
+        check_status_url:
+          type: string
+        results_url:
+          type: string
+        download_url:
+          type: string
+      required:
+      - success
+      - job_id
+      - status
+      - total_emails
+      - check_status_url
+      - results_url
+      - download_url
+    JobSummary:
+      type: object
+      properties:
+        valid:
+          type: integer
+          minimum: 0
+        invalid:
+          type: integer
+          minimum: 0
+        risky:
+          type: integer
+          minimum: 0
+    Job:
+      type: object
+      properties:
+        success:
+          type: boolean
+        job_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - pending
+          - processing
+          - completed
+          - failed
+        progress:
+          type: integer
+          minimum: 0
+          maximum: 100
+        total_emails:
+          type: integer
+          minimum: 0
+        processed:
+          type: integer
+          minimum: 0
+        summary:
+          $ref: '#/components/schemas/JobSummary'
+        credits_used:
+          type: integer
+          minimum: 0
+        file_name:
+          type: string
+        error_message:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: string
+          format: date-time
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        results_url:
+          type:
+          - string
+          - 'null'
+        download_url:
+          type:
+          - string
+          - 'null'
+      required:
+      - success
+      - job_id
+      - status
+    JobListResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        count:
+          type: integer
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+        has_more:
+          type: boolean
+      required:
+      - success
+      - total
+      - count
+      - jobs
+      - has_more
+    JobResults:
+      type: object
+      properties:
+        success:
+          type: boolean
+        job_id:
+          type: string
+        total:
+          type: integer
+        summary:
+          $ref: '#/components/schemas/JobSummary'
+        credits_used:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchResultItem'
+      required:
+      - success
+      - job_id
+      - results
+    CleanRequest:
+      type: object
+      required:
+      - emails
+      properties:
+        emails:
+          type: array
+          minItems: 1
+          maxItems: 10000
+          items:
+            type: string
+        options:
+          $ref: '#/components/schemas/CleanOptions'
+    CleanOptions:
+      type: object
+      properties:
+        exclude_public_domains:
+          type: boolean
+          default: false
+        remove_public:
+          type: boolean
+          default: false
+          description: Alias of exclude_public_domains.
+        exclude_role_accounts:
+          type: boolean
+          default: false
+        remove_role:
+          type: boolean
+          default: false
+          description: Alias of exclude_role_accounts.
+        remove_disposable:
+          type: boolean
+          default: false
+        domain_blacklist:
+          type: array
+          items:
+            type: string
+        pattern_blacklist:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+    CleanResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        original_count:
+          type: integer
+        cleaned_count:
+          type: integer
+        removed_count:
+          type: integer
+        emails:
+          type: array
+          items:
+            type: string
+            format: email
+        removed:
+          type: array
+          items:
+            $ref: '#/components/schemas/SkippedEmail'
+        stats:
+          type: object
+          properties:
+            duplicates:
+              type: integer
+            invalid_format:
+              type: integer
+            public_domains:
+              type: integer
+            role_accounts:
+              type: integer
+            disposable:
+              type: integer
+            blacklisted_domains:
+              type: integer
+            matched_patterns:
+              type: integer
+      required:
+      - success
+      - original_count
+      - cleaned_count
+      - removed_count
+      - emails
+      - removed
+      - stats
+    ExtractRequest:
+      type: object
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          maxLength: 1000000
+          description: Text or CSV content to scan for emails.
+        options:
+          type: object
+          properties:
+            deduplicate:
+              type: boolean
+              default: true
+            lowercase:
+              type: boolean
+              default: true
+          additionalProperties: false
+    ExtractResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        count:
+          type: integer
+        emails:
+          type: array
+          items:
+            type: string
+            format: email
+        stats:
+          type: object
+          properties:
+            total_matches:
+              type: integer
+            unique_count:
+              type: integer
+            domains_found:
+              type: integer
+            top_domains:
+              type: array
+              items:
+                type: object
+                properties:
+                  domain:
+                    type: string
+                  count:
+                    type: integer
+                required:
+                - domain
+                - count
+      required:
+      - success
+      - count
+      - emails
+      - stats
+    FileProcessRequest:
+      type: object
+      properties:
+        emails:
+          type: array
+          items:
+            type: string
+        text:
+          type: string
+        options:
+          type: object
+          properties:
+            deduplicate:
+              type: boolean
+              default: true
+            exclude_public_domains:
+              type: boolean
+            remove_public:
+              type: boolean
+            exclude_role_accounts:
+              type: boolean
+            remove_role:
+              type: boolean
+            remove_disposable:
+              type: boolean
+            domain_blacklist:
+              type: array
+              items:
+                type: string
+            pattern_blacklist:
+              type: array
+              items:
+                type: string
+            verify:
+              type: boolean
+              default: false
+              description: Verify each email (costs credits).
+            save:
+              type: boolean
+              default: false
+              description: Save the result as a downloadable file.
+            filename:
+              type: string
+    FileProcessResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        stats:
+          type: object
+          properties:
+            original:
+              type: integer
+            duplicates_removed:
+              type: integer
+            public_domains_removed:
+              type: integer
+            role_accounts_removed:
+              type: integer
+            disposable_removed:
+              type: integer
+            blacklisted_removed:
+              type: integer
+            patterns_removed:
+              type: integer
+            final_count:
+              type: integer
+        results:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          description: Omitted when more than 1000 rows.
+        count:
+          type: integer
+        saved:
+          type:
+          - object
+          - 'null'
+          properties:
+            id:
+              type: string
+            filename:
+              type: string
+            download_url:
+              type: string
+        credits:
+          $ref: '#/components/schemas/Credits'
+      required:
+      - success
+      - stats
+      - count
+    FileMeta:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        filename:
+          type: string
+        records:
+          type: integer
+        size:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+    FileListResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        count:
+          type: integer
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileMeta'
+      required:
+      - success
+      - count
+      - files
+    FileDetailResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        file:
+          allOf:
+          - $ref: '#/components/schemas/FileMeta'
+          - type: object
+            properties:
+              preview:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+              download_url:
+                type: string
+      required:
+      - success
+      - file
+    CreditsResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        credits:
+          type: integer
+        used_today:
+          type: integer
+        used_this_month:
+          type: integer
+        plan:
+          type: string
+      required:
+      - success
+      - credits
+      - used_today
+      - used_this_month
+      - plan
+    UsageResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        period:
+          type: string
+          enum:
+          - day
+          - week
+          - month
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+        summary:
+          type: object
+          properties:
+            total_credits_used:
+              type: integer
+            total_emails_processed:
+              type: integer
+            total_requests:
+              type: integer
+            by_endpoint:
+              type: object
+              additionalProperties:
+                type: integer
+            by_source:
+              type: object
+              additionalProperties:
+                type: integer
+        daily:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        recent:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+      required:
+      - success
+      - period
+      - start_date
+      - end_date
+      - summary
+    SkippedEmail:
+      type: object
+      properties:
+        email:
+          type: string
+        reason:
+          type: string
+          description: e.g. invalid_format, duplicate, public_domain, role_account, disposable, blacklisted_domain, matched_pattern:<value>.
+      required:
+      - email
+      - reason
+    AccountProfile:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        name:
+          type:
+          - string
+          - 'null'
+        company:
+          type:
+          - string
+          - 'null'
+        timezone:
+          type: string
+        credits:
+          type: integer
+          minimum: 0
+        total_credits_used:
+          type: integer
+          minimum: 0
+        api_keys_count:
+          type: integer
+          minimum: 0
+        max_api_keys:
+          type: integer
+          minimum: 0
+        plan:
+          type: string
+        is_corporate:
+          type: boolean
+        member_since:
+          type: string
+          format: date-time
+    AccountResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        account:
+          $ref: '#/components/schemas/AccountProfile'
+      required:
+      - success
+      - account
+    AccountUpdateRequest:
+      type: object
+      minProperties: 1
+      additionalProperties: false
+      properties:
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+          maxLength: 255
+        company:
+          type: string
+          maxLength: 255
+        timezone:
+          type: string
+          example: America/Chicago
+    AccountUpdateResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        updated:
+          type: array
+          items:
+            type: string
+      required:
+      - success
+      - message
+      - updated
+    ApiKey:
+      type: object
+      properties:
+        id:
+          type: string
+        prefix:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        last_used_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    KeyListResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        count:
+          type: integer
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiKey'
+      required:
+      - success
+      - count
+      - keys
+    KeyCreateResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        key:
+          type: string
+          description: Full vf_ key, shown only once.
+        message:
+          type: string
+        details:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type:
+              - string
+              - 'null'
+            prefix:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+      required:
+      - success
+      - key
+    MessageResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+      required:
+      - success
+      - message
+    BillingPackage:
+      type: object
+      properties:
+        id:
+          type: string
+          enum:
+          - starter
+          - basic
+          - pro
+          - business
+          - enterprise
+        name:
+          type: string
+        credits:
+          type: integer
+        price:
+          type: number
+          description: Price in USD dollars.
+        currency:
+          type: string
+          const: USD
+        per_1k_credits:
+          type: string
+          description: Computed USD price per 1000 credits.
+      required:
+      - id
+      - name
+      - credits
+      - price
+      - currency
+    PackagesResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        packages:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillingPackage'
+      required:
+      - success
+      - packages
+    HistoryResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        transactions:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              amount:
+                type: number
+              credits:
+                type: integer
+              status:
+                type: string
+              method:
+                type: string
+              date:
+                type: string
+                format: date-time
+      required:
+      - success
+      - transactions
+    PackageRef:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        credits:
+          type: integer
+        price_usd:
+          type: string
+    CheckoutRequest:
+      type: object
+      required:
+      - package_id
+      properties:
+        package_id:
+          type: string
+          enum:
+          - starter
+          - basic
+          - pro
+          - business
+          - enterprise
+        packageId:
+          type: string
+          description: Accepted alias of package_id.
+        method:
+          type: string
+          enum:
+          - stripe
+          - crypto
+          default: stripe
+        currency:
+          type: string
+          enum:
+          - BTC
+          - ETH
+          - LTC
+          - USDT
+          - USDC
+          description: Only for method=crypto. When set, the response returns a raw wallet address + amount + qr_code.
+    StripeCheckoutResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        method:
+          type: string
+          const: stripe
+        checkout_url:
+          type: string
+          format: uri
+        session_id:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+        package:
+          $ref: '#/components/schemas/PackageRef'
+      required:
+      - success
+      - checkout_url
+    CryptoCheckoutResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        method:
+          type: string
+          const: crypto
+        checkout_url:
+          type: string
+          format: uri
+          description: Plisio invoice page.
+        invoice_id:
+          type: string
+        address:
+          type: string
+          description: Raw wallet address (present when a currency was supplied).
+        amount:
+          type: string
+          description: Crypto amount to send.
+        currency:
+          type: string
+          enum:
+          - BTC
+          - ETH
+          - LTC
+          - USDT
+          - USDC
+        qr_code:
+          type: string
+          description: QR code (data URL or URL) for the payment address.
+        expires_at:
+          type: string
+          format: date-time
+        package:
+          $ref: '#/components/schemas/PackageRef'
+      required:
+      - success
+      - checkout_url
+      - invoice_id
+    SimpleCheckoutRequest:
+      type: object
+      required:
+      - package_id
+      properties:
+        package_id:
+          type: string
+          enum:
+          - starter
+          - basic
+          - pro
+          - business
+          - enterprise
+        packageId:
+          type: string
+          description: Accepted alias of package_id.
+    SimpleStripeResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        checkout_url:
+          type: string
+          format: uri
+        url:
+          type: string
+          format: uri
+          description: Backwards-compat alias of checkout_url.
+        session_id:
+          type: string
+        package:
+          $ref: '#/components/schemas/PackageRef'
+      required:
+      - success
+      - checkout_url
+    SimpleCryptoRequest:
+      type: object
+      required:
+      - package_id
+      properties:
+        package_id:
+          type: string
+          enum:
+          - starter
+          - basic
+          - pro
+          - business
+          - enterprise
+        packageId:
+          type: string
+          description: Accepted alias of package_id.
+        currency:
+          type: string
+          enum:
+          - BTC
+          - ETH
+          - LTC
+          - USDT
+          - USDC
+          description: When set, the response includes a raw wallet address + amount + qr_code.
+    SimpleCryptoResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        checkout_url:
+          type: string
+          format: uri
+        url:
+          type: string
+          format: uri
+          description: Backwards-compat alias of checkout_url.
+        invoice_id:
+          type: string
+        address:
+          type: string
+        amount:
+          type: string
+        currency:
+          type: string
+          enum:
+          - BTC
+          - ETH
+          - LTC
+          - USDT
+          - USDC
+        qr_code:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+        package:
+          $ref: '#/components/schemas/PackageRef'
+      required:
+      - success
+      - checkout_url
+      - invoice_id
+    DomainHealthResult:
+      type: object
+      properties:
+        domain:
+          type: string
+        score:
+          type: integer
+          minimum: 0
+          maximum: 100
+        mx:
+          type: array
+          items:
+            type: object
+            properties:
+              exchange:
+                type: string
+              priority:
+                type: integer
+            required:
+            - exchange
+            - priority
+        spf:
+          type: object
+          properties:
+            found:
+              type: boolean
+            count:
+              type: integer
+            records:
+              type: array
+              items:
+                type: string
+        dmarc:
+          type: object
+          properties:
+            found:
+              type: boolean
+            policy:
+              type: string
+              description: none|quarantine|reject (empty when not found).
+            records:
+              type: array
+              items:
+                type: string
+        txtLookup:
+          type: object
+          properties:
+            rootError:
+              type: string
+            dmarcError:
+              type: string
+        warnings:
+          type: array
+          items:
+            type: string
+        checkedAt:
+          type: string
+          format: date-time
+      required:
+      - domain
+      - score
+      - mx
+      - spf
+      - dmarc
+x-agent-guidance:
+  selfOnboarding: 'POST /api/v1/autonomous/register {email,password} -> returns a vf_ API key + 100 free credits, no human/captcha/payment. Use it as ''Authorization: Bearer vf_...''.'
+  buyCredits: POST /api/v1/billing {package_id, method:'crypto', currency:'USDT'} returns a raw wallet address + amount + qr_code for browserless payment; or method:'stripe' for a hosted checkout_url.
+  useWhen:
+  - email verification API
+  - bulk email list cleaning
+  - signup validation
+  - disposable/role/catch-all email detection
+  - domain MX/SPF/DMARC health check
+  - AI agent email hygiene
+  - ChatGPT email verification action
+  safety:
+  - Do not expose API keys.
+  - Do not invent verification results.
+  - Ask before processing private or large email lists.
+  - Verifly verifies and cleans lists; it does not send outreach emails.
+  mcp:
+    name: verifly-mcp-server
+    install: npx verifly-mcp-server
+    env: VERIFLY_API_KEY
+    hosted: https://verifly.email/mcp
+    transport: Streamable HTTP (POST)
+    github: https://github.com/james-sib/verifly-mcp-server
+    tools:
+    - verify_email
+    - verify_batch
+    - clean_email_list
+    - extract_emails
+    - check_domain_health
+    - get_credits
+  chatgptAction: https://verifly.email/chatgpt-action-openapi.json
+  cli: https://verifly.email/cli
