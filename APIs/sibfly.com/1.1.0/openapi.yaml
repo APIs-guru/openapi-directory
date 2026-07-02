@@ -1,0 +1,1618 @@
+openapi: 3.1.0
+info:
+  title: SibFly API
+  description: 'Measured ground motion (mm/yr AND in/yr) per US address from NASA
+    OPERA Sentinel-1 InSAR. Flat $0.40 per covered report; misses free; free preflight
+    (?dry_run=1); agents self-register. Full docs https://sibfly.com/docs and https://sibfly.com/llms.txt
+    ; machine enums https://sibfly.com/api/v1/schema . MCP server (not expressible
+    in OpenAPI): POST https://sibfly.com/mcp . Conventions: X-Request-Id on every
+    API response; Idempotency-Key honored on /api/v1/motion, /api/v1/motion/batch,
+    /api/v1/timeseries (7-day replay, no re-charge); 429s carry Retry-After; 402 bodies
+    include buy_credits_url + a buy_api block (POST /api/v1/buy -> checkout_url/invoice_url).'
+  version: 1.1.0
+  x-apisguru-categories:
+  - location
+  x-origin:
+  - format: openapi
+    url: https://sibfly.com/openapi.json
+    version: '3.1'
+  x-providerName: sibfly.com
+paths:
+  /api/v1/webhooks:
+    get:
+      summary: Webhooks List
+      operationId: webhooks_list_api_v1_webhooks_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Webhooks Create
+      description: 'Subscribe to events: frame.updated | balance.low | batch.done.
+        Returns the signing secret ONCE.
+
+        Verify deliveries: HMAC-SHA256(secret, ''{webhook-id}.{webhook-timestamp}.{body}'')
+        == base64 part of webhook-signature.'
+      operationId: webhooks_create_api_v1_webhooks_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - url
+              properties:
+                url:
+                  type: string
+                  description: public https URL
+                events:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - frame.updated
+                    - balance.low
+                    - batch.done
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/webhooks/{wid}:
+    delete:
+      summary: Webhooks Delete
+      operationId: webhooks_delete_api_v1_webhooks__wid__delete
+      parameters:
+      - name: wid
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Wid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chat:
+    post:
+      summary: Chat Api
+      operationId: chat_api_api_v1_chat_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: []
+              properties:
+                messages:
+                  type: array
+                  items:
+                    type: object
+                context:
+                  type: object
+                convo:
+                  type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/geocode:
+    get:
+      summary: Geocode Api
+      description: Resolve an address to lat/lon ONLY (no report, no charge) — lets
+        the user place the pin first.
+      operationId: geocode_api_api_v1_geocode_get
+      parameters:
+      - name: address
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Address
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/pixel:
+    get:
+      summary: Pixel Api
+      description: 'The exact 30 m measurement cell for a lat/lon (corners + coverage)
+        — NO velocity, NO charge.
+
+        Lets the customer lock the spot and preview the pixel before paying for the
+        report.'
+      operationId: pixel_api_api_v1_pixel_get
+      parameters:
+      - name: lat
+        in: query
+        required: false
+        schema:
+          type: number
+          title: Lat
+      - name: lon
+        in: query
+        required: false
+        schema:
+          type: number
+          title: Lon
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/me:
+    get:
+      summary: Me Api
+      operationId: me_api_api_v1_me_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/my-reports:
+    get:
+      summary: My Reports
+      operationId: my_reports_api_v1_my_reports_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/my-reports/delete:
+    post:
+      summary: My Reports Delete
+      operationId: my_reports_delete_api_v1_my_reports_delete_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - id
+              properties:
+                id:
+                  type: integer
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/my-chats:
+    get:
+      summary: My Chats
+      operationId: my_chats_api_v1_my_chats_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/my-chats/{convo}:
+    get:
+      summary: My Chat
+      operationId: my_chat_api_v1_my_chats__convo__get
+      parameters:
+      - name: convo
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Convo
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /report.pdf:
+    get:
+      summary: Report Pdf
+      operationId: report_pdf_report_pdf_get
+      parameters:
+      - name: address
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Address
+      - name: lat
+        in: query
+        required: false
+        schema:
+          type: number
+          title: Lat
+      - name: lon
+        in: query
+        required: false
+        schema:
+          type: number
+          title: Lon
+      - name: brief
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Brief
+      - name: label
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Label
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '402':
+          description: Out of credits / spend cap
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited (un-keyed)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/motion:
+    get:
+      summary: Motion
+      operationId: motion_api_v1_motion_get
+      parameters:
+      - name: address
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Address
+      - name: lat
+        in: query
+        required: false
+        schema:
+          type: number
+          title: Lat
+      - name: lon
+        in: query
+        required: false
+        schema:
+          type: number
+          title: Lon
+      - name: brief
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Brief
+      - name: label
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Label
+      - name: teaser
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Teaser
+      - name: include
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Include
+      - name: dry_run
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Dry Run
+      - name: max_age_days
+        in: query
+        required: false
+        schema:
+          type: integer
+          title: Max Age Days
+      - name: min_confidence
+        in: query
+        required: false
+        schema:
+          type: number
+          title: Min Confidence
+      - name: since
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Since
+      - name: min_geocode_score
+        in: query
+        required: false
+        schema:
+          type: number
+          title: Min Geocode Score
+      - name: min_significance
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Min Significance
+      - name: compact
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Compact
+      - name: fields
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Fields
+      - name: units
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Units
+      - name: mock
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Mock
+      responses:
+        '200':
+          description: Per-address ground-motion report; or a free miss/teaser/oracle.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MotionReport'
+              example:
+                status: ok
+                query:
+                  address: 425 Fremont St, Las Vegas, NV
+                  geocoded_address: 425 FREMONT ST, LAS VEGAS, NV, 89101
+                  lat: 36.1696
+                  lon: -115.1416
+                velocity_vertical_mm_yr: -3.6
+                velocity_vertical_in_yr: -0.1417
+                velocity_uncertainty_mm_yr: 2.0
+                velocity_uncertainty_in_yr: 0.0787
+                seasonal_amplitude_mm: 5
+                total_motion_mm: -32
+                display_units: in_yr
+                trend: subsiding
+                assessment: Notable subsidence. The ground is sinking.
+                assessment_code: notable_subsidence
+                seasonal_dominant: true
+                velocity_display: -4 mm/yr (-0.14 in/yr) ±2
+                confidence: 1.0
+                frame: F46288
+                pixel_id: F46288_5198_4811
+                n_measurements: 344
+                span_years: 9.0
+                last_observation: '2025-07-15'
+                data_age_days: 351
+                data_coverage: ok
+                data_freshness: recent
+                provenance:
+                  calibration: gps_tied
+                  calibration_rmse_mm_yr: 2.0
+                  sign_convention: negative = subsidence
+                  data_source: NASA OPERA DISP-S1 v1
+                  disclaimer: Screening estimate — not engineering-grade.
+                pixel_polygon:
+                - - 36.1696912
+                  - -115.1416287
+                - - 36.169686
+                  - -115.1412953
+                - - 36.1694157
+                  - -115.1413017
+                - - 36.1694209
+                  - -115.1416351
+                cell_size_m: 30
+                queried_at: '2026-07-01T02:00:00Z'
+                cost_usd: 0.4
+                credits_remaining_usd: 612.4
+                reports_remaining: 1531
+                request_id: req_9b35d76399
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '402':
+          description: Out of credits / spend cap
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited (un-keyed)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/motion/batch:
+    post:
+      summary: Motion Batch
+      description: 'Portfolio/agent batch: one POST, many addresses. Always-200 envelope;
+        each item carries its own
+
+        status; ONLY status:ok items are billed (misses, dupes & bad input free).
+        Batch Idempotency-Key replays
+
+        for 7d. Max 1000 items. Keyed only. async:true -> 202 {job_id} + poll. since=YYYY-MM-DD
+        -> diff-billing.'
+      operationId: motion_batch_api_v1_motion_batch_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - items
+              properties:
+                items:
+                  type: array
+                  maxItems: 1000
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      address:
+                        type: string
+                      lat:
+                        type: number
+                      lon:
+                        type: number
+                      since:
+                        type: string
+                since:
+                  type: string
+                brief:
+                  type: boolean
+                max_spend_usd:
+                  type: number
+                async:
+                  type: boolean
+      responses:
+        '200':
+          description: Per-item results + summary; only covered rows billed; duplicate
+            cells charged once.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+              example:
+                status: ok
+                summary:
+                  requested: 2
+                  billed: 1
+                  succeeded: 2
+                  no_coverage: 1
+                  invalid: 0
+                  total_cost_usd: 0.4
+                credits_remaining_usd: 612.0
+                request_id: req_abc123
+                results:
+                - id: a
+                  status: ok
+                  cost_usd: 0.4
+                  velocity_vertical_mm_yr: -3.6
+                  assessment_code: notable_subsidence
+                  pixel_id: F46288_5198_4811
+                - id: b
+                  status: no_coverage
+                  cost_usd: 0
+                  coverage: false
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '402':
+          description: Out of credits / spend cap
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/motion/batch/{job_id}:
+    get:
+      summary: Batch Job
+      description: '#2: poll an async batch job. processing -> {status}; done -> the
+        full batch result.'
+      operationId: batch_job_api_v1_motion_batch__job_id__get
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Job Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/keys:
+    get:
+      summary: List Child Keys
+      operationId: list_child_keys_api_v1_keys_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Mint Child Key
+      description: 'R2: mint a scoped, spend-capped, referer-locked, revocable CHILD
+        key from your owner key. Safe to embed
+
+        in a public widget — it draws from your credits but can''t exceed daily_cap_usd
+        and is locked to allowed_referer.'
+      operationId: mint_child_key_api_v1_keys_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: []
+              properties:
+                daily_cap_usd:
+                  type: number
+                allowed_referer:
+                  type: string
+                ttl_hours:
+                  type: number
+                label:
+                  type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/keys/{key}:
+    delete:
+      summary: Revoke Child Key
+      operationId: revoke_child_key_api_v1_keys__key__delete
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/account/spend_cap:
+    post:
+      summary: Set Spend Cap
+      description: 'A4: set/clear a per-key DAILY spend cap (USD). daily_usd=null
+        removes it. Bearer or session.'
+      operationId: set_spend_cap_api_v1_account_spend_cap_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: []
+              properties:
+                daily_usd:
+                  type:
+                  - number
+                  - 'null'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/usage:
+    get:
+      summary: Api Usage
+      description: 'R2: FREE per-key line-item ledger (what each call bought) for
+        reconciliation. Bearer or session.'
+      operationId: api_usage_api_v1_usage_get
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/balance:
+    get:
+      summary: Api Balance
+      description: 'Agent self-service: current credit balance + price so an agent
+        knows what it can afford
+
+        and where to top up. Free, no charge. Bearer key or logged-in session.'
+      operationId: api_balance_api_v1_balance_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balance'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/buy:
+    post:
+      summary: Api Buy
+      description: 'Agent-native top-up: Bearer key (or session) + one JSON call ->
+        a ready payment URL. No browser,
+
+        no cookies, no HTML. {amount_usd: 1..10000, method: ''stripe''|''crypto''}
+        -> stripe: {checkout_url,
+
+        session_id}; crypto: {invoice_url, txn_id}. Credits land automatically after
+        payment (webhook /
+
+        callback); poll GET /api/v1/balance to confirm.'
+      operationId: api_buy_api_v1_buy_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - amount_usd
+              properties:
+                amount_usd:
+                  type: number
+                  minimum: 1
+                  maximum: 10000
+                method:
+                  type: string
+                  enum:
+                  - stripe
+                  - crypto
+                  default: stripe
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited (un-keyed)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/frames:
+    get:
+      summary: Frames List
+      description: '#4: every live frame with last_observation + age — agents poll
+        this to know when to re-pull. Free.'
+      operationId: frames_list_api_v1_frames_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/frames/{frame_id}/last_updated:
+    get:
+      summary: Frame Last Updated
+      description: '#4: when a specific frame last got new OPERA data (poll to invalidate
+        caches / trigger a re-pull). Free.'
+      operationId: frame_last_updated_api_v1_frames__frame_id__last_updated_get
+      parameters:
+      - name: frame_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Frame Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/coverage/batch:
+    post:
+      summary: Coverage Batch
+      description: '#5a (A+2): FREE batch coverage pre-check — size a job before spending.
+        $0, KEYED + rate-limited, max 1000 items.'
+      operationId: coverage_batch_api_v1_coverage_batch_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - items
+              properties:
+                items:
+                  type: array
+                  maxItems: 5000
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      address:
+                        type: string
+                      lat:
+                        type: number
+                      lon:
+                        type: number
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/map:
+    get:
+      summary: Map Data
+      description: Velocity heatmap crop (base64 PNG + lat/lon bounds) for the map
+        view.
+      operationId: map_data_api_v1_map_get
+      parameters:
+      - name: address
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Address
+      - name: lat
+        in: query
+        required: false
+        schema:
+          type: number
+          title: Lat
+      - name: lon
+        in: query
+        required: false
+        schema:
+          type: number
+          title: Lon
+      - name: half_km
+        in: query
+        required: false
+        schema:
+          type: number
+          default: 4.0
+          title: Half Km
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '402':
+          description: Out of credits / spend cap
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited (un-keyed)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/timeseries:
+    get:
+      summary: Timeseries Data
+      description: 'Real multi-year cumulative vertical-motion history for an address
+        (from the cube).
+
+        A+1: pass reference_date=YYYY-MM-DD & reference_date2=YYYY-MM-DD to also get
+        the movement between two dates.
+
+        Same agent contract as /motion: dry_run + max_age_days free gates, Idempotency-Key
+        replay, 402 when broke.'
+      operationId: timeseries_data_api_v1_timeseries_get
+      parameters:
+      - name: address
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Address
+      - name: lat
+        in: query
+        required: false
+        schema:
+          type: number
+          title: Lat
+      - name: lon
+        in: query
+        required: false
+        schema:
+          type: number
+          title: Lon
+      - name: reference_date
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Reference Date
+      - name: reference_date2
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Reference Date2
+      - name: dry_run
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Dry Run
+      - name: max_age_days
+        in: query
+        required: false
+        schema:
+          type: integer
+          title: Max Age Days
+      - name: max_points
+        in: query
+        required: false
+        schema:
+          type: integer
+          title: Max Points
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '402':
+          description: Out of credits / spend cap
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited (un-keyed)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/autonomous/register:
+    post:
+      summary: Autonomous Register
+      description: 'Agent self-onboarding: ONE JSON call -> new account + API key
+        + free starter credits. No human, no captcha.
+
+        Body: {email, password?}. If password omitted, one is generated and returned.
+        Rate-limited 20/hr/IP.'
+      operationId: autonomous_register_api_v1_autonomous_register_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/schema:
+    get:
+      summary: Api Schema
+      description: 'R2 machine-readable contract: enums, thresholds, status variants,
+        conventions, decision-tree (LLMs parse
+
+        this far more reliably than prose). Versioned; enums are append-only, fields
+        additive.'
+      operationId: api_schema_api_v1_schema_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1:
+    get:
+      summary: Api Root
+      description: Discoverable JSON index of the API (agent-friendly entry point).
+      operationId: api_root_api_v1_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/coverage:
+    get:
+      summary: Coverage Data
+      description: 'Free. With NO args: the live frame list. With address= or lat/lon:
+        a per-POINT coverage answer
+
+        (A17 — the point form used to ignore lat/lon and always return the full list).'
+      operationId: coverage_data_api_v1_coverage_get
+      parameters:
+      - name: address
+        in: query
+        required: false
+        schema:
+          type: string
+          title: Address
+      - name: lat
+        in: query
+        required: false
+        schema:
+          type: number
+          title: Lat
+      - name: lon
+        in: query
+        required: false
+        schema:
+          type: number
+          title: Lon
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/support:
+    get:
+      summary: Api Support List
+      operationId: api_support_list_api_v1_support_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+    post:
+      summary: Api Support Create
+      operationId: api_support_create_api_v1_support_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: []
+              properties:
+                subject:
+                  type: string
+                message:
+                  type: string
+                priority:
+                  type: string
+  /api/v1/support/{tid}:
+    get:
+      summary: Api Support Get
+      operationId: api_support_get_api_v1_support__tid__get
+      parameters:
+      - name: tid
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Tid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      summary: Api Support Reply
+      operationId: api_support_reply_api_v1_support__tid__post
+      parameters:
+      - name: tid
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Tid
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: stable machine code
+        code:
+          type: string
+        message:
+          type: string
+        retryable:
+          type: boolean
+        doc_url:
+          type: string
+        request_id:
+          type: string
+    MotionReport:
+      type: object
+      additionalProperties: true
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+          - no_data
+          - no_coverage
+          - stale_data
+          - low_confidence
+          - low_geocode_precision
+          - no_new_data
+        velocity_vertical_mm_yr:
+          type:
+          - number
+          - 'null'
+        velocity_vertical_in_yr:
+          type:
+          - number
+          - 'null'
+        velocity_uncertainty_mm_yr:
+          type:
+          - number
+          - 'null'
+        velocity_uncertainty_in_yr:
+          type:
+          - number
+          - 'null'
+        velocity_los_mm_yr:
+          type:
+          - number
+          - 'null'
+        seasonal_amplitude_mm:
+          type:
+          - number
+          - 'null'
+        seasonal_dominant:
+          type: boolean
+        total_motion_mm:
+          type:
+          - number
+          - 'null'
+        total_motion_in:
+          type:
+          - number
+          - 'null'
+        display_units:
+          type: string
+        velocity_display:
+          type: string
+        trend:
+          type: string
+          enum:
+          - subsiding
+          - stable
+          - uplifting
+        assessment:
+          type: string
+        assessment_code:
+          type: string
+          enum:
+          - rapid_subsidence
+          - notable_subsidence
+          - stable
+          - mild_uplift
+          - strong_uplift
+          - no_clear_trend
+        confidence:
+          type:
+          - number
+          - 'null'
+        near_threshold:
+          type: boolean
+        significant_nonzero:
+          type: boolean
+        neighbor_consistent:
+          type:
+          - boolean
+          - 'null'
+        neighbor_spread_mm_yr:
+          type:
+          - number
+          - 'null'
+        frame:
+          type: string
+        pixel_id:
+          type: string
+        pixel_polygon:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+        pixel_geojson:
+          type: object
+        cell_size_m:
+          type:
+          - number
+          - 'null'
+        n_measurements:
+          type:
+          - number
+          - 'null'
+        span_years:
+          type:
+          - number
+          - 'null'
+        last_observation:
+          type: string
+        data_age_days:
+          type:
+          - integer
+          - 'null'
+        data_freshness:
+          type: string
+          enum:
+          - current
+          - recent
+          - stale
+          - very_stale
+          - unknown
+        estimated_next_acquisition:
+          type:
+          - string
+          - 'null'
+        data_coverage:
+          type: string
+        provenance:
+          type: object
+          properties:
+            calibration:
+              type: string
+              enum:
+              - gps_tied
+              - relative
+            calibration_rmse_mm_yr:
+              type:
+              - number
+              - 'null'
+            sign_convention:
+              type: string
+            science_version:
+              type: string
+            attribution:
+              type: string
+            license:
+              type: string
+            disclaimer:
+              type: string
+        query:
+          type: object
+          properties:
+            address:
+              type:
+              - string
+              - 'null'
+            geocoded_address:
+              type:
+              - string
+              - 'null'
+            geocode:
+              type: object
+              properties:
+                match_type:
+                  type: string
+                score:
+                  type: number
+            lat:
+              type: number
+            lon:
+              type: number
+        queried_at:
+          type: string
+        cost_usd:
+          type: number
+        billed_usd:
+          type:
+          - number
+          - 'null'
+        credits_remaining_usd:
+          type:
+          - number
+          - 'null'
+        reports_remaining:
+          type:
+          - integer
+          - 'null'
+        request_id:
+          type: string
+        trend_analysis:
+          type: object
+        timeseries:
+          type: object
+        ground_brief:
+          type: string
+    BatchResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        status:
+          type: string
+        summary:
+          type: object
+        results:
+          type: array
+          items:
+            type: object
+        failed:
+          type: array
+          items:
+            type: object
+        credits_remaining_usd:
+          type:
+          - number
+          - 'null'
+        request_id:
+          type: string
+    Balance:
+      type: object
+      properties:
+        credits_usd:
+          type: number
+        price_per_report_usd:
+          type: number
+        reports_remaining_est:
+          type: integer
+        top_up_url:
+          type: string
+        request_id:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: SibFly API key (sf_live_... or scoped sf_child_...)
+servers:
+- url: https://sibfly.com
+security:
+- bearerAuth: []
