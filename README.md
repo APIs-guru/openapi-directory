@@ -60,7 +60,7 @@ Existing integrations
  - [Microsoft Kiota](https://microsoft.github.io/kiota/) - Generate an API client to call any OpenAPI described API
  - [API Tracker](https://apitracker.io/) - Aggregates 14,000+ APIs, SDKs, API specifications, integrations and DX profiles. It aims to help developers access the information they need to integrate APIs faster
  - [API Watch](https://www.apiwatch.io) - Keep track of the APIs you use
- - [Proxmint GeoIP](https://proxmint.com/api/geoip) | IP geolocation (country, city, ASN) from MaxMind GeoLite2
+ - [Proxmint GeoIP](https://proxmint.com/api/geoip) - IP geolocation (country, city, ASN) from MaxMind GeoLite2
  - https://pipedream.com/ - The integration platform built for developers
  - https://any-api.com - Documentation and Test Consoles for Public APIs
  - https://datafire.io - Allows you to process and transfer data between APIs, databases, and more
