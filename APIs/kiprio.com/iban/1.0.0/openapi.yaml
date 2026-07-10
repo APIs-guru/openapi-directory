@@ -1,0 +1,106 @@
+openapi: 3.0.3
+info:
+  title: IBAN Validation API
+  description: Validate International Bank Account Numbers (IBAN) per ISO 13616-1:2007
+    / ECBS IBAN Registry release 92. Returns validity, formatted output, country,
+    check digits, and BBAN. Supports all 80+ IBAN countries.
+  version: 1.0.0
+  contact:
+    name: Kiprio
+    url: https://kiprio.com
+  x-rapidapi-category: Finance
+  x-logo:
+    url: https://kiprio.com/logo.png
+  x-apisguru-categories:
+  - financial
+  x-origin:
+  - format: openapi
+    url: https://kiprio.com/v1/iban/openapi.json
+    version: '3.0'
+  x-providerName: kiprio.com
+  x-serviceName: iban
+servers:
+- url: https://kiprio.com/v1/iban
+paths:
+  /:
+    get:
+      summary: Validate an IBAN (GET)
+      operationId: ibanValidate
+      parameters:
+      - name: iban
+        in: query
+        schema:
+          type: string
+        description: IBAN to validate
+      - name: action
+        in: query
+        schema:
+          type: string
+          enum:
+          - countries
+          - health
+        description: List supported countries or check health
+      responses:
+        '200':
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid:
+                    type: boolean
+                  iban:
+                    type: string
+                  formatted:
+                    type: string
+                    example: GB82 WEST 1234 5698 7654 32
+                  country_code:
+                    type: string
+                    example: GB
+                  country_name:
+                    type: string
+                    example: United Kingdom
+                  check_digits:
+                    type: string
+                    example: '82'
+                  bban:
+                    type: string
+                  length:
+                    type: integer
+                  errors:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          description: Missing IBAN parameter
+    post:
+      summary: Validate an IBAN (POST)
+      operationId: ibanValidatePost
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - iban
+              properties:
+                iban:
+                  type: string
+      responses:
+        '200':
+          description: Validation result
+  /health:
+    get:
+      summary: Health check
+      operationId: ibanHealth
+      responses:
+        '200':
+          description: Service status
+components:
+  securitySchemes:
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-Key
