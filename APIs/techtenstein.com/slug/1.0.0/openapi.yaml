@@ -1,0 +1,103 @@
+openapi: 3.1.0
+info:
+  title: Techtenstein Slug API
+  description: |
+    Convert any text into a clean, URL-safe slug. Unicode-aware transliteration
+    for German (ä→ae, ß→ss), French (é→e, ç→c), Spanish (ñ→n), and other Latin diacritics.
+    Configurable max length, separator character, and case. Runs on the Cloudflare edge.
+  version: 1.0.0
+  x-logo:
+    url: https://techtenstein.com/logo.png
+  contact:
+    name: Techtenstein
+    url: https://techtenstein.com
+    email: sathvickollu@gmail.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  x-origin:
+    - format: openapi
+      version: '3.1'
+      url: https://slug.techtenstein.com/openapi.json
+  x-providerName: techtenstein.com
+  x-serviceName: slug
+externalDocs:
+  description: Docs
+  url: https://docs.techtenstein.com/slug
+servers:
+  - url: https://slug.techtenstein.com
+    description: Production edge
+paths:
+  /:
+    get:
+      operationId: slugifyQuery
+      summary: Slugify a string via query string
+      parameters:
+        - name: text
+          in: query
+          required: true
+          schema:
+            type: string
+            maxLength: 500
+        - name: max
+          in: query
+          schema:
+            type: integer
+            default: 60
+        - name: sep
+          in: query
+          schema:
+            type: string
+            default: '-'
+        - name: lower
+          in: query
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Slugified result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlugResult'
+    post:
+      operationId: slugifyBody
+      summary: Slugify a string via JSON body
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlugInput'
+      responses:
+        '200':
+          description: Slugified result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlugResult'
+  /health:
+    get:
+      operationId: healthCheck
+      summary: Health check
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    SlugInput:
+      type: object
+      required: [text]
+      properties:
+        text: { type: string, maxLength: 500 }
+        max: { type: integer, default: 60 }
+        sep: { type: string, default: '-' }
+        lower: { type: boolean, default: true }
+    SlugResult:
+      type: object
+      properties:
+        slug: { type: string }
+        length: { type: integer }
+        input_length: { type: integer }
+        processing_ms: { type: integer }
