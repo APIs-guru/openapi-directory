@@ -1,0 +1,105 @@
+openapi: 3.1.0
+info:
+  title: Timezone Convert API
+  version: 1.0.0
+  description: Convert times across IANA timezones with DST awareness, list zones,
+    current time, and offset. Zero-key, CORS-enabled.
+  contact:
+    name: Techtenstein
+    url: https://techtenstein.com
+    email: sathvickollu@gmail.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  x-providerName: techtenstein.com
+  x-serviceName: timezone-convert
+  x-origin:
+  - format: openapi
+    version: '3.1'
+    url: https://timezone-convert.techtenstein.com/openapi.json
+  x-logo:
+    url: https://techtenstein.com/logo.png
+servers:
+- url: https://timezone-convert.techtenstein.com
+paths:
+  /convert:
+    get:
+      summary: Convert a datetime from one zone to another
+      parameters:
+      - name: time
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ISO 8601 datetime (e.g. 2026-07-16T09:00:00) — interpreted in
+          'from' zone if no offset
+      - name: from
+        in: query
+        required: true
+        schema:
+          type: string
+        description: IANA zone like America/New_York
+      - name: to
+        in: query
+        required: true
+        schema:
+          type: string
+        description: IANA zone like Asia/Kolkata
+      responses:
+        '200':
+          description: Converted time
+  /now:
+    get:
+      summary: Current time in a zone
+      parameters:
+      - name: zone
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Now
+  /offset:
+    get:
+      summary: Current UTC offset in minutes for a zone
+      parameters:
+      - name: zone
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Offset
+  /diff:
+    get:
+      summary: Difference in minutes between two zones right now
+      parameters:
+      - name: a
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: b
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Diff
+  /zones:
+    get:
+      summary: List supported IANA timezones (400+)
+      responses:
+        '200':
+          description: Zones
+  /health:
+    get:
+      summary: Health
+      responses:
+        '200':
+          description: OK
+externalDocs:
+  url: https://timezone-convert.techtenstein.com/
