@@ -3,7 +3,8 @@
   "info": {
     "title": "Xquik API",
     "version": "1.0",
-    "description": "REST API for X/Twitter automation, including tweet search, user lookup, timelines, posting workflows, webhooks, and media operations.",
+    "description": "Not affiliated with X Corp. Look up any tweet, user, or trend on X. Search tweets, check follower relationships, download media, and monitor accounts in real time. 33 paid-read endpoints work without a subscription through prepaid credits. 7 fixed-price lookups also accept direct per-call MPP payments. Write endpoints (post, like, retweet, follow, DM) and automation endpoints (bulk extractions, giveaway draws, monitors, webhooks) require an API key or OAuth 2.1 bearer token.\n\n## Xquik SDKs\n\nAll SDKs are auto-generated from this OpenAPI spec via Stainless and stay in sync release-by-release. Pick your language:\n\n- TypeScript / Node.js: `npm i x-twitter-scraper` -\n  [Xquik-dev/x-twitter-scraper-typescript](https://github.com/Xquik-dev/x-twitter-scraper-typescript)\n\n- Python: `pip install x-twitter-scraper` -\n  [Xquik-dev/x-twitter-scraper-python](https://github.com/Xquik-dev/x-twitter-scraper-python)\n\n- Go: `go get github.com/Xquik-dev/x-twitter-scraper-go` -\n  [Xquik-dev/x-twitter-scraper-go](https://github.com/Xquik-dev/x-twitter-scraper-go)\n\n- Ruby: `gem install x-twitter-scraper` -\n  [Xquik-dev/x-twitter-scraper-ruby](https://github.com/Xquik-dev/x-twitter-scraper-ruby)\n\n- Java (source build; Maven Central pending) -\n  [Xquik-dev/x-twitter-scraper-java](https://github.com/Xquik-dev/x-twitter-scraper-java)\n\n- Kotlin (source build; Maven Central pending) -\n  [Xquik-dev/x-twitter-scraper-kotlin](https://github.com/Xquik-dev/x-twitter-scraper-kotlin)\n\n- C# / .NET: `dotnet add package XTwitterScraper` -\n  [Xquik-dev/x-twitter-scraper-csharp](https://github.com/Xquik-dev/x-twitter-scraper-csharp)\n\n- PHP: `composer require xquik/x-twitter-scraper` -\n  [Xquik-dev/x-twitter-scraper-php](https://github.com/Xquik-dev/x-twitter-scraper-php)\n\n- CLI: `npm i -g x-twitter-scraper-cli` -\n  [Xquik-dev/x-twitter-scraper-cli](https://github.com/Xquik-dev/x-twitter-scraper-cli)\n\n- Terraform Provider (Terraform Registry) -\n  [Xquik-dev/terraform-provider-x-twitter-scraper](https://github.com/Xquik-dev/terraform-provider-x-twitter-scraper)\n\n\nOpenClaw plugin: [Xquik-dev/tweetclaw](https://github.com/Xquik-dev/tweetclaw) (`claw install tweetclaw`).",
+    "x-guidance": "## Common tasks\n\n**Find a tweet** - GET /x/tweets/{id} with a numeric tweet ID. Returns full tweet data: text, author, metrics (likes, retweets, replies, views), media URLs, and creation timestamp. Cost: $0.00015 per lookup.\n\n**Search tweets** - GET /x/tweets/search?q={query}&limit={n}. Supports X search operators, structured filters like fromUser, mediaType, minFaves, hashtags, and verifiedOnly, plus exact lookup for a pasted Tweet ID or X status URL. Plain from:user date windows are optimized for timeline completeness. Returns up to 200 tweets per page with cursor-based pagination. Cost: $0.00015 per tweet returned.\n\n**Find a user** - GET /x/users/{id} where {id} is a numeric user ID or @username. Returns profile data: name, bio, follower/following counts, verification status, join date. Cost: $0.00015 per lookup.\n\n**Check if A follows B** - GET /x/followers/check?source={a}&target={b} where source and target are usernames, @usernames, or X or Twitter profile URLs. Cost: $0.00075.\n\n**Get trending topics** - GET /trends?woeid={region}&count={n}. WOEID 1 = worldwide, 23424977 = US, 23424975 = UK, 23424969 = Turkey. Cost: $0.00045.\n\n**Download media** - POST /x/media/download with {\"tweetIds\": [\"123\", \"456\"]} body. Returns download URLs for images and videos. Cost: 1 credit per fresh tweet processed with media; cached repeat downloads are free.\n\n**Read an article** - GET /x/articles/{tweetId} for long-form X Articles. Returns full article HTML, cover image, and metadata. Cost: $0.00075.\n\n## Pagination\n\nDefault v1 responses keep their existing pagination fields for compatibility. Platform list endpoints return `hasMore` and `nextCursor`; X data endpoints return `has_next_page` and `next_cursor`. Send `xquik-api-contract: 2026-04-29` to receive the unified best-practice fields `has_more` and `next_cursor`. Pass the cursor back as `?cursor={cursor}`; legacy `?after={cursor}` still works. Dynamic-priced endpoints charge per item returned, not per request.\n\n## Authentication\n\nEligible paid read endpoints accept accountless Stripe credit wallets. Fixed-price lookups also accept direct MPP payments. Media downloads, write endpoints, and automation features require authentication. Send an Xquik API key through `x-api-key`, `Xquik-Api-Key`, or `Authorization: Bearer xq_...`. Send an OAuth 2.1 access token through `Authorization: Bearer`.\n\n## Best-Practice Response Contract\n\nv1 keeps its original response contract by default so existing integrations do not break. Send `xquik-api-contract: 2026-04-29` to opt in to the best-practice contract: snake_case response fields, Unix timestamps in seconds, structured error objects, `has_more` and `next_cursor` pagination fields, `object` resource identifiers, and prefixed IDs where available. Dependency failures that returned 502 in default v1 return 424 in the opt-in contract. Future major API versions should make this contract the default.",
     "contact": {
       "name": "Xquik",
       "url": "https://xquik.com",
@@ -13,7 +14,7 @@
       "social"
     ],
     "x-logo": {
-      "url": "https://xquik.com/icon.svg"
+      "url": "https://xquik.com/logo-square.png"
     },
     "x-origin": [
       {
@@ -92,6 +93,10 @@
     {
       "name": "Extractions",
       "description": "Bulk data extraction (23 tool types)"
+    },
+    {
+      "name": "Guest Wallets",
+      "description": "Accountless prepaid access for paid read endpoints"
     },
     {
       "name": "Lists",
@@ -183,6 +188,7 @@
                     "monitorsAllowed": {
                       "type": "integer",
                       "deprecated": true,
+                      "x-stainless-deprecation-message": "Monitor slots are unlimited. Use monitorBilling.unlimitedSlots instead.",
                       "description": "Deprecated. Monitor slots are unlimited, so this is always Number.MAX_SAFE_INTEGER.",
                       "example": 9007199254740991
                     },
@@ -473,10 +479,7 @@
         ],
         "security": [
           {
-            "apiKey": []
-          },
-          {
-            "oauthBearer": []
+            "cookieSession": []
           }
         ],
         "responses": {
@@ -521,10 +524,7 @@
         ],
         "security": [
           {
-            "apiKey": []
-          },
-          {
-            "oauthBearer": []
+            "cookieSession": []
           }
         ],
         "requestBody": {
@@ -648,10 +648,7 @@
         ],
         "security": [
           {
-            "apiKey": []
-          },
-          {
-            "oauthBearer": []
+            "cookieSession": []
           }
         ],
         "parameters": [
@@ -681,7 +678,8 @@
     "/api/v1/subscribe": {
       "post": {
         "operationId": "subscribe",
-        "summary": "Get billing URL",
+        "summary": "Create subscription checkout",
+        "description": "Create a subscription checkout or billing-management URL only after the user confirms. The request never completes payment by itself.\n",
         "tags": [
           "Subscribe"
         ],
@@ -2192,7 +2190,7 @@
                   "query": {
                     "type": "string",
                     "minLength": 1,
-                    "maxLength": 160,
+                    "maxLength": 512,
                     "description": "X search query to monitor. Whitespace is normalized.",
                     "example": "xquik OR \"x api\""
                   },
@@ -2886,14 +2884,17 @@
                   },
                   "targetCommunityId": {
                     "type": "string",
+                    "description": "Required for community_post_extractor & community_search.",
                     "example": "1500000000000000000"
                   },
                   "targetListId": {
                     "type": "string",
+                    "description": "Required for list_follower_explorer, list_member_extractor & list_post_extractor.",
                     "example": "1234567890"
                   },
                   "targetSpaceId": {
                     "type": "string",
+                    "description": "Required for space_explorer.",
                     "example": "1vOGwMdBqpwGB"
                   },
                   "resultsLimit": {
@@ -2903,6 +2904,7 @@
                   },
                   "searchQuery": {
                     "type": "string",
+                    "description": "Required for tweet_search_extractor & community_search.",
                     "example": "AI trends 2025"
                   },
                   "fromUser": {
@@ -2918,7 +2920,7 @@
                   "mentioning": {
                     "type": "string",
                     "description": "Filter tweets mentioning a username (tweet_search_extractor)",
-                    "example": "xquikcom"
+                    "example": "example_user"
                   },
                   "language": {
                     "type": "string",
@@ -3198,14 +3200,17 @@
                   },
                   "targetCommunityId": {
                     "type": "string",
+                    "description": "Required for community_post_extractor & community_search.",
                     "example": "1500000000000000000"
                   },
                   "targetListId": {
                     "type": "string",
+                    "description": "Required for list_follower_explorer, list_member_extractor & list_post_extractor.",
                     "example": "1234567890"
                   },
                   "targetSpaceId": {
                     "type": "string",
+                    "description": "Required for space_explorer.",
                     "example": "1vOGwMdBqpwGB"
                   },
                   "resultsLimit": {
@@ -3215,6 +3220,7 @@
                   },
                   "searchQuery": {
                     "type": "string",
+                    "description": "Required for tweet_search_extractor & community_search.",
                     "example": "AI trends 2025"
                   },
                   "fromUser": {
@@ -3230,7 +3236,7 @@
                   "mentioning": {
                     "type": "string",
                     "description": "Estimate tweets mentioning this username (tweet_search_extractor)",
-                    "example": "xquikcom"
+                    "example": "example_user"
                   },
                   "language": {
                     "type": "string",
@@ -4328,6 +4334,9 @@
                     "tweet.new"
                   ],
                   "isActive": true,
+                  "consecutiveFailures": 0,
+                  "deliveryStatus": "active",
+                  "failureHardCap": 200,
                   "createdAt": "2025-01-15T12:00:00Z"
                 }
               }
@@ -4500,14 +4509,106 @@
             }
           },
           "400": {
-            "description": "Invalid webhook ID or inactive webhook",
+            "description": "Invalid webhook ID or test delivery failed",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 },
                 "example": {
-                  "error": "webhook_inactive"
+                  "error": "webhook_test_failed"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthenticated"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      }
+    },
+    "/api/v1/webhooks/{id}/resume": {
+      "post": {
+        "operationId": "resumeWebhook",
+        "summary": "Test and resume webhook endpoint",
+        "tags": [
+          "Webhooks"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "oauthBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Webhook resumed after a successful test delivery",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "success",
+                    "statusCode",
+                    "webhook"
+                  ],
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "statusCode": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "webhook": {
+                      "$ref": "#/components/schemas/Webhook"
+                    }
+                  }
+                },
+                "example": {
+                  "success": true,
+                  "statusCode": 200,
+                  "webhook": {
+                    "id": "42",
+                    "url": "https://example.com/webhook",
+                    "eventTypes": [
+                      "tweet.new"
+                    ],
+                    "isActive": true,
+                    "consecutiveFailures": 0,
+                    "deliveryStatus": "active",
+                    "failureHardCap": 200,
+                    "createdAt": "2025-01-15T12:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Webhook test failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "Connection timed out",
+                  "statusCode": 0,
+                  "success": false
                 }
               }
             }
@@ -4537,7 +4638,8 @@
           },
           {
             "oauthBearer": []
-          }
+          },
+          {}
         ],
         "parameters": [
           {
@@ -4588,7 +4690,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -4704,8 +4806,8 @@
                     },
                     "chargedCredits": {
                       "type": "string",
-                      "description": "Credits charged for this tweet. Text-only tweets cost 10 credits; attached media adds 2 credits per started MB.",
-                      "example": "12"
+                      "description": "Credits charged for this tweet. Text-only tweets and replies cost 30 credits; attached media adds 2 credits per started MB.",
+                      "example": "32"
                     },
                     "writeActionId": {
                       "type": "string",
@@ -4717,7 +4819,7 @@
                   "tweetId": "1234567890",
                   "success": true,
                   "charged": true,
-                  "chargedCredits": "12"
+                  "chargedCredits": "32"
                 }
               }
             }
@@ -4917,7 +5019,7 @@
                     },
                     "chargedCredits": {
                       "type": "string",
-                      "example": "12"
+                      "example": "32"
                     },
                     "media": {
                       "type": "object",
@@ -5047,10 +5149,14 @@
           {}
         ],
         "x-payment-info": {
-          "amount": "450",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "charge",
-          "method": "tempo"
+          "offers": [
+            {
+              "amount": "450",
+              "currency": "0x20c000000000000000000000b9537d11c60e8b50",
+              "intent": "charge",
+              "method": "tempo"
+            }
+          ]
         },
         "parameters": [
           {
@@ -5168,7 +5274,7 @@
     "/api/v1/x/tweets/search": {
       "get": {
         "operationId": "searchTweets",
-        "summary": "Search tweets with X query operators and pagination",
+        "summary": "Search tweets by query, Tweet ID, X status URL, or account date window",
         "tags": [
           "Tweets"
         ],
@@ -5181,12 +5287,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "q",
@@ -5388,7 +5488,7 @@
             }
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -5423,10 +5523,14 @@
           {}
         ],
         "x-payment-info": {
-          "amount": "1050",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "charge",
-          "method": "tempo"
+          "offers": [
+            {
+              "amount": "750",
+              "currency": "0x20c000000000000000000000b9537d11c60e8b50",
+              "intent": "charge",
+              "method": "tempo"
+            }
+          ]
         },
         "parameters": [
           {
@@ -5464,6 +5568,11 @@
                         "coverImageUrl": {
                           "type": "string",
                           "example": "https://pbs.twimg.com/media/example.jpg"
+                        },
+                        "bodyText": {
+                          "type": "string",
+                          "description": "Plain text joined from all article blocks",
+                          "example": "This is the first paragraph of the article."
                         },
                         "contents": {
                           "type": "array",
@@ -5544,30 +5653,7 @@
                       }
                     },
                     "author": {
-                      "type": "object",
-                      "required": [
-                        "id",
-                        "name",
-                        "username"
-                      ],
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "9876543210"
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "Elon Musk"
-                        },
-                        "username": {
-                          "type": "string",
-                          "example": "elonmusk"
-                        },
-                        "profilePicture": {
-                          "type": "string",
-                          "example": "https://pbs.twimg.com/profile_images/example.jpg"
-                        }
-                      }
+                      "$ref": "#/components/schemas/ArticleAuthor"
                     }
                   }
                 },
@@ -5650,10 +5736,14 @@
           {}
         ],
         "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "charge",
-          "method": "tempo"
+          "offers": [
+            {
+              "amount": "150",
+              "currency": "0x20c000000000000000000000b9537d11c60e8b50",
+              "intent": "charge",
+              "method": "tempo"
+            }
+          ]
         },
         "parameters": [
           {
@@ -5663,7 +5753,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Tweet ID"
+            "description": "Numeric tweet ID, 15-20 digits"
           }
         ],
         "responses": {
@@ -6098,12 +6188,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "ids",
@@ -6112,16 +6196,16 @@
             "schema": {
               "type": "string"
             },
-            "description": "Comma-separated user IDs (max 100)"
+            "description": "Comma-separated numeric user IDs (1-100 values). Duplicate IDs are ignored while preserving first-seen order."
           }
         ],
         "responses": {
           "200": {
-            "description": "List of users",
+            "description": "Matched users plus reconciliation metadata for unavailable IDs.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedUsers"
+                  "$ref": "#/components/schemas/BatchUsers"
                 }
               }
             }
@@ -6130,7 +6214,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -6163,12 +6247,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "q",
@@ -6203,7 +6281,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -6237,10 +6315,14 @@
           {}
         ],
         "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "charge",
-          "method": "tempo"
+          "offers": [
+            {
+              "amount": "150",
+              "currency": "0x20c000000000000000000000b9537d11c60e8b50",
+              "intent": "charge",
+              "method": "tempo"
+            }
+          ]
         },
         "parameters": [
           {
@@ -6527,10 +6609,14 @@
           {}
         ],
         "x-payment-info": {
-          "amount": "1050",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "charge",
-          "method": "tempo"
+          "offers": [
+            {
+              "amount": "750",
+              "currency": "0x20c000000000000000000000b9537d11c60e8b50",
+              "intent": "charge",
+              "method": "tempo"
+            }
+          ]
         },
         "parameters": [
           {
@@ -6540,7 +6626,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Username to check (without @)"
+            "description": "Source username, @username, or X or Twitter profile URL"
           },
           {
             "name": "target",
@@ -6549,7 +6635,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Target username (without @)"
+            "description": "Target username, @username, or X or Twitter profile URL"
           }
         ],
         "responses": {
@@ -6594,7 +6680,7 @@
             }
           },
           "400": {
-            "description": "Missing params",
+            "description": "Missing or invalid params",
             "content": {
               "application/json": {
                 "schema": {
@@ -7697,7 +7783,6 @@
                           "xUsername": "elonmusk",
                           "status": "active",
                           "health": "healthy",
-                          "proxyCountry": "US",
                           "createdAt": "2025-01-15T12:00:00Z",
                           "updatedAt": "2025-03-10T08:30:00Z"
                         }
@@ -7713,7 +7798,6 @@
                       "xUsername": "elonmusk",
                       "status": "active",
                       "health": "healthy",
-                      "proxyCountry": "US",
                       "createdAt": "2025-01-15T12:00:00Z",
                       "updatedAt": "2025-03-10T08:30:00Z"
                     }
@@ -7746,7 +7830,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "X credentials (username, email, password) and optional 2FA secret and usual login country.",
+          "description": "X credentials (username, email, password) and optional 2FA secret.",
           "content": {
             "application/json": {
               "schema": {
@@ -7760,34 +7844,30 @@
                   "username": {
                     "type": "string",
                     "description": "X username",
-                    "example": "elonmusk"
+                    "example": "your_x_username"
                   },
                   "email": {
                     "type": "string",
                     "description": "Account email",
-                    "example": "user@example.com"
+                    "example": "account@example.invalid"
                   },
                   "password": {
                     "type": "string",
                     "description": "Account password",
-                    "example": "s3cur3Pa$$w0rd"
+                    "example": "<ACCOUNT_PASSWORD>"
                   },
                   "totp_secret": {
                     "type": "string",
                     "description": "TOTP secret for 2FA",
-                    "example": "JBSWY3DPEHPK3PXP"
-                  },
-                  "proxy_country": {
-                    "type": "string",
-                    "description": "Two-letter country code where the X account is usually used for login",
-                    "example": "US"
+                    "example": "<TOTP_SECRET>"
                   }
                 }
               },
               "example": {
-                "username": "elonmusk",
-                "email": "user@example.com",
-                "password": "s3cur3Pa$$w0rd"
+                "username": "your_x_username",
+                "email": "account@example.invalid",
+                "password": "<ACCOUNT_PASSWORD>",
+                "totp_secret": "<TOTP_SECRET>"
               }
             }
           }
@@ -7871,12 +7951,12 @@
                   "email_code": {
                     "type": "string",
                     "description": "Code sent to the account email.",
-                    "example": "123456"
+                    "example": "<EMAIL_VERIFICATION_CODE>"
                   }
                 }
               },
               "example": {
-                "email_code": "123456"
+                "email_code": "<EMAIL_VERIFICATION_CODE>"
               }
             }
           }
@@ -8053,28 +8133,24 @@
                   "password": {
                     "type": "string",
                     "description": "Updated account password",
-                    "example": "s3cur3Pa$$w0rd"
+                    "example": "<ACCOUNT_PASSWORD>"
                   },
                   "totp_secret": {
                     "type": "string",
                     "description": "TOTP secret for 2FA re-authentication",
-                    "example": "JBSWY3DPEHPK3PXP"
+                    "example": "<TOTP_SECRET>"
                   },
                   "email": {
                     "type": "string",
                     "description": "Email for the X account (updates stored email)",
-                    "example": "user@example.com"
-                  },
-                  "proxy_country": {
-                    "type": "string",
-                    "description": "Two-letter country code used for this reauthentication login",
-                    "example": "US"
+                    "example": "account@example.invalid"
                   }
                 }
               },
               "example": {
-                "password": "password_value",
-                "totp_secret": "totp_secret_value"
+                "password": "<ACCOUNT_PASSWORD>",
+                "totp_secret": "<TOTP_SECRET>",
+                "email": "account@example.invalid"
               }
             }
           }
@@ -8177,10 +8253,14 @@
           {}
         ],
         "x-payment-info": {
-          "amount": "450",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "charge",
-          "method": "tempo"
+          "offers": [
+            {
+              "amount": "450",
+              "currency": "0x20c000000000000000000000b9537d11c60e8b50",
+              "intent": "charge",
+              "method": "tempo"
+            }
+          ]
         },
         "parameters": [
           {
@@ -8754,6 +8834,368 @@
         }
       }
     },
+    "/api/v1/guest-wallets": {
+      "post": {
+        "operationId": "createGuestWallet",
+        "summary": "Create an accountless prepaid wallet checkout",
+        "description": "Create a one-use Stripe-hosted checkout after the user explicitly confirms a $10-$250 USD amount. This request creates no charge by itself. The user opens checkout_url on Stripe. This endpoint returns the paid-read API key without requiring an Xquik account, email, dashboard, or Xquik web page. An idempotent replay returns the same key.\n",
+        "tags": [
+          "Guest Wallets"
+        ],
+        "security": [],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuestIdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Confirmed USD amount in cents.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuestWalletPurchaseRequest"
+              },
+              "example": {
+                "amount_minor": 1000,
+                "currency": "usd"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Stripe-hosted checkout, guest API key, and API status URL.\n",
+            "headers": {
+              "Cache-Control": {
+                "description": "Prevents storage of the secret-bearing response.",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store, private"
+                }
+              },
+              "Idempotent-Replayed": {
+                "description": "Present as true when replaying the same request.",
+                "schema": {
+                  "type": "string",
+                  "const": "true"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuestWalletCreateResponse"
+                },
+                "example": {
+                  "account_required": false,
+                  "amount": {
+                    "amount_minor": 1000,
+                    "currency": "usd"
+                  },
+                  "api_key": "xq_example_returned_once",
+                  "authorization": {
+                    "header": "Authorization",
+                    "scheme": "Bearer"
+                  },
+                  "checkout_url": "https://buy.stripe.com/example",
+                  "credential_notice": "Store api_key and the Idempotency-Key securely before sharing checkout_url. No email recovery is available.",
+                  "credits": "66666",
+                  "expires_at": "2026-07-13T13:00:00.000Z",
+                  "instructions": "Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending.",
+                  "poll_after_seconds": 2,
+                  "purchase_id": "gp_example",
+                  "requires_user_interaction": true,
+                  "status": "pending",
+                  "status_url": "https://xquik.com/api/v1/guest-wallets/status",
+                  "wallet_id": "gw_example"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidInput"
+          },
+          "409": {
+            "description": "Idempotency-Key was reused with a different request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Checkout expired or can no longer be used.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request body is too large.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Content-Type must be application/json.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "423": {
+            "description": "Guest wallet is unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "503": {
+            "description": "Guest wallet checkout is unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/guest-wallets/topups": {
+      "post": {
+        "operationId": "topUpGuestWallet",
+        "summary": "Create another guest wallet checkout",
+        "description": "Create a one-use Stripe-hosted checkout for an existing paid-read guest key after the user explicitly confirms a $10-$250 USD amount. The key remains the same. This request creates no charge by itself and never redirects through an Xquik web page.\n",
+        "tags": [
+          "Guest Wallets"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/GuestIdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Confirmed USD amount in cents.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuestWalletPurchaseRequest"
+              },
+              "example": {
+                "amount_minor": 1000,
+                "currency": "usd"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Stripe-hosted checkout and API status URL.",
+            "headers": {
+              "Cache-Control": {
+                "description": "Prevents storage of the secret-bearing response.",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store, private"
+                }
+              },
+              "Idempotent-Replayed": {
+                "description": "Present as true when replaying the same request.",
+                "schema": {
+                  "type": "string",
+                  "const": "true"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuestWalletTopupResponse"
+                },
+                "example": {
+                  "account_required": false,
+                  "amount": {
+                    "amount_minor": 1000,
+                    "currency": "usd"
+                  },
+                  "checkout_url": "https://buy.stripe.com/example",
+                  "credits": "66666",
+                  "expires_at": "2026-07-13T13:00:00.000Z",
+                  "instructions": "Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending.",
+                  "poll_after_seconds": 2,
+                  "purchase_id": "gp_example",
+                  "requires_user_interaction": true,
+                  "status": "pending",
+                  "status_url": "https://xquik.com/api/v1/guest-wallets/status",
+                  "wallet_id": "gw_example"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidInput"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthenticated"
+          },
+          "409": {
+            "description": "Idempotency-Key was reused with a different request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Checkout expired or can no longer be used.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request body is too large.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Content-Type must be application/json.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "423": {
+            "description": "Guest wallet is unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "503": {
+            "description": "Guest wallet checkout is unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/guest-wallets/status": {
+      "get": {
+        "operationId": "getGuestWalletStatus",
+        "summary": "Get guest wallet and payment status",
+        "description": "Poll after Stripe payment. Use usable to decide whether paid reads can run. An active wallet can remain usable while a top-up is pending. A new wallet becomes usable only after verified webhook fulfillment. Send the guest key as Authorization: Bearer.\n",
+        "tags": [
+          "Guest Wallets"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Guest wallet status without exposing the API key.",
+            "headers": {
+              "Cache-Control": {
+                "description": "Prevents storage of wallet status.",
+                "schema": {
+                  "type": "string",
+                  "const": "no-store, private"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuestWalletStatusResponse"
+                },
+                "example": {
+                  "balance": "66666",
+                  "latest_purchase": {
+                    "amount": {
+                      "amount_minor": 1000,
+                      "currency": "usd"
+                    },
+                    "checkout_url": null,
+                    "credits": "66666",
+                    "expires_at": "2026-07-13T13:00:00.000Z",
+                    "purchase_id": "gp_example",
+                    "status": "paid"
+                  },
+                  "poll_after_seconds": null,
+                  "scope": "paid_reads",
+                  "status": "active",
+                  "top_up": {
+                    "method": "POST",
+                    "path": "/api/v1/guest-wallets/topups"
+                  },
+                  "usable": true,
+                  "wallet_id": "gw_example"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthenticated"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      }
+    },
     "/api/v1/credits": {
       "get": {
         "operationId": "getCredits",
@@ -8839,7 +9281,8 @@
     "/api/v1/credits/topup": {
       "post": {
         "operationId": "topUpCredits",
-        "summary": "Top up credits balance",
+        "summary": "Create credit top-up checkout",
+        "description": "Create a Stripe Checkout session only after the user confirms. The request never completes payment or adds credits by itself.\n",
         "tags": [
           "Subscribe"
         ],
@@ -8853,7 +9296,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Dollar amount to add to the account balance.",
+          "description": "Confirmed dollar amount for the credit top-up checkout.",
           "content": {
             "application/json": {
               "schema": {
@@ -8883,25 +9326,33 @@
         },
         "responses": {
           "200": {
-            "description": "Top-up checkout URL",
+            "description": "Top-up payment links",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "required": [
-                    "url"
+                    "url",
+                    "redirect_url"
                   ],
                   "properties": {
+                    "redirect_url": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "Stable first-party Xquik redirect URL for the active Stripe Checkout session.",
+                      "example": "https://xquik.com/api/v1/credits/topup/redirect?session_id=cs_test_123"
+                    },
                     "url": {
                       "type": "string",
                       "format": "uri",
-                      "description": "Checkout URL where the user completes the top-up payment.",
-                      "example": "https://xquik.com/billing/checkout/session"
+                      "description": "Same stable first-party Xquik redirect URL as redirect_url. The response never exposes a raw Stripe Checkout URL.",
+                      "example": "https://xquik.com/api/v1/credits/topup/redirect?session_id=cs_test_123"
                     }
                   }
                 },
                 "example": {
-                  "url": "https://xquik.com/billing/checkout/session"
+                  "redirect_url": "https://xquik.com/api/v1/credits/topup/redirect?session_id=cs_test_123",
+                  "url": "https://xquik.com/api/v1/credits/topup/redirect?session_id=cs_test_123"
                 }
               }
             }
@@ -8914,6 +9365,69 @@
           },
           "429": {
             "$ref": "#/components/responses/RateLimitExceeded"
+          }
+        }
+      }
+    },
+    "/api/v1/credits/topup/redirect": {
+      "get": {
+        "operationId": "redirectCreditTopupCheckout",
+        "summary": "Redirect to an active top-up payment page",
+        "tags": [
+          "Subscribe"
+        ],
+        "security": [],
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Billing session ID returned by the top-up billing flow."
+          }
+        ],
+        "responses": {
+          "303": {
+            "description": "Redirects to the active payment page.",
+            "headers": {
+              "Location": {
+                "description": "Payment page URL.",
+                "schema": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidInput"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "410": {
+            "description": "Top-up payment session is no longer active."
+          },
+          "502": {
+            "description": "Payment page lookup failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "missing_url"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -9017,10 +9531,7 @@
         ],
         "security": [
           {
-            "apiKey": []
-          },
-          {
-            "oauthBearer": []
+            "cookieSession": []
           }
         ],
         "requestBody": {
@@ -9153,7 +9664,8 @@
     "/api/v1/x/tweets/{id}/favoriters": {
       "get": {
         "operationId": "getTweetFavoriters",
-        "summary": "List users who liked a tweet",
+        "summary": "List visible users who liked a tweet",
+        "description": "Returns liker profiles that X makes visible for the post. X can withhold liker identities even when the post reports likes. In that case this endpoint returns 424 `favoriters_unavailable` instead of a misleading empty success.\n",
         "tags": [
           "Tweets"
         ],
@@ -9166,12 +9678,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -9189,11 +9695,14 @@
               "type": "string"
             },
             "description": "Pagination cursor for favoriters"
+          },
+          {
+            "$ref": "#/components/parameters/FollowerPageSize"
           }
         ],
         "responses": {
           "200": {
-            "description": "List of users who liked the tweet",
+            "description": "Visible users who liked the tweet",
             "content": {
               "application/json": {
                 "schema": {
@@ -9206,13 +9715,13 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
           },
           "424": {
-            "$ref": "#/components/responses/XApiError"
+            "$ref": "#/components/responses/FavoritersUnavailable"
           },
           "429": {
             "$ref": "#/components/responses/RateLimitExceeded"
@@ -9239,12 +9748,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -9262,6 +9765,9 @@
               "type": "string"
             },
             "description": "Pagination cursor for user tweets"
+          },
+          {
+            "$ref": "#/components/parameters/ResultPageSize"
           },
           {
             "name": "includeReplies",
@@ -9372,7 +9878,165 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
+          },
+          "402": {
+            "$ref": "#/components/responses/PaymentRequired"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "424": {
+            "$ref": "#/components/responses/XApiError"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "502": {
+            "$ref": "#/components/responses/XApiError"
+          }
+        }
+      }
+    },
+    "/api/v1/x/users/{id}/replies": {
+      "get": {
+        "operationId": "getUserReplies",
+        "summary": "List a user's With Replies timeline",
+        "description": "Returns the user's timeline with replies included by default.",
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "oauthBearer": []
+          },
+          {}
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "X user ID or username"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Pagination cursor for user replies"
+          },
+          {
+            "$ref": "#/components/parameters/ResultPageSize"
+          },
+          {
+            "name": "includeParentTweet",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Include parent tweet for replies"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterFromUser"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterToUser"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterMentioning"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterLanguage"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterSinceDate"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterUntilDate"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterMediaType"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterMinFaves"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterMinRetweets"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterMinReplies"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterMinQuotes"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterVerifiedOnly"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterReplies"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterRetweets"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterQuotes"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterExactPhrase"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterExcludeWords"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterAnyWords"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterHashtags"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterCashtags"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterUrl"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterConversationId"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterInReplyToTweetId"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterQuotesOfTweetId"
+          },
+          {
+            "$ref": "#/components/parameters/TweetFilterRetweetsOfTweetId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User timeline with replies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedTweets"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidInput"
+          },
+          "401": {
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -9408,12 +10072,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -9422,7 +10080,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "User ID"
+            "description": "User ID or username"
           },
           {
             "name": "cursor",
@@ -9431,6 +10089,9 @@
               "type": "string"
             },
             "description": "Pagination cursor for liked tweets"
+          },
+          {
+            "$ref": "#/components/parameters/ResultPageSize"
           },
           {
             "$ref": "#/components/parameters/TweetFilterFromUser"
@@ -9523,7 +10184,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -9559,12 +10220,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -9573,7 +10228,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "User ID for media lookup"
+            "description": "User ID or username for media lookup"
           },
           {
             "name": "cursor",
@@ -9582,6 +10237,9 @@
               "type": "string"
             },
             "description": "Pagination cursor for media tweets"
+          },
+          {
+            "$ref": "#/components/parameters/ResultPageSize"
           },
           {
             "$ref": "#/components/parameters/TweetFilterFromUser"
@@ -9674,7 +10332,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -9710,12 +10368,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -9733,6 +10385,9 @@
               "type": "string"
             },
             "description": "Pagination cursor for followers-you-know"
+          },
+          {
+            "$ref": "#/components/parameters/FollowerPageSize"
           }
         ],
         "responses": {
@@ -9750,7 +10405,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -10359,10 +11014,14 @@
           {}
         ],
         "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "charge",
-          "method": "tempo"
+          "offers": [
+            {
+              "amount": "150",
+              "currency": "0x20c000000000000000000000b9537d11c60e8b50",
+              "intent": "charge",
+              "method": "tempo"
+            }
+          ]
         },
         "parameters": [
           {
@@ -10417,6 +11076,44 @@
                         "join_policy": {
                           "type": "string",
                           "description": "Join policy (open or restricted)"
+                        },
+                        "invites_policy": {
+                          "type": "string",
+                          "description": "Invitation policy"
+                        },
+                        "is_member": {
+                          "type": "boolean",
+                          "description": "Whether the authenticated viewer is a member"
+                        },
+                        "is_nsfw": {
+                          "type": "boolean",
+                          "description": "Whether the community is marked sensitive"
+                        },
+                        "role": {
+                          "type": "string",
+                          "description": "Authenticated viewer's community role"
+                        },
+                        "creator": {
+                          "type": "object",
+                          "required": [
+                            "id",
+                            "username",
+                            "verified"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "username": {
+                              "type": "string"
+                            },
+                            "verified": {
+                              "type": "boolean"
+                            },
+                            "name": {
+                              "type": "string"
+                            }
+                          }
                         },
                         "member_count": {
                           "type": "integer",
@@ -10518,12 +11215,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -10546,7 +11237,10 @@
             "name": "pageSize",
             "in": "query",
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 20,
+              "maximum": 200,
+              "default": 20
             },
             "description": "Items per page (20-200, default 20). This is an upper bound for paid authenticated calls: remaining credits can reduce the returned page size, and zero affordable results returns 402 insufficient_credits.\n"
           }
@@ -10566,7 +11260,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -10602,12 +11296,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -10642,7 +11330,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -10678,12 +11366,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -10701,6 +11383,9 @@
               "type": "string"
             },
             "description": "Pagination cursor for community tweets"
+          },
+          {
+            "$ref": "#/components/parameters/ResultPageSize"
           }
         ],
         "responses": {
@@ -10718,7 +11403,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -10741,7 +11426,8 @@
     "/api/v1/x/communities/search": {
       "get": {
         "operationId": "searchCommunities",
-        "summary": "Search for communities by keyword",
+        "summary": "Search tweets within an X Community by keyword",
+        "description": "Returns tweets, not community records. Requires a Community ID.",
         "tags": [
           "Communities"
         ],
@@ -10754,13 +11440,17 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
+          {
+            "name": "communityId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            },
+            "description": "Numeric ID of the community whose posts to search"
+          },
           {
             "name": "q",
             "in": "query",
@@ -10774,7 +11464,12 @@
             "name": "queryType",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "Latest",
+                "Top"
+              ],
+              "default": "Latest"
             },
             "description": "Sort order (Latest or Top)"
           },
@@ -10785,11 +11480,14 @@
               "type": "string"
             },
             "description": "Pagination cursor for community search"
+          },
+          {
+            "$ref": "#/components/parameters/ResultPageSize"
           }
         ],
         "responses": {
           "200": {
-            "description": "Community search results",
+            "description": "Tweet search results from the selected X Community",
             "content": {
               "application/json": {
                 "schema": {
@@ -10802,7 +11500,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -10822,7 +11520,8 @@
     "/api/v1/x/communities/tweets": {
       "get": {
         "operationId": "getAllCommunityTweets",
-        "summary": "List tweets across all communities",
+        "summary": "Search tweets within an X Community",
+        "description": "Requires a Community ID and keyword query.",
         "tags": [
           "Communities"
         ],
@@ -10835,13 +11534,17 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
+          {
+            "name": "communityId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            },
+            "description": "Numeric ID of the community to search"
+          },
           {
             "name": "q",
             "in": "query",
@@ -10849,15 +11552,20 @@
             "schema": {
               "type": "string"
             },
-            "description": "Search query for cross-community tweets"
+            "description": "Keyword query within the selected community"
           },
           {
             "name": "queryType",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "Latest",
+                "Top"
+              ],
+              "default": "Latest"
             },
-            "description": "Sort order for cross-community results (Latest or Top)"
+            "description": "Sort order for community results (Latest or Top)"
           },
           {
             "name": "cursor",
@@ -10865,12 +11573,15 @@
             "schema": {
               "type": "string"
             },
-            "description": "Pagination cursor for cross-community results"
+            "description": "Pagination cursor for community results"
+          },
+          {
+            "$ref": "#/components/parameters/ResultPageSize"
           }
         ],
         "responses": {
           "200": {
-            "description": "Paginated list of tweets from all communities",
+            "description": "Paginated matching tweets from the selected community",
             "content": {
               "application/json": {
                 "schema": {
@@ -10883,7 +11594,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -10916,12 +11627,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -10939,6 +11644,9 @@
               "type": "string"
             },
             "description": "Pagination cursor for list followers"
+          },
+          {
+            "$ref": "#/components/parameters/FollowerPageSize"
           }
         ],
         "responses": {
@@ -10956,7 +11664,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -10992,12 +11700,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -11020,7 +11722,10 @@
             "name": "pageSize",
             "in": "query",
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 20,
+              "maximum": 200,
+              "default": 20
             },
             "description": "Members per page (20-200, default 20)"
           }
@@ -11040,7 +11745,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -11076,12 +11781,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -11099,6 +11798,9 @@
               "type": "string"
             },
             "description": "Pagination cursor for list tweets"
+          },
+          {
+            "$ref": "#/components/parameters/ResultPageSize"
           },
           {
             "name": "sinceTime",
@@ -11140,7 +11842,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -11176,12 +11878,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -11190,7 +11886,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Tweet ID to get quotes"
+            "description": "Numeric tweet ID to get quotes, 15-20 digits"
           },
           {
             "name": "cursor",
@@ -11199,6 +11895,9 @@
               "type": "string"
             },
             "description": "Pagination cursor for quote tweets"
+          },
+          {
+            "$ref": "#/components/parameters/ResultPageSize"
           },
           {
             "name": "sinceTime",
@@ -11315,7 +12014,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -11336,6 +12035,7 @@
       "get": {
         "operationId": "getTweetReplies",
         "summary": "List replies to a tweet",
+        "description": "Returns visible replies. For an unfiltered first page, Xquik compares a terminal page with the post's reported reply count. If the page is visibly incomplete, the endpoint returns 424 `replies_incomplete` instead of presenting partial coverage as complete. Use tweet search with a `conversation_id:{id}` query as the broader fallback.\n",
         "tags": [
           "Tweets"
         ],
@@ -11348,12 +12048,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -11371,6 +12065,9 @@
               "type": "string"
             },
             "description": "Pagination cursor for tweet replies"
+          },
+          {
+            "$ref": "#/components/parameters/ResultPageSize"
           },
           {
             "name": "sinceTime",
@@ -11479,13 +12176,13 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
           },
           "424": {
-            "$ref": "#/components/responses/XApiError"
+            "$ref": "#/components/responses/RepliesIncomplete"
           },
           "429": {
             "$ref": "#/components/responses/RateLimitExceeded"
@@ -11512,12 +12209,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -11535,6 +12226,9 @@
               "type": "string"
             },
             "description": "Pagination cursor for retweeters"
+          },
+          {
+            "$ref": "#/components/parameters/FollowerPageSize"
           }
         ],
         "responses": {
@@ -11552,7 +12246,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -11585,12 +12279,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -11608,6 +12296,9 @@
               "type": "string"
             },
             "description": "Pagination cursor for thread tweets"
+          },
+          {
+            "$ref": "#/components/parameters/ResultPageSize"
           }
         ],
         "responses": {
@@ -11625,7 +12316,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -11658,12 +12349,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -11689,15 +12374,10 @@
             "schema": {
               "type": "string"
             },
-            "description": "Legacy cursor alias for following lists. Prefer cursor."
+            "description": "Legacy cursor alias. Prefer cursor."
           },
           {
-            "name": "pageSize",
-            "in": "query",
-            "schema": {
-              "type": "integer"
-            },
-            "description": "Items per page (20-200, default 200). This is an upper bound for paid authenticated calls: remaining credits can reduce the returned page size, and zero affordable results returns 402 insufficient_credits.\n"
+            "$ref": "#/components/parameters/FollowerPageSize"
           },
           {
             "name": "limit",
@@ -11724,7 +12404,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -11760,12 +12440,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -11794,12 +12468,7 @@
             "description": "Legacy cursor alias. Prefer cursor."
           },
           {
-            "name": "pageSize",
-            "in": "query",
-            "schema": {
-              "type": "integer"
-            },
-            "description": "Results per page (20-200, default 200). This is an upper bound for paid authenticated calls: remaining credits can reduce the returned page size, and zero affordable results returns 402 insufficient_credits.\n"
+            "$ref": "#/components/parameters/FollowerPageSize"
           },
           {
             "name": "limit",
@@ -11826,7 +12495,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -11862,12 +12531,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -11885,6 +12548,9 @@
               "type": "string"
             },
             "description": "Pagination cursor for mentions"
+          },
+          {
+            "$ref": "#/components/parameters/ResultPageSize"
           },
           {
             "name": "sinceTime",
@@ -11993,7 +12659,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -12029,12 +12695,6 @@
           },
           {}
         ],
-        "x-payment-info": {
-          "amount": "150",
-          "currency": "0x20c000000000000000000000b9537d11c60e8b50",
-          "intent": "session",
-          "method": "tempo"
-        },
         "parameters": [
           {
             "name": "id",
@@ -12052,6 +12712,9 @@
               "type": "string"
             },
             "description": "Pagination cursor for verified followers"
+          },
+          {
+            "$ref": "#/components/parameters/FollowerPageSize"
           }
         ],
         "responses": {
@@ -12069,7 +12732,7 @@
             "$ref": "#/components/responses/InvalidInput"
           },
           "401": {
-            "$ref": "#/components/responses/Unauthenticated"
+            "$ref": "#/components/responses/AnonymousGuestAuthenticationRequired"
           },
           "402": {
             "$ref": "#/components/responses/PaymentRequired"
@@ -12096,15 +12759,33 @@
         "type": "apiKey",
         "in": "header",
         "name": "x-api-key",
-        "description": "API key passed via the x-api-key header. Xquik-Api-Key is accepted as a non-breaking vendor-prefixed alias."
+        "description": "Xquik API key passed through the x-api-key header. Xquik-Api-Key is a vendor-prefixed alias. API keys beginning with xq_ can also use Authorization: Bearer."
       },
       "oauthBearer": {
         "type": "http",
         "scheme": "bearer",
-        "description": "OAuth 2.1 access token"
+        "description": "OAuth 2.1 access token passed through Authorization: Bearer. Values beginning with xq_ remain Xquik API-key credentials, not OAuth tokens."
+      },
+      "cookieSession": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "__Host-xquik_session",
+        "description": "Secure Xquik browser session cookie."
       }
     },
     "parameters": {
+      "GuestIdempotencyKey": {
+        "name": "Idempotency-Key",
+        "in": "header",
+        "required": true,
+        "description": "Generate a cryptographically random UUID v4. Reuse it only to retry the same wallet and amount request. Initial wallet creation can recover the API key from this value, so store it as a secret and never log it.\n",
+        "schema": {
+          "type": "string",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$"
+        }
+      },
       "ResourceId": {
         "name": "id",
         "in": "path",
@@ -12133,6 +12814,28 @@
           "minimum": 1,
           "maximum": 100,
           "default": 50
+        }
+      },
+      "ResultPageSize": {
+        "name": "pageSize",
+        "in": "query",
+        "description": "Maximum items requested from this page (1-100, default 20). The response can contain fewer items because the source returned fewer, filters removed items, or remaining credits cover fewer results. Keep requesting next_cursor while has_next_page is true, even when a page is empty. The deprecated limit and count aliases remain accepted.\n",
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "default": 20
+        }
+      },
+      "FollowerPageSize": {
+        "name": "pageSize",
+        "in": "query",
+        "description": "Maximum user profiles requested from this page (20-200, default 200). The response can contain fewer profiles because the source returned fewer or remaining credits cover fewer results. Keep requesting next_cursor while has_next_page is true. The deprecated limit and count aliases remain accepted.\n",
+        "schema": {
+          "type": "integer",
+          "minimum": 20,
+          "maximum": 200,
+          "default": 200
         }
       },
       "After": {
@@ -12459,6 +13162,22 @@
       },
       "Unauthenticated": {
         "description": "Unauthenticated",
+        "headers": {
+          "Cache-Control": {
+            "description": "Prevents storage of authentication responses.",
+            "schema": {
+              "type": "string",
+              "const": "no-store"
+            }
+          },
+          "WWW-Authenticate": {
+            "description": "Bearer authentication challenge.",
+            "schema": {
+              "type": "string",
+              "const": "Bearer realm=\"xquik\""
+            }
+          }
+        },
         "content": {
           "application/json": {
             "schema": {
@@ -12467,6 +13186,88 @@
             "example": {
               "error": "unauthenticated",
               "message": "Authentication required. Provide a valid API key or bearer token."
+            }
+          }
+        }
+      },
+      "AnonymousGuestAuthenticationRequired": {
+        "description": "Authentication required for a non-MPP paid read. The Bearer challenge requests authentication and is not a Payment challenge. Requests without credentials advertise accountless Stripe checkout, but create no checkout. Explicit invalid credentials return the plain error shape. Call an advertised action only after explicit user confirmation.\n",
+        "headers": {
+          "Cache-Control": {
+            "description": "Prevents storage of the guest checkout action.",
+            "schema": {
+              "type": "string",
+              "const": "no-store"
+            }
+          },
+          "WWW-Authenticate": {
+            "description": "Bearer authentication challenge, not a Payment challenge.",
+            "schema": {
+              "type": "string",
+              "const": "Bearer realm=\"xquik\""
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/AnonymousGuestAuthenticationRequired"
+                },
+                {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Error"
+                    },
+                    {
+                      "not": {
+                        "required": [
+                          "payment_options"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "example": {
+              "account_required": false,
+              "error": "unauthenticated",
+              "message": "Authentication required.",
+              "next_step": "Ask the user to confirm a USD amount before creating checkout.",
+              "payment_options": {
+                "guest_wallet": {
+                  "create_checkout": {
+                    "account_required": false,
+                    "amount_bounds": {
+                      "currency": "usd",
+                      "maximum_minor": 25000,
+                      "minimum_minor": 1000
+                    },
+                    "body": {
+                      "amount_minor": 1000,
+                      "currency": "usd"
+                    },
+                    "creates": "checkout_url",
+                    "method": "POST",
+                    "path": "/api/v1/guest-wallets",
+                    "provider": "stripe",
+                    "required_headers": {
+                      "Idempotency-Key": "<cryptographically random UUID v4>"
+                    },
+                    "requires_authentication": false,
+                    "requires_user_confirmation": true,
+                    "requires_user_interaction": true,
+                    "response_fields": [
+                      "checkout_url",
+                      "api_key",
+                      "status_url"
+                    ],
+                    "response_url_field": "checkout_url"
+                  }
+                }
+              }
             }
           }
         }
@@ -12500,15 +13301,128 @@
         }
       },
       "PaymentRequired": {
-        "description": "Payment required. Returns a WWW-Authenticate header with an MPP challenge for pay-per-use endpoints, or indicates a subscription/credit issue for identity-authenticated endpoints.",
+        "description": "Payment required. Fixed-price direct MPP requests return a Machine Payments Protocol problem document and a WWW-Authenticate challenge. Authenticated X data requests return balances and explicit Stripe checkout-creation actions. Guest paid-read keys receive only the accountless guest top-up action. Direct MPP challenges also advertise the Stripe wallet action. Other authenticated endpoints return a legacy error shape. A failed request never creates checkout. Create checkout only after the user confirms a payment option.\n",
+        "headers": {
+          "WWW-Authenticate": {
+            "description": "MPP payment challenge for eligible anonymous pay-per-use requests. Authenticated credit or subscription errors omit this header.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/Error"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/AuthenticatedPaymentRequired"
+                },
+                {
+                  "$ref": "#/components/schemas/GuestPaymentRequired"
+                },
+                {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Error"
+                    },
+                    {
+                      "not": {
+                        "required": [
+                          "payment_options"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
             },
             "example": {
+              "balance": "0",
+              "dashboard": "/dashboard/account",
               "error": "insufficient_credits",
-              "message": "Insufficient credits"
+              "message": "Insufficient credits. Top up or subscribe to continue.",
+              "next_step": "Ask the user to confirm a payment option before creating checkout.",
+              "payment_options": {
+                "credits": {
+                  "create_checkout": {
+                    "body": {
+                      "dollars": 10,
+                      "locale": "en"
+                    },
+                    "creates": "checkout_url",
+                    "method": "POST",
+                    "path": "/api/v1/credits/topup",
+                    "provider": "stripe",
+                    "requires_authentication": true,
+                    "requires_user_confirmation": true,
+                    "response_url_field": "url"
+                  }
+                },
+                "subscription": {
+                  "create_checkout": {
+                    "body": {
+                      "tier": "starter"
+                    },
+                    "creates": "checkout_url",
+                    "method": "POST",
+                    "path": "/api/v1/subscribe",
+                    "provider": "stripe",
+                    "requires_authentication": true,
+                    "requires_user_confirmation": true,
+                    "response_url_field": "url"
+                  }
+                }
+              },
+              "required": "1",
+              "top_up_endpoint": "/api/v1/credits/topup",
+              "top_up_url": "POST /api/v1/credits/topup"
+            }
+          },
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/MppPaymentRequired"
+            },
+            "example": {
+              "account_required": false,
+              "challengeId": "Opaque MPP challenge identifier",
+              "detail": "Payment is required.",
+              "hint": "Use a supported wallet with an offer from the WWW-Authenticate header.",
+              "status": 402,
+              "title": "Payment Required",
+              "type": "https://paymentauth.org/problems/payment-required",
+              "next_step": "Ask the user to confirm a USD amount before creating checkout.",
+              "payment_options": {
+                "guest_wallet": {
+                  "create_checkout": {
+                    "account_required": false,
+                    "amount_bounds": {
+                      "currency": "usd",
+                      "maximum_minor": 25000,
+                      "minimum_minor": 1000
+                    },
+                    "body": {
+                      "amount_minor": 1000,
+                      "currency": "usd"
+                    },
+                    "creates": "checkout_url",
+                    "method": "POST",
+                    "path": "/api/v1/guest-wallets",
+                    "provider": "stripe",
+                    "required_headers": {
+                      "Idempotency-Key": "<cryptographically random UUID v4>"
+                    },
+                    "requires_authentication": false,
+                    "requires_user_confirmation": true,
+                    "requires_user_interaction": true,
+                    "response_fields": [
+                      "checkout_url",
+                      "api_key",
+                      "status_url"
+                    ],
+                    "response_url_field": "checkout_url"
+                  }
+                }
+              }
             }
           }
         }
@@ -12651,6 +13565,34 @@
           }
         }
       },
+      "FavoritersUnavailable": {
+        "description": "X reports likes for the post but does not expose the corresponding user identities. Returns error code `favoriters_unavailable`.\n",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": "favoriters_unavailable",
+              "message": "Users who liked this post are unavailable. Use retweeters or replies instead."
+            }
+          }
+        }
+      },
+      "RepliesIncomplete": {
+        "description": "The direct replies page ended before the post's reported reply count. Returns error code `replies_incomplete` so verification workflows do not treat partial coverage as exhaustive.\n",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": "replies_incomplete",
+              "message": "Replies are incomplete. Use tweet search with a conversation_id filter."
+            }
+          }
+        }
+      },
       "ConnectAlreadyConnected": {
         "description": "The specified X account is already connected to this Xquik account. Returns error code `account_already_connected`.\n",
         "content": {
@@ -12694,7 +13636,7 @@
         }
       },
       "ConnectRateLimitExceeded": {
-        "description": "Too many requests. Either the connection rate limit was exceeded (`rate_limit_exceeded` - 3 attempts per 15 minutes, `retryAfter` seconds, `Retry-After: 900` header) or a prior login attempt triggered a cooldown (`login_cooldown`, `reason`, `retryAfterMs`, `Retry-After` header in seconds).\n",
+        "description": "Too many requests. Either the generous connection safety limit was exceeded (`rate_limit_exceeded`, `retryAfter` seconds, `Retry-After: 900` header) or a prior login attempt triggered a cooldown (`login_cooldown`, `reason`, `retryAfterMs`, `Retry-After` header in seconds).\n",
         "content": {
           "application/json": {
             "schema": {
@@ -12780,7 +13722,7 @@
     },
     "schemas": {
       "PaginatedTweets": {
-        "description": "Paginated list of tweets with cursor-based navigation. For paid authenticated calls, requested page size is an upper bound: remaining credits can reduce the returned item count, and zero affordable results returns 402 insufficient_credits.\n",
+        "description": "Paginated tweet results. The item count can be lower than pageSize when the source returns fewer tweets, filters remove tweets, or remaining credits cover fewer results. Follow next_cursor while has_next_page is true. An empty page can still have has_next_page true after filtering. Zero affordable results returns 402 insufficient_credits.\n",
         "type": "object",
         "required": [
           "tweets",
@@ -12796,7 +13738,13 @@
             "example": [
               {
                 "id": "1234567890",
-                "text": "Just launched our new feature!"
+                "text": "Just launched our new feature!",
+                "retweetCount": 5,
+                "replyCount": 3,
+                "likeCount": 42,
+                "quoteCount": 1,
+                "viewCount": 1500,
+                "bookmarkCount": 2
               }
             ]
           },
@@ -12811,7 +13759,7 @@
         }
       },
       "PaginatedUsers": {
-        "description": "Paginated list of user profiles with cursor-based navigation. For paid authenticated calls, requested page size is an upper bound: remaining credits can reduce the returned item count, and zero affordable results returns 402 insufficient_credits.\n",
+        "description": "Paginated user profiles. The item count can be lower than pageSize when the source returns fewer profiles or remaining credits cover fewer results. Follow next_cursor while has_next_page is true. A relationship can naturally contain fewer profiles than requested. Zero affordable results returns 402 insufficient_credits.\n",
         "type": "object",
         "required": [
           "users",
@@ -12842,6 +13790,1091 @@
           }
         }
       },
+      "BatchUsers": {
+        "description": "Batch user lookup results. Duplicate requested IDs are ignored while preserving first-seen order. unavailable_ids identifies processed IDs with no returned profile. unprocessed_ids identifies IDs skipped when available credits limit processing.\n",
+        "type": "object",
+        "required": [
+          "users",
+          "has_next_page",
+          "next_cursor",
+          "requested_count",
+          "processed_count",
+          "returned_count",
+          "unavailable_ids",
+          "unprocessed_ids"
+        ],
+        "properties": {
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserProfile"
+            }
+          },
+          "has_next_page": {
+            "type": "boolean",
+            "const": false,
+            "description": "Batch lookups never paginate."
+          },
+          "next_cursor": {
+            "type": "string",
+            "description": "Empty because batch lookups never paginate.",
+            "maxLength": 0,
+            "example": ""
+          },
+          "requested_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Number of unique IDs requested."
+          },
+          "processed_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Number of requested IDs included in the lookup."
+          },
+          "returned_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Number of user profiles returned and charged."
+          },
+          "unavailable_ids": {
+            "type": "array",
+            "description": "Processed IDs with no returned profile, in first-seen request order.",
+            "items": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            }
+          },
+          "unprocessed_ids": {
+            "type": "array",
+            "description": "Requested IDs skipped because available credits limited processing. Retry these IDs after adding credits.",
+            "items": {
+              "type": "string",
+              "pattern": "^\\d+$"
+            }
+          }
+        }
+      },
+      "GuestWalletAmount": {
+        "description": "Confirmed USD amount for a guest wallet purchase.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "amount_minor",
+          "currency"
+        ],
+        "properties": {
+          "amount_minor": {
+            "type": "integer",
+            "minimum": 1000,
+            "maximum": 25000,
+            "description": "USD amount in cents. Accepted range is $10-$250.",
+            "example": 1000
+          },
+          "currency": {
+            "type": "string",
+            "const": "usd"
+          }
+        }
+      },
+      "GuestWalletAmountBounds": {
+        "description": "Accepted guest wallet purchase range in USD cents.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "currency",
+          "maximum_minor",
+          "minimum_minor"
+        ],
+        "properties": {
+          "currency": {
+            "type": "string",
+            "const": "usd"
+          },
+          "maximum_minor": {
+            "type": "integer",
+            "const": 25000
+          },
+          "minimum_minor": {
+            "type": "integer",
+            "const": 1000
+          }
+        }
+      },
+      "GuestWalletPurchaseRequest": {
+        "description": "User-confirmed guest wallet checkout request.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "amount_minor",
+          "currency"
+        ],
+        "properties": {
+          "amount_minor": {
+            "type": "integer",
+            "minimum": 1000,
+            "maximum": 25000,
+            "description": "Confirmed USD amount in cents.",
+            "example": 1000
+          },
+          "currency": {
+            "type": "string",
+            "const": "usd"
+          }
+        }
+      },
+      "GuestWalletCheckoutResponse": {
+        "description": "Pending Stripe checkout and guest wallet purchase details.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "account_required",
+          "amount",
+          "checkout_url",
+          "credits",
+          "expires_at",
+          "instructions",
+          "poll_after_seconds",
+          "purchase_id",
+          "requires_user_interaction",
+          "status",
+          "status_url",
+          "wallet_id"
+        ],
+        "properties": {
+          "account_required": {
+            "type": "boolean",
+            "const": false
+          },
+          "amount": {
+            "$ref": "#/components/schemas/GuestWalletAmount"
+          },
+          "api_key": {
+            "type": "string",
+            "format": "password",
+            "description": "Paid-read bearer credential returned only by initial creation. Store it as a secret. Never place it in a URL or log.\n",
+            "example": "xq_example_returned_once"
+          },
+          "authorization": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "header",
+              "scheme"
+            ],
+            "properties": {
+              "header": {
+                "type": "string",
+                "enum": [
+                  "Authorization"
+                ],
+                "example": "Authorization"
+              },
+              "scheme": {
+                "type": "string",
+                "enum": [
+                  "Bearer"
+                ],
+                "example": "Bearer"
+              }
+            }
+          },
+          "checkout_url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://buy\\.stripe\\.com/",
+            "description": "Raw Stripe-hosted checkout URL for user interaction.",
+            "example": "https://buy.stripe.com/example"
+          },
+          "credits": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "description": "Credits granted after verified payment.",
+            "example": "66666"
+          },
+          "credential_notice": {
+            "type": "string",
+            "const": "Store api_key and the Idempotency-Key securely before sharing checkout_url. No email recovery is available."
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time when the pending checkout expires.",
+            "example": "2026-07-13T13:00:00.000Z"
+          },
+          "instructions": {
+            "type": "string",
+            "const": "Give checkout_url to the user. They must complete payment on Stripe. Never submit payment for them. After payment, poll status_url every poll_after_seconds until latest_purchase.status is no longer pending."
+          },
+          "poll_after_seconds": {
+            "type": "integer",
+            "const": 2,
+            "description": "Wait at least this long before polling status_url."
+          },
+          "purchase_id": {
+            "type": "string",
+            "pattern": "^gp_[A-Za-z0-9_-]+$",
+            "example": "gp_example"
+          },
+          "requires_user_interaction": {
+            "type": "boolean",
+            "const": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "creating",
+              "pending",
+              "paid",
+              "expired",
+              "failed",
+              "refunded",
+              "disputed"
+            ],
+            "example": "pending"
+          },
+          "status_url": {
+            "type": "string",
+            "format": "uri",
+            "const": "https://xquik.com/api/v1/guest-wallets/status"
+          },
+          "wallet_id": {
+            "type": "string",
+            "pattern": "^gw_[A-Za-z0-9_-]+$",
+            "example": "gw_example"
+          }
+        }
+      },
+      "GuestWalletCreateResponse": {
+        "description": "Initial guest wallet response containing the one-time key.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GuestWalletCheckoutResponse"
+          },
+          {
+            "type": "object",
+            "required": [
+              "api_key",
+              "authorization",
+              "credential_notice"
+            ]
+          }
+        ]
+      },
+      "GuestWalletTopupResponse": {
+        "description": "Existing guest wallet top-up response without a new key.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GuestWalletCheckoutResponse"
+          },
+          {
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "api_key": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "api_key"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "authorization": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "authorization"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "GuestWalletPurchaseStatus": {
+        "description": "Latest guest wallet purchase fulfillment state.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "amount",
+          "checkout_url",
+          "credits",
+          "expires_at",
+          "purchase_id",
+          "status"
+        ],
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/GuestWalletAmount"
+          },
+          "checkout_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://buy\\.stripe\\.com/"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Present only while the purchase is pending.",
+            "example": null
+          },
+          "credits": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "example": "66666"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-07-13T13:00:00.000Z"
+          },
+          "purchase_id": {
+            "type": "string",
+            "pattern": "^gp_[A-Za-z0-9_-]+$",
+            "example": "gp_example"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "creating",
+              "pending",
+              "paid",
+              "expired",
+              "failed",
+              "refunded",
+              "disputed"
+            ],
+            "example": "paid"
+          }
+        }
+      },
+      "GuestWalletStatusResponse": {
+        "description": "Current balance, usability, and latest guest purchase state.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "balance",
+          "latest_purchase",
+          "poll_after_seconds",
+          "scope",
+          "status",
+          "top_up",
+          "usable",
+          "wallet_id"
+        ],
+        "properties": {
+          "balance": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "example": "66666"
+          },
+          "latest_purchase": {
+            "description": "Latest purchase state. This does not determine usability.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GuestWalletPurchaseStatus"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "example": {
+              "amount": {
+                "amount_minor": 1000,
+                "currency": "usd"
+              },
+              "checkout_url": null,
+              "credits": "66666",
+              "expires_at": "2026-07-13T13:00:00.000Z",
+              "purchase_id": "gp_example",
+              "status": "paid"
+            }
+          },
+          "poll_after_seconds": {
+            "description": "Polling delay while payment is pending. Null means stop.",
+            "anyOf": [
+              {
+                "type": "integer",
+                "const": 2
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "scope": {
+            "type": "string",
+            "const": "paid_reads"
+          },
+          "status": {
+            "type": "string",
+            "description": "Combined wallet and pending-checkout state. A pending top-up can coexist with usable true. Terminal expired or failed states require a new guest wallet.\n",
+            "enum": [
+              "active",
+              "pending",
+              "expired",
+              "failed",
+              "frozen",
+              "closed"
+            ],
+            "example": "active"
+          },
+          "top_up": {
+            "description": "Top-up action when usable and no checkout is pending.",
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "method",
+                  "path"
+                ],
+                "properties": {
+                  "method": {
+                    "type": "string",
+                    "const": "POST"
+                  },
+                  "path": {
+                    "type": "string",
+                    "const": "/api/v1/guest-wallets/topups"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "usable": {
+            "type": "boolean",
+            "description": "Authoritative paid-read readiness. Use instead of status.",
+            "example": true
+          },
+          "wallet_id": {
+            "type": "string",
+            "pattern": "^gw_[A-Za-z0-9_-]+$",
+            "example": "gw_example"
+          }
+        }
+      },
+      "GuestWalletCreateCheckoutAction": {
+        "description": "Explicit direct REST action for a new guest wallet checkout.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "account_required",
+          "amount_bounds",
+          "body",
+          "creates",
+          "method",
+          "path",
+          "provider",
+          "required_headers",
+          "requires_authentication",
+          "requires_user_confirmation",
+          "requires_user_interaction",
+          "response_fields",
+          "response_url_field"
+        ],
+        "properties": {
+          "account_required": {
+            "type": "boolean",
+            "const": false
+          },
+          "amount_bounds": {
+            "$ref": "#/components/schemas/GuestWalletAmountBounds"
+          },
+          "body": {
+            "$ref": "#/components/schemas/GuestWalletPurchaseRequest"
+          },
+          "creates": {
+            "type": "string",
+            "const": "checkout_url"
+          },
+          "method": {
+            "type": "string",
+            "const": "POST"
+          },
+          "path": {
+            "type": "string",
+            "const": "/api/v1/guest-wallets"
+          },
+          "provider": {
+            "type": "string",
+            "const": "stripe"
+          },
+          "required_headers": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "Idempotency-Key"
+            ],
+            "properties": {
+              "Idempotency-Key": {
+                "type": "string",
+                "const": "<cryptographically random UUID v4>"
+              }
+            }
+          },
+          "requires_authentication": {
+            "type": "boolean",
+            "const": false
+          },
+          "requires_user_confirmation": {
+            "type": "boolean",
+            "const": true
+          },
+          "requires_user_interaction": {
+            "type": "boolean",
+            "const": true
+          },
+          "response_fields": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "prefixItems": [
+              {
+                "type": "string",
+                "const": "checkout_url"
+              },
+              {
+                "type": "string",
+                "const": "api_key"
+              },
+              {
+                "type": "string",
+                "const": "status_url"
+              }
+            ],
+            "items": {
+              "type": "string",
+              "enum": [
+                "checkout_url",
+                "api_key",
+                "status_url"
+              ]
+            }
+          },
+          "response_url_field": {
+            "type": "string",
+            "const": "checkout_url"
+          }
+        }
+      },
+      "GuestWalletTopupCheckoutAction": {
+        "description": "Explicit direct REST action for a guest wallet top-up.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "account_required",
+          "amount_bounds",
+          "body",
+          "creates",
+          "method",
+          "path",
+          "provider",
+          "required_headers",
+          "requires_authentication",
+          "requires_user_confirmation",
+          "requires_user_interaction",
+          "response_fields",
+          "response_url_field"
+        ],
+        "properties": {
+          "account_required": {
+            "type": "boolean",
+            "const": false
+          },
+          "amount_bounds": {
+            "$ref": "#/components/schemas/GuestWalletAmountBounds"
+          },
+          "body": {
+            "$ref": "#/components/schemas/GuestWalletPurchaseRequest"
+          },
+          "creates": {
+            "type": "string",
+            "const": "checkout_url"
+          },
+          "method": {
+            "type": "string",
+            "const": "POST"
+          },
+          "path": {
+            "type": "string",
+            "const": "/api/v1/guest-wallets/topups"
+          },
+          "provider": {
+            "type": "string",
+            "const": "stripe"
+          },
+          "required_headers": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "Idempotency-Key"
+            ],
+            "properties": {
+              "Idempotency-Key": {
+                "type": "string",
+                "const": "<cryptographically random UUID v4>"
+              }
+            }
+          },
+          "requires_authentication": {
+            "type": "boolean",
+            "const": true
+          },
+          "requires_user_confirmation": {
+            "type": "boolean",
+            "const": true
+          },
+          "requires_user_interaction": {
+            "type": "boolean",
+            "const": true
+          },
+          "response_fields": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "prefixItems": [
+              {
+                "type": "string",
+                "const": "checkout_url"
+              },
+              {
+                "type": "string",
+                "const": "status_url"
+              }
+            ],
+            "items": {
+              "type": "string",
+              "enum": [
+                "checkout_url",
+                "status_url"
+              ]
+            }
+          },
+          "response_url_field": {
+            "type": "string",
+            "const": "checkout_url"
+          }
+        }
+      },
+      "AnonymousGuestAuthenticationRequired": {
+        "description": "Authentication error for a non-MPP anonymous paid read. The response also advertises optional accountless Stripe checkout after confirmation.\n",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "account_required",
+          "error",
+          "message",
+          "next_step",
+          "payment_options"
+        ],
+        "properties": {
+          "account_required": {
+            "type": "boolean",
+            "const": false
+          },
+          "error": {
+            "type": "string",
+            "const": "unauthenticated"
+          },
+          "message": {
+            "type": "string",
+            "example": "Authentication required."
+          },
+          "next_step": {
+            "type": "string",
+            "const": "Ask the user to confirm a USD amount before creating checkout."
+          },
+          "payment_options": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "guest_wallet"
+            ],
+            "properties": {
+              "guest_wallet": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "create_checkout"
+                ],
+                "properties": {
+                  "create_checkout": {
+                    "$ref": "#/components/schemas/GuestWalletCreateCheckoutAction"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GuestPaymentRequired": {
+        "description": "Credit error for a paid-read guest key with only its accountless guest top-up action.\n",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "balance",
+          "error",
+          "message",
+          "next_step",
+          "payment_options",
+          "required",
+          "top_up_endpoint",
+          "top_up_url"
+        ],
+        "properties": {
+          "balance": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "example": "0"
+          },
+          "error": {
+            "type": "string",
+            "enum": [
+              "insufficient_credits",
+              "no_credits",
+              "no_subscription",
+              "subscription_inactive"
+            ],
+            "example": "insufficient_credits"
+          },
+          "message": {
+            "type": "string",
+            "example": "Insufficient credits. Top up or subscribe to continue."
+          },
+          "next_step": {
+            "type": "string",
+            "const": "Ask the user to confirm a USD amount before creating checkout."
+          },
+          "payment_options": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "credits"
+            ],
+            "properties": {
+              "credits": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "create_checkout"
+                ],
+                "properties": {
+                  "create_checkout": {
+                    "$ref": "#/components/schemas/GuestWalletTopupCheckoutAction"
+                  }
+                }
+              }
+            }
+          },
+          "required": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "example": "1"
+          },
+          "top_up_endpoint": {
+            "type": "string",
+            "const": "/api/v1/guest-wallets/topups"
+          },
+          "top_up_url": {
+            "type": "string",
+            "const": "POST /api/v1/guest-wallets/topups"
+          }
+        }
+      },
+      "AuthenticatedPaymentRequired": {
+        "description": "Authenticated credit or subscription error with confirmation-gated Stripe checkout actions.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "balance",
+          "dashboard",
+          "error",
+          "message",
+          "next_step",
+          "payment_options",
+          "required",
+          "top_up_endpoint",
+          "top_up_url"
+        ],
+        "properties": {
+          "balance": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "description": "Available credits as a decimal string.",
+            "example": "0"
+          },
+          "dashboard": {
+            "type": "string",
+            "const": "/dashboard/account",
+            "description": "Account page for manual billing management."
+          },
+          "error": {
+            "type": "string",
+            "enum": [
+              "insufficient_credits",
+              "no_credits",
+              "no_subscription",
+              "subscription_inactive"
+            ],
+            "example": "insufficient_credits"
+          },
+          "message": {
+            "type": "string",
+            "example": "Insufficient credits. Top up or subscribe to continue."
+          },
+          "next_step": {
+            "type": "string",
+            "const": "Ask the user to confirm a payment option before creating checkout."
+          },
+          "payment_options": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "credits",
+              "subscription"
+            ],
+            "properties": {
+              "credits": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "create_checkout"
+                ],
+                "properties": {
+                  "create_checkout": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "body",
+                      "creates",
+                      "method",
+                      "path",
+                      "provider",
+                      "requires_authentication",
+                      "requires_user_confirmation",
+                      "response_url_field"
+                    ],
+                    "properties": {
+                      "body": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "dollars",
+                          "locale"
+                        ],
+                        "properties": {
+                          "dollars": {
+                            "type": "integer",
+                            "const": 10
+                          },
+                          "locale": {
+                            "type": "string",
+                            "const": "en"
+                          }
+                        }
+                      },
+                      "creates": {
+                        "type": "string",
+                        "const": "checkout_url"
+                      },
+                      "method": {
+                        "type": "string",
+                        "const": "POST"
+                      },
+                      "path": {
+                        "type": "string",
+                        "const": "/api/v1/credits/topup"
+                      },
+                      "provider": {
+                        "type": "string",
+                        "const": "stripe"
+                      },
+                      "requires_authentication": {
+                        "type": "boolean",
+                        "const": true
+                      },
+                      "requires_user_confirmation": {
+                        "type": "boolean",
+                        "const": true
+                      },
+                      "response_url_field": {
+                        "type": "string",
+                        "const": "url"
+                      }
+                    }
+                  }
+                }
+              },
+              "subscription": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "create_checkout"
+                ],
+                "properties": {
+                  "create_checkout": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "body",
+                      "creates",
+                      "method",
+                      "path",
+                      "provider",
+                      "requires_authentication",
+                      "requires_user_confirmation",
+                      "response_url_field"
+                    ],
+                    "properties": {
+                      "body": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "tier"
+                        ],
+                        "properties": {
+                          "tier": {
+                            "type": "string",
+                            "const": "starter"
+                          }
+                        }
+                      },
+                      "creates": {
+                        "type": "string",
+                        "const": "checkout_url"
+                      },
+                      "method": {
+                        "type": "string",
+                        "const": "POST"
+                      },
+                      "path": {
+                        "type": "string",
+                        "const": "/api/v1/subscribe"
+                      },
+                      "provider": {
+                        "type": "string",
+                        "const": "stripe"
+                      },
+                      "requires_authentication": {
+                        "type": "boolean",
+                        "const": true
+                      },
+                      "requires_user_confirmation": {
+                        "type": "boolean",
+                        "const": true
+                      },
+                      "response_url_field": {
+                        "type": "string",
+                        "const": "url"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": {
+            "type": "string",
+            "pattern": "^\\d+$",
+            "description": "Credits required for the blocked request.",
+            "example": "1"
+          },
+          "top_up_endpoint": {
+            "type": "string",
+            "const": "/api/v1/credits/topup"
+          },
+          "top_up_url": {
+            "type": "string",
+            "const": "POST /api/v1/credits/topup"
+          }
+        }
+      },
+      "MppPaymentRequired": {
+        "description": "Anonymous payment requirement for a direct MPP operation. The response includes an MPP challenge and an accountless Stripe action.",
+        "type": "object",
+        "required": [
+          "account_required",
+          "detail",
+          "next_step",
+          "payment_options",
+          "status",
+          "title",
+          "type"
+        ],
+        "properties": {
+          "account_required": {
+            "type": "boolean",
+            "const": false
+          },
+          "challengeId": {
+            "type": "string",
+            "description": "Opaque identifier for the MPP payment challenge.",
+            "example": "mpp_challenge_example"
+          },
+          "detail": {
+            "type": "string",
+            "example": "Payment is required."
+          },
+          "hint": {
+            "type": "string",
+            "description": "Instructions for selecting and paying an MPP offer.",
+            "example": "Use a supported wallet with an offer from the WWW-Authenticate header."
+          },
+          "next_step": {
+            "type": "string",
+            "const": "Ask the user to confirm a USD amount before creating checkout."
+          },
+          "payment_options": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "guest_wallet"
+            ],
+            "properties": {
+              "guest_wallet": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "create_checkout"
+                ],
+                "properties": {
+                  "create_checkout": {
+                    "$ref": "#/components/schemas/GuestWalletCreateCheckoutAction"
+                  }
+                }
+              }
+            }
+          },
+          "status": {
+            "type": "integer",
+            "const": 402
+          },
+          "title": {
+            "type": "string",
+            "const": "Payment Required"
+          },
+          "type": {
+            "type": "string",
+            "format": "uri",
+            "const": "https://paymentauth.org/problems/payment-required"
+          }
+        }
+      },
       "Error": {
         "description": "Error response. Default v1 returns a legacy string error code. Send `xquik-api-contract: 2026-04-29` to receive the structured best-practice error object.\n",
         "type": "object",
@@ -12850,6 +14883,14 @@
         ],
         "properties": {
           "error": {
+            "x-stainless-naming": {
+              "python": {
+                "type_name": "ErrorValue"
+              },
+              "java": {
+                "type_name": "ErrorValue"
+              }
+            },
             "example": "invalid_input",
             "oneOf": [
               {
@@ -12873,6 +14914,7 @@
                   "invalid_tweet_id",
                   "invalid_tweet_url",
                   "invalid_user_id",
+                  "invalid_user_ids",
                   "invalid_username",
                   "invalid_json",
                   "insufficient_credits",
@@ -12895,7 +14937,6 @@
                   "unauthenticated",
                   "unsupported_field",
                   "user_not_found",
-                  "webhook_inactive",
                   "x_account_feature_required",
                   "x_account_protected",
                   "x_account_suspended",
@@ -12973,6 +15014,7 @@
                       "invalid_tweet_id",
                       "invalid_tweet_url",
                       "invalid_user_id",
+                      "invalid_user_ids",
                       "invalid_username",
                       "invalid_json",
                       "insufficient_credits",
@@ -12995,7 +15037,6 @@
                       "unauthenticated",
                       "unsupported_field",
                       "user_not_found",
-                      "webhook_inactive",
                       "x_account_feature_required",
                       "x_account_protected",
                       "x_account_suspended",
@@ -13527,6 +15568,9 @@
           "url",
           "eventTypes",
           "isActive",
+          "consecutiveFailures",
+          "deliveryStatus",
+          "failureHardCap",
           "createdAt"
         ],
         "properties": {
@@ -13549,6 +15593,26 @@
           "isActive": {
             "type": "boolean",
             "example": true
+          },
+          "consecutiveFailures": {
+            "type": "integer",
+            "description": "Consecutive failed delivery attempts since the last success.",
+            "example": 0
+          },
+          "deliveryStatus": {
+            "type": "string",
+            "enum": [
+              "active",
+              "paused",
+              "needs_attention"
+            ],
+            "description": "Endpoint delivery state. needs_attention means delivery stopped after repeated failures.",
+            "example": "active"
+          },
+          "failureHardCap": {
+            "type": "integer",
+            "description": "Consecutive delivery failures that pause the endpoint.",
+            "example": 200
           },
           "createdAt": {
             "type": "string",
@@ -13596,8 +15660,267 @@
           }
         }
       },
+      "ArticleAuthor": {
+        "description": "X Article author profile fields returned when available.",
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "username"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "9876543210"
+          },
+          "name": {
+            "type": "string",
+            "example": "Elon Musk"
+          },
+          "username": {
+            "type": "string",
+            "example": "elonmusk"
+          },
+          "description": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "followersCount": {
+            "type": "integer"
+          },
+          "followingCount": {
+            "type": "integer"
+          },
+          "statusesCount": {
+            "type": "integer"
+          },
+          "mediaCount": {
+            "type": "integer"
+          },
+          "favouritesCount": {
+            "type": "integer"
+          },
+          "profilePicture": {
+            "type": "string"
+          },
+          "profileBannerUrl": {
+            "type": "string"
+          },
+          "isBlueVerified": {
+            "type": "boolean"
+          },
+          "isVerified": {
+            "type": "boolean"
+          },
+          "isTranslator": {
+            "type": "boolean"
+          },
+          "protected": {
+            "type": "boolean"
+          },
+          "canDm": {
+            "type": "boolean"
+          }
+        }
+      },
+      "TweetMedia": {
+        "description": "Normalized media attached to a tweet.",
+        "type": "object",
+        "required": [
+          "mediaUrl",
+          "type",
+          "url"
+        ],
+        "properties": {
+          "mediaUrl": {
+            "type": "string",
+            "description": "Media preview URL"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "photo",
+              "video",
+              "animated_gif"
+            ]
+          },
+          "url": {
+            "type": "string",
+            "description": "X media link from the tweet"
+          },
+          "videoVariants": {
+            "type": "array",
+            "description": "Available video encodings, ordered as returned",
+            "items": {
+              "type": "object",
+              "required": [
+                "contentType",
+                "url"
+              ],
+              "properties": {
+                "bitrate": {
+                  "type": "integer"
+                },
+                "contentType": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "EmbeddedTweet": {
+        "description": "Quoted or retweeted tweet context. Every object includes id, text, and engagement metrics. A zero metric can mean X did not report the count. Author, media, and conversation fields appear when available.\n",
+        "type": "object",
+        "required": [
+          "id",
+          "text",
+          "retweetCount",
+          "replyCount",
+          "likeCount",
+          "quoteCount",
+          "viewCount",
+          "bookmarkCount"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "lang": {
+            "type": "string"
+          },
+          "retweetCount": {
+            "type": "integer"
+          },
+          "replyCount": {
+            "type": "integer"
+          },
+          "likeCount": {
+            "type": "integer"
+          },
+          "quoteCount": {
+            "type": "integer"
+          },
+          "viewCount": {
+            "type": "integer"
+          },
+          "bookmarkCount": {
+            "type": "integer"
+          },
+          "isReply": {
+            "type": "boolean"
+          },
+          "isLimitedReply": {
+            "type": "boolean"
+          },
+          "isNoteTweet": {
+            "type": "boolean"
+          },
+          "isQuoteStatus": {
+            "type": "boolean"
+          },
+          "inReplyToId": {
+            "type": "string"
+          },
+          "inReplyToUserId": {
+            "type": "string"
+          },
+          "inReplyToUsername": {
+            "type": "string"
+          },
+          "conversationId": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "displayTextRange": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "contentDisclosure": {
+            "$ref": "#/components/schemas/ContentDisclosure"
+          },
+          "entities": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-stainless-any": true,
+            "x-stainless-terraform-type": "string"
+          },
+          "media": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TweetMedia"
+            }
+          },
+          "author": {
+            "$ref": "#/components/schemas/UserProfile"
+          }
+        }
+      },
+      "ContentDisclosure": {
+        "description": "Content disclosure metadata shown by X when a tweet is labeled as paid partnership content or AI-generated media.",
+        "type": "object",
+        "properties": {
+          "advertising": {
+            "type": "object",
+            "properties": {
+              "isPaidPromotion": {
+                "type": "boolean",
+                "description": "True when X labels the tweet as paid promotion content.",
+                "example": true
+              }
+            }
+          },
+          "aiGenerated": {
+            "type": "object",
+            "properties": {
+              "detectionSource": {
+                "type": "string",
+                "description": "Source of the AI-generated media disclosure.",
+                "example": "UserDeclared"
+              },
+              "canEdit": {
+                "type": "boolean",
+                "description": "Whether the disclosure can be edited on X.",
+                "example": true
+              },
+              "hasAiGeneratedMedia": {
+                "type": "boolean",
+                "description": "True when X labels the tweet as containing AI-generated media.",
+                "example": true
+              }
+            }
+          }
+        }
+      },
       "TweetDetail": {
-        "description": "Full tweet with text, engagement metrics, media, and metadata.",
+        "description": "Full tweet with text, engagement metrics, media, and metadata. A zero metric can mean X did not report the count.",
         "type": "object",
         "required": [
           "id",
@@ -13632,6 +15955,11 @@
             "description": "Whether this tweet is a reply to another tweet",
             "example": false
           },
+          "isLimitedReply": {
+            "type": "boolean",
+            "description": "Whether replies are limited for this tweet",
+            "example": false
+          },
           "isQuoteStatus": {
             "type": "boolean",
             "description": "Whether this tweet quotes another tweet",
@@ -13647,39 +15975,70 @@
             "description": "Client application used to post this tweet",
             "example": "Twitter Web App"
           },
+          "type": {
+            "type": "string",
+            "description": "Tweet result type",
+            "example": "tweet"
+          },
+          "url": {
+            "type": "string",
+            "description": "Tweet permalink URL",
+            "example": "https://x.com/example_user/status/1234567890"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Tweet language code",
+            "example": "en"
+          },
+          "inReplyToId": {
+            "type": "string",
+            "description": "Tweet ID being replied to",
+            "example": "1234567890"
+          },
+          "inReplyToUserId": {
+            "type": "string",
+            "description": "User ID being replied to",
+            "example": "9876543210"
+          },
+          "inReplyToUsername": {
+            "type": "string",
+            "description": "Username being replied to",
+            "example": "example_user"
+          },
+          "displayTextRange": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Start and end offsets for rendered tweet text",
+            "example": [
+              0,
+              31
+            ]
+          },
+          "contentDisclosure": {
+            "$ref": "#/components/schemas/ContentDisclosure"
+          },
           "entities": {
             "type": "object",
             "additionalProperties": true,
+            "x-stainless-any": true,
+            "x-stainless-terraform-type": "string",
             "description": "Parsed entities from the tweet text (URLs, mentions, hashtags, media)"
           },
           "quoted_tweet": {
-            "type": "object",
-            "additionalProperties": true,
-            "description": "The quoted tweet object, present when isQuoteStatus is true"
+            "$ref": "#/components/schemas/EmbeddedTweet"
+          },
+          "retweeted_tweet": {
+            "$ref": "#/components/schemas/EmbeddedTweet"
+          },
+          "author": {
+            "$ref": "#/components/schemas/TweetAuthor"
           },
           "media": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "mediaUrl": {
-                  "type": "string",
-                  "example": "https://pbs.twimg.com/media/example.jpg"
-                },
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "photo",
-                    "video",
-                    "animated_gif"
-                  ],
-                  "example": "photo"
-                },
-                "url": {
-                  "type": "string",
-                  "example": "https://t.co/abc123"
-                }
-              }
+              "$ref": "#/components/schemas/TweetMedia"
             },
             "description": "Attached media items, omitted when the tweet has no media"
           },
@@ -13710,43 +16069,33 @@
         }
       },
       "TweetAuthor": {
-        "description": "Author of a tweet with follower count and verification status.",
-        "type": "object",
-        "required": [
-          "id",
-          "username",
-          "followers",
-          "verified"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "example": "9876543210"
+        "description": "Tweet author profile. The lookup route always includes follower count and verification state. Other profile fields appear when available.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UserProfile"
           },
-          "username": {
-            "type": "string",
-            "example": "elonmusk"
-          },
-          "followers": {
-            "type": "integer",
-            "example": 150000000
-          },
-          "verified": {
-            "type": "boolean",
-            "example": true
-          },
-          "profilePicture": {
-            "type": "string",
-            "example": "https://pbs.twimg.com/profile_images/example.jpg"
+          {
+            "title": "TweetAuthorRequirements",
+            "type": "object",
+            "required": [
+              "followers",
+              "verified"
+            ]
           }
-        }
+        ]
       },
       "SearchTweet": {
-        "description": "Tweet returned from search results with inline author info.",
+        "description": "Tweet returned from search results with inline author info. A zero metric can mean X did not report the count.",
         "type": "object",
         "required": [
           "id",
-          "text"
+          "text",
+          "retweetCount",
+          "replyCount",
+          "likeCount",
+          "quoteCount",
+          "viewCount",
+          "bookmarkCount"
         ],
         "properties": {
           "id": {
@@ -13798,7 +16147,7 @@
           "inReplyToUsername": {
             "type": "string",
             "description": "Username being replied to",
-            "example": "xquikcom"
+            "example": "example_user"
           },
           "conversationId": {
             "type": "string",
@@ -13821,51 +16170,31 @@
               31
             ]
           },
+          "contentDisclosure": {
+            "$ref": "#/components/schemas/ContentDisclosure"
+          },
           "entities": {
             "type": "object",
             "additionalProperties": true,
             "description": "Parsed search-result entities including URLs, mentions, hashtags, and media markers"
           },
           "quoted_tweet": {
-            "type": "object",
-            "additionalProperties": true,
-            "description": "Embedded quoted tweet, omitted when not a quote tweet"
+            "$ref": "#/components/schemas/EmbeddedTweet"
           },
           "retweeted_tweet": {
-            "type": "object",
-            "additionalProperties": true,
-            "description": "Original retweeted tweet, omitted when not a retweet"
+            "$ref": "#/components/schemas/EmbeddedTweet"
           },
           "media": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "mediaUrl": {
-                  "type": "string",
-                  "example": "https://pbs.twimg.com/media/example.jpg"
-                },
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "photo",
-                    "video",
-                    "animated_gif"
-                  ],
-                  "example": "photo"
-                },
-                "url": {
-                  "type": "string",
-                  "example": "https://t.co/abc123"
-                }
-              }
+              "$ref": "#/components/schemas/TweetMedia"
             },
             "description": "Search-result media attachments, omitted when no media is present"
           },
           "url": {
             "type": "string",
             "description": "Tweet permalink URL",
-            "example": "https://x.com/xquikcom/status/1234567890"
+            "example": "https://x.com/example_user/status/1234567890"
           },
           "lang": {
             "type": "string",
@@ -13938,12 +16267,27 @@
             "type": "boolean",
             "example": true
           },
+          "isBlueVerified": {
+            "type": "boolean",
+            "description": "Whether X shows a blue verification badge",
+            "example": true
+          },
+          "isVerified": {
+            "type": "boolean",
+            "description": "Whether X marks the profile as verified",
+            "example": true
+          },
           "profilePicture": {
             "type": "string",
             "example": "https://pbs.twimg.com/profile_images/example.jpg"
           },
           "coverPicture": {
             "type": "string",
+            "example": "https://pbs.twimg.com/profile_banners/example.jpg"
+          },
+          "profileBannerUrl": {
+            "type": "string",
+            "description": "Original X profile banner field when available",
             "example": "https://pbs.twimg.com/profile_banners/example.jpg"
           },
           "location": {
@@ -13964,6 +16308,11 @@
           },
           "canDm": {
             "type": "boolean",
+            "example": false
+          },
+          "protected": {
+            "type": "boolean",
+            "description": "Whether the profile protects its posts",
             "example": false
           },
           "url": {
@@ -14010,7 +16359,7 @@
           },
           "automatedBy": {
             "type": "string",
-            "example": "xquikcom"
+            "example": "example_user"
           },
           "unavailable": {
             "type": "boolean",
@@ -14024,9 +16373,26 @@
             "type": "string",
             "example": "Business"
           },
+          "communityRole": {
+            "type": "string",
+            "description": "Community role when returned by community member reads",
+            "example": "Member"
+          },
+          "viewerFollowedBy": {
+            "type": "boolean",
+            "description": "Whether this profile follows the authenticated viewer",
+            "example": false
+          },
+          "viewerFollowing": {
+            "type": "boolean",
+            "description": "Whether the authenticated viewer follows this profile",
+            "example": true
+          },
           "profile_bio": {
             "type": "object",
             "additionalProperties": true,
+            "x-stainless-any": true,
+            "x-stainless-terraform-type": "string",
             "description": "Structured profile bio with entity annotations",
             "example": {
               "description": "CEO of Tesla, SpaceX, and X",
@@ -14308,7 +16674,6 @@
           "xUsername",
           "status",
           "health",
-          "proxyCountry",
           "createdAt",
           "updatedAt"
         ],
@@ -14331,7 +16696,7 @@
           },
           "health": {
             "type": "string",
-            "description": "Derived login/cookie health. `healthy` = cookies valid. `needsReauth` = user must submit fresh credentials. `locked` = X locked the account; unlock on x.com first. `suspended` = X banned the account. `recovering` = past cooldown, will auto-retry on next use. `temporaryIssue` = transient backend problem; retry shortly.\n",
+            "description": "Derived connection health. `healthy` = session active. `needsReauth` = user must submit fresh credentials. `locked` = X locked the account; unlock on x.com first. `suspended` = X banned the account. `recovering` = past cooldown, will auto-retry on next use. `temporaryIssue` = temporary connection problem; retry shortly.\n",
             "enum": [
               "healthy",
               "locked",
@@ -14351,10 +16716,6 @@
             "type": "string",
             "format": "date-time",
             "example": "2025-03-10T08:30:00Z"
-          },
-          "proxyCountry": {
-            "type": "string",
-            "example": "US"
           },
           "cookiesObtainedAt": {
             "type": "string",
@@ -14409,7 +16770,7 @@
         }
       },
       "XAccountDetail": {
-        "description": "Full X account details including proxy, cookies, and update timestamp.",
+        "description": "Connected X account details with health and timestamp metadata.",
         "type": "object",
         "required": [
           "id",
@@ -14458,10 +16819,6 @@
             "format": "date-time",
             "example": "2025-03-10T08:30:00Z"
           },
-          "proxyCountry": {
-            "type": "string",
-            "example": "US"
-          },
           "cookiesObtainedAt": {
             "type": "string",
             "format": "date-time",
@@ -14470,7 +16827,7 @@
         }
       },
       "SanitizedXAccount": {
-        "description": "Sanitized X account summary returned by connect and reauth. Includes an optional `loginCountry` field surfaced only when the login session country differs from the selected `proxy_country`; the field is omitted when both countries match.\n",
+        "description": "Sanitized X account summary returned by connect and reauth.",
         "type": "object",
         "required": [
           "id",
@@ -14513,11 +16870,6 @@
             "type": "string",
             "format": "date-time",
             "example": "2025-01-15T12:00:00Z"
-          },
-          "loginCountry": {
-            "type": "string",
-            "description": "ISO-3166-1 alpha-2 country code used for this login. Present only when the login session country differs from the declared `proxy_country`. Omitted otherwise.\n",
-            "example": "US"
           }
         }
       },
