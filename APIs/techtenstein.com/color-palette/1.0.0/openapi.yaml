@@ -1,0 +1,121 @@
+openapi: 3.1.0
+info:
+  title: Color Palette API
+  version: 1.0.0
+  description: Generate color palettes (complementary, triadic, analogous, tetradic,
+    monochromatic, shades, tints) from a base color. Zero-key, CORS-enabled.
+  contact:
+    name: Techtenstein
+    url: https://techtenstein.com
+    email: sathvickollu@gmail.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  x-providerName: techtenstein.com
+  x-serviceName: color-palette
+  x-origin:
+  - format: openapi
+    version: '3.1'
+    url: https://color-palette.techtenstein.com/openapi.json
+  x-logo:
+    url: https://techtenstein.com/logo.png
+servers:
+- url: https://color-palette.techtenstein.com
+paths:
+  /palette:
+    get:
+      summary: Generate a palette from a base color
+      parameters:
+      - name: color
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Base color as hex (#RRGGBB or RRGGBB) or hsl(H,S,L)
+      - name: scheme
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - complementary
+          - triadic
+          - analogous
+          - tetradic
+          - split-complementary
+          - monochromatic
+          - shades
+          - tints
+          default: complementary
+      - name: count
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 5
+          minimum: 2
+          maximum: 12
+      responses:
+        '200':
+          description: Palette
+          content:
+            application/json:
+              schema:
+                type: object
+  /random:
+    get:
+      summary: Random palette
+      parameters:
+      - name: count
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 5
+          minimum: 2
+          maximum: 12
+      - name: scheme
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Palette
+  /convert:
+    get:
+      summary: Convert a color between hex/rgb/hsl
+      parameters:
+      - name: color
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: All formats
+  /contrast:
+    get:
+      summary: WCAG contrast ratio between two colors
+      parameters:
+      - name: fg
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: bg
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Ratio + AA/AAA pass
+  /health:
+    get:
+      summary: Health
+      responses:
+        '200':
+          description: OK
+externalDocs:
+  url: https://color-palette.techtenstein.com/
