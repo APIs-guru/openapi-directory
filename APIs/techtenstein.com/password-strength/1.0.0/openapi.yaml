@@ -1,0 +1,95 @@
+openapi: 3.1.0
+info:
+  title: Password Strength API
+  version: 1.0.0
+  description: Scores password strength (0-4), estimates crack time, flags common
+    patterns and dictionary matches, and generates strong passwords. Zero-key, CORS-enabled.
+    Passwords are never logged.
+  contact:
+    name: Techtenstein
+    url: https://techtenstein.com
+    email: sathvickollu@gmail.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  x-providerName: techtenstein.com
+  x-serviceName: password-strength
+  x-origin:
+  - format: openapi
+    version: '3.1'
+    url: https://password-strength.techtenstein.com/openapi.json
+  x-logo:
+    url: https://techtenstein.com/logo.png
+servers:
+- url: https://password-strength.techtenstein.com
+paths:
+  /check:
+    get:
+      summary: Score a password
+      parameters:
+      - name: password
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Score + feedback
+  /generate:
+    get:
+      summary: Generate a strong password
+      parameters:
+      - name: length
+        in: query
+        schema:
+          type: integer
+          default: 20
+          minimum: 8
+          maximum: 128
+      - name: symbols
+        in: query
+        schema:
+          type: boolean
+          default: true
+      - name: numbers
+        in: query
+        schema:
+          type: boolean
+          default: true
+      - name: count
+        in: query
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+          maximum: 20
+      responses:
+        '200':
+          description: Passwords
+  /passphrase:
+    get:
+      summary: Generate a passphrase (diceware-style)
+      parameters:
+      - name: words
+        in: query
+        schema:
+          type: integer
+          default: 5
+          minimum: 3
+          maximum: 12
+      - name: separator
+        in: query
+        schema:
+          type: string
+          default: '-'
+      responses:
+        '200':
+          description: Passphrase
+  /health:
+    get:
+      summary: Health
+      responses:
+        '200':
+          description: OK
+externalDocs:
+  url: https://password-strength.techtenstein.com/
