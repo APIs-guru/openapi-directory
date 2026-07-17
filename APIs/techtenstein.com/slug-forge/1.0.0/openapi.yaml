@@ -1,0 +1,84 @@
+openapi: "3.1.0"
+info:
+  title: "slug-forge API"
+  version: "1.0.0"
+  description: "Turn any string into a URL-safe slug with Unicode transliteration, custom separator, strict mode, and length cap."
+  contact:
+    name: "Techtenstein"
+    url: "https://techtenstein.com"
+    email: "sathvickollu@gmail.com"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+  x-providerName: "techtenstein.com"
+  x-serviceName: "slug-forge"
+  x-origin:
+    - format: "openapi"
+      version: "3.1"
+      url: "https://slug-forge.techtenstein.com/openapi.json"
+  x-logo:
+    url: "https://techtenstein.com/logo.png"
+servers:
+  - url: "https://slug-forge.techtenstein.com"
+paths:
+  /:
+    get:
+      summary: "Landing / docs"
+  /health:
+    get:
+      summary: "Health"
+  /openapi.json:
+    get:
+      summary: "OpenAPI spec"
+  /slug:
+    get:
+      summary: "Slugify text"
+      parameters:
+        - name: "text"
+          in: "query"
+          required: True
+          schema:
+            type: "string"
+        - name: "separator"
+          in: "query"
+          schema:
+            type: "string"
+            default: "-"
+        - name: "lower"
+          in: "query"
+          schema:
+            type: "string"
+            default: "true"
+        - name: "strict"
+          in: "query"
+          schema:
+            type: "string"
+            default: "false"
+        - name: "max"
+          in: "query"
+          schema:
+            type: "integer"
+            default: 0
+      responses:
+        200:
+          description: "Slug result"
+  /batch:
+    get:
+      summary: "Slugify multiple (comma-separated in \"texts\")"
+      parameters:
+        - name: "texts"
+          in: "query"
+          required: True
+          schema:
+            type: "string"
+        - name: "separator"
+          in: "query"
+          schema:
+            type: "string"
+            default: "-"
+      responses:
+        200:
+          description: "Array of slugs"
+externalDocs:
+  url: "https://slug-forge.techtenstein.com"
+  description: "Live API + docs"
