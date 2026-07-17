@@ -1,0 +1,94 @@
+openapi: "3.1.0"
+info:
+  title: "uuid-tools API"
+  version: "1.0.0"
+  description: "Generate, decode, and validate UUIDs (v4, v7)."
+  contact:
+    name: "Techtenstein"
+    url: "https://techtenstein.com"
+    email: "sathvickollu@gmail.com"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+  x-providerName: "techtenstein.com"
+  x-serviceName: "uuid-tools"
+  x-origin:
+    - format: "openapi"
+      version: "3.1"
+      url: "https://uuid-tools.techtenstein.com/openapi.json"
+  x-logo:
+    url: "https://techtenstein.com/logo.png"
+servers:
+  - url: "https://uuid-tools.techtenstein.com"
+paths:
+  /:
+    get:
+      summary: "Landing / docs"
+      responses:
+        200:
+          description: "HTML docs"
+  /health:
+    get:
+      summary: "Health check"
+      responses:
+        200:
+          description: "OK"
+  /openapi.json:
+    get:
+      summary: "OpenAPI spec"
+      responses:
+        200:
+          description: "JSON spec"
+  /v4:
+    get:
+      summary: "Generate UUID v4"
+      parameters:
+        - name: "n"
+          in: "query"
+          schema:
+            type: "integer"
+            default: 1
+            maximum: 100
+      responses:
+        200:
+          description: "Array of UUIDs"
+  /v7:
+    get:
+      summary: "Generate time-sortable UUID v7"
+      parameters:
+        - name: "n"
+          in: "query"
+          schema:
+            type: "integer"
+            default: 1
+            maximum: 100
+      responses:
+        200:
+          description: "Array of UUIDs"
+  /validate/{uuid}:
+    get:
+      summary: "Validate a UUID string"
+      parameters:
+        - name: "uuid"
+          in: "path"
+          required: True
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "Validation result"
+  /decode/{uuid}:
+    get:
+      summary: "Decode UUID (version, variant, timestamp for v7)"
+      parameters:
+        - name: "uuid"
+          in: "path"
+          required: True
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "Decoded info"
+externalDocs:
+  url: "https://uuid-tools.techtenstein.com"
+  description: "Live API + docs"
