@@ -1,0 +1,79 @@
+openapi: "3.1.0"
+info:
+  title: "lorem-forge API"
+  version: "1.0.0"
+  description: "Lorem ipsum placeholder text. Words, sentences, paragraphs. Plain text or HTML output."
+  contact:
+    name: "Techtenstein"
+    url: "https://techtenstein.com"
+    email: "sathvickollu@gmail.com"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+  x-providerName: "techtenstein.com"
+  x-serviceName: "lorem-forge"
+  x-origin:
+    - format: "openapi"
+      version: "3.1"
+      url: "https://lorem-forge.techtenstein.com/openapi.json"
+  x-logo:
+    url: "https://techtenstein.com/logo.png"
+servers:
+  - url: "https://lorem-forge.techtenstein.com"
+paths:
+  /:
+    get:
+      summary: "Landing / docs"
+  /health:
+    get:
+      summary: "Health"
+  /openapi.json:
+    get:
+      summary: "OpenAPI spec"
+  /words:
+    get:
+      summary: "N random words"
+      parameters:
+        - name: "n"
+          in: "query"
+          schema:
+            type: "integer"
+            default: 20
+            maximum: 500
+      responses:
+        200:
+          description: "Words"
+  /sentences:
+    get:
+      summary: "N sentences"
+      parameters:
+        - name: "n"
+          in: "query"
+          schema:
+            type: "integer"
+            default: 3
+            maximum: 50
+      responses:
+        200:
+          description: "Sentences"
+  /paragraphs:
+    get:
+      summary: "N paragraphs"
+      parameters:
+        - name: "n"
+          in: "query"
+          schema:
+            type: "integer"
+            default: 3
+            maximum: 20
+        - name: "html"
+          in: "query"
+          schema:
+            type: "string"
+            default: "false"
+      responses:
+        200:
+          description: "Paragraphs"
+externalDocs:
+  url: "https://lorem-forge.techtenstein.com"
+  description: "Live API + docs"
