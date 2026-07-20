@@ -1,0 +1,3358 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Script Master Labs - x402 Data API",
+        "version": "1.0.0",
+        "description": "Script Master Labs x402 Data API provides reliable, pay-per-call U.S. federal, financial, and pharmaceutical data endpoints. SAM.gov registered (UEI G24VZA4RLMK3, CAGE 21U51). Service-Disabled Veteran-Owned Small Business (SDVOSB).",
+        "contact": {
+            "name": "Script Master Labs",
+            "email": "ScriptMasterLabs@gmail.com",
+            "url": "https://scriptmasterlabs.com"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://mcp-x402.onrender.com"
+        }
+    ],
+    "x-service-info": {
+        "categories": [
+            "government-data",
+            "grants",
+            "federal-contracts",
+            "market-intelligence",
+            "medical-reference",
+            "drug-data",
+            "healthcare-providers",
+            "clinical-trials",
+            "sec-filings",
+            "insider-trading",
+            "finance",
+            "drug-safety",
+            "treasury",
+            "yield-curve",
+            "compliance",
+            "entity-verification",
+            "agent-reputation",
+            "fact-checking",
+            "veteran-services",
+            "federal-procurement",
+            "institutional-holdings",
+            "lobbying",
+            "patent-data",
+            "economic-indicators",
+            "labor-safety",
+            "medical-devices",
+            "campaign-finance",
+            "environmental-compliance",
+            "innovation-grants",
+            "congressional-legislation",
+            "regulatory-enforcement",
+            "medicare-data",
+            "research-grants",
+            "broker-verification",
+            "activist-investing",
+            "fails-to-deliver",
+            "short-squeeze-data",
+            "reg-sho",
+            "options-flow",
+            "dark-pool-data",
+            "position-sizing",
+            "trading-signals",
+            "aml-compliance",
+            "bank-audit",
+            "financial-crime-detection",
+            "content-moderation",
+            "misinformation-detection",
+            "wallet-reputation",
+            "rsi-heatmap",
+            "options-delta",
+            "technical-indicators",
+            "market-screener",
+            "greeks-data"
+        ],
+        "payment": {
+            "protocol": "x402",
+            "rails": [
+                {
+                    "id": "standard",
+                    "scheme": "exact",
+                    "network": "base",
+                    "settlement": "facilitator",
+                    "note": "EIP-3009 via X-PAYMENT \u2014 settled through a hybrid facilitator chain."
+                },
+                {
+                    "id": "sovereign",
+                    "scheme": "exact",
+                    "network": "base",
+                    "settlement": "onchain-tx",
+                    "note": "Pay USDC then send X-PAYMENT-TX \u2014 verified directly on-chain, no facilitator."
+                }
+            ],
+            "facilitators": "/x402/facilitators"
+        },
+        "docs": {
+            "homepage": "https://scriptmasterlabs.com",
+            "llms": "https://mcp-x402.onrender.com/llms.txt",
+            "apiReference": "https://github.com/Timwal78/SML_Portfolio/tree/main/mcp-x402"
+        }
+    },
+    "paths": {
+        "/x402/grants": {
+            "get": {
+                "operationId": "searchGrants",
+                "summary": "Search live U.S. federal grant opportunities (Grants.gov Search2).",
+                "description": "Returns real, current grant opportunities. Pay 0.02 USDC on Base, then call with X-PAYMENT-TX set to the transaction hash.",
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Search keywords or CFDA/assistance-listing number.",
+                        "example": "climate research"
+                    },
+                    {
+                        "name": "rows",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 50,
+                            "default": 10
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.02",
+                    "amountUnits": "20000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "settlement": "onchain-tx",
+                    "paymentHeader": "X-PAYMENT-TX",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.02"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Live grant results"
+                    },
+                    "402": {
+                        "description": "Payment required \u2014 pay USDC then retry with X-PAYMENT-TX."
+                    }
+                }
+            }
+        },
+        "/x402/firms": {
+            "get": {
+                "operationId": "findFirms",
+                "summary": "Find self-certified SDVOSB/WOSB/SDB/minority firms by NAICS + state (SAM.gov).",
+                "description": "Returns registered firms with a self-certified socioeconomic flag, filtered by NAICS and optional state. Pay 0.08 USDC on Base, then call with X-PAYMENT-TX. Note: SBA-certified 8(a)/HUBZone status is not in SAM.",
+                "parameters": [
+                    {
+                        "name": "naics",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "6-digit NAICS code.",
+                        "example": "541512"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "2-letter state code."
+                    },
+                    {
+                        "name": "set_aside",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "SDVOSB",
+                                "WOSB",
+                                "SDB",
+                                "MINORITY"
+                            ],
+                            "default": "SDVOSB"
+                        }
+                    },
+                    {
+                        "name": "rows",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 25,
+                            "default": 10
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.08",
+                    "amountUnits": "80000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "settlement": "onchain-tx",
+                    "paymentHeader": "X-PAYMENT-TX",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.08"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Matching firms"
+                    },
+                    "402": {
+                        "description": "Payment required \u2014 pay USDC then retry with X-PAYMENT-TX."
+                    }
+                }
+            }
+        },
+        "/x402/market": {
+            "get": {
+                "operationId": "marketIntel",
+                "summary": "Federal contract market intelligence by NAICS (USAspending).",
+                "description": "Top incumbents (recipients) and top buying agencies by obligated dollars for a NAICS over a lookback window. Pay 0.30 USDC on Base, then call with X-PAYMENT-TX.",
+                "parameters": [
+                    {
+                        "name": "naics",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "6-digit NAICS code.",
+                        "example": "541512"
+                    },
+                    {
+                        "name": "years",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 10,
+                            "default": 3
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.30",
+                    "amountUnits": "300000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "settlement": "onchain-tx",
+                    "paymentHeader": "X-PAYMENT-TX",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.30"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Market intelligence"
+                    },
+                    "402": {
+                        "description": "Payment required \u2014 pay USDC then retry with X-PAYMENT-TX."
+                    }
+                }
+            }
+        },
+        "/x402/drug-label": {
+            "get": {
+                "operationId": "drugLabel",
+                "summary": "FDA drug label lookup (openFDA).",
+                "description": "Indications, dosage, warnings, interactions for a drug. Pay 0.05 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "drug",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Brand or generic drug name.",
+                        "example": "aspirin"
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.05",
+                    "amountUnits": "50000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.05"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Drug label",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/drug-recall": {
+            "get": {
+                "operationId": "drugRecall",
+                "summary": "FDA drug recall/enforcement search (openFDA).",
+                "description": "Recall reason, classification, status, recalling firm. Pay 0.08 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "drug",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "metformin"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 20,
+                            "default": 5
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.08",
+                    "amountUnits": "80000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.08"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Recalls",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/npi": {
+            "get": {
+                "operationId": "npiLookup",
+                "summary": "NPPES provider (NPI) lookup.",
+                "description": "NPI, name, specialty, location, phone. Provide last_name, organization_name, or specialty. Pay 0.05 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "last_name",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Smith"
+                    },
+                    {
+                        "name": "first_name",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "organization_name",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "specialty",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Cardiology"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.05",
+                    "amountUnits": "50000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.05"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Providers",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/clinical-trials": {
+            "get": {
+                "operationId": "clinicalTrials",
+                "summary": "Clinical trial search (ClinicalTrials.gov APIv2).",
+                "description": "NCT ID, title, status, phase, enrollment, sponsor, conditions. Pay 0.08 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "term",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Drug, sponsor, or keyword.",
+                        "example": "diabetes"
+                    },
+                    {
+                        "name": "condition",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "RECRUITING",
+                                "ACTIVE",
+                                "COMPLETED",
+                                "ALL"
+                            ],
+                            "default": "RECRUITING"
+                        }
+                    },
+                    {
+                        "name": "rows",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 25,
+                            "default": 10
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.08",
+                    "amountUnits": "80000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.08"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Clinical trials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/insider-trades": {
+            "get": {
+                "operationId": "insiderTrades",
+                "summary": "SEC EDGAR Form 4 insider trades by ticker.",
+                "description": "Executive buy/sell filings from SEC EDGAR. Returns filing URLs with full Form 4 detail. Pay 0.20 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "ticker",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Stock ticker (e.g. TSLA, AMC, GME).",
+                        "example": "NVDA"
+                    },
+                    {
+                        "name": "days",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 90,
+                            "default": 30
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 25,
+                            "default": 10
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.20",
+                    "amountUnits": "200000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.20"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Insider trades",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/drug-adverse-events": {
+            "get": {
+                "operationId": "drugAdverseEvents",
+                "summary": "FDA adverse event reports (openFDA FAERS).",
+                "description": "Reactions, seriousness, outcomes for a drug from FDA safety reports. Pay 0.08 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "drug",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "ibuprofen"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 25,
+                            "default": 10
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.08",
+                    "amountUnits": "80000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.08"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Adverse events",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/sec-8k": {
+            "get": {
+                "operationId": "sec8k",
+                "summary": "SEC EDGAR 8-K material event filings by ticker.",
+                "description": "Earnings, CEO changes, M&A, and other material events. Pay 0.25 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "ticker",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "AAPL"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 20,
+                            "default": 5
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.25",
+                    "amountUnits": "250000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.25"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "8-K filings",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/treasury-yields": {
+            "get": {
+                "operationId": "treasuryYields",
+                "summary": "Daily US Treasury yield curve rates (1M\u201330Y).",
+                "description": "Official daily yield curve from Treasury.gov. Pay 0.05 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "month",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "YYYYMM format (defaults to current month).",
+                        "example": "202606"
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.05",
+                    "amountUnits": "50000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.05"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Yield curve",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/entity-compliance": {
+            "get": {
+                "operationId": "entityCompliance",
+                "summary": "SAM entity compliance bundle: registration + exclusion + set-asides + NAICS.",
+                "description": "Full compliance check by UEI or CAGE: active status, expiry, exclusion flag, set-aside certifications, size standard. Pay 0.35 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "uei",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "SAM UEI (preferred).",
+                        "example": "JF19MPF74LN7"
+                    },
+                    {
+                        "name": "cage",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "CAGE code (alternative)."
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.35",
+                    "amountUnits": "350000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.35"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Compliance report",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/agent-score": {
+            "get": {
+                "operationId": "agentScore",
+                "summary": "AI agent FICO-style reputation score (300\u2013850).",
+                "description": "Submit behavioral signals (tasks, errors, payments) or retrieve score for an agent. Pay 0.20 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "agent_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "agent-001"
+                    },
+                    {
+                        "name": "action",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "get",
+                                "report"
+                            ],
+                            "default": "get"
+                        }
+                    },
+                    {
+                        "name": "tasks",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "successes",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "errors",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "payments",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "uptime",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.20",
+                    "amountUnits": "200000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.20"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Agent score",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/fact-check": {
+            "get": {
+                "operationId": "factCheck",
+                "summary": "Grounding oracle: fact-checks a claim against live government/FDA/SEC/Treasury data.",
+                "description": "Submit any claim; auto-routes to the relevant primary source. Pay 0.15 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "claim",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "The 10-year Treasury yield is above 4%"
+                    },
+                    {
+                        "name": "domain",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "grants",
+                                "contracts",
+                                "drug",
+                                "provider",
+                                "insider",
+                                "yields",
+                                "clinical",
+                                "general"
+                            ]
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.15",
+                    "amountUnits": "150000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.15"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Fact-check result",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/sec-13f": {
+            "get": {
+                "operationId": "sec13f",
+                "summary": "SEC EDGAR 13F institutional holdings \u2014 hedge fund quarterly positions.",
+                "description": "Returns the most recent 13F-HR filings for a fund or institution by CIK or name. Each result includes the filing URL linking to the full XML holdings table. Pay 0.25 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "cik",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "10-digit SEC CIK number (preferred).",
+                        "example": "0001067983"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Institution or fund name (e.g. \"Berkshire Hathaway\")."
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.25",
+                    "amountUnits": "250000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.25"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "13F filing list with URLs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/lobbying": {
+            "get": {
+                "operationId": "lobbyingDisclosures",
+                "summary": "Senate LDA lobbying disclosure filings \u2014 client, registrant, issues, and amounts.",
+                "description": "Search the Senate Lobbying Disclosure Act database by client name, registrant (lobbying firm), or issue code. Returns recent filings with activity detail. Pay 0.15 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The company or organization being lobbied for.",
+                        "example": "Google"
+                    },
+                    {
+                        "name": "registrant",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The lobbying firm or individual registrant."
+                    },
+                    {
+                        "name": "issue",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "LDA issue area code (e.g. TAX, HCR, DEF, ENV, TRD)."
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 25,
+                            "default": 10
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.15",
+                    "amountUnits": "150000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.15"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Lobbying filings",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/patents": {
+            "get": {
+                "operationId": "patentSearch",
+                "summary": "USPTO PatentsView patent search \u2014 title, abstract, assignee, CPC class, grant date.",
+                "description": "Search granted U.S. patents by keyword title or assignee (company). Returns patent ID, title, abstract snippet, CPC classification, and grant date. Pay 0.10 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Keyword or phrase to search in patent titles.",
+                        "example": "machine learning"
+                    },
+                    {
+                        "name": "assignee",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Assignee organization name (e.g. \"Apple Inc\").",
+                        "example": "Apple Inc"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 25,
+                            "default": 10
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.10",
+                    "amountUnits": "100000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.10"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Patent results",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/fred": {
+            "get": {
+                "operationId": "fredSeries",
+                "summary": "FRED economic indicator series (Federal Reserve Bank of St. Louis).",
+                "description": "Retrieve observations for any FRED series: GDP, CPI, UNRATE, FEDFUNDS, T10Y2Y, and 800k+ others. Returns series metadata and latest observations in reverse chronological order. Pay 0.08 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "series_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "FRED series ID (e.g. GDP, CPIAUCSL, UNRATE, FEDFUNDS, T10Y2Y, MORTGAGE30US).",
+                        "example": "GDP"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 50,
+                            "default": 20
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.08",
+                    "amountUnits": "80000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.08"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "FRED series observations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/osha": {
+            "get": {
+                "operationId": "oshaInspections",
+                "summary": "OSHA workplace inspection and violation records (DOL enforcement data).",
+                "description": "Search OSHA inspection records by establishment name, NAICS code, or state. Returns inspection activity type, citations, penalties, and open/closed status. Pay 0.10 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "establishment",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Establishment or employer name.",
+                        "example": "Amazon"
+                    },
+                    {
+                        "name": "naics",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "6-digit NAICS industry code.",
+                        "example": "493110"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "2-letter U.S. state code.",
+                        "example": "TX"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 25,
+                            "default": 10
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.10",
+                    "amountUnits": "100000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.10"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OSHA inspection records"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/fda-510k": {
+            "get": {
+                "operationId": "fda510k",
+                "summary": "FDA 510(k) medical device premarket clearances (openFDA).",
+                "description": "Search FDA 510(k) clearances by device name or applicant (manufacturer). Returns K-number, decision date, product code, decision description, and link to FDA summary. Pay 0.08 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "device",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Device name or type (e.g. \"pulse oximeter\", \"knee replacement\").",
+                        "example": "pulse oximeter"
+                    },
+                    {
+                        "name": "applicant",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Manufacturer or applicant company name.",
+                        "example": "Medtronic"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 25,
+                            "default": 10
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.08",
+                    "amountUnits": "80000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.08"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "510(k) clearances"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/sec-10k": {
+            "get": {
+                "operationId": "sec10k",
+                "summary": "SEC EDGAR 10-K annual report filings by ticker.",
+                "description": "Annual report (10-K) filing history for any public company. Returns dates and links to full 10-K documents on sec.gov. Pay 0.20 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "ticker",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "AAPL"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 10,
+                            "default": 5
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.20",
+                    "amountUnits": "200000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.20"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "10-K annual filings"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/sec-10q": {
+            "get": {
+                "operationId": "sec10q",
+                "summary": "SEC EDGAR 10-Q quarterly report filings by ticker.",
+                "description": "Quarterly report (10-Q) filing history for any public company. Returns dates and links to full 10-Q documents on sec.gov. Pay 0.15 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "ticker",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "TSLA"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 10,
+                            "default": 5
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.15",
+                    "amountUnits": "150000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.15"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "10-Q quarterly filings"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/sec-13dg": {
+            "get": {
+                "operationId": "sec13dg",
+                "summary": "SEC EDGAR 13D/13G activist investor filings by ticker.",
+                "description": "Who holds 5%+ stakes? Activist (13D) and passive (13G) large holder filings from SEC EDGAR. Pay 0.20 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "ticker",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "GME"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 20,
+                            "default": 10
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.20",
+                    "amountUnits": "200000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.20"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "13D/13G activist filings"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/finra-broker": {
+            "get": {
+                "operationId": "finraBroker",
+                "summary": "FINRA BrokerCheck broker/advisor registration and disclosure history.",
+                "description": "Search FINRA BrokerCheck for individual brokers or firms. Returns CRD number, registration status, disclosure count, and profile URL. Pay 0.15 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "John Smith"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "individual",
+                                "firm"
+                            ],
+                            "default": "individual"
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.15",
+                    "amountUnits": "150000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.15"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "BrokerCheck results"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/fec-finance": {
+            "get": {
+                "operationId": "fecFinance",
+                "summary": "FEC campaign finance \u2014 candidates, committees, and contribution totals.",
+                "description": "Search FEC open data for political candidates or committees by name. Returns receipts, disbursements, party, and election cycle data. Pay 0.10 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Biden"
+                    },
+                    {
+                        "name": "committee",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "cycle",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "2024"
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.10",
+                    "amountUnits": "100000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.10"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "FEC campaign finance data"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/epa-violations": {
+            "get": {
+                "operationId": "epaViolations",
+                "summary": "EPA ECHO environmental enforcement and violation records.",
+                "description": "Facility inspection history, citations, penalties, and compliance status from EPA ECHO. Search by facility name, state, or NAICS code. Pay 0.12 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "facility",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "ExxonMobil"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "TX"
+                    },
+                    {
+                        "name": "naics",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.12",
+                    "amountUnits": "120000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.12"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "EPA enforcement records"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/sbir-grants": {
+            "get": {
+                "operationId": "sbirGrants",
+                "summary": "SBIR/STTR small business innovation research grants.",
+                "description": "Search SBA/SBIR.gov for small business innovation grants. Filter by agency (DOD, NIH, NASA, NSF, DOE) and phase (1 or 2). Pay 0.05 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "cybersecurity AI"
+                    },
+                    {
+                        "name": "agency",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "DOD"
+                    },
+                    {
+                        "name": "phase",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "1",
+                                "2"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 25,
+                            "default": 10
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.05",
+                    "amountUnits": "50000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.05"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "SBIR/STTR grants"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/congress-bills": {
+            "get": {
+                "operationId": "congressBills",
+                "summary": "Congress.gov bill search \u2014 legislation by keyword and congress number.",
+                "description": "Search bills by keyword for any Congress session. Returns bill number, title, latest action, sponsor, and Congress.gov URL. Requires CONGRESS_API_KEY (free at api.congress.gov). Pay 0.08 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "artificial intelligence"
+                    },
+                    {
+                        "name": "congress",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "119"
+                        },
+                        "example": "119"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 20,
+                            "default": 10
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.08",
+                    "amountUnits": "80000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.08"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Congressional bills"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    },
+                    "503": {
+                        "description": "CONGRESS_API_KEY not configured on this server."
+                    }
+                }
+            }
+        },
+        "/x402/fda-warnings": {
+            "get": {
+                "operationId": "fdaWarnings",
+                "summary": "FDA warning letters \u2014 regulatory enforcement actions.",
+                "description": "Search FDA warning letters by company or product type. Returns issuing office, subject, dates, and product category. Pay 0.10 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "company",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Purdue Pharma"
+                    },
+                    {
+                        "name": "product",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "dietary supplement"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 25,
+                            "default": 10
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.10",
+                    "amountUnits": "100000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.10"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "FDA warning letters"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/cms-providers": {
+            "get": {
+                "operationId": "cmsProviders",
+                "summary": "CMS Medicare hospital quality data and physician provider information.",
+                "description": "Hospital ratings, emergency services, and ownership from CMS Hospital General Information. Or Medicare Part D physician utilization data by state. Pay 0.10 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Mayo Clinic"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "MN"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "hospital",
+                                "physician"
+                            ],
+                            "default": "hospital"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 20,
+                            "default": 10
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.10",
+                    "amountUnits": "100000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.10"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "CMS provider data"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/nih-grants": {
+            "get": {
+                "operationId": "nihGrants",
+                "summary": "NIH Reporter research grant database.",
+                "description": "Active NIH grants by keyword, institute (NCI, NHLBI, NIAID, NINDS, etc.), and fiscal year. Returns title, PI, organization, and award amount. Pay 0.05 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "cancer immunotherapy"
+                    },
+                    {
+                        "name": "agency",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "NCI"
+                    },
+                    {
+                        "name": "fiscal_year",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 2025
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 25,
+                            "default": 10
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.05",
+                    "amountUnits": "50000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.05"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "NIH research grants"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/ftd-threshold-list": {
+            "get": {
+                "operationId": "ftdThresholdList",
+                "summary": "SEC Reg SHO Threshold Securities List \u2014 persistent fails-to-deliver names.",
+                "description": "Current SEC Reg SHO threshold securities list. Keywords: reg sho, threshold securities, ftd threshold list, persistent fails to deliver, short squeeze data. Pay 0.02 USDC on Base.",
+                "parameters": [],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.02",
+                    "amountUnits": "20000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.02"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Threshold securities list"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/ftd-time-series": {
+            "get": {
+                "operationId": "ftdTimeSeries",
+                "summary": "Historical SEC Reg SHO fails-to-deliver time series for a symbol.",
+                "description": "Up to 180 days of FTD history for a symbol. Keywords: ftd time series, fails to deliver history, ftd data, reg sho history, short interest data. Pay 0.02 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "symbol",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "GME"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 180,
+                            "default": 90
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.02",
+                    "amountUnits": "20000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.02"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "FTD time series"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/ftd-ratio": {
+            "get": {
+                "operationId": "ftdRatio",
+                "summary": "Latest FTD ratio and percentile rank for a symbol.",
+                "description": "Latest FTD record, percentile rank within the rolling window, and threshold-list status. Keywords: ftd ratio, ftd percentile, fails to deliver ratio, threshold list status. Pay 0.03 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "symbol",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "AMC"
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.03",
+                    "amountUnits": "30000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.03"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "FTD ratio and percentile"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/ftd-etf-basket": {
+            "get": {
+                "operationId": "ftdEtfBasket",
+                "summary": "ETF constituents ranked by FTD notional concentration.",
+                "description": "ETF constituents ranked by current FTD notional (XRT, IWM, IJR, KRE). Keywords: etf ftd basket, etf constituent ftd, meme etf concentration. Pay 0.05 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "etf",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "XRT",
+                                "IWM",
+                                "IJR",
+                                "KRE"
+                            ]
+                        },
+                        "example": "IWM"
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.05",
+                    "amountUnits": "50000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.05"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ETF FTD basket breakdown"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/ftd-settlement-cycle": {
+            "get": {
+                "operationId": "ftdSettlementCycle",
+                "summary": "Settlement-cycle bundle \u2014 FTD stats, T+21/T+35 markers, Reg SHO 204 marker.",
+                "description": "FTD stats, threshold-list status, T+21/T+35 calendar markers, and Reg SHO 204 13-day marker for a symbol. Keywords: settlement cycle, t+21 t+35, reg sho 204, close out marker. Pay 0.05 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "symbol",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "GME"
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.05",
+                    "amountUnits": "50000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.05"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Settlement-cycle bundle"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/options-flow": {
+            "get": {
+                "operationId": "optionsFlow",
+                "summary": "Institutional options flow \u2014 sweeps, whale detection, dark-pool prints.",
+                "description": "Institutional options flow intelligence: sweeps, whale detection, unusual volume, dark-pool prints, Tradier brokerage-grade feed. Keywords: options flow, options sweep, whale options, dark pool options, unusual options volume. Pay 0.05 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "symbol",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "IWM"
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.05",
+                    "amountUnits": "50000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.05"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Options flow intelligence"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/cascade-signal": {
+            "post": {
+                "operationId": "cascadeSignal",
+                "summary": "CASCADE ACCUMULATOR directive \u2014 ACCUMULATE/PYRAMID/EXIT/STOP.",
+                "description": "Position-sizing directive for a symbol: ACCUMULATE, PYRAMID, EXIT, or STOP. Keywords: cascade accumulator, accumulate pyramid exit stop, position sizing signal. Pay 0.25 USDC on Base.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "symbol": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "symbol"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.25",
+                    "amountUnits": "250000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.25"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "CASCADE directive"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/iam-model": {
+            "get": {
+                "operationId": "iamModel",
+                "summary": "Inevitable Action Model \u2014 obligation committee verdict and mandatory action.",
+                "description": "Obligation committee verdict, Truth Layer state, and mandatory action for a symbol. Keywords: inevitable action model, obligation committee, truth layer, mandatory action signal. Pay 0.05 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "symbol",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "TSLA"
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.05",
+                    "amountUnits": "50000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.05"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "IAM resolution"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/compliance-anomaly": {
+            "post": {
+                "operationId": "complianceAnomaly",
+                "summary": "Submit a bank compliance anomaly for scoring.",
+                "description": "Submit a bank compliance anomaly to the Leviathan Matrix swarm for scoring. Keywords: bank compliance anomaly, financial crime detection, aml anomaly report, compliance swarm. Pay 5.00 USDC on Base.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "bank_id": {
+                                        "type": "string"
+                                    },
+                                    "agent_id": {
+                                        "type": "string"
+                                    },
+                                    "trigger": {
+                                        "type": "string"
+                                    },
+                                    "detail": {
+                                        "type": "string"
+                                    },
+                                    "severity": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "bank_id",
+                                    "agent_id",
+                                    "trigger",
+                                    "detail"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "5.00",
+                    "amountUnits": "5000000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "5.00"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Anomaly record and swarm response"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/compliance-audit": {
+            "post": {
+                "operationId": "complianceAudit",
+                "summary": "Full Leviathan Matrix compliance audit cycle for a bank.",
+                "description": "Full compliance audit cycle for a financial institution. Keywords: bank audit, aml compliance audit, financial institution audit, regulatory audit cycle. Pay 5.00 USDC on Base.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "bank_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "bank_id"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "5.00",
+                    "amountUnits": "5000000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "5.00"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Full audit cycle result"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/compliance-regulator-query": {
+            "get": {
+                "operationId": "complianceRegulatorQuery",
+                "summary": "Real-time regulator compliance dashboard query for a bank.",
+                "description": "Real-time regulator compliance dashboard data for a bank. Keywords: regulator dashboard, real time bank compliance, regulatory query. Pay 2.50 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "bank_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "2.50",
+                    "amountUnits": "2500000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "2.50"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Regulator dashboard data"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/max-conviction-signal": {
+            "post": {
+                "operationId": "maxConvictionSignal",
+                "summary": "TRIPLE_LOCK_VERDICT \u2014 max-conviction rare signal, distinct from the standard squeeze signal.",
+                "description": "BULL or BEAR only when three independent engines (macro price stretch, dark-pool volume kinetics, ribbon harmonics) all agree; otherwise NO_TRIPLE_LOCK with the blocking engine named. Keywords: max conviction signal, rare squeeze signal, triple lock verdict, three engine consensus. Pay 0.25 USDC on Base.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "symbol": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "symbol"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.25",
+                    "amountUnits": "250000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.25"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Max-conviction verdict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/content-trust-score": {
+            "post": {
+                "operationId": "contentTrustScore",
+                "summary": "Content misinformation trust scoring plus on-chain wallet trust ledger.",
+                "description": "Content misinformation scoring and wallet trust ledger, distinct mechanism from AI Fact Check. Keywords: content trust score, misinformation detection, wallet trust score, agent content vetting. Pay 0.01 USDC on Base.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "content": {
+                                        "type": "string"
+                                    },
+                                    "sender_wallet": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "content"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.01",
+                    "amountUnits": "10000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.01"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Trust score, verdict, flags"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/equities-heatmap": {
+            "get": {
+                "operationId": "equitiesHeatmap",
+                "summary": "Equities RSI(14) heatmap across up to 20 tickers, with a real 4-agent Claude swarm verdict.",
+                "description": "Real market data (Tradier preferred, falls back to Polygon.io) \u2014 RSI(14) computed for each ticker, grouped into a 4-bucket heatmap, plus a real multi-agent Claude swarm verdict. Keywords: RSI heatmap, equities overbought oversold, momentum screener. Pay 0.10 USDC on Base, then call with X-PAYMENT-TX.",
+                "parameters": [
+                    {
+                        "name": "tickers",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Comma-separated tickers, up to 20. Defaults to AMC/GME/IWM plus real dynamically-discovered top movers.",
+                        "example": "AAPL,MSFT,NVDA"
+                    },
+                    {
+                        "name": "timeframe",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "1h",
+                                "1d"
+                            ],
+                            "default": "1h"
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.10",
+                    "amountUnits": "100000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "settlement": "onchain-tx",
+                    "paymentHeader": "X-PAYMENT-TX",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.10"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "RSI heatmap + swarm verdict"
+                    },
+                    "402": {
+                        "description": "Payment required \u2014 pay USDC then retry with X-PAYMENT-TX."
+                    }
+                }
+            }
+        },
+        "/x402/options-delta-heatmap": {
+            "get": {
+                "operationId": "optionsDeltaHeatmap",
+                "summary": "Options Delta heatmap across up to 40 contracts, with a real 4-agent Claude swarm verdict.",
+                "description": "Real options chain data \u2014 Tradier real OPRA-fed Greeks preferred, falls back to Polygon.io with a locally modeled Black-Scholes Delta \u2014 grouped into a 4-bucket heatmap (deep OTM to deep ITM), plus a real multi-agent Claude swarm verdict. Keywords: options Delta heatmap, ITM OTM screener, Greeks scanner. Pay 0.15 USDC on Base, then call with X-PAYMENT-TX.",
+                "parameters": [
+                    {
+                        "name": "underlying",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Underlying ticker. Defaults to AMC.",
+                        "example": "AMC"
+                    },
+                    {
+                        "name": "expiration_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "YYYY-MM-DD. Defaults to nearest available."
+                    },
+                    {
+                        "name": "option_type",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "call",
+                                "put"
+                            ],
+                            "default": "call"
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.15",
+                    "amountUnits": "150000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "settlement": "onchain-tx",
+                    "paymentHeader": "X-PAYMENT-TX",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.15"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Options Delta heatmap + swarm verdict"
+                    },
+                    "402": {
+                        "description": "Payment required \u2014 pay USDC then retry with X-PAYMENT-TX."
+                    }
+                }
+            }
+        },
+        "/x402/restricted-party-screen": {
+            "get": {
+                "operationId": "screenRestrictedParty",
+                "summary": "Screen a name against all 11 US export-control and sanctions lists.",
+                "description": "Consolidated Screening List: BIS Denied Persons/Entity/Unverified Lists, State ITAR Debarred + Nonproliferation Sanctions, Treasury OFAC SDN and 5 more, in one search. Pay 0.03 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Acme Exports LLC"
+                    },
+                    {
+                        "name": "fuzzy_name",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "sources",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Comma-separated source list abbreviations (DPL, EL, MEU, UVL, ISN, DTC, SDN, CAP, CMIC, FSE, MBS, PLC). Omit for all."
+                    },
+                    {
+                        "name": "countries",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Comma-separated ISO alpha-2 country codes."
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 50,
+                            "default": 20
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.03",
+                    "amountUnits": "30000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.03"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Screening matches"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/trade-leads": {
+            "get": {
+                "operationId": "searchTradeLeads",
+                "summary": "Search live overseas trade leads for US exporters.",
+                "description": "Real foreign government tenders and private-sector RFPs sourced by ITA's global commercial network. Pay 0.03 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "solar panels"
+                    },
+                    {
+                        "name": "country_codes",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Comma-separated ISO alpha-2 country codes."
+                    },
+                    {
+                        "name": "tender_start_from",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "YYYY-MM-DD"
+                    },
+                    {
+                        "name": "tender_start_to",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "contract_start_from",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "contract_start_to",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 50,
+                            "default": 20
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.03",
+                    "amountUnits": "30000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.03"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Trade leads"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/crypto-price": {
+            "get": {
+                "operationId": "cryptoTokenPrice",
+                "summary": "Real-time token price, market cap, and 24h volume/change.",
+                "description": "CoinGecko simple price. Pay 0.01 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "ids",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Comma-separated CoinGecko coin IDs, e.g. \"bitcoin,ethereum,ripple\".",
+                        "example": "bitcoin,ethereum"
+                    },
+                    {
+                        "name": "vs_currencies",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "usd"
+                        }
+                    },
+                    {
+                        "name": "include_market_cap",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "include_24hr_vol",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "include_24hr_change",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.01",
+                    "amountUnits": "10000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.01"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token price data"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/crypto-trending": {
+            "get": {
+                "operationId": "cryptoTrending",
+                "summary": "Top trending coins, NFTs, and categories in the last 24h.",
+                "description": "CoinGecko trending search. Top 15 coins, 7 NFTs, 6 categories by user search activity. Pay 0.01 USDC on Base.",
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.01",
+                    "amountUnits": "10000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.01"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Trending coins/NFTs/categories"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/x402/fx-rate": {
+            "get": {
+                "operationId": "fxExchangeRate",
+                "summary": "Latest or historical exchange rate for a base currency.",
+                "description": "Frankfurter API -- 84 central banks, 201 currencies back to 1948. Pay 0.01 USDC on Base.",
+                "parameters": [
+                    {
+                        "name": "base",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "USD"
+                        },
+                        "example": "USD"
+                    },
+                    {
+                        "name": "quotes",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Comma-separated 3-letter target currency codes.",
+                        "example": "EUR,GBP,JPY"
+                    },
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "YYYY-MM-DD for a historical rate. Omit for latest."
+                    }
+                ],
+                "x-payment-info": {
+                    "method": "x402",
+                    "scheme": "exact",
+                    "network": "base",
+                    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                    "currency": "USDC",
+                    "amount": "0.01",
+                    "amountUnits": "10000",
+                    "payTo": "0x4e14B249D9A4c9c9352D780eCEB508A8eB7a7700",
+                    "protocols": [
+                        "x402"
+                    ],
+                    "price": {
+                        "mode": "fixed",
+                        "currency": "USD",
+                        "amount": "0.01"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Exchange rate data"
+                    },
+                    "402": {
+                        "description": "Payment required."
+                    }
+                }
+            }
+        },
+        "/.well-known/x402": {
+            "get": {
+                "operationId": "openApiDiscovery",
+                "summary": "OpenAPI/x402 discovery document (free).",
+                "security": [],
+                "responses": {
+                    "200": {
+                        "description": "OpenAPI spec."
+                    }
+                }
+            }
+        },
+        "/openapi.json": {
+            "get": {
+                "operationId": "openApiJson",
+                "summary": "OpenAPI spec (free).",
+                "security": [],
+                "responses": {
+                    "200": {
+                        "description": "OpenAPI spec."
+                    }
+                }
+            }
+        },
+        "/x402/.well-known/x402": {
+            "get": {
+                "operationId": "openApiDiscoveryAlias",
+                "summary": "OpenAPI/x402 discovery document (free).",
+                "security": [],
+                "responses": {
+                    "200": {
+                        "description": "OpenAPI spec."
+                    }
+                }
+            }
+        },
+        "/x402/openapi.json": {
+            "get": {
+                "operationId": "openApiJsonAlias",
+                "summary": "OpenAPI spec (free).",
+                "security": [],
+                "responses": {
+                    "200": {
+                        "description": "OpenAPI spec."
+                    }
+                }
+            }
+        }
+    }
+}
