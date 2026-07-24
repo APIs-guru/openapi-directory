@@ -1,0 +1,1509 @@
+openapi: 3.0.3
+info:
+  title: Prometiam Risk Intelligence API
+  version: 1.0.0
+  summary: EU + UK company registry, sanctions screening, and corporate-event monitoring
+  description: 'Unified REST API for EU + UK official-registry data across 5 countries. Spain (BORME), France (BODACC), the
+    United Kingdom (Companies House), Ireland (CRO), and Poland (KRS) are ingested daily and exposed under a single schema,
+    with sanctions screening (EU + UN + OFAC + US CSL), insolvency monitoring, and corporate-event tracking.
+
+
+    **Free tier:** 1,000 calls/month, no credit card required at https://www.prometiam.com/signup. Public pricing from €9.99/month.
+
+
+    **Authentication:** Bearer token (`Authorization: Bearer rk_live_...`). Get a key at https://www.prometiam.com/signup.
+
+
+    **Rate limits:** Per tier. Current usage returned in `meta.rate_limit` of every successful response. Exceeded calls return
+    `429` with a `Retry-After` header in seconds.
+
+
+    **Country scope:** Use `?country=ES|FR|GB|IE|PL` to target one country. If omitted, defaults to the first country in the API
+    key''s allowlist (typically `ES`).
+
+
+    **Pagination:** List endpoints use cursor-based pagination. Pass `cursor=<next_cursor>` to fetch the next page.
+
+
+    **Compliance:** EU data residency (AWS eu-central-1, Frankfurt). GDPR Article 6(1)(c) and 6(1)(f) lawful bases.'
+  termsOfService: https://www.prometiam.com/terms
+  contact:
+    name: Prometiam Support
+    url: https://www.prometiam.com/contact
+    email: support@prometiam.com
+  license:
+    name: Commercial — terms of service apply
+    url: https://www.prometiam.com/terms
+  x-providerName: prometiam.com
+  x-officialApi: true
+  x-logo:
+    url: https://www.prometiam.com/logo.svg
+    backgroundColor: '#FFFFFF'
+  x-apisguru-categories:
+  - financial
+  - open_data
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    url: https://www.prometiam.com/openapi.json
+  x-tags:
+  - company-registry
+  - kyb
+  - kyc
+  - compliance
+  - aml
+  - sanctions
+  - borme
+  - bodacc
+  - companies-house
+  - eu
+  - uk
+servers:
+- url: https://api.prometiam.com/functions/v1/risk-api
+  description: Production
+externalDocs:
+  description: Full developer documentation
+  url: https://www.prometiam.com/risk-api/docs
+tags:
+- name: Companies
+  description: Search and retrieve company profiles from official registries
+- name: People
+  description: Officer / director profiles with appointment history
+- name: Notices
+  description: Registry gazette PDF notices
+- name: Events
+  description: Normalized corporate-event timeline (capital changes, director changes, dissolutions, etc.)
+- name: Insolvency
+  description: Search and retrieve insolvency / risk notices
+- name: Sanctions
+  description: Sanctions screening across EU, UN, OFAC, and UK OFSI
+- name: Directors
+  description: Director-network analysis (cross-company linkage graph)
+- name: Account
+  description: API key information and dataset coverage
+security:
+- BearerAuth: []
+paths:
+  /search:
+    get:
+      tags:
+      - Insolvency
+      summary: Search insolvency / risk notices
+      description: Search registry risk notices by company name, VAT/NIF (Spain), SIREN/SIRET (France), or company_number
+        (UK). Returns insolvency filings, dissolutions, liquidations, and other risk-relevant events extracted from official
+        gazettes. At least one of `name`, `vat`, `siren`, `siret`, or `company_number` is required.
+      operationId: searchNotices
+      parameters:
+      - $ref: '#/components/parameters/Country'
+      - name: name
+        in: query
+        schema:
+          type: string
+        description: Company name — accent-insensitive normalized pattern match
+      - name: vat
+        in: query
+        schema:
+          type: string
+          example: A28015865
+        description: Spanish NIF/CIF (exact match)
+      - name: siren
+        in: query
+        schema:
+          type: string
+          example: '552032534'
+        description: French SIREN (9 digits) — pair with `country=FR`
+      - name: siret
+        in: query
+        schema:
+          type: string
+        description: French SIRET (14 digits)
+      - name: company_number
+        in: query
+        schema:
+          type: string
+          example: M-15812
+        description: Registry registration number (exact match)
+      - name: event_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - insolvency
+          - dissolution
+          - liquidation
+          - restructuring
+          - status_change
+      - name: date_from
+        in: query
+        schema:
+          type: string
+          format: date
+        description: Filing date range start (YYYY-MM-DD)
+      - name: date_to
+        in: query
+        schema:
+          type: string
+          format: date
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Notice'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+              example:
+                data:
+                - id: 4819921
+                  company_name: MERCADONA, S.A.
+                  company_number: V-39378060
+                  vat_number: A46103834
+                  country: ES
+                  status: active
+                  event_type: capital_change
+                  city: Valencia
+                  filing_date: '2026-03-18'
+                  source: BORME (Spain)
+                  notice_url: https://www.boe.es/borme/dias/2026/03/18/pdfs/BORME-A-2026-53-46.pdf
+                  created_at: '2026-03-18T06:04:22Z'
+                pagination:
+                  count: 1
+                  has_more: false
+                  next_cursor: null
+                meta:
+                  query_ms: 38
+                  search_mode: name_search
+                  country: ES
+                  rate_limit:
+                    rpm_remaining: 9
+                    daily_remaining: 99
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /records/{id}:
+    get:
+      tags:
+      - Insolvency
+      summary: Get insolvency notice by ID
+      description: Fetch a single registry risk notice by numeric ID. Includes the full `notice_text` and `raw_data` fields
+        that are omitted from search results.
+      operationId: getNoticeById
+      parameters:
+      - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Notice detail
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/NoticeDetail'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /companies/search:
+    get:
+      tags:
+      - Companies
+      summary: Search companies
+      description: 'Search company entity profiles by name, NIF (ES), SIREN/SIRET (FR), or company_number (GB). Returns richer
+        company metadata than `/search`: legal form, province, CNAE/SIC, registered capital.'
+      operationId: searchCompanies
+      parameters:
+      - $ref: '#/components/parameters/Country'
+      - name: name
+        in: query
+        schema:
+          type: string
+        description: Company name (normalized pattern match)
+      - name: nif
+        in: query
+        schema:
+          type: string
+        description: Spanish NIF/CIF (exact match)
+      - name: siren
+        in: query
+        schema:
+          type: string
+        description: French SIREN (9 digits)
+      - name: siret
+        in: query
+        schema:
+          type: string
+        description: French SIRET (14 digits)
+      - name: company_number
+        in: query
+        schema:
+          type: string
+        description: UK Companies House number
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: Company search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+              example:
+                data:
+                - id: 812044
+                  nif: A28015865
+                  company_name: TELEFONICA, S.A.
+                  legal_form: S.A.
+                  province: Madrid
+                  address: C/ Gran Via 28, 28013 Madrid
+                  cnae_code: '6110'
+                  capital_euros: 4551929995.36
+                  status: active
+                  country: ES
+                  first_seen_date: '1988-01-01'
+                  last_seen_date: '2026-03-28'
+                pagination:
+                  count: 1
+                  has_more: false
+                  next_cursor: null
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /companies/{id}:
+    get:
+      tags:
+      - Companies
+      summary: Get company by ID
+      description: Fetch a single company profile by numeric internal ID. Returns full detail including `objeto_social` (purpose
+        clause), registry coordinates, founding date, and embedded contacts and appointments.
+      operationId: getCompanyById
+      parameters:
+      - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Company detail
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/CompanyDetail'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /people/{id}:
+    get:
+      tags:
+      - People
+      summary: Get person by ID
+      description: Fetch a single person (officer / director) by numeric ID. Returns full name, NIF (if available), and a
+        list of all known company appointments — past and current.
+      operationId: getPersonById
+      parameters:
+      - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Person detail
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Person'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /notices/{id}:
+    get:
+      tags:
+      - Notices
+      summary: Get registry gazette notice
+      description: Fetch a registry gazette notice (PDF edition) by numeric ID. Returns edition metadata, parse status, PDF
+        URL, SHA-256 hash, and the raw extracted text.
+      operationId: getNoticePdfById
+      parameters:
+      - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Notice PDF metadata
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/NoticePdf'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /company-events/search:
+    get:
+      tags:
+      - Events
+      summary: Search corporate events
+      description: 'Search normalized company lifecycle events by company name or registration number. Event types: `dissolution`,
+        `director_change`, `capital_change`, `new_incorporation`, `name_change`, `address_change`, `liquidation`, `merger`,
+        `demerger`, `status_change`, `insolvency`.'
+      operationId: searchEvents
+      parameters:
+      - $ref: '#/components/parameters/Country'
+      - name: company_name
+        in: query
+        schema:
+          type: string
+      - name: company_number
+        in: query
+        schema:
+          type: string
+      - name: event_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - dissolution
+          - director_change
+          - capital_change
+          - new_incorporation
+          - name_change
+          - address_change
+          - liquidation
+          - merger
+          - demerger
+          - status_change
+          - insolvency
+      - name: date_from
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: date_to
+        in: query
+        schema:
+          type: string
+          format: date
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: Event search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Event'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /company-events/records/{id}:
+    get:
+      tags:
+      - Events
+      summary: Get corporate event by ID
+      description: Fetch a single corporate event by numeric ID. Returns full event detail including `raw_data` (omitted from
+        search results).
+      operationId: getEventById
+      parameters:
+      - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Event detail
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/EventDetail'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /company-events/timeline:
+    get:
+      tags:
+      - Events
+      summary: Corporate event timeline
+      description: Returns the chronological (oldest-first) event history for a single company. One of `company_number` or
+        `company_name` is required.
+      operationId: getEventTimeline
+      parameters:
+      - $ref: '#/components/parameters/Country'
+      - name: company_number
+        in: query
+        schema:
+          type: string
+      - name: company_name
+        in: query
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 200
+          default: 50
+      responses:
+        '200':
+          description: Event timeline
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Event'
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /sanctions/screen:
+    get:
+      tags:
+      - Sanctions
+      summary: Screen a name against sanctions lists (BETA)
+      description: '**BETA — list ingestion completing in Q2 2026. Endpoint live; results are limited until GA. Do not use
+        as the sole sanctions control until announced GA.**
+
+
+        Trigram fuzzy match of a person or entity name against the EU consolidated list, the UN sanctions list, OFAC, and
+        the UK OFSI list. Returns matched entities with confidence scores.'
+      operationId: screenSanctions
+      parameters:
+      - name: name
+        in: query
+        required: true
+        schema:
+          type: string
+          minLength: 2
+        description: Name to screen
+      - name: threshold
+        in: query
+        schema:
+          type: integer
+          minimum: 50
+          maximum: 100
+          default: 80
+        description: Minimum match-confidence percentage (50–100)
+      - name: entity_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - person
+          - entity
+          - vessel
+          - any
+          default: any
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      responses:
+        '200':
+          description: Sanctions match results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SanctionsHit'
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+              example:
+                data:
+                - id: 90212
+                  name: JOHN DOE
+                  type: person
+                  score: 92
+                  list: EU
+                  list_url: https://webgate.ec.europa.eu/fsd/fsf/public/files/xmlFullSanctionsList_1_1/content?token=dG9rZW4tMjAxNw
+                  added_on: '2024-09-12'
+                  country_of_birth: null
+                  aliases:
+                  - JOHN A. DOE
+                meta:
+                  query_ms: 47
+                  rate_limit:
+                    rpm_remaining: 199
+                    daily_remaining: 9999
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /sanctions/entity/{id}:
+    get:
+      tags:
+      - Sanctions
+      summary: Get sanctions entity detail
+      description: Fetch a single sanctioned entity by numeric ID. Returns full entity record including aliases, addresses,
+        and source-list references.
+      operationId: getSanctionsEntity
+      parameters:
+      - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: Sanctions entity detail
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/SanctionsEntity'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /directors/network:
+    get:
+      tags:
+      - Directors
+      summary: Director network graph
+      description: Find people who direct multiple companies. Useful for fraud detection (cross-corporate concentration) and
+        watchlist construction.
+      operationId: getDirectorNetwork
+      parameters:
+      - $ref: '#/components/parameters/Country'
+      - name: min_companies
+        in: query
+        schema:
+          type: integer
+          minimum: 2
+          default: 5
+        description: Minimum number of distinct companies a person must direct to be included
+      - name: legal_entities
+        in: query
+        schema:
+          type: boolean
+          default: false
+        description: If true, includes legal-entity directors (not just natural persons)
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 200
+          default: 50
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+      responses:
+        '200':
+          description: Director network results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DirectorNetworkNode'
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /coverage:
+    get:
+      tags:
+      - Account
+      summary: Dataset coverage statistics
+      description: 'Returns dataset coverage statistics per country: total company count, event count, person count, appointment
+        count, latest filing date, and data sources. Response is server-cached for ~1 hour.'
+      operationId: getCoverage
+      responses:
+        '200':
+          description: Coverage stats
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Coverage'
+                  meta:
+                    type: object
+                    properties:
+                      cached:
+                        type: boolean
+              example:
+                data:
+                  countries:
+                  - code: ES
+                    name: Spain
+                    status: live
+                    total_companies: 4984973
+                    total_events: 18318028
+                    total_persons: 3414158
+                    total_appointments: 13358572
+                    total_contacts: 651723
+                    latest_filing: '2026-04-30'
+                    earliest_filing: '2009-01-02'
+                    sources:
+                    - BORME (Spain)
+                    update_frequency: daily
+                  - code: FR
+                    name: France
+                    status: live
+                    total_companies: 12326275
+                    total_events: 5086447
+                    total_persons: 893802
+                    total_appointments: 1784251
+                    total_contacts: 2737942
+                    sources:
+                    - BODACC (France)
+                    update_frequency: daily
+                  - code: GB
+                    name: United Kingdom
+                    status: companies-and-officers-live; events-pending
+                    total_companies: 5554746
+                    total_persons: 6141959
+                    total_appointments: 8075696
+                    total_events: 0
+                    sources:
+                    - Companies House
+                    update_frequency: monthly bulk + daily delta
+                  cross_country:
+                    insolvency_notices: 1082118
+                    lei_entities: 187554
+                    director_crosslinks: 1027386
+                  features:
+                    company_search: live
+                    company_detail: live
+                    people_detail: live
+                    corporate_events: ES + FR live; UK pending
+                    director_network: live
+                    insolvency_search: ES + FR live
+                    sanctions_screening: beta
+                  last_updated: '2026-04-30T08:00:00Z'
+                meta:
+                  cached: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /account:
+    get:
+      tags:
+      - Account
+      summary: Account info and usage
+      description: 'Returns the authenticated key''s account details: tier, scopes, country allowlist, current rate-limit
+        usage, and 30-day usage breakdown by endpoint.'
+      operationId: getAccount
+      responses:
+        '200':
+          description: Account info
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Account'
+              example:
+                data:
+                  account_name: Acme Corp
+                  email: dev@acmecorp.com
+                  tier: starter
+                  key_prefix: rk_live_abc1
+                  scopes:
+                  - search
+                  - records
+                  - coverage
+                  - company_events
+                  countries:
+                  - ES
+                  rate_limit:
+                    rpm: 60
+                    daily: 2000
+                    rpm_used: 3
+                    daily_used: 47
+                    rpm_remaining: 57
+                    daily_remaining: 1953
+                  usage_30d:
+                    total_requests: 1240
+                    by_endpoint:
+                      /search: 810
+                      /company-events/search: 290
+                      /company-events/timeline: 140
+                  created_at: '2026-03-01T12:00:00Z'
+                  expires_at: null
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: rk_live_*
+      description: 'API keys start with `rk_live_` (or `rk_test_` for testing). Pass via `Authorization: Bearer rk_live_…`.
+        The `x-api-key` header is also accepted.'
+  parameters:
+    Country:
+      name: country
+      in: query
+      schema:
+        type: string
+        enum:
+        - ES
+        - FR
+        - GB
+        - IE
+        - PL
+      description: Country scope. If omitted, defaults to the first country in the API key's allowlist.
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    Cursor:
+      name: cursor
+      in: query
+      schema:
+        type: string
+      description: Pagination cursor from the previous response's `pagination.next_cursor`
+    IdPath:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+      description: Numeric internal ID
+  responses:
+    ValidationError:
+      description: Missing or invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: validation_error
+              message: At least one of name, vat (ES), siren or siret (FR), or company_number is required
+              status: 400
+    Unauthorized:
+      description: Missing, invalid, or expired API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: unauthorized
+              message: 'Missing API key. Use Authorization: Bearer rk_live_...'
+              status: 401
+    Forbidden:
+      description: Key lacks the required scope or country access
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: forbidden
+              message: Your key does not include the 'sanctions' scope. Upgrade to Professional.
+              status: 403
+    NotFound:
+      description: Record or endpoint not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: not_found
+              message: Record 4819921 not found
+              status: 404
+    RateLimited:
+      description: Rate limit exceeded — see `Retry-After` header for seconds until reset
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Seconds until rate-limit reset
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: rate_limit_exceeded
+              message: Rate limit exceeded. Try again in 45 seconds.
+              status: 429
+    InternalError:
+      description: Unexpected server error — safe to retry with exponential backoff
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: internal_error
+              message: An unexpected error occurred
+              status: 500
+  schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - code
+          - message
+          - status
+          properties:
+            code:
+              type: string
+              enum:
+              - validation_error
+              - unauthorized
+              - forbidden
+              - not_found
+              - rate_limit_exceeded
+              - internal_error
+            message:
+              type: string
+            status:
+              type: integer
+    Pagination:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Number of items in this response
+        has_more:
+          type: boolean
+        next_cursor:
+          type: string
+          nullable: true
+          description: Pass as `cursor` to fetch the next page
+    RateLimitMeta:
+      type: object
+      properties:
+        rpm_remaining:
+          type: integer
+        daily_remaining:
+          type: integer
+    Meta:
+      type: object
+      properties:
+        query_ms:
+          type: integer
+        search_mode:
+          type: string
+        country:
+          type: string
+          enum:
+          - ES
+          - FR
+          - GB
+        rate_limit:
+          $ref: '#/components/schemas/RateLimitMeta'
+    Notice:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        company_name:
+          type: string
+        company_number:
+          type: string
+          nullable: true
+        vat_number:
+          type: string
+          nullable: true
+        country:
+          type: string
+          enum:
+          - ES
+          - FR
+          - GB
+        status:
+          type: string
+          nullable: true
+        status_detail:
+          type: string
+          nullable: true
+        event_type:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        filing_date:
+          type: string
+          format: date
+        source:
+          type: string
+        notice_url:
+          type: string
+          format: uri
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+    NoticeDetail:
+      allOf:
+      - $ref: '#/components/schemas/Notice'
+      - type: object
+        properties:
+          notice_text:
+            type: string
+            nullable: true
+          raw_data:
+            type: object
+            additionalProperties: true
+            nullable: true
+    Company:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        country:
+          type: string
+          enum:
+          - ES
+          - FR
+          - GB
+        nif:
+          type: string
+          nullable: true
+          description: Spanish NIF/CIF
+        siren:
+          type: string
+          nullable: true
+          description: French SIREN
+        company_number:
+          type: string
+          nullable: true
+          description: UK Companies House number
+        company_name:
+          type: string
+        legal_form:
+          type: string
+          nullable: true
+        province:
+          type: string
+          nullable: true
+        address:
+          type: string
+          nullable: true
+        cnae_code:
+          type: string
+          nullable: true
+          description: Spanish economic-activity code (or SIC for UK)
+        capital_euros:
+          type: number
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        first_seen_date:
+          type: string
+          format: date
+          nullable: true
+        last_seen_date:
+          type: string
+          format: date
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+    CompanyDetail:
+      allOf:
+      - $ref: '#/components/schemas/Company'
+      - type: object
+        properties:
+          objeto_social:
+            type: string
+            nullable: true
+            description: Purpose clause (ES)
+          founding_date:
+            type: string
+            format: date
+            nullable: true
+          registro_tomo:
+            type: integer
+            nullable: true
+          registro_libro:
+            type: integer
+            nullable: true
+          registro_folio:
+            type: integer
+            nullable: true
+          registro_seccion:
+            type: string
+            nullable: true
+          registro_hoja:
+            type: string
+            nullable: true
+          registro_inscripcion:
+            type: integer
+            nullable: true
+          contacts:
+            type: array
+            items:
+              $ref: '#/components/schemas/Appointment'
+          updated_at:
+            type: string
+            format: date-time
+    Appointment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        person_id:
+          type: integer
+          format: int64
+        company_id:
+          type: integer
+          format: int64
+          nullable: true
+        company_name:
+          type: string
+          nullable: true
+        company_number:
+          type: string
+          nullable: true
+        full_name:
+          type: string
+          nullable: true
+        role:
+          type: string
+          nullable: true
+        appointment_date:
+          type: string
+          format: date
+          nullable: true
+        end_date:
+          type: string
+          format: date
+          nullable: true
+        is_current:
+          type: boolean
+    Person:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        full_name:
+          type: string
+        nif:
+          type: string
+          nullable: true
+        is_legal_entity:
+          type: boolean
+        first_seen_date:
+          type: string
+          format: date
+          nullable: true
+        last_seen_date:
+          type: string
+          format: date
+          nullable: true
+        appointments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Appointment'
+        created_at:
+          type: string
+          format: date-time
+    NoticePdf:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        edition_date:
+          type: string
+          format: date
+        edition_year:
+          type: integer
+        edition_number:
+          type: integer
+        borme_id:
+          type: string
+          nullable: true
+        section:
+          type: string
+          nullable: true
+        province:
+          type: string
+          nullable: true
+        province_code:
+          type: string
+          nullable: true
+        pdf_url:
+          type: string
+          format: uri
+        pdf_hash:
+          type: string
+        page_count:
+          type: integer
+          nullable: true
+        parse_status:
+          type: string
+          nullable: true
+        parse_version:
+          type: string
+          nullable: true
+        parsed_at:
+          type: string
+          format: date-time
+          nullable: true
+        raw_text:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+    Event:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        company_name:
+          type: string
+        company_number:
+          type: string
+          nullable: true
+        vat_number:
+          type: string
+          nullable: true
+        country:
+          type: string
+          enum:
+          - ES
+          - FR
+          - GB
+        source:
+          type: string
+        event_type:
+          type: string
+          enum:
+          - dissolution
+          - director_change
+          - capital_change
+          - new_incorporation
+          - name_change
+          - address_change
+          - liquidation
+          - merger
+          - demerger
+          - status_change
+          - insolvency
+        event_date:
+          type: string
+          format: date
+        previous_value:
+          type: string
+          nullable: true
+        new_value:
+          type: string
+          nullable: true
+        event_detail:
+          type: string
+          nullable: true
+        notice_url:
+          type: string
+          format: uri
+          nullable: true
+    EventDetail:
+      allOf:
+      - $ref: '#/components/schemas/Event'
+      - type: object
+        properties:
+          raw_data:
+            type: object
+            additionalProperties: true
+            nullable: true
+    SanctionsHit:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - person
+          - entity
+          - vessel
+        score:
+          type: integer
+          minimum: 0
+          maximum: 100
+        list:
+          type: string
+          enum:
+          - EU
+          - UN
+          - OFAC
+          - UK_OFSI
+        list_url:
+          type: string
+          format: uri
+          nullable: true
+        added_on:
+          type: string
+          format: date
+          nullable: true
+        country_of_birth:
+          type: string
+          nullable: true
+        aliases:
+          type: array
+          items:
+            type: string
+    SanctionsEntity:
+      allOf:
+      - $ref: '#/components/schemas/SanctionsHit'
+      - type: object
+        properties:
+          addresses:
+            type: array
+            items:
+              type: string
+          place_of_birth:
+            type: string
+            nullable: true
+          date_of_birth:
+            type: string
+            nullable: true
+          passport_numbers:
+            type: array
+            items:
+              type: string
+          raw_data:
+            type: object
+            additionalProperties: true
+    DirectorNetworkNode:
+      type: object
+      properties:
+        person_id:
+          type: integer
+          format: int64
+        full_name:
+          type: string
+        nif:
+          type: string
+          nullable: true
+        is_legal_entity:
+          type: boolean
+        company_count:
+          type: integer
+        active_company_count:
+          type: integer
+        country_codes:
+          type: array
+          items:
+            type: string
+        sample_companies:
+          type: array
+          maxItems: 20
+          items:
+            type: object
+            properties:
+              company_id:
+                type: integer
+                format: int64
+              company_name:
+                type: string
+              company_number:
+                type: string
+                nullable: true
+              country:
+                type: string
+    Coverage:
+      type: object
+      properties:
+        countries:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              name:
+                type: string
+              total_companies:
+                type: integer
+              total_events:
+                type: integer
+              total_persons:
+                type: integer
+              total_appointments:
+                type: integer
+              total_contacts:
+                type: integer
+              latest_filing:
+                type: string
+                format: date
+              earliest_filing:
+                type: string
+                format: date
+              sources:
+                type: array
+                items:
+                  type: string
+              update_frequency:
+                type: string
+        total_records:
+          type: integer
+        last_updated:
+          type: string
+          format: date-time
+    Account:
+      type: object
+      properties:
+        account_name:
+          type: string
+        email:
+          type: string
+          format: email
+        tier:
+          type: string
+          enum:
+          - free
+          - starter
+          - professional
+          - enterprise
+        key_prefix:
+          type: string
+        scopes:
+          type: array
+          items:
+            type: string
+        countries:
+          type: array
+          items:
+            type: string
+        rate_limit:
+          type: object
+          properties:
+            rpm:
+              type: integer
+            daily:
+              type: integer
+            rpm_used:
+              type: integer
+            daily_used:
+              type: integer
+            rpm_remaining:
+              type: integer
+            daily_remaining:
+              type: integer
+        usage_30d:
+          type: object
+          properties:
+            total_requests:
+              type: integer
+            by_endpoint:
+              type: object
+              additionalProperties:
+                type: integer
+        created_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
