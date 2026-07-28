@@ -1,0 +1,97 @@
+openapi: 3.0.0
+info:
+  title: Revnuvo DNS Intelligence API
+  version: 1.1.0
+  description: Instant domain intelligence for AI agents. No signup. x402 USDC payments
+    on Base.
+servers:
+- url: https://dns.revnuvo.site
+paths:
+  /domain/verify:
+    post:
+      summary: Verify domain registration status
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                domain:
+                  type: string
+                  description: Domain to verify e.g. stripe.com
+              required:
+              - domain
+      responses:
+        '200':
+          description: DNS verification result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  domain:
+                    type: string
+                  exists:
+                    type: boolean
+                  has_mx:
+                    type: boolean
+                  has_a:
+                    type: boolean
+                  dnssec:
+                    type: boolean
+                  checked_at:
+                    type: string
+                    format: date-time
+        '402':
+          description: Payment Required
+  /domain/dns:
+    post:
+      summary: Resolve DNS records for a domain
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                domain:
+                  type: string
+                  description: Domain to resolve e.g. stripe.com
+              required:
+              - domain
+      responses:
+        '200':
+          description: DNS records
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  domain:
+                    type: string
+                  a:
+                    type: array
+                    items:
+                      type: string
+                  aaaa:
+                    type: array
+                    items:
+                      type: string
+                  mx:
+                    type: array
+                    items:
+                      type: string
+                  txt:
+                    type: array
+                    items:
+                      type: string
+                  ns:
+                    type: array
+                    items:
+                      type: string
+                  resolved_at:
+                    type: string
+                    format: date-time
+        '402':
+          description: Payment Required

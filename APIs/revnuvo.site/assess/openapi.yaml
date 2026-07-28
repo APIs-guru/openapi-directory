@@ -1,0 +1,104 @@
+openapi: 3.1.0
+info:
+  title: Revnuvo Assess API
+  description: Domain trust and risk assessment for AI agents and developers. x402
+    USDC payments on Base.
+  version: 4.1.0
+  x-guidance: "Use POST /assess/domain to assess a domain trust and security posture.\
+    \ Returns a letter grade (A-F), trust score (0-100), risk score, and recommendation\
+    \ (TRUSTED/REVIEW/RISKY). Requires x402 payment \u2014 send a POST with JSON body\
+    \ and handle the 402 challenge using the @revnuvo/x402 SDK or any x402-compatible\
+    \ client."
+  contact:
+    email: hello@revnuvo.site
+servers:
+- url: https://assess.revnuvo.site
+paths:
+  /assess/domain:
+    post:
+      operationId: assessDomain
+      summary: Assess a domain's trust and security posture
+      security:
+      - x402: []
+      x-payment-info:
+        price:
+          mode: fixed
+          currency: USD
+          amount: '0.050000'
+        protocols:
+        - x402: {}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - domain
+              properties:
+                domain:
+                  type: string
+                  examples:
+                  - example.com
+      responses:
+        '200':
+          description: Domain assessment result
+          headers:
+            PAYMENT-RESPONSE:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  domain:
+                    type: string
+                  trust_score:
+                    type: integer
+                    minimum: 0
+                    maximum: 100
+                  risk_score:
+                    type: integer
+                    minimum: 0
+                    maximum: 100
+                  grade:
+                    type: string
+                    enum:
+                    - A
+                    - B
+                    - C
+                    - D
+                    - F
+                  recommendation:
+                    type: string
+                    enum:
+                    - TRUSTED
+                    - REVIEW
+                    - RISKY
+                  risk_flags:
+                    type: array
+                    items:
+                      type: string
+                  signals:
+                    type: object
+                  assessed_at:
+                    type: string
+                    format: date-time
+        '400':
+          description: Invalid or missing domain
+        '402':
+          description: Payment required
+          headers:
+            WWW-Authenticate:
+              schema:
+                type: string
+                enum:
+                - x402
+components:
+  securitySchemes:
+    x402:
+      type: apiKey
+      in: header
+      name: PAYMENT-SIGNATURE
+      description: x402 v2 payment signature header

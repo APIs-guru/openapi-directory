@@ -1,0 +1,231 @@
+openapi: 3.1.0
+info:
+  title: Revnuvo Resource API
+  description: Domain verification, DNS lookup, and trust assessment for AI agents
+    and developers. x402 USDC payments on Base.
+  version: 2.2.0
+  x-guidance: 'Use POST /domain/verify to check if a domain exists and has basic DNS
+    records. Use POST /domain/dns for full DNS record lookup (A, AAAA, MX, TXT, NS,
+    CNAME). Use POST /domain/assess for a trust and risk assessment with a letter
+    grade. All endpoints require x402 payment. For POST, send JSON body {"domain":
+    "example.com"}. For GET, add ?domain=example.com as a query parameter. Handle
+    the 402 challenge using the @revnuvo/x402 SDK or any x402-compatible client.'
+  contact:
+    email: hello@revnuvo.site
+servers:
+- url: https://resource.revnuvo.site
+paths:
+  /domain/verify:
+    post:
+      operationId: verifyDomain
+      summary: Verify a domain's existence and basic DNS records
+      security:
+      - x402: []
+      x-payment-info:
+        price:
+          mode: fixed
+          currency: USD
+          amount: '0.001000'
+        protocols:
+        - x402: {}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - domain
+              properties:
+                domain:
+                  type: string
+                  examples:
+                  - example.com
+      responses:
+        '200':
+          description: Domain verification result
+          headers:
+            PAYMENT-RESPONSE:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  domain:
+                    type: string
+                  exists:
+                    type: boolean
+                  has_a:
+                    type: boolean
+                  has_mx:
+                    type: boolean
+                  dnssec:
+                    type: boolean
+                  checked_at:
+                    type: string
+                    format: date-time
+        '400':
+          description: Invalid or missing domain
+        '402':
+          description: Payment required
+          headers:
+            WWW-Authenticate:
+              schema:
+                type: string
+                enum:
+                - x402
+  /domain/dns:
+    post:
+      operationId: dnsLookup
+      summary: Full DNS record lookup (A, AAAA, MX, TXT, NS, CNAME)
+      security:
+      - x402: []
+      x-payment-info:
+        price:
+          mode: fixed
+          currency: USD
+          amount: '0.002000'
+        protocols:
+        - x402: {}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - domain
+              properties:
+                domain:
+                  type: string
+                  examples:
+                  - example.com
+      responses:
+        '200':
+          description: DNS records
+          headers:
+            PAYMENT-RESPONSE:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  domain:
+                    type: string
+                  a:
+                    type: array
+                    items:
+                      type: string
+                  aaaa:
+                    type: array
+                    items:
+                      type: string
+                  mx:
+                    type: array
+                    items:
+                      type: string
+                  txt:
+                    type: array
+                    items:
+                      type: string
+                  ns:
+                    type: array
+                    items:
+                      type: string
+                  cname:
+                    type: array
+                    items:
+                      type: string
+                  resolved_at:
+                    type: string
+                    format: date-time
+        '400':
+          description: Invalid or missing domain
+        '402':
+          description: Payment required
+  /domain/assess:
+    post:
+      operationId: assessDomain
+      summary: Assess a domain's trust and security posture
+      security:
+      - x402: []
+      x-payment-info:
+        price:
+          mode: fixed
+          currency: USD
+          amount: '0.005000'
+        protocols:
+        - x402: {}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - domain
+              properties:
+                domain:
+                  type: string
+                  examples:
+                  - example.com
+      responses:
+        '200':
+          description: Domain assessment result
+          headers:
+            PAYMENT-RESPONSE:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  domain:
+                    type: string
+                  trust_score:
+                    type: integer
+                    minimum: 0
+                    maximum: 100
+                  risk_score:
+                    type: integer
+                    minimum: 0
+                    maximum: 100
+                  grade:
+                    type: string
+                    enum:
+                    - A
+                    - B
+                    - C
+                    - D
+                    - F
+                  recommendation:
+                    type: string
+                    enum:
+                    - TRUSTED
+                    - REVIEW
+                    - RISKY
+                  risk_flags:
+                    type: array
+                    items:
+                      type: string
+                  signals:
+                    type: object
+                  assessed_at:
+                    type: string
+                    format: date-time
+        '400':
+          description: Invalid or missing domain
+        '402':
+          description: Payment required
+components:
+  securitySchemes:
+    x402:
+      type: apiKey
+      in: header
+      name: PAYMENT-SIGNATURE
+      description: x402 v2 payment signature header
