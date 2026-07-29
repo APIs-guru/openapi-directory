@@ -1,0 +1,681 @@
+openapi: 3.1.0
+info:
+  title: sygnldata
+  description: Clean market-state data + execution forensics for autonomous agents. Pay per call with USDC via x402 — no account,
+    no API key. MCP endpoint at /mcp.
+  version: 0.2.0
+  x-apisguru-categories:
+  - financial
+  x-logo:
+    url: https://47.sygnliq.com/favicon.svg
+  x-origin:
+  - format: openapi
+    url: https://47.sygnliq.com/openapi.json
+    version: '3.1'
+  x-providerName: sygnliq.com
+  x-serviceName: sygnldata
+  contact:
+    name: SYGNL
+    url: https://sygnliq.com
+paths:
+  /47:
+    get:
+      summary: Sygnl47 Landing
+      description: SYGNL/47 landing page, also served at / on the 47.sygnliq.com host.
+      operationId: sygnl47_landing_47_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /:
+    get:
+      summary: Index
+      operationId: index__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /health:
+    get:
+      summary: Health
+      operationId: health_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /pricing.json:
+    get:
+      summary: Pricing
+      operationId: pricing_pricing_json_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /llms.txt:
+    get:
+      summary: Llms Txt
+      operationId: llms_txt_llms_txt_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /.well-known/ai-plugin.json:
+    get:
+      summary: Ai Plugin
+      description: 'Plugin manifest. Agent runtimes and plugin loaders probe this path by
+
+        convention, and we were returning 404 to every one of them.'
+      operationId: ai_plugin__well_known_ai_plugin_json_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /robots.txt:
+    get:
+      summary: Robots
+      operationId: robots_robots_txt_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /sitemap.xml:
+    get:
+      summary: Sitemap
+      operationId: sitemap_sitemap_xml_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /{key}.txt:
+    get:
+      summary: Indexnow Key
+      operationId: indexnow_key__key__txt_get
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Key
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/regime/sample:
+    get:
+      summary: Regime Sample
+      operationId: regime_sample_v1_regime_sample_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /v1/stats:
+    get:
+      summary: Stats
+      operationId: stats_v1_stats_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /v1/regime/current:
+    get:
+      summary: Regime Current
+      operationId: regime_current_v1_regime_current_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /v1/regime/history:
+    get:
+      summary: Regime History
+      operationId: regime_history_v1_regime_history_get
+      parameters:
+      - name: start
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: ISO timestamp lower bound
+          title: Start
+        description: ISO timestamp lower bound
+      - name: end
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: ISO timestamp upper bound
+          title: End
+        description: ISO timestamp upper bound
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 10000
+          default: 1000
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/cost/estimate:
+    post:
+      summary: Cost Estimate
+      operationId: cost_estimate_v1_cost_estimate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: true
+              type: object
+              title: Body
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/bars/qc:
+    post:
+      summary: Bars Qc
+      operationId: bars_qc_v1_bars_qc_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: true
+              type: object
+              title: Body
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/x/{slug}:
+    get:
+      summary: Dynamic Product
+      operationId: dynamic_product_v1_x__slug__get
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Slug
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/x:
+    get:
+      summary: Product Catalog
+      operationId: product_catalog_v1_x_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /v1/potus:
+    get:
+      summary: Potus Manifest
+      description: Unpriced service manifest. The shop window — no event data at all.
+      operationId: potus_manifest_v1_potus_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /v1/potus/subscribe:
+    get:
+      summary: Potus Plans
+      description: 'Unpriced: the prepaid-pass catalog. Buying one is a priced POST.'
+      operationId: potus_plans_v1_potus_subscribe_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /v1/potus/subscribe/live/24h:
+    post:
+      summary: Subscribe Live 24H
+      description: 'Prepaid pass: live tier, unmetered, 24 hours.'
+      operationId: subscribe_live_24h_v1_potus_subscribe_live_24h_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /v1/potus/subscribe/live/30d:
+    post:
+      summary: Subscribe Live 30D
+      description: 'Prepaid pass: live tier, unmetered, 30 days.'
+      operationId: subscribe_live_30d_v1_potus_subscribe_live_30d_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /v1/potus/subscribe/archive/30d:
+    post:
+      summary: Subscribe Archive 30D
+      description: 'Prepaid pass: archive tier (T+24h), unmetered, 30 days.'
+      operationId: subscribe_archive_30d_v1_potus_subscribe_archive_30d_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /v1/potus/live:
+    get:
+      summary: Potus Live
+      description: Verified events with no delay applied. The low-latency polling call.
+      operationId: potus_live_v1_potus_live_get
+      parameters:
+      - name: since
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: ISO-8601 lower bound on ts_utc; narrows only
+          title: Since
+        description: ISO-8601 lower bound on ts_utc; narrows only
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/potus/events/1m:
+    get:
+      summary: Potus Events 1M
+      description: Identical payload, nothing newer than 60 seconds.
+      operationId: potus_events_1m_v1_potus_events_1m_get
+      parameters:
+      - name: since
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: ISO-8601 lower bound on ts_utc; narrows only
+          title: Since
+        description: ISO-8601 lower bound on ts_utc; narrows only
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/potus/events/15m:
+    get:
+      summary: Potus Events 15M
+      description: Identical payload, nothing newer than 15 minutes.
+      operationId: potus_events_15m_v1_potus_events_15m_get
+      parameters:
+      - name: since
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: ISO-8601 lower bound on ts_utc; narrows only
+          title: Since
+        description: ISO-8601 lower bound on ts_utc; narrows only
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/potus/archive:
+    get:
+      summary: Potus Archive
+      description: Identical payload, T+24h and older. Cheapest rung.
+      operationId: potus_archive_v1_potus_archive_get
+      parameters:
+      - name: since
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: ISO-8601 lower bound on ts_utc; narrows only
+          title: Since
+        description: ISO-8601 lower bound on ts_utc; narrows only
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/potus/entities:
+    get:
+      summary: Potus Entities
+      description: Tracked gazetteer + which names the guards are blocking today.
+      operationId: potus_entities_v1_potus_entities_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /v1/potus/feeds:
+    get:
+      summary: Potus Feeds
+      description: Measured connect-buffer depth and source health across live news feeds.
+      operationId: potus_feeds_v1_potus_feeds_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /v1/potus/event/{event_id}:
+    get:
+      summary: Potus Event
+      description: Full detail for one event, at live-tier recency and live-tier price.
+      operationId: potus_event_v1_potus_event__event_id__get
+      parameters:
+      - name: event_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Event Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/trade/preflight:
+    post:
+      summary: Trade Preflight
+      description: 'Pre-trade decision gate: ALLOW/REDUCE/REQUIRE_CONFIRMATION/BLOCK + signed attestation.'
+      operationId: trade_preflight_v1_trade_preflight_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: true
+              type: object
+              title: Body
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/trade/preflight/demo:
+    post:
+      summary: Trade Preflight Demo
+      description: Free demo of the preflight gate (rate limited) — same engine, marked demo.
+      operationId: trade_preflight_demo_v1_trade_preflight_demo_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: true
+              type: object
+              title: Body
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/trade/preflight/signer:
+    get:
+      summary: Preflight Signer
+      description: Attestation signer address — pin this to verify preflight signatures.
+      operationId: preflight_signer_v1_trade_preflight_signer_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /v1/audit:
+    post:
+      summary: Audit
+      operationId: audit_v1_audit_post
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_audit_v1_audit_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    Body_audit_v1_audit_post:
+      properties:
+        file:
+          anyOf:
+          - type: string
+            contentMediaType: application/octet-stream
+          - type: 'null'
+          title: File
+        preset:
+          type: string
+          title: Preset
+          default: large_cap
+        n_trials:
+          type: integer
+          title: N Trials
+          default: 10
+        extra_bps:
+          type: number
+          title: Extra Bps
+          default: 0.0
+      type: object
+      title: Body_audit_v1_audit_post
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+servers:
+- url: https://47.sygnliq.com
+externalDocs:
+  description: API Documentation and agent integration files
+  url: https://47.sygnliq.com
