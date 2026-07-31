@@ -1,0 +1,758 @@
+openapi: 3.1.0
+info:
+  title: Klinky Public API
+  version: 1.0.0
+  description: 'A/B testing link shortener API. Split one link between two destinations with weighted routing. Manage links
+    and read click analytics programmatically. Docs: https://docs.klinky.io — Contact: backlink@klinky.io'
+  contact:
+    name: Klinky
+    url: https://klinky.io
+    email: backlink@klinky.io
+  x-providerName: klinky.io
+  x-origin:
+  - format: openapi
+    version: '3.1'
+    url: https://docs.klinky.io/openapi.json
+  x-logo:
+    url: https://docs.klinky.io/logo.svg
+  x-apisguru-categories:
+  - marketing
+  - analytics
+  - tools
+  x-preferred: true
+servers:
+- url: https://api.klinky.io/api/v1
+  description: Production
+paths:
+  /public/keys:
+    post:
+      tags:
+      - Public API
+      - Public API
+      summary: Create Api Key
+      description: "Create a new API key.\n\nArgs:\n    name: User-friendly name for the key\n    key_type: Either \"publishable\"\
+        \ (read-only, for frontend) or \"secret\" (full access, for backend)\n\nThe full API key is returned ONLY in this\
+        \ response.\nStore it securely - it cannot be retrieved again."
+      operationId: create_api_key_api_v1_public_keys_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: name
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Name
+      - name: key_type
+        in: query
+        required: false
+        schema:
+          type: string
+          default: secret
+          title: Key Type
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIKeyCreateResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - Public API
+      - Public API
+      summary: List Api Keys
+      description: List all API keys for the authenticated user.
+      operationId: list_api_keys_api_v1_public_keys_get
+      security:
+      - HTTPBearer: []
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIKeyListResponse'
+  /public/keys/{key_id}:
+    delete:
+      tags:
+      - Public API
+      - Public API
+      summary: Revoke Api Key
+      description: Revoke an API key.
+      operationId: revoke_api_key_api_v1_public_keys__key_id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: key_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Key Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /public/keys/rate-limit:
+    get:
+      tags:
+      - Public API
+      - Public API
+      summary: Get Rate Limit Status
+      description: Get current rate limit status.
+      operationId: get_rate_limit_status_api_v1_public_keys_rate_limit_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitStatusResponse'
+      security:
+      - HTTPBearer: []
+  /public/links:
+    post:
+      tags:
+      - Public API
+      - Public API
+      summary: Create Link
+      description: 'Create a new link with variants via API.
+
+
+        - Requires Growth or Scale plan
+
+        - Rate limited per plan tier'
+      operationId: create_link_api_v1_public_links_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - Public API
+      - Public API
+      summary: List Links
+      description: 'List user''s links with pagination.
+
+
+        Returns links with basic stats (total clicks, conversions).'
+      operationId: list_links_api_v1_public_links_get
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Page
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 20
+          title: Per Page
+      - name: require_secret
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Require Secret
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkListResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /public/links/{link_id}:
+    get:
+      tags:
+      - Public API
+      - Public API
+      summary: Get Link
+      description: Get detailed information about a specific link.
+      operationId: get_link_api_v1_public_links__link_id__get
+      parameters:
+      - name: link_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Link Id
+      - name: require_secret
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Require Secret
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - Public API
+      - Public API
+      summary: Delete Link
+      description: 'Soft delete a link.
+
+
+        The link will no longer be accessible, but data is preserved.'
+      operationId: delete_link_api_v1_public_links__link_id__delete
+      parameters:
+      - name: link_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Link Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /public/links/{link_id}/clicks:
+    get:
+      tags:
+      - Public API
+      - Public API
+      summary: Get Link Clicks
+      description: 'Get click data for a link with optional date filtering.
+
+
+        Returns paginated click events with metadata.'
+      operationId: get_link_clicks_api_v1_public_links__link_id__clicks_get
+      parameters:
+      - name: link_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Link Id
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Page
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Per Page
+      - name: start_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Start Date
+      - name: end_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: End Date
+      - name: require_secret
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Require Secret
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    APIKeyCreateResponse:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        name:
+          type: string
+          title: Name
+        key:
+          type: string
+          title: Key
+        key_prefix:
+          type: string
+          title: Key Prefix
+        key_type:
+          type: string
+          title: Key Type
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        rate_limit:
+          type: integer
+          title: Rate Limit
+      type: object
+      required:
+      - id
+      - name
+      - key
+      - key_prefix
+      - key_type
+      - created_at
+      - rate_limit
+      title: APIKeyCreateResponse
+      description: Response when creating a new API key (key shown only once).
+    APIKeyListItem:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        name:
+          type: string
+          title: Name
+        key_prefix:
+          type: string
+          title: Key Prefix
+        key_type:
+          type: string
+          title: Key Type
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        last_used_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Used At
+        is_active:
+          type: boolean
+          title: Is Active
+      type: object
+      required:
+      - id
+      - name
+      - key_prefix
+      - key_type
+      - created_at
+      - last_used_at
+      - is_active
+      title: APIKeyListItem
+      description: API key info (without the actual key).
+    APIKeyListResponse:
+      properties:
+        keys:
+          items:
+            $ref: '#/components/schemas/APIKeyListItem'
+          type: array
+          title: Keys
+        rate_limit_per_hour:
+          type: integer
+          title: Rate Limit Per Hour
+      type: object
+      required:
+      - keys
+      - rate_limit_per_hour
+      title: APIKeyListResponse
+      description: Response for listing API keys.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    LinkCreate:
+      properties:
+        name:
+          type: string
+          maxLength: 100
+          minLength: 1
+          title: Name
+        slug:
+          anyOf:
+          - type: string
+            maxLength: 32
+            minLength: 3
+          - type: 'null'
+          title: Slug
+        auto_winner:
+          type: boolean
+          title: Auto Winner
+          default: false
+        auto_winner_threshold:
+          type: integer
+          minimum: 10.0
+          title: Auto Winner Threshold
+          default: 100
+        routing_type:
+          type: string
+          enum:
+          - ab_test
+          - geo
+          title: Routing Type
+          default: ab_test
+        geo_rules:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Geo Rules
+          description: 'Country codes to variant labels mapping for geo routing. Example: {"US": "variant_a", "EU": "variant_b",
+            "default": "variant_a"}'
+        variants:
+          items:
+            $ref: '#/components/schemas/VariantCreate'
+          type: array
+          maxItems: 5
+          minItems: 2
+          title: Variants
+      type: object
+      required:
+      - name
+      - variants
+      title: LinkCreate
+      description: Model for creating a link.
+    LinkListItem:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        slug:
+          type: string
+          title: Slug
+        name:
+          type: string
+          title: Name
+        is_active:
+          type: boolean
+          title: Is Active
+        routing_type:
+          type: string
+          enum:
+          - ab_test
+          - geo
+          title: Routing Type
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        total_clicks:
+          type: integer
+          title: Total Clicks
+          default: 0
+        total_conversions:
+          type: integer
+          title: Total Conversions
+          default: 0
+        top_variant:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Top Variant
+        variants:
+          items:
+            $ref: '#/components/schemas/LinkListItemVariant'
+          type: array
+          title: Variants
+          default: []
+      type: object
+      required:
+      - id
+      - slug
+      - name
+      - is_active
+      - routing_type
+      - created_at
+      title: LinkListItem
+      description: Model for link list item (with summary stats).
+    LinkListItemVariant:
+      properties:
+        label:
+          type: string
+          title: Label
+        weight:
+          type: integer
+          title: Weight
+      type: object
+      required:
+      - label
+      - weight
+      title: LinkListItemVariant
+      description: Model for variant summary in link list item.
+    LinkListResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/LinkListItem'
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+      type: object
+      required:
+      - items
+      - total
+      title: LinkListResponse
+      description: Model for paginated link list.
+    LinkResponse:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        organization_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Organization Id
+        slug:
+          type: string
+          title: Slug
+        name:
+          type: string
+          title: Name
+        is_active:
+          type: boolean
+          title: Is Active
+        auto_winner:
+          type: boolean
+          title: Auto Winner
+        auto_winner_threshold:
+          type: integer
+          title: Auto Winner Threshold
+        routing_type:
+          type: string
+          enum:
+          - ab_test
+          - geo
+          title: Routing Type
+        geo_rules:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Geo Rules
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        variants:
+          items:
+            $ref: '#/components/schemas/VariantResponse'
+          type: array
+          title: Variants
+      type: object
+      required:
+      - id
+      - user_id
+      - slug
+      - name
+      - is_active
+      - auto_winner
+      - auto_winner_threshold
+      - routing_type
+      - geo_rules
+      - created_at
+      - updated_at
+      - variants
+      title: LinkResponse
+      description: Model for link response.
+    RateLimitStatusResponse:
+      properties:
+        limit:
+          type: integer
+          title: Limit
+        remaining:
+          type: integer
+          title: Remaining
+        reset_at:
+          type: string
+          format: date-time
+          title: Reset At
+      type: object
+      required:
+      - limit
+      - remaining
+      - reset_at
+      title: RateLimitStatusResponse
+      description: Current rate limit status.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    VariantCreate:
+      properties:
+        label:
+          type: string
+          maxLength: 50
+          minLength: 1
+          title: Label
+        destination_url:
+          type: string
+          maxLength: 2048
+          minLength: 1
+          title: Destination Url
+        weight:
+          type: integer
+          maximum: 100.0
+          minimum: 0.0
+          title: Weight
+      type: object
+      required:
+      - label
+      - destination_url
+      - weight
+      title: VariantCreate
+      description: Model for creating a variant.
+    VariantResponse:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        link_id:
+          type: string
+          format: uuid
+          title: Link Id
+        label:
+          type: string
+          title: Label
+        destination_url:
+          type: string
+          title: Destination Url
+        weight:
+          type: integer
+          title: Weight
+        is_winner:
+          type: boolean
+          title: Is Winner
+        is_archived:
+          type: boolean
+          title: Is Archived
+          default: false
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+      type: object
+      required:
+      - id
+      - link_id
+      - label
+      - destination_url
+      - weight
+      - is_winner
+      - created_at
+      title: VariantResponse
+      description: Model for variant response.
+externalDocs:
+  description: Klinky API documentation
+  url: https://docs.klinky.io
