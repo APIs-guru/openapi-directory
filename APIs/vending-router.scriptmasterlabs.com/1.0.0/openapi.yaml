@@ -1,0 +1,51 @@
+openapi: 3.1.0
+info:
+  title: ScriptMaster Agentic Vending Router
+  description: x402-gated agentic vending stack for AI agents, dynamic payload vending, Ghost Layer Xahau decision receipts, and compute spot exchange.
+  version: 1.0.0
+  contact:
+    name: ScriptMasterLabs
+    email: hello@scriptmasterlabs.com
+    url: https://www.scriptmasterlabs.com
+servers:
+  - url: https://scriptmaster-vending-router.onrender.com
+    description: Production Vending Router
+paths:
+  /.well-known/manifest.json:
+    get:
+      summary: Vending Router Manifest & MCP Server Card
+      operationId: getManifest
+      responses:
+        '200':
+          description: Public manifest with MCP tool specs.
+  /ghost-layer/status:
+    get:
+      summary: Ghost Layer Chain Status (Free)
+      operationId: getGhostLayerStatus
+      responses:
+        '200':
+          description: Real-time XRPL and Base liveness status.
+  /ghost-layer/notarize:
+    post:
+      summary: Ghost Layer Decision Notary (Paid)
+      description: Mints Xahau URIToken cryptographic receipts for AI decision payloads (0.15 USDC / RLUSD).
+      operationId: notarizeDecision
+      responses:
+        '200':
+          description: Cryptographic attestation receipt.
+        '402':
+          description: Payment required — 0.15 USDC on Base or 0.15 RLUSD on XRPL.
+  /marketplace/listings:
+    get:
+      summary: Browse Agentic Marketplace Listings (Free)
+      operationId: browseMarketplace
+      responses:
+        '200':
+          description: Directory of x402-payable APIs.
+  /exchange:
+    get:
+      summary: Ghost Exchange — Compute & Intelligence Spot Sales (Free)
+      operationId: browseExchange
+      responses:
+        '200':
+          description: Spot sales of compute capacity and model inference.
