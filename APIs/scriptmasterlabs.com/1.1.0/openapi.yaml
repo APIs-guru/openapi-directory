@@ -1,0 +1,40 @@
+openapi: 3.1.0
+info:
+  title: ScriptMasterLabs — ACP x402 Data API & MCP Engine
+  description: Pay-per-call crypto, RWA, federal, SEC, and compliance micro-utility APIs settled in USDC on Base via x402 headers.
+  version: 1.1.0
+  contact:
+    name: ScriptMasterLabs
+    email: hello@scriptmasterlabs.com
+    url: https://www.scriptmasterlabs.com
+servers:
+  - url: https://acp-x402-scriptmasterlabs.onrender.com
+    description: Main Production Server
+paths:
+  /.well-known/x402:
+    get:
+      summary: OpenAPI/x402 discovery document (free)
+      operationId: openApiDiscovery
+      responses:
+        '200':
+          description: OpenAPI spec.
+  /x402/crypto-price:
+    get:
+      summary: Crypto Price API
+      description: Real-time crypto price quotes paid via x402 (0.001 USDC on Base).
+      operationId: CryptoPrice
+      responses:
+        '200':
+          description: Paid JSON result
+        '402':
+          description: Payment required — pay 0.001 USDC on Base then retry with X-PAYMENT header.
+  /x402/web-search:
+    get:
+      summary: Web Search API
+      description: Real-time web search capability for AI agents paid via x402.
+      operationId: WebSearch
+      responses:
+        '200':
+          description: Paid JSON result
+        '402':
+          description: Payment required — pay 0.001 USDC on Base then retry with X-PAYMENT header.
