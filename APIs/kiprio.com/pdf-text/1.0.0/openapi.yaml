@@ -1,0 +1,92 @@
+openapi: 3.0.3
+servers:
+  - url: https://kiprio.com/v1/pdf-text
+info:
+  description: >-
+    Extract plain text from PDF documents for LLM and RAG pipelines.
+    Upload a file or provide a URL. Pure server-side processing — no third-party
+    AI keys required. Free tier: 20 requests/day without authentication.
+  title: PDF Text Extractor
+  version: 1.0.0
+  x-apisguru-categories:
+    - text
+    - documents
+  x-logo:
+    url: https://kiprio.com/logo.png
+  x-origin:
+    - format: openapi
+      url: https://kiprio.com/v1/pdf-text/openapi.json
+      version: '3.0'
+  x-providerName: kiprio.com
+  x-serviceName: pdf-text
+externalDocs:
+  description: API documentation
+  url: https://kiprio.com/docs#pdf-text
+paths:
+  /:
+    get:
+      summary: Extract text from a PDF via URL
+      operationId: pdfTextFromUrl
+      parameters:
+        - name: url
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uri
+          example: 'https://example.com/document.pdf'
+      responses:
+        '200':
+          description: Extracted text content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  text:
+                    type: string
+                  word_count:
+                    type: integer
+                  char_count:
+                    type: integer
+                  method:
+                    type: string
+                  truncated:
+                    type: boolean
+    post:
+      summary: Extract text from a PDF file upload or URL
+      operationId: pdfTextFromFile
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+      responses:
+        '200':
+          description: Extracted text content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  text:
+                    type: string
+                  word_count:
+                    type: integer
+                  char_count:
+                    type: integer
+                  method:
+                    type: string
+                  truncated:
+                    type: boolean
