@@ -1,0 +1,1589 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Web Metadata & Contact Extractor API",
+    "description": "Ultra-fast, enterprise REST API: Extended Metadata, Anti-SSRF Shield, Async Redis Rate Limiter (auto-reconnect + health observability), Multi-Worker Gunicorn, Favicon HD Engine, NLP Summary, HTTP/2, ORJSON.",
+    "version": "4.1.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Health Check",
+        "description": "Public liveness probe — exposes only service name and version.\nUse /health/details (requires HEALTH_DETAILS_SECRET header) for full operational status.",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health/details": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Health Details",
+        "description": "Protected operational health endpoint.\nRequires X-Health-Secret header matching HEALTH_DETAILS_SECRET env var.\nReturns Redis mode, status, engine details and configuration flags for monitoring.",
+        "operationId": "health_details_health_details_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health/ready": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Health Ready",
+        "description": "Kubernetes/Render readiness probe.\nReturns 200 when the process is ready to serve traffic (HTTP client initialized).\nReturns 503 when still starting up. Does NOT expose internal details.",
+        "operationId": "health_ready_health_ready_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/extract": {
+      "get": {
+        "tags": [
+          "Full Extractor"
+        ],
+        "summary": "Extract Metadata",
+        "description": "Extract full metadata payload (<200ms with Rust ORJSON + IP-Pinned Anti-SSRF Shield + HTTP/2 streaming):\n- **SEO Metadata**: Title, description, OG image, favicon, canonical URL, language, author, theme color, H1 tags.\n- **Page Health Metrics**: Content length (bytes), image count, accessibility missing alt count, link count.\n- **Contacts**: Public email addresses and telephone numbers.\n- **Social Links**: Profiles on Twitter/X, LinkedIn, Instagram, Facebook, GitHub, YouTube, Telegram, TikTok.\n- **Technologies**: Precision context-aware CMS and framework signatures.\n- **SEO Audit**: Automated 14-point SEO diagnostic score & warnings.\n- **Link Extractor**: Categorized internal vs external hyperlinks.\n- **Structured Data**: Schema.org JSON-LD schemas.\n- **Feeds**: RSS/Atom feed discovery.\n- **Security**: HTTP security headers score & IP-Pinned Anti-SSRF Protection.\n- **AI Reader**: Clean Markdown article text, word count & reading time.\n\nWithout `fields`, runs the complete pipeline. With `fields`, only runs\nthe extractors needed for the requested keys — `fields=detected_technologies`\nis exactly as cheap as `GET /api/v1/tech-stack`.",
+        "operationId": "extract_metadata_api_v1_extract_get",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The target website URL to analyze (e.g. https://example.com)",
+              "title": "Url"
+            },
+            "description": "The target website URL to analyze (e.g. https://example.com)"
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional comma-separated list of keys to filter response (e.g. metadata,contacts) — only runs the extractors those fields actually need, same as calling the matching specialized endpoint",
+              "title": "Fields"
+            },
+            "description": "Optional comma-separated list of keys to filter response (e.g. metadata,contacts) — only runs the extractors those fields actually need, same as calling the matching specialized endpoint"
+          },
+          {
+            "name": "user_agent",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional custom User-Agent header",
+              "title": "User Agent"
+            },
+            "description": "Optional custom User-Agent header"
+          },
+          {
+            "name": "x-rapidapi-proxy-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Rapidapi-Proxy-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request: Invalid URL format, missing domain hostname, or blocked by IP-Pinned Anti-SSRF Shield"
+          },
+          "403": {
+            "description": "Forbidden: Invalid or missing X-RapidAPI-Proxy-Secret authentication header"
+          },
+          "429": {
+            "description": "Too Many Requests: Rate limit exceeded (60 requests/min per IP)"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/link-preview": {
+      "get": {
+        "tags": [
+          "Link Preview"
+        ],
+        "summary": "Extract Link Preview",
+        "description": "Lightweight endpoint optimized for link preview cards (Social Cards / Unfurl):\nReturns title, description, og_image, favicon, favicon_high_res, site_name, and language.",
+        "operationId": "extract_link_preview_api_v1_link_preview_get",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The target URL to generate link preview for",
+              "title": "Url"
+            },
+            "description": "The target URL to generate link preview for"
+          },
+          {
+            "name": "user_agent",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional custom User-Agent header",
+              "title": "User Agent"
+            },
+            "description": "Optional custom User-Agent header"
+          },
+          {
+            "name": "x-rapidapi-proxy-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Rapidapi-Proxy-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkPreviewResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request: Invalid URL format, missing domain hostname, or blocked by IP-Pinned Anti-SSRF Shield"
+          },
+          "403": {
+            "description": "Forbidden: Invalid or missing X-RapidAPI-Proxy-Secret authentication header"
+          },
+          "429": {
+            "description": "Too Many Requests: Rate limit exceeded (60 requests/min per IP)"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/contacts": {
+      "get": {
+        "tags": [
+          "Contact Discovery"
+        ],
+        "summary": "Extract Contacts",
+        "description": "Dedicated endpoint for public contact-signal discovery:\nReturns public emails, telephone numbers, and official social media profile URLs\nfound on the page. This surfaces raw public signals, not verified company/people\ndata — it does not identify who these belong to or confirm they're monitored.",
+        "operationId": "extract_contacts_api_v1_contacts_get",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The target URL to extract contact information and social handles from",
+              "title": "Url"
+            },
+            "description": "The target URL to extract contact information and social handles from"
+          },
+          {
+            "name": "user_agent",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional custom User-Agent header",
+              "title": "User Agent"
+            },
+            "description": "Optional custom User-Agent header"
+          },
+          {
+            "name": "x-rapidapi-proxy-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Rapidapi-Proxy-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request: Invalid URL format, missing domain hostname, or blocked by IP-Pinned Anti-SSRF Shield"
+          },
+          "403": {
+            "description": "Forbidden: Invalid or missing X-RapidAPI-Proxy-Secret authentication header"
+          },
+          "429": {
+            "description": "Too Many Requests: Rate limit exceeded (60 requests/min per IP)"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tech-stack": {
+      "get": {
+        "tags": [
+          "Tech Stack"
+        ],
+        "summary": "Extract Tech Stack",
+        "description": "Dedicated endpoint for technology intelligence & CMS auditing:\nDetects 40+ frameworks and CMS signatures with structural context-aware matching.",
+        "operationId": "extract_tech_stack_api_v1_tech_stack_get",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The target URL to inspect for CMS and technology stack signatures",
+              "title": "Url"
+            },
+            "description": "The target URL to inspect for CMS and technology stack signatures"
+          },
+          {
+            "name": "user_agent",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional custom User-Agent header",
+              "title": "User Agent"
+            },
+            "description": "Optional custom User-Agent header"
+          },
+          {
+            "name": "x-rapidapi-proxy-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Rapidapi-Proxy-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TechStackResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request: Invalid URL format, missing domain hostname, or blocked by IP-Pinned Anti-SSRF Shield"
+          },
+          "403": {
+            "description": "Forbidden: Invalid or missing X-RapidAPI-Proxy-Secret authentication header"
+          },
+          "429": {
+            "description": "Too Many Requests: Rate limit exceeded (60 requests/min per IP)"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/schema": {
+      "get": {
+        "tags": [
+          "Structured Data"
+        ],
+        "summary": "Extract Schema",
+        "description": "Dedicated endpoint for Schema.org & JSON-LD structured data extraction:\nReturns parsed product pricing, e-commerce reviews, article schemas, event details, and organization metadata.",
+        "operationId": "extract_schema_api_v1_schema_get",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The target URL to extract Schema.org JSON-LD structured data from",
+              "title": "Url"
+            },
+            "description": "The target URL to extract Schema.org JSON-LD structured data from"
+          },
+          {
+            "name": "user_agent",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional custom User-Agent header",
+              "title": "User Agent"
+            },
+            "description": "Optional custom User-Agent header"
+          },
+          {
+            "name": "x-rapidapi-proxy-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Rapidapi-Proxy-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SchemaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request: Invalid URL format, missing domain hostname, or blocked by IP-Pinned Anti-SSRF Shield"
+          },
+          "403": {
+            "description": "Forbidden: Invalid or missing X-RapidAPI-Proxy-Secret authentication header"
+          },
+          "429": {
+            "description": "Too Many Requests: Rate limit exceeded (60 requests/min per IP)"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/security": {
+      "get": {
+        "tags": [
+          "Security Audit"
+        ],
+        "summary": "Extract Security Headers Endpoint",
+        "description": "Dedicated endpoint for HTTP Security Headers audit:\nInspects HSTS, Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, and calculates a percentage security score.",
+        "operationId": "extract_security_headers_endpoint_api_v1_security_get",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The target URL to audit HTTP security headers",
+              "title": "Url"
+            },
+            "description": "The target URL to audit HTTP security headers"
+          },
+          {
+            "name": "user_agent",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional custom User-Agent header",
+              "title": "User Agent"
+            },
+            "description": "Optional custom User-Agent header"
+          },
+          {
+            "name": "x-rapidapi-proxy-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Rapidapi-Proxy-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SecurityHeadersResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request: Invalid URL format, missing domain hostname, or blocked by IP-Pinned Anti-SSRF Shield"
+          },
+          "403": {
+            "description": "Forbidden: Invalid or missing X-RapidAPI-Proxy-Secret authentication header"
+          },
+          "429": {
+            "description": "Too Many Requests: Rate limit exceeded (60 requests/min per IP)"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/markdown": {
+      "get": {
+        "tags": [
+          "AI & LLM Reader"
+        ],
+        "summary": "Extract Clean Markdown Article",
+        "description": "Dedicated endpoint for AI Agents, ChatGPT, Claude & RAG pipelines:\nStrips noise (ads, navs, footers, scripts) and converts webpage article text into clean, structured Markdown with NLP auto-summary and keywords.",
+        "operationId": "extract_clean_markdown_article_api_v1_markdown_get",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The target article/webpage URL to extract clean LLM-ready Markdown from",
+              "title": "Url"
+            },
+            "description": "The target article/webpage URL to extract clean LLM-ready Markdown from"
+          },
+          {
+            "name": "user_agent",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional custom User-Agent header",
+              "title": "User Agent"
+            },
+            "description": "Optional custom User-Agent header"
+          },
+          {
+            "name": "x-rapidapi-proxy-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Rapidapi-Proxy-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarkdownResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request: Invalid URL format, missing domain hostname, or blocked by IP-Pinned Anti-SSRF Shield"
+          },
+          "403": {
+            "description": "Forbidden: Invalid or missing X-RapidAPI-Proxy-Secret authentication header"
+          },
+          "429": {
+            "description": "Too Many Requests: Rate limit exceeded (60 requests/min per IP)"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/seo-audit": {
+      "get": {
+        "tags": [
+          "SEO Audit"
+        ],
+        "summary": "Extract Seo Audit",
+        "description": "Dedicated endpoint for automated SEO diagnostic audit:\nEvaluates Title tag, Meta Description, Canonical URL, H1 heading, OpenGraph image, Favicon, Image ALT coverage,\nHTTPS security, lang attribute, viewport, indexability, multiple-H1, Twitter Card, and structured data.",
+        "operationId": "extract_seo_audit_api_v1_seo_audit_get",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The target URL to perform automated 14-point SEO diagnostic audit",
+              "title": "Url"
+            },
+            "description": "The target URL to perform automated 14-point SEO diagnostic audit"
+          },
+          {
+            "name": "user_agent",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional custom User-Agent header",
+              "title": "User Agent"
+            },
+            "description": "Optional custom User-Agent header"
+          },
+          {
+            "name": "x-rapidapi-proxy-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Rapidapi-Proxy-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SeoAuditResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request: Invalid URL format, missing domain hostname, or blocked by IP-Pinned Anti-SSRF Shield"
+          },
+          "403": {
+            "description": "Forbidden: Invalid or missing X-RapidAPI-Proxy-Secret authentication header"
+          },
+          "429": {
+            "description": "Too Many Requests: Rate limit exceeded (60 requests/min per IP)"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/links": {
+      "get": {
+        "tags": [
+          "Link Extractor"
+        ],
+        "summary": "Extract Links Endpoint",
+        "description": "Dedicated endpoint for hyperlink extraction and domain classification:\nCategorizes all page links into internal links (same domain) and external links (third-party websites).",
+        "operationId": "extract_links_endpoint_api_v1_links_get",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The target URL to extract and classify internal vs external hyperlinks",
+              "title": "Url"
+            },
+            "description": "The target URL to extract and classify internal vs external hyperlinks"
+          },
+          {
+            "name": "user_agent",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional custom User-Agent header",
+              "title": "User Agent"
+            },
+            "description": "Optional custom User-Agent header"
+          },
+          {
+            "name": "x-rapidapi-proxy-secret",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Rapidapi-Proxy-Secret"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinksResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request: Invalid URL format, missing domain hostname, or blocked by IP-Pinned Anti-SSRF Shield"
+          },
+          "403": {
+            "description": "Forbidden: Invalid or missing X-RapidAPI-Proxy-Secret authentication header"
+          },
+          "429": {
+            "description": "Too Many Requests: Rate limit exceeded (60 requests/min per IP)"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ContactsResponse": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "final_url": {
+            "type": "string",
+            "title": "Final Url"
+          },
+          "status_code": {
+            "type": "integer",
+            "title": "Status Code"
+          },
+          "execution_time_ms": {
+            "type": "number",
+            "title": "Execution Time Ms"
+          },
+          "bot_protection_detected": {
+            "type": "boolean",
+            "title": "Bot Protection Detected",
+            "default": false
+          },
+          "emails": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Emails"
+          },
+          "phones": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Phones"
+          },
+          "phone_details": {
+            "items": {
+              "$ref": "#/components/schemas/PhoneDetail"
+            },
+            "type": "array",
+            "title": "Phone Details",
+            "default": []
+          },
+          "social_links": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Social Links"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "final_url",
+          "status_code",
+          "execution_time_ms",
+          "emails",
+          "phones",
+          "social_links"
+        ],
+        "title": "ContactsResponse"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "LinkPreviewResponse": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "final_url": {
+            "type": "string",
+            "title": "Final Url"
+          },
+          "status_code": {
+            "type": "integer",
+            "title": "Status Code"
+          },
+          "execution_time_ms": {
+            "type": "number",
+            "title": "Execution Time Ms"
+          },
+          "bot_protection_detected": {
+            "type": "boolean",
+            "title": "Bot Protection Detected",
+            "default": false
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "og_image": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Og Image"
+          },
+          "favicon": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Favicon"
+          },
+          "favicon_high_res": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Favicon High Res"
+          },
+          "site_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Site Name"
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Language"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "final_url",
+          "status_code",
+          "execution_time_ms",
+          "title",
+          "description",
+          "og_image",
+          "favicon",
+          "site_name",
+          "language"
+        ],
+        "title": "LinkPreviewResponse"
+      },
+      "LinksResponse": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "final_url": {
+            "type": "string",
+            "title": "Final Url"
+          },
+          "status_code": {
+            "type": "integer",
+            "title": "Status Code"
+          },
+          "execution_time_ms": {
+            "type": "number",
+            "title": "Execution Time Ms"
+          },
+          "bot_protection_detected": {
+            "type": "boolean",
+            "title": "Bot Protection Detected",
+            "default": false
+          },
+          "total_links_count": {
+            "type": "integer",
+            "title": "Total Links Count"
+          },
+          "internal_links_count": {
+            "type": "integer",
+            "title": "Internal Links Count"
+          },
+          "external_links_count": {
+            "type": "integer",
+            "title": "External Links Count"
+          },
+          "internal_links": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Internal Links"
+          },
+          "external_links": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "External Links"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "final_url",
+          "status_code",
+          "execution_time_ms",
+          "total_links_count",
+          "internal_links_count",
+          "external_links_count",
+          "internal_links",
+          "external_links"
+        ],
+        "title": "LinksResponse"
+      },
+      "MarkdownResponse": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "final_url": {
+            "type": "string",
+            "title": "Final Url"
+          },
+          "status_code": {
+            "type": "integer",
+            "title": "Status Code"
+          },
+          "execution_time_ms": {
+            "type": "number",
+            "title": "Execution Time Ms"
+          },
+          "bot_protection_detected": {
+            "type": "boolean",
+            "title": "Bot Protection Detected",
+            "default": false
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "word_count": {
+            "type": "integer",
+            "title": "Word Count"
+          },
+          "reading_time_minutes": {
+            "type": "number",
+            "title": "Reading Time Minutes"
+          },
+          "summary_snippet": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Summary Snippet"
+          },
+          "top_keywords": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Top Keywords",
+            "default": []
+          },
+          "markdown_content": {
+            "type": "string",
+            "title": "Markdown Content"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "final_url",
+          "status_code",
+          "execution_time_ms",
+          "title",
+          "word_count",
+          "reading_time_minutes",
+          "markdown_content"
+        ],
+        "title": "MarkdownResponse"
+      },
+      "PhoneDetail": {
+        "properties": {
+          "raw": {
+            "type": "string",
+            "title": "Raw"
+          },
+          "normalized": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Normalized"
+          },
+          "country": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country"
+          },
+          "possible": {
+            "type": "boolean",
+            "title": "Possible",
+            "default": false
+          },
+          "valid": {
+            "type": "boolean",
+            "title": "Valid",
+            "default": false
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "raw"
+        ],
+        "title": "PhoneDetail"
+      },
+      "SchemaResponse": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "final_url": {
+            "type": "string",
+            "title": "Final Url"
+          },
+          "status_code": {
+            "type": "integer",
+            "title": "Status Code"
+          },
+          "execution_time_ms": {
+            "type": "number",
+            "title": "Execution Time Ms"
+          },
+          "bot_protection_detected": {
+            "type": "boolean",
+            "title": "Bot Protection Detected",
+            "default": false
+          },
+          "json_ld_count": {
+            "type": "integer",
+            "title": "Json Ld Count"
+          },
+          "json_ld_schemas": {
+            "items": {},
+            "type": "array",
+            "title": "Json Ld Schemas"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "final_url",
+          "status_code",
+          "execution_time_ms",
+          "json_ld_count",
+          "json_ld_schemas"
+        ],
+        "title": "SchemaResponse"
+      },
+      "SecurityHeadersResponse": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "final_url": {
+            "type": "string",
+            "title": "Final Url"
+          },
+          "status_code": {
+            "type": "integer",
+            "title": "Status Code"
+          },
+          "execution_time_ms": {
+            "type": "number",
+            "title": "Execution Time Ms"
+          },
+          "bot_protection_detected": {
+            "type": "boolean",
+            "title": "Bot Protection Detected",
+            "default": false
+          },
+          "security_score_percentage": {
+            "type": "number",
+            "title": "Security Score Percentage"
+          },
+          "security_headers": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Security Headers"
+          },
+          "security_header_grades": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Security Header Grades",
+            "default": {}
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "final_url",
+          "status_code",
+          "execution_time_ms",
+          "security_score_percentage",
+          "security_headers"
+        ],
+        "title": "SecurityHeadersResponse"
+      },
+      "SeoAuditResponse": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "final_url": {
+            "type": "string",
+            "title": "Final Url"
+          },
+          "status_code": {
+            "type": "integer",
+            "title": "Status Code"
+          },
+          "execution_time_ms": {
+            "type": "number",
+            "title": "Execution Time Ms"
+          },
+          "bot_protection_detected": {
+            "type": "boolean",
+            "title": "Bot Protection Detected",
+            "default": false
+          },
+          "seo_score_percentage": {
+            "type": "number",
+            "title": "Seo Score Percentage"
+          },
+          "passed_checks": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Passed Checks"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Warnings"
+          },
+          "checks": {
+            "items": {
+              "$ref": "#/components/schemas/SeoCheck"
+            },
+            "type": "array",
+            "title": "Checks",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "final_url",
+          "status_code",
+          "execution_time_ms",
+          "seo_score_percentage",
+          "passed_checks",
+          "warnings"
+        ],
+        "title": "SeoAuditResponse"
+      },
+      "SeoCheck": {
+        "properties": {
+          "check": {
+            "type": "string",
+            "title": "Check"
+          },
+          "passed": {
+            "type": "boolean",
+            "title": "Passed"
+          },
+          "severity": {
+            "type": "string",
+            "title": "Severity"
+          },
+          "evidence": {
+            "type": "string",
+            "title": "Evidence"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "check",
+          "passed",
+          "severity",
+          "evidence"
+        ],
+        "title": "SeoCheck"
+      },
+      "TechStackResponse": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "final_url": {
+            "type": "string",
+            "title": "Final Url"
+          },
+          "status_code": {
+            "type": "integer",
+            "title": "Status Code"
+          },
+          "execution_time_ms": {
+            "type": "number",
+            "title": "Execution Time Ms"
+          },
+          "bot_protection_detected": {
+            "type": "boolean",
+            "title": "Bot Protection Detected",
+            "default": false
+          },
+          "detected_technologies": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Detected Technologies"
+          },
+          "technology_details": {
+            "items": {
+              "$ref": "#/components/schemas/TechnologyDetail"
+            },
+            "type": "array",
+            "title": "Technology Details",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "final_url",
+          "status_code",
+          "execution_time_ms",
+          "detected_technologies"
+        ],
+        "title": "TechStackResponse"
+      },
+      "TechnologyDetail": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence"
+          },
+          "evidence": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Evidence",
+            "default": []
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "name",
+          "confidence",
+          "category"
+        ],
+        "title": "TechnologyDetail"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
