@@ -1,0 +1,4165 @@
+openapi: 3.1.0
+info:
+  title: Offendersearch API
+  version: 1.0.0
+  description: "National sex-offender search across all US states and territories, unified behind one\
+    \ API. Synchronous by default (call and wait) for interactive use; an asynchronous mode returns a\
+    \ job handle and is built for batch and high-volume work. Full offenders.io field parity plus scored\
+    \ matches, per-source provenance, freshness options, DOB/age match-state fidelity, and a consolidated\
+    \ verification-report PDF (`POST /v1/report`) with a source citation on every record. Criminal records\
+    \ land later as an additive `recordType` — the contract does not change.\n\n## Authentication\nMost\
+    \ customer endpoints authenticate with an API key sent in the `X-API-Key` header (`ApiKeyAuth`). The\
+    \ primary synchronous search additionally accepts a signed **session token** (`Authorization: Bearer\
+    \ <token>`) so the dashboard console can run searches on behalf of a signed-in user. The offenders.io\
+    \ compatibility endpoint accepts the key three ways for drop-in parity: `X-API-Key`, `Authorization:\
+    \ Bearer <key>`, or `?key=<key>`. Account/dashboard endpoints (`/v1/account`, `/v1/keys`, `/v1/usage`,\
+    \ ...) require a session token. Internal ops endpoints require the separate `X-Admin-Key` credential.\n\
+    \n## Freshness & billing\n`freshness` is a per-request parameter with two values — `daily` (the DEFAULT\
+    \ when omitted) and `weekly`.\n\n* **`daily`** is the freshest data we publish. Our sweep of every\
+    \ registry runs\n  on a daily cycle, so a `daily` answer is assembled from the newest snapshot we\n\
+    \  hold of each one — in practice, almost real time. Ask for it when currency is\n  the point. It\
+    \ bills the **+$0.01/call daily-freshness surcharge** on top of the\n  base per-call rate (admin-overridable\
+    \ per customer).\n* **`weekly`** is also fresh. Identity is essentially identical to `daily` — the\n\
+    \  same people, names, aliases, offenses, addresses and photos — and what can lag\n  is only the most\
+    \ recent movement, a registration or an address change from the\n  last day or so. Right for bulk\
+    \ screening and periodic re-screens. **No\n  surcharge.**\n\n\n**`freshness` describes the answer;\
+    \ it does not filter it.** No registry is ever withheld from a result because of when it was last\
+    \ swept: every registry covering the query contributes, from the newest snapshot we hold of it. `status`\
+    \ never becomes `partial` for a snapshot age, and `warnings[]` never carries a staleness sentence.\n\
+    \n**★ EVERY DATE IS ISO-8601 — BREAKING CHANGE, 2026-08-04.** Every date-shaped field in a record\
+    \ now comes back as ISO-8601: `dob`, the four `offense.*Date` fields, and the five `stateData` date\
+    \ fields. They used to be the registry's own string passed through byte-for-byte, so a single response\
+    \ could carry `\"2003-03-31\"`, `\"10/11/1988\"`, `\"11-29-1987\"` and `\"Aug. 10, 1987\"` in the\
+    \ same key — `offense.offenseDate` was ISO on only 45.4% of its populated values, in seven distinct\
+    \ shapes. **If you wrote a lenient parser or a per-state format table, you can delete it; if you compared\
+    \ these values as raw strings, or stored them in a text column and matched on it, those comparisons\
+    \ will change once.**\nThree rules govern the new values, and the third is the one to read carefully:\n\
+    1. A full date is `YYYY-MM-DD`. 2. **A partial date stays partial.** A registry that publishes only\
+    \ a month or\n   only a year yields `YYYY-MM` or `YYYY` — we never invent a day. The companion\n \
+    \  `datePrecision` object on `offense` and `stateData` names the precision\n   explicitly, exactly\
+    \ as `dobPrecision` has always done for `dob`.\n3. **Nothing is discarded.** A value we cannot read\
+    \ as a date — a crime\n   description in an offence-date cell, a `registrationEnds` of \"Life\" —\
+    \ is NOT\n   served as a fake date and NOT silently blanked. The field is `\"\"`, the\n   precision\
+    \ is `unparseable`, and the registry's literal text is preserved in\n   the `datesAsPublished` object\
+    \ beside it.\n\n`source.scrapedAt` / `.lastCheckedAt` / `.sourceUpdatedAt` were already ISO-8601 timestamps\
+    \ and are unchanged. `dob` was already `YYYY-MM-DD` and is unchanged.\n\n**There is no date FILTER\
+    \ on the offense or stateData dates.** `dob` is the one date you can narrow a query on; read the rest\
+    \ off the record.\n**Provenance is never traded for normalisation.** The registry's own text is kept\
+    \ beside the normalised value, not overwritten by it, which is why `datesAsPublished` still carries\
+    \ what the source actually printed — including the 38,818 `registrationEnds` cells that hold a registration\
+    \ DURATION (\"15 Years\", \"Lifetime\") rather than a date.\n\n**Where currency is published — and\
+    \ where it is not.** Per record, `record.source.scrapedAt` is the moment we ingested the snapshot\
+    \ that record came from. Per registry, `GET /v1/sources` publishes `health.lastSuccessAt` and `health.ageSeconds`\
+    \ live and without an API key. Both are things you ask for. Neither is attached to a search answer:\
+    \ `sourceStatus[]` carries no age fields, because an answer that contains every matching record does\
+    \ not need a caveat about our sweep schedule.\n\n★ **Freshness and completeness are different questions,\
+    \ and only one of them makes an empty result unsafe.** `freshness` says how OLD an answer is; it says\
+    \ nothing about whether the answer is WHOLE. A registry swept ten minutes ago can still fail to be\
+    \ searched to the end — a deadline, or a candidate set larger than one search may examine — and then\
+    \ a `0` from it means UNKNOWN, not NO MATCH. That is `counts.sourcesIncomplete` / `sourceStatus[].incomplete`,\
+    \ it is unrelated to freshness, and it is the one signal that must never be ignored. See API-CONTRACT.md\
+    \ §5.0.\n\n**Migrating from a pre-2026-08-04 integration.** `counts.sourcesStale`, `counts.sourcesDegraded`,\
+    \ `counts.sourcesOmitted`, `counts.recordsFromStaleSources`, `freshnessDetail`, and `sourceStatus[].freshnessSatisfied`\
+    \ / `.degraded` / `.omitted` / `.ageSeconds` / `.lastSuccessAt` were removed and are no longer emitted.\
+    \ If you were gating on any of them, gate on `counts.sourcesIncomplete` instead — it asks whether\
+    \ your ANSWER is whole, which is the question those keys were being used to ask. `onStale` is deprecated\
+    \ but still accepted, so an older request body keeps working.\n\nBilling is required for every account;\
+    \ the ONLY free call is one scoped exclusively to statutorily non-commercial jurisdiction(s) (e.g.\
+    \ state=CA), which has nothing commercially billable. **Batch billing is per-search:** `POST /v1/batch`\
+    \ is one HTTP request but each search in it is billed as its own search (per-row freshness included)\
+    \ — a batch of 100 = 100 billable searches. The consolidated verification report (`POST /v1/report`)\
+    \ is a separate, callable endpoint any valid key may use (no per-key entitlement), billed **+$0.02\
+    \ per document** (admin-overridable per customer). A separate `proof` add-on also carries an extra\
+    \ per-document charge and requires billing (402 otherwise); it is NOT the customer verification report.\n"
+  contact:
+    name: Offendersearch
+    url: https://offendersearch.app
+    email: support@offendersearch.app
+  x-providerName: offendersearch.app
+  x-origin:
+  - format: openapi
+    version: '3.1'
+    url: https://offendersearch.app/openapi.json
+  x-apisguru-categories:
+  - security
+  - open_data
+servers:
+- url: https://api.offendersearch.app
+security:
+- ApiKeyAuth: []
+paths:
+  /v1/search:
+    post:
+      operationId: syncSearch
+      summary: Synchronous search (PRIMARY — call and wait)
+      description: 'Searches the full dataset by default (or the jurisdictions you name) in a single call
+        and returns scored, de-duplicated results in the response. Served from the current snapshot for
+        speed. Set `deadlineMs` to bound how long you wait; with `onDeadline: partial` the response returns
+        whatever completed within that bound, with per-jurisdiction status in `sourceStatus`; with `onDeadline:
+        error` a forced-partial result returns 504 instead. Accepts an API key OR a session token.
+
+        '
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Search results (complete, or partial when a deadlineMs bound is hit)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          description: 'Billing required for the requested `proof` documents (account has no billing enabled).
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+        '504':
+          description: Deadline was hit and `onDeadline=error` was set (forced-partial).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/searches:
+    post:
+      operationId: asyncSearch
+      summary: Asynchronous search — built for batch and high-volume work
+      description: '**The batch endpoint.** Submit the search, get a job id back immediately, and collect
+        the result when it is ready — poll `GET /v1/searches/{searchId}` or supply a `webhookUrl` and
+        we POST the finished envelope to it.
+
+
+        Because you are not holding a connection open there is no request-timeout ceiling on the work,
+        so every named jurisdiction runs to completion. Use it for bulk screening, periodic re-screens
+        of a roster you already hold, backfills, unattended scheduled jobs, and broad national sweeps.
+
+
+        Use `POST /v1/search` instead when a person is waiting on the answer — that is the interactive
+        endpoint and it returns in one round trip. Both read the same corpus at the same `freshness` tier
+        and return the same envelope; the choice is about how you collect the result, not how current
+        it is. To submit many searches at once, `POST /v1/batch` takes up to 1,000 queries in a single
+        request.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AsyncSearchRequest'
+      responses:
+        '202':
+          description: Search accepted; poll `resultsUrl` for status + results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncSearchAccepted'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+  /v1/searches/{searchId}:
+    get:
+      operationId: getSearch
+      summary: Fetch an async search's status + results
+      description: 'Returns the job''s current state. While `pending`/`running` the body carries empty
+        `records`/`sourceStatus` and a zeroed `counts`; on `error` it carries an `error` string; when
+        finished it is the full SearchResponse.
+
+        '
+      parameters:
+      - name: searchId
+        in: path
+        required: true
+        schema:
+          type: string
+        example: srch_9f2c1a7b
+      responses:
+        '200':
+          description: Search status + results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/searches/{searchId}/proof:
+    post:
+      operationId: makeProof
+      summary: Per-registry look-alike proof docs (internal add-on — NOT the verification report)
+      description: 'Internal per-registry add-on, distinct from the customer-facing consolidated verification
+        report (`POST /v1/report`). Renders a per-registry look-alike PDF/HTML for ONLY the registries
+        the caller names. Requires billing (402 otherwise); it carries an extra per-document charge. Never
+        generated for all sources implicitly. `registries` is required. A registry with no look-alike
+        template yet is skipped and NOT billed (its document row carries an empty `url` + explanatory
+        `note`).
+
+        '
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: searchId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProofRequest'
+      responses:
+        '200':
+          description: Proof bundle (one verification-report document per requested registry)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProofBundle'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          description: Payment required — billing not enabled on the account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+  /v1/report:
+    post:
+      operationId: makeReport
+      summary: Consolidated verification / proof PDF for one search
+      description: 'Renders a SINGLE consolidated verification PDF for a search that was ALREADY run —
+        pass the `searchId` of a prior `POST /v1/search` (or `/v1/searches`) call (valid for 7 days),
+        optionally with the `viewerName`/`viewerEmail` of whoever is viewing it (both OPTIONAL, printed
+        at the top as a viewer verification — not an access gate). Any valid key or session may call it
+        — there is NO per-key entitlement. Because the search call was already billed, the report meters
+        ONLY the **+$0.02 per-PDF** charge (admin-overridable per customer via `pdf_rate_cents`). (Legacy
+        one-shot: omit `searchId` and pass an inline `query`, which runs the search inline and also bills
+        the call.) The PDF shows EVERY matching offender and EVERY field on file (name, aliases, DOB/age
+        match state, address/jurisdiction, offense/risk, photo when available, and the full extensive
+        field set), plus a source-attribution section with a citation on every record — proving provenance.
+        A legal notice (use restrictions; informational only, not an FCRA consumer report) is printed
+        on the document. Responds with `application/pdf` as a file attachment (`Content-Disposition: attachment`);
+        the report id is echoed in the `X-Report-Id` header. Accepts an API key OR a session token.
+
+        '
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportRequest'
+      responses:
+        '200':
+          description: The consolidated verification report (a PDF file attachment).
+          headers:
+            X-Report-Id:
+              description: Unique id of the generated report (also printed on the document).
+              schema:
+                type: string
+                example: rpt_9f2c1a7b3e4d
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+  /v1/batch:
+    post:
+      operationId: batchSearch
+      summary: Batch search (row-in / row-out bulk lookups)
+      description: 'Runs many queries in one call — offenders.io CSV-batch parity (one row = one call
+        in, one result out). Each row goes through the SAME engine as `/v1/search` (served from the current
+        snapshot), with bounded server-side concurrency, and results come back in input order. Send either
+        a JSON array of query objects, a JSON envelope `{ "queries": [...], ...batch-wide options }` (the
+        non-`queries` keys — `jurisdictions`, `freshness`, `match`, `recordTypes`, `locationScoped`, `include`
+        — apply to every row), or a `text/csv` body whose header row names Query fields (`firstName,lastName,state,dob,city,zipcode,address,age,q`).
+        A row that fails is reported with `status: error` in place; it never aborts the batch. Max 1000
+        rows. Accepts an API key OR a session token.
+
+
+        **Billing — per search, NOT per request.** A batch is one HTTP call but contains N searches, and
+        **each search in the batch is billed as one search** (at the graduated per-call rate, plus its
+        own +$0.01 daily-freshness surcharge when that row''s freshness is `daily` — the default). A batch
+        of 100 rows = 100 billable searches. Freshness applies per row: set `freshness: weekly` on a row
+        (or batch-wide) to bill that search with no surcharge.
+
+        '
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - type: array
+                items:
+                  $ref: '#/components/schemas/Query'
+              - type: object
+                properties:
+                  queries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Query'
+                  jurisdictions:
+                    type: array
+                    items:
+                      type: string
+                  freshness:
+                    type: string
+                    enum:
+                    - daily
+                    - weekly
+                    default: daily
+                    description: Batch-wide default; a per-row `freshness` overrides it for that row.
+                  match:
+                    type: string
+                    enum:
+                    - strict
+                    - balanced
+                    - broad
+                  recordTypes:
+                    type: array
+                    items:
+                      type: string
+                  locationScoped:
+                    type: boolean
+                  include:
+                    type: array
+                    items:
+                      type: string
+                required:
+                - queries
+          text/csv:
+            schema:
+              type: string
+              description: Header row of Query field names, then one query per line.
+              example: 'firstName,lastName,state
+
+                John,Smith,FL
+
+                Jane,Doe,TX
+
+                '
+      responses:
+        '200':
+          description: Per-row results, in input order.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Number of rows processed.
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        index:
+                          type: integer
+                          description: 0-based input row index.
+                        status:
+                          type: string
+                          description: Row outcome (complete/partial/error).
+                        counts:
+                          type: object
+                          properties:
+                            records:
+                              type: integer
+                            sourcesQueried:
+                              type: integer
+                            sourcesIncomplete:
+                              type: integer
+                              description: Registries in THIS ROW that could not be searched to the end.
+                                Check it per row — one row can be short while the rest are whole. See
+                                API-CONTRACT.md §5.0.
+                        warnings:
+                          type: array
+                          items:
+                            type: string
+                          description: Per-row warnings, same shape as the envelope's. `[]` when nothing
+                            shortened this row. A batch row carries no `sourceStatus`, so this is the
+                            only prose signal it has.
+                        records:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/Record'
+                        error:
+                          type: string
+                          description: Present only when status=error.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '413':
+          description: Batch exceeded the maximum row count (1000).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+  /v1/proof-docs/{token}:
+    get:
+      operationId: getProofDoc
+      summary: Fetch a rendered verification-report document
+      description: 'Serves the rendered proof document referenced by a ProofBundle document `url`. Returns
+        the raw file body with the appropriate content type (`application/pdf` or `text/html`), not JSON.
+
+        '
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: token
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Opaque document token from a ProofBundle document `url`.
+      responses:
+        '200':
+          description: The rendered document.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+            text/html:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/records/{recordId}:
+    get:
+      operationId: getRecord
+      summary: Fetch a single normalized record by recordId or uuid
+      description: 'Resolves a record by EITHER identifier a search published for it: our `recordId` (`rec_…`)
+        or the registry''s own `uuid`. DATABASE-BACKED since 2026-08-04 — it previously read only an in-memory
+        index local to one API container, keyed on `recordId` alone, so a `uuid` never resolved and a
+        `recordId` resolved only when the follow-up request happened to reach the same container as the
+        search.
+
+
+        A `404` means THIS IDENTIFIER IS NOT CURRENT — never that the person is unregistered. Registries
+        re-issue their ids (KY, MO, OR, AZ, IA and WV each re-issued their entire registry within eight
+        days to 2026-08-04; CA re-issued ~104,000). Re-search by name and state, then store the new `uuid`.
+
+
+        An identifier carrying a byte no id of ours can hold — a NUL or any other control character —
+        is also a `404`. Until 2026-08-05 `/v1/records/%00` and `/v1/records/a%00b` returned **500**,
+        the only 5xx reachable from ~60 hostile inputs, because the NUL reached a database parameter.
+        A 5xx is a claim that WE failed, and for a malformed id that claim is false. `%01` and `%25` always
+        answered 404; now every impossible id answers the same way.
+
+
+        A `409` means the id is AMBIGUOUS. A `uuid` is unique only together with its jurisdiction — `20059`
+        identifies a Florida, a Pennsylvania and a Wisconsin registrant, and 55,893 ids are shared across
+        jurisdictions (147,624 records). This endpoint returns one record and will not guess which you
+        meant; use `GET /v1/compat/sexoffender?uuid=…&state=XX`, which returns every match with its jurisdiction,
+        or use `recordId`, which is namespaced per jurisdiction and does not collide.
+
+        '
+      parameters:
+      - name: recordId
+        in: path
+        required: true
+        description: The `recordId` (`rec_…`) or the registry `uuid` from a search result.
+        schema:
+          type: string
+        example: rec_ab12cd34ef56gh78ij90
+      responses:
+        '200':
+          description: The record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: 'The identifier matches records in more than one jurisdiction. `detail` names them.
+            Disambiguate with the compat endpoint''s `state`, or use `recordId`.
+
+            '
+  /v1/sources:
+    get:
+      operationId: listSources
+      summary: Coverage catalog + live health of every jurisdiction
+      description: 'The catalog of every jurisdiction we cover, with lightweight health. No API key required
+        — this doubles as public coverage transparency.
+
+        '
+      security: []
+      responses:
+        '200':
+          description: Coverage catalog
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SourceInfo'
+  /v1/support:
+    post:
+      operationId: submitSupportMessage
+      summary: Send a message to the Offendersearch team
+      description: 'Sends a message to our support team. **No API key required** — this is the endpoint
+        behind the contact form on offendersearch.app, and it is open because the people who need it most
+        are the ones who do not have a key yet.
+
+
+        A `200` means the message is **recorded**: it is stored against the `submissionId` in the response
+        and can be looked up by that id if you ever need to refer to it. It does not report that an email
+        has arrived anywhere, because that is a separate step we do not make you wait for.
+
+
+        Replies come from the address in `supportEmail`, normally within one business day. You can also
+        write to that address directly; both routes reach the same inbox.
+
+
+        The endpoint accepts `application/json` or `application/x-www-form-urlencoded`, so an ordinary
+        HTML form can post to it without any JavaScript.
+
+        '
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupportRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SupportRequest'
+      responses:
+        '200':
+          description: The message was recorded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupportResult'
+        '413':
+          description: 'The body is larger than this endpoint accepts (64 KB). Send a summary and reply
+            to our answer with anything bulky.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: 'A required field is missing or the email address is not a valid address. Nothing
+            was stored; correct it and send again.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: 'Too many messages from one address in a short period. Nothing was stored, so nothing
+            is duplicated when you retry. `Retry-After` gives the number of seconds to wait, and the same
+            value is in `detail.retryAfterSeconds`.
+
+            '
+          headers:
+            Retry-After:
+              description: Seconds to wait before sending the message again.
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitError'
+        '503':
+          description: 'The message could not be recorded, so **do not treat it as sent**. Use the address
+            in the error text instead; it is answered by the same team.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/compat/sexoffender:
+    post:
+      operationId: compatSexoffenderPost
+      summary: offenders.io drop-in compatibility (POST)
+      description: 'Accepts offenders.io''s exact parameters and returns their exact envelope ({offenders,
+        page, totalPages[, error]}). Existing offenders.io integrations switch by changing only the base
+        URL and key. Accepts the key via `X-API-Key`, `Authorization: Bearer`, or `?key=`. Echoes/mints
+        the offenders.io correlation headers (`X-Request-Id`, `X-Offenders-Request-Id`, `X-Offendersearch-Request-Id`).
+        Errors use the offenders.io `{code, message}` shape.
+
+
+        **Combination-validation (400 with `{code:400, message}`):** `q` cannot be combined with `firstName`/`lastName`,
+        nor with `lat`/`lng`; `address` cannot be combined with `q`, nor with `lat`/`lng`.
+
+
+        **GIS search (`lat`+`lng` supplied):** results are paged **50 per page** (regular searches page
+        20), and the query defaults to the **last 90 days** of source updates (`updatedAtStart = now −
+        90d`) unless the caller supplies an explicit `updatedAtStart`. A missing `radius` defaults to
+        1 mile (capped at 100).
+
+        '
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      - QueryKeyAuth: []
+      parameters:
+      - name: X-Request-Id
+        in: header
+        required: false
+        schema:
+          type: string
+          pattern: ^[A-Za-z0-9._:-]{1,64}$
+        description: Optional client correlation id; echoed back when valid.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OffendersIoRequest'
+      responses:
+        '200':
+          description: offenders.io-shaped response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OffendersIoResponse'
+        '400':
+          description: 'Invalid parameter combination: `q` with firstName/lastName or lat/lng, or `address`
+            with q or lat/lng. Body is `{code:400, message}`.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompatError'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompatError'
+        '422':
+          description: faceId supplied (facial search not supported).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompatError'
+    get:
+      operationId: compatSexoffenderGet
+      summary: offenders.io drop-in compatibility (GET)
+      description: 'Identical semantics to the POST form; parameters are supplied as query string values
+        (offenders.io demo/GET mode). Accepts the key via `X-API-Key`, `Authorization: Bearer`, or `?key=`.
+
+        '
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      - QueryKeyAuth: []
+      parameters:
+      - name: firstName
+        in: query
+        schema:
+          type: string
+      - name: lastName
+        in: query
+        schema:
+          type: string
+      - name: dob
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: age
+        in: query
+        schema:
+          type: integer
+      - name: city
+        in: query
+        schema:
+          type: string
+      - name: state
+        in: query
+        schema:
+          type: string
+      - name: zipcode
+        in: query
+        schema:
+          type: string
+      - name: address
+        in: query
+        schema:
+          type: string
+      - name: lat
+        in: query
+        schema:
+          type: number
+      - name: lng
+        in: query
+        schema:
+          type: number
+      - name: radius
+        in: query
+        schema:
+          type: number
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: fuzzy
+        in: query
+        schema:
+          type: boolean
+      - name: mode
+        in: query
+        schema:
+          type: string
+          enum:
+          - extensive
+      - name: prefixMatch
+        in: query
+        schema:
+          type: string
+          enum:
+          - firstName
+          - lastName
+          - both
+      - name: faceId
+        in: query
+        schema:
+          type: string
+      - name: createdAtStart
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: createdAtEnd
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: updatedAtStart
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: updatedAtEnd
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: uuid
+        in: query
+        schema:
+          type: string
+      - name: personUuid
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+      - name: key
+        in: query
+        schema:
+          type: string
+        description: API key (offenders.io demo mode); alternative to the header.
+      - name: X-Request-Id
+        in: header
+        required: false
+        schema:
+          type: string
+          pattern: ^[A-Za-z0-9._:-]{1,64}$
+      responses:
+        '200':
+          description: offenders.io-shaped response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OffendersIoResponse'
+        '400':
+          description: Invalid parameter combination.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompatError'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompatError'
+        '422':
+          description: faceId supplied (facial search not supported).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompatError'
+  /v1/auth/signup:
+    post:
+      operationId: signup
+      summary: Create an account (returns a session token)
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignupBody'
+      responses:
+        '200':
+          description: Account created; session token + account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResult'
+        '400':
+          description: Validation error (missing org, bad email, weak password, terms not accepted).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: An account with that email already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/auth/login:
+    post:
+      operationId: login
+      summary: Verify credentials (returns a session token)
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginBody'
+      responses:
+        '200':
+          description: Session token + account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResult'
+        '401':
+          description: Invalid email or password.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/account:
+    get:
+      operationId: getAccount
+      summary: Current account (session)
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: The account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/keys:
+    get:
+      operationId: listKeys
+      summary: List API keys for the account (session)
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: The account's API keys (masked; secrets are never re-shown).
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiKey'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createKey
+      summary: Create an API key (secret shown once)
+      security:
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKeyBody'
+      responses:
+        '201':
+          description: Key created. `secret` is returned ONCE here; only its hash is stored.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyWithSecret'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/keys/{keyId}/rotate:
+    post:
+      operationId: rotateKey
+      summary: Rotate an API key (new secret shown once)
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: keyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Rotated key; new `secret` returned once.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyWithSecret'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Key not found or revoked.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/keys/{keyId}:
+    delete:
+      operationId: deleteKey
+      summary: Revoke an API key
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: keyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Key revoked.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - revoked
+                  id:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Key not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/usage:
+    get:
+      operationId: getUsage
+      summary: Usage + spend for the current billing period (session)
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: Usage summary derived from the searches table.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/team:
+    get:
+      operationId: getTeam
+      summary: Team members (single-owner org today)
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: Team members (one owner row).
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeamMember'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: inviteMember
+      summary: Invite a team member (not available — single-owner)
+      security:
+      - BearerAuth: []
+      responses:
+        '400':
+          description: Team invitations aren't available yet (accounts are single-owner).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/team/{memberId}:
+    delete:
+      operationId: removeMember
+      summary: Remove a team member (not available — single-owner)
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: memberId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '400':
+          description: Team member management isn't available yet (accounts are single-owner).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/billing:
+    get:
+      operationId: getBilling
+      summary: Billing state (session)
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: Billing state derived from the account + usage.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Billing'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Customer API key. Primary auth for search/records/compat/proof.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Signed session token (HMAC-SHA256). Auth for account/dashboard endpoints; also accepted
+        by POST /v1/search and the compat endpoint.
+
+        '
+    QueryKeyAuth:
+      type: apiKey
+      in: query
+      name: key
+      description: API key passed as `?key=` — offenders.io demo mode (compat endpoint only).
+    AdminAuth:
+      type: apiKey
+      in: header
+      name: X-Admin-Key
+      description: Internal admin credential — separate from customer API keys.
+  responses:
+    Unauthorized:
+      description: Missing or invalid credential.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unprocessable:
+      description: 'Unprocessable request — e.g. `faceId` supplied (facial search is not supported; we
+        never fake a face match).
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      description: Standard FastAPI error body.
+      properties:
+        detail:
+          type: string
+          description: Human-readable error message.
+          example: Missing or invalid API key. Send it in the X-API-Key header.
+    CompatError:
+      type: object
+      description: 'offenders.io-shaped error body (returned by the /v1/compat/sexoffender endpoint instead
+        of the standard `{detail}` shape).
+
+        '
+      properties:
+        code:
+          type: integer
+          example: 401
+        message:
+          type: string
+          example: Missing or invalid API key.
+    RateLimitError:
+      type: object
+      description: 'A refusal that will succeed if you wait. `detail.retryAfterSeconds` always equals
+        the `Retry-After` header — read either, but read one: retrying immediately will simply be refused
+        again.
+
+        '
+      properties:
+        detail:
+          type: object
+          properties:
+            code:
+              type: string
+              enum:
+              - rate_limited
+              - overloaded
+              description: '`rate_limited` is a per-caller quota and clears by itself. `overloaded` means
+                the service is at capacity.
+
+                '
+            message:
+              type: string
+            retryAfterSeconds:
+              type: integer
+              description: Seconds to wait before retrying. Same as `Retry-After`.
+    SupportRequest:
+      type: object
+      required:
+      - name
+      - email
+      - message
+      properties:
+        name:
+          type: string
+          maxLength: 120
+          description: Who we are replying to.
+          example: Dana Okafor
+        email:
+          type: string
+          maxLength: 254
+          description: 'The address we reply to. It is checked for a valid shape only — we do not send
+            anything to it to confirm it, and it is never added to a list.
+
+            '
+          example: dana@example.org
+        message:
+          type: string
+          minLength: 10
+          maxLength: 8000
+          description: What you would like to ask or tell us.
+        subject:
+          type: string
+          maxLength: 200
+          description: Optional one-line summary.
+        topic:
+          type: string
+          enum:
+          - sales
+          - support
+          - security
+          - baa
+          - other
+          default: support
+          description: 'Which team should read it first. Anything unrecognised is treated as `support`,
+            so a wrong value routes the message rather than refusing it.
+
+            '
+        website:
+          type: string
+          description: 'Leave empty. Present so automated submissions can be told apart from people; a
+            message that fills it in is still recorded.
+
+            '
+        renderedAt:
+          type: integer
+          format: int64
+          description: 'Optional. Unix time in milliseconds when the form was displayed. Omit it if you
+            are calling the endpoint directly — its absence is not held against a submission.
+
+            '
+    SupportResult:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - received
+          description: '`received` means the message is recorded and retrievable by `submissionId`.
+
+            '
+        submissionId:
+          type: string
+          description: 'The reference for this message. Quote it if you follow up about the same thread.
+
+            '
+          example: sup_9f2c1a4b6d8e0f31
+        supportEmail:
+          type: string
+          description: 'The address a reply will come from, and the address you can write to directly
+            instead of using this endpoint.
+
+            '
+          example: support@offendersearch.app
+    Query:
+      type: object
+      additionalProperties: false
+      description: 'The person/location query. All fields are optional; supply what you have. DOB/age
+        drive the match-state (see Record.dobVerification). offenders.io parity filters (q/address/prefixMatch/fuzzy/createdAt*/updatedAt*/page/
+        perPage) are applied uniformly across ALL jurisdictions.
+
+        '
+      properties:
+        firstName:
+          type: string
+          description: Given name.
+          example: John
+        lastName:
+          type: string
+          description: Surname (primary match key).
+          example: Smith
+        dob:
+          type: string
+          format: date
+          description: 'Date of birth, `YYYY-MM-DD`. Optional, and it NARROWS — a record whose published
+            birth evidence conflicts with this date is excluded.
+
+
+            ★ **It does not require us to hold a date of birth for the person.** The date you send is
+            matched against every kind of birth evidence a registry publishes: a full date, a birth year
+            alone, or a published age alone. Records with none of those are still returned on the name,
+            flagged unverified. `matchState` on each record tells you which of those happened and how
+            strong it was — read it there; the four outcomes are `dob_match`, `year_match`, `age_match`
+            and `no_dob_age_year`.
+
+            '
+          example: '1985-06-14'
+        age:
+          type: integer
+          description: Age filter. Used when DOB is unavailable; matched ±1 year for birthday drift.
+          example: 39
+        city:
+          type: string
+          description: Residence city filter.
+          example: Chicago
+        state:
+          type: string
+          description: '2-letter USPS state/territory code (`FL`), case-insensitive; the full state or
+            territory name (`Florida`) is also accepted and means exactly the same thing. A value we cannot
+            resolve to a jurisdiction is rejected with 422 — it is never silently treated as `matches
+            nothing`.
+
+
+            ★ IT IS A UNION, AND YOU SHOULD KNOW WHICH HALF MATCHED. `state` keeps a record when EITHER
+            one of its `addressStates` is that state (they live there) OR its `registrationState` is (that
+            state''s registry holds them). It does NOT change which registries run — all 58 are searched
+            and `state` narrows the answer. (Until 2026-08-05 it silently scoped the fan-out to that state''s
+            own registries, which hid anyone registered elsewhere while residing there; use `locationScoped:
+            true` if you explicitly want the cheaper, narrower search.) Those two halves are genuinely
+            different populations: 105,028 records are registered in a state where they have no address
+            on file, and 70,973 records carry no address state at all and are reachable ONLY by the registration
+            half. Every record comes back carrying both `registrationState` and `addressStates`, so you
+            can tell which half answered without a second call — narrow to residents with `addressStates`,
+            or to a registry''s roster with `jurisdictions: ["FL"]`, which is the registration-only filter.
+
+            '
+          example: IL
+        zipcode:
+          type: string
+          description: Residence ZIP (first 5 used).
+          example: '60614'
+        address:
+          type: string
+          description: 'Parity: fuzzy street-address match (every token must appear in some record address).'
+        lat:
+          type: number
+          description: Latitude for GIS radius search.
+          example: 41.9
+        lng:
+          type: number
+          description: Longitude for GIS radius search.
+          example: -87.65
+        radiusMiles:
+          type: number
+          maximum: 100
+          description: 'Parity: GIS radius in miles. Defaults to 1 when lat/lng given; capped at 100.'
+        q:
+          type: string
+          description: 'Parity: free-text across name/alias/address/city/state/zip (all tokens must appear).'
+        fuzzy:
+          type: boolean
+          description: 'Parity: offenders.io fuzzy toggle. true -> balanced match; false -> strict. Overrides
+            `SearchRequest.match`.'
+        prefixMatch:
+          description: 'PARTIAL-NAME SEARCH. Treat the name(s) you supplied as the START of a name: `thom`
+            returns Thomas, Thompson and Thomason. Accepts "firstName", "lastName", "both" (prefix-match
+            BOTH fields at once), or a list. Matched against every recorded ALIAS as well as the registered
+            legal name; `matchedName` on each record says which one matched. MINIMUM 3 CHARACTERS — a
+            shorter prefix returns 422. Prefix matching is a strict superset of exact matching, and an
+            exact match always ranks above a prefix match. `nameMatch` overrides this.
+
+            '
+          oneOf:
+          - type: string
+            enum:
+            - firstName
+            - lastName
+            - both
+          - type: array
+            items:
+              type: string
+              enum:
+              - firstName
+              - lastName
+        nameMatch:
+          type: object
+          description: 'EXPLICIT PER-FIELD CONTROL over how names are matched — the fine-grained form
+            of `prefixMatch`/`match`. Anything omitted from a field''s list is OFF for that field. Exact
+            matching is always on and cannot be disabled. Overrides both `prefixMatch` and `SearchRequest.match`.
+
+            '
+          properties:
+            firstName:
+              type: array
+              description: Strategies for the first name. prefix requires >=3 characters; middle requires
+                >=2.
+              items:
+                type: string
+                enum:
+                - exact
+                - prefix
+                - nickname
+                - fuzzy
+                - middle
+            lastName:
+              type: array
+              description: Strategies for the last name. prefix requires >=3 characters.
+              items:
+                type: string
+                enum:
+                - exact
+                - prefix
+                - fuzzy
+            aliases:
+              type: boolean
+              default: true
+              description: Also apply these strategies to every recorded alias.
+        faceId:
+          type: string
+          description: Parity input ONLY — facial search is NOT supported; supplying it returns 422 (never
+            a faked face match).
+        createdAtStart:
+          type: string
+          format: date-time
+          description: 'Parity: lower bound on source.scraped_at (when we first recorded the record).'
+        createdAtEnd:
+          type: string
+          format: date-time
+          description: 'Parity: upper bound on source.scraped_at.'
+        updatedAtStart:
+          type: string
+          format: date-time
+          description: 'Parity: lower bound on source.source_updated_at (when the source last changed
+            the record).'
+        updatedAtEnd:
+          type: string
+          format: date-time
+          description: 'Parity: upper bound on source.source_updated_at.'
+        page:
+          type: integer
+          minimum: 1
+          description: 'Parity: 1-based page number. Omit it and the whole match set is returned in a
+            single page — up to the response cap. ★ ABOVE THE CAP, OMITTING IT IS NOT THE SAME AS ASKING
+            FOR EVERYTHING: an unpaginated answer larger than `cappedLimit` (4,000) is trimmed to that
+            many records and says so with `capped: true`, and `cappedOmittedSources` names the registries
+            that contributed nothing to it. A PAGINATED request is never trimmed — it walks the entire
+            match set and `capped` stays `false`. So `counts.records` vs `counts.recordsReturned` is the
+            pair to branch on: if they differ, send `perPage` and page through. Most searches never reach
+            this — a `name + DOB` query returns tens of records — but a bare common surname does. A page
+            past `totalPages` returns an empty `records` array (changed 2026-08-05; it used to re-serve
+            the last page).
+
+            '
+        perPage:
+          type: integer
+          minimum: 1
+          description: 'Parity: page size. Defaults to 20 when paginating. Sending it turns pagination
+            ON, which is what makes an over-cap match set fully reachable. Clamped to `cappedLimit`, so
+            a single page can never rebuild the oversized response the cap exists to prevent.
+
+            '
+        ageTolerance:
+          type: integer
+          minimum: 0
+          maximum: 10
+          default: 1
+          description: 'How many years of slack the age comparison allows, when the query carries a `dob`
+            and the record publishes only an `age`. Eleven registries publish an age and no date at all,
+            so a `name + DOB` search has to compare a searched DATE against a published AGE; how much
+            slack that allows is a risk decision, and it is yours. The default of 1 is not arbitrary —
+            a published age with an unpublished birthday is consistent with two birth years, and the registry
+            may have computed it a refresh before we read it, so the age is anchored to the date we read
+            that page rather than to today. Raise it for a high-recall screening pass: more same-name
+            strangers, fewer missed true matches.
+
+            '
+        onAgeMismatch:
+          type: string
+          enum:
+          - drop
+          - flag
+          default: drop
+          description: 'What to do with a record that matches on NAME but whose published age contradicts
+            the searched `dob`. `drop` (default) omits it. `flag` RETURNS it, labelled `matchState: "age_mismatch"`,
+            and lets you judge — "silently omitted" and "checked, and the age contradicts your date" are
+            different facts. A flagged record is always `unverified` and can never be reported as DOB-confirmed.
+
+            '
+    SearchRequest:
+      type: object
+      required:
+      - query
+      additionalProperties: false
+      properties:
+        query:
+          $ref: '#/components/schemas/Query'
+        jurisdictions:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: 'Jurisdiction codes — a registry id, or any two-letter code that registry COVERS,
+            in any case. null/omit = the full dataset. ★ AN UNRECOGNISED VALUE IS A 422 (changed 2026-08-05),
+            never an empty result. `["XX"]` and `["TEXAS"]` previously returned `status: "complete", records:
+            0, sourcesQueried: 0, warnings: []` — indistinguishable from "this person is not a registered
+            offender" — for one wrong token, while `["tx"]` returned 1,219. GET /v1/sources lists every
+            id.
+
+            '
+          example:
+          - IL
+          - IN
+        locationScoped:
+          type: boolean
+          default: false
+          description: 'OPT-IN ONLY. If true AND `query.state` is set, run only the registries that COVER
+            that state instead of all 58. `query.state` alone does NOT turn this on — it is a residence
+            FILTER, not a registry selector, and inferring the scope from it (the behaviour until 2026-08-05)
+            hid every registrant whose registry is not the state they live in: 7.0% of records, and 36%
+            of a matched out-of-state-residence sample returned ZERO. When this narrows the fan-out the
+            response reports `counts.sourcesSkippedByScope` and a "NARROWED SEARCH" warning, because a
+            registry that was never asked contributes a 0 meaning UNKNOWN, not NO MATCH.
+
+            '
+        recordTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - sex_offender
+          default:
+          - sex_offender
+          description: 'Record types to search. Only sex_offender today; criminal records land later additively.
+            ★ ANY OTHER VALUE IS A 422 (changed 2026-08-05) — note the underscore: `["sexoffender"]` used
+            to return a clean, complete zero.
+
+            '
+        freshness:
+          type: string
+          enum:
+          - daily
+          - weekly
+          - standard
+          default: daily
+          description: 'Per-request data-freshness tier — two billable values, DEFAULT `daily` when omitted.
+            ★ ANY OTHER VALUE IS A 422 (changed 2026-08-05): `"hourly"` previously returned 200 AND was
+            echoed back in the response as if it were an honoured tier, on a call billed as `daily`. `daily`
+            is the freshest data we publish: every registry is swept on a daily cycle and a `daily` answer
+            is built from the newest snapshot of each, in practice almost real time. It bills the +$0.01/call
+            daily-freshness surcharge on top of the base per-call rate (admin-overridable per customer,
+            `daily_surcharge_cents`). `weekly` is also fresh — identity data is essentially identical
+            and only the most recent movements may lag — and carries NO surcharge; it is the right tier
+            for bulk and periodic re-screens. THIS IS NOT A FILTER: no registry is withheld from a result
+            for being older than the tier, and `status` never becomes `partial` because of a snapshot
+            age. Read `record.source.scrapedAt` for a record''s actual currency and `GET /v1/sources`
+            for a registry''s. (`standard` is accepted as a legacy alias and bills as `daily`.)
+
+            '
+        onStale:
+          type: string
+          enum:
+          - include
+          - omit
+          default: include
+          deprecated: true
+          description: 'DEPRECATED 2026-08-04 — leave it unset. The default (`include`) is the behaviour
+            you want. Still accepted so that request bodies written against the old default keep working.
+            Note before sending it: `omit` is a filter that DROPS WHOLE REGISTRIES from your own search.
+            A registry it drops contributes zero records and is reported honestly as incomplete — `sourceStatus[].incompleteReason:
+            "excluded"`, counted in `counts.sourcesIncomplete`, and named in the `INCOMPLETE SEARCH:`
+            warning — so a `0` from it means UNKNOWN, not NO MATCH. Remove the parameter and those records
+            come back. Does NOT affect billing — the surcharge is keyed to `freshness` only.
+
+            '
+        match:
+          type: string
+          enum:
+          - strict
+          - balanced
+          - broad
+          default: balanced
+          description: "Fuzzy-match tolerance applied uniformly across ALL jurisdictions. ★ AN UNRECOGNISED\
+            \ VALUE IS A 422 (changed 2026-08-05). A typo used to fall through to `balanced`: `\"strick\"\
+            ` returned 16 records where the `strict` the caller asked for returns 11 — a silent WIDENING,\
+            \ and the same fallthrough narrows in the other direction. strict=exact; balanced=nicknames/variants/initials/typos(dist\
+            \ 1) on first name, exact last; broad=also prefix/typo on last name. (query.prefixMatch/query.fuzzy\
+            \ override this — see Query.)\n\n★ THE COMPLETE, ENUMERATED LIST OF WHAT EACH MODE DOES TO\
+            \ A NAME. Nothing outside this table is applied to a name in any mode. Every transformation\
+            \ is reported per record in `matchDetail.strategies`, so you can always see which one produced\
+            \ a given hit — and filter on it.\nGIVEN NAME (`firstName`)\n  exact     — equal, case- and\
+            \ accent-insensitive.               strict, balanced, broad\n  nickname  — a curated given-name\
+            \ equivalence table (123 groups,\n              418 names): Bob/Bobby/Rob/Robert, Tony/Anthony,\n\
+            \              Peggy/Margaret, Bill/Will/William. It is a fixed list,\n              not an\
+            \ algorithm; the equivalents we hold for any\n              record are published on that record\
+            \ as `nicknames`, so\n              you can read the table straight off the wire.\n      \
+            \                                                           balanced, broad\n  initial   —\
+            \ one letter against a full name, either direction:\n              `J` matches `John`, and\
+            \ `J` on file is matched by\n              `John`.                                       \
+            \     balanced, broad\n  prefix    — the stored name STARTS WITH what you sent, minimum\n\
+            \              3 characters: `Thom` -> `Thomas`, `Marcel` ->\n              `Marcellous`.\
+            \ Anchored at the start, never a\n              substring.                               \
+            \          balanced, broad\n  fuzzy     — Damerau-Levenshtein edit distance (a swap of two\n\
+            \              adjacent letters counts as ONE edit, so `Jhon` ->\n              `John`). BUDGET:\
+            \ **1 edit in `balanced`, 2 in\n              `broad`.** Not phonetic — see the `broad` warning\n\
+            \              below for why the second edit is opt-in.            balanced (1), broad (2)\n\
+            \  middle    — the given name you sent is the person's MIDDLE name.\n              81.1% of\
+            \ the records we hold carry one, and many\n              people are known by theirs, so `firstName=Wayne`\n\
+            \              returns the man registered as `Dean Wayne Ellison`.\n              WHOLE TOKEN,\
+            \ EXACTLY, minimum 2 characters: `Wayne`\n              matches the `Wayne` of `Wayne Allen`;\
+            \ it does not\n              match `Waynette`, `Wayn` or the initial `W`. Never\n        \
+            \      prefixed, never fuzzy: some names are overwhelmingly\n              MIDDLE names (`Lee`\
+            \ is 20x commoner in the middle slot\n              than the first), so for exactly the names\
+            \ this matches\n              it draws on a much larger pool — which is where\n          \
+            \    spelling latitude is least affordable.\n              Reported as `firstName: \"middle\"\
+            ` and capped at 0.60.\n                                                                 balanced,\
+            \ broad\n  absent    — the record publishes no given name at all, so your\n              query\
+            \ could not be DISPROVED. Kept and flagged; never\n              a confirmation.         \
+            \                            every mode\n\nSURNAME (`lastName`)\n  exact     — equal, or equal\
+            \ to one whole token of a compound\n              surname (`Smith` matches `Hamilton-Smith`,\
+            \ and never\n              `Goldsmith`).                                       strict, balanced,\
+            \ broad\n  prefix    — starts-with, minimum 3 characters.                  broad only\n  fuzzy\
+            \     — edit distance, budget SCALED BY LENGTH: 0 edits at\n              <=4 characters,\
+            \ 1 at 5-7, 2 at >=8. `Hernandez` ->\n              `Fernandez` matches; `Ross` -> `Rose`\
+            \ does not.     broad only\n  There is no nickname table for surnames, and asking for one\n\
+            \  (`nameMatch.lastName: [\"nickname\"]`) is a 422.\n\nALIASES — searched in `balanced` and\
+            \ `broad`, not in `strict`, and with `exact`/`prefix`/`fuzzy` only. Aliases arrive unstructured\
+            \ and in mixed word order, so every token is tested and we cannot tell you which token was\
+            \ the given name — which is why `nickname` and `initial` are not offered on them. An alias-only\
+            \ hit is reported as `alias:<strategy>` and caps `matchConfidence` at 0.55.\n★ WHAT WE DO\
+            \ NOT DO, STATED PLAINLY, BECAUSE IT IS THE QUESTION EVERY EVALUATION ASKS. No phonetic or\
+            \ Soundex matching (`Smyth` -> `Smith` works because it is one edit; `Schmidt` -> `Smith`\
+            \ does not and will not). No transliteration. No middle-name field. No cross-field matching\
+            \ — a `firstName` query is never tested against a surname. No inference of one name from another\
+            \ beyond the fixed nickname table above. If you need a variant we do not cover, send it as\
+            \ a second query; we would rather you saw two honest answers than one widened one.\n\n★ CORRECTION,\
+            \ 2026-08-05 — `balanced` USED TO FUZZ THE GIVEN NAME AT 2 EDITS, WHICH IS NOT WHAT THIS DOCUMENT\
+            \ HAS EVER SAID. Every client-facing surface promised edit distance 1 for `balanced`; the\
+            \ engine ran 2. Measured on 4,000 production records over 12 surnames and 25 given names,\
+            \ the second edit returned 2,504 records where 1 returns 1,274 — and of the 1,230 it added,\
+            \ ZERO were nickname-table equivalents and 98.0% carried an entirely unrelated given name\
+            \ (`juan`->`john`, `carl`->`paul`, `gary`->`mark`, `rick`->`eric`). Two edits on a four-letter\
+            \ name replace half of it. `balanced` now behaves as documented. If you were relying on the\
+            \ wider behaviour, ask for `broad` — it is the same budget, named, and its cost is documented\
+            \ below. Recall was measured before the change on a control cohort: 21 of 21 people from a\
+            \ customer's own audit corpus, and 40 of 40 blind registrants queried by their registered\
+            \ given name, are all still returned.\n\n★ PREFER `balanced` (the default), ESPECIALLY FOR\
+            \ A NATIONAL SEARCH. `balanced` already handles the variants people reach for `broad` to solve\
+            \ — nicknames (Tony/Anthony), initials, first-name prefixes and first-name typos. Measured\
+            \ against 34,894 competitor records, `balanced` matched 98.28% and `broad` recovered only\
+            \ 38 more (0.11%).\n\n★ `broad` FUZZES THE SURNAME, AND THAT COSTS PRECISION. Its surname\
+            \ edit-distance budget scales with length (0 edits at <=4 characters, 1 at 5-7, 2 at >=8),\
+            \ which is why `Hernandez`/`Fernandez` matches but `Ross`/`Rose` does not. Even so, `broad`\
+            \ returns roughly 13.5% surname false positives by design: at 6 letters a single edit cannot\
+            \ separate `Siegel` from `Riegel` any more than `Smith` from `Smyth`. Every such hit is labelled\
+            \ `lastName:fuzzy` in `matchBasis` — filter on it before acting. In this API a false positive\
+            \ (naming an innocent person as a registered offender) is a materially worse error than a\
+            \ miss.\n\n★ `broad` MAY NOT FINISH AT NATIONAL SCOPE. It cannot use the indexed surname range,\
+            \ so it reads far more candidate rows per registry; a 57-registry fan-out can exceed the per-registry\
+            \ deadline. When that happens the response says so (`status: partial`, `counts.sourcesIncomplete\
+            \ > 0`, a `warnings[]` sentence naming each registry) — it is never silently short. Production\
+            \ 2026-08-04, {\"firstName\":\"Tony\",\"lastName\":\"Wilson\"}: balanced returned 182 records\
+            \ `complete`; broad returned 32 with `sourcesIncomplete: 29`. Scope `broad` with `query.state`\
+            \ to use it safely.\n"
+        include:
+          type: array
+          items:
+            type: string
+            enum:
+            - stateData
+            - raw
+            - extensive
+          description: 'Parity: request extensive detail. `["stateData"]` (or `["extensive"]`) adds the
+            `stateData` block. It is the ONLY field behind this option — `offenses[]` and `images[]` come
+            back on every response. A response reports what it left out in top-level `omittedFields`.'
+        proof:
+          allOf:
+          - $ref: '#/components/schemas/ProofRequest'
+          nullable: true
+          description: 'Optional inline request for the per-registry look-alike proof add-on (billing
+            required — 402 otherwise). This is NOT the customer verification report — for that use `POST
+            /v1/report` (consolidated, requires `requesterName`). Omit for no extra charge.
+
+            '
+        deadlineMs:
+          type: integer
+          default: 120000
+          minimum: 1000
+          maximum: 600000
+          description: 'Maximum time to wait, in ms. Default 2 minutes (120000); lower it for a faster,
+            bounded response. ★ BOUNDED TO 1000-600000 SINCE 2026-08-05 — outside that is a 422. `0` and
+            `-1` were previously accepted and silently ignored, and on the cache-served sync path the
+            per-registry probe deadline governs anyway, so a sub-second value could never have meant what
+            it said.
+
+            '
+        onDeadline:
+          type: string
+          enum:
+          - partial
+          - error
+          default: partial
+          description: 'On deadline: partial=return what completed (status=partial); error=return 504.
+            ★ Any other value is a 422 (changed 2026-08-05); it used to fall through to `partial`.
+
+            '
+    ReportRequest:
+      description: 'Generate a verification report for a search that was ALREADY run: pass the `searchId`
+        returned by a prior `POST /v1/search` (or `/v1/searches`) call — up to 7 days afterward. The viewer
+        identity (`viewerName`/`viewerEmail`, or the legacy `requesterName`) is OPTIONAL and is printed
+        at the top of the PDF as a record of who viewed it — it is NOT an access gate. A legacy one-shot
+        mode is still supported: omit `searchId` and pass an inline `query` (+ optional `jurisdictions`/`locationScoped`/`freshness`)
+        to run the search inline. Provide EITHER a `searchId` OR a `query`.
+
+        '
+      type: object
+      properties:
+        searchId:
+          type: string
+          nullable: true
+          description: Id of a prior /v1/search (or /v1/searches) call to report on (within the 7-day
+            window).
+          example: srch_9f2c1a7b3e4d
+        query:
+          $ref: '#/components/schemas/Query'
+        jurisdictions:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: Legacy one-shot mode only (ignored when searchId is given).
+        locationScoped:
+          type: boolean
+          default: false
+        freshness:
+          type: string
+          enum:
+          - daily
+          - weekly
+          default: daily
+        viewerName:
+          type: string
+          nullable: true
+          description: OPTIONAL — name of the person viewing/running the report (printed on the PDF).
+          example: Jane Doe, HR Compliance
+        viewerEmail:
+          type: string
+          nullable: true
+          description: OPTIONAL — email of the viewer (printed on the PDF).
+          example: jane@acme.example
+        requesterName:
+          type: string
+          nullable: true
+          description: Legacy alias for viewerName (optional).
+        purpose:
+          type: string
+          nullable: true
+          description: Optional stated purpose for the lookup (printed on the PDF).
+          example: Volunteer background screening
+        reference:
+          type: string
+          nullable: true
+          description: Optional caller reference / case id (printed on the PDF).
+          example: case-2026-0417
+    AsyncSearchRequest:
+      allOf:
+      - $ref: '#/components/schemas/SearchRequest'
+      - type: object
+        properties:
+          webhookUrl:
+            type: string
+            format: uri
+            nullable: true
+            description: Optional URL to notify when the async search completes.
+    AsyncSearchAccepted:
+      type: object
+      description: The 202 body returned by POST /v1/searches.
+      properties:
+        searchId:
+          type: string
+          example: srch_9f2c1a7b
+        status:
+          type: string
+          enum:
+          - pending
+          - running
+        jurisdictionsQueried:
+          type: integer
+          description: How many jurisdictions this search will query.
+        estimatedCompletionSec:
+          type: integer
+          example: 20
+        resultsUrl:
+          type: string
+          description: Poll this for status + results.
+          example: /v1/searches/srch_9f2c1a7b
+    SearchResponse:
+      type: object
+      description: 'Synchronous result, or the state of an async job. While pending/running, `records`/`sourceStatus`
+        are empty and `counts` is zeroed; on error, `error` is set and other fields may be omitted.
+
+        '
+      properties:
+        searchId:
+          type: string
+          example: srch_9f2c1a7b
+        status:
+          type: string
+          enum:
+          - complete
+          - partial
+          - running
+          - pending
+          - error
+          description: 'complete=every registry was searched to the end; partial=at least one was NOT
+            (deadline or candidate-cap truncation) or a source errored; pending/running=async job in flight;
+            error=async job failed. ★ `partial` is NEVER about how old the data is — a snapshot''s age
+            does not affect `status`. When `status` is `partial`, read `counts.sourcesIncomplete` before
+            treating an empty `records` as an answer (API-CONTRACT.md §5.0).
+
+            '
+        freshness:
+          type: string
+          enum:
+          - daily
+          - weekly
+          - standard
+          description: 'The freshness tier the caller asked for, echoed back — also the tier billed. Normally
+            `daily` or `weekly`. `standard` appears only when the caller sent the legacy value (billed
+            as `daily`). An unrecognised request value is echoed as `daily`. For how current the DATA
+            is, read `record.source.scrapedAt` per record or `GET /v1/sources` per registry.
+
+            '
+        elapsedMs:
+          type: integer
+          description: Server processing time for the search, in ms.
+        counts:
+          type: object
+          description: Roll-up counts.
+          properties:
+            records:
+              type: integer
+              description: 'TOTAL matched records, BEFORE the page slice — not `records.length`. The envelope
+                also carries `page`, `perPage` and `totalPages`, so you do not need to compute the page
+                count yourself.
+
+                '
+            recordsReturned:
+              type: integer
+              description: 'How many records THIS RESPONSE carries. Equal to `counts.records` on virtually
+                every search; when `capped` is true it is the cap and `counts.records` is the true match
+                count, so the two together tell you exactly how much of the answer you are holding. Always
+                present.
+
+                '
+            sourcesQueried:
+              type: integer
+              description: 'Registries queried in this search. A default search — INCLUDING one with `query.state`
+                — queries all 58. Only an explicit `jurisdictions` list or an explicit `locationScoped:
+                true` reduces it.
+
+                '
+            sourcesSkippedByScope:
+              type: integer
+              description: 'Registries NOT queried because the caller sent `locationScoped: true`. Always
+                present; 0 on every default search. Above 0 the answer excludes anyone registered by a
+                registry outside the requested state, however they match the residence filter — those
+                registries contributed nothing because they were not searched, which is not the same as
+                finding no match.
+
+                '
+            sourcesIncomplete:
+              type: integer
+              description: 'Registries that could NOT BE SEARCHED TO THE END — either the registry did
+                not answer within its 15s deadline, or the query matched more than 15,000 candidate rows
+                in that registry and only the first 15,000 were examined (2,000 for the speculative typo
+                arm of `match: "broad"`). This is NOT the same as paging: `page`/`perPage` slice an answer
+                you can walk in full, and never cost you a record. See `incompleteReason`. Anything above
+                0 means `records` is a LOWER BOUND: a matching person may exist in that registry and simply
+                never have been reached. ★ AN EMPTY `records` ARRAY WITH `sourcesIncomplete > 0` IS NOT
+                EVIDENCE THAT A PERSON IS UNREGISTERED. `sourceStatus[].incomplete` identifies which registries,
+                and `warnings[0]` states it in prose. See API-CONTRACT.md §5.0.
+
+                '
+            sourcesComplete:
+              type: integer
+              description: '★ HOW MANY REGISTRIES ACTUALLY ANSWERED THIS REQUEST — the positive count,
+                and the one to build a retry policy on. Always present. `status: "complete"` means exactly
+                `sourcesComplete == sourcesQueried`; both come from the same internal test, so the word
+                and the number can never disagree. READ IT AS A RATIO. `status: "partial"` is one word
+                covering everything from "one registry was slow" to "almost none of them answered" — on
+                2026-08-05 the identical nationwide body returned 207 records with 57 of 58 registries
+                answering, and 9 records with 7 of 58 answering, and BOTH said `partial`. `sourcesComplete/sourcesQueried`
+                is what tells those apart: hold-and-retry on a low ratio, accept a high one. DO NOT compute
+                this as `sourcesQueried - sourcesIncomplete`. That subtraction over-counts: a registry
+                that errored, or that is closed to commercial use (`status: "restricted"`), or that does
+                not cover your query (`"no_coverage"`) contributed nothing and sets no `incomplete` flag,
+                so the subtraction credits it as having answered. This field does not. It is a fact about
+                THIS REQUEST''S fan-out and says nothing about when any registry was last collected.
+
+                '
+        warnings:
+          type: array
+          items:
+            type: string
+          description: 'Plain-language notices about anything that SHORTENED this answer — one sentence
+            per condition, naming the registries. ALWAYS present; `[]` means nothing did, so `warnings
+            == []` is a valid completeness check and the cheapest one available. The loudest entry, always
+            first when present, begins "INCOMPLETE SEARCH:" and means one or more registries could not
+            be searched to the end. Freshness never produces a warning.
+
+            '
+        page:
+          type: integer
+          description: 'The page you asked for, echoed back. `1` when the caller did not paginate. ★ CHANGED
+            2026-08-05: a `query.page` past `totalPages` now returns an EMPTY `records` array instead
+            of being CLAMPED to the last page. The clamp re-served the last page under every page number
+            you sent (pages 5, 6 and 50 of a 4-page result all carried page 4''s records), so the canonical
+            `while records: page += 1` client NEVER TERMINATED — and /v1/search meters one billable call
+            per request, so every spin was charged. `counts.records` and `totalPages` are unchanged, and
+            walking 1..totalPages returns exactly the same records it always did.
+
+            '
+        perPage:
+          type: integer
+          description: 'Page size actually applied. NOTE: when the caller did NOT paginate this equals
+            the TOTAL record count (the whole set was returned in one page), not the 20 default.
+
+            '
+        totalPages:
+          type: integer
+          description: Total pages at this `perPage`. `1` when the caller did not paginate.
+        sourceStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceStatus'
+          description: Per-source outcome for this search.
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/Record'
+        proof:
+          allOf:
+          - $ref: '#/components/schemas/ProofBundle'
+          description: Proof bundle when `proof` was requested; otherwise {status:none}.
+        error:
+          type: string
+          nullable: true
+          description: Set only when an async job failed (status=error).
+        capped:
+          type: boolean
+          description: 'TRUE when the search matched more records than one response may carry and the
+            list was cut to `cappedLimit`. Always present, `false` on virtually every search. **Branch
+            on this field, not on prose and not by comparing counts.** When it is true, `counts.records`
+            is still the true number of people who matched — you are holding the first `cappedLimit` of
+            them. A capped response is not an error and not a `partial`: every record in it is a real
+            match, and the registries were all searched to the end. To see the rest, narrow the search
+            (see `cappedReason`).
+
+            '
+        cappedReason:
+          type: string
+          nullable: true
+          enum:
+          - responseLimit
+          description: 'Why the response was capped; `null` when `capped` is false. `responseLimit` is
+            the fixed ceiling on how many records one response may carry. It exists so that a whole-registry
+            sweep cannot be issued as a single call; it is not a limit on how much of the corpus you may
+            reach, only on how much of it arrives at once.
+
+            '
+        cappedLimit:
+          type: integer
+          nullable: true
+          description: 'The ceiling that was applied (currently 4000), or `null` when `capped` is false.
+            Read it from the response rather than hard-coding it.
+
+            '
+        cappedOmittedSources:
+          type: array
+          items:
+            type: string
+          description: 'The registries whose records are ENTIRELY absent from this response because of
+            the cap — sorted, and `[]` on every uncapped search (always present). `capped` / `cappedLimit`
+            tell you HOW MANY records did not fit; this tells you WHOSE. Records are ordered by match
+            confidence rather than by registry, so a registry''s whole contribution can fall below the
+            line together. ★ NO PAGE OF THIS RESPONSE REACHES A REGISTRY NAMED HERE: `totalPages` counts
+            only the `cappedLimit` records carried, so walking every page does not recover them. Their
+            `sourceStatus[].matched` counts are still exact. The recovery is to NARROW the search until
+            the answer fits — add `state`, `city`, `zipCode`, `firstName` or `dob`/`age`, or name registries
+            directly with `jurisdictions`. Example: `{"lastName":"Smith"}` matches 11,338 people nationally
+            and this list names the registries holding the rest; the same query with `"state": "GA"` returns
+            894 records with `capped: false`.
+
+            '
+        omittedFields:
+          type: array
+          items:
+            type: string
+          description: 'The record FIELDS this response does not carry because you did not request them
+            — `["stateData"]` on a default search, `[]` when `include` (or compat `mode=extensive`) was
+            sent. Always present. ★ READ IT BEFORE TREATING A NULL NESTED BLOCK AS A FACT ABOUT THE REGISTRANT.
+            `stateData: null` is byte-identical for "you did not ask" and "this registry publishes none";
+            this key is the only thing that separates them. `images` and `offenses` are never omitted,
+            so `[]` there is always a fact about the registrant.
+
+            '
+    SourceStatus:
+      type: object
+      description: One source's outcome within a search.
+      properties:
+        source:
+          type: string
+          description: Jurisdiction / source code.
+          example: IL
+        status:
+          type: string
+          enum:
+          - ok
+          - error
+          - restricted
+          - no_coverage
+          description: 'ok=searched (records may be []); error=network/parse failure; restricted=legal
+            gate (surfaced, not dropped); no_coverage=registry doesn''t cover this query. ★ `ok` DOES
+            NOT MEAN THE SEARCH FINISHED — a registry that timed out or whose candidate set was truncated
+            still reports `ok`, because `status` describes whether the registry RESPONDED. Read `incomplete`.
+
+            '
+        matched:
+          type: integer
+          description: Records this source contributed, before cross-source merge. When `incomplete` is
+            true this is a LOWER BOUND.
+        fromCache:
+          type: boolean
+          description: True when served from the current snapshot.
+        note:
+          type: string
+          nullable: true
+          description: 'Free-text detail, reworded without notice. NEVER branch on it. It no longer carries
+            any statement about the age of our data: a filter on the way out replaces such wording, so
+            `note` describes only what happened to the search. Use `incomplete` / `incompleteReason` for
+            search completeness, and `record.source.scrapedAt` for a record''s own provenance.
+
+            '
+        incomplete:
+          type: boolean
+          description: 'True when this registry WAS NOT SEARCHED TO THE END — its `matched` count is a
+            LOWER BOUND and a matching person may exist here that you were not shown. ★ INDEPENDENT OF
+            `status`: an incomplete source still reports `status: ok`, because `status` describes whether
+            the registry RESPONDED, not whether the search FINISHED. Read this field, not `status`, to
+            decide whether an empty result means "nobody matched". See API-CONTRACT.md §5.0.
+
+            '
+        incompleteReason:
+          type: string
+          nullable: true
+          enum:
+          - deadline
+          - truncated
+          - excluded
+          - not_searched
+          - unavailable
+          - error
+          description: '★ WHY THIS REGISTRY DID NOT FINISH — a CLOSED enum, and the field to branch on.
+            `incompleteReason` is non-null if and only if `incomplete` is true; the two are always set
+            together, so `incomplete` is your boolean gate and this is the reason you act on. Do NOT parse
+            `note` for any of this: `note` is free text, it has been reworded before, and one of its sentences
+            said "stale" about a deadline for months.
+
+
+            **The six values, and what to DO about each:**
+
+
+            `deadline` — this registry did not answer within its 15-second deadline and contributed zero
+            (or, if we had a cached answer to fall back on, a short) result. ★ RETRYABLE: retry the same
+            request, or raise `deadlineMs`.
+
+
+            `truncated` — your query matched more candidate rows in this registry''s prefilter than one
+            search may examine, so only the first 15,000 were searched and that window is NOT ranked —
+            a match outside it is not returned. This is NOT a page: there is no "next 15,000" to ask for,
+            which is exactly what distinguishes it from `perPage`. ★ RETRYING IS NOT THE FIX — narrow
+            the query instead, most effectively by adding a surname. Shapes that trip it: a `firstName`
+            with no `lastName`; a `city`/`zipCode`/`dob`/`age` with no name at all; short or common surname
+            tokens searched nationally. Under `match: "broad"` it is also reported when the speculative
+            typo arm — which carries its own, much smaller 2,000-row budget so it can never spend the
+            whole candidate cap — matched more misspelling candidates than that budget allows.
+
+
+            ★ A `dob` OR `age` IS NEVER THE THING THAT GETS CUT. When your query constrains the birth
+            year, the records whose birth year MATCHES are examined first, to the full 15,000; only the
+            leftover budget goes to records whose registry publishes no birth date. Those unknown-birth-date
+            records are still returned when the name matches — a registry that publishes no DOB cannot
+            rule a person out, so they come back flagged `dobVerification: "unverified_no_dob_or_age"`
+            — but they can no longer displace somebody whose birth date is exactly the one you asked about.
+            So if you see `truncated` on a query carrying a DOB, the records that were cut are from the
+            unknown-birth-date group. See API-CONTRACT.md §5.0.
+
+
+            `excluded` — YOUR OWN deprecated `onStale: "omit"` dropped this registry. Remove the parameter
+            and its records come back. Nothing is wrong on our side.
+
+
+            `not_searched` — we had nothing to search for this registry at all. An immediate retry will
+            not help: this is a coverage failure on our side and it already alerts us. Treat the answer
+            as a lower bound and re-run later.
+
+
+            `unavailable` — we could not READ this registry for this request (a transient backend or transport
+            fault). It contributed nothing. ★ RETRYABLE.
+
+
+            `error` — this registry returned an error for this request (network / parse). It contributed
+            nothing. ★ RETRYABLE with backoff; a persistent one is ours and is alerting.
+
+
+            **`null`** when `incomplete` is false — this registry was searched to the end and its `matched`
+            count is exact.
+
+
+            ★ ADDED 2026-08-05: `unavailable` and `error`. Before that date a registry that FAILED was
+            reported `status: "error"` with `incomplete: false` and `incompleteReason: null`, so it was
+            missing from `counts.sourcesIncomplete` and from the `INCOMPLETE SEARCH:` warning, and the
+            only description of what had happened was the wording of `note`. `excluded` and `not_searched`
+            could always be emitted but were **missing from this enum** — if you generated types from
+            an older copy of this spec, regenerate them.
+
+
+            ★ THERE IS NO `stale` MEMBER, AND THERE WILL NOT BE ONE. This field describes THIS REQUEST''S
+            FAN-OUT — did each registry answer, and was it searched to the end. It is not, and will never
+            be, a statement about how old our snapshot of a registry is. Those are different questions:
+            a registry swept ten minutes ago can still be incomplete, and a registry swept yesterday was
+            still searched to the end and its `0` is a real `0`. If you want a registry''s currency, ask
+            for it directly at `GET /v1/sources` -> `health.lastSuccessAt` (no API key required), or read
+            `record.source.scrapedAt` for a single record.
+
+            '
+        cappedOmitted:
+          type: boolean
+          description: 'True when this registry matched people and NONE of its records are in this response,
+            because the response cap (`capped` / `cappedLimit`) cut the list before any of them. Always
+            present, `false` on virtually every search. ★ THIS IS NOT `incomplete`, AND THE DIFFERENCE
+            IS THE ACTION YOU TAKE. `incomplete` means the registry could not be searched to the end,
+            so its `matched` is a lower bound. Here the registry WAS searched to the end and its `matched`
+            is EXACT — what is missing is the records, not the search. So `status` stays `complete` and
+            `counts.sourcesIncomplete` does not count it. ★ AND PAGING CANNOT REACH IT: `totalPages` counts
+            only the records this response carries, so a registry flagged here is on no page of it. Narrow
+            the search instead — add `state`, `city`, `zipCode`, `firstName` or `dob`/`age`, or name registries
+            with `jurisdictions` — and the answer fits under the ceiling with nothing left out. The rolled-up
+            list of every registry flagged here is `cappedOmittedSources` on the response.
+
+            '
+    Name:
+      type: object
+      properties:
+        first:
+          type: string
+        middle:
+          type: string
+        last:
+          type: string
+        suffix:
+          type: string
+        full:
+          type: string
+          description: 'Computed: first middle last suffix, joined.'
+    Address:
+      type: object
+      properties:
+        type:
+          type: string
+          default: residence
+          description: 'Address kind. This is an OPEN vocabulary, not a closed enum — treat it as a string
+            with a common case. Values observed in production, by frequency: `residence` (~85%), `employment`
+            (~8%), `other` (~4%), `incarceration`, `H`, `O`, `school`, `transient`, `RL`. The single-letter
+            values are raw registry codes that are not yet normalized. Match `residence` explicitly and
+            bucket everything else rather than switching exhaustively.
+
+            '
+          example: residence
+        line1:
+          type: string
+        city:
+          type: string
+        county:
+          type: string
+        state:
+          type: string
+        zipcode:
+          type: string
+        lat:
+          type: number
+          nullable: true
+          description: Populated only for GIS/geocoded sources.
+        lng:
+          type: number
+          nullable: true
+    Offense:
+      type: object
+      description: 'Structured offense (richer than offenders.io''s single packed `crime` string).
+
+        '
+      properties:
+        crime:
+          type: string
+        statute:
+          type: string
+        riskLevel:
+          type: string
+          description: 'The registry''s RISK CLASSIFICATION for this registrant, verbatim (`"Tier 3"`,
+            `"Level 2"`, `"MODERATE"`), or `""`. **Not comparable across states** — each is a different
+            statutory scale, and there is no cross-state severity ranking in this API. **Many states run
+            no risk scheme at all and return `""`; that is a fact about the statute, not about the registrant,
+            and it never means low risk.** It is also NOT a registration status: for whether a registrant
+            is confined, absconded, deported or deceased, read `stateData.status`. **Florida** defines
+            a statutory *designation* rather than a tier, so Florida records return `riskLevel: ""` and
+            carry `"Sexual Predator"` / `"Sexual Offender"` / `"Juvenile Sexual Offender"` in `stateData.designation`
+            (and the `flags.predator` boolean).
+
+            '
+        tier:
+          type: string
+          description: 'The registry''s TIER, where it publishes one separately from `riskLevel`, verbatim
+            (`"Tier 3"`, `"II"`), or `""`. Frequently a duplicate of `riskLevel`; same cross-state caveat.
+
+            '
+        convictionDate:
+          type: string
+          description: 'ISO-8601. `YYYY-MM-DD`, or the reduced-precision `YYYY-MM` / `YYYY` when the registry
+            publishes only a month or a year, or `""`. Read `datePrecision.convictionDate` to tell those
+            apart without measuring the string length. ★ BREAKING 2026-08-04 — this used to be the registry''s
+            string passed through verbatim, so one response could carry "2003-03-31", "10/11/1988", "11-29-1987"
+            and "Aug. 10, 1987" in the same key. The original text is still available in `datesAsPublished`.
+
+            '
+        offenseDate:
+          type: string
+          description: 'Date the OFFENCE was committed — a different fact from `convictionDate` and never
+            a substitute for it. Published by TN (whose offences table is headed literally "DATE OF OFFENSE"),
+            PA, IL, MO, KS and NY. ISO-8601, same rules as `convictionDate`. ★ BREAKING 2026-08-04 — format
+            changed; it was ISO on only 45.4% of its populated values before.
+
+            '
+        registrationDate:
+          type: string
+          description: ISO-8601, same rules as `convictionDate`. ★ Format changed 2026-08-04.
+        releaseDate:
+          type: string
+          description: ISO-8601, same rules as `convictionDate`. ★ Format changed 2026-08-04.
+        datePrecision:
+          type: object
+          additionalProperties:
+            type: string
+            enum:
+            - exact
+            - year_month
+            - year
+            - none
+            - unparseable
+          description: 'How much of each date this registry actually published. One entry for every date
+            key on this object — `convictionDate`, `offenseDate`, `registrationDate`, `releaseDate` —
+            always all four, always present. `exact` = a full `YYYY-MM-DD`. `year_month` = the value is
+            `YYYY-MM`; no day was published and none was invented. `year` = the value is `YYYY`. `none`
+            = the registry published nothing, or published a placeholder meaning "no date" (`0001-01-01`,
+            `01/01/9999`). `unparseable` = the registry published something that is not a date; the value
+            is `""` and the original text is in `datesAsPublished`. Same idea as `dobPrecision`.
+
+            '
+        datesAsPublished:
+          type: object
+          additionalProperties:
+            type: string
+          description: 'The registry''s ORIGINAL text for any date key whose published form is not byte-identical
+            to what we now emit — e.g. `{"convictionDate": "10/11/1988"}`. `{}` when every date round-tripped
+            unchanged. Nothing is ever discarded to normalise: values we cannot read as dates (Tennessee''s
+            40 offence-date cells holding a crime description, Wisconsin''s `registrationEnds` of "15
+            Years") appear here rather than being blanked. Use it when you need the registry''s literal
+            rendering, or to audit anything marked `unparseable`. Since 2026-08-05 this text is STORED
+            rather than re-derived on each response, so it survives the normalisation permanently — the
+            source''s own rendering is not something we can lose by changing a parser later.
+
+            '
+        caseNumber:
+          type: string
+        victimAge:
+          type: string
+        victimSex:
+          type: string
+        jurisdiction:
+          type: string
+          description: 'Conviction jurisdiction — the two-letter STATE code, never the county and never
+            a court name. Where a registry publishes a composite (a county and a state in one column,
+            or a category label wrapped around the code) the parts are separated into `convictionCounty`
+            / `convictionCity` / `federal` and this field carries the state alone. It is left as the registry''s
+            own text ONLY where the source value carries a fact with no other field to hold it — e.g.
+            Florida''s `Interstate, GA` (an interstate compact transfer) or Texas''s `Military (YY)`.
+
+            '
+        convictionCounty:
+          type: string
+          description: 'County in which the conviction was entered, as the registry publishes it. A different
+            fact from the registrant''s residence county (`addresses[].county`). Registries head this
+            column very differently and it is captured from each of them: OK `CASE_REFERENCE_COUNTY`,
+            the OffenderWatch cluster "County of Conviction", FL/ND "Jurisdiction & State", IL "Conviction
+            State or IL County", ID "Place of Conviction", MS "Location", NE "Jurisdiction", NC "County
+            - State", KS a "County" column beside a "State" column, MI/WI/IA a dedicated county column.
+            Out-of-state convictions keep their own county and their own `jurisdiction` — a Florida registrant
+            convicted in Cherokee County, Georgia is served as `convictionCounty: "Cherokee"`, `jurisdiction:
+            "GA"`.
+
+            '
+        convictionCity:
+          type: string
+          description: 'City in which the conviction was entered (OK `CONVICTION_CITY`; AK names the venue
+            city in the convicting court''s own name, e.g. "SUPERIOR COURT PALMER").
+
+            '
+        convictionCount:
+          type: string
+          description: 'How many convictions this offence row represents. MA publishes it as "No. of Convictions";
+            the OffenderWatch cluster and MT publish it as "Counts". One offence ROW is not one conviction.
+
+            '
+        federal:
+          type: boolean
+          nullable: true
+          description: 'True when the registry marks the conviction as FEDERAL rather than state (OK''s
+            per-offence "Fed?" Y/N column). `null` = not published.
+
+            '
+    SourceRef:
+      type: object
+      description: Provenance stamp — mandatory on every record's primary source.
+      properties:
+        jurisdiction:
+          type: string
+          description: Jurisdiction code, e.g. IL.
+          example: IL
+        registryName:
+          type: string
+        recordUrl:
+          type: string
+          format: uri
+          description: Link to the underlying record.
+        scrapedAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: createdAt basis — when we first recorded it.
+        lastCheckedAt:
+          type: string
+          format: date-time
+          nullable: true
+        sourceUpdatedAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: updatedAt basis — when the source last changed the record.
+    StateData:
+      type: object
+      description: 'Parity: offenders.io extensive stateData (retained only for include=stateData/extensive).'
+      properties:
+        stateOffenderId:
+          type: string
+        status:
+          type: string
+          description: 'Where the registrant stands with the registry, in the registry''s own words, or
+            `""`. This is the key that answers *is this person still at liberty?* — and it is distinct
+            from `offense.riskLevel`, which carries a risk classification. Free text, per state: **Florida
+            (FDLE)** publishes nine values — `"Released - Subject to Registration"`, `"Confinement"`,
+            `"Supervised - FL Dept of Corrections"`, `"Supervised - US Probation"`, `"Supervised - FL
+            Dept of Juvenile Justice"`, `"Deported"`, `"Deceased"`, `"Absconded"`, `"Civil Commitment"`
+            — while other states use their own (`"Compliant"`, `"Non-Compliant"`, …). **Match on the exact
+            strings a given state publishes; there is no cross-state enum.** Two of these conditions also
+            have booleans you can read without string matching: `flags.absconder` and, where published,
+            `stateData.incarcerationStatus`.
+
+
+            ★ **Georgia (GBI)** publishes this instead of an address for registrants it records as moved
+            out of state, deceased, homeless, incarcerated outside Georgia, or out of the country — e.g.
+            `"*** MOVED OUT OF STATE ***"`, `"*** INCARCERATED - OUT OF STATE ***"`, `"ABSCONDER (Address
+            Unknown)"`. Georgia''s coverage is built from GBI''s per-registrant pages as well as its bulk
+            export, so these registrants are returned like any other; read `stateData.status` for why
+            `addresses[]` may be empty on them, and note that address- and radius-filtered queries cannot
+            reach them.
+
+            '
+        designation:
+          type: string
+          description: 'The registry''s statutory CLASSIFICATION of the offender, verbatim — e.g. `"Sexual
+            Predator"`, `"Sexual Offender"`, `"Juvenile Sexual Offender"` — or `""`. Distinct from a risk
+            tier. Where a registry distinguishes a predator class, `flags.predator` mirrors it as a boolean.
+
+            '
+        registrationEnds:
+          type: string
+          description: 'When the registration TERM ends. ISO-8601 (`YYYY-MM-DD` / `YYYY-MM` / `YYYY`)
+            or `""`. ★ READ `datePrecision.registrationEnds` BEFORE YOU TRUST AN EMPTY VALUE HERE. 49,961
+            records publish something in this field that is not a date at all but a DURATION or a lifetime
+            marker — Wisconsin "15 Years" / "25 Years" / "Life" (25,218), Oklahoma "Lifetime" (6,606),
+            North Dakota "LIFETIME" (742). Those come back as `""` with precision `unparseable` and the
+            literal text in `datesAsPublished`, because a date-typed key must hold a date or nothing.
+            They are NOT missing data, and reading `""` here as "no end date on file" would be wrong for
+            exactly those registrants — check `datesAsPublished.registrationEnds`, and see also `isLifetimeRegistration`
+            and `registrationDuration`.
+
+            '
+        datePrecision:
+          type: object
+          additionalProperties:
+            type: string
+            enum:
+            - exact
+            - year_month
+            - year
+            - none
+            - unparseable
+          description: 'How much of each date this registry published, one entry for every date key on
+            this object — `registrationEnds`, `lastVerificationDate`, `addressVerificationDate`, `sentenceCompletionDate`,
+            `registrationStarts` — always all five, always present. Values as documented on `Offense.datePrecision`.
+
+            '
+        datesAsPublished:
+          type: object
+          additionalProperties:
+            type: string
+          description: 'The registry''s ORIGINAL text for any date key on this object whose published
+            form differs from what we now emit; `{}` when none do. This is where "Life", "15 Years" and
+            "Lifetime" live after normalisation — they are preserved, not discarded.
+
+            '
+        verificationRequirement:
+          type: string
+        lawAgency:
+          type: string
+        judgmentOfConvictionUrl:
+          type: string
+          format: uri
+        vehicles:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+            properties:
+              plate:
+                type: string
+                description: 'Plate as printed, usually state-prefixed: "UT F814NW".'
+              make:
+                type: string
+                description: '"Ford", "Kawasaki", "General Motors".'
+              model:
+                type: string
+                description: '"F150", "Motorcycle" — free text, sometimes a class rather than a model.'
+              year:
+                type: string
+                description: 'STRING, not an integer: "2018".'
+              color:
+                type: string
+                description: '"White", "Black Green (Light)" — registry vocabulary, not normalized.'
+          description: 'Vehicles the registrant has reported to the registry. Keys are not guaranteed:
+            the five above are what the OffenderWatch cluster prints, and other registries publish different
+            ones — always read defensively. `[]` is AMBIGUOUS and carries three different facts that the
+            response cannot separate: this person reported no vehicle, this registry does not publish
+            vehicles at all, or the detail page has not been fetched for this record yet. Treat `[]` as
+            "no vehicle known", never as "no vehicle owned". Populated in 22 jurisdictions; among records
+            that HAVE a detail page, roughly 27-69% carry at least one (FL 27%, PA 44%, OH 58%, LA 61%).
+
+            '
+        photos:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        complianceStatus:
+          type: string
+          description: e.g. compliant | non-compliant.
+        isLifetimeRegistration:
+          type: boolean
+          nullable: true
+          description: True when registration is for life.
+        lastVerificationDate:
+          type: string
+          description: 'When the offender last verified, ISO-8601 or `""`. ★ Format changed 2026-08-04:
+            it was ISO on 85.9% of its populated values and `MM/DD/YYYY` on the rest, despite this description
+            having claimed "ISO date" all along. It is ISO now.
+
+            '
+        addressVerificationDate:
+          type: string
+          description: 'When the address was verified (e.g. KS "Current as of"), ISO-8601 or `""`. ★ Format
+            changed 2026-08-04 — previously ISO on 96.2% of populated values, `MM/DD/YYYY` on the rest.
+
+            '
+        incarcerationStatus:
+          type: string
+          description: e.g. incarcerated | released (e.g. SD IsInJail).
+        comments:
+          type: string
+          description: Free-text registry remarks.
+        criminalHistory:
+          type: string
+          description: Narrative / prior-history summary.
+        adjudication:
+          type: string
+          description: e.g. adult | juvenile.
+        registrationDuration:
+          type: string
+          description: e.g. 10 years | lifetime.
+        skinTone:
+          type: string
+          description: IA skin-tone descriptor (e.g. light | medium | dark).
+        residencyRestriction:
+          type: string
+          description: IA residency constraint (free text).
+        employmentRestriction:
+          type: string
+          description: IA employment constraint (free text).
+        exclusionZones:
+          type: array
+          items:
+            type: string
+          description: IA geographic zones the offender is barred from.
+        district:
+          type: string
+          description: DC police district.
+        psa:
+          type: string
+          description: DC Police Service Area.
+        quadrant:
+          type: string
+          description: DC quadrant (NW | NE | SW | SE).
+        birthCity:
+          type: string
+          description: Place of birth — city (WY DCI prints a 'Place Of Birth' row on every detail page).
+        birthState:
+          type: string
+          description: Place of birth — state.
+        birthCountry:
+          type: string
+          description: Place of birth — country.
+        sentenceCompletionDate:
+          type: string
+          description: 'Date the SENTENCE completes (OK''s "Completion of Sentence" row, present on roughly
+            half of Oklahoma profiles). Distinct from `registrationEnds` (the registration TERM) and from
+            `offense.releaseDate` (release from custody). ISO-8601 or `""`. ★ BREAKING 2026-08-04 — Oklahoma
+            publishes this as `MM-DD-YYYY`, so 100% of its populated values changed shape.
+
+            '
+        registrationStarts:
+          type: string
+          description: 'Date registration began — the partner of `registrationEnds`. ISO-8601 or `""`.
+            ★ EXPANDED 2026-08-09 from one jurisdiction to sixteen: Oklahoma ("Orig Reg Date"), Virginia
+            ("Initial Registration Start Date"), Pennsylvania ("Registration Start"), Kansas ("Registered
+            Since"), Wisconsin, North Carolina, Georgia, Illinois, Indiana, Delaware, Alaska, Puerto Rico,
+            New Mexico, Wyoming, Guam and the District of Columbia. It is the FIRST registration, not
+            the most recent one: registries that publish only a latest-registration or address event date
+            (e.g. Oregon, Texas) leave this `""` rather than filling it with a different fact. ★ BREAKING
+            2026-08-04 — was `MM-DD-YYYY` on 100% of its populated values.
+
+            '
+        professionalLicenses:
+          type: array
+          items:
+            type: string
+          description: 'Professional / occupational licences the registrant holds, as free text exactly
+            as the state prints them. Prose, not a structured licence table — do not parse. `[]` means
+            the registry lists none for this person, or does not publish the section. ★ EXPANDED 2026-08-09:
+            **Utah** (`Professional Licenses` tab — type, and often an expiry, e.g. `CDL Class A - Expires:
+            04-13-2030`) and **Hawaii** (`License Type` — the occupation alone, e.g. `PHYSICIAN`, `REAL
+            ESTATE SALESPERSON`, `ELECTRICIAN JOURNEYMAN INDUSTRIAL`; no number and no expiry is published,
+            so none is reported).
+
+            '
+        shoeSize:
+          type: string
+          example: 10½
+          description: 'Shoe size as Texas DPS records it, in the physical-description block beside height,
+            weight, hair and eye colour. **Texas only** — `""` on every other jurisdiction, always, so
+            an empty string here cannot be read as "this person has no shoe size on file" outside TX.
+            A STRING, not a number: half sizes use the `½` character (`"09½"`) and leading zeros are kept
+            as published. DPS''s explicit `UNKNOWN` literal is normalised to `""`. Fill: 72,289 of 107,939
+            present Texas registrants (67.0%), from the twice-weekly bulk export, so there is no detail-fetch
+            lag.
+
+            '
+        build:
+          type: string
+          example: Large
+          description: 'Body build as the registry prints it, in the physical-description block beside
+            skin tone, hair and eye colour. **Minnesota only**, and within Minnesota only its DOC community-notification
+            cohort — 381 of 1,450 present Minnesota records (26.3%; 88.4% of that cohort''s 431). The
+            BCA non-compliant cohort served under the same `MN` code publishes no build at all. FREE TEXT,
+            not an enum: the live vocabulary measured over the whole cohort on 2026-08-04 is Medium 209,
+            Large 77, Stocky 27, Slender 25, Small 22, Husky 13, Lean 7, Muscular 1. Minnesota''s own
+            `Unknown` literal is normalised to `""`. An empty string means "this registry does not publish
+            a build" — never "average build".
+
+            '
+        shoeWidth:
+          type: string
+          example: D
+          description: 'Shoe width as Texas DPS records it — a US last code (`D`, `EEE`, `B`), not a measurement.
+            **Texas only**, same empty-string caveat and same `UNKNOWN` normalisation as `shoeSize`. NOTE:
+            `""` on 100% of records until the next Texas bulk drop — the reader landed 2026-08-04 and
+            no export has been ingested since.
+
+            '
+    Record:
+      type: object
+      description: 'One normalized offender record (offenders.io-parity superset + our extensions).
+
+
+        **Every key is always present — we never omit a key.** Read the empty values carefully, because
+        they mean different things:
+
+
+        * `""` on a string field means **the source registry does not publish that field for this record**.
+        Registries differ enormously (Maine publishes no sex/race/height at all). This is a property of
+        the source, not a transient gap on our side.
+
+        * `null` on `dob` means the registry publishes no date of birth — check `age`, since many portals
+        publish age only.
+
+        * `null` on `flags.absconder` / `flags.predator` means **unknown / not published**. It is NOT
+        the same as `false`, which means the registry affirmatively says the person is not an absconder/predator.
+
+        * `null` on `matchedName` means your query supplied no name; `null` on `matchState` means your
+        query supplied no `dob` or `age`.
+
+        * `null` on `stateData` means **you did not request deep detail** — the engine omits that one
+        block unless the request carries `include: ["stateData"]`. This is the one empty value that says
+        nothing about source coverage, and you never have to guess which case you are in: the response''s
+        top-level `omittedFields` names it (`["stateData"]` vs `[]`). `offenses` and `images` are NOT
+        omitted — both come back on every response, so `[]` there is a fact about the registrant.
+
+        '
+      properties:
+        recordId:
+          type: string
+          description: 'Our per-record id, `rec_` + 20 hex. Hashed from JURISDICTION + the registry uuid
+            (or, when the registry publishes no uuid, jurisdiction + record url + full name + dob).
+
+            *** NOT A STABLE KEY FOR A PERSON. *** recordId is derived from the MERGE: when we find one
+            person in several registries we merge those rows and one WINS, and recordId (like uuid) describes
+            the winner. Which row wins depends on which registries were in YOUR search, so narrowing the
+            scope changes the id for the same human with nothing re-ingested. Verified on production 2026-08-05,
+            one man (Stephen Vincent Allen, dob 1961-09-25, TX Sid=07428710 and SC Id=583650): nationwide
+            -> rec_6d066763131ebe8c77ea (uuid 07428710); jurisdictions:["SC"] -> rec_b0b4abc2433b71400670
+            (uuid 583650); jurisdictions:["NSOPW"] -> rec_f8c63c0ec62e7563bd6c. One person, four ids,
+            no defect.
+
+            CONSEQUENCE: collecting ids from state-scoped queries and then checking them against a nationwide
+            result reports a correct merge as a MISSING RECORD. Compare results as PEOPLE (name + dob
+            + registrationState, or the `sources[]` entries), never as id sets across different scopes.
+
+            DETERMINISTIC WITHIN ONE SCOPE: re-run the same request and you get the same ids. Store the
+            scope with the id.
+
+            BREAKING 2026-08-04: the jurisdiction was added, so every recordId for a record carrying a
+            uuid changed once. It previously hashed the uuid ALONE, which collapsed registrants that different
+            registries had given the same id onto ONE recordId - source id 20059 returned rec_a82c17793c3bd390eef1
+            for both a Pennsylvania and a Wisconsin registrant. 147,624 records were affected. Stored
+            ids from before that date will not match; re-key.
+
+            '
+          example: rec_ab12cd34ef56gh78ij90
+        uuid:
+          type: string
+          description: 'The REGISTRY''s own id, verbatim; "" (18%) when that registry publishes none.
+            Unique only WITH its jurisdiction — 55,893 ids are shared across jurisdictions (147,624 records),
+            so `20059` is a Florida, a Pennsylvania AND a Wisconsin registrant. Registries also RE-ISSUE
+            ids in bulk, which retires the old value: treat a stored `uuid` as a cache to refresh, not
+            as a primary key.
+
+            It is the PRIMARY registry''s id for the assembled record, so like recordId it changes when
+            the registries covered by your search change. It is not the more stable of the two - see recordId
+            above for which identifier to store.
+
+            '
+          example: IL:X24A0926
+        recordType:
+          type: string
+          enum:
+          - sex_offender
+          default: sex_offender
+        matchConfidence:
+          type: number
+          nullable: true
+          description: 'OUR relevance score for this match (offenders.io has none). Null when unscored.
+            CAPPED by how the name matched, so a widened match is never reported as certainty: exact on
+            the registered name = no cap; nickname <= 0.75; prefix / fuzzy / middle name / no first name
+            published <= 0.60; alias-only <= 0.55. The cap is lifted only when you supplied a `dob` and
+            the record''s full DOB matched it. A partial-name hit is a CANDIDATE match, never identity
+            verification.
+
+            '
+        matchBasis:
+          type: array
+          items:
+            type: string
+          description: 'Why the record is in the result set, PER FIELD, so a widened search is never silent.
+            Name tokens are `<field>:<how>`: `lastName:exact` / `firstName:exact` (the field equals what
+            you sent), `lastName:prefix` / `firstName:prefix` (the field STARTS WITH what you sent), `firstName:nickname`
+            (a nickname equivalence, e.g. bob -> Robert), `lastName:fuzzy` / `firstName:fuzzy` (spelling
+            variant or typo), `firstName:middle` (the given name you sent is the person''s MIDDLE name,
+            matched as a whole token of the registered legal name), `firstName:absent` (the record publishes
+            no first name, so it could not be disproved — kept and flagged), and `alias:exact` / `alias:prefix`
+            (an ALIAS matched, not the registered name). Also carries the legacy `lastName`/ `firstName`/`dob`
+            tokens for which identity fields the record itself provides, plus `name_match`, `alias_match`,
+            `middle_name_match`, or `unverified_no_dob_or_age`. Example: `["lastName:prefix","firstName:nickname","name_match"]`.
+
+            **Parsing note — this array mixes two vocabularies.** The bare `lastName` / `firstName` /
+            `dob` tokens describe which identity fields the RECORD populates; they do NOT mean that field
+            matched your query and they appear even when you did not search on it (a record can carry
+            the `dob` token on a search with no `dob`). To read match quality reliably, use only the tokens
+            containing a colon, plus `name_match`, `alias_match` and `unverified_no_dob_or_age`.
+
+            **Prefer `matchDetail`**, which is this same information already split into its separate vocabularies.
+
+            '
+        matchDetail:
+          type: object
+          description: 'The UNMIXED reading of `matchBasis` — the same information, already split into
+            the three separate things that array encodes, so you never have to know which token shape
+            means what. Always present. `matchBasis` is left byte-for-byte unchanged for existing integrations;
+            NEW CODE SHOULD READ THIS FIELD.
+
+
+            Caution on `strategies.lastName: "exact"` — it means the queried surname equalled the record''s
+            surname OR one TOKEN of a compound/hyphenated surname ("Hamilton-Smith" matches a "Smith"
+            query, uncapped). It is not a guarantee of string equality; whole-surname matches simply sort
+            first.
+
+            '
+          properties:
+            strategies:
+              type: object
+              additionalProperties:
+                type: string
+                enum:
+                - exact
+                - nickname
+                - initial
+                - prefix
+                - fuzzy
+                - middle
+                - absent
+              description: "HOW each field matched, as `{field: strategy}`. The three possible keys are\
+                \ `lastName`, `firstName` and `alias`; `alias` is present ONLY when an alias rather than\
+                \ the registered name produced the hit.\n\nThe strategy vocabulary is CLOSED — these seven\
+                \ values are all that can appear, and an unrecognised engine token would surface under\
+                \ `other` instead. Listed strongest first, with the ceiling each imposes on `matchConfidence`\
+                \ and the fields it can appear on:\n\n* `exact` (rank 1, no cap) — the field equals your\
+                \ value, or equals one\n  token of a compound surname. On `lastName`, `firstName`, `alias`.\
+                \ On\n  in every `match` mode and cannot be disabled.\n\n* `nickname` (rank 2, <= 0.75)\
+                \ — a known given-name equivalence\n  (bob -> Robert). **`firstName` only**: there is\
+                \ no surname nickname\n  table, and requesting one on `lastName` is a 422.\n\n* `initial`\
+                \ (rank 2, <= 0.60) — a single letter against a full given\n  name (J -> John), either\
+                \ direction. `firstName` only.\n\n* `prefix` (rank 3, <= 0.60) — the field STARTS WITH\
+                \ your value,\n  minimum 3 characters. On `lastName`, `firstName`, `alias`.\n\n* `fuzzy`\
+                \ (rank 4, <= 0.60) — spelling variant or typo within a\n  length-scaled edit-distance\
+                \ budget. On `lastName`, `firstName`,\n  `alias`.\n\n* `middle` (rank 5, <= 0.60) — the\
+                \ given name you sent is the\n  person's MIDDLE name, matched as a whole token of the\
+                \ registered\n  legal name (minimum 2 characters; never prefixed, never fuzzy, and\n \
+                \ an initial is not a name in either direction). `firstName` only.\n  `matchedNameType`\
+                \ stays `\"legal\"` — a middle name IS part of the\n  registered name — and `signals`\
+                \ additionally carries\n  `matchedMiddleName`. It ranks below every first-name strategy\
+                \ on\n  purpose: some names sit overwhelmingly in the middle slot (`Lee`\n  is 20x commoner\
+                \ there than as a first name), so for those names\n  this arm draws on a much larger pool\
+                \ and a coincidence is\n  correspondingly likelier. Tried only after the registered first\n\
+                \  name and every alias have failed, so a stronger basis is always the\n  one reported.\n\
+                \n* `absent` (rank 6, <= 0.60) — the record publishes NO first name, so\n  your query\
+                \ could not be disproved; the record is kept and flagged,\n  never confirmed. `firstName`\
+                \ only.\n\n\nBy `match` preset: `strict` enables `exact` alone (and aliases are off).\
+                \ `balanced` adds `nickname`, `initial`, `prefix`, `fuzzy` and `middle` on `firstName`\
+                \ only. `broad` additionally allows `prefix` and `fuzzy` on `lastName`. `absent` can occur\
+                \ in any mode. `initial` and `absent` are engine behaviours and cannot be named in `nameMatch`,\
+                \ which accepts `exact`/`prefix`/`nickname`/`fuzzy`/`middle` on `firstName` and `exact`/`prefix`/`fuzzy`\
+                \ on `lastName`.\n\nRank is the ordering contract, not a score: results sort by surname\
+                \ rank then given-name rank, and legal-name hits sort before alias-only hits. An alias-only\
+                \ hit caps confidence at 0.55, the lowest value the engine produces. Every cap is lifted\
+                \ only when you supplied a `dob` and the record's full date of birth matched it.\n\nFor\
+                \ picking an auto-accept threshold, gate on this object rather than on `matchConfidence`\
+                \ alone (several strategies share one ceiling): auto-accept `exact` on every queried field\
+                \ with `matchedNameType: \"legal\"`; review anything `nickname`, `initial`, `prefix`,\
+                \ `fuzzy` or `middle`; never auto-accept an alias-only hit or `firstName: \"absent\"`.\
+                \ See API-CONTRACT.md section 3.8.\n"
+              example:
+                lastName: exact
+                firstName: nickname
+            fieldsPresent:
+              type: array
+              items:
+                type: string
+              description: 'Which identity fields the RECORD carries (`lastName`, `firstName`, `dob`).
+                Pure data completeness — says nothing about your query.
+
+                '
+              example:
+              - lastName
+              - firstName
+              - dob
+            signals:
+              type: array
+              items:
+                type: string
+                enum:
+                - matchedLegalName
+                - matchedAlias
+                - matchedMiddleName
+                - unverifiable
+              description: 'Boolean-ish flags about the match as a whole. `matchedMiddleName` accompanies
+                `strategies.firstName: "middle"` and is repeated here so a caller who screens on `signals`
+                alone still sees that the given name matched the person''s middle name rather than their
+                first.
+
+                '
+            matchedNameType:
+              type: string
+              nullable: true
+              enum:
+              - legal
+              - alias
+              description: Whether the registered legal name or an alias produced the hit. Null when no
+                name was queried.
+            verification:
+              type: string
+              nullable: true
+              description: The raw `dobVerification` token, or null when no dob/age was queried.
+            other:
+              type: array
+              items:
+                type: string
+              description: 'Present ONLY if the engine emitted a token this mapping does not recognise,
+                so a new token can never silently vanish. Normally absent.
+
+                '
+        matchedName:
+          type: object
+          nullable: true
+          description: 'WHICH name matched your query, and whether it was the registered legal name or
+            an alias. null when the query supplied no name. Read this alongside matchBasis so an alias
+            or partial-name hit is never mistaken for a registered-name match.
+
+            '
+          properties:
+            value:
+              type: string
+              description: The literal name string that matched.
+            type:
+              type: string
+              enum:
+              - legal
+              - alias
+              description: legal = the registered name; alias = one of the record's aliases.
+        name:
+          $ref: '#/components/schemas/Name'
+        aliases:
+          type: array
+          items:
+            type: string
+          description: 'Known aliases as the registry publishes them (flat strings, mixed shapes — "SURNAME,
+            GIVEN" and "Given Surname" both occur; do not parse positionally). IMPORTANT: [] is TWO different
+            facts and this response cannot tell them apart — either the registry publishes no alias field,
+            or it does and this person has none on file. 69% of records carry at least one, but the rate
+            is a property of the source: KY 99%, AK/NE 89%, ID 46%, SD 44%, and WV 2% because the WV registry
+            has no alias field at all and the only names it publishes sit inside the offence narrative.
+            Per-jurisdiction detail in docs/FIELD-DICTIONARY.md section 5.
+
+            '
+        nicknames:
+          type: array
+          items:
+            type: string
+          description: 'OUTPUT-ONLY. First-name nickname/variant expansion, computed at serialize-time
+            from `name.first` for name-search recall (parity with offenders.io `firstName_nicknames`;
+            e.g. "Jonathan" -> ["john","nathan"]). Computed at serialize-time and never populated from
+            source data. Empty when nothing was expanded.
+
+            '
+          readOnly: true
+          example:
+          - john
+          - johnny
+          - jack
+        dob:
+          type: string
+          format: date
+          nullable: true
+          description: "Date of birth — **a full ISO-8601 `YYYY-MM-DD` date, or `null`. Never anything\
+            \ else.** If this field has a value, a registry printed a complete date; you can hand it straight\
+            \ to a date parser.\n\n* `\"1964-08-13\"` — a full date the registry printed. `dobPrecision:\
+            \ exact`.\n* `null` — no full date was published. **The record may still tell you a\n  great\
+            \ deal about when this person was born:** read `birthYear` (present\n  whenever the year is\
+            \ known) and `age` (published by many registries that\n  publish no date at all). `dobPrecision`\
+            \ says which.\n\n\n★ **You never have to compensate for a null here when you search.** A `dob`\
+            \ you send is matched against every kind of birth evidence we hold, not just against this\
+            \ field — see `matchState` for the four outcomes and exactly how strong each one is. A registrant\
+            \ we know only as \"born 1976\", or only as \"aged 47 when we read the page\", is still returned\
+            \ by a search for a full date consistent with that, and is labelled so you can see the birthday\
+            \ was not confirmed.\n\n★ **We never publish a month or a day a registry did not print.**\
+            \ A year-only registrant has no month and no day at any layer of our system, so this field\
+            \ can never hand you a fabricated New Year's Day that is byte-identical to a real one.\n\n\
+            **Comparing us against another vendor on this field?** Read `dobPrecision` on both sides or\
+            \ the comparison is meaningless — a vendor that pads a birth year to January 1st and reports\
+            \ it as an exact date will appear to have a date of birth for people whose birthday nobody\
+            \ knows.\n"
+        birthYear:
+          type: integer
+          nullable: true
+          minimum: 1900
+          maximum: 2100
+          example: 1976
+          description: 'The registrant''s **year of birth, whenever we know it — by any route.** Populated
+            both when a registry published only a birth year and when it published a full date (in which
+            case this is that date''s year), so year logic reads one field and never has to branch on
+            what a particular registry happens to publish.
+
+
+            `dobPrecision` — not this field — tells you which of those two it was: `year` means a registry
+            published the year itself and no more; `exact` means we read it off the full date in `dob`.
+
+
+            **It is never derived from `age`.** An age is not a date: converting one into a birth year
+            bakes in the moment we read the page and is wrong the day after the person''s next birthday.
+            So an age-only record has `birthYear: null` — and is still reachable by a `dob` search, because
+            that widening happens when we MATCH your query rather than in what we publish as fact. See
+            `matchState: age_match`.
+
+
+            `null` means we do not know the year.
+
+            '
+        dobPrecision:
+          type: string
+          enum:
+          - exact
+          - year
+          - year_month
+          - unknown
+          description: "How much of `dob` the REGISTRY actually published — the authoritative reading\
+            \ of that field, and the only thing that can distinguish a real 1 January birthday from a\
+            \ year-only record.\n\n* `exact` — a registry published a full date. `dob` is `YYYY-MM-DD`\
+            \ and\n  `birthYear` is that date's year. A search for that date reports\n  `matchState: dob_match`.\n\
+            \n* `year` — a registry published a birth year and nothing more. `dob` is\n  `null`, `birthYear`\
+            \ holds the year. A search for **any** date inside\n  that year still reaches the record,\
+            \ reported as\n  `matchState: year_match` — never `dob_match`, because a year cannot\n  confirm\
+            \ a birthday.\n\n* `year_month` — defined for completeness; no source currently uses it.\n\
+            * `unknown` — no birth date and no birth year on file. `dob` and\n  `birthYear` are both `null`.\
+            \ **Read `age`**, which several registries\n  publish instead of a date; a search carrying\
+            \ a `dob` still reaches\n  those records when the published age is consistent with it\n  (`matchState:\
+            \ age_match`).\n\n\nA genuine 1 January birthday is served as `exact`, like any other date,\
+            \ and is not affected by anything above — `dobPrecision` is the only thing that can distinguish\
+            \ it from a year-only record, which is why it is authoritative rather than decorative.\n\n\
+            **A merge can IMPROVE this value.** One record may combine several registries' entries for\
+            \ the same person (see `sources`). Where a year-only registry and a full-DOB registry both\
+            \ hold that person and agree on the year, the record carries the **full date** at `exact`\
+            \ — the better source wins. The same person can therefore be `year` under a registry-scoped\
+            \ query and `exact` nationwide. We never publish a year for a date we hold, and we never invent\
+            \ a date to replace a year; if two sources disagree on the birth year the record keeps its\
+            \ own rather than blending them.\n"
+        age:
+          type: string
+          description: Age as published; captured especially when DOB is unavailable.
+        sex:
+          type: string
+          description: 'Free text, registry vocabulary, NOT an enum. "" when we hold nothing. "Male" and
+            "M" (and "F"/"Female") occur in the SAME response when a search spans registries — normalize
+            before grouping. MAINE and the DISTRICT OF COLUMBIA are a special case worth knowing: neither
+            registry''s own website publishes a sex anywhere, so these values come from the jurisdiction''s
+            own federal NSOPW feed and use that feed''s "M"/"F"/"U" vocabulary. Fill measured 2026-08-04:
+            ME 99.7% (2,880 of 2,888), DC 97.2% (1,028 of 1,058); the residue is records we could not
+            join with certainty and is left empty rather than guessed.
+
+            '
+        race:
+          type: string
+          description: 'Free text, registry vocabulary, NOT an enum. "" when unknown. IMPORTANT: several
+            registries (California among them) publish ONE column covering race and ethnicity; we route
+            Hispanic values to `ethnicity` and everything else to `race`, so for those states the two
+            keys are MUTUALLY EXCLUSIVE and reading `race` alone drops every Hispanic registrant. California
+            measured 2026-08-04: race 51%, ethnicity 48%, either 99.4%. Compute coverage on (race || ethnicity).
+            ME and DC publish NO race on any surface they render (checked live 2026-08-04 on both of Maine''s
+            profile renderings, and on DC''s ArcGIS layer, roster and CSOSA bulletin) and their federal
+            feeds carry none either, so "" is final there, and there is no ethnicity to fall back to.
+            The national index (NSOPW) publishes no race, ethnicity, height, weight, eyeColor, hairColor
+            or marks on any record of any of the 158 jurisdictions it federates — its API carries ten
+            keys and none of these is among them. A person held by BOTH a state registry and the national
+            index is returned as ONE record carrying the STATE registry''s physical description, with
+            both registries listed in `sources[]`; a person only the national index reaches carries ""
+            for these keys. Tribal registrants are read from the tribe''s own per-registrant page and
+            carry them normally.
+
+            '
+        ethnicity:
+          type: string
+          description: 'Free text. "" is the common case (67%). Observed values include "Hispanic", "Non-Hispanic",
+            "Not Hispanic", "Unknown" — normalize before grouping. See `race` for the single-column registries.
+
+            '
+        height:
+          type: string
+        weight:
+          type: string
+        eyeColor:
+          type: string
+        hairColor:
+          type: string
+        marks:
+          type: string
+          description: 'Scars, marks and tattoos as recorded by the registry — free text, no vocabulary,
+            no fixed separator; can run to several hundred characters. IMPORTANT: "" is TWO different
+            facts and this response cannot tell them apart — either the registry publishes no such field
+            at all, or it does and this person has none on file. It is NOT evidence that a person has
+            no tattoos. Verified NOT PUBLISHED by KY, NE, WV, ID, SD, AK, TX, IL, VA, GA, MA and the national
+            NSOPW index; published by ~28 other states, each at its own rate. See `race` for how the national
+            index and a state registry combine into one record. Per-jurisdiction detail, and how each
+            was verified, in docs/FIELD-DICTIONARY.md section 6.5.
+
+            '
+          example: Tattooed Arm, left upper; Scar on Chest; Pierced ear, left
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        registrationState:
+          type: string
+          readOnly: true
+          description: 'WHICH REGISTRY holds this record — the registering state or territory, NOT where
+            the person lives. Always present; `""` when the registry is not a state (see below). The value
+            is in exactly the vocabulary `query.state` accepts, so you can send it straight back as a
+            filter and find this record again.
+
+
+            ★ `registrationState` and `addressStates` are deliberately two fields, and neither is called
+            `state`. They disagree often: of the 846,485 records held by a two-letter state registry (2026-08-04),
+            105,028 (12.4%) have NO address in the registering state — they are registered there and living
+            elsewhere — and a further 8,564 carry both a home-state and an out-of-state address. 36,525
+            of Florida''s 92,690 registrants have no Florida address on file. A single `state` key would
+            answer one of those two questions and be read as the other.
+
+
+            `""` on 35,153 records (2.34%): 29,097 from NSOPW where the federal feed named no member registry,
+            and every record of the `TRIBAL` registry (5,980 present, spread over 98 tribal registries
+            — re-verified 2026-08-05). A tribe is its own registering authority and is not a state; we
+            do not map one to the other because we have not verified that containment, and a wrong verdict
+            of that kind is worse than an honest blank because nobody re-examines it.
+
+
+            ★ THE BLANK WITHHOLDS NOTHING, and that is why it is the right answer. The registering authority
+            is published per record on `sources[].registryName` ("Cherokee Nation Sex Offender Registry",
+            "Navajo Nation Sex Offender Registry", …) and `sources[].recordUrl` — finer than a state code
+            would have been — `addressStates` still says where the person lives, and `source.jurisdiction`
+            is populated on 100% of records (it is the literal string `TRIBAL` for these; send `jurisdictions:
+            ["TRIBAL"]` to scope to them).
+
+            '
+          example: FL
+        addressStates:
+          type: array
+          readOnly: true
+          items:
+            type: string
+          description: 'Every DISTINCT state appearing in `addresses[]`, first-seen order, no duplicates.
+            Always present; never null.
+
+
+            The plural is load-bearing. 23,058 records carry addresses in two or more states (22,626 in
+            two, 432 in three or more), because residence, employment and school addresses are published
+            independently and need not agree. This array does not say which is which — read `addresses[]`
+            and its `type` for that. Treating `addressStates[0]` as "where they live" is the mistake this
+            field exists to prevent.
+
+
+            `[]` means NO address on file carries a state — 70,973 records (4.72%). It does NOT mean the
+            person has no address, and it does NOT mean we did not look: it means the registry published
+            no parseable state. Those records are still returned by `state=XX` when `registrationState`
+            matches, which is the only thing that reaches them.
+
+
+            Values are canonicalised to the `query.state` vocabulary, but a token we do not recognise
+            is passed through upper-cased rather than dropped, because registries publish real non-state
+            codes here — Florida writes `YY` for out-of-country on 5,005 addresses.
+
+            '
+          example:
+          - FL
+          - GA
+        offense:
+          allOf:
+          - $ref: '#/components/schemas/Offense'
+          description: Primary/first offense (always present).
+        offenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offense'
+          description: 'Every offense, the primary one first — the same object as `offense`, which is
+            `offenses[0]`. Always returned; `include` is NOT required. (It was until 2026-08-14, and an
+            empty array beside a populated `offense` read as a positive "no convictions" for registrants
+            with several.)
+
+            '
+        stateData:
+          oneOf:
+          - $ref: '#/components/schemas/StateData'
+          - type: 'null'
+          description: 'Extensive per-state detail; `null` unless `include: ["stateData"]` (or compat
+            `mode=extensive`) was sent. The response''s `omittedFields` tells you whether a `null` here
+            is an omission or an absence.
+
+            '
+        flags:
+          type: object
+          description: 'Registry flags. `null` means the registry does not publish the flag (UNKNOWN)
+            — it is not equivalent to `false`, which means the registry affirmatively reports the person
+            is not flagged.
+
+            '
+          properties:
+            absconder:
+              type: boolean
+              nullable: true
+            predator:
+              type: boolean
+              nullable: true
+        housingStatus:
+          type: string
+          nullable: true
+          enum:
+          - homeless
+          - incarcerated
+          - housed
+          description: 'Normalised housing status for the registrant, derived from whichever field the
+            source registry uses to state it — registries express this in different places and different
+            words, and this field answers the question the same way for all of them.
+
+
+            `null` means the registry does not publish a housing status. It does NOT mean the person is
+            housed: only an affirmative statement from the registry produces `housed`.
+
+            '
+        images:
+          type: array
+          description: Photo URLs. Always returned — `include` is NOT required (it was until 2026-08-04).
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+        source:
+          oneOf:
+          - $ref: '#/components/schemas/SourceRef'
+          - type: 'null'
+          description: 'The PRIMARY source only - the registry whose copy won the merge. A record that
+            spans three registries still has exactly one `source`. To learn every registry a person is
+            on, read `sources[]`, not this.
+
+            '
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceRef'
+          description: 'EVERY registry this person appears on, one entry per registry, each with that
+            registry''s jurisdiction, name and record URL. A registry that publishes several rows for
+            one person contributes a single entry. Observed: 63% one source, 36% two, 1% three. Two or
+            more distinct registries add +0.10 to matchConfidence. `source` is the PRIMARY registry only
+            - read `sources[]` when the question is which registries a person appears on.
+
+            THE REGISTRY IS `registryName`. `jurisdiction` is where the person is REGISTERED, so a state
+            registry and NSOPW''s listing of the same registrant share it - a record can carry "SC" twice,
+            once for SC SLED and once for NSOPW. Count registries by registryName. `jurisdiction: "NSOPW"`
+            does not appear.
+
+            `sources[]` reflects the registries your search covered: a nationwide search returns the person''s
+            full registry list, a state-scoped search returns that state''s entry. This is also why recordId
+            differs between the two.
+
+            recordUrl: on FL, CA, GA, MO and OR it is a registry-wide page rather than the registrant''s
+            own; on OK, ME, VA and AZ it is per-registrant for most records; some IL records carry none.
+            Everywhere else it is the registrant''s page and is the link to verify against.
+
+            Two registry listings become ONE record when the registry''s own identifier links them (matchDetail.signals:
+            ["linkedByRegistryId"]) or when both carry a full published date of birth that agrees along
+            with the name. They stay separate otherwise - including when the only thing they share is
+            a name and a birth YEAR, since two different registrants can share one. So a registrant known
+            only by birth year, held by two registries with no matching identifier, appears once per registry.
+            Deduplicate on name + birth year + address if you need a single row.
+
+            '
+        matchState:
+          type: string
+          nullable: true
+          enum:
+          - dob_match
+          - year_match
+          - age_match
+          - no_dob_age_year
+          - age_mismatch
+          - dob_mismatch
+          - null
+          description: "**How this record matched the `dob` (or `age`) you sent — the complete list of\
+            \ strategies, in descending order of strength.** Read this field, not `dobVerification`, which\
+            \ carries the raw token for backward-compat.\n\n★ **THE THING TO UNDERSTAND ABOUT A `name\
+            \ + dob` SEARCH:** registries do not all publish a date of birth. Some publish a birth year,\
+            \ some publish only an age, some publish neither. **A `dob` you send is matched against all\
+            \ of them**, so one query reaches every kind of record, and this field tells you exactly how\
+            \ strong the evidence was in each case. Nothing is widened silently: a weaker match is always\
+            \ labelled as one.\n\n* `dob_match` — the record holds a **full date of birth** and it equals\n\
+            \  the date you sent. The strongest state. `dobPrecision: exact`.\n\n* `year_match` — the\
+            \ record holds a **birth year only**, and the date you\n  sent falls inside that year. The\
+            \ year agrees; the birthday was never\n  published and is therefore **not confirmed**. `dobPrecision:\
+            \ year`,\n  `birthYear` set, `dob` null.\n\n* `age_match` — the record holds **no birth date\
+            \ at all, but a published\n  age**, and that age is consistent with the date you sent. Because\
+            \ the\n  registry did not publish a birthday, an age is consistent with **two**\n  birth years\
+            \ (the person may or may not have had their birthday when the\n  page was published), and\
+            \ **both are accepted** — so this state is\n  approximately a two-year window around the date\
+            \ you asked for, not a\n  confirmation of it. `dobPrecision: unknown`, `birthYear` null, `age`\
+            \ set.\n\n* `no_dob_age_year` — the record has **no date, no year and no age**:\n  there was\
+            \ nothing to check your date against. It is returned anyway,\n  because the NAME matched (see\
+            \ `matchBasis`) and an absence of evidence\n  cannot rule the person out — but nothing about\
+            \ the birth date has been\n  verified. `unverified` is `true` on these.\n\n* `age_mismatch`\
+            \ — the record matched on NAME, publishes only an **age**,\n  and that age **contradicts**\
+            \ the date you sent. Returned ONLY when you\n  ask for it with `onAgeMismatch: \"flag\"`;\
+            \ by default such a record is\n  dropped. Always `unverified` — it came back on the name,\
+            \ and it can\n  never be reported as a confirmed identification. Use it when you would\n \
+            \ rather see a contradiction and judge it than have it silently omitted.\n\n* `dob_mismatch`\
+            \ — the record HAD a date, a year or an age, and it\n  **conflicted** with what you sent.\
+            \ These are **filtered out** of\n  `records`; the value is documented so you know a true conflict\
+            \ is\n  excluded rather than shown.\n\n* `null` — your query carried no `dob` and no `age`,\
+            \ so there was nothing\n  to match on.\n\n\n**If you only want confirmed birthdays, keep `dob_match`.**\
+            \ If you are screening and a missed person is the expensive error, keep `year_match`, `age_match`\
+            \ and `no_dob_age_year` too — that is what they are for, and it is why they are separate values\
+            \ rather than one \"matched\" flag.\n"
+        dobVerification:
+          type: string
+          enum:
+          - ''
+          - dob_match
+          - year_match
+          - age_match
+          - no_dob_age_year
+          - dob_mismatch
+          - unverified_no_dob_or_age
+          description: 'DOB/age match-state vs. the query (Goal 5). Meanings: `dob_match` = record''s
+            full DOB equals the query DOB; `year_match` = record is year-only (dobPrecision=year) and
+            the year equals the query DOB''s year; `age_match` = matched on age (±1yr) when no full DOB
+            was available; `no_dob_age_year` = record had no DOB, age, or year to check against; `dob_mismatch`
+            = the record had a DOB/age that did NOT match (such records are filtered out of `records`,
+            so this surfaces only where the contract exposes rejected candidates); `unverified_no_dob_or_age`
+            = kept-but-flagged, nothing to verify; `""` = no DOB/age filter was supplied. ★ **CORRECTED
+            2026-08-06.** This field previously carried a note saying `year_match` and `no_dob_age_year`
+            were "RESERVED" and not emitted. They are emitted, and have been for some time — a year-only
+            record answers `year_match` and a record with nothing to verify answers `unverified_no_dob_or_age`
+            (published as `no_dob_age_year` on `matchState`). Branch on `matchState`, whose vocabulary
+            is the clean one.
+
+            '
+        unverified:
+          type: boolean
+          description: True when the record had NO DOB and NO age to verify against — shown anyway, flagged.
+    ProofRequest:
+      type: object
+      description: 'Request body for the per-registry look-alike proof add-on (NOT the consolidated verification
+        report — see ReportRequest / `POST /v1/report`). Available to billing-enabled accounts and carries
+        an extra charge per document. Name the registries and the format — proof is never generated for
+        all sources implicitly.
+
+        '
+      required:
+      - registries
+      properties:
+        registries:
+          type: array
+          minItems: 1
+          items:
+            type: string
+          description: Jurisdiction codes to render proof for (e.g. ["IL","IN"]). Each renderable one
+            is billed.
+        format:
+          type: string
+          enum:
+          - pdf
+          - html
+          default: pdf
+    ProofBundle:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - none
+          - rendering
+          - ready
+          description: ready=at least one doc rendered; none=nothing billable rendered.
+        billedDocuments:
+          type: integer
+          description: Count of proof docs billed on this request.
+        documents:
+          type: array
+          items:
+            type: object
+            properties:
+              registry:
+                type: string
+              format:
+                type: string
+                enum:
+                - pdf
+                - html
+              url:
+                type: string
+                description: Fetch via GET /v1/proof-docs/{token}. Empty when the registry has no template
+                  yet.
+              note:
+                type: string
+                description: Present (e.g. "no proof template for registry") when the doc was skipped
+                  and not billed.
+    SourceInfo:
+      type: object
+      description: One jurisdiction from the public coverage catalog.
+      properties:
+        id:
+          type: string
+          example: IL
+        name:
+          type: string
+          example: Illinois Sex Offender Registry
+        covers:
+          type: array
+          items:
+            type: string
+          description: State/territory codes this source covers (some sources cover many).
+        scope:
+          type: string
+          enum:
+          - state
+          - national
+        status:
+          type: string
+          enum:
+          - building
+          - live
+        legal:
+          type: object
+          properties:
+            commercialUse:
+              type: string
+              enum:
+              - allowed
+              - restricted
+              - prohibited
+              - unknown
+        health:
+          type: object
+          properties:
+            lastSuccessAt:
+              type: string
+              format: date-time
+              nullable: true
+              description: When this registry was last ingested successfully — this registry's currency,
+                live. null if it never has been. This endpoint needs no API key, so it is auditable before
+                purchase.
+            typicalLatencyMs:
+              type: integer
+              nullable: true
+              description: p50 latency from local diagnostics. null when not measured on this instance.
+            ageSeconds:
+              type: number
+              nullable: true
+              description: Age of the current snapshot, in seconds. null = never ingested (unknown, never
+                'fresh').
+            freshFor:
+              type: array
+              items:
+                type: string
+                enum:
+                - daily
+                - weekly
+              description: 'The freshness tiers this registry''s current snapshot falls inside — a restatement
+                of `ageSeconds` in tier labels. `[]` = never ingested. NOT A FILTER: a registry contributes
+                its records to a search whatever this says, at every tier. Read it to KNOW a registry''s
+                age, not to predict which registries will answer. See API-CONTRACT.md §2.
+
+                '
+    OffendersIoRequest:
+      type: object
+      description: offenders.io parameters, accepted verbatim.
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dob:
+          type: string
+          format: date
+        age:
+          type: integer
+        city:
+          type: string
+        state:
+          type: string
+        zipcode:
+          type: string
+        address:
+          type: string
+          description: Cannot be combined with q or lat/lng (400).
+        lat:
+          type: number
+        lng:
+          type: number
+        radius:
+          type: number
+          description: Miles; defaults to 1 when a point is given, capped at 100. GIS pages are 50/page.
+        q:
+          type: string
+          description: Cannot be combined with firstName/lastName or lat/lng (400).
+        fuzzy:
+          type: boolean
+        mode:
+          type: string
+          enum:
+          - extensive
+        prefixMatch:
+          description: 'Partial-name search — the name is treated as the START of a name (min 3 characters),
+            matched against aliases too. "both" prefixes first and last name together.
+
+            '
+          oneOf:
+          - type: string
+            enum:
+            - firstName
+            - lastName
+            - both
+          - type: array
+            items:
+              type: string
+              enum:
+              - firstName
+              - lastName
+        faceId:
+          type: string
+          description: Not supported — returns 422.
+        createdAtStart:
+          type: string
+          format: date-time
+        createdAtEnd:
+          type: string
+          format: date-time
+        updatedAtStart:
+          type: string
+          format: date-time
+          description: GIS searches default to the last 90 days of updates unless this is set.
+        updatedAtEnd:
+          type: string
+          format: date-time
+        uuid:
+          type: string
+          description: 'Direct record lookup (parity), database-backed since 2026-08-04. Pass the `uuid`
+            a search returned. BEFORE that date this accepted only our internal `rec_…` id, so feeding
+            back the `uuid` this same endpoint publishes returned an empty `offenders` array 100% of the
+            time. An empty result means the id is not CURRENT (registries re-issue ids in bulk), not that
+            the person is unregistered — re-search by name and state. Combine with `state` when the id
+            may be shared across jurisdictions; without it every match is returned.
+
+            '
+        personUuid:
+          type: string
+          description: Alias of `uuid` for direct record lookup (parity). Same semantics.
+        page:
+          type: integer
+          default: 1
+        perPage:
+          type: integer
+    OffendersIoResponse:
+      type: object
+      description: offenders.io envelope, returned verbatim for compat.
+      properties:
+        offenders:
+          type: array
+          items:
+            $ref: '#/components/schemas/OffendersIoOffender'
+        page:
+          type: integer
+        totalPages:
+          type: integer
+        error:
+          type: integer
+          nullable: true
+          description: 'offenders.io convention: present (e.g. 503) when the result set may be incomplete
+            (deadline-partial or a source errored).'
+    OffendersIoOffender:
+      type: object
+      description: 'offenders.io''s flat offender object — every one of their 38 keys, plus additive extras
+        (personUuid, county, stateData, matchConfidence). lat/lng default to -1 (their missing/needs-geocoding
+        sentinel), not null.
+
+        '
+      properties:
+        uuid:
+          type: string
+        personUuid:
+          type: string
+          description: Additive.
+        name:
+          type: string
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        firstName_nicknames:
+          type: array
+          items:
+            type: string
+          description: 'First-name nickname/variant expansion for search recall (parity with offenders.io
+            `firstName_nicknames`; e.g. "Jonathan" -> ["john","nathan"]). Mirrors the native Record.nicknames
+            field.
+
+            '
+          example:
+          - john
+          - johnny
+        aliases:
+          type: array
+          items:
+            type: object
+            properties:
+              givenName:
+                type: string
+              middleName:
+                type: string
+              surName:
+                type: string
+        dob:
+          type: string
+          nullable: true
+          description: 'UTC midnight ISO, e.g. `1990-01-15T00:00:00.000Z` — the incumbent''s shape, reproduced
+            for drop-in compatibility.
+
+
+            ★ **null when `dobPrecision` is `year`.** This timestamp format has no way to say "a birth
+            year, and nothing finer", and we will not fill the gap with a January-1 placeholder. The year
+            is not lost: the native `/v1/search` response carries `birthYear: 1976` for the same record.
+            Note the incumbent DOES emit a Jan-1 timestamp here for those registrants — so on this field
+            they look more complete than us and are in fact less accurate.
+
+            '
+        dobPrecision:
+          type: string
+          enum:
+          - exact
+          - year
+          - year_month
+          - unknown
+          description: See `Record.dobPrecision`. Authoritative — read it before trusting `dob`.
+        sex:
+          type: string
+          description: 'Free text, registry vocabulary, NOT an enum. "" when we hold nothing. "Male" and
+            "M" (and "F"/"Female") occur in the SAME response when a search spans registries — normalize
+            before grouping. MAINE and the DISTRICT OF COLUMBIA are a special case worth knowing: neither
+            registry''s own website publishes a sex anywhere, so these values come from the jurisdiction''s
+            own federal NSOPW feed and use that feed''s "M"/"F"/"U" vocabulary. Fill measured 2026-08-04:
+            ME 99.7% (2,880 of 2,888), DC 97.2% (1,028 of 1,058); the residue is records we could not
+            join with certainty and is left empty rather than guessed.
+
+            '
+        age:
+          type: string
+        race:
+          type: string
+          description: 'Free text, registry vocabulary, NOT an enum. "" when unknown. IMPORTANT: several
+            registries (California among them) publish ONE column covering race and ethnicity; we route
+            Hispanic values to `ethnicity` and everything else to `race`, so for those states the two
+            keys are MUTUALLY EXCLUSIVE and reading `race` alone drops every Hispanic registrant. California
+            measured 2026-08-04: race 51%, ethnicity 48%, either 99.4%. Compute coverage on (race || ethnicity).
+            ME and DC publish NO race on any surface they render (checked live 2026-08-04 on both of Maine''s
+            profile renderings, and on DC''s ArcGIS layer, roster and CSOSA bulletin) and their federal
+            feeds carry none either, so "" is final there, and there is no ethnicity to fall back to.
+            The national index (NSOPW) publishes no race, ethnicity, height, weight, eyeColor, hairColor
+            or marks on any record of any of the 158 jurisdictions it federates — its API carries ten
+            keys and none of these is among them. A person held by BOTH a state registry and the national
+            index is returned as ONE record carrying the STATE registry''s physical description, with
+            both registries listed in `sources[]`; a person only the national index reaches carries ""
+            for these keys. Tribal registrants are read from the tribe''s own per-registrant page and
+            carry them normally.
+
+            '
+        ethnicity:
+          type: string
+          description: 'Free text. "" is the common case (67%). Observed values include "Hispanic", "Non-Hispanic",
+            "Not Hispanic", "Unknown" — normalize before grouping. See `race` for the single-column registries.
+
+            '
+        height:
+          type: string
+        weight:
+          type: string
+        eyeColor:
+          type: string
+        hairColor:
+          type: string
+        marks:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zipcode:
+          type: string
+        county:
+          type: string
+          description: Additive.
+        lat:
+          type: number
+          description: -1 when missing.
+        lng:
+          type: number
+          description: -1 when missing.
+        locations:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              streetAddress:
+                type: string
+              city:
+                type: string
+              state:
+                type: string
+              zipCode:
+                type: string
+              county:
+                type: string
+              latitude:
+                type: number
+              longitude:
+                type: number
+              fromDate:
+                type: string
+              toDate:
+                type: string
+        crime:
+          type: string
+        riskLevel:
+          type: string
+          description: 'The registry''s own classification of this registrant, whichever kind that registry
+            publishes: a risk tier where one exists (`"Tier 3"`, `"MODERATE"`), otherwise the statutory
+            designation (`"Sexual Predator"`, `"Sexual Offender"`). `""` when the registry publishes neither.
+            **Not comparable across states**, and `""` never means low risk — many states run no risk
+            scheme at all. It is NOT a registration status: for whether the registrant is confined, absconded,
+            deported or deceased, read `stateData.status` or the `isAbsconder` boolean. Where a state
+            publishes a statutory DESIGNATION instead of a tier (**Florida**: `"Sexual Predator"` / `"Sexual
+            Offender"` / `"Juvenile Sexual Offender"`), that designation is carried in `stateData.designation`
+            and mirrored by `isPredator`; send `mode=extensive` and it also fills this key, since `stateData`
+            is only resolved in that mode.
+
+            '
+        registrationDate:
+          type: string
+          nullable: true
+        isAbsconder:
+          type: boolean
+          nullable: true
+        isPredator:
+          type: boolean
+          nullable: true
+        offenderUrl:
+          type: string
+        offenderImageUrl:
+          type: string
+        offenderImageUrlR2:
+          type: string
+          description: Their rehosted-CDN field — always empty for us.
+        jurisdiction:
+          type: string
+        sources:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              url:
+                type: string
+        content:
+          type: string
+          description: Pre-formatted HTML summary (parity).
+        createdAt:
+          type: string
+          nullable: true
+        updatedAt:
+          type: string
+          nullable: true
+        stateData:
+          oneOf:
+          - $ref: '#/components/schemas/StateData'
+          - type: 'null'
+          description: Additive; null unless mode=extensive.
+        matchConfidence:
+          type: number
+          nullable: true
+          description: Additive.
+    SignupBody:
+      type: object
+      required:
+      - email
+      - password
+      - orgName
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+        orgName:
+          type: string
+        acceptedTerms:
+          type: boolean
+          default: false
+          description: Must be true to sign up.
+    LoginBody:
+      type: object
+      required:
+      - email
+      - password
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+    AuthResult:
+      type: object
+      properties:
+        token:
+          type: string
+          description: 'Signed session token (use as Authorization: Bearer).'
+        account:
+          $ref: '#/components/schemas/Account'
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+        orgName:
+          type: string
+        email:
+          type: string
+          format: email
+        billingEnabled:
+          type: boolean
+        plan:
+          type: string
+          enum:
+          - metered
+        createdAt:
+          type: string
+          format: date-time
+    CreateKeyBody:
+      type: object
+      properties:
+        name:
+          type: string
+          default: Untitled key
+        freshness:
+          type: array
+          items:
+            type: string
+            enum:
+            - standard
+            - weekly
+            - daily
+          nullable: true
+          description: LEGACY/UNENFORCED. Freshness is a PER-REQUEST parameter on /v1/search and is NOT
+            provisioned on the key — any valid key may send `daily` or `weekly` and is billed accordingly.
+            This field is retained for compatibility and does not gate anything.
+        proof:
+          type: boolean
+          nullable: true
+          description: Whether the key may request proof docs. Defaults true.
+    ApiKey:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        maskedKey:
+          type: string
+          description: Prefix + ellipsis; the full secret is never re-shown.
+        createdAt:
+          type: string
+          format: date-time
+        lastUsedAt:
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          type: string
+          enum:
+          - active
+          - revoked
+        scopes:
+          type: object
+          properties:
+            freshness:
+              type: array
+              items:
+                type: string
+                enum:
+                - standard
+                - weekly
+                - daily
+            proof:
+              type: boolean
+    ApiKeyWithSecret:
+      allOf:
+      - $ref: '#/components/schemas/ApiKey'
+      - type: object
+        properties:
+          secret:
+            type: string
+            description: Full key secret — returned ONCE on create/rotate; only its hash is stored.
+    Usage:
+      type: object
+      properties:
+        periodStart:
+          type: string
+          format: date-time
+        periodEnd:
+          type: string
+          format: date-time
+        totalCalls:
+          type: integer
+        includedCalls:
+          type: integer
+          description: Calls included before overage (e.g. 2000).
+        currentSpend:
+          type: number
+        proofDocsBilled:
+          type: integer
+        proofSpend:
+          type: number
+        daily:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                description: YYYY-MM-DD
+              calls:
+                type: integer
+              cost:
+                type: number
+        byTier:
+          type: array
+          items:
+            type: object
+            properties:
+              tier:
+                type: string
+                enum:
+                - standard
+                - weekly
+                - daily
+              calls:
+                type: integer
+              cost:
+                type: number
+    TeamMember:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        role:
+          type: string
+          enum:
+          - owner
+        status:
+          type: string
+          enum:
+          - active
+        invitedAt:
+          type: string
+          format: date-time
+        lastActiveAt:
+          type: string
+          format: date-time
+    Billing:
+      type: object
+      properties:
+        billingEnabled:
+          type: boolean
+        paymentMethod:
+          type: object
+          nullable: true
+        currentSpend:
+          type: number
+        softCap:
+          type: number
+          nullable: true
+        invoices:
+          type: array
+          items:
+            type: object
+    AdminAccount:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        orgName:
+          type: string
+        billingEnabled:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        activeKeys:
+          type: integer
+        searchCount:
+          type: integer
+    WarmQuery:
+      type: object
+      description: An internal warm query (kept hot). curated or top-derived.
+      properties:
+        query:
+          $ref: '#/components/schemas/Query'
+        jurisdictions:
+          type: array
+          items:
+            type: string
+          nullable: true
+        locationScoped:
+          type: boolean
+          default: false
+        source:
+          type: string
+          enum:
+          - curated
+          - derived
+        frequency:
+          type: integer
+          description: Observed customer-search count (derived queries only).
+    WarmRunResult:
+      type: object
+      properties:
+        warmed:
+          type: integer
+        failed:
+          type: integer
+        freshness:
+          type: string
+          enum:
+          - standard
+          - weekly
+          - daily
+        startedAt:
+          type: string
+          format: date-time
+        durationMs:
+          type: integer
+    ScraperRun:
+      type: object
+      description: One scraper call within a search — the atomic diagnostic record.
+      properties:
+        ts:
+          type: string
+          format: date-time
+        scraper:
+          type: string
+        status:
+          type: string
+          enum:
+          - ok
+          - error
+          - restricted
+          - no_coverage
+        duration_ms:
+          type: integer
+        records:
+          type: integer
+        from_cache:
+          type: boolean
+        truncated:
+          type: boolean
+          description: Hit a pagination/detail cap.
+        pages:
+          type: integer
+          nullable: true
+        note:
+          type: string
+          nullable: true
+        error:
+          type: string
+          nullable: true
+        query_hash:
+          type: string
+          description: Ties run to a search, no PII.
+    ScraperHealth:
+      type: object
+      properties:
+        total_runs:
+          type: integer
+        scrapers:
+          type: array
+          items:
+            type: object
+            properties:
+              scraper:
+                type: string
+              runs:
+                type: integer
+              success_rate:
+                type: number
+              error_rate:
+                type: number
+              cache_hit_rate:
+                type: number
+              latency_ms:
+                type: object
+                properties:
+                  p50:
+                    type: integer
+                  p95:
+                    type: integer
+                  max:
+                    type: integer
+              avg_records:
+                type: number
+              truncated_runs:
+                type: integer
+              last_status:
+                type: string
+              last_error:
+                type: string
+                nullable: true
+    CacheStats:
+      type: object
+      properties:
+        hitRate:
+          type: number
+          description: Fraction of sync calls served from cache.
+        hotSetSize:
+          type: integer
+        lastWarmRunAt:
+          type: string
+          format: date-time
+          nullable: true
+        staleEntries:
+          type: integer
+        perRegistry:
+          type: array
+          items:
+            type: object
+            properties:
+              registry:
+                type: string
+              warmSuccess:
+                type: boolean
+              lastWarmedAt:
+                type: string
+                format: date-time
+    IngestStatus:
+      type: object
+      description: Per-registry nightly-ingest freshness view (GET /admin/ingest/status).
+      properties:
+        generatedAt:
+          type: string
+          format: date-time
+        cachedJurisdictions:
+          type: array
+          items:
+            type: string
+        totals:
+          type: object
+          properties:
+            present:
+              type: integer
+            dropped:
+              type: integer
+        lastRunSummary:
+          type: object
+          properties:
+            okCount:
+              type: integer
+            errorCount:
+              type: integer
+            totalRecords:
+              type: integer
+            dbMb:
+              type: number
+            oldestFreshnessHours:
+              type: number
+              nullable: true
+        registries:
+          type: array
+          items:
+            $ref: '#/components/schemas/IngestRegistryRow'
+    IngestRegistryRow:
+      type: object
+      properties:
+        jurisdiction:
+          type: string
+        acquisition:
+          type: string
+          description: bulk | enumerate | live | ""
+        status:
+          type: string
+          nullable: true
+        lastIngestedAt:
+          type: string
+          format: date-time
+          nullable: true
+        lastRunStartedAt:
+          type: string
+          format: date-time
+          nullable: true
+        lastRunFinishedAt:
+          type: string
+          format: date-time
+          nullable: true
+        stale:
+          type: boolean
+        recordCount:
+          type: object
+          properties:
+            present:
+              type: integer
+            dropped:
+              type: integer
+        runRecordCount:
+          type: integer
+        presentCount:
+          type: integer
+        droppedCount:
+          type: integer
+        error:
+          type: string
+          nullable: true
+        freshnessStamp:
+          type: string
+          format: date-time
+          nullable: true
+        freshnessAgeSeconds:
+          type: number
+          nullable: true
+        freshnessAgeHours:
+          type: number
+          nullable: true
+    IngestReport:
+      type: object
+      description: 'Latest per-run ingest report. When no run has produced one yet, only `available:false`
+        (+ note/reportDir) is returned.
+
+        '
+      properties:
+        available:
+          type: boolean
+        note:
+          type: string
+        reportDir:
+          type: string
+      additionalProperties: true
+externalDocs:
+  description: API documentation
+  url: https://offendersearch.app/docs
