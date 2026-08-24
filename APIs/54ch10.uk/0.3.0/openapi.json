@@ -1,0 +1,113 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "54ch10 Brief API",
+    "description": "Pre-interact JSON briefs for EVM addresses, tokens, and URLs. Analytics-only tooling — not financial, legal, or investment advice. Free tier 20/day/IP; paid keys via Stripe.",
+    "version": "0.3.0",
+    "contact": {
+      "name": "54ch10",
+      "url": "https://54ch10.uk",
+      "email": "brainpowerux@gmail.com"
+    },
+    "license": {
+      "name": "Proprietary",
+      "url": "https://54ch10.uk/LEGAL_DISCLAIMER.txt"
+    },
+    "x-apisguru-categories": ["security", "cryptocurrency"],
+    "x-logo": {
+      "url": "https://54ch10.uk/favicon.ico"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://54ch10.uk",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/v1/brief": {
+      "get": {
+        "operationId": "getBrief",
+        "summary": "Pre-interact risk brief",
+        "description": "Returns score (0–100, higher = more concerning), band, flags, summary, and sources[]. Live signals may include OpenPhish (URLs) and eth_getCode (EVM). Not clearance.",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["address", "token", "url"]
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 2048
+            },
+            "description": "Address, token id, or URL to brief"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Brief JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": { "type": "boolean" },
+                    "type": { "type": "string" },
+                    "q": { "type": "string" },
+                    "score": { "type": "number" },
+                    "band": {
+                      "type": "string",
+                      "enum": ["clear", "caution", "elevated", "critical", "unknown"]
+                    },
+                    "flags": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "summary": { "type": "string" },
+                    "sources": { "type": "array", "items": { "type": "object" } },
+                    "disclaimer": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "Invalid API key" },
+          "429": { "description": "Free tier rate limited" }
+        },
+        "security": [
+          {},
+          { "bearerAuth": [] }
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "getHealth",
+        "summary": "Health check",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "54k_",
+        "description": "Optional paid API key (54k_…)"
+      }
+    }
+  }
+}
