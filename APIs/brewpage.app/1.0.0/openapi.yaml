@@ -933,14 +933,16 @@ paths:
         schema:
           type: string
       requestBody:
+        required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:
                 file:
                   type: string
                   format: binary
+                  description: The file to upload. The original filename is taken from the multipart part headers
               required:
               - file
       responses:
@@ -2794,7 +2796,9 @@ components:
           format: date-time
           description: When the report was submitted
         reviewedAt:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
           description: When the report was most recently reviewed (null if never reviewed)
     ReportUpdateRequest:
