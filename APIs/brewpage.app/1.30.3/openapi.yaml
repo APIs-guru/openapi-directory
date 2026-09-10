@@ -124,37 +124,29 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Password
-        in: header
-        description: Access password via header
-        required: false
-        schema:
-          type: string
-      - name: p
-        in: query
-        description: Access password via query param (alternative to X-Password header)
-        required: false
-        schema:
-          type: string
+      security:
+      - {}
+      - ResourcePassword: []
+      - ResourcePasswordQuery: []
       responses:
         '200':
           description: Key value
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/KvGetResponse'
         '403':
           description: Wrong password
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/KvGetResponse'
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Store or key not found
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/KvGetResponse'
+                $ref: '#/components/schemas/ErrorResponse'
     put:
       tags:
       - KV
@@ -182,43 +174,39 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Owner-Token
-        in: header
-        description: Owner token returned at creation. Required for update and delete
-        required: true
-        schema:
-          type: string
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/KvUpsertKeyRequest'
         required: true
+      security:
+      - OwnerToken: []
       responses:
         '200':
           description: Key upserted
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/KvUpsertKeyResponse'
         '403':
           description: Missing or wrong owner token
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/KvUpsertKeyResponse'
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Store not found or expired
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/KvUpsertKeyResponse'
+                $ref: '#/components/schemas/ErrorResponse'
         '409':
           description: Key limit exceeded
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/KvUpsertKeyResponse'
+                $ref: '#/components/schemas/ErrorResponse'
     delete:
       tags:
       - KV
@@ -241,19 +229,23 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Owner-Token
-        in: header
-        description: Owner token returned at creation. Required for update and delete
-        required: true
-        schema:
-          type: string
+      security:
+      - OwnerToken: []
       responses:
         '204':
           description: Key deleted
         '403':
           description: Missing or wrong owner token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Store or key not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/json/{ns}/{id}:
     get:
       tags:
@@ -272,37 +264,30 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Password
-        in: header
-        description: Access password via header
-        required: false
-        schema:
-          type: string
-      - name: p
-        in: query
-        description: Access password via query param (alternative to X-Password header)
-        required: false
-        schema:
-          type: string
+      security:
+      - {}
+      - ResourcePassword: []
+      - ResourcePasswordQuery: []
       responses:
         '200':
           description: JSON content
           content:
-            '*/*':
+            application/json:
               schema:
-                type: string
+                description: |
+                  Raw JSON document, returned exactly as stored — object, array or scalar.
         '403':
           description: Wrong password
           content:
-            '*/*':
+            application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Document not found or expired
           content:
-            '*/*':
+            application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/ErrorResponse'
     put:
       tags:
       - JSON
@@ -325,37 +310,35 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Owner-Token
-        in: header
-        description: Owner token returned at creation. Required for update and delete
-        required: true
-        schema:
-          type: string
       requestBody:
         content:
           application/json:
             schema:
-              type: string
+              description: |
+                Any valid JSON document — object, array or scalar. Stored verbatim;
+                a body that is not valid JSON is rejected with 400.
         required: true
+      security:
+      - OwnerToken: []
       responses:
         '200':
           description: Document updated
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/JsonUpdateResponse'
         '403':
           description: Missing or wrong owner token
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/JsonUpdateResponse'
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Document not found or expired
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/JsonUpdateResponse'
+                $ref: '#/components/schemas/ErrorResponse'
     delete:
       tags:
       - JSON
@@ -373,19 +356,23 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Owner-Token
-        in: header
-        description: Owner token returned at creation. Required for update and delete
-        required: true
-        schema:
-          type: string
+      security:
+      - OwnerToken: []
       responses:
         '204':
           description: Document deleted
         '403':
           description: Missing or wrong owner token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Document not found or expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/html/{ns}/{id}:
     get:
       tags:
@@ -404,37 +391,29 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Password
-        in: header
-        description: Access password via header
-        required: false
-        schema:
-          type: string
-      - name: p
-        in: query
-        description: Access password via query param (alternative to X-Password header)
-        required: false
-        schema:
-          type: string
+      security:
+      - {}
+      - ResourcePassword: []
+      - ResourcePasswordQuery: []
       responses:
         '200':
           description: HTML content
           content:
-            '*/*':
+            text/html:
               schema:
                 type: string
         '403':
           description: Wrong password
           content:
-            '*/*':
+            application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Page not found or expired
           content:
-            '*/*':
+            application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/ErrorResponse'
     put:
       tags:
       - HTML
@@ -457,37 +436,33 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Owner-Token
-        in: header
-        description: Owner token returned at creation. Required for update and delete
-        required: true
-        schema:
-          type: string
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/HtmlUpdateRequest'
         required: true
+      security:
+      - OwnerToken: []
       responses:
         '200':
           description: Page updated
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/HtmlUpdateResponse'
         '403':
           description: Missing or wrong owner token
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/HtmlUpdateResponse'
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Page not found or expired
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/HtmlUpdateResponse'
+                $ref: '#/components/schemas/ErrorResponse'
     delete:
       tags:
       - HTML
@@ -505,19 +480,23 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Owner-Token
-        in: header
-        description: Owner token returned at creation. Required for update and delete
-        required: true
-        schema:
-          type: string
+      security:
+      - OwnerToken: []
       responses:
         '204':
           description: Page deleted
         '403':
           description: Missing or wrong owner token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Page not found or expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/kv:
     get:
       tags:
@@ -533,17 +512,14 @@ paths:
         schema:
           type: string
           default: public
-      - name: X-Owner-Token
-        in: header
-        description: Owner token to filter by ownership. Without token returns empty list
-        required: false
-        schema:
-          type: string
+      security:
+      - {}
+      - OwnerToken: []
       responses:
         '200':
           description: Store list
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 items:
@@ -601,25 +577,26 @@ paths:
             schema:
               $ref: '#/components/schemas/KvCreateStoreRequest'
         required: true
+      security: []
       responses:
         '201':
           description: Store created
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/KvCreateStoreResponse'
         '400':
           description: Invalid request parameters
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/KvCreateStoreResponse'
+                $ref: '#/components/schemas/ErrorResponse'
         '429':
           description: Rate limit exceeded
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/KvCreateStoreResponse'
+                $ref: '#/components/schemas/ErrorResponse'
   /api/json:
     get:
       tags:
@@ -635,17 +612,14 @@ paths:
         schema:
           type: string
           default: public
-      - name: X-Owner-Token
-        in: header
-        description: Owner token to filter by ownership. Without token returns empty list
-        required: false
-        schema:
-          type: string
+      security:
+      - {}
+      - OwnerToken: []
       responses:
         '200':
           description: Document list
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 items:
@@ -701,27 +675,30 @@ paths:
         content:
           application/json:
             schema:
-              type: string
+              description: |
+                Any valid JSON document — object, array or scalar. Stored verbatim;
+                a body that is not valid JSON is rejected with 400.
         required: true
+      security: []
       responses:
         '201':
           description: Document created
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/JsonCreateResponse'
         '400':
           description: Invalid JSON or request parameters
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/JsonCreateResponse'
+                $ref: '#/components/schemas/ErrorResponse'
         '429':
           description: Rate limit exceeded
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/JsonCreateResponse'
+                $ref: '#/components/schemas/ErrorResponse'
   /api/html:
     post:
       tags:
@@ -784,25 +761,26 @@ paths:
             schema:
               $ref: '#/components/schemas/HtmlUploadRequest'
         required: true
+      security: []
       responses:
         '201':
           description: Page created
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/HtmlUploadResponse'
         '400':
           description: Invalid request parameters
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/HtmlUploadResponse'
+                $ref: '#/components/schemas/ErrorResponse'
         '429':
           description: Rate limit exceeded
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/HtmlUploadResponse'
+                $ref: '#/components/schemas/ErrorResponse'
   /api/files:
     get:
       tags:
@@ -818,17 +796,14 @@ paths:
         schema:
           type: string
           default: public
-      - name: X-Owner-Token
-        in: header
-        description: Owner token to filter by ownership. Without token returns empty list
-        required: false
-        schema:
-          type: string
+      security:
+      - {}
+      - OwnerToken: []
       responses:
         '200':
           description: File list
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 items:
@@ -881,41 +856,44 @@ paths:
         schema:
           type: string
       requestBody:
+        required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:
                 file:
                   type: string
                   format: binary
+                  description: The file to upload. The original filename is taken from the multipart part headers
               required:
               - file
+      security: []
       responses:
         '201':
           description: File uploaded
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/FileUploadResponse'
         '400':
           description: Invalid request or file too large
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/FileUploadResponse'
+                $ref: '#/components/schemas/ErrorResponse'
         '415':
           description: Unsupported file type
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/FileUploadResponse'
+                $ref: '#/components/schemas/ErrorResponse'
         '429':
           description: Rate limit exceeded
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/FileUploadResponse'
+                $ref: '#/components/schemas/ErrorResponse'
   /{ns}/{id}:
     get:
       tags:
@@ -942,24 +920,16 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Password
-        in: header
-        description: Access password for protected resources
-        required: false
-        schema:
-          type: string
-      - name: p
-        in: query
-        description: Access password (query alternative to X-Password header)
-        required: false
-        schema:
-          type: string
       - name: dl
         in: query
         description: Force download as attachment
         required: false
         schema:
           type: boolean
+      security:
+      - {}
+      - ResourcePassword: []
+      - ResourcePasswordQuery: []
       responses:
         '200':
           description: OK
@@ -1010,8 +980,12 @@ paths:
               schema:
                 type: string
                 format: binary
-        '409':
-          description: Conflict — ns+id already exists. Retry with a different id or omit id to let the server generate one
+        '404':
+          description: Resource not found or expired — served as an HTML error page
+          content:
+            text/html:
+              schema:
+                type: string
   /{ns}/{id}/{sub}:
     get:
       tags:
@@ -1041,24 +1015,16 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Password
-        in: header
-        description: Access password for protected resources
-        required: false
-        schema:
-          type: string
-      - name: p
-        in: query
-        description: Access password (query alternative to X-Password header)
-        required: false
-        schema:
-          type: string
       - name: dl
         in: query
         description: Force download as attachment
         required: false
         schema:
           type: boolean
+      security:
+      - {}
+      - ResourcePassword: []
+      - ResourcePasswordQuery: []
       responses:
         '200':
           description: OK
@@ -1101,6 +1067,12 @@ paths:
               schema:
                 type: string
                 format: binary
+        '404':
+          description: Resource or sub-path not found or expired — served as an HTML error page
+          content:
+            text/html:
+              schema:
+                type: string
   /{key}.txt:
     get:
       tags:
@@ -1114,6 +1086,7 @@ paths:
         required: true
         schema:
           type: string
+      security: []
       responses:
         '200':
           description: Key file content
@@ -1149,11 +1122,12 @@ paths:
         schema:
           type: string
           example: Europe/Lisbon
+      security: []
       responses:
         '200':
           description: Platform statistics
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/StatsResponse'
   /api/sitemap.xml:
@@ -1164,6 +1138,7 @@ paths:
       description: Generates sitemap with static pages and all public gallery entries. Caddy should route /sitemap.xml to
         this endpoint
       operationId: sitemap
+      security: []
       responses:
         '200':
           description: Sitemap XML
@@ -1189,37 +1164,29 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Password
-        in: header
-        description: Access password via header
-        required: false
-        schema:
-          type: string
-      - name: p
-        in: query
-        description: Access password via query param (alternative to X-Password header)
-        required: false
-        schema:
-          type: string
+      security:
+      - {}
+      - ResourcePassword: []
+      - ResourcePasswordQuery: []
       responses:
         '200':
           description: Key list
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/KvListKeysResponse'
         '403':
           description: Wrong password
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/KvListKeysResponse'
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Store not found or expired
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/KvListKeysResponse'
+                $ref: '#/components/schemas/ErrorResponse'
     delete:
       tags:
       - KV
@@ -1237,19 +1204,23 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Owner-Token
-        in: header
-        description: Owner token required to delete
-        required: true
-        schema:
-          type: string
+      security:
+      - OwnerToken: []
       responses:
         '204':
           description: Store deleted
         '403':
           description: Invalid owner token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Store not found or expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/gallery:
     get:
       tags:
@@ -1290,13 +1261,20 @@ paths:
           - date
           - views
           default: date
+      security: []
       responses:
         '200':
           description: Paginated gallery items
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/GalleryResponse'
+        '400':
+          description: Invalid pagination or sort parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/files/{ns}/{id}:
     get:
       tags:
@@ -1315,24 +1293,16 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Password
-        in: header
-        description: Access password via header
-        required: false
-        schema:
-          type: string
-      - name: p
-        in: query
-        description: Access password via query param (alternative to X-Password header)
-        required: false
-        schema:
-          type: string
       - name: dl
         in: query
         description: Force download as attachment
         required: false
         schema:
           type: boolean
+      security:
+      - {}
+      - ResourcePassword: []
+      - ResourcePasswordQuery: []
       responses:
         '200':
           description: File content
@@ -1344,17 +1314,15 @@ paths:
         '403':
           description: Wrong password
           content:
-            '*/*':
+            application/json:
               schema:
-                type: string
-                format: byte
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: File not found or expired
           content:
-            '*/*':
+            application/json:
               schema:
-                type: string
-                format: byte
+                $ref: '#/components/schemas/ErrorResponse'
     delete:
       tags:
       - Files
@@ -1372,19 +1340,23 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Owner-Token
-        in: header
-        description: Owner token returned at creation. Required for update and delete
-        required: true
-        schema:
-          type: string
+      security:
+      - OwnerToken: []
       responses:
         '204':
           description: File deleted
         '403':
           description: Missing or wrong owner token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: File not found or expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/sites:
     post:
       tags:
@@ -1487,6 +1459,7 @@ paths:
                     - about.html
                     - gallery.html
                     - contact.html
+      security: []
       responses:
         '201':
           description: Site uploaded
@@ -1544,12 +1517,8 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Owner-Token
-        in: header
-        description: Owner token returned at creation
-        required: true
-        schema:
-          type: string
+      security:
+      - OwnerToken: []
       responses:
         '200':
           description: Site info
@@ -1586,12 +1555,8 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Owner-Token
-        in: header
-        description: Owner token returned at creation. Required for delete
-        required: true
-        schema:
-          type: string
+      security:
+      - OwnerToken: []
       responses:
         '204':
           description: Site deleted
@@ -1631,18 +1596,10 @@ paths:
         description: 'Relative file path within the site. May contain slashes for nested paths, e.g.: assets/css/main.css'
         schema:
           type: string
-      - name: X-Password
-        in: header
-        description: Access password via header
-        required: false
-        schema:
-          type: string
-      - name: p
-        in: query
-        description: Access password via query param
-        required: false
-        schema:
-          type: string
+      security:
+      - {}
+      - ResourcePassword: []
+      - ResourcePasswordQuery: []
       responses:
         '200':
           description: File content
@@ -1677,6 +1634,7 @@ paths:
             schema:
               $ref: '#/components/schemas/ReportRequest'
         required: true
+      security: []
       responses:
         '201':
           description: Report accepted
@@ -1704,12 +1662,6 @@ paths:
       description: List abuse reports with optional status filtering and pagination. Requires admin password
       operationId: listReports
       parameters:
-      - name: X-Admin-Password
-        in: header
-        description: Admin password
-        required: true
-        schema:
-          type: string
       - name: status
         in: query
         description: Filter by report status
@@ -1737,6 +1689,8 @@ paths:
           type: integer
           format: int32
           default: 0
+      security:
+      - AdminPassword: []
       responses:
         '200':
           description: Reports list
@@ -1768,12 +1722,8 @@ paths:
         schema:
           type: string
           pattern: '^[A-Za-z0-9]{10}$'
-      - name: X-Admin-Password
-        in: header
-        description: Admin password
-        required: true
-        schema:
-          type: string
+      security:
+      - AdminPassword: []
       responses:
         '200':
           description: Report detail
@@ -1807,18 +1757,14 @@ paths:
         schema:
           type: string
           pattern: '^[A-Za-z0-9]{10}$'
-      - name: X-Admin-Password
-        in: header
-        description: Admin password
-        required: true
-        schema:
-          type: string
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ReportUpdateRequest'
         required: true
+      security:
+      - AdminPassword: []
       responses:
         '200':
           description: Updated report detail
@@ -1857,12 +1803,6 @@ paths:
         Filters are mutually exclusive and applied in priority order: `resource` > `ip` > (none, returns most recent).
       operationId: listAccess
       parameters:
-      - name: X-Admin-Password
-        in: header
-        description: Admin password
-        required: true
-        schema:
-          type: string
       - name: resource
         in: query
         description: Filter events by resource ID (e.g. a 10-character short ID). Takes priority over `ip`
@@ -1891,6 +1831,8 @@ paths:
           type: integer
           format: int32
           default: 0
+      security:
+      - AdminPassword: []
       responses:
         '200':
           description: Access events list, most recent first
@@ -1917,12 +1859,6 @@ paths:
         Requires admin password.
       operationId: accessStats
       parameters:
-      - name: X-Admin-Password
-        in: header
-        description: Admin password
-        required: true
-        schema:
-          type: string
       - name: days
         in: query
         description: Number of days to look back from now
@@ -1931,6 +1867,8 @@ paths:
           type: integer
           format: int32
           default: 7
+      security:
+      - AdminPassword: []
       responses:
         '200':
           description: Aggregated access stats
@@ -1965,21 +1903,22 @@ paths:
         required: true
         schema:
           type: string
-      - name: X-Owner-Token
-        in: header
-        description: Owner token to verify (constant-time match)
-        required: false
-        schema:
-          type: string
+      security:
+      - {}
+      - OwnerToken: []
       responses:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/OwnerCheckResponse'
         '404':
           description: Resource does not exist or has expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /preview-html/{ns}/{id}:
     get:
       tags:
@@ -1998,6 +1937,7 @@ paths:
         required: true
         schema:
           type: string
+      security: []
       responses:
         '200':
           description: HTML stub with OG meta (or generic stub when resource is missing)
@@ -2028,6 +1968,7 @@ paths:
         required: false
         schema:
           type: string
+      security: []
       responses:
         '200':
           description: PNG image bytes
@@ -2043,6 +1984,33 @@ paths:
         '429':
           description: Per-IP rate limit exceeded
 components:
+  securitySchemes:
+    OwnerToken:
+      type: apiKey
+      in: header
+      name: X-Owner-Token
+      description: |
+        Owner token returned when the resource was created. Proves ownership for update/delete and
+        scopes list endpoints to the caller's own resources. On create endpoints the same header is a
+        plain request parameter (it groups new resources under an existing owner), not a credential.
+    ResourcePassword:
+      type: apiKey
+      in: header
+      name: X-Password
+      description: |
+        Access password for a password-protected resource. Omit for resources published without a
+        password. On create endpoints X-Password is a plain request parameter that sets the password
+        of the new resource, not a credential.
+    ResourcePasswordQuery:
+      type: apiKey
+      in: query
+      name: p
+      description: Access password as a query parameter — alternative to the X-Password header.
+    AdminPassword:
+      type: apiKey
+      in: header
+      name: X-Admin-Password
+      description: Admin password, required by every /api/admin/** endpoint.
   schemas:
     OwnerCheckResponse:
       type: object
@@ -2664,6 +2632,19 @@ components:
           type: string
           format: date-time
           description: ISO-8601 timestamp of when the error occurred
+        result:
+          type: object
+          description: Machine-readable outcome envelope accompanying the error
+          properties:
+            code:
+              type: string
+              description: Outcome code, e.g. failed
+            action:
+              type: string
+              description: What the server did with the request, e.g. rejected or unavailable
+            reason:
+              type: string
+              description: Same text as message, repeated for clients reading only the result envelope
     ReportRequest:
       type: object
       required:
