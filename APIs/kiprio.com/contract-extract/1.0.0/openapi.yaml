@@ -1,0 +1,64 @@
+openapi: 3.0.3
+servers:
+  - url: https://kiprio.com/v1/contract-extract
+info:
+  description: >-
+    Extract parties, dates, payment terms, governing law, and dispute resolution
+    clauses from raw contract text as structured JSON. BYOK — caller supplies
+    their own Anthropic API key. Free tier available.
+  title: Contract Clause Extraction API
+  version: 1.0.0
+  x-apisguru-categories:
+    - text
+    - documents
+  x-logo:
+    url: https://kiprio.com/logo.png
+  x-origin:
+    - format: openapi
+      url: https://kiprio.com/v1/contract-extract/openapi.json
+      version: '3.0'
+  x-providerName: kiprio.com
+  x-serviceName: contract-extract
+externalDocs:
+  description: API documentation
+  url: https://kiprio.com/contract-extract-api/
+paths:
+  /:
+    post:
+      summary: Extract structured clauses from contract text
+      operationId: contractExtract
+      parameters:
+        - name: X-Anthropic-Key
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Caller-supplied Anthropic API key (BYOK)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+      responses:
+        '200':
+          description: Extracted contract clauses
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  parties:
+                    type: object
+                  dates:
+                    type: object
+                  payment_terms:
+                    type: object
+                  governing_law:
+                    type: string
+                  dispute_resolution:
+                    type: string
+                  confidence:
+                    type: object
