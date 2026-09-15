@@ -1,0 +1,245 @@
+openapi: 3.0.3
+info:
+  title: SSL Certificate Inspector API
+  description: Inspect SSL/TLS certificates for any domain. Returns expiry, issuer,
+    SANs, protocol, cipher, and a letter grade (A+ to F).
+  version: 1.0.0
+  contact:
+    name: kiprio.com
+    url: https://kiprio.com
+    email: hello@kiprio.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  x-apisguru-categories:
+  - security
+  x-logo:
+    url: https://kiprio.com/logo.png
+  x-origin:
+  - format: openapi
+    url: https://kiprio.com/v1/ssl/openapi.json
+    version: '3.0'
+  x-providerName: kiprio.com
+  x-serviceName: ssl
+servers:
+- url: https://kiprio.com/v1/ssl
+tags:
+- name: ssl
+  description: SSL Certificate Inspector API
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key from https://kiprio.com/dashboard
+paths:
+  /health:
+    get:
+      tags:
+      - ssl
+      summary: Health check
+      operationId: ssl_health
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  service:
+                    type: string
+                    example: ssl
+  /demo:
+    get:
+      tags:
+      - ssl
+      summary: Inspect SSL certificate (demo, IP rate-limited)
+      operationId: ssl_demo
+      parameters:
+      - name: domain
+        in: query
+        required: true
+        schema:
+          type: string
+        example: example.com
+      responses:
+        '200':
+          description: Certificate info
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  domain:
+                    type: string
+                  valid:
+                    type: boolean
+                  expires_at:
+                    type: string
+                    format: date-time
+                  days_remaining:
+                    type: integer
+                  issuer:
+                    type: string
+                  subject:
+                    type: string
+                  sans:
+                    type: array
+                    items:
+                      type: string
+                  chain_depth:
+                    type: integer
+                  protocol:
+                    type: string
+                    example: TLSv1.3
+                  cipher:
+                    type: string
+                  grade:
+                    type: string
+                    enum:
+                    - A+
+                    - A
+                    - B
+                    - C
+                    - F
+                  tier:
+                    type: string
+        '400':
+          description: Invalid domain
+        '429':
+          description: Rate limit exceeded
+  /:
+    get:
+      tags:
+      - ssl
+      summary: Inspect SSL certificate (API key required)
+      operationId: ssl_inspect_get
+      security:
+      - ApiKeyAuth: []
+      parameters:
+      - name: domain
+        in: query
+        required: true
+        schema:
+          type: string
+        example: example.com
+      responses:
+        '200':
+          description: Certificate info
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  domain:
+                    type: string
+                  valid:
+                    type: boolean
+                  expires_at:
+                    type: string
+                    format: date-time
+                  days_remaining:
+                    type: integer
+                  issuer:
+                    type: string
+                  subject:
+                    type: string
+                  sans:
+                    type: array
+                    items:
+                      type: string
+                  chain_depth:
+                    type: integer
+                  protocol:
+                    type: string
+                    example: TLSv1.3
+                  cipher:
+                    type: string
+                  grade:
+                    type: string
+                    enum:
+                    - A+
+                    - A
+                    - B
+                    - C
+                    - F
+                  tier:
+                    type: string
+        '400':
+          description: Invalid domain
+        '401':
+          description: Unauthorised
+        '429':
+          description: Rate limit exceeded
+    post:
+      tags:
+      - ssl
+      summary: Inspect SSL certificate (POST)
+      operationId: ssl_inspect_post
+      security:
+      - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - domain
+              properties:
+                domain:
+                  type: string
+                  example: example.com
+      responses:
+        '200':
+          description: Certificate info
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  domain:
+                    type: string
+                  valid:
+                    type: boolean
+                  expires_at:
+                    type: string
+                    format: date-time
+                  days_remaining:
+                    type: integer
+                  issuer:
+                    type: string
+                  subject:
+                    type: string
+                  sans:
+                    type: array
+                    items:
+                      type: string
+                  chain_depth:
+                    type: integer
+                  protocol:
+                    type: string
+                    example: TLSv1.3
+                  cipher:
+                    type: string
+                  grade:
+                    type: string
+                    enum:
+                    - A+
+                    - A
+                    - B
+                    - C
+                    - F
+                  tier:
+                    type: string
+        '400':
+          description: Invalid domain
+        '401':
+          description: Unauthorised
+        '429':
+          description: Rate limit exceeded

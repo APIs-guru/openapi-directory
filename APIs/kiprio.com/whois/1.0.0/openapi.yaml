@@ -1,0 +1,30 @@
+openapi: 3.0.3
+servers:
+  - url: https://kiprio.com/v1/whois
+info:
+  description: >-
+    Look up WHOIS / RDAP data for any domain. Returns registrar, registration
+    dates, nameservers, and domain status using the RDAP bootstrap service.
+    No API key required for free tier.
+  title: WHOIS / Domain Lookup API
+  version: 1.0.0
+  x-apisguru-categories:
+    - domain
+  x-logo:
+    url: https://kiprio.com/logo.png
+  x-origin:
+    - format: openapi
+      url: https://kiprio.com/v1/whois/openapi.json
+paths:
+  /lookup:
+    get:
+      summary: Look up WHOIS/RDAP data for a domain
+      parameters:
+        - name: domain
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: WHOIS/RDAP data for the domain
