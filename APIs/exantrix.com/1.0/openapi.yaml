@@ -1,0 +1,176 @@
+openapi: 3.0.3
+info:
+  title: Exantrix seller API
+  version: "1.0"
+  description: |
+    API vendeur de la marketplace Exantrix (impression 3D, DTF, textile, flocage, decoupe).
+    Documentation : https://exantrix.com/extensions/api (FR), https://exantrix.com/en/extensions/api (EN).
+    Authentification : en-tete `Authorization: Bearer <jeton>` (jeton genere dans l'espace vendeur).
+    Limite : 600 requetes par 10 minutes et par jeton.
+  contact: { name: Exantrix, url: https://exantrix.com/contact }
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    url: https://cdn.exantrix.com/static/img/logo-impresion-3d-dtf-exantrix.webp
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/tony-dev-web/exantrix-api/main/openapi.yaml
+      version: "3.0"
+  x-providerName: exantrix.com
+externalDocs:
+  url: https://exantrix.com/en/extensions/api
+  description: Seller API documentation
+servers:
+  - url: https://exantrix.com/api/v1
+security:
+  - jeton: []
+components:
+  securitySchemes:
+    jeton: { type: http, scheme: bearer }
+  schemas:
+    Erreur:
+      type: object
+      properties: { erreur: { type: string } }
+    Fiche:
+      type: object
+      required: [reference, titre, categorie, prix_ttc]
+      properties:
+        reference: { type: string, maxLength: 50, description: Identifiant unique cote boutique (SKU) }
+        titre: { type: string, maxLength: 60 }
+        categorie: { type: string, enum: [3d, dtf, textile, flocage, decoupe] }
+        prix_ttc: { type: number, minimum: 0.01, description: Prix TTC en euros }
+        stock: { type: integer, minimum: 0, default: 1 }
+        images: { type: array, maxItems: 5, items: { type: string, format: uri } }
+        description: { type: string, maxLength: 160 }
+        information: { type: string, maxLength: 1255 }
+        marque: { type: string, maxLength: 50 }
+        sous_categorie: { type: string, maxLength: 70 }
+        url_boutique: { type: string, maxLength: 150 }
+    Produit:
+      type: object
+      properties:
+        reference: { type: string }
+        id: { type: integer }
+        titre: { type: string }
+        prix_ttc: { type: string }
+        stock: { type: integer }
+        categorie: { type: string }
+        url: { type: string }
+        image: { type: string }
+        visible: { type: boolean }
+        moderation: { type: string, enum: [attente, accepte, refuse] }
+        cree: { type: boolean }
+    Ligne:
+      type: object
+      properties:
+        reference: { type: string }
+        produit_id: { type: integer }
+        titre: { type: string }
+        quantite: { type: integer }
+        prix_ttc: { type: string }
+        total_ttc: { type: string }
+        couleur: { type: string }
+        taille: { type: string }
+        position: { type: string }
+        texte_3d: { type: string }
+        renseignement: { type: string }
+    Commande:
+      type: object
+      properties:
+        id: { type: integer }
+        statut: { type: string }
+        date: { type: string }
+        transporteur: { type: string }
+        suivi: { type: string }
+        livraison:
+          type: object
+          properties:
+            nom: { type: string }
+            prenom: { type: string }
+            adresse: { type: string }
+            code_postal: { type: string }
+            ville: { type: string }
+            telephone: { type: string }
+            email: { type: string }
+            mode: { type: string }
+        lignes: { type: array, items: { $ref: "#/components/schemas/Ligne" } }
+        total_vendeur_ttc: { type: string }
+    Webhook:
+      type: object
+      description: Corps envoye en POST a l'URL de notification, signe par l'en-tete X-Exantrix-Signature (sha256= + HMAC-SHA256 hex du corps, cle = jeton).
+      properties:
+        evenement: { type: string, enum: [commande.payee] }
+        commande: { $ref: "#/components/schemas/Commande" }
+  responses:
+    NonAutorise: { description: Jeton invalide, content: { application/json: { schema: { $ref: "#/components/schemas/Erreur" } } } }
+paths:
+  /moi:
+    get:
+      summary: Compte vendeur
+      responses:
+        "200":
+          description: Statut, autorisation de vente, commission, boutique, webhook
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vendeur: { type: string }
+                  vendeur_id: { type: integer }
+                  statut: { type: string }
+                  peut_vendre: { type: boolean }
+                  commission: { type: string }
+                  boutique: { type: string }
+                  webhook: { type: string }
+        "401": { $ref: "#/components/responses/NonAutorise" }
+  /produits:
+    get:
+      summary: Produits du vendeur
+      responses:
+        "200": { description: Liste, content: { application/json: { schema: { type: object, properties: { produits: { type: array, items: { $ref: "#/components/schemas/Produit" } } } } } } }
+    put:
+      summary: Creer ou mettre a jour par reference (200 max par appel)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object, required: [produits], properties: { produits: { type: array, maxItems: 200, items: { $ref: "#/components/schemas/Fiche" } } } }
+      responses:
+        "200":
+          description: Fiches traitees et erreurs (400 si aucune fiche valide)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  produits: { type: array, items: { $ref: "#/components/schemas/Produit" } }
+                  erreurs: { type: array, items: { type: object, properties: { reference: { type: string }, erreur: { type: string } } } }
+  /produits/{reference}/stock:
+    patch:
+      summary: Mettre a jour le stock
+      parameters: [{ name: reference, in: path, required: true, schema: { type: string } }]
+      requestBody: { required: true, content: { application/json: { schema: { type: object, required: [stock], properties: { stock: { type: integer, minimum: 0 } } } } } }
+      responses:
+        "200": { description: Stock mis a jour }
+        "404": { description: Reference inconnue }
+  /produits/{reference}:
+    delete:
+      summary: Retirer des listes (stock 0), sans effacer
+      parameters: [{ name: reference, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200": { description: Retire }
+        "404": { description: Reference inconnue }
+  /commandes:
+    get:
+      summary: Commandes payees contenant des produits du vendeur (500 dernieres)
+      parameters: [{ name: depuis, in: query, required: false, schema: { type: string, format: date }, description: AAAA-MM-JJ }]
+      responses:
+        "200": { description: Liste, content: { application/json: { schema: { type: object, properties: { commandes: { type: array, items: { $ref: "#/components/schemas/Commande" } } } } } } }
+  /commandes/{id}/expedier:
+    post:
+      summary: Declarer l'expedition
+      parameters: [{ name: id, in: path, required: true, schema: { type: integer } }]
+      requestBody: { required: true, content: { application/json: { schema: { type: object, required: [suivi], properties: { transporteur: { type: string, maxLength: 50 }, suivi: { type: string, maxLength: 100 } } } } } }
+      responses:
+        "200": { description: Commande passee en EXPEDIEE }
+        "404": { description: Commande introuvable }
