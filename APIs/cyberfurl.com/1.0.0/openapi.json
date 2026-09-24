@@ -1,0 +1,251 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "CyberFurl External Attack Surface & Threat Intelligence API",
+    "description": "Enterprise-grade continuous External Attack Surface Management (EASM), DNS security hygiene, email authentication (SPF, DKIM, DMARC, BIMI), SSL/TLS certificate analysis, open port scanning, and threat intelligence API.",
+    "version": "1.0.0",
+    "x-providerName": "cyberfurl.com",
+    "x-serviceName": "easm-threat-intel",
+    "x-apisguru-categories": [
+      "security",
+      "developer_tools",
+      "tools"
+    ],
+    "x-logo": {
+      "url": "https://cyberfurl.com/cyberfurl-logo-exact.png",
+      "backgroundColor": "#090D16"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "version": "3.0.3",
+        "url": "https://cyberfurl.com/openapi.json"
+      }
+    ],
+    "contact": {
+      "name": "CyberFurl Support",
+      "url": "https://cyberfurl.com",
+      "email": "cyberfurl9@gmail.com"
+    },
+    "license": {
+      "name": "Proprietary / Free Tier Available",
+      "url": "https://cyberfurl.com/terms"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://cyberfurl.com/api",
+      "description": "Production API Server"
+    }
+  ],
+  "paths": {
+    "/dnstools/dns-scan/": {
+      "post": {
+        "summary": "Run comprehensive DNS scan",
+        "description": "Scans a domain for all standard DNS records, DNSSEC configuration, zone transfer vulnerabilities, and caching resolver behavior.",
+        "operationId": "runDnsScan",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["domain"],
+                "properties": {
+                  "domain": {
+                    "type": "string",
+                    "example": "cyberfurl.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Comprehensive DNS scan results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "domain": { "type": "string" },
+                    "status": { "type": "string" },
+                    "records": { "type": "object" },
+                    "dnssec": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dnstools/dns-records/{domain}/": {
+      "get": {
+        "summary": "Get all DNS records",
+        "description": "Retrieves active A, AAAA, MX, NS, TXT, CNAME, and SOA records for the specified target domain.",
+        "operationId": "getDnsRecords",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "cyberfurl.com"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DNS records retrieved successfully"
+          }
+        }
+      }
+    },
+    "/dnstools/dnssec/{domain}/": {
+      "get": {
+        "summary": "Validate DNSSEC",
+        "description": "Validates DNSSEC key records (DNSKEY, DS, RRSIG) and verifies cryptographic chain of trust from root.",
+        "operationId": "validateDnssec",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "cyberfurl.com"
+          }
+        ],
+        "responses": {
+          "200": { "description": "DNSSEC validation report" }
+        }
+      }
+    },
+    "/emailtools/email-scan/": {
+      "post": {
+        "summary": "Run full email security posture scan",
+        "description": "Analyzes SPF, DKIM, DMARC, BIMI, MTA-STS, and TLS-RPT policies to detect email spoofing and deliverability flaws.",
+        "operationId": "runEmailScan",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["domain"],
+                "properties": {
+                  "domain": { "type": "string", "example": "cyberfurl.com" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Email security assessment results" }
+        }
+      }
+    },
+    "/emailtools/{domain}/spf/": {
+      "get": {
+        "summary": "Check SPF record",
+        "description": "Validates Sender Policy Framework record, DNS lookup count, mechanism syntax, and CIDR blocks.",
+        "operationId": "checkSpf",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "cyberfurl.com"
+          }
+        ],
+        "responses": { "200": { "description": "SPF inspection results" } }
+      }
+    },
+    "/emailtools/{domain}/dmarc/": {
+      "get": {
+        "summary": "Check DMARC policy",
+        "description": "Evaluates DMARC record enforcement (none, quarantine, reject), percentage coverage, and aggregate reporting endpoints.",
+        "operationId": "checkDmarc",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "cyberfurl.com"
+          }
+        ],
+        "responses": { "200": { "description": "DMARC record and alignment policy" } }
+      }
+    },
+    "/subdomains/{domain}/": {
+      "get": {
+        "summary": "Enumerate external subdomains",
+        "description": "Performs passive external attack surface enumeration to uncover exposed subdomains and shadow infrastructure.",
+        "operationId": "enumerateSubdomains",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "cyberfurl.com"
+          }
+        ],
+        "responses": { "200": { "description": "List of discovered subdomains" } }
+      }
+    },
+    "/check-typosquatting/{domain}/": {
+      "get": {
+        "summary": "Typosquatting & Impersonation Check",
+        "description": "Scans for permutation variations, homoglyphs, and potential phishing domains impersonating the brand.",
+        "operationId": "checkTyposquatting",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "cyberfurl.com"
+          }
+        ],
+        "responses": { "200": { "description": "Discovered lookalike and impersonation domains" } }
+      }
+    },
+    "/port-scan/{host}/": {
+      "get": {
+        "summary": "External port scan",
+        "description": "Probes common perimeter network ports (80, 443, 21, 22, 25, 3306, 5432, 8080, 8443) for unintended exposure.",
+        "operationId": "scanPorts",
+        "parameters": [
+          {
+            "name": "host",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "cyberfurl.com"
+          }
+        ],
+        "responses": { "200": { "description": "Open port enumeration report" } }
+      }
+    },
+    "/iptools/ip-lookup/{ip}/": {
+      "get": {
+        "summary": "IP Geolocation and ASN intelligence",
+        "description": "Returns autonomous system number (ASN), organization name, geographic location, and hosting provider metadata.",
+        "operationId": "lookupIp",
+        "parameters": [
+          {
+            "name": "ip",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "1.1.1.1"
+          }
+        ],
+        "responses": { "200": { "description": "IP and ASN intelligence profile" } }
+      }
+    }
+  }
+}
