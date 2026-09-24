@@ -1,0 +1,204 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Eczaneler.ORG Nöbetçi Eczane REST API",
+    "description": "Türkiye (81 il) ve KKTC genelindeki tüm güncel nöbetçi eczaneler, il/ilçe sorguları ve GPS koordinat bazlı en yakın eczane sorgulama REST API servisi.",
+    "version": "2.0.0",
+    "x-providerName": "eczaneler.org",
+    "x-serviceName": "duty-pharmacies",
+    "x-apisguru-categories": [
+      "health",
+      "location",
+      "open_data"
+    ],
+    "x-logo": {
+      "url": "https://eczaneler.org/images/logo.png",
+      "backgroundColor": "#FFFFFF"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "version": "3.0.3",
+        "url": "https://eczaneler.org/openapi.json"
+      }
+    ],
+    "contact": {
+      "name": "Eczaneler.ORG API Destek",
+      "url": "https://eczaneler.org/nobetci-eczane-api",
+      "email": "mehmeterdogan080@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.eczaneler.org/v2",
+      "description": "Üretim (Production) API Sunucusu"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Api-Key",
+        "description": "Eczaneler.ORG API Anahtarı"
+      }
+    },
+    "schemas": {
+      "Coordinates": {
+        "type": "object",
+        "properties": {
+          "lat": { "type": "number", "example": 37.03424072 },
+          "lng": { "type": "number", "example": 35.30810547 }
+        }
+      },
+      "Pharmacy": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1204 },
+          "city_id": { "type": "integer", "example": 1 },
+          "district_id": { "type": "integer", "example": 1757 },
+          "name": { "type": "string", "example": "Aygül Eczanesi" },
+          "phone": { "type": "string", "example": "05070251485" },
+          "city": { "type": "string", "example": "Adana" },
+          "district": { "type": "string", "example": "Çukurova" },
+          "locality": { "type": "string", "example": "Mahfesığmaz" },
+          "address": { "type": "string", "example": "MAHFESIĞMAZ MAH. ŞEHİTLER BULV. KAROL SİTESİ NO:14/L" },
+          "address_description": { "type": "string", "example": "Karol Sitesi altı, Şehitler Bulvarı üzeri" },
+          "sentry_date": { "type": "string", "example": "2026-09-24" },
+          "is_sentry": { "type": "boolean", "example": true },
+          "workingHours": { "type": "string", "example": "08:00 - 23:59" },
+          "note": { "type": "string", "example": "" },
+          "status": { "type": "string", "example": "publish" },
+          "coordinates": { "$ref": "#/components/schemas/Coordinates" },
+          "map_link": { "type": "string", "example": "https://www.google.com/maps/search/?api=1&query=37.03424072,35.30810547" },
+          "distance": { "type": "number", "description": "Metre cinsinden mesafe (sadece nearby sorgularında döner)", "example": 450.5 }
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "total": { "type": "integer", "example": 5 },
+          "per_page": { "type": "integer", "example": 25 },
+          "current_page": { "type": "integer", "example": 1 },
+          "total_pages": { "type": "integer", "example": 1 },
+          "has_more": { "type": "boolean", "example": false }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/pharmacies/sentry-pharmacies": {
+      "get": {
+        "summary": "Tüm Nöbetçi Eczaneleri Listele",
+        "description": "Türkiye ve KKTC genelinde anlık tüm nöbetçi eczaneleri listeler.",
+        "parameters": [
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "default": 25 } },
+          { "name": "page", "in": "query", "schema": { "type": "integer", "default": 1 } }
+        ],
+        "responses": {
+          "200": { "description": "Başarılı liste" },
+          "401": { "description": "Geçersiz API Anahtarı" }
+        }
+      }
+    },
+    "/pharmacies/sentry-city-list/{city}": {
+      "get": {
+        "summary": "İl Bazlı Nöbetçi Eczaneleri Listele",
+        "parameters": [
+          { "name": "city", "in": "path", "required": true, "description": "İl slug (istanbul) veya Şehir ID (34)", "schema": { "type": "string" } },
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "default": 25 } },
+          { "name": "page", "in": "query", "schema": { "type": "integer", "default": 1 } }
+        ],
+        "responses": {
+          "200": { "description": "İldeki nöbetçi eczaneler listesi" }
+        }
+      }
+    },
+    "/pharmacies/sentry-district-list/{city}/{district}": {
+      "get": {
+        "summary": "İlçe Bazlı Nöbetçi Eczaneleri Listele",
+        "parameters": [
+          { "name": "city", "in": "path", "required": true, "description": "İl slug veya ID", "schema": { "type": "string" } },
+          { "name": "district", "in": "path", "required": true, "description": "İlçe slug veya ID", "schema": { "type": "string" } },
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "default": 25 } },
+          { "name": "page", "in": "query", "schema": { "type": "integer", "default": 1 } }
+        ],
+        "responses": {
+          "200": { "description": "İlçedeki nöbetçi eczaneler listesi" }
+        }
+      }
+    },
+    "/pharmacies/pharmacies-nearby": {
+      "post": {
+        "summary": "GPS Koordinatları İle En Yakın Eczaneleri Bul",
+        "description": "Enlem ve boylam bazlı en yakın eczaneleri metre sırasına göre döner.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["lat", "lon"],
+                "properties": {
+                  "lat": { "type": "number", "example": 41.0082 },
+                  "lon": { "type": "number", "example": 28.9784 },
+                  "is_sentry": { "type": "integer", "enum": [0, 1], "default": 1, "description": "1: Yalnızca nöbetçiler, 0: Tümü" },
+                  "limit": { "type": "integer", "default": 10 }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "En yakın eczaneler listesi" }
+        }
+      }
+    },
+    "/pharmacies/cities": {
+      "get": {
+        "summary": "Tüm İller Listesi",
+        "responses": { "200": { "description": "81 İl ve KKTC listesi" } }
+      }
+    },
+    "/pharmacies/districts/{city}": {
+      "get": {
+        "summary": "İlçeler Listesi",
+        "parameters": [
+          { "name": "city", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "İlçeler listesi" } }
+      }
+    },
+    "/account": {
+      "get": {
+        "summary": "Hesap ve Lisans Durumu",
+        "responses": { "200": { "description": "Hesap ve abonelik detayları" } }
+      }
+    },
+    "/update-whitelist": {
+      "post": {
+        "summary": "IP Whitelist Güncelleme",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["ips"],
+                "properties": {
+                  "ips": { "type": "string", "example": "5.132.*" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "IP whitelist güncellendi" } }
+      }
+    }
+  }
+}
