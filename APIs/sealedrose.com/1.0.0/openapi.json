@@ -1,0 +1,411 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Sealed Rose — AI Media Forensics & Deepfake Detection API",
+    "description": "Official developer REST API for Sealed Rose (https://sealedrose.com/verify-video). High-throughput multi-modal neural decomposition across video, audio, image, and text to detect synthetic media, face swaps, voice clones, and generative AI artifacts. Free in-browser forensic verification available at https://sealedrose.com/verify-video.",
+    "version": "1.0.0",
+    "termsOfService": "https://sealedrose.com/terms",
+    "contact": {
+      "name": "Sealed Rose Developer Relations",
+      "url": "https://sealedrose.com/developers",
+      "email": "derek@sealedrose.com"
+    },
+    "license": {
+      "name": "Commercial & Free Tier",
+      "url": "https://sealedrose.com/terms"
+    },
+    "x-providerName": "sealedrose.com",
+    "x-serviceName": "media-forensics",
+    "x-apisguru-categories": [
+      "security",
+      "developer_tools",
+      "media"
+    ],
+    "x-logo": {
+      "url": "https://sealedrose.com/marks/sealed-rose-mark.png",
+      "backgroundColor": "#090D16"
+    },
+    "x-origin": [
+      {
+        "format": "openapi",
+        "version": "3.0.3",
+        "url": "https://sealedrose.com/openapi.json"
+      }
+    ]
+  },
+  "externalDocs": {
+    "description": "Interactive Free Deepfake Video Scanner & Web Inspection Tool",
+    "url": "https://sealedrose.com/verify-video"
+  },
+  "servers": [
+    {
+      "url": "https://sealedrose.com",
+      "description": "Global Production API Gateway"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/api/v1/detect/video": {
+      "post": {
+        "summary": "Detect deepfake video and synthetic face manipulation",
+        "description": "Scans video files using frame-by-frame temporal optical flow and neural artifact decomposition. Returns confidence score, frame-level probability, and forensic analysis. See https://sealedrose.com/verify-video for interactive web inspection.",
+        "operationId": "detectVideo",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "MP4, MOV, or WebM video file (up to 32 MB)"
+                  },
+                  "webhook_url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Optional webhook endpoint for asynchronous result delivery"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Forensic video analysis report",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoAnalysisResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid media file or unsupported format"
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing API key"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/api/v1/detect/image": {
+      "post": {
+        "summary": "Detect AI-generated and synthetic images",
+        "description": "Detects AI-generated or manipulated images (Midjourney, DALL-E, Stable Diffusion, FaceSwaps). Returns probability and synthetic marker breakdown.",
+        "operationId": "detectImage",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "JPEG, PNG, or WebP image file (up to 32 MB)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Forensic image analysis report",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageAnalysisResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid media file"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/v1/detect/audio": {
+      "post": {
+        "summary": "Detect AI cloned voice and synthetic audio",
+        "description": "Analyzes speech audio streams for neural vocoder artifacts, synthetic timbre signatures, and voice cloning markers (ElevenLabs, Tortoise, Vall-E).",
+        "operationId": "detectAudio",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "MP3, WAV, M4A, or OGG audio file"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Forensic audio analysis report",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AudioAnalysisResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid audio file"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/v1/detect/text": {
+      "post": {
+        "summary": "Detect AI-generated text and LLM artifacts",
+        "description": "Evaluates token perplexity, burstiness, and stylistic entropy to identify text generated by Large Language Models.",
+        "operationId": "detectText",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "text"
+                ],
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "Text snippet to analyze for LLM generation artifacts",
+                    "example": "In today's digital landscape, the rapid advancement of artificial intelligence..."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Text forensic evaluation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextAnalysisResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/v1/health": {
+      "get": {
+        "summary": "API Health and Neural Model Cluster Status",
+        "description": "Checks real-time readiness of the Sealed Rose inference cluster.",
+        "operationId": "getHealth",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Cluster healthy and operational",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "healthy"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "version": {
+                      "type": "string",
+                      "example": "1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "API Key",
+        "description": "API Key obtained from Sealed Rose Developer Portal (https://sealedrose.com/developers)"
+      }
+    },
+    "schemas": {
+      "VideoAnalysisResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "complete"
+          },
+          "is_synthetic": {
+            "type": "boolean",
+            "example": true
+          },
+          "confidence_score": {
+            "type": "number",
+            "format": "float",
+            "example": 0.984
+          },
+          "primary_anomaly": {
+            "type": "string",
+            "example": "Temporal optical flow discontinuity detected across facial boundary"
+          },
+          "duration_seconds": {
+            "type": "number",
+            "example": 14.2
+          },
+          "frames_analyzed": {
+            "type": "integer",
+            "example": 426
+          },
+          "anomalous_frames": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "frame_number": {
+                  "type": "integer"
+                },
+                "timestamp_ms": {
+                  "type": "integer"
+                },
+                "synthetic_probability": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ImageAnalysisResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "complete"
+          },
+          "is_synthetic": {
+            "type": "boolean",
+            "example": false
+          },
+          "confidence_score": {
+            "type": "number",
+            "format": "float",
+            "example": 0.031
+          },
+          "generator_attribution": {
+            "type": "string",
+            "example": "none_detected"
+          },
+          "frequency_artifacts": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
+      "AudioAnalysisResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "complete"
+          },
+          "is_synthetic": {
+            "type": "boolean",
+            "example": true
+          },
+          "confidence_score": {
+            "type": "number",
+            "format": "float",
+            "example": 0.942
+          },
+          "vocoder_spectral_discontinuity": {
+            "type": "boolean",
+            "example": true
+          },
+          "detected_architecture": {
+            "type": "string",
+            "example": "diffusion_tts"
+          }
+        }
+      },
+      "TextAnalysisResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "complete"
+          },
+          "is_synthetic": {
+            "type": "boolean",
+            "example": false
+          },
+          "perplexity": {
+            "type": "number",
+            "example": 84.2
+          },
+          "burstiness": {
+            "type": "number",
+            "example": 0.42
+          },
+          "ai_probability": {
+            "type": "number",
+            "example": 0.12
+          }
+        }
+      }
+    }
+  }
+}
