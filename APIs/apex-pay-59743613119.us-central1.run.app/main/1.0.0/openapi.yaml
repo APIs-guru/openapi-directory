@@ -1,0 +1,1060 @@
+openapi: 3.1.0
+info:
+  title: Apex Forge x402 Commerce Node
+  version: 1.0.0
+  x-providerName: apex-pay-59743613119.us-central1.run.app
+  x-origin:
+  - format: openapi
+    url: https://apex-pay-59743613119.us-central1.run.app/openapi.json
+    version: '3.0'
+  x-apisguru-categories:
+  - payment
+  - financial
+  - developer_tools
+  description: Apex Forge x402 commerce node — HTTP-402 machine-payable API. Utility,
+    finance, audit and lane-health endpoints priced $0.001-$1.50 per call, settled
+    in USDC on Base mainnet via the x402 protocol. tools/list discovery free.
+  contact:
+    name: Apex Forge
+    url: https://github.com/BeastlyPearce/apex-edge-tools
+paths:
+  /:
+    get:
+      summary: Serve Dream Rig
+      operationId: serve_dream_rig__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /.well-known/agent.json:
+    get:
+      summary: Well Known Agent
+      operationId: well_known_agent__well_known_agent_json_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /.well-known/x402:
+    get:
+      summary: Well Known X402
+      description: x402 surface manifest — what agent402's crawler reads to list us.
+      operationId: well_known_x402__well_known_x402_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /premium-data:
+    get:
+      summary: Premium Data Endpoint
+      operationId: premium_data_endpoint_premium_data_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/compute:
+    get:
+      summary: Premium Data Endpoint
+      operationId: premium_data_endpoint_api_v1_compute_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /telemetry:
+    post:
+      summary: Telemetry Endpoint
+      operationId: telemetry_endpoint_telemetry_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TelemetryEvent'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/audit:
+    post:
+      summary: Audit Service Endpoint
+      description: 'CELS Audit Service — receive-only x402 endpoint.
+
+
+        The mounted X402Middleware verifies and settles the payment before this handler
+        runs;
+
+        payment always lands in
+
+        APEX_AGENT_WALLET (receive-only — this service never sends funds).'
+      operationId: audit_service_endpoint_api_v1_audit_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuditRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/mcp-verdict:
+    post:
+      summary: Mcp Verdict Endpoint
+      description: 'Transformed-decision product: evaluate an agent tool call or MCP
+
+        manifest against the AgentFirewall policy and return a signed-style
+
+        verdict. Deterministic — no model dispatch, ~zero marginal cost.'
+      operationId: mcp_verdict_endpoint_api_v1_mcp_verdict_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerdictRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/diligence:
+    post:
+      summary: Diligence Endpoint
+      description: 'Vendor/tool due-diligence: run deterministic control checks over
+        the
+
+        supplied manifest/text (secret exposure, dangerous-command surface,
+
+        injection markers) and emit a PASS/FAIL/INCONCLUSIVE with a bounded
+
+        residual-risk score. No upstream calls — margin stays with the node.'
+      operationId: diligence_endpoint_api_v1_diligence_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiligenceRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/gas/quote:
+    post:
+      summary: Gas Quote Endpoint
+      description: 'Free quote: how much gas `usd` buys + the challenge envelope the
+        buyer
+
+        signs and pays. The returned envelope is what /api/v1/gas/topup verifies.'
+      operationId: gas_quote_endpoint_api_v1_gas_quote_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GasQuoteRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/license/validate:
+    post:
+      summary: License Validate Endpoint
+      description: 'Free validation probe: returns the structured license verdict
+        the
+
+        tenant would get on any api-scoped route.'
+      operationId: license_validate_endpoint_api_v1_license_validate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LicenseValidateRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/gas/topup:
+    post:
+      summary: Gas Topup Endpoint
+      description: 'Settlement-gated mint: the facilitator''s X402_VERIFIED verdict
+        is the
+
+        ONLY thing that credits gas. No facilitator, no dry-run, no credit.'
+      operationId: gas_topup_endpoint_api_v1_gas_topup_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GasTopupRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/gas/token:
+    post:
+      summary: Gas Token Endpoint
+      description: 'Pay gas -> get token. The settlement_ref is the bearer proof:
+        it
+
+        must name a credit row against THIS account. Cost = TOKEN_GAS_COST
+
+        (default 500); settlements >= PAID_TOKEN_MIN_USD mint paid-scope keys
+
+        (paid-lane entitlement), smaller ones mint api-scope keys.'
+      operationId: gas_token_endpoint_api_v1_gas_token_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GasTokenRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/webhooks/stripe:
+    post:
+      summary: Stripe Webhook
+      description: 'Stripe settlement ingress. Signature verify runs BEFORE the body
+        is
+
+        trusted; a verified settlement event credits the gas_account named in
+
+        payment metadata. Settlement refs dedup globally — Stripe retries and
+
+        replays are idempotent. Events carrying no gas_account are acked with
+
+        STRIPE_SETTLEMENT_UNROUTED (200, retry-storm avoided) and stay in the
+
+        audit trail for manual allocation.'
+      operationId: stripe_webhook_api_v1_webhooks_stripe_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/dodo/checkout:
+    post:
+      summary: Dodo Checkout
+      description: 'Mint a hosted Dodo checkout link (Merchant-of-Record fiat rail).
+
+        Self-gating: the link settles nothing until a human pays it on Dodo''s
+
+        page, and the signed webhook is what actually credits gas.'
+      operationId: dodo_checkout_api_v1_dodo_checkout_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DodoCheckoutRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/dodo/webhook:
+    post:
+      summary: Dodo Webhook
+      description: 'Dodo settlement ingress — the MoR twin of webhooks/stripe.
+
+        Signature verify runs inside handle_webhook BEFORE the body is
+
+        trusted; payment.success credits the metadata.account_id gas account
+
+        (settlement_ref ''dodo:<payment_id>'', globally deduped); disputes write
+
+        evidence bundles. Everything else is acked EVENT_IGNORED.'
+      operationId: dodo_webhook_api_v1_dodo_webhook_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/strike/receipt:
+    post:
+      summary: Strike Receipt Endpoint
+      description: 'Settlement -> strike receipt. The settlement_ref is bearer proof
+
+        that money landed (x402 topup, Stripe webhook, or Dodo all converge on
+
+        gas credit rows). The receipt''s paid budget equals the settled USD —
+
+        the client pre-funds its own paid-lane compute. One receipt per
+
+        settlement (the DB enforces it).'
+      operationId: strike_receipt_endpoint_api_v1_strike_receipt_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StrikeReceiptRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/raas/route-health:
+    get:
+      summary: Raas Route Health
+      description: 'RaaS: live lane-cooldown telemetry for external routing agents.
+
+        Priced at $0.001 via PAY_ROUTES; license-key holders bypass upstream.
+
+        Internal paths are stripped — callers get the ring, not the host.'
+      operationId: raas_route_health_api_v1_raas_route_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/raas/model-efficacy:
+    get:
+      summary: Raas Model Efficacy
+      description: 'RaaS: measured per-lane probe efficacy for external routers.
+
+        Priced at $0.005 via PAY_ROUTES. 503/LANE_SCORES_EMPTY when no
+
+        fresh scores exist — measured truth or nothing.'
+      operationId: raas_model_efficacy_api_v1_raas_model_efficacy_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/raas/route-verdict:
+    post:
+      summary: Raas Route Verdict
+      description: 'RaaS: scored, health-aware lane chain + top pick for a task kind.
+
+        Priced at $0.01 via PAY_ROUTES. Never fabricates a pick — cooling
+
+        chains return ALL_LANES_COOLING with the honest chain attached.'
+      operationId: raas_route_verdict_api_v1_raas_route_verdict_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteVerdictRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/raas/media-route:
+    post:
+      summary: Raas Media Route
+      description: 'RaaS: armed modality-lane candidates + orb hints for a media kind.
+
+        Priced at $0.01 via PAY_ROUTES. ''Armed'' means provisioned — liveness
+
+        claims stay with lane_probe evidence, not this verdict.'
+      operationId: raas_media_route_api_v1_raas_media_route_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MediaRouteRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/swarm/findings:
+    get:
+      summary: Swarm Findings Endpoint
+      description: 'Swarm findings feed — the audit swarm''s measured output as a
+        paid
+
+        product. Priced at $0.05 via PAY_ROUTES. Serves the reduced report
+
+        when present, else a live receipt rollup; empty findings are a
+
+        truthful answer.'
+      operationId: swarm_findings_endpoint_api_v1_swarm_findings_get
+      parameters:
+      - name: scan_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Scan Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/strike/verdict:
+    post:
+      summary: Strike Verdict Endpoint
+      description: 'Synaptic snipe as a service — one bounded DEEP-tier dispatch in
+
+        the strike''s VERDICT/PROOF/FIX shape. Priced at $0.25 via PAY_ROUTES.
+
+        Free lanes only: this endpoint never arms paid tiers, and an
+
+        unanswered shot returns the honest failure.'
+      operationId: strike_verdict_endpoint_api_v1_strike_verdict_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StrikeVerdictRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/util/hash:
+    get:
+      summary: Util Hash
+      operationId: util_hash_api_v1_util_hash_get
+      parameters:
+      - name: text
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: Text
+      - name: algo
+        in: query
+        required: false
+        schema:
+          type: string
+          default: sha256
+          title: Algo
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/util/uuid:
+    get:
+      summary: Util Uuid
+      operationId: util_uuid_api_v1_util_uuid_get
+      parameters:
+      - name: n
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+          title: N
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/util/convert:
+    get:
+      summary: Util Convert
+      operationId: util_convert_api_v1_util_convert_get
+      parameters:
+      - name: value
+        in: query
+        required: false
+        schema:
+          type: number
+          default: 0.0
+          title: Value
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/finance/perp-funding:
+    get:
+      summary: Finance Perp Funding
+      operationId: finance_perp_funding_api_v1_finance_perp_funding_get
+      parameters:
+      - name: symbol
+        in: query
+        required: false
+        schema:
+          type: string
+          default: BTCUSDT
+          title: Symbol
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/edgar/filings:
+    get:
+      summary: Edgar Filings
+      operationId: edgar_filings_api_v1_edgar_filings_get
+      parameters:
+      - name: cik
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: Cik
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/mcp/tools:
+    get:
+      summary: Mcp Tools List
+      description: Free discovery surface — MCP tools/list analogue (names + schemas).
+      operationId: mcp_tools_list_api_v1_mcp_tools_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/util/base64:
+    get:
+      summary: Util Base64
+      operationId: util_base64_api_v1_util_base64_get
+      parameters:
+      - name: text
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: Text
+      - name: decode
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: Decode
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/util/timezone:
+    get:
+      summary: Util Timezone
+      operationId: util_timezone_api_v1_util_timezone_get
+      parameters:
+      - name: time
+        in: query
+        required: false
+        schema:
+          type: string
+          default: '12:00'
+          title: Time
+      - name: frm
+        in: query
+        required: false
+        schema:
+          type: string
+          default: UTC
+          title: Frm
+      - name: to
+        in: query
+        required: false
+        schema:
+          type: string
+          default: UTC
+          title: To
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/finance/perp-basis:
+    get:
+      summary: Finance Perp Basis
+      description: Basis = (mark - index)/index — premiumIndex alone carries both.
+      operationId: finance_perp_basis_api_v1_finance_perp_basis_get
+      parameters:
+      - name: symbol
+        in: query
+        required: false
+        schema:
+          type: string
+          default: BTCUSDT
+          title: Symbol
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/weather/history:
+    get:
+      summary: Weather History
+      description: Open-Meteo archive — free, no key, deterministic daily means.
+      operationId: weather_history_api_v1_weather_history_get
+      parameters:
+      - name: lat
+        in: query
+        required: false
+        schema:
+          type: number
+          default: 0.0
+          title: Lat
+      - name: lon
+        in: query
+        required: false
+        schema:
+          type: number
+          default: 0.0
+          title: Lon
+      - name: date
+        in: query
+        required: false
+        schema:
+          type: string
+          default: ''
+          title: Date
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/mcp/call:
+    post:
+      summary: Mcp Call
+      description: 'Paid tools/call — $0.05 via PAY_ROUTES. Bounded allowlist; tool
+
+        output is returned parsed when possible so callers get JSON, not
+
+        JSON-in-a-string.'
+      operationId: mcp_call_api_v1_mcp_call_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/McpCallRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AuditRequest:
+      properties:
+        target:
+          type: string
+          title: Target
+      type: object
+      required:
+      - target
+      title: AuditRequest
+      description: Paid HTTP audit request for owner/repo[@ref].
+    DiligenceRequest:
+      properties:
+        target:
+          type: string
+          title: Target
+        claims:
+          items:
+            type: string
+          type: array
+          title: Claims
+          default: []
+      type: object
+      required:
+      - target
+      title: DiligenceRequest
+      description: Paid due-diligence decision — bounded deterministic control map.
+    DodoCheckoutRequest:
+      properties:
+        account_id:
+          type: string
+          title: Account Id
+        usd_amount:
+          type: number
+          title: Usd Amount
+      type: object
+      required:
+      - account_id
+      - usd_amount
+      title: DodoCheckoutRequest
+      description: 'Human fiat entry: create a hosted Dodo checkout for a gas top-up.'
+    GasQuoteRequest:
+      properties:
+        usd:
+          type: number
+          title: Usd
+          default: 1.0
+      type: object
+      title: GasQuoteRequest
+      description: Gas purchase quote — returns the price and a spendable x402 challenge.
+    GasTokenRequest:
+      properties:
+        account_id:
+          type: string
+          title: Account Id
+        settlement_ref:
+          type: string
+          title: Settlement Ref
+      type: object
+      required:
+      - account_id
+      - settlement_ref
+      title: GasTokenRequest
+      description: Mint an access token from funded gas — the token-access rail.
+    GasTopupRequest:
+      properties:
+        account_id:
+          type: string
+          title: Account Id
+        payment_header:
+          type: string
+          title: Payment Header
+      type: object
+      required:
+      - account_id
+      - payment_header
+      title: GasTopupRequest
+      description: Credit a gas account from a verified x402 payment.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    LicenseValidateRequest:
+      properties:
+        key:
+          type: string
+          title: Key
+      type: object
+      required:
+      - key
+      title: LicenseValidateRequest
+      description: 'License-key verdict — free probe before an entitled client commits
+
+        its agents to the api-scoped bypass path.'
+    McpCallRequest:
+      properties:
+        tool:
+          type: string
+          title: Tool
+        arguments:
+          additionalProperties: true
+          type: object
+          title: Arguments
+          default: {}
+      type: object
+      required:
+      - tool
+      title: McpCallRequest
+    MediaRouteRequest:
+      properties:
+        kind:
+          type: string
+          title: Kind
+      type: object
+      required:
+      - kind
+      title: MediaRouteRequest
+      description: Paid modality routing verdict — media.<medium>.<direction>.
+    RouteVerdictRequest:
+      properties:
+        task_kind:
+          type: string
+          title: Task Kind
+      type: object
+      required:
+      - task_kind
+      title: RouteVerdictRequest
+      description: Paid routing verdict — task_kind selects the tier chain.
+    StrikeReceiptRequest:
+      properties:
+        settlement_ref:
+          type: string
+          title: Settlement Ref
+        kind:
+          type: string
+          title: Kind
+      type: object
+      required:
+      - settlement_ref
+      - kind
+      title: StrikeReceiptRequest
+      description: Convert a settled payment into strike authorization.
+    StrikeVerdictRequest:
+      properties:
+        evidence:
+          type: string
+          title: Evidence
+        question:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Question
+      type: object
+      required:
+      - evidence
+      title: StrikeVerdictRequest
+      description: Paid synaptic snipe — one decisive shot on supplied evidence.
+    TelemetryEvent:
+      properties:
+        event:
+          type: string
+          title: Event
+        message:
+          type: string
+          title: Message
+        gamma:
+          type: number
+          title: Gamma
+        h_x:
+          type: number
+          title: H X
+      type: object
+      required:
+      - event
+      - message
+      title: TelemetryEvent
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    VerdictRequest:
+      properties:
+        tool_name:
+          type: string
+          title: Tool Name
+          default: run_command
+        arguments:
+          additionalProperties: true
+          type: object
+          title: Arguments
+          default: {}
+        manifest:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Manifest
+      type: object
+      title: VerdictRequest
+      description: Paid MCP/agent safety verdict — deterministic firewall evaluation.
