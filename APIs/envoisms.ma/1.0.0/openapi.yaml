@@ -1,0 +1,3387 @@
+openapi: 3.0.3
+info:
+  title: EnvoiSMS.ma API
+  x-service-info:
+    title: EnvoiSMS.ma API
+    description: Telecom messaging and phone verification APIs for Morocco
+    categories:
+      - telecom
+      - messaging
+      - sms
+      - otp
+  description: |
+    # EnvoiSMS.ma — Plateforme Programmable de Messagerie Entreprise & AtlasAI™ au Maroc
+
+    API de messagerie professionnelle tout-en-un pour le Maroc : SMS direct multi-opérateurs (Maroc Telecom, Orange, Inwi), API officielle WhatsApp Business (Meta Embedded Signup v4, menus interactifs, boutons rapides, WhatsApp Flows, localisation GPS, transcription de notes vocales AtlasAI™ Voice, extraction de reçus bancaires AtlasAI™ Vision), moteur conversationnel de qualification de leads AtlasAI™ Conversational Engine (BANT scoring en Darija, Arabe et Français ; intégration native exclusive WABA), passerelles Inbound Webhooks (TikTok & Meta Lead Ads) et boîte de réception Live Chat 2-voies avec suivi de la fenêtre de 24h. Note : AtlasAI™ (Conversational Engine, Voice, Vision) est intégré nativement dans WhatsApp Business API et n'est pas disponible en tant qu'API autonome.
+
+    ## Authentication
+    All API requests require an `Authorization: Bearer YOUR_API_KEY` header.
+
+    ## Base URL
+    ```
+    https://api.envoisms.ma/v1
+    ```
+
+    ## Rate Limiting
+    Rate limits are applied per API key, over a rolling one-minute window.
+    Default: **100 requests/minute** per key (dashboard sessions: 600/minute).
+    Higher limits are available per key — contact support.
+
+    Every authenticated response carries the current state, so your client can
+    build backpressure without guessing:
+
+    | Header | Meaning |
+    |---|---|
+    | `X-RateLimit-Limit` | The key's requests/minute allowance |
+    | `X-RateLimit-Remaining` | Requests left in the current window |
+    | `X-RateLimit-Reset` | Unix timestamp (seconds) when the window resets |
+
+    When the limit is exceeded the API returns `429 RATE_LIMITED` with a
+    `Retry-After` header (seconds). Honor it — retrying earlier only consumes
+    the next window.
+
+    ## Idempotency
+    `POST /messages` and `POST /messages/bulk` accept an optional
+    `Idempotency-Key` header (any unique string up to 255 characters, e.g. a
+    UUID). If a request times out or your client crashes mid-call, retry with
+    the **same key**: the platform guarantees the send executes at most once,
+    and the retry returns the stored original response with an
+    `Idempotency-Replayed: true` header instead of sending (and billing) again.
+
+    - Keys are scoped to your account and expire after 24 hours.
+    - Reusing a key with a **different** request body returns
+      `422 IDEMPOTENCY_KEY_REUSED` — a key names one request, not a channel.
+    - If the original request is still executing, the retry returns
+      `409 IDEMPOTENCY_IN_FLIGHT` with `Retry-After`.
+
+    ## Webhook signatures
+    Every webhook delivery is signed with your endpoint's secret (returned once
+    at creation, rotatable via `POST /webhooks/{id}/rotate-secret`). Verify the
+    `X-EnvoiSMS-Signature-256` header, format `t=<unix-seconds>,v1=<hex>`:
+
+    1. Split out `t` and `v1`.
+    2. Compute `HMAC-SHA256(secret, "{t}." + raw_request_body)` (hex).
+    3. Compare to `v1` with a constant-time comparison, and reject if
+       `|now - t|` exceeds your tolerance (we recommend 5 minutes) — the
+       timestamp is inside the signed payload, so a captured delivery cannot
+       be replayed later.
+
+    The legacy `X-EnvoiSMS-Signature` header (HMAC-SHA256 over the body alone)
+    is still sent for existing integrations; new code should verify the
+    timestamped header.
+
+    ## Error Format
+    ```json
+    {
+      "error": {
+        "code": "ERROR_CODE",
+        "message": "Human-readable message",
+        "docs": "https://envoisms.ma/en/docs#errors"
+      }
+    }
+    ```
+
+    `code` is the stable, machine-readable key — branch on it, never on the
+    message text. `message` is an English sentence saying what went wrong and
+    what to do; its wording may improve over time. Common codes:
+
+    | Code | HTTP | Meaning |
+    |---|---|---|
+    | `UNAUTHORIZED` | 401 | Missing or invalid API key |
+    | `FORBIDDEN` | 403 | The key lacks the required permission scope, or the account is suspended |
+    | `INSUFFICIENT_BALANCE` | 402 | Account balance too low for this send |
+    | `OPTED_OUT` | 403 | The recipient unsubscribed from your messages |
+    | `INVALID_PHONE` | 400 | `to` must be E.164, e.g. `+212612345678` |
+    | `WHATSAPP_NOT_CONNECTED` | 403 | WhatsApp sends need your own WhatsApp Business number connected in the dashboard; for an ordinary text, omit `channel` (SMS is the default) — nothing was charged |
+    | `OUT_OF_24H_WINDOW` | 400 | Free-form WhatsApp message to a contact who has not written to you on WhatsApp in the last 24 hours — send an approved `template` instead. Refused before any charge |
+    | `WHATSAPP_ONLY_FIELD` / `CONFLICTING_MESSAGE_TYPES` / `CASCADE_NOT_SUPPORTED` | 400 | A WhatsApp-only field on another channel, two content types in one message, or `cascade` with a type SMS cannot carry |
+    | `INVALID_REACTION` / `INVALID_CONTEXT` / `INVALID_CONTACTS` / `INVALID_LOCATION` / `INVALID_MEDIA` | 400 | Malformed WhatsApp payload; the message names the field |
+    | `INVALID_INTERACTIVE_TYPE` / `INVALID_CTA_URL_ACTION` / `MISSING_CTA_DISPLAY_TEXT` / `CTA_DISPLAY_TEXT_TOO_LONG` / `INVALID_URL` / `INVALID_LOCATION_REQUEST_ACTION` | 400 | Malformed `interactive` payload |
+    | `INVALID_PURPOSE` | 400 | consent `purpose` must be marketing, transactional, otp or service |
+    | `INVALID_STATUS` | 400 | consent `status` must be granted or withdrawn |
+    | `INVALID_CHANNEL` | 400 | consent `channel` must be whatsapp, sms or any |
+    | `INVALID_SOURCE` | 400 | consent `source` must be api, form, import or dashboard |
+    | `INVALID_EVIDENCE` | 400 | consent `evidence` must be a JSON object under 4 KB |
+    | `INVALID_DATE` | 400 | a timestamp is not ISO 8601, or `recorded_at` is in the future |
+    | `INVALID_CHANNEL` / `CHANNEL_NOT_CONFIGURED` | 400 | Channel unknown, or not available on the platform |
+    | `SENDER_ID_NOT_APPROVED` / `SENDER_ID_PENDING` / `SENDER_ID_IN_REVIEW` / `SENDER_ID_REJECTED` | 403 | Sender ID not usable yet — see Settings → Sender IDs |
+    | `SENDER_ID_GENERIC` | 400 | `sender_id` is a generic header (INFO, ALERT, SERVICE…), not a brand — use your brand name or omit it |
+    | `SENDER_ID_PROTECTED_BRAND` | 403 | `sender_id` names or resembles a protected institution (bank, payment scheme, carrier, public body); only an account approved for that exact name may use it |
+    | `SENDER_ID_NOT_REGISTERED` | 403 | `sender_id` was never registered on the account and the account has no completed top-up — limited to your own verified number until then |
+    | `SPAM_OR_PHISHING_DETECTED` / `CONTENT_BLOCKED` | 400 | Content refused: a phishing link, a message speaking as a bank / carrier / public body, or an acceptable-use violation. The account is suspended pending operator review |
+    | `MISSING_FIELD` / `INVALID_FIELD` / `INVALID_JSON` | 400 | Request body problems; the message names the field |
+    | `INVALID_CODE` / `EXPIRED_CODE` / `MAX_ATTEMPTS` | 400/404/429 | OTP verification outcomes |
+    | `RATE_LIMITED` | 429 | Too many requests — honor `Retry-After` |
+    | `INVALID_IDEMPOTENCY_KEY` | 400 | `Idempotency-Key` header too long (max 255 chars) |
+    | `IDEMPOTENCY_IN_FLIGHT` | 409 | Original request with this key still executing — retry shortly |
+    | `IDEMPOTENCY_KEY_REUSED` | 422 | Key already used with a different request body |
+    | `STRIPE_ERROR` | 502 | Payment page could not be created; nothing was charged |
+    | `NOT_FOUND` | 404 | Resource does not exist or belongs to another account |
+    | `INTERNAL_ERROR` | 500 | Failure on our side — safe to retry; contact support if it persists |
+
+    Codes not in this table follow the same conventions; treat an unknown code
+    as a terminal failure of the request, not of your integration.
+
+    ### WhatsApp failure codes
+    A WhatsApp message that WhatsApp refuses ends `failed` with one of these
+    `error_code` values (on `GET /messages/{id}` and in the `failed` webhook),
+    each with an English `error_message`:
+
+    | Code | WhatsApp code | Meaning | Automatic retry |
+    |---|---|---|---|
+    | `META_WINDOW_EXPIRED` | 131047 | 24-hour customer service window closed — send a template | no |
+    | `META_UNDELIVERABLE` | 131026 | Number not reachable on WhatsApp | never |
+    | `META_MARKETING_LIMIT` | 131049 | Per-user marketing message limit (ecosystem protection) — do not resend immediately | never |
+    | `META_PAIR_RATE_LIMITED` | 131056 | Too many messages to this contact in a short time | yes |
+    | `META_RATE_LIMITED` | 130429 | Throughput limit of the sending number | yes |
+    | `META_POLICY_BLOCKED` | 368 | Sending number temporarily blocked for policy violations | never |
+    | `META_ACCOUNT_LOCKED` | 131031 | WhatsApp Business account locked | no |
+    | `META_PAYMENT_ISSUE` | 131042 | Payment-method problem on the WhatsApp Business account | no |
+    | `META_UNSUPPORTED_TYPE` | 131051 | Message type not supported | no |
+    | `META_TEMPLATE_PARAM_MISMATCH` | 132000 | Template variable count does not match | no |
+    | `META_TEMPLATE_NOT_FOUND` | 132001 | Template missing in that language, or not approved | no |
+    | `META_TEMPLATE_PARAM_FORMAT` | 132012 | Template variable in the wrong format | no |
+    | `META_PHONE_NOT_REGISTERED` | 133010 | Sending number not registered | no |
+    | `META_GENERIC_ERROR` / `META_SERVICE_UNAVAILABLE` | 131000 / 131016 | Temporary WhatsApp-side failure | yes |
+    | `META_<code>` | other | Any other WhatsApp code, with WhatsApp's own description | no |
+
+    "yes" = re-sent automatically with a growing delay, three attempts in
+    total, before the message fails. "never" = retrying would only hurt the
+    sending number's quality, so it is not retried even on a server error. A
+    message refused before WhatsApp accepted it is refunded automatically.
+  version: 1.0.0
+  contact:
+    name: EnvoiSMS.ma Support
+    email: contact@envoisms.ma
+    url: https://envoisms.ma/support
+  license:
+    name: Commercial
+  x-apisguru-categories:
+    - messaging
+    - telecom
+  x-logo:
+    url: https://envoisms.ma/logo.png
+    backgroundColor: "#0F172A"
+  x-origin:
+    - format: openapi
+      url: https://envoisms.ma/openapi.json
+      version: "3.0.3"
+  x-providerName: envoisms.ma
+servers:
+  - url: https://api.envoisms.ma/v1
+    description: Production
+  - url: https://api-staging.envoisms.ma/v1
+    description: Staging configuration; deploy and verify before using
+security:
+  - BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Your EnvoiSMS API key
+  schemas:
+    ConsentEvent:
+      type: object
+      properties:
+        id:
+          type: string
+          example: cns_9f2a...
+        phone:
+          type: string
+          example: '+212612345678'
+        channel:
+          type: string
+          enum:
+            - whatsapp
+            - sms
+            - any
+        purpose:
+          type: string
+          enum:
+            - marketing
+            - transactional
+            - otp
+            - service
+        status:
+          type: string
+          enum:
+            - granted
+            - withdrawn
+        source:
+          type: string
+          enum:
+            - api
+            - form
+            - import
+            - dashboard
+            - whatsapp_keyword
+            - sms_keyword
+            - whatsapp_inbound
+            - ctwa
+        evidence:
+          type: object
+          nullable: true
+        recorded_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+    Message:
+      type: object
+      description: Response to POST /messages — the message as accepted into the send queue.
+      properties:
+        id:
+          type: string
+          example: msg_8f2da1b2c3d4e5f6a7b8c9d0
+        to:
+          type: string
+          example: '+212612345678'
+        channel:
+          type: string
+          enum:
+            - sms
+            - whatsapp
+            - voice
+            - rcs
+          description: sms is generally available with multi-operator routing. whatsapp sends from your own connected WhatsApp Business number (templates, text, media, interactive messages, reactions, contacts, locations) via the official WhatsApp Cloud API. voice and rcs are available on request.
+        cascade:
+          type: boolean
+        status:
+          type: string
+          example: queued
+        cost:
+          type: object
+          description: What was actually charged. Always zero on a sandbox key.
+          properties:
+            eur:
+              type: number
+              example: 0.072
+            mad:
+              type: number
+              example: 0.79
+        segments:
+          type: integer
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+        sandbox:
+          type: boolean
+          description: Present and true only when the request used an `env_test_` key. Nothing was delivered and nothing was charged.
+        simulated_cost:
+          type: object
+          description: |
+            Sandbox only. What this exact send would have cost on a live key, at the account's own rates — so an integration can be costed before it goes live. Reported separately from `cost` so a rehearsal can never be mistaken for revenue.
+          properties:
+            eur:
+              type: number
+              example: 0.072
+            mad:
+              type: number
+              example: 0.79
+        warnings:
+          type: array
+          description: |
+            Sandbox only. What a live key would have been refused for — today `OUT_OF_24H_WINDOW` for a free-form WhatsApp message outside the customer service window. The sandbox still simulates the send.
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: OUT_OF_24H_WINDOW
+              message:
+                type: string
+    MessageRecord:
+      type: object
+      description: A stored message as returned by GET /messages/{id}. The metadata object provided at send time is not echoed here; it travels in DLR webhooks.
+      properties:
+        id:
+          type: string
+          example: msg_8f2da1b2c3d4e5f6a7b8c9d0
+        campaign_id:
+          type: string
+          nullable: true
+        to:
+          type: string
+          example: '+212612345678'
+        channel:
+          type: string
+          enum:
+            - sms
+            - whatsapp
+            - telegram
+            - voice
+            - rcs
+        body:
+          type: string
+          example: Votre code est 1234
+        sender_id:
+          type: string
+          example: MonApp
+        unicode:
+          type: integer
+          description: 1 when the body required the UCS-2 alphabet (Arabic etc.), 0 for GSM-7
+        segments:
+          type: integer
+          example: 1
+        status:
+          type: string
+          enum:
+            - queued
+            - sent
+            - delivered
+            - failed
+            - undeliverable
+            - unconfirmed
+          description: unconfirmed = the network accepted the message but never reported a final outcome within the reporting window; a delivery receipt arriving later still replaces it.
+        error_code:
+          type: string
+          nullable: true
+          description: 'Set on failed/undeliverable messages. A short diagnostic key: DLR_<network status> when the failure came from a delivery report (e.g. DLR_REJECTD, DLR_EXPIRED, DLR_UNDELIV), GATEWAY_* for a failure on the EnvoiSMS routing side before the network was reached, ENVOISMS_* for other routing diagnostics, META_* for a WhatsApp refusal (see "WhatsApp failure codes" in the API description). Treat unknown values as a generic terminal failure — new keys may appear.'
+        error_message:
+          type: string
+          nullable: true
+          description: Human-readable failure reason in English, set together with error_code. When the network gave no reason, this reads "The destination network did not deliver this message and gave no reason." Display text — do not parse it programmatically; branch on status and error_code instead.
+        cost_eur:
+          type: number
+          example: 0.072
+        cost_mad:
+          type: number
+          example: 0.79
+        scheduled_at:
+          type: string
+          format: date-time
+          nullable: true
+        sent_at:
+          type: string
+          format: date-time
+          nullable: true
+        delivered_at:
+          type: string
+          format: date-time
+          nullable: true
+        read_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: Timestamp when the recipient opened and read the message (WhatsApp blue checkmark)
+        failed_at:
+          type: string
+          format: date-time
+          nullable: true
+        operator:
+          type: string
+          nullable: true
+          example: Maroc Telecom
+          description: Resolved destination network for Moroccan numbers (Maroc Telecom, Orange, Inwi, Autre); best-effort elsewhere.
+        sandbox:
+          type: integer
+          description: 1 when the message was created by an env_test_ sandbox key
+        created_at:
+          type: string
+          format: date-time
+    SendMessageRequest:
+      type: object
+      required:
+        - to
+      description: |
+        `message` is required for SMS and for WhatsApp text and interactive messages. A WhatsApp message whose content is a template, a media object, a reaction, contacts, a location or a sticker needs no `message` (for media it becomes the caption when given). Exactly one of reaction, contacts, location or sticker per message, and none of them together with another content type.
+      properties:
+        to:
+          type: string
+          description: Destination phone in E.164 format
+          example: '+212612345678'
+        message:
+          type: string
+          description: Message content (max 1600 chars). See the object description for when it may be omitted on WhatsApp.
+          example: 'Bonjour! Votre commande #1234 est confirmée.'
+        from:
+          type: string
+          description: Sender ID (alphanumeric, max 11 chars)
+          example: MonApp
+        channel:
+          type: string
+          enum:
+            - sms
+            - whatsapp
+            - voice
+            - rcs
+          default: sms
+          description: 'Channel for message delivery: sms (default) for Moroccan operator routes; whatsapp to send from your own connected WhatsApp Business number (403 WHATSAPP_NOT_CONNECTED otherwise). To send an ordinary text to a customer who happens to use WhatsApp, sms is enough: no connection, no template, no 24-hour window. On whatsapp, a message that is not a template may only be sent to a contact who wrote to your number in the last 24 hours — otherwise it is refused with 400 OUT_OF_24H_WINDOW before any charge (with a cascade, WhatsApp is skipped and the next channel is used instead).'
+        cascade:
+          type: boolean
+          description: 'When true, tries WhatsApp, then falls back to SMS: at once if WhatsApp refuses the message or reports it failed (not on WhatsApp, 24-hour window closed, ...), or when no delivery report arrives within cascade_timeout (120 s by default). Only a send that actually went out is billed: a refused or failed WhatsApp message is not, and you pay for the SMS alone. A WhatsApp message still waiting for its delivery report did go out (it can still be delivered when the phone reconnects), so it is billed along with its SMS fallback, and refunded if WhatsApp later reports it failed. Tip: give your WhatsApp template a time-to-live (TTL) no longer than cascade_timeout, so a phone that comes back online does not receive both.'
+          default: false
+        cascade_timeout:
+          type: integer
+          minimum: 30
+          maximum: 43200
+          default: 120
+          description: 'With cascade: seconds to wait for a delivery report before the next channel. Shorter falls back faster but bills more double sends; longer means fewer duplicates. Out of range: 400 INVALID_FIELD.'
+        metadata:
+          type: object
+          description: 'Custom key-value pairs, stored with the message and returned in DLR webhooks. One key carries platform semantics: set purpose: "otp" when the message carries a one-time code you generated yourself — if the network reports a hard delivery failure on a Moroccan number while the code is still fresh (within 10 minutes), the platform automatically re-sends it once over an alternate SMS route, under the same message id and at no extra charge. Prefer /verify/send when you want the whole code lifecycle (generation, delivery cascade, validation, expiry) managed for you. Set no_failover: true to opt out of this automatic re-send entirely — the first delivery attempt''s outcome is then final.'
+          example:
+            order_id: ORD-12345
+            customer_ref: C-789
+        buttons:
+          type: array
+          description: Optional WhatsApp interactive buttons (max 3). Only supported on the whatsapp channel.
+          items:
+            $ref: '#/components/schemas/MessageButton'
+        interactive:
+          type: object
+          description: 'WhatsApp Cloud API interactive message payload. cta_url: action {name: "cta_url", parameters: {display_text (max 20 chars), url}}. location_request_message: body text plus an optional action {name: "send_location"}; the contact answers with a location.'
+          properties:
+            type:
+              type: string
+              enum:
+                - list
+                - button
+                - product
+                - product_list
+                - flow
+                - carousel
+                - order_details
+                - cta_url
+                - location_request_message
+            header:
+              type: object
+            body:
+              type: object
+              properties:
+                text:
+                  type: string
+            footer:
+              type: object
+              properties:
+                text:
+                  type: string
+            action:
+              type: object
+        template:
+          type: object
+          description: WhatsApp only. An approved template of your account; exempt from the 24-hour window. Priced by the template's category as registered on your account.
+          properties:
+            name:
+              type: string
+              example: order_update
+            language:
+              type: string
+              example: fr
+            components:
+              type: array
+              items:
+                type: object
+        phone_number_id:
+          type: string
+          description: WhatsApp only. Which of your connected numbers sends; defaults to your default number.
+        image:
+          $ref: '#/components/schemas/WhatsAppMedia'
+        video:
+          $ref: '#/components/schemas/WhatsAppMedia'
+        audio:
+          $ref: '#/components/schemas/WhatsAppMedia'
+        document:
+          $ref: '#/components/schemas/WhatsAppMedia'
+        sticker:
+          $ref: '#/components/schemas/WhatsAppMedia'
+        reaction:
+          type: object
+          description: WhatsApp only. React to a message of the conversation. Not billed. An empty emoji removes your reaction.
+          required:
+            - message_id
+            - emoji
+          properties:
+            message_id:
+              type: string
+              description: WhatsApp message id (wamid) of the message you react to
+              example: wamid.HBgLMjEyNjEyMzQ1Njc4FQIAEhgg
+            emoji:
+              type: string
+              example: 👍
+        contacts:
+          type: array
+          maxItems: 20
+          description: 'WhatsApp only. Contact cards (WhatsApp Cloud API contacts object). name.formatted_name is required; allowed keys: name, phones, emails, urls, addresses, org, birthday (YYYY-MM-DD).'
+          items:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: object
+                required:
+                  - formatted_name
+                properties:
+                  formatted_name:
+                    type: string
+                    example: Service client
+                  first_name:
+                    type: string
+                  last_name:
+                    type: string
+              phones:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    phone:
+                      type: string
+                      example: '+212522000000'
+                    type:
+                      type: string
+                      example: WORK
+                    wa_id:
+                      type: string
+        location:
+          type: object
+          description: WhatsApp only. Send a location pin.
+          required:
+            - latitude
+            - longitude
+          properties:
+            latitude:
+              type: number
+              minimum: -90
+              maximum: 90
+              example: 33.5731
+            longitude:
+              type: number
+              minimum: -180
+              maximum: 180
+              example: -7.5898
+            name:
+              type: string
+              example: Agence Casablanca
+            address:
+              type: string
+              example: Bd Zerktouni, Casablanca
+        context:
+          type: object
+          description: WhatsApp only. Reply to (quote) an earlier message of the conversation. Works with every type except reaction.
+          required:
+            - message_id
+          properties:
+            message_id:
+              type: string
+              example: wamid.HBgLMjEyNjEyMzQ1Njc4FQIAEhgg
+    WhatsAppMedia:
+      type: object
+      description: WhatsApp media by exactly one of id (a media id uploaded to WhatsApp) or link (an https URL). caption on image, video and document only; filename on document only.
+      properties:
+        id:
+          type: string
+        link:
+          type: string
+          example: https://example.com/brochure.pdf
+        caption:
+          type: string
+          maxLength: 1024
+        filename:
+          type: string
+    BulkSendRequest:
+      type: object
+      required:
+        - messages
+      properties:
+        messages:
+          type: array
+          maxItems: 10000
+          items:
+            type: object
+            required:
+              - to
+              - message
+            properties:
+              to:
+                type: string
+                example: '+212612345678'
+              message:
+                type: string
+                example: Bonjour {{name}}!
+        from:
+          type: string
+        channel:
+          type: string
+          enum:
+            - sms
+            - whatsapp
+            - telegram
+            - voice
+            - rcs
+          default: sms
+          description: Use sms by default. whatsapp sends free-form text from your connected WhatsApp Business number; each recipient must have written to you in the last 24 hours, and recipients outside that window are listed under rejected (OUT_OF_24H_WINDOW) and not charged. Bulk carries no templates — use campaigns for template sends.
+    VerifySendRequest:
+      type: object
+      required:
+        - to
+      properties:
+        to:
+          type: string
+          example: '+212612345678'
+        channel:
+          type: string
+          enum:
+            - sms
+            - whatsapp
+            - telegram
+            - voice
+            - rcs
+          default: sms
+          description: 'whatsapp = EnvoiSMS generates a 6-digit code and delivers it with its own WhatsApp authentication template, nothing to store on your side. The code is valid for expiry seconds, capped at 600 (10 minutes, also the default). If WhatsApp refuses the submission, the code is sent by SMS instead; an SMS follow-up after a delay happens only with a Verify application (app_id) whose channel list includes sms with auto-cascade on. code_length and template are ignored in this mode. sms = classic mode: you control code length, expiry, template and sender. Both modes are confirmed with the same /verify/check call.'
+        otp_type:
+          type: string
+          enum:
+            - copy_code
+            - one_tap
+            - zero_tap
+            - url
+          default: copy_code
+          description: WhatsApp Authentication template button type (copy_code, one_tap autofill, zero_tap, or url).
+        package_name:
+          type: string
+          description: Android application package name for One-Tap / Zero-Tap Autofill
+          example: ma.monapp.ecommerce
+        signature_hash:
+          type: string
+          description: Android app signature hash (SMS Retriever / Autofill API)
+          example: AbCdEf12345
+        code_length:
+          type: integer
+          minimum: 4
+          maximum: 8
+          default: 6
+          description: sms channel only — whatsapp verifications always use 6 digits
+        expiry:
+          type: integer
+          description: Code validity in seconds, 60–1800 (default 600). On the whatsapp channel it is capped at 600, the authentication template's own limit.
+          default: 600
+        app_id:
+          type: string
+          description: Verify Application ID configured in dashboard. If set, channels parameters and cascade logic are automatically managed.
+          example: vra_82fb5a71
+        cascade:
+          type: array
+          items:
+            type: string
+          description: Ordered channel cascade list for validation routing (e.g. ['whatsapp', 'sms', 'voice']). ignored if app_id is set.
+          example:
+            - whatsapp
+            - sms
+        brand:
+          type: string
+          description: Brand name shown in OTP message
+          example: MaSociété
+        template:
+          type: string
+          description: Custom OTP message. Use {{code}} and {{brand}} placeholders.
+          example: 'Code {{brand}}: {{code}}. Ne partagez jamais ce code.'
+        otp_button_text:
+          type: string
+          maxLength: 25
+          description: Custom label for the WhatsApp click-to-copy OTP button
+          example: Copier le code
+        web_otp_domain:
+          type: string
+          description: 'Target domain for W3C WebOTP browser autofill (appends @domain #code to the SMS)'
+          example: https://monsite.ma
+        app_hash:
+          type: string
+          description: 11-character Android SMS Retriever API application hash for automatic Android OTP detection
+          example: vG1k6XyZ1aB
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Stable machine-readable key, always UPPER_SNAKE_CASE. Branch on this, never on the message text. The common codes are listed in the Error Format section of the API description above.
+              example: INSUFFICIENT_BALANCE
+            message:
+              type: string
+              description: Human-readable explanation in English of what went wrong and what to do about it. Wording may improve over time — display it, do not parse it.
+              example: 'Insufficient balance. Required: EUR 0.072, available: EUR 0.01'
+            docs:
+              type: string
+              description: Link to the error documentation page.
+              example: https://envoisms.ma/en/docs#errors
+    MessageButton:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum:
+            - copy
+            - url
+            - call
+          description: Button action type
+          example: copy
+        text:
+          type: string
+          maxLength: 25
+          description: Button text label
+          example: Copier le code
+        copy_code:
+          type: string
+          description: Value to copy (only for copy type)
+          example: '123456'
+        url:
+          type: string
+          description: Target URL (only for url type). Must start with http:// or https://
+          example: https://example.com
+        phone_number:
+          type: string
+          description: Target phone number (only for call type) in E.164 format
+          example: '+212612345678'
+    WhatsAppProfile:
+      type: object
+      properties:
+        about:
+          type: string
+          example: Service client officiel EnvoiSMS.ma
+        address:
+          type: string
+          example: Casablanca, Maroc
+        description:
+          type: string
+          example: Infrastructure de messagerie programmable pour les entreprises.
+        email:
+          type: string
+          example: contact@votremarque.ma
+        websites:
+          type: array
+          items:
+            type: string
+          example:
+            - https://votremarque.ma
+        profile_picture_url:
+          type: string
+          example: https://pps.whatsapp.net/v/...
+    ConversationThread:
+      type: object
+      properties:
+        phone:
+          type: string
+          example: '+212612345678'
+        contact_name:
+          type: string
+          example: Yassine Alami
+        last_message:
+          type: string
+          example: Bonjour, je souhaite des informations sur votre offre.
+        last_message_at:
+          type: string
+          format: date-time
+        unread_count:
+          type: integer
+          example: 1
+        bot_muted:
+          type: boolean
+          example: false
+        can_reply_free:
+          type: boolean
+          example: true
+        window_expires_at:
+          type: string
+          format: date-time
+    QualifiedLead:
+      type: object
+      properties:
+        id:
+          type: string
+          example: lead_01J...
+        phone:
+          type: string
+          example: '+212612345678'
+        name:
+          type: string
+          example: Dr. Benjelloun
+        preset:
+          type: string
+          example: medical_equipment
+        bant_score:
+          type: integer
+          example: 85
+        is_hot:
+          type: boolean
+          example: true
+        intent:
+          type: string
+          example: Échographe Doppler pour cabinet médical
+        stage:
+          type: string
+          enum:
+            - new
+            - contacted
+            - meeting_scheduled
+            - closed_won
+            - closed_lost
+          example: meeting_scheduled
+        created_at:
+          type: string
+          format: date-time
+    InboundWebhookCatch:
+      type: object
+      properties:
+        id:
+          type: string
+          example: inw_9a8b...
+        name:
+          type: string
+          example: Campagne TikTok Ads Casablanca
+        source:
+          type: string
+          example: tiktok_ads
+        catch_url:
+          type: string
+          example: https://api.envoisms.ma/v1/inbound-webhooks/catch/inw_9a8b...
+        auto_start_funnel:
+          type: boolean
+          example: true
+        total_received:
+          type: integer
+          example: 142
+        created_at:
+          type: string
+          format: date-time
+paths:
+  /messages:
+    post:
+      summary: Send a message
+      x-payment-info:
+        intent: session
+        method: stripe
+        amount: '5.00'
+        currency: usd
+        description: EnvoiSMS API prepaid session deposit
+        offers:
+          - intent: session
+            method: stripe
+            amount: '5.00'
+            currency: usd
+          - intent: session
+            method: tempo
+            amount: '5000000'
+            currency: usd
+      description: 'Send one SMS, or one WhatsApp message from your own connected WhatsApp Business number (channel whatsapp: templates, text, media by id or link, interactive list/button/flow/cta_url/location_request_message, reactions, contact cards, locations, stickers, and a reply context on any of them). WhatsApp rule: a message that is not a template may only be sent to a contact who wrote to your number in the last 24 hours; otherwise it is refused with 400 OUT_OF_24H_WINDOW before anything is charged. Reactions are not billed. To show a typing indicator while you prepare a reply, see POST /messages/typing. Without a connected number, WhatsApp OTPs are available via /verify/send with channel whatsapp. Sending one-time codes? /verify/send manages the full OTP lifecycle (generation, delivery, validation, expiry) and is the recommended path; if you generate codes yourself and send them here, tag the request with metadata purpose: "otp" to enable the automatic one-shot re-send over an alternate SMS route on delivery failure (see the sms_otp example).'
+      operationId: sendMessage
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description: 'Unique string (max 255 chars, e.g. a UUID) making this send safe to retry: the same key replays the original response instead of sending and billing again. See the Idempotency section above.'
+          schema:
+            type: string
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendMessageRequest'
+            examples:
+              sms:
+                summary: Simple SMS
+                value:
+                  to: '+212612345678'
+                  message: 'Votre commande #1234 est expédiée!'
+                  from: MaMarque
+              sms_otp:
+                summary: SMS OTP (self-managed code)
+                description: 'The purpose: "otp" tag is what makes this an OTP for the platform: on a hard delivery failure reported for a Moroccan number, the code is re-sent once over an alternate SMS route while still fresh (within 10 minutes), same message id, no extra charge. Without the tag it is treated as an ordinary SMS. Prefer /verify/send when you want code generation, expiry, attempts and validation handled for you.'
+                value:
+                  to: '+212612345678'
+                  message: 'Votre code: 123456'
+                  channel: sms
+                  metadata:
+                    purpose: otp
+              cascade:
+                summary: Conservative cascade using configured channels
+                value:
+                  to: '+212612345678'
+                  message: 'Votre code: 123456'
+                  cascade: true
+              whatsapp_template:
+                summary: WhatsApp template (opens a conversation at any time)
+                value:
+                  to: '+212612345678'
+                  channel: whatsapp
+                  template:
+                    name: order_update
+                    language: fr
+                  metadata:
+                    variables:
+                      - Amal
+                      - '#1234'
+              whatsapp_reply:
+                summary: WhatsApp text reply quoting the customer's message (inside the 24-hour window)
+                value:
+                  to: '+212612345678'
+                  channel: whatsapp
+                  message: Votre colis part aujourd'hui.
+                  context:
+                    message_id: wamid.HBgLMjEyNjEyMzQ1Njc4FQIAEhgg
+              whatsapp_reaction:
+                summary: WhatsApp reaction (not billed)
+                value:
+                  to: '+212612345678'
+                  channel: whatsapp
+                  reaction:
+                    message_id: wamid.HBgLMjEyNjEyMzQ1Njc4FQIAEhgg
+                    emoji: 👍
+              whatsapp_location:
+                summary: WhatsApp location pin
+                value:
+                  to: '+212612345678'
+                  channel: whatsapp
+                  location:
+                    latitude: 33.5731
+                    longitude: -7.5898
+                    name: Agence Casablanca
+              whatsapp_contacts:
+                summary: WhatsApp contact card
+                value:
+                  to: '+212612345678'
+                  channel: whatsapp
+                  contacts:
+                    - name:
+                        formatted_name: Service client
+                      phones:
+                        - phone: '+212522000000'
+                          type: WORK
+              whatsapp_cta_url:
+                summary: WhatsApp call-to-action URL button
+                value:
+                  to: '+212612345678'
+                  channel: whatsapp
+                  interactive:
+                    type: cta_url
+                    body:
+                      text: Suivez votre commande en direct.
+                    action:
+                      name: cta_url
+                      parameters:
+                        display_text: Suivre
+                        url: https://example.com/track/1234
+              whatsapp_video_by_id:
+                summary: WhatsApp video by uploaded media id
+                value:
+                  to: '+212612345678'
+                  channel: whatsapp
+                  video:
+                    id: '1234567890'
+                    caption: Démonstration
+      responses:
+        '202':
+          description: Message queued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '400':
+          description: 'Bad request — including OUT_OF_24H_WINDOW (WhatsApp free-form message outside the customer service window; the error also carries window_expired: true and window_expires_at) and the WhatsApp payload codes listed in Error Format. Nothing is charged.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '402':
+          description: Insufficient balance
+        '403':
+          description: WHATSAPP_NOT_CONNECTED (no connected WhatsApp Business number), FORBIDDEN_ASSET, OPTED_OUT, or a Sender ID that is not usable yet
+        '429':
+          description: Rate limit exceeded
+      tags:
+        - SMS & WhatsApp Messaging
+    get:
+      summary: List messages
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum:
+              - queued
+              - sent
+              - delivered
+              - failed
+              - undeliverable
+        - name: channel
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+            maximum: 200
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: from_date
+          in: query
+          description: Start date (ISO 8601)
+          schema:
+            type: string
+        - name: to_date
+          in: query
+          description: End date (ISO 8601)
+          schema:
+            type: string
+        - name: format
+          in: query
+          description: Set to `csv` to download the full filtered set (not a page) as a UTF-8 CSV file, capped at 10000 rows. When the cap applies, the file's last row says so.
+          schema:
+            type: string
+            enum:
+              - csv
+      responses:
+        '200':
+          description: List of messages
+      tags:
+        - SMS & WhatsApp Messaging
+  /messages/bulk:
+    post:
+      summary: Send bulk messages
+      description: Send up to 10,000 messages in one request. channel whatsapp sends free-form text from your connected WhatsApp Business number (403 WHATSAPP_NOT_CONNECTED otherwise); each recipient must have written to your number in the last 24 hours. Entries the platform refuses — outside that window (OUT_OF_24H_WINDOW), opted out, … — are listed under rejected with their error code and are never charged.
+      operationId: sendBulk
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description: Unique string (max 255 chars) making this batch safe to retry without double-sending. See the Idempotency section above.
+          schema:
+            type: string
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkSendRequest'
+            examples:
+              sms_bulk:
+                summary: SMS bulk
+                value:
+                  channel: sms
+                  from: MaMarque
+                  messages:
+                    - to: '+212612345678'
+                      message: Bonjour Amal
+                    - to: '+212698765432'
+                      message: Bonjour Youssef
+      responses:
+        '202':
+          description: Batch queued
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  batch_id:
+                    type: string
+                  total:
+                    type: integer
+                    description: Messages queued
+                  channel:
+                    type: string
+                  estimated_cost:
+                    type: object
+                    properties:
+                      eur:
+                        type: number
+                      mad:
+                        type: number
+                  messages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        to:
+                          type: string
+                        status:
+                          type: string
+                          example: queued
+                  rejected:
+                    type: array
+                    description: Present only when some entries were refused. Nothing was charged for them.
+                    items:
+                      type: object
+                      properties:
+                        to:
+                          type: string
+                        code:
+                          type: string
+                          example: OUT_OF_24H_WINDOW
+                        message:
+                          type: string
+      tags:
+        - SMS & WhatsApp Messaging
+  /messages/{id}:
+    get:
+      summary: Get message status
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Message details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageRecord'
+        '404':
+          description: Message not found
+      tags:
+        - SMS & WhatsApp Messaging
+  /messages/typing:
+    post:
+      summary: WhatsApp typing indicator
+      description: 'Marks a WhatsApp message you received as read and shows your contact a typing indicator while you prepare the reply. The indicator disappears when you reply, or after about 25 seconds. Not a message: nothing is stored or charged. Answered synchronously; a refusal by WhatsApp returns its META_* code. Requires the send scope and a connected WhatsApp Business number; sandbox keys simulate.'
+      operationId: sendTypingIndicator
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - message_id
+              properties:
+                message_id:
+                  type: string
+                  description: WhatsApp message id (wamid) of the message you received
+                  example: wamid.HBgLMjEyNjEyMzQ1Njc4FQIAEhgg
+                typing_indicator:
+                  type: boolean
+                  default: true
+                  description: false sends the read receipt alone
+                phone_number_id:
+                  type: string
+                  description: Which of your connected numbers received the message; defaults to your default number
+      responses:
+        '200':
+          description: Accepted by WhatsApp (or simulated on a sandbox key)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - ok
+                      - simulated
+                  message_id:
+                    type: string
+                  typing_indicator:
+                    type: boolean
+                  sandbox:
+                    type: boolean
+        '400':
+          description: MISSING_FIELD / INVALID_FIELD, or a WhatsApp refusal (META_*)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: WHATSAPP_NOT_CONNECTED or FORBIDDEN_ASSET
+        '502':
+          description: META_SERVICE_UNAVAILABLE — WhatsApp could not be reached; retry
+      tags:
+        - SMS & WhatsApp Messaging
+  /verify/send:
+    post:
+      summary: Send OTP verification code
+      x-payment-info:
+        intent: session
+        method: stripe
+        amount: '5.00'
+        currency: usd
+        description: EnvoiSMS OTP verification prepaid session deposit
+        offers:
+          - intent: session
+            method: stripe
+            amount: '5.00'
+            currency: usd
+          - intent: session
+            method: tempo
+            amount: '5000000'
+            currency: usd
+      operationId: sendVerify
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifySendRequest'
+      responses:
+        '202':
+          description: OTP sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  session_id:
+                    type: string
+                  message_id:
+                    type: string
+                    description: Underlying message id (sms channel only)
+                  to:
+                    type: string
+                  channel:
+                    type: string
+                  expires_at:
+                    type: string
+                    format: date-time
+                  status:
+                    type: string
+                    example: sent
+                  cost:
+                    type: object
+                    description: Managed whatsapp verifications only — the flat per-verification price
+                    properties:
+                      eur:
+                        type: number
+                      mad:
+                        type: number
+                  sandbox:
+                    type: boolean
+                    description: Present and true on env_test_ keys; nothing was delivered
+                  sandbox_code:
+                    type: string
+                    description: Sandbox keys only — the generated code, returned so the check endpoint can be exercised in tests. Never present on a live key.
+      tags:
+        - Phone Verification (OTP)
+  /verify/resend:
+    post:
+      summary: Resend the code of an existing verification session
+      description: |
+        Re-delivers the code of a still-pending session, optionally over a
+        different channel. Available on every plan, including Starter — it needs
+        the same `verify` scope as /verify/send and nothing more.
+
+        The code itself is unchanged, so an earlier message that arrives late is
+        still valid. Whichever channel you choose, the session's expiry and
+        remaining attempts are untouched.
+
+        **Cooldown.** A resend is refused with `OTP_COOLDOWN` (429) until the
+        window opened by the *previous* delivery has passed: 60 s after a
+        WhatsApp delivery, 30 s after an SMS one. `/verify/send` reports the
+        applicable figure as `resend_after_seconds`, and
+        `GET /verify/{session_id}` reports the live countdown as
+        `resend_available_in_seconds`. The window is per account and
+        destination — other customers' traffic to the same number does not
+        affect yours. `Retry-After` on the 429 carries the exact remaining
+        seconds.
+
+        **Sandbox keys.** An `env_test_` key simulates: nothing is delivered and
+        nothing is charged. The response carries `sandbox: true` alongside the
+        `sandbox_code`, so a simulated resend is never mistaken for a delivered
+        one. A sandbox key can only resend sessions it created, and a live key
+        only live sessions.
+      operationId: resendVerify
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - session_id
+              properties:
+                session_id:
+                  type: string
+                  description: The session returned by /verify/send. Must still be pending and unexpired.
+                channel:
+                  type: string
+                  enum:
+                    - sms
+                    - whatsapp
+                  default: sms
+                  description: Channel for this delivery. Defaults to sms, which is also the useful fallback when a WhatsApp code did not arrive. whatsapp requires the session's code to be 4–8 numeric digits, the only shape the authentication template accepts.
+      responses:
+        '200':
+          description: Code re-sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  session_id:
+                    type: string
+                  message_id:
+                    type: string
+                  to:
+                    type: string
+                  channel:
+                    type: string
+                    enum:
+                      - sms
+                      - whatsapp
+                  status:
+                    type: string
+                    example: sent
+                  resend_after_seconds:
+                    type: integer
+                    description: Seconds before this session accepts another resend
+                  expires_at:
+                    type: string
+                    format: date-time
+                  sandbox:
+                    type: boolean
+                    description: Present and true on env_test_ keys; nothing was delivered and nothing was charged
+                  simulated:
+                    type: boolean
+                    description: Present and true on env_test_ keys
+                  sandbox_code:
+                    type: string
+                    description: Sandbox keys only — never present on a live key
+        '400':
+          description: Session already completed or invalid (INVALID_STATE), expired (SESSION_EXPIRED), or a non-numeric code requested over whatsapp (INVALID_CODE_TYPE)
+        '402':
+          description: Insufficient balance (INSUFFICIENT_BALANCE)
+        '404':
+          description: Session not found or expired (SESSION_NOT_FOUND). Also returned when a sandbox key targets a live session or vice versa — the message names the cause.
+        '429':
+          description: Cooldown still open (OTP_COOLDOWN); Retry-After carries the remaining seconds
+        '502':
+          description: The channel accepted nothing (DELIVERY_FAILED); nothing was charged. Retry over sms.
+      tags:
+        - Phone Verification (OTP)
+  /verify/check:
+    post:
+      summary: Check OTP code
+      operationId: checkVerify
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - session_id
+                - code
+              properties:
+                session_id:
+                  type: string
+                code:
+                  type: string
+                  example: '123456'
+      responses:
+        '200':
+          description: Code verified
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  session_id:
+                    type: string
+                  verified:
+                    type: boolean
+                  verified_at:
+                    type: string
+                    format: date-time
+        '400':
+          description: Wrong code (error code INVALID_CODE; the message states how many attempts remain)
+        '404':
+          description: Session not found, or the code expired (EXPIRED_CODE)
+        '429':
+          description: Maximum verification attempts exceeded (MAX_ATTEMPTS); the session is closed
+      tags:
+        - Phone Verification (OTP)
+  /verify/lookup:
+    post:
+      summary: Validate phone number (EnvoiSMS Lookup Engine)
+      description: Validates phone number format, carrier, and location using the operator database.
+      operationId: lookupNumber
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - number
+              properties:
+                number:
+                  type: string
+                  description: Phone number to validate (E.164 or local format)
+                  example: '+212612345678'
+                country_code:
+                  type: string
+                  description: Optional ISO 2-letter country code
+                  example: MA
+      responses:
+        '200':
+          description: Phone validation information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid:
+                    type: boolean
+                  number:
+                    type: string
+                  local_format:
+                    type: string
+                  international_format:
+                    type: string
+                  country_prefix:
+                    type: string
+                  country_code:
+                    type: string
+                  country_name:
+                    type: string
+                  location:
+                    type: string
+                  carrier:
+                    type: string
+                  line_type:
+                    type: string
+        '400':
+          description: Missing or invalid parameters
+      tags:
+        - Phone Verification (OTP)
+  /verify/{session_id}:
+    get:
+      summary: Get OTP verification session
+      operationId: getVerifySession
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OTP session
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  to:
+                    type: string
+                  channel:
+                    type: string
+                    enum:
+                      - sms
+                      - whatsapp
+                      - telegram
+                      - voice
+                      - rcs
+                  app_id:
+                    type: string
+                    nullable: true
+                  status:
+                    type: string
+                    enum:
+                      - pending
+                      - verified
+                      - failed
+                      - expired
+                  expires_at:
+                    type: string
+                    format: date-time
+                  verified_at:
+                    type: string
+                    format: date-time
+                    nullable: true
+                  created_at:
+                    type: string
+                    format: date-time
+                  attempts_used:
+                    type: integer
+                  attempts_remaining:
+                    type: integer
+                  resend_available_in_seconds:
+                    type: integer
+                    description: 0 when a resend is accepted right now
+                  can_resend_now:
+                    type: boolean
+                  deliveries:
+                    type: array
+                    description: One entry per delivery attempt, oldest first, with the outcome the network reported. This is the authoritative answer to "did my user receive the code?" — a delivered entry means the handset acknowledged it.
+                    items:
+                      type: object
+                      properties:
+                        channel:
+                          type: string
+                          enum:
+                            - sms
+                            - whatsapp
+                        kind:
+                          type: string
+                          enum:
+                            - send
+                            - resend
+                        status:
+                          type: string
+                          enum:
+                            - submitted
+                            - sent
+                            - delivered
+                            - read
+                            - failed
+                            - simulated
+                          description: 'simulated means a sandbox key: nothing left the platform'
+                        simulated:
+                          type: boolean
+                        submitted_at:
+                          type: string
+                          format: date-time
+                        delivered_at:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        read_at:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        failed_at:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        error_code:
+                          type: string
+                          nullable: true
+                        error_message:
+                          type: string
+                          nullable: true
+        '404':
+          description: Session not found
+      tags:
+        - Phone Verification (OTP)
+  /lookup/{number}:
+    get:
+      summary: Number lookup
+      description: Validate a phone number and resolve its destination and, for Moroccan mobiles, the serving operator — including ported numbers the platform has learned about, which prefix tables alone cannot see. Billed per successful lookup (`lookup` channel of your rate card, 0.05 MAD list price); an invalid number is a 400 and is never billed. Requires the `send` permission scope.
+      operationId: lookupNumber
+      parameters:
+        - name: number
+          in: path
+          required: true
+          description: The number to look up, E.164 (URL-encode the +, e.g. %2B212612345678). National Moroccan formats (06…, 07…) are accepted and normalized.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lookup result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: lkp_1a2b3c4d5e6f
+                  number:
+                    type: string
+                    example: '+212612345678'
+                  valid:
+                    type: boolean
+                  country_iso:
+                    type: string
+                    description: ISO 3166-1 alpha-2 of the destination, or XX when unknown.
+                    example: MA
+                  type:
+                    type: string
+                    enum:
+                      - mobile
+                      - unknown
+                  operator:
+                    type: string
+                    nullable: true
+                    description: Serving operator when known (Moroccan mobiles and major foreign prefixes), else null.
+                    example: Inwi
+                  ported:
+                    type: boolean
+                    description: true when the platform has evidence the number moved to a different operator than its allocated block.
+                  cost:
+                    type: object
+                    properties:
+                      eur:
+                        type: number
+                      mad:
+                        type: number
+        '400':
+          description: Invalid number (not billed)
+        '402':
+          description: Insufficient balance
+      tags:
+        - Number Intelligence & HLR
+  /conversations:
+    get:
+      summary: List WhatsApp conversations
+      description: Retrieves all active 2-way conversation threads with 24-hour service window expiry time and bot status.
+      operationId: listConversations
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 30
+        - name: bot_status
+          in: query
+          schema:
+            type: string
+            enum:
+              - active
+              - muted
+      responses:
+        '200':
+          description: List of conversation threads
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conversations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConversationThread'
+                  total:
+                    type: integer
+      tags:
+        - Conversations & Live Chat
+  /conversations/{phone}:
+    get:
+      summary: Get conversation history
+      description: Retrieves full message history exchanged with a specific phone number.
+      operationId: getConversationHistory
+      parameters:
+        - name: phone
+          in: path
+          required: true
+          schema:
+            type: string
+            example: '+212612345678'
+      responses:
+        '200':
+          description: Full conversation message history
+      tags:
+        - Conversations & Live Chat
+  /conversations/{phone}/messages:
+    post:
+      summary: Send live chat reply
+      description: Sends an agent message to a contact and mutes the bot on that conversation (un-mute with POST /conversations/{phone}/toggle-bot). A free-form WhatsApp message (text or media) requires the contact to have written in the last 24 hours — otherwise 400 OUT_OF_24H_WINDOW; a template (template_id or template_name) may be sent at any time. Billed like the same send on POST /messages.
+      operationId: sendConversationReply
+      parameters:
+        - name: phone
+          in: path
+          required: true
+          schema:
+            type: string
+            example: '+212612345678'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  description: Text of the reply (or the caption of media_url)
+                channel:
+                  type: string
+                  enum:
+                    - whatsapp
+                    - sms
+                  default: whatsapp
+                phone_number_id:
+                  type: string
+                  description: Which connected WhatsApp number replies
+                template_name:
+                  type: string
+                  description: Approved WhatsApp template to send instead of free text
+                template_id:
+                  type: string
+                template_language:
+                  type: string
+                  example: fr
+                variables:
+                  type: array
+                  items:
+                    type: string
+                  description: Template placeholder values in order
+                media_url:
+                  type: string
+                  description: 'https URL (or data: URI) of an image or PDF to attach'
+                media_type:
+                  type: string
+                  enum:
+                    - image
+                    - document
+                filename:
+                  type: string
+      responses:
+        '201':
+          description: Reply sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  message:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      phone:
+                        type: string
+                      role:
+                        type: string
+                        example: agent
+                      message:
+                        type: string
+                      status:
+                        type: string
+                        example: sent
+                      channel:
+                        type: string
+                      created_at:
+                        type: string
+                        format: date-time
+        '400':
+          description: OUT_OF_24H_WINDOW, TEMPLATE_NOT_APPROVED or MISSING_MESSAGE
+        '404':
+          description: TEMPLATE_NOT_FOUND
+      tags:
+        - Conversations & Live Chat
+  /whatsapp/profile:
+    get:
+      summary: Get WhatsApp Business profile
+      description: Retrieves the public verified profile of your WhatsApp Business Account.
+      operationId: getWhatsAppProfile
+      responses:
+        '200':
+          description: WhatsApp profile information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WhatsAppProfile'
+      tags:
+        - WhatsApp Business Profile
+    post:
+      summary: Update WhatsApp Business profile
+      description: Updates public profile details (about, description, address, email, websites) for your verified WhatsApp Business Account.
+      operationId: updateWhatsAppProfile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                about:
+                  type: string
+                description:
+                  type: string
+                address:
+                  type: string
+                email:
+                  type: string
+                websites:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Profile updated successfully
+      tags:
+        - WhatsApp Business Profile
+  /qualified-leads:
+    get:
+      summary: List AtlasAI qualified leads
+      description: Retrieves prospects qualified by the AtlasAI™ conversational engine with BANT scoring and intent details.
+      operationId: listQualifiedLeads
+      parameters:
+        - name: stage
+          in: query
+          schema:
+            type: string
+            enum:
+              - new
+              - contacted
+              - meeting_scheduled
+              - closed_won
+              - closed_lost
+        - name: min_score
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of qualified leads
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  leads:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/QualifiedLead'
+      tags:
+        - AI Qualified Leads
+  /qualified-leads/{id}/status:
+    post:
+      summary: Update lead stage
+      description: Updates the CRM pipeline stage for a qualified lead.
+      operationId: updateLeadStatus
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - new
+                    - contacted
+                    - meeting_scheduled
+                    - closed_won
+                    - closed_lost
+                notes:
+                  type: string
+      responses:
+        '200':
+          description: Lead status updated
+      tags:
+        - AI Qualified Leads
+  /inbound-webhooks:
+    get:
+      summary: List Inbound Webhooks
+      description: Retrieves all configured inbound lead capture endpoints.
+      operationId: listInboundWebhooks
+      responses:
+        '200':
+          description: List of inbound webhooks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  webhooks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/InboundWebhookCatch'
+      tags:
+        - Inbound Webhooks
+    post:
+      summary: Create an Inbound Webhook
+      description: Creates a unique Catch URL for receiving advertising leads (TikTok Lead Ads, Meta Lead Ads, Zapier).
+      operationId: createInboundWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                source:
+                  type: string
+                  enum:
+                    - tiktok_ads
+                    - meta_leads
+                    - google_forms
+                    - custom
+                  default: custom
+                auto_start_funnel:
+                  type: boolean
+                  default: true
+      responses:
+        '201':
+          description: Inbound webhook created with unique catch URL
+      tags:
+        - Inbound Webhooks
+  /contacts:
+    get:
+      summary: List contacts
+      operationId: listContacts
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+        - name: list_id
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+            maximum: 500
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Contact list
+      tags:
+        - Contacts & Audience
+    post:
+      summary: Create or update contact
+      operationId: upsertContact
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - phone
+              properties:
+                phone:
+                  type: string
+                  example: '+212612345678'
+                name:
+                  type: string
+                  example: Sara
+                email:
+                  type: string
+                  format: email
+                list_id:
+                  type: string
+                custom_fields:
+                  type: object
+                  properties:
+                    custom1:
+                      type: string
+                    custom2:
+                      type: string
+                    custom3:
+                      type: string
+      responses:
+        '201':
+          description: Contact created
+      tags:
+        - Contacts & Audience
+  /contacts/import:
+    post:
+      summary: Import contacts
+      operationId: importContacts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - contacts
+              properties:
+                list_id:
+                  type: string
+                contacts:
+                  type: array
+                  maxItems: 5000
+                  items:
+                    type: object
+                    required:
+                      - phone
+                    properties:
+                      phone:
+                        type: string
+                        example: '+212612345678'
+                      name:
+                        type: string
+                      email:
+                        type: string
+                        format: email
+      responses:
+        '202':
+          description: Import accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imported:
+                    type: integer
+                  skipped:
+                    type: integer
+      tags:
+        - Contacts & Audience
+  /contacts/lists:
+    get:
+      summary: List contact lists
+      operationId: listContactLists
+      responses:
+        '200':
+          description: Contact lists
+      tags:
+        - Contacts & Audience
+    post:
+      summary: Create contact list
+      operationId: createContactList
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  example: Customers
+                description:
+                  type: string
+      responses:
+        '201':
+          description: Contact list created
+      tags:
+        - Contacts & Audience
+  /contacts/{id}:
+    delete:
+      summary: Delete contact
+      operationId: deleteContact
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Contact deleted
+      tags:
+        - Contacts & Audience
+  /campaigns:
+    get:
+      summary: List campaigns
+      operationId: listCampaigns
+      responses:
+        '200':
+          description: Campaign list
+      tags:
+        - Campaigns & Bulk Dispatch
+    post:
+      summary: Create campaign
+      operationId: createCampaign
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                channel:
+                  type: string
+                  enum:
+                    - sms
+                    - whatsapp
+                    - telegram
+                    - voice
+                    - rcs
+                  default: sms
+                list_id:
+                  type: string
+                template_id:
+                  type: string
+                body:
+                  type: string
+                sender_id:
+                  type: string
+                  example: ENVOISMS
+                scheduled_at:
+                  type: string
+                  format: date-time
+                buttons:
+                  type: array
+                  description: Optional WhatsApp interactive buttons (max 3). Only supported on the whatsapp channel.
+                  items:
+                    $ref: '#/components/schemas/MessageButton'
+                metadata:
+                  type: object
+                  description: 'Custom metadata (e.g. throttling options: { throttling: ''50_min'' })'
+                  example:
+                    throttling: 50_min
+      responses:
+        '201':
+          description: Campaign created
+      tags:
+        - Campaigns & Bulk Dispatch
+  /campaigns/{id}:
+    get:
+      summary: Get campaign
+      operationId: getCampaign
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Campaign details
+        '404':
+          description: Campaign not found
+      tags:
+        - Campaigns & Bulk Dispatch
+  /campaigns/{id}/send:
+    post:
+      summary: Send campaign
+      operationId: sendCampaign
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Campaign queued
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  queued:
+                    type: integer
+                  total:
+                    type: integer
+      tags:
+        - Campaigns & Bulk Dispatch
+  /optouts:
+    get:
+      summary: List opt-outs
+      operationId: listOptouts
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+            maximum: 500
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Opt-out registry
+      tags:
+        - Compliance & Consent
+    post:
+      summary: Create opt-out
+      operationId: createOptout
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - phone
+              properties:
+                phone:
+                  type: string
+                  example: '+212612345678'
+      responses:
+        '201':
+          description: Recipient opted out
+      tags:
+        - Compliance & Consent
+  /optouts/{phone}:
+    delete:
+      summary: Remove opt-out
+      operationId: deleteOptout
+      parameters:
+        - name: phone
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Recipient opted back in
+      tags:
+        - Compliance & Consent
+  /consents:
+    get:
+      summary: List consent events
+      description: |
+        Append-only consent ledger: the evidence behind an opt-in or an opt-out
+        (Law 09-08 art. 10, CNDP). Every grant and every withdrawal is one event
+        with its source and evidence; the current state of a number is derived
+        from the latest event per purpose (see `GET /consents/{phone}`).
+
+        The platform writes events itself when it observes the person's own act:
+        STOP / START keywords on WhatsApp (`whatsapp_keyword`), STOP on SMS
+        (`sms_keyword`), and the first customer-initiated WhatsApp conversation
+        (`whatsapp_inbound`, purpose `service`). Everything the platform cannot
+        see — a web form, a signed import — is yours to record via `POST`.
+
+        Add `format=csv` to download every matching event as a file (capped at
+        10,000 rows; when the cap bites the last row of the file says so).
+      operationId: listConsents
+      parameters:
+        - name: phone
+          in: query
+          description: E.164 number to filter on
+          schema:
+            type: string
+            example: '+212612345678'
+        - name: purpose
+          in: query
+          schema:
+            type: string
+            enum:
+              - marketing
+              - transactional
+              - otp
+              - service
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum:
+              - granted
+              - withdrawn
+        - name: from
+          in: query
+          description: Only events recorded at or after this ISO 8601 timestamp
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: format
+          in: query
+          description: '`csv` returns the full filtered set as a file'
+          schema:
+            type: string
+            enum:
+              - json
+              - csv
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+            maximum: 500
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Consent events, newest first
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConsentEvent'
+                  total:
+                    type: integer
+                  limit:
+                    type: integer
+                  offset:
+                    type: integer
+      tags:
+        - Compliance & Consent
+    post:
+      summary: Record a consent event
+      description: |
+        Records that a person granted or withdrew consent, with the evidence you
+        hold (the wording shown, the page URL, the IP, a reference). `recorded_at`
+        may be backdated for an imported consent; it cannot be in the future.
+        A `marketing` withdrawal is also placed on the opt-out list immediately.
+
+        `source` is limited to `api`, `form`, `import` and `dashboard`: the
+        keyword and inbound sources are the platform's own observations and are
+        reserved.
+      operationId: createConsent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - phone
+                - purpose
+              properties:
+                phone:
+                  type: string
+                  example: '+212612345678'
+                purpose:
+                  type: string
+                  enum:
+                    - marketing
+                    - transactional
+                    - otp
+                    - service
+                status:
+                  type: string
+                  enum:
+                    - granted
+                    - withdrawn
+                  default: granted
+                channel:
+                  type: string
+                  enum:
+                    - whatsapp
+                    - sms
+                    - any
+                  default: any
+                source:
+                  type: string
+                  enum:
+                    - api
+                    - form
+                    - import
+                    - dashboard
+                  default: api
+                evidence:
+                  type: object
+                  description: Free-form JSON object under 4 KB — the wording shown, url, ip, reference
+                  example:
+                    text: J'accepte de recevoir les offres par WhatsApp
+                    url: https://example.ma/inscription
+                    ip: 41.140.0.1
+                recorded_at:
+                  type: string
+                  format: date-time
+                  description: When the person acted (defaults to now; may be backdated, never in the future)
+      responses:
+        '201':
+          description: Event recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsentEvent'
+        '400':
+          description: INVALID_PHONE, INVALID_PURPOSE, INVALID_STATUS, INVALID_CHANNEL, INVALID_SOURCE, INVALID_EVIDENCE or INVALID_DATE
+      tags:
+        - Compliance & Consent
+  /consents/{phone}:
+    get:
+      summary: Consent state and history for a number
+      description: |
+        The answer to "show me this person's consent": the current state per
+        purpose (derived from the newest event — `unknown` when no event exists,
+        never assumed granted), whether the number sits on the opt-out list, and
+        the full event history, newest first.
+      operationId: getConsentForPhone
+      parameters:
+        - name: phone
+          in: path
+          required: true
+          schema:
+            type: string
+            example: '+212612345678'
+      responses:
+        '200':
+          description: Derived state and history
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  phone:
+                    type: string
+                  opted_out:
+                    type: boolean
+                  opted_out_at:
+                    type: string
+                    nullable: true
+                  state:
+                    type: object
+                    additionalProperties:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                          enum:
+                            - granted
+                            - withdrawn
+                            - unknown
+                        channel:
+                          type: string
+                        source:
+                          type: string
+                        recorded_at:
+                          type: string
+                        record_id:
+                          type: string
+                  history:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConsentEvent'
+      tags:
+        - Compliance & Consent
+  /webhooks:
+    get:
+      summary: List webhooks
+      operationId: listWebhooks
+      responses:
+        '200':
+          description: Webhook list
+      tags:
+        - Delivery Webhooks (DLR)
+    post:
+      summary: Create webhook
+      operationId: createWebhook
+      description: 'Message events POST one payload shape regardless of where in the pipeline the state change happened: `{ "id", "to", "channel", "status", "error_code", "error_message" }` — the two error fields are present only on failed/undeliverable events and carry the same values as the stored message (see the Message schema). `id` is the EnvoiSMS message id, the same one the send call returned. `metadata` supplied at send time is included on delivery-report events.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+              properties:
+                url:
+                  type: string
+                  format: uri
+                  example: https://yourapp.com/smsma-webhook
+                events:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - message.sent
+                      - message.delivered
+                      - message.failed
+                      - message.undeliverable
+                      - message.fallback
+                      - message.test
+                      - message.*
+                  default:
+                    - message.delivered
+                    - message.failed
+                secret:
+                  type: string
+                  description: Optional HMAC secret. Generated and returned when omitted.
+      responses:
+        '201':
+          description: Webhook created
+      tags:
+        - Delivery Webhooks (DLR)
+  /webhooks/{id}:
+    patch:
+      summary: Update webhook
+      operationId: updateWebhook
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+                events:
+                  type: array
+                  items:
+                    type: string
+                active:
+                  type: boolean
+      responses:
+        '200':
+          description: Webhook updated
+      tags:
+        - Delivery Webhooks (DLR)
+    delete:
+      summary: Disable webhook
+      operationId: deleteWebhook
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Webhook disabled
+      tags:
+        - Delivery Webhooks (DLR)
+  /webhooks/{id}/rotate-secret:
+    post:
+      summary: Rotate webhook signing secret
+      description: Generates a new signing secret for the endpoint and returns it exactly once. Deliveries already queued were signed with the old secret, so accept both during a short rollover.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: New secret (returned only here)
+        '404':
+          description: Webhook not found
+      tags:
+        - Delivery Webhooks (DLR)
+  /webhooks/{id}/test:
+    post:
+      summary: Test webhook
+      operationId: testWebhook
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Test webhook queued
+      tags:
+        - Delivery Webhooks (DLR)
+  /billing/balance:
+    get:
+      summary: Get billing balance
+      operationId: getBillingBalance
+      responses:
+        '200':
+          description: Current balance
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance_eur:
+                    type: number
+                    example: 45.23
+                  balance_mad:
+                    type: number
+                    example: 497.53
+                  currency:
+                    type: string
+                    example: EUR
+                  plan:
+                    type: string
+                    example: business
+      tags:
+        - Billing & Balances
+  /balance:
+    get:
+      summary: Get account balance (alias)
+      operationId: getBalance
+      responses:
+        '200':
+          description: Current balance
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance_eur:
+                    type: number
+                    example: 45.23
+                  balance_mad:
+                    type: number
+                    example: 497.53
+                  currency:
+                    type: string
+                    example: EUR
+                  plan:
+                    type: string
+                    example: business
+      tags:
+        - Billing & Balances
+  /billing/transactions:
+    get:
+      summary: List billing transactions
+      operationId: listBillingTransactions
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+            maximum: 200
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Billing transactions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                            - topup
+                            - usage
+                            - refund
+                            - adjustment
+                            - grant
+                          description: grant = the welcome credit written once at signup; it is not a payment and cannot be receipted
+                        amount_eur:
+                          type: number
+                        amount_mad:
+                          type: number
+                        balance_after_eur:
+                          type: number
+                        description:
+                          type: string
+                        reference:
+                          type: string
+                          nullable: true
+                        payment_method:
+                          type: string
+                          nullable: true
+                        status:
+                          type: string
+                        created_at:
+                          type: string
+                          format: date-time
+                  limit:
+                    type: integer
+                  offset:
+                    type: integer
+                  total:
+                    type: integer
+      tags:
+        - Billing & Balances
+  /billing/plans:
+    get:
+      summary: List plan pricing
+      operationId: listBillingPlans
+      responses:
+        '200':
+          description: Pricing rows by plan and channel
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        plan:
+                          type: string
+                          example: starter
+                        channel:
+                          type: string
+                          enum:
+                            - sms
+                            - whatsapp
+                            - telegram
+                            - voice
+                            - rcs
+                        price_eur:
+                          type: number
+                          example: 0.04455
+                        price_mad:
+                          type: number
+                          example: 0.49
+      tags:
+        - Billing & Balances
+  /billing/packs:
+    get:
+      summary: List prepaid SMS packs
+      description: Returns the sellable prepaid credit packs. What a pack buys is `amount_mad` of credit; `sms` is an ESTIMATE of how many messages that becomes at `price_per_sms_mad`, for a single-segment Moroccan message on the default sender. A custom sender ID bills at the `sms_custom` rate, and longer messages cost more than one segment, so the real count is usually lower. `sms_estimated` is always true — never treat `sms` as an entitlement. Completing a pack top-up also updates the account to the matching volume tier. `min_topup_mad` is the floor for a custom-amount top-up on POST /billing/topups.
+      operationId: listBillingPacks
+      responses:
+        '200':
+          description: SMS pack rows
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: sms-1000
+                        sms:
+                          type: integer
+                          example: 1000
+                          description: Estimated message count, not a guaranteed quantity. See sms_estimated.
+                        sms_estimated:
+                          type: boolean
+                          example: true
+                          description: Always true. The count varies with destination, sender type and segments.
+                        amount_eur:
+                          type: number
+                          example: 34.55
+                        amount_mad:
+                          type: number
+                          example: 380
+                        price_per_sms_mad:
+                          type: number
+                          example: 0.38
+                        volume_tier:
+                          type: string
+                          example: business
+                  min_topup_mad:
+                    type: number
+                    example: 275
+                    description: Minimum accepted amount_mad for a custom top-up.
+      tags:
+        - Billing & Balances
+  /billing/payment-methods:
+    get:
+      summary: List configured payment methods
+      description: Returns Stripe, crypto, and bank-transfer availability for the authenticated account. Missing configuration names are returned so operators know what to configure before taking live payments.
+      operationId: listBillingPaymentMethods
+      responses:
+        '200':
+          description: Payment method readiness
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          enum:
+                            - stripe
+                            - crypto
+                            - bank_transfer
+                        label:
+                          type: string
+                        configured:
+                          type: boolean
+                        missing:
+                          type: array
+                          items:
+                            type: string
+                        settlement:
+                          type: string
+                          enum:
+                            - automatic
+                            - manual
+                        description:
+                          type: string
+      tags:
+        - Billing & Balances
+  /billing/topups:
+    post:
+      summary: Create balance top-up or SMS pack
+      description: Creates a custom balance top-up or a prepaid SMS pack. Pack top-ups carry a volume tier, for example `sms-1000` unlocks the `business` SMS price when payment is completed.
+      operationId: createBillingTopup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount_eur:
+                  type: number
+                  minimum: 10
+                  example: 50
+                  description: Required for custom top-ups. Optional when pack_id is provided.
+                pack_id:
+                  type: string
+                  example: sms-1000
+                payment_method:
+                  type: string
+                  enum:
+                    - stripe
+                    - crypto
+                    - bank_transfer
+                  example: stripe
+      responses:
+        '201':
+          description: Pending top-up
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: topup_abcd
+                  status:
+                    type: string
+                    example: pending
+                  amount_eur:
+                    type: number
+                    example: 50
+                  amount_mad:
+                    type: number
+                    example: 550
+                  pack_id:
+                    type: string
+                    nullable: true
+                    example: sms-1000
+                  sms_count:
+                    type: integer
+                    nullable: true
+                    example: 1000
+                  volume_tier:
+                    type: string
+                    nullable: true
+                    example: business
+                  price_per_sms_mad:
+                    type: number
+                    nullable: true
+                    example: 0.38
+                  checkout_url:
+                    type: string
+                    format: uri
+                  instructions:
+                    type: object
+                    additionalProperties: true
+        '400':
+          description: Invalid amount, pack, or payment method
+        '503':
+          description: Requested payment method is not configured. Configure the missing Stripe or bank-transfer fields before retrying.
+      tags:
+        - Billing & Balances
+  /billing/topups/claim:
+    post:
+      summary: Claim paid top-ups
+      description: |
+        Verifies the caller's pending top-ups against the payment provider and credits the ones that are confirmed paid. The dashboard calls this automatically on the checkout success redirect, so the balance reflects a payment within seconds even if webhook delivery lags. Idempotent — a top-up is only ever credited once, and only the caller's own top-ups are examined.
+      operationId: claimBillingTopups
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                session_id:
+                  type: string
+                  description: Checkout session id from the success redirect. Narrows the claim to that checkout.
+                topup_id:
+                  type: string
+                  description: Alternatively, a specific top-up id to claim.
+      responses:
+        '200':
+          description: Claim outcome and refreshed balances
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  claimed:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: topup_abcd
+                        status:
+                          type: string
+                          example: completed
+                  completed:
+                    type: integer
+                    example: 1
+                  balance_eur:
+                    type: number
+                    example: 61.82
+                  balance_mad:
+                    type: number
+                    example: 680
+      tags:
+        - Billing & Balances
+  /billing/quota:
+    get:
+      summary: Get billing quota limit
+      description: Gets the monthly spending/sending quota limits configured for safety.
+      operationId: getQuota
+      responses:
+        '200':
+          description: Quota configuration
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  monthly_limit_mad:
+                    type: number
+                  monthly_usage_mad:
+                    type: number
+      tags:
+        - Billing & Balances
+    patch:
+      summary: Update billing quota limit
+      description: Updates the monthly spending and sending quota limit for the account.
+      operationId: updateQuota
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - monthly_limit_mad
+              properties:
+                monthly_limit_mad:
+                  type: number
+                  example: 5000
+      responses:
+        '200':
+          description: Quota updated successfully
+      tags:
+        - Billing & Balances
+  /analytics:
+    get:
+      summary: Get usage analytics
+      operationId: getAnalytics
+      parameters:
+        - name: days
+          in: query
+          schema:
+            type: integer
+            default: 30
+            maximum: 365
+      responses:
+        '200':
+          description: Analytics data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  window_days:
+                    type: integer
+                  summary:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                      delivered:
+                        type: integer
+                      failed:
+                        type: integer
+                      delivery_rate:
+                        type: number
+                      cost_eur:
+                        type: number
+                      cost_mad:
+                        type: number
+                  channels:
+                    type: array
+                    items:
+                      type: object
+                  daily:
+                    type: array
+                    items:
+                      type: object
+      tags:
+        - Analytics & Reporting
+  /api-keys:
+    get:
+      summary: List API keys
+      operationId: listApiKeys
+      responses:
+        '200':
+          description: API keys without full secret values
+      tags:
+        - API Keys & Security
+    post:
+      summary: Create API key
+      operationId: createApiKey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Production key
+                permissions:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - send
+                      - verify
+                      - status
+                      - balance
+                      - contacts
+                      - campaigns
+                      - webhooks
+                      - billing
+                      - analytics
+                      - api_keys
+                      - optouts
+                ip_whitelist:
+                  type: array
+                  items:
+                    type: string
+                rate_limit:
+                  type: integer
+                  minimum: 10
+                  maximum: 1000
+                sandbox:
+                  type: boolean
+                  default: false
+                  description: |
+                    Mint a sandbox key, prefixed `env_test_` instead of `smr_`. Requests on a sandbox key are validated, priced and recorded exactly like live ones — opt-out list, sender rules, phishing screen and quota all apply — but nothing is delivered to a carrier, no balance is debited and no invoice line is created. A simulated delivery receipt follows a few seconds later, including the `delivered` webhook. Sends and OTPs made with a sandbox key are excluded from analytics and are only visible to sandbox keys. A key's mode is fixed at creation; create a new key to switch.
+      responses:
+        '201':
+          description: API key created. Full key is returned once.
+      tags:
+        - API Keys & Security
+  /api-keys/{id}:
+    patch:
+      summary: Update API key
+      operationId: updateApiKey
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                permissions:
+                  type: array
+                  items:
+                    type: string
+                ip_whitelist:
+                  type: array
+                  items:
+                    type: string
+                rate_limit:
+                  type: integer
+                active:
+                  type: boolean
+      responses:
+        '200':
+          description: API key updated
+      tags:
+        - API Keys & Security
+    delete:
+      summary: Revoke API key
+      operationId: revokeApiKey
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: API key revoked
+      tags:
+        - API Keys & Security
+  /account/export:
+    get:
+      summary: Export account data (data rights)
+      description: 'Self-service data export (Law 09-08 / GDPR): returns the account''s personal data — profile, ledger, message logs, contacts, webhooks, verification sessions, support cases, opt-outs — as one JSON artefact. Dashboard session only; API keys are refused. Tables over the export cap are truncated and named in `truncated_tables` inside the file itself.'
+      operationId: exportAccountData
+      responses:
+        '200':
+          description: JSON export bundle (Content-Disposition attachment)
+        '403':
+          description: Only available from a dashboard session
+      tags:
+        - Account & Privacy
+  /account/deletion-request:
+    post:
+      summary: Request account deletion (data rights)
+      description: 'Opens a tracked erasure request (Law 09-08 / GDPR), processed within 30 days by an operator: personal data is erased or anonymised, invoicing records are retained for the legal accounting period. Dashboard session only. Idempotent — a second call returns the already-open case.'
+      operationId: requestAccountDeletion
+      responses:
+        '200':
+          description: A deletion request was already open
+        '202':
+          description: Deletion request recorded, case id returned
+        '403':
+          description: Only available from a dashboard session
+      tags:
+        - Account & Privacy
+  /health:
+    get:
+      summary: Health check
+      description: Public service health endpoint. This route is served from the API root, not the /v1 prefix.
+      operationId: healthCheck
+      servers:
+        - url: https://api.envoisms.ma
+          description: Production root
+        - url: https://api-staging.envoisms.ma
+          description: Staging root configuration; deploy and verify before using
+      responses:
+        '200':
+          description: Service health
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  service:
+                    type: string
+                    example: envoisms-api
+                  version:
+                    type: string
+                    example: 1.0.0
+                  time:
+                    type: string
+                    format: date-time
+      tags:
+        - System & Utilities
+  /search:
+    get:
+      summary: Natural language search
+      description: Search EnvoiSMS.ma features, pricing, documentation, integrations, and operator details using a natural language query. Helpful for AI search engine grounding.
+      operationId: searchFeatures
+      parameters:
+        - name: q
+          in: query
+          description: Search term or natural language query
+          required: true
+          schema:
+            type: string
+            example: WooCommerce
+      responses:
+        '200':
+          description: Successful search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  query:
+                    type: string
+                  count:
+                    type: integer
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        description:
+                          type: string
+                        category:
+                          type: string
+                        url:
+                          type: string
+                        tags:
+                          type: array
+                          items:
+                            type: string
+      tags:
+        - System & Utilities
+  /recommend:
+    get:
+      summary: Get system recommendations
+      description: Recommends the best pricing pack, channel, integration code, and strategy based on your industry, use case, or expected message volume.
+      operationId: getRecommendations
+      parameters:
+        - name: q
+          in: query
+          description: Natural language use case or industry description (e.g. ecommerce shipping, otp)
+          required: false
+          schema:
+            type: string
+            example: ecommerce in Morocco
+        - name: volume
+          in: query
+          description: Expected monthly message volume
+          required: false
+          schema:
+            type: integer
+            example: 5000
+        - name: industry
+          in: query
+          description: Business industry
+          required: false
+          schema:
+            type: string
+            example: retail
+      responses:
+        '200':
+          description: System recommendations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recommendation:
+                    type: object
+                    properties:
+                      channel:
+                        type: string
+                        enum:
+                          - sms
+                          - whatsapp
+                          - cascade
+                      pricing_pack:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          sms:
+                            type: integer
+                          price_mad:
+                            type: number
+                          price_per_sms_mad:
+                            type: number
+                      reasoning:
+                        type: string
+                      setup_guidelines:
+                        type: object
+                        properties:
+                          engine:
+                            type: string
+                          sample_code:
+                            type: string
+                      whatsapp_chat_url:
+                        type: string
+                      buy_url:
+                        type: string
+      tags:
+        - System & Utilities
+tags:
+  - name: SMS & WhatsApp Messaging
+    description: Direct multi-operator SMS gateway (Maroc Telecom, Orange, Inwi) and official Meta Cloud API WhatsApp Business messaging with template support, rich media, interactive buttons, typing indicators, and automatic carrier failover.
+  - name: Phone Verification (OTP)
+    description: Zero-infrastructure phone number verification. Handles one-time passcode generation, WhatsApp & SMS multi-channel delivery, automated fallback, expiry handling, and rate-limited validation.
+  - name: Number Intelligence & HLR
+    description: Real-time Moroccan (IAM, Orange, Inwi) and international phone number validation, E.164 normalization, carrier resolution, and mobile number portability (MNP) intelligence.
+  - name: Conversations & Live Chat
+    description: Two-way customer conversation threads across WhatsApp and SMS. Retrieve message timelines, customer interactions, agent replies, and monitor the 24-hour customer care window.
+  - name: WhatsApp Business Profile
+    description: Manage your connected WhatsApp Business Account (WABA) profile details, business description, verified display name, logo URL, and customer support contact details.
+  - name: AI Qualified Leads
+    description: AtlasAI™ automated conversational lead qualification. Inspect BANT scores (Budget, Authority, Need, Timing), Darija/Arabic/French customer sentiment, and qualification status.
+  - name: Inbound Webhooks
+    description: Ingest leads and triggers from external platforms (Meta Lead Ads, TikTok Lead Generation, Google Forms, Typeform, Webflow, Zapier) and trigger instant WhatsApp engagement.
+  - name: Contacts & Audience
+    description: Customer contact management, metadata attributes, audience list segmentation, and high-performance bulk CSV contact imports.
+  - name: Campaigns & Bulk Dispatch
+    description: Large-scale broadcast campaigns via SMS and WhatsApp. Schedule personalized promotional and transactional marketing campaigns with real-time delivery progress metrics.
+  - name: Compliance & Consent
+    description: Moroccan Law 09-08 (CNDP) and GDPR compliance ledger. Record explicit opt-in consents, manage automated STOP / UNSUB keyword opt-outs, and maintain auditable compliance logs.
+  - name: Delivery Webhooks (DLR)
+    description: Real-time HTTP delivery notifications with HMAC-SHA256 signature verification. Manage webhook endpoints, rotate signing secrets, and trigger test delivery payloads.
+  - name: Billing & Balances
+    description: Account balance queries, prepaid credit top-ups via Stripe and Moroccan bank transfer, automated MAD tax invoices, pricing plans, and rate quota limits.
+  - name: Analytics & Reporting
+    description: Delivery performance metrics, carrier latency breakdowns, SMS segment usage, and channel distribution analytics.
+  - name: API Keys & Security
+    description: Manage live and sandbox API keys, configure IP address restrictions, and set granular access scopes.
+  - name: Account & Privacy
+    description: CNDP / GDPR data portability exports, customer audit trails, and formal account deletion requests.
+  - name: System & Utilities
+    description: Platform health monitoring, service availability checks, AI natural-language documentation search, and use-case recommendation engine.
+x-tagGroups:
+  - name: Core Messaging & Verification
+    tags:
+      - SMS & WhatsApp Messaging
+      - Phone Verification (OTP)
+      - Number Intelligence & HLR
+  - name: Conversations & WhatsApp AI
+    tags:
+      - Conversations & Live Chat
+      - WhatsApp Business Profile
+      - AI Qualified Leads
+      - Inbound Webhooks
+  - name: Audience, Campaigns & Webhooks
+    tags:
+      - Contacts & Audience
+      - Campaigns & Bulk Dispatch
+      - Compliance & Consent
+      - Delivery Webhooks (DLR)
+  - name: Billing, Analytics & Management
+    tags:
+      - Billing & Balances
+      - Analytics & Reporting
+      - API Keys & Security
+      - Account & Privacy
+      - System & Utilities
