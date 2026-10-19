@@ -1,0 +1,1937 @@
+openapi: 3.0.3
+servers:
+- url: https://allratestoday.com
+  description: Production
+info:
+  title: AllRatesToday Exchange Rate & Central Bank Rates API
+  description: |-
+    Live mid-market exchange rates for 160+ currencies plus official rates from 121 central banks and 3 tax authorities (ECB, the Fed, Bank of Canada, CBSL, Banxico, HMRC, US Treasury and more).
+
+    ## Data
+    - **Market rates** (`/api/rate`, `/api/v1/rates`, `/api/historical-rates`): live mid-market rates, refreshed roughly every 60 seconds.
+    - **Central-bank rates** (`/api/v1/central-bank/*`, `/api/open/central-bank/*`): the official tables exactly as published by each institution, one table per publication date. History reaches back to 2000 and earlier for major sources (ECB from 1999, Bank of Canada from 1950s-era series where published).
+    - **Daily Reference Rate** (`/api/open/reference-rate`, `/api/v1/reference-rate/*`): one immutable mid-market USD table per business day, fixed at 16:00 London (median of a five-minute sampling window). For index calculation, research and reporting; not a registered benchmark. Methodology: https://allratestoday.com/reference-rate/
+
+    ## Authentication
+    Most endpoints require an API key sent as `Authorization: Bearer art_live_...`. Get a free key at https://allratestoday.com/register, or self-issue a 100-call trial key with no account via `POST /api/agent/keys` (built for AI agents). Logged-in dashboard users can also authenticate with their session cookie.
+
+    Keyless endpoints: `/api/v1/symbols` and `/api/open/central-bank/{bank}` (attribution required), plus JSON reads of `/api/public/central-bank/{bank}`.
+
+    ## Output formats
+    Endpoints that return tabular data accept `?format=json|csv|xml|xlsx` (CSV is UTF-8 with BOM; XLSX is a real Excel workbook; default json).
+
+    ## Plans
+    Free plan: 300 requests in total (a lifetime allowance that never resets), latest central-bank tables included. Historical central-bank dates and time series require a paid plan. See https://allratestoday.com/pricing.
+  version: 2.2.0
+  contact:
+    name: AllRatesToday Support
+    url: https://allratestoday.com
+    email: support@allratestoday.com
+  termsOfService: https://allratestoday.com/terms/
+  x-apisguru-categories:
+  - financial
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: https://allratestoday.com/apple-touch-icon.png
+  x-origin:
+  - format: openapi
+    url: https://allratestoday.com/openapi.json
+    version: '3.0'
+  x-providerName: allratestoday.com
+externalDocs:
+  description: API documentation
+  url: https://allratestoday.com/docs/
+tags:
+- name: Market Rates
+  description: Live and historical mid-market rates (updated ~every 60 seconds)
+- name: Central Bank Rates
+  description: Official reference rates as published by central banks and tax authorities (API key required)
+- name: Open Endpoints
+  description: Keyless endpoints — no API key needed
+- name: Compatibility
+  description: Drop-in JSON shapes for exchangeratesapi.io, Fixer, exchangerate.host and Frankfurter, served from the ECB reference table.
+paths:
+  /api/rate:
+    get:
+      tags:
+      - Market Rates
+      operationId: getRate
+      summary: Current exchange rate for one currency pair
+      description: 'Live mid-market rate between two currencies, refreshed roughly every 60 seconds. Requires an API key: pass it as `Authorization: Bearer art_live_...` or, for simple cross-origin GETs, as `?key=` (alias `?apiKey=`). CORS-enabled.'
+      security:
+      - bearerAuth: []
+      - apiKeyQuery: []
+      parameters:
+      - name: source
+        in: query
+        required: true
+        description: Source currency code (ISO 4217)
+        schema:
+          type: string
+          minLength: 3
+          maxLength: 3
+          example: USD
+      - name: target
+        in: query
+        required: true
+        description: Target currency code (ISO 4217)
+        schema:
+          type: string
+          minLength: 3
+          maxLength: 3
+          example: EUR
+      - name: key
+        in: query
+        required: false
+        description: API key (alternative to the Authorization header; `apiKey` also accepted)
+        schema:
+          type: string
+          example: art_live_xxxxx
+      - name: apiKey
+        in: query
+        required: false
+        description: Alias for `key` — the same query-string fallback under its camelCase name.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Current rate
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - rate
+                - source
+                properties:
+                  rate:
+                    type: number
+                    format: double
+                    example: 0.92145
+                  source:
+                    type: string
+                    description: Data source class
+                    example: mid-market
+              example:
+                rate: 0.92145
+                source: mid-market
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/QuotaExceeded'
+        '502':
+          description: Upstream rate provider error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/historical-rates:
+    get:
+      tags:
+      - Market Rates
+      operationId: getHistoricalRates
+      summary: Historical market rates for a currency pair
+      description: Time series of mid-market rates for one pair over a preset period. `1d` returns hourly points; `7d` and `30d` daily points; `1y` weekly-sampled points. Requires an API key (Bearer header) or a logged-in session.
+      security:
+      - bearerAuth: []
+      - sessionCookie: []
+      parameters:
+      - name: source
+        in: query
+        required: true
+        description: Source currency code (ISO 4217)
+        schema:
+          type: string
+          example: USD
+      - name: target
+        in: query
+        required: true
+        description: Target currency code (ISO 4217)
+        schema:
+          type: string
+          example: LKR
+      - name: period
+        in: query
+        required: false
+        description: Time window
+        schema:
+          type: string
+          enum:
+          - 1d
+          - 7d
+          - 30d
+          - 1y
+          default: 7d
+      - $ref: '#/components/parameters/Format'
+      responses:
+        '200':
+          description: Historical series (oldest first)
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - source
+                - target
+                - data
+                - period
+                properties:
+                  source:
+                    type: string
+                    example: USD
+                  target:
+                    type: string
+                    example: LKR
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                          description: YYYY-MM-DD (ISO date-time for 1d period)
+                          example: '2026-08-10'
+                        rate:
+                          type: number
+                          format: double
+                          example: 302.4512
+                        timestamp:
+                          type: integer
+                          format: int64
+                          description: Unix time in milliseconds
+                  source_api:
+                    type: string
+                    example: mid-market
+                  period:
+                    type: string
+                    enum:
+                    - 1d
+                    - 7d
+                    - 30d
+                    - 1y
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/QuotaExceeded'
+        '500':
+          description: Server or upstream error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/rates:
+    get:
+      tags:
+      - Market Rates
+      operationId: getRatesV1
+      summary: Live and historical market rates (Wise-compatible)
+      description: The main authenticated rates endpoint, parameter-compatible with the Wise `/v1/rates` API. Refreshed roughly every 60 seconds (responses cached 60s). Omit `target` for all rates from `source`; pass comma-separated targets (e.g. `target=EUR,GBP,JPY`) for multiple pairs in one call; use `time` for a point-in-time rate or `from`/`to` (+ optional `group`) for a series.
+      security:
+      - bearerAuth: []
+      - sessionCookie: []
+      parameters:
+      - name: source
+        in: query
+        required: false
+        description: Source currency code (ISO 4217)
+        schema:
+          type: string
+          example: USD
+      - name: target
+        in: query
+        required: false
+        description: Target currency code; comma-separated list allowed (e.g. `EUR,GBP,JPY`)
+        schema:
+          type: string
+          example: EUR
+      - name: time
+        in: query
+        required: false
+        description: Historical point-in-time (ISO 8601)
+        schema:
+          type: string
+          format: date-time
+      - name: from
+        in: query
+        required: false
+        description: Series start date (YYYY-MM-DD)
+        schema:
+          type: string
+          format: date
+      - name: to
+        in: query
+        required: false
+        description: Series end date (YYYY-MM-DD, exclusive)
+        schema:
+          type: string
+          format: date
+      - name: group
+        in: query
+        required: false
+        description: Series granularity when using from/to
+        schema:
+          type: string
+          enum:
+          - minute
+          - hour
+          - day
+      - $ref: '#/components/parameters/Format'
+      - name: amount
+        in: query
+        required: false
+        description: Convert this amount instead of returning a bare rate. Changes the response to a conversion object and requires exactly one source and one target (400 with a comma-separated target list). Must be non-negative.
+        schema:
+          type: number
+          minimum: 0
+        example: 1000
+      - name: api_key
+        in: query
+        required: false
+        description: API key as a query parameter, for callers that cannot set a header (browser address bar, spreadsheet IMPORTDATA). Prefer the Authorization header in production.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Array of rate objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    rate:
+                      type: number
+                      format: double
+                      example: 0.92145
+                    source:
+                      type: string
+                      example: USD
+                    target:
+                      type: string
+                      example: EUR
+                    time:
+                      type: string
+                      format: date-time
+                      example: '2026-08-11T09:00:00Z'
+              example:
+              - rate: 0.92145
+                source: USD
+                target: EUR
+                time: '2026-08-11T09:00:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/QuotaExceeded'
+        '500':
+          description: Server or upstream error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/symbols:
+    get:
+      tags:
+      - Market Rates
+      - Open Endpoints
+      operationId: getSymbols
+      summary: List supported currencies
+      description: All supported currency codes, names, and symbols. No authentication required; CORS-enabled; cached 24 hours; does not count toward your monthly quota.
+      parameters:
+      - $ref: '#/components/parameters/Format'
+      responses:
+        '200':
+          description: Supported currencies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  currencies:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: USD
+                        name:
+                          type: string
+                          example: US Dollar
+                        symbol:
+                          type: string
+                          example: $
+                  count:
+                    type: integer
+                    example: 161
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/v1/central-banks:
+    get:
+      tags:
+      - Central Bank Rates
+      operationId: listCentralBanks
+      summary: List covered central banks and official sources
+      description: 'Every covered source (37+ central banks, monetary authorities, and tax authorities) with metadata: country, home currency, published rate types, latest available date, days of history, official source URL, and ready-made endpoint URLs. Available on all plans.'
+      security:
+      - bearerAuth: []
+      - sessionCookie: []
+      parameters:
+      - $ref: '#/components/parameters/Format'
+      responses:
+        '200':
+          description: Covered sources
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  banks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: ecb
+                        name:
+                          type: string
+                          example: European Central Bank
+                        country:
+                          type: string
+                          example: Euro area
+                        home_ccy:
+                          type: string
+                          example: EUR
+                        kind:
+                          type: string
+                          description: Source type, e.g. central_bank or tax_authority
+                          example: central_bank
+                        rate_types:
+                          type: array
+                          items:
+                            type: string
+                          example:
+                          - reference
+                        latest_date:
+                          type: string
+                          format: date
+                          example: '2026-08-10'
+                        days_of_history:
+                          type: integer
+                          description: Distinct publication dates stored (major sources reach back to 2000 and earlier)
+                          example: 6890
+                        source_url:
+                          type: string
+                          example: https://www.ecb.europa.eu/stats/eurofxref/
+                        endpoints:
+                          type: object
+                          properties:
+                            latest:
+                              type: string
+                            by_date:
+                              type: string
+                            history:
+                              type: string
+                  disclaimer:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/QuotaExceeded'
+  /api/v1/central-banks/rates:
+    get:
+      tags:
+      - Central Bank Rates
+      operationId: compareCentralBankRates
+      summary: Every bank's latest official rate for one pair
+      description: 'Cross-bank comparison: each covered source''s most recent official rate for the requested pair in a single call, with min/max/median and spread in basis points. Pairs a bank does not publish directly are cross-computed via that bank''s own table only (never mixing banks) and flagged `derived`. Sources whose newest publication is older than 30 days are flagged `stale` and excluded from the spread stats. Banks that cannot produce the pair are skipped. Methodology: https://allratestoday.com/official-rates-methodology/. Available on all plans.'
+      security:
+      - bearerAuth: []
+      - sessionCookie: []
+      parameters:
+      - name: source
+        in: query
+        required: true
+        description: Source currency, 3-letter code
+        schema:
+          type: string
+          minLength: 3
+          maxLength: 3
+          example: USD
+      - name: target
+        in: query
+        required: true
+        description: Target currency, 3-letter code
+        schema:
+          type: string
+          minLength: 3
+          maxLength: 3
+          example: EUR
+      - $ref: '#/components/parameters/Format'
+      responses:
+        '200':
+          description: Latest rate for the pair from every source that can produce it
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  source:
+                    type: string
+                    example: USD
+                  target:
+                    type: string
+                    example: EUR
+                  as_of:
+                    type: string
+                    format: date
+                    description: Newest rate_date among the returned banks; each bank also carries its own rate_date
+                    example: '2026-08-10'
+                  count:
+                    type: integer
+                    example: 41
+                  banks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: ecb
+                        name:
+                          type: string
+                          example: European Central Bank
+                        rate:
+                          type: number
+                          example: 0.9214
+                        rate_date:
+                          type: string
+                          format: date
+                          example: '2026-08-10'
+                        rate_type:
+                          type: string
+                          example: reference
+                        derived:
+                          type: boolean
+                          description: True when the pair was inverted or cross-computed from the bank's own table rather than printed directly
+                          example: true
+                        method:
+                          type: string
+                          enum:
+                          - published
+                          - inverse
+                          - cross
+                          example: inverse
+                        stale:
+                          type: boolean
+                          description: True when the bank's newest publication is older than 30 days (e.g. quarterly sources)
+                          example: false
+                  stats:
+                    type: object
+                    nullable: true
+                    description: Computed over non-stale banks only; null when no fresh source covers the pair
+                    properties:
+                      min:
+                        type: number
+                        example: 0.9187
+                      max:
+                        type: number
+                        example: 0.9241
+                      median:
+                        type: number
+                        example: 0.9214
+                      spread_bps:
+                        type: number
+                        description: (max - min) / median in basis points
+                        example: 58.6
+                      banks_in_stats:
+                        type: integer
+                        example: 38
+                  methodology:
+                    type: string
+                    example: https://allratestoday.com/official-rates-methodology/
+                  disclaimer:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: No covered source publishes rates covering the requested pair
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          $ref: '#/components/responses/QuotaExceeded'
+  /api/v1/central-bank/{bank}/latest:
+    get:
+      tags:
+      - Central Bank Rates
+      operationId: getCentralBankLatest
+      summary: Latest official rate table for a bank
+      description: The bank's most recent published table (e.g. `ecb`, `boc`, `cbsl`, `banxico`). Pass `source`+`target` to get a single pair — cross-computed via the bank's home currency when not directly published and flagged `derived`. Available on all plans.
+      security:
+      - bearerAuth: []
+      - sessionCookie: []
+      parameters:
+      - $ref: '#/components/parameters/BankCode'
+      - $ref: '#/components/parameters/PairSource'
+      - $ref: '#/components/parameters/PairTarget'
+      - $ref: '#/components/parameters/Format'
+      responses:
+        '200':
+          description: Latest published table (or single resolved pair when source+target given)
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/CbTable'
+                - $ref: '#/components/schemas/CbPair'
+              example:
+                bank: ecb
+                name: European Central Bank
+                rate_date: '2026-08-10'
+                rates:
+                - base: EUR
+                  quote: USD
+                  type: reference
+                  value: 1.0853
+                disclaimer: Official rates as published by the named central bank. On weekends/holidays the most recent published rate_date is returned.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Unknown bank, or the bank does not publish the requested pair
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          $ref: '#/components/responses/QuotaExceeded'
+        '503':
+          description: No rates ingested yet for this bank
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/central-bank/{bank}/{date}:
+    get:
+      tags:
+      - Central Bank Rates
+      operationId: getCentralBankByDate
+      summary: Official rate table for a specific date
+      description: The bank's published table in force on a date. Weekends and holidays return the most recent published date on or before the requested one — `rate_date` says which, and `published_on_requested_date` is false when they differ (this is the rate compliance users must apply). Optional `source`+`target` narrows to one pair. History reaches back to 2000 and earlier for major sources. Paid plans only. JSON only.
+      security:
+      - bearerAuth: []
+      - sessionCookie: []
+      parameters:
+      - $ref: '#/components/parameters/BankCode'
+      - name: date
+        in: path
+        required: true
+        description: Requested date (YYYY-MM-DD)
+        schema:
+          type: string
+          format: date
+          example: '2026-06-30'
+      - $ref: '#/components/parameters/PairSource'
+      - $ref: '#/components/parameters/PairTarget'
+      responses:
+        '200':
+          description: Table (or single pair) in force on the date
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/CbTableDated'
+                - $ref: '#/components/schemas/CbPairDated'
+              example:
+                bank: cbsl
+                name: Central Bank of Sri Lanka
+                requested_date: '2026-06-28'
+                rate_date: '2026-06-26'
+                published_on_requested_date: false
+                source: USD
+                target: LKR
+                rate: 298.7654
+                rate_type: indicative
+                derived: false
+                method: published
+                disclaimer: Official rates as published by the named central bank. On weekends/holidays the most recent published rate_date is returned.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/PaidPlanRequired'
+        '404':
+          description: Unknown bank, no data on/before the date, or pair not covered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          $ref: '#/components/responses/QuotaExceeded'
+  /api/v1/central-bank/{bank}/history:
+    get:
+      tags:
+      - Central Bank Rates
+      operationId: getCentralBankHistory
+      summary: Official rate time series
+      description: Daily series over a date range (defaults to the last year; capped at 5000 rows — narrow the range if `truncated` is true). Use `symbol` for every published pair involving one currency, or `source`+`target` for a single resolved pair per date (cross-computed via the home currency when needed, flagged `derived`). Archives reach back to 2000 and earlier for major sources. Paid plans only.
+      security:
+      - bearerAuth: []
+      - sessionCookie: []
+      parameters:
+      - $ref: '#/components/parameters/BankCode'
+      - name: symbol
+        in: query
+        required: false
+        description: 3-letter currency code matching either side of the pair. Required unless source+target are given.
+        schema:
+          type: string
+          example: USD
+      - $ref: '#/components/parameters/PairSource'
+      - $ref: '#/components/parameters/PairTarget'
+      - name: from
+        in: query
+        required: false
+        description: 'Range start (YYYY-MM-DD; default: one year before `to`)'
+        schema:
+          type: string
+          format: date
+          example: '2025-01-01'
+      - name: to
+        in: query
+        required: false
+        description: 'Range end (YYYY-MM-DD; default: today)'
+        schema:
+          type: string
+          format: date
+          example: '2025-12-31'
+      - $ref: '#/components/parameters/Format'
+      responses:
+        '200':
+          description: Ascending daily series
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bank:
+                    type: string
+                    example: ecb
+                  name:
+                    type: string
+                    example: European Central Bank
+                  symbol:
+                    type: string
+                    example: USD
+                  source:
+                    type: string
+                    description: Present in pair mode
+                    example: USD
+                  target:
+                    type: string
+                    description: Present in pair mode
+                    example: LKR
+                  from:
+                    type: string
+                    format: date
+                  to:
+                    type: string
+                    format: date
+                  count:
+                    type: integer
+                    example: 254
+                  truncated:
+                    type: boolean
+                    description: True when the 5000-row cap was hit
+                  rates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        rate_date:
+                          type: string
+                          format: date
+                        date:
+                          type: string
+                          format: date
+                          description: Used instead of rate_date in pair mode
+                        base:
+                          type: string
+                        quote:
+                          type: string
+                        type:
+                          type: string
+                        value:
+                          type: number
+                          format: double
+                        rate:
+                          type: number
+                          format: double
+                          description: Pair mode
+                        derived:
+                          type: boolean
+                          description: 'Pair mode: true when not directly published'
+                        method:
+                          type: string
+                          enum:
+                          - published
+                          - inverse
+                          - cross
+                          description: Pair mode
+                  disclaimer:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/PaidPlanRequired'
+        '404':
+          description: Unknown bank or pair not covered in range
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          $ref: '#/components/responses/QuotaExceeded'
+  /api/v1/central-bank/{bank}/availability:
+    get:
+      tags:
+      - Central Bank Rates
+      operationId: getCentralBankAvailability
+      summary: Publication calendar for a bank
+      description: The dates a bank actually published a table, for one year (`?year=2026`) or a date range (defaults to the last year; capped at 3700 dates). Weekends, holidays, and weekly/quarterly cadences show up as missing dates. Dates only, no values — available on all plans.
+      security:
+      - bearerAuth: []
+      - sessionCookie: []
+      parameters:
+      - $ref: '#/components/parameters/BankCode'
+      - name: year
+        in: query
+        required: false
+        description: Whole calendar year (overrides from/to)
+        schema:
+          type: integer
+          example: 2026
+      - name: from
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: to
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+      - $ref: '#/components/parameters/Format'
+      responses:
+        '200':
+          description: Ascending list of published dates
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bank:
+                    type: string
+                    example: boc
+                  name:
+                    type: string
+                    example: Bank of Canada
+                  from:
+                    type: string
+                    format: date
+                  to:
+                    type: string
+                    format: date
+                  count:
+                    type: integer
+                    example: 251
+                  truncated:
+                    type: boolean
+                  dates:
+                    type: array
+                    items:
+                      type: string
+                      format: date
+                    example:
+                    - '2026-01-02'
+                    - '2026-01-05'
+                  note_semantics:
+                    type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Unknown bank
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          $ref: '#/components/responses/QuotaExceeded'
+  /api/open/central-banks:
+    get:
+      tags:
+      - Central Bank Rates
+      - Open Endpoints
+      operationId: listOpenCentralBanks
+      summary: Catalogue of every official source — keyless
+      description: Every central bank and tax authority the API serves, with the date of its latest published table, its age in days, a stale flag and its publication cadence. No API key. Use it to discover source codes for the other central-bank endpoints and to check freshness before citing a rate.
+      responses:
+        '200':
+          description: Source catalogue
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sources:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: ecb
+                        name:
+                          type: string
+                          example: European Central Bank
+                        latest:
+                          type: string
+                          format: date
+                          example: '2026-09-18'
+                        age_days:
+                          type: integer
+                          example: 1
+                        stale:
+                          type: boolean
+                          example: false
+                        cadence:
+                          type: string
+                          example: daily
+              example:
+                sources:
+                - code: ecb
+                  name: European Central Bank
+                  latest: '2026-09-18'
+                  age_days: 1
+                  stale: false
+                  cadence: daily
+                - code: hmrc
+                  name: HM Revenue & Customs
+                  latest: '2026-09-01'
+                  age_days: 18
+                  stale: false
+                  cadence: monthly
+  /api/open/central-bank/{bank}:
+    get:
+      tags:
+      - Central Bank Rates
+      - Open Endpoints
+      operationId: getOpenCentralBankLatest
+      summary: Latest official table — keyless, attribution required
+      description: The latest published table for a central bank or tax authority, with no API key. CORS-enabled and edge-cached (30–60 min), built for embeds and widgets. Free to use with a visible attribution link to allratestoday.com (the response includes the attribution object). Pass `source`+`target` for a single pair (direct or inverse only). JSON only. For historical dates, time series, or cross-computed pairs use the keyed `/api/v1/central-bank/*` endpoints.
+      parameters:
+      - $ref: '#/components/parameters/BankCode'
+      - $ref: '#/components/parameters/PairSource'
+      - $ref: '#/components/parameters/PairTarget'
+      responses:
+        '200':
+          description: Latest published table (or single pair) with attribution
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bank:
+                    type: string
+                    example: ecb
+                  rate_date:
+                    type: string
+                    format: date
+                    example: '2026-08-10'
+                  rates:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CbRate'
+                  source:
+                    type: string
+                    description: Pair mode
+                    example: EUR
+                  target:
+                    type: string
+                    description: Pair mode
+                    example: USD
+                  rate:
+                    type: number
+                    format: double
+                    description: Pair mode
+                    example: 1.0853
+                  rate_type:
+                    type: string
+                    description: Pair mode
+                    example: reference
+                  derived:
+                    type: boolean
+                    description: 'Pair mode: true when computed as the inverse of the published rate'
+                  method:
+                    type: string
+                    enum:
+                    - published
+                    - inverse
+                    description: Pair mode
+                  attribution:
+                    type: object
+                    properties:
+                      source:
+                        type: string
+                        example: Official rates published by ECB, served by AllRatesToday
+                      url:
+                        type: string
+                        example: https://allratestoday.com/central-bank-rates-api/ecb/
+                      terms:
+                        type: string
+                        example: Free to use with visible attribution linking to allratestoday.com
+        '404':
+          description: Unknown source, no published table yet, or pair not covered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/public/central-bank/{bank}:
+    get:
+      tags:
+      - Central Bank Rates
+      - Open Endpoints
+      operationId: downloadCentralBankLatest
+      summary: Latest official table as JSON (open) or CSV/XLSX download (free account)
+      description: The latest published table for one source. JSON is open (no key). `format=csv` and `format=xlsx` return a downloadable file and require a logged-in free account (session cookie) — register at https://allratestoday.com/register. XML is not supported on this endpoint.
+      security:
+      - {}
+      - sessionCookie: []
+      parameters:
+      - $ref: '#/components/parameters/BankCode'
+      - name: format
+        in: query
+        required: false
+        description: json (open) or csv/xlsx file download (requires logged-in session)
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+          - xlsx
+          default: json
+      responses:
+        '200':
+          description: Latest table (raw cache shape) or file download
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bank:
+                    type: string
+                    example: ecb
+                  rate_date:
+                    type: string
+                    format: date
+                    example: '2026-08-10'
+                  rates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        base_ccy:
+                          type: string
+                          example: EUR
+                        quote_ccy:
+                          type: string
+                          example: USD
+                        rate_type:
+                          type: string
+                          example: reference
+                        value:
+                          type: number
+                          format: double
+                          example: 1.0853
+            text/csv:
+              schema:
+                type: string
+                format: binary
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: File downloads (csv/xlsx) require a logged-in free account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Unknown source or no published table yet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/open/geo:
+    get:
+      operationId: getVisitorGeo
+      tags:
+      - Open Endpoints
+      summary: Visitor's country and currency — keyless
+      description: 'The calling IP''s country (from Cloudflare''s edge) and the currency it maps to. Keyless and CORS-open (`Access-Control-Allow-Origin: *`), so browser packages such as react-currency-localizer-realtime can detect a visitor''s currency without a third-party geo-IP service. Never cached — the answer is per-IP. `country` and `currency` are null when the edge cannot determine a country.'
+      parameters: []
+      responses:
+        '200':
+          description: Country and mapped currency for the calling IP.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  country:
+                    type: string
+                    nullable: true
+                    description: ISO 3166-1 alpha-2, or null
+                  currency:
+                    type: string
+                    nullable: true
+                    description: ISO 4217 code mapped from the country, or null
+                  source:
+                    type: string
+                    enum:
+                    - cloudflare
+              example:
+                country: GB
+                currency: GBP
+                source: cloudflare
+  /api/public/central-bank/{bank}/history:
+    get:
+      operationId: downloadCentralBankHistory
+      tags:
+      - Central Bank Rates
+      summary: Whole-table history download for one source
+      description: 'Every currency the bank published, one row per currency per date, over a chosen range (max one year) — the endpoint behind the history download buttons on the per-bank pages. This is the table download''s historical sibling, not the single-pair series: for an API-key-metered time series of one pair use /api/v1/central-bank/{bank}/history. Session-authenticated (log in at allratestoday.com in the same browser) and paid plans only. Billed by volume: one API call per currency series per month of history in the file.'
+      parameters:
+      - name: bank
+        in: path
+        required: true
+        description: Central bank or tax authority code — list from /api/v1/central-banks.
+        schema:
+          type: string
+        example: ecb
+      - name: from
+        in: query
+        required: false
+        description: 'Range start, YYYY-MM-DD (default: one year before `to`).'
+        schema:
+          type: string
+          format: date
+        example: '2026-01-01'
+      - name: to
+        in: query
+        required: false
+        description: 'Range end, YYYY-MM-DD (default: today). Range is capped at 366 days.'
+        schema:
+          type: string
+          format: date
+      - name: format
+        in: query
+        required: false
+        description: csv (default UTF-8 BOM download), xlsx, or json.
+        schema:
+          type: string
+          enum:
+          - csv
+          - xlsx
+          - json
+          default: json
+      responses:
+        '200':
+          description: The table as JSON rows, CSV, or an Excel workbook.
+        '401':
+          description: Not logged in — history downloads require an account session.
+        '403':
+          description: Free plan — history downloads require a paid plan.
+        '429':
+          description: The download would exceed the plan's remaining monthly quota.
+  /api/compat/{provider}/latest:
+    get:
+      tags:
+      - Compatibility
+      - Open Endpoints
+      operationId: compatLatest
+      summary: Latest ECB table in a legacy provider's JSON shape — keyless
+      description: Drop-in replacement for exchangeratesapi.io, the Fixer free tier, exchangerate.host and Frankfurter. Same fields those APIs returned, plus additive `source` and `attribution`. Keyless, CORS, edge-cached. See https://allratestoday.com/migrate/
+      parameters:
+      - name: provider
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - exchangeratesapi
+          - fixer
+          - exchangerate-host
+          - frankfurter
+        description: Which provider's response shape to reproduce.
+      - name: base
+        in: query
+        schema:
+          type: string
+          example: USD
+        description: 'Base currency (Frankfurter alias: from). Default EUR.'
+      - name: symbols
+        in: query
+        schema:
+          type: string
+          example: GBP,JPY
+        description: 'Comma-separated quote currencies (Frankfurter alias: to). Default: all.'
+      - name: amount
+        in: query
+        schema:
+          type: number
+          default: 1
+        description: Frankfurter-style multiplier.
+      responses:
+        '200':
+          description: Provider-shaped table
+          content:
+            application/json:
+              example:
+                base: USD
+                date: '2026-09-12'
+                rates:
+                  GBP: 0.7377
+                  JPY: 146.91
+                source: European Central Bank reference rates, served by AllRatesToday
+                attribution: https://allratestoday.com/migrate/
+        '400':
+          description: Unknown base or bad symbols, in the provider's error shape
+  /api/compat/{provider}/{path}:
+    get:
+      tags:
+      - Compatibility
+      operationId: compatDatedOrRange
+      summary: Dated table, date range or currency list in a legacy shape
+      description: '`{YYYY-MM-DD}` for the table in force on a date; `history?start_at&end_at` (exchangeratesapi), `timeseries?start_date&end_date` (Fixer, exchangerate.host) or `{from}..{to}` (Frankfurter) for one table per published date, limited to 366 days and billed one request per month covered; `symbols` / `currencies` for the currency list (keyless). Dated and range lookups need a free API key.'
+      security:
+      - ApiKeyAuth: []
+      - {}
+      parameters:
+      - name: provider
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - exchangeratesapi
+          - fixer
+          - exchangerate-host
+          - frankfurter
+        description: Which provider's response shape to reproduce.
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+          example: '2026-01-15'
+      - name: base
+        in: query
+        schema:
+          type: string
+          example: USD
+        description: 'Base currency (Frankfurter alias: from). Default EUR.'
+      - name: symbols
+        in: query
+        schema:
+          type: string
+          example: GBP,JPY
+        description: 'Comma-separated quote currencies (Frankfurter alias: to). Default: all.'
+      responses:
+        '200':
+          description: Provider-shaped table or timeseries
+        '401':
+          description: Free API key required
+        '404':
+          description: No published rates for that date or range
+  /api/agent/keys:
+    get:
+      tags:
+      - Authentication
+      - Open Endpoints
+      operationId: describeTrialKeys
+      summary: How to self-issue a trial key — keyless
+      description: Describes the trial-key contract (method, body, limits) so an agent that only knows the URL can use it.
+      responses:
+        '200':
+          description: Endpoint manifest
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags:
+      - Authentication
+      - Open Endpoints
+      operationId: issueTrialKey
+      summary: Self-issue a 100-call trial API key — no account, no email
+      description: 'Built for AI agents and other machine callers that cannot complete the human sign-up (captcha + email verification). Returns a key with 100 lifetime calls, valid 7 days, that unlocks everything a free account gets: real-time rates, latest central-bank tables, publication calendars (historical and dated rates, market and central-bank, are on paid plans). Limits: 3 keys per IP per day, 100 per day in total. Exhausted keys answer 429 with an upgrade_url. For a lasting key register at https://allratestoday.com/register (300 calls, free). Send `Content-Type: application/json` (an empty JSON object is fine); a POST without it is rejected as a cross-site form.'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                agent:
+                  type: string
+                  maxLength: 80
+                  description: 'Optional: the agent or product requesting the key.'
+                purpose:
+                  type: string
+                  maxLength: 200
+                  description: 'Optional: one line on what the rates are for.'
+        description: 'Optional fields. Always send `Content-Type: application/json`, with `{}` if you have nothing to say.'
+      responses:
+        '201':
+          description: Trial key issued
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - api_key
+                - calls_included
+                - expires_at
+                properties:
+                  api_key:
+                    type: string
+                    example: art_live_k3j9x2m7q1w8e5r4t6y0u2i8o3p5a7s1
+                  calls_included:
+                    type: integer
+                    example: 100
+                  expires_at:
+                    type: string
+                    format: date-time
+                  how_to_use:
+                    type: string
+                  mcp_url:
+                    type: string
+                    format: uri
+                  included:
+                    type: string
+                  upgrade:
+                    type: object
+                    properties:
+                      free_account:
+                        type: string
+                      paid_plans:
+                        type: string
+                  attribution:
+                    type: string
+        '429':
+          description: Per-IP cap reached or too many attempts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  retry_after_s:
+                    type: integer
+        '503':
+          description: Today's global allocation is used up
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /api/open/reference-rate:
+    get:
+      tags:
+      - Reference Rate
+      - Open Endpoints
+      operationId: getOpenReferenceRate
+      summary: Latest Daily Reference Rate (16:00 London) — keyless
+      description: 'AllRatesToday Daily Reference Rate: one immutable mid-market USD table per business day, fixed at 16:00 Europe/London as the per-currency median of five once-a-minute samples (15:57:30–16:02:30). Never revised. Not the WM/Refinitiv fix and not a registered benchmark; for index calculation, research and reporting. Methodology: https://allratestoday.com/reference-rate/ Keyless with attribution; dated tables and history need a key.'
+      parameters:
+      - name: source
+        in: query
+        schema:
+          type: string
+          example: SAR
+        description: 'With target: one pair, cross-computed via USD and flagged derived.'
+      - name: target
+        in: query
+        schema:
+          type: string
+          example: USD
+      - name: format
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+          - xml
+          - xlsx
+        description: Output format (default json).
+      responses:
+        '200':
+          description: Latest table or one pair
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rate_date:
+                    type: string
+                    format: date
+                  time:
+                    type: string
+                    example: 16:00 London
+                  base:
+                    type: string
+                    example: USD
+                  window_start:
+                    type: string
+                    format: date-time
+                  window_end:
+                    type: string
+                    format: date-time
+                  samples:
+                    type: integer
+                  published_at:
+                    type: string
+                    format: date-time
+                  method:
+                    type: string
+                  rates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        base:
+                          type: string
+                        quote:
+                          type: string
+                        value:
+                          type: number
+                        low:
+                          type: number
+                        high:
+                          type: number
+                        samples:
+                          type: integer
+                  attribution:
+                    type: object
+                  disclaimer:
+                    type: string
+        '404':
+          description: Not published yet (next_publication says when)
+  /api/v1/reference-rate/latest:
+    get:
+      tags:
+      - Reference Rate
+      operationId: getReferenceRateLatest
+      summary: Latest Daily Reference Rate with window low/high and sample counts
+      description: 'AllRatesToday Daily Reference Rate: one immutable mid-market USD table per business day, fixed at 16:00 Europe/London as the per-currency median of five once-a-minute samples (15:57:30–16:02:30). Never revised. Not the WM/Refinitiv fix and not a registered benchmark; for index calculation, research and reporting. Methodology: https://allratestoday.com/reference-rate/ Any plan.'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: symbols
+        in: query
+        schema:
+          type: string
+          example: EUR,GBP,SAR
+        description: Comma-separated quote currencies to keep.
+      - name: source
+        in: query
+        schema:
+          type: string
+          example: SAR
+        description: 'With target: one pair, cross-computed via USD and flagged derived.'
+      - name: target
+        in: query
+        schema:
+          type: string
+          example: USD
+      - name: format
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+          - xml
+          - xlsx
+        description: Output format (default json).
+      responses:
+        '200':
+          description: Latest table
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rate_date:
+                    type: string
+                    format: date
+                  time:
+                    type: string
+                    example: 16:00 London
+                  base:
+                    type: string
+                    example: USD
+                  window_start:
+                    type: string
+                    format: date-time
+                  window_end:
+                    type: string
+                    format: date-time
+                  samples:
+                    type: integer
+                  published_at:
+                    type: string
+                    format: date-time
+                  method:
+                    type: string
+                  rates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        base:
+                          type: string
+                        quote:
+                          type: string
+                        value:
+                          type: number
+                        low:
+                          type: number
+                        high:
+                          type: number
+                        samples:
+                          type: integer
+                  attribution:
+                    type: object
+                  disclaimer:
+                    type: string
+        '401':
+          description: Missing or invalid API key
+        '404':
+          description: Not published yet
+  /api/v1/reference-rate/{date}:
+    get:
+      tags:
+      - Reference Rate
+      operationId: getReferenceRateByDate
+      summary: Daily Reference Rate table for a date — paid plans
+      description: 'AllRatesToday Daily Reference Rate: one immutable mid-market USD table per business day, fixed at 16:00 Europe/London as the per-currency median of five once-a-minute samples (15:57:30–16:02:30). Never revised. Not the WM/Refinitiv fix and not a registered benchmark; for index calculation, research and reporting. Methodology: https://allratestoday.com/reference-rate/ Weekends/holidays return the previous business day (rate_date says which).'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: date
+        in: path
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: symbols
+        in: query
+        schema:
+          type: string
+          example: EUR,GBP,SAR
+        description: Comma-separated quote currencies to keep.
+      - name: source
+        in: query
+        schema:
+          type: string
+          example: SAR
+        description: 'With target: one pair, cross-computed via USD and flagged derived.'
+      - name: target
+        in: query
+        schema:
+          type: string
+          example: USD
+      - name: format
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+          - xml
+          - xlsx
+        description: Output format (default json).
+      responses:
+        '200':
+          description: Table
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rate_date:
+                    type: string
+                    format: date
+                  time:
+                    type: string
+                    example: 16:00 London
+                  base:
+                    type: string
+                    example: USD
+                  window_start:
+                    type: string
+                    format: date-time
+                  window_end:
+                    type: string
+                    format: date-time
+                  samples:
+                    type: integer
+                  published_at:
+                    type: string
+                    format: date-time
+                  method:
+                    type: string
+                  rates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        base:
+                          type: string
+                        quote:
+                          type: string
+                        value:
+                          type: number
+                        low:
+                          type: number
+                        high:
+                          type: number
+                        samples:
+                          type: integer
+                  attribution:
+                    type: object
+                  disclaimer:
+                    type: string
+        '403':
+          description: Paid plan required
+        '404':
+          description: No table on or before the date
+  /api/v1/reference-rate/history:
+    get:
+      tags:
+      - Reference Rate
+      operationId: getReferenceRateHistory
+      summary: Daily Reference Rate series — paid plans, billed per month of range
+      description: 'AllRatesToday Daily Reference Rate: one immutable mid-market USD table per business day, fixed at 16:00 Europe/London as the per-currency median of five once-a-minute samples (15:57:30–16:02:30). Never revised. Not the WM/Refinitiv fix and not a registered benchmark; for index calculation, research and reporting. Methodology: https://allratestoday.com/reference-rate/ One point per published business day. Billed one API call per month of range.'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: symbol
+        in: query
+        schema:
+          type: string
+          example: EGP
+        description: Quote currency per 1 USD (or give source+target).
+      - name: source
+        in: query
+        schema:
+          type: string
+          example: SAR
+        description: 'With target: one pair, cross-computed via USD and flagged derived.'
+      - name: target
+        in: query
+        schema:
+          type: string
+          example: USD
+      - name: from
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: to
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: format
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+          - xml
+          - xlsx
+        description: Output format (default json).
+      responses:
+        '200':
+          description: Series
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  base:
+                    type: string
+                  quote:
+                    type: string
+                  from:
+                    type: string
+                  to:
+                    type: string
+                  count:
+                    type: integer
+                  points:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        rate_date:
+                          type: string
+                          format: date
+                        value:
+                          type: number
+        '403':
+          description: Paid plan required
+components:
+  parameters:
+    Format:
+      name: format
+      in: query
+      required: false
+      description: Response format (default json). csv is UTF-8 with a BOM; xlsx is a real Excel workbook with typed dates and numbers; xml mirrors the JSON fields.
+      schema:
+        type: string
+        enum:
+        - json
+        - csv
+        - xml
+        - xlsx
+        default: json
+    BankCode:
+      name: bank
+      in: path
+      required: true
+      description: Source code from /api/v1/central-banks (e.g. ecb, boc, cbsl, banxico, ustreasury)
+      schema:
+        type: string
+        pattern: ^[a-z0-9_-]{2,20}$
+        example: ecb
+    PairSource:
+      name: source
+      in: query
+      required: false
+      description: 'Pair mode: source currency, 3-letter code (requires target)'
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 3
+        example: USD
+    PairTarget:
+      name: target
+      in: query
+      required: false
+      description: 'Pair mode: target currency, 3-letter code (requires source)'
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 3
+        example: LKR
+  responses:
+    BadRequest:
+      description: Invalid or missing parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: 'Authentication required — provide an API key via `Authorization: Bearer art_live_...` (free keys at https://allratestoday.com/register)'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    PaidPlanRequired:
+      description: Historical central-bank data requires a paid plan; /latest is available on all plans
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              upgrade_url:
+                type: string
+                example: https://allratestoday.com/pricing
+    QuotaExceeded:
+      description: Monthly request limit exceeded (X-Monthly-Limit / X-Monthly-Used / X-Monthly-Resets headers included)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Request limit exceeded
+              used:
+                type: integer
+              limit:
+                type: integer
+              plan:
+                type: string
+                example: free
+              resets_at:
+                type: string
+                format: date-time
+              upgrade_url:
+                type: string
+                example: https://allratestoday.com/pricing
+  schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          description: Error message
+        hint:
+          type: string
+          description: Optional remediation hint
+    CbRate:
+      type: object
+      properties:
+        base:
+          type: string
+          example: EUR
+        quote:
+          type: string
+          example: USD
+        type:
+          type: string
+          description: Rate type as labeled by the bank (reference, buying, selling, indicative, ...)
+          example: reference
+        value:
+          type: number
+          format: double
+          example: 1.0853
+    CbTable:
+      type: object
+      properties:
+        bank:
+          type: string
+          example: ecb
+        name:
+          type: string
+          example: European Central Bank
+        rate_date:
+          type: string
+          format: date
+          example: '2026-08-10'
+        rates:
+          type: array
+          items:
+            $ref: '#/components/schemas/CbRate'
+        disclaimer:
+          type: string
+    CbPair:
+      type: object
+      properties:
+        bank:
+          type: string
+          example: cbsl
+        name:
+          type: string
+          example: Central Bank of Sri Lanka
+        rate_date:
+          type: string
+          format: date
+        source:
+          type: string
+          example: USD
+        target:
+          type: string
+          example: LKR
+        rate:
+          type: number
+          format: double
+          example: 298.7654
+        rate_type:
+          type: string
+          example: indicative
+        derived:
+          type: boolean
+          description: True when not directly published by the bank (inverse or cross-computed)
+        method:
+          type: string
+          enum:
+          - published
+          - inverse
+          - cross
+        disclaimer:
+          type: string
+    CbTableDated:
+      allOf:
+      - $ref: '#/components/schemas/CbTable'
+      - type: object
+        properties:
+          requested_date:
+            type: string
+            format: date
+          published_on_requested_date:
+            type: boolean
+            description: False when the bank did not publish on the requested date and the most recent prior table is returned
+    CbPairDated:
+      allOf:
+      - $ref: '#/components/schemas/CbPair'
+      - type: object
+        properties:
+          requested_date:
+            type: string
+            format: date
+          published_on_requested_date:
+            type: boolean
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API key from your AllRatesToday dashboard. Example: `Authorization: Bearer art_live_xxxxx`. Free keys at https://allratestoday.com/register. Agents without an account: `POST /api/agent/keys` issues a 100-call trial key instantly.'
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: key
+      description: API key as a query parameter (accepted on /api/rate only; `apiKey` is an alias)
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: art_session
+      description: Session cookie for logged-in dashboard users
