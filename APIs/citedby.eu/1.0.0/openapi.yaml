@@ -1,0 +1,370 @@
+openapi: 3.0.3
+info:
+  title: CitedBy AI crawler access API
+  version: 1.0.0
+  description: 'One request tells you which AI crawlers can read a site: GPTBot, OAI-SearchBot, ChatGPT-User, PerplexityBot,
+    ClaudeBot, Google-Extended, Bingbot and Googlebot. For each one you get what robots.txt says and what the server answers
+    it. It is the result the free AI crawler check shows, as JSON. No key, no account, CORS open.
+
+
+    Limits: 30 requests per hour per IP address, at most 12 sites per hour that were not checked in the last 6 hours. No grade
+    and no score: the API returns only what the free check at https://citedby.eu/tools/ai-crawler-check shows.'
+  termsOfService: https://citedby.eu/ai-access-api#terms
+  contact:
+    name: CitedBy
+    email: hello@citedby.eu
+    url: https://citedby.eu/contact
+  x-logo:
+    url: https://citedby.eu/apple-touch-icon.png
+    backgroundColor: '#FFFFFF'
+  x-providerName: citedby.eu
+  x-apisguru-categories:
+  - developer_tools
+  x-origin:
+  - format: openapi
+    url: https://citedby.eu/openapi.json
+    version: '3.0'
+externalDocs:
+  description: API documentation
+  url: https://citedby.eu/ai-access-api
+servers:
+- url: https://citedby.eu
+tags:
+- name: AI access
+paths:
+  /api/v1/ai-access:
+    get:
+      operationId: getAiAccess
+      tags:
+      - AI access
+      summary: Which AI crawlers can read a site
+      description: Checks robots.txt and one live request per crawler for the site and returns one result per crawler. A site
+        checked in the last 6 hours returns the stored result.
+      parameters:
+      - name: url
+        in: query
+        required: true
+        example: example.com
+        schema:
+          type: string
+          maxLength: 2048
+        description: 'A domain or a full address, for example example.com or https://example.com/shop. Only the site is checked:
+          the path, the port and www. are dropped.'
+      responses:
+        '200':
+          description: The result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiAccess'
+              example:
+                api_version: '1'
+                site: theguardian.com
+                checked_at: '2026-10-24T17:27:07Z'
+                robots_txt:
+                  state: found
+                  status: 200
+                  blocks_all_crawlers: false
+                summary:
+                  total: 8
+                  allowed: 6
+                  blocked:
+                  - PerplexityBot
+                  - ClaudeBot
+                crawlers:
+                - id: GPTBot
+                  role: training
+                  robots_txt: allowed
+                  robots_txt_rule: null
+                  server: ok
+                  access: allowed
+                - id: OAI-SearchBot
+                  role: search
+                  robots_txt: allowed
+                  robots_txt_rule: null
+                  server: ok
+                  access: allowed
+                - id: ChatGPT-User
+                  role: user_fetch
+                  robots_txt: allowed
+                  robots_txt_rule: null
+                  server: ok
+                  access: allowed
+                - id: PerplexityBot
+                  role: search
+                  robots_txt: disallowed
+                  robots_txt_rule: 'Disallow: /'
+                  server: blocked
+                  access: blocked_by_robots_txt_and_server
+                - id: ClaudeBot
+                  role: training
+                  robots_txt: disallowed
+                  robots_txt_rule: 'Disallow: /'
+                  server: blocked
+                  access: blocked_by_robots_txt_and_server
+                - id: Google-Extended
+                  role: training
+                  robots_txt: allowed
+                  robots_txt_rule: null
+                  server: not_tested
+                  access: allowed
+                - id: Bingbot
+                  role: search
+                  robots_txt: allowed
+                  robots_txt_rule: null
+                  server: ok
+                  access: allowed
+                - id: Googlebot
+                  role: search
+                  robots_txt: allowed
+                  robots_txt_rule: null
+                  server: ok
+                  access: allowed
+                report_url: https://citedby.eu/tools/ai-crawler-check/theguardian.com?utm_source=api&utm_medium=api&utm_campaign=ai_access_api
+                audit_url: https://citedby.eu/?url=theguardian.com&source=api&utm_source=api&utm_medium=api&utm_campaign=ai_access_api
+                attribution:
+                  text: AI crawler access by CitedBy
+                  url: https://citedby.eu/ai-access-api
+                docs: https://citedby.eu/ai-access-api
+        '202':
+          description: 'A slow site returns 202 with {"status": "pending"}: the check keeps running and its result is stored.
+            Ask again after the Retry-After seconds.'
+          headers:
+            Retry-After:
+              description: Seconds to wait before asking again.
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - pending
+                  site:
+                    type: string
+                  message:
+                    type: string
+                  retry_after_seconds:
+                    type: integer
+        '400':
+          description: '400: the url parameter is missing. 400: not a public site address (a private address, a bad name,
+            more than 2,048 characters).'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: '422: the site did not answer our crawler, so access cannot be judged. Nothing is guessed: there is
+            no all-clear.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: '429: over the limits below. Retry-After says how many seconds to wait.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            Retry-After:
+              description: Seconds to wait before asking again.
+              schema:
+                type: integer
+        '502':
+          description: '502 or 503: the checker did not answer. Try again in a minute.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: '503: CitedBy is running its maximum number of checks. Retry-After is 60 seconds.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            Retry-After:
+              description: Seconds to wait before asking again.
+              schema:
+                type: integer
+components:
+  schemas:
+    AiAccess:
+      type: object
+      required:
+      - api_version
+      - site
+      - checked_at
+      - robots_txt
+      - summary
+      - crawlers
+      - report_url
+      - audit_url
+      - attribution
+      - docs
+      properties:
+        api_version:
+          type: string
+          enum:
+          - '1'
+        site:
+          type: string
+          description: The domain that was checked.
+        checked_at:
+          type: string
+          format: date-time
+          description: When CitedBy ran the check, in UTC. A site checked in the last 6 hours returns the stored result, so
+            this can be earlier than your request.
+        robots_txt:
+          type: object
+          required:
+          - state
+          - status
+          - blocks_all_crawlers
+          properties:
+            state:
+              type: string
+              enum:
+              - found
+              - not_found
+              - unreachable
+              - server_error
+              description: found, not_found, unreachable or server_error. A server error on robots.txt means a crawler has
+                to assume it may not crawl (RFC 9309), so every crawler then shows as blocked.
+            status:
+              type: integer
+              nullable: true
+              description: The HTTP status robots.txt answered with.
+            blocks_all_crawlers:
+              type: boolean
+              description: true when the rules for all crawlers (*) close the whole site.
+        summary:
+          type: object
+          required:
+          - total
+          - allowed
+          - blocked
+          description: How many of the 8 crawlers can read the site (allowed), and the names of those that cannot (blocked).
+          properties:
+            total:
+              type: integer
+            allowed:
+              type: integer
+            blocked:
+              type: array
+              items:
+                type: string
+        crawlers:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - role
+            - robots_txt
+            - robots_txt_rule
+            - server
+            - access
+            properties:
+              id:
+                type: string
+                enum:
+                - GPTBot
+                - OAI-SearchBot
+                - ChatGPT-User
+                - PerplexityBot
+                - ClaudeBot
+                - Google-Extended
+                - Bingbot
+                - Googlebot
+                description: The crawler's name.
+              role:
+                type: string
+                enum:
+                - training
+                - search
+                - user_fetch
+                description: training (collects text to train models), search (can cite your pages in answers) or user_fetch
+                  (opens a page when a person asks about it).
+              robots_txt:
+                type: string
+                enum:
+                - allowed
+                - disallowed
+                - not_read
+                description: allowed, disallowed or not_read (robots.txt could not be read).
+              robots_txt_rule:
+                type: string
+                nullable: true
+                description: The robots.txt rule that closes the site to this crawler, or null.
+              server:
+                type: string
+                enum:
+                - ok
+                - blocked
+                - down
+                - not_tested
+                description: ok, blocked (the server answers this crawler's user-agent with a refusal or a challenge page),
+                  down (an error) or not_tested. Google-Extended is a robots.txt token only, so it is never tested on the
+                  server.
+              access:
+                type: string
+                enum:
+                - allowed
+                - blocked_by_robots_txt
+                - blocked_by_server
+                - blocked_by_robots_txt_and_server
+                - server_error
+                description: 'The verdict for this crawler, one of the values below. allowed: the crawler can read the site.
+                  blocked_by_robots_txt: robots.txt closes the site to this crawler. blocked_by_server: the server turns this
+                  crawler''s user-agent away or shows it a challenge page. blocked_by_robots_txt_and_server: both. server_error:
+                  the server answered this crawler with an error.'
+        report_url:
+          type: string
+          format: uri
+          description: The full result page of the free check for this site.
+        audit_url:
+          type: string
+          format: uri
+          description: Where to audit the whole site.
+        attribution:
+          type: object
+          required:
+          - text
+          - url
+          description: The text and link to show when you display the result (see the terms).
+          properties:
+            text:
+              type: string
+            url:
+              type: string
+              format: uri
+        docs:
+          type: string
+          format: uri
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - code
+          - message
+          properties:
+            code:
+              type: string
+              enum:
+              - missing_url
+              - bad_url
+              - site_unreachable
+              - rate_limited
+              - busy
+              - unavailable
+            message:
+              type: string
