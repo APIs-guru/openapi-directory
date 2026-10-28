@@ -1,0 +1,294 @@
+openapi: 3.1.0
+info:
+  title: NexusPulse BurnerShield API
+  description: "\n# \U0001F6E1️ BurnerShield — High-Speed Disposable Email & Deliverability API\n\n**BurnerShield** protects\
+    \ SaaS platforms, newsletters, and checkout systems against:\n- \U0001F6AB Fake signups & trial abuse using disposable/throwaway\
+    \ burner emails.\n- \U0001F4C9 Domain reputation damage caused by bounced emails sent to dead domains.\n- \U0001F4A1 User\
+    \ input typos (e.g., detecting `gmaill.com` and suggesting `gmail.com`).\n\n### Key Features\n* **Sub-35ms Latency**:\
+    \ In-memory O(1) bloom lookups for 65,000+ burner domains.\n* **Live DNS MX Verification**: Validates mail server availability\
+    \ in real time.\n* **Risk Scoring & Action Recommendations**: Returns actionable `allow`, `review`, or `block` directives.\n\
+    \    "
+  version: 1.0.0
+  termsOfService: https://burnershield.dev/terms
+  contact:
+    name: NexusPulse Developer Platform
+    url: https://nexuspulse.dev
+    email: support@nexuspulse.dev
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  x-apisguru-categories:
+  - email
+  - security
+  - developer_tools
+  x-logo:
+    url: https://raw.githubusercontent.com/nexuspulse/brand/main/assets/burnershield-logo.png
+    backgroundColor: '#1E293B'
+    altText: NexusPulse BurnerShield Logo
+  x-origin:
+  - format: openapi
+    url: https://pulse-api.milind-chatrabhuji.workers.dev/v1/burnershield/openapi.json
+    version: 3.1.0
+  x-providerName: burnershield.dev
+paths:
+  /health:
+    get:
+      tags:
+      - System
+      summary: Health Check
+      description: Health check endpoint to verify uptime and service readiness.
+      operationId: health_check_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Rate limit exceeded or service throttling
+      security: []
+  /v1/email/verify:
+    post:
+      tags:
+      - Verification
+      summary: Verify Single Email
+      description: 'Verify a single email address.
+
+        Returns syntax validation, disposable email detection, MX records, typo corrections, and risk score.'
+      operationId: verify_single_email_v1_email_verify_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - BearerAuth: []
+      - ApiKeyAuth: []
+  /v1/email/verify-batch:
+    post:
+      tags:
+      - Verification
+      summary: Verify Batch Emails
+      description: 'Verify up to 100 email addresses in a single request.
+
+        Ideal for lead cleaning, mailing list hygiene, and bulk sign-up auditing.'
+      operationId: verify_batch_emails_v1_email_verify_batch_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchVerifyRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchVerifyResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - BearerAuth: []
+      - ApiKeyAuth: []
+components:
+  schemas:
+    BatchVerifyRequest:
+      properties:
+        emails:
+          items:
+            type: string
+          type: array
+          maxItems: 100
+          title: Emails
+          example:
+          - test@gmail.com
+          - fake@10minutemail.com
+        check_mx:
+          type: boolean
+          title: Check Mx
+          default: true
+        suggest_correction:
+          type: boolean
+          title: Suggest Correction
+          default: true
+      type: object
+      required:
+      - emails
+      title: BatchVerifyRequest
+    BatchVerifyResponse:
+      properties:
+        total_processed:
+          type: integer
+          title: Total Processed
+        results:
+          items:
+            $ref: '#/components/schemas/VerifyResponse'
+          type: array
+          title: Results
+        total_execution_time_ms:
+          type: number
+          title: Total Execution Time Ms
+      type: object
+      required:
+      - total_processed
+      - results
+      - total_execution_time_ms
+      title: BatchVerifyResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    VerifyRequest:
+      properties:
+        email:
+          type: string
+          title: Email
+          description: The email address to verify.
+          example: alex.test@guerrillamail.com
+        check_mx:
+          type: boolean
+          title: Check Mx
+          description: Whether to query live DNS MX records for the domain.
+          default: true
+        suggest_correction:
+          type: boolean
+          title: Suggest Correction
+          description: Whether to detect and suggest typo fixes.
+          default: true
+      type: object
+      required:
+      - email
+      title: VerifyRequest
+    VerifyResponse:
+      properties:
+        email:
+          type: string
+          title: Email
+        user:
+          type: string
+          title: User
+        domain:
+          type: string
+          title: Domain
+        is_valid_syntax:
+          type: boolean
+          title: Is Valid Syntax
+        is_disposable:
+          type: boolean
+          title: Is Disposable
+        is_free_provider:
+          type: boolean
+          title: Is Free Provider
+        is_role_account:
+          type: boolean
+          title: Is Role Account
+        mx_records_found:
+          type: boolean
+          title: Mx Records Found
+        primary_mx:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Primary Mx
+        did_you_mean:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Did You Mean
+        risk_score:
+          type: integer
+          title: Risk Score
+        recommendation:
+          type: string
+          title: Recommendation
+        reasons:
+          items:
+            type: string
+          type: array
+          title: Reasons
+        execution_time_ms:
+          type: number
+          title: Execution Time Ms
+      type: object
+      required:
+      - email
+      - user
+      - domain
+      - is_valid_syntax
+      - is_disposable
+      - is_free_provider
+      - is_role_account
+      - mx_records_found
+      - primary_mx
+      - did_you_mean
+      - risk_score
+      - recommendation
+      - reasons
+      - execution_time_ms
+      title: VerifyResponse
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Enter your NexusPulse API key (e.g., nxp_live_...)
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header
+      description: Enter your NexusPulse API key in the X-API-Key header
+servers:
+- url: https://pulse-api.milind-chatrabhuji.workers.dev
+  description: NexusPulse Production Serverless Edge (Cloudflare Global Network)
+externalDocs:
+  description: NexusPulse BurnerShield Documentation
+  url: https://pulse-api.milind-chatrabhuji.workers.dev/docs

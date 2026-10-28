@@ -1,0 +1,404 @@
+openapi: 3.1.0
+info:
+  title: NexusPulse LinkMeta Pro API
+  description: "\n# \U0001F517 LinkMeta — High-Performance Metadata & Reader Mode API\n\n**LinkMeta** extracts rich OpenGraph,\
+    \ Twitter Cards, Schema.org (JSON-LD), favicons, and clean reader-mode markdown from any webpage in **sub-150ms**.\n\n\
+    ### Why LinkMeta?\n* \U0001F680 **Zero Headless Chromium**: Avoid expensive Puppeteer/Playwright browser overhead ($0\
+    \ hosting cost).\n* ⚡ **Streaming Fetch**: Stops download as soon as HTML `<head>` tags are consumed for instant previews.\n\
+    * \U0001F4DD **Clean Reader Markdown**: Automatically strips ads, scripts, navs, and converts article bodies to clean\
+    \ Markdown.\n* \U0001F6E1️ **In-Memory Cache**: Sub-1ms response times on frequently shared URLs.\n    "
+  version: 1.0.0
+  termsOfService: https://linkmeta.dev/terms
+  contact:
+    name: NexusPulse Developer Platform
+    url: https://nexuspulse.dev
+    email: support@nexuspulse.dev
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  x-apisguru-categories:
+  - developer_tools
+  - media
+  - search
+  x-logo:
+    url: https://raw.githubusercontent.com/nexuspulse/brand/main/assets/linkmeta-logo.png
+    backgroundColor: '#0F172A'
+    altText: NexusPulse LinkMeta Logo
+  x-origin:
+  - format: openapi
+    url: https://pulse-api.milind-chatrabhuji.workers.dev/v1/linkmeta/openapi.json
+    version: 3.1.0
+  x-providerName: linkmeta.dev
+paths:
+  /health:
+    get:
+      tags:
+      - System
+      summary: Health Check
+      description: Health check endpoint to verify uptime and service readiness.
+      operationId: health_check_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Rate limit exceeded or service throttling
+      security: []
+  /v1/meta/extract:
+    post:
+      tags:
+      - Metadata
+      summary: Extract Metadata
+      description: Extract OpenGraph, Twitter Cards, Schema.org, and clean reader markdown from a given URL.
+      operationId: extract_metadata_v1_meta_extract_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExtractRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtractResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - BearerAuth: []
+      - ApiKeyAuth: []
+    get:
+      tags:
+      - Metadata
+      summary: Extract Metadata Get
+      description: Convenience GET endpoint for browser queries, cURL snippets, and quick preview generation.
+      operationId: extract_metadata_get_v1_meta_extract_get
+      parameters:
+      - name: url
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Target webpage URL
+          title: Url
+        description: Target webpage URL
+      - name: include_content
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Include clean reader markdown and text
+          default: true
+          title: Include Content
+        description: Include clean reader markdown and text
+      - name: use_cache
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: Enable in-memory caching
+          default: true
+          title: Use Cache
+        description: Enable in-memory caching
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtractResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - BearerAuth: []
+      - ApiKeyAuth: []
+  /v1/meta/extract-batch:
+    post:
+      tags:
+      - Metadata
+      summary: Extract Metadata Batch
+      description: 'Batch extract metadata for up to 20 URLs concurrently.
+
+        Optimized for bookmark managers, link preview generation, and feed readers.'
+      operationId: extract_metadata_batch_v1_meta_extract_batch_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchExtractRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchExtractResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - BearerAuth: []
+      - ApiKeyAuth: []
+components:
+  schemas:
+    BatchExtractRequest:
+      properties:
+        urls:
+          items:
+            type: string
+          type: array
+          maxItems: 20
+          minItems: 1
+          title: Urls
+          example:
+          - https://github.com
+          - https://news.ycombinator.com
+        include_content:
+          type: boolean
+          title: Include Content
+          description: Whether to parse body content (defaults to False for fast batch processing).
+          default: false
+        max_content_length:
+          type: integer
+          title: Max Content Length
+          default: 20000
+        timeout_seconds:
+          type: number
+          title: Timeout Seconds
+          default: 6.0
+        use_cache:
+          type: boolean
+          title: Use Cache
+          default: true
+      type: object
+      required:
+      - urls
+      title: BatchExtractRequest
+    BatchExtractResponse:
+      properties:
+        total_processed:
+          type: integer
+          title: Total Processed
+        results:
+          items:
+            $ref: '#/components/schemas/ExtractResponse'
+          type: array
+          title: Results
+        total_execution_time_ms:
+          type: number
+          title: Total Execution Time Ms
+      type: object
+      required:
+      - total_processed
+      - results
+      - total_execution_time_ms
+      title: BatchExtractResponse
+    ExtractRequest:
+      properties:
+        url:
+          type: string
+          title: Url
+          description: Target website URL to extract metadata from.
+          example: https://news.ycombinator.com
+        include_content:
+          type: boolean
+          title: Include Content
+          description: Whether to parse and return clean reader-mode text and markdown.
+          default: true
+        max_content_length:
+          type: integer
+          maximum: 200000.0
+          minimum: 100.0
+          title: Max Content Length
+          description: Maximum characters of body content to return.
+          default: 50000
+        timeout_seconds:
+          type: number
+          maximum: 30.0
+          minimum: 1.0
+          title: Timeout Seconds
+          description: HTTP request timeout.
+          default: 8.0
+        use_cache:
+          type: boolean
+          title: Use Cache
+          description: Whether to utilize the high-speed in-memory cache.
+          default: true
+      type: object
+      required:
+      - url
+      title: ExtractRequest
+    ExtractResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+        final_url:
+          type: string
+          title: Final Url
+        canonical_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Canonical Url
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        image:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image
+        favicon:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Favicon
+        site_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Site Name
+        author:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Author
+        published_time:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Published Time
+        language:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Language
+        opengraph:
+          additionalProperties:
+            type: string
+          type: object
+          title: Opengraph
+        twitter:
+          additionalProperties:
+            type: string
+          type: object
+          title: Twitter
+        schema_org:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: Schema Org
+        content_text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Content Text
+        content_markdown:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Content Markdown
+        word_count:
+          type: integer
+          title: Word Count
+          default: 0
+        read_time_minutes:
+          type: integer
+          title: Read Time Minutes
+          default: 0
+        execution_time_ms:
+          type: number
+          title: Execution Time Ms
+        total_latency_ms:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Total Latency Ms
+        cached:
+          type: boolean
+          title: Cached
+          default: false
+      type: object
+      required:
+      - url
+      - final_url
+      - execution_time_ms
+      title: ExtractResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Enter your NexusPulse API key (e.g., nxp_live_...)
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header
+      description: Enter your NexusPulse API key in the X-API-Key header
+servers:
+- url: https://pulse-api.milind-chatrabhuji.workers.dev
+  description: NexusPulse Production Serverless Edge (Cloudflare Global Network)
+externalDocs:
+  description: NexusPulse LinkMeta Documentation
+  url: https://pulse-api.milind-chatrabhuji.workers.dev/docs
