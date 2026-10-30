@@ -1,0 +1,1380 @@
+openapi: 3.1.0
+info:
+  title: webcapture
+  version: '2026-10-05'
+  description: 'URL to PDF, screenshot and markdown API: one authenticated call renders a public web page to a print-stable
+    PDF with headless Chromium (151.0.7922.34 driven by Patchright, the Playwright 1.62 API), a full-page PNG, JPEG or WebP
+    screenshot, or clean markdown. Auth is a Bearer api key minted in the dashboard; the /v3 paths are a drop-in pdfshift
+    compatibility shim speaking X-API-Key or Bearer. Challenge aware retries handle pages behind bot protection; hard targets
+    are out of scope by design. This document is hand-authored and pinned against the routes by the test suite.'
+  x-logo:
+    url: https://webcapture.io/logo.png
+  x-origin:
+  - format: openapi
+    url: https://webcapture.io/openapi.json
+    version: '3.1'
+  x-providerName: webcapture.io
+  x-serviceName: webcapture
+servers:
+- url: '{origin}'
+  variables:
+    origin:
+      default: https://webcapture.io
+      description: deployment origin.
+tags:
+- name: convert
+  description: render a url to an artifact.
+- name: conversions
+  description: poll and download finished renders.
+- name: account
+  description: usage and api keys.
+- name: compatibility
+  description: pdfshift drop-in shim.
+paths:
+  /v1/convert:
+    post:
+      operationId: convert
+      tags:
+      - convert
+      summary: Render a URL to PDF, an image, or markdown
+      description: 'Sync by default: the call holds the connection and answers 200 with the finished receipt. wait=false opts
+        into the 202 job ticket for polling. Admission order: body size, ip rate limit, key, then field validation (422),
+        then quota and concurrency (429), then the SSRF guard (422 on a refused url).'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: wait
+        in: query
+        required: false
+        description: false opts into the 202 job ticket (poll and download urls in the body); true is an accepted alias of
+          the sync default.
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+          default: 'true'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: 'one render request with exactly one of url or html. JSON null counts as absent for optional fields
+                that accept it. Unknown fields are ignored. A proxy parameter is refused: BYOP was removed and a caller supplied
+                proxy cannot be made safe.'
+              properties:
+                url:
+                  type: string
+                  format: uri
+                  minLength: 1
+                  description: 'absolute http or https url of the page to render. Mutually exclusive with html. Admission
+                    re-verifies it: unresolvable, private range and non-http sources are refused with 422 before any render
+                    is queued.'
+                html:
+                  type: string
+                  minLength: 1
+                  maxLength: 1048576
+                  description: raw html document to render instead of fetching a page. Must contain non-whitespace content
+                    and be the only source field. The document itself is never persisted or included in webhooks.
+                baseUrl:
+                  type: string
+                  format: uri
+                  minLength: 1
+                  description: 'html only: absolute public http(s) base for relative assets and the receipt''s sourceUrl.
+                    It passes the same DNS and private-range admission as url. Cannot combine with a base element in the html.
+                    Required with any raw-html fetch controls; without it sourceUrl is about:blank.'
+                format:
+                  type: string
+                  enum:
+                  - pdf
+                  - png
+                  - jpeg
+                  - webp
+                  - markdown
+                  default: pdf
+                  description: output format. Absent means pdf.
+                colorScheme:
+                  type: string
+                  enum:
+                  - light
+                  - dark
+                  - site
+                  default: light
+                  description: color scheme to emulate. site keeps the page's own preference.
+                fullPage:
+                  type: boolean
+                  default: true
+                  description: 'image formats only: capture the full scrollable page (the default) instead of the layout viewport.
+                    Must be true or false when present.'
+                viewport:
+                  type: object
+                  description: 'image formats only: the layout viewport set before the capture.'
+                  properties:
+                    width:
+                      type: integer
+                      minimum: 200
+                      maximum: 7680
+                    height:
+                      type: integer
+                      minimum: 200
+                      maximum: 7680
+                  required:
+                  - width
+                  - height
+                quality:
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                  description: 'image formats only: encoder quality for jpeg and webp.'
+                scale:
+                  type: number
+                  minimum: 0.1
+                  maximum: 2
+                  description: render scale.
+                margin:
+                  type: string
+                  pattern: ^[0-9.]+(mm|cm|in|px)?$
+                  description: 'pdf only: one margin value applied to all four sides, a number with an optional mm, cm, in
+                    or px unit, 100 or less, e.g. 12mm.'
+                settle:
+                  type: integer
+                  minimum: 0
+                  maximum: 10000
+                  description: milliseconds to wait after load before the capture, 0 to 10000. Absent keeps the deployment
+                    default.
+                pageRanges:
+                  type: string
+                  pattern: ^[\d\s,\-]+$
+                  description: 'pdf only: pages to print, e.g. 1-3,7. Digits, commas, hyphens and whitespace only.'
+                tagged:
+                  type: boolean
+                  description: 'pdf only: emit a tagged (accessibility) pdf. Only an explicit true enables it.'
+                displayHeaderFooter:
+                  type: boolean
+                  description: 'pdf only: render headerTemplate or footerTemplate on every printed page. Requires at least
+                    one of the two templates unless sandbox is set.'
+                headerTemplate:
+                  type: string
+                  maxLength: 10000
+                  description: 'pdf only: html for the print header, at most 10000 characters.'
+                footerTemplate:
+                  type: string
+                  maxLength: 10000
+                  description: 'pdf only: html for the print footer, at most 10000 characters.'
+                landscape:
+                  type: boolean
+                  description: landscape orientation for the print or capture. Only an explicit true enables it.
+                sandbox:
+                  type: boolean
+                  description: 'test mode: the render is quota free (the usage ledger never moves) and carries a forced webcapture
+                    watermark footer. Cannot carry headerTemplate or footerTemplate.'
+                destination:
+                  type: string
+                  format: uri
+                  maxLength: 2048
+                  description: 'https url the finished artifact is PUT to after the render, at most 2048 characters. A refused
+                    or failed push never fails the render: the artifact stays downloadable and the outcome (status class only,
+                    never the url) rides the receipt, the status row and the completion webhook.'
+                fetch:
+                  type: object
+                  description: 'controls applied when the renderer opens the source. httpHeaders: an object of header name
+                    and value strings, at most 20 entries, names at most 128 RFC token characters (cookie, host and content-length
+                    are refused; pass cookies in cookies), values printable ascii with no line breaks, at most 1024 characters.
+                    cookies: at most 20 name and value entries, printable ascii, values at most 4096 characters; the engine
+                    pins every cookie to the render url''s own origin regardless of any caller domain opinion. auth: basic
+                    credentials, username and password at most 255 characters each.'
+                  properties:
+                    httpHeaders:
+                      type: object
+                      description: extra request headers sent when the source is fetched.
+                      additionalProperties:
+                        type: string
+                    cookies:
+                      type: array
+                      description: cookies set on the render url's origin.
+                      maxItems: 20
+                      items:
+                        type: object
+                        description: name and value only.
+                        additionalProperties: false
+                        properties:
+                          name:
+                            type: string
+                            minLength: 1
+                            maxLength: 128
+                          value:
+                            type: string
+                            maxLength: 4096
+                        required:
+                        - name
+                        - value
+                    auth:
+                      type: object
+                      description: basic auth credentials for the source.
+                      additionalProperties: false
+                      properties:
+                        username:
+                          type: string
+                          maxLength: 255
+                        password:
+                          type: string
+                          maxLength: 255
+                      required:
+                      - username
+                      - password
+                phi:
+                  type: boolean
+                  description: 'phi safe rendering for accounts with an executed BAA: the stored row and the completion webhook
+                    omit the source url entirely and the download serves the bytes once, dropping the artifact and the row
+                    as they leave. Requires the account''s BAA flag; without it the route answers 403.'
+                css:
+                  type: string
+                  minLength: 1
+                  maxLength: 20000
+                  description: inline stylesheet injected into the page before any capture, 1 to 20000 characters. url and
+                    object forms are refused (they would be a new fetch surface).
+                javascript:
+                  type: string
+                  minLength: 1
+                  maxLength: 20000
+                  description: inline script run on the page before any capture, 1 to 20000 characters. url and object forms
+                    are refused. Cannot pair with disableJavaScript.
+                usePrint:
+                  type: boolean
+                  description: emulate print media before the capture.
+                waitFor:
+                  type: string
+                  minLength: 1
+                  maxLength: 500
+                  description: css selector the render waits for before the capture, 1 to 500 characters. Chromium validates
+                    the selector itself.
+                disableJavaScript:
+                  type: boolean
+                  description: open the page context with JavaScript disabled. Cannot pair with a javascript expression.
+                disableBackgrounds:
+                  type: boolean
+                  description: 'pdf only: print without page backgrounds.'
+                filename:
+                  type: string
+                  pattern: ^[A-Za-z0-9._-]{1,100}$
+                  description: suggested download name used in the artifact response's Content-Disposition, 1 to 100 characters
+                    of letters, digits, dot, dash or underscore, and not only dots.
+                waitForNetwork:
+                  type: boolean
+                  description: hold navigation until the network settles (networkidle) instead of the load event.
+                raiseForStatus:
+                  type: boolean
+                  description: make an http 400 or higher from the source a terminal render failure instead of the default
+                    retry ladder's judgment after the full load pass.
+                lazyLoadImages:
+                  type: boolean
+                  description: hold the render after the reveal walk until every document image has finished (loaded or failed),
+                    bounded by the settle ceiling. Every format waits, markdown extraction included.
+                removeBlank:
+                  type: boolean
+                  description: 'pdf only: drop pages with no content (no text, path or shading operators and no image objects)
+                    between the render and the artifact save.'
+                clip:
+                  type: object
+                  description: page coordinate region to crop the screenshot to. Image formats only; mutually exclusive with
+                    cssSelector; requires fullPage (an explicit fullPage false is refused).
+                  properties:
+                    x:
+                      type: integer
+                      minimum: 0
+                    y:
+                      type: integer
+                      minimum: 0
+                    width:
+                      type: integer
+                      minimum: 1
+                    height:
+                      type: integer
+                      minimum: 1
+                cssSelector:
+                  type: string
+                  minLength: 1
+                  maxLength: 500
+                  description: 'image formats only: capture this css selector''s element instead of the page, 1 to 500 characters.
+                    Mutually exclusive with clip.'
+                dpi:
+                  type: number
+                  minimum: 1
+                  maximum: 4
+                  description: 'image formats only: output density for the capture, between 1 and 4. PDF points are density
+                    independent, so the pairing is refused on pdf and markdown.'
+                encode:
+                  type: boolean
+                  description: 'response shaping: true inlines the stored artifact as base64 in the sync receipt''s content
+                    field beside the unchanged download url. Ignored on the wait=false 202 ticket, where no artifact exists
+                    yet.'
+                pageSize:
+                  type: string
+                  enum:
+                  - A4
+                  - A3
+                  - Letter
+                  - Legal
+                  - A5
+                  description: 'pdf only: paper size for the print call, accepted case insensitively and stored canonically
+                    (letter becomes Letter). Absent keeps A4.'
+                transparent:
+                  type: boolean
+                  description: 'png or webp only: capture without the default white background so transparent regions survive.
+                    Refused on jpeg (no alpha channel) and on non-image formats.'
+                watermark:
+                  type: string
+                  minLength: 1
+                  maxLength: 120
+                  description: 'pdf only: text stamped diagonally on every page after the render, 1 to 120 characters measured
+                    after trim, limited to characters the standard pdf fonts can encode (no CJK or emoji).'
+                metadata:
+                  type: object
+                  description: document info fields written after the render. Strings at most 300 characters; keywords an
+                    array of at most 20 strings of at most 60 characters; unknown fields are refused.
+                  additionalProperties: false
+                  properties:
+                    title:
+                      type: string
+                      maxLength: 300
+                    author:
+                      type: string
+                      maxLength: 300
+                    subject:
+                      type: string
+                      maxLength: 300
+                    keywords:
+                      type: array
+                      maxItems: 20
+                      items:
+                        type: string
+                        maxLength: 60
+                encryption:
+                  type: object
+                  description: aes 256 password protection applied after every other transform. Passwords are strings of 1
+                    to 255 characters and must not start with a dash (a password is a value, not a flag).
+                  additionalProperties: false
+                  properties:
+                    userPassword:
+                      type: string
+                      minLength: 1
+                      maxLength: 255
+                    ownerPassword:
+                      type: string
+                      minLength: 1
+                      maxLength: 255
+                  required:
+                  - userPassword
+              oneOf:
+              - required:
+                - url
+                not:
+                  anyOf:
+                  - required:
+                    - html
+                  - required:
+                    - baseUrl
+              - required:
+                - html
+                not:
+                  required:
+                  - url
+      responses:
+        '200':
+          description: the render finished within the call. content rides only when the request set encode true.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversionReceipt'
+        '202':
+          description: async ticket from wait=false. Poll the status url; the download url is stable from admission.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversionTicket'
+        '400':
+          description: the body is not valid json.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: missing or invalid api key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '413':
+          description: body over 1 MiB.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: a field refused by validation, the source url refused by admission, or the target's bot protection
+            serving a challenge page instead of content (code E_CHALLENGE). The error names the rule; it never echoes the
+            refused value.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: ip rate limit (retryAfterSec), the account's in-flight cap (code and requiredTier), or the monthly
+            quota (used, limit, resetDate, upgradeUrl).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '502':
+          description: the render failed after the retry ladder (bot-challenge blocks answer 422 E_CHALLENGE instead).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: encryption requested but qpdf is unavailable on the deployment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/conversions/{id}:
+    get:
+      operationId: getConversion
+      tags:
+      - conversions
+      summary: Poll a conversion's status
+      description: 'Status flows queued, rendering, then ready or failed. Rows are scoped to the calling key: another key''s
+        id answers 404.'
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: the conversion row.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversionStatus'
+        '401':
+          description: missing or invalid api key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: no such conversion for this key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/conversions/{id}.pdf:
+    get:
+      operationId: downloadConversion
+      tags:
+      - conversions
+      summary: Download a rendered artifact
+      description: The path keeps the legacy .pdf suffix; the content type and filename tell the truth for every format (pdf,
+        png, jpeg, webp, markdown). The disposition query only swaps the Content-Disposition token, never the name logic.
+        Phi rows serve the bytes once and drop the artifact behind the response.
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: disposition
+        in: query
+        required: false
+        description: inline (the default) for browser viewing, attachment for a forced download.
+        schema:
+          type: string
+          enum:
+          - inline
+          - attachment
+          default: inline
+      responses:
+        '200':
+          description: the artifact bytes, cached privately for the authenticated client only.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/webp:
+              schema:
+                type: string
+                format: binary
+            text/markdown:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: an unknown disposition value.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: missing or invalid api key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: no such artifact for this key, or the retention window retired it.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/usage:
+    get:
+      operationId: getUsage
+      tags:
+      - account
+      summary: This month's usage and remaining quota
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: the calling key's quota pool for the current calendar month.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tier:
+                    type: string
+                    enum:
+                    - free
+                    - pro
+                    - scale
+                  month:
+                    type: string
+                    description: the calendar month, e.g. 2026-10.
+                  used:
+                    type: integer
+                    minimum: 0
+                  limit:
+                    type: integer
+                    minimum: 0
+                  remaining:
+                    type: integer
+                    minimum: 0
+                required:
+                - tier
+                - month
+                - used
+                - limit
+                - remaining
+        '401':
+          description: missing or invalid api key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/keys:
+    get:
+      operationId: listKeys
+      tags:
+      - account
+      summary: List api keys (master key)
+      description: 'Operator surface: the master key lists every key. The plaintext key material is never in the listing.'
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: every key on record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyList'
+        '401':
+          description: master key required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: too many master-key requests.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: createKey
+      tags:
+      - account
+      summary: Mint an api key (master key)
+      description: 'Operator surface: the master key mints a key at the named tier. A webhook url is https only, admitted
+        by the same SSRF guard as deliveries, and is a pro tier feature.'
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tier:
+                  type: string
+                  enum:
+                  - free
+                  - pro
+                  - scale
+                  description: the minted key's tier. Required.
+                webhookUrl:
+                  type: string
+                  format: uri
+                  description: optional https url for signed conversion.completed deliveries; free tier keys refuse one.
+              required:
+              - tier
+      responses:
+        '201':
+          description: the plaintext key, shown exactly once. webhookSecret is null when no webhook was set.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyCreated'
+        '400':
+          description: unknown tier, or the webhook url refused.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: master key required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: a webhook url on a free tier key (signed webhooks are a pro feature).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: too many key requests.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/keys/{id}:
+    delete:
+      operationId: revokeKey
+      tags:
+      - account
+      summary: Revoke an api key (master key)
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: the key is revoked.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  revoked:
+                    type: boolean
+                    const: true
+                required:
+                - revoked
+        '401':
+          description: master key required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: no such key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: too many master-key requests.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/convert/{format}:
+    post:
+      operationId: convertShim
+      tags:
+      - compatibility
+      summary: Render a URL (pdfshift compatibility)
+      description: Drop-in pdfshift contract over the same admission pipeline as /v1/convert. The path names the output format;
+        the body is pdfshift-shaped and always synchronous, answering the raw artifact bytes. The error envelope is {success:false,
+        error, code} on every failure, and quota exhaustion answers 403 no credits remaining the way pdfshift does.
+      security:
+      - shimApiKey: []
+      - bearerAuth: []
+      parameters:
+      - name: format
+        in: path
+        required: true
+        description: output format. On the pdf path a body format names the paper size instead.
+        schema:
+          type: string
+          enum:
+          - pdf
+          - png
+          - jpeg
+          - webp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: 'pdfshift-shaped body. The path segment carries the output format; on the pdf path a body format
+                names the paper size (A4, A3, Letter, Legal, A5, case insensitive), never the output format. Always synchronous:
+                the response is the raw bytes. Known but unsupported pdfshift parameters are refused with 422. Source accepts
+                a url or raw html; raw html cannot combine with http_headers, cookies or auth because the shim has no base-url
+                parameter.'
+              properties:
+                source:
+                  type: string
+                  minLength: 1
+                  maxLength: 1048576
+                  description: url of the page to render, or a raw html document. Required. Raw html renders directly; the
+                    http_headers, cookies and auth trio is url-only.
+                landscape:
+                  type: boolean
+                  description: landscape orientation.
+                margin:
+                  type: string
+                  pattern: ^[0-9.]+(mm|cm|in|px)?$
+                  description: 'pdf path only: one margin value applied to all four sides, 100 or less with an optional mm,
+                    cm, in or px unit.'
+                quality:
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                  description: encoder quality for jpeg and webp.
+                delay:
+                  type: number
+                  description: milliseconds to wait after load before capture, clamped to 10000.
+                timeout:
+                  type: number
+                  description: seconds, converted to milliseconds and clamped to a 60000 render budget.
+                zoom:
+                  type: number
+                  minimum: 0.1
+                  maximum: 2
+                  description: render scale.
+                filename:
+                  type: string
+                  pattern: ^[A-Za-z0-9._-]{1,100}$
+                  description: suggested download name, 1 to 100 characters of letters, digits, dot, dash or underscore, not
+                    only dots.
+                css:
+                  type: string
+                  minLength: 1
+                  maxLength: 20000
+                  description: inline stylesheet; url forms are refused.
+                javascript:
+                  type: string
+                  minLength: 1
+                  maxLength: 20000
+                  description: inline script; url forms are refused; cannot pair with disable_javascript.
+                use_print:
+                  type: boolean
+                  description: emulate print media before the capture.
+                wait_for:
+                  type: string
+                  minLength: 1
+                  maxLength: 500
+                  description: 'css selector the render waits for. pdfshift''s function name form is not replicated: a function
+                    name simply never matches and the render fails when the wait budget ends.'
+                disable_javascript:
+                  type: boolean
+                  description: open the page context with JavaScript disabled; cannot pair with javascript.
+                disable_backgrounds:
+                  type: boolean
+                  description: 'pdf path only: print without page backgrounds.'
+                wait_for_network:
+                  type: boolean
+                  description: hold navigation until the network settles instead of the load event.
+                ignore_long_polling:
+                  type: boolean
+                  description: 'accepted for parity and mapped onto the same network settle wait: the networkidle quiet window
+                    already ignores long polls.'
+                lazy_load_images:
+                  type: boolean
+                  description: hold the render until every document image finishes before the capture.
+                raise_for_status:
+                  type: boolean
+                  description: make an http 400 or higher from the source a terminal render failure.
+                remove_blank:
+                  type: boolean
+                  description: 'pdf path only: drop pages with no content between the render and the artifact save.'
+                clip:
+                  type: object
+                  description: page coordinate region to crop the screenshot to. Image formats only; mutually exclusive with
+                    cssSelector; requires fullPage (an explicit fullPage false is refused).
+                  properties:
+                    x:
+                      type: integer
+                      minimum: 0
+                    y:
+                      type: integer
+                      minimum: 0
+                    width:
+                      type: integer
+                      minimum: 1
+                    height:
+                      type: integer
+                      minimum: 1
+                css_selector:
+                  type: string
+                  minLength: 1
+                  maxLength: 500
+                  description: 'image paths only: capture this css selector''s element; mutually exclusive with clip.'
+                dpi:
+                  type: number
+                  minimum: 1
+                  maximum: 4
+                  description: 'image paths only: output density for the capture.'
+                transparent:
+                  type: boolean
+                  description: 'png or webp path only: capture without the default white background; refused on jpeg.'
+                is_hipaa:
+                  type: boolean
+                  description: 'maps onto the native phi mode: the stored row and the completion webhook omit the source url.
+                    Requires the account''s BAA flag, answered 403.'
+                watermark:
+                  type: object
+                  description: 'pdf path only: watermark.text, 1 to 120 characters after trim, characters the standard pdf
+                    fonts can encode. Other watermark styling options are refused by name.'
+                  additionalProperties: false
+                  properties:
+                    text:
+                      type: string
+                      minLength: 1
+                      maxLength: 120
+                  required:
+                  - text
+                metadata:
+                  type: object
+                  description: document info fields written after the render. Strings at most 300 characters; keywords an
+                    array of at most 20 strings of at most 60 characters; unknown fields are refused.
+                  additionalProperties: false
+                  properties:
+                    title:
+                      type: string
+                      maxLength: 300
+                    author:
+                      type: string
+                      maxLength: 300
+                    subject:
+                      type: string
+                      maxLength: 300
+                    keywords:
+                      type: array
+                      maxItems: 20
+                      items:
+                        type: string
+                        maxLength: 60
+                protection:
+                  type: object
+                  description: 'pdf path only: pdfshift''s name for password protection, mapped onto the native encryption.
+                    user and owner are 1 to 255 characters and must not start with a dash.'
+                  additionalProperties: false
+                  properties:
+                    user:
+                      type: string
+                      minLength: 1
+                      maxLength: 255
+                    owner:
+                      type: string
+                      minLength: 1
+                      maxLength: 255
+                  required:
+                  - user
+                http_headers:
+                  type: object
+                  description: extra request headers, same admission as /v1's fetch.httpHeaders (token names, no cookie, host
+                    or content-length).
+                  additionalProperties:
+                    type: string
+                cookies:
+                  type: array
+                  description: cookies, same admission as /v1's fetch.cookies. An entry may name a domain, honored only when
+                    it matches the source url's hostname; attributes beyond domain are ignored.
+                  maxItems: 20
+                  items:
+                    type: object
+                    description: name and value, plus an optional domain that must equal the source hostname.
+                    properties:
+                      name:
+                        type: string
+                        minLength: 1
+                        maxLength: 128
+                      value:
+                        type: string
+                        maxLength: 4096
+                      domain:
+                        type: string
+                    required:
+                    - name
+                    - value
+                auth:
+                  type: object
+                  description: basic auth credentials for the source, username and password at most 255 characters each.
+                  additionalProperties: false
+                  properties:
+                    username:
+                      type: string
+                      maxLength: 255
+                    password:
+                      type: string
+                      maxLength: 255
+                  required:
+                  - username
+                  - password
+              required:
+              - source
+      responses:
+        '200':
+          description: the raw artifact bytes.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/webp:
+              schema:
+                type: string
+                format: binary
+          headers:
+            x-credits-cost:
+              schema:
+                type: string
+              description: always 1.
+            x-credits-used:
+              schema:
+                type: string
+              description: always 1.
+            x-credits-remaining:
+              schema:
+                type: string
+              description: quota remaining after this render.
+            x-response-duration:
+              schema:
+                type: string
+              description: render wall time in milliseconds.
+        '400':
+          description: a malformed value (shim 400 class).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShimError'
+        '401':
+          description: unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShimError'
+        '403':
+          description: no credits remaining, or phi requested without an executed BAA. Quota numbers ride in an errors object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShimError'
+        '404':
+          description: unsupported path format.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShimError'
+        '408':
+          description: the render budget elapsed (pdfshift's timeout answer).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShimError'
+        '413':
+          description: body over 1 MiB.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShimError'
+        '422':
+          description: a well-formed value naming a capability this endpoint does not have, listed by name, or the target's
+            bot protection serving a challenge page instead of content.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShimError'
+        '429':
+          description: ip rate limit or the queue full.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShimError'
+        '502':
+          description: the render failed after the retry ladder (bot-challenge blocks answer 422 instead).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShimError'
+  /tools/convert:
+    post:
+      operationId: convertTool
+      tags:
+      - convert
+      summary: 'Free browser-tool endpoint: render a URL to PDF'
+      description: 'The public tool''s submission endpoint: no account, PDF only, fair use capped at a few renders per minute
+        and ten per day per address. Same admission pipeline as the keyed routes (SSRF guard included), a plain attachment
+        named webcapture.pdf with no footer attached. Browser origins only: a cross-origin request is refused.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+                  minLength: 1
+                  description: the page to render. Required.
+                format:
+                  type: string
+                  enum:
+                  - pdf
+                  description: 'must be pdf when present: this tool converts to PDF only.'
+                landscape:
+                  type: boolean
+                  description: landscape orientation for the pdf print. Only an explicit true enables it.
+              required:
+              - url
+      responses:
+        '200':
+          description: the pdf bytes, no-store, as an attachment named webcapture.pdf.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '403':
+          description: a cross-origin request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '413':
+          description: body over 1 MiB.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: a missing url, a non-pdf format, a source refused by admission, or the target's bot protection serving
+            a challenge page instead of content.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: the free tool's fair use cap, carrying retryAfterSec and the upgrade pointer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '502':
+          description: the render failed after the retry ladder (bot-challenge blocks answer 422 instead).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: an api key minted in the dashboard, sent as the Authorization bearer credential.
+    shimApiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: pdfshift callers may send the key in X-API-Key; Bearer works on both surfaces.
+  schemas:
+    ConversionReceipt:
+      type: object
+      description: the sync 200 receipt. sourceType identifies the input kind; sourceUrl remains for compatibility and callers
+        should not treat about:blank as a navigable url. content rides only when the request set encode true.
+      properties:
+        id:
+          type: string
+          description: the conversion id, cnv prefixed.
+        bytes:
+          type: integer
+          description: artifact size.
+        attempts:
+          type: integer
+          description: render attempts consumed.
+        remaining:
+          type: integer
+          description: quota remaining after this render.
+        sourceUrl:
+          type: string
+          description: 'legacy source field: the rendered url, or for raw html the admitted baseUrl or about:blank. Use sourceType
+            to identify raw html; the document itself is never echoed.'
+        sourceType:
+          type: string
+          enum:
+          - url
+          - html
+          description: 'the input kind: a fetched url or a directly supplied html document.'
+        download:
+          type: string
+          format: uri
+          description: stable download url for the artifact.
+        content:
+          type: string
+          contentEncoding: base64
+          description: the artifact inlined when the request set encode true; decodes to the exact stored bytes.
+        sandbox:
+          type: boolean
+          description: present and true when the render ran in sandbox mode.
+        phi:
+          type: boolean
+          description: present and true when the render ran in phi mode.
+        filename:
+          type: string
+          description: echoed when the request carried one.
+        destination:
+          type: object
+          description: 'present when the request carried a destination: the push''s outcome class, never the url.'
+          properties:
+            status:
+              type: string
+              description: 'uploaded, or failed: <reason>.'
+          required:
+          - status
+      required:
+      - id
+      - bytes
+      - attempts
+      - remaining
+      - sourceUrl
+      - sourceType
+      - download
+    ConversionTicket:
+      type: object
+      description: the async 202 ticket from wait=false, left before any render runs.
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          const: queued
+        poll:
+          type: string
+          format: uri
+          description: status url to poll.
+        download:
+          type: string
+          format: uri
+          description: stable download url, valid once the status is ready.
+        sandbox:
+          type: boolean
+          description: present and true for sandbox renders.
+        phi:
+          type: boolean
+          description: present and true for phi renders.
+        destination:
+          type: object
+          description: present when a destination was requested; the only honest status a pre-render ticket can carry is requested.
+          properties:
+            status:
+              type: string
+              const: requested
+          required:
+          - status
+      required:
+      - id
+      - status
+      - poll
+      - download
+    ConversionStatus:
+      type: object
+      description: the poll view of one conversion row, scoped to the calling key.
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum:
+          - queued
+          - rendering
+          - ready
+          - failed
+        error:
+          type: string
+          description: the failure class, present only on failed rows.
+        attempts:
+          type: integer
+          description: render attempts consumed; absent until a render ran.
+        bytes:
+          type: integer
+          description: artifact size, present only on ready rows.
+        download:
+          type: string
+          format: uri
+        webhookDelivery:
+          type: object
+          description: 'the completion webhook''s outcome when the key carries one: at, ok, attempts, status, error.'
+          properties:
+            at:
+              type: string
+              format: date-time
+            ok:
+              type: boolean
+            attempts:
+              type: integer
+            status:
+              type: integer
+              nullable: true
+            error:
+              type: string
+              nullable: true
+          required:
+          - at
+          - ok
+          - attempts
+          - status
+          - error
+        destination:
+          type: object
+          description: 'present only when the request carried a destination: the status class and timestamp, never the url.'
+          properties:
+            status:
+              type: string
+            at:
+              type: string
+              format: date-time
+          required:
+          - status
+          - at
+      required:
+      - id
+      - status
+      - download
+    KeyCreated:
+      type: object
+      description: 'the mint response: the plaintext key is shown exactly once.'
+      properties:
+        key:
+          type: string
+          description: the plaintext api key.
+        id:
+          type: string
+        tier:
+          type: string
+          enum:
+          - free
+          - pro
+          - scale
+        webhookSecret:
+          type:
+          - string
+          - 'null'
+          description: the webhook signing secret, or null when no webhook was set.
+      required:
+      - key
+      - id
+      - tier
+      - webhookSecret
+    KeyList:
+      type: object
+      description: 'the master listing: every key, never its plaintext material.'
+      properties:
+        keys:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              prefix:
+                type: string
+              tier:
+                type: string
+              revoked:
+                type: boolean
+              hasWebhook:
+                type: boolean
+              createdAt:
+                type: string
+                format: date-time
+            required:
+            - id
+            - prefix
+            - tier
+            - revoked
+            - hasWebhook
+            - createdAt
+      required:
+      - keys
+    Error:
+      type: object
+      description: 'error envelope. Some 429 and 5xx bodies carry extra fields: retryAfterSec on rate limits, used, limit,
+        resetDate and upgradeUrl on quota, code on classified failures. Source validation can carry E_SOURCE_REQUIRED, E_SOURCE_CONFLICT,
+        E_SOURCE_INVALID, E_BASE_URL_INVALID, E_BASE_URL_CONFLICT or E_BASE_URL_REQUIRED.'
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+      required:
+      - error
+    ShimError:
+      type: object
+      description: pdfshift's error envelope, exactly.
+      properties:
+        success:
+          type: boolean
+          const: false
+        error:
+          type: string
+        code:
+          type: integer
+      required:
+      - success
+      - error
+      - code
