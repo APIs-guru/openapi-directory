@@ -1,0 +1,36 @@
+openapi: 3.0.3
+info:
+  title: VerifyAPI — Signup Verification (Email + IP Risk)
+  version: 1.0.0
+  description: Email validity, disposable-domain detection and IP/Tor risk in one call, with an allow/challenge/block signup recommendation.
+servers:
+  - url: https://data-api-probe.onrender.com
+security:
+  - ApiKeyAuth: []
+paths:
+  /v1/verify/email:
+    get:
+      summary: Verify an email address
+      parameters:
+        - { name: email, in: query, required: true, schema: { type: string}}
+      responses: { '200': { description: "Fields: syntax_valid, has_mx, mx_records, disposable, free_provider, role_account, score (0-100), verdict (valid|disposable|undeliverable_domain|unverifiable|invalid)"}}
+  /v1/verify/ip:
+    get:
+      summary: Check IP risk
+      parameters:
+        - { name: ip, in: query, required: true, schema: { type: string}}
+      responses: { '200': { description: "Fields: ip_class, tor_exit, signals, score, verdict (no_negative_signals|high_risk|non_routable|invalid_ip)"}}
+  /v1/verify/signup:
+    get:
+      summary: Combined signup verdict (email + IP)
+      parameters:
+        - { name: email, in: query, schema: { type: string}}
+        - { name: ip, in: query, schema: { type: string}}
+      responses: { '200': { description: "Fields: email result, ip result, recommendation (allow|challenge|block), reasons[]"}}
+  /v1/usage:
+    get:
+      summary: Usage for the calling key
+      responses: { '200': { description: Per-product call counts (total / this month)}}
+components:
+  securitySchemes:
+    ApiKeyAuth: { type: apiKey, in: header, name: x-api-key}
