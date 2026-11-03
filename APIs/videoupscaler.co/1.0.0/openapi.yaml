@@ -1,0 +1,419 @@
+openapi: 3.1.0
+info:
+  title: VideoUpscaler API
+  version: 1.0.0
+  description: Upscale and enhance videos up to 4K with AI on cloud GPUs. Compatible with n8n, Zapier, Make, Dify, Coze, and
+    OpenAI Actions.
+  contact:
+    name: VideoUpscaler
+    url: https://videoupscaler.co
+  x-apisguru-categories:
+  - media
+  x-logo:
+    url: https://videoupscaler.co/icon-192.png
+  x-origin:
+  - format: openapi
+    url: https://videoupscaler.co/openapi.json
+    version: '3.1'
+  x-providerName: videoupscaler.co
+servers:
+- url: https://videoupscaler.co/api/v1
+  description: Production API
+security:
+- bearerAuth: []
+paths:
+  /upscale:
+    post:
+      operationId: createUpscaleTask
+      summary: Create a video upscale task
+      description: Charges credits for the video duration and starts an asynchronous upscale job to 1080p, 2k, or 4k.
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        description: Unique ASCII string (1-255 chars) so retries never charge twice.
+        schema:
+          type: string
+          maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUpscaleRequest'
+      responses:
+        '201':
+          description: Task created and started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '200':
+          description: Existing task returned for a repeated Idempotency-Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          $ref: '#/components/responses/ApiErrorResponse'
+        '401':
+          $ref: '#/components/responses/ApiErrorResponse'
+        '402':
+          $ref: '#/components/responses/ApiErrorResponse'
+        '403':
+          $ref: '#/components/responses/ApiErrorResponse'
+        '409':
+          $ref: '#/components/responses/ApiErrorResponse'
+        '422':
+          $ref: '#/components/responses/ApiErrorResponse'
+  /uploads:
+    post:
+      operationId: createUploadUrl
+      summary: Create a signed upload URL
+      description: Issues a signed PUT URL for uploading a local video file (up to 100MB) directly to storage.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUploadRequest'
+      responses:
+        '201':
+          description: Signed upload URL created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadTarget'
+        '400':
+          $ref: '#/components/responses/ApiErrorResponse'
+        '401':
+          $ref: '#/components/responses/ApiErrorResponse'
+        '402':
+          $ref: '#/components/responses/ApiErrorResponse'
+        '413':
+          $ref: '#/components/responses/ApiErrorResponse'
+  /tasks/{id}:
+    get:
+      operationId: getUpscaleTask
+      summary: Get an upscale task by ID
+      description: Returns the latest status of an upscale task. Pass wait=1..45 to hold the request until the task finishes
+        or the timeout elapses.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Task UUID returned by POST /upscale
+        schema:
+          type: string
+      - name: wait
+        in: query
+        required: false
+        description: Optional long-poll duration in seconds (0 to 45). Waits until the task completes/fails or the timer expires.
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 45
+          default: 0
+      responses:
+        '200':
+          description: Task status and output URL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '404':
+          $ref: '#/components/responses/ApiErrorResponse'
+  /tasks:
+    get:
+      operationId: listUpscaleTasks
+      summary: List recent tasks
+      description: Lists your upscale tasks, newest first.
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+      responses:
+        '200':
+          description: Paginated task list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskList'
+  /account:
+    get:
+      operationId: getAccountBalance
+      summary: Get credit balance and pricing
+      description: Returns remaining credits and credit rates per second of video for each resolution.
+      responses:
+        '200':
+          description: Account balance and per-second rates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key (vu_live_...)
+      description: Create an API key in https://videoupscaler.co/settings/apikeys
+  responses:
+    ApiErrorResponse:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+  schemas:
+    CreateUpscaleRequest:
+      type: object
+      required:
+      - video_url
+      - resolution
+      properties:
+        video_url:
+          type: string
+          format: uri
+          description: Public http(s) URL of the video (MP4, MOV, WebM up to 500MB) or video_url from /uploads.
+        resolution:
+          type: string
+          enum:
+          - 1080p
+          - 2k
+          - 4k
+          description: Target output resolution.
+        webhook_url:
+          type: string
+          format: uri
+          description: Optional public https:// URL. Receives a POST with the Task object when status becomes completed or
+            failed.
+        ops:
+          $ref: '#/components/schemas/UpscaleOps'
+    UpscaleOps:
+      type: object
+      description: Optional AI video enhancement operations.
+      properties:
+        engine:
+          type: string
+          enum:
+          - flashvsr
+          - anime
+          description: Upscaling model engine (use anime for 2D animation).
+        denoise:
+          type: integer
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          description: Denoise strength (0 = off, 1 = light, 2 = medium, 3 = strong).
+        deinterlace:
+          type: boolean
+          description: Remove combing artifacts from interlaced video.
+        deflicker:
+          type: boolean
+          description: Reduce temporal brightness flicker.
+        stabilize:
+          type: boolean
+          description: Smooth handheld camera shake.
+        faceRestore:
+          type: boolean
+          description: Restore facial details (videos up to 5 minutes).
+        fpsMultiplier:
+          type: integer
+          enum:
+          - 1
+          - 2
+          - 4
+          - 8
+          description: Frame interpolation multiplier.
+        slowMotion:
+          type: boolean
+          description: Extend duration instead of increasing frame rate when fpsMultiplier > 1.
+        hdr:
+          type: string
+          enum:
+          - none
+          - hdr10
+          - hlg
+          description: HDR output transfer mode.
+    CreateUploadRequest:
+      type: object
+      required:
+      - content_type
+      - size
+      properties:
+        content_type:
+          type: string
+          enum:
+          - video/mp4
+          - video/quicktime
+          - video/webm
+        size:
+          type: integer
+          minimum: 1
+          maximum: 104857600
+          description: File size in bytes (max 100MB).
+    UploadTarget:
+      type: object
+      required:
+      - upload_url
+      - method
+      - headers
+      - video_url
+      - max_bytes
+      - expires_at
+      properties:
+        upload_url:
+          type: string
+          format: uri
+        method:
+          type: string
+          enum:
+          - PUT
+        headers:
+          type: object
+          properties:
+            Content-Type:
+              type: string
+        video_url:
+          type: string
+          format: uri
+        max_bytes:
+          type: integer
+        expires_at:
+          type: string
+          format: date-time
+    Task:
+      type: object
+      required:
+      - id
+      - status
+      - resolution
+      - video_url
+      - credits_charged
+      - created_at
+      - updated_at
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum:
+          - queued
+          - processing
+          - completed
+          - failed
+        resolution:
+          type:
+          - string
+          - 'null'
+          enum:
+          - 1080p
+          - 2k
+          - 4k
+          - null
+        video_url:
+          type:
+          - string
+          - 'null'
+        duration_seconds:
+          type:
+          - number
+          - 'null'
+        processed_seconds:
+          type:
+          - number
+          - 'null'
+        credits_charged:
+          type: integer
+        watermark:
+          type:
+          - boolean
+          - 'null'
+        output_url:
+          type:
+          - string
+          - 'null'
+          description: Download URL of the upscaled MP4 once status is completed.
+        thumbnail_url:
+          type:
+          - string
+          - 'null'
+        error:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    TaskList:
+      type: object
+      required:
+      - data
+      - page
+      - limit
+      - total
+      - has_more
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        has_more:
+          type: boolean
+    Account:
+      type: object
+      required:
+      - credits
+      - credits_per_second
+      properties:
+        credits:
+          type: integer
+        credits_per_second:
+          type: object
+          properties:
+            1080p:
+              type: integer
+            2k:
+              type: integer
+            4k:
+              type: integer
+    ApiError:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - code
+          - message
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+externalDocs:
+  description: API and MCP documentation
+  url: https://videoupscaler.co/docs
