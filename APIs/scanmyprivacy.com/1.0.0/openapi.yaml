@@ -1,0 +1,134 @@
+openapi: 3.1.0
+info:
+  title: ScanMyPrivacy API
+  description: Public privacy and network security tools providing connection scans, IP geolocation lookups, and website safety checks.
+  version: 1.0.0
+  contact:
+    name: ScanMyPrivacy Support
+    url: https://scanmyprivacy.com
+  license:
+    name: MIT
+    url: https://opensource.org
+
+servers:
+  - url: https://scanmyprivacy.com
+    description: Production API Server
+
+paths:
+  /scan/full:
+    get:
+      summary: Full Privacy Scan
+      description: Evaluates the client connection profile for IP exposure, VPN usage, and WebRTC/DNS leak vulnerabilities.
+      operationId: getFullScan
+      responses:
+        '200':
+          description: A successful privacy profile analysis.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrivacyScanResult'
+
+  /lookup/ip:
+    get:
+      summary: IP and Network Lookup
+      description: Returns the approximate geographic location, ISP registry records, and reverse DNS details for a targeted IP address or domain.
+      operationId: lookupIP
+      parameters:
+        - name: query
+          in: query
+          description: The targeted IPv4/IPv6 address or domain name string.
+          required: true
+          schema:
+            type: string
+            examples: 
+              - "203.0.113.7"
+      responses:
+        '200':
+          description: Geolocation and network registration data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IPLookupResult'
+        '400':
+          description: Invalid IP address or domain format provided.
+
+  /check/safety:
+    post:
+      summary: Website Safety Checker
+      description: Inspects a specific URL target's HTTPS profile, SSL/TLS certificate validity, and potential security flags.
+      operationId: checkSafety
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - targetUrl
+              properties:
+                targetUrl:
+                  type: string
+                  format: uri
+                  examples:
+                    - "https://example.com"
+      responses:
+        '200':
+          description: Technical safety indicators and risk flag assessments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SafetyCheckResult'
+
+components:
+  schemas:
+    PrivacyScanResult:
+      type: object
+      required:
+        - privacyScore
+        - ipExposed
+        - vpnDetected
+      properties:
+        privacyScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: In-memory counter estimate of overall connection security.
+        ipExposed:
+          type: boolean
+          description: True if the baseline connection leaks the user's real public IP.
+        vpnDetected:
+          type: boolean
+          description: Inferred from the network registration records.
+        leakVulnerabilities:
+          type: object
+          properties:
+            dnsLeak:
+              type: boolean
+            webRtcLeak:
+              type: boolean
+
+    IPLookupResult:
+      type: object
+      properties:
+        ipAddress:
+          type: string
+        country:
+          type: string
+        city:
+          type: string
+        isp:
+          type: string
+        reverseDns:
+          type: string
+
+    SafetyCheckResult:
+      type: object
+      properties:
+        isSafe:
+          type: boolean
+        hasValidSsl:
+          type: boolean
+        riskFlags:
+          type: array
+          items:
+            type: string
