@@ -1,0 +1,406 @@
+openapi: 3.1.0
+info:
+  title: RxAtlas API
+  version: 1.0.0
+  description: Search and retrieve normalized US drug products at FDA product-NDC grain with source-linked SPL, RxNorm, application, ingredient, pricing, shortage, and enforcement enrichments.
+  contact:
+    email: data@apex-db.org
+  x-guidance: Use GET /v1/drugs for paid full-corpus search with the documented query parameters, GET /v1/drugs/{id} for one canonical record, and GET /v1/coverage for measured coverage. Requests may authenticate with a bearer token or answer the advertised x402/MPP payment challenge.
+  x-apisguru-categories:
+  - open_data
+  x-logo:
+    url: https://rxatlas.dev/icon.svg
+  x-origin:
+  - format: openapi
+    url: https://api.rxatlas.dev/v1/openapi.json
+    version: '3.1'
+  x-providerName: rxatlas.dev
+servers:
+- url: https://api.rxatlas.dev
+x-service-info:
+  categories:
+  - data
+  - search
+  docs:
+    homepage: https://rxatlas.dev
+    apiReference: https://api.rxatlas.dev/openapi.json
+    llms: https://rxatlas.dev/llms.txt
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Paid API token, e.g. `Authorization: Bearer <token>`.'
+paths:
+  /health:
+    get:
+      summary: Liveness probe
+      security: []
+      tags:
+      - meta
+      responses:
+        '200':
+          description: Service is up
+  /v1/drugs:
+    get:
+      summary: Search US drug products by NDC, brand, generic name, ingredient, manufacturer, dosage form, route, source, or identifier.
+      tags:
+      - drugs
+      security:
+      - bearerAuth: []
+      x-payment-info:
+        amount: '100000'
+        currency: '0x20C000000000000000000000b9537d11c60E8b50'
+        description: 1 search page
+        intent: charge
+        method: tempo
+        preferredOffer: mpp-tempo
+        price:
+          mode: fixed
+          currency: USD
+          amount: '0.100000'
+        protocols:
+        - x402:
+            scheme: exact
+            network: eip155:8453
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: evm
+            intent: charge
+            network: '8453'
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: tempo
+            intent: charge
+            network: '4217'
+            currency: '0x20C000000000000000000000b9537d11c60E8b50'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        network: '4217'
+        recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+          maxLength: 160
+      - name: ndc
+        in: query
+        schema:
+          type: string
+          maxLength: 32
+        example: 75834-258
+      - name: brand_name
+        in: query
+        schema:
+          type: string
+          maxLength: 160
+      - name: generic_name
+        in: query
+        schema:
+          type: string
+          maxLength: 160
+      - name: ingredient
+        in: query
+        schema:
+          type: string
+          maxLength: 160
+      - name: manufacturer_name
+        in: query
+        schema:
+          type: string
+          maxLength: 160
+      - name: route
+        in: query
+        schema:
+          type: string
+          maxLength: 80
+      - name: dosage_form
+        in: query
+        schema:
+          type: string
+          maxLength: 120
+      - name: dea_schedule
+        in: query
+        schema:
+          type: string
+          enum:
+          - CI
+          - CII
+          - CIII
+          - CIV
+          - CV
+      - name: source
+        in: query
+        schema:
+          type: string
+          enum:
+          - openfda-ndc
+          - dailymed
+          - nadac
+          - openfda-enforcement
+          - orange-book
+          - rxnorm
+          - openfda-unii
+          - openfda-shortages
+      - name: shortage_status
+        in: query
+        schema:
+          type: string
+          enum:
+          - Current
+          - To Be Discontinued
+          - Resolved
+      - name: rxcui
+        in: query
+        schema:
+          type: string
+          maxLength: 16
+          pattern: ^[0-9]+$
+      - name: spl_set_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+          pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+        example: 1
+      - name: cursor
+        in: query
+        schema:
+          type: string
+          description: Opaque keyset cursor from a previous response.
+      - name: count
+        in: query
+        schema:
+          type: boolean
+          description: Include the total matching-record count.
+      responses:
+        '200':
+          description: A keyset page of records with per-field provenance.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                - has_more
+                - next_cursor
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                        _provenance:
+                          type: object
+                          additionalProperties: true
+                      additionalProperties: true
+                  has_more:
+                    type: boolean
+                  next_cursor:
+                    type:
+                    - string
+                    - 'null'
+                  total:
+                    type: integer
+                    minimum: 0
+                additionalProperties: false
+              example:
+                data:
+                - id: 147244
+                  canonical_product_ndc: 75834-258
+                  brand_name: ATORVASTATIN CALCIUM TABLET
+                  generic_name: Atorvastatin calcium
+                  manufacturer_name: NIVAGEN PHARMACEUTICALS, INC.
+                  dosage_form: TABLET
+                  route: ORAL
+                  strength: 80 mg/1
+                  application_number: ANDA213853
+                  has_recall: true
+                has_more: false
+                next_cursor: null
+        '401':
+          description: Missing/invalid bearer token.
+        '402':
+          description: Payment Required for full-scope per-call access.
+        '429':
+          description: Rate limit exceeded.
+  /v1/drugs/{id}:
+    get:
+      summary: Retrieve one full FDA product-NDC record by its positive RxAtlas ID, including available source-linked enrichments.
+      tags:
+      - drugs
+      security:
+      - bearerAuth: []
+      x-payment-info:
+        amount: '25000'
+        currency: '0x20C000000000000000000000b9537d11c60E8b50'
+        description: 1 full record
+        intent: charge
+        method: tempo
+        preferredOffer: mpp-tempo
+        price:
+          mode: fixed
+          currency: USD
+          amount: '0.025000'
+        protocols:
+        - x402:
+            scheme: exact
+            network: eip155:8453
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: evm
+            intent: charge
+            network: '8453'
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: tempo
+            intent: charge
+            network: '4217'
+            currency: '0x20C000000000000000000000b9537d11c60E8b50'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        network: '4217'
+        recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The full record.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                  _provenance:
+                    type: object
+                    additionalProperties: true
+                additionalProperties: true
+              example:
+                id: 147244
+                canonical_product_ndc: 75834-258
+                brand_name: ATORVASTATIN CALCIUM TABLET
+                generic_name: Atorvastatin calcium
+                manufacturer_name: NIVAGEN PHARMACEUTICALS, INC.
+                dosage_form: TABLET
+                route: ORAL
+                strength: 80 mg/1
+                application_number: ANDA213853
+                source_record_url: https://api.fda.gov/drug/ndc.json?search=product_ndc:75834-258
+        '402':
+          description: Payment Required for full-scope per-call access.
+        '404':
+          description: Not found.
+  /v1/coverage:
+    get:
+      summary: Retrieve the dated RxAtlas coverage contract with release size, source coverage, identity matching, and measured field fill.
+      tags:
+      - coverage
+      security:
+      - bearerAuth: []
+      x-payment-info:
+        amount: '250000'
+        currency: '0x20C000000000000000000000b9537d11c60E8b50'
+        description: coverage matrix
+        intent: charge
+        method: tempo
+        preferredOffer: mpp-tempo
+        price:
+          mode: fixed
+          currency: USD
+          amount: '0.250000'
+        protocols:
+        - x402:
+            scheme: exact
+            network: eip155:8453
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: evm
+            intent: charge
+            network: '8453'
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: tempo
+            intent: charge
+            network: '4217'
+            currency: '0x20C000000000000000000000b9537d11c60E8b50'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        network: '4217'
+        recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+      responses:
+        '200':
+          description: Coverage matrix.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                dataset:
+                  id: drugs
+                  name: RxAtlas
+                snapshot:
+                  version: '2026-08-03'
+                  row_count: 134112
+                total_records:
+                  count: 134112
+                  label: FDA NDC products
+        '402':
+          description: Payment Required for per-call coverage access.
+        '403':
+          description: A paid API tier is required.
+  /v1/sources:
+    get:
+      summary: Source registry (provenance authorities)
+      tags:
+      - meta
+      security: []
+      responses:
+        '200':
+          description: Registered sources.
+  /v1/snapshots:
+    get:
+      summary: List downloadable dataset snapshots you are entitled to
+      tags:
+      - snapshots
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Available releases.
+  /v1/releases/current:
+    get:
+      summary: Get the authoritative currently published customer release
+      tags:
+      - meta
+      security: []
+      responses:
+        '200':
+          description: Verified release identity, counts, and checksums.
+        '503':
+          description: No verified release is currently available.

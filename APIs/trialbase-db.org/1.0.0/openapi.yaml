@@ -1,0 +1,371 @@
+openapi: 3.1.0
+info:
+  title: TrialBase DB API
+  version: 1.0.0
+  description: Search and retrieve normalized clinical trials across ClinicalTrials.gov, CTIS, EudraCT, ISRCTN, and the licensed DRKS slice with registry identifiers, study attributes, locations, and source-linked evidence.
+  contact:
+    email: data@apex-db.org
+  x-guidance: Use GET /v1/trials for paid full-corpus search with the documented query parameters, GET /v1/trials/{id} for one canonical record, and GET /v1/coverage for measured coverage. Requests may authenticate with a bearer token or answer the advertised x402/MPP payment challenge.
+  x-apisguru-categories:
+  - open_data
+  x-logo:
+    url: https://trialbase-db.org/icon.svg
+  x-origin:
+  - format: openapi
+    url: https://api.trialbase-db.org/v1/openapi.json
+    version: '3.1'
+  x-providerName: trialbase-db.org
+servers:
+- url: https://api.trialbase-db.org
+x-service-info:
+  categories:
+  - data
+  - search
+  docs:
+    homepage: https://trialbase-db.org
+    apiReference: https://api.trialbase-db.org/openapi.json
+    llms: https://trialbase-db.org/llms.txt
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Paid API token, e.g. `Authorization: Bearer <token>`.'
+paths:
+  /health:
+    get:
+      summary: Liveness probe
+      security: []
+      tags:
+      - meta
+      responses:
+        '200':
+          description: Service is up
+  /v1/trials:
+    get:
+      summary: Search normalized clinical trials by registry, condition, intervention, sponsor, country, status, phase, study type, or free text.
+      tags:
+      - trials
+      security:
+      - bearerAuth: []
+      x-payment-info:
+        amount: '100000'
+        currency: '0x20C000000000000000000000b9537d11c60E8b50'
+        description: 1 search page
+        intent: charge
+        method: tempo
+        preferredOffer: mpp-tempo
+        price:
+          mode: fixed
+          currency: USD
+          amount: '0.100000'
+        protocols:
+        - x402:
+            scheme: exact
+            network: eip155:8453
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: evm
+            intent: charge
+            network: '8453'
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: tempo
+            intent: charge
+            network: '4217'
+            currency: '0x20C000000000000000000000b9537d11c60E8b50'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        network: '4217'
+        recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+          maxLength: 160
+      - name: status
+        in: query
+        schema:
+          type: string
+          maxLength: 40
+      - name: phase
+        in: query
+        schema:
+          type: string
+          maxLength: 20
+      - name: study_type
+        in: query
+        schema:
+          type: string
+          maxLength: 20
+      - name: sponsor
+        in: query
+        schema:
+          type: string
+          maxLength: 160
+      - name: condition
+        in: query
+        schema:
+          type: string
+          maxLength: 160
+        example: Intimate partner violence
+      - name: intervention
+        in: query
+        schema:
+          type: string
+          maxLength: 160
+      - name: country
+        in: query
+        schema:
+          type: string
+          maxLength: 80
+      - name: registry
+        in: query
+        schema:
+          type: string
+          maxLength: 40
+        example: isrctn
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+        example: 1
+      - name: cursor
+        in: query
+        schema:
+          type: string
+          description: Opaque keyset cursor from a previous response.
+      - name: count
+        in: query
+        schema:
+          type: boolean
+          description: Include the total matching-record count.
+      responses:
+        '200':
+          description: A keyset page of records with per-field provenance.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                - has_more
+                - next_cursor
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                        _provenance:
+                          type: object
+                          additionalProperties: true
+                      additionalProperties: true
+                  has_more:
+                    type: boolean
+                  next_cursor:
+                    type:
+                    - string
+                    - 'null'
+                  total:
+                    type: integer
+                    minimum: 0
+                additionalProperties: false
+              example:
+                data:
+                - id: 679751
+                  registry_id: ISRCTN17465883
+                  brief_title: Effectiveness of an intimate partner violence intervention to reduce detection gaps among diverse ethnic groups of women
+                  primary_registry: isrctn
+                  status: unknown
+                  study_type: INTERVENTIONAL
+                  countries:
+                  - Israel
+                  start_date: '2022-06-07'
+                  enrollment_count: 3829
+                has_more: false
+                next_cursor: null
+        '401':
+          description: Missing/invalid bearer token.
+        '402':
+          description: Payment Required for full-scope per-call access.
+        '429':
+          description: Rate limit exceeded.
+  /v1/trials/{id}:
+    get:
+      summary: Retrieve one full normalized clinical-trial record by its positive TrialBase ID, including available registry provenance.
+      tags:
+      - trials
+      security:
+      - bearerAuth: []
+      x-payment-info:
+        amount: '25000'
+        currency: '0x20C000000000000000000000b9537d11c60E8b50'
+        description: 1 full record
+        intent: charge
+        method: tempo
+        preferredOffer: mpp-tempo
+        price:
+          mode: fixed
+          currency: USD
+          amount: '0.025000'
+        protocols:
+        - x402:
+            scheme: exact
+            network: eip155:8453
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: evm
+            intent: charge
+            network: '8453'
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: tempo
+            intent: charge
+            network: '4217'
+            currency: '0x20C000000000000000000000b9537d11c60E8b50'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        network: '4217'
+        recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The full record.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                  _provenance:
+                    type: object
+                    additionalProperties: true
+                additionalProperties: true
+              example:
+                id: 679751
+                registry_id: ISRCTN17465883
+                brief_title: Effectiveness of an intimate partner violence intervention to reduce detection gaps among diverse ethnic groups of women
+                primary_registry: isrctn
+                study_type: INTERVENTIONAL
+                countries:
+                - Israel
+                conditions:
+                - Intimate partner violence (IPV)
+                start_date: '2022-06-07'
+                enrollment_count: 3829
+                source_record_url: https://www.isrctn.com/ISRCTN17465883
+        '402':
+          description: Payment Required for full-scope per-call access.
+        '404':
+          description: Not found.
+  /v1/coverage:
+    get:
+      summary: Retrieve the dated TrialBase coverage contract with release size, registry counts, identity matching, and measured field fill.
+      tags:
+      - coverage
+      security:
+      - bearerAuth: []
+      x-payment-info:
+        amount: '250000'
+        currency: '0x20C000000000000000000000b9537d11c60E8b50'
+        description: coverage matrix
+        intent: charge
+        method: tempo
+        preferredOffer: mpp-tempo
+        price:
+          mode: fixed
+          currency: USD
+          amount: '0.250000'
+        protocols:
+        - x402:
+            scheme: exact
+            network: eip155:8453
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: evm
+            intent: charge
+            network: '8453'
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: tempo
+            intent: charge
+            network: '4217'
+            currency: '0x20C000000000000000000000b9537d11c60E8b50'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        network: '4217'
+        recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+      responses:
+        '200':
+          description: Coverage matrix.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                dataset:
+                  id: trials
+                  name: TrialBase DB
+                snapshot:
+                  version: '2026-07-18'
+                  row_count: 679083
+                total_records:
+                  count: 679083
+                  label: Canonical trials
+        '402':
+          description: Payment Required for per-call coverage access.
+        '403':
+          description: A paid API tier is required.
+  /v1/sources:
+    get:
+      summary: Source registry (provenance authorities)
+      tags:
+      - meta
+      security: []
+      responses:
+        '200':
+          description: Registered sources.
+  /v1/snapshots:
+    get:
+      summary: List downloadable dataset snapshots you are entitled to
+      tags:
+      - snapshots
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Available releases.
+  /v1/releases/current:
+    get:
+      summary: Get the authoritative currently published customer release
+      tags:
+      - meta
+      security: []
+      responses:
+        '200':
+          description: Verified release identity, counts, and checksums.
+        '503':
+          description: No verified release is currently available.

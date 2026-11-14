@@ -1,0 +1,414 @@
+openapi: 3.1.0
+info:
+  title: RecallRadar API
+  version: 1.0.0
+  description: Search and retrieve historical consumer-product safety notices from eight official sources with normalized recall classification, hazards, remedies, parties, products, and provenance.
+  contact:
+    email: data@apex-db.org
+  x-guidance: Use GET /v1/recalls for paid full-corpus search with the documented query parameters, GET /v1/recalls/{id} for one canonical record, and GET /v1/coverage for measured coverage. Requests may authenticate with a bearer token or answer the advertised x402/MPP payment challenge.
+  x-apisguru-categories:
+  - open_data
+  x-logo:
+    url: https://recallradar.dev/icon.svg
+  x-origin:
+  - format: openapi
+    url: https://api.recallradar.dev/v1/openapi.json
+    version: '3.1'
+  x-providerName: recallradar.dev
+servers:
+- url: https://api.recallradar.dev
+x-service-info:
+  categories:
+  - data
+  - search
+  docs:
+    homepage: https://recallradar.dev
+    apiReference: https://api.recallradar.dev/openapi.json
+    llms: https://recallradar.dev/llms.txt
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Paid API token, e.g. `Authorization: Bearer <token>`.'
+paths:
+  /health:
+    get:
+      summary: Liveness probe
+      security: []
+      tags:
+      - meta
+      responses:
+        '200':
+          description: Service is up
+  /v1/recalls:
+    get:
+      summary: Search consumer-product safety notices by authority, jurisdiction, recall status, category, risk, hazard, manufacturer, date, or free text.
+      tags:
+      - recalls
+      security:
+      - bearerAuth: []
+      x-payment-info:
+        amount: '100000'
+        currency: '0x20C000000000000000000000b9537d11c60E8b50'
+        description: 1 search page
+        intent: charge
+        method: tempo
+        preferredOffer: mpp-tempo
+        price:
+          mode: fixed
+          currency: USD
+          amount: '0.100000'
+        protocols:
+        - x402:
+            scheme: exact
+            network: eip155:8453
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: evm
+            intent: charge
+            network: '8453'
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: tempo
+            intent: charge
+            network: '4217'
+            currency: '0x20C000000000000000000000b9537d11c60E8b50'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        network: '4217'
+        recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 160
+        example: fouet
+      - name: authority
+        in: query
+        schema:
+          type: string
+          enum:
+          - cpsc
+          - eu-safety-gate
+          - health-canada
+          - gov-uk-opss
+          - accc
+          - fr-rappelconso
+          - tw-bsmi
+          - fi-tukes-historical
+        example: fr-rappelconso
+      - name: jurisdiction
+        in: query
+        schema:
+          type: string
+          minLength: 2
+          maxLength: 3
+      - name: category_code
+        in: query
+        schema:
+          type: string
+          enum:
+          - toys
+          - cosmetics
+          - appliances
+          - clothing
+          - chemicals
+          - jewellery
+          - childcare
+          - ppe
+          - lighting
+          - machinery
+          - sports
+          - household
+          - furniture
+          - kitchen
+          - electronics
+          - tools
+          - gas
+          - stationery
+          - food_imitating
+          - garden
+          - vehicles
+          - other
+      - name: risk_level
+        in: query
+        schema:
+          type: string
+          enum:
+          - high
+          - medium
+          - low
+          - unknown
+      - name: hazard
+        in: query
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 60
+      - name: manufacturer
+        in: query
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 120
+      - name: published_from
+        in: query
+        schema:
+          type: string
+          pattern: ^\d{4}-\d{2}-\d{2}$
+      - name: published_to
+        in: query
+        schema:
+          type: string
+          pattern: ^\d{4}-\d{2}-\d{2}$
+      - name: is_recall
+        in: query
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+        example: 'true'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+        example: 1
+      - name: cursor
+        in: query
+        schema:
+          type: string
+          description: Opaque keyset cursor from a previous response.
+      - name: count
+        in: query
+        schema:
+          type: boolean
+          description: Include the total matching-record count.
+      responses:
+        '200':
+          description: A keyset page of records with per-field provenance.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                - has_more
+                - next_cursor
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                        _provenance:
+                          type: object
+                          additionalProperties: true
+                      additionalProperties: true
+                  has_more:
+                    type: boolean
+                  next_cursor:
+                    type:
+                    - string
+                    - 'null'
+                  total:
+                    type: integer
+                    minimum: 0
+                additionalProperties: false
+              example:
+                data:
+                - id: 60733
+                  title: fouet inox nylon fouet
+                  authority: fr-rappelconso
+                  jurisdiction: FR
+                  is_recall: true
+                  hazard_types:
+                  - risque chimique
+                  published_at: '2026-07-17'
+                  source_notice_ref: id:49902
+                has_more: false
+                next_cursor: null
+        '401':
+          description: Missing/invalid bearer token.
+        '402':
+          description: Payment Required for full-scope per-call access.
+        '429':
+          description: Rate limit exceeded.
+  /v1/recalls/{id}:
+    get:
+      summary: Retrieve one full consumer-product safety notice by its positive RecallRadar ID, including available products, parties, and provenance.
+      tags:
+      - recalls
+      security:
+      - bearerAuth: []
+      x-payment-info:
+        amount: '25000'
+        currency: '0x20C000000000000000000000b9537d11c60E8b50'
+        description: 1 full record
+        intent: charge
+        method: tempo
+        preferredOffer: mpp-tempo
+        price:
+          mode: fixed
+          currency: USD
+          amount: '0.025000'
+        protocols:
+        - x402:
+            scheme: exact
+            network: eip155:8453
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: evm
+            intent: charge
+            network: '8453'
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: tempo
+            intent: charge
+            network: '4217'
+            currency: '0x20C000000000000000000000b9537d11c60E8b50'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        network: '4217'
+        recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The full record.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                  _provenance:
+                    type: object
+                    additionalProperties: true
+                additionalProperties: true
+              example:
+                id: 60733
+                title: fouet inox nylon fouet
+                authority: fr-rappelconso
+                jurisdiction: FR
+                is_recall: true
+                hazard_types:
+                - risque chimique
+                published_at: '2026-07-17'
+                source_notice_ref: id:49902
+                source_record_url: https://rappel.conso.gouv.fr/fiche-rappel/49902/rapex
+        '402':
+          description: Payment Required for full-scope per-call access.
+        '404':
+          description: Not found.
+  /v1/coverage:
+    get:
+      summary: Retrieve the dated RecallRadar coverage contract with release size, authority counts, recall classification, and measured field fill.
+      tags:
+      - coverage
+      security:
+      - bearerAuth: []
+      x-payment-info:
+        amount: '250000'
+        currency: '0x20C000000000000000000000b9537d11c60E8b50'
+        description: coverage matrix
+        intent: charge
+        method: tempo
+        preferredOffer: mpp-tempo
+        price:
+          mode: fixed
+          currency: USD
+          amount: '0.250000'
+        protocols:
+        - x402:
+            scheme: exact
+            network: eip155:8453
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: evm
+            intent: charge
+            network: '8453'
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: tempo
+            intent: charge
+            network: '4217'
+            currency: '0x20C000000000000000000000b9537d11c60E8b50'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        network: '4217'
+        recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+      responses:
+        '200':
+          description: Coverage matrix.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                dataset:
+                  id: recalls
+                  name: RecallRadar
+                snapshot:
+                  version: '2026-07-20'
+                  row_count: 53484
+                total_records:
+                  count: 53484
+                  label: Exported safety notices
+        '402':
+          description: Payment Required for per-call coverage access.
+        '403':
+          description: A paid API tier is required.
+  /v1/sources:
+    get:
+      summary: Source registry (provenance authorities)
+      tags:
+      - meta
+      security: []
+      responses:
+        '200':
+          description: Registered sources.
+  /v1/snapshots:
+    get:
+      summary: List downloadable dataset snapshots you are entitled to
+      tags:
+      - snapshots
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Available releases.
+  /v1/releases/current:
+    get:
+      summary: Get the authoritative currently published customer release
+      tags:
+      - meta
+      security: []
+      responses:
+        '200':
+          description: Verified release identity, counts, and checksums.
+        '503':
+          description: No verified release is currently available.

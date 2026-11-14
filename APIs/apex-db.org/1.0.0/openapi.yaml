@@ -1,0 +1,368 @@
+openapi: 3.1.0
+info:
+  title: Apex API
+  version: 1.0.0
+  description: Search and retrieve normalized vehicle variants with specifications, emissions, powertrain fields, and source-linked provenance from public automotive datasets.
+  contact:
+    email: data@apex-db.org
+  x-guidance: Use GET /v1/apex for paid full-corpus search with the documented query parameters, GET /v1/apex/{id} for one canonical record, and GET /v1/coverage for measured coverage. Requests may authenticate with a bearer token or answer the advertised x402/MPP payment challenge.
+  x-apisguru-categories:
+  - open_data
+  - transport
+  x-logo:
+    url: https://apex-db.org/icon.svg
+  x-origin:
+  - format: openapi
+    url: https://api.apex-db.org/v1/openapi.json
+    version: '3.1'
+  x-providerName: apex-db.org
+servers:
+- url: https://api.apex-db.org
+x-service-info:
+  categories:
+  - data
+  - search
+  docs:
+    homepage: https://apex-db.org
+    apiReference: https://api.apex-db.org/openapi.json
+    llms: https://apex-db.org/llms.txt
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Paid API token, e.g. `Authorization: Bearer <token>`.'
+paths:
+  /health:
+    get:
+      summary: Liveness probe
+      security: []
+      tags:
+      - meta
+      responses:
+        '200':
+          description: Service is up
+  /v1/apex:
+    get:
+      summary: Search normalized vehicle variants by brand, model, model year, powertrain, market, or free text.
+      tags:
+      - apex
+      security:
+      - bearerAuth: []
+      x-payment-info:
+        amount: '100000'
+        currency: '0x20C000000000000000000000b9537d11c60E8b50'
+        description: 1 search page
+        intent: charge
+        method: tempo
+        preferredOffer: mpp-tempo
+        price:
+          mode: fixed
+          currency: USD
+          amount: '0.100000'
+        protocols:
+        - x402:
+            scheme: exact
+            network: eip155:8453
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: evm
+            intent: charge
+            network: '8453'
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: tempo
+            intent: charge
+            network: '4217'
+            currency: '0x20C000000000000000000000b9537d11c60E8b50'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        network: '4217'
+        recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+      parameters:
+      - name: brand
+        in: query
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 80
+        example: Alfa Romeo
+      - name: model
+        in: query
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 80
+        example: Giulia
+      - name: model_year
+        in: query
+        schema:
+          type: integer
+          minimum: 1880
+          maximum: 2100
+        example: 2022
+      - name: powertrain
+        in: query
+        schema:
+          type: string
+          enum:
+          - ICE
+          - HEV
+          - PHEV
+          - BEV
+          - MHEV
+          - REEV
+          - FCEV
+      - name: market
+        in: query
+        schema:
+          type: string
+          minLength: 2
+          maxLength: 40
+      - name: q
+        in: query
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 120
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+        example: 1
+      - name: cursor
+        in: query
+        schema:
+          type: string
+          description: Opaque keyset cursor from a previous response.
+      - name: count
+        in: query
+        schema:
+          type: boolean
+          description: Include the total matching-record count.
+      responses:
+        '200':
+          description: A keyset page of records with per-field provenance.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                - has_more
+                - next_cursor
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - id
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                        _provenance:
+                          type: object
+                          additionalProperties: true
+                      additionalProperties: true
+                  has_more:
+                    type: boolean
+                  next_cursor:
+                    type:
+                    - string
+                    - 'null'
+                  total:
+                    type: integer
+                    minimum: 0
+                additionalProperties: false
+              example:
+                data:
+                - id: 7
+                  slug: alfa-romeo-giulia-2022-2-0l-q4-8at-awd-280-hp-130
+                  brand: Alfa Romeo
+                  model: Giulia
+                  model_year: 2022
+                  power_hp: 280
+                  fuel_type: gasoline
+                  drive_type: AWD
+                  powertrain: ICE
+                  co2_combined_g_km: 217
+                has_more: true
+                next_cursor: '7'
+        '401':
+          description: Missing/invalid bearer token.
+        '402':
+          description: Payment Required for full-scope per-call access.
+        '429':
+          description: Rate limit exceeded.
+  /v1/apex/{id}:
+    get:
+      summary: Retrieve one full normalized vehicle-variant record by its positive Apex ID, including available provenance.
+      tags:
+      - apex
+      security:
+      - bearerAuth: []
+      x-payment-info:
+        amount: '25000'
+        currency: '0x20C000000000000000000000b9537d11c60E8b50'
+        description: 1 full record
+        intent: charge
+        method: tempo
+        preferredOffer: mpp-tempo
+        price:
+          mode: fixed
+          currency: USD
+          amount: '0.025000'
+        protocols:
+        - x402:
+            scheme: exact
+            network: eip155:8453
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: evm
+            intent: charge
+            network: '8453'
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: tempo
+            intent: charge
+            network: '4217'
+            currency: '0x20C000000000000000000000b9537d11c60E8b50'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        network: '4217'
+        recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The full record.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - id
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                  _provenance:
+                    type: object
+                    additionalProperties: true
+                additionalProperties: true
+              example:
+                id: 7
+                slug: alfa-romeo-giulia-2022-2-0l-q4-8at-awd-280-hp-130
+                brand: Alfa Romeo
+                model: Giulia
+                model_year: 2022
+                power_hp: 280
+                fuel_type: gasoline
+                drive_type: AWD
+                powertrain: ICE
+                co2_combined_g_km: 217
+        '402':
+          description: Payment Required for full-scope per-call access.
+        '404':
+          description: Not found.
+  /v1/coverage:
+    get:
+      summary: Retrieve the dated Apex coverage contract with release size, source counts, and measured field fill.
+      tags:
+      - coverage
+      security:
+      - bearerAuth: []
+      x-payment-info:
+        amount: '250000'
+        currency: '0x20C000000000000000000000b9537d11c60E8b50'
+        description: coverage matrix
+        intent: charge
+        method: tempo
+        preferredOffer: mpp-tempo
+        price:
+          mode: fixed
+          currency: USD
+          amount: '0.250000'
+        protocols:
+        - x402:
+            scheme: exact
+            network: eip155:8453
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: evm
+            intent: charge
+            network: '8453'
+            currency: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        - mpp:
+            method: tempo
+            intent: charge
+            network: '4217'
+            currency: '0x20C000000000000000000000b9537d11c60E8b50'
+            recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+        network: '4217'
+        recipient: '0x1Ee42717b1c370dACE197a8850Bf41a932F3b5A8'
+      responses:
+        '200':
+          description: Coverage matrix.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                dataset:
+                  id: apex
+                  name: Apex
+                snapshot:
+                  version: '2026-07-19'
+                  row_count: 43076
+                total_records:
+                  count: 43076
+                  label: Exported vehicle variants
+        '402':
+          description: Payment Required for per-call coverage access.
+        '403':
+          description: A paid API tier is required.
+  /v1/sources:
+    get:
+      summary: Source registry (provenance authorities)
+      tags:
+      - meta
+      security: []
+      responses:
+        '200':
+          description: Registered sources.
+  /v1/snapshots:
+    get:
+      summary: List downloadable dataset snapshots you are entitled to
+      tags:
+      - snapshots
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Available releases.
+  /v1/releases/current:
+    get:
+      summary: Get the authoritative currently published customer release
+      tags:
+      - meta
+      security: []
+      responses:
+        '200':
+          description: Verified release identity, counts, and checksums.
+        '503':
+          description: No verified release is currently available.
