@@ -1,0 +1,610 @@
+openapi: 3.1.0
+info:
+  title: Serqo Search API
+  version: 1.0.0
+  summary: Real-time Google & Bing search results in JSON with zero proxy setup
+  description: >-
+    Public developer API for Google and Bing search results in clean JSON format.
+    Includes organic search rankings, knowledge panels, autocomplete keyword discovery,
+    and multi-language support with zero proxy management.
+  termsOfService: https://serqo.io/terms
+  contact:
+    name: Serqo Support
+    email: support@serqo.io
+    url: https://serqo.io/contact
+  license:
+    name: Proprietary
+    url: https://serqo.io/terms
+  x-apisguru-categories:
+    - search
+    - developer_tools
+  x-logo:
+    url: https://serqo.io/favicon.png
+    backgroundColor: "#FFFFFF"
+  x-origin:
+    - format: openapi
+      url: https://serqo.io/openapi.yaml
+      version: "3.1"
+  x-providerName: serqo.io
+servers:
+  - url: https://api.serqo.io
+    description: Serqo API
+tags:
+  - name: Search
+    description: Search requests and supported engines
+  - name: Account
+    description: API key account information
+  - name: Health
+    description: Service health checks
+paths:
+  /v1/search:
+    post:
+      tags: [Search]
+      operationId: searchPost
+      summary: Run a search
+      description: >-
+        Runs one search and returns normalized results. Successful searches are
+        charged at the configured rate. Use Idempotency-Key to safely retry a
+        request after a lost response.
+      security:
+        - apiKeyHeader: []
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+            example:
+              q: espresso machines
+              engine: google
+              type: web
+              gl: us
+              hl: en
+      responses:
+        '200':
+          description: Search completed successfully.
+          headers:
+            x-request-id:
+              $ref: '#/components/headers/RequestId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/InsufficientCredits'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/InvalidParameter'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+        '502':
+          $ref: '#/components/responses/UpstreamError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/UpstreamError'
+  /v1/autocomplete:
+    post:
+      tags: [Search]
+      operationId: autocompletePost
+      summary: Google search autocomplete and keyword expansion
+      description: >-
+        Retrieves Google search suggestions and supports multi-round keyword expansion strategies
+        such as alphabet soup, questions, and recursive deep tree mining.
+      security:
+        - apiKeyHeader: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [q]
+              properties:
+                q:
+                  type: string
+                  description: Seed keyword
+                  example: nextjs
+                strategy:
+                  type: string
+                  enum: [normal, alphabet, questions, prepositions, intent, seo_matrix, deep]
+                  default: normal
+                  description: Expansion strategy
+                gl:
+                  type: string
+                  description: Two-letter country code
+                  example: us
+                hl:
+                  type: string
+                  description: Interface language
+                  example: en
+                depth:
+                  type: integer
+                  minimum: 1
+                  maximum: 3
+                  default: 1
+                  description: Recursive depth for deep strategy
+                limit:
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                  description: Suggestion limit
+                timeout:
+                  type: integer
+                  minimum: 100
+                  maximum: 30000
+                  description: Maximum timeout in milliseconds
+      responses:
+        '200':
+          description: Autocomplete suggestions returned successfully.
+          headers:
+            x-request-id:
+              $ref: '#/components/headers/RequestId'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  requestId:
+                    type: string
+                  data:
+                    type: object
+                  meta:
+                    type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/InsufficientCredits'
+        '422':
+          $ref: '#/components/responses/InvalidParameter'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/engines:
+    get:
+      tags: [Search]
+      operationId: listEngines
+      summary: List available search engines and types
+      security:
+        - apiKeyHeader: []
+      responses:
+        '200':
+          description: Current engine capability matrix.
+          headers:
+            x-request-id:
+              $ref: '#/components/headers/RequestId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnginesSuccess'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/me:
+    get:
+      tags: [Account]
+      operationId: getCurrentAccount
+      summary: Get the account associated with an API key
+      security:
+        - apiKeyHeader: []
+      responses:
+        '200':
+          description: Account and API key identifiers. The key secret is never returned.
+          headers:
+            x-request-id:
+              $ref: '#/components/headers/RequestId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeSuccess'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/health:
+    get:
+      tags: [Health]
+      operationId: productHealth
+      summary: Check product API process health
+      security: []
+      responses:
+        '200':
+          description: API process is responding.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, data]
+                properties:
+                  success:
+                    const: true
+                  data:
+                    type: object
+                    required: [status]
+                    properties:
+                      status:
+                        const: ok
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key sent in the x-api-key request header.
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: false
+      description: >-
+        Optional visible-ASCII key, 1–255 characters. Reusing the same key and
+        parameters within 24 hours replays the first successful response.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 255
+        pattern: '^[\x21-\x7E]+$'
+  headers:
+    RequestId:
+      description: Request identifier for support and troubleshooting.
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Malformed request or missing required field.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Unauthorized:
+      description: API key is missing, invalid, revoked, or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    InsufficientCredits:
+      description: Account does not have enough credits for the search.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Forbidden:
+      description: Account permission or plan restriction.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Conflict:
+      description: Idempotency key conflict or request already in progress.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    InvalidParameter:
+      description: Invalid or unsupported parameter.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    RateLimited:
+      description: Request rate or search queue limit reached.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    InternalError:
+      description: Internal application error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    UpstreamError:
+      description: Search service or upstream error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    ServiceUnavailable:
+      description: Search type is under maintenance or a search dependency is temporarily unavailable. Failed searches are not charged.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+  schemas:
+    SearchType:
+      type: string
+      enum: [web, images, videos, news, shopping, forums, books, maps, patents]
+      description: Search vertical. Core types (web, images, news, videos) are currently active; shopping, forums, books, maps, patents are in development and coming soon.
+    SearchRequest:
+      type: object
+      additionalProperties: false
+      required: [q]
+      properties:
+        q:
+          type: string
+          minLength: 1
+          description: Search query.
+        engine:
+          type: string
+          enum: [google, bing]
+          default: google
+        type:
+          $ref: '#/components/schemas/SearchType'
+          default: web
+        gl:
+          type: string
+          pattern: '^[a-z]{2}$'
+          description: Two-letter lowercase country code.
+        hl:
+          type: string
+          description: Search interface language code.
+        device:
+          type: string
+          enum: [desktop]
+          default: desktop
+        start:
+          type: integer
+          minimum: 0
+          maximum: 1000000
+        safe:
+          type: string
+          enum: [off, active]
+          default: off
+        tbs:
+          type: string
+          description: Google time filter, for example qdr:d, qdr:w, or qdr:m.
+      example:
+        q: espresso machines
+        engine: google
+        type: web
+        gl: us
+        hl: en
+    SearchSuccess:
+      type: object
+      required: [success, requestId, data]
+      properties:
+        success:
+          const: true
+        requestId:
+          type: string
+        data:
+          $ref: '#/components/schemas/SearchData'
+        meta:
+          type: object
+          properties:
+            cache:
+              type: [string, 'null']
+              enum: [hit, miss, null]
+      example:
+        success: true
+        requestId: req_example
+        data:
+          engine: google
+          type: web
+          query:
+            q: espresso machines
+            gl: us
+            hl: en
+          searchInformation:
+            totalResults: null
+            timeTakenMs: null
+            displayed: null
+          results: []
+          features: {}
+          pagination:
+            page: 1
+            start: 0
+            hasNext: false
+            nextStart: null
+          meta:
+            elapsedMs: 250
+        meta:
+          cache: miss
+    SearchData:
+      type: object
+      required: [engine, type, query, searchInformation, results, features, pagination, meta]
+      properties:
+        engine:
+          type: string
+          enum: [google, bing]
+        type:
+          $ref: '#/components/schemas/SearchType'
+        query:
+          type: object
+          additionalProperties: true
+          properties:
+            q:
+              type: string
+            gl:
+              type: [string, 'null']
+            hl:
+              type: [string, 'null']
+            device:
+              type: [string, 'null']
+            start:
+              type: [integer, 'null']
+            safe:
+              type: [string, 'null']
+            tbs:
+              type: [string, 'null']
+        searchInformation:
+          type: object
+          additionalProperties: true
+          properties:
+            totalResults:
+              type: [integer, 'null']
+            timeTakenMs:
+              type: [integer, 'null']
+            displayed:
+              type: [string, 'null']
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResultItem'
+        features:
+          type: object
+          additionalProperties: true
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        meta:
+          type: object
+          required: [elapsedMs]
+          properties:
+            elapsedMs:
+              type: [integer, 'null']
+      additionalProperties: true
+    SearchResultItem:
+      type: object
+      required: [position, type]
+      properties:
+        position:
+          type: integer
+          minimum: 1
+        type:
+          type: string
+        title:
+          type: [string, 'null']
+        url:
+          type: [string, 'null']
+          format: uri-reference
+        displayedUrl:
+          type: [string, 'null']
+        domain:
+          type: [string, 'null']
+        source:
+          type: [string, 'null']
+        date:
+          type: [string, 'null']
+        snippet:
+          type: [string, 'null']
+        thumbnail:
+          type: [string, 'null']
+        favicon:
+          type: [string, 'null']
+        duration:
+          type: [string, 'null']
+        price:
+          type: [string, 'null']
+        rating:
+          type: [number, 'null']
+        sitelinks:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        extensions:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
+    Pagination:
+      type: object
+      required: [page, start, hasNext, nextStart]
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        start:
+          type: integer
+        hasNext:
+          type: boolean
+        nextStart:
+          type: [integer, 'null']
+    EnginesSuccess:
+      type: object
+      required: [success, requestId, data]
+      properties:
+        success:
+          const: true
+        requestId:
+          type: string
+        data:
+          type: object
+          required: [engines]
+          properties:
+            engines:
+              type: array
+              items:
+                $ref: '#/components/schemas/EngineCapability'
+    EngineCapability:
+      type: object
+      required: [id, displayName, verticals, pagination]
+      properties:
+        id:
+          type: string
+          enum: [google, bing]
+        displayName:
+          type: string
+        verticals:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchType'
+        pagination:
+          type: string
+    MeSuccess:
+      type: object
+      required: [success, requestId, data]
+      properties:
+        success:
+          const: true
+        requestId:
+          type: string
+        data:
+          type: object
+          required: [account, key]
+          properties:
+            account:
+              type: object
+              required: [id, email, role]
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                email:
+                  type: string
+                  format: email
+                role:
+                  type: string
+            key:
+              type: object
+              required: [id, prefix]
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                prefix:
+                  type: string
+    ErrorEnvelope:
+      type: object
+      required: [success, requestId, error]
+      properties:
+        success:
+          const: false
+        requestId:
+          type: string
+        error:
+          type: object
+          required: [code, message, retryable]
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            retryable:
+              type: boolean
+            retryAfterMs:
+              type: integer
+              minimum: 0
+            details: {}
