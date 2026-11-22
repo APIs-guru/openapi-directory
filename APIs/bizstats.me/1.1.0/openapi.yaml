@@ -1,0 +1,4272 @@
+openapi: 3.1.0
+info:
+  title: BizStats Montenegro Business Data API
+  version: 1.1.0
+  description: 'Versioned read API for Montenegro company, registry, procurement, public-payment and economic data. Every
+    dataset is documented in /v1/datasets/catalog with its source, cadence, methodology and limitations. No key is needed.
+    Responses are JSON (CSV where noted), cached for 5 minutes (Cache-Control) and served with CORS for any origin; please
+    keep automated use to about one request per second. The contract covers the operations listed here: documented fields
+    keep their name and type within v1, new fields may be added. Other paths under /v1 are not part of the contract and may
+    change. Deprecated: netPayCosts (an alias of grossPayCosts; the value is gross pay costs).'
+  contact:
+    name: BizStats.me
+    email: hello@bizstats.me
+    url: https://bizstats.me/en/api/
+  license:
+    name: BizStats data license
+    url: https://bizstats.me/data-license/
+  termsOfService: https://bizstats.me/terms/
+  x-apisguru-categories:
+  - open_data
+  - financial
+  x-logo:
+    url: https://bizstats.me/icon.svg
+    backgroundColor: '#FFFFFF'
+  x-origin:
+  - format: openapi
+    url: https://api.bizstats.me/v1/openapi.json
+    version: '3.1'
+  x-providerName: bizstats.me
+servers:
+- url: https://api.bizstats.me
+  description: Production
+tags:
+- name: Catalog
+  description: Datasets, provenance and freshness
+- name: Companies
+  description: Filings, aggregates and people
+- name: Changes
+  description: Change feed and risk lists
+- name: Procurement
+  description: CEJN notices, buyers and suppliers
+- name: Government
+  description: Treasury, projects and indicators
+paths:
+  /v1:
+    get:
+      tags:
+      - Catalog
+      operationId: getApiIndex
+      summary: API entry point
+      parameters: []
+      responses:
+        '200':
+          description: Links to the docs and catalog
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiIndexResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1
+  /v1/datasets/catalog:
+    get:
+      tags:
+      - Catalog
+      operationId: listDatasets
+      summary: List public BizStats datasets
+      description: Source, cadence, coverage, methodology, limitations and endpoints for every dataset.
+      parameters: []
+      responses:
+        '200':
+          description: Dataset catalog
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetCatalogResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/datasets/catalog
+  /v1/datasets/catalog/{id}:
+    get:
+      tags:
+      - Catalog
+      operationId: getDataset
+      summary: Describe one public dataset
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - companies
+          - company-registry
+          - company-ownership
+          - persons
+          - procurement-notices
+          - procurement-awards
+          - public-payments
+          - blocked-accounts
+          - tax-debtors
+          - economic-indicators
+          - municipality-statistics
+          - development-projects
+          - court-hearings
+          - court-decisions
+          - property-ownership
+      responses:
+        '200':
+          description: Dataset definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetResponse'
+        '404':
+          description: Unknown dataset id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/datasets/catalog/companies
+  /v1/datasets/status:
+    get:
+      tags:
+      - Catalog
+      operationId: getDatasetStatus
+      summary: Source freshness and ingestion status
+      description: 'For each source: when BizStats last fetched it, the newest date its records cover, and a freshness tier.'
+      parameters: []
+      responses:
+        '200':
+          description: Dataset freshness
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetStatusResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/datasets/status
+  /v1/companies:
+    get:
+      tags:
+      - Companies
+      operationId: listCompanies
+      summary: List, filter and rank companies for a filing year
+      parameters:
+      - name: year
+        in: query
+        required: false
+        description: Filing year; defaults to the latest year with filings (unknown years fall back to it)
+        example: '2025'
+        schema:
+          type: string
+          pattern: ^[0-9]{4}$
+      - name: sort
+        in: query
+        required: false
+        description: margin ranks companies with at least 100,000 EUR revenue first; revenueChange (vs year − 1) ranks bases
+          of at least 1M EUR revenue and 5 employees first. Rows without a value sort last.
+        schema:
+          default: totalIncome
+          type: string
+          enum:
+          - name
+          - totalIncome
+          - profit
+          - employeeCount
+          - averagePay
+          - incomePerEmployee
+          - margin
+          - revenueChange
+      - name: dir
+        in: query
+        required: false
+        schema:
+          default: desc
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: q
+        in: query
+        required: false
+        description: Substring of name, PIB, activity or municipality
+        schema:
+          type: string
+      - name: sector
+        in: query
+        required: false
+        description: Exact sector name
+        schema:
+          type: string
+      - name: municipality
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: category
+        in: query
+        required: false
+        description: Activity title
+        schema:
+          type: string
+      - name: activityCode
+        in: query
+        required: false
+        description: KD 2010 code
+        schema:
+          type: string
+      - name: minRevenue
+        in: query
+        required: false
+        schema:
+          type: number
+          minimum: 0
+      - name: maxRevenue
+        in: query
+        required: false
+        schema:
+          type: number
+          minimum: 0
+      - name: minEmployees
+        in: query
+        required: false
+        schema:
+          type: number
+          minimum: 0
+      - name: maxEmployees
+        in: query
+        required: false
+        schema:
+          type: number
+          minimum: 0
+      - name: plausibleProfit
+        in: query
+        required: false
+        description: 1 = exclude filings with an implausible profit
+        schema:
+          type: string
+          enum:
+          - '1'
+      - name: page
+        in: query
+        required: false
+        description: 1-based page; past the last page serves the last
+        schema:
+          default: 1
+          type: integer
+          minimum: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Rows per page (max 200; larger values are capped)
+        schema:
+          default: 50
+          type: integer
+          minimum: 1
+          maximum: 200
+      responses:
+        '200':
+          description: One page of companies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyListResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/companies?year=2025&sort=totalIncome&pageSize=5
+  /v1/companies/{pib}:
+    get:
+      tags:
+      - Companies
+      operationId: getCompany
+      summary: A company's filing history and linked public records
+      description: Returns a JSON array with one row per filing year, oldest first. The last (latest-year) row also carries
+        identity, ownership, risk, procurement, payment, court and property records.
+      parameters:
+      - name: pib
+        in: path
+        required: true
+        description: 8-digit tax identification number (PIB)
+        schema:
+          type: string
+          pattern: ^[0-9]{8}$
+      - name: includeEnrichment
+        in: query
+        required: false
+        description: 0 = filing rows only, without the linked public records
+        schema:
+          default: '1'
+          type: string
+          enum:
+          - '0'
+          - '1'
+      responses:
+        '200':
+          description: Filing years
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyHistoryResponse'
+        '404':
+          description: No filings for this PIB (or not an 8-digit PIB)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/companies/02002230
+  /v1/companies/{pib}/export.csv:
+    get:
+      tags:
+      - Companies
+      operationId: exportCompanyCsv
+      summary: A company's filing history as CSV
+      parameters:
+      - name: pib
+        in: path
+        required: true
+        description: 8-digit tax identification number (PIB)
+        schema:
+          type: string
+          pattern: ^[0-9]{8}$
+      responses:
+        '200':
+          description: 'CSV (UTF-8 with BOM): PIB, Company, Year, Sector, Category, Municipality, Total Income, Profit, Employees,
+            Avg Gross Pay, Income/Employee, Parse Status, Profit Margin %, Activity Code'
+          content:
+            text/csv:
+              schema:
+                type: string
+        '404':
+          description: No filings for this PIB (or not an 8-digit PIB)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/companies/02002230/export.csv
+  /v1/export.csv:
+    get:
+      tags:
+      - Companies
+      operationId: exportCompaniesCsv
+      summary: The first 100 companies matching the filters as CSV
+      description: 'Same filters as /v1/companies, no paging. A free preview: the first 100 rows in the requested order (X-Export-Row-Count,
+        X-Export-Row-Limit, and X-Export-Truncated: true when more companies match). Full lists with website, email and phone
+        columns are part of BizStats Business.'
+      parameters:
+      - name: year
+        in: query
+        required: false
+        description: Filing year; defaults to the latest year with filings (unknown years fall back to it)
+        example: '2025'
+        schema:
+          type: string
+          pattern: ^[0-9]{4}$
+      - name: sort
+        in: query
+        required: false
+        description: margin ranks companies with at least 100,000 EUR revenue first; revenueChange (vs year − 1) ranks bases
+          of at least 1M EUR revenue and 5 employees first. Rows without a value sort last.
+        schema:
+          default: totalIncome
+          type: string
+          enum:
+          - name
+          - totalIncome
+          - profit
+          - employeeCount
+          - averagePay
+          - incomePerEmployee
+          - margin
+          - revenueChange
+      - name: dir
+        in: query
+        required: false
+        schema:
+          default: desc
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: q
+        in: query
+        required: false
+        description: Substring of name, PIB, activity or municipality
+        schema:
+          type: string
+      - name: sector
+        in: query
+        required: false
+        description: Exact sector name
+        schema:
+          type: string
+      - name: municipality
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: category
+        in: query
+        required: false
+        description: Activity title
+        schema:
+          type: string
+      - name: activityCode
+        in: query
+        required: false
+        description: KD 2010 code
+        schema:
+          type: string
+      - name: minRevenue
+        in: query
+        required: false
+        schema:
+          type: number
+          minimum: 0
+      - name: maxRevenue
+        in: query
+        required: false
+        schema:
+          type: number
+          minimum: 0
+      - name: minEmployees
+        in: query
+        required: false
+        schema:
+          type: number
+          minimum: 0
+      - name: maxEmployees
+        in: query
+        required: false
+        schema:
+          type: number
+          minimum: 0
+      - name: plausibleProfit
+        in: query
+        required: false
+        description: 1 = exclude filings with an implausible profit
+        schema:
+          type: string
+          enum:
+          - '1'
+      responses:
+        '200':
+          description: 'CSV (UTF-8 with BOM): PIB, Company, Year, Sector, Category, Municipality, Total Income, Profit, Employees,
+            Avg Gross Pay, Income/Employee, Parse Status, Profit Margin %, Activity Code'
+          content:
+            text/csv:
+              schema:
+                type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/export.csv?year=2025&sector=Construction
+  /v1/search:
+    get:
+      tags:
+      - Companies
+      operationId: searchCompanies
+      summary: Search companies by name, PIB, activity or owner
+      parameters:
+      - name: q
+        in: query
+        required: true
+        example: telekom
+        schema:
+          type: string
+          minLength: 2
+          maxLength: 100
+      - name: mode
+        in: query
+        required: false
+        schema:
+          default: typeahead
+          type: string
+          enum:
+          - typeahead
+          - full
+      - name: limit
+        in: query
+        required: false
+        description: Default 8 (typeahead) or 40 (full); max 50
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/search?q=telekom
+  /v1/regions:
+    get:
+      tags:
+      - Companies
+      operationId: listRegions
+      summary: Company aggregates by municipality
+      parameters:
+      - name: year
+        in: query
+        required: false
+        description: Filing year; defaults to the latest year with filings (unknown years fall back to it)
+        example: '2025'
+        schema:
+          type: string
+          pattern: ^[0-9]{4}$
+      responses:
+        '200':
+          description: Municipality aggregates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegionsResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/regions?year=2025
+  /v1/sectors:
+    get:
+      tags:
+      - Companies
+      operationId: listSectors
+      summary: Company aggregates by sector
+      parameters:
+      - name: year
+        in: query
+        required: false
+        description: Filing year; defaults to the latest year with filings (unknown years fall back to it)
+        example: '2025'
+        schema:
+          type: string
+          pattern: ^[0-9]{4}$
+      responses:
+        '200':
+          description: Sector aggregates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectorsResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/sectors?year=2025
+  /v1/movers:
+    get:
+      tags:
+      - Companies
+      operationId: listMovers
+      summary: Largest year-over-year changes
+      parameters:
+      - name: metric
+        in: query
+        required: false
+        schema:
+          default: revenue
+          type: string
+          enum:
+          - revenue
+          - profit
+          - employees
+          - pay
+      - name: limit
+        in: query
+        required: false
+        schema:
+          default: 12
+          type: integer
+          minimum: 1
+          maximum: 50
+      - name: year
+        in: query
+        required: false
+        description: Filing year; defaults to the latest year with filings (unknown years fall back to it)
+        example: '2025'
+        schema:
+          type: string
+          pattern: ^[0-9]{4}$
+      - name: sector
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: municipality
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Gainers and losers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoversResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/movers?metric=revenue&limit=10
+  /v1/persons/{slug}:
+    get:
+      tags:
+      - Companies
+      operationId: getPerson
+      summary: Public registry roles grouped under one name
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
+          maxLength: 200
+          pattern: ^[a-z0-9-]+$
+      responses:
+        '200':
+          description: Roles and aggregates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonResponse'
+        '404':
+          description: Unknown slug
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/persons/4gte-s-r-o-pib-03060438
+  /v1/changes:
+    get:
+      tags:
+      - Changes
+      operationId: listChanges
+      summary: Detected blockades, tax-debtor listings and tender wins
+      description: Same-day contracts of one supplier on one tender are one row (contractCount). Rows are ordered by detection
+        day, then event date and amount, unless sort says otherwise.
+      parameters:
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - blockade_started
+          - blockade_cleared
+          - tax_debtor_listed
+          - tender_won
+          - registry_notice
+      - name: pib
+        in: query
+        required: false
+        description: 8-digit tax identification number (PIB)
+        schema:
+          type: string
+          pattern: ^[0-9]{8}$
+      - name: buyer
+        in: query
+        required: false
+        description: Substring of the tender buyer (tender wins only)
+        schema:
+          type: string
+          maxLength: 120
+      - name: municipality
+        in: query
+        required: false
+        description: Company municipality (latest filing)
+        schema:
+          type: string
+          maxLength: 120
+      - name: sector
+        in: query
+        required: false
+        schema:
+          type: string
+          maxLength: 120
+      - name: minAmount
+        in: query
+        required: false
+        schema:
+          type: number
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        schema:
+          default: recent
+          type: string
+          enum:
+          - recent
+          - eventDate
+          - amount
+      - name: page
+        in: query
+        required: false
+        description: 1-based page; past the last page serves the last
+        schema:
+          default: 1
+          type: integer
+          minimum: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Rows per page (max 100; larger values are capped)
+        schema:
+          default: 50
+          type: integer
+          minimum: 1
+          maximum: 100
+      responses:
+        '200':
+          description: Change events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangesResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/changes?type=tender_won&sort=amount&pageSize=10
+  /v1/changes/export.csv:
+    get:
+      tags:
+      - Changes
+      operationId: exportChangesCsv
+      summary: The filtered change feed as CSV
+      parameters:
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - blockade_started
+          - blockade_cleared
+          - tax_debtor_listed
+          - tender_won
+          - registry_notice
+      - name: pib
+        in: query
+        required: false
+        description: 8-digit tax identification number (PIB)
+        schema:
+          type: string
+          pattern: ^[0-9]{8}$
+      - name: buyer
+        in: query
+        required: false
+        description: Substring of the tender buyer (tender wins only)
+        schema:
+          type: string
+          maxLength: 120
+      - name: municipality
+        in: query
+        required: false
+        description: Company municipality (latest filing)
+        schema:
+          type: string
+          maxLength: 120
+      - name: sector
+        in: query
+        required: false
+        schema:
+          type: string
+          maxLength: 120
+      - name: minAmount
+        in: query
+        required: false
+        schema:
+          type: number
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        schema:
+          default: recent
+          type: string
+          enum:
+          - recent
+          - eventDate
+          - amount
+      responses:
+        '200':
+          description: 'CSV (UTF-8 with BOM), up to 5,000 rows: detected_at, event_date, event_type, pib, company_name, has_company_page,
+            municipality, sector, amount_eur, amount_incomplete, contract_count, contract_ids, buyer_name, procurement_id,
+            tender_title, supplier_as_recorded, consortium_size, tax_list_categories, days_blocked, source_lag_days'
+          content:
+            text/csv:
+              schema:
+                type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Change log not available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/changes/export.csv?type=blockade_started
+  /v1/blocked-accounts:
+    get:
+      tags:
+      - Changes
+      operationId: listBlockedAccounts
+      summary: Companies with a blocked account (CBCG snapshot)
+      parameters:
+      - name: snapshotDate
+        in: query
+        required: false
+        description: CBCG snapshot (YYYY-MM-DD); default the latest
+        schema:
+          type: string
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+      - name: pib
+        in: query
+        required: false
+        description: 8-digit tax identification number (PIB)
+        schema:
+          type: string
+          pattern: ^[0-9]{8}$
+      - name: q
+        in: query
+        required: false
+        description: Name substring
+        schema:
+          type: string
+          maxLength: 120
+      - name: minAmount
+        in: query
+        required: false
+        schema:
+          type: number
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        schema:
+          default: amount
+          type: string
+          enum:
+          - amount
+          - days
+          - name
+      - name: dir
+        in: query
+        required: false
+        description: Default desc (asc for name)
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: page
+        in: query
+        required: false
+        description: 1-based page; past the last page serves the last
+        schema:
+          default: 1
+          type: integer
+          minimum: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Rows per page (max 200; larger values are capped)
+        schema:
+          default: 50
+          type: integer
+          minimum: 1
+          maximum: 200
+      responses:
+        '200':
+          description: Blocked accounts in one snapshot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockedAccountsResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/blocked-accounts?pageSize=20
+  /v1/tax-debtors:
+    get:
+      tags:
+      - Changes
+      operationId: listTaxDebtors
+      summary: Entries of the published tax-debtor lists
+      parameters:
+      - name: list
+        in: query
+        required: false
+        description: Published list; legacy 2024 names (tax_debt_black_list_200, …) are accepted
+        schema:
+          type: string
+          enum:
+          - top_200
+          - bankruptcy_100
+          - salary_taxes_50
+          - tax_white_list
+      - name: snapshotDate
+        in: query
+        required: false
+        description: Edition date; default each list's latest edition
+        schema:
+          type: string
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+      - name: pib
+        in: query
+        required: false
+        description: 8-digit tax identification number (PIB)
+        schema:
+          type: string
+          pattern: ^[0-9]{8}$
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          maxLength: 120
+      - name: minAmount
+        in: query
+        required: false
+        schema:
+          type: number
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        schema:
+          default: amount
+          type: string
+          enum:
+          - amount
+          - name
+      - name: dir
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: page
+        in: query
+        required: false
+        description: 1-based page; past the last page serves the last
+        schema:
+          default: 1
+          type: integer
+          minimum: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Rows per page (max 200; larger values are capped)
+        schema:
+          default: 50
+          type: integer
+          minimum: 1
+          maximum: 200
+      responses:
+        '200':
+          description: List entries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxDebtorsResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/tax-debtors?list=top_200
+  /v1/procurements/search:
+    get:
+      tags:
+      - Procurement
+      operationId: searchProcurements
+      summary: Search CEJN procurement notices
+      parameters:
+      - name: q
+        in: query
+        required: false
+        description: Keywords; a comma or semicolon separates alternatives (any of them)
+        schema:
+          type: string
+      - name: buyer
+        in: query
+        required: false
+        description: Buyer name substring
+        schema:
+          type: string
+      - name: municipality
+        in: query
+        required: false
+        description: Buyer municipality
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - active
+          - expired
+          - completed
+          - canceled
+          - suspended
+      - name: procedureType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: noticeType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: cpv
+        in: query
+        required: false
+        description: CPV division (2 digits) or a code in it
+        schema:
+          type: string
+          pattern: ^\d{2}(\d{6})?$
+      - name: dateFrom
+        in: query
+        required: false
+        description: Publication date from
+        schema:
+          type: string
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+      - name: dateTo
+        in: query
+        required: false
+        description: Publication date to
+        schema:
+          type: string
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+      - name: minValue
+        in: query
+        required: false
+        description: Minimum estimated value, EUR
+        schema:
+          type: number
+          minimum: 0
+      - name: maxValue
+        in: query
+        required: false
+        schema:
+          type: number
+          minimum: 0
+      - name: sort
+        in: query
+        required: false
+        schema:
+          default: publicationDate
+          type: string
+          enum:
+          - publicationDate
+          - deadline
+          - estimatedValue
+      - name: dir
+        in: query
+        required: false
+        schema:
+          default: desc
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: page
+        in: query
+        required: false
+        description: 1-based page; past the last page serves the last
+        schema:
+          default: 1
+          type: integer
+          minimum: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Rows per page (max 100; larger values are capped)
+        schema:
+          default: 25
+          type: integer
+          minimum: 1
+          maximum: 100
+      responses:
+        '200':
+          description: Procurement search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcurementSearchResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Search timed out; narrow the query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/procurements/search?q=nafta&pageSize=5
+  /v1/procurements/{id}:
+    get:
+      tags:
+      - Procurement
+      operationId: getProcurement
+      summary: A procurement notice with lots, events and awards
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: procurement_id (me_cejn:tender:121357) or numeric CEJN id
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Procurement detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcurementDetailResponse'
+        '404':
+          description: Unknown procurement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/procurements/121357
+  /v1/procurements/buyers/{buyer}:
+    get:
+      tags:
+      - Procurement
+      operationId: getProcurementBuyer
+      summary: A buyer's procurement profile
+      parameters:
+      - name: buyer
+        in: path
+        required: true
+        description: Buyer name (URL-encoded)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Buyer profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuyerProfileResponse'
+        '404':
+          description: Unknown buyer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/procurements/buyers/MINISTARSTVO%20ODBRANE
+  /v1/procurements/suppliers/{pib}:
+    get:
+      tags:
+      - Procurement
+      operationId: getProcurementSupplier
+      summary: A supplier's awarded contracts
+      parameters:
+      - name: pib
+        in: path
+        required: true
+        description: 8-digit tax identification number (PIB)
+        schema:
+          type: string
+          pattern: ^[0-9]{8}$
+      responses:
+        '200':
+          description: Supplier profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplierProfileResponse'
+        '404':
+          description: No awards and no company for this PIB
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/procurements/suppliers/02643448
+  /v1/public-payments/search:
+    get:
+      tags:
+      - Government
+      operationId: searchPublicPayments
+      summary: Search State Treasury payments
+      parameters:
+      - name: q
+        in: query
+        required: false
+        description: Payee, account, ledger account, expense item, funding source, document number or source title
+        schema:
+          type: string
+      - name: sort
+        in: query
+        required: false
+        schema:
+          default: date
+          type: string
+          enum:
+          - date
+          - amount
+      - name: dir
+        in: query
+        required: false
+        schema:
+          default: desc
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: page
+        in: query
+        required: false
+        description: 1-based page; past the last page serves the last
+        schema:
+          default: 1
+          type: integer
+          minimum: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Rows per page (max 100; larger values are capped)
+        schema:
+          default: 25
+          type: integer
+          minimum: 1
+          maximum: 100
+      - name: cursor
+        in: query
+        required: false
+        description: nextCursor of the previous page (keyset paging; newest-first order only)
+        schema:
+          type: string
+      - name: includeTotal
+        in: query
+        required: false
+        schema:
+          default: '1'
+          type: string
+          enum:
+          - '0'
+          - '1'
+      responses:
+        '200':
+          description: Payment rows
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicPaymentSearchResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/public-payments/search?q=telekom&pageSize=5
+  /v1/public-payments/export.csv:
+    get:
+      tags:
+      - Government
+      operationId: exportPublicPaymentsCsv
+      summary: Every State Treasury payment matching a query as CSV
+      description: Same q and sort as /v1/public-payments/search, no paging. Up to 50,000 rows (X-Export-Row-Count, X-Export-Row-Limit
+        headers); larger exports return 422.
+      parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        required: false
+        schema:
+          default: date
+          type: string
+          enum:
+          - date
+          - amount
+      - name: dir
+        in: query
+        required: false
+        schema:
+          default: desc
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        '200':
+          description: 'CSV (UTF-8 with BOM): Payee, Amount (EUR), Paid at, Account, Ledger account, Expense item, Funding
+            source, Document number, Source row, Source title, Source URL'
+          content:
+            text/csv:
+              schema:
+                type: string
+        '422':
+          description: More than 50,000 rows; narrow the search
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/public-payments/export.csv?q=telekom&sort=amount
+  /v1/development-projects/search:
+    get:
+      tags:
+      - Government
+      operationId: searchDevelopmentProjects
+      summary: Search published development-project decisions
+      parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+          maxLength: 100
+      - name: municipality
+        in: query
+        required: false
+        schema:
+          type: string
+          maxLength: 100
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          maxLength: 100
+      - name: investor
+        in: query
+        required: false
+        schema:
+          type: string
+          maxLength: 100
+      - name: investorPib
+        in: query
+        required: false
+        description: 8-digit tax identification number (PIB)
+        schema:
+          type: string
+          pattern: ^[0-9]{8}$
+      - name: year
+        in: query
+        required: false
+        description: 2000–2100, or 'undated'
+        schema:
+          type: string
+      - name: includeIndividuals
+        in: query
+        required: false
+        schema:
+          default: '0'
+          type: string
+          enum:
+          - '0'
+          - '1'
+      - name: page
+        in: query
+        required: false
+        description: 1-based page; past the last page serves the last
+        schema:
+          default: 1
+          type: integer
+          minimum: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Rows per page (max 100; larger values are capped)
+        schema:
+          default: 25
+          type: integer
+          minimum: 1
+          maximum: 100
+      responses:
+        '200':
+          description: Development projects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevelopmentProjectSearchResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/development-projects/search?municipality=Budva
+  /v1/government/summary:
+    get:
+      tags:
+      - Government
+      operationId: getGovernmentSummary
+      summary: Headline counts of the government open-data sources
+      parameters: []
+      responses:
+        '200':
+          description: Source summaries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GovernmentSummaryResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/government/summary
+  /v1/regional-context/summary:
+    get:
+      tags:
+      - Government
+      operationId: getRegionalContextSummary
+      summary: Municipality statistics available per category
+      parameters: []
+      responses:
+        '200':
+          description: Category coverage
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegionalContextSummaryResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/regional-context/summary
+  /v1/government/indicators:
+    get:
+      tags:
+      - Government
+      operationId: listIndicators
+      summary: The curated economic indicators
+      parameters: []
+      responses:
+        '200':
+          description: Indicators
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndicatorListResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/government/indicators
+  /v1/government/indicators/{slug}:
+    get:
+      tags:
+      - Government
+      operationId: getIndicator
+      summary: An annual economic-indicator series
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - gdp-current-prices
+          - gdp-per-capita
+          - gdp-real-growth
+          - unemployment-rate
+          - employees
+          - average-gross-wage
+      responses:
+        '200':
+          description: Indicator series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndicatorSeriesResponse'
+        '404':
+          description: Unknown indicator slug
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-bizstats-example: /v1/government/indicators/gdp-current-prices
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      additionalProperties: {}
+    DatasetDefinition:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        sourceName:
+          type: string
+        sourceUrl:
+          type: string
+        cadence:
+          type: string
+        geographicCoverage:
+          type: string
+          const: Montenegro
+        temporalCoverage:
+          type: string
+        entityKeys:
+          type: array
+          items:
+            type: string
+        apiPath:
+          type: string
+          description: Main endpoint (may be a URI template such as {pib})
+        webPath:
+          type: string
+        formats:
+          type: array
+          items:
+            type: string
+            enum:
+            - json
+            - csv
+            - rss
+        endpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              kind:
+                type: string
+                enum:
+                - list
+                - record
+                - csv
+                - rss
+              method:
+                type: string
+                const: GET
+              url:
+                type: string
+                description: A concrete, working request URL
+              template:
+                description: RFC 6570 URI template the example instantiates
+                type: string
+              format:
+                type: string
+                enum:
+                - json
+                - csv
+                - rss
+            required:
+            - kind
+            - method
+            - url
+            - format
+            additionalProperties: {}
+        methodology:
+          type: string
+        limitations:
+          type: string
+        commercialAccess:
+          type: boolean
+      required:
+      - id
+      - title
+      - description
+      - sourceName
+      - sourceUrl
+      - cadence
+      - geographicCoverage
+      - temporalCoverage
+      - entityKeys
+      - apiPath
+      - webPath
+      - formats
+      - endpoints
+      - methodology
+      - limitations
+      - commercialAccess
+      additionalProperties: {}
+    DatasetCatalogResponse:
+      type: object
+      properties:
+        schemaVersion:
+          type: string
+        generatedAt:
+          type: string
+          description: ISO 8601 date (YYYY-MM-DD) or timestamp
+        license:
+          type: string
+        methodology:
+          type: string
+        datasets:
+          type: array
+          items:
+            $ref: '#/components/schemas/DatasetDefinition'
+      required:
+      - schemaVersion
+      - generatedAt
+      - license
+      - methodology
+      - datasets
+      additionalProperties: {}
+    DatasetResponse:
+      type: object
+      properties:
+        schemaVersion:
+          type: string
+        dataset:
+          $ref: '#/components/schemas/DatasetDefinition'
+      required:
+      - schemaVersion
+      - dataset
+      additionalProperties: {}
+    DatasetStatusResponse:
+      type: object
+      properties:
+        sourceAvailable:
+          type: boolean
+        generatedAt:
+          type: string
+          description: ISO 8601 date (YYYY-MM-DD) or timestamp
+        datasets:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              datasetKey:
+                type: string
+              source:
+                type: string
+              cadence:
+                type: string
+              scheduled:
+                type: boolean
+              lastSuccessAt:
+                anyOf:
+                - type: string
+                  description: ISO 8601 date (YYYY-MM-DD) or timestamp
+                - type: 'null'
+              lastAttemptAt:
+                anyOf:
+                - type: string
+                  description: ISO 8601 date (YYYY-MM-DD) or timestamp
+                - type: 'null'
+              lastStatus:
+                type:
+                - string
+                - 'null'
+              consecutiveFailures:
+                type: integer
+              refreshedAt:
+                anyOf:
+                - type: string
+                  description: ISO 8601 date (YYYY-MM-DD) or timestamp
+                - type: 'null'
+              latestFetchAt:
+                anyOf:
+                - type: string
+                  description: ISO 8601 date (YYYY-MM-DD) or timestamp
+                - type: 'null'
+              latestDataDate:
+                description: Newest date (YYYY-MM-DD) or period (e.g. 2025)
+                type:
+                - string
+                - 'null'
+              earliestDataDate:
+                description: Oldest date or period covered, when known
+                type:
+                - string
+                - 'null'
+              latestDataIsPeriod:
+                type: boolean
+              freshness:
+                type: string
+                enum:
+                - fresh
+                - stale
+                - critical
+                - unknown
+              sourceFreshness:
+                type: string
+                enum:
+                - fresh
+                - stale
+                - critical
+                - unknown
+              derivedFreshness:
+                type: string
+                enum:
+                - fresh
+                - stale
+                - critical
+                - unknown
+              readModels:
+                type: array
+                items:
+                  type: string
+              derivedLastSuccessAt:
+                anyOf:
+                - type: string
+                  description: ISO 8601 date (YYYY-MM-DD) or timestamp
+                - type: 'null'
+              ageDays:
+                type:
+                - number
+                - 'null'
+            required:
+            - id
+            - datasetKey
+            - source
+            - cadence
+            - scheduled
+            - lastSuccessAt
+            - lastAttemptAt
+            - lastStatus
+            - consecutiveFailures
+            - refreshedAt
+            - latestFetchAt
+            - latestDataDate
+            - earliestDataDate
+            - latestDataIsPeriod
+            - freshness
+            - sourceFreshness
+            - derivedFreshness
+            - readModels
+            - derivedLastSuccessAt
+            - ageDays
+            additionalProperties: {}
+        readModels:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              lastSuccessAt:
+                anyOf:
+                - type: string
+                  description: ISO 8601 date (YYYY-MM-DD) or timestamp
+                - type: 'null'
+              lastAttemptAt:
+                anyOf:
+                - type: string
+                  description: ISO 8601 date (YYYY-MM-DD) or timestamp
+                - type: 'null'
+              lastStatus:
+                type:
+                - string
+                - 'null'
+              lastMode:
+                type:
+                - string
+                - 'null'
+            required:
+            - name
+            - lastSuccessAt
+            - lastAttemptAt
+            - lastStatus
+            - lastMode
+            additionalProperties: {}
+      required:
+      - sourceAvailable
+      - generatedAt
+      - datasets
+      - readModels
+      additionalProperties: {}
+    ApiIndexResponse:
+      type: object
+      properties:
+        name:
+          type: string
+        version:
+          type: string
+        documentation:
+          type: string
+        openapi:
+          type: string
+        catalog:
+          type: string
+        mcp:
+          type: string
+      required:
+      - name
+      - version
+      - documentation
+      - openapi
+      - catalog
+      - mcp
+      additionalProperties: {}
+    CompanyRow:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        pib:
+          type: string
+        reportId:
+          type:
+          - string
+          - 'null'
+        legalStatus:
+          type:
+          - string
+          - 'null'
+        municipality:
+          type:
+          - string
+          - 'null'
+        activityCode:
+          description: KD 2010 activity code
+          type:
+          - string
+          - 'null'
+        activityName:
+          type:
+          - string
+          - 'null'
+        sector:
+          type: string
+        parseStatus:
+          type:
+          - string
+          - 'null'
+        totalIncome:
+          description: Total income, EUR
+          type:
+          - number
+          - 'null'
+        profit:
+          description: Profit or loss for the year, EUR
+          type:
+          - number
+          - 'null'
+        employeeCount:
+          type:
+          - number
+          - 'null'
+        grossPayCosts:
+          description: Gross wage costs for the year, EUR (IRMS AOP 012, or AOP 210 'troškovi zarada' when 012 is missing).
+          type:
+          - number
+          - 'null'
+        netPayCosts:
+          deprecated: true
+          description: Deprecated alias of grossPayCosts. Despite the name the value is GROSS pay costs; it stays in v1 for
+            compatibility.
+          type:
+          - number
+          - 'null'
+        averagePay:
+          description: Average monthly gross pay, EUR; null when not computable or the filing is flagged suspicious.
+          type:
+          - number
+          - 'null'
+        incomePerEmployee:
+          type:
+          - number
+          - 'null'
+        yearId:
+          type: integer
+        yearValue:
+          type: integer
+        year:
+          type: string
+        updatedAt:
+          anyOf:
+          - type: string
+            description: ISO 8601 date (YYYY-MM-DD) or timestamp
+          - type: 'null'
+        officialFilingUrl:
+          type:
+          - string
+          - 'null'
+        logoUrl:
+          type:
+          - string
+          - 'null'
+        logoSourceUrl:
+          type:
+          - string
+          - 'null'
+        logoDomain:
+          type:
+          - string
+          - 'null'
+        logoConfidence:
+          type:
+          - number
+          - 'null'
+      required:
+      - id
+      - name
+      - pib
+      - reportId
+      - legalStatus
+      - municipality
+      - activityCode
+      - activityName
+      - sector
+      - parseStatus
+      - totalIncome
+      - profit
+      - employeeCount
+      - grossPayCosts
+      - netPayCosts
+      - averagePay
+      - incomePerEmployee
+      - yearId
+      - yearValue
+      - year
+      - updatedAt
+      - officialFilingUrl
+      - logoUrl
+      - logoSourceUrl
+      - logoDomain
+      - logoConfidence
+      additionalProperties: {}
+    PreviousYearFiling:
+      type: object
+      properties:
+        year:
+          type: string
+        totalIncome:
+          type:
+          - number
+          - 'null'
+        profit:
+          type:
+          - number
+          - 'null'
+        employeeCount:
+          type:
+          - number
+          - 'null'
+        netPayCosts:
+          type:
+          - number
+          - 'null'
+        averagePay:
+          type:
+          - number
+          - 'null'
+        incomePerEmployee:
+          type:
+          - number
+          - 'null'
+        parseStatus:
+          type:
+          - string
+          - 'null'
+      required:
+      - year
+      - totalIncome
+      - profit
+      - employeeCount
+      - netPayCosts
+      - averagePay
+      - incomePerEmployee
+      - parseStatus
+      additionalProperties: {}
+    CompanyListRow:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        pib:
+          type: string
+        reportId:
+          type:
+          - string
+          - 'null'
+        legalStatus:
+          type:
+          - string
+          - 'null'
+        municipality:
+          type:
+          - string
+          - 'null'
+        activityCode:
+          description: KD 2010 activity code
+          type:
+          - string
+          - 'null'
+        activityName:
+          type:
+          - string
+          - 'null'
+        sector:
+          type: string
+        parseStatus:
+          type:
+          - string
+          - 'null'
+        totalIncome:
+          description: Total income, EUR
+          type:
+          - number
+          - 'null'
+        profit:
+          description: Profit or loss for the year, EUR
+          type:
+          - number
+          - 'null'
+        employeeCount:
+          type:
+          - number
+          - 'null'
+        grossPayCosts:
+          description: Gross wage costs for the year, EUR (IRMS AOP 012, or AOP 210 'troškovi zarada' when 012 is missing).
+          type:
+          - number
+          - 'null'
+        netPayCosts:
+          deprecated: true
+          description: Deprecated alias of grossPayCosts. Despite the name the value is GROSS pay costs; it stays in v1 for
+            compatibility.
+          type:
+          - number
+          - 'null'
+        averagePay:
+          description: Average monthly gross pay, EUR; null when not computable or the filing is flagged suspicious.
+          type:
+          - number
+          - 'null'
+        incomePerEmployee:
+          type:
+          - number
+          - 'null'
+        yearId:
+          type: integer
+        yearValue:
+          type: integer
+        year:
+          type: string
+        updatedAt:
+          anyOf:
+          - type: string
+            description: ISO 8601 date (YYYY-MM-DD) or timestamp
+          - type: 'null'
+        officialFilingUrl:
+          type:
+          - string
+          - 'null'
+        logoUrl:
+          type:
+          - string
+          - 'null'
+        logoSourceUrl:
+          type:
+          - string
+          - 'null'
+        logoDomain:
+          type:
+          - string
+          - 'null'
+        logoConfidence:
+          type:
+          - number
+          - 'null'
+        previous:
+          anyOf:
+          - $ref: '#/components/schemas/PreviousYearFiling'
+          - type: 'null'
+          description: The filing for year − 1, or null when there is none (first filing, gap or placeholder) or no comparison
+            year.
+      required:
+      - id
+      - name
+      - pib
+      - reportId
+      - legalStatus
+      - municipality
+      - activityCode
+      - activityName
+      - sector
+      - parseStatus
+      - totalIncome
+      - profit
+      - employeeCount
+      - grossPayCosts
+      - netPayCosts
+      - averagePay
+      - incomePerEmployee
+      - yearId
+      - yearValue
+      - year
+      - updatedAt
+      - officialFilingUrl
+      - logoUrl
+      - logoSourceUrl
+      - logoDomain
+      - logoConfidence
+      - previous
+      additionalProperties: {}
+    CompanyListResponse:
+      type: object
+      properties:
+        year:
+          type: string
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        total:
+          type: integer
+        previousYear:
+          anyOf:
+          - type: object
+            properties:
+              year:
+                type: string
+              seriesBreaks:
+                type: array
+                items:
+                  type: string
+                description: 'Metrics on a different basis in the two years (employees, avgPay, profit, margin between 2019
+                  and 2020): not comparable.'
+            required:
+            - year
+            - seriesBreaks
+            additionalProperties: {}
+          - type: 'null'
+          description: The comparison year of each row's `previous` filing; null when year − 1 has no filings.
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyListRow'
+      required:
+      - year
+      - page
+      - pageSize
+      - total
+      - previousYear
+      - companies
+      additionalProperties: {}
+    CompanyYear:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        pib:
+          type: string
+        reportId:
+          type:
+          - string
+          - 'null'
+        legalStatus:
+          type:
+          - string
+          - 'null'
+        municipality:
+          type:
+          - string
+          - 'null'
+        activityCode:
+          description: KD 2010 activity code
+          type:
+          - string
+          - 'null'
+        activityName:
+          type:
+          - string
+          - 'null'
+        sector:
+          type: string
+        parseStatus:
+          type:
+          - string
+          - 'null'
+        totalIncome:
+          description: Total income, EUR
+          type:
+          - number
+          - 'null'
+        profit:
+          description: Profit or loss for the year, EUR
+          type:
+          - number
+          - 'null'
+        employeeCount:
+          type:
+          - number
+          - 'null'
+        grossPayCosts:
+          description: Gross wage costs for the year, EUR (IRMS AOP 012, or AOP 210 'troškovi zarada' when 012 is missing).
+          type:
+          - number
+          - 'null'
+        netPayCosts:
+          deprecated: true
+          description: Deprecated alias of grossPayCosts. Despite the name the value is GROSS pay costs; it stays in v1 for
+            compatibility.
+          type:
+          - number
+          - 'null'
+        averagePay:
+          description: Average monthly gross pay, EUR; null when not computable or the filing is flagged suspicious.
+          type:
+          - number
+          - 'null'
+        incomePerEmployee:
+          type:
+          - number
+          - 'null'
+        yearId:
+          type: integer
+        yearValue:
+          type: integer
+        year:
+          type: string
+        updatedAt:
+          anyOf:
+          - type: string
+            description: ISO 8601 date (YYYY-MM-DD) or timestamp
+          - type: 'null'
+        officialFilingUrl:
+          type:
+          - string
+          - 'null'
+        logoUrl:
+          type:
+          - string
+          - 'null'
+        logoSourceUrl:
+          type:
+          - string
+          - 'null'
+        logoDomain:
+          type:
+          - string
+          - 'null'
+        logoConfidence:
+          type:
+          - number
+          - 'null'
+        identity:
+          description: CRPS registry identity (latest row only)
+          anyOf:
+          - type: object
+            properties: {}
+            additionalProperties: {}
+          - type: 'null'
+        companyWebsite:
+          description: The company's own website and the emails, phones and social profiles it publishes (latest row only)
+          anyOf:
+          - type: object
+            properties: {}
+            additionalProperties: {}
+          - type: 'null'
+        ownership:
+          description: CRPS owners and owned companies (latest row only)
+          type: object
+          properties: {}
+          additionalProperties: {}
+        risk:
+          description: Blocked accounts, tax-debtor lists, filing gaps and registry status (latest row only)
+          anyOf:
+          - type: object
+            properties: {}
+            additionalProperties: {}
+          - type: 'null'
+        procurements:
+          type: object
+          properties: {}
+          additionalProperties: {}
+        payments:
+          type: object
+          properties: {}
+          additionalProperties: {}
+        developmentProjects:
+          type: object
+          properties: {}
+          additionalProperties: {}
+        courtActivity:
+          type: object
+          properties: {}
+          additionalProperties: {}
+        accounts:
+          type: object
+          properties: {}
+          additionalProperties: {}
+        properties:
+          type: object
+          properties: {}
+          additionalProperties: {}
+        filingPersons:
+          type: object
+          properties: {}
+          additionalProperties: {}
+        registryNotices:
+          type: object
+          properties: {}
+          additionalProperties: {}
+        verdict:
+          type: object
+          properties:
+            tier:
+              type: string
+              enum:
+              - solid
+              - watch
+              - caution
+              - critical
+              - insufficient_data
+            reasons:
+              type: array
+              items:
+                type: string
+            modelVersion:
+              type: string
+          required:
+          - tier
+          - reasons
+          - modelVersion
+          additionalProperties: {}
+      required:
+      - id
+      - name
+      - pib
+      - reportId
+      - legalStatus
+      - municipality
+      - activityCode
+      - activityName
+      - sector
+      - parseStatus
+      - totalIncome
+      - profit
+      - employeeCount
+      - grossPayCosts
+      - netPayCosts
+      - averagePay
+      - incomePerEmployee
+      - yearId
+      - yearValue
+      - year
+      - updatedAt
+      - officialFilingUrl
+      - logoUrl
+      - logoSourceUrl
+      - logoDomain
+      - logoConfidence
+      additionalProperties: {}
+    CompanyHistoryResponse:
+      minItems: 1
+      type: array
+      items:
+        $ref: '#/components/schemas/CompanyYear'
+    SearchResponse:
+      type: object
+      properties:
+        query:
+          type: string
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              pib:
+                type: string
+              name:
+                type: string
+              sector:
+                type: string
+              municipality:
+                type:
+                - string
+                - 'null'
+              latestYear:
+                type: string
+              totalIncome:
+                type:
+                - number
+                - 'null'
+              employeeCount:
+                type:
+                - number
+                - 'null'
+              matchReason:
+                type: string
+                enum:
+                - name
+                - pib
+                - activity
+                - municipality
+                - owner
+                - similar
+            required:
+            - pib
+            - name
+            - sector
+            - municipality
+            - latestYear
+            - totalIncome
+            - employeeCount
+            additionalProperties: {}
+        companyTotal:
+          type: integer
+        sectors:
+          type: array
+          items:
+            type: object
+            properties: {}
+            additionalProperties: {}
+        municipalities:
+          type: array
+          items:
+            type: object
+            properties: {}
+            additionalProperties: {}
+        tenders:
+          type: array
+          items:
+            type: object
+            properties: {}
+            additionalProperties: {}
+      required:
+      - query
+      - results
+      additionalProperties: {}
+    RegionsResponse:
+      type: object
+      properties:
+        year:
+          type: string
+        coverage:
+          anyOf:
+          - type: object
+            properties: {}
+            additionalProperties: {}
+          - type: 'null'
+        national:
+          type: object
+          properties:
+            companyCount:
+              type: integer
+            totalRevenue:
+              type:
+              - number
+              - 'null'
+            totalProfit:
+              type:
+              - number
+              - 'null'
+            totalEmployees:
+              type:
+              - number
+              - 'null'
+            avgPay:
+              type:
+              - number
+              - 'null'
+            profitMargin:
+              type:
+              - number
+              - 'null'
+          required:
+          - companyCount
+          - totalRevenue
+          - totalProfit
+          - totalEmployees
+          - avgPay
+          additionalProperties: {}
+        municipalities:
+          type: array
+          items:
+            type: object
+            properties:
+              municipality:
+                type: string
+              companyCount:
+                type: integer
+              totalRevenue:
+                type:
+                - number
+                - 'null'
+              totalProfit:
+                type:
+                - number
+                - 'null'
+              totalEmployees:
+                type:
+                - number
+                - 'null'
+              avgPay:
+                type:
+                - number
+                - 'null'
+              profitMargin:
+                type:
+                - number
+                - 'null'
+            required:
+            - municipality
+            - companyCount
+            - totalRevenue
+            - totalProfit
+            - totalEmployees
+            - avgPay
+            additionalProperties: {}
+        unassigned:
+          anyOf:
+          - type: object
+            properties: {}
+            additionalProperties: {}
+          - type: 'null'
+      required:
+      - year
+      - national
+      - municipalities
+      - unassigned
+      additionalProperties: {}
+    SectorsResponse:
+      type: object
+      properties:
+        year:
+          type: string
+        coverage:
+          anyOf:
+          - type: object
+            properties: {}
+            additionalProperties: {}
+          - type: 'null'
+        national:
+          type: object
+          properties:
+            companyCount:
+              type: integer
+            totalRevenue:
+              type:
+              - number
+              - 'null'
+            totalProfit:
+              type:
+              - number
+              - 'null'
+            totalEmployees:
+              type:
+              - number
+              - 'null'
+            avgPay:
+              type:
+              - number
+              - 'null'
+            profitMargin:
+              type:
+              - number
+              - 'null'
+          required:
+          - companyCount
+          - totalRevenue
+          - totalProfit
+          - totalEmployees
+          - avgPay
+          additionalProperties: {}
+        sectors:
+          type: array
+          items:
+            type: object
+            properties:
+              sector:
+                type: string
+              companyCount:
+                type: integer
+              totalRevenue:
+                type:
+                - number
+                - 'null'
+              totalProfit:
+                type:
+                - number
+                - 'null'
+              totalEmployees:
+                type:
+                - number
+                - 'null'
+              avgPay:
+                type:
+                - number
+                - 'null'
+              profitMargin:
+                type:
+                - number
+                - 'null'
+              coverageNote:
+                description: banks_insurers_missing or insurers_missing when the sector's filings omit them
+                type:
+                - string
+                - 'null'
+            required:
+            - sector
+            - companyCount
+            - totalRevenue
+            - totalProfit
+            - totalEmployees
+            - avgPay
+            additionalProperties: {}
+      required:
+      - year
+      - national
+      - sectors
+      additionalProperties: {}
+    MoversResponse:
+      type: object
+      properties:
+        metric:
+          type: string
+          enum:
+          - revenue
+          - profit
+          - employees
+          - pay
+        year:
+          type: string
+        prevYear:
+          type:
+          - string
+          - 'null'
+        tracked:
+          type: integer
+        stats:
+          type: object
+          properties: {}
+          additionalProperties: {}
+        gainers:
+          type: array
+          items:
+            type: object
+            properties:
+              pib:
+                type: string
+              name:
+                type: string
+              current:
+                type: number
+              previous:
+                type: number
+              delta:
+                type: number
+              pctChange:
+                type:
+                - number
+                - 'null'
+              flags:
+                type: array
+                items:
+                  type: string
+              logoUrl:
+                type:
+                - string
+                - 'null'
+            required:
+            - pib
+            - name
+            - current
+            - previous
+            - delta
+            - pctChange
+            additionalProperties: {}
+        losers:
+          type: array
+          items:
+            type: object
+            properties:
+              pib:
+                type: string
+              name:
+                type: string
+              current:
+                type: number
+              previous:
+                type: number
+              delta:
+                type: number
+              pctChange:
+                type:
+                - number
+                - 'null'
+              flags:
+                type: array
+                items:
+                  type: string
+              logoUrl:
+                type:
+                - string
+                - 'null'
+            required:
+            - pib
+            - name
+            - current
+            - previous
+            - delta
+            - pctChange
+            additionalProperties: {}
+        turnarounds:
+          description: Loss to profit between the two years, by the profit swing, whatever the metric; with the counts both
+            ways.
+          type: object
+          properties:
+            toProfit:
+              type: integer
+            toLoss:
+              type: integer
+            rows:
+              type: array
+              items:
+                type: object
+                properties:
+                  pib:
+                    type: string
+                  name:
+                    type: string
+                  current:
+                    type: number
+                  previous:
+                    type: number
+                  delta:
+                    type: number
+                  pctChange:
+                    type:
+                    - number
+                    - 'null'
+                  flags:
+                    type: array
+                    items:
+                      type: string
+                  logoUrl:
+                    type:
+                    - string
+                    - 'null'
+                required:
+                - pib
+                - name
+                - current
+                - previous
+                - delta
+                - pctChange
+                additionalProperties: {}
+          required:
+          - toProfit
+          - toLoss
+          - rows
+          additionalProperties: {}
+      required:
+      - metric
+      - year
+      - prevYear
+      - tracked
+      - gainers
+      - losers
+      additionalProperties: {}
+    PersonResponse:
+      type: object
+      properties:
+        sourceAvailable:
+          type: boolean
+        person:
+          type: object
+          properties:
+            slug:
+              type: string
+            displayName:
+              type: string
+            identityBasis:
+              type:
+              - string
+              - 'null'
+            identityScopePib:
+              type:
+              - string
+              - 'null'
+          required:
+          - slug
+          - displayName
+          - identityBasis
+          - identityScopePib
+          additionalProperties: {}
+        roles:
+          type: array
+          items:
+            type: object
+            properties:
+              pib:
+                type: string
+              companyName:
+                type:
+                - string
+                - 'null'
+              role:
+                type:
+                - string
+                - 'null'
+              position:
+                type:
+                - string
+                - 'null'
+              sharePct:
+                type:
+                - number
+                - 'null'
+              active:
+                type: boolean
+              startedOn:
+                anyOf:
+                - type: string
+                  description: ISO 8601 date (YYYY-MM-DD) or timestamp
+                - type: 'null'
+              endedOn:
+                anyOf:
+                - type: string
+                  description: ISO 8601 date (YYYY-MM-DD) or timestamp
+                - type: 'null'
+            required:
+            - pib
+            - companyName
+            - role
+            - position
+            - sharePct
+            - active
+            - startedOn
+            - endedOn
+            additionalProperties: {}
+        aggregates:
+          type: object
+          properties: {}
+          additionalProperties: {}
+        sourceFetchedAt:
+          anyOf:
+          - type: string
+            description: ISO 8601 date (YYYY-MM-DD) or timestamp
+          - type: 'null'
+        indexable:
+          type: boolean
+      required:
+      - sourceAvailable
+      - person
+      - roles
+      - aggregates
+      additionalProperties: {}
+    ChangesResponse:
+      type: object
+      properties:
+        sourceAvailable:
+          type: boolean
+        type:
+          type:
+          - string
+          - 'null'
+        pib:
+          type:
+          - string
+          - 'null'
+        sort:
+          type: string
+          enum:
+          - recent
+          - eventDate
+          - amount
+        filters:
+          type: object
+          properties:
+            buyer:
+              type:
+              - string
+              - 'null'
+            municipality:
+              type:
+              - string
+              - 'null'
+            sector:
+              type:
+              - string
+              - 'null'
+            minAmount:
+              type:
+              - number
+              - 'null'
+          required:
+          - buyer
+          - municipality
+          - sector
+          - minAmount
+          additionalProperties: {}
+        page:
+          type: integer
+          description: Page served (clamped to the last page)
+        pageSize:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
+        requestedPage:
+          type: integer
+        typeCounts:
+          type: array
+          items:
+            type: object
+            properties:
+              eventType:
+                type: string
+              count:
+                type: integer
+              latestDetectedAt:
+                anyOf:
+                - type: string
+                  description: ISO 8601 date (YYYY-MM-DD) or timestamp
+                - type: 'null'
+            required:
+            - eventType
+            - count
+            - latestDetectedAt
+            additionalProperties: {}
+        weeklyCounts:
+          type: array
+          items:
+            type: object
+            properties:
+              weekStart:
+                type: string
+              count:
+                type: integer
+            required:
+            - weekStart
+            - count
+            additionalProperties: {}
+        filterOptions:
+          type: object
+          properties:
+            municipalities:
+              type: array
+              items:
+                type: object
+                properties:
+                  value:
+                    type: string
+                  count:
+                    type: integer
+                required:
+                - value
+                - count
+                additionalProperties: false
+            sectors:
+              type: array
+              items:
+                type: object
+                properties:
+                  value:
+                    type: string
+                  count:
+                    type: integer
+                required:
+                - value
+                - count
+                additionalProperties: false
+          required:
+          - municipalities
+          - sectors
+          additionalProperties: {}
+        events:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              pib:
+                type: string
+              eventType:
+                type: string
+                enum:
+                - blockade_started
+                - blockade_cleared
+                - tax_debtor_listed
+                - new_filing
+                - tender_won
+                - registry_notice
+                - court_case
+                - ownership_change
+                - media_mention
+              detectedAt:
+                type: string
+                description: ISO 8601 date (YYYY-MM-DD) or timestamp
+              eventDate:
+                description: 'Source date: contract or snapshot date'
+                type:
+                - string
+                - 'null'
+              companyName:
+                type:
+                - string
+                - 'null'
+              companyKnown:
+                type: boolean
+                description: False when the PIB has no company page on BizStats
+              municipality:
+                type:
+                - string
+                - 'null'
+              sector:
+                type:
+                - string
+                - 'null'
+              amount:
+                description: 'EUR: blocked amount, listed tax debt, total income or contract value (summed for collapsed contracts).
+                  0 or null = not published.'
+                type:
+                - number
+                - 'null'
+              amountIncomplete:
+                type: boolean
+              buyerName:
+                type:
+                - string
+                - 'null'
+              procurementId:
+                type:
+                - string
+                - 'null'
+              tenderTitle:
+                type:
+                - string
+                - 'null'
+              tenderEstimatedValue:
+                type:
+                - number
+                - 'null'
+              supplierName:
+                description: Supplier string exactly as CEJN recorded it
+                type:
+                - string
+                - 'null'
+              contractCount:
+                type: integer
+                description: 'Contracts this row stands for: same supplier, tender and contract day are one row'
+              contracts:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    awardId:
+                      type: string
+                    contractId:
+                      type:
+                      - string
+                      - 'null'
+                    amount:
+                      type:
+                      - number
+                      - 'null'
+                  required:
+                  - awardId
+                  - contractId
+                  - amount
+                  additionalProperties: {}
+              consortiumSize:
+                anyOf:
+                - type: integer
+                - type: 'null'
+              amountScope:
+                anyOf:
+                - type: string
+                  const: consortium_total
+                - type: 'null'
+              debtCategories:
+                type: array
+                items:
+                  type: string
+              daysBlocked:
+                type:
+                - number
+                - 'null'
+              notice:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  title:
+                    type:
+                    - string
+                    - 'null'
+                  documentUrl:
+                    type:
+                    - string
+                    - 'null'
+                required:
+                - kind
+                - title
+                - documentUrl
+                additionalProperties: {}
+              sourceLagDays:
+                anyOf:
+                - type: integer
+                - type: 'null'
+              staleSource:
+                type: boolean
+            required:
+            - id
+            - pib
+            - eventType
+            - detectedAt
+            - eventDate
+            - companyName
+            - companyKnown
+            - municipality
+            - sector
+            - amount
+            - amountIncomplete
+            - buyerName
+            - procurementId
+            - tenderTitle
+            - tenderEstimatedValue
+            - supplierName
+            - contractCount
+            - contracts
+            - consortiumSize
+            - amountScope
+            - debtCategories
+            - daysBlocked
+            - sourceLagDays
+            - staleSource
+            additionalProperties: {}
+      required:
+      - sourceAvailable
+      - type
+      - pib
+      - sort
+      - filters
+      - page
+      - pageSize
+      - total
+      - totalPages
+      - requestedPage
+      - typeCounts
+      - weeklyCounts
+      - filterOptions
+      - events
+      additionalProperties: {}
+    BlockedAccountsResponse:
+      type: object
+      properties:
+        sourceAvailable:
+          type: boolean
+        snapshotDate:
+          anyOf:
+          - type: string
+            description: ISO 8601 date (YYYY-MM-DD) or timestamp
+          - type: 'null'
+        snapshots:
+          type: array
+          items:
+            type: string
+            description: ISO 8601 date (YYYY-MM-DD) or timestamp
+        page:
+          type: integer
+          description: Page served (clamped to the last page)
+        pageSize:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
+        excluded:
+          type: object
+          properties:
+            withoutPib:
+              type: integer
+            soleProprietors:
+              type: integer
+          required:
+          - withoutPib
+          - soleProprietors
+          additionalProperties: {}
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              pib:
+                type: string
+                pattern: ^[0-9]{8}$
+                description: 8-digit tax identification number (PIB)
+              name:
+                type:
+                - string
+                - 'null'
+              blockedAmount:
+                type:
+                - number
+                - 'null'
+              daysBlocked:
+                type:
+                - number
+                - 'null'
+              snapshotDate:
+                anyOf:
+                - type: string
+                  description: ISO 8601 date (YYYY-MM-DD) or timestamp
+                - type: 'null'
+              registry:
+                description: 'CBCG sub-list: in_crps or not_in_crps'
+                type:
+                - string
+                - 'null'
+              sourceUrl:
+                type:
+                - string
+                - 'null'
+            required:
+            - pib
+            - name
+            - blockedAmount
+            - daysBlocked
+            - snapshotDate
+            - registry
+            - sourceUrl
+            additionalProperties: {}
+      required:
+      - sourceAvailable
+      - snapshotDate
+      - snapshots
+      - page
+      - pageSize
+      - total
+      - totalPages
+      - results
+      additionalProperties: {}
+    TaxDebtorsResponse:
+      type: object
+      properties:
+        sourceAvailable:
+          type: boolean
+        list:
+          type:
+          - string
+          - 'null'
+        snapshotDate:
+          anyOf:
+          - type: string
+            description: ISO 8601 date (YYYY-MM-DD) or timestamp
+          - type: 'null'
+        editions:
+          type: array
+          items:
+            type: object
+            properties:
+              list:
+                type: string
+              snapshotDate:
+                anyOf:
+                - type: string
+                  description: ISO 8601 date (YYYY-MM-DD) or timestamp
+                - type: 'null'
+              rows:
+                type: integer
+              historical:
+                type: boolean
+            required:
+            - list
+            - snapshotDate
+            - rows
+            - historical
+            additionalProperties: {}
+        page:
+          type: integer
+          description: Page served (clamped to the last page)
+        pageSize:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              pib:
+                type: string
+                pattern: ^[0-9]{8}$
+                description: 8-digit tax identification number (PIB)
+              name:
+                type:
+                - string
+                - 'null'
+              amount:
+                description: Listed debt, EUR, at the edition date (a historical publication, not a current balance)
+                type:
+                - number
+                - 'null'
+              list:
+                type: string
+              snapshotDate:
+                anyOf:
+                - type: string
+                  description: ISO 8601 date (YYYY-MM-DD) or timestamp
+                - type: 'null'
+              historical:
+                type: boolean
+                description: The edition is more than 12 months old
+              sourceTitle:
+                type:
+                - string
+                - 'null'
+              sourceUrl:
+                type:
+                - string
+                - 'null'
+            required:
+            - pib
+            - name
+            - amount
+            - list
+            - snapshotDate
+            - historical
+            - sourceTitle
+            - sourceUrl
+            additionalProperties: {}
+      required:
+      - sourceAvailable
+      - editions
+      - page
+      - pageSize
+      - total
+      - totalPages
+      - results
+      additionalProperties: {}
+    ProcurementRow:
+      type: object
+      properties:
+        procurementId:
+          type: string
+        cejnId:
+          anyOf:
+          - type: integer
+          - type: 'null'
+        title:
+          type: string
+        buyerName:
+          type:
+          - string
+          - 'null'
+        procedureType:
+          type:
+          - string
+          - 'null'
+        noticeType:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+        lifecycleState:
+          type:
+          - string
+          - 'null'
+        publicationDate:
+          anyOf:
+          - type: string
+            description: ISO 8601 date (YYYY-MM-DD) or timestamp
+          - type: 'null'
+        deadlineDate:
+          anyOf:
+          - type: string
+            description: ISO 8601 date (YYYY-MM-DD) or timestamp
+          - type: 'null'
+        estimatedValue:
+          type:
+          - number
+          - 'null'
+        awardValue:
+          type:
+          - number
+          - 'null'
+        awardDate:
+          anyOf:
+          - type: string
+            description: ISO 8601 date (YYYY-MM-DD) or timestamp
+          - type: 'null'
+        cpvCodes:
+          description: CEJN CPV codes (8 digits)
+          type: array
+          items:
+            type: string
+        supplierNames:
+          type: array
+          items:
+            type: string
+        contractCount:
+          type: integer
+        currency:
+          type:
+          - string
+          - 'null'
+        sourceUrl:
+          type:
+          - string
+          - 'null'
+      required:
+      - procurementId
+      - cejnId
+      - title
+      - buyerName
+      - procedureType
+      - noticeType
+      - status
+      - publicationDate
+      - deadlineDate
+      - estimatedValue
+      - awardValue
+      - awardDate
+      - supplierNames
+      - contractCount
+      - currency
+      - sourceUrl
+      additionalProperties: {}
+    ProcurementSearchResponse:
+      type: object
+      properties:
+        sourceAvailable:
+          type: boolean
+        query:
+          type: string
+        page:
+          type: integer
+          description: Page served (clamped to the last page)
+        pageSize:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
+        valuedTotal:
+          type: integer
+        facets:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              properties:
+                value:
+                  type: string
+                count:
+                  type: integer
+              required:
+              - value
+              - count
+              additionalProperties: false
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcurementRow'
+      required:
+      - sourceAvailable
+      - query
+      - page
+      - pageSize
+      - total
+      - totalPages
+      - results
+      additionalProperties: {}
+    ProcurementDetailResponse:
+      type: object
+      properties:
+        sourceAvailable:
+          type: boolean
+        procurement:
+          type: object
+          properties:
+            procurementId:
+              type: string
+            cejnId:
+              anyOf:
+              - type: integer
+              - type: 'null'
+            title:
+              type: string
+            buyerName:
+              type:
+              - string
+              - 'null'
+            procedureType:
+              type:
+              - string
+              - 'null'
+            noticeType:
+              type:
+              - string
+              - 'null'
+            status:
+              type:
+              - string
+              - 'null'
+            lifecycleState:
+              type:
+              - string
+              - 'null'
+            publicationDate:
+              anyOf:
+              - type: string
+                description: ISO 8601 date (YYYY-MM-DD) or timestamp
+              - type: 'null'
+            deadlineDate:
+              anyOf:
+              - type: string
+                description: ISO 8601 date (YYYY-MM-DD) or timestamp
+              - type: 'null'
+            estimatedValue:
+              type:
+              - number
+              - 'null'
+            awardValue:
+              type:
+              - number
+              - 'null'
+            awardDate:
+              anyOf:
+              - type: string
+                description: ISO 8601 date (YYYY-MM-DD) or timestamp
+              - type: 'null'
+            cpvCodes:
+              description: CEJN CPV codes (8 digits)
+              type: array
+              items:
+                type: string
+            supplierNames:
+              type: array
+              items:
+                type: string
+            contractCount:
+              type: integer
+            currency:
+              type:
+              - string
+              - 'null'
+            sourceUrl:
+              type:
+              - string
+              - 'null'
+            bodyText:
+              type:
+              - string
+              - 'null'
+          required:
+          - procurementId
+          - cejnId
+          - title
+          - buyerName
+          - procedureType
+          - noticeType
+          - status
+          - publicationDate
+          - deadlineDate
+          - estimatedValue
+          - awardValue
+          - awardDate
+          - supplierNames
+          - contractCount
+          - currency
+          - sourceUrl
+          - bodyText
+          additionalProperties: {}
+        parties:
+          type: array
+          items:
+            type: object
+            properties: {}
+            additionalProperties: {}
+        lots:
+          type: array
+          items:
+            type: object
+            properties: {}
+            additionalProperties: {}
+        statusEvents:
+          type: array
+          items:
+            type: object
+            properties: {}
+            additionalProperties: {}
+        awards:
+          type: array
+          items:
+            type: object
+            properties:
+              awardId:
+                type: string
+              contractId:
+                anyOf:
+                - type: integer
+                - type: 'null'
+              supplierName:
+                type:
+                - string
+                - 'null'
+              supplierPib:
+                type:
+                - string
+                - 'null'
+              contractValue:
+                type:
+                - number
+                - 'null'
+              contractDate:
+                anyOf:
+                - type: string
+                  description: ISO 8601 date (YYYY-MM-DD) or timestamp
+                - type: 'null'
+              lifecycle:
+                type:
+                - string
+                - 'null'
+              countedInTotals:
+                type: boolean
+            required:
+            - awardId
+            - contractId
+            - supplierName
+            - supplierPib
+            - contractValue
+            - contractDate
+            - lifecycle
+            additionalProperties: {}
+        matchedPayments:
+          type: object
+          properties: {}
+          additionalProperties: {}
+      required:
+      - sourceAvailable
+      - procurement
+      - parties
+      - lots
+      - statusEvents
+      - awards
+      additionalProperties: {}
+    BuyerProfileResponse:
+      type: object
+      properties:
+        sourceAvailable:
+          type: boolean
+        buyerName:
+          type: string
+        summary:
+          anyOf:
+          - type: object
+            properties: {}
+            additionalProperties: {}
+          - type: 'null'
+        topSuppliers:
+          type: array
+          items:
+            type: object
+            properties: {}
+            additionalProperties: {}
+        byYear:
+          type: array
+          items:
+            type: object
+            properties: {}
+            additionalProperties: {}
+        tenders:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcurementRow'
+      required:
+      - sourceAvailable
+      - buyerName
+      - summary
+      - topSuppliers
+      - tenders
+      additionalProperties: {}
+    SupplierProfileResponse:
+      type: object
+      properties:
+        sourceAvailable:
+          type: boolean
+        pib:
+          type: string
+        supplierName:
+          type:
+          - string
+          - 'null'
+        company:
+          anyOf:
+          - type: object
+            properties: {}
+            additionalProperties: {}
+          - type: 'null'
+        summary:
+          anyOf:
+          - type: object
+            properties: {}
+            additionalProperties: {}
+          - type: 'null'
+        awardsByYear:
+          type: array
+          items:
+            type: object
+            properties: {}
+            additionalProperties: {}
+        topBuyers:
+          type: array
+          items:
+            type: object
+            properties: {}
+            additionalProperties: {}
+        recentAwards:
+          type: array
+          items:
+            type: object
+            properties: {}
+            additionalProperties: {}
+      required:
+      - sourceAvailable
+      - pib
+      - supplierName
+      - company
+      - summary
+      - awardsByYear
+      - topBuyers
+      - recentAwards
+      additionalProperties: {}
+    PublicPaymentSearchResponse:
+      type: object
+      properties:
+        sourceAvailable:
+          type: boolean
+        query:
+          type: string
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
+        totalAmount:
+          description: Sum of every matching payment, EUR (with the total)
+          type:
+          - number
+          - 'null'
+        nextCursor:
+          type:
+          - string
+          - 'null'
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              paymentKey:
+                type: string
+              documentNumber:
+                type:
+                - string
+                - 'null'
+              expenseItem:
+                type:
+                - string
+                - 'null'
+              generalLedgerAccount:
+                type:
+                - string
+                - 'null'
+              accountName:
+                type:
+                - string
+                - 'null'
+              payeeName:
+                type: string
+              amount:
+                type:
+                - number
+                - 'null'
+              paidAt:
+                anyOf:
+                - type: string
+                  description: ISO 8601 date (YYYY-MM-DD) or timestamp
+                - type: 'null'
+              fundingSource:
+                type:
+                - string
+                - 'null'
+              sourceTitle:
+                type: string
+              sourceUrl:
+                type:
+                - string
+                - 'null'
+            required:
+            - paymentKey
+            - documentNumber
+            - expenseItem
+            - generalLedgerAccount
+            - accountName
+            - payeeName
+            - amount
+            - paidAt
+            - fundingSource
+            - sourceTitle
+            - sourceUrl
+            additionalProperties: {}
+      required:
+      - sourceAvailable
+      - query
+      - page
+      - pageSize
+      - results
+      additionalProperties: {}
+    DevelopmentProjectSearchResponse:
+      type: object
+      properties:
+        sourceAvailable:
+          type: boolean
+        page:
+          type: integer
+          description: Page served (clamped to the last page)
+        pageSize:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
+        undatedExcluded:
+          type: integer
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              projectId:
+                type: string
+              sourceMunicipality:
+                type: string
+              sourceType:
+                type: string
+              status:
+                type: string
+              projectTitle:
+                type: string
+              decisionDate:
+                type:
+                - string
+                - 'null'
+              municipality:
+                type:
+                - string
+                - 'null'
+              sourceUrl:
+                type:
+                - string
+                - 'null'
+              parties:
+                type: array
+                items:
+                  type: object
+                  properties: {}
+                  additionalProperties: {}
+            required:
+            - projectId
+            - sourceMunicipality
+            - sourceType
+            - status
+            - projectTitle
+            - decisionDate
+            - municipality
+            - sourceUrl
+            - parties
+            additionalProperties: {}
+      required:
+      - sourceAvailable
+      - page
+      - pageSize
+      - total
+      - totalPages
+      - results
+      additionalProperties: {}
+    IndicatorListResponse:
+      type: object
+      properties:
+        sourceAvailable:
+          type: boolean
+        indicators:
+          type: array
+          items:
+            type: object
+            properties:
+              slug:
+                type: string
+              topic:
+                type: string
+              metricName:
+                type: string
+              unit:
+                type: string
+                enum:
+                - eur
+                - eur_thousand
+                - percent
+                - index
+                - persons
+              aggregation:
+                type: string
+                enum:
+                - annual_average
+                - annual_latest
+                - annual_sum
+                - annual_sum_yoy
+              sourceFrequency:
+                type: string
+                enum:
+                - annual
+                - quarterly
+                - monthly
+                - mixed
+                - unknown
+              pointCount:
+                type: integer
+              yearMin:
+                anyOf:
+                - type: integer
+                - type: 'null'
+              yearMax:
+                anyOf:
+                - type: integer
+                - type: 'null'
+              latest:
+                anyOf:
+                - type: object
+                  properties:
+                    year:
+                      type: integer
+                    value:
+                      type: number
+                    observationCount:
+                      type: integer
+                    expectedObservationCount:
+                      type: integer
+                    complete:
+                      type: boolean
+                    throughPeriod:
+                      type:
+                      - string
+                      - 'null'
+                  required:
+                  - year
+                  - value
+                  - observationCount
+                  - expectedObservationCount
+                  - complete
+                  - throughPeriod
+                  additionalProperties: {}
+                - type: 'null'
+              previous:
+                anyOf:
+                - type: object
+                  properties:
+                    year:
+                      type: integer
+                    value:
+                      type: number
+                    observationCount:
+                      type: integer
+                    expectedObservationCount:
+                      type: integer
+                    complete:
+                      type: boolean
+                    throughPeriod:
+                      type:
+                      - string
+                      - 'null'
+                  required:
+                  - year
+                  - value
+                  - observationCount
+                  - expectedObservationCount
+                  - complete
+                  - throughPeriod
+                  additionalProperties: {}
+                - type: 'null'
+            required:
+            - slug
+            - topic
+            - metricName
+            - unit
+            - aggregation
+            - sourceFrequency
+            - pointCount
+            - yearMin
+            - yearMax
+            - latest
+            - previous
+            additionalProperties: {}
+      required:
+      - sourceAvailable
+      - indicators
+      additionalProperties: {}
+    IndicatorSeriesResponse:
+      type: object
+      properties:
+        sourceAvailable:
+          type: boolean
+        slug:
+          type: string
+        topic:
+          type: string
+        metricName:
+          type: string
+        unit:
+          type: string
+          enum:
+          - eur
+          - eur_thousand
+          - percent
+          - index
+          - persons
+        aggregation:
+          type: string
+          enum:
+          - annual_average
+          - annual_latest
+          - annual_sum
+          - annual_sum_yoy
+        sourceFrequency:
+          type: string
+          enum:
+          - annual
+          - quarterly
+          - monthly
+          - mixed
+          - unknown
+        series:
+          type: array
+          items:
+            type: object
+            properties:
+              year:
+                type: integer
+              value:
+                type: number
+              observationCount:
+                type: integer
+              expectedObservationCount:
+                type: integer
+              complete:
+                type: boolean
+              throughPeriod:
+                type:
+                - string
+                - 'null'
+            required:
+            - year
+            - value
+            - observationCount
+            - expectedObservationCount
+            - complete
+            - throughPeriod
+            additionalProperties: {}
+        partialLatest:
+          anyOf:
+          - type: object
+            properties:
+              year:
+                type: integer
+              value:
+                type: number
+              observationCount:
+                type: integer
+              expectedObservationCount:
+                type: integer
+              complete:
+                type: boolean
+              throughPeriod:
+                type:
+                - string
+                - 'null'
+            required:
+            - year
+            - value
+            - observationCount
+            - expectedObservationCount
+            - complete
+            - throughPeriod
+            additionalProperties: {}
+          - type: 'null'
+        source:
+          type: object
+          properties: {}
+          additionalProperties: {}
+      required:
+      - sourceAvailable
+      - slug
+      - topic
+      - metricName
+      - unit
+      - aggregation
+      - sourceFrequency
+      - series
+      - partialLatest
+      additionalProperties: {}
+    RegionalContextSummaryResponse:
+      type: object
+      properties:
+        sourceAvailable:
+          type: boolean
+        total:
+          type: integer
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              category:
+                type: string
+              rowCount:
+                type: integer
+              municipalityCount:
+                type: integer
+              yearMin:
+                anyOf:
+                - type: integer
+                - type: 'null'
+              yearMax:
+                anyOf:
+                - type: integer
+                - type: 'null'
+            required:
+            - category
+            - rowCount
+            - municipalityCount
+            - yearMin
+            - yearMax
+            additionalProperties: {}
+      required:
+      - sourceAvailable
+      additionalProperties: {}
+    GovernmentSummaryResponse:
+      type: object
+      properties: {}
+      additionalProperties: {}
