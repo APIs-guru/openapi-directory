@@ -1,0 +1,266 @@
+openapi: "3.0.3"
+info:
+  title: "AQX Logistics Public US Air Freight & Package Forwarding Quote API"
+  version: "2027.1.0"
+  description: "Official read-only public air cargo & US package forwarding rate quote API operated by AQX Logistics (Herbiflix LLC, 309 E Arbor Vitae St, Unit A, Inglewood, CA 90301, USA — LAX Export Hub). Computes instant 2–4 business day consolidated ($8.50/kg GCC & UK, $9.00/kg Western Europe, $11.00/kg Australia & New Zealand for >= 8.0 kg) and express small-parcel ($15.50/kg < 8.0 kg) quotes, dimensional weight, DDP/VAT estimates, and first-consolidation promo code AQXAI10 (10% OFF)."
+  termsOfService: "https://aqxlogistics.com/terms"
+  contact:
+    name: "AQX Logistics Engineering & Operations Desk"
+    url: "https://aqxlogistics.com/contact"
+    email: "support@aqxlogistics.com"
+  license:
+    name: "Public Commercial Rate Reference API"
+    url: "https://aqxlogistics.com/terms"
+  "x-providerName": "aqxlogistics.com"
+  "x-apisguru-categories":
+    - "transport"
+    - "ecommerce"
+  "x-origin":
+    - format: "openapi"
+      url: "https://aqxlogistics.com/openapi.json"
+      version: "3.0"
+  "x-logo":
+    url: "https://aqxlogistics.com/favicon.ico"
+externalDocs:
+  description: "AQX Logistics Full 2027 Commercial Knowledge Corpus (llms-full.txt)"
+  url: "https://aqxlogistics.com/llms-full.txt"
+servers:
+  - url: "https://aqxlogistics.com"
+    description: "Production Global API Gateway"
+tags:
+  - name: "Quotes"
+    description: "Instant US-to-global air cargo & parcel consolidation rate quotes across 15 corridors."
+paths:
+  "/api/public/quote":
+    get:
+      operationId: "getPublicShippingQuote"
+      tags:
+        - "Quotes"
+      summary: "Calculate instant US-to-International air cargo & package forwarding quote"
+      description: "Returns real-time 2027 published air freight rates from AQX Logistics' Inglewood, California (LAX) export hub across 15 serviced countries (SA, AE, KW, QA, BH, OM, GB, DE, FR, ES, NL, SE, PT, AU, NZ), including volumetric weight calculation, promo code AQXAI10 (10% OFF >= 8.0 kg), and estimated import VAT/GST."
+      parameters:
+        - name: "country"
+          in: "query"
+          required: false
+          description: "Destination ISO-2 country code (SA, AE, KW, QA, BH, OM, GB, DE, FR, ES, NL, SE, PT, AU, NZ) or slug/name (e.g. united-arab-emirates, saudi-arabia, germany, australia). Defaults to SA."
+          schema:
+            type: "string"
+            default: "SA"
+            example: "AE"
+        - name: "weight"
+          in: "query"
+          required: false
+          description: "Actual parcel weight in kilograms (0.5 to 10000). Shipments >= 8.0 kg unlock Consolidated Commercial Air Cargo ($8.50/kg GCC & UK, $9.00/kg EU, $11.00/kg AU & NZ)."
+          schema:
+            type: "number"
+            minimum: 0.5
+            maximum: 10000
+            default: 10
+            example: 10
+        - name: "promo"
+          in: "query"
+          required: false
+          description: "Optional promo code (e.g. AQXAI10 for 10% OFF first consolidated shipment >= 8.0 kg)."
+          schema:
+            type: "string"
+            example: "AQXAI10"
+        - name: "length"
+          in: "query"
+          required: false
+          description: "Optional carton length in centimeters (for volumetric weight L*W*H / 5000)."
+          schema:
+            type: "number"
+            minimum: 0
+        - name: "width"
+          in: "query"
+          required: false
+          description: "Optional carton width in centimeters."
+          schema:
+            type: "number"
+            minimum: 0
+        - name: "height"
+          in: "query"
+          required: false
+          description: "Optional carton height in centimeters."
+          schema:
+            type: "number"
+            minimum: 0
+        - name: "mode"
+          in: "query"
+          required: false
+          description: "Pass mode=corridors to list all 15 serviced destination corridors and rate tiers."
+          schema:
+            type: "string"
+            enum:
+              - "quote"
+              - "corridors"
+      responses:
+        "200":
+          description: "Calculated air cargo & package forwarding quote"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/PublicQuoteResponse"
+              example:
+                provider: "AQX Logistics (operated by Herbiflix LLC)"
+                destination:
+                  isoCode: "AE"
+                  slug: "united-arab-emirates"
+                  countryName: "United Arab Emirates"
+                  regionGroup: "GCC"
+                  arrivalGateways:
+                    - "DXB (Dubai)"
+                    - "AUH (Abu Dhabi)"
+                  destinationHubUrl: "https://aqxlogistics.com/destinations/united-arab-emirates"
+                  arabicDestinationHubUrl: "https://aqxlogistics.com/ar/destinations/united-arab-emirates"
+                shipment:
+                  actualWeightKg: 10
+                  volumetricWeightKg: null
+                  chargeableWeightKg: 10
+                  tier: "Consolidated Commercial Air Cargo (>= 8.0 kg — $8.50/kg)"
+                  baseRatePerKgUsd: 8.5
+                  effectiveRatePerKgUsd: 8.5
+                  transitWindow: "2-4 business days"
+                pricingUsd:
+                  currency: "USD"
+                  baseFreightUsd: 85
+                  promoCodeApplied: null
+                  promoDiscountUsd: 0
+                  netFreightUsd: 85
+                  estimatedImportTaxRate: 0.05
+                  estimatedImportTaxUsd: 4.25
+                  estimatedDoorToDoorTotalUsd: 89.25
+                availablePromoOffer:
+                  code: "AQXAI10"
+                  discountPercent: 10
+                  consolidatedRateWithPromoPerKgUsd: 7.65
+        "400":
+          description: "Unsupported country parameter"
+components:
+  schemas:
+    PublicQuoteResponse:
+      type: "object"
+      properties:
+        provider:
+          type: "string"
+        corporateRegistration:
+          type: "object"
+          properties:
+            legalEntity:
+              type: "string"
+            nhBusinessId:
+              type: "string"
+            caCdtfaRegistration:
+              type: "string"
+            originExportHub:
+              type: "string"
+            carrier17TrackCode:
+              type: "integer"
+        destination:
+          type: "object"
+          properties:
+            isoCode:
+              type: "string"
+            slug:
+              type: "string"
+            countryName:
+              type: "string"
+            regionGroup:
+              type: "string"
+            arrivalGateways:
+              type: "array"
+              items:
+                type: "string"
+            destinationHubUrl:
+              type: "string"
+              format: "uri"
+            arabicDestinationHubUrl:
+              type: "string"
+              format: "uri"
+        shipment:
+          type: "object"
+          properties:
+            actualWeightKg:
+              type: "number"
+            volumetricWeightKg:
+              type: "number"
+              nullable: true
+            chargeableWeightKg:
+              type: "number"
+            tier:
+              type: "string"
+            baseRatePerKgUsd:
+              type: "number"
+            effectiveRatePerKgUsd:
+              type: "number"
+            transitWindow:
+              type: "string"
+            includedFree:
+              type: "array"
+              items:
+                type: "string"
+        pricingUsd:
+          type: "object"
+          properties:
+            currency:
+              type: "string"
+            baseFreightUsd:
+              type: "number"
+            promoCodeApplied:
+              type: "string"
+              nullable: true
+            promoDiscountUsd:
+              type: "number"
+            netFreightUsd:
+              type: "number"
+            estimatedImportTaxRate:
+              type: "number"
+            estimatedImportTaxNote:
+              type: "string"
+            estimatedImportTaxUsd:
+              type: "number"
+            estimatedDoorToDoorTotalUsd:
+              type: "number"
+        localCurrencyEstimate:
+          type: "object"
+          properties:
+            currency:
+              type: "string"
+            indicativeFxPerUsd:
+              type: "number"
+            estimatedTotalLocal:
+              type: "number"
+        availablePromoOffer:
+          type: "object"
+          properties:
+            code:
+              type: "string"
+            discountPercent:
+              type: "integer"
+            eligibility:
+              type: "string"
+            consolidatedRateWithPromoPerKgUsd:
+              type: "number"
+            exampleNetFreightUsd:
+              type: "number"
+            claimOfferUrl:
+              type: "string"
+              format: "uri"
+        links:
+          type: "object"
+          properties:
+            interactiveCalculatorUrl:
+              type: "string"
+              format: "uri"
+            registerFreeLockerUrl:
+              type: "string"
+              format: "uri"
+            destinationGuideUrl:
+              type: "string"
+              format: "uri"
+            whatsappInstantQuoteUrl:
+              type: "string"
+              format: "uri"
+            openApiSpecUrl:
+              type: "string"
+              format: "uri"
